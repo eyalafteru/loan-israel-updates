@@ -1,4 +1,5 @@
-
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <p><script>
     // בדיקה והוספת viewport meta tag אם חסר
     if (!document.querySelector('meta[name="viewport"]')) {
@@ -87,9 +88,18 @@
     
     /* Base Styles - מוגבל רק לפרויקט זה */
     
+    /* רקע לבן לכל העמוד - חשוב לSimple Browser */
+    html, body {
+      background-color: #ffffff !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+    
     .wpc-loans-nonbank-h7k2-wrapper {
       font-family: 'Assistant', sans-serif !important;
       direction: rtl !important;
+      background-color: #ffffff !important;
+      min-height: 100vh !important;
     }
     
     .wpc-loans-nonbank-h7k2-wrapper * {
@@ -422,7 +432,7 @@
 <h2 class="wpc-loans-nonbank-h7k2-section-title">מהי הלוואה חוץ בנקאית מומלצת?</h2>
 <div class="wpc-loans-nonbank-h7k2-section-content">
 <p>רבים מחפשים <strong>הלוואה חוץ בנקאית מומלצת</strong> שתספק פתרון מהיר וגמיש, במיוחד כאשר הבנק מעמיד קשיים. מדובר במימון מגוף פיננסי מורשה (כגון חברות כרטיסי אשראי, ביטוח או בתי השקעות) שאינו הבנק שלכם.</p>
-<p>היתרון המרכזי הוא שהלוואה זו אינה משפיעה על מסגרת האשראי (האובליגו) בבנק. פתרונות אלו מתאימים לעיתים קרובות גם <strong><a href="https://loan-israel.co.il/rejected-loans/">למסורבי בנק</a></strong> או <strong><a href="https://loan-israel.co.il/הלוואות-לבעלי-bdi-שלילי/">לבעלי BDI שלילי</a></strong> הזקוקים לאישור מהיר ודיסקרטי, וכן למי שמחפש <strong>הלוואה חוץ בנקאית ללא אשראי</strong> פנוי במסגרת הבנקאית.</p>
+<p>היתרון המרכזי הוא שהלוואה זו אינה משפיעה על מסגרת האשראי (האובליגו) בבנק. פתרונות אלו מתאימים גם למי שמחפש <strong>הלוואה חוץ בנקאית ללא אשראי</strong> פנוי במסגרת הבנקאית, או לצרכים דחופים שדורשים אישור מהיר.</p>
 <p>לדוגמה, נכון לדצמבר 2025, ניתן לקבל מימון של עד 200,000 ₪ (ובמקרים מסוימים עד 500,000 ₪) בריביות תחרותיות, עם פריסה נוחה של עד 84 תשלומים.</p>
 </div>
 <!-- Quick Navigation (TOC) -->
@@ -1667,10 +1677,10 @@
 <!-- אזור 10: הלוואה למסורבי בנק ובעלי BDI שלילי - ✅ עוצב והושלם -->
 <section class="wpc-loans-nonbank-h7k2-section">
 <div class="wpc-loans-nonbank-h7k2-container">
-<h2 class="wpc-loans-nonbank-h7k2-section-title"><a href="https://loan-israel.co.il/rejected-loans/">הלוואה למסורבי בנק</a> ובעלי BDI שלילי</h2>
+<h2 class="wpc-loans-nonbank-h7k2-section-title">הלוואה למסורבי בנק ובעלי BDI שלילי</h2>
 <div class="wpc-loans-nonbank-h7k2-section-content">
-<p><strong>מה זה BDI?</strong> דירוג האשראי האישי שלכם בטווח 300-850. ציון מתחת ל-720 נחשב בעייתי, ומתחת ל-600 - שלילי.</p>
-<p>הבנקים בוחנים את ה-BDI במאגר נתוני האשראי ודוחים מועמדים עם דירוג נמוך. <em>הפתרון</em>: חברות מימון חוץ בנקאיות שפועלות לפי קריטריונים גמישים יותר.</p>
+<p><strong>מה זה BDI?</strong> דירוג האשראי האישי שלכם בטווח 300-850. ציון מתחת ל-720 נחשב בעייתי, ומתחת ל-600 - שלילי. למידע נוסף על פתרונות מימון ל<a href="https://loan-israel.co.il/הלוואות-לבעלי-bdi-שלילי/">בעלי BDI שלילי</a>.</p>
+<p>הבנקים בוחנים את ה-BDI במאגר נתוני האשראי ודוחים מועמדים עם דירוג נמוך. <em>הפתרון</em>: חברות מימון חוץ בנקאיות המתמחות ב<a href="https://loan-israel.co.il/rejected-loans/">הלוואות למסורבי בנק</a> שפועלות לפי קריטריונים גמישים יותר.</p>
 <h3>למה הבנק מסרב לכם?</h3>
 <ul>
 <li><strong>חוסר יכולת החזר</strong> - הכנסה נמוכה או חובות גבוהים</li>
@@ -3206,28 +3216,28 @@
 <div class="wpc-loans-nonbank-h7k2-step-card">
 <div class="wpc-loans-nonbank-h7k2-step-number">1</div>
 <div class="wpc-loans-nonbank-h7k2-step-content">
-<h3><a href="https://loan-israel.co.il/property-loans/">הלוואה כנגד נכס</a></h3>
+<span class="wpc-loans-nonbank-h7k2-step-title"><a href="https://loan-israel.co.il/property-loans/">הלוואה כנגד נכס</a></span>
 <p>דירה, בית, מגרש, חנות. הריבית נמוכה יותר בגלל הביטחון</p>
 </div>
 </div>
 <div class="wpc-loans-nonbank-h7k2-step-card">
 <div class="wpc-loans-nonbank-h7k2-step-number">2</div>
 <div class="wpc-loans-nonbank-h7k2-step-content">
-<h3><a href="https://loan-israel.co.il/הלוואות-על-חשבון-הפנסיה/">הלוואה כנגד קרן פנסיה</a></h3>
+<span class="wpc-loans-nonbank-h7k2-step-title"><a href="https://loan-israel.co.il/הלוואות-על-חשבון-הפנסיה/">הלוואה כנגד קרן פנסיה</a></span>
 <p>ריבית של 1%-5% בלבד, ללא בדיקות אשראי</p>
 </div>
 </div>
 <div class="wpc-loans-nonbank-h7k2-step-card">
 <div class="wpc-loans-nonbank-h7k2-step-number">3</div>
 <div class="wpc-loans-nonbank-h7k2-step-content">
-<h3>חברות מימון מורשות</h3>
+<span class="wpc-loans-nonbank-h7k2-step-title">חברות מימון מורשות</span>
 <p>פועלות בהיתר ממשרד האוצר, בטוחות ומסודרות</p>
 </div>
 </div>
 <div class="wpc-loans-nonbank-h7k2-step-card">
 <div class="wpc-loans-nonbank-h7k2-step-number">4</div>
 <div class="wpc-loans-nonbank-h7k2-step-content">
-<h3><a href="https://loan-israel.co.il/הלוואות-חברתיות/">הלוואה חברתית/גמ"ח</a></h3>
+<span class="wpc-loans-nonbank-h7k2-step-title"><a href="https://loan-israel.co.il/הלוואות-חברתיות/">הלוואה חברתית/גמ"ח</a></span>
 <p>לסכומים קטנים, תנאים מועדפים</p>
 </div>
 </div>
@@ -3288,11 +3298,11 @@
 <div class="wpc-loans-nonbank-h7k2-card-inner">
 <div class="wpc-loans-nonbank-h7k2-card-front">
 <div class="wpc-loans-nonbank-h7k2-purpose-icon">🏠</div>
-<h3>שיפוץ דירה</h3>
+<span class="wpc-loans-nonbank-h7k2-card-title"><a href="https://loan-israel.co.il/renovation-loans/">שיפוץ דירה</a></span>
 <p>20,000 - 300,000 ₪</p>
 </div>
 <div class="wpc-loans-nonbank-h7k2-card-back">
-<h4>שיפוץ דירה</h4>
+<span class="wpc-loans-nonbank-h7k2-card-title-back"><a href="https://loan-israel.co.il/renovation-loans/">שיפוץ דירה</a></span>
 <ul>
 <li>אישור מהיר תוך 48 שעות</li>
 <li>ללא פיקוח על השימוש בכספים</li>
@@ -3307,11 +3317,11 @@
 <div class="wpc-loans-nonbank-h7k2-card-inner">
 <div class="wpc-loans-nonbank-h7k2-card-front">
 <div class="wpc-loans-nonbank-h7k2-purpose-icon">🚗</div>
-<h3>רכישת רכב</h3>
+<span class="wpc-loans-nonbank-h7k2-card-title"><a href="https://loan-israel.co.il/מימון-לרכב-חדש/">רכישת רכב</a></span>
 <p>50,000 - 200,000 ₪</p>
 </div>
 <div class="wpc-loans-nonbank-h7k2-card-back">
-<h4>רכישת רכב</h4>
+<span class="wpc-loans-nonbank-h7k2-card-title-back"><a href="https://loan-israel.co.il/מימון-לרכב-חדש/">רכישת רכב</a></span>
 <ul>
 <li>מימון עד 80% משווי הרכב</li>
 <li>פריסה עד 5 שנים</li>
@@ -3326,11 +3336,11 @@
 <div class="wpc-loans-nonbank-h7k2-card-inner">
 <div class="wpc-loans-nonbank-h7k2-card-front">
 <div class="wpc-loans-nonbank-h7k2-purpose-icon">💍</div>
-<h3>חתונות ואירועים</h3>
+<span class="wpc-loans-nonbank-h7k2-card-title"><a href="https://loan-israel.co.il/הלוואה-לחתונה/">חתונות ואירועים</a></span>
 <p>30,000 - 150,000 ₪</p>
 </div>
 <div class="wpc-loans-nonbank-h7k2-card-back">
-<h4>חתונות ואירועים</h4>
+<span class="wpc-loans-nonbank-h7k2-card-title-back"><a href="https://loan-israel.co.il/הלוואה-לחתונה/">חתונות ואירועים</a></span>
 <ul>
 <li>תכנון מראש עם ודאות כספית</li>
 <li>תנאי החזר נוחים</li>
@@ -3345,11 +3355,11 @@
 <div class="wpc-loans-nonbank-h7k2-card-inner">
 <div class="wpc-loans-nonbank-h7k2-card-front">
 <div class="wpc-loans-nonbank-h7k2-purpose-icon">📊</div>
-<h3><a href="https://loan-israel.co.il/הלוואות-לסגירת-חובות/" style="color:white;text-decoration:none;">סגירת חובות</a></h3>
+<span class="wpc-loans-nonbank-h7k2-card-title"><a href="https://loan-israel.co.il/הלוואות-לסגירת-חובות/">סגירת חובות</a></span>
 <p>25,000 - 400,000 ₪</p>
 </div>
 <div class="wpc-loans-nonbank-h7k2-card-back">
-<h4>סגירת חובות</h4>
+<span class="wpc-loans-nonbank-h7k2-card-title-back"><a href="https://loan-israel.co.il/הלוואות-לסגירת-חובות/">סגירת חובות</a></span>
 <ul>
 <li>איחוד חובות לתשלום אחד</li>
 <li>הפחתת ריבית כוללת</li>
@@ -3364,11 +3374,11 @@
 <div class="wpc-loans-nonbank-h7k2-card-inner">
 <div class="wpc-loans-nonbank-h7k2-card-front">
 <div class="wpc-loans-nonbank-h7k2-purpose-icon">💼</div>
-<h3>השקעות עסקיות</h3>
+<span class="wpc-loans-nonbank-h7k2-card-title"><a href="https://loan-israel.co.il/Business/">השקעות עסקיות</a></span>
 <p>100,000 - 500,000 ₪</p>
 </div>
 <div class="wpc-loans-nonbank-h7k2-card-back">
-<h4>השקעות עסקיות</h4>
+<span class="wpc-loans-nonbank-h7k2-card-title-back"><a href="https://loan-israel.co.il/Business/">השקעות עסקיות</a></span>
 <ul>
 <li>מימון מהיר להזדמנויות</li>
 <li>תנאים גמישים לעצמאים</li>
@@ -3383,11 +3393,11 @@
 <div class="wpc-loans-nonbank-h7k2-card-inner">
 <div class="wpc-loans-nonbank-h7k2-card-front">
 <div class="wpc-loans-nonbank-h7k2-purpose-icon">🏥</div>
-<h3>צרכים רפואיים</h3>
+<span class="wpc-loans-nonbank-h7k2-card-title"><a href="https://loan-israel.co.il/הלוואות-להליך-רפואי/">צרכים רפואיים</a></span>
 <p>15,000 - 200,000 ₪</p>
 </div>
 <div class="wpc-loans-nonbank-h7k2-card-back">
-<h4>צרכים רפואיים</h4>
+<span class="wpc-loans-nonbank-h7k2-card-title-back"><a href="https://loan-israel.co.il/הלוואות-להליך-רפואי/">צרכים רפואיים</a></span>
 <ul>
 <li>אישור מיידי לטיפולים דחופים</li>
 <li>תנאים מועדפים למקרי חירום</li>
@@ -3598,13 +3608,24 @@
       font-family: 'Assistant', sans-serif !important;
     }
     
-    .wpc-loans-nonbank-h7k2-step-content h3 {
+    .wpc-loans-nonbank-h7k2-step-content h3,
+    .wpc-loans-nonbank-h7k2-step-title {
+      display: block !important;
       font-size: 1.2rem !important;
       font-weight: var(--fw-semibold) !important;
       color: var(--primary) !important;
       margin: 0 0 15px 0 !important;
       font-family: 'Assistant', sans-serif !important;
       direction: rtl !important;
+    }
+    
+    .wpc-loans-nonbank-h7k2-step-title a {
+      color: inherit !important;
+      text-decoration: none !important;
+    }
+    
+    .wpc-loans-nonbank-h7k2-step-title a:hover {
+      text-decoration: underline !important;
     }
     
     .wpc-loans-nonbank-h7k2-step-content p {
@@ -3813,13 +3834,24 @@
       font-weight: 600 !important;
     }
     
-    .wpc-loans-nonbank-h7k2-card-front h3 {
+    .wpc-loans-nonbank-h7k2-card-front h3,
+    .wpc-loans-nonbank-h7k2-card-title {
+      display: block !important;
       font-size: 1.3rem !important;
       font-weight: var(--fw-bold) !important;
       margin: 0 0 10px 0 !important;
       font-family: 'Assistant', sans-serif !important;
       direction: rtl !important;
       color: #ffffff !important;
+    }
+    
+    .wpc-loans-nonbank-h7k2-card-title a {
+      color: #ffffff !important;
+      text-decoration: none !important;
+    }
+    
+    .wpc-loans-nonbank-h7k2-card-title a:hover {
+      text-decoration: underline !important;
     }
     
     .wpc-loans-nonbank-h7k2-card-front p {
@@ -3830,12 +3862,24 @@
       direction: rtl !important;
     }
     
-    .wpc-loans-nonbank-h7k2-card-back h4 {
+    .wpc-loans-nonbank-h7k2-card-back h4,
+    .wpc-loans-nonbank-h7k2-card-title-back {
+      display: block !important;
       font-size: 1.2rem !important;
       color: var(--primary) !important;
       margin: 0 0 15px 0 !important;
       font-family: 'Assistant', sans-serif !important;
       direction: rtl !important;
+      font-weight: var(--fw-bold) !important;
+    }
+    
+    .wpc-loans-nonbank-h7k2-card-title-back a {
+      color: var(--primary) !important;
+      text-decoration: none !important;
+    }
+    
+    .wpc-loans-nonbank-h7k2-card-title-back a:hover {
+      text-decoration: underline !important;
     }
     
     .wpc-loans-nonbank-h7k2-card-back ul {

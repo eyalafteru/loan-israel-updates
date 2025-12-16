@@ -1,5 +1,4 @@
-<!-- wp:html -->
-<p>&nbsp;</p>
+
 <!-- התחלת התוכן שלנו עם wrapper מוגן -->
 <div class="wpc-instant-loans-k7m2-wrapper"><style>
     /* CSS Variables - חובה מ-visual.txt */
@@ -108,18 +107,18 @@
     
     /* השורה הזו כבר מוגדרת בשורה 55-58 */
     
-    /* תיקון סופי - כל הכותרות section-title כחולות */
+    /* תיקון צבע כותרות - כחול לכל הכותרות עם רקע לבן */
+    h2.wpc-instant-loans-k7m2-section-title,
+    h2.wpc-instant-loans-k7m2-blue-title,
     .wpc-instant-loans-k7m2-section-title,
-    .wpc-instant-loans-k7m2-section-title {
-      text-align: center !important;
-      margin: 0 auto 20px !important;
-      display: block !important;
-      width: 100% !important;
-      color: var(--primary) !important; /* כחול של וורדפרס - חזק ביותר */
-      font-family: 'Assistant', sans-serif !important;
-      font-weight: 700 !important;
-      font-size: 2.5em !important;
-      z-index: 999 !important; /* עדיפות מקסימלית */
+    .wpc-instant-loans-k7m2-blue-title {
+      color: #1e3a5f !important;
+    }
+    
+    /* כותרות לבנות רק באזורים עם רקע כחול */
+    .wpc-instant-loans-k7m2-hero-section h2,
+    .wpc-instant-loans-k7m2-hero-section .wpc-instant-loans-k7m2-section-title {
+      color: #ffffff !important;
     }
     
     /* ביטול הגדרות מיוחדות מ-visual.txt עבור הכותרות */
@@ -419,8 +418,7 @@
       font-family: 'Assistant', sans-serif !important;
     }
     
-    /* תיקון toc_12 עד toc_19 ללבן - קלאס ייחודי לוורדפרס */
-    #toc_12, #toc_13, #toc_14, #toc_15, #toc_16, #toc_17, #toc_18, #toc_19,
+    /* כותרות לבנות - רק קלאסים ספציפיים, לא toc IDs של וורדפרס */
     .wpc-instant-loans-k7m2-white-header {
       color: #ffffff !important;
       font-family: 'Assistant', sans-serif !important;
@@ -5030,11 +5028,11 @@
 <p class="wpc-instant-loans-k7m2-update-date"><strong>עודכן לאחרונה:</strong> [current_date format="F Y" hebrew="true"]</p>
 <p class="wpc-instant-loans-k7m2-rate-info" style="font-size: 0.95em; color: rgba(255,255,255,0.9); margin-top: 10px;">💡 הריביות בתוכן מעודכנות לפי ריבית פריים 5.75% (ריבית בנק ישראל 4.25%, נכון לנובמבר 2025)</p>
 <p class="wpc-instant-loans-k7m2-hero-subtitle">גלה מהן האפשרויות הזמינות לך להלוואה מיידית ואיזו הכי מתאימה למצב שלך</p>
-<div class="wpc-instant-loans-k7m2-hero-cta"><button class="wpc-instant-loans-k7m2-hero-btn wpc-instant-loans-k7m2-hero-btn-primary"> בדוק אפשרויות זמינות עכשיו </button> <button class="wpc-instant-loans-k7m2-hero-btn wpc-instant-loans-k7m2-hero-btn-secondary"> השווה בין כל המלווים </button></div>
+<div class="wpc-instant-loans-k7m2-hero-cta"><button class="wpc-instant-loans-k7m2-hero-btn wpc-instant-loans-k7m2-hero-btn-primary"> בדוק אפשרויות זמינות עכשיו </button> <button class="wpc-instant-loans-k7m2-hero-btn wpc-instant-loans-k7m2-hero-btn-secondary" onclick="document.querySelector('.wpc-instant-loans-k7m2-rates-section').scrollIntoView({behavior: 'smooth'})"> השווה בין כל המלווים </button></div>
 </div>
 </section>
 <!-- אזור 2: טופס AWG מעוצב - ✅ עוצב והושלם --><!-- חיפושים שביצעתי: wpc-instant-loans-k7m2-awg-section + כל הרכיבים + מובייל -->
-<section class="wpc-instant-loans-k7m2-awg-section">
+<section id="awg-form" class="wpc-instant-loans-k7m2-awg-section">
 <div class="wpc-instant-loans-k7m2-awg-container"><!-- כותרת AWG הוסרה לפי בקשת המשתמש -->
 <div class="wpc-instant-loans-k7m2-awg-content">
 <div class="wpc-shortcode-item">[awg postid="32400"]</div>
@@ -5047,33 +5045,33 @@
 <div class="wpc-instant-loans-k7m2-section-header">
 <h2 class="wpc-instant-loans-k7m2-section-title">מחשבון דחיפות כלכלית לקבלת כסף מהיר</h2>
 </div>
-<div class="wpc-instant-loans-k7m2-calc-content"><!-- מחשבון מאוחד עם כפתורים -->
+<div class="wpc-instant-loans-k7m2-calc-content" data-selected-period="24" data-selected-profile="employee" data-selected-urgency="normal" data-selected-time="24"><!-- מחשבון מאוחד עם כפתורים -->
 <div class="wpc-instant-loans-k7m2-calc-panel wpc-instant-loans-k7m2-unified-panel active"><!-- סכום הלוואה -->
 <div class="wpc-instant-loans-k7m2-input-group"><label class="wpc-instant-loans-k7m2-input-label">💰 סכום הלוואה נדרש</label>
-<div class="wpc-instant-loans-k7m2-slider-wrapper wpc-instant-loans-k7m2-slider-wrapper"><input class="wpc-instant-loans-k7m2-slider wpc-instant-loans-k7m2-amount-slider" max="200000" min="5000" step="5000" type="range" value="50000" data-field="amount" />
+<div class="wpc-instant-loans-k7m2-slider-wrapper wpc-instant-loans-k7m2-slider-wrapper"><input class="wpc-instant-loans-k7m2-slider wpc-instant-loans-k7m2-amount-slider" max="200000" min="5000" step="5000" type="range" value="50000" data-field="amount" oninput="if(window.WPC_InstantLoans)WPC_InstantLoans.updateAmount(this.value)" />
 <div class="wpc-instant-loans-k7m2-slider-value wpc-instant-loans-k7m2-amount-value">50,000 ש"ח</div>
 </div>
 </div>
 <!-- תקופת החזר -->
 <div class="wpc-instant-loans-k7m2-input-group"><label class="wpc-instant-loans-k7m2-input-label">📅 תקופת החזר</label>
-<div class="wpc-instant-loans-k7m2-button-group" data-field="period"><button class="wpc-instant-loans-k7m2-option-btn" data-value="6">📊 6 חודשים</button> <button class="wpc-instant-loans-k7m2-option-btn" data-value="12">📈 12 חודשים</button> <button class="wpc-instant-loans-k7m2-option-btn" data-value="18">📉 18 חודשים</button> <button class="wpc-instant-loans-k7m2-option-btn active" data-value="24">⭐ 24 חודשים</button> <button class="wpc-instant-loans-k7m2-option-btn" data-value="36">📋 36 חודשים</button> <button class="wpc-instant-loans-k7m2-option-btn" data-value="48">📊 48 חודשים</button> <button class="wpc-instant-loans-k7m2-option-btn" data-value="60">📈 60 חודשים</button></div>
+<div class="wpc-instant-loans-k7m2-button-group" data-field="period"><button class="wpc-instant-loans-k7m2-option-btn" data-value="6" onclick="if(window.WPC_InstantLoans)WPC_InstantLoans.selectOption(this)">📊 6 חודשים</button> <button class="wpc-instant-loans-k7m2-option-btn" data-value="12" onclick="if(window.WPC_InstantLoans)WPC_InstantLoans.selectOption(this)">📈 12 חודשים</button> <button class="wpc-instant-loans-k7m2-option-btn" data-value="18" onclick="if(window.WPC_InstantLoans)WPC_InstantLoans.selectOption(this)">📉 18 חודשים</button> <button class="wpc-instant-loans-k7m2-option-btn active" data-value="24" onclick="if(window.WPC_InstantLoans)WPC_InstantLoans.selectOption(this)">⭐ 24 חודשים</button> <button class="wpc-instant-loans-k7m2-option-btn" data-value="36" onclick="if(window.WPC_InstantLoans)WPC_InstantLoans.selectOption(this)">📋 36 חודשים</button> <button class="wpc-instant-loans-k7m2-option-btn" data-value="48" onclick="if(window.WPC_InstantLoans)WPC_InstantLoans.selectOption(this)">📊 48 חודשים</button> <button class="wpc-instant-loans-k7m2-option-btn" data-value="60" onclick="if(window.WPC_InstantLoans)WPC_InstantLoans.selectOption(this)">📈 60 חודשים</button></div>
 </div>
 <!-- סוג פרופיל -->
 <div class="wpc-instant-loans-k7m2-input-group"><label class="wpc-instant-loans-k7m2-input-label">👤 סוג פרופיל</label>
-<div class="wpc-instant-loans-k7m2-button-group" data-field="profile"><button class="wpc-instant-loans-k7m2-option-btn active" data-value="employee">💼 עובד שכיר</button> <button class="wpc-instant-loans-k7m2-option-btn" data-value="self-employed">🏢 עצמאי</button> <button class="wpc-instant-loans-k7m2-option-btn" data-value="pensioner">👴 פנסיונר</button> <button class="wpc-instant-loans-k7m2-option-btn" data-value="business">🏭 עסק קטן</button></div>
+<div class="wpc-instant-loans-k7m2-button-group" data-field="profile"><button class="wpc-instant-loans-k7m2-option-btn active" data-value="employee" onclick="if(window.WPC_InstantLoans)WPC_InstantLoans.selectOption(this)">💼 עובד שכיר</button> <button class="wpc-instant-loans-k7m2-option-btn" data-value="self-employed" onclick="if(window.WPC_InstantLoans)WPC_InstantLoans.selectOption(this)">🏢 עצמאי</button> <button class="wpc-instant-loans-k7m2-option-btn" data-value="pensioner" onclick="if(window.WPC_InstantLoans)WPC_InstantLoans.selectOption(this)">👴 פנסיונר</button> <button class="wpc-instant-loans-k7m2-option-btn" data-value="business" onclick="if(window.WPC_InstantLoans)WPC_InstantLoans.selectOption(this)">🏭 עסק קטן</button></div>
 </div>
 <!-- רמת דחיפות -->
 <div class="wpc-instant-loans-k7m2-input-group"><label class="wpc-instant-loans-k7m2-input-label">⚡ רמת דחיפות</label>
-<div class="wpc-instant-loans-k7m2-button-group" data-field="urgency"><button class="wpc-instant-loans-k7m2-option-btn" data-value="urgent">🔥 דחוף (תוך 24 שעות)</button> <button class="wpc-instant-loans-k7m2-option-btn active" data-value="normal">⏰ רגיל (תוך שבוע)</button></div>
+<div class="wpc-instant-loans-k7m2-button-group" data-field="urgency"><button class="wpc-instant-loans-k7m2-option-btn" data-value="urgent" onclick="if(window.WPC_InstantLoans)WPC_InstantLoans.selectOption(this)">🔥 דחוף (תוך 24 שעות)</button> <button class="wpc-instant-loans-k7m2-option-btn active" data-value="normal" onclick="if(window.WPC_InstantLoans)WPC_InstantLoans.selectOption(this)">⏰ רגיל (תוך שבוע)</button></div>
 </div>
 <!-- זמן מקסימלי -->
 <div class="wpc-instant-loans-k7m2-input-group"><label class="wpc-instant-loans-k7m2-input-label">⏱️ זמן מקסימלי לקבלת כסף</label>
-<div class="wpc-instant-loans-k7m2-button-group" data-field="time"><button class="wpc-instant-loans-k7m2-option-btn" data-value="1">⚡ תוך שעה</button> <button class="wpc-instant-loans-k7m2-option-btn active" data-value="24">🕐 תוך 24 שעות</button> <button class="wpc-instant-loans-k7m2-option-btn" data-value="48">📅 תוך 48 שעות</button> <button class="wpc-instant-loans-k7m2-option-btn" data-value="168">📋 תוך שבוע</button></div>
+<div class="wpc-instant-loans-k7m2-button-group" data-field="time"><button class="wpc-instant-loans-k7m2-option-btn" data-value="1" onclick="if(window.WPC_InstantLoans)WPC_InstantLoans.selectOption(this)">⚡ תוך שעה</button> <button class="wpc-instant-loans-k7m2-option-btn active" data-value="24" onclick="if(window.WPC_InstantLoans)WPC_InstantLoans.selectOption(this)">🕐 תוך 24 שעות</button> <button class="wpc-instant-loans-k7m2-option-btn" data-value="48" onclick="if(window.WPC_InstantLoans)WPC_InstantLoans.selectOption(this)">📅 תוך 48 שעות</button> <button class="wpc-instant-loans-k7m2-option-btn" data-value="168" onclick="if(window.WPC_InstantLoans)WPC_InstantLoans.selectOption(this)">📋 תוך שבוע</button></div>
 </div>
 <!-- הכנסה והוצאות -->
 <div class="wpc-instant-loans-k7m2-input-group"><label class="wpc-instant-loans-k7m2-input-label">💵 הכנסה חודשית נטו</label> <input class="wpc-instant-loans-k7m2-input wpc-instant-loans-k7m2-income-input" max="50000" min="3000" type="number" placeholder="לדוגמה: 8000" /></div>
 <div class="wpc-instant-loans-k7m2-input-group"><label class="wpc-instant-loans-k7m2-input-label">📊 הוצאות קבועות חודשיות</label> <input class="wpc-instant-loans-k7m2-input wpc-instant-loans-k7m2-expenses-input" max="40000" min="1000" type="number" placeholder="לדוגמה: 5000" /></div>
-<button class="wpc-instant-loans-k7m2-hero-btn wpc-instant-loans-k7m2-hero-btn-primary"> 🎯 קבל המלצות מותאמות אישית </button></div>
+<button class="wpc-instant-loans-k7m2-hero-btn wpc-instant-loans-k7m2-hero-btn-primary" onclick="if(window.WPC_InstantLoans)WPC_InstantLoans.calculate()"> 🎯 קבל המלצות מותאמות אישית </button></div>
 <!-- תוצאות -->
 <div class="wpc-instant-loans-k7m2-results wpc-instant-loans-k7m2-calc-results" style="display: none;">
 <h3 style="text-align: center; margin-bottom: 20px; color: var(--primary);">תוצאות מותאמות עבורך</h3>
@@ -5086,12 +5084,12 @@
 <section class="wpc-instant-loans-k7m2-intro-section">
 <div class="wpc-instant-loans-k7m2-intro-container">
 <div class="wpc-instant-loans-k7m2-section-header">
-<h2 class="wpc-instant-loans-k7m2-section-title">הקדמה מהירה - מה זה הלוואה מיידית?</h2>
+<h2 class="wpc-instant-loans-k7m2-section-title">מהי הלוואה מיידית אונליין?</h2>
 </div>
 <div class="wpc-instant-loans-k7m2-intro-content">
 <div class="wpc-instant-loans-k7m2-intro-text">
-<p class="wpc-instant-loans-k7m2-intro-paragraph">הלוואה מיידית היא הפתרון המושלם לצרכים פיננסיים דחופים. בניגוד להלוואות מסורתיות שלוקחות שבועות, הלוואות מיידיות ניתנות לאישור תוך שעות ספורות - ולעיתים אפילו דקות!</p>
-<p class="wpc-instant-loans-k7m2-intro-paragraph">במדריך זה נכסה את כל הפרטים החשובים שתצטרכו לדעת, החל מהגופים המלווים הטובים ביותר וכלה בחישובי עלויות מדויקים שיעזרו לכם לבחור בחכמה.</p>
+<p class="wpc-instant-loans-k7m2-intro-paragraph"><strong>הלוואה מיידית</strong> היא פתרון אשראי מהיר המאפשר קבלת כספים לחשבון הבנק תוך זמן קצר, לרוב בין שעה ל-3 ימי עסקים. השירות זמין דרך בנקים, חברות אשראי וגופים חוץ בנקאיים, ולרוב אינו דורש ערבים או ביטחונות פיזיים.</p>
+<p class="wpc-instant-loans-k7m2-intro-paragraph">על פי בדיקתנו ב-2025, ניתן לקבל מימון בסכומים של עד 400,000 ש"ח בפריסה של עד 120 תשלומים. התהליך מתבצע באופן דיגיטלי מלא ומתאים למגוון רחב של מטרות וצרכים.</p>
 <div class="wpc-instant-loans-k7m2-intro-highlight">
 <h3 class="wpc-instant-loans-k7m2-intro-highlight-title">למה כדאי לקרוא את המדריך הזה?</h3>
 <ul class="wpc-instant-loans-k7m2-intro-list">
@@ -5120,7 +5118,7 @@
 </div>
 <div class="wpc-instant-loans-k7m2-lenders-content">
 <div class="wpc-instant-loans-k7m2-lenders-intro">
-<p class="wpc-instant-loans-k7m2-lenders-paragraph">שוק ההלוואות המיידיות מגוון ומתפתח במהירות. כל גוף מלווה מציע תנאים שונים, קהלי יעד ייחודיים וכלים טכנולוגיים מתקדמים להאצת תהליך האישור.</p>
+<p class="wpc-instant-loans-k7m2-lenders-paragraph">שוק ההלוואות המיידיות מגוון ומתפתח במהירות. כיום ניתן לקבל <strong>הלוואה מיידית אונליין</strong> ממגוון גופים - כל אחד מציע תנאים שונים, קהלי יעד ייחודיים וכלים טכנולוגיים מתקדמים.</p>
 </div>
 <div class="wpc-instant-loans-k7m2-lenders-categories">
 <div class="wpc-instant-loans-k7m2-category-grid"><!-- קטגוריה 1: בנקים דיגיטליים -->
@@ -5128,10 +5126,10 @@
 <div class="wpc-instant-loans-k7m2-category-icon">🏦</div>
 <h3 class="wpc-instant-loans-k7m2-category-title">בנקים דיגיטליים ומסחריים</h3>
           <ul class="wpc-instant-loans-k7m2-category-list">
-            <li><strong>בנק הפועלים</strong> - הלוואות דיגיטליות עד 250,000 ש"ח ללקוחות קיימים</li>
-            <li><strong>בנק לאומי</strong> - הלוואה דיגיטלית עד 400,000 ש"ח</li>
-            <li><strong>מזרחי-טפחות</strong> - עד 125,000 ש"ח, 2-72 חודשים</li>
-            <li><strong>בנק דיסקונט</strong> - הלוואה דיגיטלית עם ריבית מיוחדת</li>
+            <li><strong>בנק לאומי</strong> - הלוואה דיגיטלית עד 400,000 ש"ח בפריסה ל-120 חודשים (עם אופציית דחיית תשלום לחצי שנה).</li>
+            <li><strong>בנק דיסקונט</strong> - הלוואה דיגיטלית מהירה עד 50,000 ש"ח ללא בטחונות וערבים.</li>
+            <li><strong>מזרחי-טפחות</strong> - הלוואה מיידית עד 125,000 ש"ח עם אפשרות לגרייס של 3 חודשים.</li>
+            <li><strong>בנק הפועלים</strong> - הלוואות דיגיטליות עד 250,000 ש"ח ללקוחות כל הבנקים.</li>
           </ul>
 </div>
 <!-- קטגוריה 2: פלטפורמות P2P -->
@@ -5139,19 +5137,19 @@
 <div class="wpc-instant-loans-k7m2-category-icon">💻</div>
 <h3 class="wpc-instant-loans-k7m2-category-title">פלטפורמות P2P ודיגיטליות</h3>
 <ul class="wpc-instant-loans-k7m2-category-list">
-<li><strong>טריא (Tarya)</strong> - עד 70,000 ש"ח, ריבית 4.5%-18%</li>
-<li><strong>בלנדר</strong> - פלטפורמת P2P, 5,000-100,000 ש"ח</li>
-<li><strong>BTB Finance</strong> - מעל 2 מיליארד ש"ח הועברו, עד מיליון ש"ח</li>
+<li><strong>טריא (Tarya)</strong> - <a href="https://loan-israel.co.il/">הלוואה לכל מטרה</a> עד 30 שנה (מותנה בבטחונות).</li>
+<li><strong>בלנדר</strong> - הלוואות P2P עד 60 חודשים בתהליך דיגיטלי מלא.</li>
+<li><strong>הפניקס</strong> - הלוואה חופשית עד 150,000 ש"ח ללא ערבים בתהליך אונליין.</li>
 </ul>
 </div>
 <!-- קטגוריה 3: חברות אשראי -->
 <div class="wpc-instant-loans-k7m2-category-card">
 <div class="wpc-instant-loans-k7m2-category-icon">💳</div>
-<h3 class="wpc-instant-loans-k7m2-category-title">חברות אשראי מובילות</h3>
+<h3 class="wpc-instant-loans-k7m2-category-title">חברות אשראי (הלוואה מיידית ללא אשראי בנקאי)</h3>
           <ul class="wpc-instant-loans-k7m2-category-list">
-            <li><strong>MAX (לשעבר לאומי קארד)</strong> - 3.2 מיליון כרטיסי אשראי</li>
-            <li><strong>כאל</strong> - פתרונות מימון מהירים</li>
-            <li><strong>ישראכרט</strong> - מימון מיידי עד 500,000 ש"ח</li>
+            <li><strong>הלוואה מיידית מקס (MAX)</strong> - פתרונות אשראי חוץ בנקאיים מהירים למחזיקי כרטיס.</li>
+            <li><strong>כאל</strong> - הלוואה מיידית לכולם (בכפוף לחיתום) ללא פגיעה באובליגו.</li>
+            <li><strong>ישראכרט</strong> - מימון מיידי עד 500,000 ש"ח בפריסה של עד 60 תשלומים.</li>
           </ul>
 </div>
 <!-- קטגוריה 4: חברות מימון -->
@@ -5159,8 +5157,9 @@
 <div class="wpc-instant-loans-k7m2-category-icon">🏢</div>
 <h3 class="wpc-instant-loans-k7m2-category-title">חברות מימון חוץ-בנקאיות</h3>
 <ul class="wpc-instant-loans-k7m2-category-list">
-<li><strong>מימון ישיר</strong> - תיק 8.6 מיליארד ש"ח, 10,000-150,000 ש"ח</li>
-<li><strong>פסגות</strong> - פתרונות מימון מותאמים</li>
+<li><strong>מימון ישיר</strong> - הלוואות לרכב ולכל מטרה עד 150,000 ש"ח.</li>
+<li><strong>נאוי גרופ</strong> - פתרונות מימון להשלמת הון עצמי ולטווח בינוני.</li>
+<li><strong>עוגן</strong> - מסלולי סיוע ייחודיים (כולל <a href="https://loan-israel.co.il/הלוואות-ללא-ריבית/">הלוואה ללא ריבית</a> למילואימניקים).</li>
 </ul>
 </div>
 </div>
@@ -5177,74 +5176,61 @@
 <div class="wpc-instant-loans-k7m2-goals-grid"><!-- מטרה 1: טיול וחופשות -->
 <div class="wpc-instant-loans-k7m2-goal-card" data-goal="travel">
 <div class="wpc-instant-loans-k7m2-goal-icon">✈️</div>
-<h3 class="wpc-instant-loans-k7m2-goal-title">טיול וחופשות</h3>
+<span class="wpc-instant-loans-k7m2-goal-title"><a href="https://loan-israel.co.il/הלוואות-לחופשה-בחול-או-בארץ/">טיול וחופשות</a></span>
 <p class="wpc-instant-loans-k7m2-goal-description">מימון חלום הטיול המשפחתי או החופשה הרומנטית שחלמתם עליה</p>
 </div>
 <!-- מטרה 2: רכב -->
 <div class="wpc-instant-loans-k7m2-goal-card" data-goal="car">
 <div class="wpc-instant-loans-k7m2-goal-icon">🚗</div>
-<h3 class="wpc-instant-loans-k7m2-goal-title">רכב ותיקונים</h3>
+<span class="wpc-instant-loans-k7m2-goal-title"><a href="https://loan-israel.co.il/מימון-לרכב-חדש/">רכב ותיקונים</a></span>
 <p class="wpc-instant-loans-k7m2-goal-description">החלפת רכב, תיקונים דחופים או שדרוגים נדרשים</p>
 </div>
 <!-- מטרה 3: איחוד חובות -->
 <div class="wpc-instant-loans-k7m2-goal-card" data-goal="debt">
 <div class="wpc-instant-loans-k7m2-goal-icon">💳</div>
-<h3 class="wpc-instant-loans-k7m2-goal-title">איחוד חובות</h3>
+<span class="wpc-instant-loans-k7m2-goal-title"><a href="https://loan-israel.co.il/הלוואות-לסגירת-חובות/">איחוד חובות</a></span>
 <p class="wpc-instant-loans-k7m2-goal-description">פתרון חכם לסגירת כל החובות והמשכת החזר אחד נוח</p>
 </div>
 <!-- מטרה 4: ריהוט ומוצרי חשמל -->
 <div class="wpc-instant-loans-k7m2-goal-card" data-goal="furniture">
 <div class="wpc-instant-loans-k7m2-goal-icon">🛋️</div>
-<h3 class="wpc-instant-loans-k7m2-goal-title">ריהוט הבית</h3>
+<span class="wpc-instant-loans-k7m2-goal-title">ריהוט הבית</span>
 <p class="wpc-instant-loans-k7m2-goal-description">רכישת ריהוט חדש או מוצרי חשמל נדרשים לבית</p>
 </div>
 <!-- מטרה 5: טיפולים רפואיים -->
 <div class="wpc-instant-loans-k7m2-goal-card" data-goal="medical">
 <div class="wpc-instant-loans-k7m2-goal-icon">🏥</div>
-<h3 class="wpc-instant-loans-k7m2-goal-title">טיפולים רפואיים</h3>
+<span class="wpc-instant-loans-k7m2-goal-title"><a href="https://loan-israel.co.il/הלוואות-להליך-רפואי/">טיפולים רפואיים</a></span>
 <p class="wpc-instant-loans-k7m2-goal-description">מימון טיפולים רפואיים ודנטליים דחופים או פרטיים</p>
 </div>
 <!-- מטרה 6: אירועי משפחה -->
 <div class="wpc-instant-loans-k7m2-goal-card" data-goal="events">
 <div class="wpc-instant-loans-k7m2-goal-icon">💒</div>
-<h3 class="wpc-instant-loans-k7m2-goal-title">אירועי משפחה</h3>
+<span class="wpc-instant-loans-k7m2-goal-title"><a href="https://loan-israel.co.il/הלוואה-לחתונה/">אירועי משפחה</a></span>
 <p class="wpc-instant-loans-k7m2-goal-description">מימון חתונות, בר/בת מצווה ואירועים משפחתיים חשובים</p>
 </div>
 <!-- מטרה 7: שיפוצים -->
 <div class="wpc-instant-loans-k7m2-goal-card" data-goal="renovation">
 <div class="wpc-instant-loans-k7m2-goal-icon">🔨</div>
-<h3 class="wpc-instant-loans-k7m2-goal-title">שיפוצים דחופים</h3>
+<span class="wpc-instant-loans-k7m2-goal-title"><a href="https://loan-israel.co.il/renovation-loans/">שיפוצים דחופים</a></span>
 <p class="wpc-instant-loans-k7m2-goal-description">תיקונים דחופים בבית או שיפוצים שלא יכולים לחכות</p>
 </div>
 <!-- מטרה 8: לימודים -->
 <div class="wpc-instant-loans-k7m2-goal-card" data-goal="education">
 <div class="wpc-instant-loans-k7m2-goal-icon">📚</div>
-<h3 class="wpc-instant-loans-k7m2-goal-title">לימודים וקורסים</h3>
+<span class="wpc-instant-loans-k7m2-goal-title"><a href="https://loan-israel.co.il/הלוואה-ללימודים/">לימודים וקורסים</a></span>
 <p class="wpc-instant-loans-k7m2-goal-description">השקעה בעתיד - מימון לימודים או קורסים מקצועיים</p>
 </div>
 </div>
 <div class="wpc-instant-loans-k7m2-goals-cta">
 <p class="wpc-instant-loans-k7m2-goals-cta-text">מצאת את המטרה שלך? בדוק כמה תוכל לקבל</p>
-<button class="wpc-instant-loans-k7m2-goals-btn"> חשב את ההלוואה המתאימה לך </button></div>
+<button class="wpc-instant-loans-k7m2-goals-btn" onclick="document.getElementById('awg-form').scrollIntoView({behavior: 'smooth'})"> חשב את ההלוואה המתאימה לך </button></div>
 </div>
 </section>
-<!-- אזור 8 נמחק לפי בקשת המשתמש -->
-<div class="wpc-instant-loans-k7m2-video-description">
-<h3 class="wpc-instant-loans-k7m2-video-title">3 דקות שיחסכו לך שעות של חיפושים</h3>
-<p class="wpc-instant-loans-k7m2-video-text">במדריך הוידאו הזה תלמדו איך לבחור את המלווה הטוב ביותר, מה צריך לבדוק לפני הגשת בקשה ואיך להגדיל את הסיכויים לאישור.</p>
-<div class="wpc-instant-loans-k7m2-video-features">
-<div class="wpc-instant-loans-k7m2-video-feature"><span class="wpc-instant-loans-k7m2-video-feature-icon">⏱️</span>3 דקות בלבד</div>
-<div class="wpc-instant-loans-k7m2-video-feature"><span class="wpc-instant-loans-k7m2-video-feature-icon">💡</span>טיפים מקצועיים</div>
-<div class="wpc-instant-loans-k7m2-video-feature"><span class="wpc-instant-loans-k7m2-video-feature-icon">📈</span>העלאת סיכויי האישור</div>
-<div class="wpc-instant-loans-k7m2-video-feature"><span class="wpc-instant-loans-k7m2-video-feature-icon">💰</span>חיסכון בעלויות</div>
-</div>
-</div>
-</div>
-</div>
 <!-- אזור 10: טבלת ריביות מעודכנת - ✅ עוצב והושלם --><!-- חיפושים שביצעתי: wpc-comparison-demo (שורה 1988), wpc-instant-loans-k7m2-table - עיצוב אינטראקטיבי עם כרטיסים -->
 <section class="wpc-instant-loans-k7m2-rates-section">
 <div class="wpc-instant-loans-k7m2-section-header">
-<h2 class="wpc-instant-loans-k7m2-section-title">טבלת השוואה: גופים מלווים מובילים 2025</h2>
+<h2 class="wpc-instant-loans-k7m2-section-title">השוואת 14 גופים מובילים להלוואה מיידית - 2025</h2>
 </div>
 <div class="wpc-comparison-demo-container">
 <div class="wpc-comparison-demo-wrapper">
@@ -5269,7 +5255,7 @@
 <div class="wpc-comparison-feature good">💰 עד 1,000,000 ש"ח</div>
 <div class="wpc-comparison-feature good">🏆 ריבית תחרותית</div>
 </div>
-<button class="wpc-comparison-demo-btn"> קבל הצעה טובה יותר </button></div>
+<button class="wpc-comparison-demo-btn" onclick="document.getElementById('awg-form').scrollIntoView({behavior: 'smooth'})"> קבל הצעה טובה יותר </button></div>
 <!-- לאומי - בנקאי מומלץ -->
 <div class="wpc-instant-loans-k7m2-comparison-card" data-amount="400000" data-recommended="true">
 <div class="wpc-comparison-demo-header">
@@ -5283,7 +5269,7 @@
 <div class="wpc-comparison-feature good">💰 עד 400,000 ש"ח</div>
 <div class="wpc-comparison-feature good">🛡️ יציבות בנקאית</div>
 </div>
-<button class="wpc-comparison-demo-btn"> קבל הצעה טובה יותר </button></div>
+<button class="wpc-comparison-demo-btn" onclick="document.getElementById('awg-form').scrollIntoView({behavior: 'smooth'})"> קבל הצעה טובה יותר </button></div>
 <!-- מימון ישיר - חוץ-בנקאי מומלץ -->
 <div class="wpc-instant-loans-k7m2-comparison-card" data-amount="150000" data-recommended="true">
 <div class="wpc-comparison-demo-header">
@@ -5297,7 +5283,7 @@
 <div class="wpc-comparison-feature good">💰 עד 150,000 ש"ח</div>
 <div class="wpc-comparison-feature good">📈 סכומים גבוהים</div>
 </div>
-<button class="wpc-comparison-demo-btn"> קבל הצעה טובה יותר </button></div>
+<button class="wpc-comparison-demo-btn" onclick="document.getElementById('awg-form').scrollIntoView({behavior: 'smooth'})"> קבל הצעה טובה יותר </button></div>
 <!-- ישראכרט - מהיר -->
 <div class="wpc-instant-loans-k7m2-comparison-card" data-amount="500000" data-recommended="false">
 <div class="wpc-comparison-demo-header">
@@ -5311,7 +5297,7 @@
 <div class="wpc-comparison-feature good">💰 עד 500,000 ש"ח</div>
 <div class="wpc-comparison-feature bad">📊 ריבית גבוהה יחסית</div>
 </div>
-<button class="wpc-comparison-demo-btn"> קבל הצעה טובה יותר </button></div>
+<button class="wpc-comparison-demo-btn" onclick="document.getElementById('awg-form').scrollIntoView({behavior: 'smooth'})"> קבל הצעה טובה יותר </button></div>
 <!-- בלנדר - גמיש -->
 <div class="wpc-instant-loans-k7m2-comparison-card" data-amount="100000" data-recommended="false">
 <div class="wpc-comparison-demo-header">
@@ -5325,7 +5311,133 @@
 <div class="wpc-comparison-feature good">📊 ריבית הוגנת</div>
 <div class="wpc-comparison-feature bad">⏱️ 24-48 שעות</div>
 </div>
-<button class="wpc-comparison-demo-btn"> קבל הצעה טובה יותר </button></div>
+<button class="wpc-comparison-demo-btn" onclick="document.getElementById('awg-form').scrollIntoView({behavior: 'smooth'})"> קבל הצעה טובה יותר </button></div>
+<!-- דיסקונט - ללא בטחונות -->
+<div class="wpc-instant-loans-k7m2-comparison-card" data-amount="50000" data-recommended="true">
+<div class="wpc-comparison-demo-header">
+<div><img class="wpc-instant-loans-k7m2-rates-logo" src="https://loan-israel.co.il/wp-content/uploads/2024/01/%D7%93%D7%99%D7%A1%D7%A7%D7%95%D7%A0%D7%98-300x137.webp" alt="בנק דיסקונט" /> <span class="wpc-instant-loans-k7m2-rates-name">דיסקונט</span></div>
+<div class="wpc-comparison-demo-stars">★★★★☆</div>
+</div>
+<div class="wpc-comparison-demo-rate">פריים + 2-4%</div>
+<div class="wpc-comparison-demo-features">
+<div class="wpc-comparison-feature good">✅ ללא ערבים</div>
+<div class="wpc-comparison-feature good">💰 עד 50,000 ש"ח</div>
+<div class="wpc-comparison-feature good">⚡ תהליך דיגיטלי מלא</div>
+<div class="wpc-comparison-feature good">🛡️ בנקאי ויציב</div>
+</div>
+<button class="wpc-comparison-demo-btn" onclick="document.getElementById('awg-form').scrollIntoView({behavior: 'smooth'})"> קבל הצעה טובה יותר </button></div>
+<!-- הפניקס - חוץ בנקאי -->
+<div class="wpc-instant-loans-k7m2-comparison-card" data-amount="150000" data-recommended="true">
+<div class="wpc-comparison-demo-header">
+<div><img class="wpc-instant-loans-k7m2-rates-logo" src="https://loan-israel.co.il/wp-content/uploads/2025/06/הפניקס.png" alt="הפניקס" /> <span class="wpc-instant-loans-k7m2-rates-name">הפניקס</span></div>
+<div class="wpc-comparison-demo-stars">★★★★☆</div>
+</div>
+<div class="wpc-comparison-demo-rate">5.5%-14%</div>
+<div class="wpc-comparison-demo-features">
+<div class="wpc-comparison-feature good">✅ ללא ערבים</div>
+<div class="wpc-comparison-feature good">💰 עד 150,000 ש"ח</div>
+<div class="wpc-comparison-feature good">⏱️ תהליך אונליין מלא</div>
+<div class="wpc-comparison-feature good">📊 ריבית תחרותית</div>
+</div>
+<button class="wpc-comparison-demo-btn" onclick="document.getElementById('awg-form').scrollIntoView({behavior: 'smooth'})"> קבל הצעה טובה יותר </button></div>
+<!-- בנק הפועלים - דיגיטלי -->
+<div class="wpc-instant-loans-k7m2-comparison-card" data-amount="250000" data-recommended="true">
+<div class="wpc-comparison-demo-header">
+<div><img class="wpc-instant-loans-k7m2-rates-logo" src="https://loan-israel.co.il/wp-content/uploads/2024/07/בנק-הפועלים.webp" alt="בנק הפועלים" /> <span class="wpc-instant-loans-k7m2-rates-name">הפועלים</span></div>
+<div class="wpc-comparison-demo-stars">★★★★☆</div>
+</div>
+<div class="wpc-comparison-demo-rate">פריים + 1-3%</div>
+<div class="wpc-comparison-demo-features">
+<div class="wpc-comparison-feature good">✅ דיגיטלי מלא</div>
+<div class="wpc-comparison-feature good">💰 עד 250,000 ש"ח</div>
+<div class="wpc-comparison-feature good">⏱️ דחיית קרן 6 חודשים</div>
+<div class="wpc-comparison-feature good">🛡️ יציבות בנקאית</div>
+</div>
+<button class="wpc-comparison-demo-btn" onclick="document.getElementById('awg-form').scrollIntoView({behavior: 'smooth'})"> קבל הצעה טובה יותר </button></div>
+<!-- מזרחי-טפחות - מיידי -->
+<div class="wpc-instant-loans-k7m2-comparison-card" data-amount="125000" data-recommended="true">
+<div class="wpc-comparison-demo-header">
+<div><img class="wpc-instant-loans-k7m2-rates-logo" src="https://loan-israel.co.il/wp-content/uploads/2016/11/בנק-מזרחי-טפחות.webp" alt="מזרחי-טפחות" /> <span class="wpc-instant-loans-k7m2-rates-name">מזרחי-טפחות</span></div>
+<div class="wpc-comparison-demo-stars">★★★★☆</div>
+</div>
+<div class="wpc-comparison-demo-rate">0%-פריים+3%</div>
+<div class="wpc-comparison-demo-features">
+<div class="wpc-comparison-feature good">🎁 0% ריבית עד 40,000₪</div>
+<div class="wpc-comparison-feature good">💰 עד 125,000 ש"ח</div>
+<div class="wpc-comparison-feature good">⏱️ גרייס 3 חודשים</div>
+<div class="wpc-comparison-feature good">🏦 בנקאי אמין</div>
+</div>
+<button class="wpc-comparison-demo-btn" onclick="document.getElementById('awg-form').scrollIntoView({behavior: 'smooth'})"> קבל הצעה טובה יותר </button></div>
+<!-- בנק ירושלים - לכל הבנקים -->
+<div class="wpc-instant-loans-k7m2-comparison-card" data-amount="200000" data-recommended="false">
+<div class="wpc-comparison-demo-header">
+<div><img class="wpc-instant-loans-k7m2-rates-logo" src="https://loan-israel.co.il/wp-content/uploads/2016/10/בנק-ירושלים.webp" alt="בנק ירושלים" /> <span class="wpc-instant-loans-k7m2-rates-name">בנק ירושלים</span></div>
+<div class="wpc-comparison-demo-stars">★★★★☆</div>
+</div>
+<div class="wpc-comparison-demo-rate">פריים + 2-5%</div>
+<div class="wpc-comparison-demo-features">
+<div class="wpc-comparison-feature good">✅ לכל לקוחות הבנקים</div>
+<div class="wpc-comparison-feature good">💰 עד 200,000 ש"ח</div>
+<div class="wpc-comparison-feature good">📅 עד 120 חודשים</div>
+<div class="wpc-comparison-feature good">🔓 ללא חשבון משכורת</div>
+</div>
+<button class="wpc-comparison-demo-btn" onclick="document.getElementById('awg-form').scrollIntoView({behavior: 'smooth'})"> קבל הצעה טובה יותר </button></div>
+<!-- עוגן - 0% למילואימניקים -->
+<div class="wpc-instant-loans-k7m2-comparison-card featured" data-amount="60000" data-recommended="true">
+<div class="wpc-comparison-demo-header">
+<div><img class="wpc-instant-loans-k7m2-rates-logo" src="https://loan-israel.co.il/wp-content/uploads/2025/09/עוגן.png" alt="קרן עוגן" /> <span class="wpc-instant-loans-k7m2-rates-name">עוגן</span></div>
+<div class="wpc-comparison-demo-stars">★★★★★</div>
+</div>
+<div class="wpc-comparison-demo-rate">0% ריבית!</div>
+<div class="wpc-comparison-demo-features">
+<div class="wpc-comparison-feature good">🎖️ למילואימניקים 30+ ימים</div>
+<div class="wpc-comparison-feature good">💰 עד 60,000 ש"ח</div>
+<div class="wpc-comparison-feature good">📅 פריסה ל-5 שנים</div>
+<div class="wpc-comparison-feature good">🆓 ללא ריבית כלל!</div>
+</div>
+<button class="wpc-comparison-demo-btn" onclick="document.getElementById('awg-form').scrollIntoView({behavior: 'smooth'})"> בדוק זכאות עכשיו </button></div>
+<!-- כלל ביטוח - מקרן פנסיה -->
+<div class="wpc-instant-loans-k7m2-comparison-card" data-amount="100000" data-recommended="false">
+<div class="wpc-comparison-demo-header">
+<div><img class="wpc-instant-loans-k7m2-rates-logo" src="https://loan-israel.co.il/wp-content/uploads/2025/09/כלל.png" alt="כלל ביטוח" /> <span class="wpc-instant-loans-k7m2-rates-name"><a href="https://loan-israel.co.il/הלוואות-על-חשבון-הפנסיה/">כלל (קרן פנסיה)</a></span></div>
+<div class="wpc-comparison-demo-stars">★★★★☆</div>
+</div>
+<div class="wpc-comparison-demo-rate">פריים + 0-2%</div>
+<div class="wpc-comparison-demo-features">
+<div class="wpc-comparison-feature good">✅ מהחיסכון שלך</div>
+<div class="wpc-comparison-feature good">💰 עד 80% מהצבירה</div>
+<div class="wpc-comparison-feature good">📅 עד 7 שנים</div>
+<div class="wpc-comparison-feature good">🔒 ללא בדיקת אשראי</div>
+</div>
+<button class="wpc-comparison-demo-btn" onclick="document.getElementById('awg-form').scrollIntoView({behavior: 'smooth'})"> קבל הצעה טובה יותר </button></div>
+<!-- בנק יהב - עובדי מדינה -->
+<div class="wpc-instant-loans-k7m2-comparison-card" data-amount="150000" data-recommended="false">
+<div class="wpc-comparison-demo-header">
+<div><img class="wpc-instant-loans-k7m2-rates-logo" src="https://loan-israel.co.il/wp-content/uploads/2024/07/בנק-יהב.webp" alt="בנק יהב" /> <span class="wpc-instant-loans-k7m2-rates-name">בנק יהב</span></div>
+<div class="wpc-comparison-demo-stars">★★★★☆</div>
+</div>
+<div class="wpc-comparison-demo-rate">פריים + 0-2.9%</div>
+<div class="wpc-comparison-demo-features">
+<div class="wpc-comparison-feature good">👨‍💼 לעובדי מדינה</div>
+<div class="wpc-comparison-feature good">💰 עד 150,000 ש"ח</div>
+<div class="wpc-comparison-feature good">📅 עד 15 שנים</div>
+<div class="wpc-comparison-feature good">🎁 ריבית מועדפת</div>
+</div>
+<button class="wpc-comparison-demo-btn" onclick="document.getElementById('awg-form').scrollIntoView({behavior: 'smooth'})"> קבל הצעה טובה יותר </button></div>
+<!-- בנק הבינלאומי -->
+<div class="wpc-instant-loans-k7m2-comparison-card" data-amount="200000" data-recommended="false">
+<div class="wpc-comparison-demo-header">
+<div><img class="wpc-instant-loans-k7m2-rates-logo" src="https://loan-israel.co.il/wp-content/uploads/2024/01/הבינלואמי.webp" alt="הבינלאומי" /> <span class="wpc-instant-loans-k7m2-rates-name">הבינלאומי</span></div>
+<div class="wpc-comparison-demo-stars">★★★☆☆</div>
+</div>
+<div class="wpc-comparison-demo-rate">פריים + 0.2-3%</div>
+<div class="wpc-comparison-demo-features">
+<div class="wpc-comparison-feature good">🏠 שדרוג הבית עד 200K</div>
+<div class="wpc-comparison-feature good">🎓 0% ריבית לשכ"ל</div>
+<div class="wpc-comparison-feature good">📅 עד 72 חודשים</div>
+<div class="wpc-comparison-feature bad">⚠️ דורש ערבות</div>
+</div>
+<button class="wpc-comparison-demo-btn" onclick="document.getElementById('awg-form').scrollIntoView({behavior: 'smooth'})"> קבל הצעה טובה יותר </button></div>
 </div>
 </div>
 </div>
@@ -5430,7 +5542,7 @@
 </div>
 <div style="text-align: center; margin-top: 40px;">
 <p class="wpc-instant-loans-k7m2-timeline-cta-text">מוכנים להתחיל? זה הזמן לבדוק זכאות! 🚀</p>
-<button class="wpc-instant-loans-k7m2-lender-btn"> התחל את התהליך עכשיו ⚡ </button></div>
+<button class="wpc-instant-loans-k7m2-lender-btn" onclick="document.getElementById('awg-form').scrollIntoView({behavior: 'smooth'})"> התחל את התהליך עכשיו ⚡ </button></div>
 </div>
 </section>
 <!-- אזור 14 נמחק לפי בקשת המשתמש --><!-- אזור 15: הלוואות מיידיות למוגבלים ומסורבים - ✅ עוצב והושלם --><!-- חיפושים שביצעתי: wpc-instant-loans-k7m2-alert (שורה 2330) - אלרטים צבעוניים + כרטיסי פתרונות -->
@@ -5868,7 +5980,7 @@
 <div class="wpc-instant-loans-k7m2-solution-icon">👥</div>
 <h3 class="wpc-instant-loans-k7m2-solution-title">ערבויות ובטחונות</h3>
 </div>
-<p class="wpc-instant-loans-k7m2-solution-description">ערב חזק עם דירוג אשראי טוב יכול להוביל לאישור גם במקרים מורכבים. הפתרון הנפוץ ביותר.</p>
+<p class="wpc-instant-loans-k7m2-solution-description">ערב חזק עם <a href="https://loan-israel.co.il/בדיקת-דירוג-אשראי-אישי/">דירוג אשראי</a> טוב יכול להוביל לאישור גם במקרים מורכבים. הפתרון הנפוץ ביותר.</p>
 <ul class="wpc-instant-loans-k7m2-solution-features">
 <li>שיפור משמעותי בסיכויי האישור</li>
 <li>ריבית נמוכה יותר עם ערב טוב</li>
@@ -5885,7 +5997,7 @@
 <div class="wpc-instant-loans-k7m2-solution-icon">⚡</div>
 <h3 class="wpc-instant-loans-k7m2-solution-title">הלוואות קצרות מועד</h3>
 </div>
-<p class="wpc-instant-loans-k7m2-solution-description">הלוואות ל-3-12 חודשים בלבד. סכומים קטנים יחסית אבל אישור מהיר גם למוגבלים.</p>
+<p class="wpc-instant-loans-k7m2-solution-description"><strong>הלוואה מיידית במזומן</strong> ל-3-12 חודשים בלבד. סכומים קטנים יחסית אבל אישור מהיר גם למוגבלים.</p>
 <ul class="wpc-instant-loans-k7m2-solution-features">
 <li>אישור תוך שעות ספורות</li>
 <li>דרישות מינימליות</li>
@@ -5900,9 +6012,9 @@
 <div class="wpc-instant-loans-k7m2-solution-card">
 <div class="wpc-instant-loans-k7m2-solution-header">
 <div class="wpc-instant-loans-k7m2-solution-icon">🏠</div>
-<h3 class="wpc-instant-loans-k7m2-solution-title">משכנתאות חלופיות</h3>
+<span class="wpc-instant-loans-k7m2-solution-title"><a href="https://loan-israel.co.il/property-loans/">הלוואה כנגד נכס</a></span>
 </div>
-<p class="wpc-instant-loans-k7m2-solution-description">חברות מימון פרטיות המציעות משכנתאות למי שנדחה בבנקים. מתמחות בלקוחות מורכבים.</p>
+<p class="wpc-instant-loans-k7m2-solution-description"><strong>הלוואה מיידית חוץ בנקאית</strong> מחברות מימון פרטיות. מתמחות בלקוחות מורכבים שנדחו ב<a href="https://loan-israel.co.il/הלוואות-גדולות/">משכנתא</a> בנקאית.</p>
 <ul class="wpc-instant-loans-k7m2-solution-features">
 <li>פתרון לדחויים במשכנתא בנקאית</li>
 <li>גמישות בהוכחת הכנסה</li>
@@ -5918,7 +6030,7 @@
 <div class="wpc-instant-loans-k7m2-restricted-cta">
 <h3>נדחיתם? בדקו אפשרויות אחרות</h3>
 <p>מלאו את הפרטים ונבדוק עבורכם אילו מהפתרונות מתאימים למצב שלכם</p>
-<button class="wpc-instant-loans-k7m2-lender-btn" style="max-width: 350px;"> בדקו זכאות לפתרונות חלופיים </button></div>
+<button class="wpc-instant-loans-k7m2-lender-btn" style="max-width: 350px;" onclick="document.getElementById('awg-form').scrollIntoView({behavior: 'smooth'})"> בדקו זכאות לפתרונות חלופיים </button></div>
 </div>
 </section>
 <!-- אזור 16: הלוואות מיידיות ללא צ'קים - ✅ עוצב והושלם --><!-- חיפושים שביצעתי: wpc-comparison-demo (בסיס) - כרטיסי השוואה מתקדמים -->
@@ -6030,7 +6142,7 @@
 <div style="text-align: center; margin-top: 50px; padding: 40px; background: white; border-radius: var(--radius-lg); box-shadow: var(--shadow-md);">
 <h3 style="color: var(--text-dark); margin-bottom: 20px; font-size: 1.4em; font-family: 'Assistant', sans-serif;">מוכנים להלוואה ללא צ'קים?</h3>
 <p class="wpc-instant-loans-k7m2-no-checks-summary-text">רוב המלווים כיום מציעים את כל האפשרויות. בחרו את השיטה הנוחה לכם ובדקו זכאות.</p>
-<button class="wpc-instant-loans-k7m2-lender-btn" style="max-width: 300px;"> בדקו הלוואה ללא צ'קים </button></div>
+<button class="wpc-instant-loans-k7m2-lender-btn" style="max-width: 300px;" onclick="document.getElementById('awg-form').scrollIntoView({behavior: 'smooth'})"> בדקו הלוואה ללא צ'קים </button></div>
 </div>
 </section>
 <!-- אזור 17: טיפים לבחירת הלוואה - ✅ עוצב והושלם --><!-- חיפושים שביצעתי: wpc-instant-loans-k7m2-alert (בסיס) - אלרטים + כרטיסי טיפים מתקדמים -->
@@ -6086,7 +6198,7 @@
 <div class="wpc-instant-loans-k7m2-final-cta">
 <h3>מוכנים לבחור בחוכמה?</h3>
 <p>עכשיו כשאתם יודעים על מה לשים לב, בואו נמצא לכם את ההלוואה המתאימה ביותר</p>
-<button class="wpc-instant-loans-k7m2-cta-btn-white"> השוו הצעות בחכמה </button></div>
+<button class="wpc-instant-loans-k7m2-cta-btn-white" onclick="document.getElementById('awg-form').scrollIntoView({behavior: 'smooth'})"> השוו הצעות בחכמה </button></div>
 </div>
 </section>
 <!-- אזור 18: הלוואות לעסקים קטנים - ✅ עוצב והושלם --><!-- חיפושים שביצעתי: wpc-instant-loans-k7m2-section-title (בסיס) - עיצוב פשוט וברור -->
@@ -6114,7 +6226,7 @@
 <div class="wpc-instant-loans-k7m2-business-highlight"><strong>לעסקים חדשים:</strong> קרן אוגן מציעה הלוואות מיוחדות בתוספת ליווי מקצועי לחיזוק הפעילות העסקית. זה כולל ייעוץ כלכלי, עזרה בתכנון עסקי ותמיכה בשיווק.</div>
 <div class="wpc-instant-loans-k7m2-business-cta">
 <p style="color: var(--text-light); margin-bottom: 20px; font-family: 'Assistant', sans-serif;">צריכים מימון מהיר לעסק? בדקו זכאות גם לעסקים</p>
-<button class="wpc-instant-loans-k7m2-lender-btn" style="max-width: 280px;"> בדקו זכאות לעסק </button></div>
+<button class="wpc-instant-loans-k7m2-lender-btn" style="max-width: 280px;" onclick="document.getElementById('awg-form').scrollIntoView({behavior: 'smooth'})"> בדקו זכאות לעסק </button></div>
 </div>
 </div>
 </section>
@@ -6135,7 +6247,7 @@
                 <p>
                   <strong>כן, אך זה מסובך יותר.</strong> חברות P2P כמו טריא
                   ובלנדר לעיתים מאשרות הלוואות גם עם חובות קיימים, במיוחד אם יש
-                  ערב או בטחון נוסף. הריבית תהיה גבוהה יותר.
+                  ערב או בטחון נוסף. הריבית תהיה גבוהה יותר. במקרים מסוימים ניתן לקבל גם <strong>הלוואה מיידית במזומן למוגבלים</strong> דרך גופים ייעודיים.
                 </p>
               </div>
             </div>
@@ -6243,10 +6355,49 @@
                 </p>
               </div>
             </div>
+            <!-- שאלה 9 - SEO -->
+            <div class="wpc-faq-simple-item">
+              <input id="faq-9" class="wpc-faq-simple-toggle" type="checkbox">
+              <label class="wpc-faq-simple-question" for="faq-9">
+                <h3>מה עושים אם סורבתי בבנק? (הלוואה מיידית למסורבים)</h3>
+                <span class="wpc-faq-simple-icon">+</span>
+              </label>
+              <div class="wpc-faq-simple-answer">
+                <p>
+                  <strong><a href="https://loan-israel.co.il/rejected-loans/">הלוואה מיידית למסורבים</a></strong> אפשרית דרך גופים חוץ בנקאיים כמו מימון ישיר, הפניקס או עוגן. גופים אלו בוחנים את יכולת ההחזר הנוכחית ולא רק את היסטוריית האשראי. ניתן להגיש בקשה ל<strong>הלוואה מיידית אונליין למסורבים</strong> ולקבל מענה תוך שעות.
+                </p>
+              </div>
+            </div>
+            <!-- שאלה 10 - SEO -->
+            <div class="wpc-faq-simple-item">
+              <input id="faq-10" class="wpc-faq-simple-toggle" type="checkbox">
+              <label class="wpc-faq-simple-question" for="faq-10">
+                <h3>האם ניתן לקבל סכומים קטנים במזומן?</h3>
+                <span class="wpc-faq-simple-icon">+</span>
+              </label>
+              <div class="wpc-faq-simple-answer">
+                <p>
+                  <strong>כן.</strong> ניתן לקבל <strong>הלוואה מיידית עד 15000</strong> ש"ח ואפילו פחות דרך חברות אשראי וגופים חוץ בנקאיים. חלק מהגופים מאפשרים משיכת <strong>הלוואה מיידית במזומן</strong> דרך כרטיס נטען או סניפי דואר - פתרון מצוין למי שזקוק לכסף נזיל כאן ועכשיו.
+                </p>
+              </div>
+            </div>
+            <!-- שאלה 11 - SEO -->
+            <div class="wpc-faq-simple-item">
+              <input id="faq-11" class="wpc-faq-simple-toggle" type="checkbox">
+              <label class="wpc-faq-simple-question" for="faq-11">
+                <h3>האם אפשר הלוואה מיידית ללא פגיעה באשראי הבנקאי?</h3>
+                <span class="wpc-faq-simple-icon">+</span>
+              </label>
+              <div class="wpc-faq-simple-answer">
+                <p>
+                  <strong>כן.</strong> <strong>הלוואה מיידית ללא אשראי</strong> בנקאי ניתנת על ידי גופים חוץ בנקאיים ומבוססת על כושר ההחזר של הלווה, לא על המסגרת בבנק. זהו פתרון מצוין לשמירה על האובליגו לצרכים עתידיים כמו <a href="https://loan-israel.co.il/הלוואות-גדולות/">משכנתא</a>.
+                </p>
+              </div>
+            </div>
           </div>
 <div class="wpc-faq-simple-cta">
 <p><strong>עדיין יש לכם שאלות?</strong> היועצים שלנו זמינים לעזרה</p>
-<button class="wpc-faq-simple-btn"> 🔍 בדקו זכאות עם ייעוץ מקצועי </button></div>
+<button class="wpc-faq-simple-btn" onclick="document.getElementById('awg-form').scrollIntoView({behavior: 'smooth'})"> 🔍 בדקו זכאות עם ייעוץ מקצועי </button></div>
 </div>
 </section>
 <!-- אזור 19: יתרונות וחסרונות - השוואה הוגנת - ✅ עוצב והושלם --><!-- חיפושים שביצעתי: wpc-comparison-demo (העתקה מדויקת) - טבלת השוואה ויזואלית עם ✅ ו-❌ -->
@@ -6283,7 +6434,7 @@
 </div>
 <div style="text-align: center; margin-top: 40px; padding-top: 30px; border-top: 2px solid var(--border); font-family: 'Assistant', sans-serif;">
 <p style="color: var(--text-light); margin-bottom: 20px; font-size: 1.1em;"><strong>המסקנה:</strong> הלוואות מיידיות מתאימות לצרכים דחופים אמיתיים, אך חשוב לשקול היטב את העלות מול המהירות.</p>
-<button class="wpc-instant-loans-k7m2-lender-btn" style="max-width: 320px;"> השוו הצעות בחכמה עכשיו </button></div>
+<button class="wpc-instant-loans-k7m2-lender-btn" style="max-width: 320px;" onclick="document.getElementById('awg-form').scrollIntoView({behavior: 'smooth'})"> השוו הצעות בחכמה עכשיו </button></div>
 </div>
 </div>
 </section>
@@ -6292,7 +6443,7 @@
 <div class="wpc-instant-loans-k7m2-final-cta-content">
 <h2 class="wpc-instant-loans-k7m2-final-cta-title">מוכן להתחיל?</h2>
 <p class="wpc-instant-loans-k7m2-final-cta-subtitle">עכשיו אתה יודע הכל - הגיע הזמן לבדוק אפשרויות ולקבל את ההצעה הטובה ביותר עבורך</p>
-<div class="wpc-instant-loans-k7m2-final-cta-container"><!-- כפתור ראשי --> <button class="wpc-instant-loans-k7m2-final-cta-btn wpc-instant-loans-k7m2-final-cta-btn-primary"> <span class="wpc-instant-loans-k7m2-final-cta-icon">🚀</span> בדוק אפשרויות זמינות עכשיו </button> <!-- כפתור משני --> <a class="wpc-instant-loans-k7m2-final-cta-btn wpc-instant-loans-k7m2-final-cta-btn-whatsapp" href="https://api.whatsapp.com/send/?phone=%2B972534288957&amp;text=%D7%90%D7%A0%D7%99+%D7%9E%D7%A2%D7%95%D7%A0%D7%99%D7%99%D7%9F+%D7%9C%D7%94%D7%AA%D7%97%D7%99%D7%9C+%D7%91%D7%93%D7%99%D7%A7%D7%AA+%D7%96%D7%9B%D7%90%D7%95%D7%AA+%D7%9C%D7%94%D7%9C%D7%95%D7%95%D7%90%D7%94&amp;type=phone_number&amp;app_absent=0" target="_blank" rel="noopener"> <span class="wpc-instant-loans-k7m2-final-cta-icon">💬</span> שאל אותנו בWhatsApp </a></div>
+<div class="wpc-instant-loans-k7m2-final-cta-container"><!-- כפתור ראשי --> <button class="wpc-instant-loans-k7m2-final-cta-btn wpc-instant-loans-k7m2-final-cta-btn-primary" onclick="document.getElementById('awg-form').scrollIntoView({behavior: 'smooth'})"> <span class="wpc-instant-loans-k7m2-final-cta-icon">🚀</span> בדוק אפשרויות זמינות עכשיו </button> <!-- כפתור משני --> <a class="wpc-instant-loans-k7m2-final-cta-btn wpc-instant-loans-k7m2-final-cta-btn-whatsapp" href="https://api.whatsapp.com/send/?phone=%2B972534288957&amp;text=%D7%90%D7%A0%D7%99+%D7%9E%D7%A2%D7%95%D7%A0%D7%99%D7%99%D7%9F+%D7%9C%D7%94%D7%AA%D7%97%D7%99%D7%9C+%D7%91%D7%93%D7%99%D7%A7%D7%AA+%D7%96%D7%9B%D7%90%D7%95%D7%AA+%D7%9C%D7%94%D7%9C%D7%95%D7%95%D7%90%D7%94&amp;type=phone_number&amp;app_absent=0" target="_blank" rel="noopener"> <span class="wpc-instant-loans-k7m2-final-cta-icon">💬</span> שאל אותנו בWhatsApp </a></div>
 <p class="wpc-instant-loans-k7m2-final-cta-note">* השירות חינמי ללא התחייבות | מענה מקצועי תוך דקות</p>
 </div>
 </section>
@@ -7071,6 +7222,7 @@
           "@type": "Answer",
           "text": "כן, אך זה מסובך יותר. חברות P2P כמו טריא ובלנדר לעיתים מאשרות הלוואות גם עם חובות קיימים, במיוחד אם יש ערב או בטחון נוסף."
         }
+      },{
         "@type": "Question",
         "name": "מה המסמכים הנדרשים להלוואה מיידית?",
         "acceptedAnswer": {
@@ -7111,6 +7263,27 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "זה מורכב מאוד אך לא בלתי אפשרי. חלק מחברות המימון מציעות פתרונות ייעודיים, אך בתנאים מחמירים וריבית גבוהה משמעותית (20%+ שנתי)."
+        }
+      },{
+        "@type": "Question",
+        "name": "מה עושים אם סורבתי בבנק? (הלוואה מיידית למסורבים)",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "הלוואה מיידית למסורבים אפשרית דרך גופים חוץ בנקאיים כמו מימון ישיר, הפניקס או עוגן. גופים אלו בוחנים את יכולת ההחזר הנוכחית ולא רק את היסטוריית האשראי."
+        }
+      },{
+        "@type": "Question",
+        "name": "האם ניתן לקבל סכומים קטנים במזומן?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "כן. ניתן לקבל הלוואה מיידית עד 15,000 ש\"ח ואפילו פחות דרך חברות אשראי וגופים חוץ בנקאיים. חלק מהגופים מאפשרים משיכת הלוואה מיידית במזומן דרך כרטיס נטען או סניפי דואר."
+        }
+      },{
+        "@type": "Question",
+        "name": "האם אפשר הלוואה מיידית ללא פגיעה באשראי הבנקאי?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "כן. הלוואה מיידית ללא אשראי בנקאי ניתנת על ידי גופים חוץ בנקאיים ומבוססת על כושר ההחזר של הלווה, לא על המסגרת בבנק. זהו פתרון מצוין לשמירה על האובליגו לצרכים עתידיים כמו משכנתא."
         }
       }]
     }
@@ -7173,8 +7346,3 @@
       }
     })();
     </script></p>
-<!-- /wp:html -->
-
-<!-- wp:paragraph -->
-<p>&nbsp;</p>
-<!-- /wp:paragraph -->
