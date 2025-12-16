@@ -1,0 +1,262 @@
+# 📊 סקירה פיננסית - חלק 2: משכנתאות והלוואות
+
+## 🎯 תפקיד
+🚨 **כתוב רק את חלק 2 של הסקירה!** 🚨
+
+חלק 1 כבר קיים (מאזן, ריביות, חובות בעייתיים).
+
+תפקידך:
+**כתוב רק את הסעיפים של חלק 2:**
+1. משכנתאות (דירוג + טבלה + תמונה + המלצות)
+2. הלוואות (דירוג + טבלה + תמונה + המלצות)
+3. מסקנות והמלצות
+4. דיסקליימר משפטי
+5. סגירת `</div>` הראשי + Related Posts
+
+❌ **אל תכתוב:**
+- `<div class="wpc-financial-review-wrapper">` (זה כבר קיים!)
+- כותרת ראשית
+- תמצית מנהלים
+- מאזן בנקאי
+- ריביות אשראי
+- חובות בעייתיים
+
+✅ **כתוב רק:**
+- דירוג משכנתאות
+- דירוג הלוואות
+- טבלת מסלולים
+- מסקנות
+- דיסקליימר
+- `</div>` סגירה בלבד
+
+הסקירה נכתבת על ידי **תבקש**.
+
+## ✍️ סגנון כתיבה חובה (המשך מחלק 1):
+1. **שפה פשוטה** - כתוב כאילו אתה מסביר לחבר טוב
+2. **אין ז'רגון** - במקום "ריבית משתנה" כתוב "ריבית שמשתנה כל תקופה"
+3. **דוגמאות פשוטות** - "למשל, אם קונים דירה ב-2 מיליון ₪..."
+4. **הייליטס בהתחלה** - 3 נקודות החשובות ביותר בתחילת כל סעיף
+5. **כתיבה אנושית** - בלי משפטים מסובכים
+6. **מה זה אומר עליך?** - תמיד הסבר איך זה משפיע על הקורא
+
+## ⚡ דוגמה לסגנון הנכון:
+
+**❌ לא טוב (שפה גבוהה):**
+"בנק הבינלאומי מוביל בדירוג המשכנתאות עם ריבית כוללת אפקטיבית של 5.04%."
+
+**✅ טוב (שפה פשוטה):**
+"הבנק הבינלאומי הכי זול עכשיו - ריבית של 5.04%. למשל, על משכנתא של מיליון ₪ תחסוך בערך 500 ₪ בחודש לעומת בנק יקר יותר."
+
+---
+
+## 📥 נתוני קלט
+
+**חלק 1 (מהשלב הקודם):**
+```
+{{ $json.text }}
+```
+
+**משכנתאות:**
+```
+{{ $('Aggregate').item.json.data[4].properties['תוצאות סריקה'].rich_text[0].text.content }}
+```
+
+**הלוואות:**
+```
+{{ $('Aggregate').item.json.data[1].properties['תוצאות סריקה'].rich_text[0].text.content }}
+```
+
+**תמונה משכנתאות:**
+```
+{{ $('תמונה משכנתאות').item.json.secure_url }}
+```
+
+**תמונה הלוואות:**
+```
+{{ $('תמונה הלוואות').item.json.secure_url }}
+```
+
+---
+
+## 📋 מבנה ה-HTML לחלק 2 בלבד:
+
+התחל ישירות עם סעיף המשכנתאות (ללא `<div>` פותח):
+
+```html
+    <!-- דירוג משכנתאות -->
+    <section class="wpc-mortgage-ranking">
+        <h2>🏠 דירוג המשכנתאות: [כותרת תובנה קצרה]</h2>
+        <div class="analysis-content">
+            <h3>תמונת המצב</h3>
+            <p>[2-3 משפטים: מי הכי זול, פערים, מגמות]</p>
+            
+            <div class="mortgage-summary" style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin: 30px 0;">
+                <div class="summary-stat" style="text-align: center; padding: 20px; background: #f8f9fa; border: 2px solid #1e5490; border-radius: 8px; min-width: 200px; flex: 1;">
+                    <span class="stat-label" style="display: block; font-size: 14px; color: #666; margin-bottom: 8px;">פער מקסימלי</span>
+                    <span class="stat-value" style="display: block; font-size: 28px; font-weight: bold; color: #1e5490;">[X.XX]%</span>
+                </div>
+                <div class="summary-stat" style="text-align: center; padding: 20px; background: #f8f9fa; border: 2px solid #1e5490; border-radius: 8px; min-width: 200px; flex: 1;">
+                    <span class="stat-label" style="display: block; font-size: 14px; color: #666; margin-bottom: 8px;">הבנק הזול ביותר</span>
+                    <span class="stat-value" style="display: block; font-size: 28px; font-weight: bold; color: #1e5490;">[שם הבנק]</span>
+                </div>
+                <div class="summary-stat" style="text-align: center; padding: 20px; background: #f8f9fa; border: 2px solid #1e5490; border-radius: 8px; min-width: 200px; flex: 1;">
+                    <span class="stat-label" style="display: block; font-size: 14px; color: #666; margin-bottom: 8px;">ריבית ממוצעת</span>
+                    <span class="stat-value" style="display: block; font-size: 28px; font-weight: bold; color: #1e5490;">[X.XX]%</span>
+                </div>
+            </div>
+            
+            <h3>טבלת דירוג</h3>
+            [הכנס את הטבלה מנתוני המשכנתאות - רק 5 בנקים עליונים]
+            
+            <div class="mortgage-image" style="text-align: center; margin: 30px 0;">
+                <img src="{{ $('תמונה משכנתאות').item.json.secure_url }}" alt="משכנתאות נובמבר 2025" loading="lazy" style="max-height: 400px; width: auto; display: block; margin: 0 auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+            </div>
+            
+            <h3>המלצות</h3>
+            <ul class="consumer-tips">
+                <li>✅ התחל ב[שם הבנק הזול]</li>
+                <li>📊 השווה לפחות 3 בנקים</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- דירוג הלוואות -->
+    <section class="wpc-loans-ranking">
+        <h2>💳 דירוג ההלוואות: [כותרת תובנה קצרה]</h2>
+        <div class="analysis-content">
+            <h3>תמונת המצב</h3>
+            <p>[2-3 משפטים: השוואה בנקים vs כרטיסי אשראי, פערים]</p>
+            
+            <div class="loans-summary" style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin: 30px 0;">
+                <div class="summary-stat" style="text-align: center; padding: 20px; background: #f8f9fa; border: 2px solid #ff6b35; border-radius: 8px; min-width: 200px; flex: 1;">
+                    <span class="stat-label" style="display: block; font-size: 14px; color: #666; margin-bottom: 8px;">פער בנקים/כרטיסים</span>
+                    <span class="stat-value" style="display: block; font-size: 28px; font-weight: bold; color: #ff6b35;">[X.XX]%</span>
+                </div>
+                <div class="summary-stat" style="text-align: center; padding: 20px; background: #f8f9fa; border: 2px solid #28a745; border-radius: 8px; min-width: 200px; flex: 1;">
+                    <span class="stat-label" style="display: block; font-size: 14px; color: #666; margin-bottom: 8px;">המלווה הזול ביותר</span>
+                    <span class="stat-value" style="display: block; font-size: 28px; font-weight: bold; color: #28a745;">[שם הגוף]</span>
+                </div>
+                <div class="summary-stat" style="text-align: center; padding: 20px; background: #f8f9fa; border: 2px solid #1e5490; border-radius: 8px; min-width: 200px; flex: 1;">
+                    <span class="stat-label" style="display: block; font-size: 14px; color: #666; margin-bottom: 8px;">היקף שוק</span>
+                    <span class="stat-value" style="display: block; font-size: 28px; font-weight: bold; color: #1e5490;">[X.XX] מיליארד ש"ח</span>
+                </div>
+            </div>
+            
+            <h3>טבלת דירוג</h3>
+            [הכנס את הטבלה מנתוני ההלוואות - רק 5 מלווים עליונים]
+            
+            <div class="loans-image" style="text-align: center; margin: 30px 0;">
+                <img src="{{ $('תמונה הלוואות').item.json.secure_url }}" alt="הלוואות נובמבר 2025" loading="lazy" style="max-height: 400px; width: auto; display: block; margin: 0 auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+            </div>
+            
+            <h3>המלצות</h3>
+            <ul class="consumer-tips">
+                <li>🏆 התחל ב[שם המלווה הזול]</li>
+                <li>⚠️ הימנע מכרטיסי אשראי - ריבית כפולה</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- טבלת מסלולים -->
+    <section class="wpc-loan-tracks">
+        <h2>📊 מסלולי הלוואות</h2>
+        <div class="loan-tracks-table">
+            [loan_tracks_comparison_table]
+        </div>
+    </section>
+
+    <!-- מסקנות -->
+    <section class="wpc-conclusions">
+        <h2>🎯 מסקנות והמלצות</h2>
+        
+        <div class="key-takeaways" style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin: 30px 0;">
+            <div class="takeaway-box" style="text-align: center; padding: 25px; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border-radius: 12px; min-width: 250px; flex: 1; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
+                <span class="takeaway-icon" style="display: block; font-size: 48px; margin-bottom: 15px;">📈</span>
+                <h4 style="margin: 10px 0; color: #1e5490; font-size: 18px;">מגמת האשראי</h4>
+                <p style="margin: 10px 0; color: #666; font-size: 14px; line-height: 1.6;">[משפט אחד סיכום]</p>
+            </div>
+            <div class="takeaway-box" style="text-align: center; padding: 25px; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border-radius: 12px; min-width: 250px; flex: 1; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
+                <span class="takeaway-icon" style="display: block; font-size: 48px; margin-bottom: 15px;">💰</span>
+                <h4 style="margin: 10px 0; color: #1e5490; font-size: 18px;">מגמת הריביות</h4>
+                <p style="margin: 10px 0; color: #666; font-size: 14px; line-height: 1.6;">[משפט אחד סיכום]</p>
+            </div>
+            <div class="takeaway-box" style="text-align: center; padding: 25px; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border-radius: 12px; min-width: 250px; flex: 1; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
+                <span class="takeaway-icon" style="display: block; font-size: 48px; margin-bottom: 15px;">⚠️</span>
+                <h4 style="margin: 10px 0; color: #1e5490; font-size: 18px;">סיכונים</h4>
+                <p style="margin: 10px 0; color: #666; font-size: 14px; line-height: 1.6;">[משפט אחד סיכום]</p>
+            </div>
+        </div>
+        
+        <h3>המלצות מעשיות</h3>
+        <div class="practical-recommendations">
+            <h4>למחפשי משכנתא:</h4>
+            <ul>
+                <li>[המלצה 1]</li>
+                <li>[המלצה 2]</li>
+            </ul>
+            
+            <h4>למחפשי הלוואה:</h4>
+            <ul>
+                <li>[המלצה 1]</li>
+                <li>[המלצה 2]</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- דיסקליימר -->
+    <section class="wpc-sources-disclaimer">
+        <div class="wpc-disclaimer">
+            <h3>הצהרת אחריות</h3>
+            <p>הסקירה מבוססת על נתונים ציבוריים ומהווה מידע כללי בלבד. אין לראות בה ייעוץ פיננסי, משפטי או מקצועי אחר. לפני כל החלטה פיננסית מומלץ להיוועץ בגורמים מקצועיים. הנתונים נכונים למועד הפרסום ועשויים להשתנות.</p>
+        </div>
+    </section>
+
+</div>
+<!-- סוף הסקירה -->
+```
+
+---
+
+## ✍️ כללים:
+1. **דיוק 100%** בנתונים מהמקור
+2. **פשוט ונגיש** - כתוב כאילו אתה מסביר לחבר
+3. **הייליטס בהתחלה** - 3 נקודות קצרות בתחילת כל סעיף
+4. **דוגמאות מהחיים** - "למשל, משפחה שרוצה משכנתא של 1.5 מיליון..."
+5. **מה זה אומר עליך?** - תמיד הסבר איך זה משפיע על הקורא
+6. **חסכון בכסף** - תמיד הראה כמה כסף חוסכים בבחירה נכונה
+7. **סגור** - סיים עם `</div>` בלבד (Related Posts יתווסף ב-WordPress)
+8. 🚨 **CRITICAL: כל הקופסאות והתמונות חייבות להיות ממורכזות!**
+   - כל `div` של summary/stats/savings/takeaway חייב להיות עם `text-align: center` ו-`justify-content: center`
+   - כל תמונה חייבת להיות עם `display: block; margin: 0 auto; text-align: center` על הcontainer שלה
+   - כל span של ערך/מספר חייב להיות עם `display: block` ו-`text-align: center`
+
+## 📝 מבנה סעיף (דוגמה):
+
+```html
+<h2>🏠 [כותרת פשוטה וברורה]</h2>
+
+<h3>⚡ 3 הדברים החשובים:</h3>
+<ul class="highlights">
+    <li>נקודה 1 - איזה בנק הכי זול</li>
+    <li>נקודה 2 - כמה כסף חוסכים</li>
+    <li>נקודה 3 - מה לעשות עכשיו</li>
+</ul>
+
+<h3>מה קורה בשוק?</h3>
+<p>[הסבר פשוט עם דוגמה: "למשל, אם לוקחים משכנתא של..."]</p>
+
+<h3>כמה כסף חוסכים?</h3>
+<p>[חישוב פשוט: "ההבדל בין הבנק הזול והיקר הוא 500 ₪ בחודש"]</p>
+
+<h3>מה לעשות?</h3>
+<ul>
+    <li>✅ [המלצה פשוטה 1]</li>
+    <li>📞 [המלצה פשוטה 2]</li>
+</ul>
+```
+
+---
+
+## 🎯 פלט:
+HTML מלא וסגור - סקירה פיננסית שלמה ומוכנה לפרסום!
+

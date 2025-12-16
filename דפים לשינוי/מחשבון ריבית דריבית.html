@@ -1,0 +1,4088 @@
+<!-- תגיות HEAD לSEO מושלם -->
+<script>
+  // בדיקה והוספת תגיות HEAD חיוניות אם חסרות
+  (function() {
+    // Viewport Meta Tag
+    if (!document.querySelector('meta[name="viewport"]')) {
+      const viewport = document.createElement('meta');
+      viewport.name = 'viewport';
+      viewport.content = 'width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover';
+      document.head.appendChild(viewport);
+    }
+    
+    // Title Tag
+    if (!document.title || document.title === '') {
+      document.title = 'מחשבון ריבית דריבית מתקדם - גלה כמה הכסף שלך יכול לצמוח | רק תבקש';
+    }
+    
+    // Meta Description
+    if (!document.querySelector('meta[name="description"]')) {
+      const description = document.createElement('meta');
+      description.name = 'description';
+      description.content = 'מחשבון ריבית דריבית מתקדם עם 4 טאבים: חישוב בסיסי, השוואת קרנות, סימולציה ארוך טווח ואופטימיזציה. גלה כמה הכסף שלך יכול לצמוח עם הפקדות חודשיות והשפעת מס ואינפלציה.';
+      document.head.appendChild(description);
+    }
+    
+    // Meta Keywords
+    if (!document.querySelector('meta[name="keywords"]')) {
+      const keywords = document.createElement('meta');
+      keywords.name = 'keywords';
+      keywords.content = 'מחשבון ריבית דריבית, ריבית צמודה, חיסכון לטווח ארוך, ערך עתידי, קרן פנסיה, קרן השתלמות, פיקדון בנקאי, תכנון פיננסי, אופטימיזציה מס, הפקדות חודשיות, אינפלציה, תשואה אמיתית';
+      document.head.appendChild(keywords);
+    }
+    
+    // Meta Author
+    if (!document.querySelector('meta[name="author"]')) {
+      const author = document.createElement('meta');
+      author.name = 'author';
+      author.content = 'אייל עובדיה - רק תבקש';
+      document.head.appendChild(author);
+    }
+    
+    // Meta Robots
+    if (!document.querySelector('meta[name="robots"]')) {
+      const robots = document.createElement('meta');
+      robots.name = 'robots';
+      robots.content = 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1';
+      document.head.appendChild(robots);
+    }
+    
+    // Canonical URL
+    if (!document.querySelector('link[rel="canonical"]')) {
+      const canonical = document.createElement('link');
+      canonical.rel = 'canonical';
+      canonical.href = 'https://loan-israel.co.il/compound-interest-calculator';
+      document.head.appendChild(canonical);
+    }
+    
+    // Open Graph Tags
+    const ogTags = [
+      { property: 'og:type', content: 'website' },
+      { property: 'og:title', content: 'מחשבון ריבית דריבית מתקדם - גלה כמה הכסף שלך יכול לצמוח' },
+      { property: 'og:description', content: 'מחשבון ריבית דריבית מתקדם עם 4 טאבים מתקדמים לתכנון חיסכון מיטבי. כולל השוואת מסלולי חיסכון, סימולציה ארוך טווח ואופטימיזציה פיננסית.' },
+      { property: 'og:url', content: 'https://loan-israel.co.il/compound-interest-calculator' },
+      { property: 'og:site_name', content: 'רק תבקש' },
+      { property: 'og:locale', content: 'he_IL' },
+      { property: 'og:image', content: 'https://loan-israel.co.il/wp-content/uploads/2025/07/image-95.webp' },
+      { property: 'og:image:width', content: '1200' },
+      { property: 'og:image:height', content: '630' },
+      { property: 'og:image:alt', content: 'מחשבון ריבית דריבית מתקדם - אייל עובדיה' }
+    ];
+    
+    ogTags.forEach(tag => {
+      if (!document.querySelector(`meta[property="${tag.property}"]`)) {
+        const meta = document.createElement('meta');
+        meta.setAttribute('property', tag.property);
+        meta.content = tag.content;
+        document.head.appendChild(meta);
+      }
+    });
+    
+    // Twitter Card Tags
+    const twitterTags = [
+      { name: 'twitter:card', content: 'summary_large_image' },
+      { name: 'twitter:title', content: 'מחשבון ריבית דריבית מתקדם - גלה כמה הכסף שלך יכול לצמוח' },
+      { name: 'twitter:description', content: 'מחשבון ריבית דריבית מתקדם עם 4 טאבים לתכנון חיסכון מיטבי. השוואת מסלולים, סימולציה ארוך טווח ואופטימיזציה פיננסית.' },
+      { name: 'twitter:image', content: 'https://loan-israel.co.il/wp-content/uploads/2025/07/image-95.webp' },
+      { name: 'twitter:image:alt', content: 'מחשבון ריבית דריבית מתקדם - אייל עובדיה' }
+    ];
+    
+    twitterTags.forEach(tag => {
+      if (!document.querySelector(`meta[name="${tag.name}"]`)) {
+        const meta = document.createElement('meta');
+        meta.name = tag.name;
+        meta.content = tag.content;
+        document.head.appendChild(meta);
+      }
+    });
+    
+    // Additional SEO Meta Tags
+    const additionalTags = [
+      { name: 'theme-color', content: '#1e5490' },
+      { name: 'msapplication-TileColor', content: '#1e5490' },
+      { name: 'application-name', content: 'מחשבון ריבית דריבית - רק תבקש' },
+      { name: 'apple-mobile-web-app-title', content: 'מחשבון ריבית דריבית' },
+      { name: 'apple-mobile-web-app-capable', content: 'yes' },
+      { name: 'apple-mobile-web-app-status-bar-style', content: 'black-translucent' },
+      { name: 'format-detection', content: 'telephone=no' },
+      { name: 'mobile-web-app-capable', content: 'yes' },
+      { name: 'apple-touch-fullscreen', content: 'yes' },
+      { name: 'HandheldFriendly', content: 'true' },
+      { name: 'MobileOptimized', content: '375' }
+    ];
+    
+    additionalTags.forEach(tag => {
+      if (!document.querySelector(`meta[name="${tag.name}"]`)) {
+        const meta = document.createElement('meta');
+        meta.name = tag.name;
+        meta.content = tag.content;
+        document.head.appendChild(meta);
+      }
+    });
+    
+    // Language and Direction
+    if (!document.documentElement.lang) {
+      document.documentElement.lang = 'he';
+    }
+    if (!document.documentElement.dir) {
+      document.documentElement.dir = 'rtl';
+    }
+    
+  })();
+  </script>
+  
+  <style>
+  /* === תיקון צבעים למכשירים אמיתיים - חובה להוסיף בראש הקובץ === */
+  .wpc-calc-compound-int-k9x7-wrapper {
+      color-scheme: light !important;
+      forced-color-adjust: none !important;
+      -webkit-forced-color-adjust: none !important;
+      -ms-high-contrast-adjust: none !important;
+  }
+
+  @media (prefers-color-scheme: dark) {
+      .wpc-calc-compound-int-k9x7-wrapper {
+          color-scheme: light !important;
+          background-color: white !important;
+      }
+      
+      .wpc-calc-compound-int-k9x7-wrapper * {
+          color-scheme: light !important;
+      }
+  }
+
+  .wpc-calc-compound-int-k9x7-wrapper * {
+      forced-color-adjust: none !important;
+      -webkit-forced-color-adjust: none !important;
+      -webkit-text-fill-color: initial !important;
+      -webkit-font-smoothing: antialiased !important;
+      -moz-osx-font-smoothing: grayscale !important;
+  }
+
+  /* CSS Variables */
+  :root {
+    --primary: #1e5490;
+    --primary-dark: #2a5fa0;
+    --danger: #ff3b3b;
+    --success: #25D366;
+    --warning: #FF9800;
+    --text-dark: #222222;
+    --text-light: #444444;
+    --bg-light: #f5f5f5;
+    --white: #ffffff;
+    --border: #d0d0d0;
+    --max-width-container: 1200px;
+    --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+    --shadow-md: 0 5px 20px rgba(0,0,0,0.1);
+    --shadow-lg: 0 10px 40px rgba(0,0,0,0.15);
+    --radius-sm: 8px;
+    --radius-md: 15px;
+    --radius-lg: 20px;
+    --transition: all 0.3s ease;
+    --gradient-primary: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    --gradient-success: linear-gradient(135deg, var(--success) 0%, #1da851 100%);
+    
+    /* Typography Scale Variables */
+    --fs-hero: clamp(2.5rem, 5vw, 4rem);
+    --fs-h1: clamp(2rem, 4vw, 3rem);
+    --fs-h2: clamp(1.5rem, 3vw, 2rem);
+    --fs-h3: clamp(1.25rem, 2.5vw, 1.5rem);
+    --fs-body: clamp(1rem, 2vw, 1.25rem);
+    --fs-small: clamp(0.875rem, 1.5vw, 1rem);
+    --fs-input-min: 16px;
+    
+    /* Line Heights */
+    --lh-tight: 1.2;
+    --lh-normal: 1.5;
+    --lh-relaxed: 1.8;
+    
+    /* Font Weights */
+    --fw-light: 300;
+    --fw-regular: 400;
+    --fw-medium: 500;
+    --fw-semibold: 600;
+    --fw-bold: 700;
+    --fw-extrabold: 800;
+    
+    /* Spacing System */
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-5: 1.25rem;
+    --space-6: 1.5rem;
+    --space-8: 2rem;
+    --space-10: 2.5rem;
+    --space-12: 3rem;
+    --space-16: 4rem;
+    --space-20: 5rem;
+    --space-24: 6rem;
+    
+    /* Mobile Spacing */
+    --space-mobile-section: var(--space-10);
+    --space-mobile-card: var(--space-5);
+    --space-mobile-element: var(--space-3);
+  }
+  
+  /* Global Styles */
+  .wpc-calc-compound-int-k9x7-wrapper {
+    all: initial !important;
+    font-family: 'Assistant', sans-serif !important;
+    direction: rtl !important;
+    max-width: var(--max-width-container) !important;
+    margin: 0 auto !important;
+    width: 100% !important;
+    padding: 0 20px !important;
+    box-sizing: border-box !important;
+    /* תיקונים למכשירים אמיתיים */
+    -webkit-text-size-adjust: 100% !important;
+    -ms-text-size-adjust: 100% !important;
+    text-size-adjust: 100% !important;
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale !important;
+    overflow-x: hidden !important;
+    /* מניעת זום לא רצוי */
+    -webkit-overflow-scrolling: touch !important;
+    scroll-behavior: smooth !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-wrapper * {
+    box-sizing: border-box !important;
+    font-family: 'Assistant', sans-serif !important;
+    /* תיקונים למכשירים אמיתיים */
+    -webkit-tap-highlight-color: rgba(0,0,0,0.1) !important;
+    -webkit-touch-callout: none !important;
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    user-select: none !important;
+  }
+  
+  /* אלמנטים שכן צריכים selection */
+  .wpc-calc-compound-int-k9x7-wrapper input,
+  .wpc-calc-compound-int-k9x7-wrapper textarea,
+  .wpc-calc-compound-int-k9x7-wrapper [contenteditable],
+  .wpc-calc-compound-int-k9x7-wrapper p,
+  .wpc-calc-compound-int-k9x7-wrapper span,
+  .wpc-calc-compound-int-k9x7-wrapper h1,
+  .wpc-calc-compound-int-k9x7-wrapper h2,
+  .wpc-calc-compound-int-k9x7-wrapper h3,
+  .wpc-calc-compound-int-k9x7-wrapper h4,
+  .wpc-calc-compound-int-k9x7-wrapper h5,
+  .wpc-calc-compound-int-k9x7-wrapper h6,
+  .wpc-calc-compound-int-k9x7-wrapper .wpc-calc-compound-int-k9x7-text,
+  .wpc-calc-compound-int-k9x7-wrapper .wpc-calc-compound-int-k9x7-faq-content {
+    -webkit-user-select: text !important;
+    -moz-user-select: text !important;
+    -ms-user-select: text !important;
+    user-select: text !important;
+  }
+  
+  /* אלמנטים שלא צריכים selection */
+  .wpc-calc-compound-int-k9x7-wrapper .wpc-calc-compound-int-k9x7-slider-value,
+  .wpc-calc-compound-int-k9x7-wrapper .wpc-calc-compound-int-k9x7-result-value,
+  .wpc-calc-compound-int-k9x7-wrapper .wpc-calc-compound-int-k9x7-breakdown-value,
+  .wpc-calc-compound-int-k9x7-wrapper .wpc-calc-compound-int-k9x7-stat-value {
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    user-select: none !important;
+  }
+  
+  /* כותרת עם קו אדום */
+  .wpc-calc-compound-int-k9x7-title {
+    font-size: 2.5em !important;
+    font-weight: 700 !important;
+    color: var(--primary) !important;
+    margin: 0 auto 20px !important;
+    line-height: 1.3 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 15px !important;
+    width: fit-content !important;
+    justify-content: center !important;
+    direction: rtl !important;
+    position: relative !important;
+    padding-right: 25px !important;
+    text-align: center !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-title::after {
+    content: '' !important;
+    width: 4px !important;
+    height: 60px !important;
+    background: linear-gradient(135deg, #e74c3c, #c0392b) !important;
+    position: absolute !important;
+    right: 0 !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    border-radius: 2px !important;
+    box-shadow: 0 2px 4px rgba(231, 76, 60, 0.3) !important;
+  }
+  
+  /* Calculator Container */
+  .wpc-calc-compound-int-k9x7-container {
+    max-width: var(--max-width-container) !important;
+    margin: 0 auto !important;
+    padding: 40px 20px !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-calc-wrapper {
+    background: white !important;
+    border-radius: var(--radius-lg) !important;
+    box-shadow: var(--shadow-md) !important;
+    overflow: hidden !important;
+  }
+  
+  /* Tabs Navigation */
+  .wpc-calc-compound-int-k9x7-tabs {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)) !important;
+    gap: 8px !important;
+    padding: 5px !important;
+    background: var(--bg-light) !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-tab {
+    background: var(--bg-light) !important;
+    border: 2px solid transparent !important;
+    border-radius: 12px !important;
+    padding: 12px 8px !important;
+    min-height: 70px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+    transition: var(--transition) !important;
+    font-family: inherit !important;
+    box-shadow: var(--shadow-sm) !important;
+    text-align: center !important;
+    /* תיקונים למכשירים אמיתיים */
+    -webkit-tap-highlight-color: transparent !important;
+    touch-action: manipulation !important;
+    -webkit-user-select: none !important;
+    user-select: none !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-tab:hover {
+    background: white !important;
+    border-color: var(--primary) !important;
+    transform: translateY(-2px) !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-tab.active {
+    background: var(--gradient-primary) !important;
+    border-color: var(--primary-dark) !important;
+    color: white !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-tab-icon {
+    font-size: 1.5em !important;
+    margin-bottom: 8px !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-tab span:last-child {
+    font-size: 1em !important;
+    font-weight: 600 !important;
+  }
+  
+  /* Tab Content */
+  .wpc-calc-compound-int-k9x7-content {
+    padding: 30px !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-panel {
+    display: none !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-panel.active {
+    display: block !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-panel h4 {
+    color: var(--primary) !important;
+    margin-bottom: 20px !important;
+    font-size: 1.5em !important;
+  }
+  
+  /* Input Groups */
+  .wpc-calc-compound-int-k9x7-input-group {
+    margin-bottom: 25px !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-input-group label {
+    display: block !important;
+    margin-bottom: 8px !important;
+    font-weight: 600 !important;
+    color: var(--text-dark) !important;
+    font-size: 1.1em !important;
+  }
+  
+  /* Slider Styles */
+  .wpc-calc-compound-int-k9x7-slider-wrapper {
+    position: relative !important;
+    margin-bottom: 15px !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-slider {
+    width: 100% !important;
+    height: 8px !important;
+    background: var(--border) !important;
+    border-radius: 4px !important;
+    outline: none !important;
+    -webkit-appearance: none !important;
+    appearance: none !important;
+    margin-bottom: 10px !important;
+    /* תיקונים למכשירים אמיתיים */
+    -webkit-tap-highlight-color: transparent !important;
+    touch-action: pan-x !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-slider::-webkit-slider-thumb {
+    -webkit-appearance: none !important;
+    width: 25px !important;
+    height: 25px !important;
+    background: var(--primary) !important;
+    border-radius: 50% !important;
+    cursor: pointer !important;
+    box-shadow: var(--shadow-sm) !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-slider::-moz-range-thumb {
+    width: 25px !important;
+    height: 25px !important;
+    background: var(--primary) !important;
+    border-radius: 50% !important;
+    cursor: pointer !important;
+    border: none !important;
+    box-shadow: var(--shadow-sm) !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-slider-value {
+    text-align: center !important;
+    font-size: 1.2em !important;
+    font-weight: 700 !important;
+    color: var(--primary) !important;
+    direction: ltr !important;
+    background: var(--bg-light) !important;
+    padding: 8px 15px !important;
+    border-radius: 20px !important;
+    display: inline-block !important;
+    min-width: 120px !important;
+  }
+  
+  /* Toggle Groups */
+  .wpc-calc-compound-int-k9x7-toggle-group {
+    background: var(--bg-light) !important;
+    border-radius: 30px !important;
+    padding: 5px !important;
+    display: flex !important;
+    gap: 5px !important;
+    margin-bottom: 20px !important;
+    /* תיקונים למכשירים אמיתיים */
+    -webkit-user-select: none !important;
+    user-select: none !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-toggle-btn {
+    flex: 1 !important;
+    padding: 12px 20px !important;
+    border: none !important;
+    background: transparent !important;
+    border-radius: 25px !important;
+    cursor: pointer !important;
+    transition: var(--transition) !important;
+    font-weight: 600 !important;
+    font-size: 1em !important;
+    /* תיקונים למכשירים אמיתיים */
+    min-height: 44px !important;
+    -webkit-appearance: none !important;
+    appearance: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+    touch-action: manipulation !important;
+    -webkit-user-select: none !important;
+    user-select: none !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-toggle-btn.active {
+    background: var(--gradient-primary) !important;
+    color: white !important;
+    box-shadow: var(--shadow-sm) !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-toggle-btn:hover:not(.active) {
+    background: white !important;
+  }
+  
+  /* Results */
+  .wpc-calc-compound-int-k9x7-results {
+    background: var(--gradient-primary) !important;
+    color: white !important;
+    padding: 25px !important;
+    border-radius: var(--radius-md) !important;
+    margin-top: 30px !important;
+    text-align: center !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-results h5 {
+    margin: 0 0 15px 0 !important;
+    font-size: 1.3em !important;
+    font-weight: 600 !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-result-value {
+    font-size: 2.2em !important;
+    font-weight: 800 !important;
+    margin: 10px 0 !important;
+    direction: ltr !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-result-breakdown {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)) !important;
+    gap: 15px !important;
+    margin-top: 20px !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-breakdown-item {
+    background: rgba(255,255,255,0.1) !important;
+    padding: 15px !important;
+    border-radius: var(--radius-sm) !important;
+    text-align: center !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-breakdown-item strong {
+    display: block !important;
+    font-size: 1.1em !important;
+    margin-bottom: 5px !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-breakdown-value {
+    font-size: 1.3em !important;
+    font-weight: 700 !important;
+    direction: ltr !important;
+  }
+  
+  /* Chart Container */
+  .wpc-calc-compound-int-k9x7-chart {
+    background: white !important;
+    border: 1px solid var(--border) !important;
+    border-radius: var(--radius-md) !important;
+    padding: 20px !important;
+    margin: 20px 0 !important;
+    height: 300px !important;
+    position: relative !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-chart-title {
+    text-align: center !important;
+    margin-bottom: 15px !important;
+    font-weight: 600 !important;
+    color: var(--primary) !important;
+  }
+  
+  /* AWG Section */
+  .wpc-calc-compound-int-k9x7-awg-section {
+    background: #ffffff !important;
+    padding: 60px 20px !important;
+    margin: 40px 0 !important;
+    border-top: 1px solid #e0e0e0 !important;
+    border-bottom: 1px solid #e0e0e0 !important;
+    width: 100% !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-awg-container {
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+    padding: 30px !important;
+    text-align: center !important;
+    background: #ffffff !important;
+    border-radius: 15px !important;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08) !important;
+    border: 1px solid #f0f0f0 !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-awg-title h2 {
+    font-size: 2em !important;
+    font-weight: 700 !important;
+    color: #1e5490 !important;
+    margin: 0 0 10px 0 !important;
+    font-family: Assistant, sans-serif !important;
+    text-align: center !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-awg-title p {
+    font-size: 1.1em !important;
+    color: #666666 !important;
+    margin: 0 0 30px 0 !important;
+    font-family: Assistant, sans-serif !important;
+    text-align: center !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-cta-btn {
+    background: var(--gradient-primary) !important;
+    color: white !important;
+    border: none !important;
+    padding: 18px 40px !important;
+    border-radius: 50px !important;
+    font-size: 1.2em !important;
+    font-weight: 700 !important;
+    cursor: pointer !important;
+    transition: var(--transition) !important;
+    box-shadow: var(--shadow-md) !important;
+    margin-bottom: 20px !important;
+    /* תיקונים למכשירים אמיתיים */
+    min-height: 50px !important;
+    -webkit-appearance: none !important;
+    appearance: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+    touch-action: manipulation !important;
+    -webkit-user-select: none !important;
+    user-select: none !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-cta-btn:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: var(--shadow-lg) !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-awg-content {
+    width: 100% !important;
+    text-align: center !important;
+    padding: 0 !important;
+    border-radius: 12px !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    opacity: 0 !important;
+    transform: translateY(20px) !important;
+    transition: all 0.6s ease !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-awg-content.show {
+    height: auto !important;
+    padding: 25px !important;
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-shortcode-item {
+    margin-bottom: 30px !important;
+    padding: 20px !important;
+    border-radius: 10px !important;
+    transition: all 0.3s ease !important;
+    width: 100% !important;
+    background-color: #ffffff !important;
+  }
+  
+  /* Mobile Responsive */
+  @media (max-width: 768px) {
+    .wpc-calc-compound-int-k9x7-wrapper {
+      padding: 0 15px !important;
+    }
+    
+    /* תיקון צבעים למכשירים אמיתיים - רק האלמנטים הבעייתיים */
+    .wpc-calc-compound-int-k9x7-tab:not(.active) {
+      color: #222222 !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-tab:not(.active) span:last-child {
+      color: #222222 !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-example-label {
+      color: #222222 !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-example-item:not(.highlight) {
+      color: #222222 !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-comparison-card.regular {
+      color: #222222 !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-case-param {
+      color: #222222 !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-faq-header {
+      color: #222222 !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-shortcode-item {
+      width: 100% !important;
+      max-width: 100% !important;
+      margin: 0 auto 30px auto !important;
+      padding: 15px !important;
+      box-sizing: border-box !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-title {
+      font-size: 1.8em !important;
+      padding-right: 20px !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-title::after {
+      height: 45px !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-container {
+      padding: 20px 10px !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-tabs {
+      grid-template-columns: repeat(2, 1fr) !important;
+      gap: 5px !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-tab {
+      min-height: 60px !important;
+      padding: 8px 5px !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-tab-icon {
+      font-size: 1.2em !important;
+      margin-bottom: 5px !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-tab span:last-child {
+      font-size: 1em !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-content {
+      padding: 20px !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-result-breakdown {
+      grid-template-columns: 1fr !important;
+      gap: 10px !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-toggle-group {
+      flex-direction: column !important;
+      gap: 8px !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-awg-section {
+      padding: 40px 15px !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-awg-container {
+      padding: 20px !important;
+      box-shadow: none !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-tip-card {
+      padding: 25px !important;
+      margin-bottom: 25px !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-tip-icon {
+      font-size: 2.2em !important;
+      margin-bottom: 18px !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-tip-card h4 {
+      font-size: 1.25em !important;
+      margin-bottom: 18px !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-tip-card li {
+      padding: 9px 0 !important;
+      font-size: 1em !important;
+      line-height: 1.7 !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-tips-grid {
+      grid-template-columns: 1fr !important;
+      gap: 25px !important;
+      margin: 25px 0 !important;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .wpc-calc-compound-int-k9x7-wrapper {
+      padding: 0 12px !important;
+    }
+    
+    /* תיקון צבעים למכשירים אמיתיים - רק האלמנטים הבעייתיים */
+    .wpc-calc-compound-int-k9x7-tab:not(.active) {
+      color: #222222 !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-tab:not(.active) span:last-child {
+      color: #222222 !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-example-label {
+      color: #222222 !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-example-item:not(.highlight) {
+      color: #222222 !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-comparison-card.regular {
+      color: #222222 !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-case-param {
+      color: #222222 !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-faq-header {
+      color: #222222 !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-shortcode-item {
+      width: 100% !important;
+      max-width: 100% !important;
+      margin: 0 auto 25px auto !important;
+      padding: 12px !important;
+      box-sizing: border-box !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-title {
+      font-size: 1.5em !important;
+      padding-right: 18px !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-title::after {
+      height: 35px !important;
+      width: 3px !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-tabs {
+      grid-template-columns: 1fr !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-content {
+      padding: 15px !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-result-value {
+      font-size: 1.8em !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-awg-section {
+      padding: 30px 12px !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-cta-btn {
+      padding: 15px 30px !important;
+      font-size: 1.1em !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-stats-grid {
+      grid-template-columns: 1fr !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-warning-cards {
+      grid-template-columns: 1fr !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-parameters-grid {
+      grid-template-columns: 1fr !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-comparison-cards {
+      flex-direction: column !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-comparison-arrow {
+      transform: rotate(90deg) !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-tips-grid {
+      grid-template-columns: 1fr !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-points-grid {
+      grid-template-columns: 1fr !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-steps-flow {
+      flex-direction: column !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-step-arrow {
+      transform: rotate(90deg) !important;
+      margin: 10px 0 !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-tip-card {
+      padding: 22px !important;
+      margin-bottom: 22px !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-tip-icon {
+      font-size: 2.1em !important;
+      margin-bottom: 16px !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-tip-card h4 {
+      font-size: 1.15em !important;
+      margin-bottom: 16px !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-tip-card li {
+      padding: 8px 0 !important;
+      font-size: 1em !important;
+      line-height: 1.65 !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-tips-grid {
+      grid-template-columns: 1fr !important;
+      gap: 20px !important;
+      margin: 20px 0 !important;
+    }
+  }
+
+  /* רזולוציה 375px - אופטימיזציה למכשירים קטנים */
+  @media (max-width: 375px) {
+    .wpc-calc-compound-int-k9x7-wrapper {
+      padding: 0 10px !important;
+    }
+    
+    /* תיקון צבעים למכשירים אמיתיים - רק האלמנטים הבעייתיים */
+    .wpc-calc-compound-int-k9x7-tab:not(.active) {
+      color: #222222 !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-tab:not(.active) span:last-child {
+      color: #222222 !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-example-label {
+      color: #222222 !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-example-item:not(.highlight) {
+      color: #222222 !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-comparison-card.regular {
+      color: #222222 !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-case-param {
+      color: #222222 !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-faq-header {
+      color: #222222 !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-summary-main {
+      color: #222222 !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-shortcode-item {
+      width: 100% !important;
+      max-width: 100% !important;
+      margin: 0 auto 20px auto !important;
+      padding: 10px !important;
+      box-sizing: border-box !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-awg-container {
+      box-shadow: none !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-title {
+      font-size: 1.3em !important;
+      padding-right: 15px !important;
+      line-height: 1.2 !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-title::after {
+      height: 30px !important;
+      width: 3px !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-container {
+      padding: 15px 5px !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-content {
+      padding: 12px !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-tab {
+      min-height: 55px !important;
+      padding: 6px 4px !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-tab-icon {
+      font-size: 1.1em !important;
+      margin-bottom: 4px !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-tab span:last-child {
+      font-size: 0.9em !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-slider-value {
+      font-size: 1.1em !important;
+      padding: 6px 12px !important;
+      min-width: 100px !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-toggle-btn {
+      padding: 10px 15px !important;
+      font-size: 0.9em !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-result-value {
+      font-size: 1.6em !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-breakdown-item {
+      padding: 12px !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-breakdown-value {
+      font-size: 1.1em !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-awg-section {
+      padding: 25px 10px !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-awg-container {
+      padding: 0 !important;
+      box-shadow: none !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-awg-title h2 {
+      font-size: 1.6em !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-cta-btn {
+      padding: 12px 25px !important;
+      font-size: 1em !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-text-section {
+      padding: 30px !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-section-title {
+      font-size: 1.4em !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-stat-card {
+      padding: 20px !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-stat-icon {
+      font-size: 2em !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-stat-value {
+      font-size: 1.6em !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-warning-card {
+      padding: 20px !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-tab-explanation {
+      padding: 20px !important;
+      padding-right: 60px !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-tab-number {
+      width: 35px !important;
+      height: 35px !important;
+      font-size: 1.1em !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-formula {
+      font-size: 2em !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-parameter-card {
+      padding: 20px !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-parameter-symbol {
+      font-size: 2em !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-example-box {
+      padding: 25px !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-comparison-card {
+      padding: 25px !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-tip-card {
+      padding: 20px !important;
+      margin-bottom: 20px !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-tip-icon {
+      font-size: 2em !important;
+      margin-bottom: 15px !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-tip-card h4 {
+      font-size: 1.2em !important;
+      margin-bottom: 15px !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-tip-card li {
+      padding: 8px 0 !important;
+      font-size: 1em !important;
+      line-height: 1.6 !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-tips-grid {
+      grid-template-columns: 1fr !important;
+      gap: 15px !important;
+      margin: 15px 0 !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-case-study {
+      padding: 25px !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-point-card {
+      padding: 20px !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-step {
+      padding: 15px !important;
+      max-width: 160px !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-step-number {
+      width: 35px !important;
+      height: 35px !important;
+      font-size: 1.1em !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-author-card {
+      padding: 15px !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-author-image img {
+      width: 70px !important;
+      height: 70px !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-author-info h4 {
+      font-size: 1.2em !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-author-title {
+      font-size: 1em !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-faq-header {
+      padding: 10px !important;
+      font-size: 0.95em !important;
+      gap: 8px !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-faq-icon {
+      font-size: 1.1em !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-faq-content.active {
+      padding: 12px !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-chart {
+      padding: 12px 8px !important;
+      margin-top: 15px !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-chart canvas {
+      height: 160px !important;
+    }
+  }
+  
+  /* Content Section Styles */
+  .wpc-calc-compound-int-k9x7-content-section {
+    background: var(--bg-secondary) !important;
+    padding: 60px 0 !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-text-section {
+    margin-bottom: 50px !important;
+    background: white !important;
+    padding: 40px !important;
+    border-radius: var(--radius-lg) !important;
+    box-shadow: var(--shadow-sm) !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-section-title {
+    font-size: var(--fs-h3) !important;
+    font-weight: var(--fw-bold) !important;
+    color: var(--primary) !important;
+    margin-bottom: 25px !important;
+    padding-bottom: 15px !important;
+    border-bottom: 2px solid var(--primary) !important;
+    position: relative !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-text {
+    font-size: var(--fs-body) !important;
+    line-height: var(--lh-relaxed) !important;
+    color: var(--text-dark) !important;
+    margin-bottom: 20px !important;
+  }
+  
+  /* Stats Grid */
+  .wpc-calc-compound-int-k9x7-stats-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)) !important;
+    gap: 20px !important;
+    margin: 30px 0 !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-stat-card {
+    background: var(--gradient-primary) !important;
+    color: white !important;
+    padding: 25px !important;
+    border-radius: var(--radius-md) !important;
+    text-align: center !important;
+    box-shadow: var(--shadow-md) !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-stat-icon {
+    font-size: 2.5em !important;
+    margin-bottom: 15px !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-stat-value {
+    font-size: 2em !important;
+    font-weight: var(--fw-extrabold) !important;
+    margin-bottom: 10px !important;
+    direction: ltr !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-stat-label {
+    font-size: 1em !important;
+    opacity: 0.9 !important;
+  }
+  
+  /* Warning Cards */
+  .wpc-calc-compound-int-k9x7-warning-cards {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)) !important;
+    gap: 20px !important;
+    margin: 30px 0 !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-warning-card {
+    background: #fff5f5 !important;
+    border: 2px solid #fed7d7 !important;
+    border-radius: var(--radius-md) !important;
+    padding: 25px !important;
+    text-align: center !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-warning-icon {
+    font-size: 2em !important;
+    margin-bottom: 15px !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-warning-card h4 {
+    color: var(--danger) !important;
+    font-size: 1.2em !important;
+    font-weight: var(--fw-bold) !important;
+    margin-bottom: 10px !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-warning-card p {
+    color: var(--text-dark) !important;
+    font-size: 1em !important;
+    margin: 0 !important;
+  }
+  
+  /* Tabs Explanation */
+  .wpc-calc-compound-int-k9x7-tabs-explanation {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 25px !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-tab-explanation {
+    background: var(--bg-light) !important;
+    border-radius: var(--radius-md) !important;
+    padding: 25px !important;
+    position: relative !important;
+    padding-right: 70px !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-tab-number {
+    position: absolute !important;
+    right: 20px !important;
+    top: 20px !important;
+    width: 40px !important;
+    height: 40px !important;
+    background: var(--gradient-primary) !important;
+    color: white !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 1.2em !important;
+    font-weight: var(--fw-bold) !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-tab-explanation h4 {
+    color: var(--primary) !important;
+    font-size: 1.3em !important;
+    font-weight: var(--fw-bold) !important;
+    margin-bottom: 15px !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-tab-explanation p {
+    color: var(--text-dark) !important;
+    line-height: var(--lh-relaxed) !important;
+    margin: 0 !important;
+  }
+  
+  /* Formula Section */
+  .wpc-calc-compound-int-k9x7-formula-section {
+    margin: 30px 0 !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-formula-box {
+    background: var(--gradient-primary) !important;
+    color: white !important;
+    padding: 30px !important;
+    border-radius: var(--radius-md) !important;
+    text-align: center !important;
+    margin-bottom: 30px !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-formula {
+    font-size: 2.5em !important;
+    font-weight: var(--fw-extrabold) !important;
+    font-family: 'Courier New', monospace !important;
+    margin-bottom: 15px !important;
+    direction: ltr !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-formula-explanation {
+    font-size: 1.1em !important;
+    opacity: 0.9 !important;
+  }
+  
+  /* Parameters Grid */
+  .wpc-calc-compound-int-k9x7-parameters-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
+    gap: 20px !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-parameter-card {
+    background: white !important;
+    border: 2px solid var(--border) !important;
+    border-radius: var(--radius-md) !important;
+    padding: 25px !important;
+    text-align: center !important;
+    box-shadow: var(--shadow-sm) !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-parameter-symbol {
+    font-size: 2.5em !important;
+    font-weight: var(--fw-extrabold) !important;
+    color: var(--primary) !important;
+    margin-bottom: 10px !important;
+    font-family: 'Times New Roman', serif !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-parameter-name {
+    font-size: 1.2em !important;
+    font-weight: var(--fw-bold) !important;
+    color: var(--text-dark) !important;
+    margin-bottom: 10px !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-parameter-example {
+    font-size: 1.5em !important;
+    font-weight: var(--fw-bold) !important;
+    color: var(--success) !important;
+    margin-bottom: 10px !important;
+    direction: ltr !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-parameter-desc {
+    font-size: 1em !important;
+    color: var(--text-light) !important;
+  }
+  
+  /* Example Section */
+  .wpc-calc-compound-int-k9x7-example-section {
+    margin: 40px 0 !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-example-box {
+    background: #f0f8ff !important;
+    border: 2px solid #b3d9ff !important;
+    border-radius: var(--radius-md) !important;
+    padding: 30px !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-example-scenario {
+    font-size: 1.2em !important;
+    color: var(--primary) !important;
+    margin-bottom: 25px !important;
+    text-align: center !important;
+    padding: 15px !important;
+    background: white !important;
+    border-radius: var(--radius-sm) !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-example-results {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 15px !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-example-item {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 15px !important;
+    background: white !important;
+    border-radius: var(--radius-sm) !important;
+    box-shadow: var(--shadow-sm) !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-example-item.highlight {
+    background: var(--gradient-success) !important;
+    color: white !important;
+    font-weight: var(--fw-bold) !important;
+    font-size: 1.1em !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-example-label {
+    font-weight: var(--fw-semibold) !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-example-value {
+    font-weight: var(--fw-bold) !important;
+    direction: ltr !important;
+  }
+  
+  /* Comparison Section */
+  .wpc-calc-compound-int-k9x7-comparison-section {
+    margin: 40px 0 !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-comparison-cards {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 30px !important;
+    margin: 30px 0 !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-comparison-card {
+    flex: 1 !important;
+    max-width: 300px !important;
+    padding: 30px !important;
+    border-radius: var(--radius-md) !important;
+    text-align: center !important;
+    box-shadow: var(--shadow-md) !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-comparison-card.regular {
+    background: #f8f9fa !important;
+    border: 2px solid #dee2e6 !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-comparison-card.compound {
+    background: var(--gradient-success) !important;
+    color: white !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-comparison-title {
+    font-size: 1.2em !important;
+    font-weight: var(--fw-bold) !important;
+    margin-bottom: 15px !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-comparison-calc {
+    font-size: 1em !important;
+    margin-bottom: 15px !important;
+    opacity: 0.8 !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-comparison-result {
+    font-size: 2em !important;
+    font-weight: var(--fw-extrabold) !important;
+    direction: ltr !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-comparison-arrow {
+    font-size: 2em !important;
+    color: var(--primary) !important;
+    font-weight: var(--fw-bold) !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-advantage-highlight {
+    background: var(--gradient-success) !important;
+    color: white !important;
+    padding: 20px !important;
+    border-radius: var(--radius-md) !important;
+    text-align: center !important;
+    font-size: 1.3em !important;
+    margin-top: 30px !important;
+  }
+  
+  /* Tips Grid */
+  .wpc-calc-compound-int-k9x7-tips-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) !important;
+    gap: 30px !important;
+    margin: 30px 0 !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-tip-card {
+    border-radius: var(--radius-md) !important;
+    padding: 30px !important;
+    box-shadow: var(--shadow-md) !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-tip-card.error {
+    background: #fff5f5 !important;
+    border: 2px solid #fed7d7 !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-tip-card.success {
+    background: #f0fff4 !important;
+    border: 2px solid #c6f6d5 !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-tip-icon {
+    font-size: 2.5em !important;
+    text-align: center !important;
+    margin-bottom: 20px !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-tip-card h4 {
+    font-size: 1.3em !important;
+    font-weight: var(--fw-bold) !important;
+    margin-bottom: 20px !important;
+    text-align: center !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-tip-card.error h4 {
+    color: var(--danger) !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-tip-card.success h4 {
+    color: var(--success) !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-tip-card ul {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-tip-card li {
+    padding: 10px 0 !important;
+    border-bottom: 1px solid rgba(0,0,0,0.1) !important;
+    color: var(--text-dark) !important;
+    line-height: var(--lh-relaxed) !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-tip-card li:last-child {
+    border-bottom: none !important;
+  }
+  
+  /* Case Studies */
+  .wpc-calc-compound-int-k9x7-case-studies {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 30px !important;
+    margin: 30px 0 !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-case-study {
+    border-radius: var(--radius-md) !important;
+    padding: 30px !important;
+    box-shadow: var(--shadow-md) !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-case-study.success {
+    background: #f0fff4 !important;
+    border: 2px solid #c6f6d5 !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-case-study.warning {
+    background: #fffbf0 !important;
+    border: 2px solid #fed7aa !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-case-study h4 {
+    font-size: 1.4em !important;
+    font-weight: var(--fw-bold) !important;
+    margin-bottom: 25px !important;
+    text-align: center !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-case-params {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)) !important;
+    gap: 15px !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-case-param {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 15px !important;
+    background: white !important;
+    border-radius: var(--radius-sm) !important;
+    box-shadow: var(--shadow-sm) !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-case-param.highlight {
+    background: var(--gradient-success) !important;
+    color: white !important;
+    font-weight: var(--fw-bold) !important;
+    font-size: 1.1em !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-case-label {
+    font-weight: var(--fw-semibold) !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-case-value {
+    font-weight: var(--fw-bold) !important;
+    direction: ltr !important;
+  }
+  
+  /* Case Warning */
+  .wpc-calc-compound-int-k9x7-case-warning {
+    background: white !important;
+    border-radius: var(--radius-sm) !important;
+    padding: 25px !important;
+    text-align: center !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-warning-title {
+    font-size: 1.2em !important;
+    font-weight: var(--fw-bold) !important;
+    color: var(--warning) !important;
+    margin-bottom: 10px !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-warning-desc {
+    font-size: 1.1em !important;
+    color: var(--text-dark) !important;
+    margin-bottom: 15px !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-warning-impact {
+    font-size: 1.3em !important;
+    font-weight: var(--fw-bold) !important;
+    color: var(--danger) !important;
+    margin-bottom: 15px !important;
+    direction: ltr !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-warning-lesson {
+    font-size: 1em !important;
+    color: var(--success) !important;
+    font-weight: var(--fw-semibold) !important;
+    font-style: italic !important;
+  }
+  
+  /* Key Points */
+  .wpc-calc-compound-int-k9x7-key-points {
+    margin: 40px 0 !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-points-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)) !important;
+    gap: 20px !important;
+    margin-top: 25px !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-point-card {
+    background: var(--gradient-primary) !important;
+    color: white !important;
+    padding: 25px !important;
+    border-radius: var(--radius-md) !important;
+    text-align: center !important;
+    box-shadow: var(--shadow-md) !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-point-icon {
+    font-size: 2em !important;
+    margin-bottom: 15px !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-point-text {
+    font-size: 1.1em !important;
+    font-weight: var(--fw-semibold) !important;
+    line-height: var(--lh-relaxed) !important;
+  }
+  
+  /* Next Steps */
+  .wpc-calc-compound-int-k9x7-next-steps {
+    margin: 40px 0 !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-steps-flow {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 20px !important;
+    margin-top: 30px !important;
+    flex-wrap: wrap !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-step {
+    background: white !important;
+    border: 2px solid var(--primary) !important;
+    border-radius: var(--radius-md) !important;
+    padding: 20px !important;
+    text-align: center !important;
+    max-width: 180px !important;
+    box-shadow: var(--shadow-sm) !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-step-number {
+    width: 40px !important;
+    height: 40px !important;
+    background: var(--gradient-primary) !important;
+    color: white !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 1.2em !important;
+    font-weight: var(--fw-bold) !important;
+    margin: 0 auto 15px !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-step-title {
+    font-size: 1em !important;
+    font-weight: var(--fw-bold) !important;
+    color: var(--primary) !important;
+    margin-bottom: 10px !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-step-desc {
+    font-size: 1em !important;
+    color: var(--text-light) !important;
+    line-height: var(--lh-normal) !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-step-arrow {
+    font-size: 1.5em !important;
+    color: var(--primary) !important;
+    font-weight: var(--fw-bold) !important;
+  }
+  
+  /* Summary Section */
+  .wpc-calc-compound-int-k9x7-summary-section {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)) !important;
+    gap: 30px !important;
+    margin: 30px 0 !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-summary-main,
+  .wpc-calc-compound-int-k9x7-summary-cta {
+    background: white !important;
+    border-radius: var(--radius-md) !important;
+    padding: 30px !important;
+    box-shadow: var(--shadow-md) !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-summary-main {
+    border: 2px solid var(--primary) !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-summary-cta {
+    background: var(--gradient-success) !important;
+    color: white !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-summary-main h4,
+  .wpc-calc-compound-int-k9x7-summary-cta h4 {
+    font-size: 1.4em !important;
+    font-weight: var(--fw-bold) !important;
+    margin-bottom: 20px !important;
+    text-align: center !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-summary-main h4 {
+    color: var(--primary) !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-summary-main p,
+  .wpc-calc-compound-int-k9x7-summary-cta p {
+    font-size: var(--fs-body) !important;
+    line-height: var(--lh-relaxed) !important;
+    margin: 0 !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-summary-main p {
+    color: var(--text-dark) !important;
+  }
+  
+  /* FAQ Accordion Styles */
+  .wpc-calc-compound-int-k9x7-faq-container {
+    margin: 30px 0 !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-faq-item {
+    border: 1px solid var(--border) !important;
+    border-radius: var(--radius-sm) !important;
+    margin-bottom: 10px !important;
+    overflow: hidden !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-faq-header {
+    background: var(--bg-light) !important;
+    padding: 20px !important;
+    cursor: pointer !important;
+    font-weight: 600 !important;
+    font-size: 1.1em !important;
+    position: relative !important;
+    transition: all 0.2s ease !important;
+    -webkit-tap-highlight-color: transparent !important;
+    user-select: none !important;
+    border: 2px solid transparent !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 15px !important;
+    /* תיקונים למכשירים אמיתיים */
+    min-height: 60px !important;
+    touch-action: manipulation !important;
+    -webkit-user-select: none !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-faq-header:hover {
+    background: #f0f0f0 !important;
+    border-color: var(--primary) !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-faq-header.active {
+    background: var(--primary) !important;
+    color: white !important;
+    border-color: var(--primary) !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-faq-header:active {
+    transform: scale(0.99) !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-faq-icon {
+    font-size: 1.5em !important;
+    flex-shrink: 0 !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-faq-header::after {
+    content: '←' !important;
+    position: absolute !important;
+    left: 20px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    font-size: 1.2em !important;
+    transition: transform 0.3s ease !important;
+    width: 24px !important;
+    height: 24px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: 50% !important;
+    background: rgba(0,0,0,0.1) !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-faq-header.active::after {
+    transform: translateY(-50%) rotate(90deg) !important;
+    background: rgba(255,255,255,0.2) !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-faq-content {
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: max-height 0.3s ease !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-faq-content.active {
+    max-height: 500px !important;
+    padding: 20px !important;
+    background: white !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-faq-content p {
+    margin: 0 !important;
+    color: var(--text-dark) !important;
+    line-height: var(--lh-relaxed) !important;
+    font-size: var(--fs-body) !important;
+  }
+  
+  /* Author Card Styles */
+  .wpc-calc-compound-int-k9x7-author-card {
+    display: grid !important;
+    grid-template-columns: 150px 1fr !important;
+    gap: 30px !important;
+    background: var(--gradient-primary) !important;
+    color: white !important;
+    padding: 30px !important;
+    border-radius: var(--radius-lg) !important;
+    box-shadow: var(--shadow-lg) !important;
+    margin: 30px 0 !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-author-image {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-author-image img {
+    width: 120px !important;
+    height: 120px !important;
+    border-radius: 50% !important;
+    object-fit: cover !important;
+    border: 4px solid white !important;
+    box-shadow: var(--shadow-md) !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-author-info h4 {
+    font-size: 1.8em !important;
+    font-weight: var(--fw-extrabold) !important;
+    margin: 0 0 10px 0 !important;
+    color: white !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-author-title {
+    font-size: 1.2em !important;
+    font-weight: var(--fw-semibold) !important;
+    margin-bottom: 20px !important;
+    opacity: 0.9 !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-author-expertise {
+    margin-bottom: 25px !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-expertise-item {
+    margin-bottom: 12px !important;
+    font-size: 1em !important;
+    line-height: var(--lh-relaxed) !important;
+    opacity: 0.9 !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-expertise-item strong {
+    color: white !important;
+    font-weight: var(--fw-bold) !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-author-quote {
+    background: rgba(255,255,255,0.1) !important;
+    padding: 20px !important;
+    border-radius: var(--radius-md) !important;
+    font-style: italic !important;
+    font-size: 1.05em !important;
+    line-height: var(--lh-relaxed) !important;
+    margin-bottom: 25px !important;
+    border-right: 4px solid white !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-author-credentials {
+    margin-top: 20px !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-credential-item {
+    margin-bottom: 12px !important;
+    font-size: 1em !important;
+    line-height: var(--lh-relaxed) !important;
+    opacity: 0.85 !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-credential-item strong {
+    color: white !important;
+    font-weight: var(--fw-bold) !important;
+  }
+  
+  /* Team Expertise */
+  .wpc-calc-compound-int-k9x7-team-expertise {
+    margin-top: 40px !important;
+    background: white !important;
+    padding: 30px !important;
+    border-radius: var(--radius-lg) !important;
+    box-shadow: var(--shadow-sm) !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-team-expertise h4 {
+    color: var(--primary) !important;
+    font-size: 1.4em !important;
+    font-weight: var(--fw-bold) !important;
+    margin-bottom: 25px !important;
+    text-align: center !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-team-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)) !important;
+    gap: 20px !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-team-item {
+    background: var(--bg-light) !important;
+    padding: 20px !important;
+    border-radius: var(--radius-md) !important;
+    text-align: center !important;
+    border: 2px solid transparent !important;
+    transition: var(--transition) !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-team-item:hover {
+    border-color: var(--primary) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: var(--shadow-md) !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-team-icon {
+    font-size: 2em !important;
+    margin-bottom: 15px !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-team-text {
+    color: var(--text-dark) !important;
+    font-weight: var(--fw-semibold) !important;
+    line-height: var(--lh-relaxed) !important;
+  }
+  
+  /* Mobile Responsive for New Elements */
+  @media (max-width: 768px) {
+    .wpc-calc-compound-int-k9x7-author-card {
+      grid-template-columns: 1fr !important;
+      text-align: center !important;
+      gap: 20px !important;
+      padding: 25px !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-author-image img {
+      width: 100px !important;
+      height: 100px !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-author-info h4 {
+      font-size: 1.5em !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-team-grid {
+      grid-template-columns: 1fr !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-faq-header {
+      padding: 15px !important;
+      font-size: 1em !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-faq-content.active {
+      padding: 15px !important;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .wpc-calc-compound-int-k9x7-author-card {
+      padding: 20px !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-author-image img {
+      width: 80px !important;
+      height: 80px !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-author-info h4 {
+      font-size: 1.3em !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-author-title {
+      font-size: 1.1em !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-faq-header {
+      padding: 12px !important;
+      font-size: 1em !important;
+      gap: 10px !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-faq-icon {
+      font-size: 1.2em !important;
+    }
+  }
+
+  /* רזולוציה 375px - אופטימיזציה נוספת למכשירים קטנים */
+  @media (max-width: 375px) {
+    .wpc-calc-compound-int-k9x7-team-grid {
+      grid-template-columns: 1fr !important;
+      gap: 15px !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-team-item {
+      padding: 15px !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-team-icon {
+      font-size: 1.8em !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-team-text {
+      font-size: 0.95em !important;
+    }
+  }
+  
+  /* תיקונים כלליים לכפתורים במכשירים אמיתיים */
+  .wpc-calc-compound-int-k9x7-wrapper button,
+  .wpc-calc-compound-int-k9x7-wrapper [role="button"],
+  .wpc-calc-compound-int-k9x7-wrapper .wpc-calc-compound-int-k9x7-tab,
+  .wpc-calc-compound-int-k9x7-wrapper .wpc-calc-compound-int-k9x7-toggle-btn,
+  .wpc-calc-compound-int-k9x7-wrapper .wpc-calc-compound-int-k9x7-cta-btn,
+  .wpc-calc-compound-int-k9x7-wrapper .wpc-calc-compound-int-k9x7-faq-header {
+    -webkit-tap-highlight-color: rgba(30, 84, 144, 0.2) !important;
+    -webkit-touch-callout: none !important;
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    user-select: none !important;
+    touch-action: manipulation !important;
+    -webkit-appearance: none !important;
+    appearance: none !important;
+    outline: none !important;
+    border: none !important;
+  }
+  
+  /* Focus states למכשירים אמיתיים */
+  .wpc-calc-compound-int-k9x7-wrapper button:focus,
+  .wpc-calc-compound-int-k9x7-wrapper [role="button"]:focus,
+  .wpc-calc-compound-int-k9x7-wrapper .wpc-calc-compound-int-k9x7-tab:focus,
+  .wpc-calc-compound-int-k9x7-wrapper .wpc-calc-compound-int-k9x7-toggle-btn:focus,
+  .wpc-calc-compound-int-k9x7-wrapper .wpc-calc-compound-int-k9x7-cta-btn:focus,
+  .wpc-calc-compound-int-k9x7-wrapper .wpc-calc-compound-int-k9x7-faq-header:focus {
+    outline: 2px solid var(--primary) !important;
+    outline-offset: 2px !important;
+  }
+
+  /* עיצוב משופר לגרפים */
+  .wpc-calc-compound-int-k9x7-chart {
+    margin-top: 30px !important;
+    padding: 25px !important;
+    background: white !important;
+    border-radius: var(--radius-md) !important;
+    border: 1px solid var(--color-border) !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-chart-title {
+    font-size: 1.1em !important;
+    font-weight: 600 !important;
+    color: var(--primary) !important;
+    margin-bottom: 20px !important;
+    text-align: center !important;
+    padding-bottom: 10px !important;
+    border-bottom: 2px solid var(--color-border) !important;
+  }
+  
+  .wpc-calc-compound-int-k9x7-chart canvas {
+    width: 100% !important;
+    height: 250px !important;
+    border-radius: 8px !important;
+    background: #fafafa !important;
+    border: 1px solid #e0e0e0 !important;
+  }
+  
+  @media (max-width: 768px) {
+    .wpc-calc-compound-int-k9x7-chart {
+      padding: 20px 15px !important;
+      margin-top: 25px !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-chart-title {
+      font-size: 1em !important;
+      margin-bottom: 15px !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-chart canvas {
+      height: 200px !important;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .wpc-calc-compound-int-k9x7-chart {
+      padding: 15px 10px !important;
+      margin-top: 20px !important;
+    }
+    
+    .wpc-calc-compound-int-k9x7-chart canvas {
+      height: 180px !important;
+    }
+  }
+
+  /* רזולוציה 375px - אופטימיזציה סופית לגרפים */
+  @media (max-width: 375px) {
+    .wpc-calc-compound-int-k9x7-chart-title {
+      font-size: 0.95em !important;
+      margin-bottom: 12px !important;
+    }
+  }
+  </style>
+  
+  <div class="wpc-calc-compound-int-k9x7-wrapper" id="wpc-calc-compound-int-k9x7-main">
+    <div class="wpc-calc-compound-int-k9x7-container">
+      <h1 class="wpc-calc-compound-int-k9x7-title">מחשבון ריבית דריבית - גלה כמה הכסף שלך יכול לצמוח לאורך השנים</h1>
+      <p style="text-align: center; margin-bottom: 5px;">[current_date format="F Y" hebrew="true"]</p>
+      <p class="wpc-calc-compound-int-k9x7-rate-info" style="text-align: center; font-size: 0.95em; color: #666; margin-top: 0; margin-bottom: 20px;">
+          💡 הריביות בתוכן מעודכנות לפי ריבית פריים 5.75% (ריבית בנק ישראל 4.25%, נכון לנובמבר 2025)
+      </p>
+    </div>
+    
+    <div class="wpc-calc-compound-int-k9x7-container">
+      <div class="wpc-calc-compound-int-k9x7-calc-wrapper">
+        <!-- Tabs Navigation -->
+        <div class="wpc-calc-compound-int-k9x7-tabs">
+          <button class="wpc-calc-compound-int-k9x7-tab active" data-tab="compound-calculator">
+            <div class="wpc-calc-compound-int-k9x7-tab-icon">🧮</div>
+            <span>מחשבון ריבית דריבית</span>
+          </button>
+          <button class="wpc-calc-compound-int-k9x7-tab" data-tab="funds-comparison">
+            <div class="wpc-calc-compound-int-k9x7-tab-icon">📊</div>
+            <span>השוואת קרנות וחיסכון</span>
+          </button>
+          <button class="wpc-calc-compound-int-k9x7-tab" data-tab="longterm-simulation">
+            <div class="wpc-calc-compound-int-k9x7-tab-icon">🎯</div>
+            <span>סימולציה ארוך טווח</span>
+          </button>
+          <button class="wpc-calc-compound-int-k9x7-tab" data-tab="accumulation-optimizer">
+            <div class="wpc-calc-compound-int-k9x7-tab-icon">⚡</div>
+            <span>אופטימיזציה וצבירה</span>
+          </button>
+        </div>
+        
+        <!-- Tab Content -->
+        <div class="wpc-calc-compound-int-k9x7-content">
+          <!-- Tab 1: מחשבון ריבית דריבית -->
+          <div class="wpc-calc-compound-int-k9x7-panel active" id="compound-calculator">
+            <h4>מחשבון ריבית דריבית בסיסי</h4>
+            
+            <div class="wpc-calc-compound-int-k9x7-input-group">
+              <label>סכום התחלתי (₪)</label>
+              <div class="wpc-calc-compound-int-k9x7-slider-wrapper">
+                <input type="range" class="wpc-calc-compound-int-k9x7-slider" id="initial-amount" min="0" max="500000" value="50000" step="1000">
+                <div class="wpc-calc-compound-int-k9x7-slider-value" id="initial-amount-value">₪50,000</div>
+              </div>
+            </div>
+            
+            <div class="wpc-calc-compound-int-k9x7-input-group">
+              <label>ריבית שנתית (%)</label>
+              <div class="wpc-calc-compound-int-k9x7-slider-wrapper">
+                <input type="range" class="wpc-calc-compound-int-k9x7-slider" id="interest-rate" min="0.5" max="15" value="4.5" step="0.1">
+                <div class="wpc-calc-compound-int-k9x7-slider-value" id="interest-rate-value">4.5%</div>
+              </div>
+            </div>
+            
+            <div class="wpc-calc-compound-int-k9x7-input-group">
+              <label>תקופה בשנים</label>
+              <div class="wpc-calc-compound-int-k9x7-slider-wrapper">
+                <input type="range" class="wpc-calc-compound-int-k9x7-slider" id="time-period" min="1" max="50" value="20" step="1">
+                <div class="wpc-calc-compound-int-k9x7-slider-value" id="time-period-value">20 שנים</div>
+              </div>
+            </div>
+            
+            <div class="wpc-calc-compound-int-k9x7-input-group">
+              <label>הפקדה חודשית (₪)</label>
+              <div class="wpc-calc-compound-int-k9x7-slider-wrapper">
+                <input type="range" class="wpc-calc-compound-int-k9x7-slider" id="monthly-deposit" min="0" max="10000" value="1000" step="100">
+                <div class="wpc-calc-compound-int-k9x7-slider-value" id="monthly-deposit-value">₪1,000</div>
+              </div>
+            </div>
+            
+            <div class="wpc-calc-compound-int-k9x7-input-group">
+              <label>תדירות ריבוי</label>
+              <div class="wpc-calc-compound-int-k9x7-toggle-group">
+                <button class="wpc-calc-compound-int-k9x7-toggle-btn active" data-frequency="12">חודשי</button>
+                <button class="wpc-calc-compound-int-k9x7-toggle-btn" data-frequency="4">רבעוני</button>
+                <button class="wpc-calc-compound-int-k9x7-toggle-btn" data-frequency="1">שנתי</button>
+              </div>
+            </div>
+            
+            <div class="wpc-calc-compound-int-k9x7-input-group">
+              <label>השפעת מס (25%)</label>
+              <div class="wpc-calc-compound-int-k9x7-toggle-group">
+                <button class="wpc-calc-compound-int-k9x7-toggle-btn active" data-tax="true">כולל מס</button>
+                <button class="wpc-calc-compound-int-k9x7-toggle-btn" data-tax="false">ללא מס</button>
+              </div>
+            </div>
+            
+            <div class="wpc-calc-compound-int-k9x7-results" id="compound-results">
+              <h5>תוצאות החישוב</h5>
+              <div class="wpc-calc-compound-int-k9x7-result-value" id="final-amount">₪0</div>
+              <div class="wpc-calc-compound-int-k9x7-result-breakdown">
+                <div class="wpc-calc-compound-int-k9x7-breakdown-item">
+                  <strong>קרן שהופקדה</strong>
+                  <div class="wpc-calc-compound-int-k9x7-breakdown-value" id="total-deposits">₪0</div>
+                </div>
+                <div class="wpc-calc-compound-int-k9x7-breakdown-item">
+                  <strong>ריבית דריבית</strong>
+                  <div class="wpc-calc-compound-int-k9x7-breakdown-value" id="compound-interest">₪0</div>
+                </div>
+                <div class="wpc-calc-compound-int-k9x7-breakdown-item">
+                  <strong>יתרון על ריבית פשוטה</strong>
+                  <div class="wpc-calc-compound-int-k9x7-breakdown-value" id="simple-advantage">₪0</div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="wpc-calc-compound-int-k9x7-chart">
+              <div class="wpc-calc-compound-int-k9x7-chart-title">גרף צמיחת החיסכון לאורך זמן</div>
+              <canvas id="growth-chart" width="100%" height="250"></canvas>
+            </div>
+          </div>
+          
+          <!-- Tab 2: השוואת קרנות וחיסכון -->
+          <div class="wpc-calc-compound-int-k9x7-panel" id="funds-comparison">
+            <h4>השוואת מסלולי חיסכון בישראל</h4>
+            
+            <div class="wpc-calc-compound-int-k9x7-input-group">
+              <label>סכום להשוואה (₪)</label>
+              <div class="wpc-calc-compound-int-k9x7-slider-wrapper">
+                <input type="range" class="wpc-calc-compound-int-k9x7-slider" id="comparison-amount" min="10000" max="500000" value="100000" step="5000">
+                <div class="wpc-calc-compound-int-k9x7-slider-value" id="comparison-amount-value">₪100,000</div>
+              </div>
+            </div>
+            
+            <div class="wpc-calc-compound-int-k9x7-input-group">
+              <label>תקופת השוואה (שנים)</label>
+              <div class="wpc-calc-compound-int-k9x7-slider-wrapper">
+                <input type="range" class="wpc-calc-compound-int-k9x7-slider" id="comparison-period" min="5" max="40" value="20" step="1">
+                <div class="wpc-calc-compound-int-k9x7-slider-value" id="comparison-period-value">20 שנים</div>
+              </div>
+            </div>
+            
+            <div class="wpc-calc-compound-int-k9x7-results" id="comparison-results">
+              <h5>השוואת תוצאות לפי מסלולים</h5>
+              <div class="wpc-calc-compound-int-k9x7-result-breakdown">
+                <div class="wpc-calc-compound-int-k9x7-breakdown-item">
+                  <strong>קרן פנסיה (4.8%)</strong>
+                  <div class="wpc-calc-compound-int-k9x7-breakdown-value" id="pension-result">₪0</div>
+                </div>
+                <div class="wpc-calc-compound-int-k9x7-breakdown-item">
+                  <strong>קרן השתלמות (4.2%)</strong>
+                  <div class="wpc-calc-compound-int-k9x7-breakdown-value" id="study-result">₪0</div>
+                </div>
+                <div class="wpc-calc-compound-int-k9x7-breakdown-item">
+                  <strong>פיקדון בנקאי (3.5%)</strong>
+                  <div class="wpc-calc-compound-int-k9x7-breakdown-value" id="deposit-result">₪0</div>
+                </div>
+                <div class="wpc-calc-compound-int-k9x7-breakdown-item">
+                  <strong>חיסכון מנהלים (6.2%)</strong>
+                  <div class="wpc-calc-compound-int-k9x7-breakdown-value" id="executive-result">₪0</div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="wpc-calc-compound-int-k9x7-chart">
+              <div class="wpc-calc-compound-int-k9x7-chart-title">השוואה ויזואלית בין מסלולי החיסכון</div>
+              <canvas id="comparison-chart" width="100%" height="250"></canvas>
+            </div>
+          </div>
+          
+          <!-- Tab 3: סימולציה ארוך טווח -->
+          <div class="wpc-calc-compound-int-k9x7-panel" id="longterm-simulation">
+            <h4>תכנון למטרות ספציפיות</h4>
+            
+            <div class="wpc-calc-compound-int-k9x7-input-group">
+              <label>בחר מטרת חיסכון</label>
+              <div class="wpc-calc-compound-int-k9x7-toggle-group">
+                <button class="wpc-calc-compound-int-k9x7-toggle-btn active" data-goal="pension">פנסיה</button>
+                <button class="wpc-calc-compound-int-k9x7-toggle-btn" data-goal="house">דירה</button>
+                <button class="wpc-calc-compound-int-k9x7-toggle-btn" data-goal="wedding">חתונה</button>
+                <button class="wpc-calc-compound-int-k9x7-toggle-btn" data-goal="emergency">חירום</button>
+              </div>
+            </div>
+            
+            <div class="wpc-calc-compound-int-k9x7-input-group">
+              <label>סכום יעד (₪)</label>
+              <div class="wpc-calc-compound-int-k9x7-slider-wrapper">
+                <input type="range" class="wpc-calc-compound-int-k9x7-slider" id="target-amount" min="100000" max="5000000" value="2000000" step="50000">
+                <div class="wpc-calc-compound-int-k9x7-slider-value" id="target-amount-value">₪2,000,000</div>
+              </div>
+            </div>
+            
+            <div class="wpc-calc-compound-int-k9x7-input-group">
+              <label>זמן להשגת המטרה (שנים)</label>
+              <div class="wpc-calc-compound-int-k9x7-slider-wrapper">
+                <input type="range" class="wpc-calc-compound-int-k9x7-slider" id="target-years" min="5" max="40" value="25" step="1">
+                <div class="wpc-calc-compound-int-k9x7-slider-value" id="target-years-value">25 שנים</div>
+              </div>
+            </div>
+            
+            <div class="wpc-calc-compound-int-k9x7-input-group">
+              <label>אינפלציה צפויה (%)</label>
+              <div class="wpc-calc-compound-int-k9x7-slider-wrapper">
+                <input type="range" class="wpc-calc-compound-int-k9x7-slider" id="inflation-rate" min="1" max="6" value="3.3" step="0.1">
+                <div class="wpc-calc-compound-int-k9x7-slider-value" id="inflation-rate-value">3.3%</div>
+              </div>
+            </div>
+            
+            <div class="wpc-calc-compound-int-k9x7-results" id="simulation-results">
+              <h5>תוצאות הסימולציה</h5>
+              <div class="wpc-calc-compound-int-k9x7-result-breakdown">
+                <div class="wpc-calc-compound-int-k9x7-breakdown-item">
+                  <strong>הפקדה חודשית נדרשת</strong>
+                  <div class="wpc-calc-compound-int-k9x7-breakdown-value" id="required-monthly">₪0</div>
+                </div>
+                <div class="wpc-calc-compound-int-k9x7-breakdown-item">
+                  <strong>ערך אמיתי (אחרי אינפלציה)</strong>
+                  <div class="wpc-calc-compound-int-k9x7-breakdown-value" id="real-value">₪0</div>
+                </div>
+                <div class="wpc-calc-compound-int-k9x7-breakdown-item">
+                  <strong>סה"כ הפקדות</strong>
+                  <div class="wpc-calc-compound-int-k9x7-breakdown-value" id="total-contributions">₪0</div>
+                </div>
+                <div class="wpc-calc-compound-int-k9x7-breakdown-item">
+                  <strong>רווח מריבית דריבית</strong>
+                  <div class="wpc-calc-compound-int-k9x7-breakdown-value" id="compound-profit">₪0</div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="wpc-calc-compound-int-k9x7-chart">
+              <div class="wpc-calc-compound-int-k9x7-chart-title">תחזית צמיחה עם השפעת אינפלציה</div>
+              <canvas id="simulation-chart" width="100%" height="250"></canvas>
+            </div>
+          </div>
+          
+          <!-- Tab 4: אופטימיזציה וצבירה -->
+          <div class="wpc-calc-compound-int-k9x7-panel" id="accumulation-optimizer">
+            <h4>אופטימיזציה חכמה לחיסכון</h4>
+            
+            <div class="wpc-calc-compound-int-k9x7-input-group">
+              <label>גיל נוכחי</label>
+              <div class="wpc-calc-compound-int-k9x7-slider-wrapper">
+                <input type="range" class="wpc-calc-compound-int-k9x7-slider" id="current-age" min="18" max="65" value="30" step="1">
+                <div class="wpc-calc-compound-int-k9x7-slider-value" id="current-age-value">30 שנים</div>
+              </div>
+            </div>
+            
+            <div class="wpc-calc-compound-int-k9x7-input-group">
+              <label>גיל פרישה מתוכנן</label>
+              <div class="wpc-calc-compound-int-k9x7-slider-wrapper">
+                <input type="range" class="wpc-calc-compound-int-k9x7-slider" id="retirement-age" min="55" max="75" value="67" step="1">
+                <div class="wpc-calc-compound-int-k9x7-slider-value" id="retirement-age-value">67 שנים</div>
+              </div>
+            </div>
+            
+            <div class="wpc-calc-compound-int-k9x7-input-group">
+              <label>הכנסה חודשית נטו (₪)</label>
+              <div class="wpc-calc-compound-int-k9x7-slider-wrapper">
+                <input type="range" class="wpc-calc-compound-int-k9x7-slider" id="monthly-income" min="5000" max="50000" value="15000" step="500">
+                <div class="wpc-calc-compound-int-k9x7-slider-value" id="monthly-income-value">₪15,000</div>
+              </div>
+            </div>
+            
+            <div class="wpc-calc-compound-int-k9x7-input-group">
+              <label>אחוז מההכנסה לחיסכון (%)</label>
+              <div class="wpc-calc-compound-int-k9x7-slider-wrapper">
+                <input type="range" class="wpc-calc-compound-int-k9x7-slider" id="savings-percentage" min="5" max="30" value="15" step="1">
+                <div class="wpc-calc-compound-int-k9x7-slider-value" id="savings-percentage-value">15%</div>
+              </div>
+            </div>
+            
+            <div class="wpc-calc-compound-int-k9x7-results" id="optimizer-results">
+              <h5>המלצות אופטימיזציה</h5>
+              <div class="wpc-calc-compound-int-k9x7-result-breakdown">
+                <div class="wpc-calc-compound-int-k9x7-breakdown-item">
+                  <strong>חיסכון חודשי מומלץ</strong>
+                  <div class="wpc-calc-compound-int-k9x7-breakdown-value" id="recommended-savings">₪0</div>
+                </div>
+                <div class="wpc-calc-compound-int-k9x7-breakdown-item">
+                  <strong>צפי לפנסיה</strong>
+                  <div class="wpc-calc-compound-int-k9x7-breakdown-value" id="pension-forecast">₪0</div>
+                </div>
+                <div class="wpc-calc-compound-int-k9x7-breakdown-item">
+                  <strong>חלוקה מומלצת - קרן פנסיה</strong>
+                  <div class="wpc-calc-compound-int-k9x7-breakdown-value" id="pension-allocation">₪0</div>
+                </div>
+                <div class="wpc-calc-compound-int-k9x7-breakdown-item">
+                  <strong>חלוקה מומלצת - חיסכון נוסף</strong>
+                  <div class="wpc-calc-compound-int-k9x7-breakdown-value" id="additional-savings">₪0</div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="wpc-calc-compound-int-k9x7-chart">
+              <div class="wpc-calc-compound-int-k9x7-chart-title">השוואת תרחישי התחלה מוקדמת vs מאוחרת</div>
+              <canvas id="optimizer-chart" width="100%" height="250"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- AWG Section -->
+    <div class="wpc-calc-compound-int-k9x7-awg-section">
+      <div class="wpc-calc-compound-int-k9x7-awg-container">
+        <div class="wpc-calc-compound-int-k9x7-awg-title">
+          <h2>בדיקת זכאות להלוואה</h2>
+          <p>רוצה לממן את החיסכון שלך או לקבל הלוואה לצרכים נוספים? בדוק את הזכאות שלך עכשיו</p>
+        </div>
+        <button class="wpc-calc-compound-int-k9x7-cta-btn" id="awg-cta-btn">
+          בדוק זכאות להלוואה עכשיו
+        </button>
+        <div class="wpc-calc-compound-int-k9x7-awg-content" id="awg-content">
+          <div class="wpc-calc-compound-int-k9x7-shortcode-item" id="shortcodeContainer">
+            [awg postid="32400"]
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- תוכן מקצועי מלא -->
+    <div class="wpc-calc-compound-int-k9x7-content-section">
+      <div class="wpc-calc-compound-int-k9x7-container">
+        
+        <!-- כוח הריבית הדריבית לחיסכון בישראל -->
+        <section class="wpc-calc-compound-int-k9x7-text-section">
+          <h3 class="wpc-calc-compound-int-k9x7-section-title">🎯 כוח הריבית הדריבית לחיסכון בישראל</h3>
+          
+          <p class="wpc-calc-compound-int-k9x7-text">
+            הריבית הדריבית זה אחד הכלים הכי חזקים לבניית עושר לטווח הארוך. אמנם זה נשמע מסובך, אבל המימוש פשוט: כסף שמרוויח כסף, שבתורו מרוויח עוד כסף. המחשבון שלנו עוזר לכם להבין מה הפוטנציאל האמיתי של החיסכון שלכם ולראות איך השקעה קטנה היום הופכת לסכום נחמד בעתיד.
+          </p>
+          
+          <p class="wpc-calc-compound-int-k9x7-text">
+            במחשבון יש 4 מצבים שונים: חישוב בסיסי של ריבית דריבית עם הפקדות חודשיות, השוואה בין סוגי חיסכון שונים בשוק, סימולציה למטרות ספציפיות כמו פנסיה או דירה, ואופטימיזציה שעוזרת לכם למצוא את האסטרטגיה הטובה ביותר. הכל בממשק נוח שמציג את התוצאות בצורה ברורה.
+          </p>
+          
+          <!-- כרטיסי סטטיסטיקות מצב שוק החיסכון -->
+          <div class="wpc-calc-compound-int-k9x7-stats-grid">
+            <div class="wpc-calc-compound-int-k9x7-stat-card">
+              <div class="wpc-calc-compound-int-k9x7-stat-icon">🏦</div>
+              <div class="wpc-calc-compound-int-k9x7-stat-value">4.5%</div>
+              <div class="wpc-calc-compound-int-k9x7-stat-label">ריבית בנק ישראל נוכחית</div>
+            </div>
+            <div class="wpc-calc-compound-int-k9x7-stat-card">
+              <div class="wpc-calc-compound-int-k9x7-stat-icon">📈</div>
+              <div class="wpc-calc-compound-int-k9x7-stat-value">3.5%-5.2%</div>
+              <div class="wpc-calc-compound-int-k9x7-stat-label">ריבית ממוצעת חיסכון ארוך טווח</div>
+            </div>
+            <div class="wpc-calc-compound-int-k9x7-stat-card">
+              <div class="wpc-calc-compound-int-k9x7-stat-icon">🎯</div>
+              <div class="wpc-calc-compound-int-k9x7-stat-value">4.2%-5.5%</div>
+              <div class="wpc-calc-compound-int-k9x7-stat-label">ריבית קרנות פנסיה + הטבת מס</div>
+            </div>
+            <div class="wpc-calc-compound-int-k9x7-stat-card">
+              <div class="wpc-calc-compound-int-k9x7-stat-icon">💰</div>
+              <div class="wpc-calc-compound-int-k9x7-stat-value">42%</div>
+              <div class="wpc-calc-compound-int-k9x7-stat-label">אחוז הישראלים החוסכים באופן שיטתי</div>
+            </div>
+          </div>
+        </section>
+        
+        <!-- מלכודות נפוצות בחיסכון -->
+        <section class="wpc-calc-compound-int-k9x7-text-section">
+          <h3 class="wpc-calc-compound-int-k9x7-section-title">⚠️ מלכודות נפוצות בחיסכון ריבית דריבית</h3>
+          
+          <div class="wpc-calc-compound-int-k9x7-warning-cards">
+            <div class="wpc-calc-compound-int-k9x7-warning-card">
+              <div class="wpc-calc-compound-int-k9x7-warning-icon">💸</div>
+              <h4>מלכודת מס הכנסה</h4>
+              <p>רבים שוכחים לקחת בחשבון את מס הרווח על הריבית (25%)</p>
+            </div>
+            <div class="wpc-calc-compound-int-k9x7-warning-card">
+              <div class="wpc-calc-compound-int-k9x7-warning-icon">📉</div>
+              <h4>מלכודת אינפלציה</h4>
+              <p>התעלמות מהשחיקה האמיתית של כוח הקנייה (3.3% בשנה)</p>
+            </div>
+            <div class="wpc-calc-compound-int-k9x7-warning-card">
+              <div class="wpc-calc-compound-int-k9x7-warning-icon">🔄</div>
+              <h4>מלכודת הפקדות לא עקביות</h4>
+              <p>חוסרי רציפות בהפקדות הורסים את האפקט המצטבר</p>
+            </div>
+            <div class="wpc-calc-compound-int-k9x7-warning-card">
+              <div class="wpc-calc-compound-int-k9x7-warning-icon">🚫</div>
+              <h4>מלכודת הוצאות מוקדמות</h4>
+              <p>נגיעה בכסף הורסת את כל הרווח העתידי</p>
+            </div>
+          </div>
+        </section>
+        
+        <!-- איך המחשבון עובד -->
+        <section class="wpc-calc-compound-int-k9x7-text-section">
+          <h3 class="wpc-calc-compound-int-k9x7-section-title">🧮 איך המחשבון עובד - הסבר מפורט על כל טאב</h3>
+          
+          <div class="wpc-calc-compound-int-k9x7-tabs-explanation">
+            <div class="wpc-calc-compound-int-k9x7-tab-explanation">
+              <div class="wpc-calc-compound-int-k9x7-tab-number">1</div>
+              <h4>טאב מחשבון ריבית דריבית</h4>
+              <p>זה הטאב הבסיסי שמחשב לכם את הערך העתידי של החיסכון שלכם. תכניסו את הסכום ההתחלתי (אם יש), ריבית שנתית, תקופת החיסכון בשנים, והפקדה חודשית. המחשבון יראה לכם כמה כסף יהיה לכם בסוף התקופה, כמה מזה ריבית דריבית, וכמה זה יותר מחיסכון רגיל. יש גם אפשרות לבחור תדירות ריבוי (חודשי/רבעוני/שנתי) ולראות איך מס משפיע על התוצאות.</p>
+            </div>
+            
+            <div class="wpc-calc-compound-int-k9x7-tab-explanation">
+              <div class="wpc-calc-compound-int-k9x7-tab-number">2</div>
+              <h4>טאב השוואת קרנות וחיסכון</h4>
+              <p>כאן תוכלו להשוות בין סוגי החיסכון השונים בישראל: קרן פנסיה (4.2%-5.5% + הטבת מס), קרן השתלמות (3.5%-4.8% + הטבת מס), פיקדון בנקאי (2.5%-4.0% + בטחון מלא), ותכניות חיסכון מנהלים (5.0%-7.2%). המחשבון יראה לכם את התוצאות בכל מסלול עם אותם נתונים, כולל השפעת המס וההטבות השונות. זה עוזר לבחור את המסלול הכי מתאים לכם.</p>
+            </div>
+            
+            <div class="wpc-calc-compound-int-k9x7-tab-explanation">
+              <div class="wpc-calc-compound-int-k9x7-tab-number">3</div>
+              <h4>טאב סימולציה ארוך טווח</h4>
+              <p>הטאב הזה מיועד לתכנון למטרות ספציפיות. תוכלו לקבוע מטרה (פנסיה, קניית דירה, חתונה, חירום) ולראות כמה צריך לחסוך כדי להגיע אליה. המחשבון יחשב לכם תחזיות ל-20-40 שנים קדימה, יראה איך אינפלציה משפיעה על הכסף האמיתי שלכם, ויתן תחזיות שונות לפי תרחישי ריבית שונים. זה מאוד שימושי לתכנון פיננסי ארוך טווח.</p>
+            </div>
+            
+            <div class="wpc-calc-compound-int-k9x7-tab-explanation">
+              <div class="wpc-calc-compound-int-k9x7-tab-number">4</div>
+              <h4>טאב אופטימיזציה וצבירה</h4>
+              <p>זה הטאב הכי מתקדם. הוא עוזר לכם למצוא את האסטרטגיה הטובה ביותר: מתי להתחיל לחסוך, כמה להפקיד כל חודש, איך לחלק הכסף בין מסלולי חיסכון שונים, ואיך למטב את המסים. המחשבון יראה לכם את ההבדל בין התחלה מוקדמת למאוחרת, יעזור לכם לקבוע את ההפקדה החודשית המיטבית לפי ההכנסות שלכם, ויציע חלוקה חכמה בין מסלולי חיסכון שונים לפיזור סיכונים.</p>
+            </div>
+          </div>
+        </section>
+        
+        <!-- הנוסחאות והחישובים -->
+        <section class="wpc-calc-compound-int-k9x7-text-section">
+          <h3 class="wpc-calc-compound-int-k9x7-section-title">🧮 הנוסחאות והחישובים - איך זה באמת עובד</h3>
+          
+          <div class="wpc-calc-compound-int-k9x7-formula-section">
+            <h4>נוסחת הריבית הדריבית המתמטית</h4>
+            <div class="wpc-calc-compound-int-k9x7-formula-box">
+              <div class="wpc-calc-compound-int-k9x7-formula">A = P(1 + r)^t</div>
+              <div class="wpc-calc-compound-int-k9x7-formula-explanation">
+                נוסחת הריבית הדריבית הבסיסית
+              </div>
+            </div>
+            
+            <div class="wpc-calc-compound-int-k9x7-parameters-grid">
+              <div class="wpc-calc-compound-int-k9x7-parameter-card">
+                <div class="wpc-calc-compound-int-k9x7-parameter-symbol">P</div>
+                <div class="wpc-calc-compound-int-k9x7-parameter-name">קרן</div>
+                <div class="wpc-calc-compound-int-k9x7-parameter-example">₪50,000</div>
+                <div class="wpc-calc-compound-int-k9x7-parameter-desc">סכום ההשקעה הראשוני</div>
+              </div>
+              <div class="wpc-calc-compound-int-k9x7-parameter-card">
+                <div class="wpc-calc-compound-int-k9x7-parameter-symbol">r</div>
+                <div class="wpc-calc-compound-int-k9x7-parameter-name">ריבית</div>
+                <div class="wpc-calc-compound-int-k9x7-parameter-example">4.5%</div>
+                <div class="wpc-calc-compound-int-k9x7-parameter-desc">ריבית שנתית ממוצעת בישראל</div>
+              </div>
+              <div class="wpc-calc-compound-int-k9x7-parameter-card">
+                <div class="wpc-calc-compound-int-k9x7-parameter-symbol">t</div>
+                <div class="wpc-calc-compound-int-k9x7-parameter-name">זמן</div>
+                <div class="wpc-calc-compound-int-k9x7-parameter-example">15 שנים</div>
+                <div class="wpc-calc-compound-int-k9x7-parameter-desc">תקופת החיסכון הממוצעת</div>
+              </div>
+              <div class="wpc-calc-compound-int-k9x7-parameter-card">
+                <div class="wpc-calc-compound-int-k9x7-parameter-symbol">A</div>
+                <div class="wpc-calc-compound-int-k9x7-parameter-name">תוצאה</div>
+                <div class="wpc-calc-compound-int-k9x7-parameter-example">₪96,795</div>
+                <div class="wpc-calc-compound-int-k9x7-parameter-desc">הסכום הסופי</div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- דוגמה חיה -->
+          <div class="wpc-calc-compound-int-k9x7-example-section">
+            <h4>🎯 דוגמה חיה מהמחשבון</h4>
+            <div class="wpc-calc-compound-int-k9x7-example-box">
+              <div class="wpc-calc-compound-int-k9x7-example-scenario">
+                <strong>תרחיש:</strong> משפחה שחוסכת ₪1,000 בחודש במשך 20 שנה בריבית דריבית של 4%
+              </div>
+              <div class="wpc-calc-compound-int-k9x7-example-results">
+                <div class="wpc-calc-compound-int-k9x7-example-item">
+                  <span class="wpc-calc-compound-int-k9x7-example-label">סכום שהופקד:</span>
+                  <span class="wpc-calc-compound-int-k9x7-example-value">₪240,000</span>
+                </div>
+                <div class="wpc-calc-compound-int-k9x7-example-item">
+                  <span class="wpc-calc-compound-int-k9x7-example-label">ריבית דריבית שנוספה:</span>
+                  <span class="wpc-calc-compound-int-k9x7-example-value">₪106,954</span>
+                </div>
+                <div class="wpc-calc-compound-int-k9x7-example-item highlight">
+                  <span class="wpc-calc-compound-int-k9x7-example-label">סכום סופי:</span>
+                  <span class="wpc-calc-compound-int-k9x7-example-value">₪346,954</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- השוואה ויזואלית -->
+          <div class="wpc-calc-compound-int-k9x7-comparison-section">
+            <h4>📊 השוואה ויזואלית - לפני ואחרי</h4>
+            <div class="wpc-calc-compound-int-k9x7-comparison-cards">
+              <div class="wpc-calc-compound-int-k9x7-comparison-card regular">
+                <div class="wpc-calc-compound-int-k9x7-comparison-title">חיסכון רגיל</div>
+                <div class="wpc-calc-compound-int-k9x7-comparison-calc">₪1,000/חודש × 20 שנים</div>
+                <div class="wpc-calc-compound-int-k9x7-comparison-result">₪240,000</div>
+              </div>
+              <div class="wpc-calc-compound-int-k9x7-comparison-arrow">→</div>
+              <div class="wpc-calc-compound-int-k9x7-comparison-card compound">
+                <div class="wpc-calc-compound-int-k9x7-comparison-title">חיסכון ריבית דריבית</div>
+                <div class="wpc-calc-compound-int-k9x7-comparison-calc">באותם תנאים</div>
+                <div class="wpc-calc-compound-int-k9x7-comparison-result">₪346,954</div>
+              </div>
+            </div>
+            <div class="wpc-calc-compound-int-k9x7-advantage-highlight">
+              <strong>יתרון הריבית הדריבית: +₪106,954 (44% יותר!)</strong>
+            </div>
+          </div>
+        </section>
+        
+        <!-- טיפים מעשיים -->
+        <section class="wpc-calc-compound-int-k9x7-text-section">
+          <h3 class="wpc-calc-compound-int-k9x7-section-title">💡 טיפים מעשיים למיטוב החיסכון</h3>
+          
+          <div class="wpc-calc-compound-int-k9x7-tips-grid">
+            <div class="wpc-calc-compound-int-k9x7-tip-card error">
+              <div class="wpc-calc-compound-int-k9x7-tip-icon">🚫</div>
+              <h4>שגיאות נפוצות בחיסכון לטווח ארוך</h4>
+              <ul>
+                <li>התחלה מאוחרת: כל שנה של איחור עולה אלפי שקלים בתוצאה הסופית</li>
+                <li>הפסקות בהפקדות: גם הפסקה של שנה אחת פוגעת משמעותית בתוצאה</li>
+                <li>בחירת ריבית נמוכה: הבדל של 1% בריבית = הבדל עצום בתוצאה הסופית</li>
+                <li>התעלמות ממס: תכנון מס נכון יכול לחסוך עשרות אלפי שקלים</li>
+              </ul>
+            </div>
+            
+            <div class="wpc-calc-compound-int-k9x7-tip-card success">
+              <div class="wpc-calc-compound-int-k9x7-tip-icon">💰</div>
+              <h4>טיפים זהב לחיסכון מיטבי</h4>
+              <ul>
+                <li><strong>התחילו מוקדם:</strong> גם ₪200 בחודש מגיל 25 עדיף מ-₪500 בחודש מגיל 35</li>
+                <li><strong>עקביות:</strong> הפקדה אוטומטית מבטיחה רציפות ומונעת פיתויים</li>
+                <li><strong>מעקב שנתי:</strong> בדיקה של התשואות וכיוונון לפי השינויים בשוק</li>
+                <li><strong>ניצול הטבות מס:</strong> קרן פנסיה, קרן השתלמות, וביטוח מנהלים מפחיתים מס</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+        
+        <!-- דוגמאות אמיתיות מהשוק הישראלי -->
+        <section class="wpc-calc-compound-int-k9x7-text-section">
+          <h3 class="wpc-calc-compound-int-k9x7-section-title">📋 דוגמאות אמיתיות מהשוק הישראלי</h3>
+          
+          <div class="wpc-calc-compound-int-k9x7-case-studies">
+            <div class="wpc-calc-compound-int-k9x7-case-study success">
+              <h4>📈 מקרה טיפוסי - משפחה צעירה</h4>
+              <div class="wpc-calc-compound-int-k9x7-case-data">
+                <div class="wpc-calc-compound-int-k9x7-case-params">
+                  <div class="wpc-calc-compound-int-k9x7-case-param">
+                    <span class="wpc-calc-compound-int-k9x7-case-label">גיל התחלת חיסכון:</span>
+                    <span class="wpc-calc-compound-int-k9x7-case-value">28</span>
+                  </div>
+                  <div class="wpc-calc-compound-int-k9x7-case-param">
+                    <span class="wpc-calc-compound-int-k9x7-case-label">הפקדה חודשית:</span>
+                    <span class="wpc-calc-compound-int-k9x7-case-value">₪1,500</span>
+                  </div>
+                  <div class="wpc-calc-compound-int-k9x7-case-param">
+                    <span class="wpc-calc-compound-int-k9x7-case-label">ריבית ממוצעת:</span>
+                    <span class="wpc-calc-compound-int-k9x7-case-value">4.2% (קרן פנסיה משלימה)</span>
+                  </div>
+                  <div class="wpc-calc-compound-int-k9x7-case-param">
+                    <span class="wpc-calc-compound-int-k9x7-case-label">יעד:</span>
+                    <span class="wpc-calc-compound-int-k9x7-case-value">פרישה בגיל 67</span>
+                  </div>
+                  <div class="wpc-calc-compound-int-k9x7-case-param">
+                    <span class="wpc-calc-compound-int-k9x7-case-label">תקופת חיסכון:</span>
+                    <span class="wpc-calc-compound-int-k9x7-case-value">39 שנים</span>
+                  </div>
+                  <div class="wpc-calc-compound-int-k9x7-case-param highlight">
+                    <span class="wpc-calc-compound-int-k9x7-case-label">תוצאה צפויה:</span>
+                    <span class="wpc-calc-compound-int-k9x7-case-value">₪2,847,563</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="wpc-calc-compound-int-k9x7-case-study warning">
+              <h4>⚠️ מקרה מורכב עם התרעות</h4>
+              <div class="wpc-calc-compound-int-k9x7-case-warning">
+                <div class="wpc-calc-compound-int-k9x7-warning-title">טעות נפוצה:</div>
+                <div class="wpc-calc-compound-int-k9x7-warning-desc">הפסקת חיסכון לשנתיים (מגיל 35-37)</div>
+                <div class="wpc-calc-compound-int-k9x7-warning-impact">השפעה על התוצאה הסופית: -₪284,000</div>
+                <div class="wpc-calc-compound-int-k9x7-warning-lesson">לקח מרכזי: רציפות חשובה יותר מגובה הסכום</div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- נקודות מרכזיות לזכור -->
+          <div class="wpc-calc-compound-int-k9x7-key-points">
+            <h4>✅ נקודות מרכזיות לזכור</h4>
+            <div class="wpc-calc-compound-int-k9x7-points-grid">
+              <div class="wpc-calc-compound-int-k9x7-point-card">
+                <div class="wpc-calc-compound-int-k9x7-point-icon">⏰</div>
+                <div class="wpc-calc-compound-int-k9x7-point-text">זמן חשוב יותר מכמות בריבית דריבית</div>
+              </div>
+              <div class="wpc-calc-compound-int-k9x7-point-card">
+                <div class="wpc-calc-compound-int-k9x7-point-icon">🔄</div>
+                <div class="wpc-calc-compound-int-k9x7-point-text">עקביות מביאה תוצאות מדהימות לטווח הארוך</div>
+              </div>
+              <div class="wpc-calc-compound-int-k9x7-point-card">
+                <div class="wpc-calc-compound-int-k9x7-point-icon">💸</div>
+                <div class="wpc-calc-compound-int-k9x7-point-text">כל שנת איחור עולה יקר במיוחד</div>
+              </div>
+              <div class="wpc-calc-compound-int-k9x7-point-card">
+                <div class="wpc-calc-compound-int-k9x7-point-icon">📊</div>
+                <div class="wpc-calc-compound-int-k9x7-point-text">תכנון מס נכון יכול להכפיל את התוצאות</div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- צעדים הבאים -->
+          <div class="wpc-calc-compound-int-k9x7-next-steps">
+            <h4>🔢 צעדים הבאים לחיסכון אפקטיבי</h4>
+            <div class="wpc-calc-compound-int-k9x7-steps-flow">
+              <div class="wpc-calc-compound-int-k9x7-step">
+                <div class="wpc-calc-compound-int-k9x7-step-number">1</div>
+                <div class="wpc-calc-compound-int-k9x7-step-title">הגדרת יעדים ברורים</div>
+                <div class="wpc-calc-compound-int-k9x7-step-desc">כמה כסף ולאיזה מטרה</div>
+              </div>
+              <div class="wpc-calc-compound-int-k9x7-step-arrow">→</div>
+              <div class="wpc-calc-compound-int-k9x7-step">
+                <div class="wpc-calc-compound-int-k9x7-step-number">2</div>
+                <div class="wpc-calc-compound-int-k9x7-step-title">בחירת מסלול מתאים</div>
+                <div class="wpc-calc-compound-int-k9x7-step-desc">קרן פנסיה, קרן השתלמות, או פיקדון</div>
+              </div>
+              <div class="wpc-calc-compound-int-k9x7-step-arrow">→</div>
+              <div class="wpc-calc-compound-int-k9x7-step">
+                <div class="wpc-calc-compound-int-k9x7-step-number">3</div>
+                <div class="wpc-calc-compound-int-k9x7-step-title">הקמת הפקדה אוטומטית</div>
+                <div class="wpc-calc-compound-int-k9x7-step-desc">למנוע פיתויים ושכחה</div>
+              </div>
+              <div class="wpc-calc-compound-int-k9x7-step-arrow">→</div>
+              <div class="wpc-calc-compound-int-k9x7-step">
+                <div class="wpc-calc-compound-int-k9x7-step-number">4</div>
+                <div class="wpc-calc-compound-int-k9x7-step-title">מעקב רבעוני</div>
+                <div class="wpc-calc-compound-int-k9x7-step-desc">בדיקת התקדמות וכיוונים</div>
+              </div>
+              <div class="wpc-calc-compound-int-k9x7-step-arrow">→</div>
+              <div class="wpc-calc-compound-int-k9x7-step">
+                <div class="wpc-calc-compound-int-k9x7-step-number">5</div>
+                <div class="wpc-calc-compound-int-k9x7-step-title">התאמות שנתיות</div>
+                <div class="wpc-calc-compound-int-k9x7-step-desc">עדכון סכומים לפי השינויים בהכנסה</div>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        <!-- סיכום והצעדים הבאים -->
+        <section class="wpc-calc-compound-int-k9x7-text-section">
+          <h3 class="wpc-calc-compound-int-k9x7-section-title">🌟 סיכום והצעדים הבאים</h3>
+          
+          <div class="wpc-calc-compound-int-k9x7-summary-section">
+            <div class="wpc-calc-compound-int-k9x7-summary-main">
+              <h4>למה ריבית דריבית זה כל כך חזק</h4>
+              <p>הריבית הדריבית היא בעצם הדרך של הכסף שלכם לעבוד בעבורכם. ככל שתתחילו מוקדם יותר ותהיו יותר עקביים, כך האפקט יהיה חזק יותר. המחשבון שלנו מראה לכם בדיוק איך השקעות קטנות היום הופכות לכסף רציני בעתיד, ומה יקרה אם תדחו את ההתחלה.</p>
+            </div>
+            
+            <div class="wpc-calc-compound-int-k9x7-summary-cta">
+              <h4>🚀 מה עושים עכשיו</h4>
+              <p>כל יום שאתם מחכים זה יום שבו אתם מפסידים על הפוטנציאל העצום של הריבית הדריבית. תשתמשו במחשבון כדי לראות בדיוק איך החיסכון שלכם יכול לצמוח, ותתחילו לפעול לקראת העתיד הפיננסי שלכם כבר היום.</p>
+            </div>
+          </div>
+        </section>
+        
+        <!-- FAQ אקורדיון -->
+        <section class="wpc-calc-compound-int-k9x7-text-section">
+          <h3 class="wpc-calc-compound-int-k9x7-section-title">❓ שאלות נפוצות על ריבית דריבית וחיסכון</h3>
+          
+          <div class="wpc-calc-compound-int-k9x7-faq-container">
+            <div class="wpc-calc-compound-int-k9x7-faq-item">
+              <div class="wpc-calc-compound-int-k9x7-faq-header" data-faq="1">
+                <span class="wpc-calc-compound-int-k9x7-faq-icon">💰</span>
+                איך מחשבים ריבית דריבית בפועל?
+              </div>
+              <div class="wpc-calc-compound-int-k9x7-faq-content" id="faq-1">
+                <p>הריבית הדריבית מחושבת לפי הנוסחה A = P(1+r)^t, כאשר הריבית נצברת על הקרן והריבית הקודמת יחד. למשל, אם השקעתם ₪10,000 בריבית של 5% לשנה, בשנה הראשונה תרוויחו ₪500, בשנה השנייה תרוויחו 5% על ₪10,500 = ₪525, וכן הלאה.</p>
+              </div>
+            </div>
+            
+            <div class="wpc-calc-compound-int-k9x7-faq-item">
+              <div class="wpc-calc-compound-int-k9x7-faq-header" data-faq="2">
+                <span class="wpc-calc-compound-int-k9x7-faq-icon">⏰</span>
+                מה ההבדל בין ריבית פשוטה לריבית דריבית?
+              </div>
+              <div class="wpc-calc-compound-int-k9x7-faq-content" id="faq-2">
+                <p>בריבית פשוטה הריבית מחושבת רק על הקרן המקורית. בריבית דריבית הריבית מחושבת על הקרן + כל הריבית שנצברה. ההבדל הופך למשמעותי מאוד לטווח הארוך - בהשקעה של ₪50,000 למשך 20 שנה בריבית 5%, הריבית הפשוטה תיתן ₪50,000 רווח, הדריבית תיתן ₪82,367 רווח.</p>
+              </div>
+            </div>
+            
+            <div class="wpc-calc-compound-int-k9x7-faq-item">
+              <div class="wpc-calc-compound-int-k9x7-faq-header" data-faq="3">
+                <span class="wpc-calc-compound-int-k9x7-faq-icon">📋</span>
+                איך משפיעות הפקדות חודשיות על הריבית הדריבית?
+              </div>
+              <div class="wpc-calc-compound-int-k9x7-faq-content" id="faq-3">
+                <p>הפקדות חודשיות מכפילות את האפקט! כל הפקדה חודשית מתחילה לייצר ריבית דריבית מהרגע שהיא מוכנסת. המחשבון שלנו משתמש בנוסחת PMT המתקדמת כדי לחשב את האפקט המצטבר של כל ההפקדות החודשיות.</p>
+              </div>
+            </div>
+            
+            <div class="wpc-calc-compound-int-k9x7-faq-item">
+              <div class="wpc-calc-compound-int-k9x7-faq-header" data-faq="4">
+                <span class="wpc-calc-compound-int-k9x7-faq-icon">⚠️</span>
+                איך מס הכנסה משפיע על התוצאות?
+              </div>
+              <div class="wpc-calc-compound-int-k9x7-faq-content" id="faq-4">
+                <p>בישראל ריבית ורווחי הון חייבים במס לפי מדרגות המס (25% ממוצע). חשוב לקחת זאת בחשבון בחישובי התשואה האמיתית. מסלולים עם הטבות מס (קרן פנסיה, קרן השתלמות) יכולים לשפר משמעותית את התוצאה הנטו.</p>
+              </div>
+            </div>
+            
+            <div class="wpc-calc-compound-int-k9x7-faq-item">
+              <div class="wpc-calc-compound-int-k9x7-faq-header" data-faq="5">
+                <span class="wpc-calc-compound-int-k9x7-faq-icon">🎯</span>
+                מה האסטרטגיה הטובה ביותר להתחלת חיסכון?
+              </div>
+              <div class="wpc-calc-compound-int-k9x7-faq-content" id="faq-5">
+                <p>התחילו מוקדם ככל האפשר, גם עם סכומים קטנים. ₪500 בחודש מגיל 25 יכולים להפוך לממון רב יותר מ-₪1,500 בחודש מגיל 40. הקימו הפקדה אוטומטית ואל תיגעו בכסף עד למועד המטרה.</p>
+              </div>
+            </div>
+            
+            <div class="wpc-calc-compound-int-k9x7-faq-item">
+              <div class="wpc-calc-compound-int-k9x7-faq-header" data-faq="6">
+                <span class="wpc-calc-compound-int-k9x7-faq-icon">💼</span>
+                איזה מסלולי חיסכון מציעים ריבית דריבית בישראל?
+              </div>
+              <div class="wpc-calc-compound-int-k9x7-faq-content" id="faq-6">
+                <p>כמעט כל מסלולי החיסכון מציעים ריבית דריבית: קרנות פנסיה (4.2%-5.5%), קרנות השתלמות (3.5%-4.8%), פיקדונות בנקאיים (2.5%-4.0%), תכניות חיסכון מנהלים (5.0%-7.2%). ההבדל הוא בגובה הריבית, הטבות המס, ורמת הנזילות.</p>
+              </div>
+            </div>
+            
+            <div class="wpc-calc-compound-int-k9x7-faq-item">
+              <div class="wpc-calc-compound-int-k9x7-faq-header" data-faq="7">
+                <span class="wpc-calc-compound-int-k9x7-faq-icon">📊</span>
+                איך אינפלציה משפיעה על החיסכון לטווח ארוך?
+              </div>
+              <div class="wpc-calc-compound-int-k9x7-faq-content" id="faq-7">
+                <p>אינפלציה שוחקת את כוח הקנייה של הכסף. אם האינפלציה 3% בשנה והריבית 4%, התשואה האמיתית היא רק 1%. חשוב לבחור מסלולי חיסכון שמנצחים את האינפלציה בשוליים בטוחים.</p>
+              </div>
+            </div>
+            
+            <div class="wpc-calc-compound-int-k9x7-faq-item">
+              <div class="wpc-calc-compound-int-k9x7-faq-header" data-faq="8">
+                <span class="wpc-calc-compound-int-k9x7-faq-icon">⏱️</span>
+                מתי כדאי להתחיל לחסוך לפנסיה?
+              </div>
+              <div class="wpc-calc-compound-int-k9x7-faq-content" id="faq-8">
+                <p>ככל שמתחילים מוקדם יותר, כך האפקט של הריבית הדריבית חזק יותר. גם בגיל 25 כדאי להתחיל לחשוב על פנסיה. ההבדל בין התחלה בגיל 25 לגיל 35 יכול להיות עשרות אלפי שקלים בפנסיה.</p>
+              </div>
+            </div>
+            
+            <div class="wpc-calc-compound-int-k9x7-faq-item">
+              <div class="wpc-calc-compound-int-k9x7-faq-header" data-faq="9">
+                <span class="wpc-calc-compound-int-k9x7-faq-icon">🏦</span>
+                איך בוחרים בין מסלולים שונים של קרן פנסיה?
+              </div>
+              <div class="wpc-calc-compound-int-k9x7-faq-content" id="faq-9">
+                <p>שווה להשוות: עמלת ניהול, תשואה היסטורית, רמת סיכון, גמישות בהשקעות. הבדלים קטנים בעמלה יכולים להשפיע משמעותית לטווח של 30-40 שנים.</p>
+              </div>
+            </div>
+            
+            <div class="wpc-calc-compound-int-k9x7-faq-item">
+              <div class="wpc-calc-compound-int-k9x7-faq-header" data-faq="10">
+                <span class="wpc-calc-compound-int-k9x7-faq-icon">📈</span>
+                איך יודעים אם החיסכון שלי על המסלול הנכון?
+              </div>
+              <div class="wpc-calc-compound-int-k9x7-faq-content" id="faq-10">
+                <p>עשו בדיקה שנתית: האם התשואה מנצחת אינפלציה? האם אתם עומדים ביעדי החיסכון? האם יש מסלולים טובים יותר בשוק? המחשבון שלנו יעזור לכם להעריך את המצב הנוכחי.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        <!-- כרטיס פרופיל אייל עובדיה -->
+        <section class="wpc-calc-compound-int-k9x7-text-section">
+          <h3 class="wpc-calc-compound-int-k9x7-section-title">👨‍🎓 מחבר העמוד: אייל עובדיה</h3>
+          
+          <div class="wpc-calc-compound-int-k9x7-author-card">
+            <div class="wpc-calc-compound-int-k9x7-author-image">
+              <img src="https://loan-israel.co.il/wp-content/uploads/2025/07/image-95.webp" alt="אייל עובדיה - מנהל מקצועי רק תבקש" loading="lazy">
+            </div>
+            <div class="wpc-calc-compound-int-k9x7-author-info">
+              <h4>אייל עובדיה</h4>
+              <div class="wpc-calc-compound-int-k9x7-author-title">המנהל המקצועי של פורטל "רק תבקש"</div>
+              <div class="wpc-calc-compound-int-k9x7-author-expertise">
+                <div class="wpc-calc-compound-int-k9x7-expertise-item">
+                  <strong>תחום התמחות:</strong> תכנון פיננסי וחיסכון לטווח ארוך, מחשבונים פיננסיים מתקדמים
+                </div>
+                <div class="wpc-calc-compound-int-k9x7-expertise-item">
+                  <strong>מומחיות הצוות:</strong> יועצים פיננסיים מוסמכים ואנליסטים מתמחים בתכנון חיסכון והשקעות
+                </div>
+                <div class="wpc-calc-compound-int-k9x7-expertise-item">
+                  <strong>ניסיון מצטבר:</strong> מעל 15 שנות ניסיון מקצועי מצטבר של הצוות בתחום התכנון הפיננסי
+                </div>
+                <div class="wpc-calc-compound-int-k9x7-expertise-item">
+                  <strong>לקוחות שקיבלו ייעוץ:</strong> למעלה מ-5,500 לקוחות בתכנון חיסכון והשקעות
+                </div>
+              </div>
+              <div class="wpc-calc-compound-int-k9x7-author-quote">
+                "בעבודתנו עם יותר מ-5,500 לקוחות בתכנון חיסכון, ראינו דפוסים ברורים: הצלחה בחיסכון לטווח ארוך תלויה ב-80% בעקביות וב-20% בלבד בבחירת המסלול. לקוחות שמתחילים מוקדם אפילו עם סכומים קטנים מגיעים לתוצאות הרבה יותר טובות מאלו שמתחילים מאוחר עם סכומים גדולים."
+              </div>
+              <div class="wpc-calc-compound-int-k9x7-author-credentials">
+                <div class="wpc-calc-compound-int-k9x7-credential-item">
+                  <strong>מומחיות מקצועית:</strong> תכנון פיננסי אישי, אסטרטגיות חיסכון, חישובי ריבית דריבית, אופטימיזציה מס לחיסכון
+                </div>
+                <div class="wpc-calc-compound-int-k9x7-credential-item">
+                  <strong>פיקוח איכות:</strong> אייל עובדיה מפקח על איכות החישובים והתוכן המקצועי
+                </div>
+                <div class="wpc-calc-compound-int-k9x7-credential-item">
+                  <strong>רקע חברה:</strong> פורטל "רק תבקש" - חברת אפטריו בע"מ, מתמחה בפתרונות פיננסיים
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="wpc-calc-compound-int-k9x7-team-expertise">
+            <h4>🤝 צוות המומחים בתחום החיסכון והשקעות</h4>
+            <div class="wpc-calc-compound-int-k9x7-team-grid">
+              <div class="wpc-calc-compound-int-k9x7-team-item">
+                <div class="wpc-calc-compound-int-k9x7-team-icon">💼</div>
+                <div class="wpc-calc-compound-int-k9x7-team-text">מומחי תכנון פיננסי עם הסמכות מקצועיות</div>
+              </div>
+              <div class="wpc-calc-compound-int-k9x7-team-item">
+                <div class="wpc-calc-compound-int-k9x7-team-icon">📊</div>
+                <div class="wpc-calc-compound-int-k9x7-team-text">אנליסטים פיננסיים מתמחים בחישובי תשואה</div>
+              </div>
+              <div class="wpc-calc-compound-int-k9x7-team-item">
+                <div class="wpc-calc-compound-int-k9x7-team-icon">💰</div>
+                <div class="wpc-calc-compound-int-k9x7-team-text">יועצי מס המתמחים באופטימיזציה של חיסכון ארוך טווח</div>
+              </div>
+              <div class="wpc-calc-compound-int-k9x7-team-item">
+                <div class="wpc-calc-compound-int-k9x7-team-icon">⚖️</div>
+                <div class="wpc-calc-compound-int-k9x7-team-text">מתמחים ברגולציה ודרישות משפטיות בתחום החיסכון</div>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+      </div>
+    </div>
+  </div>
+  
+  <script>
+  (function() {
+      'use strict';
+      
+      // בדיקת namespace
+      const namespace = 'WPC_CalcCompoundInt_K9X7';
+      if (window[namespace]) {
+          console.warn(namespace + ' כבר קיים');
+          return;
+      }
+      
+      // Container validation
+      const container = document.getElementById('wpc-calc-compound-int-k9x7-main');
+      if (!container) {
+          console.error('Container לא נמצא');
+          return;
+      }
+      
+      // State מבודד
+      const state = {
+          initialized: false,
+          currentTab: 'compound-calculator',
+          currentFrequency: 12,
+          includeTax: true,
+          currentGoal: 'pension'
+      };
+      
+      // Error boundaries
+      function safeExecute(fn, context = 'unknown') {
+          try {
+              return fn();
+          } catch (error) {
+              console.error(`שגיאה ב-${context}:`, error);
+              return null;
+          }
+      }
+      
+      // נוסחאות פיננסיות
+      const FinancialFormulas = {
+          // ריבית דריבית עם הפקדות חודשיות
+          compoundInterestWithDeposits: function(principal, rate, time, monthlyDeposit, frequency) {
+              const r = rate / 100;
+              const n = frequency;
+              const t = time;
+              
+              // חישוב הקרן הראשונית
+              const futureValuePrincipal = principal * Math.pow(1 + r/n, n*t);
+              
+              // חישוב הפקדות חודשיות
+              const monthlyRate = r / 12;
+              const totalMonths = t * 12;
+              let futureValueDeposits = 0;
+              
+              if (monthlyDeposit > 0 && monthlyRate > 0) {
+                  futureValueDeposits = monthlyDeposit * 
+                      ((Math.pow(1 + monthlyRate, totalMonths) - 1) / monthlyRate);
+              } else if (monthlyDeposit > 0) {
+                  futureValueDeposits = monthlyDeposit * totalMonths;
+              }
+              
+              return futureValuePrincipal + futureValueDeposits;
+          },
+          
+          // ריבית פשוטה להשוואה
+          simpleInterest: function(principal, rate, time, monthlyDeposit) {
+              const totalDeposits = monthlyDeposit * time * 12;
+              const totalPrincipal = principal + totalDeposits;
+              const interest = totalPrincipal * (rate / 100) * time;
+              return totalPrincipal + interest;
+          },
+          
+          // חישוב הפקדה חודשית נדרשת ליעד
+          requiredMonthlyPayment: function(targetAmount, rate, time, initialAmount = 0) {
+              const r = rate / 100 / 12;
+              const n = time * 12;
+              
+              // הערך העתידי של הסכום הראשוני
+              const futureInitial = initialAmount * Math.pow(1 + r, n);
+              const remainingAmount = targetAmount - futureInitial;
+              
+              if (remainingAmount <= 0) return 0;
+              if (r === 0) return remainingAmount / n;
+              
+              return remainingAmount * r / (Math.pow(1 + r, n) - 1);
+          },
+          
+          // התאמה לאינפלציה
+          adjustForInflation: function(amount, inflationRate, years) {
+              return amount / Math.pow(1 + inflationRate / 100, years);
+          },
+          
+          // חישוב מס על רווח
+          calculateTax: function(totalAmount, principal, totalDeposits, taxRate = 0.25) {
+              const profit = totalAmount - principal - totalDeposits;
+              const tax = profit * taxRate;
+              return totalAmount - tax;
+          }
+      };
+      
+      // פונקציות עזר
+      const Utils = {
+          formatCurrency: function(amount) {
+              return new Intl.NumberFormat('he-IL', {
+                  style: 'currency',
+                  currency: 'ILS',
+                  minimumFractionDigits: 0,
+                  maximumFractionDigits: 0
+              }).format(Math.round(amount));
+          },
+          
+          formatNumber: function(number) {
+              return new Intl.NumberFormat('he-IL').format(Math.round(number));
+          },
+          
+          formatPercentage: function(number) {
+              return number.toFixed(1) + '%';
+          }
+      };
+      
+      // מנהל טאבים
+      const TabManager = {
+          init: function() {
+              const tabs = container.querySelectorAll('.wpc-calc-compound-int-k9x7-tab');
+              const panels = container.querySelectorAll('.wpc-calc-compound-int-k9x7-panel');
+              
+              tabs.forEach(tab => {
+                  tab.addEventListener('click', (e) => {
+                      const targetTab = tab.dataset.tab;
+                      
+                      // עדכון טאבים
+                      tabs.forEach(t => t.classList.remove('active'));
+                      tab.classList.add('active');
+                      
+                      // עדכון פאנלים
+                      panels.forEach(p => p.classList.remove('active'));
+                      const targetPanel = container.querySelector(`#${targetTab}`);
+                      if (targetPanel) {
+                          targetPanel.classList.add('active');
+                          state.currentTab = targetTab;
+                          
+                          // חישוב מחדש לטאב הנוכחי
+                          Calculator.calculateCurrentTab();
+                      }
+                  });
+              });
+          }
+      };
+      
+      // מנהל סליידרים
+      const SliderManager = {
+          init: function() {
+              const sliders = container.querySelectorAll('.wpc-calc-compound-int-k9x7-slider');
+              
+              sliders.forEach(slider => {
+                  this.updateSliderValue(slider);
+                  
+                  slider.addEventListener('input', (e) => {
+                      this.updateSliderValue(slider);
+                      Calculator.calculateCurrentTab();
+                  });
+              });
+          },
+          
+          updateSliderValue: function(slider) {
+              const value = parseFloat(slider.value);
+              const valueDisplay = container.querySelector(`#${slider.id}-value`);
+              
+              if (!valueDisplay) return;
+              
+              switch(slider.id) {
+                  case 'initial-amount':
+                  case 'comparison-amount':
+                  case 'target-amount':
+                  case 'monthly-income':
+                      valueDisplay.textContent = Utils.formatCurrency(value);
+                      break;
+                  case 'monthly-deposit':
+                      valueDisplay.textContent = Utils.formatCurrency(value);
+                      break;
+                  case 'interest-rate':
+                  case 'inflation-rate':
+                      valueDisplay.textContent = Utils.formatPercentage(value);
+                      break;
+                  case 'time-period':
+                  case 'comparison-period':
+                  case 'target-years':
+                  case 'current-age':
+                  case 'retirement-age':
+                      valueDisplay.textContent = value + ' שנים';
+                      break;
+                  case 'savings-percentage':
+                      valueDisplay.textContent = value + '%';
+                      break;
+              }
+          }
+      };
+      
+      // מנהל כפתורי בחירה
+      const ToggleManager = {
+          init: function() {
+              const toggleGroups = container.querySelectorAll('.wpc-calc-compound-int-k9x7-toggle-group');
+              
+              toggleGroups.forEach(group => {
+                  const buttons = group.querySelectorAll('.wpc-calc-compound-int-k9x7-toggle-btn');
+                  
+                  buttons.forEach(button => {
+                      button.addEventListener('click', (e) => {
+                          // עדכון מצב active
+                          buttons.forEach(b => b.classList.remove('active'));
+                          button.classList.add('active');
+                          
+                          // עדכון state
+                          if (button.dataset.frequency) {
+                              state.currentFrequency = parseInt(button.dataset.frequency);
+                          }
+                          if (button.dataset.tax) {
+                              state.includeTax = button.dataset.tax === 'true';
+                          }
+                          if (button.dataset.goal) {
+                              state.currentGoal = button.dataset.goal;
+                          }
+                          
+                          Calculator.calculateCurrentTab();
+                      });
+                  });
+              });
+          }
+      };
+      
+      // מחשבון ראשי
+      const Calculator = {
+          calculateCurrentTab: function() {
+              switch(state.currentTab) {
+                  case 'compound-calculator':
+                      this.calculateCompound();
+                      break;
+                  case 'funds-comparison':
+                      this.calculateComparison();
+                      break;
+                  case 'longterm-simulation':
+                      this.calculateSimulation();
+                      break;
+                  case 'accumulation-optimizer':
+                      this.calculateOptimizer();
+                      break;
+              }
+          },
+          
+          calculateCompound: function() {
+              const principal = parseFloat(container.querySelector('#initial-amount').value) || 0;
+              const rate = parseFloat(container.querySelector('#interest-rate').value) || 0;
+              const time = parseFloat(container.querySelector('#time-period').value) || 0;
+              const monthlyDeposit = parseFloat(container.querySelector('#monthly-deposit').value) || 0;
+              
+              if (time === 0) return;
+              
+              // חישוב ריבית דריבית
+              const compoundAmount = FinancialFormulas.compoundInterestWithDeposits(
+                  principal, rate, time, monthlyDeposit, state.currentFrequency
+              );
+              
+              // חישוב ריבית פשוטה להשוואה
+              const simpleAmount = FinancialFormulas.simpleInterest(
+                  principal, rate, time, monthlyDeposit
+              );
+              
+              const totalDeposits = principal + (monthlyDeposit * time * 12);
+              const compoundInterest = compoundAmount - totalDeposits;
+              const simpleAdvantage = compoundAmount - simpleAmount;
+              
+              // התאמה למס
+              let finalAmount = compoundAmount;
+              if (state.includeTax) {
+                  finalAmount = FinancialFormulas.calculateTax(
+                      compoundAmount, principal, monthlyDeposit * time * 12
+                  );
+              }
+              
+              // עדכון תוצאות
+              this.updateResults('compound-results', {
+                  'final-amount': finalAmount,
+                  'total-deposits': totalDeposits,
+                  'compound-interest': compoundInterest,
+                  'simple-advantage': Math.max(0, simpleAdvantage)
+              });
+              
+              // עדכון גרף
+              this.updateGrowthChart(principal, rate, time, monthlyDeposit);
+          },
+          
+          calculateComparison: function() {
+              const amount = parseFloat(container.querySelector('#comparison-amount').value) || 0;
+              const period = parseFloat(container.querySelector('#comparison-period').value) || 0;
+              
+              if (amount === 0 || period === 0) return;
+              
+              const rates = {
+                  pension: 4.8,
+                  study: 4.2,
+                  deposit: 3.5,
+                  executive: 6.2
+              };
+              
+              const results = {};
+              Object.keys(rates).forEach(key => {
+                  results[key + '-result'] = FinancialFormulas.compoundInterestWithDeposits(
+                      amount, rates[key], period, 0, 12
+                  );
+              });
+              
+              this.updateResults('comparison-results', results);
+              this.updateComparisonChart(rates, amount, period);
+          },
+          
+          calculateSimulation: function() {
+              const targetAmount = parseFloat(container.querySelector('#target-amount').value) || 0;
+              const years = parseFloat(container.querySelector('#target-years').value) || 0;
+              const inflationRate = parseFloat(container.querySelector('#inflation-rate').value) || 0;
+              const rate = 4.5; // ריבית ממוצעת
+              
+              if (targetAmount === 0 || years === 0) return;
+              
+              const requiredMonthly = FinancialFormulas.requiredMonthlyPayment(
+                  targetAmount, rate, years, 0
+              );
+              
+              const totalContributions = requiredMonthly * years * 12;
+              const compoundProfit = targetAmount - totalContributions;
+              const realValue = FinancialFormulas.adjustForInflation(
+                  targetAmount, inflationRate, years
+              );
+              
+              this.updateResults('simulation-results', {
+                  'required-monthly': requiredMonthly,
+                  'real-value': realValue,
+                  'total-contributions': totalContributions,
+                  'compound-profit': compoundProfit
+              });
+              
+              this.updateSimulationChart(targetAmount, years, inflationRate);
+          },
+          
+          calculateOptimizer: function() {
+              const currentAge = parseFloat(container.querySelector('#current-age').value) || 0;
+              const retirementAge = parseFloat(container.querySelector('#retirement-age').value) || 0;
+              const monthlyIncome = parseFloat(container.querySelector('#monthly-income').value) || 0;
+              const savingsPercentage = parseFloat(container.querySelector('#savings-percentage').value) || 0;
+              
+              const yearsToRetirement = retirementAge - currentAge;
+              const recommendedSavings = monthlyIncome * (savingsPercentage / 100);
+              
+              if (yearsToRetirement <= 0) return;
+              
+              const pensionForecast = FinancialFormulas.compoundInterestWithDeposits(
+                  0, 4.8, yearsToRetirement, recommendedSavings, 12
+              );
+              
+              const pensionAllocation = recommendedSavings * 0.7; // 70% לקרן פנסיה
+              const additionalSavings = recommendedSavings * 0.3; // 30% לחיסכון נוסף
+              
+              this.updateResults('optimizer-results', {
+                  'recommended-savings': recommendedSavings,
+                  'pension-forecast': pensionForecast,
+                  'pension-allocation': pensionAllocation,
+                  'additional-savings': additionalSavings
+              });
+              
+              this.updateOptimizerChart(currentAge, retirementAge, recommendedSavings);
+          },
+          
+          updateResults: function(containerId, results) {
+              const resultsContainer = container.querySelector(`#${containerId}`);
+              if (!resultsContainer) return;
+              
+              Object.keys(results).forEach(key => {
+                  const element = resultsContainer.querySelector(`#${key}`);
+                  if (element) {
+                      element.textContent = Utils.formatCurrency(results[key]);
+                  }
+              });
+          },
+          
+          updateGrowthChart: function(principal, rate, time, monthlyDeposit) {
+              const canvas = container.querySelector('#growth-chart');
+              if (!canvas) return;
+              
+              const ctx = canvas.getContext('2d');
+              const rect = canvas.getBoundingClientRect();
+              const width = canvas.width = rect.width * 2; // High DPI
+              const height = canvas.height = 500; // גובה גדול יותר
+              canvas.style.width = rect.width + 'px';
+              canvas.style.height = '250px';
+              
+              ctx.clearRect(0, 0, width, height);
+              ctx.scale(2, 2); // High DPI scaling
+              
+              // נתוני הגרף
+              const years = [];
+              const compoundValues = [];
+              const simpleValues = [];
+              
+              for (let year = 0; year <= time; year++) {
+                  years.push(year);
+                  
+                  const compoundValue = FinancialFormulas.compoundInterestWithDeposits(
+                      principal, rate, year, monthlyDeposit, 12
+                  );
+                  const simpleValue = FinancialFormulas.simpleInterest(
+                      principal, rate, year, monthlyDeposit
+                  );
+                  
+                  compoundValues.push(compoundValue);
+                  simpleValues.push(simpleValue);
+              }
+              
+              // ציור הגרף
+              this.drawChart(ctx, rect.width, 250, years, compoundValues, simpleValues);
+          },
+          
+          updateComparisonChart: function(rates, amount, period) {
+              const canvas = container.querySelector('#comparison-chart');
+              if (!canvas) return;
+              
+              const ctx = canvas.getContext('2d');
+              const rect = canvas.getBoundingClientRect();
+              const width = canvas.width = rect.width * 2;
+              const height = canvas.height = 500;
+              canvas.style.width = rect.width + 'px';
+              canvas.style.height = '250px';
+              
+              ctx.clearRect(0, 0, width, height);
+              ctx.scale(2, 2);
+              
+              // חישוב תוצאות
+              const results = Object.keys(rates).map(key => ({
+                  name: this.getFundName(key),
+                  value: FinancialFormulas.compoundInterestWithDeposits(amount, rates[key], period, 0, 12),
+                  color: this.getFundColor(key)
+              }));
+              
+              this.drawBarChart(ctx, rect.width, 250, results);
+          },
+          
+          updateSimulationChart: function(targetAmount, years, inflationRate) {
+              const canvas = container.querySelector('#simulation-chart');
+              if (!canvas) return;
+              
+              const ctx = canvas.getContext('2d');
+              const rect = canvas.getBoundingClientRect();
+              const width = canvas.width = rect.width * 2;
+              const height = canvas.height = 500;
+              canvas.style.width = rect.width + 'px';
+              canvas.style.height = '250px';
+              
+              ctx.clearRect(0, 0, width, height);
+              ctx.scale(2, 2);
+              
+              // נתונים לגרף
+              const yearData = [];
+              const nominalValues = [];
+              const realValues = [];
+              
+              for (let year = 0; year <= years; year += Math.max(1, Math.floor(years / 10))) {
+                  yearData.push(year);
+                  const nominalValue = (targetAmount / years) * year;
+                  const realValue = FinancialFormulas.adjustForInflation(nominalValue, inflationRate, year);
+                  
+                  nominalValues.push(nominalValue);
+                  realValues.push(realValue);
+              }
+              
+              this.drawChart(ctx, rect.width, 250, yearData, nominalValues, realValues);
+          },
+          
+          updateOptimizerChart: function(currentAge, retirementAge, monthlySavings) {
+              const canvas = container.querySelector('#optimizer-chart');
+              if (!canvas) return;
+              
+              const ctx = canvas.getContext('2d');
+              const rect = canvas.getBoundingClientRect();
+              const width = canvas.width = rect.width * 2;
+              const height = canvas.height = 500;
+              canvas.style.width = rect.width + 'px';
+              canvas.style.height = '250px';
+              
+              ctx.clearRect(0, 0, width, height);
+              ctx.scale(2, 2);
+              
+              // השוואה בין התחלה מוקדמת למאוחרת
+              const earlyStart = retirementAge - currentAge;
+              const lateStart = Math.max(5, earlyStart - 10);
+              
+              const earlyTotal = FinancialFormulas.compoundInterestWithDeposits(
+                  0, 4.8, earlyStart, monthlySavings, 12
+              );
+              const lateTotal = FinancialFormulas.compoundInterestWithDeposits(
+                  0, 4.8, lateStart, monthlySavings * 1.5, 12
+              );
+              
+              const results = [
+                  { name: 'התחלה מוקדמת', value: earlyTotal, color: '#25D366' },
+                  { name: 'התחלה מאוחרת', value: lateTotal, color: '#ff3b3b' }
+              ];
+              
+              this.drawBarChart(ctx, rect.width, 250, results);
+          },
+          
+          drawChart: function(ctx, width, height, xData, yData1, yData2) {
+              const padding = 50;
+              const chartWidth = width - 2 * padding;
+              const chartHeight = height - 2 * padding;
+              
+              // מציאת ערכים מקסימליים
+              const maxY = Math.max(...yData1, ...yData2);
+              const maxX = Math.max(...xData);
+              
+              if (maxY === 0 || maxX === 0) return;
+              
+              // רקע הגרף
+              ctx.fillStyle = '#fafafa';
+              ctx.fillRect(padding, padding, chartWidth, chartHeight);
+              
+              // קווי רשת
+              ctx.strokeStyle = '#e8e8e8';
+              ctx.lineWidth = 1;
+              
+              // קווי רשת אנכיים
+              for (let i = 0; i <= 5; i++) {
+                  const x = padding + (i * chartWidth / 5);
+                  ctx.beginPath();
+                  ctx.moveTo(x, padding);
+                  ctx.lineTo(x, height - padding);
+                  ctx.stroke();
+              }
+              
+              // קווי רשת אופקיים
+              for (let i = 0; i <= 5; i++) {
+                  const y = padding + (i * chartHeight / 5);
+                  ctx.beginPath();
+                  ctx.moveTo(padding, y);
+                  ctx.lineTo(width - padding, y);
+                  ctx.stroke();
+              }
+              
+              // ציור צירים עיקריים
+              ctx.strokeStyle = '#333';
+              ctx.lineWidth = 2;
+              
+              // ציר X
+              ctx.beginPath();
+              ctx.moveTo(padding, height - padding);
+              ctx.lineTo(width - padding, height - padding);
+              ctx.stroke();
+              
+              // ציר Y
+              ctx.beginPath();
+              ctx.moveTo(padding, padding);
+              ctx.lineTo(padding, height - padding);
+              ctx.stroke();
+              
+              // תוויות צירים
+              ctx.fillStyle = '#666';
+              ctx.font = '11px Assistant';
+              ctx.textAlign = 'center';
+              
+              // תוויות ציר X (שנים)
+              for (let i = 0; i <= 5; i++) {
+                  const x = padding + (i * chartWidth / 5);
+                  const year = Math.round((i * maxX) / 5);
+                  ctx.fillText(year + ' שנים', x, height - padding + 20);
+              }
+              
+              // תוויות ציר Y (סכומים)
+              ctx.textAlign = 'right';
+              for (let i = 0; i <= 5; i++) {
+                  const y = height - padding - (i * chartHeight / 5);
+                  const value = (i * maxY) / 5;
+                  ctx.fillText(Utils.formatCurrency(value), padding - 10, y + 4);
+              }
+              
+              // ציור קווי הגרף
+              this.drawLine(ctx, xData, yData1, maxX, maxY, padding, chartWidth, chartHeight, '#1e5490', 3);
+              this.drawLine(ctx, xData, yData2, maxX, maxY, padding, chartWidth, chartHeight, '#ff3b3b', 2);
+              
+              // מקרא
+              const legendY = padding + 20;
+              ctx.fillStyle = '#1e5490';
+              ctx.fillRect(width - 150, legendY - 5, 15, 3);
+              ctx.fillStyle = '#333';
+              ctx.font = '12px Assistant';
+              ctx.textAlign = 'left';
+              ctx.fillText('ריבית דריבית', width - 130, legendY);
+              
+              ctx.fillStyle = '#ff3b3b';
+              ctx.fillRect(width - 150, legendY + 15, 15, 2);
+              ctx.fillStyle = '#333';
+              ctx.fillText('ריבית פשוטה', width - 130, legendY + 20);
+          },
+          
+          drawLine: function(ctx, xData, yData, maxX, maxY, padding, chartWidth, chartHeight, color, lineWidth) {
+              ctx.strokeStyle = color;
+              ctx.lineWidth = lineWidth;
+              ctx.beginPath();
+              
+              for (let i = 0; i < xData.length; i++) {
+                  const x = padding + (xData[i] / maxX) * chartWidth;
+                  const y = padding + chartHeight - (yData[i] / maxY) * chartHeight;
+                  
+                  if (i === 0) {
+                      ctx.moveTo(x, y);
+                  } else {
+                      ctx.lineTo(x, y);
+                  }
+              }
+              
+              ctx.stroke();
+          },
+          
+          drawBarChart: function(ctx, width, height, data) {
+              const padding = 60;
+              const chartWidth = width - 2 * padding;
+              const chartHeight = height - 2 * padding - 40; // מקום לתוויות
+              const barWidth = Math.min(chartWidth / data.length * 0.7, 80);
+              const maxValue = Math.max(...data.map(d => d.value));
+              
+              if (maxValue === 0) return;
+              
+              // רקע הגרף
+              ctx.fillStyle = '#fafafa';
+              ctx.fillRect(padding, padding, chartWidth, chartHeight);
+              
+              // קווי רשת אופקיים
+              ctx.strokeStyle = '#e8e8e8';
+              ctx.lineWidth = 1;
+              for (let i = 0; i <= 5; i++) {
+                  const y = padding + (i * chartHeight / 5);
+                  ctx.beginPath();
+                  ctx.moveTo(padding, y);
+                  ctx.lineTo(width - padding, y);
+                  ctx.stroke();
+              }
+              
+              // ציר Y
+              ctx.strokeStyle = '#333';
+              ctx.lineWidth = 2;
+              ctx.beginPath();
+              ctx.moveTo(padding, padding);
+              ctx.lineTo(padding, padding + chartHeight);
+              ctx.stroke();
+              
+              // תוויות ציר Y
+              ctx.fillStyle = '#666';
+              ctx.font = '11px Assistant';
+              ctx.textAlign = 'right';
+              for (let i = 0; i <= 5; i++) {
+                  const y = padding + chartHeight - (i * chartHeight / 5);
+                  const value = (i * maxValue) / 5;
+                  ctx.fillText(Utils.formatCurrency(value), padding - 10, y + 4);
+              }
+              
+              data.forEach((item, index) => {
+                  const x = padding + (index * chartWidth / data.length) + (chartWidth / data.length - barWidth) / 2;
+                  const barHeight = (item.value / maxValue) * chartHeight;
+                  const y = padding + chartHeight - barHeight;
+                  
+                  // צל לעמודה
+                  ctx.fillStyle = 'rgba(0,0,0,0.1)';
+                  ctx.fillRect(x + 2, y + 2, barWidth, barHeight);
+                  
+                  // ציור עמודה
+                  ctx.fillStyle = item.color;
+                  ctx.fillRect(x, y, barWidth, barHeight);
+                  
+                  // גבול לעמודה
+                  ctx.strokeStyle = item.color;
+                  ctx.lineWidth = 2;
+                  ctx.strokeRect(x, y, barWidth, barHeight);
+                  
+                  // תווית שם
+                  ctx.fillStyle = '#333';
+                  ctx.font = '12px Assistant';
+                  ctx.textAlign = 'center';
+                  const nameY = padding + chartHeight + 20;
+                  ctx.fillText(item.name, x + barWidth / 2, nameY);
+                  
+                  // ערך בתוך העמודה
+                  if (barHeight > 30) {
+                      ctx.fillStyle = 'white';
+                      ctx.font = 'bold 11px Assistant';
+                      ctx.fillText(Utils.formatCurrency(item.value), x + barWidth / 2, y + barHeight / 2 + 4);
+                  } else {
+                      // ערך מעל העמודה
+                      ctx.fillStyle = '#666';
+                      ctx.font = '10px Assistant';
+                      ctx.fillText(Utils.formatCurrency(item.value), x + barWidth / 2, y - 8);
+                  }
+              });
+          },
+          
+          getFundName: function(key) {
+              const names = {
+                  pension: 'קרן פנסיה',
+                  study: 'קרן השתלמות',
+                  deposit: 'פיקדון בנקאי',
+                  executive: 'חיסכון מנהלים'
+              };
+              return names[key] || key;
+          },
+          
+          getFundColor: function(key) {
+              const colors = {
+                  pension: '#1e5490',
+                  study: '#25D366',
+                  deposit: '#FF9800',
+                  executive: '#ff3b3b'
+              };
+              return colors[key] || '#666';
+          }
+      };
+      
+      // מנהל AWG
+      const AWGManager = {
+          init: function() {
+              const ctaBtn = container.querySelector('#awg-cta-btn');
+              const awgContent = container.querySelector('#awg-content');
+              
+              if (ctaBtn && awgContent) {
+                  ctaBtn.addEventListener('click', (event) => {
+                      if (event) {
+                          event.preventDefault();
+                          event.stopPropagation();
+                      }
+                      
+                      // הסתרת כפתור CTA
+                      ctaBtn.style.display = 'none';
+                      
+                      // הצגת תוכן AWG (בדיוק כמו ב-temp.html)
+                      awgContent.classList.add('show');
+                      
+                      // המתנה לאנימציה ואז גלילה (בדיוק כמו ב-temp.html)
+                      setTimeout(function() {
+                          const rect = awgContent.getBoundingClientRect();
+                          const offset = window.pageYOffset + rect.top - 20;
+                          window.scrollTo({
+                              top: offset,
+                              behavior: 'smooth'
+                          });
+                      }, 100);
+                      
+                      return false;
+                  });
+              }
+          }
+      };
+      
+      // מנהל FAQ
+      const FAQManager = {
+          init: function() {
+              const faqHeaders = container.querySelectorAll('.wpc-calc-compound-int-k9x7-faq-header');
+              
+              faqHeaders.forEach(header => {
+                  header.addEventListener('click', (e) => {
+                      const faqId = header.dataset.faq;
+                      const content = container.querySelector(`#faq-${faqId}`);
+                      
+                      if (!content) return;
+                      
+                      // בדיקה אם כבר פתוח
+                      const isActive = header.classList.contains('active');
+                      
+                      // סגירת כל ה-FAQ האחרים
+                      faqHeaders.forEach(otherHeader => {
+                          const otherFaqId = otherHeader.dataset.faq;
+                          const otherContent = container.querySelector(`#faq-${otherFaqId}`);
+                          
+                          if (otherContent && otherHeader !== header) {
+                              otherHeader.classList.remove('active');
+                              otherContent.classList.remove('active');
+                          }
+                      });
+                      
+                      // פתיחה או סגירה של הנוכחי
+                      if (isActive) {
+                          header.classList.remove('active');
+                          content.classList.remove('active');
+                      } else {
+                          header.classList.add('active');
+                          content.classList.add('active');
+                          
+                          // גלילה חלקה לשאלה הפתוחה
+                          setTimeout(() => {
+                              header.scrollIntoView({ 
+                                  behavior: 'smooth',
+                                  block: 'nearest'
+                              });
+                          }, 300);
+                      }
+                  });
+              });
+          }
+      };
+      
+      // אתחול המערכת
+      function init() {
+          if (state.initialized) return;
+          
+          safeExecute(() => {
+              TabManager.init();
+              SliderManager.init();
+              ToggleManager.init();
+              AWGManager.init();
+              FAQManager.init();
+              
+              // חישוב ראשוני
+              Calculator.calculateCurrentTab();
+              
+              state.initialized = true;
+              console.log('מחשבון ריבית דריבית אותחל בהצלחה');
+          }, 'initialization');
+      }
+      
+      // Cleanup function
+      function cleanup() {
+          state.initialized = false;
+          delete window[namespace];
+      }
+      
+      // Page visibility cleanup
+      document.addEventListener('visibilitychange', () => {
+          if (document.hidden) {
+              // ניקוי כשהעמוד לא נראה
+          }
+      });
+      
+      // חשיפה מוגבלת
+      window[namespace] = {
+          version: '1.0.0',
+          destroy: cleanup,
+          recalculate: () => Calculator.calculateCurrentTab()
+      };
+      
+      // אתחול אוטומטי
+      if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', init);
+      } else {
+          init();
+      }
+      
+  })();
+  </script>
+  
+  <!-- Schema JSON-LD Markup -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "איך מחשבים ריבית דריבית בפועל?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "הריבית הדריבית מחושבת לפי הנוסחה A = P(1+r)^t, כאשר הריבית נצברת על הקרן והריבית הקודמת יחד. במחשבון שלנו מחושבת גם השפעת הפקדות חודשיות וניכוי מס."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "מה ההבדל בין ריבית פשוטה לריבית דריבית?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "בריבית פשוטה הריבית מחושבת רק על הקרן המקורית. בריבית דריבית הריבית מחושבת על הקרן + כל הריבית שנצברה. ההבדל הופך למשמעותי מאוד לטווח הארוך."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "איזה מסלולי חיסכון מציעים ריבית דריבית בישראל?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "כמעט כל מסלולי החיסכון מציעים ריבית דריבית: קרנות פנסיה (4.2%-5.5%), קרנות השתלמות (3.5%-4.8%), פיקדונות בנקאיים (2.5%-4.0%), תכניות חיסכון מנהלים (5.0%-7.2%)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "איך משפיעות הפקדות חודשיות על הריבית הדריבית?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "הפקדות חודשיות מכפילות את האפקט! כל הפקדה חודשית מתחילה לייצר ריבית דריבית מהרגע שהיא מוכנסת. המחשבון שלנו משתמש בנוסחת PMT המתקדמת כדי לחשב את האפקט המצטבר."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "איך מס הכנסה משפיע על התוצאות?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "בישראל ריבית ורווחי הון חייבים במס לפי מדרגות המס (25% ממוצע). חשוב לקחת זאת בחשבון בחישובי התשואה האמיתית. מסלולים עם הטבות מס יכולים לשפר משמעותית את התוצאה הנטו."
+        }
+      }
+    ]
+  }
+  </script>
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FinancialProduct",
+    "name": "מחשבון ריבית דריבית מתקדם",
+    "description": "מחשבון מתקדם לחישוב ריבית דריבית עם הפקדות חודשיות, השוואת מסלולי חיסכון, סימולציה ארוך טווח ואופטימיזציה פיננסית. כולל 4 טאבים מתקדמים עם ויזואליזציות אינטראקטיביות.",
+    "category": "Compound Interest Calculator",
+    "provider": {
+      "@type": "Organization",
+      "name": "רק תבקש - אפטריו בע״מ",
+      "url": "https://loan-israel.co.il"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "ILS",
+      "availability": "https://schema.org/InStock"
+    },
+    "url": "https://loan-israel.co.il/compound-interest-calculator",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Web Browser",
+    "featureList": [
+      "חישוב ריבית דריבית עם הפקדות חודשיות",
+      "השוואת מסלולי חיסכון בישראל",
+      "סימולציה ארוך טווח עם השפעת אינפלציה",
+      "אופטימיזציה חכמה לחיסכון",
+      "ויזואליזציות גרפיות אינטראקטיביות",
+      "חישוב השפעת מס על התשואה"
+    ]
+  }
+  </script>
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "אייל עובדיה",
+    "jobTitle": "מנהל מקצועי ויועץ פיננסי ראשי",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "רק תבקש - אפטריו בע״מ",
+      "url": "https://loan-israel.co.il"
+    },
+    "description": "בעבודתנו עם יותר מ-5,500 לקוחות בתכנון חיסכון, זיהינו דפוסים ברורים: הצלחה בחיסכון לטווח ארוך תלויה ב-80% בעקביות וב-20% בלבד בבחירת המסלול. לקוחות שמתחילים מוקדם אפילו עם סכומים קטנים מגיעים לתוצאות הרבה יותר טובות מאלו שמתחילים מאוחר עם סכומים גדולים. זה הכוח האמיתי של הריבית הדריבית - הזמן עובד בעבורכם.",
+    "knowsAbout": [
+      "ריבית דריבית",
+      "תכנון פיננסי",
+      "חיסכון לטווח ארוך",
+      "מחשבונים פיננסיים",
+      "קרנות פנסיה",
+      "אסטרטגיות השקעה",
+      "אופטימיזציה מס לחיסכון",
+      "תכנון פיננסי אישי"
+    ],
+    "telephone": "+972-53-428-8957",
+    "image": "https://loan-israel.co.il/wp-content/uploads/2025/07/image-95.webp",
+    "sameAs": [
+      "https://loan-israel.co.il"
+    ]
+  }
+  </script>
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "רק תבקש - אפטריו בע״מ",
+    "url": "https://loan-israel.co.il",
+    "telephone": "+972-53-428-8957",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "IL"
+    },
+    "founder": {
+      "@type": "Person",
+      "name": "אייל עובדיה"
+    },
+    "description": "חברה מובילה בתחום פתרונות פיננסיים ומחשבונים מתקדמים לתכנון פיננסי בישראל. מתמחים בפיתוח כלים דיגיטליים לתכנון חיסכון, חישובי ריבית דריבית ואופטימיזציה פיננסית.",
+    "serviceType": [
+      "מחשבונים פיננסיים",
+      "תכנון חיסכון",
+      "ייעוץ פיננסי דיגיטלי",
+      "כלי אופטימיזציה פיננסית"
+    ],
+    "areaServed": {
+      "@type": "Country",
+      "name": "Israel"
+    }
+  }
+  </script>
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "דף הבית",
+        "item": "https://loan-israel.co.il/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "מחשבונים פיננסיים",
+        "item": "https://loan-israel.co.il/calculators"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "מחשבון ריבית דריבית",
+        "item": "https://loan-israel.co.il/compound-interest-calculator"
+      }
+    ]
+  }
+  </script>

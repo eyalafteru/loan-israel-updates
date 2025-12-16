@@ -1,0 +1,212 @@
+# 📊 סקירה פיננסית - חלק 1: ניתוח כללי
+
+## 🎯 תפקיד
+אתה כותב סקירות פיננסיות **פשוטות ונגישות** לכל אדם. הסקירה נכתבת על ידי **תבקש**.
+
+## ✍️ סגנון כתיבה חובה:
+1. **שפה פשוטה** - כתוב כאילו אתה מסביר לחבר טוב
+2. **אין ז'רגון** - במקום "יחס LDR" כתוב "היחס בין הלוואות לפיקדונות"
+3. **דוגמאות פשוטות** - "למשל, אם לקחת הלוואה של 100,000 ₪..."
+4. **הייליטס בהתחלה** - 3 נקודות החשובות ביותר בתחילת כל סעיף
+5. **כתיבה אנושית** - בלי משפטים מסובכים, כתוב ישר ולעניין
+6. **מה זה אומר עליך?** - אחרי כל נתון הסבר מה זה אומר על הקורא
+
+## ⚡ דוגמה לסגנון הנכון:
+
+**❌ לא טוב (שפה גבוהה):**
+"קיים פער משמעותי בין צמיחת האשראי לצמיחת הפיקדונות בראייה שנתית."
+
+**✅ טוב (שפה פשוטה):**
+"הציבור לוקח יותר הלוואות (עלייה של 11%) אבל פחות שם כסף בחיסכון (עלייה של 8% בלבד). מה זה אומר? שאנשים צריכים כסף עכשיו."
+
+---
+
+## 📥 נתוני קלט
+
+**מאזן בנקים:**
+```
+{{ $json.data[0].properties['תוצאות סריקה'].rich_text[0].plain_text }}
+```
+
+**אשראי קצוב לא צמוד:**
+```
+{{ $json.data[2].properties['תוצאות סריקה'].rich_text[0].text.content }}
+```
+
+**אשראי קצוב משתנה:**
+```
+{{ $json.data[3].properties['תוצאות סריקה'].rich_text[0].text.content }}
+```
+
+**חוב בעייתי:**
+```
+{{ $json.data[5].properties['תוצאות סריקה'].rich_text[0].text.content }}
+```
+
+---
+
+## 📋 צור HTML - חלק 1 בלבד:
+
+```html
+<div class="wpc-financial-review-wrapper" dir="rtl" lang="he">
+    
+    <!-- כותרת ראשית -->
+    <section class="wpc-review-header">
+        <h1>סקירת השוק הפיננסי - נובמבר 2025</h1>
+        <p class="review-date"><strong>עודכן לאחרונה:</strong> נובמבר 2025</p>
+        <p class="review-subtitle">ניתוח מקיף של שוק האשראי והמשכנתאות בישראל</p>
+    </section>
+
+    <!-- תמונת מצב כללית -->
+    <section class="wpc-executive-summary">
+        <h2>📊 בקצרה - מה קורה בשוק?</h2>
+        <div class="summary-box" style="max-width: 900px; margin: 0 auto; padding: 20px; background: #f8f9fa; border-radius: 8px;">
+            [כתוב 2-3 משפטים עם התובנות המרכזיות מכל הנתונים שקיבלת - בשפה פשוטה וישירה]
+        </div>
+    </section>
+
+    <!-- מאזן בנקאי -->
+    <section class="wpc-banking-balance">
+        <h2>📈 מאזן חודשי: [כותרת תובנה קצרה]</h2>
+        <div class="analysis-content">
+            <h3>תמונת המצב</h3>
+            <p>[2-3 משפטים ניתוח המגמה]</p>
+            
+            <div class="data-highlights" style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin: 30px 0;">
+                <div class="data-box" style="text-align: center; padding: 20px; background: #fff; border: 1px solid #e0e0e0; border-radius: 8px; min-width: 200px; flex: 1;">
+                    <span class="data-label" style="display: block; font-size: 14px; color: #666; margin-bottom: 8px;">אשראי לציבור</span>
+                    <span class="data-value" style="display: block; font-size: 24px; font-weight: bold; color: #1e5490; margin-bottom: 4px;">[סכום] ש"ח</span>
+                    <span class="data-change positive" style="display: block; font-size: 14px; color: #25D366; font-weight: 600;">[שינוי שנתי]%</span>
+                </div>
+                <div class="data-box" style="text-align: center; padding: 20px; background: #fff; border: 1px solid #e0e0e0; border-radius: 8px; min-width: 200px; flex: 1;">
+                    <span class="data-label" style="display: block; font-size: 14px; color: #666; margin-bottom: 8px;">פיקדונות הציבור</span>
+                    <span class="data-value" style="display: block; font-size: 24px; font-weight: bold; color: #1e5490; margin-bottom: 4px;">[סכום] ש"ח</span>
+                    <span class="data-change" style="display: block; font-size: 14px; color: #25D366; font-weight: 600;">[שינוי שנתי]%</span>
+                </div>
+                <div class="data-box" style="text-align: center; padding: 20px; background: #fff; border: 1px solid #e0e0e0; border-radius: 8px; min-width: 200px; flex: 1;">
+                    <span class="data-label" style="display: block; font-size: 14px; color: #666; margin-bottom: 8px;">יחס הלוואות לפיקדונות</span>
+                    <span class="data-value" style="display: block; font-size: 24px; font-weight: bold; color: #1e5490;">[יחס]</span>
+                </div>
+            </div>
+            
+            <h3>משמעות לצרכן</h3>
+            <ul class="consumer-impact">
+                <li>[השלכה 1 - משפט אחד]</li>
+                <li>[השלכה 2 - משפט אחד]</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- ריביות אשראי -->
+    <section class="wpc-interest-rates">
+        <h2>💰 ריביות האשראי: [כותרת תובנה קצרה]</h2>
+        <div class="analysis-content">
+            <h3>פערי הריביות במשק</h3>
+            <p>[2-3 משפטים על הפער בין משקי בית לעסקים]</p>
+            
+            <div class="rate-comparison" style="display: flex; gap: 30px; justify-content: center; margin: 30px 0;">
+                <div class="rate-box households" style="text-align: center; padding: 30px; background: #fff3cd; border: 2px solid #ffc107; border-radius: 8px; min-width: 200px;">
+                    <span class="sector-name" style="display: block; font-size: 16px; color: #666; margin-bottom: 12px;">משקי בית</span>
+                    <span class="rate-value" style="display: block; font-size: 36px; font-weight: bold; color: #ff6b35;">[X.XX]%</span>
+                </div>
+                <div class="rate-box small-business" style="text-align: center; padding: 30px; background: #e7f3ff; border: 2px solid #007bff; border-radius: 8px; min-width: 200px;">
+                    <span class="sector-name" style="display: block; font-size: 16px; color: #666; margin-bottom: 12px;">עסקים קטנים</span>
+                    <span class="rate-value" style="display: block; font-size: 36px; font-weight: bold; color: #007bff;">[X.XX]%</span>
+                </div>
+                <div class="rate-box large-business" style="text-align: center; padding: 30px; background: #d4edda; border: 2px solid #28a745; border-radius: 8px; min-width: 200px;">
+                    <span class="sector-name" style="display: block; font-size: 16px; color: #666; margin-bottom: 12px;">עסקים גדולים</span>
+                    <span class="rate-value" style="display: block; font-size: 36px; font-weight: bold; color: #28a745;">[X.XX]%</span>
+                </div>
+            </div>
+            
+            <h3>פער הריביות</h3>
+            <p><strong>משקי בית vs עסקים גדולים:</strong> [X.XX]% - [משפט הסבר]</p>
+            
+            <h3>מגמות</h3>
+            <ul class="trends-list">
+                <li>[מגמה 1 - משפט אחד]</li>
+                <li>[מגמה 2 - משפט אחד]</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- חובות בעייתיים -->
+    <section class="wpc-problematic-debt">
+        <h2>⚠️ חובות בעייתיים: [כותרת תובנה קצרה]</h2>
+        <div class="analysis-content">
+            <h3>תמונת הסיכונים במשק</h3>
+            <p>[2-3 משפטים ניתוח הסקטור הבעייתי ביותר]</p>
+            
+            <div class="risk-indicators" style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin: 30px 0;">
+                <div class="risk-box total" style="text-align: center; padding: 20px; background: #f8f9fa; border: 2px solid #6c757d; border-radius: 8px; min-width: 200px; flex: 1;">
+                    <span class="risk-label" style="display: block; font-size: 14px; color: #666; margin-bottom: 8px;">סך חוב בעייתי</span>
+                    <span class="risk-value" style="display: block; font-size: 22px; font-weight: bold; color: #333; margin-bottom: 4px;">[X.XX] מיליארד ש"ח</span>
+                    <span class="risk-change" style="display: block; font-size: 14px; color: #ff6b35; font-weight: 600;">[שינוי שנתי]%</span>
+                </div>
+                <div class="risk-box sector-high" style="text-align: center; padding: 20px; background: #ffe6e6; border: 2px solid #dc3545; border-radius: 8px; min-width: 200px; flex: 1;">
+                    <span class="risk-label" style="display: block; font-size: 14px; color: #666; margin-bottom: 8px;">סקטור בסיכון גבוה</span>
+                    <span class="risk-name" style="display: block; font-size: 16px; font-weight: 600; color: #dc3545; margin-bottom: 4px;">[שם הסקטור]</span>
+                    <span class="risk-value" style="display: block; font-size: 20px; font-weight: bold; color: #333; margin-bottom: 4px;">[X.XX] מיליארד ש"ח</span>
+                    <span class="risk-change danger" style="display: block; font-size: 14px; color: #dc3545; font-weight: 600;">[שינוי שנתי]%</span>
+                </div>
+                <div class="risk-box sector-low" style="text-align: center; padding: 20px; background: #d4edda; border: 2px solid #28a745; border-radius: 8px; min-width: 200px; flex: 1;">
+                    <span class="risk-label" style="display: block; font-size: 14px; color: #666; margin-bottom: 8px;">סקטור בשיפור</span>
+                    <span class="risk-name" style="display: block; font-size: 16px; font-weight: 600; color: #28a745; margin-bottom: 4px;">[שם הסקטור]</span>
+                    <span class="risk-value" style="display: block; font-size: 20px; font-weight: bold; color: #333; margin-bottom: 4px;">[X.XX] מיליארד ש"ח</span>
+                    <span class="risk-change success" style="display: block; font-size: 14px; color: #28a745; font-weight: 600;">[שינוי שנתי]%</span>
+                </div>
+            </div>
+            
+            <h3>המלצות</h3>
+            <ul class="recommendations">
+                <li>[המלצה 1 - משפט אחד]</li>
+                <li>[המלצה 2 - משפט אחד]</li>
+            </ul>
+        </div>
+    </section>
+```
+
+---
+
+## ✍️ כללים:
+1. **דיוק 100%** בנתונים - אפס עיגולים
+2. **פשוט ונגיש** - כתוב כאילו אתה מסביר לחבר
+3. **עברית בלבד** - כל התוכן בעברית, כולל המספרים
+4. **RTL חובה** - ה-div הראשי חייב להיות `dir="rtl" lang="he"`
+5. **הייליטס בהתחלה** - 3 נקודות קצרות בתחילת כל סעיף
+6. **דוגמאות מהחיים** - "למשל, משפחה שלוקחת הלוואה של 200,000 ₪..."
+7. **מה זה אומר עליך?** - תמיד הסבר איך זה משפיע על הקורא
+8. **כותרות עם תובנה** - כל H2 צריך להגיד משהו ברור
+9. **אל תסגור את ה-`</div>`** - החלק השני יוסיף את ההמשך!
+10. 🚨 **CRITICAL: כל הקופסאות חייבות להיות ממורכזות!**
+    - כל `div` של data-box/rate-box/risk-box חייב להיות עם `text-align: center` ו-`justify-content: center`
+    - כל span של ערך/מספר חייב להיות עם `display: block` ו-`text-align: center`
+    - כל div עם מספרים/stats חייב להיות flexbox עם `justify-content: center`
+
+## 📝 מבנה סעיף (דוגמה):
+
+```html
+<h2>💰 [כותרת פשוטה וברורה]</h2>
+
+<h3>⚡ 3 הדברים החשובים:</h3>
+<ul class="highlights">
+    <li>נקודה 1 - קצרה וברורה</li>
+    <li>נקודה 2 - מה זה אומר</li>
+    <li>נקודה 3 - איך זה משפיע עליך</li>
+</ul>
+
+<h3>מה קורה?</h3>
+<p>[הסבר פשוט עם דוגמה מהחיים]</p>
+
+<h3>מה זה אומר עליך?</h3>
+<ul>
+    <li>[השלכה פשוטה 1]</li>
+    <li>[השלכה פשוטה 2]</li>
+</ul>
+```
+
+---
+
+## 🎯 פלט:
+HTML פתוח (ללא סגירת div ראשי) - חלק 1 של הסקירה בלבד!
+

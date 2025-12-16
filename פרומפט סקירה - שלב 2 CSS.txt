@@ -1,0 +1,465 @@
+# 🎨 פרומפט סקירה פיננסית - שלב 2: CSS ועיצוב
+
+## 🎯 תפקיד
+קח את ה-HTML שנוצר בשלב 1 והוסף לו CSS מלא ומקצועי.
+
+---
+
+## 📥 קלט
+
+```html
+{{ $('שלב 1 - תוכן').item.json.output }}
+```
+
+---
+
+## 🎨 CSS מלא להוספה
+
+הוסף את הCSS הבא **לפני** ה-HTML (בתוך תגית `<style>`):
+
+```css
+/* ========================================
+   סקירה פיננסית - עיצוב מקצועי
+   ======================================== */
+
+.wpc-financial-review-wrapper {
+    all: initial !important;
+    font-family: 'Assistant', sans-serif !important;
+    direction: rtl !important;
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+    padding: 40px 20px !important;
+    box-sizing: border-box !important;
+}
+
+/* כותרות */
+.wpc-financial-review-wrapper h1 {
+    font-size: 2.5em !important;
+    color: #1e5490 !important;
+    margin-bottom: 15px !important;
+    font-weight: 700 !important;
+}
+
+.wpc-financial-review-wrapper h2 {
+    font-size: 2em !important;
+    color: #1e5490 !important;
+    margin: 40px 0 20px !important;
+    padding-bottom: 10px !important;
+    border-bottom: 3px solid #ff3b3b !important;
+    font-weight: 700 !important;
+}
+
+.wpc-financial-review-wrapper h3 {
+    font-size: 1.5em !important;
+    color: #333 !important;
+    margin: 25px 0 15px !important;
+    font-weight: 600 !important;
+}
+
+.wpc-financial-review-wrapper h4 {
+    font-size: 1.2em !important;
+    color: #1e5490 !important;
+    margin: 20px 0 10px !important;
+    font-weight: 600 !important;
+}
+
+.wpc-financial-review-wrapper p {
+    line-height: 1.8 !important;
+    margin: 15px 0 !important;
+    color: #333 !important;
+}
+
+/* תאריך ותת-כותרת */
+.review-date {
+    font-size: 1.1em !important;
+    color: #666 !important;
+    margin-bottom: 10px !important;
+}
+
+.review-subtitle {
+    font-size: 1.15em !important;
+    color: #555 !important;
+    font-style: italic !important;
+}
+
+/* תמצית מנהלים */
+.wpc-executive-summary .summary-box {
+    background: linear-gradient(135deg, #1e5490 0%, #164070 100%) !important;
+    color: white !important;
+    padding: 30px !important;
+    border-radius: 12px !important;
+    font-size: 1.2em !important;
+    line-height: 1.8 !important;
+    box-shadow: 0 4px 15px rgba(30, 84, 144, 0.2) !important;
+    margin: 20px 0 !important;
+}
+
+/* קופסאות נתונים */
+.data-highlights,
+.mortgage-summary,
+.loans-summary,
+.risk-indicators {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)) !important;
+    gap: 20px !important;
+    margin: 25px 0 !important;
+}
+
+.data-box,
+.summary-stat,
+.risk-box {
+    background: white !important;
+    border: 2px solid #e0e0e0 !important;
+    border-radius: 10px !important;
+    padding: 20px !important;
+    text-align: center !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05) !important;
+}
+
+.data-box:hover,
+.summary-stat:hover,
+.risk-box:hover {
+    transform: translateY(-5px) !important;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1) !important;
+    border-color: #1e5490 !important;
+}
+
+.data-label,
+.stat-label,
+.risk-label {
+    display: block !important;
+    font-size: 0.95em !important;
+    color: #666 !important;
+    margin-bottom: 8px !important;
+    font-weight: 500 !important;
+}
+
+.data-value,
+.stat-value,
+.risk-value {
+    display: block !important;
+    font-size: 2em !important;
+    color: #1e5490 !important;
+    font-weight: 700 !important;
+    margin: 10px 0 !important;
+}
+
+.data-change,
+.risk-change {
+    display: inline-block !important;
+    padding: 5px 12px !important;
+    border-radius: 20px !important;
+    font-size: 0.9em !important;
+    font-weight: 600 !important;
+}
+
+.data-change.positive,
+.risk-change.success {
+    background: #d4edda !important;
+    color: #155724 !important;
+}
+
+.data-change.negative,
+.risk-change.danger {
+    background: #f8d7da !important;
+    color: #721c24 !important;
+}
+
+/* השוואת ריביות */
+.rate-comparison {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
+    gap: 20px !important;
+    margin: 25px 0 !important;
+}
+
+.rate-box {
+    padding: 25px !important;
+    border-radius: 10px !important;
+    text-align: center !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
+}
+
+.rate-box.households {
+    background: linear-gradient(135deg, #ff3b3b 0%, #d32f2f 100%) !important;
+    color: white !important;
+}
+
+.rate-box.small-business {
+    background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%) !important;
+    color: white !important;
+}
+
+.rate-box.large-business {
+    background: linear-gradient(135deg, #25D366 0%, #1da851 100%) !important;
+    color: white !important;
+}
+
+.sector-name {
+    display: block !important;
+    font-size: 1.1em !important;
+    margin-bottom: 10px !important;
+    font-weight: 600 !important;
+}
+
+.rate-value {
+    display: block !important;
+    font-size: 2.5em !important;
+    font-weight: 700 !important;
+    margin: 15px 0 !important;
+}
+
+/* סיכונים */
+.risk-box.total {
+    border-color: #1e5490 !important;
+    border-width: 3px !important;
+}
+
+.risk-box.sector-high {
+    border-color: #ff3b3b !important;
+    background: #fff5f5 !important;
+}
+
+.risk-box.sector-low {
+    border-color: #25D366 !important;
+    background: #f0f9f4 !important;
+}
+
+.risk-name {
+    display: block !important;
+    font-size: 1.1em !important;
+    color: #333 !important;
+    margin: 5px 0 !important;
+    font-weight: 600 !important;
+}
+
+/* רשימות */
+.consumer-impact,
+.trends-list,
+.recommendations,
+.consumer-tips {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 20px 0 !important;
+}
+
+.consumer-impact li,
+.trends-list li,
+.recommendations li,
+.consumer-tips li {
+    padding: 12px 15px 12px 45px !important;
+    margin-bottom: 12px !important;
+    background: #f8f9fa !important;
+    border-right: 4px solid #1e5490 !important;
+    border-radius: 6px !important;
+    position: relative !important;
+    line-height: 1.6 !important;
+}
+
+.consumer-impact li:before,
+.trends-list li:before,
+.recommendations li:before,
+.consumer-tips li:before {
+    content: "✓" !important;
+    position: absolute !important;
+    right: 15px !important;
+    color: #25D366 !important;
+    font-weight: 700 !important;
+    font-size: 1.3em !important;
+}
+
+/* תמונות */
+.mortgage-image,
+.loans-image {
+    margin: 30px 0 !important;
+    text-align: center !important;
+}
+
+.mortgage-image img,
+.loans-image img {
+    max-width: 100% !important;
+    height: auto !important;
+    border-radius: 12px !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important;
+}
+
+.image-caption {
+    margin-top: 12px !important;
+    font-size: 0.95em !important;
+    color: #666 !important;
+    font-style: italic !important;
+}
+
+/* טבלאות */
+.loan-tracks-table,
+.mortgage-table-wrapper,
+.loans-table-wrapper {
+    overflow-x: auto !important;
+    margin: 25px 0 !important;
+    border-radius: 10px !important;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08) !important;
+}
+
+/* מסקנות */
+.key-takeaways {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
+    gap: 20px !important;
+    margin: 30px 0 !important;
+}
+
+.takeaway-box {
+    background: white !important;
+    border: 2px solid #e0e0e0 !important;
+    border-radius: 12px !important;
+    padding: 25px !important;
+    text-align: center !important;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08) !important;
+}
+
+.takeaway-icon {
+    display: block !important;
+    font-size: 3em !important;
+    margin-bottom: 15px !important;
+}
+
+.takeaway-box h4 {
+    color: #1e5490 !important;
+    margin: 10px 0 !important;
+    font-size: 1.2em !important;
+}
+
+.takeaway-box p {
+    color: #555 !important;
+    font-size: 1em !important;
+}
+
+/* המלצות מעשיות */
+.practical-recommendations {
+    background: #f8f9fa !important;
+    padding: 25px !important;
+    border-radius: 10px !important;
+    margin: 20px 0 !important;
+}
+
+.practical-recommendations h4 {
+    color: #1e5490 !important;
+    margin-top: 20px !important;
+    font-size: 1.15em !important;
+}
+
+.practical-recommendations ul {
+    list-style: none !important;
+    padding: 0 !important;
+}
+
+.practical-recommendations li {
+    padding: 10px 15px 10px 35px !important;
+    margin-bottom: 10px !important;
+    background: white !important;
+    border-right: 3px solid #25D366 !important;
+    border-radius: 5px !important;
+    position: relative !important;
+}
+
+.practical-recommendations li:before {
+    content: "→" !important;
+    position: absolute !important;
+    right: 10px !important;
+    color: #25D366 !important;
+    font-weight: 700 !important;
+}
+
+/* דיסקליימר */
+.wpc-disclaimer {
+    background: #fff9e6 !important;
+    border: 2px solid #ffc107 !important;
+    border-radius: 10px !important;
+    padding: 25px !important;
+    margin: 30px 0 !important;
+}
+
+.wpc-disclaimer h3 {
+    color: #856404 !important;
+    margin-top: 0 !important;
+}
+
+.wpc-disclaimer p {
+    color: #856404 !important;
+    line-height: 1.7 !important;
+    margin: 0 !important;
+}
+
+/* מובייל */
+@media (max-width: 768px) {
+    .wpc-financial-review-wrapper {
+        padding: 30px 15px !important;
+    }
+    
+    .wpc-financial-review-wrapper h1 {
+        font-size: 2em !important;
+    }
+    
+    .wpc-financial-review-wrapper h2 {
+        font-size: 1.6em !important;
+    }
+    
+    .wpc-financial-review-wrapper h3 {
+        font-size: 1.3em !important;
+    }
+    
+    .data-highlights,
+    .mortgage-summary,
+    .loans-summary,
+    .risk-indicators,
+    .key-takeaways {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .rate-comparison {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .data-value,
+    .stat-value,
+    .risk-value {
+        font-size: 1.8em !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .wpc-financial-review-wrapper {
+        padding: 20px 12px !important;
+    }
+    
+    .wpc-financial-review-wrapper h1 {
+        font-size: 1.6em !important;
+    }
+    
+    .wpc-financial-review-wrapper h2 {
+        font-size: 1.4em !important;
+    }
+    
+    .data-value,
+    .stat-value,
+    .risk-value {
+        font-size: 1.5em !important;
+    }
+}
+```
+
+---
+
+## 📋 מה לעשות
+
+1. **קח את ה-HTML** מהשלב הקודם
+2. **הוסף את כל ה-CSS** למעלה (בתוך `<style>...</style>`)
+3. **שמור על כל המבנה** כפי שהוא
+
+---
+
+## 🎯 פלט מצופה
+
+HTML מלא + CSS מעוצב, מוכן להדבקה ישירות ב-WordPress!
+

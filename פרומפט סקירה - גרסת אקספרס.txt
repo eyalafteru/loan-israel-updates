@@ -1,0 +1,200 @@
+# 📊 סקירה פיננסית - גרסת אקספרס (מהירה מאוד!)
+
+## 🎯 תפקיד
+צור סקירה פיננסית תמציתית בעברית. **תמציתי ומדויק בלבד!**
+
+---
+
+## 📥 נתונים
+
+**מאזן:** `{{ $json.data[0].properties['תוצאות סריקה'].rich_text[0].plain_text }}`
+
+**אשראי 1:** `{{ $json.data[2].properties['תוצאות סריקה'].rich_text[0].text.content }}`
+
+**אשראי 2:** `{{ $json.data[3].properties['תוצאות סריקה'].rich_text[0].text.content }}`
+
+**חוב בעייתי:** `{{ $json.data[5].properties['תוצאות סריקה'].rich_text[0].text.content }}`
+
+**משכנתאות:** `{{ $json.data[4].properties['תוצאות סריקה'].rich_text[0].text.content }}`
+
+**הלוואות:** `{{ $json.data[1].properties['תוצאות סריקה'].rich_text[0].text.content }}`
+
+**תמונה משכנתאות:** `{{ $('תמונה משכנתאות').item.json.secure_url }}`
+
+**תמונה הלוואות:** `{{ $('תמונה הלוואות').item.json.secure_url }}`
+
+---
+
+## 📋 צור HTML בדיוק לפי המבנה:
+
+```html
+<div class="wpc-financial-review-wrapper">
+    
+    <section class="wpc-review-header">
+        <h1>סקירת השוק הפיננסי - נובמבר 2025</h1>
+        <p class="review-date"><strong>עודכן:</strong> נובמבר 2025</p>
+    </section>
+
+    <section class="wpc-executive-summary">
+        <h2>תמצית מנהלים</h2>
+        <div class="summary-box">
+            [2-3 משפטים עם התובנות הכי חשובות]
+        </div>
+    </section>
+
+    <section class="wpc-banking-balance">
+        <h2>📈 [כותרת תובנה ממאזן]</h2>
+        <div class="analysis-content">
+            <p>[2-3 משפטים ניתוח]</p>
+            <div class="data-highlights">
+                <div class="data-box">
+                    <span class="data-label">אשראי לציבור</span>
+                    <span class="data-value">[סכום]</span>
+                    <span class="data-change positive">[שינוי]%</span>
+                </div>
+                <div class="data-box">
+                    <span class="data-label">פיקדונות</span>
+                    <span class="data-value">[סכום]</span>
+                    <span class="data-change">[שינוי]%</span>
+                </div>
+            </div>
+            <ul class="consumer-impact">
+                <li>[השלכה 1]</li>
+                <li>[השלכה 2]</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="wpc-interest-rates">
+        <h2>💰 [כותרת תובנה מריביות]</h2>
+        <div class="analysis-content">
+            <p>[2-3 משפטים ניתוח פערים]</p>
+            <div class="rate-comparison">
+                <div class="rate-box households">
+                    <span class="sector-name">משקי בית</span>
+                    <span class="rate-value">[X.XX]%</span>
+                </div>
+                <div class="rate-box large-business">
+                    <span class="sector-name">עסקים גדולים</span>
+                    <span class="rate-value">[X.XX]%</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="wpc-problematic-debt">
+        <h2>⚠️ [כותרת תובנה מחובות]</h2>
+        <div class="analysis-content">
+            <p>[2-3 משפטים ניתוח]</p>
+            <div class="risk-indicators">
+                <div class="risk-box total">
+                    <span class="risk-label">סך חוב בעייתי</span>
+                    <span class="risk-value">[X] מיליארד ש"ח</span>
+                    <span class="risk-change">[שינוי]%</span>
+                </div>
+                <div class="risk-box sector-high">
+                    <span class="risk-label">סקטור בסיכון</span>
+                    <span class="risk-name">[שם]</span>
+                    <span class="risk-value">[X] מיליארד</span>
+                    <span class="risk-change danger">[שינוי]%</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="wpc-mortgage-ranking">
+        <h2>🏠 [כותרת תובנה ממשכנתאות]</h2>
+        <div class="analysis-content">
+            <p>[2-3 משפטים ניתוח]</p>
+            <div class="mortgage-summary">
+                <div class="summary-stat">
+                    <span class="stat-label">פער מקסימלי</span>
+                    <span class="stat-value">[X.XX]%</span>
+                </div>
+                <div class="summary-stat">
+                    <span class="stat-label">הבנק הזול</span>
+                    <span class="stat-value">[שם]</span>
+                </div>
+            </div>
+            [הכנס טבלה קצרה מהנתונים]
+            <img src="{{ $('תמונה משכנתאות').item.json.secure_url }}" alt="משכנתאות">
+            <ul class="consumer-tips">
+                <li>✅ [המלצה 1]</li>
+                <li>📊 [המלצה 2]</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="wpc-loans-ranking">
+        <h2>💳 [כותרת תובנה מהלוואות]</h2>
+        <div class="analysis-content">
+            <p>[2-3 משפטים ניתוח]</p>
+            <div class="loans-summary">
+                <div class="summary-stat">
+                    <span class="stat-label">פער</span>
+                    <span class="stat-value">[X.XX]%</span>
+                </div>
+                <div class="summary-stat">
+                    <span class="stat-label">המלווה הזול</span>
+                    <span class="stat-value">[שם]</span>
+                </div>
+            </div>
+            [הכנס טבלה קצרה מהנתונים]
+            <img src="{{ $('תמונה הלוואות').item.json.secure_url }}" alt="הלוואות">
+            <ul class="consumer-tips">
+                <li>🏆 [המלצה 1]</li>
+                <li>⚠️ [המלצה 2]</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="wpc-loan-tracks">
+        <h2>📊 מסלולי הלוואות</h2>
+        [loan_tracks_comparison_table]
+    </section>
+
+    <section class="wpc-conclusions">
+        <h2>🎯 מסקנות</h2>
+        <div class="key-takeaways">
+            <div class="takeaway-box">
+                <span class="takeaway-icon">📈</span>
+                <h4>מגמת האשראי</h4>
+                <p>[משפט אחד]</p>
+            </div>
+            <div class="takeaway-box">
+                <span class="takeaway-icon">💰</span>
+                <h4>מגמת הריביות</h4>
+                <p>[משפט אחד]</p>
+            </div>
+        </div>
+        <h3>המלצות</h3>
+        <ul>
+            <li>למשכנתא: [המלצה]</li>
+            <li>להלוואה: [המלצה]</li>
+        </ul>
+    </section>
+
+    <section class="wpc-sources-disclaimer">
+        <div class="wpc-disclaimer">
+            <h3>הצהרת אחריות</h3>
+            <p>הסקירה מבוססת על נתונים ציבוריים ומהווה מידע כללי בלבד. אין לראות בה ייעוץ פיננסי.</p>
+        </div>
+    </section>
+
+    [related-shortcode-instert]
+
+</div>
+```
+
+---
+
+## ⚡ כללי כתיבה - אקספרס:
+
+1. **תמציתי:** מקסימום 2-3 משפטים לכל חלק
+2. **נתונים:** כל נתון מדויק 100% מהמקור
+3. **תובנות:** רק המרכזיות ביותר
+4. **טבלאות:** רק השורות החשובות ביותר (לא הכל!)
+
+**מטרה: לסיים תוך 3-4 דקות מקסימום!** ⚡
+
+
