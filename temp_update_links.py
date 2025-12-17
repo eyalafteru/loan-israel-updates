@@ -110,3 +110,4 @@ try:
     print(f"Appended {len(new_rows)} rows to {target_file}")
 except Exception as e:
     print(f"Error: {e}")
+

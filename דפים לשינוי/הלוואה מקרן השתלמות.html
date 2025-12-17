@@ -1,4 +1,4 @@
-<!-- wp:html --><!-- 🔥 הלוואות מקרן השתלמות - מימון חכם בריבית נמוכה -->
+<!-- 🔥 הלוואות מקרן השתלמות - מימון חכם בריבית נמוכה -->
 <p><script>
   // בדיקה והוספת viewport meta tag אם חסר
   if (!document.querySelector('meta[name="viewport"]')) {
@@ -748,6 +748,30 @@
     direction: rtl !important;
     font-family: 'Assistant', sans-serif !important;
   }
+
+  /* 📊 טבלת מסלולי ריבית - תיקון כותרות */
+  .wpc-keren-loan-h3k9-comparison-table thead,
+  table[style*="border-collapse: collapse"] thead {
+    background: var(--gradient-primary) !important;
+    color: white !important;
+  }
+
+  .wpc-keren-loan-h3k9-comparison-table th,
+  table[style*="border-collapse: collapse"] th {
+    background: transparent !important;
+    color: white !important;
+    padding: 15px !important;
+    text-align: center !important;
+    font-weight: 600 !important;
+    border: none !important;
+  }
+
+  /* תיקון ספציפי לטבלה במסך */
+  thead tr th:nth-child(odd),
+  thead tr th:nth-child(even) {
+    background-color: transparent !important;
+    background: transparent !important;
+  }
   
   .wpc-slider-demo,
   .wpc-keren-loan-h3k9-slider {
@@ -908,12 +932,9 @@
 </div>
 <div class="wpc-calc-tabs-demo-wrapper wpc-keren-loan-h3k9-calc-wrapper"><!-- טאבים -->
 <div class="wpc-calc-tabs-demo-nav wpc-keren-loan-h3k9-calc-nav">
-<div class="wpc-calc-tab-demo-icon wpc-keren-loan-h3k9-calc-tab-icon">🧮</div>
-<button class="wpc-calc-tab-demo wpc-keren-loan-h3k9-calc-tab active" data-tab="basic">חישוב בסיסי </button>
-<div class="wpc-calc-tab-demo-icon wpc-keren-loan-h3k9-calc-tab-icon">📊</div>
-<button class="wpc-calc-tab-demo wpc-keren-loan-h3k9-calc-tab" data-tab="compare">השוואת קרנות </button>
-<div class="wpc-calc-tab-demo-icon wpc-keren-loan-h3k9-calc-tab-icon">📈</div>
-<button class="wpc-calc-tab-demo wpc-keren-loan-h3k9-calc-tab" data-tab="simulator">סימולטור החזר </button></div>
+<button class="wpc-calc-tab-demo wpc-keren-loan-h3k9-calc-tab active" data-tab="basic"><div class="wpc-calc-tab-demo-icon wpc-keren-loan-h3k9-calc-tab-icon">🧮</div><span>חישוב בסיסי</span></button>
+<button class="wpc-calc-tab-demo wpc-keren-loan-h3k9-calc-tab" data-tab="compare"><div class="wpc-calc-tab-demo-icon wpc-keren-loan-h3k9-calc-tab-icon">📊</div><span>השוואת קרנות</span></button>
+<button class="wpc-calc-tab-demo wpc-keren-loan-h3k9-calc-tab" data-tab="simulator"><div class="wpc-calc-tab-demo-icon wpc-keren-loan-h3k9-calc-tab-icon">📈</div><span>סימולטור החזר</span></button></div>
 <!-- תוכן -->
 <div class="wpc-calc-content wpc-keren-loan-h3k9-calc-content"><!-- טאב 1: חישוב בסיסי -->
 <div class="wpc-calc-panel wpc-keren-loan-h3k9-calc-panel active" data-panel="basic">
@@ -1555,212 +1576,201 @@
 </div>
 </div>
 </section>
-<p><script>
-  // 🎯 Quiz JavaScript - בטוח עם namespace ייחודי ו-AbortController
+<p>  <script>
+  // 🎯 Quiz JavaScript - Robust Version
   (function() {
       'use strict';
       
       const namespace = 'WPC_KerenLoan_H3K9_Quiz';
-      if (window[namespace]) {
-          console.warn(namespace + ' כבר קיים');
-          return;
+      
+      // Cleanup previous instance if exists
+      if (window[namespace] && typeof window[namespace].destroy === 'function') {
+          window[namespace].destroy();
       }
       
-      const container = document.getElementById('quiz-container');
-      if (!container) {
-          console.error('Quiz container לא נמצא');
-          return;
-      }
-      
-      // AbortController לניקוי Event Listeners אוטומטי
-      const controller = new AbortController();
-      const signal = controller.signal;
-      
-      let currentQuestion = 1;
-      let answers = {};
-      
-      function updateProgress() {
-          const progressBar = document.getElementById('progress-bar');
-          const totalSteps = 4; // 3 שאלות + תוצאות
-          const percentage = (currentQuestion / totalSteps) * 100;
-          progressBar.style.width = percentage + '%';
+      function initQuiz() {
+          // Use class selector which is safer in WordPress
+          const container = document.querySelector('.wpc-keren-loan-h3k9-quiz-wrapper') || document.getElementById('quiz-container');
           
-          if (currentQuestion <= 3) {
-              progressBar.textContent = `שאלה ${currentQuestion} מתוך 4`;
-          } else {
-              progressBar.textContent = `תוצאות - 4 מתוך 4`;
-          }
-      }
-      
-      function showQuestion(questionNumber) {
-          // הסתר את כל השאלות
-          document.querySelectorAll('.quiz-question').forEach(q => q.style.display = 'none');
-          
-          // הצג את השאלה הנוכחית או התוצאות
-          if (questionNumber === 4) {
-              document.getElementById('results').style.display = 'block';
-          } else {
-              document.getElementById(`question-${questionNumber}`).style.display = 'block';
+          if (!container) {
+              console.warn('Quiz container not found, retrying...');
+              setTimeout(initQuiz, 500);
+              return;
           }
           
-          // עדכן כפתורים
-          const backBtn = document.getElementById('back-btn');
-          const nextBtn = document.getElementById('next-btn');
+          // Scoped selectors helper
+          const get = (selector) => container.querySelector(selector);
+          const getAll = (selector) => container.querySelectorAll(selector);
           
-          backBtn.style.display = questionNumber > 1 ? 'block' : 'none';
+          // AbortController for clean event handling
+          const controller = new AbortController();
+          const signal = controller.signal;
           
-          if (questionNumber === 3) {
-              nextBtn.textContent = 'קבל תוצאה';
-          } else if (questionNumber === 4) {
-              nextBtn.textContent = 'חשב הלוואה עכשיו';
-          } else {
-              nextBtn.textContent = 'המשך';
+          let currentQuestion = 1;
+          let answers = {};
+          
+          function updateProgress() {
+              const progressBar = get('.wpc-quiz-progress-demo-bar'); // Use class
+              if (!progressBar) return;
+              
+              const totalSteps = 4;
+              const percentage = (currentQuestion / totalSteps) * 100;
+              progressBar.style.width = percentage + '%';
+              
+              if (currentQuestion <= 3) {
+                  progressBar.textContent = `שאלה ${currentQuestion} מתוך 4`;
+              } else {
+                  progressBar.textContent = `תוצאות - 4 מתוך 4`;
+              }
           }
           
-          updateProgress();
-      }
-      
-      function calculateResult() {
-          let score = 0;
-          
-          // שאלה 1: הכנסה קבועה (40%)
-          if (answers.q1 === 'yes') score += 40;
-          
-          // שאלה 2: סכום גדול בעתיד (30%)
-          if (answers.q2 === 'no') score += 30;
-          
-          // שאלה 3: העדפה (30%)
-          if (answers.q3 === 'total') score += 30;
-          
-          let resultHtml = '';
-          
-          if (score >= 60) {
-              // בלון חלקי
-              resultHtml = `
-                  <div style="text-align: center; background: linear-gradient(135deg, #e8f5e8, #f0f9ff); padding: 30px; border-radius: 20px; border: 3px solid var(--success);">
-                      <div style="font-size: 3em; margin-bottom: 15px;">🎯</div>
-                      <h3 style="font-size: 2em; margin-bottom: 20px; color: var(--primary);">התוצאה שלך: בלון חלקי</h3>
-                      <p style="font-size: 1.3em; margin-bottom: 25px; line-height: 1.6; color: var(--text-dark);">
-                          בהתבסס על התשובות שלך, <strong style="color: var(--success);">בלון חלקי</strong> מתאים לך יותר - 
-                          תשלום ריבית חודשית נמוכה והחזר הקרן בסוף התקופה.
-                      </p>
-                      
-                      <div style="background: white; padding: 25px; border-radius: 15px; margin: 25px 0; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
-                          <h4 style="color: var(--primary); font-size: 1.4em; margin-bottom: 15px;">💡 רוצה לדעת כמה תוכל לקבל?</h4>
-                          <p style="font-size: 1.2em; color: var(--text-dark); margin-bottom: 20px;">
-                              מלא את הטופס וקבל הצעה מותאמת אישית עד 250,000 ₪. התחל בדיקת זכאות ותדע לאיזה סכום ותנאים אתה זכאי!
-                          </p>
-                          <button 
-                              onclick="document.querySelector('.wpc-keren-loan-h3k9-awg-container')?.scrollIntoView({ behavior: 'smooth', block: 'start' })"
-                              style="background: var(--success); color: white; padding: 15px 30px; border: none; border-radius: 25px; font-size: 1.2em; font-weight: 700; cursor: pointer; box-shadow: 0 5px 15px rgba(34,197,94,0.3); transition: all 0.3s ease; font-family: 'Assistant', sans-serif;"
-                              onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 20px rgba(34,197,94,0.4)'"
-                              onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 5px 15px rgba(34,197,94,0.3)'"
-                          >
-                              🧮 חשב הלוואה מקרן השתלמות
-                          </button>
-                      </div>
-                  </div>
-              `;
-          } else {
-              // בלון מלא
-              resultHtml = `
-                  <div style="text-align: center; background: transparent; padding: 30px; border-radius: 20px; border: none;">
-                      <div style="font-size: 3em; margin-bottom: 15px;">🎯</div>
-                      <h3 style="font-size: 2em; margin-bottom: 20px; color: var(--primary);">התוצאה שלך: בלון מלא</h3>
-                      <p style="font-size: 1.3em; margin-bottom: 25px; line-height: 1.6; color: var(--text-dark);">
-                          בהתבסס על התשובות שלך, <strong style="color: var(--warning);">בלון מלא</strong> מתאים לך יותר - 
-                          ללא תשלומים חודשיים והחזר כל הסכום בסוף התקופה.
-                      </p>
-                      
-                      <div style="background: white; padding: 25px; border-radius: 15px; margin: 25px 0; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
-                          <h4 style="color: var(--primary); font-size: 1.4em; margin-bottom: 15px;">💡 רוצה לדעת כמה תוכל לקבל?</h4>
-                          <p style="font-size: 1.2em; color: var(--text-dark); margin-bottom: 20px;">
-                              מלא את הטופס וקבל הצעה מותאמת אישית עד 250,000 ₪. התחל בדיקת זכאות ותדע לאיזה סכום ותנאים אתה זכאי!
-                          </p>
-                          <button 
-                              onclick="document.querySelector('.wpc-keren-loan-h3k9-awg-container')?.scrollIntoView({ behavior: 'smooth', block: 'start' })"
-                              style="background: var(--warning); color: white; padding: 15px 30px; border: none; border-radius: 25px; font-size: 1.2em; font-weight: 700; cursor: pointer; box-shadow: 0 5px 15px rgba(251,191,36,0.3); transition: all 0.3s ease; font-family: 'Assistant', sans-serif;"
-                              onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 20px rgba(251,191,36,0.4)'"
-                              onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 5px 15px rgba(251,191,36,0.3)'"
-                          >
-                              🧮 חשב הלוואה מקרן השתלמות
-                          </button>
-                      </div>
-                  </div>
-              `;
-          }
-          
-          const resultContainer = document.getElementById('result-content');
-          if (resultContainer) {
-              resultContainer.innerHTML = resultHtml;
-          } else {
-              console.error('result-content element not found');
-          }
-      }
-      
-      // Event delegation בטוח עם AbortController
-      container.addEventListener('click', function(e) {
-          const nextBtn = e.target.closest('#next-btn');
-          const backBtn = e.target.closest('#back-btn');
-          
-          if (nextBtn) {
-              // בדוק אם נבחרה תשובה
-              const currentQuestionElement = document.getElementById(`question-${currentQuestion}`);
-              if (currentQuestionElement && currentQuestion <= 3) {
-                  const selectedAnswer = currentQuestionElement.querySelector('input[type="radio"]:checked');
-                  if (!selectedAnswer) {
-                      alert('אנא בחר תשובה כדי להמשיך');
-                      return;
-                  }
-                  answers[selectedAnswer.name] = selectedAnswer.value;
+          function showQuestion(questionNumber) {
+              // Hide all questions
+              getAll('.quiz-question').forEach(q => q.style.display = 'none');
+              
+              // Show current
+              if (questionNumber === 4) {
+                  const results = get('#results');
+                  if (results) results.style.display = 'block';
+              } else {
+                  const question = get(`#question-${questionNumber}`);
+                  if (question) question.style.display = 'block';
               }
               
-              if (currentQuestion < 3) {
-                  currentQuestion++;
-                  showQuestion(currentQuestion);
-              } else if (currentQuestion === 3) {
-                  // מעבר לתוצאות (צעד 4)
-                  currentQuestion = 4;
-                  calculateResult();
-                  showQuestion(4);
+              // Update buttons
+              const backBtn = get('.wpc-quiz-demo-btn-back');
+              const nextBtn = get('.wpc-quiz-demo-btn-next');
+              
+              if (backBtn) backBtn.style.display = questionNumber > 1 ? 'block' : 'none';
+              
+              if (nextBtn) {
+                  if (questionNumber === 3) {
+                      nextBtn.textContent = 'קבל תוצאה';
+                  } else if (questionNumber === 4) {
+                      nextBtn.textContent = 'חשב הלוואה עכשיו';
+                  } else {
+                      nextBtn.textContent = 'המשך';
+                  }
+              }
+              
+              updateProgress();
+          }
+          
+          function calculateResult() {
+              let score = 0;
+              
+              if (answers.q1 === 'yes') score += 40;
+              if (answers.q2 === 'no') score += 30;
+              if (answers.q3 === 'total') score += 30;
+              
+              let resultHtml = '';
+              
+              // Logic stays the same...
+              if (score >= 60) {
+                  resultHtml = `
+                      <div style="text-align: center; background: linear-gradient(135deg, #e8f5e8, #f0f9ff); padding: 30px; border-radius: 20px; border: 3px solid var(--success);">
+                          <div style="font-size: 3em; margin-bottom: 15px;">🎯</div>
+                          <h3 style="font-size: 2em; margin-bottom: 20px; color: var(--primary);">התוצאה שלך: בלון חלקי</h3>
+                          <p style="font-size: 1.3em; margin-bottom: 25px; line-height: 1.6; color: var(--text-dark);">
+                              בהתבסס על התשובות שלך, <strong style="color: var(--success);">בלון חלקי</strong> מתאים לך יותר.
+                          </p>
+                          <div style="background: white; padding: 25px; border-radius: 15px; margin: 25px 0; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                              <button 
+                                  class="wpc-quiz-result-btn"
+                                  style="background: var(--success); color: white; padding: 15px 30px; border: none; border-radius: 25px; font-size: 1.2em; font-weight: 700; cursor: pointer; font-family: 'Assistant', sans-serif;"
+                              >
+                                  🧮 חשב הלוואה מקרן השתלמות
+                              </button>
+                          </div>
+                      </div>
+                  `;
               } else {
-                  // עבור למחשבון הלוואה
-                  const calcSection = document.getElementById('wpc-keren-loan-h3k9-calculator');
-                  if (calcSection) {
-                      calcSection.scrollIntoView({ behavior: 'smooth' });
+                  resultHtml = `
+                      <div style="text-align: center; background: transparent; padding: 30px; border-radius: 20px; border: none;">
+                          <div style="font-size: 3em; margin-bottom: 15px;">🎯</div>
+                          <h3 style="font-size: 2em; margin-bottom: 20px; color: var(--primary);">התוצאה שלך: בלון מלא</h3>
+                          <p style="font-size: 1.3em; margin-bottom: 25px; line-height: 1.6; color: var(--text-dark);">
+                              בהתבסס על התשובות שלך, <strong style="color: var(--warning);">בלון מלא</strong> מתאים לך יותר.
+                          </p>
+                          <div style="background: white; padding: 25px; border-radius: 15px; margin: 25px 0; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                              <button 
+                                  class="wpc-quiz-result-btn"
+                                  style="background: var(--warning); color: white; padding: 15px 30px; border: none; border-radius: 25px; font-size: 1.2em; font-weight: 700; cursor: pointer; font-family: 'Assistant', sans-serif;"
+                              >
+                                  🧮 חשב הלוואה מקרן השתלמות
+                              </button>
+                          </div>
+                      </div>
+                  `;
+              }
+              
+              const resultContainer = get('.wpc-quiz-result'); // Use class
+              if (resultContainer) {
+                  resultContainer.innerHTML = resultHtml;
+                  // Attach click handler for the new button
+                  const newBtn = resultContainer.querySelector('.wpc-quiz-result-btn');
+                  if (newBtn) {
+                      newBtn.onclick = function() {
+                          const awg = document.querySelector('.wpc-keren-loan-h3k9-awg-container');
+                          if (awg) awg.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                      };
                   }
               }
           }
           
-          if (backBtn && currentQuestion > 1) {
-              currentQuestion--;
-              showQuestion(currentQuestion);
-          }
-      });
-      
-      // אתחול
-      showQuestion(1);
-      
-      // Cleanup function
-      function cleanup() {
-          controller.abort(); // מסיר את כל הlisteners
-          delete window[namespace];
+          // Main Event Delegation
+          container.addEventListener('click', function(e) {
+              // Handle Navigation Buttons
+              if (e.target.closest('.wpc-quiz-demo-btn-next')) {
+                  const currentQEl = get(`#question-${currentQuestion}`);
+                  if (currentQEl && currentQuestion <= 3) {
+                      const selected = currentQEl.querySelector('input[type="radio"]:checked');
+                      if (!selected) {
+                          alert('אנא בחר תשובה כדי להמשיך');
+                          return;
+                      }
+                      answers[selected.name] = selected.value;
+                  }
+                  
+                  if (currentQuestion < 3) {
+                      currentQuestion++;
+                      showQuestion(currentQuestion);
+                  } else if (currentQuestion === 3) {
+                      currentQuestion = 4;
+                      calculateResult();
+                      showQuestion(4);
+                  } else {
+                      // Final step - scroll to calculator
+                      const calc = document.querySelector('#wpc-keren-loan-h3k9-calculator');
+                      if (calc) calc.scrollIntoView({ behavior: 'smooth' });
+                  }
+              }
+              
+              if (e.target.closest('.wpc-quiz-demo-btn-back')) {
+                  if (currentQuestion > 1) {
+                      currentQuestion--;
+                      showQuestion(currentQuestion);
+                  }
+              }
+              
+          }, { signal });
+          
+          showQuestion(1);
+          
+          window[namespace] = {
+              version: '2.0.0',
+              destroy: () => {
+                  controller.abort();
+                  delete window[namespace];
+              }
+          };
       }
-      
-      // Page visibility cleanup (כשמשתמש עוזב העמוד)
-      document.addEventListener('visibilitychange', () => {
-          if (document.hidden) {
-              cleanup();
-          }
-      });
-      
-      // חשיפה מוגבלת לwindow
-      window[namespace] = {
-          version: '1.0.0',
-          getCurrentQuestion: () => currentQuestion,
-          getAnswers: () => answers,
-          destroy: cleanup
-      };
+
+      if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', initQuiz);
+      } else {
+          initQuiz();
+      }
   })();
   </script></p>
 <!-- 📚 אזור 10: קרן השתלמות לעצמאים - הזדמנות שאסור לפספס - ✅ עוצב והושלם --><!-- תוכן: סעיף עצמאים מ-workpage.html - עיצוב: wpc-section-demo-title -->
@@ -1803,12 +1813,12 @@
         
         <div style="overflow-x: auto;">
           <table style="width: 100%; border-collapse: collapse; background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.05); margin-bottom: 50px;">
-            <thead style="background: var(--gradient-primary); color: white;">
+            <thead style="background: var(--gradient-primary) !important; color: white !important;">
               <tr>
                 <th style="padding: 15px; text-align: center; font-weight: 600;">מסלול ריבית</th>
-                <th style="padding: 15px; text-align: center; font-weight: 600;">שיעור ריבית</th>
+                <th style="padding: 15px !important; text-align: center !important; font-weight: 600 !important; background: transparent !important; color: white !important;">שיעור ריבית</th>
                 <th style="padding: 15px; text-align: center; font-weight: 600;">ריבית נוכחית (2025)</th>
-                <th style="padding: 15px; text-align: center; font-weight: 600;">מתאים עבור</th>
+                <th style="padding: 15px !important; text-align: center !important; font-weight: 600 !important; background: transparent !important; color: white !important;">מתאים עבור</th>
               </tr>
             </thead>
             <tbody>
@@ -2068,7 +2078,7 @@
 </div>
 </div>
 <!-- CTA Button -->
-<div style="text-align: center !important; margin-top: 40px !important; direction: rtl !important;"><button style="background: var(--gradient-primary) !important; color: white !important; padding: 18px 35px !important; border: none !important; border-radius: 50px !important; font-size: 1.2em !important; font-weight: 700 !important; cursor: pointer !important; box-shadow: 0 8px 20px rgba(30,84,144,0.3) !important; transition: all 0.3s ease !important; font-family: 'Assistant', sans-serif !important; direction: rtl !important;"> 🎯 בחר קרן והתחל תהליך </button></div>
+<div style="text-align: center !important; margin-top: 40px !important; direction: rtl !important;"><button style="background: var(--gradient-primary) !important; color: white !important; padding: 18px 35px !important; border: none !important; border-radius: 50px !important; font-size: 1.2em !important; font-weight: 700 !important; cursor: pointer !important; box-shadow: 0 8px 20px rgba(30,84,144,0.3) !important; transition: all 0.3s ease !important; font-family: 'Assistant', sans-serif !important; direction: rtl !important;" data-action="scroll-to-awg"> 🎯 בחר קרן והתחל תהליך </button></div>
 </div>
 </section>
 <p><script>
@@ -2269,7 +2279,7 @@
 <div style="text-align: center !important; margin-top: 50px !important; direction: rtl !important;">
 <div style="background: white !important; border-radius: 20px !important; padding: 30px !important; box-shadow: 0 10px 30px rgba(0,0,0,0.1) !important; border: 2px solid var(--primary) !important; max-width: 1200px !important; margin: 0 auto !important; direction: rtl !important;">
 <p style="font-size: 1.1em !important; color: var(--primary) !important; margin-bottom: 15px !important; font-weight: 600 !important; direction: rtl !important; font-family: 'Assistant', sans-serif !important;">🤔 עדיין לא בטוחים? בואו נחשב כמה תוכלו לחסוך!</p>
-<button style="background: var(--primary) !important; color: white !important; padding: 15px 35px !important; border: none !important; border-radius: 25px !important; font-size: 1.1em !important; font-weight: 700 !important; cursor: pointer !important; box-shadow: 0 8px 20px rgba(30,84,144,0.3) !important; transition: all 0.3s ease !important; font-family: 'Assistant', sans-serif !important; direction: rtl !important;"> 🧮 מחשבון החיסכון שלי </button></div>
+<button style="background: var(--primary) !important; color: white !important; padding: 15px 35px !important; border: none !important; border-radius: 25px !important; font-size: 1.1em !important; font-weight: 700 !important; cursor: pointer !important; box-shadow: 0 8px 20px rgba(30,84,144,0.3) !important; transition: all 0.3s ease !important; font-family: 'Assistant', sans-serif !important; direction: rtl !important;" data-action="scroll-to-calculator"> 🧮 מחשבון החיסכון שלי </button></div>
 </div>
 </div>
 </section>
@@ -2431,7 +2441,7 @@
 </ul>
 </div>
 <!-- CTA -->
-<div style="margin-top: 40px !important; direction: rtl !important;"><button style="background: var(--success) !important; color: white !important; padding: 18px 35px !important; border: none !important; border-radius: 30px !important; font-size: 1.2em !important; font-weight: 700 !important; cursor: pointer !important; box-shadow: 0 8px 25px rgba(22,160,133,0.3) !important; transition: all 0.3s ease !important; font-family: 'Assistant', sans-serif !important; direction: rtl !important;"> 🏛️ בדוק זכאות כעובד מדינה </button></div>
+<div style="margin-top: 40px !important; direction: rtl !important;"><button style="background: var(--success) !important; color: white !important; padding: 18px 35px !important; border: none !important; border-radius: 30px !important; font-size: 1.2em !important; font-weight: 700 !important; cursor: pointer !important; box-shadow: 0 8px 25px rgba(22,160,133,0.3) !important; transition: all 0.3s ease !important; font-family: 'Assistant', sans-serif !important; direction: rtl !important;" data-action="scroll-to-awg"> 🏛️ בדוק זכאות כעובד מדינה </button></div>
 </div>
 </div>
 </section>
@@ -2471,7 +2481,7 @@
 </div>
 </div>
 <!-- CTA -->
-<div style="text-align: center !important; margin-top: 40px !important; direction: rtl !important;"><button style="background: var(--primary) !important; color: white !important; padding: 18px 35px !important; border: none !important; border-radius: 30px !important; font-size: 1.2em !important; font-weight: 700 !important; cursor: pointer !important; box-shadow: 0 8px 25px rgba(30,84,144,0.3) !important; transition: all 0.3s ease !important; font-family: 'Assistant', sans-serif !important; direction: rtl !important;"> 💼 חשב הלוואה מקרן השתלמות </button></div>
+<div style="text-align: center !important; margin-top: 40px !important; direction: rtl !important;"><button style="background: var(--primary) !important; color: white !important; padding: 18px 35px !important; border: none !important; border-radius: 30px !important; font-size: 1.2em !important; font-weight: 700 !important; cursor: pointer !important; box-shadow: 0 8px 25px rgba(30,84,144,0.3) !important; transition: all 0.3s ease !important; font-family: 'Assistant', sans-serif !important; direction: rtl !important;" data-action="scroll-to-awg"> 💼 חשב הלוואה מקרן השתלמות </button></div>
 </div>
 </div>
 </section>
@@ -2576,7 +2586,7 @@
 <div class="wpc-comparison-feature bad" style="padding: 6px 12px !important; border-radius: 6px !important; font-size: 0.9em !important; font-weight: 600 !important; background: #ffebee !important; color: #c62828 !important; direction: rtl !important; font-family: 'Assistant', sans-serif !important;">⚠ קשירה נדרשת</div>
 <div class="wpc-comparison-feature good" style="padding: 6px 12px !important; border-radius: 6px !important; font-size: 0.9em !important; font-weight: 600 !important; background: #e8f5e9 !important; color: #2e7d32 !important; direction: rtl !important; font-family: 'Assistant', sans-serif !important;">✓ סכומים גבוהים יותר</div>
 </div>
-<button class="wpc-comparison-demo-btn wpc-keren-loan-h3k9-btn" style="width: 100% !important; padding: 12px 24px !important; background: var(--warning) !important; color: white !important; border: none !important; border-radius: 8px !important; font-weight: 700 !important; cursor: pointer !important; transition: all 0.3s ease !important; direction: rtl !important; font-family: 'Assistant', sans-serif !important;"> 📊 חשב הלוואה לא נזילה </button></div>
+<button class="wpc-comparison-demo-btn wpc-keren-loan-h3k9-btn" style="width: 100% !important; padding: 12px 24px !important; background: var(--warning) !important; color: white !important; border: none !important; border-radius: 8px !important; font-weight: 700 !important; cursor: pointer !important; transition: all 0.3s ease !important; direction: rtl !important; font-family: 'Assistant', sans-serif !important;" data-action="scroll-to-awg"> 📊 חשב הלוואה לא נזילה </button></div>
 <!-- כרטיס 3: קרן למורים -->
 <div class="wpc-comparison-demo-card wpc-keren-loan-h3k9-card featured" style="background: white !important; border: 2px solid #e74c3c !important; border-radius: 15px !important; padding: 20px !important; transition: all 0.3s ease !important; direction: rtl !important; position: relative !important; box-shadow: 0 8px 25px rgba(231,76,60,0.15) !important;">
 <div style="position: absolute !important; top: -10px !important; right: 15px !important; background: #e74c3c !important; color: white !important; padding: 5px 12px !important; border-radius: 15px !important; font-size: 0.8em !important; font-weight: 700 !important; direction: rtl !important; font-family: 'Assistant', sans-serif !important;">🏆 הטוב ביותר</div>
@@ -2590,7 +2600,7 @@
 <div class="wpc-comparison-feature good" style="padding: 6px 12px !important; border-radius: 6px !important; font-size: 0.9em !important; font-weight: 600 !important; background: #e8f5e9 !important; color: #2e7d32 !important; direction: rtl !important; font-family: 'Assistant', sans-serif !important;">🏫 הטבה למורים</div>
 <div class="wpc-comparison-feature good" style="padding: 6px 12px !important; border-radius: 6px !important; font-size: 0.9em !important; font-weight: 600 !important; background: #e8f5e9 !important; color: #2e7d32 !important; direction: rtl !important; font-family: 'Assistant', sans-serif !important;">⚡ אישור מהיר</div>
 </div>
-<button class="wpc-comparison-demo-btn wpc-keren-loan-h3k9-btn" style="width: 100% !important; padding: 12px 24px !important; background: #e74c3c !important; color: white !important; border: none !important; border-radius: 8px !important; font-weight: 700 !important; cursor: pointer !important; transition: all 0.3s ease !important; direction: rtl !important; font-family: 'Assistant', sans-serif !important;"> 🏫 הלוואה למורים </button></div>
+<button class="wpc-comparison-demo-btn wpc-keren-loan-h3k9-btn" style="width: 100% !important; padding: 12px 24px !important; background: #e74c3c !important; color: white !important; border: none !important; border-radius: 8px !important; font-weight: 700 !important; cursor: pointer !important; transition: all 0.3s ease !important; direction: rtl !important; font-family: 'Assistant', sans-serif !important;" data-action="scroll-to-awg"> 🏫 הלוואה למורים </button></div>
 <!-- כרטיס 4: עובדי מדינה -->
 <div class="wpc-comparison-demo-card wpc-keren-loan-h3k9-card" style="background: white !important; border: 2px solid var(--primary) !important; border-radius: 15px !important; padding: 20px !important; transition: all 0.3s ease !important; direction: rtl !important;">
 <div class="wpc-comparison-demo-header wpc-keren-loan-h3k9-header" style="display: flex !important; justify-content: space-between !important; align-items: center !important; margin-bottom: 15px !important; direction: rtl !important;">
@@ -2603,7 +2613,7 @@
 <div class="wpc-comparison-feature good" style="padding: 6px 12px !important; border-radius: 6px !important; font-size: 0.9em !important; font-weight: 600 !important; background: #e8f5e9 !important; color: #2e7d32 !important; direction: rtl !important; font-family: 'Assistant', sans-serif !important;">💰 עד 250,000 ש"ח</div>
 <div class="wpc-comparison-feature good" style="padding: 6px 12px !important; border-radius: 6px !important; font-size: 0.9em !important; font-weight: 600 !important; background: #e8f5e9 !important; color: #2e7d32 !important; direction: rtl !important; font-family: 'Assistant', sans-serif !important;">⏰ עד 84 חודשים</div>
 </div>
-<button class="wpc-comparison-demo-btn wpc-keren-loan-h3k9-btn" style="width: 100% !important; padding: 12px 24px !important; background: var(--primary) !important; color: white !important; border: none !important; border-radius: 8px !important; font-weight: 700 !important; cursor: pointer !important; transition: all 0.3s ease !important; direction: rtl !important; font-family: 'Assistant', sans-serif !important;"> 🏛️ הלוואה לעובד מדינה </button></div>
+<button class="wpc-comparison-demo-btn wpc-keren-loan-h3k9-btn" style="width: 100% !important; padding: 12px 24px !important; background: var(--primary) !important; color: white !important; border: none !important; border-radius: 8px !important; font-weight: 700 !important; cursor: pointer !important; transition: all 0.3s ease !important; direction: rtl !important; font-family: 'Assistant', sans-serif !important;" data-action="scroll-to-awg"> 🏛️ הלוואה לעובד מדינה </button></div>
 </div>
 <!-- הסבר תחתון -->
 <div style="margin-top: 30px !important; padding: 20px !important; background: #f0f7ff !important; border-radius: 15px !important; border: 2px solid var(--primary) !important; text-align: center !important; direction: rtl !important;">
@@ -2716,7 +2726,7 @@
 </div>
 </div>
 <!-- CTA תחתון -->
-<div style="text-align: center !important; margin-top: 50px !important; direction: rtl !important;"><button style="background: var(--primary) !important; color: white !important; padding: 18px 35px !important; border: none !important; border-radius: 30px !important; font-size: 1.2em !important; font-weight: 700 !important; cursor: pointer !important; box-shadow: 0 8px 25px rgba(30,84,144,0.3) !important; transition: all 0.3s ease !important; font-family: 'Assistant', sans-serif !important; direction: rtl !important;"> 🎯 בואו נבדוק אם אתם מתאימים! </button></div>
+<div style="text-align: center !important; margin-top: 50px !important; direction: rtl !important;"><button style="background: var(--primary) !important; color: white !important; padding: 18px 35px !important; border: none !important; border-radius: 30px !important; font-size: 1.2em !important; font-weight: 700 !important; cursor: pointer !important; box-shadow: 0 8px 25px rgba(30,84,144,0.3) !important; transition: all 0.3s ease !important; font-family: 'Assistant', sans-serif !important; direction: rtl !important;" data-action="scroll-to-awg"> 🎯 בואו נבדוק אם אתם מתאימים! </button></div>
 </section>
 <!-- 📱 Mobile עיצוב לכרטיסי קהל יעד -->
 <p><style>
@@ -2893,7 +2903,7 @@
 </div>
 </div>
 <!-- CTA תחתון -->
-<div style="text-align: center !important; margin-top: 50px !important; direction: rtl !important;"><button style="background: var(--primary) !important; color: white !important; padding: 18px 35px !important; border: none !important; border-radius: 30px !important; font-size: 1.2em !important; font-weight: 700 !important; cursor: pointer !important; box-shadow: 0 8px 25px rgba(30,84,144,0.3) !important; transition: all 0.3s ease !important; font-family: 'Assistant', sans-serif !important; direction: rtl !important;"> 💡 עכשיו שיש לכם תשובות - בואו נתחיל! </button></div>
+<div style="text-align: center !important; margin-top: 50px !important; direction: rtl !important;"><button style="background: var(--primary) !important; color: white !important; padding: 18px 35px !important; border: none !important; border-radius: 30px !important; font-size: 1.2em !important; font-weight: 700 !important; cursor: pointer !important; box-shadow: 0 8px 25px rgba(30,84,144,0.3) !important; transition: all 0.3s ease !important; font-family: 'Assistant', sans-serif !important; direction: rtl !important;" data-action="scroll-to-awg"> 💡 עכשיו שיש לכם תשובות - בואו נתחיל! </button></div>
 </section>
 <!-- 📱 Mobile עיצוב ל-FAQ -->
 <p><style>
@@ -2950,7 +2960,7 @@
       const NS = 'WPC_KerenLoan_H3K9';
       if (window[NS] && window[NS].accordionInitialized) return;
       
-      // פונקציית toggle לאקורדיון
+      // פונקציית toggle לאקורדיון - חשופה לשימוש ב-onclick
       window.toggleAccordion = function(header) {
           const content = header.nextElementSibling;
           const icon = header.querySelector('span');
@@ -2965,8 +2975,10 @@
                   h.style.borderColor = 'transparent';
                   const otherContent = h.nextElementSibling;
                   const otherIcon = h.querySelector('span');
-                  otherContent.classList.remove('active');
-                  otherContent.style.maxHeight = '0';
+                  if (otherContent) {
+                      otherContent.classList.remove('active');
+                      otherContent.style.maxHeight = '0';
+                  }
                   if (otherIcon) {
                       otherIcon.style.transform = 'translateY(-50%)';
                       otherIcon.style.background = 'rgba(0,0,0,0.1)';
@@ -2980,8 +2992,10 @@
               header.style.background = '#f8f9fa';
               header.style.color = '';
               header.style.borderColor = 'transparent';
-              content.classList.remove('active');
-              content.style.maxHeight = '0';
+              if (content) {
+                  content.classList.remove('active');
+                  content.style.maxHeight = '0';
+              }
               if (icon) {
                   icon.style.transform = 'translateY(-50%)';
                   icon.style.background = 'rgba(0,0,0,0.1)';
@@ -2992,14 +3006,23 @@
               header.style.background = 'var(--primary)';
               header.style.color = 'white';
               header.style.borderColor = 'var(--primary)';
-              content.classList.add('active');
-              content.style.maxHeight = '500px';
+              if (content) {
+                  content.classList.add('active');
+                  content.style.maxHeight = content.scrollHeight + 'px'; // חישוב גובה דינמי
+              }
               if (icon) {
                   icon.style.transform = 'translateY(-50%) rotate(90deg)';
                   icon.style.background = 'rgba(255,255,255,0.2)';
               }
           }
       };
+
+      // הוספת Event Listeners לאקורדיון באופן ידני (בנוסף ל-onclick ב-HTML אם קיים)
+      document.querySelectorAll('.wpc-accordion-demo-header').forEach(header => {
+          header.addEventListener('click', function() {
+              window.toggleAccordion(this);
+          });
+      });
       
       // סימון שהאקורדיון אותחל
       if (!window[NS]) window[NS] = {};
@@ -3026,7 +3049,7 @@
 <div style="text-align: center !important; margin-top: 50px !important; direction: rtl !important;">
 <div class="wpc-keren-loan-h3k9-cta-box" style="background: rgba(255,255,255,0.1) !important; border-radius: 25px !important; padding: 40px !important; backdrop-filter: blur(10px) !important; border: 2px solid rgba(255,255,255,0.2) !important; display: block !important; width: 100% !important; max-width: 1200px !important; margin: 0 auto !important; text-align: center !important;">
 <h3 style="color: white !important; font-size: 1.5em !important; margin-bottom: 25px !important; font-weight: 700 !important; direction: rtl !important; font-family: 'Assistant', sans-serif !important; text-align: center !important;">🚀 מוכנים להתחיל? בואו נבדוק את הזכאות שלכם!</h3>
-<div style="display: flex !important; justify-content: center !important; align-items: center !important; direction: rtl !important;"><button style="background: linear-gradient(135deg, var(--success), #16a085) !important; color: white !important; padding: 20px 50px !important; border: none !important; border-radius: 50px !important; font-size: 1.3em !important; font-weight: 700 !important; cursor: pointer !important; box-shadow: 0 10px 30px rgba(22,160,133,0.4) !important; transition: all 0.3s ease !important; font-family: 'Assistant', sans-serif !important; direction: rtl !important; min-width: 280px !important; margin: 0 auto !important; display: block !important;"> ✅ התחל עכשיו - בדוק זכאות </button></div>
+<div style="display: flex !important; justify-content: center !important; align-items: center !important; direction: rtl !important;"><button style="background: linear-gradient(135deg, var(--success), #16a085) !important; color: white !important; padding: 20px 50px !important; border: none !important; border-radius: 50px !important; font-size: 1.3em !important; font-weight: 700 !important; cursor: pointer !important; box-shadow: 0 10px 30px rgba(22,160,133,0.4) !important; transition: all 0.3s ease !important; font-family: 'Assistant', sans-serif !important; direction: rtl !important; min-width: 280px !important; margin: 0 auto !important; display: block !important;" data-action="scroll-to-awg"> ✅ התחל עכשיו - בדוק זכאות </button></div>
 <p style="margin-top: 15px !important; font-size: 0.9em !important; color: #e3f2fd !important; direction: rtl !important; font-family: 'Assistant', sans-serif !important; text-align: center !important;">⏰ תוצאות מיידיות - ללא התחייבות</p>
 </div>
 </div>
@@ -3156,7 +3179,7 @@
 <div style="font-size: 2.5em !important; margin-bottom: 15px !important; text-align: center !important;">🏢</div>
 <h3 style="color: var(--primary) !important; font-size: 1.3em !important; font-weight: 700 !important; margin-bottom: 15px !important; text-align: center !important; direction: rtl !important; font-family: 'Assistant', sans-serif !important;">מגדל</h3>
 <p style="color: var(--text-dark) !important; margin-bottom: 20px !important; text-align: center !important; font-size: 1em !important; direction: rtl !important; font-family: 'Assistant', sans-serif !important;">טופס בקשה מקוון</p>
-<div style="text-align: center !important;"><button style="background: var(--primary) !important; color: white !important; padding: 12px 25px !important; border: none !important; border-radius: 25px !important; font-size: 1em !important; font-weight: 600 !important; cursor: pointer !important; transition: all 0.3s ease !important; font-family: 'Assistant', sans-serif !important; direction: rtl !important; width: 100% !important;"> 🌐 מעבר לטופס </button></div>
+<div style="text-align: center !important;"><a href="https://www.migdal.co.il/macro/usefullforms" target="_blank" rel="noopener noreferrer nofollow" style="display: inline-block !important; text-decoration: none !important; width: 100% !important;"><button style="background: var(--primary) !important; color: white !important; padding: 12px 25px !important; border: none !important; border-radius: 25px !important; font-size: 1em !important; font-weight: 600 !important; cursor: pointer !important; transition: all 0.3s ease !important; font-family: 'Assistant', sans-serif !important; direction: rtl !important; width: 100% !important;"> 🌐 מעבר לטופס באתר מגדל </button></a></div>
 </div>
 <!-- טופס מנורה מבטחים -->
 <div style="background: white !important; border: 2px solid var(--success) !important; border-radius: 15px !important; padding: 25px !important; box-shadow: 0 8px 25px rgba(0,0,0,0.1) !important; transition: all 0.3s ease !important; direction: rtl !important; position: relative !important; overflow: hidden !important;">
@@ -3170,7 +3193,7 @@
 <div style="font-size: 2.5em !important; margin-bottom: 15px !important; text-align: center !important;">📄</div>
 <h3 style="color: var(--warning) !important; font-size: 1.3em !important; font-weight: 700 !important; margin-bottom: 15px !important; text-align: center !important; direction: rtl !important; font-family: 'Assistant', sans-serif !important;">אלטשולר שחם</h3>
 <p style="color: var(--text-dark) !important; margin-bottom: 20px !important; text-align: center !important; font-size: 1em !important; direction: rtl !important; font-family: 'Assistant', sans-serif !important;">טופס PDF להורדה</p>
-<div style="text-align: center !important;"><button style="background: var(--warning) !important; color: white !important; padding: 12px 25px !important; border: none !important; border-radius: 25px !important; font-size: 1em !important; font-weight: 600 !important; cursor: pointer !important; transition: all 0.3s ease !important; font-family: 'Assistant', sans-serif !important; direction: rtl !important; width: 100% !important;"> 📥 הורד PDF </button></div>
+<div style="text-align: center !important;"><a href="https://www.as-invest.co.il/interstedin/forms/" target="_blank" rel="noopener noreferrer nofollow" style="display: inline-block !important; text-decoration: none !important; width: 100% !important;"><button style="background: var(--warning) !important; color: white !important; padding: 12px 25px !important; border: none !important; border-radius: 25px !important; font-size: 1em !important; font-weight: 600 !important; cursor: pointer !important; transition: all 0.3s ease !important; font-family: 'Assistant', sans-serif !important; direction: rtl !important; width: 100% !important;"> 📥 הורד טופס מאתר אלטשולר </button></a></div>
 </div>
 <!-- טופס הראל -->
 <div style="background: white !important; border: 2px solid #e74c3c !important; border-radius: 15px !important; padding: 25px !important; box-shadow: 0 8px 25px rgba(0,0,0,0.1) !important; transition: all 0.3s ease !important; direction: rtl !important; position: relative !important; overflow: hidden !important;">
@@ -3184,14 +3207,14 @@
 <div style="font-size: 2.5em !important; margin-bottom: 15px !important; text-align: center !important;">📝</div>
 <h3 style="color: #9b59b6 !important; font-size: 1.3em !important; font-weight: 700 !important; margin-bottom: 15px !important; text-align: center !important; direction: rtl !important; font-family: 'Assistant', sans-serif !important;">מיטב דש</h3>
 <p style="color: var(--text-dark) !important; margin-bottom: 20px !important; text-align: center !important; font-size: 1em !important; direction: rtl !important; font-family: 'Assistant', sans-serif !important;">הסכם הלוואה PDF</p>
-<div style="text-align: center !important;"><button style="background: #9b59b6 !important; color: white !important; padding: 12px 25px !important; border: none !important; border-radius: 25px !important; font-size: 1em !important; font-weight: 600 !important; cursor: pointer !important; transition: all 0.3s ease !important; font-family: 'Assistant', sans-serif !important; direction: rtl !important; width: 100% !important;"> 📥 הורד הסכם </button></div>
+<div style="text-align: center !important;"><a href="https://www.meitav.co.il/forms/" target="_blank" rel="noopener noreferrer nofollow" style="display: inline-block !important; text-decoration: none !important; width: 100% !important;"><button style="background: #9b59b6 !important; color: white !important; padding: 12px 25px !important; border: none !important; border-radius: 25px !important; font-size: 1em !important; font-weight: 600 !important; cursor: pointer !important; transition: all 0.3s ease !important; font-family: 'Assistant', sans-serif !important; direction: rtl !important; width: 100% !important;"> 📥 הורד טופס מאתר מיטב </button></a></div>
 </div>
 </div>
 <!-- הערה חשובה -->
 <div style="margin-top: 50px !important; background: linear-gradient(135deg, #e3f2fd, #f0f7ff) !important; border: 2px solid var(--primary) !important; border-radius: 20px !important; padding: 30px !important; text-align: center !important; direction: rtl !important;">
 <h3 style="color: var(--primary) !important; font-size: 1.4em !important; margin-bottom: 15px !important; font-weight: 700 !important; direction: rtl !important; font-family: 'Assistant', sans-serif !important;">💡 הערה חשובה לפני מילוי הטופס</h3>
 <p style="color: var(--text-dark) !important; font-size: 1.1em !important; line-height: 1.6 !important; margin-bottom: 20px !important; direction: rtl !important; font-family: 'Assistant', sans-serif !important;">לפני מילוי הטופס, מומלץ להשתמש במחשבון שלנו כדי לחשב את הסכום והתשלום החודשי הצפויים.</p>
-<button style="background: var(--primary) !important; color: white !important; padding: 15px 30px !important; border: none !important; border-radius: 25px !important; font-size: 1.1em !important; font-weight: 600 !important; cursor: pointer !important; transition: all 0.3s ease !important; font-family: 'Assistant', sans-serif !important; direction: rtl !important;"> 🧮 חזרה למחשבון </button></div>
+<button style="background: var(--primary) !important; color: white !important; padding: 15px 30px !important; border: none !important; border-radius: 25px !important; font-size: 1.1em !important; font-weight: 600 !important; cursor: pointer !important; transition: all 0.3s ease !important; font-family: 'Assistant', sans-serif !important; direction: rtl !important;" data-action="scroll-to-calculator"> 🧮 חזרה למחשבון </button></div>
 </div>
 </section>
 <!-- 📱 Mobile עיצוב לטפסים -->
@@ -3516,4 +3539,3 @@
     }
   }
   </script></p>
-<!-- /wp:html -->
