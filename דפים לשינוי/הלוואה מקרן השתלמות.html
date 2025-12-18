@@ -1592,121 +1592,121 @@
           // Use class selector which is safer in WordPress
           const container = document.querySelector('.wpc-keren-loan-h3k9-quiz-wrapper') || document.getElementById('quiz-container');
           
-          if (!container) {
+      if (!container) {
               console.warn('Quiz container not found, retrying...');
               setTimeout(initQuiz, 500);
-              return;
-          }
-          
+          return;
+      }
+      
           // Scoped selectors helper
           const get = (selector) => container.querySelector(selector);
           const getAll = (selector) => container.querySelectorAll(selector);
           
           // AbortController for clean event handling
-          const controller = new AbortController();
-          const signal = controller.signal;
-          
-          let currentQuestion = 1;
-          let answers = {};
-          
-          function updateProgress() {
+      const controller = new AbortController();
+      const signal = controller.signal;
+      
+      let currentQuestion = 1;
+      let answers = {};
+      
+      function updateProgress() {
               const progressBar = get('.wpc-quiz-progress-demo-bar'); // Use class
               if (!progressBar) return;
               
               const totalSteps = 4;
-              const percentage = (currentQuestion / totalSteps) * 100;
-              progressBar.style.width = percentage + '%';
-              
-              if (currentQuestion <= 3) {
-                  progressBar.textContent = `שאלה ${currentQuestion} מתוך 4`;
-              } else {
-                  progressBar.textContent = `תוצאות - 4 מתוך 4`;
-              }
-          }
+          const percentage = (currentQuestion / totalSteps) * 100;
+          progressBar.style.width = percentage + '%';
           
-          function showQuestion(questionNumber) {
+          if (currentQuestion <= 3) {
+              progressBar.textContent = `שאלה ${currentQuestion} מתוך 4`;
+          } else {
+              progressBar.textContent = `תוצאות - 4 מתוך 4`;
+          }
+      }
+      
+      function showQuestion(questionNumber) {
               // Hide all questions
               getAll('.quiz-question').forEach(q => q.style.display = 'none');
-              
+          
               // Show current
-              if (questionNumber === 4) {
+          if (questionNumber === 4) {
                   const results = get('#results');
                   if (results) results.style.display = 'block';
-              } else {
+          } else {
                   const question = get(`#question-${questionNumber}`);
                   if (question) question.style.display = 'block';
-              }
-              
+          }
+          
               // Update buttons
               const backBtn = get('.wpc-quiz-demo-btn-back');
               const nextBtn = get('.wpc-quiz-demo-btn-next');
-              
+          
               if (backBtn) backBtn.style.display = questionNumber > 1 ? 'block' : 'none';
-              
+          
               if (nextBtn) {
-                  if (questionNumber === 3) {
-                      nextBtn.textContent = 'קבל תוצאה';
-                  } else if (questionNumber === 4) {
-                      nextBtn.textContent = 'חשב הלוואה עכשיו';
-                  } else {
-                      nextBtn.textContent = 'המשך';
+          if (questionNumber === 3) {
+              nextBtn.textContent = 'קבל תוצאה';
+          } else if (questionNumber === 4) {
+              nextBtn.textContent = 'חשב הלוואה עכשיו';
+          } else {
+              nextBtn.textContent = 'המשך';
                   }
-              }
-              
-              updateProgress();
           }
           
-          function calculateResult() {
-              let score = 0;
-              
-              if (answers.q1 === 'yes') score += 40;
-              if (answers.q2 === 'no') score += 30;
-              if (answers.q3 === 'total') score += 30;
-              
-              let resultHtml = '';
-              
+          updateProgress();
+      }
+      
+      function calculateResult() {
+          let score = 0;
+          
+          if (answers.q1 === 'yes') score += 40;
+          if (answers.q2 === 'no') score += 30;
+          if (answers.q3 === 'total') score += 30;
+          
+          let resultHtml = '';
+          
               // Logic stays the same...
-              if (score >= 60) {
-                  resultHtml = `
-                      <div style="text-align: center; background: linear-gradient(135deg, #e8f5e8, #f0f9ff); padding: 30px; border-radius: 20px; border: 3px solid var(--success);">
-                          <div style="font-size: 3em; margin-bottom: 15px;">🎯</div>
-                          <h3 style="font-size: 2em; margin-bottom: 20px; color: var(--primary);">התוצאה שלך: בלון חלקי</h3>
-                          <p style="font-size: 1.3em; margin-bottom: 25px; line-height: 1.6; color: var(--text-dark);">
+          if (score >= 60) {
+              resultHtml = `
+                  <div style="text-align: center; background: linear-gradient(135deg, #e8f5e8, #f0f9ff); padding: 30px; border-radius: 20px; border: 3px solid var(--success);">
+                      <div style="font-size: 3em; margin-bottom: 15px;">🎯</div>
+                      <h3 style="font-size: 2em; margin-bottom: 20px; color: var(--primary);">התוצאה שלך: בלון חלקי</h3>
+                      <p style="font-size: 1.3em; margin-bottom: 25px; line-height: 1.6; color: var(--text-dark);">
                               בהתבסס על התשובות שלך, <strong style="color: var(--success);">בלון חלקי</strong> מתאים לך יותר.
-                          </p>
-                          <div style="background: white; padding: 25px; border-radius: 15px; margin: 25px 0; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
-                              <button 
+                      </p>
+                      <div style="background: white; padding: 25px; border-radius: 15px; margin: 25px 0; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                          <button 
                                   class="wpc-quiz-result-btn"
                                   style="background: var(--success); color: white; padding: 15px 30px; border: none; border-radius: 25px; font-size: 1.2em; font-weight: 700; cursor: pointer; font-family: 'Assistant', sans-serif;"
-                              >
-                                  🧮 חשב הלוואה מקרן השתלמות
-                              </button>
-                          </div>
+                          >
+                              🧮 חשב הלוואה מקרן השתלמות
+                          </button>
                       </div>
-                  `;
-              } else {
-                  resultHtml = `
-                      <div style="text-align: center; background: transparent; padding: 30px; border-radius: 20px; border: none;">
-                          <div style="font-size: 3em; margin-bottom: 15px;">🎯</div>
-                          <h3 style="font-size: 2em; margin-bottom: 20px; color: var(--primary);">התוצאה שלך: בלון מלא</h3>
-                          <p style="font-size: 1.3em; margin-bottom: 25px; line-height: 1.6; color: var(--text-dark);">
+                  </div>
+              `;
+          } else {
+              resultHtml = `
+                  <div style="text-align: center; background: transparent; padding: 30px; border-radius: 20px; border: none;">
+                      <div style="font-size: 3em; margin-bottom: 15px;">🎯</div>
+                      <h3 style="font-size: 2em; margin-bottom: 20px; color: var(--primary);">התוצאה שלך: בלון מלא</h3>
+                      <p style="font-size: 1.3em; margin-bottom: 25px; line-height: 1.6; color: var(--text-dark);">
                               בהתבסס על התשובות שלך, <strong style="color: var(--warning);">בלון מלא</strong> מתאים לך יותר.
-                          </p>
-                          <div style="background: white; padding: 25px; border-radius: 15px; margin: 25px 0; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
-                              <button 
+                      </p>
+                      <div style="background: white; padding: 25px; border-radius: 15px; margin: 25px 0; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                          <button 
                                   class="wpc-quiz-result-btn"
                                   style="background: var(--warning); color: white; padding: 15px 30px; border: none; border-radius: 25px; font-size: 1.2em; font-weight: 700; cursor: pointer; font-family: 'Assistant', sans-serif;"
-                              >
-                                  🧮 חשב הלוואה מקרן השתלמות
-                              </button>
-                          </div>
+                          >
+                              🧮 חשב הלוואה מקרן השתלמות
+                          </button>
                       </div>
-                  `;
-              }
-              
+                  </div>
+              `;
+          }
+          
               const resultContainer = get('.wpc-quiz-result'); // Use class
-              if (resultContainer) {
-                  resultContainer.innerHTML = resultHtml;
+          if (resultContainer) {
+              resultContainer.innerHTML = resultHtml;
                   // Attach click handler for the new button
                   const newBtn = resultContainer.querySelector('.wpc-quiz-result-btn');
                   if (newBtn) {
@@ -1715,54 +1715,54 @@
                           if (awg) awg.scrollIntoView({ behavior: 'smooth', block: 'start' });
                       };
                   }
-              }
           }
-          
+      }
+      
           // Main Event Delegation
-          container.addEventListener('click', function(e) {
+      container.addEventListener('click', function(e) {
               // Handle Navigation Buttons
               if (e.target.closest('.wpc-quiz-demo-btn-next')) {
                   const currentQEl = get(`#question-${currentQuestion}`);
                   if (currentQEl && currentQuestion <= 3) {
                       const selected = currentQEl.querySelector('input[type="radio"]:checked');
                       if (!selected) {
-                          alert('אנא בחר תשובה כדי להמשיך');
-                          return;
-                      }
-                      answers[selected.name] = selected.value;
+                      alert('אנא בחר תשובה כדי להמשיך');
+                      return;
                   }
-                  
-                  if (currentQuestion < 3) {
-                      currentQuestion++;
-                      showQuestion(currentQuestion);
-                  } else if (currentQuestion === 3) {
-                      currentQuestion = 4;
-                      calculateResult();
-                      showQuestion(4);
-                  } else {
+                      answers[selected.name] = selected.value;
+              }
+              
+              if (currentQuestion < 3) {
+                  currentQuestion++;
+                  showQuestion(currentQuestion);
+              } else if (currentQuestion === 3) {
+                  currentQuestion = 4;
+                  calculateResult();
+                  showQuestion(4);
+              } else {
                       // Final step - scroll to calculator
                       const calc = document.querySelector('#wpc-keren-loan-h3k9-calculator');
                       if (calc) calc.scrollIntoView({ behavior: 'smooth' });
-                  }
               }
-              
+          }
+          
               if (e.target.closest('.wpc-quiz-demo-btn-back')) {
                   if (currentQuestion > 1) {
-                      currentQuestion--;
-                      showQuestion(currentQuestion);
-                  }
+              currentQuestion--;
+              showQuestion(currentQuestion);
+          }
               }
-              
+      
           }, { signal });
           
-          showQuestion(1);
-          
+      showQuestion(1);
+      
           window[namespace] = {
               version: '2.0.0',
               destroy: () => {
                   controller.abort();
-                  delete window[namespace];
-              }
+          delete window[namespace];
+      }
           };
       }
 
@@ -2976,8 +2976,8 @@
                   const otherContent = h.nextElementSibling;
                   const otherIcon = h.querySelector('span');
                   if (otherContent) {
-                      otherContent.classList.remove('active');
-                      otherContent.style.maxHeight = '0';
+                  otherContent.classList.remove('active');
+                  otherContent.style.maxHeight = '0';
                   }
                   if (otherIcon) {
                       otherIcon.style.transform = 'translateY(-50%)';
@@ -2993,8 +2993,8 @@
               header.style.color = '';
               header.style.borderColor = 'transparent';
               if (content) {
-                  content.classList.remove('active');
-                  content.style.maxHeight = '0';
+              content.classList.remove('active');
+              content.style.maxHeight = '0';
               }
               if (icon) {
                   icon.style.transform = 'translateY(-50%)';
@@ -3007,7 +3007,7 @@
               header.style.color = 'white';
               header.style.borderColor = 'var(--primary)';
               if (content) {
-                  content.classList.add('active');
+              content.classList.add('active');
                   content.style.maxHeight = content.scrollHeight + 'px'; // חישוב גובה דינמי
               }
               if (icon) {
