@@ -1,0 +1,2327 @@
+<script>
+// בדיקה והוספת viewport meta tag אם חסר
+if (!document.querySelector('meta[name="viewport"]')) {
+  const viewport = document.createElement('meta');
+  viewport.name = 'viewport';
+  viewport.content = 'width=device-width, initial-scale=1.0, user-scalable=yes';
+  document.head.appendChild(viewport);
+}
+</script>
+
+<style>
+/* === CSS Variables === */
+:root {
+  --wpc-tax-primary: #1e5490;
+  --wpc-tax-primary-dark: #163d6b;
+  --wpc-tax-primary-light: rgba(30, 84, 144, 0.1);
+  --wpc-tax-success: #10b981;
+  --wpc-tax-success-light: rgba(16, 185, 129, 0.1);
+  --wpc-tax-warning: #f59e0b;
+  --wpc-tax-warning-light: rgba(245, 158, 11, 0.1);
+  --wpc-tax-danger: #ef4444;
+  --wpc-tax-danger-light: rgba(239, 68, 68, 0.1);
+  --wpc-tax-text-dark: #1f2937;
+  --wpc-tax-text-light: #6b7280;
+  --wpc-tax-bg-light: #f8fafc;
+  --wpc-tax-white: #ffffff;
+  --wpc-tax-border: #e5e7eb;
+  --wpc-tax-shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+  --wpc-tax-shadow-md: 0 4px 15px rgba(0,0,0,0.1);
+  --wpc-tax-shadow-lg: 0 10px 40px rgba(0,0,0,0.15);
+  --wpc-tax-radius-sm: 8px;
+  --wpc-tax-radius-md: 12px;
+  --wpc-tax-radius-lg: 20px;
+  --wpc-tax-transition: all 0.3s ease;
+}
+
+/* === Base Wrapper === */
+.wpc-calc-tax-r4k8-wrapper {
+  all: initial !important;
+  display: block !important;
+  font-family: 'Assistant', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  direction: rtl !important;
+  color: var(--wpc-tax-text-dark) !important;
+  line-height: 1.6 !important;
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+  padding: 20px !important;
+  box-sizing: border-box !important;
+  color-scheme: light !important;
+}
+
+.wpc-calc-tax-r4k8-wrapper * {
+  box-sizing: border-box !important;
+  font-family: inherit !important;
+}
+
+/* === Title Section === */
+.wpc-calc-tax-r4k8-title-section {
+  text-align: center !important;
+  margin-bottom: 30px !important;
+}
+
+.wpc-calc-tax-r4k8-title {
+  font-size: 2.2rem !important;
+  font-weight: 700 !important;
+  color: var(--wpc-tax-primary) !important;
+  margin: 0 0 10px 0 !important;
+  position: relative !important;
+  padding-right: 20px !important;
+}
+
+.wpc-calc-tax-r4k8-title::after {
+  content: '' !important;
+  position: absolute !important;
+  right: 0 !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  width: 5px !important;
+  height: 60px !important;
+  background: linear-gradient(180deg, var(--wpc-tax-primary) 0%, var(--wpc-tax-success) 100%) !important;
+  border-radius: 3px !important;
+}
+
+.wpc-calc-tax-r4k8-subtitle {
+  font-size: 1rem !important;
+  color: var(--wpc-tax-text-light) !important;
+  margin: 0 !important;
+}
+
+.wpc-calc-tax-r4k8-update-date {
+  display: inline-block !important;
+  background: var(--wpc-tax-primary-light) !important;
+  color: var(--wpc-tax-primary) !important;
+  padding: 5px 15px !important;
+  border-radius: 20px !important;
+  font-size: 0.9rem !important;
+  margin-top: 10px !important;
+}
+
+/* === Calculator Container === */
+.wpc-calc-tax-r4k8-calculator {
+  background: var(--wpc-tax-white) !important;
+  border-radius: var(--wpc-tax-radius-lg) !important;
+  box-shadow: var(--wpc-tax-shadow-md) !important;
+  overflow: hidden !important;
+  margin-bottom: 30px !important;
+}
+
+/* === Tabs Navigation === */
+.wpc-calc-tax-r4k8-tabs-nav {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  background: var(--wpc-tax-bg-light) !important;
+  border-bottom: 2px solid var(--wpc-tax-border) !important;
+}
+
+.wpc-calc-tax-r4k8-tab-btn {
+  flex: 1 1 auto !important;
+  min-width: 100px !important;
+  padding: 16px 20px !important;
+  background: transparent !important;
+  border: none !important;
+  cursor: pointer !important;
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  color: var(--wpc-tax-text-light) !important;
+  transition: var(--wpc-tax-transition) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  border-bottom: 3px solid transparent !important;
+  font-family: inherit !important;
+}
+
+.wpc-calc-tax-r4k8-tab-btn:hover {
+  background: var(--wpc-tax-white) !important;
+  color: var(--wpc-tax-primary) !important;
+}
+
+.wpc-calc-tax-r4k8-tab-btn.active {
+  background: var(--wpc-tax-white) !important;
+  color: var(--wpc-tax-primary) !important;
+  border-bottom-color: var(--wpc-tax-primary) !important;
+}
+
+.wpc-calc-tax-r4k8-tab-icon {
+  font-size: 1.3rem !important;
+}
+
+/* === Tab Content === */
+.wpc-calc-tax-r4k8-tab-content {
+  display: none !important;
+  padding: 30px !important;
+}
+
+.wpc-calc-tax-r4k8-tab-content.active {
+  display: block !important;
+}
+
+.wpc-calc-tax-r4k8-tab-title {
+  font-size: 1.4rem !important;
+  font-weight: 700 !important;
+  color: var(--wpc-tax-primary) !important;
+  margin: 0 0 25px 0 !important;
+  text-align: center !important;
+}
+
+/* === Apartment Type Selector === */
+.wpc-calc-tax-r4k8-type-selector {
+  display: flex !important;
+  gap: 15px !important;
+  margin-bottom: 25px !important;
+  justify-content: center !important;
+}
+
+.wpc-calc-tax-r4k8-type-btn {
+  flex: 1 !important;
+  max-width: 250px !important;
+  padding: 20px !important;
+  background: var(--wpc-tax-bg-light) !important;
+  border: 2px solid var(--wpc-tax-border) !important;
+  border-radius: var(--wpc-tax-radius-md) !important;
+  cursor: pointer !important;
+  transition: var(--wpc-tax-transition) !important;
+  text-align: center !important;
+  font-family: inherit !important;
+}
+
+.wpc-calc-tax-r4k8-type-btn:hover {
+  border-color: var(--wpc-tax-primary) !important;
+  background: var(--wpc-tax-primary-light) !important;
+}
+
+.wpc-calc-tax-r4k8-type-btn.active {
+  border-color: var(--wpc-tax-primary) !important;
+  background: var(--wpc-tax-primary-light) !important;
+  box-shadow: 0 0 0 3px rgba(30, 84, 144, 0.2) !important;
+}
+
+.wpc-calc-tax-r4k8-type-icon {
+  font-size: 2rem !important;
+  display: block !important;
+  margin-bottom: 8px !important;
+}
+
+.wpc-calc-tax-r4k8-type-label {
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  color: var(--wpc-tax-text-dark) !important;
+  display: block !important;
+}
+
+.wpc-calc-tax-r4k8-type-desc {
+  font-size: 0.85rem !important;
+  color: var(--wpc-tax-text-light) !important;
+  margin-top: 5px !important;
+  display: block !important;
+}
+
+/* === Input Groups === */
+.wpc-calc-tax-r4k8-input-group {
+  margin-bottom: 25px !important;
+}
+
+.wpc-calc-tax-r4k8-input-label {
+  display: block !important;
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  color: var(--wpc-tax-text-dark) !important;
+  margin-bottom: 10px !important;
+}
+
+.wpc-calc-tax-r4k8-slider-container {
+  display: flex !important;
+  align-items: center !important;
+  gap: 15px !important;
+}
+
+.wpc-calc-tax-r4k8-slider {
+  flex: 1 !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  height: 8px !important;
+  background: var(--wpc-tax-border) !important;
+  border-radius: 4px !important;
+  outline: none !important;
+  cursor: pointer !important;
+}
+
+.wpc-calc-tax-r4k8-slider::-webkit-slider-thumb {
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  width: 24px !important;
+  height: 24px !important;
+  background: var(--wpc-tax-primary) !important;
+  border-radius: 50% !important;
+  cursor: pointer !important;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2) !important;
+  transition: var(--wpc-tax-transition) !important;
+}
+
+.wpc-calc-tax-r4k8-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.1) !important;
+}
+
+.wpc-calc-tax-r4k8-slider::-moz-range-thumb {
+  width: 24px !important;
+  height: 24px !important;
+  background: var(--wpc-tax-primary) !important;
+  border-radius: 50% !important;
+  cursor: pointer !important;
+  border: none !important;
+}
+
+.wpc-calc-tax-r4k8-slider-value {
+  min-width: 130px !important;
+  padding: 12px 15px !important;
+  background: var(--wpc-tax-primary-light) !important;
+  color: var(--wpc-tax-primary) !important;
+  border-radius: var(--wpc-tax-radius-sm) !important;
+  font-size: 1.1rem !important;
+  font-weight: 700 !important;
+  text-align: center !important;
+}
+
+/* === Results Section === */
+.wpc-calc-tax-r4k8-results {
+  background: linear-gradient(135deg, var(--wpc-tax-primary) 0%, var(--wpc-tax-primary-dark) 100%) !important;
+  border-radius: var(--wpc-tax-radius-md) !important;
+  padding: 25px !important;
+  color: var(--wpc-tax-white) !important;
+  margin-top: 25px !important;
+}
+
+.wpc-calc-tax-r4k8-results-title {
+  font-size: 1.1rem !important;
+  font-weight: 600 !important;
+  margin: 0 0 20px 0 !important;
+  text-align: center !important;
+  opacity: 0.9 !important;
+}
+
+.wpc-calc-tax-r4k8-results-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)) !important;
+  gap: 20px !important;
+}
+
+.wpc-calc-tax-r4k8-result-item {
+  background: rgba(255,255,255,0.15) !important;
+  border-radius: var(--wpc-tax-radius-sm) !important;
+  padding: 20px !important;
+  text-align: center !important;
+}
+
+.wpc-calc-tax-r4k8-result-label {
+  font-size: 0.9rem !important;
+  opacity: 0.9 !important;
+  margin-bottom: 8px !important;
+}
+
+.wpc-calc-tax-r4k8-result-value {
+  font-size: 1.8rem !important;
+  font-weight: 700 !important;
+}
+
+.wpc-calc-tax-r4k8-result-value.highlight {
+  color: #fbbf24 !important;
+}
+
+/* === Tax Breakdown Table === */
+.wpc-calc-tax-r4k8-breakdown {
+  margin-top: 25px !important;
+  background: var(--wpc-tax-bg-light) !important;
+  border-radius: var(--wpc-tax-radius-md) !important;
+  overflow: hidden !important;
+}
+
+.wpc-calc-tax-r4k8-breakdown-title {
+  background: var(--wpc-tax-primary) !important;
+  color: var(--wpc-tax-white) !important;
+  padding: 15px 20px !important;
+  font-size: 1.1rem !important;
+  font-weight: 600 !important;
+  margin: 0 !important;
+}
+
+.wpc-calc-tax-r4k8-breakdown-table {
+  width: 100% !important;
+  border-collapse: collapse !important;
+}
+
+.wpc-calc-tax-r4k8-breakdown-table th,
+.wpc-calc-tax-r4k8-breakdown-table td {
+  padding: 12px 15px !important;
+  text-align: right !important;
+  border-bottom: 1px solid var(--wpc-tax-border) !important;
+}
+
+.wpc-calc-tax-r4k8-breakdown-table th {
+  background: var(--wpc-tax-white) !important;
+  font-weight: 600 !important;
+  color: var(--wpc-tax-text-dark) !important;
+}
+
+.wpc-calc-tax-r4k8-breakdown-table td {
+  background: var(--wpc-tax-white) !important;
+}
+
+.wpc-calc-tax-r4k8-breakdown-table tr:last-child td {
+  border-bottom: none !important;
+  font-weight: 700 !important;
+  background: var(--wpc-tax-primary-light) !important;
+}
+
+/* === Brackets Display === */
+.wpc-calc-tax-r4k8-brackets {
+  display: grid !important;
+  gap: 12px !important;
+  margin-top: 20px !important;
+}
+
+.wpc-calc-tax-r4k8-bracket-item {
+  display: flex !important;
+  align-items: center !important;
+  background: var(--wpc-tax-white) !important;
+  border: 1px solid var(--wpc-tax-border) !important;
+  border-radius: var(--wpc-tax-radius-sm) !important;
+  padding: 15px !important;
+  gap: 15px !important;
+}
+
+.wpc-calc-tax-r4k8-bracket-rate {
+  min-width: 60px !important;
+  height: 60px !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 1.2rem !important;
+  font-weight: 700 !important;
+  color: var(--wpc-tax-white) !important;
+}
+
+.wpc-calc-tax-r4k8-bracket-rate.rate-0 { background: var(--wpc-tax-success) !important; }
+.wpc-calc-tax-r4k8-bracket-rate.rate-3 { background: #22c55e !important; }
+.wpc-calc-tax-r4k8-bracket-rate.rate-5 { background: var(--wpc-tax-warning) !important; }
+.wpc-calc-tax-r4k8-bracket-rate.rate-8 { background: #f97316 !important; }
+.wpc-calc-tax-r4k8-bracket-rate.rate-10 { background: var(--wpc-tax-danger) !important; }
+
+.wpc-calc-tax-r4k8-bracket-info {
+  flex: 1 !important;
+}
+
+.wpc-calc-tax-r4k8-bracket-range {
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  color: var(--wpc-tax-text-dark) !important;
+  margin-bottom: 3px !important;
+}
+
+.wpc-calc-tax-r4k8-bracket-desc {
+  font-size: 0.85rem !important;
+  color: var(--wpc-tax-text-light) !important;
+}
+
+/* === Comparison Section === */
+.wpc-calc-tax-r4k8-comparison {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 20px !important;
+  margin-top: 25px !important;
+}
+
+.wpc-calc-tax-r4k8-compare-card {
+  background: var(--wpc-tax-white) !important;
+  border: 2px solid var(--wpc-tax-border) !important;
+  border-radius: var(--wpc-tax-radius-md) !important;
+  overflow: hidden !important;
+}
+
+.wpc-calc-tax-r4k8-compare-header {
+  padding: 15px 20px !important;
+  text-align: center !important;
+  font-weight: 700 !important;
+  font-size: 1.1rem !important;
+}
+
+.wpc-calc-tax-r4k8-compare-header.single {
+  background: var(--wpc-tax-success-light) !important;
+  color: var(--wpc-tax-success) !important;
+}
+
+.wpc-calc-tax-r4k8-compare-header.additional {
+  background: var(--wpc-tax-danger-light) !important;
+  color: var(--wpc-tax-danger) !important;
+}
+
+.wpc-calc-tax-r4k8-compare-body {
+  padding: 20px !important;
+}
+
+.wpc-calc-tax-r4k8-compare-row {
+  display: flex !important;
+  justify-content: space-between !important;
+  padding: 10px 0 !important;
+  border-bottom: 1px solid var(--wpc-tax-border) !important;
+}
+
+.wpc-calc-tax-r4k8-compare-row:last-child {
+  border-bottom: none !important;
+  font-weight: 700 !important;
+  font-size: 1.2rem !important;
+  color: var(--wpc-tax-primary) !important;
+}
+
+.wpc-calc-tax-r4k8-savings-badge {
+  background: var(--wpc-tax-success) !important;
+  color: var(--wpc-tax-white) !important;
+  padding: 15px 25px !important;
+  border-radius: var(--wpc-tax-radius-md) !important;
+  text-align: center !important;
+  margin-top: 20px !important;
+  font-size: 1.2rem !important;
+  font-weight: 700 !important;
+}
+
+/* === Info Box === */
+.wpc-calc-tax-r4k8-info-box {
+  background: var(--wpc-tax-primary-light) !important;
+  border-right: 4px solid var(--wpc-tax-primary) !important;
+  padding: 15px 20px !important;
+  border-radius: var(--wpc-tax-radius-sm) !important;
+  margin-top: 20px !important;
+}
+
+.wpc-calc-tax-r4k8-info-title {
+  font-weight: 700 !important;
+  color: var(--wpc-tax-primary) !important;
+  margin-bottom: 5px !important;
+}
+
+.wpc-calc-tax-r4k8-info-text {
+  font-size: 0.95rem !important;
+  color: var(--wpc-tax-text-dark) !important;
+  line-height: 1.6 !important;
+}
+
+/* === AWG Section === */
+.wpc-calc-tax-r4k8-awg-section {
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%) !important;
+  border-radius: var(--wpc-tax-radius-lg) !important;
+  padding: 30px !important;
+  margin: 30px 0 !important;
+  text-align: center !important;
+}
+
+.wpc-calc-tax-r4k8-awg-title {
+  font-size: 1.5rem !important;
+  font-weight: 700 !important;
+  color: var(--wpc-tax-primary) !important;
+  margin: 0 0 20px 0 !important;
+}
+
+.wpc-calc-tax-r4k8-cta-buttons {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 15px !important;
+  justify-content: center !important;
+  margin-bottom: 20px !important;
+}
+
+.wpc-calc-tax-r4k8-cta-btn {
+  padding: 15px 30px !important;
+  border-radius: 50px !important;
+  font-size: 1.1rem !important;
+  font-weight: 600 !important;
+  border: none !important;
+  cursor: pointer !important;
+  transition: var(--wpc-tax-transition) !important;
+  font-family: inherit !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+.wpc-calc-tax-r4k8-cta-btn.primary {
+  background: linear-gradient(135deg, var(--wpc-tax-danger) 0%, #dc2626 100%) !important;
+  color: var(--wpc-tax-white) !important;
+}
+
+.wpc-calc-tax-r4k8-cta-btn.secondary {
+  background: linear-gradient(135deg, var(--wpc-tax-success) 0%, #059669 100%) !important;
+  color: var(--wpc-tax-white) !important;
+}
+
+.wpc-calc-tax-r4k8-cta-btn:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: var(--wpc-tax-shadow-md) !important;
+}
+
+.wpc-calc-tax-r4k8-awg-content {
+  display: none !important;
+  margin-top: 20px !important;
+  padding: 20px !important;
+  background: var(--wpc-tax-white) !important;
+  border-radius: var(--wpc-tax-radius-md) !important;
+}
+
+.wpc-calc-tax-r4k8-awg-content.active {
+  display: block !important;
+}
+
+/* === FAQ Section === */
+.wpc-calc-tax-r4k8-faq-section {
+  margin: 40px 0 !important;
+}
+
+.wpc-calc-tax-r4k8-section-title {
+  font-size: 1.8rem !important;
+  font-weight: 700 !important;
+  color: var(--wpc-tax-primary) !important;
+  margin: 0 0 25px 0 !important;
+  text-align: center !important;
+}
+
+.wpc-calc-tax-r4k8-faq-item {
+  background: var(--wpc-tax-white) !important;
+  border: 1px solid var(--wpc-tax-border) !important;
+  border-radius: var(--wpc-tax-radius-md) !important;
+  margin-bottom: 12px !important;
+  overflow: hidden !important;
+}
+
+.wpc-calc-tax-r4k8-faq-header {
+  padding: 18px 20px !important;
+  cursor: pointer !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  background: var(--wpc-tax-bg-light) !important;
+  transition: var(--wpc-tax-transition) !important;
+}
+
+.wpc-calc-tax-r4k8-faq-header:hover {
+  background: var(--wpc-tax-primary-light) !important;
+}
+
+.wpc-calc-tax-r4k8-faq-question {
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  color: var(--wpc-tax-text-dark) !important;
+}
+
+.wpc-calc-tax-r4k8-faq-icon {
+  font-size: 1.2rem !important;
+  transition: var(--wpc-tax-transition) !important;
+  color: var(--wpc-tax-primary) !important;
+}
+
+.wpc-calc-tax-r4k8-faq-item.active .wpc-calc-tax-r4k8-faq-icon {
+  transform: rotate(180deg) !important;
+}
+
+.wpc-calc-tax-r4k8-faq-answer {
+  display: none !important;
+  padding: 20px !important;
+  font-size: 0.95rem !important;
+  line-height: 1.7 !important;
+  color: var(--wpc-tax-text-dark) !important;
+}
+
+.wpc-calc-tax-r4k8-faq-item.active .wpc-calc-tax-r4k8-faq-answer {
+  display: block !important;
+}
+
+/* === Content Section === */
+.wpc-calc-tax-r4k8-content-section {
+  background: var(--wpc-tax-white) !important;
+  border-radius: var(--wpc-tax-radius-lg) !important;
+  padding: 40px !important;
+  margin: 40px 0 !important;
+  box-shadow: var(--wpc-tax-shadow-sm) !important;
+}
+
+.wpc-calc-tax-r4k8-content-title {
+  font-size: 1.6rem !important;
+  font-weight: 700 !important;
+  color: var(--wpc-tax-primary) !important;
+  margin: 0 0 20px 0 !important;
+}
+
+.wpc-calc-tax-r4k8-content-text {
+  font-size: 1rem !important;
+  line-height: 1.8 !important;
+  color: var(--wpc-tax-text-dark) !important;
+  margin-bottom: 20px !important;
+}
+
+/* === Embed Section === */
+.wpc-calc-tax-r4k8-embed-section {
+  background: var(--wpc-tax-white) !important;
+  border-radius: var(--wpc-tax-radius-lg) !important;
+  padding: 40px !important;
+  margin: 40px 0 !important;
+  box-shadow: var(--wpc-tax-shadow-sm) !important;
+}
+
+.wpc-calc-tax-r4k8-embed-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  padding: 18px 40px !important;
+  background: linear-gradient(135deg, var(--wpc-tax-success) 0%, #059669 100%) !important;
+  color: var(--wpc-tax-white) !important;
+  border: none !important;
+  border-radius: 50px !important;
+  font-size: 1.2rem !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  transition: var(--wpc-tax-transition) !important;
+  font-family: inherit !important;
+}
+
+.wpc-calc-tax-r4k8-embed-btn:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: var(--wpc-tax-shadow-md) !important;
+}
+
+.wpc-calc-tax-r4k8-color-picker {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  gap: 12px !important;
+  margin: 25px 0 !important;
+}
+
+.wpc-calc-tax-r4k8-color-btn {
+  width: 50px !important;
+  height: 50px !important;
+  border-radius: 50% !important;
+  border: 3px solid var(--wpc-tax-white) !important;
+  cursor: pointer !important;
+  transition: var(--wpc-tax-transition) !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2) !important;
+}
+
+.wpc-calc-tax-r4k8-color-btn:hover {
+  transform: scale(1.15) !important;
+}
+
+.wpc-calc-tax-r4k8-color-btn.active {
+  border-color: #333 !important;
+  transform: scale(1.2) !important;
+}
+
+.wpc-calc-tax-r4k8-preview-container {
+  background: var(--wpc-tax-bg-light) !important;
+  border: 2px solid var(--wpc-tax-border) !important;
+  border-radius: var(--wpc-tax-radius-md) !important;
+  padding: 20px !important;
+  margin-top: 25px !important;
+}
+
+/* === Mobile Responsive === */
+@media (max-width: 768px) {
+  .wpc-calc-tax-r4k8-wrapper {
+    padding: 15px !important;
+  }
+  
+  .wpc-calc-tax-r4k8-title {
+    font-size: 1.6rem !important;
+  }
+  
+  .wpc-calc-tax-r4k8-tab-btn {
+    flex: 1 1 45% !important;
+    min-width: auto !important;
+    padding: 12px 10px !important;
+    font-size: 0.9rem !important;
+  }
+  
+  .wpc-calc-tax-r4k8-tab-content {
+    padding: 20px 15px !important;
+  }
+  
+  .wpc-calc-tax-r4k8-type-selector {
+    flex-direction: column !important;
+  }
+  
+  .wpc-calc-tax-r4k8-type-btn {
+    max-width: 100% !important;
+  }
+  
+  .wpc-calc-tax-r4k8-comparison {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .wpc-calc-tax-r4k8-results-grid {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .wpc-calc-tax-r4k8-cta-buttons {
+    flex-direction: column !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .wpc-calc-tax-r4k8-title {
+    font-size: 1.4rem !important;
+  }
+  
+  .wpc-calc-tax-r4k8-tab-btn {
+    font-size: 0.85rem !important;
+    padding: 10px 8px !important;
+  }
+  
+  .wpc-calc-tax-r4k8-tab-icon {
+    display: none !important;
+  }
+  
+  .wpc-calc-tax-r4k8-result-value {
+    font-size: 1.4rem !important;
+  }
+  
+  .wpc-calc-tax-r4k8-slider-value {
+    min-width: 100px !important;
+    font-size: 0.95rem !important;
+  }
+  
+  .wpc-calc-tax-r4k8-content-section,
+  .wpc-calc-tax-r4k8-embed-section {
+    padding: 25px 15px !important;
+  }
+}
+</style>
+
+<div class="wpc-calc-tax-r4k8-wrapper" id="wpc-calc-tax-r4k8-main">
+  
+  <!-- Title Section -->
+  <div class="wpc-calc-tax-r4k8-title-section">
+    <h1 class="wpc-calc-tax-r4k8-title">מחשבון מס רכישה 2024-2025</h1>
+    <p class="wpc-calc-tax-r4k8-subtitle">חשבו בקלות כמה מס רכישה תשלמו על דירה יחידה או דירה נוספת</p>
+    <span class="wpc-calc-tax-r4k8-update-date">📅 עודכן: ינואר 2025 | מדרגות בתוקף: 16.1.2024 - 15.1.2025</span>
+  </div>
+
+  <!-- Calculator -->
+  <div class="wpc-calc-tax-r4k8-calculator" id="wpc-calc-tax-r4k8-calculator">
+    
+    <!-- Tabs Navigation -->
+    <div class="wpc-calc-tax-r4k8-tabs-nav">
+      <button class="wpc-calc-tax-r4k8-tab-btn active" data-action="switch-tab" data-tab="basic">
+        <span class="wpc-calc-tax-r4k8-tab-icon">🧮</span>
+        <span>חישוב מס</span>
+      </button>
+      <button class="wpc-calc-tax-r4k8-tab-btn" data-action="switch-tab" data-tab="compare">
+        <span class="wpc-calc-tax-r4k8-tab-icon">📊</span>
+        <span>השוואת מס</span>
+      </button>
+      <button class="wpc-calc-tax-r4k8-tab-btn" data-action="switch-tab" data-tab="brackets">
+        <span class="wpc-calc-tax-r4k8-tab-icon">📋</span>
+        <span>מדרגות מס</span>
+      </button>
+      <button class="wpc-calc-tax-r4k8-tab-btn" data-action="switch-tab" data-tab="reverse">
+        <span class="wpc-calc-tax-r4k8-tab-icon">🔄</span>
+        <span>חישוב הפוך</span>
+      </button>
+    </div>
+
+    <!-- Tab 1: Basic Calculation -->
+    <div class="wpc-calc-tax-r4k8-tab-content active" id="tab-basic">
+      <h2 class="wpc-calc-tax-r4k8-tab-title">חישוב מס רכישה לדירה</h2>
+      
+      <!-- Apartment Type Selector -->
+      <div class="wpc-calc-tax-r4k8-type-selector">
+        <button class="wpc-calc-tax-r4k8-type-btn active" data-action="select-type" data-type="single">
+          <span class="wpc-calc-tax-r4k8-type-icon">🏠</span>
+          <span class="wpc-calc-tax-r4k8-type-label">דירה יחידה</span>
+          <span class="wpc-calc-tax-r4k8-type-desc">זו הדירה היחידה שלי בישראל</span>
+        </button>
+        <button class="wpc-calc-tax-r4k8-type-btn" data-action="select-type" data-type="additional">
+          <span class="wpc-calc-tax-r4k8-type-icon">🏢</span>
+          <span class="wpc-calc-tax-r4k8-type-label">דירה נוספת</span>
+          <span class="wpc-calc-tax-r4k8-type-desc">יש לי כבר דירה אחרת</span>
+        </button>
+      </div>
+
+      <!-- Price Input -->
+      <div class="wpc-calc-tax-r4k8-input-group">
+        <label class="wpc-calc-tax-r4k8-input-label">💰 מחיר הדירה (₪)</label>
+        <div class="wpc-calc-tax-r4k8-slider-container">
+          <input type="range" class="wpc-calc-tax-r4k8-slider" id="basic-price-slider" 
+                 min="500000" max="15000000" step="50000" value="2500000">
+          <div class="wpc-calc-tax-r4k8-slider-value" id="basic-price-value">₪2,500,000</div>
+        </div>
+      </div>
+
+      <!-- Results -->
+      <div class="wpc-calc-tax-r4k8-results">
+        <h3 class="wpc-calc-tax-r4k8-results-title">📊 תוצאות החישוב</h3>
+        <div class="wpc-calc-tax-r4k8-results-grid">
+          <div class="wpc-calc-tax-r4k8-result-item">
+            <div class="wpc-calc-tax-r4k8-result-label">מחיר הדירה</div>
+            <div class="wpc-calc-tax-r4k8-result-value" id="basic-result-price">₪2,500,000</div>
+          </div>
+          <div class="wpc-calc-tax-r4k8-result-item">
+            <div class="wpc-calc-tax-r4k8-result-label">מס רכישה לתשלום</div>
+            <div class="wpc-calc-tax-r4k8-result-value highlight" id="basic-result-tax">₪26,048</div>
+          </div>
+          <div class="wpc-calc-tax-r4k8-result-item">
+            <div class="wpc-calc-tax-r4k8-result-label">אחוז מס אפקטיבי</div>
+            <div class="wpc-calc-tax-r4k8-result-value" id="basic-result-percent">1.04%</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Breakdown -->
+      <div class="wpc-calc-tax-r4k8-breakdown">
+        <h4 class="wpc-calc-tax-r4k8-breakdown-title">📋 פירוט חישוב המס</h4>
+        <table class="wpc-calc-tax-r4k8-breakdown-table">
+          <thead>
+            <tr>
+              <th>מדרגה</th>
+              <th>סכום במדרגה</th>
+              <th>אחוז מס</th>
+              <th>מס לתשלום</th>
+            </tr>
+          </thead>
+          <tbody id="basic-breakdown-body">
+            <!-- Populated by JavaScript -->
+          </tbody>
+        </table>
+      </div>
+
+      <div class="wpc-calc-tax-r4k8-info-box">
+        <div class="wpc-calc-tax-r4k8-info-title">💡 טיפ חשוב</div>
+        <div class="wpc-calc-tax-r4k8-info-text">
+          מס רכישה משולם תוך 60 יום מחתימת חוזה הרכישה. ניתן לשלם ישירות לרשות המיסים או דרך עורך הדין.
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 2: Comparison -->
+    <div class="wpc-calc-tax-r4k8-tab-content" id="tab-compare">
+      <h2 class="wpc-calc-tax-r4k8-tab-title">השוואת מס: דירה יחידה מול דירה נוספת</h2>
+      
+      <div class="wpc-calc-tax-r4k8-input-group">
+        <label class="wpc-calc-tax-r4k8-input-label">💰 מחיר הדירה להשוואה (₪)</label>
+        <div class="wpc-calc-tax-r4k8-slider-container">
+          <input type="range" class="wpc-calc-tax-r4k8-slider" id="compare-price-slider" 
+                 min="500000" max="15000000" step="50000" value="3000000">
+          <div class="wpc-calc-tax-r4k8-slider-value" id="compare-price-value">₪3,000,000</div>
+        </div>
+      </div>
+
+      <div class="wpc-calc-tax-r4k8-comparison">
+        <!-- Single Apartment -->
+        <div class="wpc-calc-tax-r4k8-compare-card">
+          <div class="wpc-calc-tax-r4k8-compare-header single">🏠 דירה יחידה</div>
+          <div class="wpc-calc-tax-r4k8-compare-body">
+            <div class="wpc-calc-tax-r4k8-compare-row">
+              <span>מחיר הדירה:</span>
+              <span id="compare-single-price">₪3,000,000</span>
+            </div>
+            <div class="wpc-calc-tax-r4k8-compare-row">
+              <span>חלק פטור ממס:</span>
+              <span id="compare-single-exempt">₪1,978,745</span>
+            </div>
+            <div class="wpc-calc-tax-r4k8-compare-row">
+              <span>מס לתשלום:</span>
+              <span id="compare-single-tax">₪45,535</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Additional Apartment -->
+        <div class="wpc-calc-tax-r4k8-compare-card">
+          <div class="wpc-calc-tax-r4k8-compare-header additional">🏢 דירה נוספת</div>
+          <div class="wpc-calc-tax-r4k8-compare-body">
+            <div class="wpc-calc-tax-r4k8-compare-row">
+              <span>מחיר הדירה:</span>
+              <span id="compare-additional-price">₪3,000,000</span>
+            </div>
+            <div class="wpc-calc-tax-r4k8-compare-row">
+              <span>חלק פטור ממס:</span>
+              <span>₪0</span>
+            </div>
+            <div class="wpc-calc-tax-r4k8-compare-row">
+              <span>מס לתשלום:</span>
+              <span id="compare-additional-tax">₪240,000</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wpc-calc-tax-r4k8-savings-badge" id="compare-savings">
+        💰 חיסכון ברכישת דירה יחידה: ₪194,465
+      </div>
+
+      <div class="wpc-calc-tax-r4k8-info-box">
+        <div class="wpc-calc-tax-r4k8-info-title">📌 מה נחשב "דירה יחידה"?</div>
+        <div class="wpc-calc-tax-r4k8-info-text">
+          דירה יחידה = רוכש שאין לו דירת מגורים אחרת בישראל, או שיש לו דירה ומתחייב למכור אותה תוך 18 חודשים מרכישת הדירה החדשה.
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 3: Tax Brackets -->
+    <div class="wpc-calc-tax-r4k8-tab-content" id="tab-brackets">
+      <h2 class="wpc-calc-tax-r4k8-tab-title">מדרגות מס רכישה 2024-2025</h2>
+      
+      <div class="wpc-calc-tax-r4k8-type-selector">
+        <button class="wpc-calc-tax-r4k8-type-btn active" data-action="select-bracket-type" data-type="single">
+          <span class="wpc-calc-tax-r4k8-type-icon">🏠</span>
+          <span class="wpc-calc-tax-r4k8-type-label">דירה יחידה</span>
+        </button>
+        <button class="wpc-calc-tax-r4k8-type-btn" data-action="select-bracket-type" data-type="additional">
+          <span class="wpc-calc-tax-r4k8-type-icon">🏢</span>
+          <span class="wpc-calc-tax-r4k8-type-label">דירה נוספת</span>
+        </button>
+      </div>
+
+      <!-- Single Apartment Brackets -->
+      <div class="wpc-calc-tax-r4k8-brackets" id="brackets-single">
+        <div class="wpc-calc-tax-r4k8-bracket-item">
+          <div class="wpc-calc-tax-r4k8-bracket-rate rate-0">0%</div>
+          <div class="wpc-calc-tax-r4k8-bracket-info">
+            <div class="wpc-calc-tax-r4k8-bracket-range">עד ₪1,978,745</div>
+            <div class="wpc-calc-tax-r4k8-bracket-desc">פטור מלא - לא משלמים מס על חלק זה</div>
+          </div>
+        </div>
+        <div class="wpc-calc-tax-r4k8-bracket-item">
+          <div class="wpc-calc-tax-r4k8-bracket-rate rate-3">3.5%</div>
+          <div class="wpc-calc-tax-r4k8-bracket-info">
+            <div class="wpc-calc-tax-r4k8-bracket-range">₪1,978,745 - ₪2,347,040</div>
+            <div class="wpc-calc-tax-r4k8-bracket-desc">מס מופחת על מדרגה זו</div>
+          </div>
+        </div>
+        <div class="wpc-calc-tax-r4k8-bracket-item">
+          <div class="wpc-calc-tax-r4k8-bracket-rate rate-5">5%</div>
+          <div class="wpc-calc-tax-r4k8-bracket-info">
+            <div class="wpc-calc-tax-r4k8-bracket-range">₪2,347,040 - ₪6,055,070</div>
+            <div class="wpc-calc-tax-r4k8-bracket-desc">שיעור מס בינוני</div>
+          </div>
+        </div>
+        <div class="wpc-calc-tax-r4k8-bracket-item">
+          <div class="wpc-calc-tax-r4k8-bracket-rate rate-8">8%</div>
+          <div class="wpc-calc-tax-r4k8-bracket-info">
+            <div class="wpc-calc-tax-r4k8-bracket-range">₪6,055,070 - ₪20,183,565</div>
+            <div class="wpc-calc-tax-r4k8-bracket-desc">שיעור מס גבוה לדירות יקרות</div>
+          </div>
+        </div>
+        <div class="wpc-calc-tax-r4k8-bracket-item">
+          <div class="wpc-calc-tax-r4k8-bracket-rate rate-10">10%</div>
+          <div class="wpc-calc-tax-r4k8-bracket-info">
+            <div class="wpc-calc-tax-r4k8-bracket-range">מעל ₪20,183,565</div>
+            <div class="wpc-calc-tax-r4k8-bracket-desc">שיעור מס מקסימלי לדירות יוקרה</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Additional Apartment Brackets -->
+      <div class="wpc-calc-tax-r4k8-brackets" id="brackets-additional" style="display: none;">
+        <div class="wpc-calc-tax-r4k8-bracket-item">
+          <div class="wpc-calc-tax-r4k8-bracket-rate rate-8">8%</div>
+          <div class="wpc-calc-tax-r4k8-bracket-info">
+            <div class="wpc-calc-tax-r4k8-bracket-range">עד ₪6,055,070</div>
+            <div class="wpc-calc-tax-r4k8-bracket-desc">מס על כל הסכום ללא פטור</div>
+          </div>
+        </div>
+        <div class="wpc-calc-tax-r4k8-bracket-item">
+          <div class="wpc-calc-tax-r4k8-bracket-rate rate-10">10%</div>
+          <div class="wpc-calc-tax-r4k8-bracket-info">
+            <div class="wpc-calc-tax-r4k8-bracket-range">מעל ₪6,055,070</div>
+            <div class="wpc-calc-tax-r4k8-bracket-desc">שיעור מס מקסימלי</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wpc-calc-tax-r4k8-info-box">
+        <div class="wpc-calc-tax-r4k8-info-title">📅 תוקף המדרגות</div>
+        <div class="wpc-calc-tax-r4k8-info-text">
+          המדרגות בתוקף מ-16 בינואר 2024 ועד 15 בינואר 2025. המדרגות מתעדכנות מדי שנה בהתאם למדד המחירים לצרכן.
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 4: Reverse Calculation -->
+    <div class="wpc-calc-tax-r4k8-tab-content" id="tab-reverse">
+      <h2 class="wpc-calc-tax-r4k8-tab-title">חישוב הפוך: כמה דירה אוכל לקנות?</h2>
+      
+      <div class="wpc-calc-tax-r4k8-type-selector">
+        <button class="wpc-calc-tax-r4k8-type-btn active" data-action="select-reverse-type" data-type="single">
+          <span class="wpc-calc-tax-r4k8-type-icon">🏠</span>
+          <span class="wpc-calc-tax-r4k8-type-label">דירה יחידה</span>
+        </button>
+        <button class="wpc-calc-tax-r4k8-type-btn" data-action="select-reverse-type" data-type="additional">
+          <span class="wpc-calc-tax-r4k8-type-icon">🏢</span>
+          <span class="wpc-calc-tax-r4k8-type-label">דירה נוספת</span>
+        </button>
+      </div>
+
+      <div class="wpc-calc-tax-r4k8-input-group">
+        <label class="wpc-calc-tax-r4k8-input-label">💵 התקציב הכולל שלי (כולל מס רכישה)</label>
+        <div class="wpc-calc-tax-r4k8-slider-container">
+          <input type="range" class="wpc-calc-tax-r4k8-slider" id="reverse-budget-slider" 
+                 min="500000" max="15000000" step="50000" value="3000000">
+          <div class="wpc-calc-tax-r4k8-slider-value" id="reverse-budget-value">₪3,000,000</div>
+        </div>
+      </div>
+
+      <div class="wpc-calc-tax-r4k8-results">
+        <h3 class="wpc-calc-tax-r4k8-results-title">🎯 מה אני יכול לקנות?</h3>
+        <div class="wpc-calc-tax-r4k8-results-grid">
+          <div class="wpc-calc-tax-r4k8-result-item">
+            <div class="wpc-calc-tax-r4k8-result-label">תקציב כולל</div>
+            <div class="wpc-calc-tax-r4k8-result-value" id="reverse-result-budget">₪3,000,000</div>
+          </div>
+          <div class="wpc-calc-tax-r4k8-result-item">
+            <div class="wpc-calc-tax-r4k8-result-label">מחיר דירה מקסימלי</div>
+            <div class="wpc-calc-tax-r4k8-result-value highlight" id="reverse-result-max-price">₪2,954,465</div>
+          </div>
+          <div class="wpc-calc-tax-r4k8-result-item">
+            <div class="wpc-calc-tax-r4k8-result-label">מס רכישה משוער</div>
+            <div class="wpc-calc-tax-r4k8-result-value" id="reverse-result-tax">₪45,535</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wpc-calc-tax-r4k8-info-box">
+        <div class="wpc-calc-tax-r4k8-info-title">🧮 איך זה עובד?</div>
+        <div class="wpc-calc-tax-r4k8-info-text">
+          המחשבון מחשב את מחיר הדירה המקסימלי שתוכלו לרכוש כך שמחיר הדירה + מס הרכישה לא יעלו על התקציב הכולל שהגדרתם.
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- AWG Section -->
+  <div class="wpc-calc-tax-r4k8-awg-section">
+    <h3 class="wpc-calc-tax-r4k8-awg-title">🎯 צריכים משכנתא לרכישת הדירה?</h3>
+    <div class="wpc-calc-tax-r4k8-cta-buttons">
+      <button class="wpc-calc-tax-r4k8-cta-btn primary" data-action="open-awg">
+        🎯 בדוק זכאות למשכנתא - קבל הצעה מיידית!
+      </button>
+      <button class="wpc-calc-tax-r4k8-cta-btn secondary" data-action="scroll-to-embed">
+        🎁 רוצה להטמיע את המחשבון בחינם באתרך? לחץ כאן!
+      </button>
+    </div>
+    <div class="wpc-calc-tax-r4k8-awg-content" id="awg-content">
+      <div class="wpc-calc-tax-r4k8-shortcode-item">
+        [awg postid="32400"]
+      </div>
+    </div>
+  </div>
+
+  <!-- Content Section -->
+  <div class="wpc-calc-tax-r4k8-content-section">
+    <h2 class="wpc-calc-tax-r4k8-content-title">מה זה מס רכישה ואיך הוא מחושב?</h2>
+    <p class="wpc-calc-tax-r4k8-content-text">
+      <strong>מס רכישה</strong> הוא מס שמשלם רוכש נכס מקרקעין בישראל לרשות המיסים. המס מחושב כאחוז ממחיר הנכס, 
+      ושיעורו משתנה בהתאם לסוג הנכס (דירת מגורים, קרקע, נכס מסחרי) ולמעמד הרוכש (דירה יחידה או נוספת).
+    </p>
+    
+    <h3 class="wpc-calc-tax-r4k8-content-title">הבדל משמעותי בין דירה יחידה לדירה נוספת</h3>
+    <p class="wpc-calc-tax-r4k8-content-text">
+      הפער במס רכישה בין רוכש דירה יחידה לרוכש דירה נוספת יכול להגיע לעשרות ואף מאות אלפי שקלים. 
+      לדוגמה: על דירה במחיר 3,000,000 ₪, רוכש דירה יחידה ישלם כ-45,000 ₪ מס, בעוד רוכש דירה נוספת ישלם כ-240,000 ₪ - הפרש של כ-195,000 ₪!
+    </p>
+    
+    <h3 class="wpc-calc-tax-r4k8-content-title">מתי משלמים את מס הרכישה?</h3>
+    <p class="wpc-calc-tax-r4k8-content-text">
+      את מס הרכישה יש לשלם תוך <strong>60 יום</strong> מיום חתימת חוזה הרכישה. התשלום נעשה לרשות המיסים, 
+      בדרך כלל באמצעות עורך הדין שמטפל בעסקה. איחור בתשלום יגרור ריבית והצמדה.
+    </p>
+  </div>
+
+  <!-- Embed Section -->
+  <div class="wpc-calc-tax-r4k8-embed-section" id="wpc-calc-tax-r4k8-embed">
+    <h2 style="color: var(--wpc-tax-primary); font-size: 1.8em; text-align: center; margin-bottom: 25px;">
+      🎁 רוצים להטמיע את מחשבון מס רכישה באתר שלכם? חינם לחלוטין!
+    </h2>
+    
+    <div style="background: rgba(30, 84, 144, 0.08); padding: 20px; border-radius: 12px; margin-bottom: 25px; border-right: 4px solid var(--wpc-tax-primary);">
+      <p style="font-size: 1.1em; line-height: 1.7; margin: 0; color: #222;">
+        <strong>💎 אנחנו נותנים לכם את מחשבון מס רכישה המתקדם הזה לחלוטין בחינם!</strong><br>
+        תמורת קישור קרדיט קטן לאתר שלנו, תקבלו מחשבון מקצועי עם 4 טאבים, מדרגות מס מעודכנות 2024-2025, ועיצוב responsive מלא.<br>
+        <strong>שווי המחשבון:</strong> מעל ₪12,000 בפיתוח 💰 | <strong>מה ששילמתם:</strong> ₪0 🎉
+      </p>
+    </div>
+    
+    <div style="background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); padding: 25px; border-radius: 12px; margin: 25px 0; border: 2px solid #0ea5e9;">
+      <h3 style="color: #0369a1; margin-top: 0; font-size: 1.4em;">🚀 למה להטמיע מחשבון באתר שלכם? זה משפר את ה-SEO!</h3>
+      <ul style="line-height: 2; color: #222; margin: 0; list-style: none; padding: 0;">
+        <li>📈 <strong>תוכן אינטראקטיבי איכותי</strong> - גוגל אוהבת דפים עם כלים שימושיים</li>
+        <li>⏱️ <strong>זמן שהייה ארוך יותר</strong> - מבקרים נשארים בדף יותר זמן</li>
+        <li>🔗 <strong>מילות מפתח רלוונטיות</strong> - מחשבון מס רכישה, מדרגות מס, רכישת דירה</li>
+        <li>💼 <strong>מקצועיות ואמינות</strong> - אתר עם כלי מחשבון נראה מקצועי יותר</li>
+        <li>📱 <strong>Mobile Friendly</strong> - מחשבון responsive = נקודות SEO נוספות</li>
+      </ul>
+    </div>
+    
+    <h3 style="color: var(--wpc-tax-primary); margin-top: 25px;">📋 איך מטמיעים? (3 דקות בלבד)</h3>
+    <ol style="line-height: 2; color: #222;">
+      <li><strong>לחצו</strong> על הכפתור הירוק למטה 👇</li>
+      <li><strong>פתחו</strong> את עורך וורדפרס שלכם (מצב Text/HTML)</li>
+      <li><strong>הדביקו</strong> את הקוד במיקום הרצוי</li>
+      <li><strong>פרסמו!</strong> המחשבון יעבוד מיידית ✨</li>
+    </ol>
+    
+    <div style="text-align: center;">
+      <button class="wpc-calc-tax-r4k8-embed-btn" data-action="copy-embed-code">
+        📋 העתק קוד HTML מלא - לחצו כאן!
+      </button>
+    </div>
+
+    <h4 style="margin-top: 30px; color: var(--wpc-tax-primary); text-align: center;">🎨 בחרו צבע מותאם לאתר שלכם:</h4>
+    
+    <div style="background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin-top: 15px;">
+      <p style="text-align: center; margin-bottom: 20px; font-weight: 700;">👇 בחרו צבע והמחשבון יופיע בתצוגה מקדימה 👇</p>
+      
+      <div class="wpc-calc-tax-r4k8-color-picker" id="color-picker">
+        <button class="wpc-calc-tax-r4k8-color-btn active" style="background: #1e5490;" 
+                data-action="preview-color" data-color="#1e5490" data-name="כחול מקצועי" title="כחול מקצועי 💙"></button>
+        <button class="wpc-calc-tax-r4k8-color-btn" style="background: #10b981;" 
+                data-action="preview-color" data-color="#10b981" data-name="ירוק צמיחה" title="ירוק צמיחה 💚"></button>
+        <button class="wpc-calc-tax-r4k8-color-btn" style="background: #ef4444;" 
+                data-action="preview-color" data-color="#ef4444" data-name="אדום אנרגטי" title="אדום אנרגטי ❤️"></button>
+        <button class="wpc-calc-tax-r4k8-color-btn" style="background: #8b5cf6;" 
+                data-action="preview-color" data-color="#8b5cf6" data-name="סגול יוקרתי" title="סגול יוקרתי 💜"></button>
+        <button class="wpc-calc-tax-r4k8-color-btn" style="background: #f59e0b;" 
+                data-action="preview-color" data-color="#f59e0b" data-name="כתום דינמי" title="כתום דינמי 🧡"></button>
+        <button class="wpc-calc-tax-r4k8-color-btn" style="background: #ec4899;" 
+                data-action="preview-color" data-color="#ec4899" data-name="ורוד מודרני" title="ורוד מודרני 💗"></button>
+        <button class="wpc-calc-tax-r4k8-color-btn" style="background: #06b6d4;" 
+                data-action="preview-color" data-color="#06b6d4" data-name="טורקיז רענן" title="טורקיז רענן 🩵"></button>
+        <button class="wpc-calc-tax-r4k8-color-btn" style="background: #84cc16;" 
+                data-action="preview-color" data-color="#84cc16" data-name="ליים עז" title="ליים עז 💛"></button>
+        <button class="wpc-calc-tax-r4k8-color-btn" style="background: #f97316;" 
+                data-action="preview-color" data-color="#f97316" data-name="כתום בוהק" title="כתום בוהק 🔥"></button>
+        <button class="wpc-calc-tax-r4k8-color-btn" style="background: #0891b2;" 
+                data-action="preview-color" data-color="#0891b2" data-name="כחול ים" title="כחול ים 🌊"></button>
+      </div>
+      
+      <div style="text-align: center; margin-top: 15px;">
+        <label style="font-weight: 600; color: #222;">🎨 צבע מותאם אישית: </label>
+        <input type="color" id="custom-color-picker" value="#1e5490" 
+               style="width: 50px; height: 50px; border-radius: 8px; cursor: pointer; border: 2px solid #ddd; vertical-align: middle;">
+      </div>
+    </div>
+
+    <div class="wpc-calc-tax-r4k8-preview-container" id="preview-container" style="display: none; margin-top: 25px;">
+      <h4 style="text-align: center; margin-bottom: 15px; color: var(--wpc-tax-primary);">✨ תצוגה מקדימה בצבע: <span id="preview-color-name">כחול מקצועי</span></h4>
+      <div id="preview-content"></div>
+      <div style="text-align: center; margin-top: 20px;">
+        <button class="wpc-calc-tax-r4k8-embed-btn" data-action="copy-preview-code">
+          📋 העתק קוד עם הצבע הנבחר
+        </button>
+      </div>
+    </div>
+
+    <div style="background: #fff3cd; padding: 20px; border-radius: 12px; margin-top: 25px; border: 2px solid #ffc107;">
+      <h4 style="color: #856404; margin-top: 0;">⚠️ זכויות יוצרים ותנאי שימוש</h4>
+      <p style="color: #856404; line-height: 1.7; margin: 0;">
+        מחשבון זה מוגן בזכויות יוצרים © וניתן להטמעה בחינם רק תמורת השארת קישור הקרדיט.<br>
+        <strong>אסור:</strong> הסרת הקרדיט, שימוש מסחרי ישיר ללא אישור, מכירת המחשבון.
+      </p>
+    </div>
+    
+    <div style="background: linear-gradient(135deg, var(--wpc-tax-primary) 0%, #163d6b 100%); padding: 30px; border-radius: 12px; margin-top: 25px; text-align: center; color: white;">
+      <h3 style="color: white; margin-top: 0;">🎯 רוצים מחשבון מותאם אישית?</h3>
+      <p style="font-size: 1.1em;">📧 שלחו מייל ל: <strong>info@loan-israel.co.il</strong></p>
+    </div>
+  </div>
+
+  <!-- FAQ Section -->
+  <div class="wpc-calc-tax-r4k8-faq-section">
+    <h2 class="wpc-calc-tax-r4k8-section-title">שאלות נפוצות על מס רכישה</h2>
+    
+    <div class="wpc-calc-tax-r4k8-faq-item" data-action="toggle-faq">
+      <div class="wpc-calc-tax-r4k8-faq-header">
+        <span class="wpc-calc-tax-r4k8-faq-question">❓ מהו מס רכישה ומתי משלמים אותו?</span>
+        <span class="wpc-calc-tax-r4k8-faq-icon">▼</span>
+      </div>
+      <div class="wpc-calc-tax-r4k8-faq-answer">
+        <strong>מס רכישה</strong> הוא מס שמשלם רוכש נכס מקרקעין (דירה, קרקע, נכס מסחרי) לרשות המיסים בישראל. 
+        את המס יש לשלם תוך <strong>60 יום</strong> מיום חתימת חוזה הרכישה. התשלום נעשה באמצעות עורך הדין שמטפל בעסקה.
+      </div>
+    </div>
+
+    <div class="wpc-calc-tax-r4k8-faq-item" data-action="toggle-faq">
+      <div class="wpc-calc-tax-r4k8-faq-header">
+        <span class="wpc-calc-tax-r4k8-faq-question">❓ מה ההבדל בין מס רכישה לדירה יחידה לדירה נוספת?</span>
+        <span class="wpc-calc-tax-r4k8-faq-icon">▼</span>
+      </div>
+      <div class="wpc-calc-tax-r4k8-faq-answer">
+        ההבדל משמעותי מאוד! <strong>דירה יחידה</strong> נהנית ממדרגות מס מופחתות עם פטור מלא על כ-2 מיליון ₪ הראשונים. 
+        <strong>דירה נוספת</strong> מחויבת ב-8% מהשקל הראשון. לדוגמה: על דירה ב-3 מיליון ₪, 
+        רוכש דירה יחידה ישלם כ-45,000 ₪ בעוד רוכש דירה נוספת ישלם כ-240,000 ₪.
+      </div>
+    </div>
+
+    <div class="wpc-calc-tax-r4k8-faq-item" data-action="toggle-faq">
+      <div class="wpc-calc-tax-r4k8-faq-header">
+        <span class="wpc-calc-tax-r4k8-faq-question">❓ מה נחשב "דירה יחידה" לצורך מס רכישה?</span>
+        <span class="wpc-calc-tax-r4k8-faq-icon">▼</span>
+      </div>
+      <div class="wpc-calc-tax-r4k8-faq-answer">
+        דירה יחידה היא כזו שהרוכש אין לו דירת מגורים אחרת בישראל. גם מי שיש לו דירה ומתחייב <strong>למכור אותה תוך 18 חודשים</strong> 
+        מרכישת הדירה החדשה יכול להיחשב כרוכש דירה יחידה. בני זוג נשואים נחשבים כיחידה אחת לעניין זה.
+      </div>
+    </div>
+
+    <div class="wpc-calc-tax-r4k8-faq-item" data-action="toggle-faq">
+      <div class="wpc-calc-tax-r4k8-faq-header">
+        <span class="wpc-calc-tax-r4k8-faq-question">❓ האם ניתן לקבל פטור או הנחה במס רכישה?</span>
+        <span class="wpc-calc-tax-r4k8-faq-icon">▼</span>
+      </div>
+      <div class="wpc-calc-tax-r4k8-faq-answer">
+        כן, יש מספר מקרים של פטור או הנחה: <strong>עולים חדשים</strong> (עד 7 שנים מהעלייה) זכאים להטבות, 
+        <strong>נכים</strong> ו<strong>משפחות שכולות</strong> זכאים להנחות. כמו כן, <strong>רכישה מקבלן</strong> של דירה חדשה 
+        שעדיין לא נמסרה עשויה להיות כפופה לכללים שונים. מומלץ להתייעץ עם עורך דין.
+      </div>
+    </div>
+
+    <div class="wpc-calc-tax-r4k8-faq-item" data-action="toggle-faq">
+      <div class="wpc-calc-tax-r4k8-faq-header">
+        <span class="wpc-calc-tax-r4k8-faq-question">❓ מתי מתעדכנות מדרגות מס הרכישה?</span>
+        <span class="wpc-calc-tax-r4k8-faq-icon">▼</span>
+      </div>
+      <div class="wpc-calc-tax-r4k8-faq-answer">
+        מדרגות מס הרכישה מתעדכנות פעם בשנה, ב-<strong>16 בינואר</strong>, בהתאם לשיעור עליית מדד המחירים לצרכן. 
+        המדרגות הנוכחיות בתוקף מ-16.1.2024 עד 15.1.2025. עדכון המדרגות בדרך כלל מוריד את סכום המס 
+        (כי התקרות עולות בהתאם למדד).
+      </div>
+    </div>
+
+    <div class="wpc-calc-tax-r4k8-faq-item" data-action="toggle-faq">
+      <div class="wpc-calc-tax-r4k8-faq-header">
+        <span class="wpc-calc-tax-r4k8-faq-question">❓ מה קורה אם לא משלמים את מס הרכישה בזמן?</span>
+        <span class="wpc-calc-tax-r4k8-faq-icon">▼</span>
+      </div>
+      <div class="wpc-calc-tax-r4k8-faq-answer">
+        איחור בתשלום מס רכישה גורר <strong>ריבית והצמדה</strong> מיום חתימת החוזה. בנוסף, רשות המיסים עשויה להטיל 
+        <strong>קנסות</strong> על איחור משמעותי. במקרים קיצוניים, אי תשלום מס רכישה יכול למנוע רישום הזכויות בטאבו.
+      </div>
+    </div>
+
+    <div class="wpc-calc-tax-r4k8-faq-item" data-action="toggle-faq">
+      <div class="wpc-calc-tax-r4k8-faq-header">
+        <span class="wpc-calc-tax-r4k8-faq-question">❓ האם מס רכישה חל גם על קניית קרקע?</span>
+        <span class="wpc-calc-tax-r4k8-faq-icon">▼</span>
+      </div>
+      <div class="wpc-calc-tax-r4k8-faq-answer">
+        כן, מס רכישה חל על כל רכישת זכות במקרקעין כולל קרקע. עם זאת, <strong>מדרגות המס לקרקע</strong> שונות 
+        ממדרגות המס לדירת מגורים. על קרקע שיעור המס הוא קבוע של <strong>6%</strong> מהשקל הראשון 
+        (ללא מדרגות מופחתות).
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Schema.org JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "מהו מס רכישה ומתי משלמים אותו?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "מס רכישה הוא מס שמשלם רוכש נכס מקרקעין לרשות המיסים בישראל. את המס יש לשלם תוך 60 יום מיום חתימת חוזה הרכישה."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "מה ההבדל בין מס רכישה לדירה יחידה לדירה נוספת?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "דירה יחידה נהנית ממדרגות מס מופחתות עם פטור מלא על כ-2 מיליון ₪ הראשונים. דירה נוספת מחויבת ב-8% מהשקל הראשון."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "מה נחשב דירה יחידה לצורך מס רכישה?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "דירה יחידה היא כזו שהרוכש אין לו דירת מגורים אחרת בישראל. גם מי שמתחייב למכור דירה קיימת תוך 18 חודשים יכול להיחשב כרוכש דירה יחידה."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "מתי מתעדכנות מדרגות מס הרכישה?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "מדרגות מס הרכישה מתעדכנות פעם בשנה, ב-16 בינואר, בהתאם לשיעור עליית מדד המחירים לצרכן."
+      }
+    }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FinancialProduct",
+  "name": "מחשבון מס רכישה 2024-2025",
+  "description": "מחשבון מס רכישה מתקדם לחישוב מס על רכישת דירה יחידה או דירה נוספת בישראל לפי מדרגות המס העדכניות",
+  "category": "Financial Calculator",
+  "featureList": ["חישוב מס לדירה יחידה", "חישוב מס לדירה נוספת", "השוואת מס", "פירוט מדרגות", "חישוב הפוך"],
+  "provider": {
+    "@type": "Organization",
+    "name": "רק תבקש - אפטריו בע״מ",
+    "url": "https://loan-israel.co.il"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "ILS"
+  }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "איך לחשב מס רכישה על דירה",
+  "step": [
+    {
+      "@type": "HowToStep",
+      "name": "בחירת סוג הדירה",
+      "text": "בחרו האם מדובר בדירה יחידה (ללא דירה אחרת בבעלותכם) או דירה נוספת"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "הזנת מחיר הדירה",
+      "text": "הזינו את מחיר הדירה בשקלים באמצעות הסליידר או ידנית"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "קבלת תוצאות",
+      "text": "המחשבון יציג את סכום מס הרכישה לתשלום ופירוט לפי מדרגות"
+    }
+  ]
+}
+</script>
+
+<script>
+(function() {
+    'use strict';
+    
+    // Namespace check
+    const NS = 'WPC_CalcTax_R4K8';
+    if (window[NS]) return;
+    
+    // Container validation
+    const container = document.getElementById('wpc-calc-tax-r4k8-main');
+    if (!container) {
+        console.error('Calculator container not found');
+        return;
+    }
+
+    // Calculator name for embed
+    const CALCULATOR_NAME = 'מס רכישה';
+
+    // ==========================================
+    // TAX BRACKETS 2024-2025
+    // ==========================================
+    const BRACKETS_SINGLE = [
+        { min: 0, max: 1978745, rate: 0 },
+        { min: 1978745, max: 2347040, rate: 0.035 },
+        { min: 2347040, max: 6055070, rate: 0.05 },
+        { min: 6055070, max: 20183565, rate: 0.08 },
+        { min: 20183565, max: Infinity, rate: 0.10 }
+    ];
+
+    const BRACKETS_ADDITIONAL = [
+        { min: 0, max: 6055070, rate: 0.08 },
+        { min: 6055070, max: Infinity, rate: 0.10 }
+    ];
+
+    // ==========================================
+    // STATE MANAGEMENT
+    // ==========================================
+    const state = {
+        activeTab: 'basic',
+        basicType: 'single',
+        basicPrice: 2500000,
+        comparePrice: 3000000,
+        bracketsType: 'single',
+        reverseType: 'single',
+        reverseBudget: 3000000,
+        previewColor: '#1e5490',
+        previewColorName: 'כחול מקצועי'
+    };
+
+    // ==========================================
+    // UTILITY FUNCTIONS
+    // ==========================================
+    function formatCurrency(num) {
+        return '₪' + Math.round(num).toLocaleString('he-IL');
+    }
+
+    function formatPercent(num) {
+        return (num * 100).toFixed(2) + '%';
+    }
+
+    function el(id) {
+        return document.getElementById(id);
+    }
+
+    // ==========================================
+    // TAX CALCULATION FUNCTIONS
+    // ==========================================
+    function calculateTax(price, type) {
+        const brackets = type === 'single' ? BRACKETS_SINGLE : BRACKETS_ADDITIONAL;
+        let totalTax = 0;
+        let breakdown = [];
+
+        for (let i = 0; i < brackets.length; i++) {
+            const bracket = brackets[i];
+            if (price <= bracket.min) break;
+
+            const taxableInBracket = Math.min(price, bracket.max) - bracket.min;
+            if (taxableInBracket > 0) {
+                const taxInBracket = taxableInBracket * bracket.rate;
+                totalTax += taxInBracket;
+                breakdown.push({
+                    min: bracket.min,
+                    max: Math.min(price, bracket.max),
+                    rate: bracket.rate,
+                    amount: taxableInBracket,
+                    tax: taxInBracket
+                });
+            }
+        }
+
+        return {
+            total: Math.round(totalTax),
+            effectiveRate: price > 0 ? totalTax / price : 0,
+            breakdown: breakdown
+        };
+    }
+
+    function calculateMaxPrice(budget, type) {
+        // Binary search to find max price where price + tax = budget
+        let low = 0;
+        let high = budget;
+        
+        while (high - low > 100) {
+            const mid = (low + high) / 2;
+            const tax = calculateTax(mid, type).total;
+            if (mid + tax <= budget) {
+                low = mid;
+            } else {
+                high = mid;
+            }
+        }
+        
+        return Math.round(low);
+    }
+
+    // ==========================================
+    // UPDATE FUNCTIONS
+    // ==========================================
+    function updateBasic() {
+        const price = state.basicPrice;
+        const type = state.basicType;
+        const result = calculateTax(price, type);
+
+        el('basic-price-value').textContent = formatCurrency(price);
+        el('basic-result-price').textContent = formatCurrency(price);
+        el('basic-result-tax').textContent = formatCurrency(result.total);
+        el('basic-result-percent').textContent = formatPercent(result.effectiveRate);
+
+        // Update breakdown table
+        const tbody = el('basic-breakdown-body');
+        let html = '';
+        
+        result.breakdown.forEach((row, index) => {
+            const rateLabel = row.rate === 0 ? 'פטור' : (row.rate * 100) + '%';
+            html += `<tr>
+                <td>${index + 1}</td>
+                <td>${formatCurrency(row.amount)}</td>
+                <td>${rateLabel}</td>
+                <td>${formatCurrency(row.tax)}</td>
+            </tr>`;
+        });
+        
+        html += `<tr>
+            <td colspan="3"><strong>סה"כ מס רכישה</strong></td>
+            <td><strong>${formatCurrency(result.total)}</strong></td>
+        </tr>`;
+        
+        tbody.innerHTML = html;
+    }
+
+    function updateCompare() {
+        const price = state.comparePrice;
+        const singleResult = calculateTax(price, 'single');
+        const additionalResult = calculateTax(price, 'additional');
+        const savings = additionalResult.total - singleResult.total;
+
+        el('compare-price-value').textContent = formatCurrency(price);
+        el('compare-single-price').textContent = formatCurrency(price);
+        el('compare-single-exempt').textContent = formatCurrency(Math.min(price, 1978745));
+        el('compare-single-tax').textContent = formatCurrency(singleResult.total);
+        el('compare-additional-price').textContent = formatCurrency(price);
+        el('compare-additional-tax').textContent = formatCurrency(additionalResult.total);
+        el('compare-savings').textContent = '💰 חיסכון ברכישת דירה יחידה: ' + formatCurrency(savings);
+    }
+
+    function updateBrackets() {
+        const singleBrackets = el('brackets-single');
+        const additionalBrackets = el('brackets-additional');
+        
+        if (state.bracketsType === 'single') {
+            singleBrackets.style.display = 'grid';
+            additionalBrackets.style.display = 'none';
+        } else {
+            singleBrackets.style.display = 'none';
+            additionalBrackets.style.display = 'grid';
+        }
+    }
+
+    function updateReverse() {
+        const budget = state.reverseBudget;
+        const type = state.reverseType;
+        const maxPrice = calculateMaxPrice(budget, type);
+        const taxResult = calculateTax(maxPrice, type);
+
+        el('reverse-budget-value').textContent = formatCurrency(budget);
+        el('reverse-result-budget').textContent = formatCurrency(budget);
+        el('reverse-result-max-price').textContent = formatCurrency(maxPrice);
+        el('reverse-result-tax').textContent = formatCurrency(taxResult.total);
+    }
+
+    // ==========================================
+    // TAB SWITCHING
+    // ==========================================
+    function switchTab(tabName) {
+        state.activeTab = tabName;
+        
+        // Update tab buttons
+        container.querySelectorAll('.wpc-calc-tax-r4k8-tab-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        container.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+        
+        // Update tab contents
+        container.querySelectorAll('.wpc-calc-tax-r4k8-tab-content').forEach(content => {
+            content.classList.remove('active');
+        });
+        el('tab-' + tabName).classList.add('active');
+    }
+
+    // ==========================================
+    // TYPE SELECTORS
+    // ==========================================
+    function selectType(type, context) {
+        const selector = context === 'basic' ? '.wpc-calc-tax-r4k8-type-selector' : 
+                         context === 'brackets' ? '#tab-brackets .wpc-calc-tax-r4k8-type-selector' :
+                         '#tab-reverse .wpc-calc-tax-r4k8-type-selector';
+        
+        const buttons = container.querySelectorAll(selector + ' .wpc-calc-tax-r4k8-type-btn');
+        buttons.forEach(btn => btn.classList.remove('active'));
+        
+        const activeBtn = container.querySelector(selector + ` [data-type="${type}"]`);
+        if (activeBtn) activeBtn.classList.add('active');
+
+        if (context === 'basic') {
+            state.basicType = type;
+            updateBasic();
+        } else if (context === 'brackets') {
+            state.bracketsType = type;
+            updateBrackets();
+        } else if (context === 'reverse') {
+            state.reverseType = type;
+            updateReverse();
+        }
+    }
+
+    // ==========================================
+    // AWG & FAQ HANDLERS
+    // ==========================================
+    function openAWG() {
+        const awgContent = el('awg-content');
+        awgContent.classList.toggle('active');
+        if (awgContent.classList.contains('active')) {
+            awgContent.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    }
+
+    function toggleFAQ(item) {
+        item.classList.toggle('active');
+    }
+
+    function scrollToEmbed() {
+        el('wpc-calc-tax-r4k8-embed').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // ==========================================
+    // EMBED FUNCTIONS
+    // ==========================================
+    function darkenColor(hex, percent) {
+        const num = parseInt(hex.replace('#', ''), 16);
+        const amt = Math.round(2.55 * percent);
+        const R = Math.max((num >> 16) - amt, 0);
+        const G = Math.max((num >> 8 & 0x00FF) - amt, 0);
+        const B = Math.max((num & 0x0000FF) - amt, 0);
+        return '#' + (0x1000000 + R * 0x10000 + G * 0x100 + B).toString(16).slice(1);
+    }
+
+    function getEmbedCSS(color) {
+        const darkColor = darkenColor(color, 15);
+        // Convert hex to rgba for light color
+        const r = parseInt(color.slice(1, 3), 16);
+        const g = parseInt(color.slice(3, 5), 16);
+        const b = parseInt(color.slice(5, 7), 16);
+        const lightColor = `rgba(${r}, ${g}, ${b}, 0.1)`;
+        
+        let css = '';
+        const styleElements = document.querySelectorAll('style');
+        for (let i = 0; i < styleElements.length; i++) {
+            const styleText = styleElements[i].textContent;
+            if (styleText && styleText.includes('wpc-calc-tax-r4k8')) {
+                css = styleText;
+                break;
+            }
+        }
+        
+        if (!css) {
+            console.error('CSS not found for embed');
+            return '';
+        }
+        
+        // Replace all color references
+        css = css.replace(/#1e5490/g, color);
+        css = css.replace(/#163d6b/g, darkColor);
+        css = css.replace(/rgba\(30,\s*84,\s*144,\s*0\.1\)/g, lightColor);
+        css = css.replace(/--wpc-tax-primary:\s*#1e5490/g, `--wpc-tax-primary: ${color}`);
+        css = css.replace(/--wpc-tax-primary-dark:\s*#163d6b/g, `--wpc-tax-primary-dark: ${darkColor}`);
+        css = css.replace(/--wpc-tax-primary-light:\s*rgba\(30,\s*84,\s*144,\s*0\.1\)/g, `--wpc-tax-primary-light: ${lightColor}`);
+        
+        return css;
+    }
+
+    function getEmbedScript() {
+        return `<script>
+document.addEventListener("DOMContentLoaded", function() {
+    (function() {
+        "use strict";
+        var NS = "WPC_CalcTax_Embed";
+        if (window[NS]) return;
+        var container = document.getElementById("wpc-calc-tax-r4k8-main");
+        if (!container) return;
+
+        var BRACKETS_SINGLE = [
+            { min: 0, max: 1978745, rate: 0 },
+            { min: 1978745, max: 2347040, rate: 0.035 },
+            { min: 2347040, max: 6055070, rate: 0.05 },
+            { min: 6055070, max: 20183565, rate: 0.08 },
+            { min: 20183565, max: Infinity, rate: 0.10 }
+        ];
+        var BRACKETS_ADDITIONAL = [
+            { min: 0, max: 6055070, rate: 0.08 },
+            { min: 6055070, max: Infinity, rate: 0.10 }
+        ];
+
+        var state = {
+            basicType: "single",
+            basicPrice: 2500000,
+            comparePrice: 3000000,
+            bracketsType: "single",
+            reverseType: "single",
+            reverseBudget: 3000000
+        };
+
+        function formatCurrency(n) { return "₪" + Math.round(n).toLocaleString("he-IL"); }
+        function formatPercent(n) { return (n * 100).toFixed(2) + "%"; }
+        function el(id) { return document.getElementById(id); }
+
+        function calculateTax(price, type) {
+            var brackets = type === "single" ? BRACKETS_SINGLE : BRACKETS_ADDITIONAL;
+            var totalTax = 0;
+            var breakdown = [];
+            for (var i = 0; i < brackets.length; i++) {
+                var bracket = brackets[i];
+                if (price <= bracket.min) break;
+                var taxableInBracket = Math.min(price, bracket.max) - bracket.min;
+                if (taxableInBracket > 0) {
+                    var taxInBracket = taxableInBracket * bracket.rate;
+                    totalTax += taxInBracket;
+                    breakdown.push({ min: bracket.min, max: Math.min(price, bracket.max), rate: bracket.rate, amount: taxableInBracket, tax: taxInBracket });
+                }
+            }
+            return { total: Math.round(totalTax), effectiveRate: price > 0 ? totalTax / price : 0, breakdown: breakdown };
+        }
+
+        function calculateMaxPrice(budget, type) {
+            var low = 0, high = budget;
+            while (high - low > 100) {
+                var mid = (low + high) / 2;
+                var tax = calculateTax(mid, type).total;
+                if (mid + tax <= budget) low = mid; else high = mid;
+            }
+            return Math.round(low);
+        }
+
+        function updateBasic() {
+            var price = state.basicPrice;
+            var result = calculateTax(price, state.basicType);
+            if(el("basic-price-value")) el("basic-price-value").textContent = formatCurrency(price);
+            if(el("basic-result-price")) el("basic-result-price").textContent = formatCurrency(price);
+            if(el("basic-result-tax")) el("basic-result-tax").textContent = formatCurrency(result.total);
+            if(el("basic-result-percent")) el("basic-result-percent").textContent = formatPercent(result.effectiveRate);
+            var tbody = el("basic-breakdown-body");
+            if (tbody) {
+                var html = "";
+                for(var i=0; i<result.breakdown.length; i++) {
+                    var row = result.breakdown[i];
+                    var rateLabel = row.rate === 0 ? "פטור" : (row.rate * 100) + "%";
+                    html += "<tr><td>" + (i+1) + "</td><td>" + formatCurrency(row.amount) + "</td><td>" + rateLabel + "</td><td>" + formatCurrency(row.tax) + "</td></tr>";
+                }
+                html += "<tr><td colspan=\\"3\\"><strong>סהכ מס רכישה</strong></td><td><strong>" + formatCurrency(result.total) + "</strong></td></tr>";
+                tbody.innerHTML = html;
+            }
+        }
+
+        function updateCompare() {
+            var price = state.comparePrice;
+            var singleResult = calculateTax(price, "single");
+            var additionalResult = calculateTax(price, "additional");
+            var savings = additionalResult.total - singleResult.total;
+            if(el("compare-price-value")) el("compare-price-value").textContent = formatCurrency(price);
+            if(el("compare-single-price")) el("compare-single-price").textContent = formatCurrency(price);
+            if(el("compare-single-exempt")) el("compare-single-exempt").textContent = formatCurrency(Math.min(price, 1978745));
+            if(el("compare-single-tax")) el("compare-single-tax").textContent = formatCurrency(singleResult.total);
+            if(el("compare-additional-price")) el("compare-additional-price").textContent = formatCurrency(price);
+            if(el("compare-additional-tax")) el("compare-additional-tax").textContent = formatCurrency(additionalResult.total);
+            if(el("compare-savings")) el("compare-savings").textContent = "💰 חיסכון ברכישת דירה יחידה: " + formatCurrency(savings);
+        }
+
+        function updateReverse() {
+            var budget = state.reverseBudget;
+            var maxPrice = calculateMaxPrice(budget, state.reverseType);
+            var taxResult = calculateTax(maxPrice, state.reverseType);
+            if(el("reverse-budget-value")) el("reverse-budget-value").textContent = formatCurrency(budget);
+            if(el("reverse-result-budget")) el("reverse-result-budget").textContent = formatCurrency(budget);
+            if(el("reverse-result-max-price")) el("reverse-result-max-price").textContent = formatCurrency(maxPrice);
+            if(el("reverse-result-tax")) el("reverse-result-tax").textContent = formatCurrency(taxResult.total);
+        }
+
+        function switchTab(tabName) {
+            container.querySelectorAll(".wpc-calc-tax-r4k8-tab-btn").forEach(function(btn) { btn.classList.remove("active"); });
+            var activeBtn = container.querySelector("[data-tab=\\"" + tabName + "\\"]");
+            if (activeBtn) activeBtn.classList.add("active");
+            container.querySelectorAll(".wpc-calc-tax-r4k8-tab-content").forEach(function(c) { c.classList.remove("active"); });
+            var tabContent = el("tab-" + tabName);
+            if (tabContent) tabContent.classList.add("active");
+        }
+
+        container.addEventListener("click", function(e) {
+            var action = e.target.closest("[data-action]");
+            if (!action) return;
+            var act = action.dataset.action;
+            if (act === "switch-tab") switchTab(action.dataset.tab);
+            else if (act === "select-type") {
+                state.basicType = action.dataset.type;
+                container.querySelectorAll("#tab-basic .wpc-calc-tax-r4k8-type-btn").forEach(function(b){b.classList.remove("active");});
+                action.classList.add("active");
+                updateBasic();
+            }
+            else if (act === "select-bracket-type") {
+                state.bracketsType = action.dataset.type;
+                container.querySelectorAll("#tab-brackets .wpc-calc-tax-r4k8-type-btn").forEach(function(b){b.classList.remove("active");});
+                action.classList.add("active");
+                el("brackets-single").style.display = state.bracketsType === "single" ? "grid" : "none";
+                el("brackets-additional").style.display = state.bracketsType === "additional" ? "grid" : "none";
+            }
+            else if (act === "select-reverse-type") {
+                state.reverseType = action.dataset.type;
+                container.querySelectorAll("#tab-reverse .wpc-calc-tax-r4k8-type-btn").forEach(function(b){b.classList.remove("active");});
+                action.classList.add("active");
+                updateReverse();
+            }
+            else if (act === "toggle-faq") {
+                var faqItem = action.closest(".wpc-calc-tax-r4k8-faq-item");
+                if (faqItem) faqItem.classList.toggle("active");
+            }
+        });
+
+        container.addEventListener("input", function(e) {
+            var id = e.target.id;
+            if (id === "basic-price-slider") { state.basicPrice = parseInt(e.target.value); updateBasic(); }
+            else if (id === "compare-price-slider") { state.comparePrice = parseInt(e.target.value); updateCompare(); }
+            else if (id === "reverse-budget-slider") { state.reverseBudget = parseInt(e.target.value); updateReverse(); }
+        });
+
+        updateBasic(); updateCompare(); updateReverse();
+        window[NS] = { version: "1.0.0" };
+    })();
+});
+<` + `/script>`;
+    }
+
+    function copyEmbedCode() {
+        const calculator = el('wpc-calc-tax-r4k8-calculator');
+        const calcClone = calculator.cloneNode(true);
+        
+        // Remove preview elements
+        const previewElements = calcClone.querySelectorAll('[id^="preview"]');
+        previewElements.forEach(el => el.remove());
+
+        const css = getEmbedCSS('#1e5490');
+        
+        let code = '<style>\n' + css + '\n</style>\n\n';
+        code += '<div class="wpc-calc-tax-r4k8-wrapper" id="wpc-calc-tax-r4k8-main">\n';
+        code += calcClone.outerHTML + '\n';
+        code += '</div>\n\n';
+        code += `<p style="text-align:center; font-size:0.9em; margin-top:20px; color:#666;">
+    מחשבון ${CALCULATOR_NAME} פותח על ידי 
+    <a href="https://loan-israel.co.il/" target="_blank" rel="nofollow noopener" 
+       style="color:#1e5490; text-decoration:underline;">
+       רק תבקש פיננסים
+    </a>
+</p>\n\n`;
+        code += getEmbedScript();
+
+        navigator.clipboard.writeText(code).then(() => {
+            alert('✅ הקוד הועתק בהצלחה! הדביקו אותו בעורך HTML שלכם.');
+        });
+    }
+
+    function applyColorToCalculator(calcElement, color) {
+        const darkColor = darkenColor(color, 15);
+        // Convert hex to rgba for light color
+        const r = parseInt(color.slice(1, 3), 16);
+        const g = parseInt(color.slice(3, 5), 16);
+        const b = parseInt(color.slice(5, 7), 16);
+        const lightColor = `rgba(${r}, ${g}, ${b}, 0.1)`;
+        
+        // Override CSS Variables on the element itself
+        calcElement.style.setProperty('--wpc-tax-primary', color);
+        calcElement.style.setProperty('--wpc-tax-primary-dark', darkColor);
+        calcElement.style.setProperty('--wpc-tax-primary-light', lightColor);
+        
+        // Tab buttons - active state (use setProperty with priority)
+        calcElement.querySelectorAll('.wpc-calc-tax-r4k8-tab-btn.active').forEach(btn => {
+            btn.style.setProperty('border-bottom-color', color, 'important');
+            btn.style.setProperty('color', color, 'important');
+        });
+        
+        // Results sections
+        calcElement.querySelectorAll('.wpc-calc-tax-r4k8-results').forEach(el => {
+            el.style.setProperty('background', `linear-gradient(135deg, ${color} 0%, ${darkColor} 100%)`, 'important');
+        });
+        
+        // Breakdown title
+        calcElement.querySelectorAll('.wpc-calc-tax-r4k8-breakdown-title').forEach(el => {
+            el.style.setProperty('background', color, 'important');
+        });
+        
+        // Type buttons - active state
+        calcElement.querySelectorAll('.wpc-calc-tax-r4k8-type-btn.active').forEach(btn => {
+            btn.style.setProperty('border-color', color, 'important');
+            btn.style.setProperty('background', lightColor, 'important');
+        });
+        
+        // Info boxes
+        calcElement.querySelectorAll('.wpc-calc-tax-r4k8-info-box').forEach(el => {
+            el.style.setProperty('border-right-color', color, 'important');
+            el.style.setProperty('background', lightColor, 'important');
+        });
+        
+        // Tab titles
+        calcElement.querySelectorAll('.wpc-calc-tax-r4k8-tab-title').forEach(el => {
+            el.style.setProperty('color', color, 'important');
+        });
+        
+        // Slider value displays
+        calcElement.querySelectorAll('.wpc-calc-tax-r4k8-slider-value').forEach(el => {
+            el.style.setProperty('background', lightColor, 'important');
+            el.style.setProperty('color', color, 'important');
+        });
+        
+        // Compare row last child (totals)
+        calcElement.querySelectorAll('.wpc-calc-tax-r4k8-compare-row:last-child').forEach(el => {
+            el.style.setProperty('color', color, 'important');
+        });
+        
+        // Bracket rate circles based on color theme
+        calcElement.querySelectorAll('.wpc-calc-tax-r4k8-bracket-rate').forEach(el => {
+            // Keep original colors for rate indicators
+        });
+
+        // Savings badge
+        calcElement.querySelectorAll('.wpc-calc-tax-r4k8-savings-badge').forEach(el => {
+            el.style.setProperty('background', color, 'important');
+        });
+    }
+
+    function showPreview(color, colorName) {
+        state.previewColor = color;
+        state.previewColorName = colorName;
+
+        const previewContainer = el('preview-container');
+        const previewContent = el('preview-content');
+        
+        previewContainer.style.display = 'block';
+        el('preview-color-name').textContent = colorName;
+
+        // Clone calculator
+        const calculator = el('wpc-calc-tax-r4k8-calculator');
+        const calcClone = calculator.cloneNode(true);
+
+        // Apply color to all elements
+        applyColorToCalculator(calcClone, color);
+
+        previewContent.innerHTML = '';
+        previewContent.appendChild(calcClone);
+
+        // Initialize JS for cloned calculator
+        initPreviewCalculator(calcClone, color);
+
+        // Update color buttons
+        container.querySelectorAll('.wpc-calc-tax-r4k8-color-btn').forEach(btn => {
+            btn.classList.remove('active');
+            if (btn.dataset.color === color) btn.classList.add('active');
+        });
+
+        previewContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    // ==========================================
+    // PREVIEW CALCULATOR INITIALIZATION
+    // ==========================================
+    function initPreviewCalculator(calcClone, color) {
+        const darkColor = darkenColor(color, 15);
+        
+        // Preview state (separate from main state)
+        const previewState = {
+            basicType: 'single',
+            basicPrice: 2500000,
+            comparePrice: 3000000,
+            bracketsType: 'single',
+            reverseType: 'single',
+            reverseBudget: 3000000
+        };
+
+        // Helper to find elements in clone
+        function cloneEl(selector) {
+            return calcClone.querySelector(selector);
+        }
+
+        // Update functions for preview
+        function updatePreviewBasic() {
+            const price = previewState.basicPrice;
+            const result = calculateTax(price, previewState.basicType);
+            
+            const priceValue = cloneEl('#basic-price-value');
+            const resultPrice = cloneEl('#basic-result-price');
+            const resultTax = cloneEl('#basic-result-tax');
+            const resultPercent = cloneEl('#basic-result-percent');
+            const tbody = cloneEl('#basic-breakdown-body');
+            
+            if (priceValue) priceValue.textContent = formatCurrency(price);
+            if (resultPrice) resultPrice.textContent = formatCurrency(price);
+            if (resultTax) resultTax.textContent = formatCurrency(result.total);
+            if (resultPercent) resultPercent.textContent = formatPercent(result.effectiveRate);
+            
+            if (tbody) {
+                let html = '';
+                result.breakdown.forEach((row, index) => {
+                    const rateLabel = row.rate === 0 ? 'פטור' : (row.rate * 100) + '%';
+                    html += `<tr><td>${index + 1}</td><td>${formatCurrency(row.amount)}</td><td>${rateLabel}</td><td>${formatCurrency(row.tax)}</td></tr>`;
+                });
+                html += `<tr><td colspan="3"><strong>סה"כ מס רכישה</strong></td><td><strong>${formatCurrency(result.total)}</strong></td></tr>`;
+                tbody.innerHTML = html;
+            }
+        }
+
+        function updatePreviewCompare() {
+            const price = previewState.comparePrice;
+            const singleResult = calculateTax(price, 'single');
+            const additionalResult = calculateTax(price, 'additional');
+            const savings = additionalResult.total - singleResult.total;
+
+            const priceValue = cloneEl('#compare-price-value');
+            const singlePrice = cloneEl('#compare-single-price');
+            const singleExempt = cloneEl('#compare-single-exempt');
+            const singleTax = cloneEl('#compare-single-tax');
+            const additionalPrice = cloneEl('#compare-additional-price');
+            const additionalTax = cloneEl('#compare-additional-tax');
+            const savingsBadge = cloneEl('#compare-savings');
+            
+            if (priceValue) priceValue.textContent = formatCurrency(price);
+            if (singlePrice) singlePrice.textContent = formatCurrency(price);
+            if (singleExempt) singleExempt.textContent = formatCurrency(Math.min(price, 1978745));
+            if (singleTax) singleTax.textContent = formatCurrency(singleResult.total);
+            if (additionalPrice) additionalPrice.textContent = formatCurrency(price);
+            if (additionalTax) additionalTax.textContent = formatCurrency(additionalResult.total);
+            if (savingsBadge) savingsBadge.textContent = '💰 חיסכון ברכישת דירה יחידה: ' + formatCurrency(savings);
+        }
+
+        function updatePreviewReverse() {
+            const budget = previewState.reverseBudget;
+            const maxPrice = calculateMaxPrice(budget, previewState.reverseType);
+            const taxResult = calculateTax(maxPrice, previewState.reverseType);
+
+            const budgetValue = cloneEl('#reverse-budget-value');
+            const resultBudget = cloneEl('#reverse-result-budget');
+            const resultMaxPrice = cloneEl('#reverse-result-max-price');
+            const resultTax = cloneEl('#reverse-result-tax');
+            
+            if (budgetValue) budgetValue.textContent = formatCurrency(budget);
+            if (resultBudget) resultBudget.textContent = formatCurrency(budget);
+            if (resultMaxPrice) resultMaxPrice.textContent = formatCurrency(maxPrice);
+            if (resultTax) resultTax.textContent = formatCurrency(taxResult.total);
+        }
+
+        function switchPreviewTab(tabName) {
+            // Update tab buttons
+            calcClone.querySelectorAll('.wpc-calc-tax-r4k8-tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+                btn.style.removeProperty('color');
+                btn.style.removeProperty('border-bottom-color');
+            });
+            const activeBtn = calcClone.querySelector(`[data-tab="${tabName}"]`);
+            if (activeBtn) {
+                activeBtn.classList.add('active');
+                activeBtn.style.setProperty('color', color, 'important');
+                activeBtn.style.setProperty('border-bottom-color', color, 'important');
+            }
+            
+            // Update tab contents
+            calcClone.querySelectorAll('.wpc-calc-tax-r4k8-tab-content').forEach(content => {
+                content.classList.remove('active');
+                content.style.setProperty('display', 'none', 'important');
+            });
+            const activeContent = cloneEl('#tab-' + tabName);
+            if (activeContent) {
+                activeContent.classList.add('active');
+                activeContent.style.setProperty('display', 'block', 'important');
+            }
+        }
+
+        // Convert hex to rgba
+        const r = parseInt(color.slice(1, 3), 16);
+        const g = parseInt(color.slice(3, 5), 16);
+        const b = parseInt(color.slice(5, 7), 16);
+        const lightColor = `rgba(${r}, ${g}, ${b}, 0.1)`;
+        
+        // Helper to apply color to type buttons
+        function applyTypeButtonColor(btn, isActive) {
+            if (isActive) {
+                btn.style.setProperty('border-color', color, 'important');
+                btn.style.setProperty('background', lightColor, 'important');
+            } else {
+                btn.style.removeProperty('border-color');
+                btn.style.removeProperty('background');
+            }
+        }
+
+        // Event delegation for cloned calculator
+        calcClone.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const action = e.target.closest('[data-action]');
+            if (!action) return;
+
+            const act = action.dataset.action;
+
+            if (act === 'switch-tab') {
+                e.preventDefault();
+                switchPreviewTab(action.dataset.tab);
+            } else if (act === 'select-type') {
+                e.preventDefault();
+                previewState.basicType = action.dataset.type;
+                calcClone.querySelectorAll('#tab-basic .wpc-calc-tax-r4k8-type-btn').forEach(b => {
+                    b.classList.remove('active');
+                    applyTypeButtonColor(b, false);
+                });
+                action.classList.add('active');
+                applyTypeButtonColor(action, true);
+                updatePreviewBasic();
+            } else if (act === 'select-bracket-type') {
+                e.preventDefault();
+                previewState.bracketsType = action.dataset.type;
+                calcClone.querySelectorAll('#tab-brackets .wpc-calc-tax-r4k8-type-btn').forEach(b => {
+                    b.classList.remove('active');
+                    applyTypeButtonColor(b, false);
+                });
+                action.classList.add('active');
+                applyTypeButtonColor(action, true);
+                const singleBrackets = cloneEl('#brackets-single');
+                const additionalBrackets = cloneEl('#brackets-additional');
+                if (singleBrackets) singleBrackets.style.display = previewState.bracketsType === 'single' ? 'grid' : 'none';
+                if (additionalBrackets) additionalBrackets.style.display = previewState.bracketsType === 'additional' ? 'grid' : 'none';
+            } else if (act === 'select-reverse-type') {
+                e.preventDefault();
+                previewState.reverseType = action.dataset.type;
+                calcClone.querySelectorAll('#tab-reverse .wpc-calc-tax-r4k8-type-btn').forEach(b => {
+                    b.classList.remove('active');
+                    applyTypeButtonColor(b, false);
+                });
+                action.classList.add('active');
+                applyTypeButtonColor(action, true);
+                updatePreviewReverse();
+            }
+        });
+
+        // Input events for sliders in preview
+        calcClone.addEventListener('input', function(e) {
+            const id = e.target.id;
+            if (id === 'basic-price-slider') {
+                previewState.basicPrice = parseInt(e.target.value);
+                updatePreviewBasic();
+            } else if (id === 'compare-price-slider') {
+                previewState.comparePrice = parseInt(e.target.value);
+                updatePreviewCompare();
+            } else if (id === 'reverse-budget-slider') {
+                previewState.reverseBudget = parseInt(e.target.value);
+                updatePreviewReverse();
+            }
+        });
+
+        // Apply dynamic slider styling
+        function applySliderColor() {
+            // Add dynamic style for slider thumbs
+            let styleId = 'preview-slider-style';
+            let existingStyle = document.getElementById(styleId);
+            if (existingStyle) existingStyle.remove();
+            
+            const style = document.createElement('style');
+            style.id = styleId;
+            style.textContent = `
+                #preview-content .wpc-calc-tax-r4k8-slider::-webkit-slider-thumb {
+                    background: ${color} !important;
+                }
+                #preview-content .wpc-calc-tax-r4k8-slider::-moz-range-thumb {
+                    background: ${color} !important;
+                }
+            `;
+            document.head.appendChild(style);
+        }
+        applySliderColor();
+
+        // Initialize preview values
+        updatePreviewBasic();
+        updatePreviewCompare();
+        updatePreviewReverse();
+    }
+
+    function copyPreviewCode() {
+        const color = state.previewColor;
+        const calculator = el('wpc-calc-tax-r4k8-calculator');
+        const calcClone = calculator.cloneNode(true);
+
+        const css = getEmbedCSS(color);
+        
+        let code = '<style>\n' + css + '\n</style>\n\n';
+        code += '<div class="wpc-calc-tax-r4k8-wrapper" id="wpc-calc-tax-r4k8-main">\n';
+        code += calcClone.outerHTML + '\n';
+        code += '</div>\n\n';
+        code += `<p style="text-align:center; font-size:0.9em; margin-top:20px; color:#666;">
+    מחשבון ${CALCULATOR_NAME} פותח על ידי 
+    <a href="https://loan-israel.co.il/" target="_blank" rel="nofollow noopener" 
+       style="color:${color}; text-decoration:underline;">
+       רק תבקש פיננסים
+    </a>
+</p>\n\n`;
+        code += getEmbedScript();
+
+        navigator.clipboard.writeText(code).then(() => {
+            alert('✅ הקוד עם הצבע הנבחר הועתק בהצלחה!');
+        });
+    }
+
+    // ==========================================
+    // EVENT DELEGATION
+    // ==========================================
+    container.addEventListener('click', function(e) {
+        const action = e.target.closest('[data-action]');
+        if (!action) return;
+
+        const act = action.dataset.action;
+
+        switch(act) {
+            case 'switch-tab':
+                switchTab(action.dataset.tab);
+                break;
+            case 'select-type':
+                selectType(action.dataset.type, 'basic');
+                break;
+            case 'select-bracket-type':
+                selectType(action.dataset.type, 'brackets');
+                break;
+            case 'select-reverse-type':
+                selectType(action.dataset.type, 'reverse');
+                break;
+            case 'open-awg':
+                openAWG();
+                break;
+            case 'scroll-to-embed':
+                scrollToEmbed();
+                break;
+            case 'toggle-faq':
+                toggleFAQ(action.closest('.wpc-calc-tax-r4k8-faq-item'));
+                break;
+            case 'copy-embed-code':
+                copyEmbedCode();
+                break;
+            case 'preview-color':
+                showPreview(action.dataset.color, action.dataset.name);
+                break;
+            case 'copy-preview-code':
+                copyPreviewCode();
+                break;
+        }
+    });
+
+    // Slider input events
+    container.addEventListener('input', function(e) {
+        const id = e.target.id;
+        
+        if (id === 'basic-price-slider') {
+            state.basicPrice = parseInt(e.target.value);
+            updateBasic();
+        } else if (id === 'compare-price-slider') {
+            state.comparePrice = parseInt(e.target.value);
+            updateCompare();
+        } else if (id === 'reverse-budget-slider') {
+            state.reverseBudget = parseInt(e.target.value);
+            updateReverse();
+        }
+    });
+
+    // Custom color picker
+    const customColorPicker = el('custom-color-picker');
+    if (customColorPicker) {
+        customColorPicker.addEventListener('input', function(e) {
+            showPreview(e.target.value, 'צבע מותאם אישית');
+        });
+    }
+
+    // ==========================================
+    // INITIALIZE
+    // ==========================================
+    function init() {
+        updateBasic();
+        updateCompare();
+        updateBrackets();
+        updateReverse();
+    }
+
+    init();
+
+    // Expose API
+    window[NS] = { version: '1.0.0' };
+})();
+</script>
+

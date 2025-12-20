@@ -1,0 +1,2435 @@
+<script>
+// בדיקה והוספת viewport meta tag אם חסר
+if (!document.querySelector('meta[name="viewport"]')) {
+  const viewport = document.createElement('meta');
+  viewport.name = 'viewport';
+  viewport.content = 'width=device-width, initial-scale=1.0, user-scalable=yes';
+  document.head.appendChild(viewport);
+}
+</script>
+
+<style>
+/* === תיקון צבעים למכשירים אמיתיים === */
+.wpc-calc-fire-m8k3-wrapper {
+    color-scheme: light !important;
+    forced-color-adjust: none !important;
+    -webkit-forced-color-adjust: none !important;
+    -ms-high-contrast-adjust: none !important;
+}
+
+@media (prefers-color-scheme: dark) {
+    .wpc-calc-fire-m8k3-wrapper {
+        color-scheme: light !important;
+        background-color: white !important;
+    }
+    
+    .wpc-calc-fire-m8k3-wrapper * {
+        color-scheme: light !important;
+    }
+}
+
+.wpc-calc-fire-m8k3-wrapper * {
+    forced-color-adjust: none !important;
+    -webkit-forced-color-adjust: none !important;
+    -webkit-text-fill-color: initial !important;
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale !important;
+}
+
+/* CSS Variables */
+:root {
+  --primary: #1e5490;
+  --primary-dark: #2a5fa0;
+  --danger: #ff3b3b;
+  --success: #25D366;
+  --warning: #FF9800;
+  --text-dark: #222222;
+  --text-light: #444444;
+  --bg-light: #f5f5f5;
+  --white: #ffffff;
+  --border: #999999;
+  --max-width-container: 1200px;
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+  --shadow-md: 0 5px 20px rgba(0,0,0,0.1);
+  --shadow-lg: 0 10px 40px rgba(0,0,0,0.15);
+  --radius-sm: 8px;
+  --radius-md: 15px;
+  --radius-lg: 20px;
+  --transition: all 0.3s ease;
+  --gradient-primary: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  --fire-orange: #ff6b35;
+  --fire-red: #e63946;
+}
+
+/* Global Wrapper */
+.wpc-calc-fire-m8k3-wrapper {
+    all: initial !important;
+    font-family: 'Assistant', sans-serif !important;
+    direction: rtl !important;
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+    width: 100% !important;
+    padding: 0 20px !important;
+    box-sizing: border-box !important;
+}
+
+.wpc-calc-fire-m8k3-wrapper * {
+    box-sizing: border-box !important;
+    font-family: 'Assistant', sans-serif !important;
+}
+
+/* Title with Red Line */
+.wpc-calc-fire-m8k3-title {
+    font-size: 2.5em !important;
+    font-weight: 700 !important;
+    color: var(--primary) !important;
+    margin: 0 auto 30px auto !important;
+    line-height: 1.3 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 15px !important;
+    width: fit-content !important;
+    justify-content: center !important;
+    direction: rtl !important;
+    position: relative !important;
+    padding-right: 25px !important;
+}
+
+.wpc-calc-fire-m8k3-title::after {
+    content: '' !important;
+    width: 4px !important;
+    height: 60px !important;
+    background: linear-gradient(135deg, #ff6b35, #e63946) !important;
+    position: absolute !important;
+    right: 0 !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    border-radius: 2px !important;
+    box-shadow: 0 2px 4px rgba(255, 107, 53, 0.3) !important;
+}
+
+/* Calculator Container */
+.wpc-calc-fire-m8k3-container {
+  max-width: var(--max-width-container) !important;
+  margin: 0 auto !important;
+  padding: 20px 20px !important;
+}
+
+/* Title Container - Full Width */
+.wpc-calc-fire-m8k3-title-container {
+  width: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.wpc-calc-fire-m8k3-calc-wrapper {
+  background: white !important;
+  border-radius: var(--radius-lg) !important;
+  box-shadow: var(--shadow-md) !important;
+  overflow: hidden !important;
+}
+
+/* Tabs Navigation */
+.wpc-calc-fire-m8k3-nav {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)) !important;
+  gap: 8px !important;
+  padding: 5px !important;
+  background: var(--bg-light) !important;
+}
+
+.wpc-calc-fire-m8k3-tab {
+  background: var(--bg-light) !important;
+  border: 2px solid transparent !important;
+  border-radius: 12px !important;
+  padding: 12px 8px !important;
+  min-height: 70px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  transition: var(--transition) !important;
+  font-family: inherit !important;
+  box-shadow: var(--shadow-sm) !important;
+  color: var(--text-dark) !important;
+}
+
+.wpc-calc-fire-m8k3-tab:hover {
+  background: white !important;
+  border-color: var(--primary) !important;
+  transform: translateY(-2px) !important;
+}
+
+.wpc-calc-fire-m8k3-tab.active {
+  background: var(--gradient-primary) !important;
+  border-color: var(--primary-dark) !important;
+  color: white !important;
+}
+
+.wpc-calc-fire-m8k3-tab-icon {
+  font-size: 1.5em !important;
+  margin-bottom: 8px !important;
+}
+
+.wpc-calc-fire-m8k3-tab span:last-child {
+  font-size: 0.85em !important;
+  font-weight: 600 !important;
+}
+
+/* Tab Content */
+.wpc-calc-fire-m8k3-content {
+  padding: 30px !important;
+}
+
+.wpc-calc-fire-m8k3-panel {
+  display: none !important;
+}
+
+.wpc-calc-fire-m8k3-panel.active {
+  display: block !important;
+}
+
+.wpc-calc-fire-m8k3-panel h4 {
+  color: var(--primary) !important;
+  margin-bottom: 20px !important;
+  font-size: 1.5em !important;
+  font-weight: 700 !important;
+}
+
+/* Form Elements */
+.wpc-calc-fire-m8k3-form-group {
+    margin-bottom: 25px !important;
+}
+
+.wpc-calc-fire-m8k3-label {
+    display: block !important;
+    font-size: 1em !important;
+    font-weight: 600 !important;
+    color: var(--text-dark) !important;
+    margin-bottom: 10px !important;
+}
+
+.wpc-calc-fire-m8k3-input {
+    width: 100% !important;
+    padding: 12px 15px !important;
+    border: 2px solid #666666 !important;
+    border-radius: var(--radius-sm) !important;
+    font-size: 16px !important;
+    font-family: inherit !important;
+    transition: var(--transition) !important;
+    direction: ltr !important;
+    text-align: center !important;
+    background-color: #ffffff !important;
+    color: #222222 !important;
+}
+
+.wpc-calc-fire-m8k3-input:focus {
+    outline: none !important;
+    border-color: var(--primary) !important;
+    box-shadow: 0 0 0 3px rgba(30, 84, 144, 0.1) !important;
+}
+
+/* Slider Styles */
+.wpc-calc-fire-m8k3-slider-wrapper {
+  position: relative !important;
+  margin-bottom: 15px !important;
+}
+
+.wpc-calc-fire-m8k3-slider {
+  width: 100% !important;
+  height: 10px !important;
+  background: #666666 !important;
+  border-radius: 5px !important;
+  outline: none !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  margin-bottom: 10px !important;
+  border: 1px solid #333333 !important;
+}
+
+.wpc-calc-fire-m8k3-slider::-webkit-slider-thumb {
+  -webkit-appearance: none !important;
+  width: 28px !important;
+  height: 28px !important;
+  background: var(--primary) !important;
+  border-radius: 50% !important;
+  cursor: pointer !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3) !important;
+  border: 2px solid #ffffff !important;
+}
+
+.wpc-calc-fire-m8k3-slider::-moz-range-thumb {
+  width: 28px !important;
+  height: 28px !important;
+  background: var(--primary) !important;
+  border-radius: 50% !important;
+  cursor: pointer !important;
+  border: 2px solid #ffffff !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3) !important;
+}
+
+.wpc-calc-fire-m8k3-slider-value {
+  text-align: center !important;
+  font-size: 1.2em !important;
+  font-weight: 700 !important;
+  color: var(--primary) !important;
+  direction: ltr !important;
+}
+
+/* Button Groups */
+.wpc-calc-fire-m8k3-button-group {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)) !important;
+    gap: 10px !important;
+    margin-bottom: 20px !important;
+}
+
+.wpc-calc-fire-m8k3-btn {
+    padding: 10px 15px !important;
+    border: 2px solid var(--border) !important;
+    background: white !important;
+    border-radius: var(--radius-sm) !important;
+    cursor: pointer !important;
+    transition: var(--transition) !important;
+    font-family: inherit !important;
+    font-size: 0.9em !important;
+    font-weight: 600 !important;
+    color: var(--text-dark) !important;
+}
+
+.wpc-calc-fire-m8k3-btn:hover {
+    border-color: var(--primary) !important;
+    background: var(--primary) !important;
+    color: white !important;
+}
+
+.wpc-calc-fire-m8k3-btn.active {
+    background: var(--primary) !important;
+    border-color: var(--primary) !important;
+    color: white !important;
+}
+
+/* Results Display */
+.wpc-calc-fire-m8k3-results {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 15px !important;
+  margin-top: 30px !important;
+}
+
+.wpc-calc-fire-m8k3-result {
+  background: var(--bg-light) !important;
+  border-radius: var(--radius-md) !important;
+  padding: 20px !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+}
+
+.wpc-calc-fire-m8k3-result.highlight {
+  background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(230, 57, 70, 0.1)) !important;
+  border: 2px solid var(--fire-orange) !important;
+}
+
+.wpc-calc-fire-m8k3-result-label {
+  font-size: 1em !important;
+  font-weight: 600 !important;
+  color: var(--text-light) !important;
+}
+
+.wpc-calc-fire-m8k3-result-value {
+  font-size: 1.3em !important;
+  font-weight: 700 !important;
+  color: var(--primary) !important;
+  direction: ltr !important;
+}
+
+.wpc-calc-fire-m8k3-result.highlight .wpc-calc-fire-m8k3-result-value {
+  color: var(--fire-orange) !important;
+  font-size: 1.5em !important;
+}
+
+/* FIRE Progress Bar */
+.wpc-calc-fire-m8k3-progress-container {
+  margin-top: 20px !important;
+  padding: 20px !important;
+  background: var(--bg-light) !important;
+  border-radius: var(--radius-md) !important;
+}
+
+.wpc-calc-fire-m8k3-progress-bar {
+  width: 100% !important;
+  height: 30px !important;
+  background: #e0e0e0 !important;
+  border-radius: 15px !important;
+  overflow: hidden !important;
+  position: relative !important;
+}
+
+.wpc-calc-fire-m8k3-progress-fill {
+  height: 100% !important;
+  background: linear-gradient(135deg, var(--fire-orange), var(--fire-red)) !important;
+  border-radius: 15px !important;
+  transition: width 0.5s ease !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: white !important;
+  font-weight: 700 !important;
+  font-size: 0.9em !important;
+}
+
+/* Comparison Table */
+.wpc-calc-fire-m8k3-comparison {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 20px !important;
+    margin-top: 30px !important;
+}
+
+.wpc-calc-fire-m8k3-scenario {
+    background: white !important;
+    border: 2px solid var(--border) !important;
+    border-radius: var(--radius-md) !important;
+    padding: 20px !important;
+    text-align: center !important;
+}
+
+.wpc-calc-fire-m8k3-scenario.lean {
+    border-color: #10b981 !important;
+    background: rgba(16, 185, 129, 0.05) !important;
+}
+
+.wpc-calc-fire-m8k3-scenario.regular {
+    border-color: var(--fire-orange) !important;
+    background: rgba(255, 107, 53, 0.05) !important;
+}
+
+.wpc-calc-fire-m8k3-scenario.fat {
+    border-color: #8b5cf6 !important;
+    background: rgba(139, 92, 246, 0.05) !important;
+}
+
+.wpc-calc-fire-m8k3-scenario h5 {
+    color: var(--primary) !important;
+    margin-bottom: 15px !important;
+    font-size: 1.1em !important;
+}
+
+.wpc-calc-fire-m8k3-scenario-value {
+    font-size: 1.8em !important;
+    font-weight: 700 !important;
+    margin: 15px 0 !important;
+}
+
+.wpc-calc-fire-m8k3-scenario.lean .wpc-calc-fire-m8k3-scenario-value { color: #10b981 !important; }
+.wpc-calc-fire-m8k3-scenario.regular .wpc-calc-fire-m8k3-scenario-value { color: var(--fire-orange) !important; }
+.wpc-calc-fire-m8k3-scenario.fat .wpc-calc-fire-m8k3-scenario-value { color: #8b5cf6 !important; }
+
+/* Sensitivity Table */
+.wpc-calc-fire-m8k3-sensitivity-table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    margin-top: 20px !important;
+}
+
+.wpc-calc-fire-m8k3-sensitivity-table th,
+.wpc-calc-fire-m8k3-sensitivity-table td {
+    border: 1px solid var(--border) !important;
+    padding: 12px !important;
+    text-align: center !important;
+}
+
+.wpc-calc-fire-m8k3-sensitivity-table th {
+    background: var(--primary) !important;
+    color: white !important;
+    font-weight: 600 !important;
+}
+
+.wpc-calc-fire-m8k3-sensitivity-table tr:nth-child(even) {
+    background: var(--bg-light) !important;
+}
+
+.wpc-calc-fire-m8k3-sensitivity-table .highlight-cell {
+    background: rgba(255, 107, 53, 0.2) !important;
+    font-weight: 700 !important;
+}
+
+/* AWG Section */
+.wpc-calc-fire-m8k3-awg-section {
+  background: #ffffff !important;
+  padding: 60px 20px !important;
+  margin: 40px 0 !important;
+  border-top: 1px solid #e0e0e0 !important;
+  border-bottom: 1px solid #e0e0e0 !important;
+}
+
+.wpc-calc-fire-m8k3-awg-container {
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+  padding: 30px !important;
+  text-align: center !important;
+  background: #ffffff !important;
+  border-radius: 15px !important;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.08) !important;
+  border: 1px solid #f0f0f0 !important;
+}
+
+/* CTA Buttons Wrapper */
+.wpc-calc-fire-m8k3-cta-buttons-wrapper {
+  display: flex !important;
+  gap: 15px !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-wrap: nowrap !important;
+}
+
+.wpc-calc-fire-m8k3-cta-btn {
+  background: var(--danger) !important;
+  color: white !important;
+  padding: 18px 35px !important;
+  border: none !important;
+  border-radius: 50px !important;
+  font-size: 1.1em !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+  transition: var(--transition) !important;
+  box-shadow: var(--shadow-md) !important;
+  font-family: inherit !important;
+  flex: 1 !important;
+  white-space: nowrap !important;
+}
+
+.wpc-calc-fire-m8k3-cta-btn:hover {
+  background: #e63530 !important;
+  box-shadow: 0 8px 25px rgba(255,59,59,0.4) !important;
+  transform: translateY(-2px) !important;
+}
+
+.wpc-calc-fire-m8k3-cta-embed {
+  background: var(--success) !important;
+  color: white !important;
+  padding: 18px 35px !important;
+  border: none !important;
+  border-radius: 50px !important;
+  font-size: 1.1em !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+  transition: var(--transition) !important;
+  box-shadow: var(--shadow-md) !important;
+  font-family: inherit !important;
+  flex: 1 !important;
+  white-space: nowrap !important;
+}
+
+.wpc-calc-fire-m8k3-cta-embed:hover {
+  background: #1ea557 !important;
+  box-shadow: 0 8px 25px rgba(34,197,94,0.4) !important;
+  transform: translateY(-2px) !important;
+}
+
+.wpc-calc-fire-m8k3-awg-content {
+  width: 100% !important;
+  text-align: center !important;
+  padding: 25px !important;
+  border-radius: 12px !important;
+  opacity: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  transition: all 0.5s ease !important;
+}
+
+.wpc-calc-fire-m8k3-awg-content.show {
+  opacity: 1 !important;
+  height: auto !important;
+  padding: 25px !important;
+}
+
+.wpc-calc-fire-m8k3-shortcode-item {
+  margin-bottom: 30px !important;
+  padding: 20px !important;
+  border-radius: 10px !important;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .wpc-calc-fire-m8k3-wrapper {
+        padding: 0 15px !important;
+    }
+    
+    .wpc-calc-fire-m8k3-container {
+        padding: 20px 20px !important;
+    }
+    
+    .wpc-calc-fire-m8k3-nav {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 8px !important;
+    }
+    
+    .wpc-calc-fire-m8k3-tab {
+        min-height: 70px !important;
+        padding: 12px 8px !important;
+        font-size: 1rem !important;
+    }
+    
+    .wpc-calc-fire-m8k3-tab span:last-child {
+        font-size: 1rem !important;
+    }
+    
+    .wpc-calc-fire-m8k3-content {
+        padding: 20px !important;
+    }
+    
+    .wpc-calc-fire-m8k3-comparison {
+        grid-template-columns: 1fr !important;
+        gap: 15px !important;
+    }
+    
+    .wpc-calc-fire-m8k3-button-group {
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 8px !important;
+    }
+    
+    .wpc-calc-fire-m8k3-btn {
+        font-size: 1rem !important;
+        padding: 10px 8px !important;
+        min-height: 44px !important;
+    }
+    
+    .wpc-calc-fire-m8k3-result {
+        flex-direction: column !important;
+        text-align: center !important;
+        gap: 10px !important;
+    }
+    
+    .wpc-calc-fire-m8k3-tab:not(.active) { 
+        color: #222222 !important; 
+    }
+    
+    .wpc-calc-fire-m8k3-cta-buttons-wrapper {
+        flex-direction: column !important;
+        gap: 10px !important;
+    }
+    
+    .wpc-calc-fire-m8k3-cta-btn,
+    .wpc-calc-fire-m8k3-cta-embed {
+        width: 100% !important;
+    }
+    
+    .wpc-calc-fire-m8k3-sensitivity-table {
+        font-size: 0.85em !important;
+    }
+    
+    .wpc-calc-fire-m8k3-sensitivity-table th,
+    .wpc-calc-fire-m8k3-sensitivity-table td {
+        padding: 8px 5px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .wpc-calc-fire-m8k3-container {
+        padding: 15px 10px !important;
+    }
+    
+    .wpc-calc-fire-m8k3-nav {
+        grid-template-columns: 1fr !important;
+        gap: 6px !important;
+    }
+    
+    .wpc-calc-fire-m8k3-tab {
+        min-height: 60px !important;
+        flex-direction: row !important;
+        gap: 12px !important;
+        padding: 12px 10px !important;
+    }
+    
+    .wpc-calc-fire-m8k3-tab-icon {
+        font-size: 1.2em !important;
+        margin-bottom: 0 !important;
+    }
+    
+    .wpc-calc-fire-m8k3-button-group {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+    
+    .wpc-calc-fire-m8k3-title,
+    .wpc-calc-fire-m8k3-content-title {
+        font-size: 1.5em !important;
+    }
+}
+
+@media (max-width: 375px) {
+    .wpc-calc-fire-m8k3-wrapper {
+        padding: 0 12px !important;
+    }
+    
+    .wpc-calc-fire-m8k3-container {
+        padding: 10px 10px !important;
+    }
+    
+    .wpc-calc-fire-m8k3-content {
+        padding: 15px !important;
+    }
+    
+    .wpc-calc-fire-m8k3-title,
+    .wpc-calc-fire-m8k3-content-title {
+        font-size: 1.3em !important;
+        padding-right: 18px !important;
+    }
+}
+
+/* Content Sections */
+.wpc-calc-fire-m8k3-content-section,
+.wpc-calc-fire-m8k3-faq-section {
+    max-width: 1200px !important;
+    margin: 40px auto !important;
+    padding: 0 20px !important;
+}
+
+.wpc-calc-fire-m8k3-content-title {
+    font-size: 2.5em !important;
+    font-weight: 700 !important;
+    color: var(--primary) !important;
+    margin: 40px auto 30px auto !important;
+    line-height: 1.3 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    width: fit-content !important;
+    position: relative !important;
+    padding-right: 25px !important;
+}
+
+.wpc-calc-fire-m8k3-content-title::after {
+    content: '' !important;
+    width: 4px !important;
+    height: 60px !important;
+    background: linear-gradient(135deg, #ff6b35, #e63946) !important;
+    position: absolute !important;
+    right: 0 !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    border-radius: 2px !important;
+}
+
+.wpc-calc-fire-m8k3-section-title {
+    font-size: 1.4em !important;
+    font-weight: 700 !important;
+    color: var(--primary) !important;
+    margin: 30px 0 20px 0 !important;
+}
+
+.wpc-calc-fire-m8k3-content-text {
+    font-size: 1.1em !important;
+    line-height: 1.6 !important;
+    color: var(--text-dark) !important;
+    margin-bottom: 25px !important;
+}
+
+.wpc-calc-fire-m8k3-content-text p {
+    margin-bottom: 15px !important;
+}
+
+.wpc-calc-fire-m8k3-content-text ul {
+    margin: 15px 0 !important;
+    padding-right: 20px !important;
+}
+
+.wpc-calc-fire-m8k3-content-text li {
+    margin-bottom: 8px !important;
+}
+
+/* Tab Explanations */
+.wpc-calc-fire-m8k3-tabs-explanation {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
+    gap: 20px !important;
+    margin: 30px 0 !important;
+}
+
+.wpc-calc-fire-m8k3-tab-explanation {
+    background: var(--bg-light) !important;
+    border-radius: var(--radius-md) !important;
+    padding: 20px !important;
+    border: 2px solid transparent !important;
+    transition: var(--transition) !important;
+}
+
+.wpc-calc-fire-m8k3-tab-explanation:hover {
+    border-color: var(--primary) !important;
+    transform: translateY(-2px) !important;
+}
+
+.wpc-calc-fire-m8k3-tab-explanation h5 {
+    color: var(--primary) !important;
+    font-size: 1.2em !important;
+    margin-bottom: 15px !important;
+}
+
+/* Info Boxes */
+.wpc-calc-fire-m8k3-info-box,
+.wpc-calc-fire-m8k3-example-box {
+    background: rgba(30, 84, 144, 0.05) !important;
+    border: 2px solid var(--primary) !important;
+    border-radius: var(--radius-md) !important;
+    padding: 20px !important;
+    margin: 20px 0 !important;
+}
+
+.wpc-calc-fire-m8k3-fire-box {
+    background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(230, 57, 70, 0.1)) !important;
+    border: 2px solid var(--fire-orange) !important;
+    border-radius: var(--radius-md) !important;
+    padding: 20px !important;
+    margin: 20px 0 !important;
+}
+
+.wpc-calc-fire-m8k3-info-box h5,
+.wpc-calc-fire-m8k3-fire-box h5 {
+    color: var(--primary) !important;
+    margin-bottom: 15px !important;
+    font-size: 1.1em !important;
+}
+
+/* FAQ Accordion */
+.wpc-calc-fire-m8k3-accordion-container {
+    max-width: var(--max-width-container) !important;
+    margin: 0 auto !important;
+    padding: 20px 0 !important;
+}
+
+.wpc-calc-fire-m8k3-accordion-item {
+    border: 1px solid var(--border) !important;
+    border-radius: var(--radius-sm) !important;
+    margin-bottom: 10px !important;
+    overflow: hidden !important;
+}
+
+.wpc-calc-fire-m8k3-accordion-header {
+    background: var(--bg-light) !important;
+    padding: 20px !important;
+    cursor: pointer !important;
+    font-weight: 600 !important;
+    font-size: 1.1em !important;
+    position: relative !important;
+    transition: all 0.2s ease !important;
+    color: var(--text-dark) !important;
+    border: 2px solid transparent !important;
+}
+
+.wpc-calc-fire-m8k3-accordion-header:hover {
+    background: #f0f0f0 !important;
+    border-color: var(--primary) !important;
+}
+
+.wpc-calc-fire-m8k3-accordion-header.active {
+    background: var(--primary) !important;
+    color: white !important;
+}
+
+.wpc-calc-fire-m8k3-accordion-header::after {
+    content: '←' !important;
+    position: absolute !important;
+    left: 20px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    font-size: 1.2em !important;
+    transition: transform 0.3s ease !important;
+}
+
+.wpc-calc-fire-m8k3-accordion-header.active::after {
+    transform: translateY(-50%) rotate(90deg) !important;
+}
+
+.wpc-calc-fire-m8k3-accordion-content {
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: max-height 0.3s ease !important;
+}
+
+.wpc-calc-fire-m8k3-accordion-content.active {
+    max-height: 500px !important;
+    padding: 20px !important;
+    background: white !important;
+}
+
+/* Embed Section */
+.wpc-calc-fire-m8k3-embed-section {
+    max-width: var(--max-width-container) !important;
+    margin: 40px auto !important;
+    padding: 40px 20px !important;
+    background: white !important;
+    border-radius: var(--radius-lg) !important;
+}
+
+.wpc-calc-fire-m8k3-embed-section h2 {
+    color: var(--primary) !important;
+    font-size: 2.2em !important;
+    text-align: center !important;
+    margin-bottom: 30px !important;
+}
+
+.wpc-calc-fire-m8k3-embed-section h3 {
+    color: var(--primary) !important;
+    font-size: 1.6em !important;
+    margin: 30px 0 15px 0 !important;
+}
+
+.wpc-calc-fire-m8k3-embed-section ol,
+.wpc-calc-fire-m8k3-embed-section ul {
+    margin: 15px 0 15px 25px !important;
+    line-height: 1.8 !important;
+}
+
+.wpc-calc-fire-m8k3-embed-button-large {
+    background: var(--success) !important;
+    color: white !important;
+    padding: 18px 40px !important;
+    border: none !important;
+    border-radius: 50px !important;
+    font-size: 1.2em !important;
+    font-weight: 800 !important;
+    cursor: pointer !important;
+    transition: var(--transition) !important;
+    margin: 20px 0 !important;
+    box-shadow: var(--shadow-md) !important;
+    font-family: inherit !important;
+    display: inline-block !important;
+}
+
+.wpc-calc-fire-m8k3-embed-button-large:hover {
+    background: #1da851 !important;
+    transform: translateY(-2px) !important;
+}
+
+/* Credit Link */
+.wpc-calc-fire-m8k3-credit-link a {
+    color: var(--primary) !important;
+    font-weight: 700 !important;
+    text-decoration: none !important;
+}
+
+.wpc-calc-fire-m8k3-credit-link a:hover {
+    text-decoration: underline !important;
+}
+
+/* Preview Section */
+#wpc-calc-fire-m8k3-preview-section {
+    animation: slideDown 0.5s ease-out !important;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#wpc-calc-fire-m8k3-preview-container {
+    background: white !important;
+    border-radius: 12px !important;
+    padding: 30px !important;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15) !important;
+}
+
+/* Responsive for Content */
+@media (max-width: 768px) {
+    .wpc-calc-fire-m8k3-content-section,
+    .wpc-calc-fire-m8k3-faq-section {
+        padding: 0 15px !important;
+    }
+    
+    .wpc-calc-fire-m8k3-title,
+    .wpc-calc-fire-m8k3-content-title {
+        font-size: 1.8em !important;
+        padding-right: 20px !important;
+    }
+    
+    .wpc-calc-fire-m8k3-tabs-explanation {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .wpc-calc-fire-m8k3-accordion-header {
+        padding: 15px !important;
+        font-size: 1em !important;
+    }
+    
+    .wpc-calc-fire-m8k3-embed-section {
+        padding: 25px 15px !important;
+    }
+}
+</style>
+
+<div class="wpc-calc-fire-m8k3-wrapper" id="wpc-calc-fire-m8k3-main">
+    
+    <div class="wpc-calc-fire-m8k3-container">
+        <div class="wpc-calc-fire-m8k3-title-container">
+            <h1 class="wpc-calc-fire-m8k3-title">🔥 מחשבון חופש כלכלי (FIRE) - מה המספר שלך?</h1>
+            <p style="text-align: center; margin-bottom: 5px; font-size: 0.9em; color: #666;">
+                <strong>עודכן לאחרונה:</strong> [current_date format="F Y" hebrew="true"]
+            </p>
+            <p style="text-align: center; font-size: 0.95em; color: #666; margin-top: 0; margin-bottom: 20px;">
+                💡 חשב כמה כסף תצטרך כדי לפרוש מוקדם ולחיות מהתשואה על ההשקעות
+            </p>
+        </div>
+        
+        <div class="wpc-calc-fire-m8k3-calc-wrapper">
+            <!-- Navigation Tabs -->
+            <div class="wpc-calc-fire-m8k3-nav">
+                <button class="wpc-calc-fire-m8k3-tab active" data-action="switch-tab" data-tab="fire-number">
+                    <div class="wpc-calc-fire-m8k3-tab-icon">🔥</div>
+                    <span>מספר FIRE</span>
+                </button>
+                <button class="wpc-calc-fire-m8k3-tab" data-action="switch-tab" data-tab="time-to-fire">
+                    <div class="wpc-calc-fire-m8k3-tab-icon">⏱️</div>
+                    <span>זמן להגעה</span>
+                </button>
+                <button class="wpc-calc-fire-m8k3-tab" data-action="switch-tab" data-tab="fire-types">
+                    <div class="wpc-calc-fire-m8k3-tab-icon">⚖️</div>
+                    <span>Lean/Fat FIRE</span>
+                </button>
+                <button class="wpc-calc-fire-m8k3-tab" data-action="switch-tab" data-tab="sensitivity">
+                    <div class="wpc-calc-fire-m8k3-tab-icon">📊</div>
+                    <span>ניתוח רגישות</span>
+                </button>
+            </div>
+            
+            <!-- Tab Content -->
+            <div class="wpc-calc-fire-m8k3-content">
+                
+                <!-- Tab 1: FIRE Number -->
+                <div class="wpc-calc-fire-m8k3-panel active" id="wpc-calc-fire-m8k3-fire-number">
+                    <h4>🔥 חשב את מספר ה-FIRE שלך</h4>
+                    <p style="color: #666; margin-bottom: 20px;">מהו הסכום הכולל שתצטרך לצבור כדי לחיות מהתשואה לנצח?</p>
+                    
+                    <div class="wpc-calc-fire-m8k3-form-group">
+                        <label class="wpc-calc-fire-m8k3-label">💰 הוצאה חודשית רצויה בפרישה (₪)</label>
+                        <div class="wpc-calc-fire-m8k3-slider-wrapper">
+                            <input type="range" class="wpc-calc-fire-m8k3-slider" id="monthly-expenses" min="5000" max="50000" value="15000" step="500">
+                            <div class="wpc-calc-fire-m8k3-slider-value" id="monthly-expenses-value">₪15,000</div>
+                        </div>
+                        <input type="number" class="wpc-calc-fire-m8k3-input" id="monthly-expenses-input" value="15000" min="3000" max="100000">
+                    </div>
+                    
+                    <div class="wpc-calc-fire-m8k3-form-group">
+                        <label class="wpc-calc-fire-m8k3-label">📊 שיעור משיכה שנתי (SWR)</label>
+                        <div class="wpc-calc-fire-m8k3-button-group">
+                            <button class="wpc-calc-fire-m8k3-btn" data-action="set-swr" data-value="3">3% (שמרני)</button>
+                            <button class="wpc-calc-fire-m8k3-btn" data-action="set-swr" data-value="3.5">3.5%</button>
+                            <button class="wpc-calc-fire-m8k3-btn active" data-action="set-swr" data-value="4">4% (סטנדרט)</button>
+                            <button class="wpc-calc-fire-m8k3-btn" data-action="set-swr" data-value="4.5">4.5%</button>
+                        </div>
+                        <div class="wpc-calc-fire-m8k3-slider-wrapper">
+                            <input type="range" class="wpc-calc-fire-m8k3-slider" id="swr-rate" min="2" max="6" value="4" step="0.1">
+                            <div class="wpc-calc-fire-m8k3-slider-value" id="swr-rate-value">4.0%</div>
+                        </div>
+                    </div>
+                    
+                    <div class="wpc-calc-fire-m8k3-form-group">
+                        <label class="wpc-calc-fire-m8k3-label">🏦 מס רווח הון (%)</label>
+                        <div class="wpc-calc-fire-m8k3-button-group">
+                            <button class="wpc-calc-fire-m8k3-btn" data-action="set-tax" data-value="0">0% (פטור)</button>
+                            <button class="wpc-calc-fire-m8k3-btn" data-action="set-tax" data-value="15">15%</button>
+                            <button class="wpc-calc-fire-m8k3-btn active" data-action="set-tax" data-value="25">25% (סטנדרט)</button>
+                            <button class="wpc-calc-fire-m8k3-btn" data-action="set-tax" data-value="30">30%</button>
+                        </div>
+                    </div>
+                    
+                    <div class="wpc-calc-fire-m8k3-results">
+                        <div class="wpc-calc-fire-m8k3-result highlight">
+                            <span class="wpc-calc-fire-m8k3-result-label">🔥 מספר FIRE שלך (כולל מס)</span>
+                            <span class="wpc-calc-fire-m8k3-result-value" id="fire-number-result">₪6,000,000</span>
+                        </div>
+                        <div class="wpc-calc-fire-m8k3-result">
+                            <span class="wpc-calc-fire-m8k3-result-label">הוצאה שנתית</span>
+                            <span class="wpc-calc-fire-m8k3-result-value" id="annual-expenses-result">₪180,000</span>
+                        </div>
+                        <div class="wpc-calc-fire-m8k3-result">
+                            <span class="wpc-calc-fire-m8k3-result-label">מספר FIRE בסיסי (ללא מס)</span>
+                            <span class="wpc-calc-fire-m8k3-result-value" id="fire-number-basic">₪4,500,000</span>
+                        </div>
+                        <div class="wpc-calc-fire-m8k3-result">
+                            <span class="wpc-calc-fire-m8k3-result-label">כפולת ה-25 (חוק ה-4%)</span>
+                            <span class="wpc-calc-fire-m8k3-result-value" id="rule-of-25">×25</span>
+                        </div>
+                    </div>
+                    
+                    <div class="wpc-calc-fire-m8k3-fire-box" style="margin-top: 25px;">
+                        <h5>💡 הסבר נוסחת ה-FIRE</h5>
+                        <p><strong>נוסחת ה-25:</strong> הוצאה שנתית × 25 = יעד FIRE בסיסי</p>
+                        <p><strong>עם מס:</strong> הוצאה שנתית ÷ ((1 - שיעור מס) × שיעור משיכה)</p>
+                        <p style="font-size: 0.9em; color: #666; margin-top: 10px;">שיעור המשיכה של 4% מבוסס על מחקר Trinity הקלאסי, המראה שתיק מניות/אג"ח ישרוד 30+ שנים ב-95% מהמקרים.</p>
+                    </div>
+                </div>
+                
+                <!-- Tab 2: Time to FIRE -->
+                <div class="wpc-calc-fire-m8k3-panel" id="wpc-calc-fire-m8k3-time-to-fire">
+                    <h4>⏱️ כמה זמן עד לחופש כלכלי?</h4>
+                    <p style="color: #666; margin-bottom: 20px;">חשב כמה שנים יקח לך להגיע למספר ה-FIRE שלך</p>
+                    
+                    <div class="wpc-calc-fire-m8k3-form-group">
+                        <label class="wpc-calc-fire-m8k3-label">💵 הון נוכחי (₪)</label>
+                        <div class="wpc-calc-fire-m8k3-slider-wrapper">
+                            <input type="range" class="wpc-calc-fire-m8k3-slider" id="current-capital" min="0" max="3000000" value="200000" step="10000">
+                            <div class="wpc-calc-fire-m8k3-slider-value" id="current-capital-value">₪200,000</div>
+                        </div>
+                        <input type="number" class="wpc-calc-fire-m8k3-input" id="current-capital-input" value="200000" min="0" max="10000000">
+                    </div>
+                    
+                    <div class="wpc-calc-fire-m8k3-form-group">
+                        <label class="wpc-calc-fire-m8k3-label">💰 חיסכון חודשי (₪)</label>
+                        <div class="wpc-calc-fire-m8k3-slider-wrapper">
+                            <input type="range" class="wpc-calc-fire-m8k3-slider" id="monthly-savings" min="1000" max="30000" value="5000" step="500">
+                            <div class="wpc-calc-fire-m8k3-slider-value" id="monthly-savings-value">₪5,000</div>
+                        </div>
+                        <input type="number" class="wpc-calc-fire-m8k3-input" id="monthly-savings-input" value="5000" min="500" max="100000">
+                    </div>
+                    
+                    <div class="wpc-calc-fire-m8k3-form-group">
+                        <label class="wpc-calc-fire-m8k3-label">📈 תשואה שנתית צפויה (%)</label>
+                        <div class="wpc-calc-fire-m8k3-button-group">
+                            <button class="wpc-calc-fire-m8k3-btn" data-action="set-return" data-value="5">5%</button>
+                            <button class="wpc-calc-fire-m8k3-btn" data-action="set-return" data-value="6">6%</button>
+                            <button class="wpc-calc-fire-m8k3-btn active" data-action="set-return" data-value="7">7%</button>
+                            <button class="wpc-calc-fire-m8k3-btn" data-action="set-return" data-value="8">8%</button>
+                            <button class="wpc-calc-fire-m8k3-btn" data-action="set-return" data-value="10">10%</button>
+                        </div>
+                        <div class="wpc-calc-fire-m8k3-slider-wrapper">
+                            <input type="range" class="wpc-calc-fire-m8k3-slider" id="expected-return" min="3" max="12" value="7" step="0.5">
+                            <div class="wpc-calc-fire-m8k3-slider-value" id="expected-return-value">7.0%</div>
+                        </div>
+                    </div>
+                    
+                    <div class="wpc-calc-fire-m8k3-form-group">
+                        <label class="wpc-calc-fire-m8k3-label">📊 אינפלציה שנתית (%)</label>
+                        <div class="wpc-calc-fire-m8k3-slider-wrapper">
+                            <input type="range" class="wpc-calc-fire-m8k3-slider" id="inflation-rate" min="0" max="5" value="2" step="0.5">
+                            <div class="wpc-calc-fire-m8k3-slider-value" id="inflation-rate-value">2.0%</div>
+                        </div>
+                    </div>
+                    
+                    <div class="wpc-calc-fire-m8k3-form-group">
+                        <label class="wpc-calc-fire-m8k3-label">🎯 יעד FIRE (₪)</label>
+                        <input type="number" class="wpc-calc-fire-m8k3-input" id="fire-target" value="6000000" min="500000" max="50000000">
+                        <p style="font-size: 0.85em; color: #666; margin-top: 5px; text-align: center;">השתמש בטאב "מספר FIRE" לחישוב היעד המדויק</p>
+                    </div>
+                    
+                    <div class="wpc-calc-fire-m8k3-results">
+                        <div class="wpc-calc-fire-m8k3-result highlight">
+                            <span class="wpc-calc-fire-m8k3-result-label">⏱️ שנים עד FIRE</span>
+                            <span class="wpc-calc-fire-m8k3-result-value" id="years-to-fire">18.5 שנים</span>
+                        </div>
+                        <div class="wpc-calc-fire-m8k3-result">
+                            <span class="wpc-calc-fire-m8k3-result-label">📅 תאריך הגעה משוער</span>
+                            <span class="wpc-calc-fire-m8k3-result-value" id="fire-date">יולי 2043</span>
+                        </div>
+                        <div class="wpc-calc-fire-m8k3-result">
+                            <span class="wpc-calc-fire-m8k3-result-label">סה"כ הפקדות</span>
+                            <span class="wpc-calc-fire-m8k3-result-value" id="total-contributions">₪1,110,000</span>
+                        </div>
+                        <div class="wpc-calc-fire-m8k3-result">
+                            <span class="wpc-calc-fire-m8k3-result-label">רווח מריבית דריבית</span>
+                            <span class="wpc-calc-fire-m8k3-result-value" id="compound-profit">₪4,690,000</span>
+                        </div>
+                    </div>
+                    
+                    <div class="wpc-calc-fire-m8k3-progress-container">
+                        <p style="text-align: center; font-weight: 600; margin-bottom: 15px;">התקדמות ליעד FIRE</p>
+                        <div class="wpc-calc-fire-m8k3-progress-bar">
+                            <div class="wpc-calc-fire-m8k3-progress-fill" id="fire-progress" style="width: 3.3%;">3.3%</div>
+                        </div>
+                        <p style="text-align: center; margin-top: 10px; color: #666;" id="progress-text">₪200,000 מתוך ₪6,000,000</p>
+                    </div>
+                </div>
+                
+                <!-- Tab 3: Lean/Fat FIRE -->
+                <div class="wpc-calc-fire-m8k3-panel" id="wpc-calc-fire-m8k3-fire-types">
+                    <h4>⚖️ השוואת רמות FIRE</h4>
+                    <p style="color: #666; margin-bottom: 20px;">השווה בין Lean FIRE (מינימלי), Regular FIRE ו-Fat FIRE (נוחות)</p>
+                    
+                    <div class="wpc-calc-fire-m8k3-form-group">
+                        <label class="wpc-calc-fire-m8k3-label">💰 הוצאה חודשית נוכחית (₪)</label>
+                        <div class="wpc-calc-fire-m8k3-slider-wrapper">
+                            <input type="range" class="wpc-calc-fire-m8k3-slider" id="current-expenses" min="5000" max="40000" value="15000" step="500">
+                            <div class="wpc-calc-fire-m8k3-slider-value" id="current-expenses-value">₪15,000</div>
+                        </div>
+                    </div>
+                    
+                    <div class="wpc-calc-fire-m8k3-form-group">
+                        <label class="wpc-calc-fire-m8k3-label">📊 שיעור משיכה (SWR)</label>
+                        <div class="wpc-calc-fire-m8k3-slider-wrapper">
+                            <input type="range" class="wpc-calc-fire-m8k3-slider" id="types-swr" min="3" max="5" value="4" step="0.25">
+                            <div class="wpc-calc-fire-m8k3-slider-value" id="types-swr-value">4.0%</div>
+                        </div>
+                    </div>
+                    
+                    <div class="wpc-calc-fire-m8k3-comparison">
+                        <!-- Lean FIRE -->
+                        <div class="wpc-calc-fire-m8k3-scenario lean">
+                            <h5>🥗 Lean FIRE</h5>
+                            <p style="font-size: 0.9em; color: #666;">מחייה בסיסית, ללא מותרות</p>
+                            <div class="wpc-calc-fire-m8k3-scenario-value" id="lean-fire-target">₪3,000,000</div>
+                            <p style="font-size: 0.85em;">הוצאה: <span id="lean-expenses">₪10,000</span>/חודש</p>
+                            <p style="font-size: 0.85em; color: #10b981; font-weight: 600;">~67% מההוצאה הנוכחית</p>
+                        </div>
+                        
+                        <!-- Regular FIRE -->
+                        <div class="wpc-calc-fire-m8k3-scenario regular">
+                            <h5>🔥 Regular FIRE</h5>
+                            <p style="font-size: 0.9em; color: #666;">רמת חיים דומה להיום</p>
+                            <div class="wpc-calc-fire-m8k3-scenario-value" id="regular-fire-target">₪4,500,000</div>
+                            <p style="font-size: 0.85em;">הוצאה: <span id="regular-expenses">₪15,000</span>/חודש</p>
+                            <p style="font-size: 0.85em; color: var(--fire-orange); font-weight: 600;">100% מההוצאה הנוכחית</p>
+                        </div>
+                        
+                        <!-- Fat FIRE -->
+                        <div class="wpc-calc-fire-m8k3-scenario fat">
+                            <h5>🎉 Fat FIRE</h5>
+                            <p style="font-size: 0.9em; color: #666;">נסיעות, מותרות, ביטחון</p>
+                            <div class="wpc-calc-fire-m8k3-scenario-value" id="fat-fire-target">₪6,750,000</div>
+                            <p style="font-size: 0.85em;">הוצאה: <span id="fat-expenses">₪22,500</span>/חודש</p>
+                            <p style="font-size: 0.85em; color: #8b5cf6; font-weight: 600;">~150% מההוצאה הנוכחית</p>
+                        </div>
+                    </div>
+                    
+                    <div class="wpc-calc-fire-m8k3-info-box" style="margin-top: 25px;">
+                        <h5>📖 הסבר סוגי FIRE</h5>
+                        <ul style="margin: 10px 0; padding-right: 20px;">
+                            <li><strong>Lean FIRE:</strong> פרישה מוקדמת עם הוצאות מינימליות. מתאים לאלו שמוכנים לחיות בצמצום.</li>
+                            <li><strong>Regular FIRE:</strong> שמירה על רמת החיים הנוכחית גם בפרישה.</li>
+                            <li><strong>Fat FIRE:</strong> פרישה עם מרחב תמרון - נסיעות, מותרות, וביטחון כלכלי גבוה.</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Tab 4: Sensitivity Analysis -->
+                <div class="wpc-calc-fire-m8k3-panel" id="wpc-calc-fire-m8k3-sensitivity">
+                    <h4>📊 ניתוח רגישות</h4>
+                    <p style="color: #666; margin-bottom: 20px;">ראה איך שינויים קטנים בפרמטרים משפיעים על הזמן להגעה ליעד</p>
+                    
+                    <div class="wpc-calc-fire-m8k3-form-group">
+                        <label class="wpc-calc-fire-m8k3-label">🎯 יעד FIRE (₪)</label>
+                        <input type="number" class="wpc-calc-fire-m8k3-input" id="sensitivity-target" value="5000000" min="500000" max="50000000">
+                    </div>
+                    
+                    <div class="wpc-calc-fire-m8k3-form-group">
+                        <label class="wpc-calc-fire-m8k3-label">💵 הון נוכחי (₪)</label>
+                        <input type="number" class="wpc-calc-fire-m8k3-input" id="sensitivity-capital" value="200000" min="0" max="10000000">
+                    </div>
+                    
+                    <div class="wpc-calc-fire-m8k3-form-group">
+                        <label class="wpc-calc-fire-m8k3-label">💰 חיסכון חודשי (₪)</label>
+                        <input type="number" class="wpc-calc-fire-m8k3-input" id="sensitivity-savings" value="5000" min="500" max="100000">
+                    </div>
+                    
+                    <h5 style="margin-top: 30px; color: var(--primary);">📊 השפעת שיעור התשואה על הזמן ליעד</h5>
+                    <table class="wpc-calc-fire-m8k3-sensitivity-table">
+                        <thead>
+                            <tr>
+                                <th>תשואה שנתית</th>
+                                <th>שנים ליעד</th>
+                                <th>הפרש מהבסיס</th>
+                            </tr>
+                        </thead>
+                        <tbody id="sensitivity-return-table">
+                            <tr><td>5%</td><td id="sens-5">22.1</td><td id="sens-diff-5">+3.4</td></tr>
+                            <tr><td>6%</td><td id="sens-6">20.2</td><td id="sens-diff-6">+1.5</td></tr>
+                            <tr class="highlight-cell"><td>7%</td><td id="sens-7">18.7</td><td id="sens-diff-7">בסיס</td></tr>
+                            <tr><td>8%</td><td id="sens-8">17.4</td><td id="sens-diff-8">-1.3</td></tr>
+                            <tr><td>9%</td><td id="sens-9">16.3</td><td id="sens-diff-9">-2.4</td></tr>
+                            <tr><td>10%</td><td id="sens-10">15.3</td><td id="sens-diff-10">-3.4</td></tr>
+                        </tbody>
+                    </table>
+                    
+                    <h5 style="margin-top: 30px; color: var(--primary);">💰 השפעת החיסכון החודשי</h5>
+                    <table class="wpc-calc-fire-m8k3-sensitivity-table">
+                        <thead>
+                            <tr>
+                                <th>חיסכון חודשי</th>
+                                <th>שנים ליעד</th>
+                                <th>הפרש</th>
+                            </tr>
+                        </thead>
+                        <tbody id="sensitivity-savings-table">
+                            <tr><td>₪3,000</td><td id="sens-sav-3000">25.8</td><td id="sens-sav-diff-3000">+7.1</td></tr>
+                            <tr><td>₪4,000</td><td id="sens-sav-4000">21.5</td><td id="sens-sav-diff-4000">+2.8</td></tr>
+                            <tr class="highlight-cell"><td>₪5,000</td><td id="sens-sav-5000">18.7</td><td id="sens-sav-diff-5000">בסיס</td></tr>
+                            <tr><td>₪6,000</td><td id="sens-sav-6000">16.5</td><td id="sens-sav-diff-6000">-2.2</td></tr>
+                            <tr><td>₪7,000</td><td id="sens-sav-7000">14.8</td><td id="sens-sav-diff-7000">-3.9</td></tr>
+                            <tr><td>₪10,000</td><td id="sens-sav-10000">11.6</td><td id="sens-sav-diff-10000">-7.1</td></tr>
+                        </tbody>
+                    </table>
+                    
+                    <div class="wpc-calc-fire-m8k3-fire-box" style="margin-top: 25px;">
+                        <h5>💡 תובנות חשובות</h5>
+                        <ul style="margin: 10px 0; padding-right: 20px;">
+                            <li>תוספת של 1% לתשואה השנתית מקצרת את הדרך בכ-1.5 שנים</li>
+                            <li>הגדלת החיסכון ב-₪1,000/חודש מקצרת את הדרך בכ-2 שנים</li>
+                            <li>ההשפעה של התשואה גדלה ככל שהתקופה ארוכה יותר (ריבית דריבית)</li>
+                        </ul>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <!-- AWG Section -->
+    <div class="wpc-calc-fire-m8k3-awg-section">
+        <div class="wpc-calc-fire-m8k3-awg-container">
+            <div class="wpc-calc-fire-m8k3-cta-buttons-wrapper">
+                <button class="wpc-calc-fire-m8k3-cta-btn" data-action="open-awg">
+                    🚀 קבל ייעוץ השקעות חינם - התחל את הדרך לחופש!
+                </button>
+                <button class="wpc-calc-fire-m8k3-cta-embed" data-action="scroll-to-embed">
+                    🎁 רוצה להטמיע את המחשבון בחינם באתרך? לחץ כאן!
+                </button>
+            </div>
+            <div class="wpc-calc-fire-m8k3-awg-content">
+                <div class="wpc-calc-fire-m8k3-shortcode-item">
+                    [awg postid="32400"]
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Content Section -->
+    <div class="wpc-calc-fire-m8k3-content-section">
+        <h2 class="wpc-calc-fire-m8k3-content-title">🔥 מדריך FIRE: איך להגיע לחופש כלכלי?</h2>
+        
+        <div class="wpc-calc-fire-m8k3-content-text">
+            <p><strong>FIRE</strong> (Financial Independence, Retire Early) היא תנועה פיננסית שמטרתה להגיע לעצמאות כלכלית ופרישה מוקדמת. הרעיון המרכזי: לחסוך ולהשקיע באגרסיביות עד שהתשואה על ההון מספיקה לכסות את כל ההוצאות - לנצח.</p>
+            
+            <p>מחשבון החופש הכלכלי שלנו עוזר לך לענות על <strong>השאלה החשובה ביותר</strong>: "מהו המספר שלי?" - כלומר, כמה כסף אני צריך כדי לפרוש?</p>
+        </div>
+        
+        <h3 class="wpc-calc-fire-m8k3-section-title">🧮 הסבר הטאבים במחשבון</h3>
+        
+        <div class="wpc-calc-fire-m8k3-tabs-explanation">
+            <div class="wpc-calc-fire-m8k3-tab-explanation">
+                <h5>🔥 מספר FIRE</h5>
+                <p>חשב את הסכום הכולל שתצטרך לצבור. הנוסחה הבסיסית: הוצאה שנתית × 25 (לפי כלל ה-4%).</p>
+                <p>המחשבון שלנו מתחשב גם במס רווח הון כדי לתת לך תמונה ריאלית יותר.</p>
+            </div>
+            
+            <div class="wpc-calc-fire-m8k3-tab-explanation">
+                <h5>⏱️ זמן להגעה</h5>
+                <p>הזן את ההון הנוכחי, החיסכון החודשי והתשואה הצפויה - וגלה כמה שנים עד שתגיע ליעד.</p>
+                <p>כולל התחשבות באינפלציה ותצוגת התקדמות ליעד.</p>
+            </div>
+            
+            <div class="wpc-calc-fire-m8k3-tab-explanation">
+                <h5>⚖️ Lean/Fat FIRE</h5>
+                <p>השווה בין שלוש רמות של פרישה מוקדמת: מינימליסטית, רגילה, או נוחה.</p>
+                <p>כל רמה מייצגת אחוז שונה מההוצאות הנוכחיות שלך.</p>
+            </div>
+            
+            <div class="wpc-calc-fire-m8k3-tab-explanation">
+                <h5>📊 ניתוח רגישות</h5>
+                <p>ראה איך שינויים קטנים בתשואה או בחיסכון משפיעים על הזמן להגעה ליעד.</p>
+                <p>כלי חזק להבנת הדינמיקה של בניית הון לטווח ארוך.</p>
+            </div>
+        </div>
+        
+        <h3 class="wpc-calc-fire-m8k3-section-title">📚 עקרונות הבסיס של FIRE</h3>
+        
+        <div class="wpc-calc-fire-m8k3-fire-box">
+            <h5>🔥 כלל ה-4% (Safe Withdrawal Rate)</h5>
+            <p>המחקר המפורסם "Trinity Study" בדק תיקי השקעות היסטוריים ומצא שמשיכה של 4% בשנה מהתיק מאפשרת לתיק לשרוד לפחות 30 שנים ב-95% מהמקרים.</p>
+            <p style="margin-top: 10px;"><strong>איך זה עובד?</strong> אם יש לך 4,000,000 ש"ח, אתה יכול למשוך 160,000 ש"ח בשנה (כ-13,333 ש"ח בחודש) מבלי שהקרן תיגמר.</p>
+        </div>
+        
+        <div class="wpc-calc-fire-m8k3-content-text">
+            <h4 style="color: var(--primary); margin: 25px 0 15px 0;">💡 טיפים להגעה מהירה יותר ל-FIRE</h4>
+            <ul>
+                <li><strong>הגדל את שיעור החיסכון:</strong> ככל ששיעור החיסכון גבוה יותר, כך תגיע מהר יותר. שיעור של 50%+ יכול להוביל לFIRE תוך 15-20 שנה.</li>
+                <li><strong>הקטן הוצאות:</strong> הוצאה נמוכה יותר = גם יותר חיסכון וגם יעד FIRE נמוך יותר. הכפלה אגרסיבית!</li>
+                <li><strong>השקע בעקביות:</strong> אל תנסה לתזמן את השוק. השקעה חודשית קבועה (DCA) מפחיתה סיכון.</li>
+                <li><strong>התחשב בקצבאות:</strong> קצבת זקנה ופנסיה יצמצמו את היעד הפרטי הנדרש.</li>
+                <li><strong>בנה הכנסה פסיבית:</strong> השכרת נכסים, דיבידנדים, או הכנסות מעסקים - כל אלה מקצרים את הדרך.</li>
+            </ul>
+        </div>
+        
+        <div class="wpc-calc-fire-m8k3-info-box">
+            <h5>🇮🇱 FIRE בישראל - מה צריך לדעת?</h5>
+            <ul style="margin: 10px 0; padding-right: 20px;">
+                <li><strong>מס רווח הון:</strong> 25% על רווחים מהשקעות (מופחת לקרנות השתלמות).</li>
+                <li><strong>קרן השתלמות:</strong> פטורה ממס לאחר 6 שנים - אפיק מעולה לחיסכון.</li>
+                <li><strong>פנסיה:</strong> לא ניתנת למשיכה לפני גיל 60 (ברוב המקרים).</li>
+                <li><strong>יוקר מחייה:</strong> ישראל יקרה - קח זאת בחשבון בתכנון ההוצאות.</li>
+            </ul>
+        </div>
+    </div>
+    
+    <!-- Embed Section -->
+    <div class="wpc-calc-fire-m8k3-embed-section" id="embed-section">
+        <h2>🎁 רוצים להטמיע את מחשבון החופש הכלכלי באתר שלכם? חינם לחלוטין!</h2>
+        
+        <div style="background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(230, 57, 70, 0.1)); border: 2px solid var(--fire-orange); border-radius: 15px; padding: 25px; margin: 20px 0;">
+            <p>
+                <strong>💎 אנחנו נותנים לכם את מחשבון FIRE המתקדם הזה לחלוטין בחינם!</strong><br>
+                תמורת קישור קרדיט קטן לאתר שלנו, תקבלו מחשבון מקצועי עם 4 טאבים, חישובים מדויקים, וניתוח רגישות מתקדם.<br>
+                <strong>שווי המחשבון:</strong> מעל ₪15,000 בפיתוח 💰 | <strong>מה ששילמתם:</strong> ₪0 🎉
+            </p>
+        </div>
+        
+        <div style="background: var(--bg-light); padding: 20px; border-radius: 15px; margin: 20px 0;">
+            <h3>🚀 למה להטמיע מחשבון באתר שלכם? זה משפר את ה-SEO!</h3>
+            <p><strong>הוספת מחשבון אינטראקטיבי לאתר היא אחת הדרכים הטובות ביותר לשפר את דירוג האתר!</strong></p>
+            <ul style="margin: 15px 0; padding-right: 25px;">
+                <li>📈 <strong>תוכן אינטראקטיבי איכותי</strong> - גוגל אוהבת דפים עם כלים שימושיים</li>
+                <li>⏱️ <strong>זמן שהייה ארוך יותר</strong> - מבקרים נשארים בדף יותר זמן</li>
+                <li>🔗 <strong>מילות מפתח רלוונטיות</strong> - המחשבון כולל מילות מפתח כמו "FIRE, חופש כלכלי, פרישה מוקדמת"</li>
+                <li>📱 <strong>Mobile Friendly</strong> - מחשבון responsive = נקודות SEO נוספות</li>
+            </ul>
+            <p style="background: rgba(30, 84, 144, 0.1); padding: 10px; border-radius: 8px;">
+                💡 <strong>טיפ SEO:</strong> הוסיפו את המחשבון בדפים רלוונטיים כמו "תכנון פיננסי, פרישה מוקדמת, השקעות לטווח ארוך"
+            </p>
+        </div>
+        
+        <h3>📋 איך מטמיעים? (3 דקות בלבד)</h3>
+        <p><strong>✅ יתרונות SEO:</strong> קישור הקרדיט נמצא ב-DOM המקורי - גוגל רואה ומזהה אותו מיידית!</p>
+        <ol style="padding-right: 25px; line-height: 2;">
+            <li><strong>לחצו</strong> על הכפתור הירוק "העתק קוד HTML" למטה 👇</li>
+            <li><strong>פתחו</strong> את עורך וורדפרס שלכם (מצב <code>Text/HTML</code>, לא Visual)</li>
+            <li><strong>הדביקו</strong> את הקוד במיקום הרצוי בעמוד</li>
+            <li><strong>פרסמו!</strong> המחשבון יעבוד מיידית ללא הגדרות נוספות ✨</li>
+        </ol>
+        
+        <div style="text-align: center; margin: 30px 0;">
+            <button class="wpc-calc-fire-m8k3-embed-button-large" data-action="copy-embed-code">
+                📋 העתק קוד HTML מלא - לחצו כאן!
+            </button>
+        </div>
+        
+        <h3>🎨 בחר צבע מותאם לאתרך</h3>
+        <p style="text-align: center; margin-bottom: 15px;">לחץ על עיגול צבע להצגת תצוגה מקדימה:</p>
+        
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin: 20px 0;">
+            <button style="background: #1e5490; width: 50px; height: 50px; border-radius: 50%; border: 3px solid #fff; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.2);" data-action="preview-color" data-color="#1e5490" data-name="כחול מקצועי" title="כחול מקצועי 💙"></button>
+            <button style="background: #10b981; width: 50px; height: 50px; border-radius: 50%; border: 3px solid #fff; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.2);" data-action="preview-color" data-color="#10b981" data-name="ירוק צמיחה" title="ירוק צמיחה 💚"></button>
+            <button style="background: #ff6b35; width: 50px; height: 50px; border-radius: 50%; border: 3px solid #fff; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.2);" data-action="preview-color" data-color="#ff6b35" data-name="כתום FIRE" title="כתום FIRE 🔥"></button>
+            <button style="background: #ef4444; width: 50px; height: 50px; border-radius: 50%; border: 3px solid #fff; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.2);" data-action="preview-color" data-color="#ef4444" data-name="אדום אנרגטי" title="אדום אנרגטי ❤️"></button>
+            <button style="background: #8b5cf6; width: 50px; height: 50px; border-radius: 50%; border: 3px solid #fff; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.2);" data-action="preview-color" data-color="#8b5cf6" data-name="סגול יוקרתי" title="סגול יוקרתי 💜"></button>
+            <button style="background: #f59e0b; width: 50px; height: 50px; border-radius: 50%; border: 3px solid #fff; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.2);" data-action="preview-color" data-color="#f59e0b" data-name="זהב" title="זהב 💛"></button>
+            <button style="background: #ec4899; width: 50px; height: 50px; border-radius: 50%; border: 3px solid #fff; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.2);" data-action="preview-color" data-color="#ec4899" data-name="ורוד מודרני" title="ורוד מודרני 💗"></button>
+            <button style="background: #06b6d4; width: 50px; height: 50px; border-radius: 50%; border: 3px solid #fff; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.2);" data-action="preview-color" data-color="#06b6d4" data-name="טורקיז רענן" title="טורקיז רענן 🩵"></button>
+            <button style="background: #84cc16; width: 50px; height: 50px; border-radius: 50%; border: 3px solid #fff; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.2);" data-action="preview-color" data-color="#84cc16" data-name="ליים" title="ליים 💚"></button>
+            <button style="background: #0891b2; width: 50px; height: 50px; border-radius: 50%; border: 3px solid #fff; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.2);" data-action="preview-color" data-color="#0891b2" data-name="כחול ים" title="כחול ים 🌊"></button>
+            <input type="color" id="wpc-calc-fire-m8k3-custom-color" value="#1e5490" style="width: 50px; height: 50px; border-radius: 50%; cursor: pointer; border: 3px solid #ddd;" title="בחר צבע מותאם אישית">
+        </div>
+        
+        <!-- Preview Section -->
+        <div id="wpc-calc-fire-m8k3-preview-section" style="display: none; margin: 30px 0; padding: 30px; background: #f8f9fa; border-radius: 15px; border: 2px dashed var(--primary);">
+            <h4 style="text-align: center; color: var(--primary); margin-bottom: 20px;">👁️ תצוגה מקדימה עם הצבע הנבחר</h4>
+            <div id="wpc-calc-fire-m8k3-preview-container"></div>
+            <div style="text-align: center; margin-top: 20px;">
+                <button class="wpc-calc-fire-m8k3-embed-button-large" data-action="copy-preview-code">
+                    📋 העתק קוד עם הצבע הנבחר
+                </button>
+            </div>
+        </div>
+        
+        <div style="background: #fff3cd; border: 1px solid #ffc107; border-radius: 10px; padding: 20px; margin: 30px 0;">
+            <h4>⚠️ חשוב לדעת - זכויות יוצרים ומגבלות שימוש</h4>
+            <p>מחשבון זה מוגן בזכויות יוצרים © וניתן להטמעה באתר שלכם בחינם רק תמורת השארת קישור הקרדיט.</p>
+            <p style="margin-top: 10px;"><strong>אסור בהחלט:</strong> הסרת/שינוי/הסתרת קישור הקרדיט, שימוש מסחרי ישיר ללא אישור, מכירת המחשבון.</p>
+        </div>
+        
+        <div style="background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; padding: 25px; border-radius: 15px; text-align: center; margin: 30px 0;">
+            <h3 style="color: white;">🎯 רוצים מחשבון מותאם אישית לאתר שלכם?</h3>
+            <p>יש לכם צורך בלוגיקת חישוב שונה? עיצוב מותאם? שדות נוספים? אנחנו נשמח לפתח לכם מחשבון ייעודי בחינם!</p>
+            <p style="margin-top: 15px;">📧 שלחו לנו מייל ל: <strong>info@loan-israel.co.il</strong></p>
+        </div>
+    </div>
+    
+    <!-- FAQ Section -->
+    <div class="wpc-calc-fire-m8k3-faq-section">
+        <h2 class="wpc-calc-fire-m8k3-content-title">❓ שאלות נפוצות על FIRE וחופש כלכלי</h2>
+        
+        <div class="wpc-calc-fire-m8k3-accordion-container">
+            <div class="wpc-calc-fire-m8k3-accordion-item">
+                <div class="wpc-calc-fire-m8k3-accordion-header" data-action="toggle-faq">
+                    🔥 מהו כלל ה-4% ולמה הוא חשוב?
+                </div>
+                <div class="wpc-calc-fire-m8k3-accordion-content">
+                    <p>כלל ה-4% (Safe Withdrawal Rate) מבוסס על מחקר Trinity הקלאסי שבדק תיקי השקעות היסטוריים. המחקר מצא שמשיכה של 4% בשנה מתיק מאוזן (מניות + אג"ח) מאפשרת לתיק לשרוד לפחות 30 שנים ב-95% מהמקרים. למעשה, ב-2025 רבים ממליצים על שיעור משיכה נמוך יותר (3-3.5%) לשמרנות מוגברת.</p>
+                </div>
+            </div>
+            
+            <div class="wpc-calc-fire-m8k3-accordion-item">
+                <div class="wpc-calc-fire-m8k3-accordion-header" data-action="toggle-faq">
+                    💰 כמה כסף אני צריך כדי לפרוש מוקדם?
+                </div>
+                <div class="wpc-calc-fire-m8k3-accordion-content">
+                    <p>הנוסחה הבסיסית: הוצאה שנתית × 25 = יעד FIRE. לדוגמה, אם אתה צריך 15,000 ש"ח בחודש (180,000 ש"ח בשנה), היעד הוא 4,500,000 ש"ח. עם התחשבות במס רווח הון של 25%, היעד עולה לכ-6,000,000 ש"ח. השתמש במחשבון שלנו לחישוב מדויק!</p>
+                </div>
+            </div>
+            
+            <div class="wpc-calc-fire-m8k3-accordion-item">
+                <div class="wpc-calc-fire-m8k3-accordion-header" data-action="toggle-faq">
+                    ⏱️ כמה זמן לוקח להגיע לחופש כלכלי?
+                </div>
+                <div class="wpc-calc-fire-m8k3-accordion-content">
+                    <p>התשובה תלויה בעיקר בשיעור החיסכון שלך. עם שיעור חיסכון של 50% והתשואה ממוצעת של 7%, תוכל להגיע לFIRE תוך כ-17 שנים. עם שיעור חיסכון של 70%, תקצר את הזמן לכ-8-9 שנים. ככל ששיעור החיסכון גבוה יותר, כך הזמן מתקצר באופן דרמטי.</p>
+                </div>
+            </div>
+            
+            <div class="wpc-calc-fire-m8k3-accordion-item">
+                <div class="wpc-calc-fire-m8k3-accordion-header" data-action="toggle-faq">
+                    ⚖️ מה ההבדל בין Lean FIRE ל-Fat FIRE?
+                </div>
+                <div class="wpc-calc-fire-m8k3-accordion-content">
+                    <p><strong>Lean FIRE:</strong> פרישה עם הוצאות מינימליות (60-70% מההוצאה הנוכחית). מתאים לאלו שמוכנים לחיות בצמצום תמורת חופש מהיר יותר.</p>
+                    <p><strong>Regular FIRE:</strong> שמירה על רמת החיים הנוכחית.</p>
+                    <p><strong>Fat FIRE:</strong> פרישה עם מרחב תמרון גדול (150%+ מההוצאה הנוכחית). כולל נסיעות, מותרות, וביטחון כלכלי גבוה.</p>
+                </div>
+            </div>
+            
+            <div class="wpc-calc-fire-m8k3-accordion-item">
+                <div class="wpc-calc-fire-m8k3-accordion-header" data-action="toggle-faq">
+                    📈 איפה כדאי להשקיע בדרך ל-FIRE?
+                </div>
+                <div class="wpc-calc-fire-m8k3-accordion-content">
+                    <p>האסטרטגיה המקובלת בקהילת FIRE: השקעה פסיבית בקרנות מחקות מדד רחב (כמו S&P 500 או מדד עולמי). בישראל, קרן השתלמות היא אפיק מועדף בזכות הפטור ממס. מומלץ לשלב: קרן השתלמות (עד התקרה), קרן פנסיה, ותיק השקעות עצמאי במניות.</p>
+                </div>
+            </div>
+            
+            <div class="wpc-calc-fire-m8k3-accordion-item">
+                <div class="wpc-calc-fire-m8k3-accordion-header" data-action="toggle-faq">
+                    🇮🇱 האם FIRE אפשרי בישראל עם יוקר המחייה?
+                </div>
+                <div class="wpc-calc-fire-m8k3-accordion-content">
+                    <p>בהחלט! אמנם ישראל יקרה, אבל גם השכר הממוצע גבוה יחסית. מפתח להצלחה: מגורים במקום זול יותר (לא תל אביב), הקטנת הוצאות קבועות, ניצול הטבות מס (קרן השתלמות), ואולי שילוב של עבודה חלקית בשנים הראשונות (Coast FIRE). רבים בישראל הגיעו לFIRE - זה בהחלט אפשרי!</p>
+                </div>
+            </div>
+            
+            <div class="wpc-calc-fire-m8k3-accordion-item">
+                <div class="wpc-calc-fire-m8k3-accordion-header" data-action="toggle-faq">
+                    🏦 מה לגבי הפנסיה וקצבת זקנה?
+                </div>
+                <div class="wpc-calc-fire-m8k3-accordion-content">
+                    <p>מחשבון מתקדם צריך להתחשב בקצבאות עתידיות! קצבת זקנה וקצבת פנסיה שתקבל מגיל 67 יפחיתו את ההון הפרטי שתצטרך לצבור. אם אתה צופה לקבל 5,000 ש"ח בחודש מפנסיה וביטוח לאומי מגיל 67, אתה יכול להפחית כ-1.5 מיליון ש"ח מיעד ה-FIRE שלך.</p>
+                </div>
+            </div>
+            
+            <div class="wpc-calc-fire-m8k3-accordion-item">
+                <div class="wpc-calc-fire-m8k3-accordion-header" data-action="toggle-faq">
+                    💡 מה זה Coast FIRE?
+                </div>
+                <div class="wpc-calc-fire-m8k3-accordion-content">
+                    <p>Coast FIRE היא נקודה שבה ההון שצברת יצמח מעצמו (בזכות ריבית דריבית) ליעד FIRE שלך עד גיל פרישה רגיל - גם בלי להוסיף עוד כסף. בנקודה זו, אתה יכול לעבור לעבודה חלקית או מפחיתת מתח, ולכסות רק את ההוצאות השוטפות. זו אסטרטגיה פופולרית למי שרוצה יותר איזון חיים-עבודה עכשיו.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Disclaimer -->
+    <div style="max-width: 1200px; margin: 40px auto; padding: 20px; background: #f8f9fa; border-radius: 10px; border-right: 4px solid var(--primary); font-size: 0.9em; color: #666;">
+        <p><strong>⚠️ הבהרה חשובה:</strong> המידע במחשבון זה מוגש לצורכי הערכה כללית בלבד ואינו מהווה ייעוץ פיננסי, השקעות, מיסוי או תכנון פרישה. תוצאות החישוב מבוססות על הנחות תיאורטיות ואינן מבטיחות תשואה עתידית. מומלץ להתייעץ עם יועץ פיננסי מוסמך לפני קבלת החלטות כלכליות משמעותיות.</p>
+    </div>
+    
+    <!-- Related Posts -->
+    [related-shortcode-instert]
+    
+</div>
+
+<!-- Schema.org -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "מהו כלל ה-4% ולמה הוא חשוב?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "כלל ה-4% מבוסס על מחקר Trinity שמצא שמשיכה של 4% בשנה מתיק מאוזן מאפשרת לתיק לשרוד לפחות 30 שנים ב-95% מהמקרים."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "כמה כסף אני צריך כדי לפרוש מוקדם?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "הנוסחה הבסיסית: הוצאה שנתית × 25 = יעד FIRE. לדוגמה, אם אתה צריך 15,000 ש״ח בחודש, היעד הוא כ-6,000,000 ש״ח עם התחשבות במס."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "כמה זמן לוקח להגיע לחופש כלכלי?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "תלוי בשיעור החיסכון. עם 50% חיסכון ותשואה של 7%, תגיע ליעד תוך כ-17 שנים. עם 70% חיסכון - תוך 8-9 שנים בלבד."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "מה ההבדל בין Lean FIRE ל-Fat FIRE?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Lean FIRE הוא פרישה עם הוצאות מינימליות (60-70% מהנוכחי). Fat FIRE הוא פרישה עם מרחב תמרון גדול (150%+ מההוצאה הנוכחית) הכולל נסיעות ומותרות."
+      }
+    }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FinancialProduct",
+  "name": "מחשבון חופש כלכלי FIRE",
+  "description": "מחשבון לתכנון פרישה מוקדמת וחופש כלכלי. חשב את מספר ה-FIRE שלך, זמן להגעה ליעד, והשווה בין Lean/Fat FIRE.",
+  "category": "Financial Calculator",
+  "featureList": ["חישוב מספר FIRE", "זמן להגעה ליעד", "השוואת Lean/Regular/Fat FIRE", "ניתוח רגישות"],
+  "provider": {
+    "@type": "Organization",
+    "name": "רק תבקש - אפטריו בע״מ",
+    "url": "https://loan-israel.co.il"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "ILS"
+  }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "איך לחשב את מספר ה-FIRE שלך",
+  "step": [
+    {
+      "@type": "HowToStep",
+      "name": "קבע את ההוצאה החודשית",
+      "text": "הזן את ההוצאה החודשית הרצויה בפרישה בשקלים"
+    },
+    {
+      "@type": "HowToStep", 
+      "name": "בחר שיעור משיכה",
+      "text": "בחר שיעור משיכה שנתי - הסטנדרט הוא 4%, אך רבים בוחרים ב-3-3.5% לשמרנות"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "הגדר את שיעור המס",
+      "text": "הגדר את שיעור מס רווח ההון - בישראל בדרך כלל 25%"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "קבל את היעד",
+      "text": "המחשבון יציג את מספר ה-FIRE שלך - הסכום שתצטרך לצבור לחופש כלכלי"
+    }
+  ]
+}
+</script>
+
+<!-- Main JavaScript -->
+<script>
+(function() {
+    'use strict';
+    
+    // Namespace check
+    const NS = 'WPC_CalcFire_M8K3';
+    if (window[NS]) return;
+    
+    // Container validation
+    const container = document.getElementById('wpc-calc-fire-m8k3-main');
+    if (!container) return;
+    
+    // Primary color for embed
+    const PRIMARY_COLOR = '#1e5490';
+    
+    // State
+    const state = {
+        activeTab: 'fire-number',
+        // Tab 1: Fire Number
+        monthlyExpenses: 15000,
+        swrRate: 4,
+        taxRate: 25,
+        // Tab 2: Time to Fire
+        currentCapital: 200000,
+        monthlySavings: 5000,
+        expectedReturn: 7,
+        inflationRate: 2,
+        fireTarget: 6000000,
+        // Tab 3: Fire Types
+        currentExpenses: 15000,
+        typesSwr: 4,
+        // Tab 4: Sensitivity
+        sensitivityTarget: 5000000,
+        sensitivityCapital: 200000,
+        sensitivitySavings: 5000
+    };
+    
+    // Preview state
+    let currentPreviewColor = PRIMARY_COLOR;
+    let currentPreviewColorName = 'כחול מקצועי';
+    
+    // Anchor texts for credit
+    const ANCHOR_TEXTS = [
+        'רק תבקש פיננסים',
+        'Loan Israel',
+        'מחשבון חופש כלכלי',
+        'אתר ההלוואות רק תבקש'
+    ];
+    
+    function getRandomAnchor() {
+        return ANCHOR_TEXTS[Math.floor(Math.random() * ANCHOR_TEXTS.length)];
+    }
+    
+    // Utility functions
+    function formatCurrency(num) {
+        return '₪' + Math.round(num).toLocaleString('he-IL');
+    }
+    
+    function formatPercent(num) {
+        return num.toFixed(1) + '%';
+    }
+    
+    function formatYears(num) {
+        if (num < 0 || !isFinite(num)) return 'מיידי!';
+        if (num > 100) return '100+ שנים';
+        return num.toFixed(1) + ' שנים';
+    }
+    
+    function darkenColor(color, amount = 15) {
+        const hex = color.replace('#', '');
+        const r = Math.max(0, parseInt(hex.substr(0, 2), 16) - amount);
+        const g = Math.max(0, parseInt(hex.substr(2, 2), 16) - amount);
+        const b = Math.max(0, parseInt(hex.substr(4, 2), 16) - amount);
+        return '#' + [r, g, b].map(x => x.toString(16).padStart(2, '0')).join('');
+    }
+    
+    // ===== Financial Formulas =====
+    
+    // Calculate FIRE number (target capital needed)
+    function calculateFireNumber(annualExpenses, swrRate, taxRate) {
+        // Basic: Annual Expenses / SWR
+        const basicTarget = annualExpenses / (swrRate / 100);
+        // With tax: Annual Expenses / ((1 - taxRate) × SWR)
+        const withTaxTarget = annualExpenses / ((1 - taxRate / 100) * (swrRate / 100));
+        return { basic: basicTarget, withTax: withTaxTarget };
+    }
+    
+    // Calculate years to reach target
+    function calculateYearsToFire(target, currentCapital, monthlySavings, annualReturn) {
+        if (currentCapital >= target) return 0;
+        
+        const monthlyRate = annualReturn / 100 / 12;
+        const PMT = monthlySavings;
+        const PV = currentCapital;
+        const FV = target;
+        
+        if (monthlyRate === 0) {
+            return (FV - PV) / (PMT * 12);
+        }
+        
+        // Using the formula: n = ln((FV * r + PMT) / (PV * r + PMT)) / ln(1 + r)
+        const numerator = Math.log((FV * monthlyRate + PMT) / (PV * monthlyRate + PMT));
+        const denominator = Math.log(1 + monthlyRate);
+        const months = numerator / denominator;
+        
+        return months / 12;
+    }
+    
+    // Calculate future value
+    function calculateFV(principal, annualRate, years, monthlyDeposit) {
+        const monthlyRate = annualRate / 100 / 12;
+        const months = years * 12;
+        
+        if (monthlyRate === 0) {
+            return principal + monthlyDeposit * months;
+        }
+        
+        const fvPrincipal = principal * Math.pow(1 + monthlyRate, months);
+        const fvDeposits = monthlyDeposit * ((Math.pow(1 + monthlyRate, months) - 1) / monthlyRate);
+        
+        return fvPrincipal + fvDeposits;
+    }
+    
+    // Get future date
+    function getFutureDate(years) {
+        const now = new Date();
+        const futureDate = new Date(now.getTime() + years * 365.25 * 24 * 60 * 60 * 1000);
+        const months = ['ינואר', 'פברואר', 'מרץ', 'אפריל', 'מאי', 'יוני', 
+                        'יולי', 'אוגוסט', 'ספטמבר', 'אוקטובר', 'נובמבר', 'דצמבר'];
+        return months[futureDate.getMonth()] + ' ' + futureDate.getFullYear();
+    }
+    
+    // ===== UI Update Functions =====
+    
+    const ui = {
+        updateSliderValue(sliderId, value) {
+            const valueEl = document.getElementById(sliderId + '-value');
+            if (!valueEl) return;
+            
+            if (sliderId.includes('expenses') || sliderId.includes('capital') || 
+                sliderId.includes('savings') || sliderId.includes('target')) {
+                valueEl.textContent = formatCurrency(value);
+            } else if (sliderId.includes('rate') || sliderId.includes('return') || 
+                       sliderId.includes('swr') || sliderId.includes('inflation')) {
+                valueEl.textContent = formatPercent(value);
+            } else {
+                valueEl.textContent = value;
+            }
+        },
+        
+        updateFireNumberResults() {
+            const annualExpenses = state.monthlyExpenses * 12;
+            const result = calculateFireNumber(annualExpenses, state.swrRate, state.taxRate);
+            
+            const multiplier = 1 / (state.swrRate / 100);
+            
+            document.getElementById('fire-number-result').textContent = formatCurrency(result.withTax);
+            document.getElementById('annual-expenses-result').textContent = formatCurrency(annualExpenses);
+            document.getElementById('fire-number-basic').textContent = formatCurrency(result.basic);
+            document.getElementById('rule-of-25').textContent = '×' + multiplier.toFixed(1);
+        },
+        
+        updateTimeToFireResults() {
+            const years = calculateYearsToFire(
+                state.fireTarget, 
+                state.currentCapital, 
+                state.monthlySavings, 
+                state.expectedReturn - state.inflationRate // Real return
+            );
+            
+            const totalContributions = state.currentCapital + (state.monthlySavings * years * 12);
+            const compoundProfit = state.fireTarget - totalContributions;
+            const progressPercent = Math.min(100, (state.currentCapital / state.fireTarget) * 100);
+            
+            document.getElementById('years-to-fire').textContent = formatYears(years);
+            document.getElementById('fire-date').textContent = getFutureDate(years);
+            document.getElementById('total-contributions').textContent = formatCurrency(totalContributions);
+            document.getElementById('compound-profit').textContent = formatCurrency(Math.max(0, compoundProfit));
+            
+            // Update progress bar
+            const progressFill = document.getElementById('fire-progress');
+            const progressText = document.getElementById('progress-text');
+            if (progressFill) {
+                progressFill.style.width = progressPercent.toFixed(1) + '%';
+                progressFill.textContent = progressPercent.toFixed(1) + '%';
+            }
+            if (progressText) {
+                progressText.textContent = formatCurrency(state.currentCapital) + ' מתוך ' + formatCurrency(state.fireTarget);
+            }
+        },
+        
+        updateFireTypesResults() {
+            const multiplier = 1 / (state.typesSwr / 100);
+            
+            // Lean FIRE: 67% of current expenses
+            const leanExpenses = Math.round(state.currentExpenses * 0.67);
+            const leanTarget = leanExpenses * 12 * multiplier;
+            
+            // Regular FIRE: 100% of current expenses
+            const regularExpenses = state.currentExpenses;
+            const regularTarget = regularExpenses * 12 * multiplier;
+            
+            // Fat FIRE: 150% of current expenses
+            const fatExpenses = Math.round(state.currentExpenses * 1.5);
+            const fatTarget = fatExpenses * 12 * multiplier;
+            
+            document.getElementById('lean-fire-target').textContent = formatCurrency(leanTarget);
+            document.getElementById('lean-expenses').textContent = formatCurrency(leanExpenses);
+            
+            document.getElementById('regular-fire-target').textContent = formatCurrency(regularTarget);
+            document.getElementById('regular-expenses').textContent = formatCurrency(regularExpenses);
+            
+            document.getElementById('fat-fire-target').textContent = formatCurrency(fatTarget);
+            document.getElementById('fat-expenses').textContent = formatCurrency(fatExpenses);
+        },
+        
+        updateSensitivityResults() {
+            const baseReturn = 7;
+            const baseYears = calculateYearsToFire(
+                state.sensitivityTarget,
+                state.sensitivityCapital,
+                state.sensitivitySavings,
+                baseReturn
+            );
+            
+            // Return sensitivity
+            [5, 6, 7, 8, 9, 10].forEach(rate => {
+                const years = calculateYearsToFire(
+                    state.sensitivityTarget,
+                    state.sensitivityCapital,
+                    state.sensitivitySavings,
+                    rate
+                );
+                const el = document.getElementById('sens-' + rate);
+                const diffEl = document.getElementById('sens-diff-' + rate);
+                if (el) el.textContent = years.toFixed(1);
+                if (diffEl) {
+                    if (rate === baseReturn) {
+                        diffEl.textContent = 'בסיס';
+                    } else {
+                        const diff = years - baseYears;
+                        diffEl.textContent = (diff >= 0 ? '+' : '') + diff.toFixed(1);
+                    }
+                }
+            });
+            
+            // Savings sensitivity
+            const baseSavings = state.sensitivitySavings;
+            [3000, 4000, 5000, 6000, 7000, 10000].forEach(savings => {
+                const years = calculateYearsToFire(
+                    state.sensitivityTarget,
+                    state.sensitivityCapital,
+                    savings,
+                    baseReturn
+                );
+                const baseYearsForSavings = calculateYearsToFire(
+                    state.sensitivityTarget,
+                    state.sensitivityCapital,
+                    baseSavings,
+                    baseReturn
+                );
+                
+                const el = document.getElementById('sens-sav-' + savings);
+                const diffEl = document.getElementById('sens-sav-diff-' + savings);
+                if (el) el.textContent = years.toFixed(1);
+                if (diffEl) {
+                    if (savings === baseSavings) {
+                        diffEl.textContent = 'בסיס';
+                    } else {
+                        const diff = years - baseYearsForSavings;
+                        diffEl.textContent = (diff >= 0 ? '+' : '') + diff.toFixed(1);
+                    }
+                }
+            });
+        }
+    };
+    
+    // ===== Event Handlers =====
+    
+    const handlers = {
+        'switch-tab': function(element, e) {
+            e.preventDefault();
+            const tabName = element.dataset.tab;
+            
+            // Update button states
+            container.querySelectorAll('.wpc-calc-fire-m8k3-tab').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            element.classList.add('active');
+            
+            // Update panels
+            container.querySelectorAll('.wpc-calc-fire-m8k3-panel').forEach(panel => {
+                panel.classList.remove('active');
+            });
+            const targetPanel = document.getElementById('wpc-calc-fire-m8k3-' + tabName);
+            if (targetPanel) {
+                targetPanel.classList.add('active');
+            }
+            
+            state.activeTab = tabName;
+        },
+        
+        'set-swr': function(element, e) {
+            e.preventDefault();
+            state.swrRate = parseFloat(element.dataset.value);
+            
+            container.querySelectorAll('[data-action="set-swr"]').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            element.classList.add('active');
+            
+            document.getElementById('swr-rate').value = state.swrRate;
+            ui.updateSliderValue('swr-rate', state.swrRate);
+            ui.updateFireNumberResults();
+        },
+        
+        'set-tax': function(element, e) {
+            e.preventDefault();
+            state.taxRate = parseFloat(element.dataset.value);
+            
+            container.querySelectorAll('[data-action="set-tax"]').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            element.classList.add('active');
+            
+            ui.updateFireNumberResults();
+        },
+        
+        'set-return': function(element, e) {
+            e.preventDefault();
+            state.expectedReturn = parseFloat(element.dataset.value);
+            
+            container.querySelectorAll('[data-action="set-return"]').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            element.classList.add('active');
+            
+            document.getElementById('expected-return').value = state.expectedReturn;
+            ui.updateSliderValue('expected-return', state.expectedReturn);
+            ui.updateTimeToFireResults();
+        },
+        
+        'open-awg': function(element, e) {
+            e.preventDefault();
+            const awgContent = container.querySelector('.wpc-calc-fire-m8k3-awg-content');
+            const ctaButton = element;
+            
+            if (awgContent && ctaButton) {
+                awgContent.classList.add('show');
+                ctaButton.style.display = 'none';
+                
+                setTimeout(() => {
+                    awgContent.scrollIntoView({ behavior: 'smooth' });
+                }, 300);
+            }
+        },
+        
+        'toggle-faq': function(element, e) {
+            e.preventDefault();
+            const content = element.nextElementSibling;
+            const isActive = element.classList.contains('active');
+            
+            // Close all other FAQ items
+            container.querySelectorAll('.wpc-calc-fire-m8k3-accordion-header').forEach(header => {
+                if (header !== element) {
+                    header.classList.remove('active');
+                    const otherContent = header.nextElementSibling;
+                    if (otherContent) {
+                        otherContent.classList.remove('active');
+                    }
+                }
+            });
+            
+            // Toggle current item
+            if (isActive) {
+                element.classList.remove('active');
+                content.classList.remove('active');
+            } else {
+                element.classList.add('active');
+                content.classList.add('active');
+            }
+        },
+        
+        'scroll-to-embed': function(element, e) {
+            e.preventDefault();
+            const embedSection = document.getElementById('embed-section');
+            if (embedSection) {
+                embedSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        },
+        
+        'copy-embed-code': function(element, e) {
+            e.preventDefault();
+            copyEmbedCode();
+        },
+        
+        'preview-color': function(element, e) {
+            e.preventDefault();
+            const color = element.dataset.color;
+            const name = element.dataset.name;
+            showPreview(color, name);
+        },
+        
+        'copy-preview-code': function(element, e) {
+            e.preventDefault();
+            copyEmbedCodeWithColor(currentPreviewColor, currentPreviewColorName);
+        }
+    };
+    
+    // Debounce
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+    
+    const debouncedUpdate = debounce(() => {
+        switch(state.activeTab) {
+            case 'fire-number':
+                ui.updateFireNumberResults();
+                break;
+            case 'time-to-fire':
+                ui.updateTimeToFireResults();
+                break;
+            case 'fire-types':
+                ui.updateFireTypesResults();
+                break;
+            case 'sensitivity':
+                ui.updateSensitivityResults();
+                break;
+        }
+    }, 200);
+    
+    // Event delegation
+    container.addEventListener('click', function(e) {
+        const target = e.target.closest('[data-action]');
+        if (target && handlers[target.dataset.action]) {
+            handlers[target.dataset.action](target, e);
+        }
+    });
+    
+    // Slider and input synchronization
+    container.addEventListener('input', function(e) {
+        if (e.target.classList.contains('wpc-calc-fire-m8k3-slider')) {
+            const value = parseFloat(e.target.value);
+            const sliderId = e.target.id;
+            
+            // Update state
+            if (sliderId === 'monthly-expenses') state.monthlyExpenses = value;
+            else if (sliderId === 'swr-rate') state.swrRate = value;
+            else if (sliderId === 'current-capital') state.currentCapital = value;
+            else if (sliderId === 'monthly-savings') state.monthlySavings = value;
+            else if (sliderId === 'expected-return') state.expectedReturn = value;
+            else if (sliderId === 'inflation-rate') state.inflationRate = value;
+            else if (sliderId === 'current-expenses') state.currentExpenses = value;
+            else if (sliderId === 'types-swr') state.typesSwr = value;
+            
+            ui.updateSliderValue(sliderId, value);
+            debouncedUpdate();
+        } else if (e.target.classList.contains('wpc-calc-fire-m8k3-input')) {
+            const value = parseFloat(e.target.value) || 0;
+            const inputId = e.target.id;
+            
+            // Update state based on input ID
+            if (inputId === 'monthly-expenses-input') {
+                state.monthlyExpenses = value;
+                document.getElementById('monthly-expenses').value = Math.min(50000, Math.max(5000, value));
+            }
+            else if (inputId === 'current-capital-input') {
+                state.currentCapital = value;
+                document.getElementById('current-capital').value = Math.min(3000000, Math.max(0, value));
+            }
+            else if (inputId === 'monthly-savings-input') {
+                state.monthlySavings = value;
+                document.getElementById('monthly-savings').value = Math.min(30000, Math.max(1000, value));
+            }
+            else if (inputId === 'fire-target') state.fireTarget = value;
+            else if (inputId === 'sensitivity-target') state.sensitivityTarget = value;
+            else if (inputId === 'sensitivity-capital') state.sensitivityCapital = value;
+            else if (inputId === 'sensitivity-savings') state.sensitivitySavings = value;
+            
+            debouncedUpdate();
+        }
+    });
+    
+    // ===== Embed Functions =====
+    
+    function copyEmbedCode() {
+        let code = '';
+        
+        // 1. Viewport Script
+        code += '<script>\n';
+        code += 'if (!document.querySelector(\'meta[name="viewport"]\')) {\n';
+        code += '  const viewport = document.createElement(\'meta\');\n';
+        code += '  viewport.name = \'viewport\';\n';
+        code += '  viewport.content = \'width=device-width, initial-scale=1.0, user-scalable=yes\';\n';
+        code += '  document.head.appendChild(viewport);\n';
+        code += '}\n';
+        code += '<\/script>\n\n';
+        
+        // 2. CSS
+        let styleElement = null;
+        let maxLength = 0;
+        const allStyles = document.querySelectorAll('style');
+        for (let style of allStyles) {
+            if (style.textContent.includes('wpc-calc-fire-m8k3') && style.textContent.length > maxLength) {
+                styleElement = style;
+                maxLength = style.textContent.length;
+            }
+        }
+        
+        if (styleElement) {
+            code += styleElement.outerHTML + '\n\n';
+        }
+        
+        // 3. HTML
+        code += '<div class="wpc-calc-fire-m8k3-wrapper" id="wpc-calc-fire-m8k3-main">\n';
+        
+        const calculatorContainer = container.querySelector('.wpc-calc-fire-m8k3-container');
+        if (calculatorContainer) {
+            const calcClone = calculatorContainer.cloneNode(true);
+            
+            // Remove unnecessary elements
+            const titleContainer = calcClone.querySelector('.wpc-calc-fire-m8k3-title-container');
+            if (titleContainer) titleContainer.remove();
+            
+            const awgSection = calcClone.querySelector('.wpc-calc-fire-m8k3-awg-section');
+            if (awgSection) awgSection.remove();
+            
+            code += calcClone.outerHTML + '\n\n';
+        }
+        
+        // Credit link
+        const randomAnchor = getRandomAnchor();
+        code += '<div style="text-align: center; padding: 15px; background: #f8f9fa; border-top: 2px solid #e9ecef; margin-top: 20px;">\n';
+        code += '  <p style="margin: 0; font-size: 0.9em; color: #666;">\n';
+        code += '    מחשבון חופש כלכלי זה פותח על ידי \n';
+        code += '    <a href="https://loan-israel.co.il/" target="_blank" rel="nofollow noopener" style="color:#1e5490;">' + randomAnchor + '</a>\n';
+        code += '  </p>\n';
+        code += '</div>\n';
+        code += '</div>\n\n';
+        
+        // 4. JavaScript
+        code += getEmbedScript();
+        
+        copyToClipboard(code, 'קוד HTML הועתק בהצלחה! 🎉\nהדבק בעורך וורדפרס במצב Text/HTML');
+    }
+    
+    function copyEmbedCodeWithColor(color, colorName) {
+        let code = '';
+        
+        // Same as copyEmbedCode but with color replacement
+        code += '<script>\n';
+        code += 'if (!document.querySelector(\'meta[name="viewport"]\')) {\n';
+        code += '  const viewport = document.createElement(\'meta\');\n';
+        code += '  viewport.name = \'viewport\';\n';
+        code += '  viewport.content = \'width=device-width, initial-scale=1.0, user-scalable=yes\';\n';
+        code += '  document.head.appendChild(viewport);\n';
+        code += '}\n';
+        code += '<\/script>\n\n';
+        
+        let styleElement = null;
+        let maxLength = 0;
+        const allStyles = document.querySelectorAll('style');
+        for (let style of allStyles) {
+            if (style.textContent.includes('wpc-calc-fire-m8k3') && style.textContent.length > maxLength) {
+                styleElement = style;
+                maxLength = style.textContent.length;
+            }
+        }
+        
+        if (styleElement) {
+            // Replace primary color in CSS
+            let cssContent = styleElement.textContent;
+            cssContent = cssContent.replace(/#1e5490/g, color);
+            cssContent = cssContent.replace(/#2a5fa0/g, darkenColor(color));
+            code += '<style>\n' + cssContent + '\n</style>\n\n';
+        }
+        
+        code += '<div class="wpc-calc-fire-m8k3-wrapper" id="wpc-calc-fire-m8k3-main">\n';
+        
+        const calculatorContainer = container.querySelector('.wpc-calc-fire-m8k3-container');
+        if (calculatorContainer) {
+            const calcClone = calculatorContainer.cloneNode(true);
+            const titleContainer = calcClone.querySelector('.wpc-calc-fire-m8k3-title-container');
+            if (titleContainer) titleContainer.remove();
+            const awgSection = calcClone.querySelector('.wpc-calc-fire-m8k3-awg-section');
+            if (awgSection) awgSection.remove();
+            code += calcClone.outerHTML + '\n\n';
+        }
+        
+        const randomAnchor = getRandomAnchor();
+        code += '<div style="text-align: center; padding: 15px; background: #f8f9fa; border-top: 2px solid #e9ecef; margin-top: 20px;">\n';
+        code += '  <p style="margin: 0; font-size: 0.9em; color: #666;">\n';
+        code += '    מחשבון חופש כלכלי זה פותח על ידי \n';
+        code += '    <a href="https://loan-israel.co.il/" target="_blank" rel="nofollow noopener" style="color:' + color + ';">' + randomAnchor + '</a>\n';
+        code += '  </p>\n';
+        code += '</div>\n';
+        code += '</div>\n\n';
+        
+        code += getEmbedScript();
+        
+        copyToClipboard(code, 'קוד HTML עם ' + colorName + ' הועתק! 🎉\nהדבק בעורך וורדפרס במצב Text/HTML');
+    }
+    
+    function getEmbedScript() {
+        return '<script>\n' +
+        'document.addEventListener("DOMContentLoaded", function() {\n' +
+        '  (function() {\n' +
+        '    "use strict";\n' +
+        '    var NS = "WPC_CalcFire_Embed";\n' +
+        '    if (window[NS]) return;\n' +
+        '    var container = document.getElementById("wpc-calc-fire-m8k3-main");\n' +
+        '    if (!container) return;\n' +
+        '    \n' +
+        '    var state = { monthlyExpenses: 15000, swrRate: 4, taxRate: 25 };\n' +
+        '    \n' +
+        '    function formatCurrency(n) { return "₪" + Math.round(n).toLocaleString("he-IL"); }\n' +
+        '    function formatPercent(n) { return n.toFixed(1) + "%"; }\n' +
+        '    \n' +
+        '    function calculateFireNumber(annual, swr, tax) {\n' +
+        '      var basic = annual / (swr / 100);\n' +
+        '      var withTax = annual / ((1 - tax / 100) * (swr / 100));\n' +
+        '      return { basic: basic, withTax: withTax };\n' +
+        '    }\n' +
+        '    \n' +
+        '    function updateResults() {\n' +
+        '      var annual = state.monthlyExpenses * 12;\n' +
+        '      var result = calculateFireNumber(annual, state.swrRate, state.taxRate);\n' +
+        '      var el1 = document.getElementById("fire-number-result");\n' +
+        '      var el2 = document.getElementById("annual-expenses-result");\n' +
+        '      var el3 = document.getElementById("fire-number-basic");\n' +
+        '      if (el1) el1.textContent = formatCurrency(result.withTax);\n' +
+        '      if (el2) el2.textContent = formatCurrency(annual);\n' +
+        '      if (el3) el3.textContent = formatCurrency(result.basic);\n' +
+        '    }\n' +
+        '    \n' +
+        '    function switchTab(tabName) {\n' +
+        '      var tabs = container.querySelectorAll(".wpc-calc-fire-m8k3-tab");\n' +
+        '      var panels = container.querySelectorAll(".wpc-calc-fire-m8k3-panel");\n' +
+        '      for (var i = 0; i < tabs.length; i++) tabs[i].classList.remove("active");\n' +
+        '      for (var j = 0; j < panels.length; j++) panels[j].classList.remove("active");\n' +
+        '      var tabBtn = container.querySelector("[data-tab=\\"" + tabName + "\\"]");\n' +
+        '      if (tabBtn) tabBtn.classList.add("active");\n' +
+        '      var panel = document.getElementById("wpc-calc-fire-m8k3-" + tabName);\n' +
+        '      if (panel) panel.classList.add("active");\n' +
+        '    }\n' +
+        '    \n' +
+        '    container.addEventListener("click", function(e) {\n' +
+        '      var action = e.target.closest("[data-action]");\n' +
+        '      if (!action) return;\n' +
+        '      var act = action.dataset.action;\n' +
+        '      if (act === "switch-tab") switchTab(action.dataset.tab);\n' +
+        '      if (act === "set-swr") { state.swrRate = parseFloat(action.dataset.value); updateResults(); }\n' +
+        '      if (act === "set-tax") { state.taxRate = parseFloat(action.dataset.value); updateResults(); }\n' +
+        '    });\n' +
+        '    \n' +
+        '    container.addEventListener("input", function(e) {\n' +
+        '      if (e.target.id === "monthly-expenses") {\n' +
+        '        state.monthlyExpenses = parseFloat(e.target.value);\n' +
+        '        var valEl = document.getElementById("monthly-expenses-value");\n' +
+        '        if (valEl) valEl.textContent = formatCurrency(state.monthlyExpenses);\n' +
+        '        updateResults();\n' +
+        '      }\n' +
+        '      if (e.target.id === "swr-rate") {\n' +
+        '        state.swrRate = parseFloat(e.target.value);\n' +
+        '        var valEl2 = document.getElementById("swr-rate-value");\n' +
+        '        if (valEl2) valEl2.textContent = formatPercent(state.swrRate);\n' +
+        '        updateResults();\n' +
+        '      }\n' +
+        '    });\n' +
+        '    \n' +
+        '    updateResults();\n' +
+        '    window[NS] = { version: "1.0.0" };\n' +
+        '  })();\n' +
+        '});\n' +
+        '</' + 'script>';
+    }
+    
+    function showPreview(color, colorName) {
+        currentPreviewColor = color;
+        currentPreviewColorName = colorName;
+        
+        const previewSection = document.getElementById('wpc-calc-fire-m8k3-preview-section');
+        const previewContainer = document.getElementById('wpc-calc-fire-m8k3-preview-container');
+        
+        if (!previewSection || !previewContainer) return;
+        
+        const calculatorContainer = container.querySelector('.wpc-calc-fire-m8k3-container');
+        if (!calculatorContainer) return;
+        
+        const clone = calculatorContainer.cloneNode(true);
+        
+        // Remove unnecessary elements
+        const titleContainer = clone.querySelector('.wpc-calc-fire-m8k3-title-container');
+        if (titleContainer) titleContainer.remove();
+        
+        const awgSection = clone.querySelector('.wpc-calc-fire-m8k3-awg-section');
+        if (awgSection) awgSection.remove();
+        
+        // Remove data-action from tabs
+        clone.querySelectorAll('.wpc-calc-fire-m8k3-tab').forEach(tab => {
+            tab.removeAttribute('data-action');
+        });
+        
+        // Create preview wrapper
+        const previewWrapper = document.createElement('div');
+        previewWrapper.className = 'wpc-calc-fire-m8k3-wrapper';
+        previewWrapper.id = 'wpc-calc-fire-m8k3-preview';
+        previewWrapper.appendChild(clone);
+        
+        // Apply color
+        previewWrapper.style.setProperty('--primary', color);
+        previewWrapper.style.setProperty('--primary-dark', darkenColor(color));
+        previewWrapper.style.setProperty('--gradient-primary', 
+            'linear-gradient(135deg, ' + color + ' 0%, ' + darkenColor(color) + ' 100%)');
+        
+        previewContainer.innerHTML = '';
+        previewContainer.appendChild(previewWrapper);
+        
+        // Initialize preview calculator tabs
+        previewWrapper.querySelectorAll('.wpc-calc-fire-m8k3-tab').forEach(tab => {
+            tab.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                const tabName = this.dataset.tab;
+                
+                previewWrapper.querySelectorAll('.wpc-calc-fire-m8k3-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                
+                previewWrapper.querySelectorAll('.wpc-calc-fire-m8k3-panel').forEach(p => p.classList.remove('active'));
+                const panel = previewWrapper.querySelector('#wpc-calc-fire-m8k3-' + tabName);
+                if (panel) panel.classList.add('active');
+            });
+        });
+        
+        previewSection.style.display = 'block';
+        previewSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    
+    function copyToClipboard(text, message) {
+        if (navigator.clipboard) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert(message);
+            }).catch(err => {
+                fallbackCopy(text, message);
+            });
+        } else {
+            fallbackCopy(text, message);
+        }
+    }
+    
+    function fallbackCopy(text, message) {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+            document.execCommand('copy');
+            alert(message);
+        } catch (err) {
+            alert('העתקה נכשלה. אנא העתיקו ידנית.');
+        }
+        document.body.removeChild(textarea);
+    }
+    
+    // Custom color picker
+    const customColorInput = document.getElementById('wpc-calc-fire-m8k3-custom-color');
+    if (customColorInput) {
+        customColorInput.addEventListener('change', function() {
+            showPreview(this.value, 'צבע מותאם אישית');
+        });
+    }
+    
+    // Initialize
+    function init() {
+        ui.updateFireNumberResults();
+        ui.updateTimeToFireResults();
+        ui.updateFireTypesResults();
+        ui.updateSensitivityResults();
+    }
+    
+    init();
+    
+    // Expose minimal API
+    window[NS] = { version: '1.0.0' };
+})();
+</script>
+

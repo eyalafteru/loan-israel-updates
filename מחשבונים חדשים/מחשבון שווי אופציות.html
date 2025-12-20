@@ -1,0 +1,1176 @@
+<script>
+if (!document.querySelector('meta[name="viewport"]')) {
+  const viewport = document.createElement('meta');
+  viewport.name = 'viewport';
+  viewport.content = 'width=device-width, initial-scale=1.0, user-scalable=yes';
+  document.head.appendChild(viewport);
+}
+</script>
+
+<style>
+:root {
+  --wpc-esop-primary: #1e5490;
+  --wpc-esop-primary-dark: #163d6b;
+  --wpc-esop-primary-light: rgba(30, 84, 144, 0.1);
+  --wpc-esop-success: #10b981;
+  --wpc-esop-success-light: rgba(16, 185, 129, 0.1);
+  --wpc-esop-warning: #f59e0b;
+  --wpc-esop-warning-light: rgba(245, 158, 11, 0.1);
+  --wpc-esop-danger: #ef4444;
+  --wpc-esop-text-dark: #1f2937;
+  --wpc-esop-text-light: #6b7280;
+  --wpc-esop-bg-light: #f8fafc;
+  --wpc-esop-white: #ffffff;
+  --wpc-esop-border: #e5e7eb;
+  --wpc-esop-shadow-md: 0 4px 15px rgba(0,0,0,0.1);
+  --wpc-esop-radius-sm: 8px;
+  --wpc-esop-radius-md: 12px;
+  --wpc-esop-radius-lg: 20px;
+  --wpc-esop-transition: all 0.3s ease;
+}
+
+.wpc-calc-esop-x7m2-wrapper {
+  all: initial !important;
+  display: block !important;
+  font-family: 'Assistant', -apple-system, sans-serif !important;
+  direction: rtl !important;
+  color: var(--wpc-esop-text-dark) !important;
+  line-height: 1.6 !important;
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+  padding: 20px !important;
+  box-sizing: border-box !important;
+  color-scheme: light !important;
+}
+
+.wpc-calc-esop-x7m2-wrapper * { box-sizing: border-box !important; font-family: inherit !important; }
+
+.wpc-calc-esop-x7m2-title-section { text-align: center !important; margin-bottom: 30px !important; }
+
+.wpc-calc-esop-x7m2-title {
+  font-size: 2.2rem !important;
+  font-weight: 700 !important;
+  color: var(--wpc-esop-primary) !important;
+  margin: 0 0 10px 0 !important;
+}
+
+.wpc-calc-esop-x7m2-subtitle { font-size: 1rem !important; color: var(--wpc-esop-text-light) !important; margin: 0 !important; }
+
+.wpc-calc-esop-x7m2-update-date {
+  display: inline-block !important;
+  background: var(--wpc-esop-primary-light) !important;
+  color: var(--wpc-esop-primary) !important;
+  padding: 5px 15px !important;
+  border-radius: 20px !important;
+  font-size: 0.9rem !important;
+  margin-top: 10px !important;
+}
+
+.wpc-calc-esop-x7m2-calculator {
+  background: var(--wpc-esop-white) !important;
+  border-radius: var(--wpc-esop-radius-lg) !important;
+  box-shadow: var(--wpc-esop-shadow-md) !important;
+  overflow: hidden !important;
+  margin-bottom: 30px !important;
+}
+
+.wpc-calc-esop-x7m2-tabs-nav {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  background: var(--wpc-esop-bg-light) !important;
+  border-bottom: 2px solid var(--wpc-esop-border) !important;
+}
+
+.wpc-calc-esop-x7m2-tab-btn {
+  flex: 1 1 auto !important;
+  min-width: 100px !important;
+  padding: 16px 20px !important;
+  background: transparent !important;
+  border: none !important;
+  cursor: pointer !important;
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  color: var(--wpc-esop-text-light) !important;
+  transition: var(--wpc-esop-transition) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  border-bottom: 3px solid transparent !important;
+  font-family: inherit !important;
+}
+
+.wpc-calc-esop-x7m2-tab-btn:hover { background: var(--wpc-esop-white) !important; color: var(--wpc-esop-primary) !important; }
+.wpc-calc-esop-x7m2-tab-btn.active { background: var(--wpc-esop-white) !important; color: var(--wpc-esop-primary) !important; border-bottom-color: var(--wpc-esop-primary) !important; }
+.wpc-calc-esop-x7m2-tab-icon { font-size: 1.3rem !important; }
+.wpc-calc-esop-x7m2-tab-content { display: none !important; padding: 30px !important; }
+.wpc-calc-esop-x7m2-tab-content.active { display: block !important; }
+.wpc-calc-esop-x7m2-tab-title { font-size: 1.4rem !important; font-weight: 700 !important; color: var(--wpc-esop-primary) !important; margin: 0 0 25px 0 !important; text-align: center !important; }
+.wpc-calc-esop-x7m2-input-group { margin-bottom: 25px !important; }
+.wpc-calc-esop-x7m2-input-label { display: block !important; font-size: 1rem !important; font-weight: 600 !important; color: var(--wpc-esop-text-dark) !important; margin-bottom: 10px !important; }
+.wpc-calc-esop-x7m2-slider-container { display: flex !important; align-items: center !important; gap: 15px !important; }
+
+.wpc-calc-esop-x7m2-slider {
+  flex: 1 !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  height: 8px !important;
+  background: var(--wpc-esop-border) !important;
+  border-radius: 4px !important;
+  outline: none !important;
+  cursor: pointer !important;
+}
+
+.wpc-calc-esop-x7m2-slider::-webkit-slider-thumb {
+  -webkit-appearance: none !important;
+  width: 24px !important;
+  height: 24px !important;
+  background: var(--wpc-esop-primary) !important;
+  border-radius: 50% !important;
+  cursor: pointer !important;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2) !important;
+}
+
+.wpc-calc-esop-x7m2-slider::-moz-range-thumb { width: 24px !important; height: 24px !important; background: var(--wpc-esop-primary) !important; border-radius: 50% !important; cursor: pointer !important; border: none !important; }
+
+.wpc-calc-esop-x7m2-slider-value {
+  min-width: 130px !important;
+  padding: 12px 15px !important;
+  background: var(--wpc-esop-primary-light) !important;
+  color: var(--wpc-esop-primary) !important;
+  border-radius: var(--wpc-esop-radius-sm) !important;
+  font-size: 1.1rem !important;
+  font-weight: 700 !important;
+  text-align: center !important;
+}
+
+.wpc-calc-esop-x7m2-results {
+  background: linear-gradient(135deg, var(--wpc-esop-primary) 0%, var(--wpc-esop-primary-dark) 100%) !important;
+  border-radius: var(--wpc-esop-radius-md) !important;
+  padding: 25px !important;
+  color: var(--wpc-esop-white) !important;
+  margin-top: 25px !important;
+}
+
+.wpc-calc-esop-x7m2-results-title { font-size: 1.1rem !important; font-weight: 600 !important; margin: 0 0 20px 0 !important; text-align: center !important; opacity: 0.9 !important; }
+.wpc-calc-esop-x7m2-results-grid { display: grid !important; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)) !important; gap: 20px !important; }
+.wpc-calc-esop-x7m2-result-item { background: rgba(255,255,255,0.15) !important; border-radius: var(--wpc-esop-radius-sm) !important; padding: 20px !important; text-align: center !important; }
+.wpc-calc-esop-x7m2-result-label { font-size: 0.9rem !important; opacity: 0.9 !important; margin-bottom: 8px !important; }
+.wpc-calc-esop-x7m2-result-value { font-size: 1.8rem !important; font-weight: 700 !important; }
+.wpc-calc-esop-x7m2-result-value.highlight { color: #fbbf24 !important; }
+
+.wpc-calc-esop-x7m2-info-box { background: var(--wpc-esop-primary-light) !important; border-right: 4px solid var(--wpc-esop-primary) !important; padding: 15px 20px !important; border-radius: var(--wpc-esop-radius-sm) !important; margin-top: 20px !important; }
+.wpc-calc-esop-x7m2-info-title { font-weight: 700 !important; color: var(--wpc-esop-primary) !important; margin-bottom: 5px !important; }
+.wpc-calc-esop-x7m2-info-text { font-size: 0.95rem !important; color: var(--wpc-esop-text-dark) !important; line-height: 1.6 !important; }
+
+.wpc-calc-esop-x7m2-warning-box { background: var(--wpc-esop-warning-light) !important; border-right: 4px solid var(--wpc-esop-warning) !important; padding: 15px 20px !important; border-radius: var(--wpc-esop-radius-sm) !important; margin-top: 20px !important; }
+.wpc-calc-esop-x7m2-warning-title { font-weight: 700 !important; color: #b45309 !important; margin-bottom: 5px !important; }
+
+.wpc-calc-esop-x7m2-tax-breakdown { margin-top: 25px !important; background: var(--wpc-esop-bg-light) !important; border-radius: var(--wpc-esop-radius-md) !important; overflow: hidden !important; }
+.wpc-calc-esop-x7m2-tax-breakdown-title { background: var(--wpc-esop-primary) !important; color: var(--wpc-esop-white) !important; padding: 15px 20px !important; font-size: 1.1rem !important; font-weight: 600 !important; margin: 0 !important; }
+.wpc-calc-esop-x7m2-tax-breakdown-table { width: 100% !important; border-collapse: collapse !important; }
+.wpc-calc-esop-x7m2-tax-breakdown-table th, .wpc-calc-esop-x7m2-tax-breakdown-table td { padding: 12px 15px !important; text-align: right !important; border-bottom: 1px solid var(--wpc-esop-border) !important; }
+.wpc-calc-esop-x7m2-tax-breakdown-table th { background: var(--wpc-esop-white) !important; font-weight: 600 !important; color: var(--wpc-esop-text-dark) !important; }
+.wpc-calc-esop-x7m2-tax-breakdown-table td { background: var(--wpc-esop-white) !important; }
+.wpc-calc-esop-x7m2-tax-breakdown-table tr:last-child td { border-bottom: none !important; font-weight: 700 !important; background: var(--wpc-esop-primary-light) !important; }
+
+.wpc-calc-esop-x7m2-awg-section { background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%) !important; border-radius: var(--wpc-esop-radius-lg) !important; padding: 30px !important; margin: 30px 0 !important; text-align: center !important; }
+.wpc-calc-esop-x7m2-awg-title { font-size: 1.5rem !important; font-weight: 700 !important; color: var(--wpc-esop-primary) !important; margin: 0 0 20px 0 !important; }
+.wpc-calc-esop-x7m2-cta-buttons { display: flex !important; flex-wrap: wrap !important; gap: 15px !important; justify-content: center !important; margin-bottom: 20px !important; }
+.wpc-calc-esop-x7m2-cta-btn { padding: 15px 30px !important; border-radius: 50px !important; font-size: 1.1rem !important; font-weight: 600 !important; border: none !important; cursor: pointer !important; transition: var(--wpc-esop-transition) !important; font-family: inherit !important; display: inline-flex !important; align-items: center !important; gap: 8px !important; }
+.wpc-calc-esop-x7m2-cta-btn.primary { background: linear-gradient(135deg, var(--wpc-esop-danger) 0%, #dc2626 100%) !important; color: var(--wpc-esop-white) !important; }
+.wpc-calc-esop-x7m2-cta-btn.secondary { background: linear-gradient(135deg, var(--wpc-esop-success) 0%, #059669 100%) !important; color: var(--wpc-esop-white) !important; }
+.wpc-calc-esop-x7m2-cta-btn:hover { transform: translateY(-2px) !important; box-shadow: var(--wpc-esop-shadow-md) !important; }
+.wpc-calc-esop-x7m2-awg-content { display: none !important; margin-top: 20px !important; padding: 20px !important; background: var(--wpc-esop-white) !important; border-radius: var(--wpc-esop-radius-md) !important; }
+.wpc-calc-esop-x7m2-awg-content.active { display: block !important; }
+
+.wpc-calc-esop-x7m2-faq-section { margin: 40px 0 !important; }
+.wpc-calc-esop-x7m2-section-title { font-size: 1.8rem !important; font-weight: 700 !important; color: var(--wpc-esop-primary) !important; margin: 0 0 25px 0 !important; text-align: center !important; }
+.wpc-calc-esop-x7m2-faq-item { background: var(--wpc-esop-white) !important; border: 1px solid var(--wpc-esop-border) !important; border-radius: var(--wpc-esop-radius-md) !important; margin-bottom: 12px !important; overflow: hidden !important; }
+.wpc-calc-esop-x7m2-faq-header { padding: 18px 20px !important; cursor: pointer !important; display: flex !important; justify-content: space-between !important; align-items: center !important; background: var(--wpc-esop-bg-light) !important; transition: var(--wpc-esop-transition) !important; }
+.wpc-calc-esop-x7m2-faq-header:hover { background: var(--wpc-esop-primary-light) !important; }
+.wpc-calc-esop-x7m2-faq-question { font-size: 1rem !important; font-weight: 600 !important; color: var(--wpc-esop-text-dark) !important; }
+.wpc-calc-esop-x7m2-faq-icon { font-size: 1.2rem !important; transition: var(--wpc-esop-transition) !important; color: var(--wpc-esop-primary) !important; }
+.wpc-calc-esop-x7m2-faq-item.active .wpc-calc-esop-x7m2-faq-icon { transform: rotate(180deg) !important; }
+.wpc-calc-esop-x7m2-faq-answer { display: none !important; padding: 20px !important; font-size: 0.95rem !important; line-height: 1.7 !important; color: var(--wpc-esop-text-dark) !important; }
+.wpc-calc-esop-x7m2-faq-item.active .wpc-calc-esop-x7m2-faq-answer { display: block !important; }
+
+.wpc-calc-esop-x7m2-content-section { background: var(--wpc-esop-white) !important; border-radius: var(--wpc-esop-radius-lg) !important; padding: 40px !important; margin: 40px 0 !important; box-shadow: 0 1px 3px rgba(0,0,0,0.1) !important; }
+.wpc-calc-esop-x7m2-content-title { font-size: 1.6rem !important; font-weight: 700 !important; color: var(--wpc-esop-primary) !important; margin: 0 0 20px 0 !important; }
+.wpc-calc-esop-x7m2-content-text { font-size: 1rem !important; line-height: 1.8 !important; color: var(--wpc-esop-text-dark) !important; margin-bottom: 20px !important; }
+
+.wpc-calc-esop-x7m2-embed-section { background: var(--wpc-esop-white) !important; border-radius: var(--wpc-esop-radius-lg) !important; padding: 40px !important; margin: 40px 0 !important; box-shadow: 0 1px 3px rgba(0,0,0,0.1) !important; }
+.wpc-calc-esop-x7m2-embed-btn { display: inline-flex !important; align-items: center !important; gap: 10px !important; padding: 18px 40px !important; background: linear-gradient(135deg, var(--wpc-esop-success) 0%, #059669 100%) !important; color: var(--wpc-esop-white) !important; border: none !important; border-radius: 50px !important; font-size: 1.2rem !important; font-weight: 600 !important; cursor: pointer !important; transition: var(--wpc-esop-transition) !important; font-family: inherit !important; }
+.wpc-calc-esop-x7m2-embed-btn:hover { transform: translateY(-2px) !important; box-shadow: var(--wpc-esop-shadow-md) !important; }
+.wpc-calc-esop-x7m2-color-picker { display: flex !important; flex-wrap: wrap !important; justify-content: center !important; gap: 12px !important; margin: 25px 0 !important; }
+.wpc-calc-esop-x7m2-color-btn { width: 50px !important; height: 50px !important; border-radius: 50% !important; border: 3px solid var(--wpc-esop-white) !important; cursor: pointer !important; transition: var(--wpc-esop-transition) !important; box-shadow: 0 2px 8px rgba(0,0,0,0.2) !important; }
+.wpc-calc-esop-x7m2-color-btn:hover { transform: scale(1.15) !important; }
+.wpc-calc-esop-x7m2-color-btn.active { border-color: #333 !important; transform: scale(1.2) !important; }
+.wpc-calc-esop-x7m2-preview-container { background: var(--wpc-esop-bg-light) !important; border: 2px solid var(--wpc-esop-border) !important; border-radius: var(--wpc-esop-radius-md) !important; padding: 20px !important; margin-top: 25px !important; }
+
+@media (max-width: 768px) {
+  .wpc-calc-esop-x7m2-wrapper { padding: 15px !important; }
+  .wpc-calc-esop-x7m2-title { font-size: 1.6rem !important; }
+  .wpc-calc-esop-x7m2-tab-btn { flex: 1 1 45% !important; min-width: auto !important; padding: 12px 10px !important; font-size: 0.9rem !important; }
+  .wpc-calc-esop-x7m2-tab-content { padding: 20px 15px !important; }
+  .wpc-calc-esop-x7m2-results-grid { grid-template-columns: 1fr !important; }
+  .wpc-calc-esop-x7m2-cta-buttons { flex-direction: column !important; }
+}
+
+@media (max-width: 480px) {
+  .wpc-calc-esop-x7m2-title { font-size: 1.4rem !important; }
+  .wpc-calc-esop-x7m2-tab-btn { font-size: 0.85rem !important; padding: 10px 8px !important; }
+  .wpc-calc-esop-x7m2-tab-icon { display: none !important; }
+  .wpc-calc-esop-x7m2-result-value { font-size: 1.4rem !important; }
+  .wpc-calc-esop-x7m2-slider-value { min-width: 100px !important; font-size: 0.95rem !important; }
+  .wpc-calc-esop-x7m2-content-section, .wpc-calc-esop-x7m2-embed-section { padding: 25px 15px !important; }
+}
+
+@media (max-width: 375px) {
+  .wpc-calc-esop-x7m2-wrapper { padding: 10px !important; }
+  .wpc-calc-esop-x7m2-title { font-size: 1.2rem !important; }
+  .wpc-calc-esop-x7m2-subtitle { font-size: 0.85rem !important; }
+  .wpc-calc-esop-x7m2-tab-btn { flex: 1 1 100% !important; font-size: 0.9rem !important; }
+  .wpc-calc-esop-x7m2-slider-container { flex-direction: column !important; gap: 10px !important; }
+  .wpc-calc-esop-x7m2-slider-value { width: 100% !important; min-width: auto !important; }
+  .wpc-calc-esop-x7m2-results { padding: 15px !important; }
+  .wpc-calc-esop-x7m2-result-value { font-size: 1.2rem !important; }
+  .wpc-calc-esop-x7m2-color-btn { width: 40px !important; height: 40px !important; }
+}
+</style>
+
+<div class="wpc-calc-esop-x7m2-wrapper" id="wpc-calc-esop-x7m2-main">
+  
+  <div class="wpc-calc-esop-x7m2-title-section">
+    <h1 class="wpc-calc-esop-x7m2-title">מחשבון שווי אופציות לעובדי הייטק 2025</h1>
+    <p class="wpc-calc-esop-x7m2-subtitle">חשבו כמה כסף תקבלו בפועל מהאופציות שלכם באקזיט או הנפקה</p>
+    <span class="wpc-calc-esop-x7m2-update-date">📅 עודכן: דצמבר 2025 | כולל מס יסף</span>
+  </div>
+
+  <div class="wpc-calc-esop-x7m2-calculator" id="wpc-calc-esop-x7m2-calculator">
+    
+    <div class="wpc-calc-esop-x7m2-tabs-nav">
+      <button class="wpc-calc-esop-x7m2-tab-btn active" data-action="switch-tab" data-tab="basic">
+        <span class="wpc-calc-esop-x7m2-tab-icon">💰</span>
+        <span>חישוב בסיסי</span>
+      </button>
+      <button class="wpc-calc-esop-x7m2-tab-btn" data-action="switch-tab" data-tab="dilution">
+        <span class="wpc-calc-esop-x7m2-tab-icon">📉</span>
+        <span>השפעת דילול</span>
+      </button>
+      <button class="wpc-calc-esop-x7m2-tab-btn" data-action="switch-tab" data-tab="tax">
+        <span class="wpc-calc-esop-x7m2-tab-icon">🧾</span>
+        <span>פירוט מיסוי</span>
+      </button>
+      <button class="wpc-calc-esop-x7m2-tab-btn" data-action="switch-tab" data-tab="breakeven">
+        <span class="wpc-calc-esop-x7m2-tab-icon">📊</span>
+        <span>נקודת איפוס</span>
+      </button>
+    </div>
+
+    <!-- Tab 1: Basic Calculation -->
+    <div class="wpc-calc-esop-x7m2-tab-content active" id="tab-basic">
+      <h2 class="wpc-calc-esop-x7m2-tab-title">חישוב שווי אופציות</h2>
+      
+      <div class="wpc-calc-esop-x7m2-input-group">
+        <label class="wpc-calc-esop-x7m2-input-label">📋 מספר אופציות שהוענקו</label>
+        <div class="wpc-calc-esop-x7m2-slider-container">
+          <input type="range" class="wpc-calc-esop-x7m2-slider" id="basic-options-slider" min="1000" max="500000" step="1000" value="50000">
+          <div class="wpc-calc-esop-x7m2-slider-value" id="basic-options-value">50,000</div>
+        </div>
+      </div>
+
+      <div class="wpc-calc-esop-x7m2-input-group">
+        <label class="wpc-calc-esop-x7m2-input-label">💵 מחיר מימוש - Strike Price ($)</label>
+        <div class="wpc-calc-esop-x7m2-slider-container">
+          <input type="range" class="wpc-calc-esop-x7m2-slider" id="basic-strike-slider" min="0.01" max="50" step="0.01" value="2">
+          <div class="wpc-calc-esop-x7m2-slider-value" id="basic-strike-value">$2.00</div>
+        </div>
+      </div>
+
+      <div class="wpc-calc-esop-x7m2-input-group">
+        <label class="wpc-calc-esop-x7m2-input-label">📈 מחיר מניה צפוי באקזיט ($)</label>
+        <div class="wpc-calc-esop-x7m2-slider-container">
+          <input type="range" class="wpc-calc-esop-x7m2-slider" id="basic-stock-slider" min="1" max="200" step="0.5" value="20">
+          <div class="wpc-calc-esop-x7m2-slider-value" id="basic-stock-value">$20.00</div>
+        </div>
+      </div>
+
+      <div class="wpc-calc-esop-x7m2-input-group">
+        <label class="wpc-calc-esop-x7m2-input-label">💱 שער דולר (₪)</label>
+        <div class="wpc-calc-esop-x7m2-slider-container">
+          <input type="range" class="wpc-calc-esop-x7m2-slider" id="basic-usd-slider" min="3" max="5" step="0.01" value="3.65">
+          <div class="wpc-calc-esop-x7m2-slider-value" id="basic-usd-value">₪3.65</div>
+        </div>
+      </div>
+
+      <div class="wpc-calc-esop-x7m2-results">
+        <h3 class="wpc-calc-esop-x7m2-results-title">💎 תוצאות החישוב (סעיף 102 הוני)</h3>
+        <div class="wpc-calc-esop-x7m2-results-grid">
+          <div class="wpc-calc-esop-x7m2-result-item">
+            <div class="wpc-calc-esop-x7m2-result-label">רווח ברוטו (לפני מס)</div>
+            <div class="wpc-calc-esop-x7m2-result-value" id="basic-result-gross">₪3,285,000</div>
+          </div>
+          <div class="wpc-calc-esop-x7m2-result-item">
+            <div class="wpc-calc-esop-x7m2-result-label">מס רווח הון (25%)</div>
+            <div class="wpc-calc-esop-x7m2-result-value" id="basic-result-tax">₪821,250</div>
+          </div>
+          <div class="wpc-calc-esop-x7m2-result-item">
+            <div class="wpc-calc-esop-x7m2-result-label">רווח נטו לחשבון</div>
+            <div class="wpc-calc-esop-x7m2-result-value highlight" id="basic-result-net">₪2,463,750</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wpc-calc-esop-x7m2-info-box">
+        <div class="wpc-calc-esop-x7m2-info-title">💡 מהו סעיף 102 הוני?</div>
+        <div class="wpc-calc-esop-x7m2-info-text">
+          סעיף 102 למס הכנסה מאפשר לעובדים לשלם רק 25% מס רווח הון על האופציות, במקום מס הכנסה רגיל (עד 50%). התנאי: האופציות מופקדות אצל נאמן לפחות שנתיים.
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 2: Dilution -->
+    <div class="wpc-calc-esop-x7m2-tab-content" id="tab-dilution">
+      <h2 class="wpc-calc-esop-x7m2-tab-title">חישוב עם השפעת דילול</h2>
+      
+      <div class="wpc-calc-esop-x7m2-input-group">
+        <label class="wpc-calc-esop-x7m2-input-label">📋 מספר אופציות שהוענקו</label>
+        <div class="wpc-calc-esop-x7m2-slider-container">
+          <input type="range" class="wpc-calc-esop-x7m2-slider" id="dilution-options-slider" min="1000" max="500000" step="1000" value="50000">
+          <div class="wpc-calc-esop-x7m2-slider-value" id="dilution-options-value">50,000</div>
+        </div>
+      </div>
+
+      <div class="wpc-calc-esop-x7m2-input-group">
+        <label class="wpc-calc-esop-x7m2-input-label">📉 אחוז דילול משוער (סבבי גיוס עתידיים)</label>
+        <div class="wpc-calc-esop-x7m2-slider-container">
+          <input type="range" class="wpc-calc-esop-x7m2-slider" id="dilution-percent-slider" min="0" max="60" step="5" value="20">
+          <div class="wpc-calc-esop-x7m2-slider-value" id="dilution-percent-value">20%</div>
+        </div>
+      </div>
+
+      <div class="wpc-calc-esop-x7m2-input-group">
+        <label class="wpc-calc-esop-x7m2-input-label">💵 מחיר מימוש - Strike Price ($)</label>
+        <div class="wpc-calc-esop-x7m2-slider-container">
+          <input type="range" class="wpc-calc-esop-x7m2-slider" id="dilution-strike-slider" min="0.01" max="50" step="0.01" value="2">
+          <div class="wpc-calc-esop-x7m2-slider-value" id="dilution-strike-value">$2.00</div>
+        </div>
+      </div>
+
+      <div class="wpc-calc-esop-x7m2-input-group">
+        <label class="wpc-calc-esop-x7m2-input-label">📈 מחיר מניה צפוי באקזיט ($)</label>
+        <div class="wpc-calc-esop-x7m2-slider-container">
+          <input type="range" class="wpc-calc-esop-x7m2-slider" id="dilution-stock-slider" min="1" max="200" step="0.5" value="20">
+          <div class="wpc-calc-esop-x7m2-slider-value" id="dilution-stock-value">$20.00</div>
+        </div>
+      </div>
+
+      <div class="wpc-calc-esop-x7m2-results">
+        <h3 class="wpc-calc-esop-x7m2-results-title">📊 השוואה: לפני ואחרי דילול</h3>
+        <div class="wpc-calc-esop-x7m2-results-grid">
+          <div class="wpc-calc-esop-x7m2-result-item">
+            <div class="wpc-calc-esop-x7m2-result-label">אופציות אפקטיביות</div>
+            <div class="wpc-calc-esop-x7m2-result-value" id="dilution-result-options">40,000</div>
+          </div>
+          <div class="wpc-calc-esop-x7m2-result-item">
+            <div class="wpc-calc-esop-x7m2-result-label">רווח ללא דילול</div>
+            <div class="wpc-calc-esop-x7m2-result-value" id="dilution-result-before">₪2,463,750</div>
+          </div>
+          <div class="wpc-calc-esop-x7m2-result-item">
+            <div class="wpc-calc-esop-x7m2-result-label">רווח אחרי דילול</div>
+            <div class="wpc-calc-esop-x7m2-result-value highlight" id="dilution-result-after">₪1,971,000</div>
+          </div>
+          <div class="wpc-calc-esop-x7m2-result-item">
+            <div class="wpc-calc-esop-x7m2-result-label">הפסד מדילול</div>
+            <div class="wpc-calc-esop-x7m2-result-value" id="dilution-result-loss">₪492,750</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wpc-calc-esop-x7m2-warning-box">
+        <div class="wpc-calc-esop-x7m2-warning-title">⚠️ מהו דילול?</div>
+        <div class="wpc-calc-esop-x7m2-info-text">
+          כאשר החברה מגייסת הון, היא מנפיקה מניות חדשות למשקיעים. זה מקטין את האחוז שלכם בחברה (דילול). בממוצע, כל סבב גיוס מדלל 15-25% מהאחזקות.
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 3: Tax Breakdown -->
+    <div class="wpc-calc-esop-x7m2-tab-content" id="tab-tax">
+      <h2 class="wpc-calc-esop-x7m2-tab-title">פירוט מיסוי מלא (כולל מס יסף)</h2>
+      
+      <div class="wpc-calc-esop-x7m2-input-group">
+        <label class="wpc-calc-esop-x7m2-input-label">💰 רווח ברוטו מאופציות (₪)</label>
+        <div class="wpc-calc-esop-x7m2-slider-container">
+          <input type="range" class="wpc-calc-esop-x7m2-slider" id="tax-gross-slider" min="100000" max="10000000" step="50000" value="2000000">
+          <div class="wpc-calc-esop-x7m2-slider-value" id="tax-gross-value">₪2,000,000</div>
+        </div>
+      </div>
+
+      <div class="wpc-calc-esop-x7m2-input-group">
+        <label class="wpc-calc-esop-x7m2-input-label">💼 הכנסה שנתית נוספת (שכר וכו')</label>
+        <div class="wpc-calc-esop-x7m2-slider-container">
+          <input type="range" class="wpc-calc-esop-x7m2-slider" id="tax-income-slider" min="0" max="2000000" step="10000" value="400000">
+          <div class="wpc-calc-esop-x7m2-slider-value" id="tax-income-value">₪400,000</div>
+        </div>
+      </div>
+
+      <div class="wpc-calc-esop-x7m2-results">
+        <h3 class="wpc-calc-esop-x7m2-results-title">🧾 פירוט המס</h3>
+        <div class="wpc-calc-esop-x7m2-results-grid">
+          <div class="wpc-calc-esop-x7m2-result-item">
+            <div class="wpc-calc-esop-x7m2-result-label">מס רווח הון (25%)</div>
+            <div class="wpc-calc-esop-x7m2-result-value" id="tax-result-capital">₪500,000</div>
+          </div>
+          <div class="wpc-calc-esop-x7m2-result-item">
+            <div class="wpc-calc-esop-x7m2-result-label">מס יסף (3%)</div>
+            <div class="wpc-calc-esop-x7m2-result-value" id="tax-result-yessef">₪50,350</div>
+          </div>
+          <div class="wpc-calc-esop-x7m2-result-item">
+            <div class="wpc-calc-esop-x7m2-result-label">סה"כ מס</div>
+            <div class="wpc-calc-esop-x7m2-result-value" id="tax-result-total">₪550,350</div>
+          </div>
+          <div class="wpc-calc-esop-x7m2-result-item">
+            <div class="wpc-calc-esop-x7m2-result-label">נטו לחשבון</div>
+            <div class="wpc-calc-esop-x7m2-result-value highlight" id="tax-result-net">₪1,449,650</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wpc-calc-esop-x7m2-tax-breakdown">
+        <h4 class="wpc-calc-esop-x7m2-tax-breakdown-title">📋 פירוט חישוב המס</h4>
+        <table class="wpc-calc-esop-x7m2-tax-breakdown-table">
+          <thead>
+            <tr><th>פריט</th><th>סכום</th><th>אחוז</th><th>מס</th></tr>
+          </thead>
+          <tbody id="tax-breakdown-body"></tbody>
+        </table>
+      </div>
+
+      <div class="wpc-calc-esop-x7m2-warning-box" id="yessef-warning" style="display: none;">
+        <div class="wpc-calc-esop-x7m2-warning-title">⚠️ חלה עליכם חבות מס יסף!</div>
+        <div class="wpc-calc-esop-x7m2-info-text">
+          בשנת 2025, אם ההכנסה השנתית הכוללת עולה על ₪721,560, חלה תוספת של 3% מס יסף על הסכום שמעל הסף.
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 4: Breakeven -->
+    <div class="wpc-calc-esop-x7m2-tab-content" id="tab-breakeven">
+      <h2 class="wpc-calc-esop-x7m2-tab-title">נקודת איפוס: מתי משתלם לממש?</h2>
+      
+      <div class="wpc-calc-esop-x7m2-input-group">
+        <label class="wpc-calc-esop-x7m2-input-label">📋 מספר אופציות</label>
+        <div class="wpc-calc-esop-x7m2-slider-container">
+          <input type="range" class="wpc-calc-esop-x7m2-slider" id="breakeven-options-slider" min="1000" max="500000" step="1000" value="50000">
+          <div class="wpc-calc-esop-x7m2-slider-value" id="breakeven-options-value">50,000</div>
+        </div>
+      </div>
+
+      <div class="wpc-calc-esop-x7m2-input-group">
+        <label class="wpc-calc-esop-x7m2-input-label">💵 מחיר מימוש - Strike Price ($)</label>
+        <div class="wpc-calc-esop-x7m2-slider-container">
+          <input type="range" class="wpc-calc-esop-x7m2-slider" id="breakeven-strike-slider" min="0.01" max="50" step="0.01" value="5">
+          <div class="wpc-calc-esop-x7m2-slider-value" id="breakeven-strike-value">$5.00</div>
+        </div>
+      </div>
+
+      <div class="wpc-calc-esop-x7m2-input-group">
+        <label class="wpc-calc-esop-x7m2-input-label">🎯 רווח נטו רצוי (₪)</label>
+        <div class="wpc-calc-esop-x7m2-slider-container">
+          <input type="range" class="wpc-calc-esop-x7m2-slider" id="breakeven-target-slider" min="0" max="5000000" step="50000" value="500000">
+          <div class="wpc-calc-esop-x7m2-slider-value" id="breakeven-target-value">₪500,000</div>
+        </div>
+      </div>
+
+      <div class="wpc-calc-esop-x7m2-results">
+        <h3 class="wpc-calc-esop-x7m2-results-title">🎯 מחירי מניה נדרשים</h3>
+        <div class="wpc-calc-esop-x7m2-results-grid">
+          <div class="wpc-calc-esop-x7m2-result-item">
+            <div class="wpc-calc-esop-x7m2-result-label">נקודת איפוס (רווח 0)</div>
+            <div class="wpc-calc-esop-x7m2-result-value" id="breakeven-result-zero">$5.00</div>
+          </div>
+          <div class="wpc-calc-esop-x7m2-result-item">
+            <div class="wpc-calc-esop-x7m2-result-label">מחיר לרווח הרצוי</div>
+            <div class="wpc-calc-esop-x7m2-result-value highlight" id="breakeven-result-target">$8.65</div>
+          </div>
+          <div class="wpc-calc-esop-x7m2-result-item">
+            <div class="wpc-calc-esop-x7m2-result-label">עלייה נדרשת במניה</div>
+            <div class="wpc-calc-esop-x7m2-result-value" id="breakeven-result-increase">73%</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wpc-calc-esop-x7m2-info-box">
+        <div class="wpc-calc-esop-x7m2-info-title">📌 מה זה אומר?</div>
+        <div class="wpc-calc-esop-x7m2-info-text">
+          נקודת האיפוס היא מחיר המניה שבו הרווח שלכם הוא אפס (מחיר המניה = מחיר המימוש). מחיר נמוך יותר = הפסד. מחיר גבוה יותר = רווח.
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- AWG Section -->
+  <div class="wpc-calc-esop-x7m2-awg-section">
+    <h3 class="wpc-calc-esop-x7m2-awg-title">🚀 צריכים ייעוץ פיננסי לאקזיט?</h3>
+    <div class="wpc-calc-esop-x7m2-cta-buttons">
+      <button class="wpc-calc-esop-x7m2-cta-btn primary" data-action="open-awg">🎯 קבל ייעוץ מותאם - חינם!</button>
+      <button class="wpc-calc-esop-x7m2-cta-btn secondary" data-action="scroll-to-embed">🎁 הטמע את המחשבון באתרך</button>
+    </div>
+    <div class="wpc-calc-esop-x7m2-awg-content" id="awg-content">
+      <div class="wpc-calc-esop-x7m2-shortcode-item">[awg postid="32400"]</div>
+    </div>
+  </div>
+
+  <!-- Content Section -->
+  <div class="wpc-calc-esop-x7m2-content-section">
+    <h2 class="wpc-calc-esop-x7m2-content-title">מה זה אופציות לעובדים (ESOP)?</h2>
+    <p class="wpc-calc-esop-x7m2-content-text">
+      <strong>אופציות לעובדים (Employee Stock Option Plan)</strong> הן הטבה נפוצה בחברות הייטק, שמאפשרת לעובדים לרכוש מניות של החברה במחיר קבוע מראש (Strike Price). אם החברה מצליחה והמניה עולה - העובד מרוויח את ההפרש.
+    </p>
+    
+    <h3 class="wpc-calc-esop-x7m2-content-title">איך זה עובד?</h3>
+    <p class="wpc-calc-esop-x7m2-content-text">
+      1. <strong>הענקה:</strong> החברה מעניקה לכם X אופציות עם מחיר מימוש קבוע<br>
+      2. <strong>הבשלה (Vesting):</strong> האופציות "מתבשלות" לאורך 4 שנים (בדרך כלל)<br>
+      3. <strong>אקזיט:</strong> במכירת החברה או הנפקה, אתם מוכרים את המניות<br>
+      4. <strong>רווח:</strong> מחיר מכירה - מחיר מימוש = הרווח שלכם (לפני מס)
+    </p>
+
+    <h3 class="wpc-calc-esop-x7m2-content-title">מיסוי אופציות בישראל - סעיף 102</h3>
+    <p class="wpc-calc-esop-x7m2-content-text">
+      רוב העובדים בהייטק נהנים ממסלול <strong>סעיף 102 הוני</strong> שמאפשר תשלום של 25% מס בלבד על הרווח מהאופציות. התנאים: האופציות הופקדו אצל נאמן ועברו שנתיים מיום ההפקדה.
+    </p>
+  </div>
+
+  <!-- Embed Section -->
+  <div class="wpc-calc-esop-x7m2-embed-section" id="wpc-calc-esop-x7m2-embed">
+    <h2 style="color: var(--wpc-esop-primary); font-size: 1.8em; text-align: center; margin-bottom: 25px;">
+      🎁 רוצים להטמיע את מחשבון האופציות באתר שלכם? חינם!
+    </h2>
+    
+    <div style="background: rgba(30, 84, 144, 0.08); padding: 20px; border-radius: 12px; margin-bottom: 25px; border-right: 4px solid var(--wpc-esop-primary);">
+      <p style="font-size: 1.1em; line-height: 1.7; margin: 0; color: #222;">
+        <strong>💎 מחשבון שווי אופציות מקצועי לחלוטין בחינם!</strong><br>
+        תמורת קישור קרדיט, תקבלו מחשבון עם 4 טאבים, חישוב דילול, פירוט מיסוי ומס יסף.<br>
+        <strong>שווי:</strong> ₪15,000+ בפיתוח | <strong>מחיר לכם:</strong> ₪0 🎉
+      </p>
+    </div>
+    
+    <!-- אזור יתרונות SEO -->
+    <div style="background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); padding: 25px; border-radius: 12px; margin: 30px 0; border: 2px solid #0ea5e9;">
+      <h3 style="color: #0369a1; margin-top: 0;">🚀 למה להטמיע מחשבון אופציות באתר שלכם? זה משפר את ה-SEO!</h3>
+      <p style="line-height: 1.8; color: #222; margin-bottom: 15px;">
+        <strong>הוספת מחשבון שווי אופציות לאתר היא אחת הדרכים הטובות ביותר לשפר את דירוג האתר במנועי החיפוש!</strong>
+      </p>
+      <ul style="line-height: 2; color: #222; margin: 0; padding-right: 20px;">
+        <li>📈 <strong>תוכן אינטראקטיבי איכותי</strong> - גוגל אוהבת דפים עם כלים שימושיים לעובדי הייטק</li>
+        <li>⏱️ <strong>זמן שהייה ארוך יותר</strong> - מבקרים נשארים בדף לחשב את שווי האופציות שלהם</li>
+        <li>🔗 <strong>מילות מפתח רלוונטיות</strong> - המחשבון כולל מילות מפתח כמו "שווי אופציות, ESOP, מס רווח הון, מס יסף, סעיף 102, דילול"</li>
+        <li>🎯 <strong>מחשבון מקצועי בחינם</strong> - תוכן ייחודי לעובדי הייטק בלי עלות פיתוח</li>
+        <li>💼 <strong>מקצועיות ואמינות</strong> - אתר עם כלי מחשבון אופציות נראה מקצועי יותר</li>
+        <li>📱 <strong>Mobile Friendly</strong> - מחשבון responsive מלא לכל המכשירים</li>
+        <li>🔄 <strong>עדכונים שוטפים</strong> - כולל מס יסף 2025 ומדרגות מס עדכניות</li>
+        <li>📊 <strong>הקטנת Bounce Rate</strong> - המבקרים נשארים להשתמש בכלי</li>
+      </ul>
+      <p style="margin-top: 20px; margin-bottom: 0; padding: 15px; background: white; border-radius: 8px; color: #0369a1; font-weight: 700;">
+        💡 <strong>טיפ SEO:</strong> הוסיפו את המחשבון בדפים רלוונטיים כמו "אופציות לעובדי הייטק, חישוב מס על אקזיט, ESOP בישראל, סעיף 102 הוני" - 
+        זה יחזק את הדף בדיוק במילות המפתח שאתם רוצים לדרג עליהן!
+      </p>
+    </div>
+    
+    <div style="text-align: center;">
+      <button class="wpc-calc-esop-x7m2-embed-btn" data-action="copy-embed-code">📋 העתק קוד HTML</button>
+    </div>
+
+    <h4 style="margin-top: 30px; color: var(--wpc-esop-primary); text-align: center;">🎨 בחרו צבע:</h4>
+    
+    <div class="wpc-calc-esop-x7m2-color-picker" id="color-picker">
+      <button class="wpc-calc-esop-x7m2-color-btn active" style="background: #1e5490;" data-action="preview-color" data-color="#1e5490" data-name="כחול מקצועי" title="כחול מקצועי"></button>
+      <button class="wpc-calc-esop-x7m2-color-btn" style="background: #10b981;" data-action="preview-color" data-color="#10b981" data-name="ירוק צמיחה" title="ירוק צמיחה"></button>
+      <button class="wpc-calc-esop-x7m2-color-btn" style="background: #ef4444;" data-action="preview-color" data-color="#ef4444" data-name="אדום" title="אדום"></button>
+      <button class="wpc-calc-esop-x7m2-color-btn" style="background: #8b5cf6;" data-action="preview-color" data-color="#8b5cf6" data-name="סגול" title="סגול"></button>
+      <button class="wpc-calc-esop-x7m2-color-btn" style="background: #f59e0b;" data-action="preview-color" data-color="#f59e0b" data-name="כתום" title="כתום"></button>
+      <button class="wpc-calc-esop-x7m2-color-btn" style="background: #06b6d4;" data-action="preview-color" data-color="#06b6d4" data-name="טורקיז" title="טורקיז"></button>
+      <button class="wpc-calc-esop-x7m2-color-btn" style="background: #ec4899;" data-action="preview-color" data-color="#ec4899" data-name="ורוד" title="ורוד"></button>
+      <button class="wpc-calc-esop-x7m2-color-btn" style="background: #6366f1;" data-action="preview-color" data-color="#6366f1" data-name="אינדיגו" title="אינדיגו"></button>
+      <button class="wpc-calc-esop-x7m2-color-btn" style="background: #84cc16;" data-action="preview-color" data-color="#84cc16" data-name="ליים" title="ליים"></button>
+      <button class="wpc-calc-esop-x7m2-color-btn" style="background: #333333;" data-action="preview-color" data-color="#333333" data-name="אפור כהה" title="אפור כהה"></button>
+    </div>
+    
+    <div style="text-align: center; margin-top: 15px;">
+      <label style="color: var(--wpc-esop-text-dark); font-weight: 600;">🎨 או בחרו צבע מותאם אישית: </label>
+      <input type="color" id="custom-color-picker" value="#1e5490" style="width: 50px; height: 40px; border: none; cursor: pointer; vertical-align: middle; border-radius: 8px;">
+      <button class="wpc-calc-esop-x7m2-cta-btn secondary" data-action="apply-custom-color" style="padding: 10px 20px; font-size: 0.95rem; margin-right: 10px;">החל צבע</button>
+    </div>
+
+    <div class="wpc-calc-esop-x7m2-preview-container" id="preview-container" style="display: none; margin-top: 25px;">
+      <h4 style="text-align: center; margin-bottom: 15px; color: var(--wpc-esop-primary);">תצוגה מקדימה: <span id="preview-color-name">כחול מקצועי</span></h4>
+      <div id="preview-content"></div>
+      <div style="text-align: center; margin-top: 20px;">
+        <button class="wpc-calc-esop-x7m2-embed-btn" data-action="copy-preview-code">📋 העתק קוד עם צבע נבחר</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ Section -->
+  <div class="wpc-calc-esop-x7m2-faq-section">
+    <h2 class="wpc-calc-esop-x7m2-section-title">שאלות נפוצות על אופציות</h2>
+    
+    <div class="wpc-calc-esop-x7m2-faq-item" data-action="toggle-faq">
+      <div class="wpc-calc-esop-x7m2-faq-header">
+        <span class="wpc-calc-esop-x7m2-faq-question">❓ מתי כדאי לממש אופציות?</span>
+        <span class="wpc-calc-esop-x7m2-faq-icon">▼</span>
+      </div>
+      <div class="wpc-calc-esop-x7m2-faq-answer">
+        בדרך כלל כדאי לחכות לאירוע נזילות (אקזיט או הנפקה) כדי לקבל את הכסף במזומן. מימוש מוקדם דורש תשלום עבור המניות והמס, ללא ודאות שתוכלו למכור אותן.
+      </div>
+    </div>
+
+    <div class="wpc-calc-esop-x7m2-faq-item" data-action="toggle-faq">
+      <div class="wpc-calc-esop-x7m2-faq-header">
+        <span class="wpc-calc-esop-x7m2-faq-question">❓ מה ההבדל בין סעיף 102 הוני לפירותי?</span>
+        <span class="wpc-calc-esop-x7m2-faq-icon">▼</span>
+      </div>
+      <div class="wpc-calc-esop-x7m2-faq-answer">
+        <strong>מסלול הוני (102 הוני):</strong> 25% מס רווח הון בלבד, אבל צריך לחכות שנתיים מהפקדה אצל נאמן.<br>
+        <strong>מסלול פירותי:</strong> המס מחושב כהכנסת עבודה רגילה (עד 50%), אבל אין תקופת המתנה.
+      </div>
+    </div>
+
+    <div class="wpc-calc-esop-x7m2-faq-item" data-action="toggle-faq">
+      <div class="wpc-calc-esop-x7m2-faq-header">
+        <span class="wpc-calc-esop-x7m2-faq-question">❓ מה זה מס יסף ומתי הוא חל?</span>
+        <span class="wpc-calc-esop-x7m2-faq-icon">▼</span>
+      </div>
+      <div class="wpc-calc-esop-x7m2-faq-answer">
+        מס יסף הוא תוספת של 3% על הכנסה שנתית מעל ₪721,560 (נכון ל-2025). זה כולל את הרווח מאופציות! אם יש לכם אקזיט גדול, ייתכן שתשלמו 28% מס במקום 25%.
+      </div>
+    </div>
+
+    <div class="wpc-calc-esop-x7m2-faq-item" data-action="toggle-faq">
+      <div class="wpc-calc-esop-x7m2-faq-header">
+        <span class="wpc-calc-esop-x7m2-faq-question">❓ מה קורה לאופציות אם אני עוזב?</span>
+        <span class="wpc-calc-esop-x7m2-faq-icon">▼</span>
+      </div>
+      <div class="wpc-calc-esop-x7m2-faq-answer">
+        בדרך כלל יש לכם 90 יום לממש את האופציות שכבר הבשילו (vested). אופציות שלא הבשילו - פוקעות. כדאי לבדוק את ההסכם הספציפי שלכם.
+      </div>
+    </div>
+
+    <div class="wpc-calc-esop-x7m2-faq-item" data-action="toggle-faq">
+      <div class="wpc-calc-esop-x7m2-faq-header">
+        <span class="wpc-calc-esop-x7m2-faq-question">❓ איך דילול משפיע על האופציות שלי?</span>
+        <span class="wpc-calc-esop-x7m2-faq-icon">▼</span>
+      </div>
+      <div class="wpc-calc-esop-x7m2-faq-answer">
+        כל סבב גיוס מנפיק מניות חדשות, מה שמקטין את האחוז שלכם בחברה. לדוגמה: אם יש לכם 1% ויש דילול של 20%, תישארו עם 0.8%. המספר האבסולוטי של האופציות לא משתנה, אבל הן שוות פחות יחסית.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "מתי כדאי לממש אופציות?", "acceptedAnswer": {"@type": "Answer", "text": "בדרך כלל כדאי לחכות לאירוע נזילות (אקזיט או הנפקה) כדי לקבל כסף במזומן."}},
+    {"@type": "Question", "name": "מה ההבדל בין סעיף 102 הוני לפירותי?", "acceptedAnswer": {"@type": "Answer", "text": "מסלול הוני: 25% מס אחרי שנתיים. מסלול פירותי: מס כהכנסת עבודה ללא המתנה."}},
+    {"@type": "Question", "name": "מה זה מס יסף?", "acceptedAnswer": {"@type": "Answer", "text": "תוספת 3% מס על הכנסה מעל 721,560 ש\"ח בשנה."}}
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FinancialProduct",
+  "name": "מחשבון שווי אופציות לעובדי הייטק",
+  "description": "מחשבון לחישוב שווי אופציות עובדים, כולל דילול, מיסוי ומס יסף",
+  "category": "Financial Calculator",
+  "provider": {"@type": "Organization", "name": "רק תבקש - אפטריו בע״מ", "url": "https://loan-israel.co.il"},
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "ILS"}
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "איך לחשב שווי אופציות עובדים",
+  "description": "מדריך לחישוב שווי אופציות עובדים כולל מיסוי ודילול",
+  "step": [
+    {"@type": "HowToStep", "name": "הזנת מספר אופציות", "text": "הזינו את מספר האופציות שקיבלתם מהחברה"},
+    {"@type": "HowToStep", "name": "הזנת מחיר מימוש", "text": "הזינו את מחיר המימוש (Strike Price) הקבוע בהסכם"},
+    {"@type": "HowToStep", "name": "הזנת מחיר מניה צפוי", "text": "הזינו את מחיר המניה הצפוי באקזיט או הנפקה"},
+    {"@type": "HowToStep", "name": "חישוב דילול", "text": "הוסיפו אחוז דילול אם צפויים סבבי גיוס נוספים"},
+    {"@type": "HowToStep", "name": "קבלת תוצאות", "text": "צפו ברווח נטו הצפוי אחרי מס רווח הון ומס יסף"}
+  ]
+}
+</script>
+
+<script>
+(function() {
+    'use strict';
+    
+    const NS = 'WPC_CalcEsop_X7M2';
+    if (window[NS]) return;
+    
+    const container = document.getElementById('wpc-calc-esop-x7m2-main');
+    if (!container) return;
+
+    const CALCULATOR_NAME = 'שווי אופציות';
+    const YESSEF_THRESHOLD = 721560;
+    const CAPITAL_GAINS_TAX = 0.25;
+    const YESSEF_TAX = 0.03;
+    const DEFAULT_USD = 3.65;
+
+    const state = {
+        activeTab: 'basic',
+        basic: { options: 50000, strike: 2, stock: 20, usd: 3.65 },
+        dilution: { options: 50000, percent: 20, strike: 2, stock: 20 },
+        tax: { gross: 2000000, income: 400000 },
+        breakeven: { options: 50000, strike: 5, target: 500000 },
+        previewColor: '#1e5490',
+        previewColorName: 'כחול מקצועי'
+    };
+
+    function formatCurrency(num) { return '₪' + Math.round(num).toLocaleString('he-IL'); }
+    function formatUSD(num) { return '$' + num.toFixed(2); }
+    function formatNumber(num) { return num.toLocaleString('he-IL'); }
+    function formatPercent(num) { return Math.round(num) + '%'; }
+    function el(id) { return document.getElementById(id); }
+
+    function calculateBasicProfit(options, strike, stock, usd) {
+        const grossUSD = (stock - strike) * options;
+        const grossILS = grossUSD * usd;
+        const tax = grossILS * CAPITAL_GAINS_TAX;
+        const net = grossILS - tax;
+        return { grossUSD, grossILS, tax, net };
+    }
+
+    function calculateWithYessef(gross, otherIncome) {
+        const capitalTax = gross * CAPITAL_GAINS_TAX;
+        const totalIncome = gross + otherIncome;
+        let yessefTax = 0;
+        if (totalIncome > YESSEF_THRESHOLD) {
+            const amountAboveThreshold = Math.min(gross, totalIncome - YESSEF_THRESHOLD);
+            yessefTax = amountAboveThreshold * YESSEF_TAX;
+        }
+        const totalTax = capitalTax + yessefTax;
+        const net = gross - totalTax;
+        return { capitalTax, yessefTax, totalTax, net, hasYessef: yessefTax > 0 };
+    }
+
+    function calculateBreakeven(options, strike, targetNet, usd) {
+        const targetGross = targetNet / (1 - CAPITAL_GAINS_TAX);
+        const targetPriceUSD = (targetGross / usd / options) + strike;
+        const increase = ((targetPriceUSD / strike) - 1) * 100;
+        return { breakeven: strike, targetPrice: targetPriceUSD, increase };
+    }
+
+    function updateBasic() {
+        const { options, strike, stock, usd } = state.basic;
+        const result = calculateBasicProfit(options, strike, stock, usd);
+        
+        el('basic-options-value').textContent = formatNumber(options);
+        el('basic-strike-value').textContent = formatUSD(strike);
+        el('basic-stock-value').textContent = formatUSD(stock);
+        el('basic-usd-value').textContent = '₪' + usd.toFixed(2);
+        
+        el('basic-result-gross').textContent = formatCurrency(result.grossILS);
+        el('basic-result-tax').textContent = formatCurrency(result.tax);
+        el('basic-result-net').textContent = formatCurrency(result.net);
+    }
+
+    function updateDilution() {
+        const { options, percent, strike, stock } = state.dilution;
+        const usd = DEFAULT_USD;
+        
+        const effectiveOptions = Math.round(options * (1 - percent / 100));
+        const beforeResult = calculateBasicProfit(options, strike, stock, usd);
+        const afterResult = calculateBasicProfit(effectiveOptions, strike, stock, usd);
+        const loss = beforeResult.net - afterResult.net;
+        
+        el('dilution-options-value').textContent = formatNumber(options);
+        el('dilution-percent-value').textContent = percent + '%';
+        el('dilution-strike-value').textContent = formatUSD(strike);
+        el('dilution-stock-value').textContent = formatUSD(stock);
+        
+        el('dilution-result-options').textContent = formatNumber(effectiveOptions);
+        el('dilution-result-before').textContent = formatCurrency(beforeResult.net);
+        el('dilution-result-after').textContent = formatCurrency(afterResult.net);
+        el('dilution-result-loss').textContent = formatCurrency(loss);
+    }
+
+    function updateTax() {
+        const { gross, income } = state.tax;
+        const result = calculateWithYessef(gross, income);
+        
+        el('tax-gross-value').textContent = formatCurrency(gross);
+        el('tax-income-value').textContent = formatCurrency(income);
+        
+        el('tax-result-capital').textContent = formatCurrency(result.capitalTax);
+        el('tax-result-yessef').textContent = formatCurrency(result.yessefTax);
+        el('tax-result-total').textContent = formatCurrency(result.totalTax);
+        el('tax-result-net').textContent = formatCurrency(result.net);
+        
+        const tbody = el('tax-breakdown-body');
+        tbody.innerHTML = `
+            <tr><td>רווח ברוטו</td><td>${formatCurrency(gross)}</td><td>-</td><td>-</td></tr>
+            <tr><td>מס רווח הון</td><td>${formatCurrency(gross)}</td><td>25%</td><td>${formatCurrency(result.capitalTax)}</td></tr>
+            <tr><td>מס יסף (מעל ${formatCurrency(YESSEF_THRESHOLD)})</td><td>${result.hasYessef ? formatCurrency(gross + income - YESSEF_THRESHOLD) : '₪0'}</td><td>3%</td><td>${formatCurrency(result.yessefTax)}</td></tr>
+            <tr><td colspan="3"><strong>סה"כ נטו</strong></td><td><strong>${formatCurrency(result.net)}</strong></td></tr>
+        `;
+        
+        el('yessef-warning').style.display = result.hasYessef ? 'block' : 'none';
+    }
+
+    function updateBreakeven() {
+        const { options, strike, target } = state.breakeven;
+        const usd = DEFAULT_USD;
+        const result = calculateBreakeven(options, strike, target, usd);
+        
+        el('breakeven-options-value').textContent = formatNumber(options);
+        el('breakeven-strike-value').textContent = formatUSD(strike);
+        el('breakeven-target-value').textContent = formatCurrency(target);
+        
+        el('breakeven-result-zero').textContent = formatUSD(strike);
+        el('breakeven-result-target').textContent = formatUSD(result.targetPrice);
+        el('breakeven-result-increase').textContent = formatPercent(result.increase);
+    }
+
+    function switchTab(tabName) {
+        state.activeTab = tabName;
+        container.querySelectorAll('.wpc-calc-esop-x7m2-tab-btn').forEach(btn => btn.classList.remove('active'));
+        container.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+        container.querySelectorAll('.wpc-calc-esop-x7m2-tab-content').forEach(c => c.classList.remove('active'));
+        el('tab-' + tabName).classList.add('active');
+    }
+
+    function openAWG() {
+        const awg = el('awg-content');
+        awg.classList.toggle('active');
+        if (awg.classList.contains('active')) awg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    function toggleFAQ(item) { item.classList.toggle('active'); }
+    function scrollToEmbed() { el('wpc-calc-esop-x7m2-embed').scrollIntoView({ behavior: 'smooth' }); }
+
+    function darkenColor(hex, percent) {
+        const num = parseInt(hex.replace('#', ''), 16);
+        const amt = Math.round(2.55 * percent);
+        const R = Math.max((num >> 16) - amt, 0);
+        const G = Math.max((num >> 8 & 0x00FF) - amt, 0);
+        const B = Math.max((num & 0x0000FF) - amt, 0);
+        return '#' + (0x1000000 + R * 0x10000 + G * 0x100 + B).toString(16).slice(1);
+    }
+
+    function getEmbedCSS(color) {
+        let css = '';
+        document.querySelectorAll('style').forEach(s => { if (s.textContent.includes('wpc-calc-esop-x7m2')) css = s.textContent; });
+        return css.replace(/#1e5490/g, color).replace(/#163d6b/g, darkenColor(color, 15));
+    }
+
+    function copyEmbedCode() {
+        const calc = el('wpc-calc-esop-x7m2-calculator').cloneNode(true);
+        const css = getEmbedCSS('#1e5490');
+        let code = '<style>\n' + css + '\n</style>\n\n<div class="wpc-calc-esop-x7m2-wrapper" id="wpc-calc-esop-x7m2-main">\n' + calc.outerHTML + '\n</div>\n\n';
+        code += '<p style="text-align:center;font-size:0.9em;margin-top:20px;color:#666;">מחשבון ' + CALCULATOR_NAME + ' פותח על ידי <a href="https://loan-israel.co.il/" target="_blank" rel="nofollow noopener" style="color:#1e5490;text-decoration:underline;">רק תבקש פיננסים</a></p>\n';
+        code += getEmbedScript();
+        navigator.clipboard.writeText(code).then(() => alert('✅ הקוד הועתק!'));
+    }
+
+    function showPreview(color, name) {
+        state.previewColor = color;
+        state.previewColorName = name;
+        
+        const pc = el('preview-container');
+        pc.style.display = 'block';
+        el('preview-color-name').textContent = name;
+        
+        // עדכן כפתורי צבע
+        container.querySelectorAll('.wpc-calc-esop-x7m2-color-btn').forEach(b => {
+            b.classList.remove('active');
+            if (b.dataset.color === color) b.classList.add('active');
+        });
+        
+        // שכפל את המחשבון לתצוגה מקדימה
+        const calc = el('wpc-calc-esop-x7m2-calculator');
+        if (!calc) return;
+        
+        const clone = calc.cloneNode(true);
+        clone.id = 'preview-calculator';
+        
+        // החלף צבעים בשכפול
+        replaceColorsInElement(clone, color);
+        
+        // הצג את השכפול
+        const previewContent = el('preview-content');
+        previewContent.innerHTML = '';
+        previewContent.appendChild(clone);
+        
+        // אתחל טאבים וסליידרים בתצוגה מקדימה
+        initPreviewCalculator(previewContent);
+        
+        // גלול לתצוגה
+        pc.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    
+    function replaceColorsInElement(element, newColor) {
+        const PRIMARY_COLOR = '#1e5490';
+        const darkColor = darkenColor(newColor, 15);
+        
+        element.querySelectorAll('*').forEach(el => {
+            const style = el.getAttribute('style');
+            if (style) {
+                let newStyle = style.replace(new RegExp(PRIMARY_COLOR, 'gi'), newColor);
+                newStyle = newStyle.replace(/#163d6b/gi, darkColor);
+                el.setAttribute('style', newStyle);
+            }
+        });
+        
+        // עדכן CSS variables
+        element.style.setProperty('--wpc-esop-primary', newColor);
+        element.style.setProperty('--wpc-esop-primary-dark', darkColor);
+    }
+    
+    function initPreviewCalculator(previewArea) {
+        // אתחול טאבים
+        const tabs = previewArea.querySelectorAll('[data-action="switch-tab"]');
+        const contents = previewArea.querySelectorAll('.wpc-calc-esop-x7m2-tab-content');
+        
+        tabs.forEach(tab => {
+            tab.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                const tabName = this.dataset.tab;
+                
+                tabs.forEach(t => t.classList.remove('active'));
+                contents.forEach(c => {
+                    c.classList.remove('active');
+                    c.style.display = 'none';
+                });
+                
+                this.classList.add('active');
+                const activeContent = previewArea.querySelector(`#tab-${tabName}`);
+                if (activeContent) {
+                    activeContent.classList.add('active');
+                    activeContent.style.display = 'block';
+                }
+            });
+        });
+        
+        // אתחול סליידרים
+        const sliders = previewArea.querySelectorAll('input[type="range"]');
+        sliders.forEach(slider => {
+            slider.addEventListener('input', function() {
+                const valueId = this.id.replace('-slider', '-value');
+                const valueEl = previewArea.querySelector(`#${valueId}`);
+                if (valueEl) {
+                    if (this.id.includes('strike') || this.id.includes('stock')) {
+                        valueEl.textContent = '$' + parseFloat(this.value).toFixed(2);
+                    } else if (this.id.includes('usd')) {
+                        valueEl.textContent = '₪' + parseFloat(this.value).toFixed(2);
+                    } else if (this.id.includes('percent')) {
+                        valueEl.textContent = this.value + '%';
+                    } else {
+                        valueEl.textContent = parseInt(this.value).toLocaleString('he-IL');
+                    }
+                }
+            });
+        });
+    }
+
+    function copyPreviewCode() {
+        const calc = el('wpc-calc-esop-x7m2-calculator').cloneNode(true);
+        const css = getEmbedCSS(state.previewColor);
+        let code = '<style>\n' + css + '\n</style>\n\n<div class="wpc-calc-esop-x7m2-wrapper" id="wpc-calc-esop-x7m2-main">\n' + calc.outerHTML + '\n</div>\n\n';
+        code += '<p style="text-align:center;font-size:0.9em;margin-top:20px;color:#666;">מחשבון ' + CALCULATOR_NAME + ' פותח על ידי <a href="https://loan-israel.co.il/" target="_blank" rel="nofollow noopener" style="color:' + state.previewColor + ';text-decoration:underline;">רק תבקש פיננסים</a></p>\n';
+        code += getEmbedScript();
+        navigator.clipboard.writeText(code).then(() => alert('✅ הקוד עם הצבע הועתק!'));
+    }
+
+    // === פונקציית יצירת סקריפט להטמעה ===
+    function getEmbedScript() {
+        const lines = [
+            '<scr' + 'ipt>',
+            'document.addEventListener("DOMContentLoaded", function() {',
+            '  (function() {',
+            '    "use strict";',
+            '    var NS = "WPC_CalcEsop_Embed_" + Date.now();',
+            '    if (window[NS]) return;',
+            '    var container = document.querySelector("[class*=\\"wpc-calc-esop\\"]");',
+            '    if (!container) return;',
+            '',
+            '    var CAPITAL_GAINS_TAX = 0.25;',
+            '    var YESSEF_THRESHOLD = 721560;',
+            '    var YESSEF_TAX = 0.03;',
+            '    var DEFAULT_USD = 3.65;',
+            '',
+            '    function el(id) { return document.getElementById(id); }',
+            '    function formatNumber(n) { return Math.round(n).toLocaleString("he-IL"); }',
+            '    function formatCurrency(n) { return "₪" + Math.round(n).toLocaleString("he-IL"); }',
+            '    function formatUSD(n) { return "$" + parseFloat(n).toFixed(2); }',
+            '',
+            '    function switchTab(tabName) {',
+            '      var tabs = container.querySelectorAll("[data-action=\\"switch-tab\\"]");',
+            '      var contents = container.querySelectorAll("[class*=\\"tab-content\\"]");',
+            '      for (var i = 0; i < tabs.length; i++) tabs[i].classList.remove("active");',
+            '      for (var j = 0; j < contents.length; j++) contents[j].classList.remove("active");',
+            '      var activeTab = container.querySelector("[data-tab=\\"" + tabName + "\\"]");',
+            '      if (activeTab) activeTab.classList.add("active");',
+            '      var activeContent = document.getElementById("tab-" + tabName);',
+            '      if (activeContent) activeContent.classList.add("active");',
+            '    }',
+            '',
+            '    function updateBasicCalc() {',
+            '      var options = parseFloat(el("basic-options-slider").value);',
+            '      var strike = parseFloat(el("basic-strike-slider").value);',
+            '      var stock = parseFloat(el("basic-stock-slider").value);',
+            '      var usd = parseFloat(el("basic-usd-slider").value);',
+            '      var grossUSD = (stock - strike) * options;',
+            '      var grossILS = grossUSD * usd;',
+            '      var tax = grossILS * CAPITAL_GAINS_TAX;',
+            '      var net = grossILS - tax;',
+            '      el("basic-options-value").textContent = formatNumber(options);',
+            '      el("basic-strike-value").textContent = formatUSD(strike);',
+            '      el("basic-stock-value").textContent = formatUSD(stock);',
+            '      el("basic-usd-value").textContent = "₪" + usd.toFixed(2);',
+            '      el("basic-result-gross").textContent = formatCurrency(grossILS);',
+            '      el("basic-result-tax").textContent = formatCurrency(tax);',
+            '      el("basic-result-net").textContent = formatCurrency(net);',
+            '    }',
+            '',
+            '    function updateDilutionCalc() {',
+            '      var options = parseFloat(el("dilution-options-slider").value);',
+            '      var percent = parseFloat(el("dilution-percent-slider").value);',
+            '      var strike = parseFloat(el("dilution-strike-slider").value);',
+            '      var stock = parseFloat(el("dilution-stock-slider").value);',
+            '      var effectiveOptions = Math.round(options * (1 - percent / 100));',
+            '      var grossBefore = (stock - strike) * options * DEFAULT_USD * (1 - CAPITAL_GAINS_TAX);',
+            '      var grossAfter = (stock - strike) * effectiveOptions * DEFAULT_USD * (1 - CAPITAL_GAINS_TAX);',
+            '      el("dilution-options-value").textContent = formatNumber(options);',
+            '      el("dilution-percent-value").textContent = percent + "%";',
+            '      el("dilution-strike-value").textContent = formatUSD(strike);',
+            '      el("dilution-stock-value").textContent = formatUSD(stock);',
+            '      el("dilution-result-options").textContent = formatNumber(effectiveOptions);',
+            '      el("dilution-result-before").textContent = formatCurrency(grossBefore);',
+            '      el("dilution-result-after").textContent = formatCurrency(grossAfter);',
+            '      el("dilution-result-loss").textContent = formatCurrency(grossBefore - grossAfter);',
+            '    }',
+            '',
+            '    function updateTaxCalc() {',
+            '      var gross = parseFloat(el("tax-gross-slider").value);',
+            '      var income = parseFloat(el("tax-income-slider").value);',
+            '      var capitalTax = gross * CAPITAL_GAINS_TAX;',
+            '      var totalIncome = gross + income;',
+            '      var yessefTax = 0;',
+            '      if (totalIncome > YESSEF_THRESHOLD) {',
+            '        yessefTax = Math.min(gross, totalIncome - YESSEF_THRESHOLD) * YESSEF_TAX;',
+            '      }',
+            '      el("tax-gross-value").textContent = formatCurrency(gross);',
+            '      el("tax-income-value").textContent = formatCurrency(income);',
+            '      el("tax-result-capital").textContent = formatCurrency(capitalTax);',
+            '      el("tax-result-yessef").textContent = formatCurrency(yessefTax);',
+            '      el("tax-result-total").textContent = formatCurrency(capitalTax + yessefTax);',
+            '      el("tax-result-net").textContent = formatCurrency(gross - capitalTax - yessefTax);',
+            '      var warning = el("yessef-warning");',
+            '      if (warning) warning.style.display = yessefTax > 0 ? "block" : "none";',
+            '    }',
+            '',
+            '    function updateBreakevenCalc() {',
+            '      var options = parseFloat(el("breakeven-options-slider").value);',
+            '      var strike = parseFloat(el("breakeven-strike-slider").value);',
+            '      var target = parseFloat(el("breakeven-target-slider").value);',
+            '      var targetGross = target / (1 - CAPITAL_GAINS_TAX);',
+            '      var targetPrice = (targetGross / DEFAULT_USD / options) + strike;',
+            '      var increase = ((targetPrice / strike) - 1) * 100;',
+            '      el("breakeven-options-value").textContent = formatNumber(options);',
+            '      el("breakeven-strike-value").textContent = formatUSD(strike);',
+            '      el("breakeven-target-value").textContent = formatCurrency(target);',
+            '      el("breakeven-result-zero").textContent = formatUSD(strike);',
+            '      el("breakeven-result-target").textContent = formatUSD(targetPrice);',
+            '      el("breakeven-result-increase").textContent = Math.round(increase) + "%";',
+            '    }',
+            '',
+            '    container.addEventListener("click", function(e) {',
+            '      var action = e.target.closest("[data-action]");',
+            '      if (!action) return;',
+            '      var act = action.dataset.action;',
+            '      if (act === "switch-tab") switchTab(action.dataset.tab);',
+            '      if (act === "toggle-faq") action.closest("[class*=\\"faq-item\\"]").classList.toggle("active");',
+            '      if (act === "open-awg") {',
+            '        var awg = el("awg-content");',
+            '        if (awg) awg.classList.toggle("active");',
+            '      }',
+            '    });',
+            '',
+            '    container.addEventListener("input", function(e) {',
+            '      var id = e.target.id;',
+            '      if (id.indexOf("basic-") === 0) updateBasicCalc();',
+            '      else if (id.indexOf("dilution-") === 0) updateDilutionCalc();',
+            '      else if (id.indexOf("tax-") === 0) updateTaxCalc();',
+            '      else if (id.indexOf("breakeven-") === 0) updateBreakevenCalc();',
+            '    });',
+            '',
+            '    updateBasicCalc();',
+            '    updateDilutionCalc();',
+            '    updateTaxCalc();',
+            '    updateBreakevenCalc();',
+            '',
+            '    window[NS] = { v: "1.0" };',
+            '  })();',
+            '});',
+            '</' + 'script>'
+        ];
+        return lines.join('\\n');
+    }
+
+    container.addEventListener('click', function(e) {
+        const action = e.target.closest('[data-action]');
+        if (!action) return;
+        const act = action.dataset.action;
+        if (act === 'switch-tab') switchTab(action.dataset.tab);
+        else if (act === 'open-awg') openAWG();
+        else if (act === 'scroll-to-embed') scrollToEmbed();
+        else if (act === 'toggle-faq') toggleFAQ(action.closest('.wpc-calc-esop-x7m2-faq-item'));
+        else if (act === 'copy-embed-code') copyEmbedCode();
+        else if (act === 'preview-color') showPreview(action.dataset.color, action.dataset.name);
+        else if (act === 'copy-preview-code') copyPreviewCode();
+        else if (act === 'apply-custom-color') {
+            const customColor = el('custom-color-picker').value;
+            showPreview(customColor, 'צבע מותאם אישית');
+        }
+    });
+
+    container.addEventListener('input', function(e) {
+        const id = e.target.id;
+        const val = parseFloat(e.target.value);
+        
+        if (id === 'basic-options-slider') { state.basic.options = val; updateBasic(); }
+        else if (id === 'basic-strike-slider') { state.basic.strike = val; updateBasic(); }
+        else if (id === 'basic-stock-slider') { state.basic.stock = val; updateBasic(); }
+        else if (id === 'basic-usd-slider') { state.basic.usd = val; updateBasic(); }
+        else if (id === 'dilution-options-slider') { state.dilution.options = val; updateDilution(); }
+        else if (id === 'dilution-percent-slider') { state.dilution.percent = val; updateDilution(); }
+        else if (id === 'dilution-strike-slider') { state.dilution.strike = val; updateDilution(); }
+        else if (id === 'dilution-stock-slider') { state.dilution.stock = val; updateDilution(); }
+        else if (id === 'tax-gross-slider') { state.tax.gross = val; updateTax(); }
+        else if (id === 'tax-income-slider') { state.tax.income = val; updateTax(); }
+        else if (id === 'breakeven-options-slider') { state.breakeven.options = val; updateBreakeven(); }
+        else if (id === 'breakeven-strike-slider') { state.breakeven.strike = val; updateBreakeven(); }
+        else if (id === 'breakeven-target-slider') { state.breakeven.target = val; updateBreakeven(); }
+    });
+
+    function init() { updateBasic(); updateDilution(); updateTax(); updateBreakeven(); }
+    init();
+
+    window[NS] = { version: '1.0.0' };
+})();
+</script>
+

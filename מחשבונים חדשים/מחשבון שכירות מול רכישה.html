@@ -1,0 +1,1696 @@
+<script>
+if (!document.querySelector('meta[name="viewport"]')) {
+  const viewport = document.createElement('meta');
+  viewport.name = 'viewport';
+  viewport.content = 'width=device-width, initial-scale=1.0, user-scalable=yes';
+  document.head.appendChild(viewport);
+}
+</script>
+
+<style>
+:root {
+  --wpc-rvb-primary: #1e5490;
+  --wpc-rvb-primary-dark: #163d6b;
+  --wpc-rvb-primary-light: rgba(30, 84, 144, 0.1);
+  --wpc-rvb-success: #10b981;
+  --wpc-rvb-success-light: rgba(16, 185, 129, 0.1);
+  --wpc-rvb-warning: #f59e0b;
+  --wpc-rvb-danger: #ef4444;
+  --wpc-rvb-text-dark: #1f2937;
+  --wpc-rvb-text-light: #6b7280;
+  --wpc-rvb-bg-light: #f8fafc;
+  --wpc-rvb-white: #ffffff;
+  --wpc-rvb-border: #e5e7eb;
+  --wpc-rvb-shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+  --wpc-rvb-shadow-md: 0 4px 15px rgba(0,0,0,0.1);
+  --wpc-rvb-radius-sm: 8px;
+  --wpc-rvb-radius-md: 12px;
+  --wpc-rvb-radius-lg: 20px;
+  --wpc-rvb-transition: all 0.3s ease;
+}
+
+.wpc-calc-rvb-k7m2-wrapper {
+  all: initial !important;
+  display: block !important;
+  font-family: 'Assistant', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  direction: rtl !important;
+  color: var(--wpc-rvb-text-dark) !important;
+  line-height: 1.6 !important;
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+  padding: 20px !important;
+  box-sizing: border-box !important;
+  color-scheme: light !important;
+}
+
+.wpc-calc-rvb-k7m2-wrapper * {
+  box-sizing: border-box !important;
+  font-family: inherit !important;
+}
+
+.wpc-calc-rvb-k7m2-title-section {
+  text-align: center !important;
+  margin-bottom: 30px !important;
+}
+
+.wpc-calc-rvb-k7m2-title {
+  font-size: 2.2rem !important;
+  font-weight: 700 !important;
+  color: var(--wpc-rvb-primary) !important;
+  margin: 0 0 10px 0 !important;
+  position: relative !important;
+  padding-right: 20px !important;
+}
+
+.wpc-calc-rvb-k7m2-title::after {
+  content: '' !important;
+  position: absolute !important;
+  right: 0 !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  width: 5px !important;
+  height: 60px !important;
+  background: linear-gradient(180deg, var(--wpc-rvb-primary) 0%, var(--wpc-rvb-success) 100%) !important;
+  border-radius: 3px !important;
+}
+
+.wpc-calc-rvb-k7m2-subtitle {
+  font-size: 1rem !important;
+  color: var(--wpc-rvb-text-light) !important;
+  margin: 0 !important;
+}
+
+.wpc-calc-rvb-k7m2-update-date {
+  display: inline-block !important;
+  background: var(--wpc-rvb-primary-light) !important;
+  color: var(--wpc-rvb-primary) !important;
+  padding: 5px 15px !important;
+  border-radius: 20px !important;
+  font-size: 0.9rem !important;
+  margin-top: 10px !important;
+}
+
+.wpc-calc-rvb-k7m2-calculator {
+  background: var(--wpc-rvb-white) !important;
+  border-radius: var(--wpc-rvb-radius-lg) !important;
+  box-shadow: var(--wpc-rvb-shadow-md) !important;
+  overflow: hidden !important;
+  margin-bottom: 30px !important;
+}
+
+.wpc-calc-rvb-k7m2-tabs-nav {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  background: var(--wpc-rvb-bg-light) !important;
+  border-bottom: 2px solid var(--wpc-rvb-border) !important;
+}
+
+.wpc-calc-rvb-k7m2-tab-btn {
+  flex: 1 1 auto !important;
+  min-width: 100px !important;
+  padding: 16px 20px !important;
+  background: transparent !important;
+  border: none !important;
+  cursor: pointer !important;
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  color: var(--wpc-rvb-text-light) !important;
+  transition: var(--wpc-rvb-transition) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  border-bottom: 3px solid transparent !important;
+  font-family: inherit !important;
+}
+
+.wpc-calc-rvb-k7m2-tab-btn:hover {
+  background: var(--wpc-rvb-white) !important;
+  color: var(--wpc-rvb-primary) !important;
+}
+
+.wpc-calc-rvb-k7m2-tab-btn.active {
+  background: var(--wpc-rvb-white) !important;
+  color: var(--wpc-rvb-primary) !important;
+  border-bottom-color: var(--wpc-rvb-primary) !important;
+}
+
+.wpc-calc-rvb-k7m2-tab-icon {
+  font-size: 1.3rem !important;
+}
+
+.wpc-calc-rvb-k7m2-tab-content {
+  display: none !important;
+  padding: 30px !important;
+}
+
+.wpc-calc-rvb-k7m2-tab-content.active {
+  display: block !important;
+}
+
+.wpc-calc-rvb-k7m2-tab-title {
+  font-size: 1.4rem !important;
+  font-weight: 700 !important;
+  color: var(--wpc-rvb-primary) !important;
+  margin: 0 0 25px 0 !important;
+  text-align: center !important;
+}
+
+.wpc-calc-rvb-k7m2-input-group {
+  margin-bottom: 20px !important;
+}
+
+.wpc-calc-rvb-k7m2-input-label {
+  display: block !important;
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  color: var(--wpc-rvb-text-dark) !important;
+  margin-bottom: 10px !important;
+}
+
+.wpc-calc-rvb-k7m2-slider-container {
+  display: flex !important;
+  align-items: center !important;
+  gap: 15px !important;
+}
+
+.wpc-calc-rvb-k7m2-slider {
+  flex: 1 !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  height: 8px !important;
+  background: var(--wpc-rvb-border) !important;
+  border-radius: 4px !important;
+  outline: none !important;
+  cursor: pointer !important;
+}
+
+.wpc-calc-rvb-k7m2-slider::-webkit-slider-thumb {
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  width: 24px !important;
+  height: 24px !important;
+  background: var(--wpc-rvb-primary) !important;
+  border-radius: 50% !important;
+  cursor: pointer !important;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2) !important;
+}
+
+.wpc-calc-rvb-k7m2-slider::-moz-range-thumb {
+  width: 24px !important;
+  height: 24px !important;
+  background: var(--wpc-rvb-primary) !important;
+  border-radius: 50% !important;
+  cursor: pointer !important;
+  border: none !important;
+}
+
+.wpc-calc-rvb-k7m2-slider-value {
+  min-width: 120px !important;
+  padding: 12px 15px !important;
+  background: var(--wpc-rvb-primary-light) !important;
+  color: var(--wpc-rvb-primary) !important;
+  border-radius: var(--wpc-rvb-radius-sm) !important;
+  font-size: 1.1rem !important;
+  font-weight: 700 !important;
+  text-align: center !important;
+}
+
+.wpc-calc-rvb-k7m2-inputs-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 20px !important;
+  margin-bottom: 25px !important;
+}
+
+.wpc-calc-rvb-k7m2-section-title {
+  font-size: 1.2rem !important;
+  font-weight: 700 !important;
+  color: var(--wpc-rvb-primary) !important;
+  margin: 25px 0 15px 0 !important;
+  padding-bottom: 10px !important;
+  border-bottom: 2px solid var(--wpc-rvb-border) !important;
+}
+
+.wpc-calc-rvb-k7m2-results {
+  background: linear-gradient(135deg, var(--wpc-rvb-primary) 0%, var(--wpc-rvb-primary-dark) 100%) !important;
+  border-radius: var(--wpc-rvb-radius-md) !important;
+  padding: 25px !important;
+  color: var(--wpc-rvb-white) !important;
+  margin-top: 25px !important;
+}
+
+.wpc-calc-rvb-k7m2-results-title {
+  font-size: 1.1rem !important;
+  font-weight: 600 !important;
+  margin: 0 0 20px 0 !important;
+  text-align: center !important;
+  opacity: 0.9 !important;
+}
+
+.wpc-calc-rvb-k7m2-results-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
+  gap: 20px !important;
+}
+
+.wpc-calc-rvb-k7m2-result-item {
+  background: rgba(255,255,255,0.15) !important;
+  border-radius: var(--wpc-rvb-radius-sm) !important;
+  padding: 20px !important;
+  text-align: center !important;
+}
+
+.wpc-calc-rvb-k7m2-result-label {
+  font-size: 0.9rem !important;
+  opacity: 0.9 !important;
+  margin-bottom: 8px !important;
+}
+
+.wpc-calc-rvb-k7m2-result-value {
+  font-size: 1.6rem !important;
+  font-weight: 700 !important;
+}
+
+.wpc-calc-rvb-k7m2-result-value.highlight {
+  color: #fbbf24 !important;
+}
+
+.wpc-calc-rvb-k7m2-result-value.buy {
+  color: #4ade80 !important;
+}
+
+.wpc-calc-rvb-k7m2-result-value.rent {
+  color: #f472b6 !important;
+}
+
+.wpc-calc-rvb-k7m2-comparison-cards {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 20px !important;
+  margin-top: 25px !important;
+}
+
+.wpc-calc-rvb-k7m2-compare-card {
+  background: var(--wpc-rvb-white) !important;
+  border: 2px solid var(--wpc-rvb-border) !important;
+  border-radius: var(--wpc-rvb-radius-md) !important;
+  overflow: hidden !important;
+}
+
+.wpc-calc-rvb-k7m2-compare-header {
+  padding: 15px 20px !important;
+  text-align: center !important;
+  font-weight: 700 !important;
+  font-size: 1.1rem !important;
+}
+
+.wpc-calc-rvb-k7m2-compare-header.buy {
+  background: var(--wpc-rvb-success-light) !important;
+  color: var(--wpc-rvb-success) !important;
+}
+
+.wpc-calc-rvb-k7m2-compare-header.rent {
+  background: rgba(244, 114, 182, 0.15) !important;
+  color: #ec4899 !important;
+}
+
+.wpc-calc-rvb-k7m2-compare-body {
+  padding: 20px !important;
+}
+
+.wpc-calc-rvb-k7m2-compare-row {
+  display: flex !important;
+  justify-content: space-between !important;
+  padding: 10px 0 !important;
+  border-bottom: 1px solid var(--wpc-rvb-border) !important;
+}
+
+.wpc-calc-rvb-k7m2-compare-row:last-child {
+  border-bottom: none !important;
+  font-weight: 700 !important;
+  font-size: 1.1rem !important;
+  padding-top: 15px !important;
+  margin-top: 5px !important;
+  border-top: 2px solid var(--wpc-rvb-border) !important;
+}
+
+.wpc-calc-rvb-k7m2-verdict {
+  text-align: center !important;
+  padding: 20px !important;
+  margin-top: 25px !important;
+  border-radius: var(--wpc-rvb-radius-md) !important;
+  font-size: 1.3rem !important;
+  font-weight: 700 !important;
+}
+
+.wpc-calc-rvb-k7m2-verdict.buy-wins {
+  background: var(--wpc-rvb-success-light) !important;
+  color: var(--wpc-rvb-success) !important;
+  border: 2px solid var(--wpc-rvb-success) !important;
+}
+
+.wpc-calc-rvb-k7m2-verdict.rent-wins {
+  background: rgba(244, 114, 182, 0.15) !important;
+  color: #ec4899 !important;
+  border: 2px solid #ec4899 !important;
+}
+
+.wpc-calc-rvb-k7m2-info-box {
+  background: var(--wpc-rvb-primary-light) !important;
+  border-right: 4px solid var(--wpc-rvb-primary) !important;
+  padding: 15px 20px !important;
+  border-radius: var(--wpc-rvb-radius-sm) !important;
+  margin-top: 20px !important;
+}
+
+.wpc-calc-rvb-k7m2-info-title {
+  font-weight: 700 !important;
+  color: var(--wpc-rvb-primary) !important;
+  margin-bottom: 5px !important;
+}
+
+.wpc-calc-rvb-k7m2-info-text {
+  font-size: 0.95rem !important;
+  color: var(--wpc-rvb-text-dark) !important;
+  line-height: 1.6 !important;
+}
+
+.wpc-calc-rvb-k7m2-timeline {
+  margin-top: 25px !important;
+}
+
+.wpc-calc-rvb-k7m2-timeline-item {
+  display: flex !important;
+  align-items: center !important;
+  padding: 15px !important;
+  background: var(--wpc-rvb-white) !important;
+  border: 1px solid var(--wpc-rvb-border) !important;
+  border-radius: var(--wpc-rvb-radius-sm) !important;
+  margin-bottom: 10px !important;
+  gap: 20px !important;
+}
+
+.wpc-calc-rvb-k7m2-timeline-year {
+  min-width: 80px !important;
+  font-size: 1.2rem !important;
+  font-weight: 700 !important;
+  color: var(--wpc-rvb-primary) !important;
+}
+
+.wpc-calc-rvb-k7m2-timeline-values {
+  flex: 1 !important;
+  display: flex !important;
+  gap: 30px !important;
+}
+
+.wpc-calc-rvb-k7m2-timeline-value {
+  text-align: center !important;
+}
+
+.wpc-calc-rvb-k7m2-timeline-value span {
+  display: block !important;
+  font-size: 0.85rem !important;
+  color: var(--wpc-rvb-text-light) !important;
+}
+
+.wpc-calc-rvb-k7m2-timeline-value strong {
+  font-size: 1.1rem !important;
+}
+
+.wpc-calc-rvb-k7m2-timeline-value.buy strong {
+  color: var(--wpc-rvb-success) !important;
+}
+
+.wpc-calc-rvb-k7m2-timeline-value.rent strong {
+  color: #ec4899 !important;
+}
+
+.wpc-calc-rvb-k7m2-timeline-winner {
+  padding: 5px 15px !important;
+  border-radius: 20px !important;
+  font-size: 0.9rem !important;
+  font-weight: 600 !important;
+}
+
+.wpc-calc-rvb-k7m2-timeline-winner.buy {
+  background: var(--wpc-rvb-success-light) !important;
+  color: var(--wpc-rvb-success) !important;
+}
+
+.wpc-calc-rvb-k7m2-timeline-winner.rent {
+  background: rgba(244, 114, 182, 0.15) !important;
+  color: #ec4899 !important;
+}
+
+.wpc-calc-rvb-k7m2-breakeven-display {
+  text-align: center !important;
+  padding: 40px !important;
+  background: linear-gradient(135deg, var(--wpc-rvb-primary) 0%, var(--wpc-rvb-primary-dark) 100%) !important;
+  border-radius: var(--wpc-rvb-radius-md) !important;
+  color: var(--wpc-rvb-white) !important;
+  margin: 25px 0 !important;
+}
+
+.wpc-calc-rvb-k7m2-breakeven-years {
+  font-size: 4rem !important;
+  font-weight: 700 !important;
+  color: #fbbf24 !important;
+}
+
+.wpc-calc-rvb-k7m2-breakeven-label {
+  font-size: 1.2rem !important;
+  margin-top: 10px !important;
+  opacity: 0.9 !important;
+}
+
+.wpc-calc-rvb-k7m2-awg-section {
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%) !important;
+  border-radius: var(--wpc-rvb-radius-lg) !important;
+  padding: 30px !important;
+  margin: 30px 0 !important;
+  text-align: center !important;
+}
+
+.wpc-calc-rvb-k7m2-awg-title {
+  font-size: 1.5rem !important;
+  font-weight: 700 !important;
+  color: var(--wpc-rvb-primary) !important;
+  margin: 0 0 20px 0 !important;
+}
+
+.wpc-calc-rvb-k7m2-cta-buttons {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 15px !important;
+  justify-content: center !important;
+  margin-bottom: 20px !important;
+}
+
+.wpc-calc-rvb-k7m2-cta-btn {
+  padding: 15px 30px !important;
+  border-radius: 50px !important;
+  font-size: 1.1rem !important;
+  font-weight: 600 !important;
+  border: none !important;
+  cursor: pointer !important;
+  transition: var(--wpc-rvb-transition) !important;
+  font-family: inherit !important;
+}
+
+.wpc-calc-rvb-k7m2-cta-btn.primary {
+  background: linear-gradient(135deg, var(--wpc-rvb-danger) 0%, #dc2626 100%) !important;
+  color: var(--wpc-rvb-white) !important;
+}
+
+.wpc-calc-rvb-k7m2-cta-btn.secondary {
+  background: linear-gradient(135deg, var(--wpc-rvb-success) 0%, #059669 100%) !important;
+  color: var(--wpc-rvb-white) !important;
+}
+
+.wpc-calc-rvb-k7m2-cta-btn:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: var(--wpc-rvb-shadow-md) !important;
+}
+
+.wpc-calc-rvb-k7m2-awg-content {
+  display: none !important;
+  margin-top: 20px !important;
+  padding: 20px !important;
+  background: var(--wpc-rvb-white) !important;
+  border-radius: var(--wpc-rvb-radius-md) !important;
+}
+
+.wpc-calc-rvb-k7m2-awg-content.active {
+  display: block !important;
+}
+
+.wpc-calc-rvb-k7m2-faq-section {
+  margin: 40px 0 !important;
+}
+
+.wpc-calc-rvb-k7m2-faq-item {
+  background: var(--wpc-rvb-white) !important;
+  border: 1px solid var(--wpc-rvb-border) !important;
+  border-radius: var(--wpc-rvb-radius-md) !important;
+  margin-bottom: 12px !important;
+  overflow: hidden !important;
+}
+
+.wpc-calc-rvb-k7m2-faq-header {
+  padding: 18px 20px !important;
+  cursor: pointer !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  background: var(--wpc-rvb-bg-light) !important;
+  transition: var(--wpc-rvb-transition) !important;
+}
+
+.wpc-calc-rvb-k7m2-faq-header:hover {
+  background: var(--wpc-rvb-primary-light) !important;
+}
+
+.wpc-calc-rvb-k7m2-faq-question {
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  color: var(--wpc-rvb-text-dark) !important;
+}
+
+.wpc-calc-rvb-k7m2-faq-icon {
+  font-size: 1.2rem !important;
+  transition: var(--wpc-rvb-transition) !important;
+  color: var(--wpc-rvb-primary) !important;
+}
+
+.wpc-calc-rvb-k7m2-faq-item.active .wpc-calc-rvb-k7m2-faq-icon {
+  transform: rotate(180deg) !important;
+}
+
+.wpc-calc-rvb-k7m2-faq-answer {
+  display: none !important;
+  padding: 20px !important;
+  font-size: 0.95rem !important;
+  line-height: 1.7 !important;
+  color: var(--wpc-rvb-text-dark) !important;
+}
+
+.wpc-calc-rvb-k7m2-faq-item.active .wpc-calc-rvb-k7m2-faq-answer {
+  display: block !important;
+}
+
+.wpc-calc-rvb-k7m2-content-section {
+  background: var(--wpc-rvb-white) !important;
+  border-radius: var(--wpc-rvb-radius-lg) !important;
+  padding: 40px !important;
+  margin: 40px 0 !important;
+  box-shadow: var(--wpc-rvb-shadow-sm) !important;
+}
+
+.wpc-calc-rvb-k7m2-content-title {
+  font-size: 1.6rem !important;
+  font-weight: 700 !important;
+  color: var(--wpc-rvb-primary) !important;
+  margin: 0 0 20px 0 !important;
+}
+
+.wpc-calc-rvb-k7m2-content-text {
+  font-size: 1rem !important;
+  line-height: 1.8 !important;
+  color: var(--wpc-rvb-text-dark) !important;
+  margin-bottom: 20px !important;
+}
+
+.wpc-calc-rvb-k7m2-embed-section {
+  background: var(--wpc-rvb-white) !important;
+  border-radius: var(--wpc-rvb-radius-lg) !important;
+  padding: 40px !important;
+  margin: 40px 0 !important;
+  box-shadow: var(--wpc-rvb-shadow-sm) !important;
+}
+
+.wpc-calc-rvb-k7m2-embed-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  padding: 18px 40px !important;
+  background: linear-gradient(135deg, var(--wpc-rvb-success) 0%, #059669 100%) !important;
+  color: var(--wpc-rvb-white) !important;
+  border: none !important;
+  border-radius: 50px !important;
+  font-size: 1.2rem !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  transition: var(--wpc-rvb-transition) !important;
+  font-family: inherit !important;
+}
+
+.wpc-calc-rvb-k7m2-embed-btn:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: var(--wpc-rvb-shadow-md) !important;
+}
+
+.wpc-calc-rvb-k7m2-color-picker {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  gap: 12px !important;
+  margin: 25px 0 !important;
+}
+
+.wpc-calc-rvb-k7m2-color-btn {
+  width: 50px !important;
+  height: 50px !important;
+  border-radius: 50% !important;
+  border: 3px solid var(--wpc-rvb-white) !important;
+  cursor: pointer !important;
+  transition: var(--wpc-rvb-transition) !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2) !important;
+}
+
+.wpc-calc-rvb-k7m2-color-btn:hover {
+  transform: scale(1.15) !important;
+}
+
+.wpc-calc-rvb-k7m2-color-btn.active {
+  border-color: #333 !important;
+  transform: scale(1.2) !important;
+}
+
+.wpc-calc-rvb-k7m2-preview-container {
+  background: var(--wpc-rvb-bg-light) !important;
+  border: 2px solid var(--wpc-rvb-border) !important;
+  border-radius: var(--wpc-rvb-radius-md) !important;
+  padding: 20px !important;
+  margin-top: 25px !important;
+}
+
+@media (max-width: 768px) {
+  .wpc-calc-rvb-k7m2-wrapper { padding: 15px !important; }
+  .wpc-calc-rvb-k7m2-title { font-size: 1.6rem !important; }
+  .wpc-calc-rvb-k7m2-tab-btn { flex: 1 1 45% !important; min-width: auto !important; padding: 12px 10px !important; font-size: 0.9rem !important; }
+  .wpc-calc-rvb-k7m2-tab-content { padding: 20px 15px !important; }
+  .wpc-calc-rvb-k7m2-inputs-grid { grid-template-columns: 1fr !important; }
+  .wpc-calc-rvb-k7m2-comparison-cards { grid-template-columns: 1fr !important; }
+  .wpc-calc-rvb-k7m2-results-grid { grid-template-columns: 1fr !important; }
+  .wpc-calc-rvb-k7m2-timeline-values { flex-wrap: wrap !important; gap: 15px !important; }
+  .wpc-calc-rvb-k7m2-cta-buttons { flex-direction: column !important; }
+}
+
+@media (max-width: 480px) {
+  .wpc-calc-rvb-k7m2-title { font-size: 1.4rem !important; }
+  .wpc-calc-rvb-k7m2-tab-btn { font-size: 0.85rem !important; padding: 10px 8px !important; }
+  .wpc-calc-rvb-k7m2-tab-icon { display: none !important; }
+  .wpc-calc-rvb-k7m2-result-value { font-size: 1.3rem !important; }
+  .wpc-calc-rvb-k7m2-slider-value { min-width: 100px !important; font-size: 0.95rem !important; }
+  .wpc-calc-rvb-k7m2-breakeven-years { font-size: 3rem !important; }
+  .wpc-calc-rvb-k7m2-content-section, .wpc-calc-rvb-k7m2-embed-section { padding: 25px 15px !important; }
+}
+</style>
+
+<div class="wpc-calc-rvb-k7m2-wrapper" id="wpc-calc-rvb-k7m2-main">
+  
+  <!-- Title Section -->
+  <div class="wpc-calc-rvb-k7m2-title-section">
+    <h1 class="wpc-calc-rvb-k7m2-title">מחשבון שכירות מול רכישת דירה 2025</h1>
+    <p class="wpc-calc-rvb-k7m2-subtitle">השוואה פיננסית מקיפה - מה עדיף: לשכור ולהשקיע או לקנות דירה?</p>
+    <span class="wpc-calc-rvb-k7m2-update-date">📅 עודכן: דצמבר 2025 | כולל מס שבח ורווחי הון</span>
+  </div>
+
+  <!-- Calculator -->
+  <div class="wpc-calc-rvb-k7m2-calculator" id="wpc-calc-rvb-k7m2-calculator">
+    
+    <!-- Tabs Navigation -->
+    <div class="wpc-calc-rvb-k7m2-tabs-nav">
+      <button class="wpc-calc-rvb-k7m2-tab-btn active" data-action="switch-tab" data-tab="compare">
+        <span class="wpc-calc-rvb-k7m2-tab-icon">⚖️</span>
+        <span>השוואה</span>
+      </button>
+      <button class="wpc-calc-rvb-k7m2-tab-btn" data-action="switch-tab" data-tab="timeline">
+        <span class="wpc-calc-rvb-k7m2-tab-icon">📈</span>
+        <span>ציר זמן</span>
+      </button>
+      <button class="wpc-calc-rvb-k7m2-tab-btn" data-action="switch-tab" data-tab="breakeven">
+        <span class="wpc-calc-rvb-k7m2-tab-icon">🎯</span>
+        <span>נקודת איזון</span>
+      </button>
+      <button class="wpc-calc-rvb-k7m2-tab-btn" data-action="switch-tab" data-tab="maxrent">
+        <span class="wpc-calc-rvb-k7m2-tab-icon">🏠</span>
+        <span>שכ"ד גג</span>
+      </button>
+    </div>
+
+    <!-- Tab 1: Basic Comparison -->
+    <div class="wpc-calc-rvb-k7m2-tab-content active" id="tab-compare">
+      <h2 class="wpc-calc-rvb-k7m2-tab-title">השוואת שכירות מול רכישה</h2>
+      
+      <h3 class="wpc-calc-rvb-k7m2-section-title">🏠 נתוני הנכס</h3>
+      <div class="wpc-calc-rvb-k7m2-inputs-grid">
+        <div class="wpc-calc-rvb-k7m2-input-group">
+          <label class="wpc-calc-rvb-k7m2-input-label">💰 מחיר הדירה (₪)</label>
+          <div class="wpc-calc-rvb-k7m2-slider-container">
+            <input type="range" class="wpc-calc-rvb-k7m2-slider" id="property-price-slider" min="500000" max="10000000" step="50000" value="2500000">
+            <div class="wpc-calc-rvb-k7m2-slider-value" id="property-price-value">₪2,500,000</div>
+          </div>
+        </div>
+        <div class="wpc-calc-rvb-k7m2-input-group">
+          <label class="wpc-calc-rvb-k7m2-input-label">💵 הון עצמי (₪)</label>
+          <div class="wpc-calc-rvb-k7m2-slider-container">
+            <input type="range" class="wpc-calc-rvb-k7m2-slider" id="equity-slider" min="100000" max="5000000" step="50000" value="625000">
+            <div class="wpc-calc-rvb-k7m2-slider-value" id="equity-value">₪625,000</div>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="wpc-calc-rvb-k7m2-section-title">🏦 נתוני משכנתא</h3>
+      <div class="wpc-calc-rvb-k7m2-inputs-grid">
+        <div class="wpc-calc-rvb-k7m2-input-group">
+          <label class="wpc-calc-rvb-k7m2-input-label">📊 ריבית משכנתא שנתית (%)</label>
+          <div class="wpc-calc-rvb-k7m2-slider-container">
+            <input type="range" class="wpc-calc-rvb-k7m2-slider" id="mortgage-rate-slider" min="2" max="8" step="0.1" value="4.5">
+            <div class="wpc-calc-rvb-k7m2-slider-value" id="mortgage-rate-value">4.5%</div>
+          </div>
+        </div>
+        <div class="wpc-calc-rvb-k7m2-input-group">
+          <label class="wpc-calc-rvb-k7m2-input-label">📅 תקופת המשכנתא (שנים)</label>
+          <div class="wpc-calc-rvb-k7m2-slider-container">
+            <input type="range" class="wpc-calc-rvb-k7m2-slider" id="mortgage-term-slider" min="10" max="30" step="1" value="25">
+            <div class="wpc-calc-rvb-k7m2-slider-value" id="mortgage-term-value">25 שנים</div>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="wpc-calc-rvb-k7m2-section-title">🔑 נתוני שכירות</h3>
+      <div class="wpc-calc-rvb-k7m2-inputs-grid">
+        <div class="wpc-calc-rvb-k7m2-input-group">
+          <label class="wpc-calc-rvb-k7m2-input-label">🏠 שכר דירה חודשי (₪)</label>
+          <div class="wpc-calc-rvb-k7m2-slider-container">
+            <input type="range" class="wpc-calc-rvb-k7m2-slider" id="rent-slider" min="2000" max="20000" step="100" value="6000">
+            <div class="wpc-calc-rvb-k7m2-slider-value" id="rent-value">₪6,000</div>
+          </div>
+        </div>
+        <div class="wpc-calc-rvb-k7m2-input-group">
+          <label class="wpc-calc-rvb-k7m2-input-label">📈 עליית שכ"ד שנתית (%)</label>
+          <div class="wpc-calc-rvb-k7m2-slider-container">
+            <input type="range" class="wpc-calc-rvb-k7m2-slider" id="rent-increase-slider" min="0" max="5" step="0.5" value="2">
+            <div class="wpc-calc-rvb-k7m2-slider-value" id="rent-increase-value">2%</div>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="wpc-calc-rvb-k7m2-section-title">📊 הנחות שוק</h3>
+      <div class="wpc-calc-rvb-k7m2-inputs-grid">
+        <div class="wpc-calc-rvb-k7m2-input-group">
+          <label class="wpc-calc-rvb-k7m2-input-label">📈 תשואת השקעה שנתית (%)</label>
+          <div class="wpc-calc-rvb-k7m2-slider-container">
+            <input type="range" class="wpc-calc-rvb-k7m2-slider" id="investment-return-slider" min="3" max="12" step="0.5" value="7">
+            <div class="wpc-calc-rvb-k7m2-slider-value" id="investment-return-value">7%</div>
+          </div>
+        </div>
+        <div class="wpc-calc-rvb-k7m2-input-group">
+          <label class="wpc-calc-rvb-k7m2-input-label">🏠 עליית ערך נדל"ן שנתית (%)</label>
+          <div class="wpc-calc-rvb-k7m2-slider-container">
+            <input type="range" class="wpc-calc-rvb-k7m2-slider" id="property-appreciation-slider" min="0" max="8" step="0.5" value="3">
+            <div class="wpc-calc-rvb-k7m2-slider-value" id="property-appreciation-value">3%</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wpc-calc-rvb-k7m2-input-group">
+        <label class="wpc-calc-rvb-k7m2-input-label">📅 תקופת ההשוואה (שנים)</label>
+        <div class="wpc-calc-rvb-k7m2-slider-container">
+          <input type="range" class="wpc-calc-rvb-k7m2-slider" id="comparison-years-slider" min="5" max="30" step="1" value="15">
+          <div class="wpc-calc-rvb-k7m2-slider-value" id="comparison-years-value">15 שנים</div>
+        </div>
+      </div>
+
+      <!-- Results -->
+      <div class="wpc-calc-rvb-k7m2-results">
+        <h3 class="wpc-calc-rvb-k7m2-results-title">📊 תוצאות ההשוואה</h3>
+        <div class="wpc-calc-rvb-k7m2-results-grid">
+          <div class="wpc-calc-rvb-k7m2-result-item">
+            <div class="wpc-calc-rvb-k7m2-result-label">🏠 הון נטו ברכישה</div>
+            <div class="wpc-calc-rvb-k7m2-result-value buy" id="result-buy-wealth">₪0</div>
+          </div>
+          <div class="wpc-calc-rvb-k7m2-result-item">
+            <div class="wpc-calc-rvb-k7m2-result-label">🔑 הון נטו בשכירות</div>
+            <div class="wpc-calc-rvb-k7m2-result-value rent" id="result-rent-wealth">₪0</div>
+          </div>
+          <div class="wpc-calc-rvb-k7m2-result-item">
+            <div class="wpc-calc-rvb-k7m2-result-label">📊 הפרש</div>
+            <div class="wpc-calc-rvb-k7m2-result-value highlight" id="result-difference">₪0</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Comparison Cards -->
+      <div class="wpc-calc-rvb-k7m2-comparison-cards">
+        <div class="wpc-calc-rvb-k7m2-compare-card">
+          <div class="wpc-calc-rvb-k7m2-compare-header buy">🏠 תרחיש רכישה</div>
+          <div class="wpc-calc-rvb-k7m2-compare-body">
+            <div class="wpc-calc-rvb-k7m2-compare-row"><span>שווי הנכס העתידי:</span><span id="buy-future-value">₪0</span></div>
+            <div class="wpc-calc-rvb-k7m2-compare-row"><span>יתרת משכנתא:</span><span id="buy-mortgage-balance">₪0</span></div>
+            <div class="wpc-calc-rvb-k7m2-compare-row"><span>עלויות רכישה:</span><span id="buy-purchase-costs">₪0</span></div>
+            <div class="wpc-calc-rvb-k7m2-compare-row"><span>ריבית ששולמה:</span><span id="buy-interest-paid">₪0</span></div>
+            <div class="wpc-calc-rvb-k7m2-compare-row"><span>תחזוקה:</span><span id="buy-maintenance">₪0</span></div>
+            <div class="wpc-calc-rvb-k7m2-compare-row"><span>הון נטו:</span><span id="buy-net-wealth">₪0</span></div>
+          </div>
+        </div>
+        <div class="wpc-calc-rvb-k7m2-compare-card">
+          <div class="wpc-calc-rvb-k7m2-compare-header rent">🔑 תרחיש שכירות</div>
+          <div class="wpc-calc-rvb-k7m2-compare-body">
+            <div class="wpc-calc-rvb-k7m2-compare-row"><span>השקעת הון עצמי:</span><span id="rent-initial-investment">₪0</span></div>
+            <div class="wpc-calc-rvb-k7m2-compare-row"><span>חיסכון חודשי:</span><span id="rent-monthly-savings">₪0</span></div>
+            <div class="wpc-calc-rvb-k7m2-compare-row"><span>שכ"ד ששולם:</span><span id="rent-total-rent">₪0</span></div>
+            <div class="wpc-calc-rvb-k7m2-compare-row"><span>תשואה לפני מס:</span><span id="rent-gross-return">₪0</span></div>
+            <div class="wpc-calc-rvb-k7m2-compare-row"><span>מס רווחי הון (25%):</span><span id="rent-capital-tax">₪0</span></div>
+            <div class="wpc-calc-rvb-k7m2-compare-row"><span>הון נטו:</span><span id="rent-net-wealth">₪0</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wpc-calc-rvb-k7m2-verdict" id="compare-verdict">📊 טוען...</div>
+
+      <div class="wpc-calc-rvb-k7m2-info-box">
+        <div class="wpc-calc-rvb-k7m2-info-title">💡 מה נכלל בחישוב?</div>
+        <div class="wpc-calc-rvb-k7m2-info-text">
+          <strong>ברכישה:</strong> מס רכישה (6%), עו"ד ותיווך (2%), תחזוקה שנתית (1% משווי), פטור ממס שבח על דירה יחידה.<br>
+          <strong>בשכירות:</strong> השקעת ההון העצמי בשוק ההון, חיסכון ההפרש בין החזר משכנתא לשכ"ד, מס רווחי הון 25%.
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 2: Timeline -->
+    <div class="wpc-calc-rvb-k7m2-tab-content" id="tab-timeline">
+      <h2 class="wpc-calc-rvb-k7m2-tab-title">השוואת הון נטו לאורך זמן</h2>
+      
+      <div class="wpc-calc-rvb-k7m2-timeline" id="timeline-container">
+        <!-- Generated by JavaScript -->
+      </div>
+
+      <div class="wpc-calc-rvb-k7m2-info-box">
+        <div class="wpc-calc-rvb-k7m2-info-title">📈 איך לקרוא את הנתונים?</div>
+        <div class="wpc-calc-rvb-k7m2-info-text">
+          הטבלה מציגה את ההון הנקי בכל תרחיש לאורך השנים. <strong>ירוק = רכישה עדיפה</strong>, <strong>ורוד = שכירות עדיפה</strong>.
+          שימו לב שברוב המקרים, רכישה הופכת למשתלמת יותר רק אחרי מספר שנים.
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 3: Breakeven -->
+    <div class="wpc-calc-rvb-k7m2-tab-content" id="tab-breakeven">
+      <h2 class="wpc-calc-rvb-k7m2-tab-title">נקודת האיזון - מתי רכישה משתלמת?</h2>
+      
+      <div class="wpc-calc-rvb-k7m2-breakeven-display">
+        <div class="wpc-calc-rvb-k7m2-breakeven-years" id="breakeven-years">--</div>
+        <div class="wpc-calc-rvb-k7m2-breakeven-label">שנים עד שרכישה משתלמת יותר</div>
+      </div>
+
+      <div class="wpc-calc-rvb-k7m2-results">
+        <h3 class="wpc-calc-rvb-k7m2-results-title">📊 פירוט נקודת האיזון</h3>
+        <div class="wpc-calc-rvb-k7m2-results-grid">
+          <div class="wpc-calc-rvb-k7m2-result-item">
+            <div class="wpc-calc-rvb-k7m2-result-label">הון ברכישה בנקודת איזון</div>
+            <div class="wpc-calc-rvb-k7m2-result-value buy" id="breakeven-buy-wealth">₪0</div>
+          </div>
+          <div class="wpc-calc-rvb-k7m2-result-item">
+            <div class="wpc-calc-rvb-k7m2-result-label">הון בשכירות בנקודת איזון</div>
+            <div class="wpc-calc-rvb-k7m2-result-value rent" id="breakeven-rent-wealth">₪0</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wpc-calc-rvb-k7m2-info-box">
+        <div class="wpc-calc-rvb-k7m2-info-title">🎯 מה זה אומר?</div>
+        <div class="wpc-calc-rvb-k7m2-info-text" id="breakeven-explanation">
+          אם אתם מתכננים לגור בדירה פחות מנקודת האיזון, שכירות והשקעה בשוק ההון עשויות להיות עדיפות.
+          מעבר לנקודה זו, רכישת דירה צפויה להניב הון גבוה יותר.
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 4: Max Rent -->
+    <div class="wpc-calc-rvb-k7m2-tab-content" id="tab-maxrent">
+      <h2 class="wpc-calc-rvb-k7m2-tab-title">שכר דירה גג - מתי עדיף לקנות?</h2>
+      
+      <div class="wpc-calc-rvb-k7m2-breakeven-display">
+        <div class="wpc-calc-rvb-k7m2-breakeven-years" id="max-rent-value">₪--</div>
+        <div class="wpc-calc-rvb-k7m2-breakeven-label">שכר דירה מקסימלי שמעליו עדיף לקנות</div>
+      </div>
+
+      <div class="wpc-calc-rvb-k7m2-results">
+        <h3 class="wpc-calc-rvb-k7m2-results-title">📊 ניתוח שכר דירה</h3>
+        <div class="wpc-calc-rvb-k7m2-results-grid">
+          <div class="wpc-calc-rvb-k7m2-result-item">
+            <div class="wpc-calc-rvb-k7m2-result-label">שכ"ד נוכחי שהזנתם</div>
+            <div class="wpc-calc-rvb-k7m2-result-value" id="current-rent-display">₪6,000</div>
+          </div>
+          <div class="wpc-calc-rvb-k7m2-result-item">
+            <div class="wpc-calc-rvb-k7m2-result-label">תשואת שכירות</div>
+            <div class="wpc-calc-rvb-k7m2-result-value highlight" id="rent-yield-display">2.88%</div>
+          </div>
+          <div class="wpc-calc-rvb-k7m2-result-item">
+            <div class="wpc-calc-rvb-k7m2-result-label">החלטה מומלצת</div>
+            <div class="wpc-calc-rvb-k7m2-result-value" id="rent-recommendation">--</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wpc-calc-rvb-k7m2-info-box">
+        <div class="wpc-calc-rvb-k7m2-info-title">🏠 מה זה שכ"ד גג?</div>
+        <div class="wpc-calc-rvb-k7m2-info-text">
+          שכר דירה גג הוא הסכום המקסימלי ששווה לשלם על שכירות לפני שרכישה הופכת למשתלמת יותר.
+          אם שכר הדירה <strong>גבוה מהגג</strong> - עדיף לקנות. אם הוא <strong>נמוך מהגג</strong> - עדיף לשכור ולהשקיע.
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- AWG Section -->
+  <div class="wpc-calc-rvb-k7m2-awg-section">
+    <h3 class="wpc-calc-rvb-k7m2-awg-title">🎯 מחפשים משכנתא בתנאים הטובים ביותר?</h3>
+    <div class="wpc-calc-rvb-k7m2-cta-buttons">
+      <button class="wpc-calc-rvb-k7m2-cta-btn primary" data-action="open-awg">
+        🏦 בדוק זכאות למשכנתא - קבל הצעה מיידית!
+      </button>
+      <button class="wpc-calc-rvb-k7m2-cta-btn secondary" data-action="scroll-to-embed">
+        🎁 הטמע את המחשבון בחינם באתרך
+      </button>
+    </div>
+    <div class="wpc-calc-rvb-k7m2-awg-content" id="awg-content">
+      <div class="wpc-calc-rvb-k7m2-shortcode-item">
+        [awg postid="32400"]
+      </div>
+    </div>
+  </div>
+
+  <!-- Content Section -->
+  <div class="wpc-calc-rvb-k7m2-content-section">
+    <h2 class="wpc-calc-rvb-k7m2-content-title">שכירות מול רכישה - מה עדיף ב-2025?</h2>
+    <p class="wpc-calc-rvb-k7m2-content-text">
+      השאלה "האם לקנות דירה או להמשיך לשכור?" היא אחת ההחלטות הפיננסיות המשמעותיות ביותר שנקבל בחיים.
+      ב-2025, עם ריביות משכנתא של 4-6% ומחירי דירות שממשיכים להיות גבוהים, התשובה אינה פשוטה.
+    </p>
+    
+    <h3 class="wpc-calc-rvb-k7m2-content-title">היתרונות של רכישת דירה</h3>
+    <p class="wpc-calc-rvb-k7m2-content-text">
+      <strong>• יציבות:</strong> אין חשש מפינוי או העלאת שכר דירה<br>
+      <strong>• מינוף:</strong> המשכנתא מאפשרת לרכוש נכס שווה הרבה יותר מההון העצמי<br>
+      <strong>• פטור ממס שבח:</strong> על דירה יחידה בישראל יש פטור מלא ממס שבח<br>
+      <strong>• חיסכון כפוי:</strong> כל תשלום משכנתא בונה הון עצמי בנכס
+    </p>
+    
+    <h3 class="wpc-calc-rvb-k7m2-content-title">היתרונות של שכירות והשקעה</h3>
+    <p class="wpc-calc-rvb-k7m2-content-text">
+      <strong>• גמישות:</strong> קל יותר לעבור דירה או לשנות מיקום<br>
+      <strong>• נזילות:</strong> ההון נשאר נזיל ולא נעול בנכס<br>
+      <strong>• פיזור סיכונים:</strong> ההשקעות בשוק ההון מפוזרות ולא מרוכזות בנכס אחד<br>
+      <strong>• אין הוצאות תחזוקה:</strong> השוכר לא משלם על תיקונים גדולים
+    </p>
+  </div>
+
+  <!-- Embed Section -->
+  <div class="wpc-calc-rvb-k7m2-embed-section" id="wpc-calc-rvb-k7m2-embed">
+    <h2 style="color: var(--wpc-rvb-primary); font-size: 1.8em; text-align: center; margin-bottom: 25px;">
+      🎁 רוצים להטמיע את מחשבון שכירות מול רכישה באתר שלכם? חינם!
+    </h2>
+    
+    <div style="background: rgba(30, 84, 144, 0.08); padding: 20px; border-radius: 12px; margin-bottom: 25px; border-right: 4px solid var(--wpc-rvb-primary);">
+      <p style="font-size: 1.1em; line-height: 1.7; margin: 0; color: #222;">
+        <strong>💎 מחשבון מקצועי עם 4 טאבים, חישובי מס מדויקים, ועיצוב responsive מלא!</strong><br>
+        <strong>שווי המחשבון:</strong> מעל ₪15,000 בפיתוח 💰 | <strong>מה ששילמתם:</strong> ₪0 🎉
+      </p>
+    </div>
+    
+    <div style="text-align: center;">
+      <button class="wpc-calc-rvb-k7m2-embed-btn" data-action="copy-embed-code">
+        📋 העתק קוד HTML מלא
+      </button>
+    </div>
+
+    <h4 style="margin-top: 30px; color: var(--wpc-rvb-primary); text-align: center;">🎨 בחרו צבע:</h4>
+    
+    <div class="wpc-calc-rvb-k7m2-color-picker" id="color-picker">
+      <button class="wpc-calc-rvb-k7m2-color-btn active" style="background: #1e5490;" data-action="preview-color" data-color="#1e5490" data-name="כחול מקצועי" title="כחול מקצועי 💙"></button>
+      <button class="wpc-calc-rvb-k7m2-color-btn" style="background: #10b981;" data-action="preview-color" data-color="#10b981" data-name="ירוק צמיחה" title="ירוק צמיחה 💚"></button>
+      <button class="wpc-calc-rvb-k7m2-color-btn" style="background: #ef4444;" data-action="preview-color" data-color="#ef4444" data-name="אדום אנרגטי" title="אדום אנרגטי ❤️"></button>
+      <button class="wpc-calc-rvb-k7m2-color-btn" style="background: #8b5cf6;" data-action="preview-color" data-color="#8b5cf6" data-name="סגול יוקרתי" title="סגול יוקרתי 💜"></button>
+      <button class="wpc-calc-rvb-k7m2-color-btn" style="background: #f59e0b;" data-action="preview-color" data-color="#f59e0b" data-name="כתום דינמי" title="כתום דינמי 🧡"></button>
+      <button class="wpc-calc-rvb-k7m2-color-btn" style="background: #ec4899;" data-action="preview-color" data-color="#ec4899" data-name="ורוד מודרני" title="ורוד מודרני 💗"></button>
+      <button class="wpc-calc-rvb-k7m2-color-btn" style="background: #06b6d4;" data-action="preview-color" data-color="#06b6d4" data-name="טורקיז רענן" title="טורקיז רענן 🩵"></button>
+      <button class="wpc-calc-rvb-k7m2-color-btn" style="background: #84cc16;" data-action="preview-color" data-color="#84cc16" data-name="ליים עז" title="ליים עז 💛"></button>
+      <button class="wpc-calc-rvb-k7m2-color-btn" style="background: #f97316;" data-action="preview-color" data-color="#f97316" data-name="כתום בוהק" title="כתום בוהק 🔥"></button>
+      <button class="wpc-calc-rvb-k7m2-color-btn" style="background: #0891b2;" data-action="preview-color" data-color="#0891b2" data-name="כחול ים" title="כחול ים 🌊"></button>
+    </div>
+
+    <div class="wpc-calc-rvb-k7m2-preview-container" id="preview-container" style="display: none;">
+      <h4 style="text-align: center; margin-bottom: 15px;">✨ תצוגה מקדימה: <span id="preview-color-name">כחול מקצועי</span></h4>
+      <div id="preview-content"></div>
+      <div style="text-align: center; margin-top: 20px;">
+        <button class="wpc-calc-rvb-k7m2-embed-btn" data-action="copy-preview-code">📋 העתק עם צבע נבחר</button>
+      </div>
+    </div>
+
+    <div style="background: #fff3cd; padding: 20px; border-radius: 12px; margin-top: 25px; border: 2px solid #ffc107;">
+      <h4 style="color: #856404; margin-top: 0;">⚠️ תנאי שימוש</h4>
+      <p style="color: #856404; margin: 0;">המחשבון להטמעה בחינם בתנאי השארת קישור הקרדיט. אסור להסיר או לשנות את הקרדיט.</p>
+    </div>
+  </div>
+
+  <!-- FAQ Section -->
+  <div class="wpc-calc-rvb-k7m2-faq-section">
+    <h2 style="font-size: 1.8rem; font-weight: 700; color: var(--wpc-rvb-primary); margin: 0 0 25px 0; text-align: center;">שאלות נפוצות</h2>
+    
+    <div class="wpc-calc-rvb-k7m2-faq-item" data-action="toggle-faq">
+      <div class="wpc-calc-rvb-k7m2-faq-header">
+        <span class="wpc-calc-rvb-k7m2-faq-question">❓ מתי רכישת דירה משתלמת יותר משכירות?</span>
+        <span class="wpc-calc-rvb-k7m2-faq-icon">▼</span>
+      </div>
+      <div class="wpc-calc-rvb-k7m2-faq-answer">
+        רכישה משתלמת יותר כאשר: (1) מתכננים לגור בדירה לטווח ארוך (מעל 10-15 שנה), (2) שכר הדירה גבוה ביחס למחיר הנכס (תשואת שכירות גבוהה), (3) הריבית על המשכנתא נמוכה יחסית לתשואה הצפויה בשוק ההון.
+      </div>
+    </div>
+
+    <div class="wpc-calc-rvb-k7m2-faq-item" data-action="toggle-faq">
+      <div class="wpc-calc-rvb-k7m2-faq-header">
+        <span class="wpc-calc-rvb-k7m2-faq-question">❓ מה ההבדל במיסוי בין שני התרחישים?</span>
+        <span class="wpc-calc-rvb-k7m2-faq-icon">▼</span>
+      </div>
+      <div class="wpc-calc-rvb-k7m2-faq-answer">
+        <strong>ברכישה:</strong> על דירה יחידה יש פטור מלא ממס שבח בעת המכירה. יש לשלם מס רכישה בעת הקנייה.<br>
+        <strong>בשכירות:</strong> על רווחים בשוק ההון משלמים 25% מס רווחי הון. זהו הבדל משמעותי לטובת הרכישה!
+      </div>
+    </div>
+
+    <div class="wpc-calc-rvb-k7m2-faq-item" data-action="toggle-faq">
+      <div class="wpc-calc-rvb-k7m2-faq-header">
+        <span class="wpc-calc-rvb-k7m2-faq-question">❓ מה כולל החישוב של עלויות רכישה?</span>
+        <span class="wpc-calc-rvb-k7m2-faq-icon">▼</span>
+      </div>
+      <div class="wpc-calc-rvb-k7m2-faq-answer">
+        עלויות רכישה כוללות: מס רכישה (לפי מדרגות, כ-6% בממוצע), שכר טרחת עו"ד (כ-0.5%-1%), דמי תיווך (2%), ולעיתים עלויות שיפוץ ראשוני. המחשבון מחשב כ-8% מסך מחיר הדירה.
+      </div>
+    </div>
+
+    <div class="wpc-calc-rvb-k7m2-faq-item" data-action="toggle-faq">
+      <div class="wpc-calc-rvb-k7m2-faq-header">
+        <span class="wpc-calc-rvb-k7m2-faq-question">❓ האם המחשבון מתחשב באינפלציה?</span>
+        <span class="wpc-calc-rvb-k7m2-faq-icon">▼</span>
+      </div>
+      <div class="wpc-calc-rvb-k7m2-faq-answer">
+        כן! המחשבון מתחשב בעליית שכר דירה שנתית (שמשקפת אינפלציה + עליית מחירי שכירות), ובעליית ערך הנדל"ן. 
+        שימו לב שחלק ממסלולי המשכנתא צמודים למדד, מה שמשפיע על ההחזר החודשי לאורך זמן.
+      </div>
+    </div>
+
+    <div class="wpc-calc-rvb-k7m2-faq-item" data-action="toggle-faq">
+      <div class="wpc-calc-rvb-k7m2-faq-header">
+        <span class="wpc-calc-rvb-k7m2-faq-question">❓ מה זה "שכר דירה גג"?</span>
+        <span class="wpc-calc-rvb-k7m2-faq-icon">▼</span>
+      </div>
+      <div class="wpc-calc-rvb-k7m2-faq-answer">
+        שכר דירה גג הוא הסכום המקסימלי שכדאי לשלם על שכירות לפני שרכישה הופכת למשתלמת יותר. 
+        אם שכר הדירה בפועל גבוה מהגג - עדיף לקנות. אם הוא נמוך מהגג - עדיף לשכור ולהשקיע את ההפרש.
+      </div>
+    </div>
+
+    <div class="wpc-calc-rvb-k7m2-faq-item" data-action="toggle-faq">
+      <div class="wpc-calc-rvb-k7m2-faq-header">
+        <span class="wpc-calc-rvb-k7m2-faq-question">❓ איזו תשואה להניח על השקעות בשוק ההון?</span>
+        <span class="wpc-calc-rvb-k7m2-faq-icon">▼</span>
+      </div>
+      <div class="wpc-calc-rvb-k7m2-faq-answer">
+        התשואה הממוצעת ארוכת הטווח של שוק המניות היא כ-7%-10% נומינלית. אנו ממליצים להניח 7% כברירת מחדל, 
+        שזו תשואה סבירה לתיק מניות מפוזר. תשואה גבוהה יותר תטה את הכף לטובת שכירות.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Schema.org JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "מתי רכישת דירה משתלמת יותר משכירות?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "רכישה משתלמת יותר כאשר מתכננים לגור בדירה לטווח ארוך (מעל 10-15 שנה), שכר הדירה גבוה ביחס למחיר הנכס, והריבית על המשכנתא נמוכה יחסית לתשואה הצפויה בשוק ההון."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "מה ההבדל במיסוי בין רכישה לשכירות?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "ברכישה יש פטור מלא ממס שבח על דירה יחידה בעת המכירה. בשכירות והשקעה בשוק ההון משלמים 25% מס רווחי הון על הרווחים."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "מה זה שכר דירה גג?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "שכר דירה גג הוא הסכום המקסימלי שכדאי לשלם על שכירות לפני שרכישה הופכת למשתלמת יותר. אם שכר הדירה גבוה מהגג - עדיף לקנות."
+      }
+    }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FinancialProduct",
+  "name": "מחשבון שכירות מול רכישת דירה 2025",
+  "description": "מחשבון מתקדם להשוואה פיננסית בין שכירות והשקעה בשוק ההון לבין רכישת דירה עם משכנתא",
+  "category": "Financial Calculator",
+  "featureList": ["השוואת הון נטו", "נקודת איזון", "חישוב שכ\"ד גג", "ציר זמן"],
+  "provider": {
+    "@type": "Organization",
+    "name": "רק תבקש - אפטריו בע״מ",
+    "url": "https://loan-israel.co.il"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "ILS"
+  }
+}
+</script>
+
+<script>
+(function() {
+    'use strict';
+    
+    const NS = 'WPC_CalcRVB_K7M2';
+    if (window[NS]) return;
+    
+    const container = document.getElementById('wpc-calc-rvb-k7m2-main');
+    if (!container) return;
+
+    const CALCULATOR_NAME = 'שכירות מול רכישה';
+    const PURCHASE_COSTS_RATE = 0.08;
+    const MAINTENANCE_RATE = 0.01;
+    const CAPITAL_GAINS_TAX = 0.25;
+
+    const state = {
+        propertyPrice: 2500000,
+        equity: 625000,
+        mortgageRate: 4.5,
+        mortgageTerm: 25,
+        rent: 6000,
+        rentIncrease: 2,
+        investmentReturn: 7,
+        propertyAppreciation: 3,
+        comparisonYears: 15,
+        previewColor: '#1e5490'
+    };
+
+    function formatCurrency(num) {
+        return '₪' + Math.round(num).toLocaleString('he-IL');
+    }
+
+    function el(id) {
+        return document.getElementById(id);
+    }
+
+    function calculatePMT(principal, annualRate, years) {
+        const monthlyRate = annualRate / 100 / 12;
+        const months = years * 12;
+        if (monthlyRate === 0) return principal / months;
+        return principal * (monthlyRate * Math.pow(1 + monthlyRate, months)) / (Math.pow(1 + monthlyRate, months) - 1);
+    }
+
+    function calculateRemainingBalance(principal, annualRate, totalYears, yearsPaid) {
+        const monthlyRate = annualRate / 100 / 12;
+        const totalMonths = totalYears * 12;
+        const monthsPaid = yearsPaid * 12;
+        if (monthlyRate === 0) return principal * (1 - monthsPaid / totalMonths);
+        const payment = calculatePMT(principal, annualRate, totalYears);
+        return principal * Math.pow(1 + monthlyRate, monthsPaid) - payment * (Math.pow(1 + monthlyRate, monthsPaid) - 1) / monthlyRate;
+    }
+
+    function calculateTotalInterest(principal, annualRate, totalYears, yearsPaid) {
+        const monthlyPayment = calculatePMT(principal, annualRate, totalYears);
+        const monthsPaid = Math.min(yearsPaid * 12, totalYears * 12);
+        const totalPaid = monthlyPayment * monthsPaid;
+        const principalPaid = principal - calculateRemainingBalance(principal, annualRate, totalYears, yearsPaid);
+        return Math.max(0, totalPaid - principalPaid);
+    }
+
+    function calculateFV(principal, annualRate, years) {
+        return principal * Math.pow(1 + annualRate / 100, years);
+    }
+
+    function calculateFVWithMonthlyDeposits(principal, annualRate, years, monthlyDeposit, rentGrowth) {
+        const monthlyRate = annualRate / 100 / 12;
+        const months = years * 12;
+        let total = principal;
+        let currentDeposit = monthlyDeposit;
+        
+        for (let month = 0; month < months; month++) {
+            total = total * (1 + monthlyRate) + currentDeposit;
+            if (month > 0 && month % 12 === 0) {
+                currentDeposit = currentDeposit * (1 - rentGrowth / 100);
+            }
+        }
+        return total;
+    }
+
+    function calculateTotalRentPaid(monthlyRent, rentIncrease, years) {
+        let total = 0;
+        let currentRent = monthlyRent;
+        for (let year = 0; year < years; year++) {
+            total += currentRent * 12;
+            currentRent *= (1 + rentIncrease / 100);
+        }
+        return total;
+    }
+
+    function calculateScenarios(years) {
+        const loanAmount = state.propertyPrice - state.equity;
+        const purchaseCosts = state.propertyPrice * PURCHASE_COSTS_RATE;
+        const monthlyMortgage = calculatePMT(loanAmount, state.mortgageRate, state.mortgageTerm);
+        
+        // Buy scenario
+        const futurePropertyValue = calculateFV(state.propertyPrice, state.propertyAppreciation, years);
+        const mortgageBalance = years >= state.mortgageTerm ? 0 : calculateRemainingBalance(loanAmount, state.mortgageRate, state.mortgageTerm, years);
+        const interestPaid = calculateTotalInterest(loanAmount, state.mortgageRate, state.mortgageTerm, years);
+        const maintenanceCost = state.propertyPrice * MAINTENANCE_RATE * years;
+        const buyNetWealth = futurePropertyValue - mortgageBalance;
+        const buyTotalCosts = purchaseCosts + interestPaid + maintenanceCost;
+
+        // Rent scenario  
+        const monthlySavings = Math.max(0, monthlyMortgage - state.rent);
+        const totalRentPaid = calculateTotalRentPaid(state.rent, state.rentIncrease, years);
+        
+        // Investment: equity + purchase costs saved + monthly savings
+        const initialInvestment = state.equity + purchaseCosts;
+        const investmentGross = calculateFVWithMonthlyDeposits(initialInvestment, state.investmentReturn, years, monthlySavings, state.rentIncrease);
+        const investmentGains = investmentGross - initialInvestment - (monthlySavings * 12 * years);
+        const capitalTax = investmentGains * CAPITAL_GAINS_TAX;
+        const rentNetWealth = investmentGross - capitalTax;
+
+        return {
+            buy: {
+                futureValue: futurePropertyValue,
+                mortgageBalance: mortgageBalance,
+                purchaseCosts: purchaseCosts,
+                interestPaid: interestPaid,
+                maintenance: maintenanceCost,
+                netWealth: buyNetWealth,
+                totalCosts: buyTotalCosts
+            },
+            rent: {
+                initialInvestment: initialInvestment,
+                monthlySavings: monthlySavings,
+                totalRentPaid: totalRentPaid,
+                grossReturn: investmentGross,
+                capitalTax: capitalTax,
+                netWealth: rentNetWealth
+            },
+            difference: buyNetWealth - rentNetWealth,
+            buyWins: buyNetWealth > rentNetWealth
+        };
+    }
+
+    function findBreakevenYear() {
+        for (let year = 1; year <= 50; year++) {
+            const result = calculateScenarios(year);
+            if (result.buyWins) {
+                return { year: year, buyWealth: result.buy.netWealth, rentWealth: result.rent.netWealth };
+            }
+        }
+        return { year: -1, buyWealth: 0, rentWealth: 0 };
+    }
+
+    function calculateMaxRent() {
+        const years = state.comparisonYears;
+        let low = 1000, high = 50000;
+        
+        while (high - low > 100) {
+            const mid = (low + high) / 2;
+            const originalRent = state.rent;
+            state.rent = mid;
+            const result = calculateScenarios(years);
+            state.rent = originalRent;
+            
+            if (result.buyWins) {
+                low = mid;
+            } else {
+                high = mid;
+            }
+        }
+        return Math.round(low);
+    }
+
+    function updateCompare() {
+        const result = calculateScenarios(state.comparisonYears);
+        
+        el('result-buy-wealth').textContent = formatCurrency(result.buy.netWealth);
+        el('result-rent-wealth').textContent = formatCurrency(result.rent.netWealth);
+        el('result-difference').textContent = formatCurrency(Math.abs(result.difference));
+        
+        el('buy-future-value').textContent = formatCurrency(result.buy.futureValue);
+        el('buy-mortgage-balance').textContent = formatCurrency(result.buy.mortgageBalance);
+        el('buy-purchase-costs').textContent = formatCurrency(result.buy.purchaseCosts);
+        el('buy-interest-paid').textContent = formatCurrency(result.buy.interestPaid);
+        el('buy-maintenance').textContent = formatCurrency(result.buy.maintenance);
+        el('buy-net-wealth').textContent = formatCurrency(result.buy.netWealth);
+        
+        el('rent-initial-investment').textContent = formatCurrency(result.rent.initialInvestment);
+        el('rent-monthly-savings').textContent = formatCurrency(result.rent.monthlySavings);
+        el('rent-total-rent').textContent = formatCurrency(result.rent.totalRentPaid);
+        el('rent-gross-return').textContent = formatCurrency(result.rent.grossReturn);
+        el('rent-capital-tax').textContent = formatCurrency(result.rent.capitalTax);
+        el('rent-net-wealth').textContent = formatCurrency(result.rent.netWealth);
+        
+        const verdict = el('compare-verdict');
+        if (result.buyWins) {
+            verdict.className = 'wpc-calc-rvb-k7m2-verdict buy-wins';
+            verdict.innerHTML = `🏠 <strong>רכישה עדיפה!</strong> הפרש של ${formatCurrency(result.difference)} לטובת רכישה לאחר ${state.comparisonYears} שנים`;
+        } else {
+            verdict.className = 'wpc-calc-rvb-k7m2-verdict rent-wins';
+            verdict.innerHTML = `🔑 <strong>שכירות עדיפה!</strong> הפרש של ${formatCurrency(-result.difference)} לטובת שכירות לאחר ${state.comparisonYears} שנים`;
+        }
+    }
+
+    function updateTimeline() {
+        const container = el('timeline-container');
+        let html = '';
+        const years = [5, 10, 15, 20, 25, 30];
+        
+        years.forEach(year => {
+            const result = calculateScenarios(year);
+            const winnerClass = result.buyWins ? 'buy' : 'rent';
+            const winnerText = result.buyWins ? '🏠 רכישה' : '🔑 שכירות';
+            
+            html += `
+                <div class="wpc-calc-rvb-k7m2-timeline-item">
+                    <div class="wpc-calc-rvb-k7m2-timeline-year">${year} שנים</div>
+                    <div class="wpc-calc-rvb-k7m2-timeline-values">
+                        <div class="wpc-calc-rvb-k7m2-timeline-value buy">
+                            <span>רכישה</span>
+                            <strong>${formatCurrency(result.buy.netWealth)}</strong>
+                        </div>
+                        <div class="wpc-calc-rvb-k7m2-timeline-value rent">
+                            <span>שכירות</span>
+                            <strong>${formatCurrency(result.rent.netWealth)}</strong>
+                        </div>
+                    </div>
+                    <div class="wpc-calc-rvb-k7m2-timeline-winner ${winnerClass}">${winnerText}</div>
+                </div>
+            `;
+        });
+        
+        container.innerHTML = html;
+    }
+
+    function updateBreakeven() {
+        const breakeven = findBreakevenYear();
+        
+        if (breakeven.year === -1) {
+            el('breakeven-years').textContent = '50+';
+            el('breakeven-buy-wealth').textContent = '--';
+            el('breakeven-rent-wealth').textContent = '--';
+            el('breakeven-explanation').innerHTML = '<strong>🔑 במקרה זה, שכירות עדיפה לטווח של עד 50 שנה!</strong> הנתונים שהזנתם מראים שהשקעה בשוק ההון צפויה להניב יותר מרכישת דירה.';
+        } else {
+            el('breakeven-years').textContent = breakeven.year;
+            el('breakeven-buy-wealth').textContent = formatCurrency(breakeven.buyWealth);
+            el('breakeven-rent-wealth').textContent = formatCurrency(breakeven.rentWealth);
+            
+            if (breakeven.year <= 7) {
+                el('breakeven-explanation').innerHTML = `<strong>🏠 רכישה משתלמת מהר!</strong> כבר אחרי ${breakeven.year} שנים רכישה הופכת לעדיפה. אם אתם מתכננים להישאר בדירה לטווח הזה או יותר - שקלו לקנות.`;
+            } else if (breakeven.year <= 15) {
+                el('breakeven-explanation').innerHTML = `<strong>⚖️ נקודת איזון סבירה.</strong> אחרי ${breakeven.year} שנים רכישה הופכת לעדיפה. זה טווח זמן סטנדרטי - אם אתם בטוחים שתישארו, רכישה עשויה להשתלם.`;
+            } else {
+                el('breakeven-explanation').innerHTML = `<strong>🔑 נקודת איזון רחוקה.</strong> רק אחרי ${breakeven.year} שנים רכישה הופכת לעדיפה. אם אינכם בטוחים שתישארו כל כך הרבה זמן, שכירות עשויה להיות עדיפה.`;
+            }
+        }
+    }
+
+    function updateMaxRent() {
+        const maxRent = calculateMaxRent();
+        const rentYield = (state.rent * 12 / state.propertyPrice * 100).toFixed(2);
+        
+        el('max-rent-value').textContent = formatCurrency(maxRent);
+        el('current-rent-display').textContent = formatCurrency(state.rent);
+        el('rent-yield-display').textContent = rentYield + '%';
+        
+        const recommendation = el('rent-recommendation');
+        if (state.rent > maxRent) {
+            recommendation.textContent = '🏠 לקנות';
+            recommendation.style.color = '#10b981';
+        } else {
+            recommendation.textContent = '🔑 לשכור';
+            recommendation.style.color = '#ec4899';
+        }
+    }
+
+    function updateSliderValues() {
+        el('property-price-value').textContent = formatCurrency(state.propertyPrice);
+        el('equity-value').textContent = formatCurrency(state.equity);
+        el('mortgage-rate-value').textContent = state.mortgageRate + '%';
+        el('mortgage-term-value').textContent = state.mortgageTerm + ' שנים';
+        el('rent-value').textContent = formatCurrency(state.rent);
+        el('rent-increase-value').textContent = state.rentIncrease + '%';
+        el('investment-return-value').textContent = state.investmentReturn + '%';
+        el('property-appreciation-value').textContent = state.propertyAppreciation + '%';
+        el('comparison-years-value').textContent = state.comparisonYears + ' שנים';
+    }
+
+    function updateAll() {
+        updateSliderValues();
+        updateCompare();
+        updateTimeline();
+        updateBreakeven();
+        updateMaxRent();
+    }
+
+    function switchTab(tabName) {
+        container.querySelectorAll('.wpc-calc-rvb-k7m2-tab-btn').forEach(btn => btn.classList.remove('active'));
+        container.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+        container.querySelectorAll('.wpc-calc-rvb-k7m2-tab-content').forEach(c => c.classList.remove('active'));
+        el('tab-' + tabName).classList.add('active');
+    }
+
+    function openAWG() {
+        const awg = el('awg-content');
+        awg.classList.toggle('active');
+        if (awg.classList.contains('active')) {
+            awg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    }
+
+    function scrollToEmbed() {
+        el('wpc-calc-rvb-k7m2-embed').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function toggleFAQ(item) {
+        item.classList.toggle('active');
+    }
+
+    function darkenColor(hex, percent) {
+        const num = parseInt(hex.replace('#', ''), 16);
+        const amt = Math.round(2.55 * percent);
+        const R = Math.max((num >> 16) - amt, 0);
+        const G = Math.max((num >> 8 & 0x00FF) - amt, 0);
+        const B = Math.max((num & 0x0000FF) - amt, 0);
+        return '#' + (0x1000000 + R * 0x10000 + G * 0x100 + B).toString(16).slice(1);
+    }
+
+    function getEmbedCSS(color) {
+        const darkColor = darkenColor(color, 15);
+        let css = '';
+        document.querySelectorAll('style').forEach(style => {
+            if (style.textContent.includes('wpc-calc-rvb-k7m2')) {
+                css = style.textContent;
+            }
+        });
+        css = css.replace(/#1e5490/g, color);
+        css = css.replace(/#163d6b/g, darkColor);
+        return css;
+    }
+
+    function copyEmbedCode() {
+        const calc = el('wpc-calc-rvb-k7m2-calculator').cloneNode(true);
+        const css = getEmbedCSS('#1e5490');
+        
+        let code = '<style>\n' + css + '\n</style>\n\n';
+        code += '<div class="wpc-calc-rvb-k7m2-wrapper" id="wpc-calc-rvb-k7m2-main">\n';
+        code += calc.outerHTML + '\n</div>\n\n';
+        code += `<p style="text-align:center;font-size:0.9em;margin-top:20px;color:#666;">מחשבון ${CALCULATOR_NAME} פותח על ידי <a href="https://loan-israel.co.il/" target="_blank" rel="nofollow noopener" style="color:#1e5490;text-decoration:underline;">רק תבקש פיננסים</a></p>\n\n`;
+        code += getEmbedScript();
+        
+        navigator.clipboard.writeText(code).then(() => {
+            alert('✅ הקוד הועתק בהצלחה!');
+        });
+    }
+
+    function showPreview(color, name) {
+        state.previewColor = color;
+        el('preview-container').style.display = 'block';
+        el('preview-color-name').textContent = name;
+        
+        const calc = el('wpc-calc-rvb-k7m2-calculator').cloneNode(true);
+        const darkColor = darkenColor(color, 15);
+        
+        calc.querySelectorAll('.wpc-calc-rvb-k7m2-tab-btn.active').forEach(btn => {
+            btn.style.borderBottomColor = color;
+            btn.style.color = color;
+        });
+        calc.querySelectorAll('.wpc-calc-rvb-k7m2-results').forEach(el => {
+            el.style.background = `linear-gradient(135deg, ${color} 0%, ${darkColor} 100%)`;
+        });
+        
+        el('preview-content').innerHTML = '';
+        el('preview-content').appendChild(calc);
+        
+        container.querySelectorAll('.wpc-calc-rvb-k7m2-color-btn').forEach(btn => {
+            btn.classList.remove('active');
+            if (btn.dataset.color === color) btn.classList.add('active');
+        });
+    }
+
+    function copyPreviewCode() {
+        const calc = el('wpc-calc-rvb-k7m2-calculator').cloneNode(true);
+        const css = getEmbedCSS(state.previewColor);
+        
+        let code = '<style>\n' + css + '\n</style>\n\n';
+        code += '<div class="wpc-calc-rvb-k7m2-wrapper" id="wpc-calc-rvb-k7m2-main">\n';
+        code += calc.outerHTML + '\n</div>\n\n';
+        code += `<p style="text-align:center;font-size:0.9em;margin-top:20px;color:#666;">מחשבון ${CALCULATOR_NAME} פותח על ידי <a href="https://loan-israel.co.il/" target="_blank" rel="nofollow noopener" style="color:${state.previewColor};text-decoration:underline;">רק תבקש פיננסים</a></p>\n\n`;
+        code += getEmbedScript();
+        
+        navigator.clipboard.writeText(code).then(() => {
+            alert('✅ הקוד עם הצבע הנבחר הועתק!');
+        });
+    }
+
+    function getEmbedScript() {
+        return `<script>
+document.addEventListener("DOMContentLoaded", function() {
+(function() {
+"use strict";
+var NS = "WPC_CalcRVB_Embed";
+if (window[NS]) return;
+var container = document.getElementById("wpc-calc-rvb-k7m2-main");
+if (!container) return;
+
+var state = {
+    propertyPrice: 2500000, equity: 625000, mortgageRate: 4.5, mortgageTerm: 25,
+    rent: 6000, rentIncrease: 2, investmentReturn: 7, propertyAppreciation: 3, comparisonYears: 15
+};
+
+function formatCurrency(n) { return "₪" + Math.round(n).toLocaleString("he-IL"); }
+function el(id) { return document.getElementById(id); }
+
+function calculatePMT(p, r, y) {
+    var mr = r / 100 / 12, m = y * 12;
+    if (mr === 0) return p / m;
+    return p * (mr * Math.pow(1 + mr, m)) / (Math.pow(1 + mr, m) - 1);
+}
+
+function calculateRemainingBalance(p, r, ty, yp) {
+    var mr = r / 100 / 12, tm = ty * 12, mp = yp * 12;
+    if (mr === 0) return p * (1 - mp / tm);
+    var pmt = calculatePMT(p, r, ty);
+    return p * Math.pow(1 + mr, mp) - pmt * (Math.pow(1 + mr, mp) - 1) / mr;
+}
+
+function calculateFV(p, r, y) { return p * Math.pow(1 + r / 100, y); }
+
+function calculateScenarios(years) {
+    var loan = state.propertyPrice - state.equity;
+    var costs = state.propertyPrice * 0.08;
+    var mortgage = calculatePMT(loan, state.mortgageRate, state.mortgageTerm);
+    var fv = calculateFV(state.propertyPrice, state.propertyAppreciation, years);
+    var balance = years >= state.mortgageTerm ? 0 : calculateRemainingBalance(loan, state.mortgageRate, state.mortgageTerm, years);
+    var buyWealth = fv - balance;
+    var savings = Math.max(0, mortgage - state.rent);
+    var invest = state.equity + costs;
+    var rentGross = invest * Math.pow(1 + state.investmentReturn / 100, years) + savings * 12 * years * Math.pow(1 + state.investmentReturn / 100, years / 2);
+    var gains = rentGross - invest - savings * 12 * years;
+    var tax = gains * 0.25;
+    var rentWealth = rentGross - tax;
+    return { buy: { netWealth: buyWealth, futureValue: fv, mortgageBalance: balance, purchaseCosts: costs }, rent: { netWealth: rentWealth, grossReturn: rentGross, capitalTax: tax, initialInvestment: invest, monthlySavings: savings }, difference: buyWealth - rentWealth, buyWins: buyWealth > rentWealth };
+}
+
+function updateAll() {
+    var r = calculateScenarios(state.comparisonYears);
+    if (el("result-buy-wealth")) el("result-buy-wealth").textContent = formatCurrency(r.buy.netWealth);
+    if (el("result-rent-wealth")) el("result-rent-wealth").textContent = formatCurrency(r.rent.netWealth);
+    if (el("result-difference")) el("result-difference").textContent = formatCurrency(Math.abs(r.difference));
+    if (el("buy-future-value")) el("buy-future-value").textContent = formatCurrency(r.buy.futureValue);
+    if (el("buy-mortgage-balance")) el("buy-mortgage-balance").textContent = formatCurrency(r.buy.mortgageBalance);
+    if (el("buy-purchase-costs")) el("buy-purchase-costs").textContent = formatCurrency(r.buy.purchaseCosts);
+    if (el("buy-net-wealth")) el("buy-net-wealth").textContent = formatCurrency(r.buy.netWealth);
+    if (el("rent-initial-investment")) el("rent-initial-investment").textContent = formatCurrency(r.rent.initialInvestment);
+    if (el("rent-monthly-savings")) el("rent-monthly-savings").textContent = formatCurrency(r.rent.monthlySavings);
+    if (el("rent-gross-return")) el("rent-gross-return").textContent = formatCurrency(r.rent.grossReturn);
+    if (el("rent-capital-tax")) el("rent-capital-tax").textContent = formatCurrency(r.rent.capitalTax);
+    if (el("rent-net-wealth")) el("rent-net-wealth").textContent = formatCurrency(r.rent.netWealth);
+    var v = el("compare-verdict");
+    if (v) { v.className = "wpc-calc-rvb-k7m2-verdict " + (r.buyWins ? "buy-wins" : "rent-wins"); v.innerHTML = r.buyWins ? "🏠 רכישה עדיפה! הפרש " + formatCurrency(r.difference) : "🔑 שכירות עדיפה! הפרש " + formatCurrency(-r.difference); }
+}
+
+function switchTab(t) {
+    container.querySelectorAll(".wpc-calc-rvb-k7m2-tab-btn").forEach(function(b){b.classList.remove("active");});
+    var btn = container.querySelector("[data-tab=\\""+t+"\\"]"); if(btn) btn.classList.add("active");
+    container.querySelectorAll(".wpc-calc-rvb-k7m2-tab-content").forEach(function(c){c.classList.remove("active");});
+    var tab = el("tab-"+t); if(tab) tab.classList.add("active");
+}
+
+container.addEventListener("click", function(e) {
+    var a = e.target.closest("[data-action]"); if (!a) return;
+    var act = a.dataset.action;
+    if (act === "switch-tab") switchTab(a.dataset.tab);
+    else if (act === "toggle-faq") { var f = a.closest(".wpc-calc-rvb-k7m2-faq-item"); if(f) f.classList.toggle("active"); }
+});
+
+container.addEventListener("input", function(e) {
+    var id = e.target.id, v = parseFloat(e.target.value);
+    if (id === "property-price-slider") { state.propertyPrice = v; el("property-price-value").textContent = formatCurrency(v); }
+    else if (id === "equity-slider") { state.equity = v; el("equity-value").textContent = formatCurrency(v); }
+    else if (id === "mortgage-rate-slider") { state.mortgageRate = v; el("mortgage-rate-value").textContent = v + "%"; }
+    else if (id === "mortgage-term-slider") { state.mortgageTerm = v; el("mortgage-term-value").textContent = v + " שנים"; }
+    else if (id === "rent-slider") { state.rent = v; el("rent-value").textContent = formatCurrency(v); }
+    else if (id === "rent-increase-slider") { state.rentIncrease = v; el("rent-increase-value").textContent = v + "%"; }
+    else if (id === "investment-return-slider") { state.investmentReturn = v; el("investment-return-value").textContent = v + "%"; }
+    else if (id === "property-appreciation-slider") { state.propertyAppreciation = v; el("property-appreciation-value").textContent = v + "%"; }
+    else if (id === "comparison-years-slider") { state.comparisonYears = v; el("comparison-years-value").textContent = v + " שנים"; }
+    updateAll();
+});
+
+updateAll();
+window[NS] = { version: "1.0.0" };
+})();
+});
+<` + `/script>`;
+    }
+
+    // Event Delegation
+    container.addEventListener('click', function(e) {
+        const action = e.target.closest('[data-action]');
+        if (!action) return;
+
+        switch(action.dataset.action) {
+            case 'switch-tab': switchTab(action.dataset.tab); break;
+            case 'open-awg': openAWG(); break;
+            case 'scroll-to-embed': scrollToEmbed(); break;
+            case 'toggle-faq': toggleFAQ(action.closest('.wpc-calc-rvb-k7m2-faq-item')); break;
+            case 'copy-embed-code': copyEmbedCode(); break;
+            case 'preview-color': showPreview(action.dataset.color, action.dataset.name); break;
+            case 'copy-preview-code': copyPreviewCode(); break;
+        }
+    });
+
+    container.addEventListener('input', function(e) {
+        const id = e.target.id;
+        const v = parseFloat(e.target.value);
+        
+        switch(id) {
+            case 'property-price-slider': state.propertyPrice = v; break;
+            case 'equity-slider': state.equity = v; break;
+            case 'mortgage-rate-slider': state.mortgageRate = v; break;
+            case 'mortgage-term-slider': state.mortgageTerm = v; break;
+            case 'rent-slider': state.rent = v; break;
+            case 'rent-increase-slider': state.rentIncrease = v; break;
+            case 'investment-return-slider': state.investmentReturn = v; break;
+            case 'property-appreciation-slider': state.propertyAppreciation = v; break;
+            case 'comparison-years-slider': state.comparisonYears = v; break;
+        }
+        updateAll();
+    });
+
+    updateAll();
+    window[NS] = { version: '1.0.0' };
+})();
+</script>
+
