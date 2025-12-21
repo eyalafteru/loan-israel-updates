@@ -1,0 +1,1834 @@
+<script>
+// בדיקה והוספת viewport meta tag אם חסר
+if (!document.querySelector('meta[name="viewport"]')) {
+  const viewport = document.createElement('meta');
+  viewport.name = 'viewport';
+  viewport.content = 'width=device-width, initial-scale=1.0, user-scalable=yes';
+  document.head.appendChild(viewport);
+}
+</script>
+
+<style>
+/* === CSS Variables === */
+:root {
+    --primary: #1e5490;
+    --primary-dark: #164070;
+    --danger: #ff3b3b;
+    --success: #25D366;
+    --warning: #FF9800;
+    --text-dark: #222222;
+    --text-light: #444444;
+    --bg-light: #f5f5f5;
+    --border: #d0d0d0;
+    --gradient-primary: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    --gradient-success: linear-gradient(135deg, var(--success) 0%, #1da851 100%);
+    --shadow-sm: 0 2px 8px rgba(0,0,0,0.1);
+    --shadow-md: 0 4px 15px rgba(0,0,0,0.15);
+    --shadow-lg: 0 8px 25px rgba(0,0,0,0.2);
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --transition: all 0.3s ease;
+    --max-width-container: 1200px;
+}
+
+/* === תיקון צבעים === */
+.wpc-calc-balloon-b7g3-wrapper {
+    color-scheme: light !important;
+    forced-color-adjust: none !important;
+}
+
+@media (prefers-color-scheme: dark) {
+    .wpc-calc-balloon-b7g3-wrapper {
+        color-scheme: light !important;
+        background-color: white !important;
+    }
+}
+
+/* === WRAPPER === */
+.wpc-calc-balloon-b7g3-wrapper {
+    all: initial !important;
+    font-family: 'Assistant', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+    direction: rtl !important;
+    max-width: 1200px !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+    padding: 40px 20px !important;
+    box-sizing: border-box !important;
+    display: block !important;
+}
+
+.wpc-calc-balloon-b7g3-wrapper *,
+.wpc-calc-balloon-b7g3-wrapper *::before,
+.wpc-calc-balloon-b7g3-wrapper *::after {
+    box-sizing: inherit !important;
+    font-family: inherit !important;
+}
+
+/* === TITLE === */
+.wpc-calc-balloon-b7g3-title {
+    color: var(--primary) !important;
+    font-size: 2.5em !important;
+    font-weight: 700 !important;
+    text-align: center !important;
+    margin: 0 auto 15px !important;
+    position: relative !important;
+    width: fit-content !important;
+    padding-right: 25px !important;
+}
+
+.wpc-calc-balloon-b7g3-title::after {
+    content: '' !important;
+    position: absolute !important;
+    right: 0 !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    width: 4px !important;
+    height: 60px !important;
+    background: linear-gradient(135deg, var(--danger), #c0392b) !important;
+    border-radius: 2px !important;
+}
+
+.wpc-calc-balloon-b7g3-update-date {
+    text-align: center !important;
+    color: var(--text-light) !important;
+    font-size: 0.95em !important;
+    margin-bottom: 30px !important;
+}
+
+/* === CALCULATOR CONTAINER === */
+.wpc-calc-balloon-b7g3-container {
+    background: white !important;
+    border-radius: var(--radius-lg) !important;
+    box-shadow: var(--shadow-lg) !important;
+    overflow: hidden !important;
+    margin-bottom: 40px !important;
+    max-width: 1200px !important;
+    width: 100% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+/* === TABS === */
+.wpc-calc-balloon-b7g3-tabs {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    background: var(--bg-light) !important;
+    border-bottom: 2px solid var(--border) !important;
+}
+
+.wpc-calc-balloon-b7g3-tab {
+    flex: 1 1 auto !important;
+    min-width: 140px !important;
+    padding: 20px 15px !important;
+    background: transparent !important;
+    border: none !important;
+    cursor: pointer !important;
+    transition: var(--transition) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 8px !important;
+    font-family: inherit !important;
+    font-size: 0.9em !important;
+    font-weight: 600 !important;
+    color: var(--text-light) !important;
+    border-bottom: 3px solid transparent !important;
+}
+
+.wpc-calc-balloon-b7g3-tab.active {
+    background: white !important;
+    color: var(--primary) !important;
+    border-bottom-color: var(--primary) !important;
+}
+
+.wpc-calc-balloon-b7g3-tab:hover:not(.active) {
+    background: rgba(30, 84, 144, 0.05) !important;
+}
+
+.wpc-calc-balloon-b7g3-tab-icon {
+    font-size: 1.8em !important;
+}
+
+/* === CONTENT === */
+.wpc-calc-balloon-b7g3-content {
+    padding: 30px !important;
+}
+
+.wpc-calc-balloon-b7g3-panel {
+    display: none !important;
+}
+
+.wpc-calc-balloon-b7g3-panel.active {
+    display: block !important;
+    animation: fadeIn 0.3s ease !important;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* === FORM GROUPS === */
+.wpc-calc-balloon-b7g3-form-group {
+    margin-bottom: 25px !important;
+}
+
+.wpc-calc-balloon-b7g3-label {
+    display: block !important;
+    font-weight: 700 !important;
+    color: var(--text-dark) !important;
+    margin-bottom: 10px !important;
+    font-size: 1.1em !important;
+}
+
+/* === SLIDERS === */
+.wpc-calc-balloon-b7g3-slider {
+    width: 100% !important;
+    height: 8px !important;
+    border-radius: 4px !important;
+    background: var(--bg-light) !important;
+    outline: none !important;
+    -webkit-appearance: none !important;
+    appearance: none !important;
+    cursor: pointer !important;
+    direction: ltr !important;
+}
+
+.wpc-calc-balloon-b7g3-slider::-webkit-slider-thumb {
+    -webkit-appearance: none !important;
+    width: 25px !important;
+    height: 25px !important;
+    background: var(--primary) !important;
+    border-radius: 50% !important;
+    cursor: pointer !important;
+    box-shadow: var(--shadow-sm) !important;
+}
+
+.wpc-calc-balloon-b7g3-slider::-moz-range-thumb {
+    width: 25px !important;
+    height: 25px !important;
+    background: var(--primary) !important;
+    border-radius: 50% !important;
+    cursor: pointer !important;
+    border: none !important;
+}
+
+.wpc-calc-balloon-b7g3-slider-value {
+    text-align: center !important;
+    font-size: 1.2em !important;
+    font-weight: 700 !important;
+    color: var(--primary) !important;
+    margin-top: 10px !important;
+    padding: 8px 15px !important;
+    background: var(--bg-light) !important;
+    border-radius: var(--radius-sm) !important;
+    display: inline-block !important;
+}
+
+/* === TOGGLE GROUP === */
+.wpc-calc-balloon-b7g3-toggle-group {
+    background: var(--bg-light) !important;
+    border-radius: 30px !important;
+    padding: 5px !important;
+    display: flex !important;
+    gap: 5px !important;
+    margin-bottom: 20px !important;
+}
+
+.wpc-calc-balloon-b7g3-toggle-group input {
+    display: none !important;
+}
+
+.wpc-calc-balloon-b7g3-toggle-option {
+    flex: 1 !important;
+    padding: 12px 20px !important;
+    text-align: center !important;
+    border-radius: 25px !important;
+    cursor: pointer !important;
+    transition: var(--transition) !important;
+    font-weight: 600 !important;
+    color: var(--text-light) !important;
+    font-size: 0.95em !important;
+}
+
+.wpc-calc-balloon-b7g3-toggle-group input:checked + .wpc-calc-balloon-b7g3-toggle-option {
+    background: var(--primary) !important;
+    color: white !important;
+}
+
+/* === RESULTS === */
+.wpc-calc-balloon-b7g3-results {
+    background: var(--gradient-primary) !important;
+    color: white !important;
+    padding: 25px !important;
+    border-radius: var(--radius-md) !important;
+    margin-top: 25px !important;
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
+    gap: 20px !important;
+}
+
+.wpc-calc-balloon-b7g3-result-item {
+    text-align: center !important;
+    padding: 15px !important;
+    background: rgba(255,255,255,0.1) !important;
+    border-radius: var(--radius-sm) !important;
+}
+
+.wpc-calc-balloon-b7g3-result-label {
+    display: block !important;
+    font-size: 0.9em !important;
+    margin-bottom: 8px !important;
+    opacity: 0.9 !important;
+}
+
+.wpc-calc-balloon-b7g3-result-value {
+    display: block !important;
+    font-size: 1.8em !important;
+    font-weight: 800 !important;
+    direction: ltr !important;
+}
+
+/* === COMPARISON CARDS === */
+.wpc-calc-balloon-b7g3-comparison-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
+    gap: 20px !important;
+    margin-top: 25px !important;
+}
+
+.wpc-calc-balloon-b7g3-card {
+    background: white !important;
+    border: 2px solid var(--border) !important;
+    border-radius: var(--radius-md) !important;
+    padding: 20px !important;
+    transition: var(--transition) !important;
+}
+
+.wpc-calc-balloon-b7g3-card:hover {
+    border-color: var(--primary) !important;
+    transform: translateY(-2px) !important;
+}
+
+.wpc-calc-balloon-b7g3-card.featured {
+    border-color: var(--success) !important;
+    background: linear-gradient(135deg, rgba(37, 211, 102, 0.05), rgba(29, 168, 81, 0.05)) !important;
+}
+
+.wpc-calc-balloon-b7g3-card-title {
+    font-size: 1.2em !important;
+    font-weight: 700 !important;
+    color: var(--primary) !important;
+    margin: 0 0 15px 0 !important;
+    text-align: center !important;
+}
+
+.wpc-calc-balloon-b7g3-card-value {
+    font-size: 2em !important;
+    font-weight: 800 !important;
+    color: var(--primary) !important;
+    text-align: center !important;
+    margin: 15px 0 !important;
+    direction: ltr !important;
+}
+
+.wpc-calc-balloon-b7g3-card-details {
+    font-size: 0.9em !important;
+    color: var(--text-light) !important;
+    text-align: center !important;
+}
+
+/* === INFO BOX === */
+.wpc-calc-balloon-b7g3-info-box {
+    background: linear-gradient(135deg, #fff3cd 0%, #ffeeba 100%) !important;
+    border: 1px solid #ffc107 !important;
+    border-radius: var(--radius-md) !important;
+    padding: 20px !important;
+    margin-top: 20px !important;
+}
+
+.wpc-calc-balloon-b7g3-info-title {
+    font-weight: 700 !important;
+    color: #856404 !important;
+    margin-bottom: 10px !important;
+}
+
+.wpc-calc-balloon-b7g3-info-text {
+    color: #856404 !important;
+    font-size: 0.95em !important;
+    line-height: 1.6 !important;
+    margin: 0 !important;
+}
+
+/* === AWG SECTION === */
+.wpc-calc-balloon-b7g3-awg-section {
+    max-width: 1200px !important;
+    width: 100% !important;
+    margin: 40px auto !important;
+    padding: 0 20px !important;
+    box-sizing: border-box !important;
+}
+
+.wpc-calc-balloon-b7g3-awg-container {
+    background: white !important;
+    border-radius: var(--radius-lg) !important;
+    box-shadow: var(--shadow-lg) !important;
+    text-align: center !important;
+    padding: 30px !important;
+    max-width: 1200px !important;
+    width: 100% !important;
+}
+
+.wpc-calc-balloon-b7g3-cta-button {
+    background: var(--danger) !important;
+    color: white !important;
+    padding: 18px 40px !important;
+    border: none !important;
+    border-radius: 50px !important;
+    font-size: 1.2em !important;
+    font-weight: 800 !important;
+    cursor: pointer !important;
+    transition: var(--transition) !important;
+    margin: 10px !important;
+    box-shadow: var(--shadow-md) !important;
+    font-family: inherit !important;
+}
+
+.wpc-calc-balloon-b7g3-cta-button:hover {
+    background: #e63232 !important;
+    transform: translateY(-2px) !important;
+}
+
+.wpc-calc-balloon-b7g3-embed-button {
+    background: var(--gradient-success) !important;
+    color: white !important;
+    padding: 15px 30px !important;
+    border: none !important;
+    border-radius: 50px !important;
+    font-size: 1.1em !important;
+    font-weight: 700 !important;
+    cursor: pointer !important;
+    transition: var(--transition) !important;
+    margin: 10px !important;
+    font-family: inherit !important;
+}
+
+.wpc-calc-balloon-b7g3-awg-content {
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: max-height 0.5s ease !important;
+}
+
+.wpc-calc-balloon-b7g3-awg-content.open {
+    max-height: 2000px !important;
+    padding-top: 20px !important;
+}
+
+/* === FAQ SECTION === */
+.wpc-calc-balloon-b7g3-faq-section {
+    max-width: 1200px !important;
+    width: 100% !important;
+    margin: 40px auto !important;
+    padding: 0 20px !important;
+    box-sizing: border-box !important;
+}
+
+.wpc-calc-balloon-b7g3-faq-title {
+    color: var(--primary) !important;
+    font-size: 2em !important;
+    font-weight: 700 !important;
+    text-align: center !important;
+    margin-bottom: 30px !important;
+    position: relative !important;
+    width: fit-content !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding-right: 25px !important;
+}
+
+.wpc-calc-balloon-b7g3-faq-title::after {
+    content: '' !important;
+    position: absolute !important;
+    right: 0 !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    width: 4px !important;
+    height: 50px !important;
+    background: linear-gradient(135deg, var(--danger), #c0392b) !important;
+    border-radius: 2px !important;
+}
+
+.wpc-calc-balloon-b7g3-faq-item {
+    border: 1px solid var(--border) !important;
+    border-radius: var(--radius-sm) !important;
+    margin-bottom: 10px !important;
+    overflow: hidden !important;
+}
+
+.wpc-calc-balloon-b7g3-faq-header {
+    background: var(--bg-light) !important;
+    padding: 20px !important;
+    cursor: pointer !important;
+    font-weight: 600 !important;
+    font-size: 1.05em !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    transition: var(--transition) !important;
+}
+
+.wpc-calc-balloon-b7g3-faq-header:hover {
+    background: #e9ecef !important;
+}
+
+.wpc-calc-balloon-b7g3-faq-arrow {
+    transition: transform 0.3s ease !important;
+}
+
+.wpc-calc-balloon-b7g3-faq-item.open .wpc-calc-balloon-b7g3-faq-arrow {
+    transform: rotate(180deg) !important;
+}
+
+.wpc-calc-balloon-b7g3-faq-body {
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: max-height 0.3s ease !important;
+}
+
+.wpc-calc-balloon-b7g3-faq-item.open .wpc-calc-balloon-b7g3-faq-body {
+    max-height: 500px !important;
+}
+
+.wpc-calc-balloon-b7g3-faq-answer {
+    padding: 20px !important;
+    background: white !important;
+    line-height: 1.7 !important;
+    color: var(--text-dark) !important;
+}
+
+/* === EMBED SECTION === */
+.wpc-calc-balloon-b7g3-embed-section {
+    max-width: 1200px !important;
+    width: 100% !important;
+    margin: 40px auto !important;
+    padding: 30px 20px !important;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%) !important;
+    border-radius: var(--radius-lg) !important;
+    box-sizing: border-box !important;
+}
+
+.wpc-calc-balloon-b7g3-embed-title {
+    color: var(--primary) !important;
+    font-size: 1.8em !important;
+    font-weight: 700 !important;
+    text-align: center !important;
+    margin-bottom: 20px !important;
+}
+
+.wpc-calc-balloon-b7g3-embed-value-box {
+    background: white !important;
+    padding: 20px !important;
+    border-radius: var(--radius-md) !important;
+    margin-bottom: 20px !important;
+    border-right: 4px solid var(--success) !important;
+}
+
+.wpc-calc-balloon-b7g3-color-picker {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 12px !important;
+    margin: 20px 0 !important;
+}
+
+.wpc-calc-balloon-b7g3-color-btn {
+    width: 50px !important;
+    height: 50px !important;
+    border-radius: 50% !important;
+    border: 3px solid #fff !important;
+    cursor: pointer !important;
+    box-shadow: var(--shadow-sm) !important;
+    transition: var(--transition) !important;
+}
+
+.wpc-calc-balloon-b7g3-color-btn:hover {
+    transform: scale(1.1) !important;
+}
+
+.wpc-calc-balloon-b7g3-preview-container {
+    background: transparent !important;
+    padding: 0 !important;
+    border-radius: var(--radius-md) !important;
+    margin: 20px 0 !important;
+    border: none !important;
+    overflow: visible !important;
+    max-height: none !important;
+}
+
+.wpc-calc-balloon-b7g3-preview-container * {
+    overflow: visible !important;
+    max-height: none !important;
+}
+
+.wpc-calc-balloon-b7g3-preview-container [id*="calculator-preview"] {
+    transform: scale(0.85) !important;
+    transform-origin: top center !important;
+}
+
+.wpc-calc-balloon-b7g3-preview-container .wpc-calc-balloon-b7g3-panel {
+    display: none !important;
+}
+
+.wpc-calc-balloon-b7g3-preview-container .wpc-calc-balloon-b7g3-panel.active {
+    display: block !important;
+}
+
+.wpc-calc-balloon-b7g3-copy-btn {
+    background: var(--gradient-success) !important;
+    color: white !important;
+    padding: 15px 40px !important;
+    border: none !important;
+    border-radius: 50px !important;
+    font-size: 1.1em !important;
+    font-weight: 700 !important;
+    cursor: pointer !important;
+    display: block !important;
+    margin: 20px auto !important;
+    font-family: inherit !important;
+    transition: var(--transition) !important;
+}
+
+.wpc-calc-balloon-b7g3-copy-btn:hover {
+    transform: translateY(-2px) !important;
+}
+
+
+/* === MOBILE RESPONSIVE === */
+@media (max-width: 768px) {
+    .wpc-calc-balloon-b7g3-wrapper {
+        padding: 20px 15px !important;
+    }
+    
+    .wpc-calc-balloon-b7g3-title {
+        font-size: 1.8em !important;
+        padding-right: 20px !important;
+    }
+    
+    .wpc-calc-balloon-b7g3-title::after {
+        width: 3px !important;
+        height: 40px !important;
+    }
+    
+    .wpc-calc-balloon-b7g3-tabs {
+        flex-wrap: wrap !important;
+    }
+    
+    .wpc-calc-balloon-b7g3-tab {
+        flex: 1 1 45% !important;
+        min-width: auto !important;
+        padding: 15px 10px !important;
+    }
+    
+    .wpc-calc-balloon-b7g3-content {
+        padding: 20px 15px !important;
+    }
+    
+    .wpc-calc-balloon-b7g3-results {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .wpc-calc-balloon-b7g3-result-value {
+        font-size: 1.5em !important;
+    }
+    
+    .wpc-calc-balloon-b7g3-comparison-grid {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .wpc-calc-balloon-b7g3-toggle-group {
+        flex-direction: column !important;
+    }
+    
+    .wpc-calc-balloon-b7g3-cta-button,
+    .wpc-calc-balloon-b7g3-embed-button {
+        width: 100% !important;
+        margin: 10px 0 !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .wpc-calc-balloon-b7g3-title {
+        font-size: 1.5em !important;
+    }
+    
+    .wpc-calc-balloon-b7g3-tab {
+        flex: 1 1 100% !important;
+        padding: 12px !important;
+    }
+    
+    .wpc-calc-balloon-b7g3-tab-icon {
+        font-size: 1.4em !important;
+    }
+    
+    .wpc-calc-balloon-b7g3-faq-title {
+        font-size: 1.5em !important;
+    }
+}
+</style>
+
+<!-- WRAPPER -->
+<div class="wpc-calc-balloon-b7g3-wrapper" id="wpc-calc-balloon-b7g3-main">
+
+    <!-- TITLE -->
+    <h1 class="wpc-calc-balloon-b7g3-title">מחשבון הלוואת בלון / גרייס</h1>
+    <p class="wpc-calc-balloon-b7g3-update-date"><strong>עודכן לאחרונה:</strong> [current_date format="F Y" hebrew="true"]</p>
+
+    <!-- CALCULATOR CONTAINER -->
+    <div class="wpc-calc-balloon-b7g3-container" id="wpc-calc-balloon-b7g3-calculator">
+        
+        <!-- TABS -->
+        <div class="wpc-calc-balloon-b7g3-tabs">
+            <button class="wpc-calc-balloon-b7g3-tab active" data-action="switch-tab" data-tab="basic">
+                <span class="wpc-calc-balloon-b7g3-tab-icon">🎈</span>
+                <span>חישוב בלון / גרייס</span>
+            </button>
+            <button class="wpc-calc-balloon-b7g3-tab" data-action="switch-tab" data-tab="compare">
+                <span class="wpc-calc-balloon-b7g3-tab-icon">📊</span>
+                <span>השוואת מסלולים</span>
+            </button>
+        </div>
+
+        <!-- CONTENT -->
+        <div class="wpc-calc-balloon-b7g3-content">
+            
+            <!-- TAB 1: חישוב בסיסי -->
+            <div class="wpc-calc-balloon-b7g3-panel active" id="tab-basic">
+                
+                <!-- סכום הלוואה -->
+                <div class="wpc-calc-balloon-b7g3-form-group">
+                    <label class="wpc-calc-balloon-b7g3-label">💰 סכום ההלוואה (₪)</label>
+                    <input type="range" class="wpc-calc-balloon-b7g3-slider" id="basic-amount-slider" 
+                           min="10000" max="1000000" value="100000" step="5000">
+                    <div class="wpc-calc-balloon-b7g3-slider-value" id="basic-amount-value">100,000 ₪</div>
+                </div>
+
+                <!-- ריבית שנתית -->
+                <div class="wpc-calc-balloon-b7g3-form-group">
+                    <label class="wpc-calc-balloon-b7g3-label">📈 ריבית שנתית (%)</label>
+                    <input type="range" class="wpc-calc-balloon-b7g3-slider" id="basic-rate-slider" 
+                           min="2" max="20" value="6" step="0.25">
+                    <div class="wpc-calc-balloon-b7g3-slider-value" id="basic-rate-value">6.00%</div>
+                </div>
+
+                <!-- תקופה בחודשים -->
+                <div class="wpc-calc-balloon-b7g3-form-group">
+                    <label class="wpc-calc-balloon-b7g3-label">📅 תקופה (חודשים)</label>
+                    <input type="range" class="wpc-calc-balloon-b7g3-slider" id="basic-months-slider" 
+                           min="6" max="120" value="36" step="6">
+                    <div class="wpc-calc-balloon-b7g3-slider-value" id="basic-months-value">36 חודשים (3 שנים)</div>
+                </div>
+
+                <!-- סוג הלוואה -->
+                <div class="wpc-calc-balloon-b7g3-form-group">
+                    <label class="wpc-calc-balloon-b7g3-label">🎯 סוג ההלוואה</label>
+                    <div class="wpc-calc-balloon-b7g3-toggle-group">
+                        <input type="radio" id="grace-partial" name="grace-type" value="partial" checked>
+                        <label class="wpc-calc-balloon-b7g3-toggle-option" for="grace-partial">גרייס חלקי (תשלום ריבית בלבד)</label>
+                        
+                        <input type="radio" id="grace-full" name="grace-type" value="full">
+                        <label class="wpc-calc-balloon-b7g3-toggle-option" for="grace-full">גרייס מלא (הכל בסוף)</label>
+                    </div>
+                </div>
+
+                <!-- תוצאות -->
+                <div class="wpc-calc-balloon-b7g3-results" id="basic-results">
+                    <div class="wpc-calc-balloon-b7g3-result-item">
+                        <span class="wpc-calc-balloon-b7g3-result-label">תשלום חודשי (ריבית)</span>
+                        <span class="wpc-calc-balloon-b7g3-result-value" id="basic-monthly-payment">500 ₪</span>
+                    </div>
+                    <div class="wpc-calc-balloon-b7g3-result-item">
+                        <span class="wpc-calc-balloon-b7g3-result-label">תשלום סופי (בלון)</span>
+                        <span class="wpc-calc-balloon-b7g3-result-value" id="basic-balloon-payment">100,000 ₪</span>
+                    </div>
+                    <div class="wpc-calc-balloon-b7g3-result-item">
+                        <span class="wpc-calc-balloon-b7g3-result-label">סה"כ ריבית</span>
+                        <span class="wpc-calc-balloon-b7g3-result-value" id="basic-total-interest">18,000 ₪</span>
+                    </div>
+                </div>
+
+                <!-- הסבר -->
+                <div class="wpc-calc-balloon-b7g3-info-box">
+                    <div class="wpc-calc-balloon-b7g3-info-title">💡 מה זה הלוואת בלון / גרייס?</div>
+                    <p class="wpc-calc-balloon-b7g3-info-text">
+                        <strong>גרייס חלקי:</strong> משלמים רק את הריבית החודשית לאורך כל התקופה, ובסוף משלמים את כל הקרן במכה אחת.<br><br>
+                        <strong>גרייס מלא:</strong> לא משלמים כלום לאורך התקופה, והריבית מצטברת על הקרן. בסוף משלמים את הכל - קרן + ריבית מצטברת.
+                    </p>
+                </div>
+            </div>
+
+            <!-- TAB 2: השוואה -->
+            <div class="wpc-calc-balloon-b7g3-panel" id="tab-compare">
+                <h3 style="text-align: center; color: var(--primary); margin-bottom: 25px;">השוואת מסלולי הלוואה - איזה מתאים לך?</h3>
+                
+                <div class="wpc-calc-balloon-b7g3-comparison-grid">
+                    <!-- כרטיס 1: גרייס חלקי -->
+                    <div class="wpc-calc-balloon-b7g3-card featured">
+                        <h4 class="wpc-calc-balloon-b7g3-card-title">🎈 גרייס חלקי</h4>
+                        <div class="wpc-calc-balloon-b7g3-card-value" id="compare-partial-monthly">500 ₪</div>
+                        <div class="wpc-calc-balloon-b7g3-card-details">
+                            <p>תשלום חודשי (ריבית בלבד)</p>
+                            <p><strong>בלון סופי:</strong> <span id="compare-partial-balloon">100,000 ₪</span></p>
+                            <p><strong>סה"כ ריבית:</strong> <span id="compare-partial-interest">18,000 ₪</span></p>
+                            <p style="color: var(--success); font-weight: 700; margin-top: 10px;">✅ תזרים מזומנים נמוך</p>
+                        </div>
+                    </div>
+
+                    <!-- כרטיס 2: גרייס מלא -->
+                    <div class="wpc-calc-balloon-b7g3-card">
+                        <h4 class="wpc-calc-balloon-b7g3-card-title">🔄 גרייס מלא</h4>
+                        <div class="wpc-calc-balloon-b7g3-card-value" id="compare-full-monthly">0 ₪</div>
+                        <div class="wpc-calc-balloon-b7g3-card-details">
+                            <p>תשלום חודשי (ללא תשלום)</p>
+                            <p><strong>תשלום סופי:</strong> <span id="compare-full-balloon">119,102 ₪</span></p>
+                            <p><strong>סה"כ ריבית:</strong> <span id="compare-full-interest">19,102 ₪</span></p>
+                            <p style="color: var(--warning); font-weight: 700; margin-top: 10px;">⚠️ ריבית גבוהה יותר</p>
+                        </div>
+                    </div>
+
+                    <!-- כרטיס 3: הלוואה רגילה -->
+                    <div class="wpc-calc-balloon-b7g3-card">
+                        <h4 class="wpc-calc-balloon-b7g3-card-title">📊 הלוואה רגילה (שפיצר)</h4>
+                        <div class="wpc-calc-balloon-b7g3-card-value" id="compare-regular-monthly">3,042 ₪</div>
+                        <div class="wpc-calc-balloon-b7g3-card-details">
+                            <p>תשלום חודשי קבוע</p>
+                            <p><strong>בלון סופי:</strong> 0 ₪</p>
+                            <p><strong>סה"כ ריבית:</strong> <span id="compare-regular-interest">9,527 ₪</span></p>
+                            <p style="color: var(--primary); font-weight: 700; margin-top: 10px;">💎 הכי זול בסה"כ</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- סיכום -->
+                <div class="wpc-calc-balloon-b7g3-info-box" style="margin-top: 25px;">
+                    <div class="wpc-calc-balloon-b7g3-info-title">🎯 מתי כדאי לקחת הלוואת בלון?</div>
+                    <p class="wpc-calc-balloon-b7g3-info-text">
+                        ✅ כשמחכים לכסף גדול בעתיד (מכירת נכס, בונוס, ירושה)<br>
+                        ✅ כשצריכים גמישות בתזרים המזומנים החודשי<br>
+                        ✅ למימון ביניים לזמן קצר (גישור עד למשכנתא)<br>
+                        ❌ לא מומלץ אם אין תוכנית ברורה להחזר הבלון
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- AWG SECTION -->
+    <div class="wpc-calc-balloon-b7g3-awg-section">
+        <div class="wpc-calc-balloon-b7g3-awg-container">
+            <button class="wpc-calc-balloon-b7g3-cta-button" data-action="open-awg">
+                🔥 בדוק זכאות להלוואת גרייס עכשיו - קבל הצעה מיידית!
+            </button>
+            <button class="wpc-calc-balloon-b7g3-embed-button" data-action="scroll-to-embed">
+                🎁 רוצה להטמיע את המחשבון בחינם באתרך? לחץ כאן!
+            </button>
+            <div class="wpc-calc-balloon-b7g3-awg-content" id="awg-content">
+                [awg postid="32400"]
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ SECTION -->
+    <div class="wpc-calc-balloon-b7g3-faq-section">
+        <h2 class="wpc-calc-balloon-b7g3-faq-title">❓ שאלות נפוצות על הלוואת בלון / גרייס</h2>
+        
+        <div class="wpc-calc-balloon-b7g3-faq-item" data-action="toggle-faq">
+            <div class="wpc-calc-balloon-b7g3-faq-header">
+                <span>🎈 מה ההבדל בין הלוואת בלון לגרייס?</span>
+                <span class="wpc-calc-balloon-b7g3-faq-arrow">⬇️</span>
+            </div>
+            <div class="wpc-calc-balloon-b7g3-faq-body">
+                <div class="wpc-calc-balloon-b7g3-faq-answer">
+                    בפועל, שני המונחים מתארים הלוואות דומות. <strong>הלוואת בלון</strong> מתייחסת לתשלום גדול בסוף התקופה (כמו בלון שמתנפח). <strong>הלוואת גרייס</strong> מתארת תקופה של הקפאה או הקלה בתשלומים. גרייס חלקי = תשלום ריבית בלבד, גרייס מלא = ללא תשלום כלל עד הסוף.
+                </div>
+            </div>
+        </div>
+
+        <div class="wpc-calc-balloon-b7g3-faq-item" data-action="toggle-faq">
+            <div class="wpc-calc-balloon-b7g3-faq-header">
+                <span>💰 האם הריבית בהלוואת בלון גבוהה יותר?</span>
+                <span class="wpc-calc-balloon-b7g3-faq-arrow">⬇️</span>
+            </div>
+            <div class="wpc-calc-balloon-b7g3-faq-body">
+                <div class="wpc-calc-balloon-b7g3-faq-answer">
+                    לא בהכרח. הריבית השנתית יכולה להיות זהה להלוואה רגילה, אך בגלל שהקרן לא יורדת לאורך התקופה, <strong>סך הריבית שתשלמו יהיה גבוה יותר</strong> מאשר בהלוואה רגילה באותם תנאים. בגרייס מלא הריבית אף מצטברת על הקרן (ריבית דריבית).
+                </div>
+            </div>
+        </div>
+
+        <div class="wpc-calc-balloon-b7g3-faq-item" data-action="toggle-faq">
+            <div class="wpc-calc-balloon-b7g3-faq-header">
+                <span>⏰ לכמה זמן אפשר לקחת הלוואת גרייס?</span>
+                <span class="wpc-calc-balloon-b7g3-faq-arrow">⬇️</span>
+            </div>
+            <div class="wpc-calc-balloon-b7g3-faq-body">
+                <div class="wpc-calc-balloon-b7g3-faq-answer">
+                    תקופת הגרייס משתנה בין הגופים המלווים. במשכנתאות ניתן לקבל גרייס של 6-24 חודשים. בהלוואות חוץ-בנקאיות תקופת הבלון יכולה להגיע עד 5 שנים. כדאי לבחון את היכולת לשלם את הבלון בסוף התקופה לפני שלוקחים.
+                </div>
+            </div>
+        </div>
+
+        <div class="wpc-calc-balloon-b7g3-faq-item" data-action="toggle-faq">
+            <div class="wpc-calc-balloon-b7g3-faq-header">
+                <span>🏠 האם אפשר לקחת גרייס במשכנתא?</span>
+                <span class="wpc-calc-balloon-b7g3-faq-arrow">⬇️</span>
+            </div>
+            <div class="wpc-calc-balloon-b7g3-faq-body">
+                <div class="wpc-calc-balloon-b7g3-faq-answer">
+                    כן! רוב הבנקים מציעים תקופת גרייס במשכנתא, במיוחד לרוכשי דירה מקבלן. בתקופה זו משלמים רק ריבית או לא משלמים כלל, עד שהדירה מוכנה. חשוב לזכור שהריבית נצברת ומתווספת לקרן ההלוואה.
+                </div>
+            </div>
+        </div>
+
+        <div class="wpc-calc-balloon-b7g3-faq-item" data-action="toggle-faq">
+            <div class="wpc-calc-balloon-b7g3-faq-header">
+                <span>⚠️ מה הסיכון בהלוואת בלון?</span>
+                <span class="wpc-calc-balloon-b7g3-faq-arrow">⬇️</span>
+            </div>
+            <div class="wpc-calc-balloon-b7g3-faq-body">
+                <div class="wpc-calc-balloon-b7g3-faq-answer">
+                    הסיכון העיקרי הוא <strong>אי היכולת לשלם את הבלון בסוף התקופה</strong>. אם תוכניתכם הייתה למכור נכס או לקבל כסף ממקור מסוים והדבר לא מתממש - תידרשו למחזר את ההלוואה בתנאים פחות טובים, או להיקלע לקשיים. תמיד כדאי לוודא שיש תוכנית ב' לתשלום הבלון.
+                </div>
+            </div>
+        </div>
+
+        <div class="wpc-calc-balloon-b7g3-faq-item" data-action="toggle-faq">
+            <div class="wpc-calc-balloon-b7g3-faq-header">
+                <span>🔄 האם אפשר לפרוע הלוואת בלון לפני הזמן?</span>
+                <span class="wpc-calc-balloon-b7g3-faq-arrow">⬇️</span>
+            </div>
+            <div class="wpc-calc-balloon-b7g3-faq-body">
+                <div class="wpc-calc-balloon-b7g3-faq-answer">
+                    ברוב המקרים כן, אך עשויות להיות <strong>עמלות פירעון מוקדם</strong>. הדבר תלוי בסוג ההלוואה ובגוף המלווה. במשכנתאות יש הוראות בנק ישראל שמגבילות את עמלות הפירעון המוקדם. כדאי לבדוק את התנאים מראש בהסכם ההלוואה.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- EMBED SECTION -->
+    <div class="wpc-calc-balloon-b7g3-embed-section" id="embed-section">
+        <h2 class="wpc-calc-balloon-b7g3-embed-title">🎁 רוצים להטמיע את מחשבון הלוואת בלון / גרייס באתר שלכם? חינם לחלוטין!</h2>
+        
+        <div class="wpc-calc-balloon-b7g3-embed-value-box">
+            <p style="margin: 0; line-height: 1.7;">
+                <strong>💎 אנחנו נותנים לכם את מחשבון הלוואת הבלון / גרייס המתקדם הזה לחלוטין בחינם!</strong><br>
+                תמורת קישור קרדיט קטן לאתר שלנו, תקבלו מחשבון מקצועי עם <strong>2 לשוניות</strong>, חישובי גרייס חלקי ומלא, השוואת מסלולים ועיצוב responsive מלא.<br>
+                <strong>שווי המחשבון:</strong> מעל ₪10,000 בפיתוח 💰 | <strong>מה ששילמתם:</strong> ₪0 🎉
+            </p>
+        </div>
+
+        <!-- יתרונות SEO -->
+        <div style="background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); padding: 25px; border-radius: 12px; margin: 20px 0; border: 2px solid #0ea5e9;">
+            <h3 style="color: #0369a1; margin-top: 0;">🚀 למה להטמיע מחשבון באתר שלכם? זה משפר את ה-SEO!</h3>
+            <p style="line-height: 1.8; color: #222; margin-bottom: 15px;">
+                <strong>הוספת מחשבון אינטראקטיבי לאתר היא אחת הדרכים הטובות ביותר לשפר את דירוג האתר במנועי החיפוש!</strong>
+            </p>
+            <ul style="line-height: 2; color: #222; margin: 0; padding-right: 20px;">
+                <li>📈 <strong>תוכן אינטראקטיבי איכותי</strong> - גוגל אוהבת דפים עם כלים שימושיים</li>
+                <li>⏱️ <strong>זמן שהייה ארוך יותר</strong> - מבקרים נשארים בדף יותר זמן</li>
+                <li>🔗 <strong>מילות מפתח רלוונטיות</strong> - המחשבון כולל מילות מפתח כמו "הלוואת בלון, גרייס, תשלום ריבית, תזרים מזומנים"</li>
+                <li>🎯 <strong>מחשבון בחינם להטמעה</strong> - תוכן ייחודי בלי עלות פיתוח</li>
+                <li>📱 <strong>Mobile Friendly</strong> - מחשבון responsive מלא</li>
+            </ul>
+            <p style="margin-top: 20px; margin-bottom: 0; padding: 15px; background: white; border-radius: 8px; color: #0369a1; font-weight: 700;">
+                💡 <strong>טיפ SEO:</strong> הוסיפו את המחשבון בדפים רלוונטיים כמו "הלוואת גרייס, מימון ביניים, הלוואה לרכישת דירה" - 
+                זה יחזק את הדף בדיוק במילות המפתח שאתם רוצים לדרג עליהן!
+            </p>
+        </div>
+
+        <h3 style="text-align: center; color: var(--primary); margin: 20px 0;">🎨 בחרו צבע למחשבון:</h3>
+        
+        <div class="wpc-calc-balloon-b7g3-color-picker">
+            <button class="wpc-calc-balloon-b7g3-color-btn" style="background: #1e5490;" data-action="preview-color" data-color="#1e5490" data-name="כחול מקצועי" title="כחול מקצועי 💙"></button>
+            <button class="wpc-calc-balloon-b7g3-color-btn" style="background: #10b981;" data-action="preview-color" data-color="#10b981" data-name="ירוק צמיחה" title="ירוק צמיחה 💚"></button>
+            <button class="wpc-calc-balloon-b7g3-color-btn" style="background: #ef4444;" data-action="preview-color" data-color="#ef4444" data-name="אדום אנרגטי" title="אדום אנרגטי ❤️"></button>
+            <button class="wpc-calc-balloon-b7g3-color-btn" style="background: #8b5cf6;" data-action="preview-color" data-color="#8b5cf6" data-name="סגול יוקרתי" title="סגול יוקרתי 💜"></button>
+            <button class="wpc-calc-balloon-b7g3-color-btn" style="background: #f59e0b;" data-action="preview-color" data-color="#f59e0b" data-name="כתום דינמי" title="כתום דינמי 🧡"></button>
+            <button class="wpc-calc-balloon-b7g3-color-btn" style="background: #ec4899;" data-action="preview-color" data-color="#ec4899" data-name="ורוד מודרני" title="ורוד מודרני 💗"></button>
+            <button class="wpc-calc-balloon-b7g3-color-btn" style="background: #06b6d4;" data-action="preview-color" data-color="#06b6d4" data-name="טורקיז רענן" title="טורקיז רענן 🩵"></button>
+            <button class="wpc-calc-balloon-b7g3-color-btn" style="background: #84cc16;" data-action="preview-color" data-color="#84cc16" data-name="ליים עז" title="ליים עז 💛"></button>
+            <button class="wpc-calc-balloon-b7g3-color-btn" style="background: #f97316;" data-action="preview-color" data-color="#f97316" data-name="כתום בוהק" title="כתום בוהק 🔥"></button>
+            <button class="wpc-calc-balloon-b7g3-color-btn" style="background: #0891b2;" data-action="preview-color" data-color="#0891b2" data-name="כחול ים" title="כחול ים 🌊"></button>
+            <input type="color" id="custom-color-picker" value="#1e5490" style="width: 50px; height: 50px; border-radius: 50%; cursor: pointer; border: 3px solid #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.1);" title="בחר צבע מותאם אישית">
+        </div>
+
+        <div class="wpc-calc-balloon-b7g3-preview-container" id="preview-container">
+            <p style="text-align: center; color: var(--text-light);">לחצו על צבע כדי לראות תצוגה מקדימה</p>
+        </div>
+
+        <button class="wpc-calc-balloon-b7g3-copy-btn" data-action="copy-embed-code">
+            📋 העתק קוד להטמעה
+        </button>
+
+        <div style="text-align: center; margin-top: 20px; font-size: 0.9em; color: var(--text-light);">
+            <p><strong>⚠️ תנאי שימוש:</strong> המחשבון ניתן בחינם תמורת קישור קרדיט. אין להסיר או לשנות את קישור הקרדיט.</p>
+        </div>
+    </div>
+
+
+</div>
+
+<!-- RELATED POSTS -->
+[related-shortcode-instert]
+
+<!-- SCHEMA.ORG -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "מה ההבדל בין הלוואת בלון לגרייס?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "הלוואת בלון מתייחסת לתשלום גדול בסוף התקופה. הלוואת גרייס מתארת תקופה של הקפאה או הקלה בתשלומים. גרייס חלקי = תשלום ריבית בלבד, גרייס מלא = ללא תשלום כלל עד הסוף."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "האם הריבית בהלוואת בלון גבוהה יותר?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "הריבית השנתית יכולה להיות זהה להלוואה רגילה, אך בגלל שהקרן לא יורדת, סך הריבית שתשלמו יהיה גבוה יותר."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "מה הסיכון בהלוואת בלון?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "הסיכון העיקרי הוא אי היכולת לשלם את הבלון בסוף התקופה. חשוב לוודא שיש תוכנית ברורה לתשלום הבלון."
+      }
+    }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FinancialProduct",
+  "name": "מחשבון הלוואת בלון / גרייס",
+  "description": "מחשבון לחישוב החזרים עבור הלוואת בלון וגרייס - תשלום ריבית חודשי והקרן בסוף התקופה",
+  "category": "מחשבון פיננסי",
+  "featureList": ["חישוב גרייס חלקי", "חישוב גרייס מלא", "השוואת מסלולים", "תצוגה אינטראקטיבית"],
+  "provider": {
+    "@type": "Organization",
+    "name": "רק תבקש - אפטריו בע״מ",
+    "url": "https://loan-israel.co.il"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "ILS"
+  }
+}
+</script>
+
+<!-- JAVASCRIPT -->
+<script>
+(function() {
+    'use strict';
+    
+    // בדיקת כפילויות
+    const NS = 'WPC_CalcBalloon_B7G3';
+    if (window[NS]) return;
+    
+    // מציאת הקונטיינר
+    const container = document.getElementById('wpc-calc-balloon-b7g3-main');
+    if (!container) return;
+    
+    // צבע ראשי
+    let primaryColor = '#1e5490';
+    
+    // PREFIX קבוע
+    const PREFIX = 'wpc-calc-balloon-b7g3-';
+    
+    // ===== פונקציות עזר =====
+    function formatCurrency(num) {
+        return Math.round(num).toLocaleString('he-IL') + ' ₪';
+    }
+    
+    function formatPercent(num) {
+        return num.toFixed(2) + '%';
+    }
+    
+    function darkenColor(color, percent) {
+        const num = parseInt(color.replace('#', ''), 16);
+        const amt = Math.round(2.55 * percent);
+        const R = Math.max(0, (num >> 16) - amt);
+        const G = Math.max(0, ((num >> 8) & 0x00FF) - amt);
+        const B = Math.max(0, (num & 0x0000FF) - amt);
+        return '#' + (0x1000000 + R * 0x10000 + G * 0x100 + B).toString(16).slice(1);
+    }
+    
+    function lightenColor(hex, percent) {
+        const num = parseInt(hex.replace('#', ''), 16);
+        const amt = Math.round(2.55 * percent);
+        const R = Math.min((num >> 16) + amt, 255);
+        const G = Math.min((num >> 8 & 0x00FF) + amt, 255);
+        const B = Math.min((num & 0x0000FF) + amt, 255);
+        return '#' + (0x1000000 + R * 0x10000 + G * 0x100 + B).toString(16).slice(1);
+    }
+    
+    function hexToRgba(hex, alpha) {
+        const r = parseInt(hex.slice(1, 3), 16);
+        const g = parseInt(hex.slice(3, 5), 16);
+        const b = parseInt(hex.slice(5, 7), 16);
+        return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+    }
+    
+    // ===== נוסחאות פיננסיות =====
+    
+    // חישוב תשלום חודשי רגיל (שפיצר)
+    function calcRegularPayment(principal, annualRate, months) {
+        const monthlyRate = annualRate / 100 / 12;
+        if (monthlyRate === 0) return principal / months;
+        return principal * (monthlyRate * Math.pow(1 + monthlyRate, months)) / 
+               (Math.pow(1 + monthlyRate, months) - 1);
+    }
+    
+    // חישוב ריבית חודשית (גרייס חלקי)
+    function calcMonthlyInterest(principal, annualRate) {
+        return principal * (annualRate / 100 / 12);
+    }
+    
+    // חישוב ריבית מצטברת (גרייס מלא) - ריבית דריבית
+    function calcCompoundInterest(principal, annualRate, months) {
+        const monthlyRate = annualRate / 100 / 12;
+        return principal * Math.pow(1 + monthlyRate, months);
+    }
+    
+    // ===== מצב המחשבון =====
+    const state = {
+        basic: {
+            amount: 100000,
+            rate: 6,
+            months: 36,
+            type: 'partial'
+        }
+    };
+    
+    // ===== פונקציות חישוב =====
+    function calculateBasic() {
+        const { amount, rate, months, type } = state.basic;
+        
+        let monthlyPayment, balloonPayment, totalInterest;
+        
+        if (type === 'partial') {
+            // גרייס חלקי - משלמים רק ריבית
+            monthlyPayment = calcMonthlyInterest(amount, rate);
+            balloonPayment = amount;
+            totalInterest = monthlyPayment * months;
+        } else {
+            // גרייס מלא - לא משלמים כלום, הריבית מצטברת
+            monthlyPayment = 0;
+            balloonPayment = calcCompoundInterest(amount, rate, months);
+            totalInterest = balloonPayment - amount;
+        }
+        
+        // עדכון התצוגה
+        document.getElementById('basic-monthly-payment').textContent = formatCurrency(monthlyPayment);
+        document.getElementById('basic-balloon-payment').textContent = formatCurrency(balloonPayment);
+        document.getElementById('basic-total-interest').textContent = formatCurrency(totalInterest);
+        
+        // עדכון השוואה
+        updateComparison();
+    }
+    
+    function updateComparison() {
+        const { amount, rate, months } = state.basic;
+        
+        // גרייס חלקי
+        const partialMonthly = calcMonthlyInterest(amount, rate);
+        const partialBalloon = amount;
+        const partialInterest = partialMonthly * months;
+        
+        document.getElementById('compare-partial-monthly').textContent = formatCurrency(partialMonthly);
+        document.getElementById('compare-partial-balloon').textContent = formatCurrency(partialBalloon);
+        document.getElementById('compare-partial-interest').textContent = formatCurrency(partialInterest);
+        
+        // גרייס מלא
+        const fullBalloon = calcCompoundInterest(amount, rate, months);
+        const fullInterest = fullBalloon - amount;
+        
+        document.getElementById('compare-full-monthly').textContent = formatCurrency(0);
+        document.getElementById('compare-full-balloon').textContent = formatCurrency(fullBalloon);
+        document.getElementById('compare-full-interest').textContent = formatCurrency(fullInterest);
+        
+        // הלוואה רגילה (שפיצר)
+        const regularMonthly = calcRegularPayment(amount, rate, months);
+        const regularTotal = regularMonthly * months;
+        const regularInterest = regularTotal - amount;
+        
+        document.getElementById('compare-regular-monthly').textContent = formatCurrency(regularMonthly);
+        document.getElementById('compare-regular-interest').textContent = formatCurrency(regularInterest);
+    }
+    
+    // ===== עדכון ערכי סליידרים =====
+    function updateSliderValue(sliderId, valueId, value, format) {
+        const slider = document.getElementById(sliderId);
+        const valueEl = document.getElementById(valueId);
+        
+        if (format === 'currency') {
+            valueEl.textContent = parseInt(value).toLocaleString('he-IL') + ' ₪';
+        } else if (format === 'percent') {
+            valueEl.textContent = parseFloat(value).toFixed(2) + '%';
+        } else if (format === 'months') {
+            const years = Math.floor(value / 12);
+            if (years >= 1) {
+                valueEl.textContent = value + ' חודשים (' + years + ' ' + (years === 1 ? 'שנה' : 'שנים') + ')';
+            } else {
+                valueEl.textContent = value + ' חודשים';
+            }
+        }
+    }
+    
+    // ===== מעבר בין לשוניות =====
+    function switchTab(tabName) {
+        // עדכון כפתורי הלשוניות
+        container.querySelectorAll('.wpc-calc-balloon-b7g3-tab').forEach(tab => {
+            tab.classList.remove('active');
+            if (tab.dataset.tab === tabName) {
+                tab.classList.add('active');
+            }
+        });
+        
+        // עדכון הפאנלים
+        container.querySelectorAll('.wpc-calc-balloon-b7g3-panel').forEach(panel => {
+            panel.classList.remove('active');
+        });
+        document.getElementById('tab-' + tabName).classList.add('active');
+    }
+    
+    // ===== פתיחת טופס AWG =====
+    function openAwg() {
+        const awgContent = document.getElementById('awg-content');
+        awgContent.classList.toggle('open');
+    }
+    
+    // ===== גלילה להטמעה =====
+    function scrollToEmbed() {
+        document.getElementById('embed-section').scrollIntoView({ behavior: 'smooth' });
+    }
+    
+    // ===== פתיחת/סגירת שאלות נפוצות =====
+    function toggleFaq(faqItem) {
+        faqItem.classList.toggle('open');
+    }
+    
+    // ===== תצוגה מקדימה - גרסה מתוקנת! =====
+    function showPreview(color, name) {
+        primaryColor = color;
+        const previewContainer = document.getElementById('preview-container');
+        const darkColor = darkenColor(color, 15);
+        
+        // שכפול המחשבון
+        const calculator = document.getElementById('wpc-calc-balloon-b7g3-calculator');
+        const clone = calculator.cloneNode(true);
+        
+        // 🚨 תיקון 1: שנה ID למניעת התנגשות!
+        clone.id = PREFIX + 'calculator-preview';
+        
+        // 🚨 תיקון 2: החלף IDs של טאבים ב-data attributes!
+        clone.querySelectorAll('[id^="tab-"]').forEach(panel => {
+            const tabName = panel.id.replace('tab-', '');
+            panel.setAttribute('data-preview-tab', tabName);
+            panel.removeAttribute('id');
+        });
+        
+        // 🚨 תיקון 3: הגדר CSS Variables על האלמנט המשוכפל!
+        clone.style.setProperty('--primary', color);
+        clone.style.setProperty('--primary-dark', darkColor);
+        clone.style.setProperty('--primary-light', hexToRgba(color, 0.1));
+        clone.style.setProperty('--primary-gradient', `linear-gradient(135deg, ${color} 0%, ${darkColor} 100%)`);
+        
+        // 🚨 תיקון 4: עדכון צבעים עם setProperty + important!
+        // טאבים פעילים
+        clone.querySelectorAll('.' + PREFIX + 'tab.active').forEach(el => {
+            el.style.setProperty('background-color', 'white', 'important');
+            el.style.setProperty('color', color, 'important');
+            el.style.setProperty('border-bottom-color', color, 'important');
+        });
+        
+        // תוצאות
+        clone.querySelectorAll('.' + PREFIX + 'results').forEach(el => {
+            el.style.setProperty('background', `linear-gradient(135deg, ${color} 0%, ${darkColor} 100%)`, 'important');
+        });
+        
+        // סליידרים
+        clone.querySelectorAll('input[type="range"]').forEach(el => {
+            el.style.setProperty('accent-color', color, 'important');
+        });
+        
+        // כרטיסים
+        clone.querySelectorAll('.' + PREFIX + 'card.featured').forEach(el => {
+            el.style.setProperty('border-color', color, 'important');
+        });
+        
+        clone.querySelectorAll('.' + PREFIX + 'card-title').forEach(el => {
+            el.style.setProperty('color', color, 'important');
+        });
+        
+        clone.querySelectorAll('.' + PREFIX + 'card-value').forEach(el => {
+            el.style.setProperty('color', color, 'important');
+        });
+        
+        // תיבות מידע
+        clone.querySelectorAll('.' + PREFIX + 'info-box').forEach(el => {
+            el.style.setProperty('border-right-color', color, 'important');
+        });
+        
+        // 🚨 תיקון 5: הגדרת display block/none מפורש!
+        const firstTab = clone.querySelector('[data-preview-tab]');
+        if (firstTab) {
+            firstTab.classList.add('active');
+            firstTab.style.display = 'block';
+        }
+        
+        clone.querySelectorAll('[data-preview-tab]').forEach((panel, i) => {
+            if (i > 0) {
+                panel.classList.remove('active');
+                panel.style.display = 'none';
+            }
+        });
+        
+        // הצגת התצוגה המקדימה - ללא סקרול!
+        previewContainer.innerHTML = `
+            <div style="text-align: center; padding: 15px; background: linear-gradient(135deg, ${color} 0%, ${darkColor} 100%); border-radius: 12px 12px 0 0; color: white;">
+                <h3 style="margin: 0; font-size: 1.2em;">🎨 תצוגה מקדימה - ${name}</h3>
+                <p style="margin: 5px 0 0; font-size: 0.9em; opacity: 0.9;">כך יראה המחשבון באתר שלך</p>
+            </div>
+            <div id="preview-calc-wrapper" style="border: 2px solid ${color}; border-top: none; border-radius: 0 0 12px 12px; background: #fafafa; padding: 10px;"></div>
+            <button class="wpc-calc-balloon-b7g3-copy-btn" data-action="copy-preview-code" data-color="${color}" style="margin-top: 15px; background: linear-gradient(135deg, ${color} 0%, ${darkColor} 100%) !important;">
+                📋 העתק קוד עם צבע ${name}
+            </button>
+        `;
+        
+        // הסרת overflow מהמחשבון המשוכפל למניעת סקרול
+        clone.style.cssText = 'overflow: visible !important; max-height: none !important;';
+        clone.querySelectorAll('*').forEach(el => {
+            if (el.style.overflow === 'auto' || el.style.overflow === 'scroll' || el.style.overflowY === 'auto') {
+                el.style.overflow = 'visible';
+                el.style.overflowY = 'visible';
+                el.style.maxHeight = 'none';
+            }
+        });
+        
+        document.getElementById('preview-calc-wrapper').appendChild(clone);
+        
+        // 🚨 תיקון 6: אתחול מחדש של כל ה-JS!
+        initPreviewCalculator(clone, color);
+        
+        // גלילה לתצוגה
+        previewContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    
+    // ===== אתחול מחשבון בתצוגה מקדימה - גרסה מלאה! =====
+    function initPreviewCalculator(previewCalc, color) {
+        const darkColor = darkenColor(color, 15);
+        
+        // State מקומי לתצוגה המקדימה
+        const previewState = {
+            amount: 100000,
+            rate: 6,
+            months: 36,
+            type: 'partial'
+        };
+        
+        // פונקציות חישוב מקומיות
+        function fmt(n) { return Math.round(n).toLocaleString('he-IL') + ' ₪'; }
+        function calcInt(p, r) { return p * (r / 100 / 12); }
+        function calcComp(p, r, m) { return p * Math.pow(1 + r / 100 / 12, m); }
+        function calcPmt(p, r, m) { 
+            const mr = r / 100 / 12; 
+            if (mr === 0) return p / m; 
+            return p * (mr * Math.pow(1 + mr, m)) / (Math.pow(1 + mr, m) - 1); 
+        }
+        
+        function updatePreviewResults() {
+            let mp, bp, ti;
+            if (previewState.type === 'partial') {
+                mp = calcInt(previewState.amount, previewState.rate);
+                bp = previewState.amount;
+                ti = mp * previewState.months;
+            } else {
+                mp = 0;
+                bp = calcComp(previewState.amount, previewState.rate, previewState.months);
+                ti = bp - previewState.amount;
+            }
+            
+            // עדכון תוצאות בטאב הראשון
+            const monthly = previewCalc.querySelector('[id*="basic-monthly-payment"]') || 
+                           previewCalc.querySelector('[id$="-monthly-payment"]');
+            const balloon = previewCalc.querySelector('[id*="basic-balloon-payment"]') ||
+                           previewCalc.querySelector('[id$="-balloon-payment"]');
+            const interest = previewCalc.querySelector('[id*="basic-total-interest"]') ||
+                            previewCalc.querySelector('[id$="-total-interest"]');
+            
+            if (monthly) monthly.textContent = fmt(mp);
+            if (balloon) balloon.textContent = fmt(bp);
+            if (interest) interest.textContent = fmt(ti);
+            
+            // עדכון טאב השוואה
+            const pm = calcInt(previewState.amount, previewState.rate);
+            const partialMonthly = previewCalc.querySelector('[id*="compare-partial-monthly"]');
+            const partialBalloon = previewCalc.querySelector('[id*="compare-partial-balloon"]');
+            const partialInterest = previewCalc.querySelector('[id*="compare-partial-interest"]');
+            if (partialMonthly) partialMonthly.textContent = fmt(pm);
+            if (partialBalloon) partialBalloon.textContent = fmt(previewState.amount);
+            if (partialInterest) partialInterest.textContent = fmt(pm * previewState.months);
+            
+            const fb = calcComp(previewState.amount, previewState.rate, previewState.months);
+            const fullMonthly = previewCalc.querySelector('[id*="compare-full-monthly"]');
+            const fullBalloon = previewCalc.querySelector('[id*="compare-full-balloon"]');
+            const fullInterest = previewCalc.querySelector('[id*="compare-full-interest"]');
+            if (fullMonthly) fullMonthly.textContent = fmt(0);
+            if (fullBalloon) fullBalloon.textContent = fmt(fb);
+            if (fullInterest) fullInterest.textContent = fmt(fb - previewState.amount);
+            
+            const rm = calcPmt(previewState.amount, previewState.rate, previewState.months);
+            const regularMonthly = previewCalc.querySelector('[id*="compare-regular-monthly"]');
+            const regularInterest = previewCalc.querySelector('[id*="compare-regular-interest"]');
+            if (regularMonthly) regularMonthly.textContent = fmt(rm);
+            if (regularInterest) regularInterest.textContent = fmt(rm * previewState.months - previewState.amount);
+        }
+        
+        // 🚨 טאבים - עם stopPropagation!
+        previewCalc.addEventListener('click', function(e) {
+            e.stopPropagation(); // מונע bubble למחשבון המקורי!
+            
+            const action = e.target.closest('[data-action]');
+            if (!action) return;
+            
+            if (action.dataset.action === 'switch-tab') {
+                e.preventDefault();
+                const tabName = action.dataset.tab;
+                
+                // עדכון כפתורי טאב
+                previewCalc.querySelectorAll('.' + PREFIX + 'tab').forEach(t => {
+                    t.classList.remove('active');
+                    t.style.setProperty('background-color', 'transparent', 'important');
+                    t.style.setProperty('color', '#444', 'important');
+                    t.style.setProperty('border-bottom-color', 'transparent', 'important');
+                });
+                action.classList.add('active');
+                action.style.setProperty('background-color', 'white', 'important');
+                action.style.setProperty('color', color, 'important');
+                action.style.setProperty('border-bottom-color', color, 'important');
+                
+                // הסתרת כל הפאנלים
+                previewCalc.querySelectorAll('[data-preview-tab]').forEach(p => {
+                    p.classList.remove('active');
+                    p.style.display = 'none';
+                });
+                
+                // הצגת הפאנל הנבחר
+                const targetPanel = previewCalc.querySelector('[data-preview-tab="' + tabName + '"]');
+                if (targetPanel) {
+                    targetPanel.classList.add('active');
+                    targetPanel.style.display = 'block';
+                }
+            }
+        });
+        
+        // 🚨 סליידרים - עם stopPropagation!
+        previewCalc.addEventListener('input', function(e) {
+            e.stopPropagation();
+            
+            const id = e.target.id;
+            
+            if (id === 'basic-amount-slider') {
+                previewState.amount = parseInt(e.target.value);
+                const valueEl = previewCalc.querySelector('#basic-amount-value');
+                if (valueEl) valueEl.textContent = previewState.amount.toLocaleString('he-IL') + ' ₪';
+                updatePreviewResults();
+            }
+            else if (id === 'basic-rate-slider') {
+                previewState.rate = parseFloat(e.target.value);
+                const valueEl = previewCalc.querySelector('#basic-rate-value');
+                if (valueEl) valueEl.textContent = previewState.rate.toFixed(2) + '%';
+                updatePreviewResults();
+            }
+            else if (id === 'basic-months-slider') {
+                previewState.months = parseInt(e.target.value);
+                const valueEl = previewCalc.querySelector('#basic-months-value');
+                if (valueEl) {
+                    const years = Math.floor(previewState.months / 12);
+                    valueEl.textContent = previewState.months + ' חודשים' + (years >= 1 ? ' (' + years + ' שנים)' : '');
+                }
+                updatePreviewResults();
+            }
+        });
+        
+        // 🚨 רדיו כפתורים - עם stopPropagation!
+        previewCalc.addEventListener('change', function(e) {
+            e.stopPropagation();
+            
+            if (e.target.name === 'grace-type') {
+                previewState.type = e.target.value;
+                updatePreviewResults();
+            }
+        });
+        
+        // אתחול ראשוני
+        updatePreviewResults();
+    }
+    
+    // ===== העתקת קוד הטמעה =====
+    function copyEmbedCode(colorOverride) {
+        const selectedColor = colorOverride || primaryColor;
+        const darkColor = darkenColor(selectedColor, 15);
+        
+        // קבלת המחשבון בלבד (לא AWG, FAQ, דיסקליימר, רילייטד)
+        const calculator = document.getElementById('wpc-calc-balloon-b7g3-calculator');
+        const clone = calculator.cloneNode(true);
+        
+        // הסרת אלמנטים לא רצויים אם קיימים בתוך המחשבון
+        clone.querySelectorAll('[class*="awg"], [class*="faq"], [class*="disclaimer"], [class*="embed"], [class*="related"]').forEach(el => el.remove());
+        
+        // מציאת העיצוב
+        let styles = '';
+        document.querySelectorAll('style').forEach(style => {
+            if (style.textContent.includes('wpc-calc-balloon-b7g3')) {
+                styles = style.textContent;
+            }
+        });
+        
+        // הסרת סגנונות לא נחוצים (AWG, FAQ, דיסקליימר, הטמעה)
+        styles = styles.replace(/\/\*.*?AWG.*?\*\/[\s\S]*?(?=\/\*|$)/gi, '');
+        styles = styles.replace(/\.wpc-calc-balloon-b7g3-awg[^{]*\{[^}]*\}/g, '');
+        styles = styles.replace(/\.wpc-calc-balloon-b7g3-faq[^{]*\{[^}]*\}/g, '');
+        styles = styles.replace(/\.wpc-calc-balloon-b7g3-disclaimer[^{]*\{[^}]*\}/g, '');
+        styles = styles.replace(/\.wpc-calc-balloon-b7g3-embed[^{]*\{[^}]*\}/g, '');
+        styles = styles.replace(/\.wpc-calc-balloon-b7g3-preview[^{]*\{[^}]*\}/g, '');
+        styles = styles.replace(/\.wpc-calc-balloon-b7g3-color[^{]*\{[^}]*\}/g, '');
+        styles = styles.replace(/\.wpc-calc-balloon-b7g3-copy[^{]*\{[^}]*\}/g, '');
+        
+        // החלפת הצבע הראשי
+        styles = styles.replace(/:root/g, '.wpc-calc-balloon-b7g3-wrapper');
+        styles = styles.replace(/--primary:\s*#[0-9a-fA-F]{6}/g, '--primary: ' + selectedColor);
+        styles = styles.replace(/--primary-dark:\s*#[0-9a-fA-F]{6}/g, '--primary-dark: ' + darkColor);
+        styles = styles.replace(/#1e5490/gi, selectedColor);
+        styles = styles.replace(/#164070/gi, darkColor);
+        
+        // ניקוי שורות ריקות מיותרות
+        styles = styles.replace(/\n\s*\n\s*\n/g, '\n\n');
+        
+        // בניית הקוד - רק המחשבון!
+        let code = '<style>\n' + styles + '\n</style>\n\n';
+        code += '<!-- מחשבון הלוואת בלון / גרייס - loan-israel.co.il -->\n';
+        code += '<div class="wpc-calc-balloon-b7g3-wrapper" id="wpc-calc-balloon-b7g3-main">\n';
+        code += clone.outerHTML + '\n</div>\n\n';
+        
+        // קרדיט בלבד (בלי דיסקליימר, FAQ, רילייטד)
+        code += `<p style="text-align:center; font-size:0.9em; margin-top:20px; color:#666;">
+    מחשבון הלוואת בלון / גרייס פותח על ידי 
+    <a href="https://loan-israel.co.il/" target="_blank" rel="nofollow noopener" 
+       style="color:${selectedColor}; font-weight:700; text-decoration:underline;">
+       רק תבקש פיננסים
+    </a>
+</p>\n\n`;
+        
+        // קוד JavaScript להטמעה
+        code += getEmbedScript(selectedColor);
+        
+        navigator.clipboard.writeText(code).then(() => {
+            alert('✅ הקוד הועתק בהצלחה!\n\nהקוד כולל:\n• CSS מלא עם הצבע הנבחר\n• HTML של המחשבון בלבד\n• JavaScript מלא לטאבים וסליידרים\n• קרדיט ל-loan-israel.co.il\n\n❌ לא כולל: גילוי נאות, שאלות נפוצות, אזור הטמעה');
+        }).catch(() => {
+            // Fallback
+            const textarea = document.createElement('textarea');
+            textarea.value = code;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            alert('✅ הקוד הועתק!');
+        });
+    }
+    
+    // ===== העתקת קוד מתצוגה מקדימה עם צבע =====
+    function copyPreviewCode(color) {
+        copyEmbedCode(color);
+    }
+    
+    function getEmbedScript(embedColor) {
+        const color = embedColor || '#1e5490';
+        
+        return `<script>
+document.addEventListener("DOMContentLoaded", function() {
+  (function() {
+    "use strict";
+    var NS = "WPC_CalcBalloon_Embed_" + Date.now();
+    if (window[NS]) return;
+    
+    var container = document.getElementById("wpc-calc-balloon-b7g3-main");
+    if (!container) { console.error("מחשבון לא נמצא"); return; }
+    
+    // === State ===
+    var state = {
+      basic: { amount: 100000, rate: 6, months: 36, type: "partial" }
+    };
+    
+    // === פונקציות עזר ===
+    function fmt(n) { return Math.round(n).toLocaleString("he-IL") + " ₪"; }
+    
+    // === פונקציות חישוב פיננסי ===
+    function calcMonthlyInterest(principal, annualRate) {
+      return principal * (annualRate / 100 / 12);
+    }
+    
+    function calcCompoundInterest(principal, annualRate, months) {
+      var monthlyRate = annualRate / 100 / 12;
+      return principal * Math.pow(1 + monthlyRate, months);
+    }
+    
+    function calcRegularPayment(principal, annualRate, months) {
+      var monthlyRate = annualRate / 100 / 12;
+      if (monthlyRate === 0) return principal / months;
+      return principal * (monthlyRate * Math.pow(1 + monthlyRate, months)) / (Math.pow(1 + monthlyRate, months) - 1);
+    }
+    
+    // === עדכון תוצאות ===
+    function updateBasic() {
+      var s = state.basic;
+      var mp, bp, ti;
+      
+      if (s.type === "partial") {
+        mp = calcMonthlyInterest(s.amount, s.rate);
+        bp = s.amount;
+        ti = mp * s.months;
+      } else {
+        mp = 0;
+        bp = calcCompoundInterest(s.amount, s.rate, s.months);
+        ti = bp - s.amount;
+      }
+      
+      var elMonthly = document.getElementById("basic-monthly-payment");
+      var elBalloon = document.getElementById("basic-balloon-payment");
+      var elInterest = document.getElementById("basic-total-interest");
+      
+      if (elMonthly) elMonthly.textContent = fmt(mp);
+      if (elBalloon) elBalloon.textContent = fmt(bp);
+      if (elInterest) elInterest.textContent = fmt(ti);
+      
+      updateComparison();
+    }
+    
+    function updateComparison() {
+      var s = state.basic;
+      
+      // גרייס חלקי
+      var pm = calcMonthlyInterest(s.amount, s.rate);
+      var elPartialMonthly = document.getElementById("compare-partial-monthly");
+      var elPartialBalloon = document.getElementById("compare-partial-balloon");
+      var elPartialInterest = document.getElementById("compare-partial-interest");
+      if (elPartialMonthly) elPartialMonthly.textContent = fmt(pm);
+      if (elPartialBalloon) elPartialBalloon.textContent = fmt(s.amount);
+      if (elPartialInterest) elPartialInterest.textContent = fmt(pm * s.months);
+      
+      // גרייס מלא
+      var fb = calcCompoundInterest(s.amount, s.rate, s.months);
+      var elFullMonthly = document.getElementById("compare-full-monthly");
+      var elFullBalloon = document.getElementById("compare-full-balloon");
+      var elFullInterest = document.getElementById("compare-full-interest");
+      if (elFullMonthly) elFullMonthly.textContent = fmt(0);
+      if (elFullBalloon) elFullBalloon.textContent = fmt(fb);
+      if (elFullInterest) elFullInterest.textContent = fmt(fb - s.amount);
+      
+      // הלוואה רגילה
+      var rm = calcRegularPayment(s.amount, s.rate, s.months);
+      var elRegularMonthly = document.getElementById("compare-regular-monthly");
+      var elRegularInterest = document.getElementById("compare-regular-interest");
+      if (elRegularMonthly) elRegularMonthly.textContent = fmt(rm);
+      if (elRegularInterest) elRegularInterest.textContent = fmt(rm * s.months - s.amount);
+    }
+    
+    // === מעבר טאבים ===
+    function switchTab(tabName) {
+      var tabs = container.querySelectorAll(".wpc-calc-balloon-b7g3-tab");
+      var panels = container.querySelectorAll(".wpc-calc-balloon-b7g3-panel");
+      
+      for (var i = 0; i < tabs.length; i++) {
+        tabs[i].classList.remove("active");
+        if (tabs[i].dataset.tab === tabName) {
+          tabs[i].classList.add("active");
+        }
+      }
+      
+      for (var j = 0; j < panels.length; j++) {
+        panels[j].classList.remove("active");
+        panels[j].style.display = "none";
+      }
+      
+      var targetPanel = document.getElementById("tab-" + tabName);
+      if (targetPanel) {
+        targetPanel.classList.add("active");
+        targetPanel.style.display = "block";
+      }
+    }
+    
+    // === Event Delegation ===
+    container.addEventListener("click", function(e) {
+      var action = e.target.closest("[data-action]");
+      if (!action) return;
+      
+      var act = action.dataset.action;
+      
+      if (act === "switch-tab") {
+        e.preventDefault();
+        switchTab(action.dataset.tab);
+      }
+      
+      if (act === "toggle-faq") {
+        var faqItem = action.closest(".wpc-calc-balloon-b7g3-faq-item");
+        if (faqItem) faqItem.classList.toggle("open");
+      }
+      
+      if (act === "open-awg") {
+        var awgContent = document.getElementById("awg-content");
+        if (awgContent) awgContent.classList.toggle("open");
+      }
+    });
+    
+    // === סליידרים ===
+    container.addEventListener("input", function(e) {
+      var id = e.target.id;
+      var val = e.target.value;
+      
+      if (id === "basic-amount-slider") {
+        state.basic.amount = parseInt(val);
+        var elAmount = document.getElementById("basic-amount-value");
+        if (elAmount) elAmount.textContent = parseInt(val).toLocaleString("he-IL") + " ₪";
+        updateBasic();
+      }
+      
+      if (id === "basic-rate-slider") {
+        state.basic.rate = parseFloat(val);
+        var elRate = document.getElementById("basic-rate-value");
+        if (elRate) elRate.textContent = parseFloat(val).toFixed(2) + "%";
+        updateBasic();
+      }
+      
+      if (id === "basic-months-slider") {
+        state.basic.months = parseInt(val);
+        var elMonths = document.getElementById("basic-months-value");
+        if (elMonths) {
+          var years = Math.floor(parseInt(val) / 12);
+          elMonths.textContent = val + " חודשים" + (years >= 1 ? " (" + years + " " + (years === 1 ? "שנה" : "שנים") + ")" : "");
+        }
+        updateBasic();
+      }
+    });
+    
+    // === רדיו כפתורים ===
+    container.addEventListener("change", function(e) {
+      if (e.target.name === "grace-type") {
+        state.basic.type = e.target.value;
+        updateBasic();
+      }
+    });
+    
+    // === אתחול ===
+    updateBasic();
+    
+    // הצג טאב ראשון
+    var firstPanel = document.getElementById("tab-basic");
+    if (firstPanel) {
+      firstPanel.style.display = "block";
+    }
+    
+    window[NS] = { version: "1.0.0" };
+  })();
+});
+<` + `/script>`;
+    }
+    
+    // ===== Event Listeners =====
+    container.addEventListener('click', function(e) {
+        const action = e.target.closest('[data-action]');
+        if (!action) return;
+        
+        const actionType = action.dataset.action;
+        
+        switch(actionType) {
+            case 'switch-tab':
+                switchTab(action.dataset.tab);
+                break;
+            case 'open-awg':
+                openAwg();
+                break;
+            case 'scroll-to-embed':
+                scrollToEmbed();
+                break;
+            case 'toggle-faq':
+                toggleFaq(action.closest('.wpc-calc-balloon-b7g3-faq-item'));
+                break;
+            case 'preview-color':
+                showPreview(action.dataset.color, action.dataset.name);
+                break;
+            case 'copy-embed-code':
+                copyEmbedCode();
+                break;
+            case 'copy-preview-code':
+                copyPreviewCode(action.dataset.color || primaryColor);
+                break;
+        }
+    });
+    
+    // סליידרים
+    container.addEventListener('input', function(e) {
+        const id = e.target.id;
+        
+        if (id === 'basic-amount-slider') {
+            state.basic.amount = parseInt(e.target.value);
+            updateSliderValue(id, 'basic-amount-value', e.target.value, 'currency');
+            calculateBasic();
+        }
+        else if (id === 'basic-rate-slider') {
+            state.basic.rate = parseFloat(e.target.value);
+            updateSliderValue(id, 'basic-rate-value', e.target.value, 'percent');
+            calculateBasic();
+        }
+        else if (id === 'basic-months-slider') {
+            state.basic.months = parseInt(e.target.value);
+            updateSliderValue(id, 'basic-months-value', e.target.value, 'months');
+            calculateBasic();
+        }
+    });
+    
+    // רדיו כפתורים לסוג הגרייס
+    container.addEventListener('change', function(e) {
+        if (e.target.name === 'grace-type') {
+            state.basic.type = e.target.value;
+            calculateBasic();
+        }
+    });
+    
+    // בורר צבע מותאם אישית
+    const customColorPicker = document.getElementById('custom-color-picker');
+    if (customColorPicker) {
+        customColorPicker.addEventListener('input', function(e) {
+            showPreview(e.target.value, 'צבע מותאם אישית');
+        });
+    }
+    
+    // אתחול
+    calculateBasic();
+    
+    // חשיפה מוגבלת
+    window[NS] = { version: '1.0.0' };
+})();
+</script>
+

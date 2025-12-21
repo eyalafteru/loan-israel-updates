@@ -43,6 +43,8 @@ C:\Users\eyal\loan-israel-updaets\loan-israel-updates\מחשבונים חדשי�
 | טאבים עם overflow-x | ✅ משנה ל-flex-wrap |
 | חסר !important | ✅ מוסיף לכל מאפייני CSS |
 | חסר viewport script | ✅ מוסיף בהתחלה |
+| **יש דיסקליימר** | ✅ מסיר את אזור wpc-disclaimer |
+| **יש Related Posts** | ✅ מסיר את [related-shortcode-instert] |
 
 ## 🛠️ קוד התיקון האוטומטי
 
@@ -72,6 +74,7 @@ class CalculatorQAFixer {
         this.fixTabsOverflow();
         this.fixCSSImportant();
         this.fixDOMContentLoaded();
+        this.removeForbiddenSections(); // הסרת דיסקליימר ו-related posts
         
         // 2. דוח
         this.printReport();
@@ -231,6 +234,25 @@ if (!document.querySelector('meta[name="viewport"]')) {
         const embedMatch = this.content.match(/function\s+getEmbedScript[\s\S]*?return[\s\S]*?script/);
         if (embedMatch && !embedMatch[0].includes('DOMContentLoaded')) {
             this.warnings.push('⚠️ getEmbedScript צריך לכלול DOMContentLoaded wrapper');
+        }
+    }
+    
+    // === תיקון 9: הסרת אזורים אסורים במחשבונים ===
+    removeForbiddenSections() {
+        // הסר דיסקליימר אם קיים
+        if (this.content.includes('wpc-disclaimer')) {
+            // הסר את כל אזור הדיסקליימר
+            this.content = this.content.replace(
+                /<div[^>]*class="[^"]*wpc-disclaimer[^"]*"[^>]*>[\s\S]*?<\/div>\s*/gi,
+                ''
+            );
+            this.fixes.push('✅ הוסר אזור דיסקליימר (לא שייך למחשבונים)');
+        }
+        
+        // הסר Related Posts shortcode אם קיים
+        if (this.content.includes('[related-shortcode-instert]')) {
+            this.content = this.content.replace(/\[related-shortcode-instert\]\s*/gi, '');
+            this.fixes.push('✅ הוסר [related-shortcode-instert] (לא שייך למחשבונים)');
         }
     }
     
@@ -492,6 +514,40 @@ function checkAllSections(content) {
     return missing;
 }
 ```
+
+### 🚫 בדיקת אזורים אסורים במחשבונים
+
+**חובה לוודא שהאזורים הבאים לא קיימים בעמודי מחשבון:**
+
+```javascript
+// === בדיקת אזורים שאסורים במחשבונים ===
+function checkForbiddenSections(content) {
+    const forbiddenSections = {
+        'wpc-disclaimer': 'דיסקליימר (לא שייך למחשבונים)',
+        '[related-shortcode-instert]': 'Related Posts shortcode (לא שייך למחשבונים)',
+        'related-shortcode-instert': 'Related Posts (לא שייך למחשבונים)'
+    };
+    
+    const found = [];
+    Object.entries(forbiddenSections).forEach(([key, name]) => {
+        if (content.includes(key)) {
+            found.push(`❌ נמצא אזור אסור: ${name} (${key})`);
+        }
+    });
+    
+    if (found.length === 0) {
+        console.log('✅ אין אזורים אסורים!');
+    } else {
+        console.error('🚨 נמצאו אזורים שאסורים במחשבונים - יש להסיר!');
+        found.forEach(f => console.error(f));
+    }
+    return found;
+}
+```
+
+### צ'קליסט אזורים אסורים:
+- [ ] **אין דיסקליימר** - `wpc-disclaimer` לא קיים
+- [ ] **אין Related Posts** - `[related-shortcode-instert]` לא קיים
 
 ### צ'קליסט אזורים חובה:
 - [ ] **אזור כותרת** - H1 + תאריך עדכון
@@ -2205,6 +2261,8 @@ return code + '</' + 'script>';
 - [ ] FAQ + Schema.org
 - [ ] עברית 100%
 - [ ] קרדיט עם nofollow
+- [ ] **אין דיסקליימר** (wpc-disclaimer)
+- [ ] **אין Related Posts** ([related-shortcode-instert])
 
 ---
 

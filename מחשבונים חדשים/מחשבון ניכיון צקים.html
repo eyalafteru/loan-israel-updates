@@ -1,0 +1,1468 @@
+<script>
+if (!document.querySelector('meta[name="viewport"]')) {
+  const viewport = document.createElement('meta');
+  viewport.name = 'viewport';
+  viewport.content = 'width=device-width, initial-scale=1.0, user-scalable=yes';
+  document.head.appendChild(viewport);
+}
+</script>
+
+<style>
+/* === CSS Variables === */
+:root {
+  --primary: #1e5490;
+  --primary-dark: #2a5fa0;
+  --danger: #ff3b3b;
+  --success: #25D366;
+  --warning: #FF9800;
+  --text-dark: #222222;
+  --text-light: #444444;
+  --bg-light: #f5f5f5;
+  --white: #ffffff;
+  --border: #999999;
+  --max-width-container: 1200px;
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+  --shadow-md: 0 5px 20px rgba(0,0,0,0.1);
+  --radius-sm: 8px;
+  --radius-md: 15px;
+  --radius-lg: 20px;
+  --transition: all 0.3s ease;
+  --gradient-primary: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+}
+
+/* === Global Wrapper === */
+.wpc-calc-factoring-n8k3-wrapper {
+    all: initial !important;
+    font-family: 'Assistant', sans-serif !important;
+    direction: rtl !important;
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+    width: 100% !important;
+    padding: 0 20px !important;
+    box-sizing: border-box !important;
+    color-scheme: light !important;
+}
+
+.wpc-calc-factoring-n8k3-wrapper * {
+    box-sizing: border-box !important;
+    font-family: 'Assistant', sans-serif !important;
+}
+
+/* === Title with Red Line === */
+.wpc-calc-factoring-n8k3-title {
+    font-size: 2.5em !important;
+    font-weight: 700 !important;
+    color: var(--primary) !important;
+    margin: 0 auto 30px auto !important;
+    line-height: 1.3 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 15px !important;
+    width: fit-content !important;
+    justify-content: center !important;
+    direction: rtl !important;
+    position: relative !important;
+    padding-right: 25px !important;
+}
+
+.wpc-calc-factoring-n8k3-title::after {
+    content: '' !important;
+    width: 4px !important;
+    height: 60px !important;
+    background: linear-gradient(135deg, #e74c3c, #c0392b) !important;
+    position: absolute !important;
+    right: 0 !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    border-radius: 2px !important;
+    box-shadow: 0 2px 4px rgba(231, 76, 60, 0.3) !important;
+}
+
+/* === Calculator Container === */
+.wpc-calc-factoring-n8k3-container {
+  max-width: var(--max-width-container) !important;
+  margin: 0 auto !important;
+  padding: 20px !important;
+}
+
+.wpc-calc-factoring-n8k3-title-container {
+  width: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.wpc-calc-factoring-n8k3-calc-wrapper {
+  background: white !important;
+  border-radius: var(--radius-lg) !important;
+  box-shadow: var(--shadow-md) !important;
+  overflow: hidden !important;
+}
+
+/* === Tabs Navigation === */
+.wpc-calc-factoring-n8k3-nav {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)) !important;
+  gap: 8px !important;
+  padding: 5px !important;
+  background: var(--bg-light) !important;
+}
+
+.wpc-calc-factoring-n8k3-tab {
+  background: var(--bg-light) !important;
+  border: 2px solid transparent !important;
+  border-radius: 12px !important;
+  padding: 12px 8px !important;
+  min-height: 70px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  transition: var(--transition) !important;
+  font-family: inherit !important;
+  box-shadow: var(--shadow-sm) !important;
+  color: var(--text-dark) !important;
+}
+
+.wpc-calc-factoring-n8k3-tab:hover {
+  background: white !important;
+  border-color: var(--primary) !important;
+  transform: translateY(-2px) !important;
+}
+
+.wpc-calc-factoring-n8k3-tab.active {
+  background: var(--gradient-primary) !important;
+  border-color: var(--primary-dark) !important;
+  color: white !important;
+}
+
+.wpc-calc-factoring-n8k3-tab-icon {
+  font-size: 1.5em !important;
+  margin-bottom: 8px !important;
+}
+
+.wpc-calc-factoring-n8k3-tab span:last-child {
+  font-size: 0.85em !important;
+  font-weight: 600 !important;
+}
+
+/* === Tab Content === */
+.wpc-calc-factoring-n8k3-content {
+  padding: 30px !important;
+}
+
+.wpc-calc-factoring-n8k3-panel {
+  display: none !important;
+}
+
+.wpc-calc-factoring-n8k3-panel.active {
+  display: block !important;
+}
+
+.wpc-calc-factoring-n8k3-panel h4 {
+  color: var(--primary) !important;
+  margin-bottom: 20px !important;
+  font-size: 1.5em !important;
+  font-weight: 700 !important;
+}
+
+/* === Form Elements === */
+.wpc-calc-factoring-n8k3-form-group {
+    margin-bottom: 25px !important;
+}
+
+.wpc-calc-factoring-n8k3-label {
+    display: block !important;
+    font-size: 1em !important;
+    font-weight: 600 !important;
+    color: var(--text-dark) !important;
+    margin-bottom: 10px !important;
+}
+
+/* === Slider Styles === */
+.wpc-calc-factoring-n8k3-slider-wrapper {
+  position: relative !important;
+  margin-bottom: 15px !important;
+}
+
+.wpc-calc-factoring-n8k3-slider {
+  width: 100% !important;
+  height: 10px !important;
+  background: #666666 !important;
+  border-radius: 5px !important;
+  outline: none !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  margin-bottom: 10px !important;
+  border: 1px solid #333333 !important;
+}
+
+.wpc-calc-factoring-n8k3-slider::-webkit-slider-thumb {
+  -webkit-appearance: none !important;
+  width: 28px !important;
+  height: 28px !important;
+  background: var(--primary) !important;
+  border-radius: 50% !important;
+  cursor: pointer !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3) !important;
+  border: 2px solid #ffffff !important;
+}
+
+.wpc-calc-factoring-n8k3-slider::-moz-range-thumb {
+  width: 28px !important;
+  height: 28px !important;
+  background: var(--primary) !important;
+  border-radius: 50% !important;
+  cursor: pointer !important;
+  border: 2px solid #ffffff !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3) !important;
+}
+
+.wpc-calc-factoring-n8k3-slider-value {
+  text-align: center !important;
+  font-size: 1.2em !important;
+  font-weight: 700 !important;
+  color: var(--primary) !important;
+  direction: ltr !important;
+}
+
+/* === Results Display === */
+.wpc-calc-factoring-n8k3-results {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 15px !important;
+  margin-top: 30px !important;
+}
+
+.wpc-calc-factoring-n8k3-result {
+  background: var(--bg-light) !important;
+  border-radius: var(--radius-md) !important;
+  padding: 20px !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+}
+
+.wpc-calc-factoring-n8k3-result-label {
+  font-size: 1em !important;
+  font-weight: 600 !important;
+  color: var(--text-light) !important;
+}
+
+.wpc-calc-factoring-n8k3-result-value {
+  font-size: 1.3em !important;
+  font-weight: 700 !important;
+  color: var(--primary) !important;
+  direction: ltr !important;
+}
+
+.wpc-calc-factoring-n8k3-result.highlight {
+  background: rgba(255, 59, 59, 0.1) !important;
+  border: 2px solid var(--danger) !important;
+}
+
+.wpc-calc-factoring-n8k3-result.highlight .wpc-calc-factoring-n8k3-result-value {
+  color: var(--danger) !important;
+}
+
+.wpc-calc-factoring-n8k3-result.success {
+  background: rgba(37, 211, 102, 0.1) !important;
+  border: 2px solid var(--success) !important;
+}
+
+.wpc-calc-factoring-n8k3-result.success .wpc-calc-factoring-n8k3-result-value {
+  color: var(--success) !important;
+}
+
+/* === Info Box === */
+.wpc-calc-factoring-n8k3-info-box {
+  background: rgba(30, 84, 144, 0.05) !important;
+  border: 2px solid var(--primary) !important;
+  border-radius: var(--radius-md) !important;
+  padding: 20px !important;
+  margin: 20px 0 !important;
+}
+
+.wpc-calc-factoring-n8k3-info-box h5 {
+  color: var(--primary) !important;
+  margin-bottom: 10px !important;
+  font-size: 1.1em !important;
+}
+
+.wpc-calc-factoring-n8k3-info-box p {
+  margin: 0 !important;
+  color: var(--text-dark) !important;
+}
+
+/* === AWG Section === */
+.wpc-calc-factoring-n8k3-awg-section {
+  background: #ffffff !important;
+  padding: 60px 20px !important;
+  margin: 40px 0 !important;
+  border-top: 1px solid #e0e0e0 !important;
+  border-bottom: 1px solid #e0e0e0 !important;
+}
+
+.wpc-calc-factoring-n8k3-awg-container {
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+  padding: 30px !important;
+  text-align: center !important;
+  background: #ffffff !important;
+  border-radius: 15px !important;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.08) !important;
+  border: 1px solid #f0f0f0 !important;
+}
+
+.wpc-calc-factoring-n8k3-cta-buttons-wrapper {
+  display: flex !important;
+  gap: 15px !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-wrap: nowrap !important;
+}
+
+.wpc-calc-factoring-n8k3-cta-btn {
+  background: var(--danger) !important;
+  color: white !important;
+  padding: 18px 35px !important;
+  border: none !important;
+  border-radius: 50px !important;
+  font-size: 1.1em !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+  transition: var(--transition) !important;
+  box-shadow: var(--shadow-md) !important;
+  font-family: inherit !important;
+  flex: 1 !important;
+  white-space: nowrap !important;
+}
+
+.wpc-calc-factoring-n8k3-cta-btn:hover {
+  background: #e63530 !important;
+  transform: translateY(-2px) !important;
+}
+
+.wpc-calc-factoring-n8k3-cta-embed {
+  background: var(--success) !important;
+  color: white !important;
+  padding: 18px 35px !important;
+  border: none !important;
+  border-radius: 50px !important;
+  font-size: 1.1em !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+  transition: var(--transition) !important;
+  box-shadow: var(--shadow-md) !important;
+  font-family: inherit !important;
+  flex: 1 !important;
+  white-space: nowrap !important;
+}
+
+.wpc-calc-factoring-n8k3-cta-embed:hover {
+  background: #1ea557 !important;
+  transform: translateY(-2px) !important;
+}
+
+.wpc-calc-factoring-n8k3-awg-content {
+  width: 100% !important;
+  text-align: center !important;
+  padding: 25px !important;
+  border-radius: 12px !important;
+  opacity: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  transition: all 0.5s ease !important;
+}
+
+.wpc-calc-factoring-n8k3-awg-content.show {
+  opacity: 1 !important;
+  height: auto !important;
+  padding: 25px !important;
+}
+
+/* === FAQ Accordion === */
+.wpc-calc-factoring-n8k3-faq-section {
+    max-width: 1200px !important;
+    margin: 40px auto !important;
+    padding: 0 20px !important;
+}
+
+.wpc-calc-factoring-n8k3-accordion-item {
+    border: 1px solid var(--border) !important;
+    border-radius: var(--radius-sm) !important;
+    margin-bottom: 10px !important;
+    overflow: hidden !important;
+}
+
+.wpc-calc-factoring-n8k3-accordion-header {
+    background: var(--bg-light) !important;
+    padding: 20px !important;
+    cursor: pointer !important;
+    font-weight: 600 !important;
+    font-size: 1.1em !important;
+    position: relative !important;
+    transition: all 0.2s ease !important;
+    color: var(--text-dark) !important;
+    border: 2px solid transparent !important;
+}
+
+.wpc-calc-factoring-n8k3-accordion-header:hover {
+    background: #f0f0f0 !important;
+    border-color: var(--primary) !important;
+}
+
+.wpc-calc-factoring-n8k3-accordion-header.active {
+    background: var(--primary) !important;
+    color: white !important;
+}
+
+.wpc-calc-factoring-n8k3-accordion-header::after {
+    content: '←' !important;
+    position: absolute !important;
+    left: 20px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    font-size: 1.2em !important;
+    transition: transform 0.3s ease !important;
+}
+
+.wpc-calc-factoring-n8k3-accordion-header.active::after {
+    transform: translateY(-50%) rotate(90deg) !important;
+}
+
+.wpc-calc-factoring-n8k3-accordion-content {
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: max-height 0.3s ease !important;
+}
+
+.wpc-calc-factoring-n8k3-accordion-content.active {
+    max-height: 500px !important;
+    padding: 20px !important;
+    background: white !important;
+}
+
+/* === Embed Section === */
+.wpc-calc-factoring-n8k3-embed-section {
+    max-width: 1200px !important;
+    margin: 40px auto !important;
+    padding: 30px !important;
+    background: var(--bg-light) !important;
+    border-radius: var(--radius-lg) !important;
+}
+
+.wpc-calc-factoring-n8k3-embed-section h2 {
+    color: var(--primary) !important;
+    margin-bottom: 20px !important;
+    text-align: center !important;
+}
+
+.wpc-calc-factoring-n8k3-embed-button-large {
+    display: block !important;
+    width: 100% !important;
+    max-width: 400px !important;
+    margin: 20px auto !important;
+    padding: 18px 35px !important;
+    background: var(--success) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 50px !important;
+    font-size: 1.2em !important;
+    font-weight: 700 !important;
+    cursor: pointer !important;
+    transition: var(--transition) !important;
+}
+
+.wpc-calc-factoring-n8k3-embed-button-large:hover {
+    background: #1ea557 !important;
+    transform: translateY(-2px) !important;
+}
+
+.wpc-calc-factoring-n8k3-color-picker {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 12px !important;
+    margin: 20px 0 !important;
+}
+
+.wpc-calc-factoring-n8k3-color-btn {
+    width: 50px !important;
+    height: 50px !important;
+    border-radius: 50% !important;
+    border: 3px solid #fff !important;
+    cursor: pointer !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2) !important;
+    transition: transform 0.2s !important;
+}
+
+.wpc-calc-factoring-n8k3-color-btn:hover {
+    transform: scale(1.1) !important;
+}
+
+.wpc-calc-factoring-n8k3-preview-container {
+    margin: 30px 0 !important;
+    padding: 20px !important;
+    background: white !important;
+    border-radius: var(--radius-md) !important;
+    border: 2px dashed var(--border) !important;
+}
+
+/* === Mobile Responsive === */
+@media (max-width: 768px) {
+    .wpc-calc-factoring-n8k3-wrapper {
+        padding: 0 15px !important;
+    }
+    
+    .wpc-calc-factoring-n8k3-title {
+        font-size: 1.8em !important;
+        padding-right: 20px !important;
+    }
+    
+    .wpc-calc-factoring-n8k3-title::after {
+        height: 45px !important;
+        width: 3px !important;
+    }
+    
+    .wpc-calc-factoring-n8k3-nav {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+    
+    .wpc-calc-factoring-n8k3-tab {
+        min-height: 70px !important;
+        font-size: 1rem !important;
+    }
+    
+    .wpc-calc-factoring-n8k3-tab span:last-child {
+        font-size: 1rem !important;
+    }
+    
+    .wpc-calc-factoring-n8k3-content {
+        padding: 20px !important;
+    }
+    
+    .wpc-calc-factoring-n8k3-result {
+        flex-direction: column !important;
+        text-align: center !important;
+        gap: 10px !important;
+    }
+    
+    .wpc-calc-factoring-n8k3-cta-buttons-wrapper {
+        flex-direction: column !important;
+        gap: 10px !important;
+    }
+    
+    .wpc-calc-factoring-n8k3-cta-btn,
+    .wpc-calc-factoring-n8k3-cta-embed {
+        width: 100% !important;
+        padding: 15px 25px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .wpc-calc-factoring-n8k3-nav {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .wpc-calc-factoring-n8k3-tab {
+        min-height: 60px !important;
+        flex-direction: row !important;
+        gap: 12px !important;
+    }
+    
+    .wpc-calc-factoring-n8k3-tab-icon {
+        margin-bottom: 0 !important;
+    }
+    
+    .wpc-calc-factoring-n8k3-content {
+        padding: 15px !important;
+    }
+}
+
+@media (max-width: 375px) {
+    .wpc-calc-factoring-n8k3-wrapper {
+        padding: 0 12px !important;
+    }
+    
+    .wpc-calc-factoring-n8k3-title {
+        font-size: 1.5em !important;
+    }
+}
+</style>
+
+<div class="wpc-calc-factoring-n8k3-wrapper" id="wpc-calc-factoring-n8k3-main">
+
+<!-- כותרת ראשית -->
+<div class="wpc-calc-factoring-n8k3-container">
+    <div class="wpc-calc-factoring-n8k3-title-container">
+        <h1 class="wpc-calc-factoring-n8k3-title">מחשבון עלות ניכיון צ'קים</h1>
+        <p style="text-align: center; color: #666; margin-bottom: 30px;">
+            <strong>עודכן לאחרונה:</strong> [current_date format="F Y" hebrew="true"]
+        </p>
+    </div>
+    
+    <!-- המחשבון -->
+    <div class="wpc-calc-factoring-n8k3-calc-wrapper" id="wpc-calc-factoring-n8k3-calculator">
+        
+        <!-- לשוניות -->
+        <div class="wpc-calc-factoring-n8k3-nav">
+            <button class="wpc-calc-factoring-n8k3-tab active" data-action="switch-tab" data-tab="basic">
+                <div class="wpc-calc-factoring-n8k3-tab-icon">🧮</div>
+                <span>חישוב בסיסי</span>
+            </button>
+            <button class="wpc-calc-factoring-n8k3-tab" data-action="switch-tab" data-tab="compare">
+                <div class="wpc-calc-factoring-n8k3-tab-icon">📊</div>
+                <span>השוואת הצעות</span>
+            </button>
+            <button class="wpc-calc-factoring-n8k3-tab" data-action="switch-tab" data-tab="multi">
+                <div class="wpc-calc-factoring-n8k3-tab-icon">📋</div>
+                <span>מספר צ'קים</span>
+            </button>
+        </div>
+        
+        <!-- תוכן הלשוניות -->
+        <div class="wpc-calc-factoring-n8k3-content">
+            
+            <!-- לשונית 1: חישוב בסיסי -->
+            <div class="wpc-calc-factoring-n8k3-panel active" id="tab-basic">
+                <h4>חישוב עלות ניכיון צ'ק בודד</h4>
+                
+                <div class="wpc-calc-factoring-n8k3-form-group">
+                    <label class="wpc-calc-factoring-n8k3-label">סכום הצ'ק (ברוטו):</label>
+                    <div class="wpc-calc-factoring-n8k3-slider-wrapper">
+                        <input type="range" class="wpc-calc-factoring-n8k3-slider" id="basic-amount-slider" min="1000" max="500000" value="50000" step="1000">
+                        <div class="wpc-calc-factoring-n8k3-slider-value" id="basic-amount-value">₪ 50,000</div>
+                    </div>
+                </div>
+                
+                <div class="wpc-calc-factoring-n8k3-form-group">
+                    <label class="wpc-calc-factoring-n8k3-label">מספר ימים עד לפירעון:</label>
+                    <div class="wpc-calc-factoring-n8k3-slider-wrapper">
+                        <input type="range" class="wpc-calc-factoring-n8k3-slider" id="basic-days-slider" min="7" max="365" value="90" step="1">
+                        <div class="wpc-calc-factoring-n8k3-slider-value" id="basic-days-value">90 ימים</div>
+                    </div>
+                </div>
+                
+                <div class="wpc-calc-factoring-n8k3-form-group">
+                    <label class="wpc-calc-factoring-n8k3-label">ריבית ניכיון שנתית (%):</label>
+                    <div class="wpc-calc-factoring-n8k3-slider-wrapper">
+                        <input type="range" class="wpc-calc-factoring-n8k3-slider" id="basic-rate-slider" min="5" max="40" value="18" step="0.5">
+                        <div class="wpc-calc-factoring-n8k3-slider-value" id="basic-rate-value">18%</div>
+                    </div>
+                </div>
+                
+                <div class="wpc-calc-factoring-n8k3-form-group">
+                    <label class="wpc-calc-factoring-n8k3-label">עמלת טיפול/שורה (₪ לכל צ'ק):</label>
+                    <div class="wpc-calc-factoring-n8k3-slider-wrapper">
+                        <input type="range" class="wpc-calc-factoring-n8k3-slider" id="basic-fee-slider" min="0" max="200" value="25" step="5">
+                        <div class="wpc-calc-factoring-n8k3-slider-value" id="basic-fee-value">₪ 25</div>
+                    </div>
+                </div>
+                
+                <div class="wpc-calc-factoring-n8k3-results">
+                    <div class="wpc-calc-factoring-n8k3-result success">
+                        <span class="wpc-calc-factoring-n8k3-result-label">💵 סכום נטו שתקבל:</span>
+                        <span class="wpc-calc-factoring-n8k3-result-value" id="basic-result-net">₪ 47,757</span>
+                    </div>
+                    <div class="wpc-calc-factoring-n8k3-result">
+                        <span class="wpc-calc-factoring-n8k3-result-label">📉 ריבית הניכיון:</span>
+                        <span class="wpc-calc-factoring-n8k3-result-value" id="basic-result-interest">₪ 2,218</span>
+                    </div>
+                    <div class="wpc-calc-factoring-n8k3-result">
+                        <span class="wpc-calc-factoring-n8k3-result-label">📋 עמלת טיפול:</span>
+                        <span class="wpc-calc-factoring-n8k3-result-value" id="basic-result-fee">₪ 25</span>
+                    </div>
+                    <div class="wpc-calc-factoring-n8k3-result highlight">
+                        <span class="wpc-calc-factoring-n8k3-result-label">💸 סה"כ עלות הניכיון:</span>
+                        <span class="wpc-calc-factoring-n8k3-result-value" id="basic-result-total-cost">₪ 2,243</span>
+                    </div>
+                    <div class="wpc-calc-factoring-n8k3-result highlight">
+                        <span class="wpc-calc-factoring-n8k3-result-label">📈 ריבית שנתית אפקטיבית:</span>
+                        <span class="wpc-calc-factoring-n8k3-result-value" id="basic-result-effective">19.03%</span>
+                    </div>
+                </div>
+                
+                <div class="wpc-calc-factoring-n8k3-info-box">
+                    <h5>💡 מה זה אומר?</h5>
+                    <p id="basic-explanation">הריבית האפקטיבית (19.03%) היא העלות האמיתית שלך במונחים שנתיים, כולל כל העמלות. זו הדרך הנכונה להשוות בין הצעות שונות.</p>
+                </div>
+            </div>
+            
+            <!-- לשונית 2: השוואת הצעות -->
+            <div class="wpc-calc-factoring-n8k3-panel" id="tab-compare">
+                <h4>השוואת הצעות ניכיון</h4>
+                
+                <div class="wpc-calc-factoring-n8k3-form-group">
+                    <label class="wpc-calc-factoring-n8k3-label">סכום הצ'ק:</label>
+                    <div class="wpc-calc-factoring-n8k3-slider-wrapper">
+                        <input type="range" class="wpc-calc-factoring-n8k3-slider" id="compare-amount-slider" min="1000" max="500000" value="50000" step="1000">
+                        <div class="wpc-calc-factoring-n8k3-slider-value" id="compare-amount-value">₪ 50,000</div>
+                    </div>
+                </div>
+                
+                <div class="wpc-calc-factoring-n8k3-form-group">
+                    <label class="wpc-calc-factoring-n8k3-label">מספר ימים:</label>
+                    <div class="wpc-calc-factoring-n8k3-slider-wrapper">
+                        <input type="range" class="wpc-calc-factoring-n8k3-slider" id="compare-days-slider" min="7" max="365" value="90" step="1">
+                        <div class="wpc-calc-factoring-n8k3-slider-value" id="compare-days-value">90 ימים</div>
+                    </div>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 30px;">
+                    <!-- הצעה א' -->
+                    <div style="background: #f8f9fa; padding: 20px; border-radius: 15px; border: 2px solid #1e5490;">
+                        <h5 style="color: #1e5490; margin-bottom: 15px; text-align: center;">🏦 הצעה א'</h5>
+                        <div class="wpc-calc-factoring-n8k3-form-group">
+                            <label class="wpc-calc-factoring-n8k3-label">ריבית שנתית (%):</label>
+                            <div class="wpc-calc-factoring-n8k3-slider-wrapper">
+                                <input type="range" class="wpc-calc-factoring-n8k3-slider" id="compare-rate-a-slider" min="5" max="40" value="15" step="0.5">
+                                <div class="wpc-calc-factoring-n8k3-slider-value" id="compare-rate-a-value">15%</div>
+                            </div>
+                        </div>
+                        <div class="wpc-calc-factoring-n8k3-form-group">
+                            <label class="wpc-calc-factoring-n8k3-label">עמלת טיפול (₪):</label>
+                            <div class="wpc-calc-factoring-n8k3-slider-wrapper">
+                                <input type="range" class="wpc-calc-factoring-n8k3-slider" id="compare-fee-a-slider" min="0" max="200" value="50" step="5">
+                                <div class="wpc-calc-factoring-n8k3-slider-value" id="compare-fee-a-value">₪ 50</div>
+                            </div>
+                        </div>
+                        <div style="background: white; padding: 15px; border-radius: 10px; margin-top: 15px;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                                <span>נטו:</span>
+                                <strong id="compare-net-a" style="color: #25D366;">₪ 48,102</strong>
+                            </div>
+                            <div style="display: flex; justify-content: space-between;">
+                                <span>ריבית אפקטיבית:</span>
+                                <strong id="compare-effective-a" style="color: #ff3b3b;">16.01%</strong>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- הצעה ב' -->
+                    <div style="background: #f8f9fa; padding: 20px; border-radius: 15px; border: 2px solid #25D366;">
+                        <h5 style="color: #25D366; margin-bottom: 15px; text-align: center;">🏛️ הצעה ב'</h5>
+                        <div class="wpc-calc-factoring-n8k3-form-group">
+                            <label class="wpc-calc-factoring-n8k3-label">ריבית שנתית (%):</label>
+                            <div class="wpc-calc-factoring-n8k3-slider-wrapper">
+                                <input type="range" class="wpc-calc-factoring-n8k3-slider" id="compare-rate-b-slider" min="5" max="40" value="18" step="0.5">
+                                <div class="wpc-calc-factoring-n8k3-slider-value" id="compare-rate-b-value">18%</div>
+                            </div>
+                        </div>
+                        <div class="wpc-calc-factoring-n8k3-form-group">
+                            <label class="wpc-calc-factoring-n8k3-label">עמלת טיפול (₪):</label>
+                            <div class="wpc-calc-factoring-n8k3-slider-wrapper">
+                                <input type="range" class="wpc-calc-factoring-n8k3-slider" id="compare-fee-b-slider" min="0" max="200" value="0" step="5">
+                                <div class="wpc-calc-factoring-n8k3-slider-value" id="compare-fee-b-value">₪ 0</div>
+                            </div>
+                        </div>
+                        <div style="background: white; padding: 15px; border-radius: 10px; margin-top: 15px;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                                <span>נטו:</span>
+                                <strong id="compare-net-b" style="color: #25D366;">₪ 47,781</strong>
+                            </div>
+                            <div style="display: flex; justify-content: space-between;">
+                                <span>ריבית אפקטיבית:</span>
+                                <strong id="compare-effective-b" style="color: #ff3b3b;">18.82%</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="wpc-calc-factoring-n8k3-result" style="margin-top: 30px; background: #e8f5e9; border: 2px solid #25D366;">
+                    <span class="wpc-calc-factoring-n8k3-result-label">🏆 ההצעה הכדאית יותר:</span>
+                    <span class="wpc-calc-factoring-n8k3-result-value" id="compare-winner" style="color: #25D366;">הצעה א' - חיסכון של ₪ 321</span>
+                </div>
+            </div>
+            
+            <!-- לשונית 3: מספר צ'קים -->
+            <div class="wpc-calc-factoring-n8k3-panel" id="tab-multi">
+                <h4>חישוב לסדרת צ'קים</h4>
+                
+                <div class="wpc-calc-factoring-n8k3-form-group">
+                    <label class="wpc-calc-factoring-n8k3-label">סכום כולל של הצ'קים:</label>
+                    <div class="wpc-calc-factoring-n8k3-slider-wrapper">
+                        <input type="range" class="wpc-calc-factoring-n8k3-slider" id="multi-total-slider" min="5000" max="1000000" value="100000" step="5000">
+                        <div class="wpc-calc-factoring-n8k3-slider-value" id="multi-total-value">₪ 100,000</div>
+                    </div>
+                </div>
+                
+                <div class="wpc-calc-factoring-n8k3-form-group">
+                    <label class="wpc-calc-factoring-n8k3-label">מספר צ'קים:</label>
+                    <div class="wpc-calc-factoring-n8k3-slider-wrapper">
+                        <input type="range" class="wpc-calc-factoring-n8k3-slider" id="multi-count-slider" min="1" max="50" value="10" step="1">
+                        <div class="wpc-calc-factoring-n8k3-slider-value" id="multi-count-value">10 צ'קים</div>
+                    </div>
+                </div>
+                
+                <div class="wpc-calc-factoring-n8k3-form-group">
+                    <label class="wpc-calc-factoring-n8k3-label">ממוצע ימים עד לפירעון:</label>
+                    <div class="wpc-calc-factoring-n8k3-slider-wrapper">
+                        <input type="range" class="wpc-calc-factoring-n8k3-slider" id="multi-days-slider" min="7" max="365" value="60" step="1">
+                        <div class="wpc-calc-factoring-n8k3-slider-value" id="multi-days-value">60 ימים</div>
+                    </div>
+                </div>
+                
+                <div class="wpc-calc-factoring-n8k3-form-group">
+                    <label class="wpc-calc-factoring-n8k3-label">ריבית שנתית (%):</label>
+                    <div class="wpc-calc-factoring-n8k3-slider-wrapper">
+                        <input type="range" class="wpc-calc-factoring-n8k3-slider" id="multi-rate-slider" min="5" max="40" value="16" step="0.5">
+                        <div class="wpc-calc-factoring-n8k3-slider-value" id="multi-rate-value">16%</div>
+                    </div>
+                </div>
+                
+                <div class="wpc-calc-factoring-n8k3-form-group">
+                    <label class="wpc-calc-factoring-n8k3-label">עמלת טיפול לכל צ'ק (₪):</label>
+                    <div class="wpc-calc-factoring-n8k3-slider-wrapper">
+                        <input type="range" class="wpc-calc-factoring-n8k3-slider" id="multi-fee-slider" min="0" max="100" value="20" step="5">
+                        <div class="wpc-calc-factoring-n8k3-slider-value" id="multi-fee-value">₪ 20</div>
+                    </div>
+                </div>
+                
+                <div class="wpc-calc-factoring-n8k3-results">
+                    <div class="wpc-calc-factoring-n8k3-result success">
+                        <span class="wpc-calc-factoring-n8k3-result-label">💵 סכום נטו שתקבל:</span>
+                        <span class="wpc-calc-factoring-n8k3-result-value" id="multi-result-net">₪ 97,170</span>
+                    </div>
+                    <div class="wpc-calc-factoring-n8k3-result">
+                        <span class="wpc-calc-factoring-n8k3-result-label">📉 סה"כ ריבית ניכיון:</span>
+                        <span class="wpc-calc-factoring-n8k3-result-value" id="multi-result-interest">₪ 2,630</span>
+                    </div>
+                    <div class="wpc-calc-factoring-n8k3-result">
+                        <span class="wpc-calc-factoring-n8k3-result-label">📋 סה"כ עמלות טיפול:</span>
+                        <span class="wpc-calc-factoring-n8k3-result-value" id="multi-result-fees">₪ 200</span>
+                    </div>
+                    <div class="wpc-calc-factoring-n8k3-result highlight">
+                        <span class="wpc-calc-factoring-n8k3-result-label">💸 סה"כ עלות:</span>
+                        <span class="wpc-calc-factoring-n8k3-result-value" id="multi-result-total">₪ 2,830</span>
+                    </div>
+                    <div class="wpc-calc-factoring-n8k3-result highlight">
+                        <span class="wpc-calc-factoring-n8k3-result-label">📈 ריבית שנתית אפקטיבית:</span>
+                        <span class="wpc-calc-factoring-n8k3-result-value" id="multi-result-effective">17.72%</span>
+                    </div>
+                </div>
+                
+                <div class="wpc-calc-factoring-n8k3-info-box">
+                    <h5>💡 טיפ חשוב</h5>
+                    <p>ככל שמספר הצ'קים גדול יותר, כך עמלות הטיפול מהוות חלק משמעותי יותר מהעלות. שווה לנהל משא ומתן על עמלה קבועה לחבילה.</p>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<!-- אזור בדיקת זכאות -->
+<div class="wpc-calc-factoring-n8k3-awg-section">
+    <div class="wpc-calc-factoring-n8k3-awg-container">
+        <div class="wpc-calc-factoring-n8k3-cta-buttons-wrapper">
+            <button class="wpc-calc-factoring-n8k3-cta-btn" data-action="open-awg">
+                💰 בדוק הצעות ניכיון צ'קים - קבל הצעה מיידית!
+            </button>
+            <button class="wpc-calc-factoring-n8k3-cta-embed" data-action="scroll-to-embed">
+                🎁 רוצה להוסיף את המחשבון בחינם לאתרך? לחץ כאן!
+            </button>
+        </div>
+        <div class="wpc-calc-factoring-n8k3-awg-content" id="awg-content">
+            <div class="wpc-calc-factoring-n8k3-shortcode-item">
+                [awg postid="32400"]
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- תוכן SEO -->
+<div class="wpc-calc-factoring-n8k3-faq-section">
+    <div class="wpc-calc-factoring-n8k3-title-container">
+        <h2 class="wpc-calc-factoring-n8k3-title">מה זה ניכיון צ'קים?</h2>
+    </div>
+    <div style="line-height: 1.8; color: #444;">
+        <p><strong>ניכיון צ'קים (Factoring)</strong> הוא שירות פיננסי המאפשר לעסקים להמיר צ'קים דחויים שקיבלו מלקוחות לכסף מזומן באופן מיידי. במקום להמתין לתאריך הפירעון של הצ'ק, העסק מוכר את הצ'ק לחברת ניכיון ומקבל את הכסף מיד - בניכוי עמלה וריבית.</p>
+        
+        <h3 style="color: #1e5490; margin: 25px 0 15px;">איך מחושבת עלות הניכיון?</h3>
+        <p>העלות מורכבת משני מרכיבים עיקריים:</p>
+        <ul style="padding-right: 20px;">
+            <li><strong>ריבית הניכיון:</strong> מחושבת לפי הנוסחה: סכום הצ'ק × (ריבית שנתית ÷ 365) × מספר ימים עד הפירעון</li>
+            <li><strong>עמלת טיפול:</strong> סכום קבוע לכל צ'ק (נקרא גם "עמלת שורה")</li>
+        </ul>
+        
+        <h3 style="color: #1e5490; margin: 25px 0 15px;">למה חשוב לחשב ריבית אפקטיבית?</h3>
+        <p>הריבית האפקטיבית מראה את העלות האמיתית במונחים שנתיים, תוך התחשבות בכל העמלות. זו הדרך הנכונה להשוות בין הצעות שונות, במיוחד כאשר חברה אחת מציעה ריבית נמוכה עם עמלה גבוהה, ואחרת להיפך.</p>
+    </div>
+</div>
+
+<!-- שאלות נפוצות -->
+<div class="wpc-calc-factoring-n8k3-faq-section">
+    <div class="wpc-calc-factoring-n8k3-title-container">
+        <h2 class="wpc-calc-factoring-n8k3-title">שאלות נפוצות על ניכיון צ'קים</h2>
+    </div>
+    
+    <div class="wpc-calc-factoring-n8k3-accordion-container">
+        <div class="wpc-calc-factoring-n8k3-accordion-item">
+            <div class="wpc-calc-factoring-n8k3-accordion-header" data-action="toggle-faq">
+                ⏰ כמה זמן לוקח לקבל את הכסף?
+            </div>
+            <div class="wpc-calc-factoring-n8k3-accordion-content">
+                בדרך כלל הכסף מועבר תוך 24-48 שעות מרגע אישור העסקה. חלק מחברות הניכיון מציעות העברה ביום העסקים הבא או אפילו באותו יום תמורת עמלה נוספת.
+            </div>
+        </div>
+        
+        <div class="wpc-calc-factoring-n8k3-accordion-item">
+            <div class="wpc-calc-factoring-n8k3-accordion-header" data-action="toggle-faq">
+                🏦 מה ההבדל בין ניכיון בבנק לחברה חוץ-בנקאית?
+            </div>
+            <div class="wpc-calc-factoring-n8k3-accordion-content">
+                בנקים בדרך כלל מציעים ריבית נמוכה יותר אך דורשים בטחונות, היסטוריית אשראי טובה ותהליך אישור ארוך יותר. חברות חוץ-בנקאיות גמישות יותר בדרישות אך גובות ריבית גבוהה יותר. המחשבון שלנו עוזר להשוות את העלות האפקטיבית של כל הצעה.
+            </div>
+        </div>
+        
+        <div class="wpc-calc-factoring-n8k3-accordion-item">
+            <div class="wpc-calc-factoring-n8k3-accordion-header" data-action="toggle-faq">
+                📋 אילו צ'קים אפשר לנכות?
+            </div>
+            <div class="wpc-calc-factoring-n8k3-accordion-content">
+                ניתן לנכות צ'קים דחויים שהונפקו על ידי חברות או אנשים פרטיים בעלי היסטוריית אשראי תקינה. הצ'ק חייב להיות תקין מבחינה משפטית, ללא מחיקות או תיקונים חשודים, ומושך הצ'ק צריך להיות לקוח מוכר או בעל דירוג אשראי סביר.
+            </div>
+        </div>
+        
+        <div class="wpc-calc-factoring-n8k3-accordion-item">
+            <div class="wpc-calc-factoring-n8k3-accordion-header" data-action="toggle-faq">
+                ⚠️ מה קורה אם הצ'ק חוזר?
+            </div>
+            <div class="wpc-calc-factoring-n8k3-accordion-content">
+                ברוב המקרים, אם הצ'ק חוזר (אין כיסוי), חברת הניכיון תחייב אתכם בסכום הצ'ק בתוספת עמלת צ'ק חוזר. זו הסיבה שחברות הניכיון בודקות את מושך הצ'ק לפני אישור העסקה. חלק מהחברות מציעות "ניכיון ללא חזרה" (Non-Recourse) במחיר גבוה יותר.
+            </div>
+        </div>
+        
+        <div class="wpc-calc-factoring-n8k3-accordion-item">
+            <div class="wpc-calc-factoring-n8k3-accordion-header" data-action="toggle-faq">
+                💡 איך לבחור חברת ניכיון?
+            </div>
+            <div class="wpc-calc-factoring-n8k3-accordion-content">
+                השוו לפי הריבית האפקטיבית (לא רק הריבית הנקובה), בדקו את העמלות הנלוות, וודאו שהחברה מפוקחת ובעלת רישיון. קראו חוות דעת של לקוחות, ובדקו את מהירות ההעברה ואיכות השירות. המחשבון שלנו עוזר להשוות בין הצעות בצורה אובייקטיבית.
+            </div>
+        </div>
+        
+        <div class="wpc-calc-factoring-n8k3-accordion-item">
+            <div class="wpc-calc-factoring-n8k3-accordion-header" data-action="toggle-faq">
+                📊 מה נחשב ריבית סבירה לניכיון?
+            </div>
+            <div class="wpc-calc-factoring-n8k3-accordion-content">
+                הריבית משתנה בהתאם לתנאי השוק, איכות הצ'קים והיקף הפעילות. בבנקים הריבית נעה בין 8%-15% שנתי, בחברות חוץ-בנקאיות בין 15%-25%. ריבית מעל 30% נחשבת גבוהה מאוד ויש לשקול חלופות. השתמשו במחשבון להשוואת הריבית האפקטיבית.
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- אזור הטמעה -->
+<div class="wpc-calc-factoring-n8k3-embed-section" id="embed-section">
+    <h2>🎁 רוצים להטמיע את מחשבון ניכיון הצ'קים באתר שלכם? חינם לחלוטין!</h2>
+    
+    <div style="background: #e8f5e9; padding: 20px; border-radius: 15px; margin: 20px 0;">
+        <p style="margin: 0;">
+            <strong>💎 אנחנו נותנים לכם את מחשבון ניכיון הצ'קים המתקדם הזה לחלוטין בחינם!</strong><br>
+            תמורת קישור קרדיט קטן לאתר שלנו, תקבלו מחשבון מקצועי עם 3 לשוניות, חישובים מדויקים, ועיצוב שמתאים לכל מסך.<br>
+            <strong>שווי המחשבון:</strong> מעל ₪12,000 בפיתוח 💰 | <strong>מה ששילמתם:</strong> ₪0 🎉
+        </p>
+    </div>
+    
+    <h3 style="color: #1e5490; margin: 25px 0 15px;">📋 איך מוסיפים? (3 דקות בלבד)</h3>
+    <ol style="line-height: 2;">
+        <li><strong>לחצו</strong> על הכפתור הירוק "העתק קוד" למטה 👇</li>
+        <li><strong>פתחו</strong> את עורך וורדפרס שלכם (מצב טקסט/HTML, לא עיצוב)</li>
+        <li><strong>הדביקו</strong> את הקוד במיקום הרצוי בעמוד</li>
+        <li><strong>פרסמו!</strong> המחשבון יעבוד מיד ללא הגדרות נוספות ✨</li>
+    </ol>
+    
+    <button class="wpc-calc-factoring-n8k3-embed-button-large" data-action="copy-embed-code">
+        📋 העתק קוד מלא - לחצו כאן!
+    </button>
+    
+    <h4 style="color: #1e5490; margin: 30px 0 15px; text-align: center;">🎨 בחרו צבע מותאם לאתר שלכם:</h4>
+    <div class="wpc-calc-factoring-n8k3-color-picker">
+        <button class="wpc-calc-factoring-n8k3-color-btn" style="background: #1e5490;" data-action="preview-color" data-color="#1e5490" data-name="כחול מקצועי" title="כחול מקצועי 💙"></button>
+        <button class="wpc-calc-factoring-n8k3-color-btn" style="background: #10b981;" data-action="preview-color" data-color="#10b981" data-name="ירוק צמיחה" title="ירוק צמיחה 💚"></button>
+        <button class="wpc-calc-factoring-n8k3-color-btn" style="background: #ef4444;" data-action="preview-color" data-color="#ef4444" data-name="אדום אנרגטי" title="אדום אנרגטי ❤️"></button>
+        <button class="wpc-calc-factoring-n8k3-color-btn" style="background: #8b5cf6;" data-action="preview-color" data-color="#8b5cf6" data-name="סגול יוקרתי" title="סגול יוקרתי 💜"></button>
+        <button class="wpc-calc-factoring-n8k3-color-btn" style="background: #f59e0b;" data-action="preview-color" data-color="#f59e0b" data-name="כתום דינמי" title="כתום דינמי 🧡"></button>
+        <button class="wpc-calc-factoring-n8k3-color-btn" style="background: #ec4899;" data-action="preview-color" data-color="#ec4899" data-name="ורוד מודרני" title="ורוד מודרני 💗"></button>
+        <button class="wpc-calc-factoring-n8k3-color-btn" style="background: #06b6d4;" data-action="preview-color" data-color="#06b6d4" data-name="טורקיז רענן" title="טורקיז רענן 🩵"></button>
+        <button class="wpc-calc-factoring-n8k3-color-btn" style="background: #84cc16;" data-action="preview-color" data-color="#84cc16" data-name="ליים עז" title="ליים עז 💛"></button>
+        <button class="wpc-calc-factoring-n8k3-color-btn" style="background: #f97316;" data-action="preview-color" data-color="#f97316" data-name="כתום בוהק" title="כתום בוהק 🔥"></button>
+        <button class="wpc-calc-factoring-n8k3-color-btn" style="background: #0891b2;" data-action="preview-color" data-color="#0891b2" data-name="כחול ים" title="כחול ים 🌊"></button>
+        <input type="color" id="custom-color-picker" value="#1e5490" style="width: 50px; height: 50px; border-radius: 50%; cursor: pointer; border: 3px solid #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.2);" title="בחר צבע מותאם אישית">
+    </div>
+    
+    <div class="wpc-calc-factoring-n8k3-preview-container" id="preview-container" style="display: none;">
+        <h4 style="text-align: center; color: #1e5490; margin-bottom: 20px;">תצוגה מקדימה עם הצבע: <span id="preview-color-name">כחול מקצועי</span></h4>
+        <div id="preview-content"></div>
+        <button class="wpc-calc-factoring-n8k3-embed-button-large" data-action="copy-preview-code" style="margin-top: 20px;">
+            📋 העתק קוד עם הצבע הזה
+        </button>
+    </div>
+    
+    <div style="background: #fff3cd; padding: 20px; border-radius: 15px; margin-top: 30px; border: 1px solid #ffc107;">
+        <h4 style="color: #856404; margin: 0 0 10px;">⚠️ חשוב לדעת - זכויות יוצרים</h4>
+        <p style="margin: 0; color: #856404;">
+            מחשבון זה מוגן בזכויות יוצרים © וניתן להוספה לאתר שלכם בחינם רק תמורת השארת קישור הקרדיט.<br>
+            <strong>אסור:</strong> הסרת/שינוי/הסתרת קישור הקרדיט, שימוש מסחרי ישיר ללא אישור, מכירת המחשבון.
+        </p>
+    </div>
+</div>
+
+<!-- דיסקליימר -->
+<div style="max-width: 1200px; margin: 40px auto; padding: 20px; background: #f8f9fa; border-radius: 10px; font-size: 0.9em; color: #666; line-height: 1.6;">
+    <strong>הבהרה משפטית:</strong> המחשבון מיועד להערכה ראשונית בלבד ואינו מהווה הצעה מחייבת. התוצאות מבוססות על הנתונים שהוזנו ועשויות להשתנות בהתאם לתנאים בפועל של חברת הניכיון. מומלץ לקבל הצעות מספר גופים ולהשוות ביניהן. אין לראות במידע המוצג ייעוץ פיננסי.
+</div>
+
+</div>
+
+<!-- JavaScript -->
+<script>
+(function() {
+    'use strict';
+    
+    const NS = 'WPC_CalcFactoring_N8K3';
+    if (window[NS]) return;
+    
+    const container = document.getElementById('wpc-calc-factoring-n8k3-main');
+    if (!container) return;
+    
+    const PRIMARY_COLOR = '#1e5490';
+    
+    // פונקציות עזר
+    function formatCurrency(num) {
+        return '₪ ' + Math.round(num).toLocaleString('he-IL');
+    }
+    
+    function formatPercent(num) {
+        return num.toFixed(2) + '%';
+    }
+    
+    function el(id) {
+        return document.getElementById(id);
+    }
+    
+    // חישוב עלות ניכיון
+    function calculateFactoring(amount, days, annualRate, fee) {
+        const dailyRate = annualRate / 100 / 365;
+        const discountInterest = amount * dailyRate * days;
+        const totalCost = discountInterest + fee;
+        const netAmount = amount - totalCost;
+        const effectiveRate = (totalCost / netAmount) * (365 / days) * 100;
+        
+        return {
+            netAmount: netAmount,
+            discountInterest: discountInterest,
+            fee: fee,
+            totalCost: totalCost,
+            effectiveRate: effectiveRate
+        };
+    }
+    
+    // עדכון לשונית בסיסית
+    function updateBasic() {
+        const amount = parseInt(el('basic-amount-slider').value);
+        const days = parseInt(el('basic-days-slider').value);
+        const rate = parseFloat(el('basic-rate-slider').value);
+        const fee = parseInt(el('basic-fee-slider').value);
+        
+        el('basic-amount-value').textContent = formatCurrency(amount);
+        el('basic-days-value').textContent = days + ' ימים';
+        el('basic-rate-value').textContent = rate + '%';
+        el('basic-fee-value').textContent = formatCurrency(fee);
+        
+        const result = calculateFactoring(amount, days, rate, fee);
+        
+        el('basic-result-net').textContent = formatCurrency(result.netAmount);
+        el('basic-result-interest').textContent = formatCurrency(result.discountInterest);
+        el('basic-result-fee').textContent = formatCurrency(result.fee);
+        el('basic-result-total-cost').textContent = formatCurrency(result.totalCost);
+        el('basic-result-effective').textContent = formatPercent(result.effectiveRate);
+        
+        const costPercent = (result.totalCost / amount * 100).toFixed(1);
+        el('basic-explanation').textContent = 'הריבית האפקטיבית (' + formatPercent(result.effectiveRate) + ') היא העלות האמיתית שלך במונחים שנתיים. אתה משלם ' + costPercent + '% מסכום הצ\'ק כדי לקבל את הכסף ' + days + ' ימים מוקדם יותר.';
+    }
+    
+    // עדכון לשונית השוואה
+    function updateCompare() {
+        const amount = parseInt(el('compare-amount-slider').value);
+        const days = parseInt(el('compare-days-slider').value);
+        const rateA = parseFloat(el('compare-rate-a-slider').value);
+        const feeA = parseInt(el('compare-fee-a-slider').value);
+        const rateB = parseFloat(el('compare-rate-b-slider').value);
+        const feeB = parseInt(el('compare-fee-b-slider').value);
+        
+        el('compare-amount-value').textContent = formatCurrency(amount);
+        el('compare-days-value').textContent = days + ' ימים';
+        el('compare-rate-a-value').textContent = rateA + '%';
+        el('compare-fee-a-value').textContent = formatCurrency(feeA);
+        el('compare-rate-b-value').textContent = rateB + '%';
+        el('compare-fee-b-value').textContent = formatCurrency(feeB);
+        
+        const resultA = calculateFactoring(amount, days, rateA, feeA);
+        const resultB = calculateFactoring(amount, days, rateB, feeB);
+        
+        el('compare-net-a').textContent = formatCurrency(resultA.netAmount);
+        el('compare-effective-a').textContent = formatPercent(resultA.effectiveRate);
+        el('compare-net-b').textContent = formatCurrency(resultB.netAmount);
+        el('compare-effective-b').textContent = formatPercent(resultB.effectiveRate);
+        
+        const diff = Math.abs(resultA.netAmount - resultB.netAmount);
+        if (resultA.netAmount > resultB.netAmount) {
+            el('compare-winner').textContent = 'הצעה א\' - חיסכון של ' + formatCurrency(diff);
+        } else if (resultB.netAmount > resultA.netAmount) {
+            el('compare-winner').textContent = 'הצעה ב\' - חיסכון של ' + formatCurrency(diff);
+        } else {
+            el('compare-winner').textContent = 'ההצעות שוות!';
+        }
+    }
+    
+    // עדכון לשונית מספר צ'קים
+    function updateMulti() {
+        const total = parseInt(el('multi-total-slider').value);
+        const count = parseInt(el('multi-count-slider').value);
+        const days = parseInt(el('multi-days-slider').value);
+        const rate = parseFloat(el('multi-rate-slider').value);
+        const feePerCheck = parseInt(el('multi-fee-slider').value);
+        
+        el('multi-total-value').textContent = formatCurrency(total);
+        el('multi-count-value').textContent = count + ' צ\'קים';
+        el('multi-days-value').textContent = days + ' ימים';
+        el('multi-rate-value').textContent = rate + '%';
+        el('multi-fee-value').textContent = formatCurrency(feePerCheck);
+        
+        const totalFees = feePerCheck * count;
+        const result = calculateFactoring(total, days, rate, totalFees);
+        
+        el('multi-result-net').textContent = formatCurrency(result.netAmount);
+        el('multi-result-interest').textContent = formatCurrency(result.discountInterest);
+        el('multi-result-fees').textContent = formatCurrency(totalFees);
+        el('multi-result-total').textContent = formatCurrency(result.totalCost);
+        el('multi-result-effective').textContent = formatPercent(result.effectiveRate);
+    }
+    
+    // מעבר בין לשוניות
+    function switchTab(tabName) {
+        container.querySelectorAll('.wpc-calc-factoring-n8k3-tab').forEach(function(tab) {
+            tab.classList.remove('active');
+        });
+        container.querySelectorAll('.wpc-calc-factoring-n8k3-panel').forEach(function(panel) {
+            panel.classList.remove('active');
+        });
+        
+        const activeTab = container.querySelector('[data-tab="' + tabName + '"]');
+        if (activeTab) activeTab.classList.add('active');
+        
+        const activePanel = el('tab-' + tabName);
+        if (activePanel) activePanel.classList.add('active');
+    }
+    
+    // פתיחת AWG
+    function openAWG() {
+        const content = el('awg-content');
+        if (content) {
+            content.classList.toggle('show');
+        }
+    }
+    
+    // גלילה להטמעה
+    function scrollToEmbed() {
+        const embedSection = el('embed-section');
+        if (embedSection) {
+            embedSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    }
+    
+    // פתיחת/סגירת FAQ
+    function toggleFaq(header) {
+        const isActive = header.classList.contains('active');
+        
+        container.querySelectorAll('.wpc-calc-factoring-n8k3-accordion-header').forEach(function(h) {
+            h.classList.remove('active');
+        });
+        container.querySelectorAll('.wpc-calc-factoring-n8k3-accordion-content').forEach(function(c) {
+            c.classList.remove('active');
+        });
+        
+        if (!isActive) {
+            header.classList.add('active');
+            const content = header.nextElementSibling;
+            if (content) content.classList.add('active');
+        }
+    }
+    
+    // העתקת קוד הטמעה
+    function copyEmbedCode(color) {
+        color = color || PRIMARY_COLOR;
+        const calculator = el('wpc-calc-factoring-n8k3-calculator');
+        if (!calculator) return;
+        
+        let styles = '';
+        document.querySelectorAll('style').forEach(function(style) {
+            if (style.textContent.indexOf('wpc-calc-factoring-n8k3') !== -1) {
+                styles = style.textContent.replace(/#1e5490/g, color).replace(/var\(--primary\)/g, color);
+            }
+        });
+        
+        let code = '<style>\n' + styles + '\n</style>\n';
+        code += '<div class="wpc-calc-factoring-n8k3-wrapper" id="wpc-calc-factoring-n8k3-main">\n';
+        code += calculator.outerHTML + '\n';
+        code += '</div>\n';
+        code += '<p style="text-align:center; font-size:0.9em; margin-top:20px; color:#666;">מחשבון ניכיון צ\'קים פותח על ידי <a href="https://loan-israel.co.il/" target="_blank" rel="nofollow noopener" style="color:' + color + '; text-decoration:underline;">רק תבקש פיננסים</a></p>\n';
+        code += getEmbedScript();
+        
+        navigator.clipboard.writeText(code).then(function() {
+            alert('הקוד הועתק בהצלחה! הדביקו אותו בעמוד שלכם.');
+        });
+    }
+    
+    function getEmbedScript() {
+        return '<scr' + 'ipt>\n' +
+        'document.addEventListener("DOMContentLoaded", function() {\n' +
+        '  (function() {\n' +
+        '    "use strict";\n' +
+        '    var ns = "WPC_CalcFactoring_Embed";\n' +
+        '    if (window[ns]) return;\n' +
+        '    var c = document.getElementById("wpc-calc-factoring-n8k3-main");\n' +
+        '    if (!c) return;\n' +
+        '    function fmt(n) { return "₪ " + Math.round(n).toLocaleString("he-IL"); }\n' +
+        '    function pct(n) { return n.toFixed(2) + "%"; }\n' +
+        '    function el(id) { return document.getElementById(id); }\n' +
+        '    function calc(a, d, r, f) {\n' +
+        '      var dr = r / 100 / 365;\n' +
+        '      var di = a * dr * d;\n' +
+        '      var tc = di + f;\n' +
+        '      var na = a - tc;\n' +
+        '      var er = (tc / na) * (365 / d) * 100;\n' +
+        '      return { na: na, di: di, f: f, tc: tc, er: er };\n' +
+        '    }\n' +
+        '    function upBasic() {\n' +
+        '      var a = parseInt(el("basic-amount-slider").value);\n' +
+        '      var d = parseInt(el("basic-days-slider").value);\n' +
+        '      var r = parseFloat(el("basic-rate-slider").value);\n' +
+        '      var f = parseInt(el("basic-fee-slider").value);\n' +
+        '      el("basic-amount-value").textContent = fmt(a);\n' +
+        '      el("basic-days-value").textContent = d + " ימים";\n' +
+        '      el("basic-rate-value").textContent = r + "%";\n' +
+        '      el("basic-fee-value").textContent = fmt(f);\n' +
+        '      var res = calc(a, d, r, f);\n' +
+        '      el("basic-result-net").textContent = fmt(res.na);\n' +
+        '      el("basic-result-interest").textContent = fmt(res.di);\n' +
+        '      el("basic-result-fee").textContent = fmt(res.f);\n' +
+        '      el("basic-result-total-cost").textContent = fmt(res.tc);\n' +
+        '      el("basic-result-effective").textContent = pct(res.er);\n' +
+        '    }\n' +
+        '    function upCompare() {\n' +
+        '      var a = parseInt(el("compare-amount-slider").value);\n' +
+        '      var d = parseInt(el("compare-days-slider").value);\n' +
+        '      var rA = parseFloat(el("compare-rate-a-slider").value);\n' +
+        '      var fA = parseInt(el("compare-fee-a-slider").value);\n' +
+        '      var rB = parseFloat(el("compare-rate-b-slider").value);\n' +
+        '      var fB = parseInt(el("compare-fee-b-slider").value);\n' +
+        '      el("compare-amount-value").textContent = fmt(a);\n' +
+        '      el("compare-days-value").textContent = d + " ימים";\n' +
+        '      el("compare-rate-a-value").textContent = rA + "%";\n' +
+        '      el("compare-fee-a-value").textContent = fmt(fA);\n' +
+        '      el("compare-rate-b-value").textContent = rB + "%";\n' +
+        '      el("compare-fee-b-value").textContent = fmt(fB);\n' +
+        '      var resA = calc(a, d, rA, fA);\n' +
+        '      var resB = calc(a, d, rB, fB);\n' +
+        '      el("compare-net-a").textContent = fmt(resA.na);\n' +
+        '      el("compare-effective-a").textContent = pct(resA.er);\n' +
+        '      el("compare-net-b").textContent = fmt(resB.na);\n' +
+        '      el("compare-effective-b").textContent = pct(resB.er);\n' +
+        '      var diff = Math.abs(resA.na - resB.na);\n' +
+        '      if (resA.na > resB.na) el("compare-winner").textContent = "הצעה א\' - חיסכון של " + fmt(diff);\n' +
+        '      else if (resB.na > resA.na) el("compare-winner").textContent = "הצעה ב\' - חיסכון של " + fmt(diff);\n' +
+        '      else el("compare-winner").textContent = "ההצעות שוות!";\n' +
+        '    }\n' +
+        '    function upMulti() {\n' +
+        '      var t = parseInt(el("multi-total-slider").value);\n' +
+        '      var n = parseInt(el("multi-count-slider").value);\n' +
+        '      var d = parseInt(el("multi-days-slider").value);\n' +
+        '      var r = parseFloat(el("multi-rate-slider").value);\n' +
+        '      var fp = parseInt(el("multi-fee-slider").value);\n' +
+        '      el("multi-total-value").textContent = fmt(t);\n' +
+        '      el("multi-count-value").textContent = n + " צ\'קים";\n' +
+        '      el("multi-days-value").textContent = d + " ימים";\n' +
+        '      el("multi-rate-value").textContent = r + "%";\n' +
+        '      el("multi-fee-value").textContent = fmt(fp);\n' +
+        '      var tf = fp * n;\n' +
+        '      var res = calc(t, d, r, tf);\n' +
+        '      el("multi-result-net").textContent = fmt(res.na);\n' +
+        '      el("multi-result-interest").textContent = fmt(res.di);\n' +
+        '      el("multi-result-fees").textContent = fmt(tf);\n' +
+        '      el("multi-result-total").textContent = fmt(res.tc);\n' +
+        '      el("multi-result-effective").textContent = pct(res.er);\n' +
+        '    }\n' +
+        '    function switchTab(t) {\n' +
+        '      c.querySelectorAll(".wpc-calc-factoring-n8k3-tab").forEach(function(b) { b.classList.remove("active"); });\n' +
+        '      c.querySelectorAll(".wpc-calc-factoring-n8k3-panel").forEach(function(p) { p.classList.remove("active"); });\n' +
+        '      var btn = c.querySelector("[data-tab=\\"" + t + "\\"]");\n' +
+        '      if (btn) btn.classList.add("active");\n' +
+        '      var pan = document.getElementById("tab-" + t);\n' +
+        '      if (pan) pan.classList.add("active");\n' +
+        '    }\n' +
+        '    c.addEventListener("click", function(e) {\n' +
+        '      var act = e.target.closest("[data-action]");\n' +
+        '      if (!act) return;\n' +
+        '      var a = act.dataset.action;\n' +
+        '      if (a === "switch-tab") switchTab(act.dataset.tab);\n' +
+        '    });\n' +
+        '    c.addEventListener("input", function(e) {\n' +
+        '      var id = e.target.id;\n' +
+        '      if (id.indexOf("basic") !== -1) upBasic();\n' +
+        '      else if (id.indexOf("compare") !== -1) upCompare();\n' +
+        '      else if (id.indexOf("multi") !== -1) upMulti();\n' +
+        '    });\n' +
+        '    upBasic(); upCompare(); upMulti();\n' +
+        '    window[ns] = { v: "1.0.0" };\n' +
+        '  })();\n' +
+        '});\n' +
+        '</scr' + 'ipt>';
+    }
+    
+    // תצוגה מקדימה
+    function showPreview(color, name) {
+        const previewContainer = el('preview-container');
+        const previewContent = el('preview-content');
+        const previewColorName = el('preview-color-name');
+        
+        if (!previewContainer || !previewContent) return;
+        
+        previewContainer.style.display = 'block';
+        previewColorName.textContent = name;
+        previewContainer.dataset.color = color;
+        
+        const calculator = el('wpc-calc-factoring-n8k3-calculator');
+        if (calculator) {
+            let html = calculator.outerHTML;
+            html = html.replace(/style="[^"]*color:\s*#1e5490[^"]*"/g, function(match) {
+                return match.replace(/#1e5490/g, color);
+            });
+            previewContent.innerHTML = '<div style="pointer-events: none; opacity: 0.9; transform: scale(0.9); transform-origin: top center;">' + html + '</div>';
+        }
+    }
+    
+    // Event delegation
+    container.addEventListener('click', function(e) {
+        const action = e.target.closest('[data-action]');
+        if (!action) return;
+        
+        const actionType = action.dataset.action;
+        
+        switch(actionType) {
+            case 'switch-tab':
+                switchTab(action.dataset.tab);
+                break;
+            case 'open-awg':
+                openAWG();
+                break;
+            case 'scroll-to-embed':
+                scrollToEmbed();
+                break;
+            case 'toggle-faq':
+                toggleFaq(action);
+                break;
+            case 'copy-embed-code':
+                copyEmbedCode();
+                break;
+            case 'preview-color':
+                showPreview(action.dataset.color, action.dataset.name);
+                break;
+            case 'copy-preview-code':
+                const previewContainer = el('preview-container');
+                if (previewContainer && previewContainer.dataset.color) {
+                    copyEmbedCode(previewContainer.dataset.color);
+                }
+                break;
+        }
+    });
+    
+    // Input events
+    container.addEventListener('input', function(e) {
+        const id = e.target.id;
+        if (id.indexOf('basic') !== -1) {
+            updateBasic();
+        } else if (id.indexOf('compare') !== -1) {
+            updateCompare();
+        } else if (id.indexOf('multi') !== -1) {
+            updateMulti();
+        } else if (id === 'custom-color-picker') {
+            showPreview(e.target.value, 'צבע מותאם אישית');
+        }
+    });
+    
+    // אתחול
+    updateBasic();
+    updateCompare();
+    updateMulti();
+    
+    window[NS] = { version: '1.0.0' };
+})();
+</script>
+
+<!-- Schema.org Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "כמה זמן לוקח לקבל את הכסף מניכיון צ'קים?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "בדרך כלל הכסף מועבר תוך 24-48 שעות מרגע אישור העסקה. חלק מחברות הניכיון מציעות העברה ביום העסקים הבא או אפילו באותו יום תמורת עמלה נוספת."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "מה ההבדל בין ניכיון בבנק לחברה חוץ-בנקאית?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "בנקים בדרך כלל מציעים ריבית נמוכה יותר אך דורשים בטחונות, היסטוריית אשראי טובה ותהליך אישור ארוך יותר. חברות חוץ-בנקאיות גמישות יותר בדרישות אך גובות ריבית גבוהה יותר."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "מה נחשב ריבית סבירה לניכיון צ'קים?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "בבנקים הריבית נעה בין 8%-15% שנתי, בחברות חוץ-בנקאיות בין 15%-25%. ריבית מעל 30% נחשבת גבוהה מאוד ויש לשקול חלופות."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FinancialProduct",
+  "name": "מחשבון עלות ניכיון צ'קים",
+  "description": "מחשבון לחישוב עלות ניכיון צ'קים דחויים, כולל ריבית אפקטיבית שנתית והשוואת הצעות",
+  "category": "מחשבון פיננסי",
+  "featureList": [
+    "חישוב עלות ניכיון צ'ק בודד",
+    "השוואת הצעות ניכיון",
+    "חישוב לסדרת צ'קים",
+    "ריבית שנתית אפקטיבית"
+  ],
+  "provider": {
+    "@type": "Organization",
+    "name": "רק תבקש - אפטריו בע״מ",
+    "url": "https://loan-israel.co.il"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "ILS"
+  }
+}
+</script>
+

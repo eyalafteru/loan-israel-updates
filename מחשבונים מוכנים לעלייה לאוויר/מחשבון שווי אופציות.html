@@ -924,7 +924,14 @@ if (!document.querySelector('meta[name="viewport"]')) {
     function replaceColorsInElement(element, newColor) {
         const PRIMARY_COLOR = '#1e5490';
         const darkColor = darkenColor(newColor, 15);
+        const lightColor = newColor + '1a'; // 10% opacity
         
+        // עדכן CSS variables עם important
+        element.style.setProperty('--wpc-esop-primary', newColor, 'important');
+        element.style.setProperty('--wpc-esop-primary-dark', darkColor, 'important');
+        element.style.setProperty('--wpc-esop-primary-light', `rgba(${parseInt(newColor.slice(1,3),16)}, ${parseInt(newColor.slice(3,5),16)}, ${parseInt(newColor.slice(5,7),16)}, 0.1)`, 'important');
+        
+        // החלף צבעים בinline styles
         element.querySelectorAll('*').forEach(el => {
             const style = el.getAttribute('style');
             if (style) {
@@ -934,12 +941,112 @@ if (!document.querySelector('meta[name="viewport"]')) {
             }
         });
         
-        // עדכן CSS variables
-        element.style.setProperty('--wpc-esop-primary', newColor);
-        element.style.setProperty('--wpc-esop-primary-dark', darkColor);
+        // החלף צבעים באלמנטים ספציפיים עם setProperty + important
+        // כותרות
+        element.querySelectorAll('[class*="title"], [class*="header"]').forEach(el => {
+            if (window.getComputedStyle(el).color.includes('30, 84, 144') || el.style.color) {
+                el.style.setProperty('color', newColor, 'important');
+            }
+        });
+        
+        // כפתורי טאב פעילים
+        element.querySelectorAll('.wpc-calc-esop-x7m2-tab-btn.active').forEach(el => {
+            el.style.setProperty('border-bottom-color', newColor, 'important');
+            el.style.setProperty('color', newColor, 'important');
+        });
+        
+        // תוצאות (gradient)
+        element.querySelectorAll('.wpc-calc-esop-x7m2-results').forEach(el => {
+            el.style.setProperty('background', `linear-gradient(135deg, ${newColor} 0%, ${darkColor} 100%)`, 'important');
+        });
+        
+        // info boxes
+        element.querySelectorAll('.wpc-calc-esop-x7m2-info-box').forEach(el => {
+            el.style.setProperty('border-right-color', newColor, 'important');
+        });
+        
+        // slider thumbs
+        element.querySelectorAll('input[type="range"]').forEach(el => {
+            el.style.setProperty('accent-color', newColor, 'important');
+        });
+        
+        // slider values
+        element.querySelectorAll('.wpc-calc-esop-x7m2-slider-value').forEach(el => {
+            el.style.setProperty('color', newColor, 'important');
+            el.style.setProperty('background', `rgba(${parseInt(newColor.slice(1,3),16)}, ${parseInt(newColor.slice(3,5),16)}, ${parseInt(newColor.slice(5,7),16)}, 0.1)`, 'important');
+        });
+        
+        // כותרות טבלאות
+        element.querySelectorAll('.wpc-calc-esop-x7m2-tax-breakdown-title').forEach(el => {
+            el.style.setProperty('background', newColor, 'important');
+        });
     }
     
     function initPreviewCalculator(previewArea) {
+        // פונקציות עזר
+        function pel(id) { return previewArea.querySelector(`#${id}`); }
+        function pFormatCurrency(n) { return '₪' + Math.round(n).toLocaleString('he-IL'); }
+        function pFormatUSD(n) { return '$' + parseFloat(n).toFixed(2); }
+        function pFormatNumber(n) { return Math.round(n).toLocaleString('he-IL'); }
+        
+        // פונקציות חישוב לתצוגה מקדימה
+        function pUpdateBasic() {
+            const options = parseFloat(pel('basic-options-slider')?.value || 50000);
+            const strike = parseFloat(pel('basic-strike-slider')?.value || 2);
+            const stock = parseFloat(pel('basic-stock-slider')?.value || 20);
+            const usd = parseFloat(pel('basic-usd-slider')?.value || 3.65);
+            const grossUSD = (stock - strike) * options;
+            const grossILS = grossUSD * usd;
+            const tax = grossILS * 0.25;
+            const net = grossILS - tax;
+            if (pel('basic-result-gross')) pel('basic-result-gross').textContent = pFormatCurrency(grossILS);
+            if (pel('basic-result-tax')) pel('basic-result-tax').textContent = pFormatCurrency(tax);
+            if (pel('basic-result-net')) pel('basic-result-net').textContent = pFormatCurrency(net);
+        }
+        
+        function pUpdateDilution() {
+            const options = parseFloat(pel('dilution-options-slider')?.value || 50000);
+            const percent = parseFloat(pel('dilution-percent-slider')?.value || 20);
+            const strike = parseFloat(pel('dilution-strike-slider')?.value || 2);
+            const stock = parseFloat(pel('dilution-stock-slider')?.value || 20);
+            const usd = 3.65;
+            const effectiveOptions = Math.round(options * (1 - percent / 100));
+            const grossBefore = (stock - strike) * options * usd * 0.75;
+            const grossAfter = (stock - strike) * effectiveOptions * usd * 0.75;
+            if (pel('dilution-result-options')) pel('dilution-result-options').textContent = pFormatNumber(effectiveOptions);
+            if (pel('dilution-result-before')) pel('dilution-result-before').textContent = pFormatCurrency(grossBefore);
+            if (pel('dilution-result-after')) pel('dilution-result-after').textContent = pFormatCurrency(grossAfter);
+            if (pel('dilution-result-loss')) pel('dilution-result-loss').textContent = pFormatCurrency(grossBefore - grossAfter);
+        }
+        
+        function pUpdateTax() {
+            const gross = parseFloat(pel('tax-gross-slider')?.value || 2000000);
+            const income = parseFloat(pel('tax-income-slider')?.value || 400000);
+            const capitalTax = gross * 0.25;
+            const totalIncome = gross + income;
+            let yessefTax = 0;
+            if (totalIncome > 721560) {
+                yessefTax = Math.min(gross, totalIncome - 721560) * 0.03;
+            }
+            if (pel('tax-result-capital')) pel('tax-result-capital').textContent = pFormatCurrency(capitalTax);
+            if (pel('tax-result-yessef')) pel('tax-result-yessef').textContent = pFormatCurrency(yessefTax);
+            if (pel('tax-result-total')) pel('tax-result-total').textContent = pFormatCurrency(capitalTax + yessefTax);
+            if (pel('tax-result-net')) pel('tax-result-net').textContent = pFormatCurrency(gross - capitalTax - yessefTax);
+        }
+        
+        function pUpdateBreakeven() {
+            const options = parseFloat(pel('breakeven-options-slider')?.value || 50000);
+            const strike = parseFloat(pel('breakeven-strike-slider')?.value || 5);
+            const target = parseFloat(pel('breakeven-target-slider')?.value || 500000);
+            const usd = 3.65;
+            const targetGross = target / 0.75;
+            const targetPrice = (targetGross / usd / options) + strike;
+            const increase = ((targetPrice / strike) - 1) * 100;
+            if (pel('breakeven-result-zero')) pel('breakeven-result-zero').textContent = pFormatUSD(strike);
+            if (pel('breakeven-result-target')) pel('breakeven-result-target').textContent = pFormatUSD(targetPrice);
+            if (pel('breakeven-result-increase')) pel('breakeven-result-increase').textContent = Math.round(increase) + '%';
+        }
+        
         // אתחול טאבים
         const tabs = previewArea.querySelectorAll('[data-action="switch-tab"]');
         const contents = previewArea.querySelectorAll('.wpc-calc-esop-x7m2-tab-content');
@@ -965,10 +1072,11 @@ if (!document.querySelector('meta[name="viewport"]')) {
             });
         });
         
-        // אתחול סליידרים
+        // אתחול סליידרים עם חישוב תוצאות
         const sliders = previewArea.querySelectorAll('input[type="range"]');
         sliders.forEach(slider => {
-            slider.addEventListener('input', function() {
+            slider.addEventListener('input', function(e) {
+                e.stopPropagation();
                 const valueId = this.id.replace('-slider', '-value');
                 const valueEl = previewArea.querySelector(`#${valueId}`);
                 if (valueEl) {
@@ -978,12 +1086,26 @@ if (!document.querySelector('meta[name="viewport"]')) {
                         valueEl.textContent = '₪' + parseFloat(this.value).toFixed(2);
                     } else if (this.id.includes('percent')) {
                         valueEl.textContent = this.value + '%';
+                    } else if (this.id.includes('gross') || this.id.includes('income') || this.id.includes('target')) {
+                        valueEl.textContent = '₪' + parseInt(this.value).toLocaleString('he-IL');
                     } else {
                         valueEl.textContent = parseInt(this.value).toLocaleString('he-IL');
                     }
                 }
+                
+                // עדכון חישובים לפי הטאב
+                if (this.id.includes('basic-')) pUpdateBasic();
+                else if (this.id.includes('dilution-')) pUpdateDilution();
+                else if (this.id.includes('tax-')) pUpdateTax();
+                else if (this.id.includes('breakeven-')) pUpdateBreakeven();
             });
         });
+        
+        // חישוב ראשוני
+        pUpdateBasic();
+        pUpdateDilution();
+        pUpdateTax();
+        pUpdateBreakeven();
     }
 
     function copyPreviewCode() {
@@ -1128,7 +1250,7 @@ if (!document.querySelector('meta[name="viewport"]')) {
             '});',
             '</' + 'script>'
         ];
-        return lines.join('\\n');
+        return lines.join('\n');
     }
 
     container.addEventListener('click', function(e) {

@@ -710,10 +710,6 @@ if (!document.querySelector('meta[name="viewport"]')) {
         <span class="wpc-calc-rvb-k7m2-tab-icon">📈</span>
         <span>ציר זמן</span>
       </button>
-      <button class="wpc-calc-rvb-k7m2-tab-btn" data-action="switch-tab" data-tab="breakeven">
-        <span class="wpc-calc-rvb-k7m2-tab-icon">🎯</span>
-        <span>נקודת איזון</span>
-      </button>
       <button class="wpc-calc-rvb-k7m2-tab-btn" data-action="switch-tab" data-tab="maxrent">
         <span class="wpc-calc-rvb-k7m2-tab-icon">🏠</span>
         <span>שכ"ד גג</span>
@@ -877,39 +873,7 @@ if (!document.querySelector('meta[name="viewport"]')) {
       </div>
     </div>
 
-    <!-- Tab 3: Breakeven -->
-    <div class="wpc-calc-rvb-k7m2-tab-content" id="tab-breakeven">
-      <h2 class="wpc-calc-rvb-k7m2-tab-title">נקודת האיזון - מתי רכישה משתלמת?</h2>
-      
-      <div class="wpc-calc-rvb-k7m2-breakeven-display">
-        <div class="wpc-calc-rvb-k7m2-breakeven-years" id="breakeven-years">--</div>
-        <div class="wpc-calc-rvb-k7m2-breakeven-label">שנים עד שרכישה משתלמת יותר</div>
-      </div>
-
-      <div class="wpc-calc-rvb-k7m2-results">
-        <h3 class="wpc-calc-rvb-k7m2-results-title">📊 פירוט נקודת האיזון</h3>
-        <div class="wpc-calc-rvb-k7m2-results-grid">
-          <div class="wpc-calc-rvb-k7m2-result-item">
-            <div class="wpc-calc-rvb-k7m2-result-label">הון ברכישה בנקודת איזון</div>
-            <div class="wpc-calc-rvb-k7m2-result-value buy" id="breakeven-buy-wealth">₪0</div>
-          </div>
-          <div class="wpc-calc-rvb-k7m2-result-item">
-            <div class="wpc-calc-rvb-k7m2-result-label">הון בשכירות בנקודת איזון</div>
-            <div class="wpc-calc-rvb-k7m2-result-value rent" id="breakeven-rent-wealth">₪0</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="wpc-calc-rvb-k7m2-info-box">
-        <div class="wpc-calc-rvb-k7m2-info-title">🎯 מה זה אומר?</div>
-        <div class="wpc-calc-rvb-k7m2-info-text" id="breakeven-explanation">
-          אם אתם מתכננים לגור בדירה פחות מנקודת האיזון, שכירות והשקעה בשוק ההון עשויות להיות עדיפות.
-          מעבר לנקודה זו, רכישת דירה צפויה להניב הון גבוה יותר.
-        </div>
-      </div>
-    </div>
-
-    <!-- Tab 4: Max Rent -->
+    <!-- Tab 3: Max Rent -->
     <div class="wpc-calc-rvb-k7m2-tab-content" id="tab-maxrent">
       <h2 class="wpc-calc-rvb-k7m2-tab-title">שכר דירה גג - מתי עדיף לקנות?</h2>
       
@@ -998,7 +962,7 @@ if (!document.querySelector('meta[name="viewport"]')) {
     
     <div style="background: rgba(30, 84, 144, 0.08); padding: 20px; border-radius: 12px; margin-bottom: 25px; border-right: 4px solid var(--wpc-rvb-primary);">
       <p style="font-size: 1.1em; line-height: 1.7; margin: 0; color: #222;">
-        <strong>💎 מחשבון מקצועי עם 4 טאבים, חישובי מס מדויקים, ועיצוב responsive מלא!</strong><br>
+        <strong>💎 מחשבון מקצועי עם 3 טאבים, חישובי מס מדויקים, ועיצוב responsive מלא!</strong><br>
         <strong>שווי המחשבון:</strong> מעל ₪15,000 בפיתוח 💰 | <strong>מה ששילמתם:</strong> ₪0 🎉
       </p>
     </div>
@@ -1307,7 +1271,9 @@ if (!document.querySelector('meta[name="viewport"]')) {
                 return { year: year, buyWealth: result.buy.netWealth, rentWealth: result.rent.netWealth };
             }
         }
-        return { year: -1, buyWealth: 0, rentWealth: 0 };
+        // אם אין נקודת איזון עד 50 שנה, מחזירים את הערכים ב-50 שנה
+        const result50 = calculateScenarios(50);
+        return { year: -1, buyWealth: result50.buy.netWealth, rentWealth: result50.rent.netWealth };
     }
 
     function calculateMaxRent() {
@@ -1394,24 +1360,47 @@ if (!document.querySelector('meta[name="viewport"]')) {
 
     function updateBreakeven() {
         const breakeven = findBreakevenYear();
+        const comparisonResult = calculateScenarios(state.comparisonYears);
+        
+        // מציגים את ערכי ההון בתקופת ההשוואה שנבחרה (לא בנקודת האיזון)
+        el('breakeven-buy-wealth').textContent = formatCurrency(comparisonResult.buy.netWealth);
+        el('breakeven-rent-wealth').textContent = formatCurrency(comparisonResult.rent.netWealth);
+        
+        // עדכון התוויות לשקף את תקופת ההשוואה
+        el('breakeven-results-title').textContent = `📊 הון נטו ב-${state.comparisonYears} שנים`;
+        el('breakeven-buy-label').textContent = `הון ברכישה (${state.comparisonYears} שנים)`;
+        el('breakeven-rent-label').textContent = `הון בשכירות (${state.comparisonYears} שנים)`;
         
         if (breakeven.year === -1) {
             el('breakeven-years').textContent = '50+';
-            el('breakeven-buy-wealth').textContent = '--';
-            el('breakeven-rent-wealth').textContent = '--';
-            el('breakeven-explanation').innerHTML = '<strong>🔑 במקרה זה, שכירות עדיפה לטווח של עד 50 שנה!</strong> הנתונים שהזנתם מראים שהשקעה בשוק ההון צפויה להניב יותר מרכישת דירה.';
+            const diff50 = breakeven.rentWealth - breakeven.buyWealth;
+            const diffComparison = comparisonResult.rent.netWealth - comparisonResult.buy.netWealth;
+            
+            el('breakeven-explanation').innerHTML = `<strong>🔑 במקרה זה, שכירות עדיפה לטווח של עד 50 שנה!</strong><br><br>
+                📊 <strong>בתקופת ההשוואה שבחרתם (${state.comparisonYears} שנים):</strong> שכירות עדיפה בהפרש של ${formatCurrency(diffComparison)}.<br><br>
+                📊 <strong>ב-50 שנה:</strong> הפרש של ${formatCurrency(diff50)} לטובת שכירות והשקעה.`;
         } else {
             el('breakeven-years').textContent = breakeven.year;
-            el('breakeven-buy-wealth').textContent = formatCurrency(breakeven.buyWealth);
-            el('breakeven-rent-wealth').textContent = formatCurrency(breakeven.rentWealth);
             
+            let explanation = '';
             if (breakeven.year <= 7) {
-                el('breakeven-explanation').innerHTML = `<strong>🏠 רכישה משתלמת מהר!</strong> כבר אחרי ${breakeven.year} שנים רכישה הופכת לעדיפה. אם אתם מתכננים להישאר בדירה לטווח הזה או יותר - שקלו לקנות.`;
+                explanation = `<strong>🏠 רכישה משתלמת מהר!</strong> כבר אחרי ${breakeven.year} שנים רכישה הופכת לעדיפה.`;
             } else if (breakeven.year <= 15) {
-                el('breakeven-explanation').innerHTML = `<strong>⚖️ נקודת איזון סבירה.</strong> אחרי ${breakeven.year} שנים רכישה הופכת לעדיפה. זה טווח זמן סטנדרטי - אם אתם בטוחים שתישארו, רכישה עשויה להשתלם.`;
+                explanation = `<strong>⚖️ נקודת איזון סבירה.</strong> אחרי ${breakeven.year} שנים רכישה הופכת לעדיפה.`;
             } else {
-                el('breakeven-explanation').innerHTML = `<strong>🔑 נקודת איזון רחוקה.</strong> רק אחרי ${breakeven.year} שנים רכישה הופכת לעדיפה. אם אינכם בטוחים שתישארו כל כך הרבה זמן, שכירות עשויה להיות עדיפה.`;
+                explanation = `<strong>🔑 נקודת איזון רחוקה.</strong> רק אחרי ${breakeven.year} שנים רכישה הופכת לעדיפה.`;
             }
+            
+            // הוספת מידע על תקופת ההשוואה שנבחרה
+            if (state.comparisonYears < breakeven.year) {
+                const diffComparison = comparisonResult.rent.netWealth - comparisonResult.buy.netWealth;
+                explanation += `<br><br>📊 <strong>בתקופת ההשוואה שבחרתם (${state.comparisonYears} שנים):</strong> שכירות עדיפה בהפרש של ${formatCurrency(diffComparison)}.`;
+            } else if (state.comparisonYears >= breakeven.year) {
+                const diffComparison = comparisonResult.buy.netWealth - comparisonResult.rent.netWealth;
+                explanation += `<br><br>📊 <strong>בתקופת ההשוואה שבחרתם (${state.comparisonYears} שנים):</strong> רכישה עדיפה בהפרש של ${formatCurrency(diffComparison)}.`;
+            }
+            
+            el('breakeven-explanation').innerHTML = explanation;
         }
     }
 
@@ -1449,7 +1438,6 @@ if (!document.querySelector('meta[name="viewport"]')) {
         updateSliderValues();
         updateCompare();
         updateTimeline();
-        updateBreakeven();
         updateMaxRent();
     }
 
@@ -1458,6 +1446,9 @@ if (!document.querySelector('meta[name="viewport"]')) {
         container.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
         container.querySelectorAll('.wpc-calc-rvb-k7m2-tab-content').forEach(c => c.classList.remove('active'));
         el('tab-' + tabName).classList.add('active');
+        
+        // עדכון התוצאות בעת החלפת טאב
+        updateAll();
     }
 
     function openAWG() {
@@ -1485,6 +1476,290 @@ if (!document.querySelector('meta[name="viewport"]')) {
         return '#' + (0x1000000 + R * 0x10000 + G * 0x100 + B).toString(16).slice(1);
     }
 
+    function hexToRgba(hex, alpha) {
+        const r = parseInt(hex.slice(1, 3), 16);
+        const g = parseInt(hex.slice(3, 5), 16);
+        const b = parseInt(hex.slice(5, 7), 16);
+        return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+    }
+
+    // === אתחול מחשבון בתצוגה מקדימה - קריטי! ===
+    function initPreviewCalculator(calc, primaryColor) {
+        const darkColor = darkenColor(primaryColor, 15);
+        
+        // State מקומי לתצוגה המקדימה
+        const previewState = {
+            propertyPrice: 2500000, equity: 625000, mortgageRate: 4.5, mortgageTerm: 25,
+            rent: 6000, rentIncrease: 2, investmentReturn: 7, propertyAppreciation: 3, comparisonYears: 15
+        };
+        
+        function formatCurrency(n) { return '₪' + Math.round(n).toLocaleString('he-IL'); }
+        
+        function calculatePMT(p, r, y) {
+            const mr = r / 100 / 12, m = y * 12;
+            if (mr === 0) return p / m;
+            return p * (mr * Math.pow(1 + mr, m)) / (Math.pow(1 + mr, m) - 1);
+        }
+        
+        function calculateRemainingBalance(p, r, ty, yp) {
+            const mr = r / 100 / 12, tm = ty * 12, mp = yp * 12;
+            if (mr === 0) return p * (1 - mp / tm);
+            const pmt = calculatePMT(p, r, ty);
+            return p * Math.pow(1 + mr, mp) - pmt * (Math.pow(1 + mr, mp) - 1) / mr;
+        }
+        
+        function calculateFV(p, r, y) { return p * Math.pow(1 + r / 100, y); }
+        
+        function calculateScenarios(years) {
+            const loan = previewState.propertyPrice - previewState.equity;
+            const costs = previewState.propertyPrice * 0.08;
+            const mortgage = calculatePMT(loan, previewState.mortgageRate, previewState.mortgageTerm);
+            const fv = calculateFV(previewState.propertyPrice, previewState.propertyAppreciation, years);
+            const balance = years >= previewState.mortgageTerm ? 0 : calculateRemainingBalance(loan, previewState.mortgageRate, previewState.mortgageTerm, years);
+            const buyWealth = fv - balance;
+            const savings = Math.max(0, mortgage - previewState.rent);
+            const invest = previewState.equity + costs;
+            const rentGross = invest * Math.pow(1 + previewState.investmentReturn / 100, years) + savings * 12 * years * Math.pow(1 + previewState.investmentReturn / 100, years / 2);
+            const gains = rentGross - invest - savings * 12 * years;
+            const tax = gains * 0.25;
+            const rentWealth = rentGross - tax;
+            return { buy: { netWealth: buyWealth, futureValue: fv, mortgageBalance: balance, purchaseCosts: costs }, rent: { netWealth: rentWealth, grossReturn: rentGross, capitalTax: tax, initialInvestment: invest, monthlySavings: savings }, difference: buyWealth - rentWealth, buyWins: buyWealth > rentWealth };
+        }
+        
+        function findPreviewBreakevenYear() {
+            for (let y = 1; y <= 50; y++) {
+                const res = calculateScenarios(y);
+                if (res.buyWins) return { year: y, buyWealth: res.buy.netWealth, rentWealth: res.rent.netWealth };
+            }
+            const res50 = calculateScenarios(50);
+            return { year: -1, buyWealth: res50.buy.netWealth, rentWealth: res50.rent.netWealth };
+        }
+        
+        function updatePreviewCompare() {
+            const r = calculateScenarios(previewState.comparisonYears);
+            const buyWealth = calc.querySelector('#result-buy-wealth');
+            const rentWealth = calc.querySelector('#result-rent-wealth');
+            const diff = calc.querySelector('#result-difference');
+            const verdict = calc.querySelector('#compare-verdict');
+            
+            if (buyWealth) buyWealth.textContent = formatCurrency(r.buy.netWealth);
+            if (rentWealth) rentWealth.textContent = formatCurrency(r.rent.netWealth);
+            if (diff) diff.textContent = formatCurrency(Math.abs(r.difference));
+            
+            if (verdict) {
+                verdict.className = 'wpc-calc-rvb-k7m2-verdict ' + (r.buyWins ? 'buy-wins' : 'rent-wins');
+                verdict.innerHTML = r.buyWins ? 
+                    '🏠 <strong>רכישה עדיפה!</strong> הפרש ' + formatCurrency(r.difference) : 
+                    '🔑 <strong>שכירות עדיפה!</strong> הפרש ' + formatCurrency(-r.difference);
+            }
+            
+            // עדכון פרטים
+            const buyFV = calc.querySelector('#buy-future-value');
+            const buyBalance = calc.querySelector('#buy-mortgage-balance');
+            const buyCosts = calc.querySelector('#buy-purchase-costs');
+            const buyNet = calc.querySelector('#buy-net-wealth');
+            const rentInit = calc.querySelector('#rent-initial-investment');
+            const rentSave = calc.querySelector('#rent-monthly-savings');
+            const rentGross = calc.querySelector('#rent-gross-return');
+            const rentTax = calc.querySelector('#rent-capital-tax');
+            const rentNet = calc.querySelector('#rent-net-wealth');
+            
+            if (buyFV) buyFV.textContent = formatCurrency(r.buy.futureValue);
+            if (buyBalance) buyBalance.textContent = formatCurrency(r.buy.mortgageBalance);
+            if (buyCosts) buyCosts.textContent = formatCurrency(r.buy.purchaseCosts);
+            if (buyNet) buyNet.textContent = formatCurrency(r.buy.netWealth);
+            if (rentInit) rentInit.textContent = formatCurrency(r.rent.initialInvestment);
+            if (rentSave) rentSave.textContent = formatCurrency(r.rent.monthlySavings);
+            if (rentGross) rentGross.textContent = formatCurrency(r.rent.grossReturn);
+            if (rentTax) rentTax.textContent = formatCurrency(r.rent.capitalTax);
+            if (rentNet) rentNet.textContent = formatCurrency(r.rent.netWealth);
+        }
+        
+        function updatePreviewTimeline() {
+            const cont = calc.querySelector('#timeline-container');
+            if (!cont) return;
+            let html = '';
+            const years = [5, 10, 15, 20, 25, 30];
+            years.forEach(year => {
+                const r = calculateScenarios(year);
+                const win = r.buyWins ? 'buy' : 'rent';
+                const winText = r.buyWins ? '🏠 רכישה' : '🔑 שכירות';
+                html += `<div class="wpc-calc-rvb-k7m2-timeline-item"><div class="wpc-calc-rvb-k7m2-timeline-year">${year} שנים</div><div class="wpc-calc-rvb-k7m2-timeline-values"><div class="wpc-calc-rvb-k7m2-timeline-value buy"><span>רכישה</span><strong>${formatCurrency(r.buy.netWealth)}</strong></div><div class="wpc-calc-rvb-k7m2-timeline-value rent"><span>שכירות</span><strong>${formatCurrency(r.rent.netWealth)}</strong></div></div><div class="wpc-calc-rvb-k7m2-timeline-winner ${win}">${winText}</div></div>`;
+            });
+            cont.innerHTML = html;
+        }
+        
+        function updatePreviewBreakeven() {
+            const b = findPreviewBreakevenYear();
+            const compRes = calculateScenarios(previewState.comparisonYears);
+            const buyWealthEl = calc.querySelector('#breakeven-buy-wealth');
+            const rentWealthEl = calc.querySelector('#breakeven-rent-wealth');
+            const yearsEl = calc.querySelector('#breakeven-years');
+            const expEl = calc.querySelector('#breakeven-explanation');
+            const titleEl = calc.querySelector('#breakeven-results-title');
+            const buyLabelEl = calc.querySelector('#breakeven-buy-label');
+            const rentLabelEl = calc.querySelector('#breakeven-rent-label');
+            
+            // מציגים את ערכי תקופת ההשוואה
+            if (buyWealthEl) buyWealthEl.textContent = formatCurrency(compRes.buy.netWealth);
+            if (rentWealthEl) rentWealthEl.textContent = formatCurrency(compRes.rent.netWealth);
+            if (titleEl) titleEl.textContent = `📊 הון נטו ב-${previewState.comparisonYears} שנים`;
+            if (buyLabelEl) buyLabelEl.textContent = `הון ברכישה (${previewState.comparisonYears} שנים)`;
+            if (rentLabelEl) rentLabelEl.textContent = `הון בשכירות (${previewState.comparisonYears} שנים)`;
+            
+            if (b.year === -1) {
+                if (yearsEl) yearsEl.textContent = '50+';
+                const diff50 = b.rentWealth - b.buyWealth;
+                const diffComp = compRes.rent.netWealth - compRes.buy.netWealth;
+                if (expEl) expEl.innerHTML = `<strong>🔑 במקרה זה, שכירות עדיפה לטווח של עד 50 שנה!</strong><br><br>
+                    📊 <strong>בתקופת ההשוואה (${previewState.comparisonYears} שנים):</strong> שכירות עדיפה בהפרש של ${formatCurrency(diffComp)}.<br><br>
+                    📊 <strong>ב-50 שנה:</strong> הפרש של ${formatCurrency(diff50)} לטובת שכירות.`;
+            } else {
+                if (yearsEl) yearsEl.textContent = b.year;
+                let exp = '';
+                if (b.year <= 7) exp = '<strong>🏠 רכישה משתלמת מהר!</strong> כבר אחרי ' + b.year + ' שנים רכישה עדיפה.';
+                else if (b.year <= 15) exp = '<strong>⚖️ נקודת איזון סבירה.</strong> אחרי ' + b.year + ' שנים רכישה עדיפה.';
+                else exp = '<strong>🔑 נקודת איזון רחוקה.</strong> רק אחרי ' + b.year + ' שנים רכישה עדיפה.';
+                
+                if (previewState.comparisonYears < b.year) {
+                    const diffComp = compRes.rent.netWealth - compRes.buy.netWealth;
+                    exp += `<br><br>📊 <strong>בתקופת ההשוואה (${previewState.comparisonYears} שנים):</strong> שכירות עדיפה בהפרש של ${formatCurrency(diffComp)}.`;
+                } else {
+                    const diffComp = compRes.buy.netWealth - compRes.rent.netWealth;
+                    exp += `<br><br>📊 <strong>בתקופת ההשוואה (${previewState.comparisonYears} שנים):</strong> רכישה עדיפה בהפרש של ${formatCurrency(diffComp)}.`;
+                }
+                if (expEl) expEl.innerHTML = exp;
+            }
+        }
+        
+        function updatePreviewMaxRent() {
+            const years = previewState.comparisonYears;
+            let low = 1000, high = 50000;
+            while (high - low > 100) {
+                const mid = (low + high) / 2;
+                const origRent = previewState.rent;
+                previewState.rent = mid;
+                const res = calculateScenarios(years);
+                previewState.rent = origRent;
+                if (res.buyWins) low = mid;
+                else high = mid;
+            }
+            const maxRent = Math.round(low);
+            const rentYield = (previewState.rent * 12 / previewState.propertyPrice * 100).toFixed(2);
+            
+            const maxRentEl = calc.querySelector('#max-rent-value');
+            const currentRentEl = calc.querySelector('#current-rent-display');
+            const yieldEl = calc.querySelector('#rent-yield-display');
+            const recEl = calc.querySelector('#rent-recommendation');
+            
+            if (maxRentEl) maxRentEl.textContent = formatCurrency(maxRent);
+            if (currentRentEl) currentRentEl.textContent = formatCurrency(previewState.rent);
+            if (yieldEl) yieldEl.textContent = rentYield + '%';
+            if (recEl) {
+                if (previewState.rent > maxRent) { recEl.textContent = '🏠 לקנות'; recEl.style.color = '#10b981'; }
+                else { recEl.textContent = '🔑 לשכור'; recEl.style.color = '#ec4899'; }
+            }
+        }
+        
+        function updatePreviewResults() {
+            updatePreviewCompare();
+            updatePreviewTimeline();
+            updatePreviewMaxRent();
+        }
+        
+        // === טאבים - עם stopPropagation! ===
+        const tabs = calc.querySelectorAll('[data-action="switch-tab"]');
+        const contents = calc.querySelectorAll('.wpc-calc-rvb-k7m2-tab-content');
+        
+        tabs.forEach(tab => {
+            tab.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                tabs.forEach(t => {
+                    t.classList.remove('active');
+                    t.style.setProperty('border-bottom-color', 'transparent', 'important');
+                    t.style.setProperty('color', '#6b7280', 'important');
+                    t.style.setProperty('background', 'transparent', 'important');
+                });
+                
+                contents.forEach(c => {
+                    c.classList.remove('active');
+                    c.style.display = 'none';
+                });
+                
+                this.classList.add('active');
+                this.style.setProperty('border-bottom-color', primaryColor, 'important');
+                this.style.setProperty('color', primaryColor, 'important');
+                this.style.setProperty('background', '#fff', 'important');
+                
+                const tabName = this.dataset.tab;
+                const activeContent = calc.querySelector('#tab-' + tabName);
+                if (activeContent) {
+                    activeContent.classList.add('active');
+                    activeContent.style.display = 'block';
+                }
+                
+                // עדכון התוצאות בעת החלפת טאב
+                updatePreviewResults();
+            });
+        });
+        
+        // === סליידרים ===
+        const sliders = calc.querySelectorAll('input[type="range"]');
+        sliders.forEach(slider => {
+            slider.style.setProperty('accent-color', primaryColor, 'important');
+            
+            slider.addEventListener('input', function(e) {
+                e.stopPropagation();
+                
+                const id = this.id;
+                const v = parseFloat(this.value);
+                const valueId = id.replace('-slider', '-value');
+                const valueEl = calc.querySelector('#' + valueId);
+                
+                // עדכון ערך מוצג
+                if (valueEl) {
+                    if (id.includes('rate') || id.includes('increase') || id.includes('return') || id.includes('appreciation')) {
+                        valueEl.textContent = v + '%';
+                    } else if (id.includes('term') || id.includes('years')) {
+                        valueEl.textContent = v + ' שנים';
+                    } else {
+                        valueEl.textContent = formatCurrency(v);
+                    }
+                }
+                
+                // עדכון state
+                if (id === 'property-price-slider') previewState.propertyPrice = v;
+                else if (id === 'equity-slider') previewState.equity = v;
+                else if (id === 'mortgage-rate-slider') previewState.mortgageRate = v;
+                else if (id === 'mortgage-term-slider') previewState.mortgageTerm = v;
+                else if (id === 'rent-slider') previewState.rent = v;
+                else if (id === 'rent-increase-slider') previewState.rentIncrease = v;
+                else if (id === 'investment-return-slider') previewState.investmentReturn = v;
+                else if (id === 'property-appreciation-slider') previewState.propertyAppreciation = v;
+                else if (id === 'comparison-years-slider') previewState.comparisonYears = v;
+                
+                updatePreviewResults();
+            });
+        });
+        
+        // === FAQ ===
+        const faqItems = calc.querySelectorAll('.wpc-calc-rvb-k7m2-faq-item');
+        faqItems.forEach(item => {
+            const header = item.querySelector('.wpc-calc-rvb-k7m2-faq-header');
+            if (header) {
+                header.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    item.classList.toggle('active');
+                });
+            }
+        });
+        
+        // אתחול ראשוני
+        updatePreviewResults();
+    }
+
     function getEmbedCSS(color) {
         const darkColor = darkenColor(color, 15);
         let css = '';
@@ -1500,16 +1775,26 @@ if (!document.querySelector('meta[name="viewport"]')) {
 
     function copyEmbedCode() {
         const calc = el('wpc-calc-rvb-k7m2-calculator').cloneNode(true);
-        const css = getEmbedCSS('#1e5490');
+        const defaultColor = '#1e5490';
+        const css = getEmbedCSS(defaultColor);
         
         let code = '<style>\n' + css + '\n</style>\n\n';
         code += '<div class="wpc-calc-rvb-k7m2-wrapper" id="wpc-calc-rvb-k7m2-main">\n';
         code += calc.outerHTML + '\n</div>\n\n';
-        code += `<p style="text-align:center;font-size:0.9em;margin-top:20px;color:#666;">מחשבון ${CALCULATOR_NAME} פותח על ידי <a href="https://loan-israel.co.il/" target="_blank" rel="nofollow noopener" style="color:#1e5490;text-decoration:underline;">רק תבקש פיננסים</a></p>\n\n`;
-        code += getEmbedScript();
+        code += `<p style="text-align:center;font-size:0.9em;margin-top:20px;color:#666;">מחשבון ${CALCULATOR_NAME} פותח על ידי <a href="https://loan-israel.co.il/" target="_blank" rel="nofollow noopener" style="color:${defaultColor};text-decoration:underline;">רק תבקש פיננסים</a></p>\n\n`;
+        code += getEmbedScript(defaultColor);
         
         navigator.clipboard.writeText(code).then(() => {
-            alert('✅ הקוד הועתק בהצלחה!');
+            alert('✅ הקוד הועתק בהצלחה!\n\n• CSS מלא\n• JavaScript לכל הטאבים והסליידרים\n• קרדיט לאתר');
+        }).catch(err => {
+            console.error('שגיאה בהעתקה:', err);
+            const textarea = document.createElement('textarea');
+            textarea.value = code;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            alert('✅ הקוד הועתק!');
         });
     }
 
@@ -1521,39 +1806,110 @@ if (!document.querySelector('meta[name="viewport"]')) {
         const calc = el('wpc-calc-rvb-k7m2-calculator').cloneNode(true);
         const darkColor = darkenColor(color, 15);
         
+        // שינוי ID למניעת התנגשות!
+        calc.id = 'wpc-calc-rvb-k7m2-calculator-preview';
+        
+        // הגדרת CSS Variables על האלמנט המשוכפל
+        calc.style.setProperty('--wpc-rvb-primary', color);
+        calc.style.setProperty('--wpc-rvb-primary-dark', darkColor);
+        calc.style.setProperty('--wpc-rvb-primary-light', hexToRgba(color, 0.1));
+        
+        // עדכון צבעים עם setProperty + important
         calc.querySelectorAll('.wpc-calc-rvb-k7m2-tab-btn.active').forEach(btn => {
-            btn.style.borderBottomColor = color;
-            btn.style.color = color;
+            btn.style.setProperty('border-bottom-color', color, 'important');
+            btn.style.setProperty('color', color, 'important');
         });
-        calc.querySelectorAll('.wpc-calc-rvb-k7m2-results').forEach(el => {
-            el.style.background = `linear-gradient(135deg, ${color} 0%, ${darkColor} 100%)`;
+        
+        calc.querySelectorAll('.wpc-calc-rvb-k7m2-results').forEach(elem => {
+            elem.style.setProperty('background', `linear-gradient(135deg, ${color} 0%, ${darkColor} 100%)`, 'important');
+        });
+        
+        calc.querySelectorAll('.wpc-calc-rvb-k7m2-breakeven-display').forEach(elem => {
+            elem.style.setProperty('background', `linear-gradient(135deg, ${color} 0%, ${darkColor} 100%)`, 'important');
+        });
+        
+        calc.querySelectorAll('.wpc-calc-rvb-k7m2-title').forEach(elem => {
+            elem.style.setProperty('color', color, 'important');
+        });
+        
+        calc.querySelectorAll('.wpc-calc-rvb-k7m2-tab-title, .wpc-calc-rvb-k7m2-section-title, .wpc-calc-rvb-k7m2-content-title, .wpc-calc-rvb-k7m2-awg-title').forEach(elem => {
+            elem.style.setProperty('color', color, 'important');
+        });
+        
+        calc.querySelectorAll('.wpc-calc-rvb-k7m2-slider').forEach(elem => {
+            elem.style.setProperty('accent-color', color, 'important');
+        });
+        
+        calc.querySelectorAll('.wpc-calc-rvb-k7m2-slider-value').forEach(elem => {
+            elem.style.setProperty('background', hexToRgba(color, 0.1), 'important');
+            elem.style.setProperty('color', color, 'important');
+        });
+        
+        calc.querySelectorAll('.wpc-calc-rvb-k7m2-info-box').forEach(elem => {
+            elem.style.setProperty('border-right-color', color, 'important');
+            elem.style.setProperty('background', hexToRgba(color, 0.08), 'important');
+        });
+        
+        calc.querySelectorAll('.wpc-calc-rvb-k7m2-info-title').forEach(elem => {
+            elem.style.setProperty('color', color, 'important');
+        });
+        
+        calc.querySelectorAll('.wpc-calc-rvb-k7m2-update-date').forEach(elem => {
+            elem.style.setProperty('background', hexToRgba(color, 0.1), 'important');
+            elem.style.setProperty('color', color, 'important');
+        });
+        
+        calc.querySelectorAll('.wpc-calc-rvb-k7m2-timeline-year').forEach(elem => {
+            elem.style.setProperty('color', color, 'important');
+        });
+        
+        calc.querySelectorAll('.wpc-calc-rvb-k7m2-faq-icon').forEach(elem => {
+            elem.style.setProperty('color', color, 'important');
         });
         
         el('preview-content').innerHTML = '';
         el('preview-content').appendChild(calc);
         
+        // אתחול מחדש של כל ה-event listeners!
+        initPreviewCalculator(calc, color);
+        
         container.querySelectorAll('.wpc-calc-rvb-k7m2-color-btn').forEach(btn => {
             btn.classList.remove('active');
             if (btn.dataset.color === color) btn.classList.add('active');
         });
+        
+        // גלילה לתצוגה
+        el('preview-container').scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
     function copyPreviewCode() {
         const calc = el('wpc-calc-rvb-k7m2-calculator').cloneNode(true);
         const css = getEmbedCSS(state.previewColor);
+        const color = state.previewColor;
         
         let code = '<style>\n' + css + '\n</style>\n\n';
         code += '<div class="wpc-calc-rvb-k7m2-wrapper" id="wpc-calc-rvb-k7m2-main">\n';
         code += calc.outerHTML + '\n</div>\n\n';
-        code += `<p style="text-align:center;font-size:0.9em;margin-top:20px;color:#666;">מחשבון ${CALCULATOR_NAME} פותח על ידי <a href="https://loan-israel.co.il/" target="_blank" rel="nofollow noopener" style="color:${state.previewColor};text-decoration:underline;">רק תבקש פיננסים</a></p>\n\n`;
-        code += getEmbedScript();
+        code += `<p style="text-align:center;font-size:0.9em;margin-top:20px;color:#666;">מחשבון ${CALCULATOR_NAME} פותח על ידי <a href="https://loan-israel.co.il/" target="_blank" rel="nofollow noopener" style="color:${color};text-decoration:underline;">רק תבקש פיננסים</a></p>\n\n`;
+        code += getEmbedScript(color);
         
         navigator.clipboard.writeText(code).then(() => {
-            alert('✅ הקוד עם הצבע הנבחר הועתק!');
+            alert('✅ הקוד עם הצבע הנבחר הועתק!\n\n• CSS מלא עם הצבע ' + color + '\n• JavaScript לכל הטאבים והסליידרים\n• קרדיט לאתר');
+        }).catch(err => {
+            console.error('שגיאה בהעתקה:', err);
+            // Fallback
+            const textarea = document.createElement('textarea');
+            textarea.value = code;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            alert('✅ הקוד הועתק!');
         });
     }
 
-    function getEmbedScript() {
+    function getEmbedScript(primaryColor) {
+        const color = primaryColor || '#1e5490';
         return `<script>
 document.addEventListener("DOMContentLoaded", function() {
 (function() {
@@ -1562,6 +1918,7 @@ var NS = "WPC_CalcRVB_Embed";
 if (window[NS]) return;
 var container = document.getElementById("wpc-calc-rvb-k7m2-main");
 if (!container) return;
+var PRIMARY_COLOR = "${color}";
 
 var state = {
     propertyPrice: 2500000, equity: 625000, mortgageRate: 4.5, mortgageTerm: 25,
@@ -1602,7 +1959,16 @@ function calculateScenarios(years) {
     return { buy: { netWealth: buyWealth, futureValue: fv, mortgageBalance: balance, purchaseCosts: costs }, rent: { netWealth: rentWealth, grossReturn: rentGross, capitalTax: tax, initialInvestment: invest, monthlySavings: savings }, difference: buyWealth - rentWealth, buyWins: buyWealth > rentWealth };
 }
 
-function updateAll() {
+function findBreakevenYear() {
+    for (var y = 1; y <= 50; y++) {
+        var res = calculateScenarios(y);
+        if (res.buyWins) return { year: y, buyWealth: res.buy.netWealth, rentWealth: res.rent.netWealth };
+    }
+    var res50 = calculateScenarios(50);
+    return { year: -1, buyWealth: res50.buy.netWealth, rentWealth: res50.rent.netWealth };
+}
+
+function updateCompare() {
     var r = calculateScenarios(state.comparisonYears);
     if (el("result-buy-wealth")) el("result-buy-wealth").textContent = formatCurrency(r.buy.netWealth);
     if (el("result-rent-wealth")) el("result-rent-wealth").textContent = formatCurrency(r.rent.netWealth);
@@ -1620,11 +1986,86 @@ function updateAll() {
     if (v) { v.className = "wpc-calc-rvb-k7m2-verdict " + (r.buyWins ? "buy-wins" : "rent-wins"); v.innerHTML = r.buyWins ? "🏠 רכישה עדיפה! הפרש " + formatCurrency(r.difference) : "🔑 שכירות עדיפה! הפרש " + formatCurrency(-r.difference); }
 }
 
+function updateTimeline() {
+    var cont = el("timeline-container");
+    if (!cont) return;
+    var html = "";
+    var years = [5, 10, 15, 20, 25, 30];
+    years.forEach(function(year) {
+        var r = calculateScenarios(year);
+        var win = r.buyWins ? "buy" : "rent";
+        var winText = r.buyWins ? "🏠 רכישה" : "🔑 שכירות";
+        html += '<div class="wpc-calc-rvb-k7m2-timeline-item"><div class="wpc-calc-rvb-k7m2-timeline-year">' + year + ' שנים</div><div class="wpc-calc-rvb-k7m2-timeline-values"><div class="wpc-calc-rvb-k7m2-timeline-value buy"><span>רכישה</span><strong>' + formatCurrency(r.buy.netWealth) + '</strong></div><div class="wpc-calc-rvb-k7m2-timeline-value rent"><span>שכירות</span><strong>' + formatCurrency(r.rent.netWealth) + '</strong></div></div><div class="wpc-calc-rvb-k7m2-timeline-winner ' + win + '">' + winText + '</div></div>';
+    });
+    cont.innerHTML = html;
+}
+
+function updateBreakeven() {
+    var b = findBreakevenYear();
+    var compRes = calculateScenarios(state.comparisonYears);
+    if (el("breakeven-buy-wealth")) el("breakeven-buy-wealth").textContent = formatCurrency(compRes.buy.netWealth);
+    if (el("breakeven-rent-wealth")) el("breakeven-rent-wealth").textContent = formatCurrency(compRes.rent.netWealth);
+    if (el("breakeven-results-title")) el("breakeven-results-title").textContent = "📊 הון נטו ב-" + state.comparisonYears + " שנים";
+    if (el("breakeven-buy-label")) el("breakeven-buy-label").textContent = "הון ברכישה (" + state.comparisonYears + " שנים)";
+    if (el("breakeven-rent-label")) el("breakeven-rent-label").textContent = "הון בשכירות (" + state.comparisonYears + " שנים)";
+    if (b.year === -1) {
+        if (el("breakeven-years")) el("breakeven-years").textContent = "50+";
+        var diff50 = b.rentWealth - b.buyWealth;
+        var diffComp = compRes.rent.netWealth - compRes.buy.netWealth;
+        if (el("breakeven-explanation")) el("breakeven-explanation").innerHTML = "<strong>🔑 במקרה זה, שכירות עדיפה לטווח של עד 50 שנה!</strong><br><br>📊 <strong>בתקופת ההשוואה שבחרתם (" + state.comparisonYears + " שנים):</strong> שכירות עדיפה בהפרש של " + formatCurrency(diffComp) + ".<br><br>📊 <strong>ב-50 שנה:</strong> הפרש של " + formatCurrency(diff50) + " לטובת שכירות.";
+    } else {
+        if (el("breakeven-years")) el("breakeven-years").textContent = b.year;
+        var exp = "";
+        if (b.year <= 7) exp = "<strong>🏠 רכישה משתלמת מהר!</strong> כבר אחרי " + b.year + " שנים רכישה עדיפה.";
+        else if (b.year <= 15) exp = "<strong>⚖️ נקודת איזון סבירה.</strong> אחרי " + b.year + " שנים רכישה עדיפה.";
+        else exp = "<strong>🔑 נקודת איזון רחוקה.</strong> רק אחרי " + b.year + " שנים רכישה עדיפה.";
+        if (state.comparisonYears < b.year) {
+            var diffComp = compRes.rent.netWealth - compRes.buy.netWealth;
+            exp += "<br><br>📊 <strong>בתקופת ההשוואה שבחרתם (" + state.comparisonYears + " שנים):</strong> שכירות עדיפה בהפרש של " + formatCurrency(diffComp) + ".";
+        } else {
+            var diffComp = compRes.buy.netWealth - compRes.rent.netWealth;
+            exp += "<br><br>📊 <strong>בתקופת ההשוואה שבחרתם (" + state.comparisonYears + " שנים):</strong> רכישה עדיפה בהפרש של " + formatCurrency(diffComp) + ".";
+        }
+        if (el("breakeven-explanation")) el("breakeven-explanation").innerHTML = exp;
+    }
+}
+
+function updateMaxRent() {
+    var years = state.comparisonYears;
+    var low = 1000, high = 50000;
+    while (high - low > 100) {
+        var mid = (low + high) / 2;
+        var origRent = state.rent;
+        state.rent = mid;
+        var res = calculateScenarios(years);
+        state.rent = origRent;
+        if (res.buyWins) low = mid;
+        else high = mid;
+    }
+    var maxRent = Math.round(low);
+    var rentYield = (state.rent * 12 / state.propertyPrice * 100).toFixed(2);
+    if (el("max-rent-value")) el("max-rent-value").textContent = formatCurrency(maxRent);
+    if (el("current-rent-display")) el("current-rent-display").textContent = formatCurrency(state.rent);
+    if (el("rent-yield-display")) el("rent-yield-display").textContent = rentYield + "%";
+    var rec = el("rent-recommendation");
+    if (rec) {
+        if (state.rent > maxRent) { rec.textContent = "🏠 לקנות"; rec.style.color = "#10b981"; }
+        else { rec.textContent = "🔑 לשכור"; rec.style.color = "#ec4899"; }
+    }
+}
+
+function updateAll() {
+    updateCompare();
+    updateTimeline();
+    updateMaxRent();
+}
+
 function switchTab(t) {
     container.querySelectorAll(".wpc-calc-rvb-k7m2-tab-btn").forEach(function(b){b.classList.remove("active");});
     var btn = container.querySelector("[data-tab=\\""+t+"\\"]"); if(btn) btn.classList.add("active");
     container.querySelectorAll(".wpc-calc-rvb-k7m2-tab-content").forEach(function(c){c.classList.remove("active");});
     var tab = el("tab-"+t); if(tab) tab.classList.add("active");
+    updateAll();
 }
 
 container.addEventListener("click", function(e) {

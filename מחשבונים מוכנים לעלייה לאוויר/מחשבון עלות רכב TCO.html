@@ -258,6 +258,21 @@ if (!document.querySelector('meta[name="viewport"]')) {
   text-align: center !important;
 }
 
+/* === Toggle/Switch === */
+.wpc-calc-tco-v8m3-toggle-wrapper {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  margin-bottom: 20px !important;
+  padding: 10px 15px !important;
+  background: var(--wpc-tco-bg-light) !important;
+  border-radius: var(--wpc-tco-radius-sm) !important;
+}
+
+.wpc-calc-tco-v8m3-toggle-label {
+  font-weight: 600 !important;
+}
+
 /* === Advanced Options === */
 .wpc-calc-tco-v8m3-advanced-toggle {
   display: block !important;
@@ -360,7 +375,7 @@ if (!document.querySelector('meta[name="viewport"]')) {
 .wpc-calc-tco-v8m3-bar-fill {
   height: 100% !important;
   background: var(--wpc-tco-primary) !important;
-  width: 0;
+  width: 0 !important;
   transition: width 0.5s ease !important;
 }
 
@@ -368,6 +383,7 @@ if (!document.querySelector('meta[name="viewport"]')) {
 .wpc-calc-tco-v8m3-bar-fill.fuel { background: var(--wpc-tco-warning) !important; }
 .wpc-calc-tco-v8m3-bar-fill.insurance { background: var(--wpc-tco-primary) !important; }
 .wpc-calc-tco-v8m3-bar-fill.maintenance { background: var(--wpc-tco-success) !important; }
+.wpc-calc-tco-v8m3-bar-fill.finance { background: #8b5cf6 !important; }
 
 /* === AWG Section === */
 .wpc-calc-tco-v8m3-awg-section {
@@ -449,17 +465,12 @@ if (!document.querySelector('meta[name="viewport"]')) {
 }
 
 .wpc-calc-tco-v8m3-color-btn {
-  width: 50px !important;
-  height: 50px !important;
+  width: 40px !important;
+  height: 40px !important;
   border-radius: 50% !important;
   border: 3px solid var(--wpc-tco-white) !important;
   cursor: pointer !important;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2) !important;
-  transition: var(--wpc-tco-transition) !important;
-}
-
-.wpc-calc-tco-v8m3-color-btn:hover {
-  transform: scale(1.15) !important;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2) !important;
 }
 
 .wpc-calc-tco-v8m3-color-btn.active {
@@ -526,6 +537,44 @@ if (!document.querySelector('meta[name="viewport"]')) {
     min-width: 80px !important;
     font-size: 0.9rem !important;
   }
+}
+
+@media (max-width: 375px) {
+  .wpc-calc-tco-v8m3-wrapper {
+    padding: 10px !important;
+  }
+  
+  .wpc-calc-tco-v8m3-title {
+    font-size: 1.5rem !important;
+  }
+  
+  .wpc-calc-tco-v8m3-tab-btn {
+    padding: 10px 8px !important;
+    font-size: 0.8rem !important;
+  }
+  
+  .wpc-calc-tco-v8m3-tab-icon {
+    display: none !important;
+  }
+  
+  .wpc-calc-tco-v8m3-cta-btn {
+    padding: 12px 20px !important;
+    font-size: 0.95rem !important;
+  }
+}
+
+/* Preview Container */
+.wpc-calc-tco-v8m3-preview-container {
+  background: var(--wpc-tco-white) !important;
+  border-radius: var(--wpc-tco-radius-md) !important;
+  padding: 20px !important;
+  margin-top: 20px !important;
+  border: 2px solid var(--wpc-tco-border) !important;
+  display: none !important;
+}
+
+.wpc-calc-tco-v8m3-preview-container.active {
+  display: block !important;
 }
 </style>
 
@@ -806,6 +855,7 @@ if (!document.querySelector('meta[name="viewport"]')) {
       </button>
     </div>
     <div class="wpc-calc-tco-v8m3-awg-content" id="awg-content">
+      <!-- AWG Shortcode -->
       <div style="background: white; padding: 10px; border-radius: 8px;">
         [awg postid="32400"]
       </div>
@@ -814,13 +864,13 @@ if (!document.querySelector('meta[name="viewport"]')) {
 
   <!-- Embed Section -->
   <div class="wpc-calc-tco-v8m3-embed-section" id="wpc-calc-tco-v8m3-embed">
-    <h2 style="text-align: center; color: var(--wpc-tco-primary);">🎁 רוצים להטמיע את מחשבון עלות רכב TCO באתר שלכם? חינם לחלוטין!</h2>
+    <h2 style="text-align: center; color: var(--wpc-tco-primary); margin-bottom: 20px;">🎁 רוצים להטמיע את מחשבון עלות הרכב (TCO) באתר שלכם? חינם לחלוטין!</h2>
     
     <!-- תיאור ערך -->
-    <div style="background: rgba(30, 84, 144, 0.08); padding: 20px; border-radius: 12px; margin: 30px 0; border-right: 4px solid var(--wpc-tco-primary);">
+    <div style="background: rgba(30, 84, 144, 0.08); padding: 20px; border-radius: 12px; margin-bottom: 30px; border-right: 4px solid var(--wpc-tco-primary);">
       <p style="font-size: 1.1em; line-height: 1.7; margin: 0; color: #222;">
-        <strong>💎 אנחנו נותנים לכם את מחשבון עלות רכב TCO המתקדם הזה לחלוטין בחינם!</strong><br>
-        תמורת קישור קרדיט קטן לאתר שלנו, תקבלו מחשבון מקצועי עם 3 טאבים, חישובים מדויקים לרכב בנזין/חשמלי/היברידי ועיצוב responsive מלא.<br>
+        <strong>💎 אנחנו נותנים לכם את מחשבון עלות הרכב (TCO) המתקדם הזה לחלוטין בחינם!</strong><br>
+        תמורת קישור קרדיט קטן לאתר שלנו, תקבלו מחשבון מקצועי עם <strong>3 טאבים</strong> (חישוב עלות, השוואת רכבים, מידע וטיפים), חישובים מדויקים של ירידת ערך, דלק, ביטוח וטיפולים - ועיצוב responsive מלא.<br>
         <strong>שווי המחשבון:</strong> מעל ₪12,000 בפיתוח 💰 | <strong>מה ששילמתם:</strong> ₪0 🎉
       </p>
     </div>
@@ -829,12 +879,12 @@ if (!document.querySelector('meta[name="viewport"]')) {
     <div style="background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); padding: 25px; border-radius: 12px; margin: 30px 0; border: 2px solid #0ea5e9;">
       <h3 style="color: #0369a1; margin-top: 0;">🚀 למה להטמיע מחשבון באתר שלכם? זה משפר את ה-SEO!</h3>
       <p style="line-height: 1.8; color: #222; margin-bottom: 15px;">
-        <strong>הוספת מחשבון אינטראקטיבי לאתר היא אחת הדרכים הטובות ביותר לשפר את דירוג האתר במנועי החיפוש!</strong>
+        <strong>הוספת מחשבון עלות רכב אינטראקטיבי לאתר היא אחת הדרכים הטובות ביותר לשפר את דירוג האתר במנועי החיפוש!</strong>
       </p>
-      <ul style="line-height: 2; color: #222; margin: 0;">
+      <ul style="line-height: 2; color: #222; margin: 0; padding-right: 20px;">
         <li>📈 <strong>תוכן אינטראקטיבי איכותי</strong> - גוגל אוהבת דפים עם כלים שימושיים</li>
         <li>⏱️ <strong>זמן שהייה ארוך יותר</strong> - מבקרים נשארים בדף יותר זמן</li>
-        <li>🔗 <strong>מילות מפתח רלוונטיות</strong> - המחשבון כולל מילות מפתח כמו "עלות רכב אמיתית, TCO רכב, ירידת ערך רכב, חישוב עלות בעלות רכב, רכב חשמלי מול בנזין"</li>
+        <li>🔗 <strong>מילות מפתח רלוונטיות</strong> - המחשבון כולל מילות מפתח כמו "עלות בעלות רכב, TCO, ירידת ערך, רכב חשמלי מול בנזין, עלות לקילומטר"</li>
         <li>🎯 <strong>מחשבון בחינם להטמעה</strong> - תוכן ייחודי בלי עלות פיתוח</li>
         <li>💼 <strong>מקצועיות ואמינות</strong> - אתר עם כלי מחשבון נראה מקצועי יותר</li>
         <li>📱 <strong>Mobile Friendly</strong> - מחשבון responsive מלא</li>
@@ -842,9 +892,19 @@ if (!document.querySelector('meta[name="viewport"]')) {
         <li>📊 <strong>הקטנת Bounce Rate</strong> - המבקרים נשארים להשתמש בכלי</li>
       </ul>
       <p style="margin-top: 20px; margin-bottom: 0; padding: 15px; background: white; border-radius: 8px; color: #0369a1; font-weight: 700;">
-        💡 <strong>טיפ SEO:</strong> הוסיפו את המחשבון בדפים רלוונטיים כמו "קניית רכב חדש, רכב חשמלי, מימון רכב, ליסינג רכב, השוואת רכבים" - 
+        💡 <strong>טיפ SEO:</strong> הוסיפו את המחשבון בדפים רלוונטיים כמו "השוואת רכבים, מימון רכב, רכב חשמלי מול בנזין, עלויות רכב" - 
         זה יחזק את הדף בדיוק במילות המפתח שאתם רוצים לדרג עליהן!
       </p>
+    </div>
+    
+    <!-- הוראות הטמעה -->
+    <div style="background: #fef3c7; padding: 20px; border-radius: 12px; margin-bottom: 30px; border-right: 4px solid #f59e0b;">
+      <h3 style="color: #b45309; margin-top: 0;">📋 איך מטמיעים? 3 צעדים פשוטים:</h3>
+      <ol style="line-height: 2; color: #222; margin: 0; padding-right: 20px;">
+        <li>בחרו צבע שמתאים לאתר שלכם (או השאירו את ברירת המחדל)</li>
+        <li>לחצו על "העתק קוד HTML מלא"</li>
+        <li>הדביקו את הקוד בעמוד שלכם - וזהו!</li>
+      </ol>
     </div>
     
     <div style="text-align: center; margin: 20px 0;">
@@ -853,59 +913,44 @@ if (!document.querySelector('meta[name="viewport"]')) {
       </button>
     </div>
 
-    <!-- הוראות הטמעה -->
-    <div style="background: #f8fafc; padding: 20px; border-radius: 12px; margin: 25px 0; border: 1px solid #e5e7eb;">
-      <h4 style="color: #1e5490; margin-top: 0;">📌 איך להטמיע את המחשבון?</h4>
-      <ol style="line-height: 1.8; margin: 0; padding-right: 20px;">
-        <li><strong>לחצו על "העתק קוד HTML מלא"</strong> (או בחרו צבע מהאופציות למטה)</li>
-        <li><strong>היכנסו לעורך ה-HTML של האתר שלכם</strong> (WordPress, Wix, או כל פלטפורמה אחרת)</li>
-        <li><strong>הדביקו את הקוד</strong> במקום שבו תרצו שהמחשבון יופיע</li>
-        <li><strong>שמרו ופרסמו</strong> - זהו! המחשבון עובד ומוכן לשימוש 🎉</li>
-      </ol>
-      <p style="margin: 15px 0 0 0; color: #666; font-size: 0.9em;">
-        💡 <strong>טיפ:</strong> המחשבון כולל CSS, HTML וכל ה-JavaScript הנדרש - לא צריך להוסיף כלום!
-      </p>
-    </div>
-
-    <!-- תנאי שימוש -->
-    <div style="background: #fffbeb; padding: 20px; border-radius: 12px; margin: 25px 0; border-right: 4px solid #f59e0b;">
-      <h4 style="color: #b45309; margin-top: 0;">📜 תנאי שימוש (חשוב!)</h4>
-      <ul style="line-height: 1.8; margin: 0; color: #222;">
-        <li>✅ <strong>מותר:</strong> להטמיע באתר שלכם חינם</li>
-        <li>✅ <strong>מותר:</strong> להשתמש במחשבון באתרים מסחריים</li>
-        <li>✅ <strong>מותר:</strong> לשנות את הצבע של המחשבון</li>
-        <li>❌ <strong>אסור:</strong> להסיר את הקרדיט למפתח (loan-israel.co.il)</li>
-        <li>❌ <strong>אסור:</strong> למכור או להפיץ את המחשבון כמוצר עצמאי</li>
-        <li>❌ <strong>אסור:</strong> לשנות את הקוד באופן שעלול לפגוע בפונקציונליות</li>
-      </ul>
-      <p style="margin: 15px 0 0 0; background: white; padding: 10px; border-radius: 6px; font-weight: 600; color: #b45309;">
-        📧 שאלות? צרו קשר: <a href="https://loan-israel.co.il" style="color: #1e5490; text-decoration: underline;">loan-israel.co.il</a>
-      </p>
-    </div>
-
-    <!-- בורר צבעים -->
-      <p style="font-weight: bold;">👇 בחר צבע למחשבון - לחץ לתצוגה מקדימה 👇</p>
+    <div style="text-align: center;">
+      <p style="font-weight: bold;">🎨 בחר צבע למחשבון:</p>
       <div class="wpc-calc-tco-v8m3-color-picker">
-        <button class="wpc-calc-tco-v8m3-color-btn active" style="background: #1e5490;" data-action="preview-color" data-color="#1e5490" data-name="כחול מקצועי" title="כחול מקצועי 💙"></button>
-        <button class="wpc-calc-tco-v8m3-color-btn" style="background: #10b981;" data-action="preview-color" data-color="#10b981" data-name="ירוק צמיחה" title="ירוק צמיחה 💚"></button>
-        <button class="wpc-calc-tco-v8m3-color-btn" style="background: #ef4444;" data-action="preview-color" data-color="#ef4444" data-name="אדום אנרגטי" title="אדום אנרגטי ❤️"></button>
-        <button class="wpc-calc-tco-v8m3-color-btn" style="background: #8b5cf6;" data-action="preview-color" data-color="#8b5cf6" data-name="סגול יוקרתי" title="סגול יוקרתי 💜"></button>
-        <button class="wpc-calc-tco-v8m3-color-btn" style="background: #f59e0b;" data-action="preview-color" data-color="#f59e0b" data-name="כתום דינמי" title="כתום דינמי 🧡"></button>
-        <button class="wpc-calc-tco-v8m3-color-btn" style="background: #ec4899;" data-action="preview-color" data-color="#ec4899" data-name="ורוד מודרני" title="ורוד מודרני 💗"></button>
-        <button class="wpc-calc-tco-v8m3-color-btn" style="background: #06b6d4;" data-action="preview-color" data-color="#06b6d4" data-name="טורקיז רענן" title="טורקיז רענן 🩵"></button>
-        <button class="wpc-calc-tco-v8m3-color-btn" style="background: #84cc16;" data-action="preview-color" data-color="#84cc16" data-name="ליים עז" title="ליים עז 💛"></button>
-        <button class="wpc-calc-tco-v8m3-color-btn" style="background: #f97316;" data-action="preview-color" data-color="#f97316" data-name="כתום בוהק" title="כתום בוהק 🔥"></button>
-        <button class="wpc-calc-tco-v8m3-color-btn" style="background: #0891b2;" data-action="preview-color" data-color="#0891b2" data-name="כחול ים" title="כחול ים 🌊"></button>
+        <button class="wpc-calc-tco-v8m3-color-btn active" style="background: #1e5490;" data-action="preview-color" data-color="#1e5490" data-name="כחול מקצועי" title="כחול מקצועי"></button>
+        <button class="wpc-calc-tco-v8m3-color-btn" style="background: #10b981;" data-action="preview-color" data-color="#10b981" data-name="ירוק צמיחה" title="ירוק צמיחה"></button>
+        <button class="wpc-calc-tco-v8m3-color-btn" style="background: #ef4444;" data-action="preview-color" data-color="#ef4444" data-name="אדום אנרגטי" title="אדום אנרגטי"></button>
+        <button class="wpc-calc-tco-v8m3-color-btn" style="background: #f59e0b;" data-action="preview-color" data-color="#f59e0b" data-name="כתום דינמי" title="כתום דינמי"></button>
+        <button class="wpc-calc-tco-v8m3-color-btn" style="background: #8b5cf6;" data-action="preview-color" data-color="#8b5cf6" data-name="סגול יוקרתי" title="סגול יוקרתי"></button>
+        <button class="wpc-calc-tco-v8m3-color-btn" style="background: #ec4899;" data-action="preview-color" data-color="#ec4899" data-name="ורוד מודרני" title="ורוד מודרני"></button>
+        <button class="wpc-calc-tco-v8m3-color-btn" style="background: #06b6d4;" data-action="preview-color" data-color="#06b6d4" data-name="טורקיז רענן" title="טורקיז רענן"></button>
+        <button class="wpc-calc-tco-v8m3-color-btn" style="background: #84cc16;" data-action="preview-color" data-color="#84cc16" data-name="ליים עז" title="ליים עז"></button>
+        <button class="wpc-calc-tco-v8m3-color-btn" style="background: #f97316;" data-action="preview-color" data-color="#f97316" data-name="כתום בוהק" title="כתום בוהק"></button>
+        <button class="wpc-calc-tco-v8m3-color-btn" style="background: #0891b2;" data-action="preview-color" data-color="#0891b2" data-name="כחול ים" title="כחול ים"></button>
       </div>
-      
       <div style="margin-top: 15px;">
-        <label style="font-weight: 600; color: #222;">🎨 צבע מותאם אישית: </label>
+        <label style="font-weight: 600;">🎨 צבע מותאם אישית: </label>
         <input type="color" id="custom-color-picker" value="#1e5490" 
-               style="width: 50px; height: 50px; border-radius: 8px; cursor: pointer; border: 2px solid #ddd; vertical-align: middle;">
+               style="width: 45px; height: 45px; border-radius: 8px; cursor: pointer; border: 2px solid #ddd; vertical-align: middle;">
       </div>
     </div>
+    
+    <!-- תנאי שימוש -->
+    <div style="background: #f1f5f9; padding: 20px; border-radius: 12px; margin: 30px 0; font-size: 0.9em; color: #475569;">
+      <h4 style="margin-top: 0; color: #334155;">📜 תנאי שימוש:</h4>
+      <ul style="line-height: 1.8; margin: 0; padding-right: 20px;">
+        <li>✅ השימוש במחשבון חינמי לחלוטין</li>
+        <li>✅ מותר להטמיע בכל אתר (עסקי, אישי, ממשלתי)</li>
+        <li>⚠️ <strong>חובה להשאיר את הקרדיט</strong> לאתר loan-israel.co.il</li>
+        <li>❌ אסור להסיר או להסתיר את הקרדיט</li>
+        <li>❌ אסור לשנות את הקוד באופן שמסיר את הקרדיט</li>
+      </ul>
+      <p style="margin-bottom: 0; margin-top: 15px; font-style: italic;">
+        בהטמעת המחשבון אתם מסכימים לתנאים אלה. תודה שאתם תומכים בתוכן חינמי ואיכותי! 🙏
+      </p>
+    </div>
 
-    <div id="preview-container" style="display: none; margin-top: 25px; background: #f8fafc; padding: 20px; border-radius: 12px; border: 2px solid #e5e7eb;">
+    <!-- Preview Container -->
+    <div class="wpc-calc-tco-v8m3-preview-container" id="preview-container">
       <h4 style="text-align: center; margin-bottom: 15px; color: var(--wpc-tco-primary);">✨ תצוגה מקדימה בצבע: <span id="preview-color-name">כחול מקצועי</span></h4>
       <div id="preview-content"></div>
       <div style="text-align: center; margin-top: 20px;">
@@ -949,45 +994,51 @@ if (!document.querySelector('meta[name="viewport"]')) {
         רכב חדש מאבד כ-15-20% מערכו בשנה הראשונה. אם קניתם רכב ב-150,000 ₪, "איבדתם" כ-25,000 ₪ בשנה הראשונה - שזה מעל 2,000 ₪ בחודש שפשוט "נעלמים" כשתרצו למכור את הרכב.
       </div>
     </div>
+
+    <div class="wpc-calc-tco-v8m3-faq-item" data-action="toggle-faq">
+      <div class="wpc-calc-tco-v8m3-faq-header">
+        <span>❓ האם עדיף לקנות רכב חדש או יד שנייה?</span>
+        <span>▼</span>
+      </div>
+      <div class="wpc-calc-tco-v8m3-faq-answer">
+        מבחינת TCO, רכב יד שנייה (3-4 שנים) לרוב משתלם יותר. הבעלים הקודם "ספג" את ירידת הערך הגדולה של השנים הראשונות. רכב יד שנייה בן 3 שנים יעלה כ-40-50% פחות מחדש, ועדיין יציע אמינות טובה.
+      </div>
+    </div>
+
+    <div class="wpc-calc-tco-v8m3-faq-item" data-action="toggle-faq">
+      <div class="wpc-calc-tco-v8m3-faq-header">
+        <span>❓ כמה עולה טעינת רכב חשמלי בבית?</span>
+        <span>▼</span>
+      </div>
+      <div class="wpc-calc-tco-v8m3-faq-answer">
+        עלות הטעינה הביתית היא כ-0.6 ₪ לקוט"ש (תעריף לילה). רכב חשמלי צורך כ-15-20 קוט"ש ל-100 ק"מ, כך שעלות הנסיעה היא כ-9-12 ₪ ל-100 ק"מ - פחות מחצי מעלות הבנזין!
+      </div>
+    </div>
+
+    <div class="wpc-calc-tco-v8m3-faq-item" data-action="toggle-faq">
+      <div class="wpc-calc-tco-v8m3-faq-header">
+        <span>❓ האם ביטוח מקיף לרכב חשמלי יקר יותר?</span>
+        <span>▼</span>
+      </div>
+      <div class="wpc-calc-tco-v8m3-faq-answer">
+        כן, בדרך כלל. רכבים חשמליים יקרים יותר לתיקון (סוללה, מערכות חשמל מורכבות), ולכן פרמיית הביטוח גבוהה יותר בכ-10-20%. עם זאת, ההבדל הולך וקטן ככל שהטכנולוגיה מתבגרת.
+      </div>
+    </div>
+
+    <div class="wpc-calc-tco-v8m3-faq-item" data-action="toggle-faq">
+      <div class="wpc-calc-tco-v8m3-faq-header">
+        <span>❓ איך מחשבים עלות לקילומטר?</span>
+        <span>▼</span>
+      </div>
+      <div class="wpc-calc-tco-v8m3-faq-answer">
+        עלות לקילומטר = (סך כל ההוצאות השנתיות) / (קילומטראז' שנתי). לדוגמה: אם סך ההוצאות הוא 40,000 ₪ בשנה ונוסעים 15,000 ק"מ, העלות היא 2.67 ₪ לק"מ. זה כולל ירידת ערך, דלק, ביטוח וטיפולים.
+      </div>
+    </div>
   </div>
 
 </div>
 
-<!-- Schema.org FAQPage -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "מה זה TCO ולמה זה חשוב?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "TCO (Total Cost of Ownership) הוא חישוב עלות הבעלות הכוללת. רוב האנשים מסתכלים רק על החזר ההלוואה והדלק, אך שוכחים את ירידת הערך, הביטוחים והטיפולים - שיכולים להכפיל את העלות החודשית האמיתית."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "האם רכב חשמלי באמת חוסך כסף?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "כן, בדרך כלל. עלות האנרגיה (חשמל) היא כרבע מעלות הבנזין, ואגרת הרישוי והטיפולים זולים משמעותית. עם זאת, יש לקחת בחשבון את מחיר הרכישה הגבוה יותר ואת עלות התקנת עמדת הטעינה."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "איך משפיעה ירידת הערך?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "רכב חדש מאבד כ-15-20% מערכו בשנה הראשונה. אם קניתם רכב ב-150,000 ₪ איבדתם כ-25,000 ₪ בשנה הראשונה - שזה מעל 2,000 ₪ בחודש שפשוט נעלמים כשתרצו למכור את הרכב."
-      }
-    }
-  ]
-}
-</script>
-
-<!-- Schema.org FinancialProduct -->
+<!-- Schema.org -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -1007,6 +1058,20 @@ if (!document.querySelector('meta[name="viewport"]')) {
 }
 </script>
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "מה זה TCO ולמה זה חשוב?", "acceptedAnswer": {"@type": "Answer", "text": "TCO (Total Cost of Ownership) הוא חישוב עלות הבעלות הכוללת. רוב האנשים מסתכלים רק על החזר ההלוואה והדלק, אך שוכחים את ירידת הערך, הביטוחים והטיפולים."}},
+    {"@type": "Question", "name": "האם רכב חשמלי באמת חוסך כסף?", "acceptedAnswer": {"@type": "Answer", "text": "כן, בדרך כלל. עלות האנרגיה היא כרבע מעלות הבנזין, ואגרת הרישוי והטיפולים זולים משמעותית."}},
+    {"@type": "Question", "name": "איך משפיעה ירידת הערך?", "acceptedAnswer": {"@type": "Answer", "text": "רכב חדש מאבד כ-15-20% מערכו בשנה הראשונה. זו ההוצאה הגדולה ביותר באחזקת רכב."}},
+    {"@type": "Question", "name": "האם עדיף לקנות רכב חדש או יד שנייה?", "acceptedAnswer": {"@type": "Answer", "text": "מבחינת TCO, רכב יד שנייה (3-4 שנים) לרוב משתלם יותר כי הבעלים הקודם ספג את ירידת הערך הגדולה."}},
+    {"@type": "Question", "name": "כמה עולה טעינת רכב חשמלי בבית?", "acceptedAnswer": {"@type": "Answer", "text": "עלות הטעינה הביתית היא כ-0.6 ₪ לקוט\"ש, שזה כ-9-12 ₪ ל-100 ק\"מ - פחות מחצי מעלות הבנזין."}}
+  ]
+}
+</script>
+
 <script>
 (function() {
     'use strict';
@@ -1017,8 +1082,7 @@ if (!document.querySelector('meta[name="viewport"]')) {
     const container = document.getElementById('wpc-calc-tco-v8m3-main');
     if (!container) return;
 
-    const CALCULATOR_NAME = 'עלות רכב TCO';
-
+    // Default Values
     const state = {
         type: 'gas',
         price: 150000,
@@ -1027,15 +1091,17 @@ if (!document.querySelector('meta[name="viewport"]')) {
         insurance: 6000,
         maintenance: 3000,
         depreciationRate: 15,
-        fuelPrice: 7.50,
-        embedColor: '#1e5490',
-        previewColorName: 'כחול מקצועי'
+        fuelPrice: 7.50, // Gas default
+        fuelConsumption: 12, // km per liter
+        electricityPrice: 0.60, // NIS per kWh
+        electricityConsumption: 6, // km per kWh
+        embedColor: '#1e5490'
     };
 
     const DEFAULTS = {
         gas: { depreciation: 15, fuelPrice: 7.50, maintenance: 3000, insurance: 6000 },
         hybrid: { depreciation: 12, fuelPrice: 7.50, maintenance: 2500, insurance: 5500 },
-        electric: { depreciation: 15, fuelPrice: 0.60, maintenance: 1500, insurance: 7000 }
+        electric: { depreciation: 15, fuelPrice: 0.60, maintenance: 1500, insurance: 7000 } // Higher insurance
     };
 
     function formatCurrency(num) {
@@ -1044,40 +1110,39 @@ if (!document.querySelector('meta[name="viewport"]')) {
 
     function el(id) { return document.getElementById(id); }
 
-    function darkenColor(hex, percent) {
-        const num = parseInt(hex.replace('#', ''), 16);
-        const amt = Math.round(2.55 * percent);
-        const R = Math.max((num >> 16) - amt, 0);
-        const G = Math.max((num >> 8 & 0x00FF) - amt, 0);
-        const B = Math.max((num & 0x0000FF) - amt, 0);
-        return '#' + (0x1000000 + R * 0x10000 + G * 0x100 + B).toString(16).slice(1);
-    }
-
     function updateCalculations() {
+        // 1. Depreciation
         const totalDepreciationPercent = 1 - Math.pow((1 - state.depreciationRate / 100), state.years);
         const depreciationCost = state.price * totalDepreciationPercent;
         const monthlyDepreciation = depreciationCost / (state.years * 12);
 
+        // 2. Fuel / Energy
         let annualEnergyCost = 0;
         if (state.type === 'electric') {
-             annualEnergyCost = (state.km / 6) * state.fuelPrice;
+             // Electric: km / (km per kwh) * price
+             annualEnergyCost = (state.km / state.electricityConsumption) * state.fuelPrice;
         } else {
-             const consumption = state.type === 'hybrid' ? 18 : 12;
+             // Gas/Hybrid: km / (km per liter) * price
+             const consumption = state.type === 'hybrid' ? 18 : 12; // Simple avg
              annualEnergyCost = (state.km / consumption) * state.fuelPrice;
         }
         const monthlyEnergy = annualEnergyCost / 12;
 
+        // 3. Insurance & Maintenance
         const monthlyInsurance = state.insurance / 12;
         const monthlyMaintenance = state.maintenance / 12;
 
+        // Total
         const totalMonthly = monthlyDepreciation + monthlyEnergy + monthlyInsurance + monthlyMaintenance;
         const totalCost = totalMonthly * 12 * state.years;
         const costPerKm = (totalMonthly * 12) / state.km;
 
+        // Update UI Text
         el('result-monthly').textContent = formatCurrency(totalMonthly);
         el('result-total').textContent = formatCurrency(totalCost);
         el('result-per-km').textContent = '₪' + costPerKm.toFixed(2);
 
+        // Update Bars
         updateBar('depreciation', monthlyDepreciation, totalMonthly);
         updateBar('fuel', monthlyEnergy, totalMonthly);
         updateBar('insurance', monthlyInsurance, totalMonthly);
@@ -1095,12 +1160,14 @@ if (!document.querySelector('meta[name="viewport"]')) {
     function switchType(newType) {
         state.type = newType;
         
+        // Update Defaults for Type
         const defaults = DEFAULTS[newType];
         state.depreciationRate = defaults.depreciation;
         state.maintenance = defaults.maintenance;
         state.insurance = defaults.insurance;
         state.fuelPrice = defaults.fuelPrice;
         
+        // Update Sliders UI
         el('depreciation-slider').value = state.depreciationRate;
         el('depreciation-value').textContent = state.depreciationRate + '%';
         
@@ -1112,206 +1179,13 @@ if (!document.querySelector('meta[name="viewport"]')) {
         
         el('fuel-price-input').value = state.fuelPrice.toFixed(2);
 
+        // Update Active Button
         container.querySelectorAll('.wpc-calc-tco-v8m3-type-btn').forEach(btn => {
             btn.classList.remove('active');
             if (btn.dataset.type === newType) btn.classList.add('active');
         });
 
         updateCalculations();
-    }
-
-    function getEmbedScript() {
-        const scriptLines = [
-            '<script>',
-            'document.addEventListener("DOMContentLoaded", function() {',
-            '  (function() {',
-            '    "use strict";',
-            '    var NS = "WPC_CalcTCO_Embed";',
-            '    if (window[NS]) return;',
-            '    var container = document.getElementById("wpc-calc-tco-v8m3-main");',
-            '    if (!container) return;',
-            '',
-            '    var state = { type: "gas", price: 150000, km: 15000, years: 3, insurance: 6000, maintenance: 3000, depreciationRate: 15, fuelPrice: 7.50 };',
-            '',
-            '    function formatCurrency(n) { return "₪" + Math.round(n).toLocaleString("he-IL"); }',
-            '    function el(id) { return document.getElementById(id); }',
-            '',
-            '    function updateCalculations() {',
-            '      var totalDepreciationPercent = 1 - Math.pow((1 - state.depreciationRate / 100), state.years);',
-            '      var depreciationCost = state.price * totalDepreciationPercent;',
-            '      var monthlyDepreciation = depreciationCost / (state.years * 12);',
-            '      var annualEnergyCost = 0;',
-            '      if (state.type === "electric") {',
-            '        annualEnergyCost = (state.km / 6) * state.fuelPrice;',
-            '      } else {',
-            '        var consumption = state.type === "hybrid" ? 18 : 12;',
-            '        annualEnergyCost = (state.km / consumption) * state.fuelPrice;',
-            '      }',
-            '      var monthlyEnergy = annualEnergyCost / 12;',
-            '      var monthlyInsurance = state.insurance / 12;',
-            '      var monthlyMaintenance = state.maintenance / 12;',
-            '      var totalMonthly = monthlyDepreciation + monthlyEnergy + monthlyInsurance + monthlyMaintenance;',
-            '      var totalCost = totalMonthly * 12 * state.years;',
-            '      var costPerKm = (totalMonthly * 12) / state.km;',
-            '      if(el("result-monthly")) el("result-monthly").textContent = formatCurrency(totalMonthly);',
-            '      if(el("result-total")) el("result-total").textContent = formatCurrency(totalCost);',
-            '      if(el("result-per-km")) el("result-per-km").textContent = "₪" + costPerKm.toFixed(2);',
-            '      var fillEls = ["depreciation", "fuel", "insurance", "maintenance"];',
-            '      fillEls.forEach(function(type) {',
-            '        var amt = type === "depreciation" ? monthlyDepreciation : type === "fuel" ? monthlyEnergy : type === "insurance" ? monthlyInsurance : monthlyMaintenance;',
-            '        var percent = (amt / totalMonthly) * 100;',
-            '        var fillEl = el("bar-fill-" + type);',
-            '        var valEl = el("bar-val-" + type);',
-            '        if(fillEl) fillEl.style.width = percent + "%";',
-            '        if(valEl) valEl.textContent = formatCurrency(amt);',
-            '      });',
-            '    }',
-            '',
-            '    function switchTab(tabId) {',
-            '      container.querySelectorAll(".wpc-calc-tco-v8m3-tab-btn").forEach(function(b) { b.classList.remove("active"); });',
-            '      container.querySelectorAll(".wpc-calc-tco-v8m3-tab-content").forEach(function(c) { c.classList.remove("active"); });',
-            '      var activeBtn = container.querySelector("[data-tab=\\"" + tabId + "\\"]");',
-            '      if (activeBtn) activeBtn.classList.add("active");',
-            '      var activeContent = el("tab-" + tabId);',
-            '      if (activeContent) activeContent.classList.add("active");',
-            '    }',
-            '',
-            '    container.addEventListener("click", function(e) {',
-            '      var action = e.target.closest("[data-action]");',
-            '      if (!action) return;',
-            '      var act = action.dataset.action;',
-            '      if (act === "switch-tab") switchTab(action.dataset.tab);',
-            '      else if (act === "select-type") {',
-            '        state.type = action.dataset.type;',
-            '        container.querySelectorAll(".wpc-calc-tco-v8m3-type-btn").forEach(function(b) { b.classList.remove("active"); });',
-            '        action.classList.add("active");',
-            '        updateCalculations();',
-            '      }',
-            '      else if (act === "toggle-advanced") {',
-            '        var adv = el("advanced-options");',
-            '        if(adv) adv.classList.toggle("active");',
-            '      }',
-            '      else if (act === "toggle-faq") {',
-            '        action.closest(".wpc-calc-tco-v8m3-faq-item").classList.toggle("active");',
-            '      }',
-            '    });',
-            '',
-            '    container.addEventListener("input", function(e) {',
-            '      var id = e.target.id;',
-            '      var val = parseFloat(e.target.value);',
-            '      if (id === "price-slider") { state.price = val; if(el("price-value")) el("price-value").textContent = formatCurrency(val); }',
-            '      else if (id === "km-slider") { state.km = val; if(el("km-value")) el("km-value").textContent = val.toLocaleString() + " ק\\"מ"; }',
-            '      else if (id === "years-slider") { state.years = val; if(el("years-value")) el("years-value").textContent = val + " שנים"; }',
-            '      else if (id === "insurance-slider") { state.insurance = val; if(el("insurance-value")) el("insurance-value").textContent = formatCurrency(val); }',
-            '      else if (id === "maintenance-slider") { state.maintenance = val; if(el("maintenance-value")) el("maintenance-value").textContent = formatCurrency(val); }',
-            '      else if (id === "depreciation-slider") { state.depreciationRate = val; if(el("depreciation-value")) el("depreciation-value").textContent = val + "%"; }',
-            '      else if (id === "fuel-price-input") { state.fuelPrice = val; }',
-            '      updateCalculations();',
-            '    });',
-            '',
-            '    updateCalculations();',
-            '    window[NS] = { version: "1.0.0" };',
-            '  })();',
-            '});'
-        ];
-        return scriptLines.join('\\n') + '\\n</' + 'script>';
-    }
-
-    function copyEmbedCode() {
-        let styles = '';
-        document.querySelectorAll('style').forEach(function(style) {
-            if (style.textContent.includes('wpc-calc-tco-v8m3')) {
-                styles = style.textContent;
-            }
-        });
-        
-        const calculator = el('wpc-calc-tco-v8m3-calculator');
-        if (!calculator) return;
-        
-        let code = '<style>\\n' + styles + '\\n</style>\\n\\n';
-        code += '<div class="wpc-calc-tco-v8m3-wrapper" id="wpc-calc-tco-v8m3-main">\\n';
-        code += calculator.outerHTML + '\\n';
-        code += '</div>\\n\\n';
-        
-        code += '<p style="text-align:center; font-size:0.9em; margin-top:20px; color:#666;">\\n';
-        code += '  מחשבון ' + CALCULATOR_NAME + ' פותח על ידי \\n';
-        code += '  <a href="https://loan-israel.co.il/" target="_blank" rel="nofollow noopener" ';
-        code += 'style="color:#1e5490; text-decoration:underline;">רק תבקש פיננסים</a>\\n';
-        code += '</p>\\n\\n';
-        
-        code += getEmbedScript();
-        
-        navigator.clipboard.writeText(code).then(function() {
-            alert('✅ הקוד הועתק בהצלחה! הדביקו אותו בעורך HTML שלכם.');
-        }).catch(function(err) {
-            alert('שגיאה בהעתקה. אנא נסו שוב.');
-        });
-    }
-
-    function showPreview(color, colorName) {
-        state.embedColor = color;
-        state.previewColorName = colorName;
-
-        const previewContainer = el('preview-container');
-        const previewContent = el('preview-content');
-        
-        previewContainer.style.display = 'block';
-        el('preview-color-name').textContent = colorName;
-
-        const calculator = el('wpc-calc-tco-v8m3-calculator');
-        const calcClone = calculator.cloneNode(true);
-
-        const darkColor = darkenColor(color, 15);
-        calcClone.querySelectorAll('.wpc-calc-tco-v8m3-tab-btn.active').forEach(btn => {
-            btn.style.borderBottomColor = color;
-            btn.style.color = color;
-        });
-        calcClone.querySelectorAll('.wpc-calc-tco-v8m3-results').forEach(el => {
-            el.style.background = `linear-gradient(135deg, ${color} 0%, ${darkColor} 100%)`;
-        });
-
-        previewContent.innerHTML = '';
-        previewContent.appendChild(calcClone);
-
-        container.querySelectorAll('.wpc-calc-tco-v8m3-color-btn').forEach(btn => {
-            btn.classList.remove('active');
-            if (btn.dataset.color === color) btn.classList.add('active');
-        });
-
-        previewContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }
-
-    function copyPreviewCode() {
-        const color = state.embedColor;
-        
-        let styles = '';
-        document.querySelectorAll('style').forEach(function(style) {
-            if (style.textContent.includes('wpc-calc-tco-v8m3')) {
-                styles = style.textContent.replace(/#1e5490/g, color).replace(/#163d6b/g, darkenColor(color, 15));
-            }
-        });
-        
-        const calculator = el('wpc-calc-tco-v8m3-calculator');
-        if (!calculator) return;
-        
-        let code = '<style>\\n' + styles + '\\n</style>\\n\\n';
-        code += '<div class="wpc-calc-tco-v8m3-wrapper" id="wpc-calc-tco-v8m3-main">\\n';
-        code += calculator.outerHTML + '\\n';
-        code += '</div>\\n\\n';
-        
-        code += '<p style="text-align:center; font-size:0.9em; margin-top:20px; color:#666;">\\n';
-        code += '  מחשבון ' + CALCULATOR_NAME + ' פותח על ידי \\n';
-        code += '  <a href="https://loan-israel.co.il/" target="_blank" rel="nofollow noopener" ';
-        code += 'style="color:' + color + '; text-decoration:underline;">רק תבקש פיננסים</a>\\n';
-        code += '</p>\\n\\n';
-        
-        code += getEmbedScript();
-        
-        navigator.clipboard.writeText(code).then(function() {
-            alert('✅ הקוד עם הצבע הנבחר הועתק בהצלחה!');
-        }).catch(function(err) {
-            alert('שגיאה בהעתקה. אנא נסו שוב.');
-        });
     }
 
     // Event Listeners
@@ -1345,7 +1219,7 @@ if (!document.querySelector('meta[name="viewport"]')) {
             el('wpc-calc-tco-v8m3-embed').scrollIntoView({ behavior: 'smooth' });
         }
         else if (act === 'preview-color') {
-            showPreview(action.dataset.color, action.dataset.name);
+            showPreview(action.dataset.color, action.dataset.name || 'צבע נבחר');
         }
         else if (act === 'copy-embed-code') {
             copyEmbedCode();
@@ -1390,13 +1264,385 @@ if (!document.querySelector('meta[name="viewport"]')) {
         updateCalculations();
     });
 
-    const customColorPicker = el('custom-color-picker');
-    if (customColorPicker) {
-        customColorPicker.addEventListener('input', function(e) {
-            showPreview(e.target.value, 'צבע מותאם אישית');
+    // === פונקציית יצירת סקריפט להטמעה ===
+    function getEmbedScript() {
+        const lines = [
+            '<script>',
+            'document.addEventListener("DOMContentLoaded", function() {',
+            '  (function() {',
+            '    "use strict";',
+            '    var NS = "WPC_CalcTCO_Embed_" + Date.now();',
+            '    if (window[NS]) return;',
+            '    var container = document.querySelector("[class*=\\"wpc-calc-tco\\"]");',
+            '    if (!container) return;',
+            '',
+            '    var state = { type: "gas", price: 150000, km: 15000, years: 3, insurance: 6000, maintenance: 3000, depreciationRate: 15, fuelPrice: 7.50 };',
+            '    var DEFAULTS = {',
+            '      gas: { depreciation: 15, fuelPrice: 7.50, maintenance: 3000, insurance: 6000 },',
+            '      hybrid: { depreciation: 12, fuelPrice: 7.50, maintenance: 2500, insurance: 5500 },',
+            '      electric: { depreciation: 15, fuelPrice: 0.60, maintenance: 1500, insurance: 7000 }',
+            '    };',
+            '',
+            '    function formatCurrency(n) { return "₪" + Math.round(n).toLocaleString("he-IL"); }',
+            '    function el(id) { return document.getElementById(id); }',
+            '',
+            '    function updateCalculations() {',
+            '      var totalDepPct = 1 - Math.pow((1 - state.depreciationRate / 100), state.years);',
+            '      var depCost = state.price * totalDepPct;',
+            '      var monthlyDep = depCost / (state.years * 12);',
+            '      var consumption = state.type === "electric" ? 6 : (state.type === "hybrid" ? 18 : 12);',
+            '      var annualEnergy = state.type === "electric" ? (state.km / consumption) * state.fuelPrice : (state.km / consumption) * state.fuelPrice;',
+            '      var monthlyEnergy = annualEnergy / 12;',
+            '      var monthlyIns = state.insurance / 12;',
+            '      var monthlyMaint = state.maintenance / 12;',
+            '      var totalMonthly = monthlyDep + monthlyEnergy + monthlyIns + monthlyMaint;',
+            '      var totalCost = totalMonthly * 12 * state.years;',
+            '      var costPerKm = (totalMonthly * 12) / state.km;',
+            '      if(el("result-monthly")) el("result-monthly").textContent = formatCurrency(totalMonthly);',
+            '      if(el("result-total")) el("result-total").textContent = formatCurrency(totalCost);',
+            '      if(el("result-per-km")) el("result-per-km").textContent = "₪" + costPerKm.toFixed(2);',
+            '      var total = totalMonthly || 1;',
+            '      if(el("bar-fill-depreciation")) el("bar-fill-depreciation").style.width = ((monthlyDep/total)*100)+"%";',
+            '      if(el("bar-val-depreciation")) el("bar-val-depreciation").textContent = formatCurrency(monthlyDep);',
+            '      if(el("bar-fill-fuel")) el("bar-fill-fuel").style.width = ((monthlyEnergy/total)*100)+"%";',
+            '      if(el("bar-val-fuel")) el("bar-val-fuel").textContent = formatCurrency(monthlyEnergy);',
+            '      if(el("bar-fill-insurance")) el("bar-fill-insurance").style.width = ((monthlyIns/total)*100)+"%";',
+            '      if(el("bar-val-insurance")) el("bar-val-insurance").textContent = formatCurrency(monthlyIns);',
+            '      if(el("bar-fill-maintenance")) el("bar-fill-maintenance").style.width = ((monthlyMaint/total)*100)+"%";',
+            '      if(el("bar-val-maintenance")) el("bar-val-maintenance").textContent = formatCurrency(monthlyMaint);',
+            '    }',
+            '',
+            '    function switchType(newType) {',
+            '      state.type = newType;',
+            '      var d = DEFAULTS[newType];',
+            '      state.depreciationRate = d.depreciation; state.maintenance = d.maintenance; state.insurance = d.insurance; state.fuelPrice = d.fuelPrice;',
+            '      if(el("depreciation-slider")) { el("depreciation-slider").value = d.depreciation; el("depreciation-value").textContent = d.depreciation + "%"; }',
+            '      if(el("maintenance-slider")) { el("maintenance-slider").value = d.maintenance; el("maintenance-value").textContent = formatCurrency(d.maintenance); }',
+            '      if(el("insurance-slider")) { el("insurance-slider").value = d.insurance; el("insurance-value").textContent = formatCurrency(d.insurance); }',
+            '      if(el("fuel-price-input")) el("fuel-price-input").value = d.fuelPrice.toFixed(2);',
+            '      container.querySelectorAll("[data-action=\\"select-type\\"]").forEach(function(b){b.classList.remove("active");if(b.dataset.type===newType)b.classList.add("active");});',
+            '      updateCalculations();',
+            '    }',
+            '',
+            '    function switchTab(tabName) {',
+            '      var tabs = container.querySelectorAll("[data-action=\\"switch-tab\\"]");',
+            '      var contents = container.querySelectorAll("[class*=\\"tab-content\\"]");',
+            '      for (var i = 0; i < tabs.length; i++) tabs[i].classList.remove("active");',
+            '      for (var j = 0; j < contents.length; j++) {',
+            '        contents[j].classList.remove("active");',
+            '        contents[j].style.display = "none";',
+            '      }',
+            '      var activeTab = container.querySelector("[data-tab=\\"" + tabName + "\\"]");',
+            '      if (activeTab) activeTab.classList.add("active");',
+            '      var activeContent = document.getElementById("tab-" + tabName);',
+            '      if (activeContent) {',
+            '        activeContent.classList.add("active");',
+            '        activeContent.style.display = "block";',
+            '      }',
+            '    }',
+            '',
+            '    container.addEventListener("click", function(e) {',
+            '      var action = e.target.closest("[data-action]");',
+            '      if (!action) return;',
+            '      var act = action.dataset.action;',
+            '      if (act === "switch-tab") switchTab(action.dataset.tab);',
+            '      else if (act === "select-type") switchType(action.dataset.type);',
+            '      else if (act === "toggle-advanced") {',
+            '        var adv = document.getElementById("advanced-options");',
+            '        if (adv) adv.classList.toggle("active");',
+            '      }',
+            '      else if (act === "toggle-faq") action.closest("[class*=\\"faq-item\\"]").classList.toggle("active");',
+            '    });',
+            '',
+            '    container.addEventListener("input", function(e) {',
+            '      var id = e.target.id;',
+            '      var val = parseFloat(e.target.value);',
+            '      if (id === "price-slider") { state.price = val; el("price-value").textContent = formatCurrency(val); }',
+            '      else if (id === "km-slider") { state.km = val; el("km-value").textContent = val.toLocaleString() + " ק\\"מ"; }',
+            '      else if (id === "years-slider") { state.years = val; el("years-value").textContent = val + " שנים"; }',
+            '      else if (id === "insurance-slider") { state.insurance = val; el("insurance-value").textContent = formatCurrency(val); }',
+            '      else if (id === "maintenance-slider") { state.maintenance = val; el("maintenance-value").textContent = formatCurrency(val); }',
+            '      else if (id === "depreciation-slider") { state.depreciationRate = val; el("depreciation-value").textContent = val + "%"; }',
+            '      else if (id === "fuel-price-input") { state.fuelPrice = val; }',
+            '      updateCalculations();',
+            '    });',
+            '',
+            '    updateCalculations();',
+            '    window[NS] = { v: "1.0" };',
+            '  })();',
+            '});'
+        ];
+        return lines.join('\n') + '\n</' + 'script>';
+    }
+
+    // === תיקון copyEmbedCode ===
+    function copyEmbedCode() {
+        let styles = '';
+        document.querySelectorAll('style').forEach(function(s) {
+            if (s.textContent.includes('wpc-calc-tco')) styles = s.textContent;
+        });
+        
+        const calculator = document.getElementById('wpc-calc-tco-v8m3-calculator');
+        let code = '<style>\n' + styles + '\n</style>\n\n';
+        code += '<div class="wpc-calc-tco-v8m3-wrapper" id="wpc-calc-tco-v8m3-main">\n';
+        code += calculator.outerHTML + '\n</div>\n\n';
+        code += '<p style="text-align:center;font-size:0.9em;margin-top:20px;color:#666;">מחשבון TCO פותח על ידי <a href="https://loan-israel.co.il/" target="_blank" rel="nofollow noopener" style="color:#1e5490;text-decoration:underline;">רק תבקש פיננסים</a></p>\n\n';
+        code += getEmbedScript();
+        
+        navigator.clipboard.writeText(code).then(function() {
+            alert('✅ הקוד הועתק בהצלחה!');
         });
     }
 
+    // === תצוגה מקדימה ===
+    function darkenColor(hex, percent) {
+        const num = parseInt(hex.replace('#', ''), 16);
+        const amt = Math.round(2.55 * percent);
+        const R = Math.max((num >> 16) - amt, 0);
+        const G = Math.max((num >> 8 & 0x00FF) - amt, 0);
+        const B = Math.max((num & 0x0000FF) - amt, 0);
+        return '#' + (0x1000000 + R * 0x10000 + G * 0x100 + B).toString(16).slice(1);
+    }
+
+    // === פונקציות עזר לצבעים ===
+    function lightenColor(hex, percent) {
+        const num = parseInt(hex.replace('#', ''), 16);
+        const amt = Math.round(2.55 * percent);
+        const R = Math.min((num >> 16) + amt, 255);
+        const G = Math.min((num >> 8 & 0x00FF) + amt, 255);
+        const B = Math.min((num & 0x0000FF) + amt, 255);
+        return '#' + (0x1000000 + R * 0x10000 + G * 0x100 + B).toString(16).slice(1);
+    }
+    
+    function hexToRgba(hex, alpha) {
+        const r = parseInt(hex.slice(1, 3), 16);
+        const g = parseInt(hex.slice(3, 5), 16);
+        const b = parseInt(hex.slice(5, 7), 16);
+        return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+    }
+
+    function showPreview(color, colorName) {
+        state.embedColor = color;
+        state.embedColorName = colorName;
+        
+        // Update color buttons
+        container.querySelectorAll('.wpc-calc-tco-v8m3-color-btn').forEach(b => {
+            b.classList.remove('active');
+            if (b.dataset.color === color) b.classList.add('active');
+        });
+        
+        // Show preview container
+        const previewContainer = el('preview-container');
+        previewContainer.classList.add('active');
+        el('preview-color-name').textContent = colorName;
+        
+        // Clone calculator with new color
+        const calc = el('wpc-calc-tco-v8m3-calculator').cloneNode(true);
+        
+        // 🚨 תיקון 1: שנה ID למניעת התנגשות!
+        calc.id = 'wpc-calc-tco-v8m3-calculator-preview';
+        
+        // 🚨 תיקון 2: החלף IDs של תוכן טאבים ל-data attributes
+        calc.querySelectorAll('[id^="tab-"]').forEach(tabContent => {
+            const oldId = tabContent.id;
+            const tabName = oldId.replace('tab-', '');
+            tabContent.setAttribute('data-preview-tab', tabName);
+            tabContent.id = 'preview-' + oldId;
+        });
+        
+        // 🚨 תיקון 3: הגדר CSS Variables על האלמנט המשוכפל!
+        calc.style.setProperty('--wpc-tco-primary', color);
+        calc.style.setProperty('--wpc-tco-primary-dark', darkenColor(color, 15));
+        calc.style.setProperty('--wpc-tco-primary-light', hexToRgba(color, 0.1));
+        
+        // 🚨 תיקון 4: החלף צבעים עם setProperty + important!
+        // כותרות
+        calc.querySelectorAll('.wpc-calc-tco-v8m3-tab-title, .wpc-calc-tco-v8m3-title').forEach(e => {
+            e.style.setProperty('color', color, 'important');
+        });
+        
+        // טאב פעיל
+        calc.querySelectorAll('.wpc-calc-tco-v8m3-tab-btn.active').forEach(e => {
+            e.style.setProperty('color', color, 'important');
+            e.style.setProperty('border-bottom-color', color, 'important');
+        });
+        
+        // תוצאות
+        calc.querySelectorAll('.wpc-calc-tco-v8m3-results').forEach(e => {
+            e.style.setProperty('background', `linear-gradient(135deg, ${color} 0%, ${darkenColor(color, 20)} 100%)`, 'important');
+        });
+        
+        // כפתורי סוג רכב פעילים
+        calc.querySelectorAll('.wpc-calc-tco-v8m3-type-btn.active').forEach(e => {
+            e.style.setProperty('border-color', color, 'important');
+            e.style.setProperty('background', hexToRgba(color, 0.1), 'important');
+        });
+        
+        // ערכי סליידר
+        calc.querySelectorAll('.wpc-calc-tco-v8m3-slider-value').forEach(e => {
+            e.style.setProperty('background', hexToRgba(color, 0.1), 'important');
+            e.style.setProperty('color', color, 'important');
+        });
+        
+        // סליידרים
+        calc.querySelectorAll('input[type="range"]').forEach(slider => {
+            slider.style.setProperty('accent-color', color, 'important');
+        });
+        
+        // עדכון תאריך
+        calc.querySelectorAll('.wpc-calc-tco-v8m3-update-date').forEach(e => {
+            e.style.setProperty('background', hexToRgba(color, 0.1), 'important');
+            e.style.setProperty('color', color, 'important');
+        });
+        
+        el('preview-content').innerHTML = '';
+        el('preview-content').appendChild(calc);
+        
+        // אתחול טאבים וסליידרים בתצוגה מקדימה
+        initPreviewCalculator(el('preview-content'), color);
+        
+        // גלול לתצוגה
+        previewContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    // === אתחול מחשבון בתצוגה מקדימה - גרסה מתוקנת! ===
+    function initPreviewCalculator(previewArea, primaryColor) {
+        // טאבים
+        const tabs = previewArea.querySelectorAll('[data-action="switch-tab"]');
+        const contents = previewArea.querySelectorAll('.wpc-calc-tco-v8m3-tab-content');
+        
+        tabs.forEach(tab => {
+            tab.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation(); // 🚨 קריטי! מונע bubble למחשבון המקורי
+                
+                const tabName = this.dataset.tab;
+                
+                // הסר active מכולם
+                tabs.forEach(t => {
+                    t.classList.remove('active');
+                    t.style.setProperty('color', '', 'important');
+                    t.style.setProperty('border-bottom-color', 'transparent', 'important');
+                });
+                contents.forEach(c => {
+                    c.classList.remove('active');
+                    c.style.display = 'none';
+                });
+                
+                // הוסף active לנבחר עם צבע
+                this.classList.add('active');
+                this.style.setProperty('color', primaryColor, 'important');
+                this.style.setProperty('border-bottom-color', primaryColor, 'important');
+                
+                // מצא תוכן - תמיכה ב-data-preview-tab וגם ב-ID
+                const activeContent = previewArea.querySelector(`[data-preview-tab="${tabName}"]`) ||
+                                     previewArea.querySelector('#preview-tab-' + tabName) ||
+                                     previewArea.querySelector('#tab-' + tabName);
+                if (activeContent) {
+                    activeContent.classList.add('active');
+                    activeContent.style.display = 'block';
+                }
+            });
+        });
+        
+        // סליידרים
+        const sliders = previewArea.querySelectorAll('input[type="range"]');
+        sliders.forEach(slider => {
+            slider.style.setProperty('accent-color', primaryColor, 'important');
+            
+            slider.addEventListener('input', function(e) {
+                e.stopPropagation(); // 🚨 מונע bubble
+                
+                const id = this.id;
+                const val = parseFloat(this.value);
+                const valueEl = previewArea.querySelector('#' + id.replace('-slider', '-value'));
+                
+                if (valueEl) {
+                    if (id === 'price-slider' || id === 'insurance-slider' || id === 'maintenance-slider') {
+                        valueEl.textContent = '₪' + Math.round(val).toLocaleString('he-IL');
+                    } else if (id === 'km-slider') {
+                        valueEl.textContent = val.toLocaleString('he-IL') + ' ק"מ';
+                    } else if (id === 'years-slider') {
+                        valueEl.textContent = val + ' שנים';
+                    } else if (id === 'depreciation-slider') {
+                        valueEl.textContent = val + '%';
+                    }
+                }
+            });
+        });
+        
+        // כפתורי בחירת סוג רכב
+        const typeBtns = previewArea.querySelectorAll('[data-action="select-type"]');
+        typeBtns.forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation(); // 🚨 מונע bubble
+                
+                // הסר active מכולם
+                typeBtns.forEach(b => {
+                    b.classList.remove('active');
+                    b.style.setProperty('border-color', '#e5e7eb', 'important');
+                    b.style.setProperty('background', 'transparent', 'important');
+                });
+                
+                // הוסף active לנבחר עם צבע
+                this.classList.add('active');
+                this.style.setProperty('border-color', primaryColor, 'important');
+                this.style.setProperty('background', hexToRgba(primaryColor, 0.1), 'important');
+            });
+        });
+        
+        // הגדרות מתקדמות
+        const advToggle = previewArea.querySelector('[data-action="toggle-advanced"]');
+        if (advToggle) {
+            advToggle.addEventListener('click', function(e) {
+                e.stopPropagation(); // 🚨 מונע bubble
+                const advContent = previewArea.querySelector('[id*="advanced-options"]');
+                if (advContent) advContent.classList.toggle('active');
+            });
+        }
+        
+        // FAQ
+        const faqItems = previewArea.querySelectorAll('.wpc-calc-tco-v8m3-faq-item');
+        faqItems.forEach(item => {
+            const header = item.querySelector('.wpc-calc-tco-v8m3-faq-header');
+            if (header) {
+                header.addEventListener('click', function(e) {
+                    e.stopPropagation(); // 🚨 מונע bubble
+                    item.classList.toggle('active');
+                });
+            }
+        });
+    }
+
+    function copyPreviewCode() {
+        const color = state.embedColor || '#1e5490';
+        let styles = '';
+        document.querySelectorAll('style').forEach(function(s) {
+            if (s.textContent.includes('wpc-calc-tco')) {
+                styles = s.textContent
+                    .replace(/#1e5490/g, color)
+                    .replace(/#163d6b/g, darkenColor(color, 15));
+            }
+        });
+        
+        const calculator = el('wpc-calc-tco-v8m3-calculator');
+        let code = '<style>\n' + styles + '\n</style>\n\n';
+        code += '<div class="wpc-calc-tco-v8m3-wrapper" id="wpc-calc-tco-v8m3-main">\n';
+        code += calculator.outerHTML + '\n</div>\n\n';
+        code += '<p style="text-align:center;font-size:0.9em;margin-top:20px;color:#666;">מחשבון TCO פותח על ידי <a href="https://loan-israel.co.il/" target="_blank" rel="nofollow noopener" style="color:' + color + ';text-decoration:underline;">רק תבקש פיננסים</a></p>\n\n';
+        code += getEmbedScript();
+        
+        navigator.clipboard.writeText(code).then(function() {
+            alert('✅ הקוד הועתק בצבע "' + (state.embedColorName || 'נבחר') + '"!');
+        });
+    }
+
+    // Custom color picker handler
+    el('custom-color-picker').addEventListener('input', function(e) {
+        showPreview(e.target.value, 'צבע מותאם אישית');
+    });
+
+    // Init
     updateCalculations();
     window[NS] = { version: '1.0.0' };
 

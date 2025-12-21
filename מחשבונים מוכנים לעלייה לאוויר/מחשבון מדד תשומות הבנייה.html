@@ -1,0 +1,2121 @@
+<script>
+// בדיקה והוספת viewport meta tag אם חסר
+if (!document.querySelector('meta[name="viewport"]')) {
+  const viewport = document.createElement('meta');
+  viewport.name = 'viewport';
+  viewport.content = 'width=device-width, initial-scale=1.0, user-scalable=yes';
+  document.head.appendChild(viewport);
+}
+</script>
+
+<style>
+/* === CSS Variables === */
+:root {
+  --wpc-index-primary: #1e5490;
+  --wpc-index-primary-dark: #163d6b;
+  --wpc-index-primary-light: rgba(30, 84, 144, 0.1);
+  --wpc-index-success: #10b981;
+  --wpc-index-success-light: rgba(16, 185, 129, 0.1);
+  --wpc-index-warning: #f59e0b;
+  --wpc-index-warning-light: rgba(245, 158, 11, 0.1);
+  --wpc-index-danger: #ef4444;
+  --wpc-index-danger-light: rgba(239, 68, 68, 0.1);
+  --wpc-index-text-dark: #1f2937;
+  --wpc-index-text-light: #6b7280;
+  --wpc-index-bg-light: #f8fafc;
+  --wpc-index-white: #ffffff;
+  --wpc-index-border: #e5e7eb;
+  --wpc-index-shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+  --wpc-index-shadow-md: 0 4px 15px rgba(0,0,0,0.1);
+  --wpc-index-shadow-lg: 0 10px 40px rgba(0,0,0,0.15);
+  --wpc-index-radius-sm: 8px;
+  --wpc-index-radius-md: 12px;
+  --wpc-index-radius-lg: 20px;
+  --wpc-index-transition: all 0.3s ease;
+  --wpc-index-gradient: linear-gradient(135deg, #1e5490 0%, #2a6cb0 100%);
+}
+
+/* === Base Wrapper === */
+.wpc-calc-index-b5m3-wrapper {
+  all: initial !important;
+  display: block !important;
+  font-family: 'Assistant', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  direction: rtl !important;
+  color: var(--wpc-index-text-dark) !important;
+  line-height: 1.6 !important;
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+  padding: 20px !important;
+  box-sizing: border-box !important;
+  color-scheme: light !important;
+}
+
+.wpc-calc-index-b5m3-wrapper * {
+  box-sizing: border-box !important;
+  font-family: inherit !important;
+}
+
+/* === Title Section === */
+.wpc-calc-index-b5m3-title-section {
+  text-align: center !important;
+  margin-bottom: 30px !important;
+}
+
+.wpc-calc-index-b5m3-title {
+  font-size: 2.2rem !important;
+  font-weight: 700 !important;
+  color: var(--wpc-index-primary) !important;
+  margin: 0 auto 10px auto !important;
+  position: relative !important;
+  padding-right: 25px !important;
+  display: inline-block !important;
+}
+
+.wpc-calc-index-b5m3-title::after {
+  content: '' !important;
+  position: absolute !important;
+  right: 0 !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  width: 5px !important;
+  height: 60px !important;
+  background: linear-gradient(180deg, #e74c3c 0%, #c0392b 100%) !important;
+  border-radius: 3px !important;
+}
+
+.wpc-calc-index-b5m3-subtitle {
+  font-size: 1rem !important;
+  color: var(--wpc-index-text-light) !important;
+  margin: 0 !important;
+}
+
+.wpc-calc-index-b5m3-update-date {
+  display: inline-block !important;
+  background: var(--wpc-index-primary-light) !important;
+  color: var(--wpc-index-primary) !important;
+  padding: 5px 15px !important;
+  border-radius: 20px !important;
+  font-size: 0.9rem !important;
+  margin-top: 10px !important;
+}
+
+/* === Calculator Container === */
+.wpc-calc-index-b5m3-calculator {
+  background: var(--wpc-index-white) !important;
+  border-radius: var(--wpc-index-radius-lg) !important;
+  box-shadow: var(--wpc-index-shadow-md) !important;
+  overflow: hidden !important;
+  margin-bottom: 30px !important;
+}
+
+/* === Tabs Navigation === */
+.wpc-calc-index-b5m3-tabs-nav {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)) !important;
+  gap: 8px !important;
+  padding: 10px !important;
+  background: var(--wpc-index-bg-light) !important;
+  border-bottom: 2px solid var(--wpc-index-border) !important;
+}
+
+.wpc-calc-index-b5m3-tab-btn {
+  padding: 15px 12px !important;
+  background: var(--wpc-index-white) !important;
+  border: 2px solid var(--wpc-index-border) !important;
+  border-radius: var(--wpc-index-radius-md) !important;
+  cursor: pointer !important;
+  font-size: 0.95rem !important;
+  font-weight: 600 !important;
+  color: var(--wpc-index-text-dark) !important;
+  transition: var(--wpc-index-transition) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  font-family: inherit !important;
+  min-height: 80px !important;
+}
+
+.wpc-calc-index-b5m3-tab-btn:hover {
+  border-color: var(--wpc-index-primary) !important;
+  background: var(--wpc-index-primary-light) !important;
+}
+
+.wpc-calc-index-b5m3-tab-btn.active {
+  background: var(--wpc-index-gradient) !important;
+  border-color: var(--wpc-index-primary) !important;
+  color: white !important;
+}
+
+.wpc-calc-index-b5m3-tab-icon {
+  font-size: 1.5rem !important;
+}
+
+/* === Tab Content === */
+.wpc-calc-index-b5m3-tab-content {
+  display: none !important;
+  padding: 30px !important;
+}
+
+.wpc-calc-index-b5m3-tab-content.active {
+  display: block !important;
+}
+
+.wpc-calc-index-b5m3-tab-title {
+  font-size: 1.4rem !important;
+  font-weight: 700 !important;
+  color: var(--wpc-index-primary) !important;
+  margin: 0 0 25px 0 !important;
+  text-align: center !important;
+}
+
+/* === Form Elements === */
+.wpc-calc-index-b5m3-form-group {
+  margin-bottom: 25px !important;
+}
+
+.wpc-calc-index-b5m3-label {
+  display: block !important;
+  font-weight: 600 !important;
+  color: var(--wpc-index-text-dark) !important;
+  margin-bottom: 8px !important;
+  font-size: 1rem !important;
+}
+
+.wpc-calc-index-b5m3-input {
+  width: 100% !important;
+  padding: 14px 16px !important;
+  border: 2px solid var(--wpc-index-border) !important;
+  border-radius: var(--wpc-index-radius-sm) !important;
+  font-size: 1.1rem !important;
+  transition: var(--wpc-index-transition) !important;
+  background: var(--wpc-index-white) !important;
+  color: var(--wpc-index-text-dark) !important;
+  text-align: center !important;
+  direction: ltr !important;
+}
+
+.wpc-calc-index-b5m3-input:focus {
+  outline: none !important;
+  border-color: var(--wpc-index-primary) !important;
+  box-shadow: 0 0 0 3px var(--wpc-index-primary-light) !important;
+}
+
+/* === Slider Styles === */
+.wpc-calc-index-b5m3-slider-container {
+  margin-bottom: 20px !important;
+}
+
+.wpc-calc-index-b5m3-slider {
+  width: 100% !important;
+  height: 10px !important;
+  background: #e2e8f0 !important;
+  border-radius: 5px !important;
+  outline: none !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  margin: 15px 0 !important;
+}
+
+.wpc-calc-index-b5m3-slider::-webkit-slider-thumb {
+  -webkit-appearance: none !important;
+  width: 26px !important;
+  height: 26px !important;
+  background: var(--wpc-index-primary) !important;
+  border-radius: 50% !important;
+  cursor: pointer !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2) !important;
+  border: 3px solid white !important;
+}
+
+.wpc-calc-index-b5m3-slider::-moz-range-thumb {
+  width: 26px !important;
+  height: 26px !important;
+  background: var(--wpc-index-primary) !important;
+  border-radius: 50% !important;
+  cursor: pointer !important;
+  border: 3px solid white !important;
+}
+
+.wpc-calc-index-b5m3-slider-value {
+  text-align: center !important;
+  font-size: 1.3rem !important;
+  font-weight: 700 !important;
+  color: var(--wpc-index-primary) !important;
+  direction: ltr !important;
+}
+
+/* === Button Group === */
+.wpc-calc-index-b5m3-btn-group {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 10px !important;
+  margin-bottom: 20px !important;
+}
+
+.wpc-calc-index-b5m3-btn-option {
+  flex: 1 1 auto !important;
+  min-width: 80px !important;
+  padding: 12px 16px !important;
+  background: var(--wpc-index-bg-light) !important;
+  border: 2px solid var(--wpc-index-border) !important;
+  border-radius: var(--wpc-index-radius-sm) !important;
+  cursor: pointer !important;
+  font-size: 0.95rem !important;
+  font-weight: 600 !important;
+  color: var(--wpc-index-text-dark) !important;
+  transition: var(--wpc-index-transition) !important;
+  font-family: inherit !important;
+  text-align: center !important;
+}
+
+.wpc-calc-index-b5m3-btn-option:hover {
+  border-color: var(--wpc-index-primary) !important;
+  background: var(--wpc-index-primary-light) !important;
+}
+
+.wpc-calc-index-b5m3-btn-option.active {
+  background: var(--wpc-index-primary) !important;
+  border-color: var(--wpc-index-primary) !important;
+  color: white !important;
+}
+
+/* === Results Section === */
+.wpc-calc-index-b5m3-results {
+  background: var(--wpc-index-bg-light) !important;
+  border-radius: var(--wpc-index-radius-md) !important;
+  padding: 25px !important;
+  margin-top: 25px !important;
+}
+
+.wpc-calc-index-b5m3-results-title {
+  font-size: 1.2rem !important;
+  font-weight: 700 !important;
+  color: var(--wpc-index-primary) !important;
+  margin: 0 0 20px 0 !important;
+  text-align: center !important;
+  padding-bottom: 15px !important;
+  border-bottom: 2px solid var(--wpc-index-border) !important;
+}
+
+.wpc-calc-index-b5m3-result-row {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  padding: 12px 0 !important;
+  border-bottom: 1px solid var(--wpc-index-border) !important;
+}
+
+.wpc-calc-index-b5m3-result-row:last-child {
+  border-bottom: none !important;
+}
+
+.wpc-calc-index-b5m3-result-label {
+  font-weight: 500 !important;
+  color: var(--wpc-index-text-light) !important;
+}
+
+.wpc-calc-index-b5m3-result-value {
+  font-weight: 700 !important;
+  font-size: 1.2rem !important;
+  color: var(--wpc-index-primary) !important;
+  direction: ltr !important;
+}
+
+.wpc-calc-index-b5m3-result-value.danger {
+  color: var(--wpc-index-danger) !important;
+}
+
+.wpc-calc-index-b5m3-result-value.success {
+  color: var(--wpc-index-success) !important;
+}
+
+.wpc-calc-index-b5m3-result-value.warning {
+  color: var(--wpc-index-warning) !important;
+}
+
+/* === Highlight Box === */
+.wpc-calc-index-b5m3-highlight-box {
+  background: var(--wpc-index-gradient) !important;
+  color: white !important;
+  padding: 20px !important;
+  border-radius: var(--wpc-index-radius-md) !important;
+  text-align: center !important;
+  margin-top: 20px !important;
+}
+
+.wpc-calc-index-b5m3-highlight-title {
+  font-size: 1rem !important;
+  margin: 0 0 8px 0 !important;
+  opacity: 0.9 !important;
+}
+
+.wpc-calc-index-b5m3-highlight-value {
+  font-size: 2rem !important;
+  font-weight: 700 !important;
+  margin: 0 !important;
+  direction: ltr !important;
+}
+
+/* === Recommendation Box === */
+.wpc-calc-index-b5m3-recommendation {
+  background: var(--wpc-index-success-light) !important;
+  border: 2px solid var(--wpc-index-success) !important;
+  border-radius: var(--wpc-index-radius-md) !important;
+  padding: 20px !important;
+  margin-top: 20px !important;
+}
+
+.wpc-calc-index-b5m3-recommendation.warning {
+  background: var(--wpc-index-warning-light) !important;
+  border-color: var(--wpc-index-warning) !important;
+}
+
+.wpc-calc-index-b5m3-recommendation.danger {
+  background: var(--wpc-index-danger-light) !important;
+  border-color: var(--wpc-index-danger) !important;
+}
+
+.wpc-calc-index-b5m3-recommendation-title {
+  font-weight: 700 !important;
+  font-size: 1.1rem !important;
+  margin: 0 0 10px 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+.wpc-calc-index-b5m3-recommendation-text {
+  margin: 0 !important;
+  line-height: 1.7 !important;
+  color: var(--wpc-index-text-dark) !important;
+}
+
+/* === Comparison Cards === */
+.wpc-calc-index-b5m3-comparison {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)) !important;
+  gap: 20px !important;
+  margin-top: 25px !important;
+}
+
+.wpc-calc-index-b5m3-card {
+  background: var(--wpc-index-white) !important;
+  border: 2px solid var(--wpc-index-border) !important;
+  border-radius: var(--wpc-index-radius-md) !important;
+  padding: 25px !important;
+  text-align: center !important;
+  transition: var(--wpc-index-transition) !important;
+}
+
+.wpc-calc-index-b5m3-card.best {
+  border-color: var(--wpc-index-success) !important;
+  background: var(--wpc-index-success-light) !important;
+}
+
+.wpc-calc-index-b5m3-card-title {
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  color: var(--wpc-index-text-light) !important;
+  margin: 0 0 15px 0 !important;
+}
+
+.wpc-calc-index-b5m3-card-value {
+  font-size: 1.8rem !important;
+  font-weight: 700 !important;
+  color: var(--wpc-index-primary) !important;
+  margin: 0 !important;
+  direction: ltr !important;
+}
+
+.wpc-calc-index-b5m3-card-subtitle {
+  font-size: 0.9rem !important;
+  color: var(--wpc-index-text-light) !important;
+  margin: 10px 0 0 0 !important;
+}
+
+/* === Info Box === */
+.wpc-calc-index-b5m3-info-box {
+  background: var(--wpc-index-primary-light) !important;
+  border-right: 4px solid var(--wpc-index-primary) !important;
+  padding: 15px 20px !important;
+  border-radius: 0 var(--wpc-index-radius-sm) var(--wpc-index-radius-sm) 0 !important;
+  margin-bottom: 20px !important;
+}
+
+.wpc-calc-index-b5m3-info-box p {
+  margin: 0 !important;
+  font-size: 0.95rem !important;
+  color: var(--wpc-index-text-dark) !important;
+}
+
+/* === AWG Section === */
+.wpc-calc-index-b5m3-awg-section {
+  background: var(--wpc-index-white) !important;
+  padding: 50px 20px !important;
+  margin: 40px 0 !important;
+  border-top: 1px solid var(--wpc-index-border) !important;
+  border-bottom: 1px solid var(--wpc-index-border) !important;
+}
+
+.wpc-calc-index-b5m3-awg-container {
+  max-width: 800px !important;
+  margin: 0 auto !important;
+  text-align: center !important;
+}
+
+.wpc-calc-index-b5m3-cta-buttons {
+  display: flex !important;
+  gap: 15px !important;
+  justify-content: center !important;
+  flex-wrap: wrap !important;
+}
+
+.wpc-calc-index-b5m3-cta-btn {
+  background: var(--wpc-index-danger) !important;
+  color: white !important;
+  padding: 16px 32px !important;
+  border: none !important;
+  border-radius: 50px !important;
+  font-size: 1.1rem !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+  transition: var(--wpc-index-transition) !important;
+  font-family: inherit !important;
+}
+
+.wpc-calc-index-b5m3-cta-btn:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: var(--wpc-index-shadow-md) !important;
+}
+
+.wpc-calc-index-b5m3-cta-embed {
+  background: var(--wpc-index-success) !important;
+  color: white !important;
+  padding: 16px 32px !important;
+  border: none !important;
+  border-radius: 50px !important;
+  font-size: 1.1rem !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+  transition: var(--wpc-index-transition) !important;
+  font-family: inherit !important;
+}
+
+.wpc-calc-index-b5m3-cta-embed:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: var(--wpc-index-shadow-md) !important;
+}
+
+.wpc-calc-index-b5m3-awg-content {
+  opacity: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  transition: all 0.5s ease !important;
+}
+
+.wpc-calc-index-b5m3-awg-content.show {
+  opacity: 1 !important;
+  height: auto !important;
+  padding-top: 25px !important;
+}
+
+/* === FAQ Section === */
+.wpc-calc-index-b5m3-faq-section {
+  margin-top: 40px !important;
+}
+
+.wpc-calc-index-b5m3-faq-title {
+  font-size: 1.8rem !important;
+  font-weight: 700 !important;
+  color: var(--wpc-index-primary) !important;
+  text-align: center !important;
+  margin: 0 0 30px 0 !important;
+  position: relative !important;
+  padding-right: 25px !important;
+  display: inline-block !important;
+  width: 100% !important;
+}
+
+.wpc-calc-index-b5m3-faq-item {
+  background: var(--wpc-index-white) !important;
+  border: 1px solid var(--wpc-index-border) !important;
+  border-radius: var(--wpc-index-radius-md) !important;
+  margin-bottom: 12px !important;
+  overflow: hidden !important;
+}
+
+.wpc-calc-index-b5m3-faq-question {
+  width: 100% !important;
+  padding: 18px 20px !important;
+  background: var(--wpc-index-bg-light) !important;
+  border: none !important;
+  text-align: right !important;
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  color: var(--wpc-index-text-dark) !important;
+  cursor: pointer !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  transition: var(--wpc-index-transition) !important;
+  font-family: inherit !important;
+}
+
+.wpc-calc-index-b5m3-faq-question:hover {
+  background: var(--wpc-index-primary-light) !important;
+}
+
+.wpc-calc-index-b5m3-faq-question.active {
+  background: var(--wpc-index-primary) !important;
+  color: white !important;
+}
+
+.wpc-calc-index-b5m3-faq-icon {
+  transition: transform 0.3s ease !important;
+}
+
+.wpc-calc-index-b5m3-faq-question.active .wpc-calc-index-b5m3-faq-icon {
+  transform: rotate(180deg) !important;
+}
+
+.wpc-calc-index-b5m3-faq-answer {
+  max-height: 0 !important;
+  overflow: hidden !important;
+  transition: max-height 0.3s ease !important;
+}
+
+.wpc-calc-index-b5m3-faq-answer.show {
+  max-height: 500px !important;
+}
+
+.wpc-calc-index-b5m3-faq-answer-content {
+  padding: 20px !important;
+  line-height: 1.7 !important;
+  color: var(--wpc-index-text-dark) !important;
+}
+
+/* === Content Section === */
+.wpc-calc-index-b5m3-content-section {
+  margin: 40px 0 !important;
+  padding: 30px !important;
+  background: var(--wpc-index-white) !important;
+  border-radius: var(--wpc-index-radius-lg) !important;
+  box-shadow: var(--wpc-index-shadow-sm) !important;
+}
+
+.wpc-calc-index-b5m3-content-title {
+  font-size: 1.5rem !important;
+  font-weight: 700 !important;
+  color: var(--wpc-index-primary) !important;
+  margin: 0 0 20px 0 !important;
+  position: relative !important;
+  padding-right: 20px !important;
+}
+
+.wpc-calc-index-b5m3-content-title::after {
+  content: '' !important;
+  position: absolute !important;
+  right: 0 !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  width: 4px !important;
+  height: 30px !important;
+  background: var(--wpc-index-danger) !important;
+  border-radius: 2px !important;
+}
+
+.wpc-calc-index-b5m3-content-text {
+  line-height: 1.8 !important;
+  color: var(--wpc-index-text-dark) !important;
+  margin: 0 0 15px 0 !important;
+}
+
+.wpc-calc-index-b5m3-content-list {
+  padding-right: 25px !important;
+  margin: 15px 0 !important;
+}
+
+.wpc-calc-index-b5m3-content-list li {
+  margin-bottom: 10px !important;
+  line-height: 1.7 !important;
+}
+
+/* === Mobile Responsive === */
+@media (max-width: 768px) {
+  .wpc-calc-index-b5m3-wrapper {
+    padding: 15px !important;
+  }
+
+  .wpc-calc-index-b5m3-title {
+    font-size: 1.6rem !important;
+  }
+
+  .wpc-calc-index-b5m3-tabs-nav {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  .wpc-calc-index-b5m3-tab-btn {
+    min-height: 70px !important;
+    font-size: 0.85rem !important;
+  }
+
+  .wpc-calc-index-b5m3-tab-content {
+    padding: 20px !important;
+  }
+
+  .wpc-calc-index-b5m3-comparison {
+    grid-template-columns: 1fr !important;
+  }
+
+  .wpc-calc-index-b5m3-cta-buttons {
+    flex-direction: column !important;
+  }
+
+  .wpc-calc-index-b5m3-cta-btn,
+  .wpc-calc-index-b5m3-cta-embed {
+    width: 100% !important;
+  }
+
+  .wpc-calc-index-b5m3-result-row {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 5px !important;
+  }
+
+  .wpc-calc-index-b5m3-btn-group {
+    flex-direction: column !important;
+  }
+
+  .wpc-calc-index-b5m3-btn-option {
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .wpc-calc-index-b5m3-tabs-nav {
+    grid-template-columns: 1fr !important;
+    gap: 6px !important;
+  }
+
+  .wpc-calc-index-b5m3-tab-btn {
+    flex-direction: row !important;
+    min-height: 50px !important;
+    gap: 10px !important;
+  }
+
+  .wpc-calc-index-b5m3-tab-icon {
+    font-size: 1.2rem !important;
+  }
+
+  .wpc-calc-index-b5m3-title {
+    font-size: 1.4rem !important;
+    padding-right: 18px !important;
+  }
+
+  .wpc-calc-index-b5m3-title::after {
+    width: 4px !important;
+    height: 40px !important;
+  }
+
+  .wpc-calc-index-b5m3-highlight-value {
+    font-size: 1.5rem !important;
+  }
+
+  .wpc-calc-index-b5m3-card-value {
+    font-size: 1.4rem !important;
+  }
+}
+
+/* === Mobile Small - 375px === */
+@media (max-width: 375px) {
+  .wpc-calc-index-b5m3-wrapper {
+    padding: 10px !important;
+  }
+
+  .wpc-calc-index-b5m3-title {
+    font-size: 1.2rem !important;
+  }
+
+  .wpc-calc-index-b5m3-tab-content {
+    padding: 15px !important;
+  }
+
+  .wpc-calc-index-b5m3-slider-value {
+    font-size: 1.1rem !important;
+  }
+
+  .wpc-calc-index-b5m3-faq-question {
+    font-size: 0.9rem !important;
+    padding: 14px 16px !important;
+  }
+}
+
+/* === Dark Mode Prevention === */
+@media (prefers-color-scheme: dark) {
+  .wpc-calc-index-b5m3-wrapper {
+    color-scheme: light !important;
+    background-color: white !important;
+  }
+  
+  .wpc-calc-index-b5m3-wrapper * {
+    color-scheme: light !important;
+  }
+}
+</style>
+
+<!-- === HTML Structure === -->
+<div class="wpc-calc-index-b5m3-wrapper" id="wpc-calc-index-b5m3-main">
+  
+  <!-- Title Section -->
+  <div class="wpc-calc-index-b5m3-title-section">
+    <h1 class="wpc-calc-index-b5m3-title">🏗️ מחשבון הצמדה למדד תשומות הבנייה</h1>
+    <p class="wpc-calc-index-b5m3-subtitle">חשבו כמה תוספת תשלום תצטרכו לשלם לקבלן עקב עליית מדד תשומות הבנייה</p>
+    <p class="wpc-calc-index-b5m3-update-date"><strong>עודכן:</strong> [current_date format="F Y" hebrew="true"]</p>
+  </div>
+
+  <!-- Calculator Container -->
+  <div class="wpc-calc-index-b5m3-calculator" id="wpc-calc-index-b5m3-calculator">
+    
+    <!-- Tabs Navigation -->
+    <div class="wpc-calc-index-b5m3-tabs-nav">
+      <button class="wpc-calc-index-b5m3-tab-btn active" data-action="switch-tab" data-tab="basic">
+        <span class="wpc-calc-index-b5m3-tab-icon">🧮</span>
+        <span>חישוב בסיסי</span>
+      </button>
+      <button class="wpc-calc-index-b5m3-tab-btn" data-action="switch-tab" data-tab="planning">
+        <span class="wpc-calc-index-b5m3-tab-icon">📅</span>
+        <span>תכנון תשלומים</span>
+      </button>
+      <button class="wpc-calc-index-b5m3-tab-btn" data-action="switch-tab" data-tab="compare">
+        <span class="wpc-calc-index-b5m3-tab-icon">📊</span>
+        <span>השוואת תרחישים</span>
+      </button>
+    </div>
+
+    <!-- Tab Contents -->
+    <div class="wpc-calc-index-b5m3-tabs-content">
+      
+      <!-- Tab 1: Basic Calculation -->
+      <div class="wpc-calc-index-b5m3-tab-content active" id="tab-basic">
+        <h3 class="wpc-calc-index-b5m3-tab-title">חישוב תוספת תשלום צפויה</h3>
+        
+        <div class="wpc-calc-index-b5m3-info-box">
+          <p>💡 מדד תשומות הבנייה מתפרסם מדי חודש על ידי הלמ"ס ומשקף את עליית מחירי חומרי הבנייה והעבודה. יתרת התשלום לקבלן צמודה למדד זה.</p>
+        </div>
+
+        <!-- Balance Input -->
+        <div class="wpc-calc-index-b5m3-form-group">
+          <label class="wpc-calc-index-b5m3-label">יתרת התשלום לקבלן (₪)</label>
+          <div class="wpc-calc-index-b5m3-slider-container">
+            <input type="range" class="wpc-calc-index-b5m3-slider" id="basic-balance-slider" 
+                   min="50000" max="3000000" step="10000" value="500000">
+            <div class="wpc-calc-index-b5m3-slider-value" id="basic-balance-value">500,000 ₪</div>
+          </div>
+        </div>
+
+        <!-- Months Until Delivery -->
+        <div class="wpc-calc-index-b5m3-form-group">
+          <label class="wpc-calc-index-b5m3-label">חודשים עד למסירת הדירה</label>
+          <div class="wpc-calc-index-b5m3-slider-container">
+            <input type="range" class="wpc-calc-index-b5m3-slider" id="basic-months-slider" 
+                   min="6" max="48" step="1" value="24">
+            <div class="wpc-calc-index-b5m3-slider-value" id="basic-months-value">24 חודשים (שנתיים)</div>
+          </div>
+        </div>
+
+        <!-- Expected Annual Index Rise -->
+        <div class="wpc-calc-index-b5m3-form-group">
+          <label class="wpc-calc-index-b5m3-label">צפי עליית מדד שנתית (%)</label>
+          <div class="wpc-calc-index-b5m3-btn-group" id="basic-rate-group">
+            <button class="wpc-calc-index-b5m3-btn-option" data-action="select-rate" data-rate="1.5">1.5%</button>
+            <button class="wpc-calc-index-b5m3-btn-option" data-action="select-rate" data-rate="2">2%</button>
+            <button class="wpc-calc-index-b5m3-btn-option active" data-action="select-rate" data-rate="2.5">2.5%</button>
+            <button class="wpc-calc-index-b5m3-btn-option" data-action="select-rate" data-rate="3">3%</button>
+            <button class="wpc-calc-index-b5m3-btn-option" data-action="select-rate" data-rate="4">4%</button>
+          </div>
+        </div>
+
+        <!-- Results -->
+        <div class="wpc-calc-index-b5m3-results">
+          <h4 class="wpc-calc-index-b5m3-results-title">📈 תוצאות החישוב</h4>
+          
+          <div class="wpc-calc-index-b5m3-result-row">
+            <span class="wpc-calc-index-b5m3-result-label">יתרת תשלום מקורית:</span>
+            <span class="wpc-calc-index-b5m3-result-value" id="basic-result-original">500,000 ₪</span>
+          </div>
+          
+          <div class="wpc-calc-index-b5m3-result-row">
+            <span class="wpc-calc-index-b5m3-result-label">עליית מדד משוערת:</span>
+            <span class="wpc-calc-index-b5m3-result-value" id="basic-result-percent">5.06%</span>
+          </div>
+          
+          <div class="wpc-calc-index-b5m3-result-row">
+            <span class="wpc-calc-index-b5m3-result-label">תוספת תשלום צפויה:</span>
+            <span class="wpc-calc-index-b5m3-result-value danger" id="basic-result-addition">25,314 ₪</span>
+          </div>
+          
+          <div class="wpc-calc-index-b5m3-highlight-box">
+            <p class="wpc-calc-index-b5m3-highlight-title">סה"כ תשלום סופי לקבלן</p>
+            <p class="wpc-calc-index-b5m3-highlight-value" id="basic-result-total">525,314 ₪</p>
+          </div>
+        </div>
+
+        <!-- Recommendation -->
+        <div class="wpc-calc-index-b5m3-recommendation" id="basic-recommendation">
+          <p class="wpc-calc-index-b5m3-recommendation-title">💡 המלצה</p>
+          <p class="wpc-calc-index-b5m3-recommendation-text" id="basic-recommendation-text">
+            מומלץ לבדוק אפשרות להקדים תשלומים לקבלן כדי לצמצם את החשיפה לעליית המדד.
+          </p>
+        </div>
+      </div>
+
+      <!-- Tab 2: Payment Planning -->
+      <div class="wpc-calc-index-b5m3-tab-content" id="tab-planning">
+        <h3 class="wpc-calc-index-b5m3-tab-title">תכנון תשלומים חכם - חיסכון במדד</h3>
+        
+        <div class="wpc-calc-index-b5m3-info-box">
+          <p>💡 הקדמת תשלומים לקבלן יכולה לחסוך לכם אלפי שקלים בהצמדה למדד. בדקו כמה תחסכו אם תשלמו עכשיו יותר.</p>
+        </div>
+
+        <!-- Total Balance -->
+        <div class="wpc-calc-index-b5m3-form-group">
+          <label class="wpc-calc-index-b5m3-label">סה"כ יתרה לתשלום (₪)</label>
+          <div class="wpc-calc-index-b5m3-slider-container">
+            <input type="range" class="wpc-calc-index-b5m3-slider" id="planning-total-slider" 
+                   min="100000" max="3000000" step="10000" value="600000">
+            <div class="wpc-calc-index-b5m3-slider-value" id="planning-total-value">600,000 ₪</div>
+          </div>
+        </div>
+
+        <!-- Early Payment Amount -->
+        <div class="wpc-calc-index-b5m3-form-group">
+          <label class="wpc-calc-index-b5m3-label">סכום שניתן להקדים עכשיו (₪)</label>
+          <div class="wpc-calc-index-b5m3-slider-container">
+            <input type="range" class="wpc-calc-index-b5m3-slider" id="planning-early-slider" 
+                   min="0" max="600000" step="10000" value="200000">
+            <div class="wpc-calc-index-b5m3-slider-value" id="planning-early-value">200,000 ₪</div>
+          </div>
+        </div>
+
+        <!-- Months -->
+        <div class="wpc-calc-index-b5m3-form-group">
+          <label class="wpc-calc-index-b5m3-label">חודשים עד מסירה</label>
+          <div class="wpc-calc-index-b5m3-slider-container">
+            <input type="range" class="wpc-calc-index-b5m3-slider" id="planning-months-slider" 
+                   min="6" max="48" step="1" value="24">
+            <div class="wpc-calc-index-b5m3-slider-value" id="planning-months-value">24 חודשים</div>
+          </div>
+        </div>
+
+        <!-- Index Rate -->
+        <div class="wpc-calc-index-b5m3-form-group">
+          <label class="wpc-calc-index-b5m3-label">צפי עליית מדד שנתית</label>
+          <div class="wpc-calc-index-b5m3-slider-container">
+            <input type="range" class="wpc-calc-index-b5m3-slider" id="planning-rate-slider" 
+                   min="0.5" max="6" step="0.25" value="2.5">
+            <div class="wpc-calc-index-b5m3-slider-value" id="planning-rate-value">2.5%</div>
+          </div>
+        </div>
+
+        <!-- Comparison Results -->
+        <div class="wpc-calc-index-b5m3-comparison">
+          <div class="wpc-calc-index-b5m3-card">
+            <h5 class="wpc-calc-index-b5m3-card-title">❌ ללא הקדמת תשלום</h5>
+            <p class="wpc-calc-index-b5m3-card-value" id="planning-without-early">630,379 ₪</p>
+            <p class="wpc-calc-index-b5m3-card-subtitle">תוספת מדד: <span id="planning-without-addition">30,379 ₪</span></p>
+          </div>
+          
+          <div class="wpc-calc-index-b5m3-card best">
+            <h5 class="wpc-calc-index-b5m3-card-title">✅ עם הקדמת תשלום</h5>
+            <p class="wpc-calc-index-b5m3-card-value" id="planning-with-early">620,253 ₪</p>
+            <p class="wpc-calc-index-b5m3-card-subtitle">תוספת מדד: <span id="planning-with-addition">20,253 ₪</span></p>
+          </div>
+        </div>
+
+        <div class="wpc-calc-index-b5m3-highlight-box">
+          <p class="wpc-calc-index-b5m3-highlight-title">💰 החיסכון שלכם בהקדמת התשלום</p>
+          <p class="wpc-calc-index-b5m3-highlight-value" id="planning-savings">10,126 ₪</p>
+        </div>
+
+        <div class="wpc-calc-index-b5m3-recommendation success" id="planning-recommendation">
+          <p class="wpc-calc-index-b5m3-recommendation-title">💡 המלצה</p>
+          <p class="wpc-calc-index-b5m3-recommendation-text" id="planning-recommendation-text">
+            הקדמת תשלום של 200,000 ₪ תחסוך לכם כ-10,126 ₪!
+          </p>
+        </div>
+      </div>
+
+      <!-- Tab 3: Scenario Comparison -->
+      <div class="wpc-calc-index-b5m3-tab-content" id="tab-compare">
+        <h3 class="wpc-calc-index-b5m3-tab-title">השוואת תרחישי עליית מדד</h3>
+        
+        <div class="wpc-calc-index-b5m3-info-box">
+          <p>💡 איש לא יודע מה יהיה המדד בעתיד. בדקו תרחישים שונים כדי להיערך לכל מצב.</p>
+        </div>
+
+        <!-- Balance -->
+        <div class="wpc-calc-index-b5m3-form-group">
+          <label class="wpc-calc-index-b5m3-label">יתרת תשלום (₪)</label>
+          <div class="wpc-calc-index-b5m3-slider-container">
+            <input type="range" class="wpc-calc-index-b5m3-slider" id="compare-balance-slider" 
+                   min="50000" max="3000000" step="10000" value="500000">
+            <div class="wpc-calc-index-b5m3-slider-value" id="compare-balance-value">500,000 ₪</div>
+          </div>
+        </div>
+
+        <!-- Months -->
+        <div class="wpc-calc-index-b5m3-form-group">
+          <label class="wpc-calc-index-b5m3-label">חודשים עד מסירה</label>
+          <div class="wpc-calc-index-b5m3-slider-container">
+            <input type="range" class="wpc-calc-index-b5m3-slider" id="compare-months-slider" 
+                   min="6" max="48" step="1" value="24">
+            <div class="wpc-calc-index-b5m3-slider-value" id="compare-months-value">24 חודשים</div>
+          </div>
+        </div>
+
+        <!-- Scenario Cards -->
+        <div class="wpc-calc-index-b5m3-comparison">
+          <div class="wpc-calc-index-b5m3-card best">
+            <h5 class="wpc-calc-index-b5m3-card-title">🟢 תרחיש אופטימי (1.5%)</h5>
+            <p class="wpc-calc-index-b5m3-card-value" id="compare-optimistic">515,113 ₪</p>
+            <p class="wpc-calc-index-b5m3-card-subtitle">תוספת: <span id="compare-optimistic-add">15,113 ₪</span></p>
+          </div>
+          
+          <div class="wpc-calc-index-b5m3-card">
+            <h5 class="wpc-calc-index-b5m3-card-title">🟡 תרחיש ממוצע (2.5%)</h5>
+            <p class="wpc-calc-index-b5m3-card-value" id="compare-average">525,314 ₪</p>
+            <p class="wpc-calc-index-b5m3-card-subtitle">תוספת: <span id="compare-average-add">25,314 ₪</span></p>
+          </div>
+          
+          <div class="wpc-calc-index-b5m3-card">
+            <h5 class="wpc-calc-index-b5m3-card-title">🔴 תרחיש פסימי (4%)</h5>
+            <p class="wpc-calc-index-b5m3-card-value" id="compare-pessimistic">541,218 ₪</p>
+            <p class="wpc-calc-index-b5m3-card-subtitle">תוספת: <span id="compare-pessimistic-add">41,218 ₪</span></p>
+          </div>
+        </div>
+
+        <div class="wpc-calc-index-b5m3-results">
+          <h4 class="wpc-calc-index-b5m3-results-title">📊 סיכום השוואת התרחישים</h4>
+          
+          <div class="wpc-calc-index-b5m3-result-row">
+            <span class="wpc-calc-index-b5m3-result-label">הפרש בין תרחיש אופטימי לפסימי:</span>
+            <span class="wpc-calc-index-b5m3-result-value warning" id="compare-difference">26,105 ₪</span>
+          </div>
+          
+          <div class="wpc-calc-index-b5m3-result-row">
+            <span class="wpc-calc-index-b5m3-result-label">ממוצע היסטורי (10 שנים אחרונות):</span>
+            <span class="wpc-calc-index-b5m3-result-value">2.3% לשנה</span>
+          </div>
+        </div>
+
+        <div class="wpc-calc-index-b5m3-recommendation warning">
+          <p class="wpc-calc-index-b5m3-recommendation-title">⚠️ שימו לב</p>
+          <p class="wpc-calc-index-b5m3-recommendation-text">
+            מומלץ להיערך לתרחיש הממוצע (2.5%) אך לשמור רזרבה כספית למקרה של עליית מדד גבוהה יותר.
+            בנוסף, כדאי לבדוק את האפשרות לשלם תשלומים צמודים למדד בסיס (ללא הצמדה) כחלק מהמו"מ עם הקבלן.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AWG Section -->
+  <div class="wpc-calc-index-b5m3-awg-section">
+    <div class="wpc-calc-index-b5m3-awg-container">
+      <div class="wpc-calc-index-b5m3-cta-buttons">
+        <button class="wpc-calc-index-b5m3-cta-btn" data-action="open-awg">
+          בדוק זכאות למשכנתא עכשיו - קבל הצעה מיידית!
+        </button>
+        <button class="wpc-calc-index-b5m3-cta-embed" data-action="scroll-to-embed">
+          🎁 רוצה להוסיף את המחשבון בחינם לאתרך? לחץ כאן!
+        </button>
+      </div>
+      <div class="wpc-calc-index-b5m3-awg-content" id="awg-content">
+        [awg postid="32400"]
+      </div>
+    </div>
+  </div>
+
+  <!-- Content Section for SEO -->
+  <div class="wpc-calc-index-b5m3-content-section">
+    <h2 class="wpc-calc-index-b5m3-content-title">מהו מדד תשומות הבנייה?</h2>
+    <p class="wpc-calc-index-b5m3-content-text">
+      מדד תשומות הבנייה הוא מדד המפורסם מדי חודש על ידי הלשכה המרכזית לסטטיסטיקה (הלמ"ס), 
+      והוא משקף את השינויים במחירי תשומות הבנייה בישראל - כולל חומרי בניין, עבודה, ושירותים הקשורים לבנייה.
+    </p>
+    <p class="wpc-calc-index-b5m3-content-text">
+      כאשר רוכשים דירה מקבלן, יתרת התשלום (הסכום שנותר לשלם עד למסירה) בדרך כלל צמודה למדד תשומות הבנייה.
+      משמעות הדבר היא שאם המדד עולה, גם הסכום שתצטרכו לשלם יעלה בהתאם.
+    </p>
+    
+    <h2 class="wpc-calc-index-b5m3-content-title">איך מחשבים הצמדה למדד?</h2>
+    <p class="wpc-calc-index-b5m3-content-text">
+      החישוב נעשה על פי ההפרש בין המדד ביום התשלום לבין המדד הבסיסי (בדרך כלל מדד החודש שקדם לחתימת החוזה):
+    </p>
+    <ul class="wpc-calc-index-b5m3-content-list">
+      <li><strong>שלב 1:</strong> בודקים את המדד הבסיסי (ביום חתימת החוזה)</li>
+      <li><strong>שלב 2:</strong> בודקים את המדד העדכני (ביום התשלום)</li>
+      <li><strong>שלב 3:</strong> מחשבים את אחוז השינוי: (מדד עדכני - מדד בסיס) / מדד בסיס × 100</li>
+      <li><strong>שלב 4:</strong> מכפילים את יתרת התשלום באחוז השינוי</li>
+    </ul>
+    
+    <h2 class="wpc-calc-index-b5m3-content-title">איך להתגונן מפני עליית המדד?</h2>
+    <ul class="wpc-calc-index-b5m3-content-list">
+      <li><strong>הקדמת תשלומים:</strong> שלמו כמה שיותר מוקדם - סכומים ששולמו כבר לא צמודים למדד</li>
+      <li><strong>משכנתא מוקדמת:</strong> קחו משכנתא מוקדם ככל האפשר ושלמו לקבלן</li>
+      <li><strong>מו"מ על תקרת הצמדה:</strong> נסו לסכם עם הקבלן על תקרת הצמדה מקסימלית</li>
+      <li><strong>תשלומים ללא הצמדה:</strong> בקשו שחלק מהתשלומים יהיו ללא הצמדה למדד</li>
+    </ul>
+  </div>
+
+  <!-- FAQ Section -->
+  <div class="wpc-calc-index-b5m3-faq-section">
+    <h2 class="wpc-calc-index-b5m3-faq-title">❓ שאלות נפוצות על מדד תשומות הבנייה</h2>
+    
+    <div class="wpc-calc-index-b5m3-faq-item">
+      <button class="wpc-calc-index-b5m3-faq-question" data-action="toggle-faq">
+        <span>מה קורה אם המדד יורד?</span>
+        <span class="wpc-calc-index-b5m3-faq-icon">▼</span>
+      </button>
+      <div class="wpc-calc-index-b5m3-faq-answer">
+        <div class="wpc-calc-index-b5m3-faq-answer-content">
+          אם מדד תשומות הבנייה יורד, יתרת התשלום לקבלן תקטן בהתאם. עם זאת, ברוב החוזים יש סעיף "רצפה" הקובע שהתשלום לא יכול לרדת מתחת לסכום המקורי. חשוב לבדוק את תנאי החוזה הספציפי שלכם.
+        </div>
+      </div>
+    </div>
+    
+    <div class="wpc-calc-index-b5m3-faq-item">
+      <button class="wpc-calc-index-b5m3-faq-question" data-action="toggle-faq">
+        <span>מתי מתפרסם מדד תשומות הבנייה?</span>
+        <span class="wpc-calc-index-b5m3-faq-icon">▼</span>
+      </button>
+      <div class="wpc-calc-index-b5m3-faq-answer">
+        <div class="wpc-calc-index-b5m3-faq-answer-content">
+          מדד תשומות הבנייה מתפרסם על ידי הלמ"ס בסביבות ה-15 לכל חודש, עבור החודש הקודם. לדוגמה, מדד ינואר יתפרסם באמצע פברואר. ניתן לעקוב אחר המדד באתר הלמ"ס.
+        </div>
+      </div>
+    </div>
+    
+    <div class="wpc-calc-index-b5m3-faq-item">
+      <button class="wpc-calc-index-b5m3-faq-question" data-action="toggle-faq">
+        <span>האם אפשר לשלם את כל הסכום מראש ולהימנע מהצמדה?</span>
+        <span class="wpc-calc-index-b5m3-faq-icon">▼</span>
+      </button>
+      <div class="wpc-calc-index-b5m3-faq-answer">
+        <div class="wpc-calc-index-b5m3-faq-answer-content">
+          תיאורטית כן, אך יש לקחת בחשבון כמה דברים: ראשית, לרוב לא ניתן לקחת משכנתא מלאה עד להשלמת הבנייה. שנית, כסף ששולם לקבלן נמצא "בסיכון" אם הקבלן נקלע לקשיים. שלישית, יש עלות הזדמנות - הכסף יכול להרוויח ריבית בבנק. מומלץ להתייעץ עם יועץ משכנתאות לפני קבלת החלטה.
+        </div>
+      </div>
+    </div>
+    
+    <div class="wpc-calc-index-b5m3-faq-item">
+      <button class="wpc-calc-index-b5m3-faq-question" data-action="toggle-faq">
+        <span>מהו הממוצע ההיסטורי של עליית מדד תשומות הבנייה?</span>
+        <span class="wpc-calc-index-b5m3-faq-icon">▼</span>
+      </button>
+      <div class="wpc-calc-index-b5m3-faq-answer">
+        <div class="wpc-calc-index-b5m3-faq-answer-content">
+          בעשור האחרון הממוצע השנתי נע בין 2% ל-3%, אך היו שנים חריגות. בשנים 2021-2022 המדד עלה בקצב מואץ של כ-7%-9% בשנה עקב משבר שרשרת האספקה העולמית ועליית מחירי חומרי הגלם. לכן חשוב להיערך גם לתרחישים קיצוניים.
+        </div>
+      </div>
+    </div>
+    
+    <div class="wpc-calc-index-b5m3-faq-item">
+      <button class="wpc-calc-index-b5m3-faq-question" data-action="toggle-faq">
+        <span>האם ניתן לנהל מו"מ עם הקבלן על תנאי ההצמדה?</span>
+        <span class="wpc-calc-index-b5m3-faq-icon">▼</span>
+      </button>
+      <div class="wpc-calc-index-b5m3-faq-answer">
+        <div class="wpc-calc-index-b5m3-faq-answer-content">
+          בהחלט! ניתן לנסות לנהל מו"מ על מספר נקודות: קביעת תקרת הצמדה מקסימלית (למשל, עד 5%), בקשה שחלק מהתשלומים יהיו ללא הצמדה, או קביעת מדד בסיס מאוחר יותר. הצלחת המו"מ תלויה בביקוש לפרויקט ובנכונות הקבלן.
+        </div>
+      </div>
+    </div>
+    
+    <div class="wpc-calc-index-b5m3-faq-item">
+      <button class="wpc-calc-index-b5m3-faq-question" data-action="toggle-faq">
+        <span>מה ההבדל בין מדד תשומות הבנייה למדד המחירים לצרכן?</span>
+        <span class="wpc-calc-index-b5m3-faq-icon">▼</span>
+      </button>
+      <div class="wpc-calc-index-b5m3-faq-answer">
+        <div class="wpc-calc-index-b5m3-faq-answer-content">
+          מדד תשומות הבנייה מודד את השינויים במחירי התשומות הספציפיות לענף הבנייה (חומרי בניין, שכר עובדים, ציוד וכו'), בעוד מדד המחירים לצרכן מודד את השינויים במחירי סל מוצרים ושירותים כללי. בדרך כלל, מדד תשומות הבנייה תנודתי יותר מהמדד לצרכן.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Embed Section -->
+  <div class="wpc-calc-index-b5m3-content-section" id="embed-section">
+    <h2 class="wpc-calc-index-b5m3-content-title">🎁 רוצים להטמיע את מחשבון מדד תשומות הבנייה באתר שלכם? חינם!</h2>
+    
+    <div class="wpc-calc-index-b5m3-info-box" style="background: var(--wpc-index-success-light); border-color: var(--wpc-index-success);">
+      <p>
+        <strong>💎 אנחנו נותנים לכם את מחשבון מדד תשומות הבנייה המתקדם הזה לחלוטין בחינם!</strong><br>
+        תמורת קישור קרדיט קטן לאתר שלנו, תקבלו מחשבון מקצועי עם 3 לשוניות, חישובים מדויקים, ועיצוב שמתאים לכל מסך.<br>
+        <strong>שווי המחשבון:</strong> מעל ₪12,000 בפיתוח 💰
+      </p>
+    </div>
+
+    <h3 style="margin: 25px 0 15px; color: var(--wpc-index-primary);">📋 איך מוסיפים? (3 דקות בלבד)</h3>
+    <ol class="wpc-calc-index-b5m3-content-list">
+      <li><strong>לחצו</strong> על הכפתור הירוק "העתק קוד" למטה 👇</li>
+      <li><strong>פתחו</strong> את עורך וורדפרס שלכם (מצב טקסט/HTML, לא עיצוב)</li>
+      <li><strong>הדביקו</strong> את הקוד במיקום הרצוי בעמוד</li>
+      <li><strong>פרסמו!</strong> המחשבון יעבוד מיד ללא הגדרות נוספות ✨</li>
+    </ol>
+
+    <div style="text-align: center; margin: 25px 0;">
+      <button class="wpc-calc-index-b5m3-cta-embed" data-action="copy-embed-code" style="font-size: 1.2rem; padding: 18px 40px;">
+        📋 העתק קוד מלא - לחצו כאן!
+      </button>
+    </div>
+
+    <!-- Color Picker -->
+    <h4 style="text-align: center; margin: 25px 0 15px; color: var(--wpc-index-text-dark);">🎨 בחרו צבע מותאם לאתר שלכם:</h4>
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-bottom: 25px;">
+      <button style="background: #1e5490; width: 50px; height: 50px; border-radius: 50%; border: 3px solid #fff; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.2);" data-action="preview-color" data-color="#1e5490" data-name="כחול מקצועי" title="כחול מקצועי 💙"></button>
+      <button style="background: #10b981; width: 50px; height: 50px; border-radius: 50%; border: 3px solid #fff; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.2);" data-action="preview-color" data-color="#10b981" data-name="ירוק צמיחה" title="ירוק צמיחה 💚"></button>
+      <button style="background: #ef4444; width: 50px; height: 50px; border-radius: 50%; border: 3px solid #fff; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.2);" data-action="preview-color" data-color="#ef4444" data-name="אדום אנרגטי" title="אדום אנרגטי ❤️"></button>
+      <button style="background: #8b5cf6; width: 50px; height: 50px; border-radius: 50%; border: 3px solid #fff; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.2);" data-action="preview-color" data-color="#8b5cf6" data-name="סגול יוקרתי" title="סגול יוקרתי 💜"></button>
+      <button style="background: #f59e0b; width: 50px; height: 50px; border-radius: 50%; border: 3px solid #fff; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.2);" data-action="preview-color" data-color="#f59e0b" data-name="כתום דינמי" title="כתום דינמי 🧡"></button>
+      <button style="background: #ec4899; width: 50px; height: 50px; border-radius: 50%; border: 3px solid #fff; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.2);" data-action="preview-color" data-color="#ec4899" data-name="ורוד מודרני" title="ורוד מודרני 💗"></button>
+      <button style="background: #06b6d4; width: 50px; height: 50px; border-radius: 50%; border: 3px solid #fff; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.2);" data-action="preview-color" data-color="#06b6d4" data-name="טורקיז רענן" title="טורקיז רענן 🩵"></button>
+      <button style="background: #84cc16; width: 50px; height: 50px; border-radius: 50%; border: 3px solid #fff; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.2);" data-action="preview-color" data-color="#84cc16" data-name="ליים עז" title="ליים עז 💛"></button>
+      <button style="background: #f97316; width: 50px; height: 50px; border-radius: 50%; border: 3px solid #fff; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.2);" data-action="preview-color" data-color="#f97316" data-name="כתום בוהק" title="כתום בוהק 🔥"></button>
+      <button style="background: #0891b2; width: 50px; height: 50px; border-radius: 50%; border: 3px solid #fff; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.2);" data-action="preview-color" data-color="#0891b2" data-name="כחול ים" title="כחול ים 🌊"></button>
+      <input type="color" id="wpc-calc-index-b5m3-custom-color" value="#1e5490" data-action="preview-custom-color" style="width: 50px; height: 50px; border-radius: 50%; cursor: pointer; border: 3px solid #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.2);" title="בחר צבע מותאם אישית">
+    </div>
+
+    <!-- Preview Container -->
+    <div id="wpc-calc-index-b5m3-preview-container" style="display: none; margin-top: 25px; padding: 20px; border: 2px dashed var(--wpc-index-border); border-radius: var(--wpc-index-radius-md);">
+      <h4 style="text-align: center; margin-bottom: 15px;">תצוגה מקדימה בצבע: <span id="preview-color-name">כחול מקצועי</span></h4>
+      <div id="wpc-calc-index-b5m3-preview-content"></div>
+      <div style="text-align: center; margin-top: 20px;">
+        <button class="wpc-calc-index-b5m3-cta-embed" data-action="copy-preview-code">
+          📋 העתק קוד עם הצבע הנבחר
+        </button>
+      </div>
+    </div>
+
+    <!-- Terms -->
+    <div style="background: #fff3cd; border: 1px solid #ffc107; border-radius: var(--wpc-index-radius-md); padding: 20px; margin-top: 25px;">
+      <h4 style="margin: 0 0 10px; color: #856404;">⚠️ חשוב לדעת - זכויות יוצרים</h4>
+      <p style="margin: 0; color: #856404; font-size: 0.95rem;">
+        מחשבון זה מוגן בזכויות יוצרים © וניתן להוספה לאתר שלכם בחינם רק תמורת השארת קישור הקרדיט.
+        אסור בהחלט: הסרת/שינוי/הסתרת קישור הקרדיט, שימוש מסחרי ישיר ללא אישור, מכירת המחשבון.
+      </p>
+    </div>
+  </div>
+
+</div>
+
+<!-- JavaScript -->
+<script>
+(function() {
+    'use strict';
+    
+    // Namespace check
+    const NS = 'WPC_CalcIndex_B5M3';
+    if (window[NS]) return;
+    
+    // Container validation
+    const container = document.getElementById('wpc-calc-index-b5m3-main');
+    if (!container) return;
+    
+    // === State Management ===
+    const state = {
+        basic: {
+            balance: 500000,
+            months: 24,
+            rate: 2.5
+        },
+        planning: {
+            total: 600000,
+            early: 200000,
+            months: 24,
+            rate: 2.5
+        },
+        compare: {
+            balance: 500000,
+            months: 24
+        },
+        selectedColor: '#1e5490'
+    };
+    
+    // === Helper Functions ===
+    function formatCurrency(num) {
+        return Math.round(num).toLocaleString('he-IL') + ' ₪';
+    }
+    
+    function formatPercent(num) {
+        return num.toFixed(2) + '%';
+    }
+    
+    function el(id) {
+        return document.getElementById(id);
+    }
+    
+    // Calculate compound index change over months
+    function calcIndexChange(balance, annualRate, months) {
+        // Monthly rate
+        const monthlyRate = annualRate / 100 / 12;
+        // Compound over months
+        const multiplier = Math.pow(1 + monthlyRate, months);
+        const finalAmount = balance * multiplier;
+        const addition = finalAmount - balance;
+        const percentChange = (multiplier - 1) * 100;
+        
+        return {
+            original: balance,
+            final: finalAmount,
+            addition: addition,
+            percent: percentChange
+        };
+    }
+    
+    // === Tab 1: Basic Calculation ===
+    function updateBasic() {
+        const result = calcIndexChange(state.basic.balance, state.basic.rate, state.basic.months);
+        
+        // Update display values
+        el('basic-balance-value').textContent = formatCurrency(state.basic.balance);
+        
+        const years = Math.floor(state.basic.months / 12);
+        const remainingMonths = state.basic.months % 12;
+        let monthsText = state.basic.months + ' חודשים';
+        if (years > 0) {
+            if (remainingMonths === 0) {
+                monthsText += years === 1 ? ' (שנה)' : ` (${years} שנים)`;
+            } else {
+                monthsText += ` (${years} שנים ו-${remainingMonths} חודשים)`;
+            }
+        }
+        el('basic-months-value').textContent = monthsText;
+        
+        // Update results
+        el('basic-result-original').textContent = formatCurrency(result.original);
+        el('basic-result-percent').textContent = formatPercent(result.percent);
+        el('basic-result-addition').textContent = formatCurrency(result.addition);
+        el('basic-result-total').textContent = formatCurrency(result.final);
+        
+        // Update recommendation
+        const recBox = el('basic-recommendation');
+        const recText = el('basic-recommendation-text');
+        
+        if (result.percent > 8) {
+            recBox.className = 'wpc-calc-index-b5m3-recommendation danger';
+            recText.innerHTML = `<strong>אזהרה!</strong> עם צפי של ${formatPercent(result.percent)} עליית מדד, תוספת התשלום משמעותית מאוד (${formatCurrency(result.addition)}). 
+                מומלץ מאוד לבדוק אפשרויות להקדמת תשלומים או משכנתא מוקדמת.`;
+        } else if (result.percent > 5) {
+            recBox.className = 'wpc-calc-index-b5m3-recommendation warning';
+            recText.innerHTML = `שימו לב: תוספת המדד הצפויה היא ${formatCurrency(result.addition)}. 
+                כדאי לבדוק אם ניתן להקדים חלק מהתשלומים או לנהל מו"מ עם הקבלן על תקרת הצמדה.`;
+        } else {
+            recBox.className = 'wpc-calc-index-b5m3-recommendation';
+            recText.innerHTML = `תוספת המדד הצפויה היא ${formatCurrency(result.addition)} - סכום סביר. 
+                עדיין מומלץ לשמור רזרבה כספית למקרה של עליית מדד גבוהה מהצפי.`;
+        }
+    }
+    
+    // === Tab 2: Payment Planning ===
+    function updatePlanning() {
+        // Update slider max for early payment
+        const earlySlider = el('planning-early-slider');
+        if (earlySlider) {
+            earlySlider.max = state.planning.total;
+            if (state.planning.early > state.planning.total) {
+                state.planning.early = state.planning.total;
+                earlySlider.value = state.planning.early;
+            }
+        }
+        
+        // Calculate without early payment
+        const withoutEarly = calcIndexChange(state.planning.total, state.planning.rate, state.planning.months);
+        
+        // Calculate with early payment (remaining balance after early payment)
+        const remainingBalance = state.planning.total - state.planning.early;
+        const withEarly = calcIndexChange(remainingBalance, state.planning.rate, state.planning.months);
+        const totalWithEarly = state.planning.early + withEarly.final;
+        
+        // Savings
+        const savings = withoutEarly.final - totalWithEarly;
+        
+        // Update display values
+        el('planning-total-value').textContent = formatCurrency(state.planning.total);
+        el('planning-early-value').textContent = formatCurrency(state.planning.early);
+        el('planning-months-value').textContent = state.planning.months + ' חודשים';
+        el('planning-rate-value').textContent = state.planning.rate + '%';
+        
+        // Update results
+        el('planning-without-early').textContent = formatCurrency(withoutEarly.final);
+        el('planning-without-addition').textContent = formatCurrency(withoutEarly.addition);
+        el('planning-with-early').textContent = formatCurrency(totalWithEarly);
+        el('planning-with-addition').textContent = formatCurrency(withEarly.addition);
+        el('planning-savings').textContent = formatCurrency(savings);
+        
+        // Update recommendation
+        const recText = el('planning-recommendation-text');
+        if (savings > 0) {
+            recText.innerHTML = `הקדמת תשלום של ${formatCurrency(state.planning.early)} תחסוך לכם <strong>${formatCurrency(savings)}</strong>!
+                זו תשואה של ${formatPercent((savings / state.planning.early) * 100)} על הכסף.`;
+        } else {
+            recText.textContent = 'הזינו סכום להקדמת תשלום כדי לראות כמה תוכלו לחסוך.';
+        }
+    }
+    
+    // === Tab 3: Scenario Comparison ===
+    function updateCompare() {
+        const optimistic = calcIndexChange(state.compare.balance, 1.5, state.compare.months);
+        const average = calcIndexChange(state.compare.balance, 2.5, state.compare.months);
+        const pessimistic = calcIndexChange(state.compare.balance, 4, state.compare.months);
+        
+        // Update display values
+        el('compare-balance-value').textContent = formatCurrency(state.compare.balance);
+        el('compare-months-value').textContent = state.compare.months + ' חודשים';
+        
+        // Update scenario cards
+        el('compare-optimistic').textContent = formatCurrency(optimistic.final);
+        el('compare-optimistic-add').textContent = formatCurrency(optimistic.addition);
+        el('compare-average').textContent = formatCurrency(average.final);
+        el('compare-average-add').textContent = formatCurrency(average.addition);
+        el('compare-pessimistic').textContent = formatCurrency(pessimistic.final);
+        el('compare-pessimistic-add').textContent = formatCurrency(pessimistic.addition);
+        
+        // Calculate difference
+        const difference = pessimistic.final - optimistic.final;
+        el('compare-difference').textContent = formatCurrency(difference);
+    }
+    
+    // === Tab Switching ===
+    function switchTab(tabName) {
+        // Update tab buttons
+        container.querySelectorAll('.wpc-calc-index-b5m3-tab-btn').forEach(btn => {
+            btn.classList.remove('active');
+            if (btn.dataset.tab === tabName) {
+                btn.classList.add('active');
+            }
+        });
+        
+        // Update tab content
+        container.querySelectorAll('.wpc-calc-index-b5m3-tab-content').forEach(content => {
+            content.classList.remove('active');
+        });
+        const activeTab = el('tab-' + tabName);
+        if (activeTab) {
+            activeTab.classList.add('active');
+        }
+        
+        // Recalculate the active tab
+        if (tabName === 'basic') updateBasic();
+        else if (tabName === 'planning') updatePlanning();
+        else if (tabName === 'compare') updateCompare();
+    }
+    
+    // === FAQ Toggle ===
+    function toggleFaq(button) {
+        const item = button.closest('.wpc-calc-index-b5m3-faq-item');
+        const answer = item.querySelector('.wpc-calc-index-b5m3-faq-answer');
+        
+        // Close all other FAQs
+        container.querySelectorAll('.wpc-calc-index-b5m3-faq-question.active').forEach(q => {
+            if (q !== button) {
+                q.classList.remove('active');
+                q.closest('.wpc-calc-index-b5m3-faq-item').querySelector('.wpc-calc-index-b5m3-faq-answer').classList.remove('show');
+            }
+        });
+        
+        // Toggle current
+        button.classList.toggle('active');
+        answer.classList.toggle('show');
+    }
+    
+    // === AWG Section ===
+    function openAwg() {
+        const awgContent = el('awg-content');
+        if (awgContent) {
+            awgContent.classList.toggle('show');
+        }
+    }
+    
+    // === Scroll to Embed ===
+    function scrollToEmbed() {
+        const embedSection = el('embed-section');
+        if (embedSection) {
+            embedSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    }
+    
+    // === Color Helper Functions ===
+    function darkenColor(hex, percent) {
+        const num = parseInt(hex.replace('#', ''), 16);
+        const amt = Math.round(2.55 * percent);
+        const R = Math.max((num >> 16) - amt, 0);
+        const G = Math.max((num >> 8 & 0x00FF) - amt, 0);
+        const B = Math.max((num & 0x0000FF) - amt, 0);
+        return '#' + (0x1000000 + R * 0x10000 + G * 0x100 + B).toString(16).slice(1);
+    }
+    
+    function lightenColor(hex, percent) {
+        const num = parseInt(hex.replace('#', ''), 16);
+        const amt = Math.round(2.55 * percent);
+        const R = Math.min((num >> 16) + amt, 255);
+        const G = Math.min((num >> 8 & 0x00FF) + amt, 255);
+        const B = Math.min((num & 0x0000FF) + amt, 255);
+        return '#' + (0x1000000 + R * 0x10000 + G * 0x100 + B).toString(16).slice(1);
+    }
+    
+    function hexToRgba(hex, alpha) {
+        const r = parseInt(hex.slice(1, 3), 16);
+        const g = parseInt(hex.slice(3, 5), 16);
+        const b = parseInt(hex.slice(5, 7), 16);
+        return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+    }
+    
+    // === Show Preview - Full Calculator Clone with Color ===
+    function showPreview(color, colorName) {
+        state.selectedColor = color;
+        
+        const previewContainer = el('wpc-calc-index-b5m3-preview-container');
+        const previewContent = el('wpc-calc-index-b5m3-preview-content');
+        const colorNameSpan = el('preview-color-name');
+        
+        if (colorNameSpan) colorNameSpan.textContent = colorName;
+        
+        // Clone the calculator
+        const calculator = el('wpc-calc-index-b5m3-calculator');
+        if (!calculator) {
+            console.error('לא נמצא מחשבון לשכפול');
+            return;
+        }
+        
+        const calc = calculator.cloneNode(true);
+        
+        // 🚨 Fix 1: Change ID to prevent conflicts
+        calc.id = 'wpc-calc-index-b5m3-calculator-preview';
+        
+        // 🚨 Fix 2: Replace tab IDs with data attributes
+        const tabContents = calc.querySelectorAll('[id*="tab-"]');
+        tabContents.forEach(tabContent => {
+            const oldId = tabContent.id;
+            const tabName = oldId.replace('tab-', '');
+            tabContent.setAttribute('data-preview-tab', tabName);
+            tabContent.id = 'preview-' + oldId;
+        });
+        
+        // 🚨 Fix 3: Set CSS Variables on the cloned element
+        const darkColor = darkenColor(color, 15);
+        calc.style.setProperty('--wpc-index-primary', color);
+        calc.style.setProperty('--wpc-index-primary-dark', darkColor);
+        calc.style.setProperty('--wpc-index-primary-light', hexToRgba(color, 0.1));
+        calc.style.setProperty('--wpc-index-gradient', `linear-gradient(135deg, ${color} 0%, ${darkColor} 100%)`);
+        
+        // 🚨 Fix 4: Replace colors with setProperty + important!
+        // Title
+        calc.querySelectorAll('.wpc-calc-index-b5m3-title').forEach(el => {
+            el.style.setProperty('color', color, 'important');
+        });
+        
+        // Title bar (vertical line)
+        calc.querySelectorAll('.wpc-calc-index-b5m3-title::after, [class*="title"]').forEach(el => {
+            if (el.tagName) el.style.setProperty('border-color', color, 'important');
+        });
+        
+        // Active tab button
+        const activeTabBtn = calc.querySelector('.wpc-calc-index-b5m3-tab-btn.active');
+        if (activeTabBtn) {
+            activeTabBtn.style.setProperty('background', `linear-gradient(135deg, ${color} 0%, ${darkColor} 100%)`, 'important');
+            activeTabBtn.style.setProperty('color', 'white', 'important');
+        }
+        
+        // Highlight cards
+        calc.querySelectorAll('.wpc-calc-index-b5m3-highlight-card').forEach(el => {
+            el.style.setProperty('background', `linear-gradient(135deg, ${color} 0%, ${darkColor} 100%)`, 'important');
+        });
+        
+        // Slider values
+        calc.querySelectorAll('.wpc-calc-index-b5m3-slider-value').forEach(el => {
+            el.style.setProperty('color', color, 'important');
+        });
+        
+        // Sliders
+        calc.querySelectorAll('input[type="range"]').forEach(slider => {
+            slider.style.setProperty('accent-color', color, 'important');
+        });
+        
+        // Result cards
+        calc.querySelectorAll('.wpc-calc-index-b5m3-result-card').forEach(el => {
+            el.style.setProperty('border-color', color, 'important');
+        });
+        
+        // Card values
+        calc.querySelectorAll('.wpc-calc-index-b5m3-card-value').forEach(el => {
+            el.style.setProperty('color', color, 'important');
+        });
+        
+        // Savings card
+        calc.querySelectorAll('.wpc-calc-index-b5m3-savings-card').forEach(el => {
+            el.style.setProperty('background', `linear-gradient(135deg, ${color} 0%, ${darkColor} 100%)`, 'important');
+        });
+        
+        // Info boxes
+        calc.querySelectorAll('.wpc-calc-index-b5m3-info-box').forEach(el => {
+            el.style.setProperty('border-color', color, 'important');
+            el.style.setProperty('background', hexToRgba(color, 0.05), 'important');
+        });
+        
+        // Rate buttons active
+        calc.querySelectorAll('.wpc-calc-index-b5m3-rate-btn.active').forEach(el => {
+            el.style.setProperty('background', color, 'important');
+            el.style.setProperty('border-color', color, 'important');
+            el.style.setProperty('color', 'white', 'important');
+        });
+        
+        // Progress bars
+        calc.querySelectorAll('.wpc-calc-index-b5m3-progress-fill').forEach(el => {
+            el.style.setProperty('background', color, 'important');
+        });
+        
+        // Comparison table headers
+        calc.querySelectorAll('.wpc-calc-index-b5m3-table th').forEach(el => {
+            el.style.setProperty('background', color, 'important');
+        });
+        
+        // Create preview wrapper
+        const title = `<div style="text-align: center; margin-bottom: 20px;">
+            <h3 style="color: ${color}; margin: 0; font-size: 1.3rem;">👁️ תצוגה מקדימה - ${colorName}</h3>
+            <p style="color: #666; font-size: 0.9em; margin: 5px 0 0;">כך יראה המחשבון באתר שלך</p>
+        </div>`;
+        
+        const copyBtn = `<div style="text-align: center; margin-top: 20px;">
+            <button data-action="copy-preview-code" data-color="${color}" 
+                    style="background: linear-gradient(135deg, ${color} 0%, ${darkColor} 100%); color: white; padding: 15px 40px; border: none; border-radius: 10px; font-size: 1.1em; cursor: pointer; font-weight: 600; box-shadow: 0 4px 15px ${hexToRgba(color, 0.3)};">
+                📋 העתק קוד עם צבע ${colorName}
+            </button>
+        </div>`;
+        
+        if (previewContent) {
+            previewContent.innerHTML = title + calc.outerHTML + copyBtn;
+            
+            // 🚨 Fix 5: Initialize event listeners on cloned calculator
+            const clonedCalc = previewContent.querySelector('[id*="preview"]') || 
+                               previewContent.querySelector('[class*="calculator"]');
+            if (clonedCalc) {
+                initPreviewCalculator(clonedCalc, color);
+            }
+        }
+        
+        if (previewContainer) {
+            previewContainer.style.display = 'block';
+            previewContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    }
+    
+    // === Initialize Preview Calculator - Make tabs/sliders work in cloned calculator ===
+    function initPreviewCalculator(calc, primaryColor) {
+        const darkColor = darkenColor(primaryColor, 15);
+        
+        // Local state for preview
+        const previewState = {
+            basic: { balance: 500000, months: 24, rate: 2.5 },
+            planning: { total: 600000, early: 200000, months: 24, rate: 2.5 },
+            compare: { balance: 500000, months: 24 }
+        };
+        
+        function formatCurrency(n) { return Math.round(n).toLocaleString('he-IL') + ' ₪'; }
+        function formatPercent(n) { return n.toFixed(2) + '%'; }
+        
+        function calcIndexChange(balance, rate, months) {
+            const monthlyRate = rate / 100 / 12;
+            const multiplier = Math.pow(1 + monthlyRate, months);
+            return {
+                original: balance,
+                final: balance * multiplier,
+                addition: balance * multiplier - balance,
+                percent: (multiplier - 1) * 100
+            };
+        }
+        
+        function updatePreviewBasic() {
+            const result = calcIndexChange(previewState.basic.balance, previewState.basic.rate, previewState.basic.months);
+            const balanceEl = calc.querySelector('#preview-basic-balance-value, [id*="basic-balance-value"]');
+            const monthsEl = calc.querySelector('#preview-basic-months-value, [id*="basic-months-value"]');
+            const originalEl = calc.querySelector('#preview-basic-result-original, [id*="basic-result-original"]');
+            const percentEl = calc.querySelector('#preview-basic-result-percent, [id*="basic-result-percent"]');
+            const additionEl = calc.querySelector('#preview-basic-result-addition, [id*="basic-result-addition"]');
+            const totalEl = calc.querySelector('#preview-basic-result-total, [id*="basic-result-total"]');
+            
+            if (balanceEl) balanceEl.textContent = formatCurrency(previewState.basic.balance);
+            if (monthsEl) monthsEl.textContent = previewState.basic.months + ' חודשים';
+            if (originalEl) originalEl.textContent = formatCurrency(result.original);
+            if (percentEl) percentEl.textContent = formatPercent(result.percent);
+            if (additionEl) additionEl.textContent = formatCurrency(result.addition);
+            if (totalEl) totalEl.textContent = formatCurrency(result.final);
+        }
+        
+        // 🚨 Tabs with stopPropagation!
+        const tabs = calc.querySelectorAll('[data-action="switch-tab"]');
+        const contents = calc.querySelectorAll('[data-preview-tab], [class*="tab-content"]');
+        
+        tabs.forEach(tab => {
+            tab.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation(); // 🚨 Prevent bubbling to original calculator!
+                
+                const tabName = this.dataset.tab;
+                
+                // Remove active from all tabs
+                tabs.forEach(t => {
+                    t.classList.remove('active');
+                    t.style.setProperty('background', 'transparent', 'important');
+                    t.style.setProperty('color', '#374151', 'important');
+                });
+                
+                // Hide all contents
+                contents.forEach(c => {
+                    c.classList.remove('active');
+                    c.style.display = 'none';
+                });
+                
+                // Activate selected tab with color
+                this.classList.add('active');
+                this.style.setProperty('background', `linear-gradient(135deg, ${primaryColor} 0%, ${darkColor} 100%)`, 'important');
+                this.style.setProperty('color', 'white', 'important');
+                
+                // Show matching content
+                const activeContent = calc.querySelector(`[data-preview-tab="${tabName}"], #preview-tab-${tabName}`);
+                if (activeContent) {
+                    activeContent.classList.add('active');
+                    activeContent.style.display = 'block';
+                }
+                
+                // Recalculate
+                if (tabName === 'basic') updatePreviewBasic();
+            });
+        });
+        
+        // 🚨 Sliders with stopPropagation!
+        const sliders = calc.querySelectorAll('input[type="range"]');
+        sliders.forEach(slider => {
+            slider.style.setProperty('accent-color', primaryColor, 'important');
+            
+            slider.addEventListener('input', function(e) {
+                e.stopPropagation(); // 🚨 Prevent bubbling!
+                
+                const id = this.id;
+                const val = parseFloat(this.value);
+                
+                // Update value display
+                const valueId = id.replace('-slider', '-value').replace('preview-', '');
+                const valueEl = calc.querySelector(`#preview-${valueId}, #${valueId}`);
+                if (valueEl) {
+                    if (id.includes('months')) {
+                        valueEl.textContent = val + ' חודשים';
+                    } else if (id.includes('rate')) {
+                        valueEl.textContent = val + '%';
+                    } else {
+                        valueEl.textContent = formatCurrency(val);
+                    }
+                }
+                
+                // Update state and recalculate
+                if (id.includes('basic-balance')) {
+                    previewState.basic.balance = val;
+                    updatePreviewBasic();
+                } else if (id.includes('basic-months')) {
+                    previewState.basic.months = val;
+                    updatePreviewBasic();
+                }
+            });
+        });
+        
+        // 🚨 Rate buttons with stopPropagation!
+        const rateBtns = calc.querySelectorAll('[data-action="select-rate"]');
+        rateBtns.forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                
+                // Remove active from all
+                rateBtns.forEach(b => {
+                    b.classList.remove('active');
+                    b.style.setProperty('background', 'transparent', 'important');
+                    b.style.setProperty('border-color', '#e5e7eb', 'important');
+                    b.style.setProperty('color', '#374151', 'important');
+                });
+                
+                // Activate selected
+                this.classList.add('active');
+                this.style.setProperty('background', primaryColor, 'important');
+                this.style.setProperty('border-color', primaryColor, 'important');
+                this.style.setProperty('color', 'white', 'important');
+                
+                previewState.basic.rate = parseFloat(this.dataset.rate);
+                updatePreviewBasic();
+            });
+        });
+        
+        // Initial calculation
+        updatePreviewBasic();
+    }
+    
+    // Legacy function for backward compatibility
+    function showColorPreview(color, colorName) {
+        showPreview(color, colorName);
+    }
+    
+    // === Copy Embed Code ===
+    function copyEmbedCode() {
+        const calculatorHTML = document.getElementById('wpc-calc-index-b5m3-calculator').outerHTML;
+        
+        // Get styles
+        let styles = '';
+        document.querySelectorAll('style').forEach(styleEl => {
+            if (styleEl.textContent.includes('wpc-calc-index-b5m3')) {
+                styles = styleEl.textContent;
+            }
+        });
+        
+        const embedCode = generateEmbedCode(styles, calculatorHTML, state.selectedColor);
+        
+        navigator.clipboard.writeText(embedCode).then(() => {
+            alert('✅ הקוד הועתק בהצלחה! הדביקו אותו בעורך וורדפרס במצב טקסט/HTML');
+        }).catch(() => {
+            alert('שגיאה בהעתקה. נסו שוב.');
+        });
+    }
+    
+    function copyPreviewCode() {
+        copyEmbedCode();
+    }
+    
+    function generateEmbedCode(styles, html, color) {
+        // Replace primary color in styles
+        let modifiedStyles = styles.replace(/#1e5490/g, color);
+        modifiedStyles = modifiedStyles.replace(/var\(--wpc-index-primary\)/g, color);
+        
+        let code = '<style>\n' + modifiedStyles + '\n</style>\n\n';
+        code += '<div class="wpc-calc-index-b5m3-wrapper" id="wpc-calc-index-b5m3-main">\n';
+        code += html + '\n</div>\n\n';
+        
+        // Credit link
+        code += `<p style="text-align:center; font-size:0.9em; margin-top:20px; color:#666;">
+    מחשבון מדד תשומות הבנייה פותח על ידי 
+    <a href="https://loan-israel.co.il/" target="_blank" rel="nofollow noopener" 
+       style="color:${color}; text-decoration:underline;">
+       רק תבקש פיננסים
+    </a>
+</p>\n\n`;
+        
+        // Embed script
+        code += getEmbedScript();
+        
+        return code;
+    }
+    
+    function getEmbedScript() {
+        return `<script>
+document.addEventListener("DOMContentLoaded", function() {
+  (function() {
+    "use strict";
+    var NS = "WPC_CalcIndex_Embed";
+    if (window[NS]) return;
+    var container = document.getElementById("wpc-calc-index-b5m3-main");
+    if (!container) return;
+    
+    var state = {
+      basic: { balance: 500000, months: 24, rate: 2.5 },
+      planning: { total: 600000, early: 200000, months: 24, rate: 2.5 },
+      compare: { balance: 500000, months: 24 }
+    };
+    
+    function formatCurrency(n) { return Math.round(n).toLocaleString("he-IL") + " ₪"; }
+    function formatPercent(n) { return n.toFixed(2) + "%"; }
+    function el(id) { return document.getElementById(id); }
+    
+    function calcIndexChange(balance, rate, months) {
+      var monthlyRate = rate / 100 / 12;
+      var multiplier = Math.pow(1 + monthlyRate, months);
+      return { original: balance, final: balance * multiplier, addition: balance * multiplier - balance, percent: (multiplier - 1) * 100 };
+    }
+    
+    function updateBasic() {
+      var result = calcIndexChange(state.basic.balance, state.basic.rate, state.basic.months);
+      el("basic-balance-value").textContent = formatCurrency(state.basic.balance);
+      el("basic-months-value").textContent = state.basic.months + " חודשים";
+      el("basic-result-original").textContent = formatCurrency(result.original);
+      el("basic-result-percent").textContent = formatPercent(result.percent);
+      el("basic-result-addition").textContent = formatCurrency(result.addition);
+      el("basic-result-total").textContent = formatCurrency(result.final);
+    }
+    
+    function updatePlanning() {
+      var withoutEarly = calcIndexChange(state.planning.total, state.planning.rate, state.planning.months);
+      var remaining = state.planning.total - state.planning.early;
+      var withEarly = calcIndexChange(remaining, state.planning.rate, state.planning.months);
+      var totalWithEarly = state.planning.early + withEarly.final;
+      var savings = withoutEarly.final - totalWithEarly;
+      el("planning-total-value").textContent = formatCurrency(state.planning.total);
+      el("planning-early-value").textContent = formatCurrency(state.planning.early);
+      el("planning-months-value").textContent = state.planning.months + " חודשים";
+      el("planning-rate-value").textContent = state.planning.rate + "%";
+      el("planning-without-early").textContent = formatCurrency(withoutEarly.final);
+      el("planning-without-addition").textContent = formatCurrency(withoutEarly.addition);
+      el("planning-with-early").textContent = formatCurrency(totalWithEarly);
+      el("planning-with-addition").textContent = formatCurrency(withEarly.addition);
+      el("planning-savings").textContent = formatCurrency(savings);
+    }
+    
+    function updateCompare() {
+      var opt = calcIndexChange(state.compare.balance, 1.5, state.compare.months);
+      var avg = calcIndexChange(state.compare.balance, 2.5, state.compare.months);
+      var pes = calcIndexChange(state.compare.balance, 4, state.compare.months);
+      el("compare-balance-value").textContent = formatCurrency(state.compare.balance);
+      el("compare-months-value").textContent = state.compare.months + " חודשים";
+      el("compare-optimistic").textContent = formatCurrency(opt.final);
+      el("compare-optimistic-add").textContent = formatCurrency(opt.addition);
+      el("compare-average").textContent = formatCurrency(avg.final);
+      el("compare-average-add").textContent = formatCurrency(avg.addition);
+      el("compare-pessimistic").textContent = formatCurrency(pes.final);
+      el("compare-pessimistic-add").textContent = formatCurrency(pes.addition);
+      el("compare-difference").textContent = formatCurrency(pes.final - opt.final);
+    }
+    
+    function switchTab(tabName) {
+      container.querySelectorAll(".wpc-calc-index-b5m3-tab-btn").forEach(function(btn) {
+        btn.classList.remove("active");
+        if (btn.dataset.tab === tabName) btn.classList.add("active");
+      });
+      container.querySelectorAll(".wpc-calc-index-b5m3-tab-content").forEach(function(c) { c.classList.remove("active"); });
+      var activeTab = el("tab-" + tabName);
+      if (activeTab) activeTab.classList.add("active");
+      if (tabName === "basic") updateBasic();
+      else if (tabName === "planning") updatePlanning();
+      else if (tabName === "compare") updateCompare();
+    }
+    
+    container.addEventListener("click", function(e) {
+      var action = e.target.closest("[data-action]");
+      if (!action) return;
+      var type = action.dataset.action;
+      if (type === "switch-tab") switchTab(action.dataset.tab);
+      else if (type === "toggle-faq") {
+        var item = action.closest(".wpc-calc-index-b5m3-faq-item");
+        var answer = item.querySelector(".wpc-calc-index-b5m3-faq-answer");
+        action.classList.toggle("active");
+        answer.classList.toggle("show");
+      }
+      else if (type === "select-rate") {
+        container.querySelectorAll("[data-action=select-rate]").forEach(function(b) { b.classList.remove("active"); });
+        action.classList.add("active");
+        state.basic.rate = parseFloat(action.dataset.rate);
+        updateBasic();
+      }
+    });
+    
+    container.addEventListener("input", function(e) {
+      var id = e.target.id;
+      var val = parseFloat(e.target.value);
+      if (id === "basic-balance-slider") { state.basic.balance = val; updateBasic(); }
+      else if (id === "basic-months-slider") { state.basic.months = val; updateBasic(); }
+      else if (id === "planning-total-slider") { state.planning.total = val; updatePlanning(); }
+      else if (id === "planning-early-slider") { state.planning.early = val; updatePlanning(); }
+      else if (id === "planning-months-slider") { state.planning.months = val; updatePlanning(); }
+      else if (id === "planning-rate-slider") { state.planning.rate = val; updatePlanning(); }
+      else if (id === "compare-balance-slider") { state.compare.balance = val; updateCompare(); }
+      else if (id === "compare-months-slider") { state.compare.months = val; updateCompare(); }
+    });
+    
+    updateBasic();
+    window[NS] = { version: "1.0.0" };
+  })();
+});
+<\/script>`;
+    }
+    
+    // === Event Listeners ===
+    container.addEventListener('click', function(e) {
+        const action = e.target.closest('[data-action]');
+        if (!action) return;
+        
+        const actionType = action.dataset.action;
+        
+        switch(actionType) {
+            case 'switch-tab':
+                switchTab(action.dataset.tab);
+                break;
+            case 'toggle-faq':
+                toggleFaq(action);
+                break;
+            case 'open-awg':
+                openAwg();
+                break;
+            case 'scroll-to-embed':
+                scrollToEmbed();
+                break;
+            case 'select-rate':
+                container.querySelectorAll('[data-action="select-rate"]').forEach(btn => btn.classList.remove('active'));
+                action.classList.add('active');
+                state.basic.rate = parseFloat(action.dataset.rate);
+                updateBasic();
+                break;
+            case 'preview-color':
+                showPreview(action.dataset.color, action.dataset.name);
+                break;
+            case 'copy-embed-code':
+                copyEmbedCode();
+                break;
+            case 'copy-preview-code':
+                copyPreviewCode();
+                break;
+        }
+    });
+    
+    // Input event for sliders
+    container.addEventListener('input', function(e) {
+        const id = e.target.id;
+        const value = parseFloat(e.target.value);
+        
+        // Basic tab sliders
+        if (id === 'basic-balance-slider') {
+            state.basic.balance = value;
+            updateBasic();
+        } else if (id === 'basic-months-slider') {
+            state.basic.months = value;
+            updateBasic();
+        }
+        // Planning tab sliders
+        else if (id === 'planning-total-slider') {
+            state.planning.total = value;
+            updatePlanning();
+        } else if (id === 'planning-early-slider') {
+            state.planning.early = value;
+            updatePlanning();
+        } else if (id === 'planning-months-slider') {
+            state.planning.months = value;
+            updatePlanning();
+        } else if (id === 'planning-rate-slider') {
+            state.planning.rate = value;
+            updatePlanning();
+        }
+        // Compare tab sliders
+        else if (id === 'compare-balance-slider') {
+            state.compare.balance = value;
+            updateCompare();
+        } else if (id === 'compare-months-slider') {
+            state.compare.months = value;
+            updateCompare();
+        }
+        // Custom color picker
+        else if (id === 'wpc-calc-index-b5m3-custom-color') {
+            showPreview(e.target.value, 'צבע מותאם אישית');
+        }
+    });
+    
+    // === Initialization ===
+    updateBasic();
+    
+    // Expose minimal API
+    window[NS] = { version: '1.0.0' };
+})();
+</script>
+
+<!-- Schema.org Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "מה קורה אם מדד תשומות הבנייה יורד?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "אם מדד תשומות הבנייה יורד, יתרת התשלום לקבלן תקטן בהתאם. עם זאת, ברוב החוזים יש סעיף 'רצפה' הקובע שהתשלום לא יכול לרדת מתחת לסכום המקורי."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "מתי מתפרסם מדד תשומות הבנייה?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "מדד תשומות הבנייה מתפרסם על ידי הלמ\"ס בסביבות ה-15 לכל חודש, עבור החודש הקודם."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "מהו הממוצע ההיסטורי של עליית מדד תשומות הבנייה?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "בעשור האחרון הממוצע השנתי נע בין 2% ל-3%, אך היו שנים חריגות. בשנים 2021-2022 המדד עלה בקצב מואץ של כ-7%-9% בשנה."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "האם ניתן לנהל מו\"מ עם הקבלן על תנאי ההצמדה?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "בהחלט! ניתן לנסות לנהל מו\"מ על קביעת תקרת הצמדה מקסימלית, בקשה שחלק מהתשלומים יהיו ללא הצמדה, או קביעת מדד בסיס מאוחר יותר."
+      }
+    }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FinancialProduct",
+  "name": "מחשבון הצמדה למדד תשומות הבנייה",
+  "description": "מחשבון לחישוב תוספת תשלום צפויה לקבלן עקב הצמדה למדד תשומות הבנייה",
+  "category": "מחשבון פיננסי",
+  "featureList": [
+    "חישוב תוספת מדד צפויה",
+    "תכנון תשלומים חכם",
+    "השוואת תרחישים",
+    "המלצות להקטנת עלויות"
+  ],
+  "provider": {
+    "@type": "Organization",
+    "name": "רק תבקש - אפטריו בע״מ",
+    "url": "https://loan-israel.co.il"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "ILS"
+  }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "איך להשתמש במחשבון מדד תשומות הבנייה",
+  "step": [
+    {
+      "@type": "HowToStep",
+      "name": "הזינו יתרת תשלום",
+      "text": "הזינו את הסכום שנותר לשלם לקבלן עד למסירת הדירה"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "בחרו תקופה",
+      "text": "הזינו את מספר החודשים עד למסירה הצפויה"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "בחרו צפי עליית מדד",
+      "text": "בחרו את הערכת עליית המדד השנתית (הממוצע ההיסטורי הוא 2-3%)"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "צפו בתוצאות",
+      "text": "המחשבון יציג את תוספת התשלום הצפויה והסכום הסופי"
+    }
+  ]
+}
+</script>
+

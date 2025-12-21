@@ -1,0 +1,2540 @@
+<!-- ⚠️ Car Leasing vs Ownership Calculator - מחשבון שווי שימוש רכב -->
+<!-- This code goes inside WordPress <body> tag -->
+
+<script>
+// בדיקה והוספת viewport meta tag אם חסר
+if (!document.querySelector('meta[name="viewport"]')) {
+  const viewport = document.createElement('meta');
+  viewport.name = 'viewport';
+  viewport.content = 'width=device-width, initial-scale=1.0, user-scalable=yes';
+  document.head.appendChild(viewport);
+}
+</script>
+
+<style>
+/* === CSS Variables + Base Styles === */
+/* PREFIX: wpc-calc-carval-v4m7- */
+
+:root {
+  --wpc-carval-primary: #1e5490;
+  --wpc-carval-primary-dark: #163d6b;
+  --wpc-carval-primary-light: #e8f0f8;
+  --wpc-carval-danger: #e74c3c;
+  --wpc-carval-success: #25D366;
+  --wpc-carval-warning: #f39c12;
+  --wpc-carval-text-dark: #222222;
+  --wpc-carval-text-light: #555555;
+  --wpc-carval-bg-light: #f8f9fa;
+  --wpc-carval-white: #ffffff;
+  --wpc-carval-border: #ddd;
+  --wpc-carval-shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+  --wpc-carval-shadow-md: 0 5px 20px rgba(0,0,0,0.12);
+  --wpc-carval-radius-sm: 8px;
+  --wpc-carval-radius-md: 12px;
+  --wpc-carval-radius-lg: 20px;
+  --wpc-carval-transition: all 0.3s ease;
+  --wpc-carval-gradient: linear-gradient(135deg, var(--wpc-carval-primary) 0%, var(--wpc-carval-primary-dark) 100%);
+}
+
+/* Reset & Base */
+.wpc-calc-carval-v4m7-wrapper {
+  all: initial !important;
+  display: block !important;
+  font-family: 'Assistant', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  direction: rtl !important;
+  text-align: right !important;
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+  padding: 20px !important;
+  color: var(--wpc-carval-text-dark) !important;
+  line-height: 1.6 !important;
+  box-sizing: border-box !important;
+  color-scheme: light !important;
+}
+
+.wpc-calc-carval-v4m7-wrapper *,
+.wpc-calc-carval-v4m7-wrapper *::before,
+.wpc-calc-carval-v4m7-wrapper *::after {
+  box-sizing: border-box !important;
+}
+
+/* Title Section */
+.wpc-calc-carval-v4m7-title-container {
+  text-align: center !important;
+  margin-bottom: 30px !important;
+}
+
+.wpc-calc-carval-v4m7-title {
+  font-size: 2.2rem !important;
+  font-weight: 700 !important;
+  color: var(--wpc-carval-primary) !important;
+  margin: 0 0 10px 0 !important;
+  line-height: 1.3 !important;
+}
+
+.wpc-calc-carval-v4m7-subtitle {
+  font-size: 1.1rem !important;
+  color: var(--wpc-carval-text-light) !important;
+  margin: 0 0 15px 0 !important;
+}
+
+.wpc-calc-carval-v4m7-update-date {
+  font-size: 0.9rem !important;
+  color: #777 !important;
+  margin: 0 !important;
+}
+
+/* Calculator Container */
+.wpc-calc-carval-v4m7-calculator {
+  background: var(--wpc-carval-white) !important;
+  border-radius: var(--wpc-carval-radius-lg) !important;
+  box-shadow: var(--wpc-carval-shadow-md) !important;
+  overflow: hidden !important;
+  margin-bottom: 30px !important;
+}
+
+/* Tabs Navigation */
+.wpc-calc-carval-v4m7-tabs-nav {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  background: var(--wpc-carval-bg-light) !important;
+  border-bottom: 2px solid var(--wpc-carval-border) !important;
+}
+
+.wpc-calc-carval-v4m7-tab-btn {
+  flex: 1 1 auto !important;
+  min-width: 120px !important;
+  padding: 15px 20px !important;
+  background: transparent !important;
+  border: none !important;
+  cursor: pointer !important;
+  font-family: inherit !important;
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  color: var(--wpc-carval-text-light) !important;
+  transition: var(--wpc-carval-transition) !important;
+  white-space: nowrap !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+}
+
+.wpc-calc-carval-v4m7-tab-btn:hover {
+  background: rgba(30, 84, 144, 0.1) !important;
+  color: var(--wpc-carval-primary) !important;
+}
+
+.wpc-calc-carval-v4m7-tab-btn.active {
+  background: var(--wpc-carval-white) !important;
+  color: var(--wpc-carval-primary) !important;
+  border-bottom: 3px solid var(--wpc-carval-primary) !important;
+  margin-bottom: -2px !important;
+}
+
+.wpc-calc-carval-v4m7-tab-icon {
+  font-size: 1.3rem !important;
+}
+
+/* Tab Content */
+.wpc-calc-carval-v4m7-tab-content {
+  display: none !important;
+  padding: 30px !important;
+  animation: wpcCarvalFadeIn 0.3s ease !important;
+}
+
+.wpc-calc-carval-v4m7-tab-content.active {
+  display: block !important;
+}
+
+@keyframes wpcCarvalFadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.wpc-calc-carval-v4m7-tab-title {
+  font-size: 1.4rem !important;
+  font-weight: 700 !important;
+  color: var(--wpc-carval-primary) !important;
+  margin: 0 0 25px 0 !important;
+  padding-bottom: 15px !important;
+  border-bottom: 2px solid var(--wpc-carval-primary-light) !important;
+}
+
+/* Form Grid */
+.wpc-calc-carval-v4m7-form-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 25px !important;
+  margin-bottom: 25px !important;
+}
+
+.wpc-calc-carval-v4m7-form-group {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.wpc-calc-carval-v4m7-form-group.full-width {
+  grid-column: 1 / -1 !important;
+}
+
+.wpc-calc-carval-v4m7-label {
+  font-size: 0.95rem !important;
+  font-weight: 600 !important;
+  color: var(--wpc-carval-text-dark) !important;
+  margin-bottom: 8px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+}
+
+.wpc-calc-carval-v4m7-label-icon {
+  font-size: 1.1rem !important;
+}
+
+/* Slider */
+.wpc-calc-carval-v4m7-slider-container {
+  position: relative !important;
+}
+
+.wpc-calc-carval-v4m7-slider-value {
+  text-align: center !important;
+  font-size: 1.5rem !important;
+  font-weight: 700 !important;
+  color: var(--wpc-carval-primary) !important;
+  margin-bottom: 10px !important;
+}
+
+.wpc-calc-carval-v4m7-slider {
+  width: 100% !important;
+  height: 8px !important;
+  border-radius: 4px !important;
+  background: linear-gradient(to left, var(--wpc-carval-primary) 0%, var(--wpc-carval-primary-light) 100%) !important;
+  outline: none !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  cursor: pointer !important;
+}
+
+.wpc-calc-carval-v4m7-slider::-webkit-slider-thumb {
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  width: 24px !important;
+  height: 24px !important;
+  border-radius: 50% !important;
+  background: var(--wpc-carval-primary) !important;
+  cursor: pointer !important;
+  border: 3px solid var(--wpc-carval-white) !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2) !important;
+  transition: transform 0.2s !important;
+}
+
+.wpc-calc-carval-v4m7-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.15) !important;
+}
+
+.wpc-calc-carval-v4m7-slider::-moz-range-thumb {
+  width: 24px !important;
+  height: 24px !important;
+  border-radius: 50% !important;
+  background: var(--wpc-carval-primary) !important;
+  cursor: pointer !important;
+  border: 3px solid var(--wpc-carval-white) !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2) !important;
+}
+
+.wpc-calc-carval-v4m7-slider-range {
+  display: flex !important;
+  justify-content: space-between !important;
+  font-size: 0.85rem !important;
+  color: var(--wpc-carval-text-light) !important;
+  margin-top: 5px !important;
+}
+
+/* Button Group */
+.wpc-calc-carval-v4m7-btn-group {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+}
+
+.wpc-calc-carval-v4m7-btn-option {
+  flex: 1 !important;
+  min-width: 80px !important;
+  padding: 12px 16px !important;
+  background: var(--wpc-carval-bg-light) !important;
+  border: 2px solid var(--wpc-carval-border) !important;
+  border-radius: var(--wpc-carval-radius-sm) !important;
+  cursor: pointer !important;
+  font-family: inherit !important;
+  font-size: 0.95rem !important;
+  font-weight: 600 !important;
+  color: var(--wpc-carval-text-dark) !important;
+  transition: var(--wpc-carval-transition) !important;
+  text-align: center !important;
+}
+
+.wpc-calc-carval-v4m7-btn-option:hover {
+  border-color: var(--wpc-carval-primary) !important;
+  background: var(--wpc-carval-primary-light) !important;
+}
+
+.wpc-calc-carval-v4m7-btn-option.active {
+  background: var(--wpc-carval-primary) !important;
+  border-color: var(--wpc-carval-primary) !important;
+  color: var(--wpc-carval-white) !important;
+}
+
+/* Results Section */
+.wpc-calc-carval-v4m7-results {
+  background: linear-gradient(135deg, #f8fbff 0%, #eef5fc 100%) !important;
+  border-radius: var(--wpc-carval-radius-md) !important;
+  padding: 25px !important;
+  margin-top: 25px !important;
+  border: 2px solid var(--wpc-carval-primary-light) !important;
+}
+
+.wpc-calc-carval-v4m7-results-title {
+  font-size: 1.2rem !important;
+  font-weight: 700 !important;
+  color: var(--wpc-carval-primary) !important;
+  margin: 0 0 20px 0 !important;
+  text-align: center !important;
+}
+
+.wpc-calc-carval-v4m7-results-main {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 20px !important;
+  margin-bottom: 25px !important;
+}
+
+.wpc-calc-carval-v4m7-result-card {
+  background: var(--wpc-carval-white) !important;
+  border-radius: var(--wpc-carval-radius-sm) !important;
+  padding: 20px !important;
+  text-align: center !important;
+  box-shadow: var(--wpc-carval-shadow-sm) !important;
+}
+
+.wpc-calc-carval-v4m7-result-card.highlight {
+  background: var(--wpc-carval-gradient) !important;
+  color: var(--wpc-carval-white) !important;
+}
+
+.wpc-calc-carval-v4m7-result-card.success {
+  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%) !important;
+  color: var(--wpc-carval-white) !important;
+}
+
+.wpc-calc-carval-v4m7-result-card.danger {
+  background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%) !important;
+  color: var(--wpc-carval-white) !important;
+}
+
+.wpc-calc-carval-v4m7-result-label {
+  font-size: 0.9rem !important;
+  margin-bottom: 8px !important;
+  opacity: 0.9 !important;
+}
+
+.wpc-calc-carval-v4m7-result-value {
+  font-size: 1.8rem !important;
+  font-weight: 700 !important;
+}
+
+.wpc-calc-carval-v4m7-result-card.highlight .wpc-calc-carval-v4m7-result-value,
+.wpc-calc-carval-v4m7-result-card.success .wpc-calc-carval-v4m7-result-value,
+.wpc-calc-carval-v4m7-result-card.danger .wpc-calc-carval-v4m7-result-value {
+  color: var(--wpc-carval-white) !important;
+}
+
+/* Comparison Grid */
+.wpc-calc-carval-v4m7-comparison-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 30px !important;
+  margin-bottom: 25px !important;
+}
+
+.wpc-calc-carval-v4m7-comparison-column {
+  background: var(--wpc-carval-bg-light) !important;
+  border-radius: var(--wpc-carval-radius-md) !important;
+  padding: 20px !important;
+}
+
+.wpc-calc-carval-v4m7-comparison-column h4 {
+  text-align: center !important;
+  margin: 0 0 20px 0 !important;
+  padding: 12px !important;
+  background: var(--wpc-carval-primary) !important;
+  color: var(--wpc-carval-white) !important;
+  border-radius: var(--wpc-carval-radius-sm) !important;
+  font-size: 1.1rem !important;
+}
+
+.wpc-calc-carval-v4m7-comparison-column.company h4 {
+  background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%) !important;
+}
+
+.wpc-calc-carval-v4m7-comparison-column.private h4 {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
+}
+
+/* Breakdown List */
+.wpc-calc-carval-v4m7-breakdown-list {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.wpc-calc-carval-v4m7-breakdown-list li {
+  display: flex !important;
+  justify-content: space-between !important;
+  padding: 10px 0 !important;
+  border-bottom: 1px solid var(--wpc-carval-border) !important;
+}
+
+.wpc-calc-carval-v4m7-breakdown-list li:last-child {
+  border-bottom: none !important;
+  font-weight: 700 !important;
+  padding-top: 15px !important;
+  margin-top: 5px !important;
+  border-top: 2px solid var(--wpc-carval-primary) !important;
+}
+
+/* Info Box */
+.wpc-calc-carval-v4m7-info-box {
+  background: linear-gradient(135deg, #fff9e6 0%, #fff3cc 100%) !important;
+  border: 2px solid #ffc107 !important;
+  border-radius: var(--wpc-carval-radius-sm) !important;
+  padding: 15px 20px !important;
+  margin: 20px 0 !important;
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 12px !important;
+}
+
+.wpc-calc-carval-v4m7-info-icon {
+  font-size: 1.5rem !important;
+  flex-shrink: 0 !important;
+}
+
+.wpc-calc-carval-v4m7-info-text {
+  font-size: 0.9rem !important;
+  color: var(--wpc-carval-text-dark) !important;
+  line-height: 1.5 !important;
+}
+
+/* Recommendation Box */
+.wpc-calc-carval-v4m7-recommendation {
+  background: var(--wpc-carval-white) !important;
+  border-radius: var(--wpc-carval-radius-md) !important;
+  padding: 20px !important;
+  text-align: center !important;
+  margin-top: 20px !important;
+  border: 3px solid var(--wpc-carval-success) !important;
+}
+
+.wpc-calc-carval-v4m7-recommendation.company-better {
+  border-color: #8b5cf6 !important;
+}
+
+.wpc-calc-carval-v4m7-recommendation.private-better {
+  border-color: #f59e0b !important;
+}
+
+.wpc-calc-carval-v4m7-recommendation-title {
+  font-size: 1.3rem !important;
+  font-weight: 700 !important;
+  margin-bottom: 10px !important;
+}
+
+.wpc-calc-carval-v4m7-recommendation-text {
+  font-size: 1rem !important;
+  color: var(--wpc-carval-text-light) !important;
+}
+
+/* Break-even Chart */
+.wpc-calc-carval-v4m7-chart-container {
+  background: var(--wpc-carval-white) !important;
+  border-radius: var(--wpc-carval-radius-md) !important;
+  padding: 20px !important;
+  margin-top: 20px !important;
+}
+
+.wpc-calc-carval-v4m7-chart-title {
+  font-size: 1.1rem !important;
+  font-weight: 700 !important;
+  color: var(--wpc-carval-primary) !important;
+  margin-bottom: 15px !important;
+  text-align: center !important;
+}
+
+.wpc-calc-carval-v4m7-chart-bar {
+  height: 40px !important;
+  background: var(--wpc-carval-bg-light) !important;
+  border-radius: 20px !important;
+  position: relative !important;
+  overflow: hidden !important;
+  margin-bottom: 10px !important;
+}
+
+.wpc-calc-carval-v4m7-chart-fill {
+  height: 100% !important;
+  background: linear-gradient(90deg, #25D366 0%, #f59e0b 50%, #e74c3c 100%) !important;
+  border-radius: 20px !important;
+  position: relative !important;
+  transition: width 0.5s ease !important;
+}
+
+.wpc-calc-carval-v4m7-chart-marker {
+  position: absolute !important;
+  top: -8px !important;
+  width: 4px !important;
+  height: 56px !important;
+  background: var(--wpc-carval-primary) !important;
+  transform: translateX(-50%) !important;
+}
+
+.wpc-calc-carval-v4m7-chart-labels {
+  display: flex !important;
+  justify-content: space-between !important;
+  font-size: 0.85rem !important;
+  color: var(--wpc-carval-text-light) !important;
+}
+
+/* AWG Section */
+.wpc-calc-carval-v4m7-awg-section {
+  margin: 40px 0 !important;
+  text-align: center !important;
+}
+
+.wpc-calc-carval-v4m7-awg-container {
+  background: linear-gradient(135deg, #f8fbff 0%, #e8f4ff 100%) !important;
+  border-radius: var(--wpc-carval-radius-lg) !important;
+  padding: 30px !important;
+  border: 2px solid var(--wpc-carval-primary-light) !important;
+}
+
+.wpc-calc-carval-v4m7-cta-buttons {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 15px !important;
+  align-items: center !important;
+}
+
+.wpc-calc-carval-v4m7-cta-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  padding: 18px 40px !important;
+  font-size: 1.2rem !important;
+  font-weight: 700 !important;
+  font-family: inherit !important;
+  border: none !important;
+  border-radius: 50px !important;
+  cursor: pointer !important;
+  transition: var(--wpc-carval-transition) !important;
+  text-decoration: none !important;
+  min-width: 320px !important;
+}
+
+.wpc-calc-carval-v4m7-cta-btn.primary {
+  background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%) !important;
+  color: var(--wpc-carval-white) !important;
+  box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4) !important;
+}
+
+.wpc-calc-carval-v4m7-cta-btn.primary:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: 0 8px 25px rgba(231, 76, 60, 0.5) !important;
+}
+
+.wpc-calc-carval-v4m7-cta-btn.secondary {
+  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%) !important;
+  color: var(--wpc-carval-white) !important;
+  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4) !important;
+}
+
+.wpc-calc-carval-v4m7-cta-btn.secondary:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: 0 8px 25px rgba(37, 211, 102, 0.5) !important;
+}
+
+.wpc-calc-carval-v4m7-awg-content {
+  display: none !important;
+  margin-top: 25px !important;
+  padding-top: 25px !important;
+  border-top: 2px dashed var(--wpc-carval-border) !important;
+}
+
+.wpc-calc-carval-v4m7-awg-content.active {
+  display: block !important;
+}
+
+/* Content Section */
+.wpc-calc-carval-v4m7-content-section {
+  margin: 40px 0 !important;
+}
+
+.wpc-calc-carval-v4m7-section-title {
+  font-size: 1.6rem !important;
+  font-weight: 700 !important;
+  color: var(--wpc-carval-primary) !important;
+  margin: 0 0 20px 0 !important;
+  padding-right: 15px !important;
+  border-right: 4px solid var(--wpc-carval-primary) !important;
+}
+
+.wpc-calc-carval-v4m7-content-text {
+  font-size: 1rem !important;
+  color: var(--wpc-carval-text-dark) !important;
+  line-height: 1.8 !important;
+  margin-bottom: 15px !important;
+}
+
+/* FAQ Section */
+.wpc-calc-carval-v4m7-faq-section {
+  margin: 40px 0 !important;
+}
+
+.wpc-calc-carval-v4m7-faq-item {
+  background: var(--wpc-carval-white) !important;
+  border-radius: var(--wpc-carval-radius-sm) !important;
+  margin-bottom: 10px !important;
+  box-shadow: var(--wpc-carval-shadow-sm) !important;
+  overflow: hidden !important;
+}
+
+.wpc-calc-carval-v4m7-faq-header {
+  padding: 18px 20px !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 15px !important;
+  transition: var(--wpc-carval-transition) !important;
+}
+
+.wpc-calc-carval-v4m7-faq-header:hover {
+  background: var(--wpc-carval-bg-light) !important;
+}
+
+.wpc-calc-carval-v4m7-faq-question {
+  font-size: 1.05rem !important;
+  font-weight: 600 !important;
+  color: var(--wpc-carval-text-dark) !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+}
+
+.wpc-calc-carval-v4m7-faq-icon {
+  font-size: 1.2rem !important;
+  transition: transform 0.3s ease !important;
+}
+
+.wpc-calc-carval-v4m7-faq-item.active .wpc-calc-carval-v4m7-faq-icon {
+  transform: rotate(180deg) !important;
+}
+
+.wpc-calc-carval-v4m7-faq-answer {
+  display: none !important;
+  padding: 0 20px 20px 20px !important;
+  color: var(--wpc-carval-text-light) !important;
+  line-height: 1.7 !important;
+}
+
+.wpc-calc-carval-v4m7-faq-item.active .wpc-calc-carval-v4m7-faq-answer {
+  display: block !important;
+}
+
+/* Embed Section */
+.wpc-calc-carval-v4m7-embed-section {
+  background: var(--wpc-carval-white) !important;
+  border-radius: var(--wpc-carval-radius-lg) !important;
+  padding: 30px !important;
+  margin: 40px 0 !important;
+  text-align: center !important;
+  border: 2px solid var(--wpc-carval-border) !important;
+  box-shadow: var(--wpc-carval-shadow-sm) !important;
+}
+
+.wpc-calc-carval-v4m7-embed-title {
+  font-size: 1.4rem !important;
+  font-weight: 700 !important;
+  color: var(--wpc-carval-primary) !important;
+  margin: 0 0 15px 0 !important;
+}
+
+.wpc-calc-carval-v4m7-embed-text {
+  font-size: 1rem !important;
+  color: var(--wpc-carval-text-dark) !important;
+  margin-bottom: 20px !important;
+}
+
+.wpc-calc-carval-v4m7-embed-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  padding: 15px 30px !important;
+  background: var(--wpc-carval-primary) !important;
+  color: var(--wpc-carval-white) !important;
+  border: none !important;
+  border-radius: 50px !important;
+  font-size: 1.1rem !important;
+  font-weight: 600 !important;
+  font-family: inherit !important;
+  cursor: pointer !important;
+  transition: var(--wpc-carval-transition) !important;
+}
+
+.wpc-calc-carval-v4m7-embed-btn:hover {
+  background: var(--wpc-carval-primary-dark) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* Color Picker */
+.wpc-calc-carval-v4m7-color-picker {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  margin: 20px 0 !important;
+}
+
+.wpc-calc-carval-v4m7-color-btn {
+  width: 45px !important;
+  height: 45px !important;
+  border-radius: 50% !important;
+  border: 3px solid var(--wpc-carval-white) !important;
+  cursor: pointer !important;
+  transition: var(--wpc-carval-transition) !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2) !important;
+}
+
+.wpc-calc-carval-v4m7-color-btn:hover {
+  transform: scale(1.15) !important;
+}
+
+.wpc-calc-carval-v4m7-color-btn.active {
+  border-color: #333 !important;
+  transform: scale(1.2) !important;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .wpc-calc-carval-v4m7-wrapper {
+    padding: 15px !important;
+  }
+  
+  .wpc-calc-carval-v4m7-title {
+    font-size: 1.6rem !important;
+  }
+  
+  .wpc-calc-carval-v4m7-tabs-nav {
+    flex-wrap: wrap !important;
+  }
+  
+  .wpc-calc-carval-v4m7-tab-btn {
+    flex: 1 1 45% !important;
+    min-width: auto !important;
+    padding: 12px 15px !important;
+    font-size: 0.9rem !important;
+  }
+  
+  .wpc-calc-carval-v4m7-tab-content {
+    padding: 20px !important;
+  }
+  
+  .wpc-calc-carval-v4m7-form-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+  
+  .wpc-calc-carval-v4m7-results-main {
+    grid-template-columns: 1fr !important;
+    gap: 15px !important;
+  }
+  
+  .wpc-calc-carval-v4m7-comparison-grid {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .wpc-calc-carval-v4m7-cta-btn {
+    min-width: 100% !important;
+    padding: 15px 25px !important;
+    font-size: 1rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .wpc-calc-carval-v4m7-title {
+    font-size: 1.4rem !important;
+  }
+  
+  .wpc-calc-carval-v4m7-tab-btn {
+    flex: 1 1 45% !important;
+    min-width: auto !important;
+    padding: 10px 8px !important;
+    font-size: 0.85rem !important;
+  }
+  
+  .wpc-calc-carval-v4m7-tab-icon {
+    display: none !important;
+  }
+  
+  .wpc-calc-carval-v4m7-result-value {
+    font-size: 1.4rem !important;
+  }
+  
+  .wpc-calc-carval-v4m7-btn-group {
+    flex-direction: column !important;
+  }
+}
+
+@media (max-width: 375px) {
+  .wpc-calc-carval-v4m7-wrapper {
+    padding: 10px !important;
+  }
+  
+  .wpc-calc-carval-v4m7-tab-content {
+    padding: 15px !important;
+  }
+  
+  .wpc-calc-carval-v4m7-slider-value {
+    font-size: 1.3rem !important;
+  }
+}
+</style>
+
+<!-- Main Calculator Wrapper -->
+<div class="wpc-calc-carval-v4m7-wrapper" id="wpc-calc-carval-v4m7-main">
+
+  <!-- Title Section -->
+  <div class="wpc-calc-carval-v4m7-title-container">
+    <h1 class="wpc-calc-carval-v4m7-title">מחשבון שווי שימוש רכב - ליסינג מול רכב פרטי 2025</h1>
+    <p class="wpc-calc-carval-v4m7-subtitle">האם משתלם לקחת רכב חברה או לקבל שכר גבוה יותר ולקנות רכב פרטי?</p>
+    <p class="wpc-calc-carval-v4m7-update-date"><strong>עודכן לאחרונה:</strong> [current_date format="F Y" hebrew="true"] | שיעור שווי שימוש: 2.48%</p>
+  </div>
+
+  <!-- Calculator -->
+  <div class="wpc-calc-carval-v4m7-calculator" id="wpc-calc-carval-v4m7-calculator">
+    
+    <!-- Tabs Navigation -->
+    <div class="wpc-calc-carval-v4m7-tabs-nav">
+      <button class="wpc-calc-carval-v4m7-tab-btn active" data-action="switch-tab" data-tab="basic">
+        <span class="wpc-calc-carval-v4m7-tab-icon">🚗</span>
+        <span>השוואה בסיסית</span>
+      </button>
+      <button class="wpc-calc-carval-v4m7-tab-btn" data-action="switch-tab" data-tab="detailed">
+        <span class="wpc-calc-carval-v4m7-tab-icon">📊</span>
+        <span>פירוט מלא</span>
+      </button>
+      <button class="wpc-calc-carval-v4m7-tab-btn" data-action="switch-tab" data-tab="breakeven">
+        <span class="wpc-calc-carval-v4m7-tab-icon">⚖️</span>
+        <span>נקודת איזון</span>
+      </button>
+    </div>
+
+    <!-- Tab 1: Basic Comparison -->
+    <div class="wpc-calc-carval-v4m7-tab-content active" id="tab-basic">
+      <h2 class="wpc-calc-carval-v4m7-tab-title">השוואת רכב חברה מול רכב פרטי</h2>
+      
+      <div class="wpc-calc-carval-v4m7-form-grid">
+        <!-- Gross Salary Slider -->
+        <div class="wpc-calc-carval-v4m7-form-group full-width">
+          <label class="wpc-calc-carval-v4m7-label">
+            <span class="wpc-calc-carval-v4m7-label-icon">💰</span>
+            שכר ברוטו חודשי (ללא רכב)
+          </label>
+          <div class="wpc-calc-carval-v4m7-slider-container">
+            <div class="wpc-calc-carval-v4m7-slider-value" id="basic-gross-value">20,000 ₪</div>
+            <input type="range" class="wpc-calc-carval-v4m7-slider" id="basic-gross-slider" 
+                   min="10000" max="80000" value="20000" step="1000">
+            <div class="wpc-calc-carval-v4m7-slider-range">
+              <span>10,000 ₪</span>
+              <span>80,000 ₪</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Salary Reduction for Car -->
+        <div class="wpc-calc-carval-v4m7-form-group">
+          <label class="wpc-calc-carval-v4m7-label">
+            <span class="wpc-calc-carval-v4m7-label-icon">📉</span>
+            הפחתת שכר עבור רכב חברה
+          </label>
+          <div class="wpc-calc-carval-v4m7-slider-container">
+            <div class="wpc-calc-carval-v4m7-slider-value" id="basic-reduction-value">2,000 ₪</div>
+            <input type="range" class="wpc-calc-carval-v4m7-slider" id="basic-reduction-slider" 
+                   min="0" max="6000" value="2000" step="500">
+            <div class="wpc-calc-carval-v4m7-slider-range">
+              <span>0 ₪</span>
+              <span>6,000 ₪</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Car Value -->
+        <div class="wpc-calc-carval-v4m7-form-group">
+          <label class="wpc-calc-carval-v4m7-label">
+            <span class="wpc-calc-carval-v4m7-label-icon">🚘</span>
+            שווי הרכב (מחיר מחירון)
+          </label>
+          <div class="wpc-calc-carval-v4m7-slider-container">
+            <div class="wpc-calc-carval-v4m7-slider-value" id="basic-carvalue-value">150,000 ₪</div>
+            <input type="range" class="wpc-calc-carval-v4m7-slider" id="basic-carvalue-slider" 
+                   min="50000" max="500000" value="150000" step="10000">
+            <div class="wpc-calc-carval-v4m7-slider-range">
+              <span>50,000 ₪</span>
+              <span>500,000 ₪</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Annual Kilometers -->
+        <div class="wpc-calc-carval-v4m7-form-group">
+          <label class="wpc-calc-carval-v4m7-label">
+            <span class="wpc-calc-carval-v4m7-label-icon">📍</span>
+            קילומטראז' שנתי משוער
+          </label>
+          <div class="wpc-calc-carval-v4m7-btn-group" id="basic-km-group">
+            <button class="wpc-calc-carval-v4m7-btn-option" data-value="10000" data-action="set-km">10,000</button>
+            <button class="wpc-calc-carval-v4m7-btn-option active" data-value="15000" data-action="set-km">15,000</button>
+            <button class="wpc-calc-carval-v4m7-btn-option" data-value="20000" data-action="set-km">20,000</button>
+            <button class="wpc-calc-carval-v4m7-btn-option" data-value="25000" data-action="set-km">25,000</button>
+          </div>
+        </div>
+
+        <!-- Tax Bracket -->
+        <div class="wpc-calc-carval-v4m7-form-group">
+          <label class="wpc-calc-carval-v4m7-label">
+            <span class="wpc-calc-carval-v4m7-label-icon">📋</span>
+            מדרגת מס שולי
+          </label>
+          <div class="wpc-calc-carval-v4m7-btn-group" id="basic-tax-group">
+            <button class="wpc-calc-carval-v4m7-btn-option" data-value="20" data-action="set-tax">20%</button>
+            <button class="wpc-calc-carval-v4m7-btn-option active" data-value="31" data-action="set-tax">31%</button>
+            <button class="wpc-calc-carval-v4m7-btn-option" data-value="35" data-action="set-tax">35%</button>
+            <button class="wpc-calc-carval-v4m7-btn-option" data-value="47" data-action="set-tax">47%</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Results -->
+      <div class="wpc-calc-carval-v4m7-results">
+        <h3 class="wpc-calc-carval-v4m7-results-title">📋 תוצאות ההשוואה</h3>
+        
+        <div class="wpc-calc-carval-v4m7-comparison-grid">
+          <!-- Company Car Column -->
+          <div class="wpc-calc-carval-v4m7-comparison-column company">
+            <h4>🏢 רכב חברה (ליסינג)</h4>
+            <ul class="wpc-calc-carval-v4m7-breakdown-list">
+              <li><span>שכר ברוטו מופחת</span><span id="basic-company-gross">18,000 ₪</span></li>
+              <li><span>שווי שימוש (2.48%)</span><span id="basic-benefit-value">3,720 ₪</span></li>
+              <li><span>מס על שווי שימוש</span><span id="basic-benefit-tax">-1,153 ₪</span></li>
+              <li><span>שכר נטו משוער</span><span id="basic-company-net">13,500 ₪</span></li>
+            </ul>
+          </div>
+
+          <!-- Private Car Column -->
+          <div class="wpc-calc-carval-v4m7-comparison-column private">
+            <h4>🚙 רכב פרטי</h4>
+            <ul class="wpc-calc-carval-v4m7-breakdown-list">
+              <li><span>שכר ברוטו מלא</span><span id="basic-private-gross">20,000 ₪</span></li>
+              <li><span>שכר נטו (לפני הוצאות)</span><span id="basic-private-net-before">15,200 ₪</span></li>
+              <li><span>עלות רכב פרטי חודשית</span><span id="basic-private-cost">-2,500 ₪</span></li>
+              <li><span>נטו פנוי לאחר רכב</span><span id="basic-private-net">12,700 ₪</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="wpc-calc-carval-v4m7-results-main">
+          <div class="wpc-calc-carval-v4m7-result-card" id="basic-result-card">
+            <div class="wpc-calc-carval-v4m7-result-label">הפרש חודשי</div>
+            <div class="wpc-calc-carval-v4m7-result-value" id="basic-diff">+800 ₪</div>
+          </div>
+          <div class="wpc-calc-carval-v4m7-result-card highlight">
+            <div class="wpc-calc-carval-v4m7-result-label">הפרש שנתי</div>
+            <div class="wpc-calc-carval-v4m7-result-value" id="basic-diff-annual">+9,600 ₪</div>
+          </div>
+          <div class="wpc-calc-carval-v4m7-result-card">
+            <div class="wpc-calc-carval-v4m7-result-label">המלצה</div>
+            <div class="wpc-calc-carval-v4m7-result-value" id="basic-recommendation" style="font-size: 1.2rem !important;">רכב חברה</div>
+          </div>
+        </div>
+
+        <div class="wpc-calc-carval-v4m7-info-box">
+          <span class="wpc-calc-carval-v4m7-info-icon">💡</span>
+          <div class="wpc-calc-carval-v4m7-info-text" id="basic-insight">
+            <strong>תובנה:</strong> ברכב חברה אתה חוסך את עלויות הביטוח, טסט, טיפולים וירידת ערך. העלות היחידה היא מס על שווי השימוש.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 2: Detailed Breakdown -->
+    <div class="wpc-calc-carval-v4m7-tab-content" id="tab-detailed">
+      <h2 class="wpc-calc-carval-v4m7-tab-title">פירוט מלא של העלויות</h2>
+      
+      <div class="wpc-calc-carval-v4m7-form-grid">
+        <!-- Gross Salary -->
+        <div class="wpc-calc-carval-v4m7-form-group">
+          <label class="wpc-calc-carval-v4m7-label">
+            <span class="wpc-calc-carval-v4m7-label-icon">💰</span>
+            שכר ברוטו חודשי
+          </label>
+          <div class="wpc-calc-carval-v4m7-slider-container">
+            <div class="wpc-calc-carval-v4m7-slider-value" id="detailed-gross-value">25,000 ₪</div>
+            <input type="range" class="wpc-calc-carval-v4m7-slider" id="detailed-gross-slider" 
+                   min="10000" max="100000" value="25000" step="1000">
+          </div>
+        </div>
+
+        <!-- Salary Reduction -->
+        <div class="wpc-calc-carval-v4m7-form-group">
+          <label class="wpc-calc-carval-v4m7-label">
+            <span class="wpc-calc-carval-v4m7-label-icon">📉</span>
+            הפחתת שכר עבור רכב
+          </label>
+          <div class="wpc-calc-carval-v4m7-slider-container">
+            <div class="wpc-calc-carval-v4m7-slider-value" id="detailed-reduction-value">2,500 ₪</div>
+            <input type="range" class="wpc-calc-carval-v4m7-slider" id="detailed-reduction-slider" 
+                   min="0" max="8000" value="2500" step="500">
+          </div>
+        </div>
+
+        <!-- Car Value -->
+        <div class="wpc-calc-carval-v4m7-form-group">
+          <label class="wpc-calc-carval-v4m7-label">
+            <span class="wpc-calc-carval-v4m7-label-icon">🚘</span>
+            שווי הרכב
+          </label>
+          <div class="wpc-calc-carval-v4m7-slider-container">
+            <div class="wpc-calc-carval-v4m7-slider-value" id="detailed-carvalue-value">180,000 ₪</div>
+            <input type="range" class="wpc-calc-carval-v4m7-slider" id="detailed-carvalue-slider" 
+                   min="50000" max="600000" value="180000" step="10000">
+          </div>
+        </div>
+
+        <!-- Tax Rate -->
+        <div class="wpc-calc-carval-v4m7-form-group">
+          <label class="wpc-calc-carval-v4m7-label">
+            <span class="wpc-calc-carval-v4m7-label-icon">📋</span>
+            שיעור מס שולי
+          </label>
+          <div class="wpc-calc-carval-v4m7-slider-container">
+            <div class="wpc-calc-carval-v4m7-slider-value" id="detailed-tax-value">35%</div>
+            <input type="range" class="wpc-calc-carval-v4m7-slider" id="detailed-tax-slider" 
+                   min="10" max="50" value="35" step="1">
+          </div>
+        </div>
+
+        <!-- Annual KM -->
+        <div class="wpc-calc-carval-v4m7-form-group">
+          <label class="wpc-calc-carval-v4m7-label">
+            <span class="wpc-calc-carval-v4m7-label-icon">📍</span>
+            קילומטראז' שנתי
+          </label>
+          <div class="wpc-calc-carval-v4m7-slider-container">
+            <div class="wpc-calc-carval-v4m7-slider-value" id="detailed-km-value">15,000 ק"מ</div>
+            <input type="range" class="wpc-calc-carval-v4m7-slider" id="detailed-km-slider" 
+                   min="5000" max="40000" value="15000" step="1000">
+          </div>
+        </div>
+
+        <!-- Fuel Price -->
+        <div class="wpc-calc-carval-v4m7-form-group">
+          <label class="wpc-calc-carval-v4m7-label">
+            <span class="wpc-calc-carval-v4m7-label-icon">⛽</span>
+            מחיר דלק לליטר
+          </label>
+          <div class="wpc-calc-carval-v4m7-slider-container">
+            <div class="wpc-calc-carval-v4m7-slider-value" id="detailed-fuel-value">7.50 ₪</div>
+            <input type="range" class="wpc-calc-carval-v4m7-slider" id="detailed-fuel-slider" 
+                   min="6" max="12" value="7.5" step="0.1">
+          </div>
+        </div>
+      </div>
+
+      <!-- Detailed Results -->
+      <div class="wpc-calc-carval-v4m7-results">
+        <h3 class="wpc-calc-carval-v4m7-results-title">📊 פירוט עלויות חודשיות</h3>
+        
+        <div class="wpc-calc-carval-v4m7-comparison-grid">
+          <!-- Company Car Details -->
+          <div class="wpc-calc-carval-v4m7-comparison-column company">
+            <h4>🏢 רכב חברה</h4>
+            <ul class="wpc-calc-carval-v4m7-breakdown-list">
+              <li><span>שכר ברוטו מופחת</span><span id="detailed-company-gross">22,500 ₪</span></li>
+              <li><span>שווי שימוש רכב</span><span id="detailed-benefit">4,464 ₪</span></li>
+              <li><span>מס על שווי שימוש</span><span id="detailed-benefit-tax">-1,562 ₪</span></li>
+              <li><span>דלק (אם לא כלול)</span><span id="detailed-company-fuel">0 ₪</span></li>
+              <li><span>סה"כ עלות חודשית</span><span id="detailed-company-total">1,562 ₪</span></li>
+            </ul>
+          </div>
+
+          <!-- Private Car Details -->
+          <div class="wpc-calc-carval-v4m7-comparison-column private">
+            <h4>🚙 רכב פרטי</h4>
+            <ul class="wpc-calc-carval-v4m7-breakdown-list">
+              <li><span>דלק (12 ק"מ/ליטר)</span><span id="detailed-private-fuel">938 ₪</span></li>
+              <li><span>ביטוח חובה + מקיף</span><span id="detailed-private-insurance">600 ₪</span></li>
+              <li><span>טסט שנתי + רישיון</span><span id="detailed-private-test">50 ₪</span></li>
+              <li><span>טיפולים ותחזוקה</span><span id="detailed-private-maintenance">300 ₪</span></li>
+              <li><span>ירידת ערך (15%/שנה)</span><span id="detailed-private-depreciation">2,250 ₪</span></li>
+              <li><span>סה"כ עלות חודשית</span><span id="detailed-private-total">4,138 ₪</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="wpc-calc-carval-v4m7-results-main">
+          <div class="wpc-calc-carval-v4m7-result-card">
+            <div class="wpc-calc-carval-v4m7-result-label">עלות רכב חברה</div>
+            <div class="wpc-calc-carval-v4m7-result-value" id="detailed-cost-company">1,562 ₪</div>
+          </div>
+          <div class="wpc-calc-carval-v4m7-result-card">
+            <div class="wpc-calc-carval-v4m7-result-label">עלות רכב פרטי</div>
+            <div class="wpc-calc-carval-v4m7-result-value" id="detailed-cost-private">4,138 ₪</div>
+          </div>
+          <div class="wpc-calc-carval-v4m7-result-card highlight" id="detailed-savings-card">
+            <div class="wpc-calc-carval-v4m7-result-label">חיסכון ברכב חברה</div>
+            <div class="wpc-calc-carval-v4m7-result-value" id="detailed-savings">2,576 ₪</div>
+          </div>
+        </div>
+
+        <div class="wpc-calc-carval-v4m7-info-box">
+          <span class="wpc-calc-carval-v4m7-info-icon">📌</span>
+          <div class="wpc-calc-carval-v4m7-info-text">
+            <strong>חשוב לדעת:</strong> ברכב חברה, המעסיק משלם את כל עלויות האחזקה (ביטוח, טיפולים, רישיון). 
+            העובד משלם רק מס על <strong>שווי השימוש</strong> - שמחושב כ-2.48% ממחיר הרכב לחודש.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 3: Break-even Analysis -->
+    <div class="wpc-calc-carval-v4m7-tab-content" id="tab-breakeven">
+      <h2 class="wpc-calc-carval-v4m7-tab-title">נקודת האיזון - כמה קילומטרים?</h2>
+      
+      <div class="wpc-calc-carval-v4m7-form-grid">
+        <!-- Car Value -->
+        <div class="wpc-calc-carval-v4m7-form-group">
+          <label class="wpc-calc-carval-v4m7-label">
+            <span class="wpc-calc-carval-v4m7-label-icon">🚘</span>
+            שווי הרכב
+          </label>
+          <div class="wpc-calc-carval-v4m7-slider-container">
+            <div class="wpc-calc-carval-v4m7-slider-value" id="breakeven-carvalue-value">160,000 ₪</div>
+            <input type="range" class="wpc-calc-carval-v4m7-slider" id="breakeven-carvalue-slider" 
+                   min="50000" max="500000" value="160000" step="10000">
+          </div>
+        </div>
+
+        <!-- Tax Rate -->
+        <div class="wpc-calc-carval-v4m7-form-group">
+          <label class="wpc-calc-carval-v4m7-label">
+            <span class="wpc-calc-carval-v4m7-label-icon">📋</span>
+            שיעור מס שולי
+          </label>
+          <div class="wpc-calc-carval-v4m7-slider-container">
+            <div class="wpc-calc-carval-v4m7-slider-value" id="breakeven-tax-value">31%</div>
+            <input type="range" class="wpc-calc-carval-v4m7-slider" id="breakeven-tax-slider" 
+                   min="10" max="50" value="31" step="1">
+          </div>
+        </div>
+
+        <!-- Salary Reduction -->
+        <div class="wpc-calc-carval-v4m7-form-group">
+          <label class="wpc-calc-carval-v4m7-label">
+            <span class="wpc-calc-carval-v4m7-label-icon">📉</span>
+            הפחתת שכר חודשית
+          </label>
+          <div class="wpc-calc-carval-v4m7-slider-container">
+            <div class="wpc-calc-carval-v4m7-slider-value" id="breakeven-reduction-value">2,000 ₪</div>
+            <input type="range" class="wpc-calc-carval-v4m7-slider" id="breakeven-reduction-slider" 
+                   min="0" max="6000" value="2000" step="500">
+          </div>
+        </div>
+
+        <!-- Your KM -->
+        <div class="wpc-calc-carval-v4m7-form-group">
+          <label class="wpc-calc-carval-v4m7-label">
+            <span class="wpc-calc-carval-v4m7-label-icon">📍</span>
+            הקילומטראז' השנתי שלך
+          </label>
+          <div class="wpc-calc-carval-v4m7-slider-container">
+            <div class="wpc-calc-carval-v4m7-slider-value" id="breakeven-yourkm-value">15,000 ק"מ</div>
+            <input type="range" class="wpc-calc-carval-v4m7-slider" id="breakeven-yourkm-slider" 
+                   min="5000" max="40000" value="15000" step="1000">
+          </div>
+        </div>
+      </div>
+
+      <!-- Break-even Results -->
+      <div class="wpc-calc-carval-v4m7-results">
+        <h3 class="wpc-calc-carval-v4m7-results-title">📍 נקודת האיזון</h3>
+        
+        <div class="wpc-calc-carval-v4m7-results-main">
+          <div class="wpc-calc-carval-v4m7-result-card highlight">
+            <div class="wpc-calc-carval-v4m7-result-label">נקודת איזון</div>
+            <div class="wpc-calc-carval-v4m7-result-value" id="breakeven-point">12,500 ק"מ</div>
+          </div>
+          <div class="wpc-calc-carval-v4m7-result-card">
+            <div class="wpc-calc-carval-v4m7-result-label">הקילומטראז' שלך</div>
+            <div class="wpc-calc-carval-v4m7-result-value" id="breakeven-yourkm-display">15,000 ק"מ</div>
+          </div>
+          <div class="wpc-calc-carval-v4m7-result-card" id="breakeven-status-card">
+            <div class="wpc-calc-carval-v4m7-result-label">סטטוס</div>
+            <div class="wpc-calc-carval-v4m7-result-value" id="breakeven-status" style="font-size: 1.1rem !important;">רכב חברה משתלם</div>
+          </div>
+        </div>
+
+        <!-- Visual Chart -->
+        <div class="wpc-calc-carval-v4m7-chart-container">
+          <div class="wpc-calc-carval-v4m7-chart-title">תרשים נקודת איזון</div>
+          <div class="wpc-calc-carval-v4m7-chart-bar">
+            <div class="wpc-calc-carval-v4m7-chart-fill" id="breakeven-chart-fill" style="width: 100%;"></div>
+            <div class="wpc-calc-carval-v4m7-chart-marker" id="breakeven-marker" style="left: 31.25%;"></div>
+            <div class="wpc-calc-carval-v4m7-chart-marker" id="yourkm-marker" style="left: 37.5%; background: #e74c3c;"></div>
+          </div>
+          <div class="wpc-calc-carval-v4m7-chart-labels">
+            <span>5,000 ק"מ</span>
+            <span style="color: var(--wpc-carval-primary); font-weight: 700;" id="breakeven-label">נק' איזון: 12,500</span>
+            <span>40,000 ק"מ</span>
+          </div>
+        </div>
+
+        <div class="wpc-calc-carval-v4m7-recommendation" id="breakeven-recommendation">
+          <div class="wpc-calc-carval-v4m7-recommendation-title" id="breakeven-rec-title">✅ רכב חברה משתלם יותר!</div>
+          <div class="wpc-calc-carval-v4m7-recommendation-text" id="breakeven-rec-text">
+            אתה נוסע 15,000 ק"מ בשנה, מעל נקודת האיזון של 12,500 ק"מ. כל קילומטר נוסף חוסך לך כסף ברכב חברה.
+          </div>
+        </div>
+
+        <div class="wpc-calc-carval-v4m7-info-box">
+          <span class="wpc-calc-carval-v4m7-info-icon">📊</span>
+          <div class="wpc-calc-carval-v4m7-info-text">
+            <strong>איך זה מחושב?</strong> נקודת האיזון היא הקילומטראז' השנתי שבו עלות רכב חברה שווה לעלות רכב פרטי. 
+            מעל נקודה זו - רכב חברה משתלם יותר. מתחתיה - רכב פרטי עשוי להיות כדאי יותר.
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- End Calculator -->
+
+  <!-- AWG Section -->
+  <div class="wpc-calc-carval-v4m7-awg-section">
+    <div class="wpc-calc-carval-v4m7-awg-container">
+      <div class="wpc-calc-carval-v4m7-cta-buttons">
+        <button class="wpc-calc-carval-v4m7-cta-btn primary" data-action="open-awg">
+          🚗 בדוק זכאות להלוואת רכב - קבל הצעה מיידית!
+        </button>
+        <button class="wpc-calc-carval-v4m7-cta-btn secondary" data-action="scroll-to-embed">
+          🎁 רוצה להוסיף את המחשבון בחינם לאתרך? לחץ כאן!
+        </button>
+      </div>
+      <div class="wpc-calc-carval-v4m7-awg-content" id="awg-content">
+        [awg postid="32400"]
+      </div>
+    </div>
+  </div>
+
+  <!-- Content Section -->
+  <div class="wpc-calc-carval-v4m7-content-section">
+    <h2 class="wpc-calc-carval-v4m7-section-title">מה זה שווי שימוש ברכב?</h2>
+    <p class="wpc-calc-carval-v4m7-content-text">
+      <strong>שווי שימוש ברכב</strong> הוא הטבה שמקבל עובד שיש לו רכב צמוד מהמעסיק. רשות המסים מתייחסת להטבה זו כהכנסה חייבת במס, 
+      ולכן העובד משלם מס הכנסה על שווי השימוש - גם אם הוא לא מקבל כסף בפועל.
+    </p>
+    <p class="wpc-calc-carval-v4m7-content-text">
+      החל משנת 2025, שיעור שווי השימוש הוא <strong>2.48%</strong> ממחיר המחירון של הרכב לחודש. לדוגמה, רכב בשווי 150,000 ₪ 
+      ייצור שווי שימוש של 3,720 ₪ לחודש, שעליו תשלמו מס לפי מדרגת המס השולי שלכם.
+    </p>
+  </div>
+
+  <!-- FAQ Section -->
+  <div class="wpc-calc-carval-v4m7-faq-section">
+    <h2 class="wpc-calc-carval-v4m7-section-title">שאלות נפוצות על רכב חברה ושווי שימוש</h2>
+
+    <div class="wpc-calc-carval-v4m7-faq-item" data-action="toggle-faq">
+      <div class="wpc-calc-carval-v4m7-faq-header">
+        <span class="wpc-calc-carval-v4m7-faq-question">❓ מה ההבדל בין ליסינג תפעולי ללסינג מימוני?</span>
+        <span class="wpc-calc-carval-v4m7-faq-icon">▼</span>
+      </div>
+      <div class="wpc-calc-carval-v4m7-faq-answer">
+        <strong>ליסינג תפעולי</strong> - המעסיק משלם על הכל: ביטוח, טיפולים, רישיון, וגם שוכר את הרכב. בסוף התקופה הרכב חוזר לחברת הליסינג.
+        <strong>ליסינג מימוני</strong> - בעצם הלוואה לרכישת רכב, העובד או המעסיק משלמים את כל העלויות הנוספות.
+        בשני המקרים, אם הרכב לשימוש פרטי - יש חיוב בשווי שימוש.
+      </div>
+    </div>
+
+    <div class="wpc-calc-carval-v4m7-faq-item" data-action="toggle-faq">
+      <div class="wpc-calc-carval-v4m7-faq-header">
+        <span class="wpc-calc-carval-v4m7-faq-question">❓ האם שווי שימוש משתנה לפי סוג הרכב?</span>
+        <span class="wpc-calc-carval-v4m7-faq-icon">▼</span>
+      </div>
+      <div class="wpc-calc-carval-v4m7-faq-answer">
+        <strong>כן!</strong> שווי השימוש מחושב לפי <strong>קבוצת מחיר</strong> של הרכב. רכבים היברידיים וחשמליים נהנים משיעור מופחת. 
+        השיעור הסטנדרטי הוא 2.48%, אך לרכבים חשמליים השיעור עומד על <strong>1.08%</strong> בלבד - חיסכון משמעותי!
+      </div>
+    </div>
+
+    <div class="wpc-calc-carval-v4m7-faq-item" data-action="toggle-faq">
+      <div class="wpc-calc-carval-v4m7-faq-header">
+        <span class="wpc-calc-carval-v4m7-faq-question">❓ מתי רכב פרטי משתלם יותר מרכב חברה?</span>
+        <span class="wpc-calc-carval-v4m7-faq-icon">▼</span>
+      </div>
+      <div class="wpc-calc-carval-v4m7-faq-answer">
+        רכב פרטי עשוי להשתלם יותר כאשר: <strong>נוסעים מעט קילומטרים</strong> (פחות מ-10,000 ק"מ בשנה), 
+        <strong>המעסיק מפחית שכר משמעותי</strong> עבור הרכב, או כאשר <strong>שיעור המס השולי נמוך</strong>. 
+        השתמשו במחשבון כדי לבדוק את המקרה הספציפי שלכם.
+      </div>
+    </div>
+
+    <div class="wpc-calc-carval-v4m7-faq-item" data-action="toggle-faq">
+      <div class="wpc-calc-carval-v4m7-faq-header">
+        <span class="wpc-calc-carval-v4m7-faq-question">❓ האם הדלק כלול ברכב חברה?</span>
+        <span class="wpc-calc-carval-v4m7-faq-icon">▼</span>
+      </div>
+      <div class="wpc-calc-carval-v4m7-faq-answer">
+        תלוי בתנאי העסקה. בחלק מהמקרים, המעסיק מממן גם את הדלק (בדרך כלל עד תקרה מסוימת או רק לנסיעות עבודה). 
+        במקרים אחרים, הדלק על חשבון העובד. <strong>חשוב לבדוק</strong> את תנאי ההעסקה שלכם.
+      </div>
+    </div>
+
+    <div class="wpc-calc-carval-v4m7-faq-item" data-action="toggle-faq">
+      <div class="wpc-calc-carval-v4m7-faq-header">
+        <span class="wpc-calc-carval-v4m7-faq-question">❓ איך משפיע רכב חברה על הפנסיה וקרן ההשתלמות?</span>
+        <span class="wpc-calc-carval-v4m7-faq-icon">▼</span>
+      </div>
+      <div class="wpc-calc-carval-v4m7-faq-answer">
+        שווי השימוש ברכב <strong>אינו נכלל</strong> בחישוב השכר לצורך הפרשות לפנסיה וקרן השתלמות (אלא אם הוסכם אחרת). 
+        כלומר, אם הברוטו שלכם הוא 20,000 ₪ ושווי השימוש 3,000 ₪ - ההפרשות יהיו רק על ה-20,000 ₪.
+      </div>
+    </div>
+
+    <div class="wpc-calc-carval-v4m7-faq-item" data-action="toggle-faq">
+      <div class="wpc-calc-carval-v4m7-faq-header">
+        <span class="wpc-calc-carval-v4m7-faq-question">❓ מה קורה כשמחליפים רכב חברה?</span>
+        <span class="wpc-calc-carval-v4m7-faq-icon">▼</span>
+      </div>
+      <div class="wpc-calc-carval-v4m7-faq-answer">
+        כשמחליפים רכב חברה, שווי השימוש מחושב מחדש לפי מחיר הרכב החדש. 
+        אם עברתם לרכב יקר יותר - המס על שווי השימוש יעלה. לרכב זול יותר - המס ירד. 
+        <strong>טיפ:</strong> כדאי לשקול רכב חשמלי/היברידי שנהנה משווי שימוש מופחת.
+      </div>
+    </div>
+  </div>
+
+  <!-- Embed Section -->
+  <div class="wpc-calc-carval-v4m7-embed-section" id="wpc-calc-carval-v4m7-embed">
+    <h2 class="wpc-calc-carval-v4m7-embed-title">🎁 רוצים להטמיע את המחשבון באתר שלכם? חינם!</h2>
+    <p class="wpc-calc-carval-v4m7-embed-text">
+      קבלו את מחשבון שווי שימוש רכב המתקדם לחלוטין בחינם! שווי פיתוח: מעל ₪15,000 💰
+    </p>
+    
+    <button class="wpc-calc-carval-v4m7-embed-btn" data-action="copy-embed-code">
+      📋 העתק קוד להטמעה
+    </button>
+
+    <div class="wpc-calc-carval-v4m7-color-picker">
+      <button class="wpc-calc-carval-v4m7-color-btn active" style="background: #1e5490;" data-action="preview-color" data-color="#1e5490" data-name="כחול מקצועי" title="כחול מקצועי 💙"></button>
+      <button class="wpc-calc-carval-v4m7-color-btn" style="background: #10b981;" data-action="preview-color" data-color="#10b981" data-name="ירוק צמיחה" title="ירוק צמיחה 💚"></button>
+      <button class="wpc-calc-carval-v4m7-color-btn" style="background: #ef4444;" data-action="preview-color" data-color="#ef4444" data-name="אדום אנרגטי" title="אדום אנרגטי ❤️"></button>
+      <button class="wpc-calc-carval-v4m7-color-btn" style="background: #8b5cf6;" data-action="preview-color" data-color="#8b5cf6" data-name="סגול יוקרתי" title="סגול יוקרתי 💜"></button>
+      <button class="wpc-calc-carval-v4m7-color-btn" style="background: #f59e0b;" data-action="preview-color" data-color="#f59e0b" data-name="כתום דינמי" title="כתום דינמי 🧡"></button>
+      <button class="wpc-calc-carval-v4m7-color-btn" style="background: #ec4899;" data-action="preview-color" data-color="#ec4899" data-name="ורוד מודרני" title="ורוד מודרני 💗"></button>
+      <button class="wpc-calc-carval-v4m7-color-btn" style="background: #06b6d4;" data-action="preview-color" data-color="#06b6d4" data-name="טורקיז רענן" title="טורקיז רענן 🩵"></button>
+      <button class="wpc-calc-carval-v4m7-color-btn" style="background: #84cc16;" data-action="preview-color" data-color="#84cc16" data-name="ליים עז" title="ליים עז 💛"></button>
+      <button class="wpc-calc-carval-v4m7-color-btn" style="background: #f97316;" data-action="preview-color" data-color="#f97316" data-name="כתום בוהק" title="כתום בוהק 🔥"></button>
+      <button class="wpc-calc-carval-v4m7-color-btn" style="background: #0891b2;" data-action="preview-color" data-color="#0891b2" data-name="כחול ים" title="כחול ים 🌊"></button>
+      <input type="color" class="wpc-calc-carval-v4m7-color-btn" id="custom-color-picker" value="#1e5490" data-action="preview-custom-color" title="בחר צבע מותאם אישית">
+    </div>
+
+    <p style="font-size: 0.85rem; color: #777; margin-top: 15px;">
+      ⚠️ המחשבון כולל קישור קרדיט - אנא אל תסירו אותו.
+    </p>
+  </div>
+
+</div><!-- End Wrapper -->
+
+<!-- JavaScript -->
+<script>
+(function() {
+    'use strict';
+    
+    // Namespace check
+    const NS = 'WPC_CalcCarVal_V4M7';
+    if (window[NS]) return;
+    
+    // שם המחשבון לקרדיט דינמי
+    const CALCULATOR_NAME = 'שווי שימוש רכב';
+    
+    // Container validation
+    const container = document.getElementById('wpc-calc-carval-v4m7-main');
+    if (!container) return;
+
+    // ==========================================
+    // CONSTANTS 2025
+    // ==========================================
+    const BENEFIT_RATE = 0.0248; // 2.48% שווי שימוש
+    const ELECTRIC_BENEFIT_RATE = 0.0108; // 1.08% לרכב חשמלי
+    const FUEL_CONSUMPTION = 12; // ק"מ לליטר ממוצע
+    const INSURANCE_MONTHLY = 600; // ביטוח חודשי ממוצע
+    const TEST_MONTHLY = 50; // טסט + רישיון חודשי
+    const MAINTENANCE_PER_KM = 0.15; // עלות תחזוקה לק"מ
+    const DEPRECIATION_RATE = 0.15; // ירידת ערך שנתית
+
+    // ==========================================
+    // UTILITY FUNCTIONS
+    // ==========================================
+    function formatCurrency(num) {
+        return Math.round(num).toLocaleString('he-IL') + ' ₪';
+    }
+
+    function formatKM(num) {
+        return Math.round(num).toLocaleString('he-IL') + ' ק"מ';
+    }
+
+    // ==========================================
+    // CALCULATION FUNCTIONS
+    // ==========================================
+    
+    // חישוב שווי שימוש חודשי
+    function calculateBenefitValue(carValue, isElectric = false) {
+        const rate = isElectric ? ELECTRIC_BENEFIT_RATE : BENEFIT_RATE;
+        return carValue * rate;
+    }
+    
+    // חישוב מס על שווי שימוש
+    function calculateBenefitTax(benefitValue, taxRate) {
+        return benefitValue * (taxRate / 100);
+    }
+    
+    // חישוב עלות רכב פרטי חודשית
+    function calculatePrivateCarCost(carValue, annualKM, fuelPrice = 7.5) {
+        const monthlyKM = annualKM / 12;
+        
+        // דלק
+        const fuelCost = (monthlyKM / FUEL_CONSUMPTION) * fuelPrice;
+        
+        // ביטוח
+        const insurance = INSURANCE_MONTHLY;
+        
+        // טסט + רישיון
+        const test = TEST_MONTHLY;
+        
+        // תחזוקה
+        const maintenance = monthlyKM * MAINTENANCE_PER_KM + 150; // בסיס + לפי ק"מ
+        
+        // ירידת ערך
+        const depreciation = (carValue * DEPRECIATION_RATE) / 12;
+        
+        return {
+            fuel: fuelCost,
+            insurance: insurance,
+            test: test,
+            maintenance: maintenance,
+            depreciation: depreciation,
+            total: fuelCost + insurance + test + maintenance + depreciation
+        };
+    }
+    
+    // חישוב נטו משוער (פשוט)
+    function estimateNetSalary(grossSalary) {
+        // חישוב מפושט - לא מדויק לחלוטין
+        if (grossSalary <= 7010) return grossSalary * 0.88;
+        if (grossSalary <= 10060) return grossSalary * 0.84;
+        if (grossSalary <= 16150) return grossSalary * 0.78;
+        if (grossSalary <= 22870) return grossSalary * 0.72;
+        if (grossSalary <= 46690) return grossSalary * 0.68;
+        return grossSalary * 0.60;
+    }
+    
+    // חישוב נקודת איזון
+    function calculateBreakevenKM(carValue, taxRate, salaryReduction, fuelPrice = 7.5) {
+        const benefitValue = calculateBenefitValue(carValue);
+        const benefitTax = calculateBenefitTax(benefitValue, taxRate);
+        const salaryReductionNet = salaryReduction * (1 - taxRate/100);
+        
+        // עלות רכב חברה חודשית = מס על שווי שימוש + הפסד נטו מהפחתת שכר
+        const companyCost = benefitTax + salaryReductionNet;
+        
+        // עלויות קבועות של רכב פרטי (ללא דלק ותחזוקה)
+        const fixedCosts = INSURANCE_MONTHLY + TEST_MONTHLY + (carValue * DEPRECIATION_RATE / 12);
+        
+        // עלות משתנה לק"מ (דלק + תחזוקה)
+        const variableCostPerKM = (fuelPrice / FUEL_CONSUMPTION) + MAINTENANCE_PER_KM;
+        
+        // נקודת איזון: companyCost = fixedCosts + (KM/12) * variableCost
+        // KM = (companyCost - fixedCosts) * 12 / variableCost
+        
+        if (companyCost <= fixedCosts) {
+            // רכב פרטי תמיד עדיף
+            return 0;
+        }
+        
+        const breakevenMonthlyKM = (companyCost - fixedCosts) / variableCostPerKM;
+        const breakevenAnnualKM = breakevenMonthlyKM * 12;
+        
+        return Math.max(0, Math.round(breakevenAnnualKM));
+    }
+
+    // ==========================================
+    // STATE
+    // ==========================================
+    const state = {
+        basic: { 
+            gross: 20000, 
+            reduction: 2000, 
+            carValue: 150000, 
+            annualKM: 15000, 
+            taxRate: 31 
+        },
+        detailed: { 
+            gross: 25000, 
+            reduction: 2500, 
+            carValue: 180000, 
+            taxRate: 35, 
+            annualKM: 15000, 
+            fuelPrice: 7.5 
+        },
+        breakeven: { 
+            carValue: 160000, 
+            taxRate: 31, 
+            reduction: 2000, 
+            yourKM: 15000 
+        },
+        selectedColor: '#1e5490',
+        selectedColorName: 'כחול מקצועי'
+    };
+
+    // ==========================================
+    // UPDATE FUNCTIONS
+    // ==========================================
+    
+    function updateBasicTab() {
+        const s = state.basic;
+        const benefitValue = calculateBenefitValue(s.carValue);
+        const benefitTax = calculateBenefitTax(benefitValue, s.taxRate);
+        const privateCost = calculatePrivateCarCost(s.carValue, s.annualKM);
+        
+        const companyGross = s.gross - s.reduction;
+        const privateNetBefore = estimateNetSalary(s.gross);
+        const companyNet = estimateNetSalary(companyGross) - benefitTax;
+        const privateNet = privateNetBefore - privateCost.total;
+        
+        const diff = companyNet - privateNet;
+        
+        // Update display values
+        document.getElementById('basic-gross-value').textContent = formatCurrency(s.gross);
+        document.getElementById('basic-reduction-value').textContent = formatCurrency(s.reduction);
+        document.getElementById('basic-carvalue-value').textContent = formatCurrency(s.carValue);
+        
+        // Company car column
+        document.getElementById('basic-company-gross').textContent = formatCurrency(companyGross);
+        document.getElementById('basic-benefit-value').textContent = formatCurrency(benefitValue);
+        document.getElementById('basic-benefit-tax').textContent = '-' + formatCurrency(benefitTax);
+        document.getElementById('basic-company-net').textContent = formatCurrency(companyNet);
+        
+        // Private car column
+        document.getElementById('basic-private-gross').textContent = formatCurrency(s.gross);
+        document.getElementById('basic-private-net-before').textContent = formatCurrency(privateNetBefore);
+        document.getElementById('basic-private-cost').textContent = '-' + formatCurrency(privateCost.total);
+        document.getElementById('basic-private-net').textContent = formatCurrency(privateNet);
+        
+        // Results
+        const sign = diff >= 0 ? '+' : '';
+        document.getElementById('basic-diff').textContent = sign + formatCurrency(diff);
+        document.getElementById('basic-diff-annual').textContent = sign + formatCurrency(diff * 12);
+        
+        // Recommendation
+        const resultCard = document.getElementById('basic-result-card');
+        const recEl = document.getElementById('basic-recommendation');
+        const insightEl = document.getElementById('basic-insight');
+        
+        if (diff > 0) {
+            resultCard.className = 'wpc-calc-carval-v4m7-result-card success';
+            recEl.textContent = '🏢 רכב חברה';
+            insightEl.innerHTML = '<strong>תובנה:</strong> רכב חברה משתלם יותר במקרה שלך! אתה חוסך ' + 
+                formatCurrency(diff) + ' בחודש על ביטוח, טיפולים וירידת ערך.';
+        } else if (diff < 0) {
+            resultCard.className = 'wpc-calc-carval-v4m7-result-card danger';
+            recEl.textContent = '🚙 רכב פרטי';
+            insightEl.innerHTML = '<strong>תובנה:</strong> רכב פרטי עשוי להשתלם יותר במקרה שלך. שקול לנסות רכב זול יותר או להגדיל קילומטראז\'.';
+        } else {
+            resultCard.className = 'wpc-calc-carval-v4m7-result-card highlight';
+            recEl.textContent = '⚖️ שווה';
+            insightEl.innerHTML = '<strong>תובנה:</strong> שני התרחישים דומים. בחר לפי נוחות ושיקולים אישיים.';
+        }
+    }
+
+    function updateDetailedTab() {
+        const s = state.detailed;
+        const benefitValue = calculateBenefitValue(s.carValue);
+        const benefitTax = calculateBenefitTax(benefitValue, s.taxRate);
+        const privateCost = calculatePrivateCarCost(s.carValue, s.annualKM, s.fuelPrice);
+        
+        // Update display values
+        document.getElementById('detailed-gross-value').textContent = formatCurrency(s.gross);
+        document.getElementById('detailed-reduction-value').textContent = formatCurrency(s.reduction);
+        document.getElementById('detailed-carvalue-value').textContent = formatCurrency(s.carValue);
+        document.getElementById('detailed-tax-value').textContent = s.taxRate + '%';
+        document.getElementById('detailed-km-value').textContent = formatKM(s.annualKM);
+        document.getElementById('detailed-fuel-value').textContent = s.fuelPrice.toFixed(2) + ' ₪';
+        
+        // Company car breakdown
+        document.getElementById('detailed-company-gross').textContent = formatCurrency(s.gross - s.reduction);
+        document.getElementById('detailed-benefit').textContent = formatCurrency(benefitValue);
+        document.getElementById('detailed-benefit-tax').textContent = '-' + formatCurrency(benefitTax);
+        document.getElementById('detailed-company-fuel').textContent = '0 ₪ (כלול)';
+        document.getElementById('detailed-company-total').textContent = formatCurrency(benefitTax + s.reduction * (1 - s.taxRate/100));
+        
+        // Private car breakdown
+        document.getElementById('detailed-private-fuel').textContent = formatCurrency(privateCost.fuel);
+        document.getElementById('detailed-private-insurance').textContent = formatCurrency(privateCost.insurance);
+        document.getElementById('detailed-private-test').textContent = formatCurrency(privateCost.test);
+        document.getElementById('detailed-private-maintenance').textContent = formatCurrency(privateCost.maintenance);
+        document.getElementById('detailed-private-depreciation').textContent = formatCurrency(privateCost.depreciation);
+        document.getElementById('detailed-private-total').textContent = formatCurrency(privateCost.total);
+        
+        // Summary
+        const companyCost = benefitTax + s.reduction * (1 - s.taxRate/100);
+        const savings = privateCost.total - companyCost;
+        
+        document.getElementById('detailed-cost-company').textContent = formatCurrency(companyCost);
+        document.getElementById('detailed-cost-private').textContent = formatCurrency(privateCost.total);
+        document.getElementById('detailed-savings').textContent = formatCurrency(savings);
+        
+        const savingsCard = document.getElementById('detailed-savings-card');
+        if (savings > 0) {
+            savingsCard.className = 'wpc-calc-carval-v4m7-result-card success';
+            document.querySelector('#detailed-savings-card .wpc-calc-carval-v4m7-result-label').textContent = 'חיסכון ברכב חברה';
+        } else {
+            savingsCard.className = 'wpc-calc-carval-v4m7-result-card danger';
+            document.querySelector('#detailed-savings-card .wpc-calc-carval-v4m7-result-label').textContent = 'עלות נוספת ברכב חברה';
+        }
+    }
+
+    function updateBreakevenTab() {
+        const s = state.breakeven;
+        const breakevenKM = calculateBreakevenKM(s.carValue, s.taxRate, s.reduction);
+        
+        // Update display values
+        document.getElementById('breakeven-carvalue-value').textContent = formatCurrency(s.carValue);
+        document.getElementById('breakeven-tax-value').textContent = s.taxRate + '%';
+        document.getElementById('breakeven-reduction-value').textContent = formatCurrency(s.reduction);
+        document.getElementById('breakeven-yourkm-value').textContent = formatKM(s.yourKM);
+        
+        // Results
+        document.getElementById('breakeven-point').textContent = formatKM(breakevenKM);
+        document.getElementById('breakeven-yourkm-display').textContent = formatKM(s.yourKM);
+        document.getElementById('breakeven-label').textContent = 'נק\' איזון: ' + breakevenKM.toLocaleString('he-IL');
+        
+        // Chart
+        const markerPos = ((breakevenKM - 5000) / 35000) * 100;
+        const yourKMPos = ((s.yourKM - 5000) / 35000) * 100;
+        document.getElementById('breakeven-marker').style.left = Math.min(100, Math.max(0, markerPos)) + '%';
+        document.getElementById('yourkm-marker').style.left = Math.min(100, Math.max(0, yourKMPos)) + '%';
+        
+        // Status and recommendation
+        const statusCard = document.getElementById('breakeven-status-card');
+        const statusEl = document.getElementById('breakeven-status');
+        const recBox = document.getElementById('breakeven-recommendation');
+        const recTitle = document.getElementById('breakeven-rec-title');
+        const recText = document.getElementById('breakeven-rec-text');
+        
+        if (s.yourKM >= breakevenKM && breakevenKM > 0) {
+            statusCard.className = 'wpc-calc-carval-v4m7-result-card success';
+            statusEl.textContent = '✅ רכב חברה משתלם';
+            recBox.className = 'wpc-calc-carval-v4m7-recommendation company-better';
+            recTitle.textContent = '✅ רכב חברה משתלם יותר!';
+            recText.textContent = 'אתה נוסע ' + formatKM(s.yourKM) + ' בשנה, מעל נקודת האיזון של ' + 
+                formatKM(breakevenKM) + '. כל קילומטר נוסף חוסך לך כסף ברכב חברה.';
+        } else if (breakevenKM === 0) {
+            statusCard.className = 'wpc-calc-carval-v4m7-result-card danger';
+            statusEl.textContent = '❌ רכב פרטי עדיף';
+            recBox.className = 'wpc-calc-carval-v4m7-recommendation private-better';
+            recTitle.textContent = '⚠️ רכב פרטי עדיף בכל מצב';
+            recText.textContent = 'עלות רכב החברה גבוהה מעלויות הקבועות של רכב פרטי. שקול לוותר על רכב החברה או לבקש רכב זול יותר.';
+        } else {
+            statusCard.className = 'wpc-calc-carval-v4m7-result-card danger';
+            statusEl.textContent = '⚠️ רכב פרטי עשוי להשתלם';
+            recBox.className = 'wpc-calc-carval-v4m7-recommendation private-better';
+            recTitle.textContent = '⚠️ שקול רכב פרטי';
+            recText.textContent = 'אתה נוסע ' + formatKM(s.yourKM) + ' בשנה, מתחת לנקודת האיזון של ' + 
+                formatKM(breakevenKM) + '. ייתכן שרכב פרטי יהיה כדאי יותר עבורך.';
+        }
+    }
+
+    // ==========================================
+    // TAB SWITCHING
+    // ==========================================
+    function switchTab(tabName) {
+        container.querySelectorAll('.wpc-calc-carval-v4m7-tab-btn').forEach(btn => {
+            btn.classList.remove('active');
+            if (btn.dataset.tab === tabName) {
+                btn.classList.add('active');
+            }
+        });
+        
+        container.querySelectorAll('.wpc-calc-carval-v4m7-tab-content').forEach(content => {
+            content.classList.remove('active');
+        });
+        document.getElementById('tab-' + tabName).classList.add('active');
+    }
+
+    // ==========================================
+    // AWG HANDLER
+    // ==========================================
+    function openAWG() {
+        const awgContent = document.getElementById('awg-content');
+        awgContent.classList.toggle('active');
+        
+        if (awgContent.classList.contains('active')) {
+            awgContent.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    }
+
+    // ==========================================
+    // FAQ HANDLER
+    // ==========================================
+    function toggleFAQ(item) {
+        const faqItem = item.closest('.wpc-calc-carval-v4m7-faq-item');
+        faqItem.classList.toggle('active');
+    }
+
+    // ==========================================
+    // EMBED FUNCTIONS
+    // ==========================================
+    function scrollToEmbed() {
+        document.getElementById('wpc-calc-carval-v4m7-embed').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // === פונקציית יצירת סקריפט להטמעה ===
+    function getEmbedScript() {
+        const scriptLines = [
+            '<scr' + 'ipt>',
+            'document.addEventListener("DOMContentLoaded", function() {',
+            '  (function() {',
+            '    "use strict";',
+            '    var NS = "WPC_CalcCarVal_Embed_" + Date.now();',
+            '    if (window[NS]) return;',
+            '    var container = document.querySelector("[class*=\\"wpc-calc-carval\\"]");',
+            '    if (!container) return;',
+            '',
+            '    var BENEFIT_RATE = 0.0248;',
+            '    var FUEL_CONSUMPTION = 12;',
+            '    var INSURANCE_MONTHLY = 600;',
+            '    var TEST_MONTHLY = 50;',
+            '    var MAINTENANCE_PER_KM = 0.15;',
+            '    var DEPRECIATION_RATE = 0.15;',
+            '',
+            '    var state = {',
+            '      basic: { gross: 20000, reduction: 2000, carValue: 150000, annualKM: 15000, taxRate: 31 },',
+            '      detailed: { gross: 25000, reduction: 2500, carValue: 180000, taxRate: 35, annualKM: 15000, fuelPrice: 7.5 },',
+            '      breakeven: { carValue: 160000, taxRate: 31, reduction: 2000, yourKM: 15000 }',
+            '    };',
+            '',
+            '    function formatCurrency(n) { return Math.round(n).toLocaleString("he-IL") + " ₪"; }',
+            '    function formatKM(n) { return Math.round(n).toLocaleString("he-IL") + " ק\\"מ"; }',
+            '    function calculateBenefitValue(cv) { return cv * BENEFIT_RATE; }',
+            '    function calculateBenefitTax(bv, tr) { return bv * (tr / 100); }',
+            '',
+            '    function calculatePrivateCarCost(cv, akm, fp) {',
+            '      fp = fp || 7.5;',
+            '      var mkm = akm / 12;',
+            '      var fuel = (mkm / FUEL_CONSUMPTION) * fp;',
+            '      var maint = mkm * MAINTENANCE_PER_KM + 150;',
+            '      var depr = (cv * DEPRECIATION_RATE) / 12;',
+            '      return { total: fuel + INSURANCE_MONTHLY + TEST_MONTHLY + maint + depr };',
+            '    }',
+            '',
+            '    function estimateNetSalary(gs) {',
+            '      if (gs <= 7010) return gs * 0.88;',
+            '      if (gs <= 10060) return gs * 0.84;',
+            '      if (gs <= 16150) return gs * 0.78;',
+            '      if (gs <= 22870) return gs * 0.72;',
+            '      if (gs <= 46690) return gs * 0.68;',
+            '      return gs * 0.60;',
+            '    }',
+            '',
+            '    function switchTab(tabName) {',
+            '      var tabs = container.querySelectorAll("[data-action=\\"switch-tab\\"]");',
+            '      var contents = container.querySelectorAll("[class*=\\"tab-content\\"]");',
+            '      for (var i = 0; i < tabs.length; i++) {',
+            '        tabs[i].classList.remove("active");',
+            '        if (tabs[i].dataset.tab === tabName) tabs[i].classList.add("active");',
+            '      }',
+            '      for (var j = 0; j < contents.length; j++) {',
+            '        contents[j].classList.remove("active");',
+            '      }',
+            '      var activeContent = document.getElementById("tab-" + tabName);',
+            '      if (activeContent) activeContent.classList.add("active");',
+            '    }',
+            '',
+            '    function updateBasicTab() {',
+            '      var s = state.basic;',
+            '      var bv = calculateBenefitValue(s.carValue);',
+            '      var bt = calculateBenefitTax(bv, s.taxRate);',
+            '      var pc = calculatePrivateCarCost(s.carValue, s.annualKM);',
+            '      var cg = s.gross - s.reduction;',
+            '      var pnb = estimateNetSalary(s.gross);',
+            '      var cn = estimateNetSalary(cg) - bt;',
+            '      var pn = pnb - pc.total;',
+            '      var diff = cn - pn;',
+            '      var el = function(id) { return document.getElementById(id); };',
+            '      if (el("basic-gross-value")) el("basic-gross-value").textContent = formatCurrency(s.gross);',
+            '      if (el("basic-reduction-value")) el("basic-reduction-value").textContent = formatCurrency(s.reduction);',
+            '      if (el("basic-carvalue-value")) el("basic-carvalue-value").textContent = formatCurrency(s.carValue);',
+            '      if (el("basic-company-gross")) el("basic-company-gross").textContent = formatCurrency(cg);',
+            '      if (el("basic-benefit-value")) el("basic-benefit-value").textContent = formatCurrency(bv);',
+            '      if (el("basic-benefit-tax")) el("basic-benefit-tax").textContent = "-" + formatCurrency(bt);',
+            '      if (el("basic-company-net")) el("basic-company-net").textContent = formatCurrency(cn);',
+            '      if (el("basic-private-gross")) el("basic-private-gross").textContent = formatCurrency(s.gross);',
+            '      if (el("basic-private-net-before")) el("basic-private-net-before").textContent = formatCurrency(pnb);',
+            '      if (el("basic-private-cost")) el("basic-private-cost").textContent = "-" + formatCurrency(pc.total);',
+            '      if (el("basic-private-net")) el("basic-private-net").textContent = formatCurrency(pn);',
+            '      if (el("basic-diff")) el("basic-diff").textContent = (diff >= 0 ? "+" : "") + formatCurrency(diff);',
+            '      if (el("basic-diff-annual")) el("basic-diff-annual").textContent = (diff >= 0 ? "+" : "") + formatCurrency(diff * 12);',
+            '    }',
+            '',
+            '    container.addEventListener("click", function(e) {',
+            '      var action = e.target.closest("[data-action]");',
+            '      if (!action) return;',
+            '      var act = action.dataset.action;',
+            '      if (act === "switch-tab") switchTab(action.dataset.tab);',
+            '      else if (act === "set-km") {',
+            '        container.querySelectorAll("#basic-km-group button").forEach(function(b) { b.classList.remove("active"); });',
+            '        action.classList.add("active");',
+            '        state.basic.annualKM = parseInt(action.dataset.value);',
+            '        updateBasicTab();',
+            '      }',
+            '      else if (act === "set-tax") {',
+            '        container.querySelectorAll("#basic-tax-group button").forEach(function(b) { b.classList.remove("active"); });',
+            '        action.classList.add("active");',
+            '        state.basic.taxRate = parseInt(action.dataset.value);',
+            '        updateBasicTab();',
+            '      }',
+            '      else if (act === "toggle-faq") {',
+            '        var item = action.closest("[class*=\\"faq-item\\"]");',
+            '        if (item) item.classList.toggle("active");',
+            '      }',
+            '    });',
+            '',
+            '    function updateDetailedTab() {',
+            '      var s = state.detailed;',
+            '      var bv = calculateBenefitValue(s.carValue);',
+            '      var bt = calculateBenefitTax(bv, s.taxRate);',
+            '      var pc = calculatePrivateCarCost(s.carValue, s.annualKM, s.fuelPrice);',
+            '      var cg = s.gross - s.reduction;',
+            '      var cn = estimateNetSalary(cg) - bt;',
+            '      var pnb = estimateNetSalary(s.gross);',
+            '      var pn = pnb - pc.total;',
+            '      var diff = cn - pn;',
+            '      var el = function(id) { return document.getElementById(id); };',
+            '      if (el("detailed-gross-value")) el("detailed-gross-value").textContent = formatCurrency(s.gross);',
+            '      if (el("detailed-reduction-value")) el("detailed-reduction-value").textContent = formatCurrency(s.reduction);',
+            '      if (el("detailed-carvalue-value")) el("detailed-carvalue-value").textContent = formatCurrency(s.carValue);',
+            '      if (el("detailed-tax-value")) el("detailed-tax-value").textContent = s.taxRate + "%";',
+            '      if (el("detailed-km-value")) el("detailed-km-value").textContent = formatKM(s.annualKM);',
+            '      if (el("detailed-fuel-value")) el("detailed-fuel-value").textContent = s.fuelPrice.toFixed(1) + " ₪";',
+            '      if (el("detailed-benefit-value")) el("detailed-benefit-value").textContent = formatCurrency(bv);',
+            '      if (el("detailed-benefit-tax")) el("detailed-benefit-tax").textContent = formatCurrency(bt);',
+            '      if (el("detailed-diff")) el("detailed-diff").textContent = (diff >= 0 ? "+" : "") + formatCurrency(diff);',
+            '    }',
+            '',
+            '    function calculateBreakevenKM(cv, tr, red) {',
+            '      var bv = cv * BENEFIT_RATE;',
+            '      var taxCost = bv * (tr / 100);',
+            '      var fixedCost = INSURANCE_MONTHLY + TEST_MONTHLY + 150;',
+            '      var monthlyBenefit = red - taxCost;',
+            '      if (monthlyBenefit <= 0) return 0;',
+            '      var varCost = (7.5 / FUEL_CONSUMPTION) + MAINTENANCE_PER_KM;',
+            '      var annualKM = (monthlyBenefit * 12 - fixedCost * 12 - (cv * DEPRECIATION_RATE)) / varCost;',
+            '      return Math.max(0, Math.round(annualKM));',
+            '    }',
+            '',
+            '    function updateBreakevenTab() {',
+            '      var s = state.breakeven;',
+            '      var bkm = calculateBreakevenKM(s.carValue, s.taxRate, s.reduction);',
+            '      var el = function(id) { return document.getElementById(id); };',
+            '',
+            '      // עדכון ערכי סליידרים',
+            '      if (el("breakeven-carvalue-value")) el("breakeven-carvalue-value").textContent = formatCurrency(s.carValue);',
+            '      if (el("breakeven-tax-value")) el("breakeven-tax-value").textContent = s.taxRate + "%";',
+            '      if (el("breakeven-reduction-value")) el("breakeven-reduction-value").textContent = formatCurrency(s.reduction);',
+            '      if (el("breakeven-yourkm-value")) el("breakeven-yourkm-value").textContent = formatKM(s.yourKM);',
+            '',
+            '      // תוצאות',
+            '      if (el("breakeven-point")) el("breakeven-point").textContent = formatKM(bkm);',
+            '      if (el("breakeven-yourkm-display")) el("breakeven-yourkm-display").textContent = formatKM(s.yourKM);',
+            '      if (el("breakeven-label")) el("breakeven-label").textContent = "נק\' איזון: " + bkm.toLocaleString("he-IL");',
+            '',
+            '      // Chart markers',
+            '      var markerPos = ((bkm - 5000) / 35000) * 100;',
+            '      var yourKMPos = ((s.yourKM - 5000) / 35000) * 100;',
+            '      if (el("breakeven-marker")) el("breakeven-marker").style.left = Math.min(100, Math.max(0, markerPos)) + "%";',
+            '      if (el("yourkm-marker")) el("yourkm-marker").style.left = Math.min(100, Math.max(0, yourKMPos)) + "%";',
+            '',
+            '      // סטטוס והמלצה',
+            '      var statusCard = el("breakeven-status-card");',
+            '      var statusEl = el("breakeven-status");',
+            '      var recTitle = el("breakeven-rec-title");',
+            '      var recText = el("breakeven-rec-text");',
+            '',
+            '      if (s.yourKM >= bkm && bkm > 0) {',
+            '        if (statusCard) statusCard.className = "wpc-calc-carval-v4m7-result-card success";',
+            '        if (statusEl) statusEl.textContent = "✅ רכב חברה משתלם";',
+            '        if (recTitle) recTitle.textContent = "✅ רכב חברה משתלם יותר!";',
+            '        if (recText) recText.textContent = "אתה נוסע " + formatKM(s.yourKM) + " בשנה, מעל נקודת האיזון של " + formatKM(bkm) + ".";',
+            '      } else if (bkm === 0) {',
+            '        if (statusCard) statusCard.className = "wpc-calc-carval-v4m7-result-card danger";',
+            '        if (statusEl) statusEl.textContent = "❌ רכב פרטי עדיף";',
+            '        if (recTitle) recTitle.textContent = "⚠️ רכב פרטי עדיף בכל מצב";',
+            '        if (recText) recText.textContent = "עלות רכב החברה גבוהה מדי. שקול לוותר עליו.";',
+            '      } else {',
+            '        if (statusCard) statusCard.className = "wpc-calc-carval-v4m7-result-card danger";',
+            '        if (statusEl) statusEl.textContent = "⚠️ רכב פרטי עשוי להשתלם";',
+            '        if (recTitle) recTitle.textContent = "⚠️ שקול רכב פרטי";',
+            '        if (recText) recText.textContent = "אתה נוסע " + formatKM(s.yourKM) + " בשנה, מתחת לנקודת האיזון של " + formatKM(bkm) + ".";',
+            '      }',
+            '    }',
+            '',
+            '    container.addEventListener("input", function(e) {',
+            '      var id = e.target.id;',
+            '      var val = parseFloat(e.target.value);',
+            '      if (id === "basic-gross-slider") { state.basic.gross = val; updateBasicTab(); }',
+            '      else if (id === "basic-reduction-slider") { state.basic.reduction = val; updateBasicTab(); }',
+            '      else if (id === "basic-carvalue-slider") { state.basic.carValue = val; updateBasicTab(); }',
+            '      else if (id === "detailed-gross-slider") { state.detailed.gross = val; updateDetailedTab(); }',
+            '      else if (id === "detailed-reduction-slider") { state.detailed.reduction = val; updateDetailedTab(); }',
+            '      else if (id === "detailed-carvalue-slider") { state.detailed.carValue = val; updateDetailedTab(); }',
+            '      else if (id === "detailed-tax-slider") { state.detailed.taxRate = val; updateDetailedTab(); }',
+            '      else if (id === "detailed-km-slider") { state.detailed.annualKM = val; updateDetailedTab(); }',
+            '      else if (id === "detailed-fuel-slider") { state.detailed.fuelPrice = val; updateDetailedTab(); }',
+            '      else if (id === "breakeven-carvalue-slider") { state.breakeven.carValue = val; updateBreakevenTab(); }',
+            '      else if (id === "breakeven-tax-slider") { state.breakeven.taxRate = val; updateBreakevenTab(); }',
+            '      else if (id === "breakeven-reduction-slider") { state.breakeven.reduction = val; updateBreakevenTab(); }',
+            '      else if (id === "breakeven-yourkm-slider") { state.breakeven.yourKM = val; updateBreakevenTab(); }',
+            '    });',
+            '',
+            '    updateBasicTab();',
+            '    updateDetailedTab();',
+            '    updateBreakevenTab();',
+            '    window[NS] = { v: "1.0" };',
+            '  })();',
+            '});',
+            '</' + 'script>'
+        ];
+        return scriptLines.join('\n');
+    }
+
+    function copyEmbedCode() {
+        const calculator = document.getElementById('wpc-calc-carval-v4m7-calculator');
+        const calcClone = calculator.cloneNode(true);
+        
+        let styles = '';
+        document.querySelectorAll('style').forEach(style => {
+            if (style.textContent.includes('wpc-calc-carval-v4m7')) {
+                styles = style.textContent;
+            }
+        });
+        
+        let code = '<style>\n' + styles + '\n</style>\n\n';
+        code += '<div class="wpc-calc-carval-v4m7-wrapper" id="wpc-calc-carval-v4m7-main">\n';
+        code += '<div class="wpc-calc-carval-v4m7-calculator" id="wpc-calc-carval-v4m7-calculator">\n' + calcClone.innerHTML + '\n</div>\n';
+        code += '</div>\n\n';
+        code += '<p style="text-align:center; font-size:0.9em; margin-top:20px; color:#666;">מחשבון ' + CALCULATOR_NAME + ' פותח על ידי <a href="https://loan-israel.co.il/" target="_blank" rel="nofollow noopener" style="color:#1e5490; text-decoration:underline;">רק תבקש פיננסים</a></p>\n\n';
+        code += getEmbedScript();
+        
+        navigator.clipboard.writeText(code).then(() => {
+            alert('✅ הקוד הועתק בהצלחה! הדביקו אותו באתר שלכם.');
+        }).catch(function(err) {
+            console.error('שגיאה בהעתקה:', err);
+            // Fallback for older browsers
+            var textarea = document.createElement('textarea');
+            textarea.value = code;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            alert('✅ הקוד הועתק בהצלחה!');
+        });
+    }
+
+    // === פונקציות עזר לצבעים ===
+    function darkenColor(hex, percent) {
+        const num = parseInt(hex.replace('#', ''), 16);
+        const amt = Math.round(2.55 * percent);
+        const R = Math.max((num >> 16) - amt, 0);
+        const G = Math.max((num >> 8 & 0x00FF) - amt, 0);
+        const B = Math.max((num & 0x0000FF) - amt, 0);
+        return '#' + (0x1000000 + R * 0x10000 + G * 0x100 + B).toString(16).slice(1);
+    }
+    
+    function hexToRgba(hex, alpha) {
+        const r = parseInt(hex.slice(1, 3), 16);
+        const g = parseInt(hex.slice(3, 5), 16);
+        const b = parseInt(hex.slice(5, 7), 16);
+        return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+    }
+
+    // === פונקציית תצוגה מקדימה עם החלפת צבע ===
+    function showPreview(color, colorName) {
+        state.selectedColor = color;
+        state.selectedColorName = colorName;
+        
+        // סמן את כפתור הצבע הנבחר
+        container.querySelectorAll('.wpc-calc-carval-v4m7-color-btn').forEach(btn => {
+            btn.classList.remove('active');
+            if (btn.dataset.color === color) {
+                btn.classList.add('active');
+            }
+        });
+        
+        const darkColor = darkenColor(color, 15);
+        
+        // מצא או צור אזור תצוגה מקדימה
+        let previewArea = container.querySelector('.wpc-calc-carval-v4m7-preview-area');
+        if (!previewArea) {
+            previewArea = document.createElement('div');
+            previewArea.className = 'wpc-calc-carval-v4m7-preview-area';
+            previewArea.style.cssText = 'margin-top: 30px; padding: 25px; border: 2px dashed #ddd; border-radius: 15px; background: #fafafa;';
+            const embedSection = container.querySelector('.wpc-calc-carval-v4m7-embed-section');
+            if (embedSection) embedSection.appendChild(previewArea);
+        }
+        
+        // שכפל את המחשבון
+        const calculator = document.getElementById('wpc-calc-carval-v4m7-calculator');
+        if (!calculator) return;
+        
+        const calc = calculator.cloneNode(true);
+        
+        // 🚨 תיקון 1: שנה ID למניעת התנגשות
+        calc.id = 'wpc-calc-carval-v4m7-calculator-preview';
+        
+        // 🚨 תיקון 2: החלף IDs של טאבים ב-data attributes
+        calc.querySelectorAll('[id*="tab-"]').forEach(tabContent => {
+            const tabName = tabContent.id.replace('tab-', '');
+            tabContent.setAttribute('data-preview-tab', tabName);
+            tabContent.removeAttribute('id');
+        });
+        
+        // הגדר טאב ראשון כ-active
+        const firstTabContent = calc.querySelector('[data-preview-tab="basic"]');
+        if (firstTabContent) {
+            firstTabContent.classList.add('active');
+            firstTabContent.style.display = 'block';
+        }
+        
+        calc.querySelectorAll('[data-preview-tab]').forEach((tab, i) => {
+            if (i > 0) {
+                tab.classList.remove('active');
+                tab.style.display = 'none';
+            }
+        });
+        
+        // 🚨 תיקון 3: הגדר CSS Variables על האלמנט המשוכפל
+        calc.style.setProperty('--wpc-carval-primary', color);
+        calc.style.setProperty('--wpc-carval-primary-dark', darkColor);
+        calc.style.setProperty('--wpc-carval-primary-light', hexToRgba(color, 0.1));
+        
+        // 🚨 תיקון 4: החלף צבעים עם setProperty + important
+        // כותרות
+        calc.querySelectorAll('[class*="title"], [class*="section-title"]').forEach(el => {
+            el.style.setProperty('color', color, 'important');
+        });
+        
+        // כרטיסי הדגשה
+        calc.querySelectorAll('[class*="highlight"]').forEach(el => {
+            el.style.setProperty('background', `linear-gradient(135deg, ${color} 0%, ${darkColor} 100%)`, 'important');
+        });
+        
+        // ערכי סליידר
+        calc.querySelectorAll('[class*="slider-value"]').forEach(el => {
+            el.style.setProperty('color', color, 'important');
+        });
+        
+        // כפתורי טאב פעילים
+        const activeTabBtn = calc.querySelector('[data-action="switch-tab"].active');
+        if (activeTabBtn) {
+            activeTabBtn.style.setProperty('border-bottom-color', color, 'important');
+            activeTabBtn.style.setProperty('color', color, 'important');
+        }
+        
+        // כפתורי בחירה פעילים
+        calc.querySelectorAll('[class*="btn-option"].active').forEach(btn => {
+            btn.style.setProperty('background', color, 'important');
+            btn.style.setProperty('border-color', color, 'important');
+            btn.style.setProperty('color', 'white', 'important');
+        });
+        
+        // סליידרים
+        calc.querySelectorAll('input[type="range"]').forEach(slider => {
+            slider.style.setProperty('accent-color', color, 'important');
+        });
+        
+        // כותרות עמודות השוואה
+        calc.querySelectorAll('[class*="comparison-column"] h4').forEach(el => {
+            if (el.closest('.company')) {
+                el.style.setProperty('background', `linear-gradient(135deg, ${color} 0%, ${darkColor} 100%)`, 'important');
+            }
+        });
+        
+        // תיבות מידע
+        calc.querySelectorAll('[class*="info-box"]').forEach(el => {
+            el.style.setProperty('border-color', color, 'important');
+        });
+        
+        // המלצה
+        calc.querySelectorAll('[class*="recommendation"]').forEach(el => {
+            el.style.setProperty('border-color', color, 'important');
+        });
+        
+        // כותרת
+        const title = `<div style="text-align: center; margin-bottom: 20px;">
+            <h3 style="color: ${color}; margin: 0;">✨ תצוגה מקדימה - ${colorName}</h3>
+            <p style="color: #666; font-size: 0.9em;">כך ייראה המחשבון באתר שלך</p>
+        </div>`;
+        
+        // כפתור העתקה
+        const copyBtn = `<div style="text-align: center; margin-top: 25px;">
+            <button data-action="copy-preview-code" data-color="${color}" 
+                    style="background: ${color}; color: white; padding: 18px 50px; border: none; border-radius: 50px; font-size: 1.15em; cursor: pointer; font-weight: 700; box-shadow: 0 4px 15px ${hexToRgba(color, 0.4)}; transition: all 0.3s;">
+                📋 העתק קוד עם צבע ${colorName}
+            </button>
+        </div>`;
+        
+        // הצג
+        previewArea.innerHTML = title + calc.outerHTML + copyBtn;
+        
+        // 🚨 תיקון 5: אתחל את ה-JS מחדש
+        const clonedCalc = previewArea.querySelector('[id="wpc-calc-carval-v4m7-calculator-preview"]');
+        if (clonedCalc) {
+            initPreviewCalculator(clonedCalc, color);
+        }
+        
+        // גלול לתצוגה
+        previewArea.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    
+    // === אתחול מחשבון בתצוגה מקדימה ===
+    function initPreviewCalculator(calc, primaryColor) {
+        const darkColor = darkenColor(primaryColor, 15);
+        
+        // קבועים
+        const BENEFIT_RATE = 0.0248;
+        const FUEL_CONSUMPTION = 12;
+        const INSURANCE_MONTHLY = 600;
+        const TEST_MONTHLY = 50;
+        const MAINTENANCE_PER_KM = 0.15;
+        const DEPRECIATION_RATE = 0.15;
+        
+        // State מקומי לתצוגה המקדימה - כל הטאבים!
+        const previewState = {
+            basic: { gross: 20000, reduction: 2000, carValue: 150000, annualKM: 15000, taxRate: 31 },
+            detailed: { gross: 25000, reduction: 2500, carValue: 180000, taxRate: 35, annualKM: 15000, fuelPrice: 7.5 },
+            breakeven: { carValue: 160000, taxRate: 31, reduction: 2000, yourKM: 15000 }
+        };
+        
+        // === פונקציות עזר ===
+        function formatCurrency(n) { return Math.round(n).toLocaleString('he-IL') + ' ₪'; }
+        function formatKM(n) { return Math.round(n).toLocaleString('he-IL') + ' ק"מ'; }
+        
+        function calculateBenefitValue(carValue) { return carValue * BENEFIT_RATE; }
+        function calculateBenefitTax(benefitValue, taxRate) { return benefitValue * (taxRate / 100); }
+        
+        function calculatePrivateCarCost(carValue, annualKM, fuelPrice) {
+            fuelPrice = fuelPrice || 7.5;
+            const monthlyKM = annualKM / 12;
+            const fuelCost = (monthlyKM / FUEL_CONSUMPTION) * fuelPrice;
+            const maintCost = monthlyKM * MAINTENANCE_PER_KM + 150;
+            const depreciation = (carValue * DEPRECIATION_RATE) / 12;
+            return fuelCost + INSURANCE_MONTHLY + TEST_MONTHLY + maintCost + depreciation;
+        }
+        
+        function estimateNetSalary(grossSalary) {
+            if (grossSalary <= 7010) return grossSalary * 0.88;
+            if (grossSalary <= 10060) return grossSalary * 0.84;
+            if (grossSalary <= 16150) return grossSalary * 0.78;
+            if (grossSalary <= 22870) return grossSalary * 0.72;
+            if (grossSalary <= 46690) return grossSalary * 0.68;
+            return grossSalary * 0.60;
+        }
+        
+        function calculateBreakevenKM(carValue, taxRate, reduction) {
+            const benefitValue = carValue * BENEFIT_RATE;
+            const taxCost = benefitValue * (taxRate / 100);
+            const fixedCost = INSURANCE_MONTHLY + TEST_MONTHLY + 150;
+            const monthlyBenefit = reduction - taxCost;
+            if (monthlyBenefit <= 0) return 0;
+            const variableCost = (7.5 / FUEL_CONSUMPTION) + MAINTENANCE_PER_KM;
+            const annualKM = (monthlyBenefit * 12 - fixedCost * 12 - (carValue * DEPRECIATION_RATE)) / variableCost;
+            return Math.max(0, Math.round(annualKM));
+        }
+        
+        // === פונקציות עדכון ===
+        function updateBreakevenTab() {
+            const s = previewState.breakeven;
+            const breakevenKM = calculateBreakevenKM(s.carValue, s.taxRate, s.reduction);
+            
+            // עדכון ערכי סליידרים
+            const carvalueValue = calc.querySelector('#breakeven-carvalue-value');
+            const taxValue = calc.querySelector('#breakeven-tax-value');
+            const reductionValue = calc.querySelector('#breakeven-reduction-value');
+            const yourkmValue = calc.querySelector('#breakeven-yourkm-value');
+            
+            if (carvalueValue) carvalueValue.textContent = formatCurrency(s.carValue);
+            if (taxValue) taxValue.textContent = s.taxRate + '%';
+            if (reductionValue) reductionValue.textContent = formatCurrency(s.reduction);
+            if (yourkmValue) yourkmValue.textContent = formatKM(s.yourKM);
+            
+            // תוצאות
+            const pointEl = calc.querySelector('#breakeven-point');
+            const yourkmDisplay = calc.querySelector('#breakeven-yourkm-display');
+            const labelEl = calc.querySelector('#breakeven-label');
+            
+            if (pointEl) pointEl.textContent = formatKM(breakevenKM);
+            if (yourkmDisplay) yourkmDisplay.textContent = formatKM(s.yourKM);
+            if (labelEl) labelEl.textContent = 'נק\' איזון: ' + breakevenKM.toLocaleString('he-IL');
+            
+            // Chart
+            const markerPos = ((breakevenKM - 5000) / 35000) * 100;
+            const yourKMPos = ((s.yourKM - 5000) / 35000) * 100;
+            const breakevenMarker = calc.querySelector('#breakeven-marker');
+            const yourkmMarker = calc.querySelector('#yourkm-marker');
+            if (breakevenMarker) breakevenMarker.style.left = Math.min(100, Math.max(0, markerPos)) + '%';
+            if (yourkmMarker) yourkmMarker.style.left = Math.min(100, Math.max(0, yourKMPos)) + '%';
+            
+            // סטטוס והמלצה
+            const statusCard = calc.querySelector('#breakeven-status-card');
+            const statusEl = calc.querySelector('#breakeven-status');
+            const recTitle = calc.querySelector('#breakeven-rec-title');
+            const recText = calc.querySelector('#breakeven-rec-text');
+            
+            if (s.yourKM >= breakevenKM && breakevenKM > 0) {
+                if (statusCard) statusCard.className = 'wpc-calc-carval-v4m7-result-card success';
+                if (statusEl) statusEl.textContent = '✅ רכב חברה משתלם';
+                if (recTitle) recTitle.textContent = '✅ רכב חברה משתלם יותר!';
+                if (recText) recText.textContent = 'אתה נוסע ' + formatKM(s.yourKM) + ' בשנה, מעל נקודת האיזון של ' + formatKM(breakevenKM) + '.';
+            } else if (breakevenKM === 0) {
+                if (statusCard) statusCard.className = 'wpc-calc-carval-v4m7-result-card danger';
+                if (statusEl) statusEl.textContent = '❌ רכב פרטי עדיף';
+                if (recTitle) recTitle.textContent = '⚠️ רכב פרטי עדיף בכל מצב';
+                if (recText) recText.textContent = 'עלות רכב החברה גבוהה מדי. שקול לוותר עליו.';
+            } else {
+                if (statusCard) statusCard.className = 'wpc-calc-carval-v4m7-result-card danger';
+                if (statusEl) statusEl.textContent = '⚠️ רכב פרטי עשוי להשתלם';
+                if (recTitle) recTitle.textContent = '⚠️ שקול רכב פרטי';
+                if (recText) recText.textContent = 'אתה נוסע ' + formatKM(s.yourKM) + ' בשנה, מתחת לנקודת האיזון של ' + formatKM(breakevenKM) + '.';
+            }
+        }
+        
+        // === טאבים - עם stopPropagation! ===
+        const tabs = calc.querySelectorAll('[data-action="switch-tab"]');
+        const contents = calc.querySelectorAll('[data-preview-tab]');
+        
+        tabs.forEach(tab => {
+            tab.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                const tabName = this.dataset.tab;
+                
+                tabs.forEach(t => {
+                    t.classList.remove('active');
+                    t.style.setProperty('border-bottom-color', 'transparent', 'important');
+                    t.style.setProperty('color', '#555', 'important');
+                    t.style.setProperty('background', 'transparent', 'important');
+                });
+                
+                contents.forEach(c => {
+                    c.classList.remove('active');
+                    c.style.display = 'none';
+                });
+                
+                this.classList.add('active');
+                this.style.setProperty('border-bottom-color', primaryColor, 'important');
+                this.style.setProperty('color', primaryColor, 'important');
+                this.style.setProperty('background', '#fff', 'important');
+                
+                const activeContent = calc.querySelector(`[data-preview-tab="${tabName}"]`);
+                if (activeContent) {
+                    activeContent.classList.add('active');
+                    activeContent.style.display = 'block';
+                }
+            });
+        });
+        
+        // === סליידרים - עם stopPropagation וחישוב! ===
+        const sliders = calc.querySelectorAll('input[type="range"]');
+        sliders.forEach(slider => {
+            slider.style.setProperty('accent-color', primaryColor, 'important');
+            
+            slider.addEventListener('input', function(e) {
+                e.stopPropagation();
+                
+                const id = this.id;
+                const val = parseFloat(this.value);
+                
+                // עדכן ערך מוצג
+                const valueId = id.replace('-slider', '-value');
+                const valueEl = calc.querySelector(`#${valueId}`);
+                
+                // Breakeven tab
+                if (id === 'breakeven-carvalue-slider') {
+                    previewState.breakeven.carValue = val;
+                    if (valueEl) valueEl.textContent = formatCurrency(val);
+                    updateBreakevenTab();
+                }
+                else if (id === 'breakeven-tax-slider') {
+                    previewState.breakeven.taxRate = val;
+                    if (valueEl) valueEl.textContent = val + '%';
+                    updateBreakevenTab();
+                }
+                else if (id === 'breakeven-reduction-slider') {
+                    previewState.breakeven.reduction = val;
+                    if (valueEl) valueEl.textContent = formatCurrency(val);
+                    updateBreakevenTab();
+                }
+                else if (id === 'breakeven-yourkm-slider') {
+                    previewState.breakeven.yourKM = val;
+                    if (valueEl) valueEl.textContent = formatKM(val);
+                    updateBreakevenTab();
+                }
+                // Basic/Detailed tabs - עדכון תצוגה בסיסי
+                else if (valueEl) {
+                    if (id.includes('km') || id.includes('yourkm')) {
+                        valueEl.textContent = formatKM(val);
+                    } else if (id.includes('tax')) {
+                        valueEl.textContent = val + '%';
+                    } else if (id.includes('fuel')) {
+                        valueEl.textContent = val.toFixed(1) + ' ₪';
+                    } else {
+                        valueEl.textContent = formatCurrency(val);
+                    }
+                }
+            });
+        });
+        
+        // === כפתורי בחירה ===
+        const selectBtns = calc.querySelectorAll('[data-action="set-km"], [data-action="set-tax"]');
+        selectBtns.forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                
+                const group = this.closest('.wpc-calc-carval-v4m7-btn-group');
+                if (group) {
+                    group.querySelectorAll('button').forEach(b => {
+                        b.classList.remove('active');
+                        b.style.setProperty('background', 'transparent', 'important');
+                        b.style.setProperty('border-color', '#ddd', 'important');
+                        b.style.setProperty('color', '#333', 'important');
+                    });
+                }
+                
+                this.classList.add('active');
+                this.style.setProperty('background', primaryColor, 'important');
+                this.style.setProperty('border-color', primaryColor, 'important');
+                this.style.setProperty('color', 'white', 'important');
+            });
+        });
+        
+        // === FAQ ===
+        calc.querySelectorAll('[data-action="toggle-faq"]').forEach(faq => {
+            faq.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const item = this.closest('.wpc-calc-carval-v4m7-faq-item');
+                if (item) item.classList.toggle('active');
+            });
+        });
+        
+        // אתחול ראשוני - עדכן טאב נקודת איזון
+        updateBreakevenTab();
+    }
+    
+    // === העתקת קוד מתצוגה מקדימה ===
+    function copyPreviewCode(color) {
+        let styles = '';
+        document.querySelectorAll('style').forEach(style => {
+            if (style.textContent.includes('wpc-calc-carval-v4m7')) {
+                // החלף את הצבע הראשי בצבע הנבחר
+                styles = style.textContent.replace(/#1e5490/gi, color);
+            }
+        });
+        
+        const calculator = document.getElementById('wpc-calc-carval-v4m7-calculator');
+        if (!calculator) return;
+        
+        const calcClone = calculator.cloneNode(true);
+        
+        let code = '<style>\n' + styles + '\n</style>\n\n';
+        code += '<div class="wpc-calc-carval-v4m7-wrapper" id="wpc-calc-carval-v4m7-main">\n';
+        code += '<div class="wpc-calc-carval-v4m7-calculator" id="wpc-calc-carval-v4m7-calculator">\n' + calcClone.innerHTML + '\n</div>\n';
+        code += '</div>\n\n';
+        code += '<p style="text-align:center; font-size:0.9em; margin-top:20px; color:#666;">מחשבון ' + CALCULATOR_NAME + ' פותח על ידי <a href="https://loan-israel.co.il/" target="_blank" rel="nofollow noopener" style="color:' + color + '; text-decoration:underline;">רק תבקש פיננסים</a></p>\n\n';
+        code += getEmbedScript();
+        
+        navigator.clipboard.writeText(code).then(() => {
+            alert('✅ הקוד הועתק עם הצבע ' + state.selectedColorName + '!');
+        }).catch(function() {
+            const textarea = document.createElement('textarea');
+            textarea.value = code;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            alert('✅ הקוד הועתק!');
+        });
+    }
+
+    // ==========================================
+    // EVENT HANDLERS
+    // ==========================================
+    container.addEventListener('click', function(e) {
+        const action = e.target.closest('[data-action]');
+        if (!action) return;
+        
+        const act = action.dataset.action;
+        
+        switch(act) {
+            case 'switch-tab':
+                switchTab(action.dataset.tab);
+                break;
+            case 'open-awg':
+                openAWG();
+                break;
+            case 'scroll-to-embed':
+                scrollToEmbed();
+                break;
+            case 'toggle-faq':
+                toggleFAQ(action);
+                break;
+            case 'copy-embed-code':
+                copyEmbedCode();
+                break;
+            case 'preview-color':
+                showPreview(action.dataset.color, action.dataset.name);
+                break;
+            case 'copy-preview-code':
+                copyPreviewCode(action.dataset.color);
+                break;
+            case 'set-km':
+                container.querySelectorAll('#basic-km-group .wpc-calc-carval-v4m7-btn-option').forEach(b => b.classList.remove('active'));
+                action.classList.add('active');
+                state.basic.annualKM = parseInt(action.dataset.value);
+                updateBasicTab();
+                break;
+            case 'set-tax':
+                container.querySelectorAll('#basic-tax-group .wpc-calc-carval-v4m7-btn-option').forEach(b => b.classList.remove('active'));
+                action.classList.add('active');
+                state.basic.taxRate = parseInt(action.dataset.value);
+                updateBasicTab();
+                break;
+        }
+    });
+
+    container.addEventListener('input', function(e) {
+        const id = e.target.id;
+        const value = parseFloat(e.target.value);
+        
+        // Basic tab
+        if (id === 'basic-gross-slider') { state.basic.gross = value; updateBasicTab(); }
+        else if (id === 'basic-reduction-slider') { state.basic.reduction = value; updateBasicTab(); }
+        else if (id === 'basic-carvalue-slider') { state.basic.carValue = value; updateBasicTab(); }
+        
+        // Detailed tab
+        else if (id === 'detailed-gross-slider') { state.detailed.gross = value; updateDetailedTab(); }
+        else if (id === 'detailed-reduction-slider') { state.detailed.reduction = value; updateDetailedTab(); }
+        else if (id === 'detailed-carvalue-slider') { state.detailed.carValue = value; updateDetailedTab(); }
+        else if (id === 'detailed-tax-slider') { state.detailed.taxRate = value; updateDetailedTab(); }
+        else if (id === 'detailed-km-slider') { state.detailed.annualKM = value; updateDetailedTab(); }
+        else if (id === 'detailed-fuel-slider') { state.detailed.fuelPrice = value; updateDetailedTab(); }
+        
+        // Breakeven tab
+        else if (id === 'breakeven-carvalue-slider') { state.breakeven.carValue = value; updateBreakevenTab(); }
+        else if (id === 'breakeven-tax-slider') { state.breakeven.taxRate = value; updateBreakevenTab(); }
+        else if (id === 'breakeven-reduction-slider') { state.breakeven.reduction = value; updateBreakevenTab(); }
+        else if (id === 'breakeven-yourkm-slider') { state.breakeven.yourKM = value; updateBreakevenTab(); }
+        
+        // Custom color
+        else if (id === 'custom-color-picker') { showPreview(e.target.value, 'צבע מותאם אישית'); }
+    });
+
+    // ==========================================
+    // INITIALIZATION
+    // ==========================================
+    function init() {
+        updateBasicTab();
+        updateDetailedTab();
+        updateBreakevenTab();
+    }
+    
+    init();
+    
+    // Expose minimal API
+    window[NS] = { version: '1.0.0' };
+})();
+</script>
+
+<!-- Schema.org Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "מה זה שווי שימוש ברכב?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "שווי שימוש ברכב הוא הטבה שמקבל עובד עם רכב צמוד מהמעסיק. רשות המסים מתייחסת להטבה זו כהכנסה חייבת במס. השיעור הוא 2.48% ממחיר הרכב לחודש."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "מתי רכב חברה משתלם יותר מרכב פרטי?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "רכב חברה משתלם יותר כאשר נוסעים קילומטרים רבים, שווי הרכב גבוה, ושיעור המס השולי גבוה. ככל שנוסעים יותר, החיסכון בביטוח, טיפולים וירידת ערך גדול יותר."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "כמה עולה רכב חברה לעובד?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "עלות רכב חברה לעובד היא המס על שווי השימוש. לדוגמה, רכב בשווי 150,000 ₪ עם מס שולי 31% יעלה כ-1,153 ₪ לחודש במס."
+      }
+    }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FinancialProduct",
+  "name": "מחשבון שווי שימוש רכב - ליסינג מול רכב פרטי",
+  "description": "מחשבון להשוואה בין רכב חברה (ליסינג) לרכב פרטי, כולל חישוב שווי שימוש, נקודת איזון וכדאיות כלכלית",
+  "category": "מחשבון פיננסי",
+  "featureList": ["השוואת עלויות רכב חברה מול רכב פרטי", "חישוב שווי שימוש לפי תקנות 2025", "מציאת נקודת איזון לפי קילומטראז'", "פירוט עלויות מלא"],
+  "provider": {
+    "@type": "Organization",
+    "name": "רק תבקש - אפטריו בע״מ",
+    "url": "https://loan-israel.co.il"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "ILS"
+  }
+}
+</script>
+

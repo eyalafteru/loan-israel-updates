@@ -1963,6 +1963,14 @@ if (!document.querySelector('meta[name="viewport"]')) {
         const B = Math.max((num & 0x0000FF) - amt, 0);
         return '#' + (0x1000000 + R * 0x10000 + G * 0x100 + B).toString(16).slice(1);
     }
+    
+    function hexToRgba(hex, alpha) {
+        const num = parseInt(hex.replace('#', ''), 16);
+        const R = (num >> 16) & 255;
+        const G = (num >> 8) & 255;
+        const B = num & 255;
+        return 'rgba(' + R + ',' + G + ',' + B + ',' + alpha + ')';
+    }
 
     function copyEmbedCode() {
         const calculator = document.getElementById('wpc-calc-employer-k7m3-calculator');
@@ -1977,7 +1985,73 @@ if (!document.querySelector('meta[name="viewport"]')) {
     }
 
     function getEmbedScript() {
-        return '<script>\ndocument.addEventListener("DOMContentLoaded",function(){(function(){"use strict";var NS="WPC_CalcEmployer_Embed";if(window[NS])return;var container=document.getElementById("wpc-calc-employer-k7m3-main");if(!container)return;function formatCurrency(n){return Math.round(n).toLocaleString("he-IL")+" ₪";}function calcCost(g,v,r,s){var ni=g<=7522?g*0.0451:7522*0.0451+(Math.min(g,50695)-7522)*0.076;var pen=g*0.1483;var rec=(r*418)/12;var vac=(g/22*v)/12;var study=s?g*0.075:0;return{total:g+ni+pen+rec+vac+study,additions:ni+pen+rec+vac+study};}var state={gross:15000,vac:12,rec:5,study:false};function update(){var r=calcCost(state.gross,state.vac,state.rec,state.study);var el=function(id){return document.getElementById(id);};if(el("basic-gross-value"))el("basic-gross-value").textContent=formatCurrency(state.gross);if(el("basic-result-gross"))el("basic-result-gross").textContent=formatCurrency(state.gross);if(el("basic-result-additions"))el("basic-result-additions").textContent=formatCurrency(r.additions);if(el("basic-result-total"))el("basic-result-total").textContent=formatCurrency(r.total);}function switchTab(t){var tabs=container.querySelectorAll(".wpc-calc-employer-k7m3-tab-btn");var contents=container.querySelectorAll(".wpc-calc-employer-k7m3-tab-content");for(var i=0;i<tabs.length;i++)tabs[i].classList.remove("active");for(var j=0;j<contents.length;j++)contents[j].classList.remove("active");var btn=container.querySelector("[data-tab=\\\""+t+"\\\"]");if(btn)btn.classList.add("active");var c=document.getElementById("tab-"+t);if(c)c.classList.add("active");}container.addEventListener("click",function(e){var a=e.target.closest("[data-action]");if(!a)return;var act=a.dataset.action;if(act==="switch-tab")switchTab(a.dataset.tab);else if(act==="set-vacation"){var btns=container.querySelectorAll("#basic-vacation-group .wpc-calc-employer-k7m3-btn-option");for(var i=0;i<btns.length;i++)btns[i].classList.remove("active");a.classList.add("active");state.vac=parseInt(a.dataset.value);update();}else if(act==="set-recreation"){var btns2=container.querySelectorAll("#basic-recreation-group .wpc-calc-employer-k7m3-btn-option");for(var i=0;i<btns2.length;i++)btns2[i].classList.remove("active");a.classList.add("active");state.rec=parseInt(a.dataset.value);update();}});container.addEventListener("input",function(e){if(e.target.id==="basic-gross-slider"){state.gross=parseInt(e.target.value);update();}});container.addEventListener("change",function(e){if(e.target.id==="basic-study-toggle"){state.study=e.target.checked;var l=document.getElementById("basic-study-label");if(l)l.textContent=state.study?"כן (7.5%)":"לא (0%)";update();}});update();window[NS]={version:"1.0.0"};})();});\n</' + 'script>';
+        return '<script>\n' +
+'document.addEventListener("DOMContentLoaded",function(){(function(){"use strict";\n' +
+'var NS="WPC_CalcEmployer_Embed";if(window[NS])return;\n' +
+'var container=document.getElementById("wpc-calc-employer-k7m3-main");if(!container)return;\n' +
+'\n' +
+'// פונקציות עזר\n' +
+'function fmt(n){return Math.round(n).toLocaleString("he-IL")+" ₪";}\n' +
+'function pct(n){return n.toFixed(1)+"%";}\n' +
+'function calcNI(g){var c=Math.min(g,50695);return c<=7522?c*0.0451:7522*0.0451+(c-7522)*0.076;}\n' +
+'function calcCost(g,v,r,s){var ni=calcNI(g);var pen=g*0.065;var sev=g*0.0833;var rec=(r*418)/12;var vac=(g/22*v)/12;var stud=s?g*0.075:0;var add=ni+pen+sev+rec+vac+stud;return{g:g,ni:ni,pen:pen,sev:sev,penT:pen+sev,rec:rec,vac:vac,stud:stud,add:add,tot:g+add};}\n' +
+'function getVac(s){return s<=4?12:s===5?14:s===6?16:18;}\n' +
+'function getRec(s){return s<=1?5:s<=3?6:7;}\n' +
+'function calcFromBudget(b,v,r,s){var lo=b*0.7,hi=b;for(var i=0;i<50&&hi-lo>1;i++){var m=(lo+hi)/2;if(calcCost(m,v,r,s).tot<b)lo=m;else hi=m;}return Math.round(lo);}\n' +
+'\n' +
+'// State לכל הטאבים\n' +
+'var state={basic:{g:15000,v:12,r:5,s:false},detailed:{g:20000,v:12,r:5,sr:0},compare:{gA:12000,sA:1,gB:20000,sB:5},budget:{t:20000,sen:1,s:false}};\n' +
+'\n' +
+'// עדכון טאב בסיסי\n' +
+'function updateBasic(){var c=calcCost(state.basic.g,state.basic.v,state.basic.r,state.basic.s);var el=function(id){return document.getElementById(id);};if(el("basic-gross-value"))el("basic-gross-value").textContent=fmt(state.basic.g);if(el("basic-result-gross"))el("basic-result-gross").textContent=fmt(c.g);if(el("basic-result-additions"))el("basic-result-additions").textContent=fmt(c.add);if(el("basic-result-total"))el("basic-result-total").textContent=fmt(c.tot);if(el("basic-overhead-percent"))el("basic-overhead-percent").textContent="+"+pct(c.add/c.g*100);if(el("basic-study-label"))el("basic-study-label").textContent=state.basic.s?"כן (7.5%)":"לא (0%)";}\n' +
+'\n' +
+'// עדכון טאב מפורט\n' +
+'function updateDetailed(){var hs=state.detailed.sr>0;var c=calcCost(state.detailed.g,state.detailed.v,state.detailed.r,hs);var el=function(id){return document.getElementById(id);};if(el("detailed-gross-value"))el("detailed-gross-value").textContent=fmt(state.detailed.g);if(el("detailed-vacation-value"))el("detailed-vacation-value").textContent=state.detailed.v+" ימים";if(el("detailed-recreation-value"))el("detailed-recreation-value").textContent=state.detailed.r+" ימים";if(el("detailed-study-value"))el("detailed-study-value").textContent=state.detailed.sr+"%";if(el("detailed-salary-row"))el("detailed-salary-row").textContent=fmt(c.g);if(el("detailed-ni-low"))el("detailed-ni-low").textContent=fmt(Math.min(c.g,7522)*0.0451);if(el("detailed-ni-high"))el("detailed-ni-high").textContent=fmt(c.g>7522?(Math.min(c.g,50695)-7522)*0.076:0);if(el("detailed-ni-total"))el("detailed-ni-total").innerHTML="<strong>"+fmt(c.ni)+"</strong>";if(el("detailed-pension-employer"))el("detailed-pension-employer").textContent=fmt(c.pen);if(el("detailed-severance"))el("detailed-severance").textContent=fmt(c.sev);if(el("detailed-pension-total"))el("detailed-pension-total").innerHTML="<strong>"+fmt(c.penT)+"</strong>";if(el("detailed-vacation-cost"))el("detailed-vacation-cost").textContent=fmt(c.vac);if(el("detailed-recreation-cost"))el("detailed-recreation-cost").textContent=fmt(c.rec);if(el("detailed-study-rate"))el("detailed-study-rate").textContent=state.detailed.sr+"%";if(el("detailed-study-cost"))el("detailed-study-cost").textContent=fmt(c.stud);if(el("detailed-total-cost"))el("detailed-total-cost").innerHTML="<strong>"+fmt(c.tot)+"</strong>";if(el("detailed-result-gross"))el("detailed-result-gross").textContent=fmt(c.g);if(el("detailed-result-total"))el("detailed-result-total").textContent=fmt(c.tot);if(el("detailed-result-annual"))el("detailed-result-annual").textContent=fmt(c.tot*12);if(el("detailed-overhead-text"))el("detailed-overhead-text").textContent=pct(c.add/c.g*100);}\n' +
+'\n' +
+'// עדכון טאב השוואה\n' +
+'function updateCompare(){var cA=calcCost(state.compare.gA,getVac(state.compare.sA),getRec(state.compare.sA),false);var cB=calcCost(state.compare.gB,getVac(state.compare.sB),getRec(state.compare.sB),false);var el=function(id){return document.getElementById(id);};if(el("compare-a-gross-value"))el("compare-a-gross-value").textContent=fmt(state.compare.gA);if(el("compare-b-gross-value"))el("compare-b-gross-value").textContent=fmt(state.compare.gB);if(el("compare-a-total"))el("compare-a-total").textContent=fmt(cA.tot);if(el("compare-b-total"))el("compare-b-total").textContent=fmt(cB.tot);var dg=state.compare.gB-state.compare.gA;var dt=cB.tot-cA.tot;if(el("compare-diff-gross"))el("compare-diff-gross").textContent=(dg>=0?"+":"")+fmt(dg);if(el("compare-diff-total"))el("compare-diff-total").textContent=(dt>=0?"+":"")+fmt(dt);if(el("compare-diff-annual"))el("compare-diff-annual").textContent=(dt>=0?"+":"")+fmt(dt*12);}\n' +
+'\n' +
+'// עדכון טאב תקציב\n' +
+'function updateBudget(){var v=getVac(state.budget.sen);var r=getRec(state.budget.sen);var gfb=calcFromBudget(state.budget.t,v,r,state.budget.s);var el=function(id){return document.getElementById(id);};if(el("budget-total-value"))el("budget-total-value").textContent=fmt(state.budget.t);if(el("budget-result-total"))el("budget-result-total").textContent=fmt(state.budget.t);if(el("budget-result-gross"))el("budget-result-gross").textContent=fmt(gfb);if(el("budget-result-percent"))el("budget-result-percent").textContent=pct(gfb/state.budget.t*100);}\n' +
+'\n' +
+'// מעבר טאבים\n' +
+'function switchTab(t){var tabs=container.querySelectorAll(".wpc-calc-employer-k7m3-tab-btn");var contents=container.querySelectorAll(".wpc-calc-employer-k7m3-tab-content");for(var i=0;i<tabs.length;i++)tabs[i].classList.remove("active");for(var j=0;j<contents.length;j++){contents[j].classList.remove("active");contents[j].style.display="none";}var btn=container.querySelector("[data-tab=\\""+t+"\\"]");if(btn)btn.classList.add("active");var c=document.getElementById("tab-"+t);if(c){c.classList.add("active");c.style.display="block";}}\n' +
+'\n' +
+'// כפתורים בקבוצה\n' +
+'function setActiveBtn(btn){var g=btn.closest(".wpc-calc-employer-k7m3-btn-group");if(g){var bs=g.querySelectorAll("button");for(var i=0;i<bs.length;i++)bs[i].classList.remove("active");}btn.classList.add("active");}\n' +
+'\n' +
+'// Event delegation\n' +
+'container.addEventListener("click",function(e){var a=e.target.closest("[data-action]");if(!a)return;var act=a.dataset.action;\n' +
+'if(act==="switch-tab")switchTab(a.dataset.tab);\n' +
+'else if(act==="set-vacation"){setActiveBtn(a);state.basic.v=parseInt(a.dataset.value);updateBasic();}\n' +
+'else if(act==="set-recreation"){setActiveBtn(a);state.basic.r=parseInt(a.dataset.value);updateBasic();}\n' +
+'else if(act==="set-compare-a-seniority"){setActiveBtn(a);state.compare.sA=parseInt(a.dataset.value);updateCompare();}\n' +
+'else if(act==="set-compare-b-seniority"){setActiveBtn(a);state.compare.sB=parseInt(a.dataset.value);updateCompare();}\n' +
+'else if(act==="set-budget-seniority"){setActiveBtn(a);state.budget.sen=parseInt(a.dataset.value);updateBudget();}\n' +
+'else if(act==="set-budget-study"){setActiveBtn(a);state.budget.s=parseFloat(a.dataset.value)>0;updateBudget();}\n' +
+'else if(act==="toggle-faq"){var item=a.closest(".wpc-calc-employer-k7m3-faq-item");if(item)item.classList.toggle("active");}\n' +
+'});\n' +
+'\n' +
+'// Sliders\n' +
+'container.addEventListener("input",function(e){var id=e.target.id;var v=parseInt(e.target.value);\n' +
+'if(id==="basic-gross-slider"){state.basic.g=v;updateBasic();}\n' +
+'else if(id==="detailed-gross-slider"){state.detailed.g=v;updateDetailed();}\n' +
+'else if(id==="detailed-vacation-slider"){state.detailed.v=v;updateDetailed();}\n' +
+'else if(id==="detailed-recreation-slider"){state.detailed.r=v;updateDetailed();}\n' +
+'else if(id==="detailed-study-slider"){state.detailed.sr=parseFloat(e.target.value);updateDetailed();}\n' +
+'else if(id==="compare-a-gross-slider"){state.compare.gA=v;updateCompare();}\n' +
+'else if(id==="compare-b-gross-slider"){state.compare.gB=v;updateCompare();}\n' +
+'else if(id==="budget-total-slider"){state.budget.t=v;updateBudget();}\n' +
+'});\n' +
+'\n' +
+'// Toggle\n' +
+'container.addEventListener("change",function(e){if(e.target.id==="basic-study-toggle"){state.basic.s=e.target.checked;updateBasic();}});\n' +
+'\n' +
+'// Init\n' +
+'updateBasic();updateDetailed();updateCompare();updateBudget();\n' +
+'window[NS]={v:"1.0.0"};\n' +
+'})();});\n' +
+'</' + 'script>';
     }
 
     function showPreview(color, colorName) {
@@ -1986,11 +2060,284 @@ if (!document.querySelector('meta[name="viewport"]')) {
         document.getElementById('preview-container').style.display = 'block';
         document.getElementById('preview-color-name').textContent = colorName;
         const calc = document.getElementById('wpc-calc-employer-k7m3-calculator').cloneNode(true);
-        calc.querySelectorAll('.wpc-calc-employer-k7m3-title,.wpc-calc-employer-k7m3-tab-title,.wpc-calc-employer-k7m3-results-title').forEach(el => el.style.color = color);
-        calc.querySelectorAll('.wpc-calc-employer-k7m3-result-card.highlight').forEach(el => el.style.background = 'linear-gradient(135deg,' + color + ' 0%,' + darkenColor(color, 15) + ' 100%)');
-        calc.querySelectorAll('.wpc-calc-employer-k7m3-slider-value').forEach(el => el.style.color = color);
+        calc.id = 'wpc-calc-employer-k7m3-calculator-preview';
+        
+        // עדכון IDs של תוכן הטאבים כדי למנוע קונפליקטים + הגדרת תצוגה ראשונית
+        calc.querySelectorAll('.wpc-calc-employer-k7m3-tab-content').forEach((tab, index) => {
+            if (tab.id) {
+                tab.setAttribute('data-preview-tab', tab.id.replace('tab-', ''));
+                tab.removeAttribute('id');
+            }
+            // הטאב הראשון מוצג, השאר מוסתרים
+            if (index === 0) {
+                tab.classList.add('active');
+                tab.style.display = 'block';
+            } else {
+                tab.classList.remove('active');
+                tab.style.display = 'none';
+            }
+        });
+        
+        // וודא שהטאב הראשון מסומן ככפתור פעיל
+        calc.querySelectorAll('.wpc-calc-employer-k7m3-tab-btn').forEach((btn, index) => {
+            if (index === 0) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        });
+        
+        // === החלפת צבעים מקיפה באמצעות CSS Variables ===
+        const darkColor = darkenColor(color, 15);
+        const lightColor = hexToRgba(color, 0.15);
+        
+        // דריסת CSS Variables על האלמנט המשוכפל - זה הפתרון העיקרי!
+        calc.style.setProperty('--wpc-employer-primary', color);
+        calc.style.setProperty('--wpc-employer-primary-dark', darkColor);
+        calc.style.setProperty('--wpc-employer-primary-light', hexToRgba(color, 0.1));
+        calc.style.setProperty('--wpc-employer-gradient', 'linear-gradient(135deg, ' + color + ' 0%, ' + darkColor + ' 100%)');
+        
+        // כותרות - inline style לוודא שעובד
+        calc.querySelectorAll('.wpc-calc-employer-k7m3-title, .wpc-calc-employer-k7m3-tab-title, .wpc-calc-employer-k7m3-results-title, .wpc-calc-employer-k7m3-section-title, .wpc-calc-employer-k7m3-breakdown-title').forEach(el => {
+            el.style.setProperty('color', color, 'important');
+        });
+        
+        // כרטיסי תוצאה מודגשים
+        calc.querySelectorAll('.wpc-calc-employer-k7m3-result-card.highlight').forEach(el => {
+            el.style.setProperty('background', 'linear-gradient(135deg,' + color + ' 0%,' + darkColor + ' 100%)', 'important');
+        });
+        
+        // ערכי סליידר
+        calc.querySelectorAll('.wpc-calc-employer-k7m3-slider-value').forEach(el => {
+            el.style.setProperty('color', color, 'important');
+        });
+        
+        // כפתורי טאב פעילים
+        calc.querySelectorAll('.wpc-calc-employer-k7m3-tab-btn.active').forEach(el => {
+            el.style.setProperty('color', color, 'important');
+            el.style.setProperty('border-bottom-color', color, 'important');
+        });
+        
+        // כפתורי אפשרויות פעילים
+        calc.querySelectorAll('.wpc-calc-employer-k7m3-btn-option.active').forEach(el => {
+            el.style.setProperty('background', color, 'important');
+            el.style.setProperty('border-color', color, 'important');
+        });
+        
+        // כותרות טבלאות
+        calc.querySelectorAll('.wpc-calc-employer-k7m3-breakdown-table th, .wpc-calc-employer-k7m3-cost-table th').forEach(el => {
+            el.style.setProperty('background', color, 'important');
+        });
+        
+        // סליידרים
+        calc.querySelectorAll('.wpc-calc-employer-k7m3-slider').forEach(el => {
+            el.style.setProperty('background', 'linear-gradient(to left, ' + color + ' 0%, ' + lightColor + ' 100%)', 'important');
+        });
+        
+        // פס התקדמות - פנסיה
+        calc.querySelectorAll('.wpc-calc-employer-k7m3-progress-segment.pension').forEach(el => {
+            el.style.setProperty('background', color, 'important');
+        });
+        
+        // גבולות כותרות סקציה
+        calc.querySelectorAll('.wpc-calc-employer-k7m3-section-title').forEach(el => {
+            el.style.setProperty('border-right-color', color, 'important');
+        });
+        
+        // תוצאות - גבול
+        calc.querySelectorAll('.wpc-calc-employer-k7m3-results').forEach(el => {
+            el.style.setProperty('border-color', lightColor, 'important');
+        });
+        
+        // שורת סיכום בטבלה
+        calc.querySelectorAll('.wpc-calc-employer-k7m3-breakdown-table .total-row td').forEach(el => {
+            el.style.setProperty('color', color, 'important');
+        });
+        
         document.getElementById('preview-content').innerHTML = '';
         document.getElementById('preview-content').appendChild(calc);
+        
+        // אתחול מלא של התצוגה המקדימה
+        initPreviewCalculator(calc, color);
+    }
+    
+    // === פונקציית אתחול מחשבון בתצוגה מקדימה ===
+    function initPreviewCalculator(calc, primaryColor) {
+        // State מקומי לתצוגה מקדימה
+        const previewState = {
+            basic: { gross: 15000, vacation: 12, recreation: 5, hasStudy: false },
+            detailed: { gross: 20000, vacation: 12, recreation: 5, studyRate: 0 },
+            compare: { grossA: 12000, seniorityA: 1, grossB: 20000, seniorityB: 5 },
+            budget: { total: 20000, seniority: 1, hasStudy: false }
+        };
+        
+        // פונקציות עזר
+        function formatCurrency(num) {
+            return Math.round(num).toLocaleString('he-IL') + ' ₪';
+        }
+        
+        function calculateEmployerNI(grossSalary) {
+            const cappedSalary = Math.min(grossSalary, 50695);
+            if (cappedSalary <= 7522) {
+                return cappedSalary * 0.0451;
+            }
+            return 7522 * 0.0451 + (cappedSalary - 7522) * 0.076;
+        }
+        
+        function calculateEmployerCost(gross, vacation, recreation, hasStudy) {
+            const ni = calculateEmployerNI(gross);
+            const pension = gross * 0.065;
+            const severance = gross * 0.0833;
+            const rec = (recreation * 418) / 12;
+            const vac = (gross / 22 * vacation) / 12;
+            const study = hasStudy ? gross * 0.075 : 0;
+            const additions = ni + pension + severance + rec + vac + study;
+            return { gross, ni, pension, severance, rec, vac, study, additions, total: gross + additions };
+        }
+        
+        // עדכון טאב בסיסי
+        function updateBasicTab() {
+            const r = calculateEmployerCost(previewState.basic.gross, previewState.basic.vacation, previewState.basic.recreation, previewState.basic.hasStudy);
+            const el = (sel) => calc.querySelector(sel);
+            const byId = (id) => calc.querySelector('[id="' + id + '"], [data-id="' + id + '"]') || calc.querySelector('#' + id);
+            
+            // עדכון ערכים
+            const grossValue = el('[id*="basic-gross-value"]') || byId('basic-gross-value');
+            if (grossValue) grossValue.textContent = formatCurrency(previewState.basic.gross);
+            
+            const resultGross = el('[id*="basic-result-gross"]') || byId('basic-result-gross');
+            if (resultGross) resultGross.textContent = formatCurrency(r.gross);
+            
+            const resultAdditions = el('[id*="basic-result-additions"]') || byId('basic-result-additions');
+            if (resultAdditions) resultAdditions.textContent = formatCurrency(r.additions);
+            
+            const resultTotal = el('[id*="basic-result-total"]') || byId('basic-result-total');
+            if (resultTotal) resultTotal.textContent = formatCurrency(r.total);
+            
+            const overhead = el('[id*="basic-overhead-percent"]') || byId('basic-overhead-percent');
+            if (overhead) overhead.textContent = '+' + ((r.additions / r.gross) * 100).toFixed(1) + '%';
+            
+            const studyLabel = el('[id*="basic-study-label"]') || byId('basic-study-label');
+            if (studyLabel) studyLabel.textContent = previewState.basic.hasStudy ? 'כן (7.5%)' : 'לא (0%)';
+        }
+        
+        // פונקציית עזר להפעלת כפתור בקבוצה
+        function activateButton(btn) {
+            const group = btn.closest('.wpc-calc-employer-k7m3-btn-group');
+            if (group) {
+                group.querySelectorAll('button').forEach(b => {
+                    b.classList.remove('active');
+                    b.style.removeProperty('background');
+                    b.style.removeProperty('border-color');
+                    b.style.removeProperty('color');
+                });
+            }
+            btn.classList.add('active');
+            btn.style.setProperty('background', primaryColor, 'important');
+            btn.style.setProperty('border-color', primaryColor, 'important');
+            btn.style.setProperty('color', '#fff', 'important');
+        }
+        
+        // Event delegation לכל האינטראקציות
+        calc.addEventListener('click', function(e) {
+            const a = e.target.closest('[data-action]');
+            if (!a) return;
+            const act = a.dataset.action;
+            
+            e.stopPropagation();
+            e.preventDefault();
+            
+            // מעבר טאבים
+            if (act === 'switch-tab') {
+                const tabName = a.dataset.tab;
+                calc.querySelectorAll('.wpc-calc-employer-k7m3-tab-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                    btn.style.removeProperty('color');
+                    btn.style.removeProperty('border-bottom-color');
+                    if (btn.dataset.tab === tabName) {
+                        btn.classList.add('active');
+                        btn.style.setProperty('color', primaryColor, 'important');
+                        btn.style.setProperty('border-bottom-color', primaryColor, 'important');
+                    }
+                });
+                calc.querySelectorAll('.wpc-calc-employer-k7m3-tab-content').forEach(c => {
+                    c.classList.remove('active');
+                    c.style.display = 'none';
+                });
+                const tabContent = calc.querySelector('[data-preview-tab="' + tabName + '"]');
+                if (tabContent) {
+                    tabContent.classList.add('active');
+                    tabContent.style.display = 'block';
+                }
+            }
+            
+            // כפתורי ימי חופשה
+            else if (act === 'set-vacation') {
+                activateButton(a);
+                previewState.basic.vacation = parseInt(a.dataset.value);
+                updateBasicTab();
+            }
+            
+            // כפתורי ימי הבראה
+            else if (act === 'set-recreation') {
+                activateButton(a);
+                previewState.basic.recreation = parseInt(a.dataset.value);
+                updateBasicTab();
+            }
+            
+            // כפתורי ותק/בחירה אחרים
+            else if (act === 'set-compare-a-seniority' || act === 'set-compare-b-seniority' || 
+                     act === 'set-budget-seniority' || act === 'set-budget-study') {
+                activateButton(a);
+            }
+        });
+        
+        // סליידרים
+        calc.addEventListener('input', function(e) {
+            e.stopPropagation();
+            
+            if (e.target.type === 'range') {
+                const id = e.target.id || e.target.getAttribute('id');
+                const value = parseInt(e.target.value);
+                
+                // עדכון ערך מוצג ליד הסליידר
+                let valueEl = null;
+                if (id) {
+                    const valueId = id.replace('-slider', '-value');
+                    valueEl = calc.querySelector('[id="' + valueId + '"]') || calc.querySelector('#' + valueId);
+                }
+                
+                // סליידר ברוטו בסיסי
+                if (id && id.includes('basic-gross')) {
+                    previewState.basic.gross = value;
+                    if (valueEl) valueEl.textContent = formatCurrency(value);
+                    updateBasicTab();
+                }
+                // סליידרים אחרים - עדכון תצוגה בלבד
+                else if (valueEl) {
+                    if (id && (id.includes('vacation') || id.includes('recreation'))) {
+                        valueEl.textContent = value + ' ימים';
+                    } else if (id && id.includes('study')) {
+                        valueEl.textContent = value + '%';
+                    } else {
+                        valueEl.textContent = formatCurrency(value);
+                    }
+                }
+            }
+        });
+        
+        // Toggle קרן השתלמות
+        calc.addEventListener('change', function(e) {
+            e.stopPropagation();
+            
+            if (e.target.type === 'checkbox' && e.target.id && e.target.id.includes('study-toggle')) {
+                previewState.basic.hasStudy = e.target.checked;
+                updateBasicTab();
+            }
+        });
+        
+        // עדכון ראשוני
+        updateBasicTab();
     }
 
     function copyPreviewCode() {
