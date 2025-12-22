@@ -2104,6 +2104,14 @@ if (!document.querySelector('meta[name="viewport"]')) {
     }
 
     function copyEmbedCode() {
+        // DataLayer Push - Tag Manager tracking
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            'event': 'copy_code_click',
+            'calculator_name': 'ברוטו נטו',
+            'button_type': 'copy-embed-code'
+        });
+        
         const calculator = document.getElementById('wpc-calc-salary-g8n2-calculator');
         const calcClone = calculator.cloneNode(true);
         
@@ -2483,6 +2491,14 @@ if (!document.querySelector('meta[name="viewport"]')) {
     }
 
     function copyPreviewCode() {
+        // DataLayer Push - Tag Manager tracking
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            'event': 'copy_code_click',
+            'calculator_name': 'ברוטו נטו',
+            'button_type': 'copy-preview-code'
+        });
+        
         const color = state.selectedColor;
         const colorDark = darkenColor(color, 15);
         

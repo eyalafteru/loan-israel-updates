@@ -1195,6 +1195,14 @@ if (!document.querySelector('meta[name="viewport"]')) {
     
     // העתקת קוד הטמעה
     function copyEmbedCode(color) {
+        // DataLayer Push - Tag Manager tracking
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            'event': 'copy_code_click',
+            'calculator_name': 'מחשבון עלות ניכיון צ'קים',
+            'button_type': 'copy-embed-code'
+        });
+        
         color = color || PRIMARY_COLOR;
         const calculator = el('wpc-calc-factoring-n8k3-calculator');
         if (!calculator) return;

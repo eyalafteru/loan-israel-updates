@@ -1851,13 +1851,14 @@ if (!document.querySelector('meta[name="viewport"]')) {
             '',
             '    function calculateBreakevenKM(cv, tr, red) {',
             '      var bv = cv * BENEFIT_RATE;',
-            '      var taxCost = bv * (tr / 100);',
-            '      var fixedCost = INSURANCE_MONTHLY + TEST_MONTHLY + 150;',
-            '      var monthlyBenefit = red - taxCost;',
-            '      if (monthlyBenefit <= 0) return 0;',
-            '      var varCost = (7.5 / FUEL_CONSUMPTION) + MAINTENANCE_PER_KM;',
-            '      var annualKM = (monthlyBenefit * 12 - fixedCost * 12 - (cv * DEPRECIATION_RATE)) / varCost;',
-            '      return Math.max(0, Math.round(annualKM));',
+            '      var benefitTax = bv * (tr / 100);',
+            '      var salaryReductionNet = red * (1 - tr / 100);',
+            '      var companyCost = benefitTax + salaryReductionNet;',
+            '      var fixedCosts = INSURANCE_MONTHLY + TEST_MONTHLY + (cv * DEPRECIATION_RATE / 12);',
+            '      var varCostPerKM = (7.5 / FUEL_CONSUMPTION) + MAINTENANCE_PER_KM;',
+            '      if (companyCost <= fixedCosts) return 0;',
+            '      var breakevenMonthlyKM = (companyCost - fixedCosts) / varCostPerKM;',
+            '      return Math.max(0, Math.round(breakevenMonthlyKM * 12));',
             '    }',
             '',
             '    function updateBreakevenTab() {',
@@ -1936,6 +1937,14 @@ if (!document.querySelector('meta[name="viewport"]')) {
     }
 
     function copyEmbedCode() {
+        // DataLayer Push - Tag Manager tracking
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            'event': 'copy_code_click',
+            'calculator_name': 'שווי שימוש רכב',
+            'button_type': 'copy-embed-code'
+        });
+        
         const calculator = document.getElementById('wpc-calc-carval-v4m7-calculator');
         const calcClone = calculator.cloneNode(true);
         
@@ -2170,16 +2179,107 @@ if (!document.querySelector('meta[name="viewport"]')) {
         
         function calculateBreakevenKM(carValue, taxRate, reduction) {
             const benefitValue = carValue * BENEFIT_RATE;
-            const taxCost = benefitValue * (taxRate / 100);
-            const fixedCost = INSURANCE_MONTHLY + TEST_MONTHLY + 150;
-            const monthlyBenefit = reduction - taxCost;
-            if (monthlyBenefit <= 0) return 0;
-            const variableCost = (7.5 / FUEL_CONSUMPTION) + MAINTENANCE_PER_KM;
-            const annualKM = (monthlyBenefit * 12 - fixedCost * 12 - (carValue * DEPRECIATION_RATE)) / variableCost;
-            return Math.max(0, Math.round(annualKM));
+            const benefitTax = benefitValue * (taxRate / 100);
+            const salaryReductionNet = reduction * (1 - taxRate / 100);
+            const companyCost = benefitTax + salaryReductionNet;
+            const fixedCosts = INSURANCE_MONTHLY + TEST_MONTHLY + (carValue * DEPRECIATION_RATE / 12);
+            const variableCostPerKM = (7.5 / FUEL_CONSUMPTION) + MAINTENANCE_PER_KM;
+            if (companyCost <= fixedCosts) return 0;
+            const breakevenMonthlyKM = (companyCost - fixedCosts) / variableCostPerKM;
+            return Math.max(0, Math.round(breakevenMonthlyKM * 12));
         }
         
         // === פונקציות עדכון ===
+        
+        // === עדכון טאב בסיסי ===
+        function updateBasicTab() {
+            const s = previewState.basic;
+            const benefitValue = calculateBenefitValue(s.carValue);
+            const benefitTax = calculateBenefitTax(benefitValue, s.taxRate);
+            const privateCarCost = calculatePrivateCarCost(s.carValue, s.annualKM);
+            const companyGross = s.gross - s.reduction;
+            const privateNetBefore = estimateNetSalary(s.gross);
+            const companyNet = estimateNetSalary(companyGross) - benefitTax;
+            const privateNet = privateNetBefore - privateCarCost;
+            const diff = companyNet - privateNet;
+            
+            // עדכון ערכי סליידרים
+            const grossValue = calc.querySelector('#basic-gross-value');
+            const reductionValue = calc.querySelector('#basic-reduction-value');
+            const carvalueValue = calc.querySelector('#basic-carvalue-value');
+            
+            if (grossValue) grossValue.textContent = formatCurrency(s.gross);
+            if (reductionValue) reductionValue.textContent = formatCurrency(s.reduction);
+            if (carvalueValue) carvalueValue.textContent = formatCurrency(s.carValue);
+            
+            // עדכון תוצאות רכב חברה
+            const companyGrossEl = calc.querySelector('#basic-company-gross');
+            const benefitValueEl = calc.querySelector('#basic-benefit-value');
+            const benefitTaxEl = calc.querySelector('#basic-benefit-tax');
+            const companyNetEl = calc.querySelector('#basic-company-net');
+            
+            if (companyGrossEl) companyGrossEl.textContent = formatCurrency(companyGross);
+            if (benefitValueEl) benefitValueEl.textContent = formatCurrency(benefitValue);
+            if (benefitTaxEl) benefitTaxEl.textContent = '-' + formatCurrency(benefitTax);
+            if (companyNetEl) companyNetEl.textContent = formatCurrency(companyNet);
+            
+            // עדכון תוצאות רכב פרטי
+            const privateGrossEl = calc.querySelector('#basic-private-gross');
+            const privateNetBeforeEl = calc.querySelector('#basic-private-net-before');
+            const privateCostEl = calc.querySelector('#basic-private-cost');
+            const privateNetEl = calc.querySelector('#basic-private-net');
+            
+            if (privateGrossEl) privateGrossEl.textContent = formatCurrency(s.gross);
+            if (privateNetBeforeEl) privateNetBeforeEl.textContent = formatCurrency(privateNetBefore);
+            if (privateCostEl) privateCostEl.textContent = '-' + formatCurrency(privateCarCost);
+            if (privateNetEl) privateNetEl.textContent = formatCurrency(privateNet);
+            
+            // הפרש
+            const diffEl = calc.querySelector('#basic-diff');
+            const diffAnnualEl = calc.querySelector('#basic-diff-annual');
+            
+            if (diffEl) diffEl.textContent = (diff >= 0 ? '+' : '') + formatCurrency(diff);
+            if (diffAnnualEl) diffAnnualEl.textContent = (diff >= 0 ? '+' : '') + formatCurrency(diff * 12);
+        }
+        
+        // === עדכון טאב מפורט ===
+        function updateDetailedTab() {
+            const s = previewState.detailed;
+            const benefitValue = calculateBenefitValue(s.carValue);
+            const benefitTax = calculateBenefitTax(benefitValue, s.taxRate);
+            const privateCarCost = calculatePrivateCarCost(s.carValue, s.annualKM, s.fuelPrice);
+            const companyGross = s.gross - s.reduction;
+            const companyNet = estimateNetSalary(companyGross) - benefitTax;
+            const privateNetBefore = estimateNetSalary(s.gross);
+            const privateNet = privateNetBefore - privateCarCost;
+            const diff = companyNet - privateNet;
+            
+            // עדכון ערכי סליידרים
+            const grossValue = calc.querySelector('#detailed-gross-value');
+            const reductionValue = calc.querySelector('#detailed-reduction-value');
+            const carvalueValue = calc.querySelector('#detailed-carvalue-value');
+            const taxValue = calc.querySelector('#detailed-tax-value');
+            const kmValue = calc.querySelector('#detailed-km-value');
+            const fuelValue = calc.querySelector('#detailed-fuel-value');
+            
+            if (grossValue) grossValue.textContent = formatCurrency(s.gross);
+            if (reductionValue) reductionValue.textContent = formatCurrency(s.reduction);
+            if (carvalueValue) carvalueValue.textContent = formatCurrency(s.carValue);
+            if (taxValue) taxValue.textContent = s.taxRate + '%';
+            if (kmValue) kmValue.textContent = formatKM(s.annualKM);
+            if (fuelValue) fuelValue.textContent = s.fuelPrice.toFixed(1) + ' ₪';
+            
+            // עדכון תוצאות
+            const benefitValueEl = calc.querySelector('#detailed-benefit-value');
+            const benefitTaxEl = calc.querySelector('#detailed-benefit-tax');
+            const diffEl = calc.querySelector('#detailed-diff');
+            
+            if (benefitValueEl) benefitValueEl.textContent = formatCurrency(benefitValue);
+            if (benefitTaxEl) benefitTaxEl.textContent = formatCurrency(benefitTax);
+            if (diffEl) diffEl.textContent = (diff >= 0 ? '+' : '') + formatCurrency(diff);
+        }
+        
+        // === עדכון טאב נקודת איזון ===
         function updateBreakevenTab() {
             const s = previewState.breakeven;
             const breakevenKM = calculateBreakevenKM(s.carValue, s.taxRate, s.reduction);
@@ -2283,42 +2383,60 @@ if (!document.querySelector('meta[name="viewport"]')) {
                 const id = this.id;
                 const val = parseFloat(this.value);
                 
-                // עדכן ערך מוצג
-                const valueId = id.replace('-slider', '-value');
-                const valueEl = calc.querySelector(`#${valueId}`);
-                
-                // Breakeven tab
-                if (id === 'breakeven-carvalue-slider') {
+                // Basic tab sliders
+                if (id === 'basic-gross-slider') {
+                    previewState.basic.gross = val;
+                    updateBasicTab();
+                }
+                else if (id === 'basic-reduction-slider') {
+                    previewState.basic.reduction = val;
+                    updateBasicTab();
+                }
+                else if (id === 'basic-carvalue-slider') {
+                    previewState.basic.carValue = val;
+                    updateBasicTab();
+                }
+                // Detailed tab sliders
+                else if (id === 'detailed-gross-slider') {
+                    previewState.detailed.gross = val;
+                    updateDetailedTab();
+                }
+                else if (id === 'detailed-reduction-slider') {
+                    previewState.detailed.reduction = val;
+                    updateDetailedTab();
+                }
+                else if (id === 'detailed-carvalue-slider') {
+                    previewState.detailed.carValue = val;
+                    updateDetailedTab();
+                }
+                else if (id === 'detailed-tax-slider') {
+                    previewState.detailed.taxRate = val;
+                    updateDetailedTab();
+                }
+                else if (id === 'detailed-km-slider') {
+                    previewState.detailed.annualKM = val;
+                    updateDetailedTab();
+                }
+                else if (id === 'detailed-fuel-slider') {
+                    previewState.detailed.fuelPrice = val;
+                    updateDetailedTab();
+                }
+                // Breakeven tab sliders
+                else if (id === 'breakeven-carvalue-slider') {
                     previewState.breakeven.carValue = val;
-                    if (valueEl) valueEl.textContent = formatCurrency(val);
                     updateBreakevenTab();
                 }
                 else if (id === 'breakeven-tax-slider') {
                     previewState.breakeven.taxRate = val;
-                    if (valueEl) valueEl.textContent = val + '%';
                     updateBreakevenTab();
                 }
                 else if (id === 'breakeven-reduction-slider') {
                     previewState.breakeven.reduction = val;
-                    if (valueEl) valueEl.textContent = formatCurrency(val);
                     updateBreakevenTab();
                 }
                 else if (id === 'breakeven-yourkm-slider') {
                     previewState.breakeven.yourKM = val;
-                    if (valueEl) valueEl.textContent = formatKM(val);
                     updateBreakevenTab();
-                }
-                // Basic/Detailed tabs - עדכון תצוגה בסיסי
-                else if (valueEl) {
-                    if (id.includes('km') || id.includes('yourkm')) {
-                        valueEl.textContent = formatKM(val);
-                    } else if (id.includes('tax')) {
-                        valueEl.textContent = val + '%';
-                    } else if (id.includes('fuel')) {
-                        valueEl.textContent = val.toFixed(1) + ' ₪';
-                    } else {
-                        valueEl.textContent = formatCurrency(val);
-                    }
                 }
             });
         });
@@ -2328,6 +2446,9 @@ if (!document.querySelector('meta[name="viewport"]')) {
         selectBtns.forEach(btn => {
             btn.addEventListener('click', function(e) {
                 e.stopPropagation();
+                
+                const action = this.dataset.action;
+                const value = parseInt(this.dataset.value);
                 
                 const group = this.closest('.wpc-calc-carval-v4m7-btn-group');
                 if (group) {
@@ -2343,6 +2464,15 @@ if (!document.querySelector('meta[name="viewport"]')) {
                 this.style.setProperty('background', primaryColor, 'important');
                 this.style.setProperty('border-color', primaryColor, 'important');
                 this.style.setProperty('color', 'white', 'important');
+                
+                // עדכון state וחישוב
+                if (action === 'set-km') {
+                    previewState.basic.annualKM = value;
+                    updateBasicTab();
+                } else if (action === 'set-tax') {
+                    previewState.basic.taxRate = value;
+                    updateBasicTab();
+                }
             });
         });
         
@@ -2355,7 +2485,9 @@ if (!document.querySelector('meta[name="viewport"]')) {
             });
         });
         
-        // אתחול ראשוני - עדכן טאב נקודת איזון
+        // אתחול ראשוני - עדכן את כל הטאבים
+        updateBasicTab();
+        updateDetailedTab();
         updateBreakevenTab();
     }
     

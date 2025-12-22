@@ -4229,6 +4229,14 @@
         
         // העתקת קוד מלא (ללא צבע מותאם)
         function copyEmbedCode() {
+        // DataLayer Push - Tag Manager tracking
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            'event': 'copy_code_click',
+            'calculator_name': 'מחשבון ריבית דריבית - גלה כמה הכסף שלך יכול לצמוח לאורך השנים',
+            'button_type': 'copy-embed-code'
+        });
+        
             let code = '';
             
             // בחירת אנכור אקראי לקוד המועתק
@@ -4681,6 +4689,14 @@
         
         // העתקת קוד מהתצוגה המקדימה
         function copyPreviewCode() {
+        // DataLayer Push - Tag Manager tracking
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            'event': 'copy_code_click',
+            'calculator_name': 'מחשבון ריבית דריבית - גלה כמה הכסף שלך יכול לצמוח לאורך השנים',
+            'button_type': 'copy-preview-code'
+        });
+        
             if (!currentPreviewColor) {
                 alert('אנא בחרו צבע תחילה');
                 return;

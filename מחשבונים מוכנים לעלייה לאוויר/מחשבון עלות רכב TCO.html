@@ -1377,6 +1377,14 @@ if (!document.querySelector('meta[name="viewport"]')) {
 
     // === תיקון copyEmbedCode ===
     function copyEmbedCode() {
+        // DataLayer Push - Tag Manager tracking
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            'event': 'copy_code_click',
+            'calculator_name': 'מחשבון עלות רכב אמיתית (TCO)',
+            'button_type': 'copy-embed-code'
+        });
+        
         let styles = '';
         document.querySelectorAll('style').forEach(function(s) {
             if (s.textContent.includes('wpc-calc-tco')) styles = s.textContent;
@@ -1615,6 +1623,14 @@ if (!document.querySelector('meta[name="viewport"]')) {
     }
 
     function copyPreviewCode() {
+        // DataLayer Push - Tag Manager tracking
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            'event': 'copy_code_click',
+            'calculator_name': 'מחשבון עלות רכב אמיתית (TCO)',
+            'button_type': 'copy-preview-code'
+        });
+        
         const color = state.embedColor || '#1e5490';
         let styles = '';
         document.querySelectorAll('style').forEach(function(s) {

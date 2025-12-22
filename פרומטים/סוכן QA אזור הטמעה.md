@@ -98,19 +98,366 @@ const hasDisplayNone = content.includes("style.display = 'none'") ||
                         content.includes('style.display = "none"');
 ```
 
-### 7️⃣ בעיית getEmbedScript - רק טאב אחד עובד בהעתקה!
+### 7️⃣ 🚨 בעיית getEmbedScript - רק טאב אחד עובד בהעתקה!
 | בעיה | פתרון |
 |------|-------|
-| רק הטאב הראשון עובד | הוסף state לכל הטאבים |
-| חישובים לא עובדים | הוסף פונקציות חישוב לסקריפט |
-| כפתורים לא משפיעים | הוסף handlers לכל סוגי הכפתורים |
-| סליידרים מציגים אבל לא מחשבים | חבר כל slider ל-state ולפונקציית update |
+| רק הטאב הראשון עובד | הוסף state לכל הטאבים: `state = { basic: {...}, compare: {...}, schedule: {...} }` |
+| חסר `updateCompare()` | הוסף פונקציה שמעדכנת את טבלת ההשוואה (4 שורות) |
+| חסר `updateSchedule()` | הוסף פונקציה שמייצרת לוח סילוקין דינמי |
+| סליידרים לא מעדכנים טאב נכון | כל slider צריך לבדוק את ה-ID ולקרוא לפונקציה המתאימה |
+| `switchTab` לא מעדכן תוכן | צריך לקרוא ל-update המתאים: `if (tab === "compare") updateCompare();` |
+| אתחול חסר | חייב לקרוא `updateBasic(); updateCompare(); updateSchedule();` בסוף |
+
+**בדיקה (CRITICAL):**
+```javascript
+// חילוץ תוכן getEmbedScript
+const embedScriptMatch = content.match(/function getEmbedScript[\s\S]*?<\` \+ \`\/script>/);
+const embedScript = embedScriptMatch ? embedScriptMatch[0] : '';
+
+// בדיקות הכרחיות
+const checks = {
+    'state לכל הטאבים (basic, compare, schedule)': /state\s*=\s*\{[\s\S]*?basic[\s\S]*?compare[\s\S]*?schedule/.test(embedScript),
+    'פונקציית updateBasic': /function\s+updateBasic/.test(embedScript),
+    'פונקציית updateCompare': /function\s+updateCompare/.test(embedScript),
+    'פונקציית updateSchedule': /function\s+updateSchedule/.test(embedScript),
+    'switchTab קורא לupdate': /switchTab[\s\S]*?updateBasic|updateCompare|updateSchedule/.test(embedScript),
+    'סליידר compare מעדכן updateCompare': /compare-.*-slider[\s\S]*?updateCompare/.test(embedScript),
+    'סליידר schedule מעדכן updateSchedule': /schedule-.*-slider[\s\S]*?updateSchedule/.test(embedScript),
+    'אתחול כל הטאבים': /updateBasic\(\)[\s\S]*?updateCompare\(\)[\s\S]*?updateSchedule\(\)/.test(embedScript)
+};
+
+console.log('📦 === בדיקות getEmbedScript ===');
+for (const [name, result] of Object.entries(checks)) {
+    if (result) {
+        console.log('✅ ' + name);
+    } else {
+        console.error('❌ ' + name + ' - חסר!');
+    }
+}
+```
+
+**מבנה נכון של getEmbedScript:**
+```javascript
+function getEmbedScript(color, darkColor) {
+    return \`<script>
+document.addEventListener("DOMContentLoaded", function() {
+    (function() {
+        "use strict";
+        var ns = "WPC_Calc_Embed";
+        if (window[ns]) return;
+        var container = document.getElementById("wpc-calc-xxx-main");
+        if (!container) return;
+        
+        // ✅ State לכל הטאבים
+        var state = {
+            basic: { balance: 200000, payment: 3000, rate: 5.5, extra: 500 },
+            compare: { balance: 200000, payment: 3000, rate: 5.5 },
+            schedule: { balance: 200000, payment: 3000, rate: 5.5, extra: 500 }
+        };
+        
+        // פונקציות עזר
+        function fmt(n) { return Math.round(n).toLocaleString("he-IL") + " ₪"; }
+        function pct(n) { return n.toFixed(1) + "%"; }
+        function nper(bal, pmt, r) { /* נוסחה */ }
+        function totalInt(bal, pmt, r, m) { /* נוסחה */ }
+        function $(id) { return document.getElementById(id); }
+        
+        // ✅ פונקציות update לכל טאב
+        function updateBasic() {
+            var s = state.basic;
+            // עדכון תצוגה של טאב 1
+        }
+        
+        function updateCompare() {
+            var s = state.compare;
+            var extras = [200, 500, 1000, 2000];
+            for (var i = 0; i < extras.length; i++) {
+                // עדכון כל שורה בטבלה
+            }
+        }
+        
+        function updateSchedule() {
+            var s = state.schedule;
+            var tbody = $("schedule-table-body");
+            tbody.innerHTML = "";
+            for (var m = 1; m <= 12; m++) {
+                // הוספת שורה לטבלה
+            }
+        }
+        
+        // ✅ switchTab קורא לפונקציה המתאימה
+        function switchTab(tab) {
+            // ... hide all, show selected ...
+            if (tab === "basic") updateBasic();
+            else if (tab === "compare") updateCompare();
+            else if (tab === "schedule") updateSchedule();
+        }
+        
+        // ✅ סליידרים לפי טאב
+        container.addEventListener("input", function(e) {
+            var id = e.target.id, v = parseFloat(e.target.value);
+            // Basic
+            if (id === "basic-balance-slider") { state.basic.balance = v; updateBasic(); }
+            // Compare
+            else if (id === "compare-balance-slider") { state.compare.balance = v; updateCompare(); }
+            // Schedule
+            else if (id === "schedule-balance-slider") { state.schedule.balance = v; updateSchedule(); }
+        });
+        
+        // ✅ אתחול כל הטאבים
+        updateBasic();
+        updateCompare();
+        updateSchedule();
+        
+        window[ns] = { v: "1.0.0" };
+    })();
+});
+<\` + \`/script>\`;
+}
+```
+
+### 8️⃣ 🚨 בעיית `pointer-events: none` - חוסם את כל האינטראקציה!
+| בעיה | פתרון |
+|------|-------|
+| `pointer-events: none` בתצוגה מקדימה | **אסור!** יש להסיר לחלוטין |
+| משתמשים לא יכולים ללחוץ/להזיז סליידרים | הסר את `pointer-events: none` |
+| נראה כאילו המחשבון "קפוא" | אל תשתמש בזה אף פעם בתצוגה מקדימה |
+
+**בדיקה (CRITICAL - אסור שימצא!):**
+```javascript
+const hasForbiddenPointerEvents = content.match(/showPreview[\s\S]*?pointer-events\s*:\s*none/);
+if (hasForbiddenPointerEvents) {
+    console.error('🚨 נמצא pointer-events: none בתצוגה מקדימה - אסור!');
+}
+```
+
+### 9️⃣ בעיית showPreview - החלפת HTML פשוטה לא מספיקה!
+| בעיה | פתרון |
+|------|-------|
+| `innerHTML = html.replace(...)` בלי אתחול JS | חייב לקרוא ל-`initPreviewCalculator` אחרי השכפול |
+| רק החלפת צבעים ב-regex | צריך `calc.style.setProperty` על האלמנט המשוכפל |
+| `cloneNode` בלי אתחול מחדש | חובה להוסיף event listeners חדשים |
 
 **בדיקה:**
 ```javascript
-const hasMultiTabState = content.match(/getEmbedScript[\s\S]*?state\s*=\s*\{[\s\S]*?basic[\s\S]*?detailed/);
-const hasCalculationsInEmbed = content.match(/getEmbedScript[\s\S]*?function\s+calc/);
-const hasUpdateFunctionsInEmbed = content.match(/getEmbedScript[\s\S]*?updateBasic|updateDetailed/);
+// בדוק ש-initPreviewCalculator נקרא מתוך showPreview
+const showPreviewCallsInit = content.match(/showPreview[\s\S]*?initPreviewCalculator\s*\(/);
+if (!showPreviewCallsInit) {
+    console.error('❌ showPreview לא קורא ל-initPreviewCalculator!');
+}
+
+// בדוק ש-showPreview משתמש ב-cloneNode
+const showPreviewUsesClone = content.match(/showPreview[\s\S]*?cloneNode\s*\(\s*true\s*\)/);
+if (!showPreviewUsesClone) {
+    console.warn('⚠️ showPreview לא משתמש ב-cloneNode(true)');
+}
+```
+
+### 🔟 בעיית פונקציות עזר לצבעים חסרות!
+| בעיה | פתרון |
+|------|-------|
+| אין `darkenColor` | צריך להוסיף פונקציה להכהות צבע |
+| אין `hexToRgba` | צריך להוסיף פונקציה להמרה לRGBA |
+| Gradients לא עובדים | חייב darkenColor לgradient יפה |
+
+**בדיקה:**
+```javascript
+const hasDarkenColor = content.includes('function darkenColor') || content.includes('darkenColor =');
+const hasHexToRgba = content.includes('function hexToRgba') || content.includes('hexToRgba =');
+```
+
+### 1️⃣1️⃣ בעיית חיבור initPreviewCalculator לstate ופונקציות עדכון!
+| בעיה | פתרון |
+|------|-------|
+| יש `initPreviewCalculator` אבל בלי state | חייב להגדיר `previewState` בתוך הפונקציה |
+| סליידרים לא מחוברים לחישוב | כל slider צריך לעדכן state ולקרוא לפונקציית update |
+| חסר אתחול ראשוני | צריך לקרוא לכל פונקציות ה-update בסוף |
+
+**בדיקה:**
+```javascript
+// בדוק שיש previewState בתוך initPreviewCalculator
+const hasPreviewState = content.match(/initPreviewCalculator[\s\S]*?previewState\s*=\s*\{/);
+
+// בדוק שיש פונקציות update
+const hasUpdateFunctions = content.match(/initPreviewCalculator[\s\S]*?function\s+update/);
+
+// בדוק שיש אתחול בסוף
+const hasInitCalls = content.match(/initPreviewCalculator[\s\S]*?update\w+\(\)\s*;[\s\S]*?update\w+\(\)/);
+```
+
+### 1️⃣2️⃣ 🚨 בעיית `select-color` במקום `preview-color`!
+| בעיה | פתרון |
+|------|-------|
+| כפתורי צבע עם `data-action="select-color"` | **חייב להיות** `data-action="preview-color"` |
+| פונקציית `selectColor` פשוטה מדי | צריך `showPreview` מלא עם שכפול מחשבון |
+| תצוגה מקדימה לא עובדת | ודא שה-event handler תומך ב-`preview-color` |
+
+**בדיקה (CRITICAL):**
+```javascript
+// בדוק שיש preview-color ולא select-color
+const hasPreviewColorAction = content.includes('data-action="preview-color"');
+const hasWrongSelectColor = content.includes('data-action="select-color"');
+
+if (hasWrongSelectColor) {
+    console.error('🚨 נמצא select-color - יש להחליף ל-preview-color!');
+}
+if (!hasPreviewColorAction) {
+    console.error('❌ חסר data-action="preview-color" על כפתורי הצבע!');
+}
+
+// בדוק שיש handler ב-switch/case
+const hasPreviewColorHandler = content.includes("case 'preview-color':");
+if (!hasPreviewColorHandler) {
+    console.error('❌ חסר handler עבור preview-color ב-event delegation!');
+}
+```
+
+**תיקון - החלף בכפתורי צבע:**
+```html
+<!-- ❌ שגוי -->
+<button data-action="select-color" data-color="#1e5490" ...>
+
+<!-- ✅ נכון -->
+<button data-action="preview-color" data-color="#1e5490" ...>
+```
+
+### 1️⃣3️⃣ 🚨 בעיית Mockup סטטי במקום מחשבון משוכפל!
+| בעיה | פתרון |
+|------|-------|
+| `updatePreview()` מייצר HTML סטטי | צריך `showPreview()` עם `cloneNode(true)` |
+| תצוגה מקדימה לא אינטראקטיבית | שכפל את המחשבון האמיתי והחל צבעים |
+| אין טאבים/סליידרים עובדים בתצוגה | חייב `initPreviewCalculator` אחרי שכפול |
+
+**בדיקה:**
+```javascript
+// בדוק שאין updatePreview פשוט (mockup)
+const hasSimpleUpdatePreview = content.match(/function updatePreview\(\)[\s\S]*?innerHTML\s*=\s*`/);
+if (hasSimpleUpdatePreview) {
+    console.error('🚨 נמצא updatePreview פשוט עם mockup - צריך showPreview עם cloneNode!');
+}
+
+// בדוק שיש showPreview נכון
+const hasShowPreview = content.includes('function showPreview');
+const showPreviewHasClone = content.match(/showPreview[\s\S]*?cloneNode\s*\(\s*true\s*\)/);
+
+if (!hasShowPreview) {
+    console.error('❌ חסרה פונקציית showPreview!');
+} else if (!showPreviewHasClone) {
+    console.error('❌ showPreview לא משתמש ב-cloneNode(true)!');
+}
+```
+
+### 1️⃣4️⃣ 🚨 בעיית סקרולים כפולים בתצוגה מקדימה!
+| בעיה | פתרון |
+|------|-------|
+| `preview-container` עם `max-height` + `overflow-y: auto` | גורם לסקרול כפול עם הטבלאות בפנים |
+| שני scrollbars נראים | הסר `max-height` ו-`overflow-y` מהcontainer |
+| CSS עם `overflow-y: auto` על ה-preview | שנה ל-`overflow: visible` |
+
+**בדיקה:**
+```javascript
+// בדוק CSS של preview-container
+const previewContainerCSS = content.match(/\.[\w-]*preview-container[^{]*\{[^}]+\}/);
+if (previewContainerCSS) {
+    const css = previewContainerCSS[0];
+    if (css.includes('max-height') && css.includes('overflow')) {
+        console.error('🚨 preview-container עם max-height + overflow - גורם לסקרולים כפולים!');
+    }
+}
+```
+
+**תיקון CSS:**
+```css
+/* ❌ שגוי - גורם לסקרולים כפולים */
+.wpc-calc-xxx-preview-container {
+    max-height: 400px !important;
+    overflow-y: auto !important;
+}
+
+/* ✅ נכון - בלי סקרול על ה-container */
+.wpc-calc-xxx-preview-container {
+    overflow: visible !important;
+}
+```
+
+### 1️⃣5️⃣ 🚨 בעיית עדכון רק טאב אחד בתצוגה מקדימה!
+| בעיה | פתרון |
+|------|-------|
+| רק `updatePreviewBasic()` קיים | צריך גם `updatePreviewCompare()` ו-`updatePreviewSchedule()` |
+| טבלת השוואה לא מתעדכנת | הוסף פונקציה שמחשבת ומעדכנת את כל השורות |
+| לוח סילוקין לא מתעדכן | הוסף פונקציה שמייצרת את הטבלה דינמית |
+| סליידרים לא מעדכנים את הטאב הנכון | כל slider צריך לבדוק לאיזה טאב הוא שייך |
+
+**בדיקה (CRITICAL):**
+```javascript
+// בדוק שיש פונקציות update לכל הטאבים
+const hasUpdateBasic = content.includes('updatePreviewBasic');
+const hasUpdateCompare = content.includes('updatePreviewCompare');
+const hasUpdateSchedule = content.includes('updatePreviewSchedule');
+
+console.log('updatePreviewBasic:', hasUpdateBasic ? '✅' : '❌');
+console.log('updatePreviewCompare:', hasUpdateCompare ? '✅' : '❌');
+console.log('updatePreviewSchedule:', hasUpdateSchedule ? '✅' : '❌');
+
+if (!hasUpdateCompare) {
+    console.error('❌ חסרה פונקציית updatePreviewCompare - טבלת השוואה לא תתעדכן!');
+}
+if (!hasUpdateSchedule) {
+    console.error('❌ חסרה פונקציית updatePreviewSchedule - לוח סילוקין לא יתעדכן!');
+}
+
+// בדוק שהאתחול קורא לכל הפונקציות
+const initCallsAll = content.match(/updatePreviewBasic\(\)[\s\S]*?updatePreviewCompare\(\)[\s\S]*?updatePreviewSchedule\(\)/);
+if (!initCallsAll) {
+    console.warn('⚠️ האתחול לא קורא לכל פונקציות העדכון!');
+}
+```
+
+### 1️⃣6️⃣ בעיית סליידרים לא מעדכנים את הטאב הנכון!
+| בעיה | פתרון |
+|------|-------|
+| סליידר של compare מעדכן את basic | כל slider צריך לבדוק את ה-ID שלו |
+| אין חיבור ל-state הנכון | `if (id.includes('compare-'))` → `updatePreviewCompare()` |
+| אין אבחנה בין טאבים | השתמש בשם הסליידר לזיהוי הטאב |
+
+**בדיקה:**
+```javascript
+// בדוק שסליידרים מעדכנים את הטאב הנכון
+const sliderHandlesCompare = content.match(/id\.includes\(['"]compare/);
+const sliderHandlesSchedule = content.match(/id\.includes\(['"]schedule/);
+
+if (!sliderHandlesCompare) {
+    console.error('❌ סליידרים לא מטפלים בטאב compare!');
+}
+if (!sliderHandlesSchedule) {
+    console.error('❌ סליידרים לא מטפלים בטאב schedule!');
+}
+```
+
+**תיקון - slider event handler:**
+```javascript
+slider.addEventListener('input', function(e) {
+    e.stopPropagation();
+    const id = this.id;
+    const val = parseFloat(this.value);
+    
+    // עדכון ערך מוצג
+    // ...
+    
+    // עדכון state לפי הטאב
+    if (id.includes('basic-balance')) { previewState.basic.balance = val; updatePreviewBasic(); }
+    else if (id.includes('basic-payment')) { previewState.basic.payment = val; updatePreviewBasic(); }
+    else if (id.includes('basic-rate')) { previewState.basic.rate = val; updatePreviewBasic(); }
+    // Compare tab
+    else if (id.includes('compare-balance')) { previewState.compare.balance = val; updatePreviewCompare(); }
+    else if (id.includes('compare-payment')) { previewState.compare.payment = val; updatePreviewCompare(); }
+    else if (id.includes('compare-rate')) { previewState.compare.rate = val; updatePreviewCompare(); }
+    // Schedule tab
+    else if (id.includes('schedule-balance')) { previewState.schedule.balance = val; updatePreviewSchedule(); }
+    else if (id.includes('schedule-payment')) { previewState.schedule.payment = val; updatePreviewSchedule(); }
+    else if (id.includes('schedule-rate')) { previewState.schedule.rate = val; updatePreviewSchedule(); }
+    else if (id.includes('schedule-extra')) { previewState.schedule.extra = val; updatePreviewSchedule(); }
+});
 ```
 
 ---
@@ -118,29 +465,76 @@ const hasUpdateFunctionsInEmbed = content.match(/getEmbedScript[\s\S]*?updateBas
 ## ✅ קוד בדיקה מהירה - הדבק בקונסול
 
 ```javascript
-// === בדיקה מהירה של בעיות קריטיות ===
+// === בדיקה מהירה של בעיות קריטיות - גרסה 5.1 ===
 (function() {
     const html = document.body.innerHTML;
     const script = document.querySelector('script:not([src])');
     const code = script ? script.textContent : '';
     
-    const checks = {
-        'initPreviewCalculator': code.includes('initPreviewCalculator'),
-        'stopPropagation': code.includes('stopPropagation'),
-        'setProperty with important': code.includes("setProperty(") && code.includes("'important'"),
-        'CSS Variable override': code.includes("setProperty('--") || code.includes('setProperty("--'),
-        'display block/none': code.includes("display = 'block'") || code.includes("display = 'none'"),
-        'calculator-preview ID': code.includes('calculator-preview'),
-        'data-preview-tab': code.includes('data-preview-tab'),
-        'Multi-tab state in embed': code.includes('state.basic') && code.includes('state.detailed'),
-        'Calculation functions': code.includes('calcNI') || code.includes('calcCost') || code.includes('calculateEmployer')
-    };
-    
     console.log('🔍 === בדיקת בעיות קריטיות ===\n');
     let passed = 0;
     let failed = 0;
+    let critical = 0;
     
-    for (const [name, result] of Object.entries(checks)) {
+    // === בדיקות CRITICAL - אסורים! ===
+    const forbidden = {
+        '🚨 pointer-events: none בתצוגה': /showPreview[\s\S]*?pointer-events\s*:\s*none/.test(code),
+        '🚨 select-color במקום preview-color': html.includes('data-action="select-color"'),
+        '🚨 max-height על embed-preview-content': /embed-preview-content[^>]*max-height/.test(html),
+        '🚨 overflow-y: auto על embed-preview-content': /embed-preview-content[^>]*overflow-y:\s*auto/.test(html),
+        '🚨 mockup סטטי (updatePreview עם innerHTML)': /function updatePreview\(\)[\s\S]*?innerHTML\s*=\s*`/.test(code),
+        '🚨 style.display = block בלי setProperty': /previewContainer\.style\.display\s*=\s*['"]block['"]/.test(code) && !/setProperty\(['"]display['"]/.test(code)
+    };
+    
+    console.log('🚨 === בדיקות CRITICAL (אסורים!) ===');
+    for (const [name, found] of Object.entries(forbidden)) {
+        if (found) {
+            console.error(`❌ ${name} - נמצא! יש להסיר!`);
+            critical++;
+        } else {
+            console.log(`✅ ${name} - לא נמצא (טוב!)`);
+            passed++;
+        }
+    }
+    
+    // === בדיקת Selector תואם ל-HTML ===
+    console.log('\n🔗 === בדיקת Selector תואם ל-HTML ===');
+    const selectorMatch = code.match(/showPreview[\s\S]*?querySelector\(['"]([^'"]+)['"]\)/);
+    if (selectorMatch) {
+        const selector = selectorMatch[1];
+        const className = selector.replace(/^\./, '').split(' ')[0].split('.')[0];
+        const selectorExists = html.includes('class="' + className) || html.includes("class='" + className);
+        if (selectorExists) {
+            console.log('✅ Selector "' + selector + '" קיים ב-HTML');
+            passed++;
+        } else {
+            console.error('🚨 CRITICAL: Selector "' + selector + '" לא קיים ב-HTML!');
+            critical++;
+        }
+    } else {
+        console.warn('⚠️ לא נמצא querySelector בתוך showPreview');
+    }
+    
+    // === בדיקות חובה ===
+    console.log('\n📋 === בדיקות חובה ===');
+    const required = {
+        'data-action="preview-color" על כפתורי צבע': html.includes('data-action="preview-color"'),
+        'showPreview פונקציה קיימת': code.includes('function showPreview'),
+        'initPreviewCalculator קיים': code.includes('initPreviewCalculator'),
+        'initPreviewCalculator נקרא מ-showPreview': /showPreview[\s\S]*?initPreviewCalculator\s*\(/.test(code),
+        'stopPropagation': code.includes('stopPropagation'),
+        'setProperty with important': code.includes("setProperty(") && code.includes("'important'"),
+        'setProperty לdisplay': /setProperty\(['"]display['"]/.test(code),
+        'CSS Variable override': code.includes("setProperty('--") || code.includes('setProperty("--'),
+        'calculator-preview ID': code.includes('calculator-preview'),
+        'data-preview-tab': code.includes('data-preview-tab'),
+        'darkenColor פונקציה': code.includes('darkenColor'),
+        'hexToRgba פונקציה': code.includes('hexToRgba'),
+        'previewState בתוך initPreviewCalculator': /initPreviewCalculator[\s\S]*?previewState\s*=\s*\{/.test(code),
+        'cloneNode בתוך showPreview': /showPreview[\s\S]*?cloneNode/.test(code)
+    };
+    
+    for (const [name, result] of Object.entries(required)) {
         if (result) {
             console.log(`✅ ${name}`);
             passed++;
@@ -150,13 +544,72 @@ const hasUpdateFunctionsInEmbed = content.match(/getEmbedScript[\s\S]*?updateBas
         }
     }
     
-    console.log(`\n📊 סיכום: ${passed} עברו, ${failed} נכשלו`);
+    // === בדיקות עדכון כל הטאבים ===
+    console.log('\n🔄 === בדיקות עדכון טאבים בתצוגה מקדימה ===');
+    const tabUpdates = {
+        'updatePreviewBasic קיים': code.includes('updatePreviewBasic'),
+        'updatePreviewCompare קיים': code.includes('updatePreviewCompare'),
+        'updatePreviewSchedule קיים': code.includes('updatePreviewSchedule'),
+        'סליידר מטפל ב-compare': /id\.includes\(['"]compare/.test(code),
+        'סליידר מטפל ב-schedule': /id\.includes\(['"]schedule/.test(code),
+        'אתחול קורא לכל פונקציות העדכון': /updatePreviewBasic\(\)[\s\S]*?updatePreviewCompare\(\)[\s\S]*?updatePreviewSchedule\(\)/.test(code)
+    };
     
-    if (failed > 0) {
-        console.log('\n🔧 יש לתקן את הבעיות שנכשלו!');
-    } else {
-        console.log('\n🎉 כל הבדיקות עברו!');
+    for (const [name, result] of Object.entries(tabUpdates)) {
+        if (result) {
+            console.log(`✅ ${name}`);
+            passed++;
+        } else {
+            console.error(`❌ ${name}`);
+            failed++;
+        }
     }
+    
+    // === בדיקות getEmbedScript ===
+    console.log('\n📦 === בדיקות getEmbedScript (קוד העתקה) ===');
+    
+    // חילוץ תוכן getEmbedScript
+    const embedMatch = code.match(/function getEmbedScript[\s\S]*?<\` \+ \`\/script>/);
+    const embedScript = embedMatch ? embedMatch[0] : '';
+    
+    const embedChecks = {
+        'getEmbedScript קיים': code.includes('function getEmbedScript'),
+        'state לכל הטאבים (basic, compare, schedule)': /state\s*=\s*\{[\s\S]*?basic[\s\S]*?compare[\s\S]*?schedule/.test(embedScript),
+        'updateBasic בgetEmbedScript': /function\s+updateBasic/.test(embedScript),
+        'updateCompare בgetEmbedScript': /function\s+updateCompare/.test(embedScript),
+        'updateSchedule בgetEmbedScript': /function\s+updateSchedule/.test(embedScript),
+        'switchTab קורא לupdate': /switchTab[\s\S]*?(updateBasic|updateCompare|updateSchedule)/.test(embedScript),
+        'סליידרים compare מעדכנים': embedScript.includes('compare-') && embedScript.includes('updateCompare'),
+        'סליידרים schedule מעדכנים': embedScript.includes('schedule-') && embedScript.includes('updateSchedule'),
+        'אתחול כל הפונקציות': /updateBasic\(\)[\s\S]*?updateCompare\(\)[\s\S]*?updateSchedule\(\)/.test(embedScript)
+    };
+    
+    for (const [name, result] of Object.entries(embedChecks)) {
+        if (result) {
+            console.log(`✅ ${name}`);
+            passed++;
+        } else {
+            console.error(`❌ ${name}`);
+            failed++;
+        }
+    }
+    
+    // === סיכום ===
+    console.log('\n' + '='.repeat(50));
+    console.log('📊 סיכום:');
+    console.log(`  ✅ עברו: ${passed}`);
+    console.log(`  ❌ נכשלו: ${failed}`);
+    console.log(`  🚨 קריטיים: ${critical}`);
+    
+    if (critical > 0) {
+        console.error('\n🚨 יש בעיות קריטיות שחייבים לתקן מיד!');
+    } else if (failed > 0) {
+        console.warn('\n⚠️ יש לתקן את הבעיות שנכשלו');
+    } else {
+        console.log('\n🎉 כל הבדיקות עברו בהצלחה!');
+    }
+    
+    return { passed, failed, critical };
 })();
 ```
 
@@ -1783,6 +2236,36 @@ const requiredActions = [
 
 ## שלב 3: בדוק ותקן פונקציונליות
 
+### 🚨 CRITICAL - בדיקות ראשונות (אסורים!):
+
+#### ❌ אם נמצא `pointer-events: none` בתצוגה מקדימה:
+```javascript
+// חפש את הדפוס הזה:
+/showPreview[\s\S]*?pointer-events\s*:\s*none/
+```
+**פתרון:** הסר לחלוטין! זה חוסם את כל האינטראקציה.
+
+#### ❌ אם `showPreview` רק מחליף HTML בלי אתחול JS:
+בדוק שיש:
+1. `cloneNode(true)` - לשכפול המחשבון
+2. קריאה ל-`initPreviewCalculator` אחרי השכפול
+3. `setProperty` עם `'important'` להחלפת צבעים
+
+**דפוס שגוי (צריך לתקן!):**
+```javascript
+// ❌ שגוי - רק החלפת HTML
+previewContent.innerHTML = '<div style="pointer-events: none;">' + html + '</div>';
+
+// ✅ נכון - שכפול + אתחול
+const calc = calculator.cloneNode(true);
+calc.id = 'calculator-preview';
+// ... החלפת צבעים עם setProperty ...
+previewContent.innerHTML = calc.outerHTML;
+initPreviewCalculator(clonedCalc, color);
+```
+
+### ✅ בדיקות פונקציות חובה:
+
 ### ❌ אם חסר `getEmbedScript`:
 הוסף את הפונקציה המלאה (ראה סעיף 6)
 
@@ -1795,6 +2278,24 @@ const requiredActions = [
 ### ❌ אם חסר `initPreviewCalculator`:
 הוסף את הפונקציה (ראה סעיף 4)
 
+### ❌ אם `initPreviewCalculator` קיים אבל לא נקרא מ-`showPreview`:
+הוסף קריאה ל-`initPreviewCalculator(clonedCalc, color)` בסוף `showPreview`
+
+### ❌ אם חסרים `darkenColor` ו-`hexToRgba`:
+הוסף את פונקציות העזר לצבעים (ראה סעיף 3)
+
+### ❌ אם `initPreviewCalculator` חסר `previewState`:
+הוסף state מקומי לתצוגה המקדימה עם ערכי ברירת מחדל לכל טאב
+
+### ❌ אם `initPreviewCalculator` חסר פונקציות update:
+הוסף `updateBasicPreview()`, `updateDetailedPreview()` וכו' לכל טאב
+
+### ❌ אם סליידרים לא מחוברים ל-state וחישוב:
+כל slider צריך:
+1. `e.stopPropagation()`
+2. עדכון `previewState`
+3. קריאה לפונקציית update
+
 ### ❌ אם `copyEmbedCode` לא כולל CSS/getEmbedScript:
 תקן את הפונקציה (ראה סעיף 5)
 
@@ -1806,11 +2307,28 @@ const requiredActions = [
 ```markdown
 ## 📋 דוח תיקון אזור הטמעה
 
+### 🚨 בדיקות CRITICAL (אסורים):
+- pointer-events: none: ✅ לא נמצא / ❌ נמצא - יש להסיר!
+
 ### 📝 בדיקת תוכן:
 - שם המחשבון בכותרת: ✅/❌
 - מילות מפתח רלוונטיות: ✅/❌
 - מספר טאבים נכון: ✅/❌
 - אין תוכן ממחשבון אחר: ✅/❌
+
+### 🔧 בדיקות פונקציות:
+- showPreview קיים: ✅/❌
+- showPreview משתמש ב-cloneNode: ✅/❌
+- showPreview קורא ל-initPreviewCalculator: ✅/❌
+- initPreviewCalculator קיים: ✅/❌
+- initPreviewCalculator מכיל previewState: ✅/❌
+- initPreviewCalculator מכיל פונקציות update: ✅/❌
+- stopPropagation בטאבים: ✅/❌
+- stopPropagation בסליידרים: ✅/❌
+- darkenColor/hexToRgba קיימים: ✅/❌
+- setProperty עם important: ✅/❌
+- data-preview-tab: ✅/❌
+- calculator-preview ID: ✅/❌
 
 ### ✅ תיקונים שבוצעו:
 1. [מה תוקן]
@@ -1818,9 +2336,10 @@ const requiredActions = [
 ### 📊 סטטוס פונקציונליות:
 - כפתורי צבע: ✅/❌ (כמות)
 - החלפת צבעים: ✅/❌
-- תצוגה מקדימה: ✅/❌
+- תצוגה מקדימה אינטראקטיבית: ✅/❌
 - טאבים בתצוגה: ✅/❌
 - סליידרים בתצוגה: ✅/❌
+- חישובים עובדים בתצוגה: ✅/❌
 - העתקת קוד: ✅/❌
 - CSS בהעתקה: ✅/❌
 - JS בהעתקה: ✅/❌
@@ -1871,6 +2390,139 @@ const requiredActions = [
 
 ## 📝 יומן שינויים
 
+### גרסה 5.0 (דצמבר 2025) - תיקוני באגים קריטיים!
+**בעיות חדשות שנתגלו ונוספו לבדיקה:**
+
+13. **🚨 CRITICAL: Selector ב-showPreview לא תואם ל-HTML!**
+    - בעיה: `querySelector('.xxx-calculator')` מחפש class שלא קיים
+    - סימן: לוחצים על צבע ואין מחשבון בתצוגה המקדימה
+    - פתרון: לוודא שה-selector תואם בדיוק ל-class ב-HTML
+    - בדיקה:
+    ```javascript
+    const selectorMatch = content.match(/showPreview[\s\S]*?querySelector\(['"]([^'"]+)['"]\)/);
+    if (selectorMatch) {
+        const selector = selectorMatch[1];
+        const className = selector.replace(/^\./, '').split(' ')[0];
+        if (!content.includes('class="' + className) && !content.includes("class='" + className)) {
+            console.error('🚨 CRITICAL: showPreview משתמש ב-selector שלא קיים ב-HTML: ' + selector);
+        }
+    }
+    ```
+
+14. **🚨 CRITICAL: `style.display = 'block'` לא דורס `!important`!**
+    - בעיה: התצוגה המקדימה נשארת מוסתרת
+    - סימן: לוחצים על צבע והcontainer נשאר display:none
+    - פתרון: להשתמש ב-`setProperty('display', 'block', 'important')`
+    - בדיקה:
+    ```javascript
+    const displaySimple = content.match(/previewContainer\.style\.display\s*=\s*['"]block['"]/);
+    const displayImportant = content.match(/setProperty\(['"]display['"],\s*['"]block['"],\s*['"]important['"]\)/);
+    if (displaySimple && !displayImportant) {
+        console.error('🚨 CRITICAL: style.display = "block" לא ידרוס !important - צריך setProperty!');
+    }
+    ```
+
+15. **🚨 CRITICAL: `max-height` + `overflow-y: auto` על preview-content!**
+    - בעיה: סקרול מכוער בתוך התצוגה המקדימה
+    - סימן: scrollbar בצד שמאל של התצוגה המקדימה
+    - פתרון: להסיר `max-height` ו-`overflow-y: auto`, להשתמש ב-`overflow: visible`
+    - בדיקה:
+    ```javascript
+    const previewContentStyle = content.match(/id="embed-preview-content"[^>]*style="([^"]+)"/);
+    if (previewContentStyle) {
+        const style = previewContentStyle[1];
+        if (style.includes('max-height') || style.includes('overflow-y: auto')) {
+            console.error('🚨 CRITICAL: embed-preview-content עם max-height/overflow-y:auto - גורם לסקרול מכוער!');
+        }
+    }
+    ```
+
+**תיקון CSS נכון:**
+```html
+<!-- ❌ שגוי - גורם לסקרול -->
+<div id="embed-preview-content" style="max-height: 400px !important; overflow-y: auto !important; ...">
+
+<!-- ✅ נכון - בלי סקרול -->
+<div id="embed-preview-content" style="overflow: visible !important; padding: 15px !important; ...">
+```
+
+16. **🚨 CRITICAL: שמות Selectors ב-initPreviewCalculator לא תואמים ל-IDs בHTML!**
+    - בעיה: הפונקציה מחפשת `single` אבל הטאב נקרא `basic`
+    - בעיה: הפונקציה מחפשת `offer1` אבל ה-ID הוא `offer-a`
+    - סימן: לוחצים על סליידר והנתונים לא מתעדכנים
+    - פתרון: לבדוק את ה-IDs האמיתיים ב-HTML ולהתאים את הקוד
+    - בדיקה:
+    ```javascript
+    // בדוק התאמה בין שמות ב-state לשמות ב-HTML
+    const stateNames = content.match(/previewState\s*=\s*\{[\s\S]*?\}/);
+    const htmlIds = content.match(/id="([^"]+)"/g) || [];
+    
+    // בדוק שה-state משתמש בשמות תואמים
+    if (stateNames) {
+        const stateContent = stateNames[0];
+        // בדוק אם יש 'single' ב-state אבל 'basic' ב-HTML
+        if (stateContent.includes('single:') && !htmlIds.some(id => id.includes('single'))) {
+            console.error('🚨 state משתמש ב-"single" אבל ה-HTML משתמש בשם אחר!');
+        }
+        // בדוק אם יש 'offer1' ב-state אבל 'offer-a' ב-HTML
+        if (stateContent.includes('offer1:') && htmlIds.some(id => id.includes('offer-a'))) {
+            console.error('🚨 state משתמש ב-"offer1" אבל ה-HTML משתמש ב-"offer-a"!');
+        }
+    }
+    ```
+
+**דוגמה לתיקון:**
+```javascript
+// ❌ שגוי - שמות לא תואמים
+const previewState = {
+    single: { amount: 100000 },  // אבל ה-ID הוא "basic-amount"
+    compare: { 
+        offer1: { rate: 6 },     // אבל ה-ID הוא "offer-a-rate"
+        offer2: { rate: 5.5 }    // אבל ה-ID הוא "offer-b-rate"
+    }
+};
+
+// ✅ נכון - שמות תואמים ל-IDs
+const previewState = {
+    basic: { amount: 100000 },   // תואם ל-ID "basic-amount"
+    compare: { 
+        offerA: { rate: 6 },     // תואם ל-ID "offer-a-rate"
+        offerB: { rate: 5.5 }    // תואם ל-ID "offer-b-rate"
+    }
+};
+```
+
+### גרסה 4.0 (דצמבר 2025) - שדרוג משמעותי!
+**בעיות חדשות שנתגלו ונוספו לבדיקה:**
+
+8. **🚨 CRITICAL: `pointer-events: none` בתצוגה מקדימה**
+   - בעיה: חוסם לחלוטין את כל האינטראקציה בתצוגה המקדימה
+   - פתרון: להסיר לחלוטין! אסור להשתמש בזה
+   - סימן: משתמשים לא יכולים ללחוץ על כלום בתצוגה
+
+9. **showPreview שלא קורא ל-initPreviewCalculator**
+   - בעיה: גם אם יש פונקציה initPreviewCalculator, אם היא לא נקראת - לא יעבוד!
+   - פתרון: חייב קריאה ל-`initPreviewCalculator(clonedCalc, color)` בסוף showPreview
+   - בדיקה חדשה: `/showPreview[\s\S]*?initPreviewCalculator\s*\(/`
+
+10. **חסר פונקציות עזר לצבעים**
+    - בעיה: בלי `darkenColor` ו-`hexToRgba` הצבעים לא יפים
+    - פתרון: להוסיף את שתי הפונקציות
+
+11. **initPreviewCalculator בלי previewState**
+    - בעיה: בלי state מקומי, הסליידרים לא שומרים ערכים
+    - פתרון: להגדיר `previewState` עם ערכי ברירת מחדל לכל טאב
+
+12. **סליידרים לא מחוברים לחישוב**
+    - בעיה: סליידר זזים אבל לא מחשבים
+    - פתרון: כל slider צריך לעדכן state ולקרוא לפונקציית update
+
+**שיפורים בקוד בדיקה:**
+- הוספת קטגוריה CRITICAL לבעיות אסורות
+- בדיקה ש-initPreviewCalculator נקרא מ-showPreview (לא רק קיים)
+- בדיקת previewState בתוך initPreviewCalculator
+- עדכון תבנית הדוח עם כל הבדיקות החדשות
+
 ### גרסה 3.0 (דצמבר 2025)
 **תיקונים קריטיים שנתגלו:**
 
@@ -1910,6 +2562,6 @@ const requiredActions = [
 ---
 
 **נוצר על ידי: Cursor AI**  
-**גרסה: 3.0**  
-**מיקוד: אזור הטמעה + בדיקת תוכן + תיקון בעיות JS קריטיות**
+**גרסה: 5.1**  
+**מיקוד: אזור הטמעה + בדיקת תוכן + תיקון בעיות JS קריטיות + בדיקות CRITICAL חדשות + אימות selectors + תיקון סקרולים + התאמת state ל-IDs**
 

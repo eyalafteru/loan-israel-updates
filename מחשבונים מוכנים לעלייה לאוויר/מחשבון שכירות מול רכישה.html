@@ -1287,13 +1287,15 @@ if (!document.querySelector('meta[name="viewport"]')) {
             const result = calculateScenarios(years);
             state.rent = originalRent;
             
+            // אם רכישה עדיפה → שכ"ד גבוה מדי → מחפשים למטה
+            // אם שכירות עדיפה → שכ"ד עדיין נמוך → מחפשים למעלה
             if (result.buyWins) {
-                low = mid;
-            } else {
                 high = mid;
+            } else {
+                low = mid;
             }
         }
-        return Math.round(low);
+        return Math.round(high);
     }
 
     function updateCompare() {
@@ -1641,10 +1643,10 @@ if (!document.querySelector('meta[name="viewport"]')) {
                 previewState.rent = mid;
                 const res = calculateScenarios(years);
                 previewState.rent = origRent;
-                if (res.buyWins) low = mid;
-                else high = mid;
+                if (res.buyWins) high = mid;
+                else low = mid;
             }
-            const maxRent = Math.round(low);
+            const maxRent = Math.round(high);
             const rentYield = (previewState.rent * 12 / previewState.propertyPrice * 100).toFixed(2);
             
             const maxRentEl = calc.querySelector('#max-rent-value');
@@ -1774,6 +1776,14 @@ if (!document.querySelector('meta[name="viewport"]')) {
     }
 
     function copyEmbedCode() {
+        // DataLayer Push - Tag Manager tracking
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            'event': 'copy_code_click',
+            'calculator_name': 'שכירות מול רכישה',
+            'button_type': 'copy-embed-code'
+        });
+        
         const calc = el('wpc-calc-rvb-k7m2-calculator').cloneNode(true);
         const defaultColor = '#1e5490';
         const css = getEmbedCSS(defaultColor);
@@ -1883,6 +1893,14 @@ if (!document.querySelector('meta[name="viewport"]')) {
     }
 
     function copyPreviewCode() {
+        // DataLayer Push - Tag Manager tracking
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            'event': 'copy_code_click',
+            'calculator_name': 'שכירות מול רכישה',
+            'button_type': 'copy-preview-code'
+        });
+        
         const calc = el('wpc-calc-rvb-k7m2-calculator').cloneNode(true);
         const css = getEmbedCSS(state.previewColor);
         const color = state.previewColor;
@@ -2039,10 +2057,10 @@ function updateMaxRent() {
         state.rent = mid;
         var res = calculateScenarios(years);
         state.rent = origRent;
-        if (res.buyWins) low = mid;
-        else high = mid;
+        if (res.buyWins) high = mid;
+        else low = mid;
     }
-    var maxRent = Math.round(low);
+    var maxRent = Math.round(high);
     var rentYield = (state.rent * 12 / state.propertyPrice * 100).toFixed(2);
     if (el("max-rent-value")) el("max-rent-value").textContent = formatCurrency(maxRent);
     if (el("current-rent-display")) el("current-rent-display").textContent = formatCurrency(state.rent);

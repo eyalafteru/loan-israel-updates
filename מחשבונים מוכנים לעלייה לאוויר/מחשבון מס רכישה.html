@@ -1870,6 +1870,14 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function copyEmbedCode() {
+        // DataLayer Push - Tag Manager tracking
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            'event': 'copy_code_click',
+            'calculator_name': 'מס רכישה',
+            'button_type': 'copy-embed-code'
+        });
+        
         const calculator = el('wpc-calc-tax-r4k8-calculator');
         const calcClone = calculator.cloneNode(true);
         
@@ -2217,6 +2225,14 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function copyPreviewCode() {
+        // DataLayer Push - Tag Manager tracking
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            'event': 'copy_code_click',
+            'calculator_name': 'מס רכישה',
+            'button_type': 'copy-preview-code'
+        });
+        
         const color = state.previewColor;
         const calculator = el('wpc-calc-tax-r4k8-calculator');
         const calcClone = calculator.cloneNode(true);

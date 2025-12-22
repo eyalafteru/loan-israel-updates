@@ -1488,6 +1488,14 @@ if (!document.querySelector('meta[name="viewport"]')) {
     
     // ===== העתקת קוד הטמעה =====
     function copyEmbedCode(colorOverride) {
+        // DataLayer Push - Tag Manager tracking
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            'event': 'copy_code_click',
+            'calculator_name': 'מחשבון הלוואת בלון / גרייס',
+            'button_type': 'copy-embed-code'
+        });
+        
         const selectedColor = colorOverride || primaryColor;
         const darkColor = darkenColor(selectedColor, 15);
         
@@ -1560,6 +1568,14 @@ if (!document.querySelector('meta[name="viewport"]')) {
     
     // ===== העתקת קוד מתצוגה מקדימה עם צבע =====
     function copyPreviewCode(color) {
+        // DataLayer Push - Tag Manager tracking
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            'event': 'copy_code_click',
+            'calculator_name': 'מחשבון הלוואת בלון / גרייס',
+            'button_type': 'copy-preview-code'
+        });
+        
         copyEmbedCode(color);
     }
     

@@ -2671,6 +2671,14 @@
         
         // העתקת קוד מלא (ללא צבע מותאם)
         function copyEmbedCode() {
+        // DataLayer Push - Tag Manager tracking
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            'event': 'copy_code_click',
+            'calculator_name': 'מחשבון חיסכון מתקדם - תכנן את העתיד הפיננסי שלך בחוכמה',
+            'button_type': 'copy-embed-code'
+        });
+        
             let code = '';
             
             // 1. Viewport Script
@@ -2961,6 +2969,14 @@
         
         // העתקת קוד מהתצוגה המקדימה
         function copyPreviewCode() {
+        // DataLayer Push - Tag Manager tracking
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            'event': 'copy_code_click',
+            'calculator_name': 'מחשבון חיסכון מתקדם - תכנן את העתיד הפיננסי שלך בחוכמה',
+            'button_type': 'copy-preview-code'
+        });
+        
             copyEmbedCodeWithColor(currentPreviewColor, currentPreviewColorName);
         }
         

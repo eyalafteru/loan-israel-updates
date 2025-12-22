@@ -944,7 +944,7 @@ if (!document.querySelector('meta[name="viewport"]')) {
     <!-- תצוגה מקדימה -->
     <div id="embed-preview-container" style="display: none !important; margin: 30px 0 !important; padding: 20px !important; background: #f8f9fa !important; border-radius: 15px !important; border: 2px dashed #1e5490 !important;">
       <h4 style="text-align: center !important; color: #1e5490 !important; margin-bottom: 15px !important;">👁️ תצוגה מקדימה בצבע: <span id="preview-color-name">כחול מקצועי</span></h4>
-      <div id="embed-preview-content" style="max-height: 400px !important; overflow-y: auto !important; border: 1px solid #ddd !important; border-radius: 10px !important; background: white !important;"></div>
+      <div id="embed-preview-content" style="overflow: visible !important; border: 1px solid #ddd !important; border-radius: 10px !important; background: white !important; padding: 15px !important;"></div>
       <div style="text-align: center !important; margin-top: 20px !important;">
         <button data-action="copy-preview-code" style="background: linear-gradient(135deg, #1e5490 0%, #2a5fa0 100%) !important; color: white !important; padding: 15px 40px !important; font-size: 1.1em !important; font-weight: 700 !important; border: none !important; border-radius: 10px !important; cursor: pointer !important; font-family: 'Assistant', sans-serif !important;">
           📋 העתק קוד עם הצבע הנבחר
@@ -1251,8 +1251,33 @@ if (!document.querySelector('meta[name="viewport"]')) {
     // === מצב הטמעה ===
     let currentEmbedColor = '#1e5490';
     
+    // === פונקציות עזר לצבעים ===
+    function darkenColor(hex, percent) {
+        const num = parseInt(hex.replace('#', ''), 16);
+        const amt = Math.round(2.55 * percent);
+        const R = Math.max(0, (num >> 16) - amt);
+        const G = Math.max(0, ((num >> 8) & 0x00FF) - amt);
+        const B = Math.max(0, (num & 0x0000FF) - amt);
+        return '#' + (0x1000000 + R * 0x10000 + G * 0x100 + B).toString(16).slice(1);
+    }
+    
+    function hexToRgba(hex, alpha) {
+        const r = parseInt(hex.slice(1, 3), 16);
+        const g = parseInt(hex.slice(3, 5), 16);
+        const b = parseInt(hex.slice(5, 7), 16);
+        return 'rgba(' + r + ', ' + g + ', ' + b + ', ' + alpha + ')';
+    }
+    
     // === העתקת קוד הטמעה ===
     function copyEmbedCode() {
+        // DataLayer Push - Tag Manager tracking
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            'event': 'copy_code_click',
+            'calculator_name': 'מחשבון ריבית אפקטיבית | המחיר האמיתי של ההלוואה',
+            'button_type': 'copy-embed-code'
+        });
+        
         const code = generateEmbedCode('#1e5490');
         navigator.clipboard.writeText(code).then(() => {
             alert('✅ הקוד הועתק בהצלחה! הדביקו אותו בעורך HTML שלכם.');
@@ -1261,25 +1286,16 @@ if (!document.querySelector('meta[name="viewport"]')) {
         });
     }
     
-    // === תצוגה מקדימה בצבע ===
-    function previewColor(color, name) {
-        currentEmbedColor = color;
-        
-        const previewContainer = document.getElementById('embed-preview-container');
-        const previewContent = document.getElementById('embed-preview-content');
-        const colorNameEl = document.getElementById('preview-color-name');
-        
-        if (previewContainer && previewContent) {
-            previewContainer.style.display = 'block';
-            colorNameEl.textContent = name;
-            
-            // יצירת תצוגה מקדימה מוקטנת
-            previewContent.innerHTML = generatePreviewHTML(color);
-        }
-    }
-    
     // === העתקת קוד עם צבע נבחר ===
     function copyPreviewCode() {
+        // DataLayer Push - Tag Manager tracking
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            'event': 'copy_code_click',
+            'calculator_name': 'מחשבון ריבית אפקטיבית | המחיר האמיתי של ההלוואה',
+            'button_type': 'copy-preview-code'
+        });
+        
         const code = generateEmbedCode(currentEmbedColor);
         navigator.clipboard.writeText(code).then(() => {
             alert('✅ הקוד עם הצבע הנבחר הועתק בהצלחה!');
@@ -1288,35 +1304,316 @@ if (!document.querySelector('meta[name="viewport"]')) {
         });
     }
     
-    // === יצירת HTML לתצוגה מקדימה ===
-    function generatePreviewHTML(color) {
-        return '<div style="padding: 20px; direction: rtl; font-family: Assistant, sans-serif;">' +
-            '<div style="background: linear-gradient(135deg, ' + color + ' 0%, ' + darkenColor(color, 20) + ' 100%); padding: 20px; border-radius: 10px; color: white; text-align: center; margin-bottom: 15px;">' +
-            '<h3 style="margin: 0 0 10px; color: white;">מחשבון ריבית אפקטיבית</h3>' +
-            '<p style="margin: 0; opacity: 0.9; font-size: 0.9em;">גלה את העלות האמיתית של ההלוואה</p>' +
-            '</div>' +
-            '<div style="background: #f5f5f5; padding: 15px; border-radius: 8px;">' +
-            '<div style="display: flex; justify-content: space-between; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #ddd;">' +
-            '<span>ריבית נקובה:</span><span style="font-weight: bold; color: ' + color + ';">6.0%</span>' +
-            '</div>' +
-            '<div style="display: flex; justify-content: space-between; padding: 10px; background: rgba(37,211,102,0.15); border-radius: 8px;">' +
-            '<span>ריבית אפקטיבית:</span><span style="font-weight: bold; color: #25D366; font-size: 1.2em;">6.82%</span>' +
-            '</div>' +
-            '</div>' +
-            '<p style="text-align: center; margin-top: 15px; font-size: 0.85em; color: #666;">' +
-            'מחשבון ריבית אפקטיבית פותח על ידי <a href="https://loan-israel.co.il/" target="_blank" style="color: ' + color + ';">רק תבקש פיננסים</a>' +
-            '</p>' +
-            '</div>';
+    // === תצוגה מקדימה עם שכפול מחשבון אמיתי ===
+    function previewColor(color, name) {
+        currentEmbedColor = color;
+        showPreview(color, name);
     }
     
-    // === פונקציה להכהיית צבע ===
-    function darkenColor(hex, percent) {
-        const num = parseInt(hex.replace('#', ''), 16);
-        const amt = Math.round(2.55 * percent);
-        const R = Math.max(0, (num >> 16) - amt);
-        const G = Math.max(0, ((num >> 8) & 0x00FF) - amt);
-        const B = Math.max(0, (num & 0x0000FF) - amt);
-        return '#' + (0x1000000 + R * 0x10000 + G * 0x100 + B).toString(16).slice(1);
+    function showPreview(color, colorName) {
+        const previewContainer = document.getElementById('embed-preview-container');
+        const previewContent = document.getElementById('embed-preview-content');
+        const colorNameEl = document.getElementById('preview-color-name');
+        
+        if (!previewContainer || !previewContent) return;
+        
+        previewContainer.style.setProperty('display', 'block', 'important');
+        colorNameEl.textContent = colorName;
+        
+        // מצא את המחשבון המקורי - ה-wrapper עם הטאבים והתוכן
+        const calculator = container.querySelector('.wpc-calc-effrate-r4k2-calc-wrapper');
+        if (!calculator) {
+            console.error('לא נמצא מחשבון לשכפול');
+            return;
+        }
+        
+        // שכפל את המחשבון
+        const calc = calculator.cloneNode(true);
+        
+        // שנה ID למניעת התנגשות
+        calc.id = 'wpc-calc-effrate-r4k2-calculator-preview';
+        
+        // החלף IDs של טאבים ב-data attributes
+        const tabContents = calc.querySelectorAll('[id*="tab-"]');
+        tabContents.forEach(tabContent => {
+            const oldId = tabContent.id;
+            const tabName = oldId.replace(/.*tab-/, '').replace(/-content$/, '');
+            tabContent.setAttribute('data-preview-tab', tabName);
+            tabContent.removeAttribute('id');
+        });
+        
+        // הגדר CSS Variables על האלמנט המשוכפל
+        calc.style.setProperty('--primary', color);
+        calc.style.setProperty('--primary-dark', darkenColor(color, 15));
+        calc.style.setProperty('--primary-light', hexToRgba(color, 0.1));
+        calc.style.setProperty('--primary-gradient', 'linear-gradient(135deg, ' + color + ' 0%, ' + darkenColor(color, 20) + ' 100%)');
+        
+        // החלף צבעים עם setProperty + important
+        // כותרות
+        calc.querySelectorAll('[class*="title"], [class*="header"], h3').forEach(el => {
+            if (getComputedStyle(el).color !== 'rgb(255, 255, 255)') {
+                el.style.setProperty('color', color, 'important');
+            }
+        });
+        
+        // Hero section
+        const heroSection = calc.querySelector('[class*="hero"], [class*="gradient-header"]');
+        if (heroSection) {
+            heroSection.style.setProperty('background', 'linear-gradient(135deg, ' + color + ' 0%, ' + darkenColor(color, 20) + ' 100%)', 'important');
+        }
+        
+        // טאבים פעילים
+        const activeTabBtn = calc.querySelector('[data-action="switch-tab"].active');
+        if (activeTabBtn) {
+            activeTabBtn.style.setProperty('background', color, 'important');
+            activeTabBtn.style.setProperty('color', 'white', 'important');
+            activeTabBtn.style.setProperty('border-color', color, 'important');
+        }
+        
+        // טאבים לא פעילים
+        calc.querySelectorAll('[data-action="switch-tab"]:not(.active)').forEach(tab => {
+            tab.style.setProperty('border-color', color, 'important');
+            tab.style.setProperty('color', color, 'important');
+        });
+        
+        // ערכי סליידר
+        calc.querySelectorAll('[class*="slider-value"], [id*="-val"]').forEach(el => {
+            el.style.setProperty('color', color, 'important');
+        });
+        
+        // סליידרים
+        calc.querySelectorAll('input[type="range"]').forEach(slider => {
+            slider.style.setProperty('accent-color', color, 'important');
+        });
+        
+        // כותרות טבלאות
+        calc.querySelectorAll('th, [class*="table-header"]').forEach(el => {
+            el.style.setProperty('background', color, 'important');
+        });
+        
+        // כפתורים ראשיים
+        calc.querySelectorAll('[class*="cta"], [class*="primary-btn"]').forEach(el => {
+            el.style.setProperty('background', 'linear-gradient(135deg, ' + color + ' 0%, ' + darkenColor(color, 20) + ' 100%)', 'important');
+        });
+        
+        // הצג
+        previewContent.innerHTML = '';
+        previewContent.appendChild(calc);
+        
+        // אתחל את ה-JS של המחשבון המשוכפל
+        initPreviewCalculator(calc, color);
+        
+        // גלול לתצוגה
+        previewContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    
+    // === אתחול מחשבון בתצוגה מקדימה ===
+    function initPreviewCalculator(calc, primaryColor) {
+        // State מקומי לתצוגה המקדימה - מותאם ל-IDs במחשבון זה
+        const previewState = {
+            basic: { amount: 100000, rate: 6, fee: 1500, months: 48 },
+            compare: { 
+                offerA: { amount: 100000, rate: 6, fee: 1500, months: 48 },
+                offerB: { amount: 100000, rate: 5.5, fee: 3000, months: 48 }
+            }
+        };
+        
+        // פונקציות עזר
+        function fmt(n) { return Math.round(n).toLocaleString('he-IL') + ' ₪'; }
+        function pct(n) { return n.toFixed(2) + '%'; }
+        
+        function pmt(p, r, m) {
+            const mr = r / 100 / 12;
+            if (mr === 0) return p / m;
+            return p * (mr * Math.pow(1 + mr, m)) / (Math.pow(1 + mr, m) - 1);
+        }
+        
+        function irr(cf, g) {
+            g = g || 0.1;
+            for (let i = 0; i < 100; i++) {
+                let npv = 0, d = 0;
+                for (let j = 0; j < cf.length; j++) {
+                    npv += cf[j] / Math.pow(1 + g, j);
+                    d -= j * cf[j] / Math.pow(1 + g, j + 1);
+                }
+                const ng = g - npv / d;
+                if (Math.abs(ng - g) < 0.00001) return ng;
+                g = ng;
+            }
+            return g;
+        }
+        
+        function eff(p, r, f, m) {
+            const mp = pmt(p, r, m);
+            const cf = [p - f];
+            for (let i = 0; i < m; i++) cf.push(-mp);
+            const mi = irr(cf, r / 100 / 12);
+            return (Math.pow(1 + mi, 12) - 1) * 100;
+        }
+        
+        // עדכון טאב בסיסי - מותאם ל-IDs: basic-monthly-payment, basic-effective-rate וכו'
+        function updateBasic() {
+            const s = previewState.basic;
+            const mp = pmt(s.amount, s.rate, s.months);
+            const tot = mp * s.months;
+            const interest = tot - s.amount;
+            const er = eff(s.amount, s.rate, s.fee, s.months);
+            const diff = er - s.rate;
+            
+            // מצא את כל אלמנטי התוצאה בתוך ה-calc (לא לפי ID כי הם הוסרו)
+            const monthlyEl = calc.querySelector('[id*="basic-monthly"], [class*="monthly-payment"]');
+            const totalEl = calc.querySelector('[id*="basic-total-payment"], [class*="total-payment"]');
+            const interestEl = calc.querySelector('[id*="basic-total-interest"], [class*="total-interest"]');
+            const nominalEl = calc.querySelector('[id*="basic-nominal"], [class*="nominal-rate"]');
+            const effectiveEl = calc.querySelector('[id*="basic-effective"], [class*="effective-rate"]');
+            const diffEl = calc.querySelector('[id*="basic-rate-diff"], [class*="rate-diff"]');
+            
+            if (monthlyEl) monthlyEl.textContent = fmt(mp);
+            if (totalEl) totalEl.textContent = fmt(tot);
+            if (interestEl) interestEl.textContent = fmt(interest);
+            if (nominalEl) nominalEl.textContent = pct(s.rate);
+            if (effectiveEl) effectiveEl.textContent = pct(er);
+            if (diffEl) diffEl.textContent = '+' + pct(diff);
+        }
+        
+        // עדכון טאב השוואה - מותאם ל-IDs: offer-a-monthly, offer-b-effective וכו'
+        function updateCompare() {
+            const oA = previewState.compare.offerA;
+            const oB = previewState.compare.offerB;
+            
+            const effA = eff(oA.amount, oA.rate, oA.fee, oA.months);
+            const effB = eff(oB.amount, oB.rate, oB.fee, oB.months);
+            
+            const mpA = pmt(oA.amount, oA.rate, oA.months);
+            const mpB = pmt(oB.amount, oB.rate, oB.months);
+            
+            const totA = mpA * oA.months;
+            const totB = mpB * oB.months;
+            
+            // הצעה א'
+            const mpAEl = calc.querySelector('[id*="offer-a-monthly"]');
+            const totAEl = calc.querySelector('[id*="offer-a-total"]');
+            const effAEl = calc.querySelector('[id*="offer-a-effective"]');
+            
+            // הצעה ב'
+            const mpBEl = calc.querySelector('[id*="offer-b-monthly"]');
+            const totBEl = calc.querySelector('[id*="offer-b-total"]');
+            const effBEl = calc.querySelector('[id*="offer-b-effective"]');
+            
+            if (mpAEl) mpAEl.textContent = fmt(mpA);
+            if (totAEl) totAEl.textContent = fmt(totA);
+            if (effAEl) effAEl.textContent = pct(effA);
+            
+            if (mpBEl) mpBEl.textContent = fmt(mpB);
+            if (totBEl) totBEl.textContent = fmt(totB);
+            if (effBEl) effBEl.textContent = pct(effB);
+            
+            // עדכון תוצאת ההשוואה
+            const resultEl = calc.querySelector('[class*="comparison-result"], [class*="winner"]');
+            if (resultEl) {
+                const winner = effA < effB ? "א'" : "ב'";
+                const savings = Math.abs(totA - totB);
+                resultEl.innerHTML = '🏆 הצעה ' + winner + ' זולה יותר!<br>תחסוך ' + fmt(savings) + ' לאורך כל התקופה';
+            }
+        }
+        
+        // טאבים - עם stopPropagation
+        const tabs = calc.querySelectorAll('[data-action="switch-tab"]');
+        const contents = calc.querySelectorAll('[data-preview-tab], [class*="calc-panel"]');
+        
+        tabs.forEach(tab => {
+            tab.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation(); // מונע bubble למחשבון המקורי
+                
+                const tabName = this.dataset.tab;
+                
+                // הסר active מכולם
+                tabs.forEach(t => {
+                    t.classList.remove('active');
+                    t.style.setProperty('background', 'transparent', 'important');
+                    t.style.setProperty('color', primaryColor, 'important');
+                    t.style.setProperty('border-color', primaryColor, 'important');
+                });
+                
+                contents.forEach(c => {
+                    c.classList.remove('active');
+                    c.style.display = 'none';
+                });
+                
+                // הוסף active לנבחר
+                this.classList.add('active');
+                this.style.setProperty('background', primaryColor, 'important');
+                this.style.setProperty('color', 'white', 'important');
+                
+                // הצג תוכן הטאב
+                const activeContent = calc.querySelector('[data-preview-tab="' + tabName + '"], [id*="tab-' + tabName + '"]');
+                if (activeContent) {
+                    activeContent.classList.add('active');
+                    activeContent.style.display = 'block';
+                }
+                
+                // עדכן חישובים
+                if (tabName === 'basic') updateBasic();
+                else if (tabName === 'compare') updateCompare();
+            });
+        });
+        
+        // סליידרים - עם stopPropagation
+        const sliders = calc.querySelectorAll('input[type="range"]');
+        sliders.forEach(slider => {
+            slider.addEventListener('input', function(e) {
+                e.stopPropagation();
+                
+                const id = this.id;
+                const val = parseFloat(this.value);
+                
+                // עדכון ערך מוצג
+                const valueId = id.replace('-slider', '-val').replace('-input', '-val');
+                let valueEl = calc.querySelector('#' + valueId);
+                if (!valueEl) {
+                    valueEl = this.parentElement.querySelector('[class*="value"], [id*="-val"]');
+                }
+                
+                if (valueEl) {
+                    if (id.includes('rate')) {
+                        valueEl.textContent = val.toFixed(1) + '%';
+                    } else if (id.includes('month')) {
+                        valueEl.textContent = val + ' חודשים';
+                    } else {
+                        valueEl.textContent = fmt(val);
+                    }
+                }
+                
+                // עדכון state לפי הסליידר - מותאם ל-IDs במחשבון זה
+                if (id.includes('basic')) {
+                    if (id.includes('amount')) previewState.basic.amount = val;
+                    else if (id.includes('rate')) previewState.basic.rate = val;
+                    else if (id.includes('fee')) previewState.basic.fee = val;
+                    else if (id.includes('month')) previewState.basic.months = val;
+                    updateBasic();
+                } else if (id.includes('offer-a') || id.includes('offer_a')) {
+                    if (id.includes('amount')) previewState.compare.offerA.amount = val;
+                    else if (id.includes('rate')) previewState.compare.offerA.rate = val;
+                    else if (id.includes('fee')) previewState.compare.offerA.fee = val;
+                    else if (id.includes('month')) previewState.compare.offerA.months = val;
+                    updateCompare();
+                } else if (id.includes('offer-b') || id.includes('offer_b')) {
+                    if (id.includes('amount')) previewState.compare.offerB.amount = val;
+                    else if (id.includes('rate')) previewState.compare.offerB.rate = val;
+                    else if (id.includes('fee')) previewState.compare.offerB.fee = val;
+                    else if (id.includes('month')) previewState.compare.offerB.months = val;
+                    updateCompare();
+                }
+            });
+            
+            // צבע סליידר
+            slider.style.setProperty('accent-color', primaryColor, 'important');
+        });
+        
+        // אתחול ראשוני - עדכן את כל הטאבים
+        updateBasic();
+        updateCompare();
     }
     
     // === יצירת קוד הטמעה מלא ===

@@ -3046,6 +3046,14 @@ if (!document.querySelector('meta[name="viewport"]')) {
     
     // === copyEmbedCode - העתקת קוד מלא כולל JS ===
     function copyEmbedCode() {
+        // DataLayer Push - Tag Manager tracking
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            'event': 'copy_code_click',
+            'calculator_name': 'פיצויים 360',
+            'button_type': 'copy-embed-code'
+        });
+        
         const calculator = el('wpc-calc-comp360-k7m4-calculator');
         if (!calculator) return;
         
@@ -3361,6 +3369,14 @@ if (!document.querySelector('meta[name="viewport"]')) {
     
     // === copyPreviewCode - העתקה עם צבע נבחר ===
     function copyPreviewCode() {
+        // DataLayer Push - Tag Manager tracking
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            'event': 'copy_code_click',
+            'calculator_name': 'פיצויים 360',
+            'button_type': 'copy-preview-code'
+        });
+        
         const color = state.selectedColor || '#1e5490';
         const calculator = el('wpc-calc-comp360-k7m4-calculator');
         if (!calculator) return;

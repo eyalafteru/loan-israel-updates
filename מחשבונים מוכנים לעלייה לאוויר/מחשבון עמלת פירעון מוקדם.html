@@ -1785,6 +1785,14 @@ if (!document.querySelector('link[href*="Assistant"]')) {
   }
   
   function copyEmbedCode() {
+        // DataLayer Push - Tag Manager tracking
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            'event': 'copy_code_click',
+            'calculator_name': 'מחשבון עמלת פירעון מוקדם - משכנתא',
+            'button_type': 'copy-embed-code'
+        });
+        
     // קבל את ה-CSS
     var styles = '';
     document.querySelectorAll('style').forEach(function(style) {
@@ -2099,6 +2107,14 @@ if (!document.querySelector('link[href*="Assistant"]')) {
   }
   
   function copyPreviewCode() {
+        // DataLayer Push - Tag Manager tracking
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            'event': 'copy_code_click',
+            'calculator_name': 'מחשבון עמלת פירעון מוקדם - משכנתא',
+            'button_type': 'copy-preview-code'
+        });
+        
     // קבל את ה-CSS עם הצבע הנבחר
     var styles = '';
     document.querySelectorAll('style').forEach(function(style) {

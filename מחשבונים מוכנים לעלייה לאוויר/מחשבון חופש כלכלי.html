@@ -2130,6 +2130,14 @@ if (!document.querySelector('meta[name="viewport"]')) {
     // ===== Embed Functions =====
     
     function copyEmbedCode() {
+        // DataLayer Push - Tag Manager tracking
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            'event': 'copy_code_click',
+            'calculator_name': '🔥 מחשבון חופש כלכלי - מה המספר שלך?',
+            'button_type': 'copy-embed-code'
+        });
+        
         let code = '';
         
         // 1. Viewport Script

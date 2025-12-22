@@ -1880,6 +1880,14 @@ if (!document.querySelector('meta[name="viewport"]')) {
     
     // === Embed Functions ===
     function copyEmbedCode() {
+        // DataLayer Push - Tag Manager tracking
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            'event': 'copy_code_click',
+            'calculator_name': 'סימולטור איחוד הלוואות',
+            'button_type': 'copy-embed-code'
+        });
+        
         const calcElement = document.getElementById('wpc-calc-consolidation-r8m5-calculator');
         if (!calcElement) return;
         
@@ -2138,6 +2146,9 @@ if (!document.querySelector('meta[name="viewport"]')) {
         // 🚨 תיקון 1: שנה ID למניעת התנגשות
         calc.id = 'wpc-calc-consolidation-r8m5-calculator-preview';
         
+        // הסר כפתורי CTA מהתצוגה המקדימה
+        calc.querySelectorAll('[data-action="open-awg"], [class*="cta-button"]').forEach(btn => btn.remove());
+        
         // 🚨 תיקון 2: החלף IDs של טאבים ב-data attributes
         const tabContents = calc.querySelectorAll('[id^="tab-"]');
         tabContents.forEach(tabContent => {
@@ -2286,18 +2297,155 @@ if (!document.querySelector('meta[name="viewport"]')) {
             slider.style.setProperty('accent-color', primaryColor, 'important');
         });
         
-        // === כפתורים ===
-        calc.querySelectorAll('[data-action]').forEach(btn => {
-            if (btn.dataset.action === 'add-loan' || btn.dataset.action === 'remove-loan' || btn.dataset.action === 'calculate') {
+        // === State מקומי לתצוגה מקדימה ===
+        const previewLoans = [];
+        let previewLoanCounter = 0;
+        const loanTypes = [
+            { value: 'credit-card', label: '💳 כרטיס אשראי', defaultRate: 18 },
+            { value: 'bank-loan', label: '🏦 הלוואה בנקאית', defaultRate: 8 },
+            { value: 'car-loan', label: '🚗 הלוואה לרכב', defaultRate: 6 },
+            { value: 'personal-loan', label: '👤 הלוואה אישית', defaultRate: 12 },
+            { value: 'overdraft', label: '📉 מינוס בבנק', defaultRate: 15 },
+            { value: 'store-credit', label: '🛒 אשראי חנות', defaultRate: 20 },
+            { value: 'other', label: '📋 אחר', defaultRate: 10 }
+        ];
+        
+        function formatCurrency(n) { return '₪' + Math.round(n).toLocaleString('he-IL'); }
+        function formatPercent(n) { return n.toFixed(2) + '%'; }
+        
+        function renderPreviewLoans() {
+            const listContainer = calc.querySelector('[class*="loans-list"]');
+            if (!listContainer) return;
+            
+            if (previewLoans.length === 0) {
+                listContainer.innerHTML = '<div style="text-align:center;padding:40px;color:#666;"><div style="font-size:4em;">📋</div><div>לחצו על "הוסף הלוואה" כדי להתחיל</div></div>';
+                return;
+            }
+            
+            let html = '';
+            previewLoans.forEach((loan, index) => {
+                html += '<div class="wpc-calc-consolidation-r8m5-loan-item" data-loan-id="' + loan.id + '">';
+                html += '<div class="wpc-calc-consolidation-r8m5-loan-header"><span class="wpc-calc-consolidation-r8m5-loan-type">הלוואה ' + (index + 1) + '</span>';
+                html += '<button class="wpc-calc-consolidation-r8m5-remove-loan" data-action="remove-loan" data-loan-id="' + loan.id + '">×</button></div>';
+                html += '<div class="wpc-calc-consolidation-r8m5-loan-inputs">';
+                html += '<div class="wpc-calc-consolidation-r8m5-input-group"><label class="wpc-calc-consolidation-r8m5-input-label">סוג</label>';
+                html += '<select class="wpc-calc-consolidation-r8m5-select" data-loan-id="' + loan.id + '" data-field="type">';
+                loanTypes.forEach(t => { html += '<option value="' + t.value + '"' + (loan.type === t.value ? ' selected' : '') + '>' + t.label + '</option>'; });
+                html += '</select></div>';
+                html += '<div class="wpc-calc-consolidation-r8m5-input-group"><label class="wpc-calc-consolidation-r8m5-input-label">יתרה (₪)</label>';
+                html += '<input type="number" class="wpc-calc-consolidation-r8m5-input" value="' + loan.amount + '" data-loan-id="' + loan.id + '" data-field="amount"></div>';
+                html += '<div class="wpc-calc-consolidation-r8m5-input-group"><label class="wpc-calc-consolidation-r8m5-input-label">החזר (₪)</label>';
+                html += '<input type="number" class="wpc-calc-consolidation-r8m5-input" value="' + loan.monthlyPayment + '" data-loan-id="' + loan.id + '" data-field="monthlyPayment"></div>';
+                html += '<div class="wpc-calc-consolidation-r8m5-input-group"><label class="wpc-calc-consolidation-r8m5-input-label">ריבית (%)</label>';
+                html += '<input type="number" class="wpc-calc-consolidation-r8m5-input" value="' + loan.rate + '" data-loan-id="' + loan.id + '" data-field="rate"></div>';
+                html += '</div></div>';
+            });
+            listContainer.innerHTML = html;
+            
+            // הוסף event listeners לשדות החדשים
+            listContainer.querySelectorAll('input, select').forEach(input => {
+                input.addEventListener('input', function(e) {
+                    e.stopPropagation();
+                    updatePreviewLoan(this.dataset.loanId, this.dataset.field, this.value);
+                });
+                input.addEventListener('change', function(e) {
+                    e.stopPropagation();
+                    updatePreviewLoan(this.dataset.loanId, this.dataset.field, this.value);
+                });
+            });
+            
+            listContainer.querySelectorAll('[data-action="remove-loan"]').forEach(btn => {
                 btn.addEventListener('click', function(e) {
                     e.stopPropagation();
-                    // הצג הודעה שזו רק תצוגה מקדימה
-                    if (this.dataset.action === 'calculate') {
-                        alert('זוהי תצוגה מקדימה בלבד. הקוד המלא יעבוד אחרי ההטמעה באתר שלכם!');
-                    }
+                    removePreviewLoan(this.dataset.loanId);
                 });
+            });
+        }
+        
+        function addPreviewLoan() {
+            previewLoanCounter++;
+            previewLoans.push({ id: 'preview-loan-' + previewLoanCounter, type: 'bank-loan', amount: 50000, monthlyPayment: 1500, rate: 8 });
+            renderPreviewLoans();
+            updatePreviewSummary();
+        }
+        
+        function removePreviewLoan(id) {
+            const index = previewLoans.findIndex(l => l.id === id);
+            if (index > -1) previewLoans.splice(index, 1);
+            renderPreviewLoans();
+            updatePreviewSummary();
+        }
+        
+        function updatePreviewLoan(id, field, value) {
+            const loan = previewLoans.find(l => l.id === id);
+            if (loan) {
+                if (field === 'type') {
+                    loan.type = value;
+                    const lt = loanTypes.find(t => t.value === value);
+                    if (lt) loan.rate = lt.defaultRate;
+                    renderPreviewLoans();
+                } else {
+                    loan[field] = parseFloat(value) || 0;
+                }
+                updatePreviewSummary();
             }
-        });
+        }
+        
+        function updatePreviewSummary() {
+            const summaryEl = calc.querySelector('[id*="existing-summary"], [class*="summary"]:not([class*="content"])');
+            if (!summaryEl) return;
+            
+            if (previewLoans.length === 0) {
+                summaryEl.style.display = 'none';
+                return;
+            }
+            summaryEl.style.display = 'block';
+            
+            let totalDebt = 0, totalMonthly = 0, weightedRateSum = 0;
+            previewLoans.forEach(loan => {
+                totalDebt += loan.amount;
+                totalMonthly += loan.monthlyPayment;
+                weightedRateSum += loan.amount * loan.rate;
+            });
+            const avgRate = totalDebt > 0 ? weightedRateSum / totalDebt : 0;
+            
+            const debtEl = calc.querySelector('[id*="total-debt"]');
+            const monthlyEl = calc.querySelector('[id*="total-monthly"]');
+            const rateEl = calc.querySelector('[id*="avg-rate"]');
+            const countEl = calc.querySelector('[id*="loan-count"]');
+            
+            if (debtEl) debtEl.textContent = formatCurrency(totalDebt);
+            if (monthlyEl) monthlyEl.textContent = formatCurrency(totalMonthly);
+            if (rateEl) rateEl.textContent = formatPercent(avgRate);
+            if (countEl) countEl.textContent = previewLoans.length;
+        }
+        
+        // === כפתור הוספת הלוואה ===
+        const addLoanBtn = calc.querySelector('[data-action="add-loan"]');
+        if (addLoanBtn) {
+            addLoanBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                e.preventDefault();
+                addPreviewLoan();
+            });
+        }
+        
+        // === כפתור חישוב ===
+        const calcBtn = calc.querySelector('[data-action="calculate"]');
+        if (calcBtn) {
+            calcBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                e.preventDefault();
+                if (previewLoans.length === 0) {
+                    alert('הוסיפו לפחות הלוואה אחת כדי לחשב');
+                } else {
+                    alert('✅ זוהי תצוגה מקדימה!\n\nהמחשבון המלא עובד - אחרי ההטמעה באתר שלכם, כל הפונקציות יעבדו במלואן.');
+                }
+            });
+        }
+        
+        // אתחל את רשימת ההלוואות הריקה
+        renderPreviewLoans();
         
         // הגדר טאב ראשון כ-active
         const firstTab = tabs[0];
@@ -2313,6 +2461,14 @@ if (!document.querySelector('meta[name="viewport"]')) {
     
     // === העתקת קוד עם צבע נבחר ===
     function copyPreviewCode() {
+        // DataLayer Push - Tag Manager tracking
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            'event': 'copy_code_click',
+            'calculator_name': 'סימולטור איחוד הלוואות',
+            'button_type': 'copy-preview-code'
+        });
+        
         const color = state.selectedColor || '#1e5490';
         const colorName = state.selectedColorName || 'כחול מקצועי';
         

@@ -877,6 +877,14 @@ if (!document.querySelector('meta[name="viewport"]')) {
     }
 
     function copyEmbedCode() {
+        // DataLayer Push - Tag Manager tracking
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            'event': 'copy_code_click',
+            'calculator_name': 'שווי אופציות',
+            'button_type': 'copy-embed-code'
+        });
+        
         const calc = el('wpc-calc-esop-x7m2-calculator').cloneNode(true);
         const css = getEmbedCSS('#1e5490');
         let code = '<style>\n' + css + '\n</style>\n\n<div class="wpc-calc-esop-x7m2-wrapper" id="wpc-calc-esop-x7m2-main">\n' + calc.outerHTML + '\n</div>\n\n';
@@ -1109,6 +1117,14 @@ if (!document.querySelector('meta[name="viewport"]')) {
     }
 
     function copyPreviewCode() {
+        // DataLayer Push - Tag Manager tracking
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            'event': 'copy_code_click',
+            'calculator_name': 'שווי אופציות',
+            'button_type': 'copy-preview-code'
+        });
+        
         const calc = el('wpc-calc-esop-x7m2-calculator').cloneNode(true);
         const css = getEmbedCSS(state.previewColor);
         let code = '<style>\n' + css + '\n</style>\n\n<div class="wpc-calc-esop-x7m2-wrapper" id="wpc-calc-esop-x7m2-main">\n' + calc.outerHTML + '\n</div>\n\n';

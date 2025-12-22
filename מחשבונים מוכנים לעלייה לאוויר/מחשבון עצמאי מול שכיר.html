@@ -1491,6 +1491,14 @@ if (!document.querySelector('meta[name="viewport"]')) {
 
     // === Copy embed code ===
     function copyEmbedCode() {
+        // DataLayer Push - Tag Manager tracking
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            'event': 'copy_code_click',
+            'calculator_name': 'עצמאי מול שכיר',
+            'button_type': 'copy-embed-code'
+        });
+        
         const calc = document.getElementById('wpc-calc-selfvsemp-k4m7-calculator');
         let styles = '';
         document.querySelectorAll('style').forEach(s => {
@@ -1819,6 +1827,14 @@ if (!document.querySelector('meta[name="viewport"]')) {
 
     // === Copy preview code ===
     function copyPreviewCode() {
+        // DataLayer Push - Tag Manager tracking
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            'event': 'copy_code_click',
+            'calculator_name': 'עצמאי מול שכיר',
+            'button_type': 'copy-preview-code'
+        });
+        
         const color = state.selectedColor;
         const calc = document.getElementById('wpc-calc-selfvsemp-k4m7-calculator');
         let styles = '';

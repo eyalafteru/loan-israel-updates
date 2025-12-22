@@ -292,7 +292,7 @@ if (!document.querySelector('meta[name="viewport"]')) {
   height: 80px !important;
   background: var(--wpc-dti-text-dark) !important;
   transform-origin: bottom center !important;
-  transform: translateX(-50%) rotate(-90deg) !important;
+  transform: translateX(-50%) rotate(-90deg);
   transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1) !important;
   border-radius: 2px !important;
 }
@@ -651,11 +651,10 @@ if (!document.querySelector('meta[name="viewport"]')) {
 }
 
 .wpc-calc-dti-k4m7-preview-container {
-  max-height: 400px !important;
-  overflow-y: auto !important;
   border: 1px solid var(--wpc-dti-border) !important;
   border-radius: var(--wpc-dti-radius-sm) !important;
   margin-bottom: 20px !important;
+  overflow: visible !important;
 }
 
 .wpc-calc-dti-k4m7-embed-btn-copy {
@@ -1193,10 +1192,16 @@ if (!document.querySelector('meta[name="viewport"]')) {
         const value = getElement(valueId);
         const badge = getElement(badgeId);
         
+        if (!needle || !value || !badge) {
+            console.error('Gauge elements not found:', needleId, valueId, badgeId);
+            return;
+        }
+        
         // המרת DTI לזווית (0% = -90deg, 50%+ = 90deg)
         let angle = (dti / 50) * 180 - 90;
         angle = Math.max(-90, Math.min(90, angle));
         
+        // עדכון transform ללא important בCSS
         needle.style.transform = `translateX(-50%) rotate(${angle}deg)`;
         value.textContent = formatPercent(dti);
         
@@ -1356,212 +1361,119 @@ if (!document.querySelector('meta[name="viewport"]')) {
     
     // פונקציית יצירת סקריפט להטמעה - גרסה מלאה עם כל הטאבים!
     function getEmbedScript() {
-        const lines = [
-            '<script>',
-            'document.addEventListener("DOMContentLoaded", function() {',
-            '  (function() {',
-            '    "use strict";',
-            '    var NS = "WPC_CalcDTI_Embed_" + Date.now();',
-            '    if (window[NS]) return;',
-            '    var container = document.querySelector("[class*=\\"wpc-calc-dti\\"]");',
-            '    if (!container) return;',
-            '',
-            '    // פונקציות עזר',
-            '    function el(id) { return document.getElementById(id); }',
-            '    function fmt(n) { return Math.round(n).toLocaleString("he-IL") + " ₪"; }',
-            '    function fmtPct(n) { return n.toFixed(1) + "%"; }',
-            '',
-            '    // חישוב הלוואה מקסימלית',
-            '    function calcMaxLoan(maxPay, rate, months) {',
-            '      var r = rate / 100 / 12;',
-            '      if (r === 0) return maxPay * months;',
-            '      return maxPay * (Math.pow(1 + r, months) - 1) / (r * Math.pow(1 + r, months));',
-            '    }',
-            '',
-            '    // מעבר טאבים',
-            '    function switchTab(tabName) {',
-            '      var tabs = container.querySelectorAll("[data-action=\\"switch-tab\\"]");',
-            '      var contents = container.querySelectorAll("[class*=\\"tab-content\\"]");',
-            '      for (var i = 0; i < tabs.length; i++) tabs[i].classList.remove("active");',
-            '      for (var j = 0; j < contents.length; j++) {',
-            '        contents[j].classList.remove("active");',
-            '        contents[j].style.display = "none";',
-            '      }',
-            '      var activeTab = container.querySelector("[data-tab=\\"" + tabName + "\\"]");',
-            '      if (activeTab) activeTab.classList.add("active");',
-            '      var activeContent = el("tab-" + tabName);',
-            '      if (activeContent) {',
-            '        activeContent.classList.add("active");',
-            '        activeContent.style.display = "block";',
-            '      }',
-            '      if (tabName === "basic") calcBasic();',
-            '      else if (tabName === "max-loan") calcMaxLoanTab();',
-            '      else if (tabName === "simulator") calcSimulator();',
-            '    }',
-            '',
-            '    // עדכון מד בטיחות',
-            '    function updateGauge(dti) {',
-            '      var needle = el("basic-gauge-needle");',
-            '      var value = el("basic-dti-value");',
-            '      var badge = el("basic-status-badge");',
-            '      if (!needle || !value || !badge) return;',
-            '      var angle = (dti / 50) * 180 - 90;',
-            '      angle = Math.max(-90, Math.min(90, angle));',
-            '      needle.style.transform = "translateX(-50%) rotate(" + angle + "deg)";',
-            '      value.textContent = fmtPct(dti);',
-            '      value.className = "wpc-calc-dti-k4m7-gauge-value";',
-            '      badge.className = "wpc-calc-dti-k4m7-status-badge";',
-            '      if (dti < 30) {',
-            '        value.classList.add("safe"); badge.classList.add("safe");',
-            '        badge.textContent = "✅ אזור בטוח - סיכויי אישור גבוהים";',
-            '      } else if (dti <= 40) {',
-            '        value.classList.add("warning"); badge.classList.add("warning");',
-            '        badge.textContent = "⚠️ אזור זהירות - ייתכנו הגבלות";',
-            '      } else {',
-            '        value.classList.add("danger"); badge.classList.add("danger");',
-            '        badge.textContent = "❌ אזור סיכון - סיכויי אישור נמוכים";',
-            '      }',
-            '    }',
-            '',
-            '    // === טאב 1: בדיקת יחס החזר ===',
-            '    function calcBasic() {',
-            '      var income = parseInt(el("basic-income-slider")?.value || 20000);',
-            '      var existing = parseInt(el("basic-existing-slider")?.value || 3000);',
-            '      var newLoan = parseInt(el("basic-new-slider")?.value || 2000);',
-            '      if (el("basic-income-value")) el("basic-income-value").textContent = fmt(income);',
-            '      if (el("basic-existing-value")) el("basic-existing-value").textContent = fmt(existing);',
-            '      if (el("basic-new-value")) el("basic-new-value").textContent = fmt(newLoan);',
-            '      var totalPayments = existing + newLoan;',
-            '      var dti = (totalPayments / income) * 100;',
-            '      var remaining = income - totalPayments;',
-            '      if (el("basic-total-payments")) el("basic-total-payments").textContent = fmt(totalPayments);',
-            '      if (el("basic-dti-percent")) el("basic-dti-percent").textContent = fmtPct(dti);',
-            '      if (el("basic-remaining")) el("basic-remaining").textContent = fmt(remaining);',
-            '      updateGauge(dti);',
-            '      if (el("rec-dti")) el("rec-dti").textContent = fmtPct(dti);',
-            '      if (el("rec-max-payment")) el("rec-max-payment").textContent = fmt(Math.max(0, income * 0.4 - existing));',
-            '    }',
-            '',
-            '    // === טאב 2: הלוואה מקסימלית ===',
-            '    function calcMaxLoanTab() {',
-            '      var income = parseInt(el("max-income-slider")?.value || 20000);',
-            '      var existing = parseInt(el("max-existing-slider")?.value || 3000);',
-            '      var years = parseInt(el("max-years-slider")?.value || 5);',
-            '      var rate = parseFloat(el("max-rate-slider")?.value || 6);',
-            '      if (el("max-income-value")) el("max-income-value").textContent = fmt(income);',
-            '      if (el("max-existing-value")) el("max-existing-value").textContent = fmt(existing);',
-            '      if (el("max-years-value")) el("max-years-value").textContent = years + " שנים";',
-            '      if (el("max-rate-value")) el("max-rate-value").textContent = rate + "%";',
-            '      var months = years * 12;',
-            '      var maxPay30 = (income * 0.3) - existing;',
-            '      var maxPay40 = (income * 0.4) - existing;',
-            '      var maxLoan30 = maxPay30 > 0 ? calcMaxLoan(maxPay30, rate, months) : 0;',
-            '      var maxLoan40 = maxPay40 > 0 ? calcMaxLoan(maxPay40, rate, months) : 0;',
-            '      if (el("max-loan-30")) el("max-loan-30").textContent = fmt(Math.max(0, maxLoan30));',
-            '      if (el("max-loan-40")) el("max-loan-40").textContent = fmt(Math.max(0, maxLoan40));',
-            '      if (el("max-payment-allowed")) el("max-payment-allowed").textContent = fmt(Math.max(0, maxPay40));',
-            '    }',
-            '',
-            '    // === טאב 3: סימולטור תרחישים ===',
-            '    function calcSimulator() {',
-            '      var income = parseInt(el("sim-income-slider")?.value || 20000);',
-            '      var existing = parseInt(el("sim-existing-slider")?.value || 5000);',
-            '      if (el("sim-income-value")) el("sim-income-value").textContent = fmt(income);',
-            '      if (el("sim-existing-value")) el("sim-existing-value").textContent = fmt(existing);',
-            '      var newIncome1 = income * 1.2;',
-            '      var dti1 = (existing / newIncome1) * 100;',
-            '      if (el("sim-scenario1-income")) el("sim-scenario1-income").textContent = fmt(newIncome1);',
-            '      if (el("sim-scenario1-dti")) {',
-            '        el("sim-scenario1-dti").textContent = fmtPct(dti1);',
-            '        el("sim-scenario1-dti").style.color = dti1 < 30 ? "#25D366" : dti1 <= 40 ? "#f39c12" : "#e74c3c";',
-            '      }',
-            '      var newExisting2 = Math.max(0, existing - 2000);',
-            '      var dti2 = (newExisting2 / income) * 100;',
-            '      if (el("sim-scenario2-payments")) el("sim-scenario2-payments").textContent = fmt(newExisting2);',
-            '      if (el("sim-scenario2-dti")) {',
-            '        el("sim-scenario2-dti").textContent = fmtPct(dti2);',
-            '        el("sim-scenario2-dti").style.color = dti2 < 30 ? "#25D366" : dti2 <= 40 ? "#f39c12" : "#e74c3c";',
-            '      }',
-            '      var newExisting3 = existing + 4000;',
-            '      var dti3 = (newExisting3 / income) * 100;',
-            '      if (el("sim-scenario3-payments")) el("sim-scenario3-payments").textContent = fmt(newExisting3);',
-            '      if (el("sim-scenario3-dti")) {',
-            '        el("sim-scenario3-dti").textContent = fmtPct(dti3);',
-            '        el("sim-scenario3-dti").style.color = dti3 < 30 ? "#25D366" : dti3 <= 40 ? "#f39c12" : "#e74c3c";',
-            '      }',
-            '    }',
-            '',
-            '    // אירועים',
-            '    container.addEventListener("click", function(e) {',
-            '      var action = e.target.closest("[data-action]");',
-            '      if (!action) return;',
-            '      var act = action.dataset.action;',
-            '      if (act === "switch-tab") switchTab(action.dataset.tab);',
-            '      if (act === "toggle-faq") {',
-            '        var item = action.closest("[class*=\\"faq-item\\"]");',
-            '        if (item) item.classList.toggle("active");',
-            '      }',
-            '    });',
-            '',
-            '    container.addEventListener("input", function(e) {',
-            '      if (e.target.type !== "range") return;',
-            '      var id = e.target.id;',
-            '      if (id.startsWith("basic-")) calcBasic();',
-            '      else if (id.startsWith("max-")) calcMaxLoanTab();',
-            '      else if (id.startsWith("sim-")) calcSimulator();',
-            '    });',
-            '',
-            '    // אתחול',
-            '    calcBasic();',
-            '    calcMaxLoanTab();',
-            '    calcSimulator();',
-            '    window[NS] = { v: "1.0" };',
-            '  })();',
-            '});'
-        ];
-        return lines.join('\\n') + '\\n</' + 'script>';
+        var s = '<scr' + 'ipt>';
+        s += 'document.addEventListener("DOMContentLoaded",function(){';
+        s += '(function(){"use strict";';
+        s += 'var NS="WPC_CalcDTI_Embed_"+Date.now();if(window[NS])return;';
+        s += 'var c=document.querySelector("[class*=\'wpc-calc-dti\']");if(!c)return;';
+        s += 'function el(id){return document.getElementById(id)}';
+        s += 'function fmt(n){return Math.round(n).toLocaleString("he-IL")+" ₪"}';
+        s += 'function fmtPct(n){return n.toFixed(1)+"%"}';
+        s += 'function calcMaxLoan(p,r,m){var x=r/100/12;if(x===0)return p*m;return p*(Math.pow(1+x,m)-1)/(x*Math.pow(1+x,m))}';
+        s += 'function switchTab(t){var tabs=c.querySelectorAll("[data-action=\'switch-tab\']");var contents=c.querySelectorAll("[class*=\'tab-content\']");';
+        s += 'for(var i=0;i<tabs.length;i++)tabs[i].classList.remove("active");';
+        s += 'for(var j=0;j<contents.length;j++){contents[j].classList.remove("active");contents[j].style.display="none"}';
+        s += 'var at=c.querySelector("[data-tab=\'"+t+"\']");if(at)at.classList.add("active");';
+        s += 'var ac=el("tab-"+t);if(ac){ac.classList.add("active");ac.style.display="block"}';
+        s += 'if(t==="basic")calcBasic();else if(t==="max-loan")calcMaxLoanTab();else if(t==="simulator")calcSimulator()}';
+        s += 'function updateGauge(d){var n=el("basic-gauge-needle"),v=el("basic-dti-value"),b=el("basic-status-badge");if(!n||!v||!b)return;';
+        s += 'var a=(d/50)*180-90;a=Math.max(-90,Math.min(90,a));n.style.transform="translateX(-50%) rotate("+a+"deg)";v.textContent=fmtPct(d);';
+        s += 'v.className="wpc-calc-dti-k4m7-gauge-value";b.className="wpc-calc-dti-k4m7-status-badge";';
+        s += 'if(d<30){v.classList.add("safe");b.classList.add("safe");b.textContent="✅ אזור בטוח"}';
+        s += 'else if(d<=40){v.classList.add("warning");b.classList.add("warning");b.textContent="⚠️ אזור זהירות"}';
+        s += 'else{v.classList.add("danger");b.classList.add("danger");b.textContent="❌ אזור סיכון"}}';
+        s += 'function calcBasic(){var i=parseInt(el("basic-income-slider")?.value||20000),e=parseInt(el("basic-existing-slider")?.value||3000),n=parseInt(el("basic-new-slider")?.value||2000);';
+        s += 'if(el("basic-income-value"))el("basic-income-value").textContent=fmt(i);if(el("basic-existing-value"))el("basic-existing-value").textContent=fmt(e);if(el("basic-new-value"))el("basic-new-value").textContent=fmt(n);';
+        s += 'var t=e+n,d=(t/i)*100,r=i-t;if(el("basic-total-payments"))el("basic-total-payments").textContent=fmt(t);if(el("basic-dti-percent"))el("basic-dti-percent").textContent=fmtPct(d);if(el("basic-remaining"))el("basic-remaining").textContent=fmt(r);';
+        s += 'updateGauge(d);if(el("rec-dti"))el("rec-dti").textContent=fmtPct(d);if(el("rec-max-payment"))el("rec-max-payment").textContent=fmt(Math.max(0,i*0.4-e))}';
+        s += 'function calcMaxLoanTab(){var i=parseInt(el("max-income-slider")?.value||20000),e=parseInt(el("max-existing-slider")?.value||3000),y=parseInt(el("max-years-slider")?.value||5),r=parseFloat(el("max-rate-slider")?.value||6);';
+        s += 'if(el("max-income-value"))el("max-income-value").textContent=fmt(i);if(el("max-existing-value"))el("max-existing-value").textContent=fmt(e);if(el("max-years-value"))el("max-years-value").textContent=y+" שנים";if(el("max-rate-value"))el("max-rate-value").textContent=r+"%";';
+        s += 'var m=y*12,p30=(i*0.3)-e,p40=(i*0.4)-e,l30=p30>0?calcMaxLoan(p30,r,m):0,l40=p40>0?calcMaxLoan(p40,r,m):0;';
+        s += 'if(el("max-loan-30"))el("max-loan-30").textContent=fmt(Math.max(0,l30));if(el("max-loan-40"))el("max-loan-40").textContent=fmt(Math.max(0,l40));if(el("max-payment-allowed"))el("max-payment-allowed").textContent=fmt(Math.max(0,p40))}';
+        s += 'function calcSimulator(){var i=parseInt(el("sim-income-slider")?.value||20000),e=parseInt(el("sim-existing-slider")?.value||5000);';
+        s += 'if(el("sim-income-value"))el("sim-income-value").textContent=fmt(i);if(el("sim-existing-value"))el("sim-existing-value").textContent=fmt(e);';
+        s += 'var n1=i*1.2,d1=(e/n1)*100;if(el("sim-scenario1-income"))el("sim-scenario1-income").textContent=fmt(n1);if(el("sim-scenario1-dti")){el("sim-scenario1-dti").textContent=fmtPct(d1);el("sim-scenario1-dti").style.color=d1<30?"#25D366":d1<=40?"#f39c12":"#e74c3c"}';
+        s += 'var e2=Math.max(0,e-2000),d2=(e2/i)*100;if(el("sim-scenario2-payments"))el("sim-scenario2-payments").textContent=fmt(e2);if(el("sim-scenario2-dti")){el("sim-scenario2-dti").textContent=fmtPct(d2);el("sim-scenario2-dti").style.color=d2<30?"#25D366":d2<=40?"#f39c12":"#e74c3c"}';
+        s += 'var e3=e+4000,d3=(e3/i)*100;if(el("sim-scenario3-payments"))el("sim-scenario3-payments").textContent=fmt(e3);if(el("sim-scenario3-dti")){el("sim-scenario3-dti").textContent=fmtPct(d3);el("sim-scenario3-dti").style.color=d3<30?"#25D366":d3<=40?"#f39c12":"#e74c3c"}}';
+        s += 'c.addEventListener("click",function(e){var a=e.target.closest("[data-action]");if(!a)return;var t=a.dataset.action;if(t==="switch-tab")switchTab(a.dataset.tab);if(t==="toggle-faq"){var it=a.closest("[class*=\'faq-item\']");if(it)it.classList.toggle("active")}});';
+        s += 'c.addEventListener("input",function(e){if(e.target.type!=="range")return;var id=e.target.id;if(id.indexOf("basic-")===0)calcBasic();else if(id.indexOf("max-")===0)calcMaxLoanTab();else if(id.indexOf("sim-")===0)calcSimulator()});';
+        s += 'calcBasic();calcMaxLoanTab();calcSimulator();window[NS]={v:"1.0"}})()});';
+        s += '</scr' + 'ipt>';
+        return s;
     }
     
     // העתקת קוד הטמעה
     function copyEmbedCode(color) {
         color = color || '#1e5490';
         
-        // קבל את ה-CSS
+        // קבל את ה-CSS מתגית ה-style הראשית
         let styles = '';
-        document.querySelectorAll('style').forEach(function(style) {
-            if (style.textContent.includes('wpc-calc-dti-k4m7')) {
-                styles = style.textContent;
+        const styleElements = document.querySelectorAll('style');
+        for (let i = 0; i < styleElements.length; i++) {
+            const styleContent = styleElements[i].textContent;
+            if (styleContent.includes('wpc-calc-dti-k4m7-wrapper')) {
+                styles = styleContent;
+                break;
             }
-        });
+        }
+        
+        if (!styles) {
+            console.error('CSS not found!');
+            alert('שגיאה: לא נמצא CSS. נסה שוב.');
+            return;
+        }
         
         // החלף צבע ראשי
         styles = styles.replace(/#1e5490/g, color);
+        styles = styles.replace(/--wpc-dti-primary:\s*#1e5490/g, '--wpc-dti-primary: ' + color);
         
         // קבל את ה-HTML של המחשבון בלבד (ללא embed section)
         const calculator = document.getElementById('wpc-calc-dti-k4m7-calculator');
         const titleSection = container.querySelector('.wpc-calc-dti-k4m7-title-container');
         
-        let code = '<style>\\n' + styles + '\\n</style>\\n\\n';
-        code += '<div class="wpc-calc-dti-k4m7-wrapper" id="wpc-calc-dti-k4m7-main">\\n';
-        if (titleSection) code += titleSection.outerHTML + '\\n';
-        if (calculator) code += calculator.outerHTML + '\\n';
-        code += '</div>\\n\\n';
+        if (!calculator) {
+            console.error('Calculator not found!');
+            alert('שגיאה: לא נמצא מחשבון.');
+            return;
+        }
+        
+        // בניית הקוד - ללא הכותרת הראשית (כי מכילה shortcode של וורדפרס)
+        var code = '<style>' + styles + '</style>';
+        code += '<div class="wpc-calc-dti-k4m7-wrapper" id="wpc-calc-dti-k4m7-main">';
+        code += calculator.outerHTML;
+        code += '</div>';
         
         // הוסף קרדיט
-        code += '<p style="text-align:center; font-size:0.9em; margin-top:20px; color:#666;">\\n';
-        code += '  מחשבון יחס החזר מהכנסה פותח על ידי \\n';
-        code += '  <a href="https://loan-israel.co.il/" target="_blank" rel="nofollow noopener" ';
-        code += 'style="color:' + color + '; text-decoration:underline;">רק תבקש פיננסים</a>\\n';
-        code += '</p>\\n\\n';
+        code += '<p style="text-align:center; font-size:0.9em; margin-top:20px; color:#666;">';
+        code += 'מחשבון יחס החזר מהכנסה פותח על ידי ';
+        code += '<a href="https://loan-israel.co.il/" target="_blank" rel="nofollow noopener" ';
+        code += 'style="color:' + color + '; text-decoration:underline;">רק תבקש פיננסים</a>';
+        code += '</p>';
         
         // הוסף JavaScript
         code += getEmbedScript();
         
+        // העתק ללוח
         navigator.clipboard.writeText(code).then(function() {
-            alert('✅ הקוד הועתק בהצלחה! הדביקו אותו בעורך וורדפרס.');
+            const cssLen = styles.length;
+            const jsLen = getEmbedScript().length;
+            alert('✅ הקוד הועתק בהצלחה!\n\nכולל:\n• CSS: ' + Math.round(cssLen/1024) + 'KB\n• HTML של המחשבון\n• JavaScript מלא\n• קרדיט\n\nהדביקו בעורך וורדפרס.');
         }).catch(function(err) {
             console.error('שגיאה בהעתקה:', err);
-            alert('שגיאה בהעתקה. נסה שוב.');
+            // Fallback
+            const textarea = document.createElement('textarea');
+            textarea.value = code;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+                document.execCommand('copy');
+                alert('✅ הקוד הועתק!');
+            } catch(e) {
+                alert('שגיאה בהעתקה. נסה שוב.');
+            }
+            document.body.removeChild(textarea);
         });
     }
     
@@ -1616,7 +1528,14 @@ if (!document.querySelector('meta[name="viewport"]')) {
             }
         }
         
-        // חישוב בסיסי
+        // חישוב הלוואה מקסימלית
+        function calcMaxLoanFormula(maxPay, rate, months) {
+            const r = rate / 100 / 12;
+            if (r === 0) return maxPay * months;
+            return maxPay * (Math.pow(1 + r, months) - 1) / (r * Math.pow(1 + r, months));
+        }
+        
+        // === טאב 1: חישוב בסיסי ===
         function calcPreviewBasic() {
             const incomeSlider = getEl('preview-basic-income-slider');
             const existingSlider = getEl('preview-basic-existing-slider');
@@ -1648,6 +1567,102 @@ if (!document.querySelector('meta[name="viewport"]')) {
             if (remainingEl) remainingEl.textContent = fmtCurrency(remaining);
             
             updatePreviewGauge(dti);
+            
+            // המלצה
+            const recDti = getEl('preview-rec-dti');
+            const recMax = getEl('preview-rec-max-payment');
+            if (recDti) recDti.textContent = fmtPercent(dti);
+            if (recMax) recMax.textContent = fmtCurrency(Math.max(0, income * 0.4 - existing));
+        }
+        
+        // === טאב 2: הלוואה מקסימלית ===
+        function calcPreviewMaxLoan() {
+            const incomeSlider = getEl('preview-max-income-slider');
+            const existingSlider = getEl('preview-max-existing-slider');
+            const yearsSlider = getEl('preview-max-years-slider');
+            const rateSlider = getEl('preview-max-rate-slider');
+            if (!incomeSlider) return;
+            
+            const income = parseInt(incomeSlider.value);
+            const existing = parseInt(existingSlider?.value || 3000);
+            const years = parseInt(yearsSlider?.value || 5);
+            const rate = parseFloat(rateSlider?.value || 6);
+            
+            // עדכון תצוגת ערכים
+            const incomeVal = getEl('preview-max-income-value');
+            const existingVal = getEl('preview-max-existing-value');
+            const yearsVal = getEl('preview-max-years-value');
+            const rateVal = getEl('preview-max-rate-value');
+            
+            if (incomeVal) incomeVal.textContent = fmtCurrency(income);
+            if (existingVal) existingVal.textContent = fmtCurrency(existing);
+            if (yearsVal) yearsVal.textContent = years + ' שנים';
+            if (rateVal) rateVal.textContent = rate + '%';
+            
+            // חישובים
+            const months = years * 12;
+            const maxPay30 = (income * 0.3) - existing;
+            const maxPay40 = (income * 0.4) - existing;
+            const maxLoan30 = maxPay30 > 0 ? calcMaxLoanFormula(maxPay30, rate, months) : 0;
+            const maxLoan40 = maxPay40 > 0 ? calcMaxLoanFormula(maxPay40, rate, months) : 0;
+            
+            // עדכון תוצאות
+            const loan30El = getEl('preview-max-loan-30');
+            const loan40El = getEl('preview-max-loan-40');
+            const paymentEl = getEl('preview-max-payment-allowed');
+            
+            if (loan30El) loan30El.textContent = fmtCurrency(Math.max(0, maxLoan30));
+            if (loan40El) loan40El.textContent = fmtCurrency(Math.max(0, maxLoan40));
+            if (paymentEl) paymentEl.textContent = fmtCurrency(Math.max(0, maxPay40));
+        }
+        
+        // === טאב 3: סימולטור ===
+        function calcPreviewSimulator() {
+            const incomeSlider = getEl('preview-sim-income-slider');
+            const existingSlider = getEl('preview-sim-existing-slider');
+            if (!incomeSlider) return;
+            
+            const income = parseInt(incomeSlider.value);
+            const existing = parseInt(existingSlider?.value || 5000);
+            
+            // עדכון תצוגת ערכים
+            const incomeVal = getEl('preview-sim-income-value');
+            const existingVal = getEl('preview-sim-existing-value');
+            if (incomeVal) incomeVal.textContent = fmtCurrency(income);
+            if (existingVal) existingVal.textContent = fmtCurrency(existing);
+            
+            // תרחיש 1: העלאת משכורת ב-20%
+            const newIncome1 = income * 1.2;
+            const dti1 = (existing / newIncome1) * 100;
+            const s1Income = getEl('preview-sim-scenario1-income');
+            const s1Dti = getEl('preview-sim-scenario1-dti');
+            if (s1Income) s1Income.textContent = fmtCurrency(newIncome1);
+            if (s1Dti) {
+                s1Dti.textContent = fmtPercent(dti1);
+                s1Dti.style.color = dti1 < 30 ? '#25D366' : dti1 <= 40 ? '#f39c12' : '#e74c3c';
+            }
+            
+            // תרחיש 2: סגירת הלוואה של 2000
+            const newExisting2 = Math.max(0, existing - 2000);
+            const dti2 = (newExisting2 / income) * 100;
+            const s2Payments = getEl('preview-sim-scenario2-payments');
+            const s2Dti = getEl('preview-sim-scenario2-dti');
+            if (s2Payments) s2Payments.textContent = fmtCurrency(newExisting2);
+            if (s2Dti) {
+                s2Dti.textContent = fmtPercent(dti2);
+                s2Dti.style.color = dti2 < 30 ? '#25D366' : dti2 <= 40 ? '#f39c12' : '#e74c3c';
+            }
+            
+            // תרחיש 3: לקיחת משכנתא 4000
+            const newExisting3 = existing + 4000;
+            const dti3 = (newExisting3 / income) * 100;
+            const s3Payments = getEl('preview-sim-scenario3-payments');
+            const s3Dti = getEl('preview-sim-scenario3-dti');
+            if (s3Payments) s3Payments.textContent = fmtCurrency(newExisting3);
+            if (s3Dti) {
+                s3Dti.textContent = fmtPercent(dti3);
+                s3Dti.style.color = dti3 < 30 ? '#25D366' : dti3 <= 40 ? '#f39c12' : '#e74c3c';
+            }
         }
         
         // טאבים עם stopPropagation
@@ -1679,14 +1694,26 @@ if (!document.querySelector('meta[name="viewport"]')) {
                     activeContent.classList.add('active');
                     activeContent.style.display = 'block';
                 }
+                
+                // חישוב מחדש לפי הטאב
+                if (tabName === 'basic') calcPreviewBasic();
+                else if (tabName === 'max-loan') calcPreviewMaxLoan();
+                else if (tabName === 'simulator') calcPreviewSimulator();
             });
         });
         
-        // סליידרים עם stopPropagation
+        // סליידרים עם stopPropagation - קריאה לפונקציה הנכונה לפי הטאב
         calc.querySelectorAll('input[type="range"]').forEach(function(slider) {
             slider.addEventListener('input', function(e) {
                 e.stopPropagation();
-                calcPreviewBasic();
+                const id = this.id;
+                if (id.includes('basic-')) {
+                    calcPreviewBasic();
+                } else if (id.includes('max-')) {
+                    calcPreviewMaxLoan();
+                } else if (id.includes('sim-')) {
+                    calcPreviewSimulator();
+                }
             });
             slider.style.setProperty('accent-color', primaryColor, 'important');
         });
@@ -1700,8 +1727,10 @@ if (!document.querySelector('meta[name="viewport"]')) {
             });
         });
         
-        // אתחול ראשוני
+        // אתחול ראשוני - כל הטאבים
         calcPreviewBasic();
+        calcPreviewMaxLoan();
+        calcPreviewSimulator();
     }
     
     // הצגת תצוגה מקדימה - גרסה מתוקנת!
@@ -1798,6 +1827,14 @@ if (!document.querySelector('meta[name="viewport"]')) {
     
     // העתקת קוד מהתצוגה המקדימה
     function copyPreviewCode() {
+        // DataLayer Push - Tag Manager tracking
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            'event': 'copy_code_click',
+            'calculator_name': '🏦 מחשבון יחס החזר מהכנסה (DTI) - האם יאשרו לי הלוואה?',
+            'button_type': 'copy-preview-code'
+        });
+        
         copyEmbedCode(currentPreviewColor);
     }
     

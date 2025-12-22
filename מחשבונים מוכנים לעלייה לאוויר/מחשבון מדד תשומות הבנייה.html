@@ -1767,6 +1767,14 @@ if (!document.querySelector('meta[name="viewport"]')) {
     
     // === Copy Embed Code ===
     function copyEmbedCode() {
+        // DataLayer Push - Tag Manager tracking
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            'event': 'copy_code_click',
+            'calculator_name': '🏗️ מחשבון הצמדה למדד תשומות הבנייה',
+            'button_type': 'copy-embed-code'
+        });
+        
         const calculatorHTML = document.getElementById('wpc-calc-index-b5m3-calculator').outerHTML;
         
         // Get styles
@@ -1787,6 +1795,14 @@ if (!document.querySelector('meta[name="viewport"]')) {
     }
     
     function copyPreviewCode() {
+        // DataLayer Push - Tag Manager tracking
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            'event': 'copy_code_click',
+            'calculator_name': '🏗️ מחשבון הצמדה למדד תשומות הבנייה',
+            'button_type': 'copy-preview-code'
+        });
+        
         copyEmbedCode();
     }
     

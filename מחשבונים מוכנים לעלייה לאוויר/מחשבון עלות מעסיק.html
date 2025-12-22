@@ -1973,6 +1973,14 @@ if (!document.querySelector('meta[name="viewport"]')) {
     }
 
     function copyEmbedCode() {
+        // DataLayer Push - Tag Manager tracking
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            'event': 'copy_code_click',
+            'calculator_name': 'עלות מעסיק',
+            'button_type': 'copy-embed-code'
+        });
+        
         const calculator = document.getElementById('wpc-calc-employer-k7m3-calculator');
         let styles = '';
         document.querySelectorAll('style').forEach(s => { if (s.textContent.includes('wpc-calc-employer-k7m3')) styles = s.textContent; });
@@ -2341,6 +2349,14 @@ if (!document.querySelector('meta[name="viewport"]')) {
     }
 
     function copyPreviewCode() {
+        // DataLayer Push - Tag Manager tracking
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            'event': 'copy_code_click',
+            'calculator_name': 'עלות מעסיק',
+            'button_type': 'copy-preview-code'
+        });
+        
         const color = state.selectedColor;
         let styles = '';
         document.querySelectorAll('style').forEach(s => { if (s.textContent.includes('wpc-calc-employer-k7m3')) styles = s.textContent.replace(/#1e5490/g, color).replace(/#163d6b/g, darkenColor(color, 15)); });
