@@ -244,6 +244,72 @@ if (!document.querySelector('meta[name="viewport"]')) {
 
 ---
 
+## 🚨 תאימות JavaScript לוורדפרס - חובה מוחלטת!
+
+### כללי ES5 - וורדפרס ממיר קוד ES6!
+
+**וורדפרס עלול לשבור את הקוד שלך!** יש להקפיד על הכללים הבאים:
+
+| ❌ אסור (ES6) | ✅ חובה (ES5) | סיבה |
+|--------------|--------------|------|
+| `const x = 5` | `var x = 5` | וורדפרס לא תומך בconst/let |
+| `let y = 10` | `var y = 10` | וורדפרס לא תומך בconst/let |
+| `() => {}` | `function() {}` | Arrow functions לא עובדות |
+| `...args` | `arguments` | Spread operator נשבר |
+| `` `template ${x}` `` | `'string ' + x` | Template literals לא עובדות |
+| `&&` | `if() { if() {} }` | **וורדפרס ממיר ל-`&#038;&#038;`!** |
+| `\|\|` | `x ? x : y` | **וורדפרס ממיר ל-HTML entities!** |
+| `₪` | `\u20AA` | תווים מיוחדים צריכים Unicode escape |
+| `<script>` | `'<scr' + 'ipt>'` | וורדפרס מפרש כתג script |
+| `</script>` | `'</' + 'script>'` | וורדפרס מפרש כסגירת script |
+
+### דוגמאות קוד נכון:
+
+```javascript
+// ❌ שגוי - ES6
+const calculate = (a, b) => a + b;
+const result = values.map(v => v * 2);
+if (a && b) { doSomething(); }
+const text = `סכום: ₪${amount}`;
+
+// ✅ נכון - ES5
+var calculate = function(a, b) { return a + b; };
+var result = values.map(function(v) { return v * 2; });
+if (a) { if (b) { doSomething(); } }
+var text = 'סכום: \u20AA' + amount;
+```
+
+### דוגמה לפונקציית debounce תקינה:
+```javascript
+// ✅ ES5 תקין לוורדפרס
+function debounce(func, wait) {
+    var timeout;
+    return function executedFunction() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            func.apply(context, args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+```
+
+### דוגמה ללולאה תקינה (ללא &&):
+```javascript
+// ❌ שגוי
+while (balance < target && years < 100) { ... }
+
+// ✅ נכון
+while (balance < target) { 
+    if (!(years < 100)) break; 
+    ...
+}
+```
+
+---
+
 ## ⚡ דרישות קוד JavaScript חובה
 
 ### מבנה קוד בטוח (IIFE - פונקציה שמורצת מיד)
@@ -517,84 +583,127 @@ function העתק_קוד_הטמעה() {
 }
 ```
 
-### 8. פונקציית קבל_קוד_הטמעה - קוד עצמאי להטמעה
+### 8. 🚨 העתקת הסקריפט המקורי - הגישה הנכונה!
 
-**עקרונות חשובים:**
-1. **עטיפה בהמתנה לטעינת העמוד** - מוודא שהעמוד מוכן לפני הרצת הקוד
-2. **תחביר ישן יותר** - `var` במקום `const/let`, פונקציות רגילות
-3. **סגירת תג סקריפט בטוחה** - `'</' + 'script>'` למניעת פרשנות שגויה
-4. **בניית הקוד כמערך שורות** - למניעת בעיות עם תווים מיוחדים
+**עקרון חשוב:**
+במקום לבנות סקריפט חדש מאפס (שעלול לא לעבוד), יש **להעתיק את הסקריפט המקורי מה-DOM** - זה מבטיח שהקוד שכבר עובד בדף יעבוד גם בהטמעה.
 
+**❌ הגישה הישנה (לא לעשות!):**
 ```javascript
-function קבל_קוד_הטמעה() {
-    const שורות = [
+// ❌ בניית סקריפט מאפס - עלול לא לעבוד!
+function getEmbedScript() {
+    const scriptLines = [
         '<script>',
         'document.addEventListener("DOMContentLoaded", function() {',
-        '  (function() {',
-        '    "use strict";',
-        '    var שם = "WPC_Calc[נושא]_הטמעה";',
-        '    if (window[שם]) return;',
-        '    var מיכל = document.getElementById("wpc-calc-[נושא]-[מזהה]-main");',
-        '    if (!מיכל) { console.error("המחשבון לא נמצא"); return; }',
-        '',
-        '    // === פונקציות חישוב ===',
-        '    function עצב_מטבע(n) { return Math.round(n).toLocaleString("he-IL") + " ₪"; }',
-        '    // ... שאר פונקציות החישוב ...',
-        '',
-        '    // === ניהול מצב ===',
-        '    var מצב = {',
-        '      לשונית1: { /* ערכים התחלתיים */ },',
-        '      לשונית2: { /* ערכים התחלתיים */ }',
-        '    };',
-        '',
-        '    // === פונקציות עדכון לכל לשונית ===',
-        '    function אלמנט(מזהה) { return document.getElementById(מזהה); }',
-        '    function עדכן_לשונית1() { /* עדכון אלמנטים לפי מצב */ }',
-        '    function עדכן_לשונית2() { /* עדכון אלמנטים לפי מצב */ }',
-        '',
-        '    // === מעבר בין לשוניות ===',
-        '    function עבור_ללשונית(לשונית) {',
-        '      var לשוניות = מיכל.querySelectorAll(".wpc-calc-[נושא]-[מזהה]-tab-btn");',
-        '      var תכנים = מיכל.querySelectorAll(".wpc-calc-[נושא]-[מזהה]-tab-content");',
-        '      for (var i = 0; i < לשוניות.length; i++) לשוניות[i].classList.remove("active");',
-        '      for (var j = 0; j < תכנים.length; j++) תכנים[j].classList.remove("active");',
-        '      var כפתור = מיכל.querySelector("[data-tab=\\"" + לשונית + "\\"]");',
-        '      if (כפתור) כפתור.classList.add("active");',
-        '      var תוכן = document.getElementById("tab-" + לשונית);',
-        '      if (תוכן) תוכן.classList.add("active");',
-        '    }',
-        '',
-        '    // === טיפול באירועים ===',
-        '    מיכל.addEventListener("click", function(e) {',
-        '      var פעולה = e.target.closest("[data-action]");',
-        '      if (!פעולה) return;',
-        '      var סוג = פעולה.dataset.action;',
-        '      if (סוג === "switch-tab") עבור_ללשונית(פעולה.dataset.tab);',
-        '      // ... טיפול בשאר הפעולות ...',
-        '    });',
-        '',
-        '    מיכל.addEventListener("input", function(e) {',
-        '      var מזהה = e.target.id;',
-        '      // טיפול בפסי גלילה לפי מזהה',
-        '      if (מזהה === "לשונית1-slider") { מצב.לשונית1.ערך = parseInt(e.target.value); עדכן_לשונית1(); }',
-        '    });',
-        '',
-        '    // === אתחול ===',
-        '    עדכן_לשונית1(); עדכן_לשונית2();',
-        '    window[שם] = { גרסה: "1.0.0" };',
-        '  })();',
-        '});'
+        // ... סקריפט מינימלי שלא תמיד עובד
     ];
-    // סגירת תג סקריפט בצורה בטוחה
-    return שורות.join('\\n') + '\\n</' + 'script>';
+    return scriptLines.join('\n');
 }
 ```
 
-**חשוב - התאמת מזהים:**
-ודא שהמזהים בקוד תואמים בדיוק לתוכן:
-- פסי גלילה: `[שם-לשונית]-[שדה]-slider` (לדוגמה: `basic-gross-slider`)
-- ערכים: `[שם-לשונית]-[שדה]-value` (לדוגמה: `basic-gross-value`)  
-- תוצאות: `[שם-לשונית]-result-[שדה]` (לדוגמה: `basic-result-net`)
+**✅ הגישה הנכונה - העתקת הסקריפט המקורי:**
+```javascript
+function העתק_קוד_הטמעה() {
+    let קוד = '';
+    
+    // 1. Viewport Script - חובה בתחילה
+    קוד += '<script>\n';
+    קוד += 'if (!document.querySelector(\'meta[name="viewport"]\')) {\n';
+    קוד += '  const viewport = document.createElement(\'meta\');\n';
+    קוד += '  viewport.name = \'viewport\';\n';
+    קוד += '  viewport.content = \'width=device-width, initial-scale=1.0, user-scalable=yes\';\n';
+    קוד += '  document.head.appendChild(viewport);\n';
+    קוד += '}\n';
+    קוד += '<\/script>\n\n';
+    
+    // 2. CSS - מציאת ה-style element הארוך ביותר עם הקידומת שלנו
+    let styleElement = null;
+    let maxLength = 0;
+    const allStyles = document.querySelectorAll('style');
+    for (let style of allStyles) {
+        if (style.textContent.includes('wpc-calc-[נושא]-[מזהה]') && style.textContent.length > maxLength) {
+            styleElement = style;
+            maxLength = style.textContent.length;
+        }
+    }
+    if (styleElement) {
+        קוד += styleElement.outerHTML + '\n\n';
+    }
+    
+    // 3. HTML - המחשבון בלבד
+    const מחשבון = document.getElementById('wpc-calc-[נושא]-[מזהה]-calculator');
+    if (מחשבון) {
+        const שכפול = מחשבון.cloneNode(true);
+        קוד += '<div class="wpc-calc-[נושא]-[מזהה]-wrapper" id="wpc-calc-[נושא]-[מזהה]-main">\n';
+        קוד += שכפול.outerHTML + '\n';
+        קוד += '</div>\n';
+    }
+    
+    // 4. קרדיט דינמי
+    קוד += `<p style="text-align:center; font-size:0.9em; margin-top:20px; color:#666;">
+        מחשבון ${שם_המחשבון} פותח על ידי 
+        <a href="https://loan-israel.co.il/" target="_blank" rel="nofollow noopener" 
+           style="color:#1e5490; text-decoration:underline;">
+           רק תבקש פיננסים
+        </a>
+    </p>\n\n`;
+    
+    // 5. ✅ JavaScript הראשי - מעתיק את הסקריפט המקורי מה-DOM!
+    const allScripts = Array.from(document.querySelectorAll('script'));
+    const mainScript = allScripts.find(s => 
+        s.textContent && s.textContent.includes('WPC_Calc[נושא]_[מזהה]')
+    );
+    
+    if (mainScript) {
+        קוד += mainScript.outerHTML + '\n';
+    }
+    
+    navigator.clipboard.writeText(קוד).then(() => {
+        alert('✅ הקוד הועתק בהצלחה! הדביקו באתר שלכם במצב Text/HTML');
+    });
+}
+```
+
+**יתרונות הגישה הזו:**
+1. ✅ **מעתיק קוד שעובד** - בדיוק אותו JavaScript שרץ בדף
+2. ✅ **אין צורך לתחזק שתי גרסאות** - גרסה אחת עובדת בכל מקום
+3. ✅ **כל הלשוניות עובדות** - לא רק הראשונה
+4. ✅ **כל החישובים מדויקים** - אותן נוסחאות כמו בדף המקורי
+5. ✅ **תאימות מלאה לוורדפרס** - מבנה זהה למחשבון משכנתא שעובד מצוין
+
+**התאמה לתצוגה מקדימה עם צבע:**
+```javascript
+function העתק_קוד_תצוגה() {
+    const צבע = state.selectedColor;
+    const צבע_כהה = הכהה_צבע(צבע, 15);
+    
+    let קוד = '';
+    
+    // 1. Viewport...
+    // 2. CSS - עם החלפת צבעים!
+    let styleElement = null;
+    let maxLength = 0;
+    const allStyles = document.querySelectorAll('style');
+    for (let style of allStyles) {
+        if (style.textContent.includes('wpc-calc-[נושא]-[מזהה]') && style.textContent.length > maxLength) {
+            styleElement = style;
+            maxLength = style.textContent.length;
+        }
+    }
+    if (styleElement) {
+        let modifiedStyles = styleElement.textContent
+            .replace(/#1e5490/g, צבע)
+            .replace(/#163d6b/g, צבע_כהה);
+        קוד += '<style>\n' + modifiedStyles + '\n</style>\n\n';
+    }
+    
+    // 3. HTML...
+    // 4. קרדיט עם הצבע הנבחר...
+    // 5. JavaScript המקורי...
+    
+    navigator.clipboard.writeText(קוד);
+}
+```
 
 ### 9. קרדיט דינמי לעמוד הבית
 הקרדיט תמיד מפנה לעמוד הבית עם:
@@ -688,6 +797,58 @@ const שמות_מחשבונים = {
 ---
 
 ## ⚠️ אזורים חובה בכל עמוד
+
+### 🚨 CSS לאזור AWG - חובה להשתמש ב-max-height ולא display:none!
+
+**בעיה:** כשמשתמשים ב-`display: none` על אזור ה-AWG, טפסי וורדפרס לא מאותחלים!
+
+```css
+/* ❌ שגוי - הטופס לא יעבוד! */
+.wpc-calc-[נושא]-[מזהה]-awg-content {
+    display: none !important;
+}
+
+/* ✅ נכון - מאפשר לטופס להתאתחל */
+.wpc-calc-[נושא]-[מזהה]-awg-content {
+    max-height: 0 !important;
+    overflow: hidden !important;
+    opacity: 0 !important;
+    transition: max-height 0.4s ease, opacity 0.3s ease !important;
+}
+
+.wpc-calc-[נושא]-[מזהה]-awg-content.active {
+    max-height: 2000px !important;
+    opacity: 1 !important;
+    overflow: visible !important;
+}
+```
+
+**פונקציית openAWG נכונה:**
+```javascript
+function openAWG() {
+    var awgContent = document.getElementById('awg-content');
+    if (!awgContent) return;
+    
+    var isOpening = !awgContent.classList.contains('active');
+    awgContent.classList.toggle('active');
+    
+    if (isOpening) {
+        // גלילה לאזור
+        setTimeout(function() {
+            awgContent.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 100);
+        // 🚨 חובה! שולח resize לאתחול טפסי וורדפרס
+        setTimeout(function() {
+            window.dispatchEvent(new Event('resize'));
+        }, 400);
+        if (typeof jQuery !== 'undefined') {
+            setTimeout(function() {
+                jQuery(window).trigger('resize');
+            }, 450);
+        }
+    }
+}
+```
 
 ### 1. אזור בדיקת זכאות עם כפתורים כפולים
 ```html
@@ -802,11 +963,10 @@ function חשב_הפקדה_נדרשת(יעד, סכום_התחלתי, ריבית_
 - [ ] הוראות הטמעה ברורות
 - [ ] כפתור העתקת קוד
 - [ ] 10 עיגולי צבע (ללא טקסט, רק טולטיפ) + בוחר צבע חופשי
-- [ ] קוד כולל עיצוב + תוכן + קוד עצמאי
-- [ ] קוד עטוף בהמתנה לטעינת עמוד
-- [ ] קוד בתחביר ישן יותר (var, function רגיל)
-- [ ] סגירת תג סקריפט בטוחה
-- [ ] מזהים בקוד תואמים לתוכן בדיוק
+- [ ] **קוד כולל viewport + CSS + HTML + קרדיט + JavaScript**
+- [ ] **🚨 JavaScript מועתק מה-DOM (mainScript.outerHTML) - לא getEmbedScript!**
+- [ ] מציאת הסקריפט עם `querySelectorAll('script')` ו-`includes('WPC_Calc...')`
+- [ ] CSS נמצא עם החלפת צבעים אם יש תצוגה מקדימה
 - [ ] כל הלשוניות עובדות בהטמעה
 - [ ] תצוגה מקדימה חיה עובדת (כל הלשוניות)
 - [ ] כפתור העתקה עם צבע נבחר
@@ -830,12 +990,23 @@ function חשב_הפקדה_נדרשת(יעד, סכום_התחלתי, ריבית_
 - [ ] פונקציות הטמעה מלאות
 - [ ] תצוגה מקדימה עובדת עם כל הלשוניות
 
+### 🚨 תאימות וורדפרס (ES5):
+- [ ] **אין Arrow Functions** - רק `function() {}`
+- [ ] **אין const/let** - רק `var`
+- [ ] **אין Template Literals** - רק string concatenation
+- [ ] **אין && או ||** - להחליף ב-`if` מקונן או ternary
+- [ ] **אין ₪** - להחליף ב-`\u20AA`
+- [ ] **פיצול תג script** - `'<scr' + 'ipt>'`
+- [ ] **AWG עם max-height** - לא display:none
+- [ ] **resize event ב-openAWG** - לאתחול טפסי וורדפרס
+
 ### בדיקות סופיות:
 - [ ] עברית 100% (אין אנגלית בממשק!)
 - [ ] מתאים לנייד - 375 פיקסל עובד
 - [ ] כל הכפתורים פעילים
 - [ ] הטמעה חיצונית עובדת (כל הלשוניות, כל הפסי גלילה)
 - [ ] קרדיט דינמי מופיע בקוד המיוצא
+- [ ] **בדיקה בוורדפרס** - JavaScript עובד!
 
 ---
 

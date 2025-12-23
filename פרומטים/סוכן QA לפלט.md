@@ -1865,6 +1865,73 @@ if (content.includes('loan-israel.co.il') && !content.includes('nofollow')) {
 
 ### 7️⃣ בדיקת JavaScript להטמעה (getEmbedScript)
 
+#### 🚨 בדיקות תאימות וורדפרס - קריטי!
+
+```javascript
+// === בדיקות ES5 לתאימות וורדפרס ===
+function checkWordPressCompatibility(content) {
+    var errors = [];
+    
+    // 1. בדוק Arrow Functions
+    var arrowFunctions = content.match(/=>\s*{|=>\s*[^{]/g);
+    if (arrowFunctions) {
+        errors.push('❌ נמצאו Arrow Functions (' + arrowFunctions.length + ') - להחליף ל-function() {}');
+    }
+    
+    // 2. בדוק const/let
+    var constLet = content.match(/\bconst\s+\w|let\s+\w/g);
+    if (constLet) {
+        errors.push('❌ נמצאו const/let (' + constLet.length + ') - להחליף ל-var');
+    }
+    
+    // 3. בדוק && ו-|| (וורדפרס ממיר ל-HTML entities!)
+    var logicalOperators = content.match(/\s&&\s|\s\|\|\s/g);
+    if (logicalOperators) {
+        errors.push('🚨 נמצאו && או || (' + logicalOperators.length + ') - וורדפרס ממיר אותם לHTML entities!');
+    }
+    
+    // 4. בדוק ₪ (צריך Unicode escape)
+    var shekelSymbol = content.match(/₪/g);
+    if (shekelSymbol) {
+        errors.push('❌ נמצא סימן ₪ (' + shekelSymbol.length + ') - להחליף ל-\\u20AA');
+    }
+    
+    // 5. בדוק <script> לא מפוצל
+    var scriptTags = content.match(/'<script>'|"<script>"|'<\/script>'|"<\/script>"/g);
+    if (scriptTags) {
+        errors.push('❌ נמצאו תגיות script לא מפוצלות - להחליף ל-\'<scr\' + \'ipt>\'');
+    }
+    
+    // 6. בדוק Template Literals
+    var templateLiterals = content.match(/`[^`]*\${/g);
+    if (templateLiterals) {
+        errors.push('❌ נמצאו Template Literals (' + templateLiterals.length + ') - להחליף לחיבור מחרוזות');
+    }
+    
+    if (errors.length === 0) {
+        console.log('✅ הקוד תואם ES5 ויעבוד בוורדפרס!');
+    } else {
+        console.error('🚨 בעיות תאימות וורדפרס:');
+        errors.forEach(function(e) { console.error('   ' + e); });
+    }
+    
+    return errors;
+}
+```
+
+### טבלת תאימות וורדפרס:
+
+| ❌ ES6 (לא עובד) | ✅ ES5 (עובד) | הערה |
+|-----------------|--------------|------|
+| `const x = 5` | `var x = 5` | וורדפרס לא תומך |
+| `let y = 10` | `var y = 10` | וורדפרס לא תומך |
+| `() => {}` | `function() {}` | Arrow לא עובד |
+| `\`template ${x}\`` | `'str ' + x` | Backticks נשברים |
+| `a && b` | `if(a){if(b){}}` | **וורדפרס ממיר ל-`&#038;&#038;`!** |
+| `a \|\| b` | `a ? a : b` | **וורדפרס ממיר ל-HTML entities!** |
+| `₪` | `\u20AA` | תווים מיוחדים |
+| `<script>` | `'<scr'+'ipt>'` | מפורש כתג |
+
 #### בדיקות חובה:
 ```javascript
 // בדיקה 7.1: DOMContentLoaded
@@ -2245,6 +2312,7 @@ return code + '</' + 'script>';
 
 ## ✅ צ'קליסט מהיר לסוכן QA
 
+### בדיקות מבנה:
 - [ ] אין DOCTYPE/HTML/HEAD/BODY
 - [ ] Viewport script בהתחלה
 - [ ] Prefix ייחודי בכל הקלאסים
@@ -2252,6 +2320,8 @@ return code + '</' + 'script>';
 - [ ] Media queries למובייל
 - [ ] IIFE + namespace ייחודי
 - [ ] Event delegation
+
+### בדיקות פונקציונליות:
 - [ ] טאבים עובדים (2-5)
 - [ ] סליידרים מעדכנים ערכים
 - [ ] כפתור העתקת קוד עובד
@@ -2263,6 +2333,16 @@ return code + '</' + 'script>';
 - [ ] קרדיט עם nofollow
 - [ ] **אין דיסקליימר** (wpc-disclaimer)
 - [ ] **אין Related Posts** ([related-shortcode-instert])
+
+### 🚨 תאימות וורדפרס (קריטי!):
+- [ ] **אין Arrow Functions** - רק `function() {}`
+- [ ] **אין const/let** - רק `var`
+- [ ] **אין Template Literals** - רק חיבור מחרוזות
+- [ ] **אין && או ||** - וורדפרס ממיר ל-HTML entities!
+- [ ] **אין ₪** - להחליף ב-`\u20AA`
+- [ ] **תגי script מפוצלים** - `'<scr' + 'ipt>'`
+- [ ] **AWG עם max-height** - לא display:none!
+- [ ] **resize event ב-openAWG** - לאתחול טפסי וורדפרס
 
 ---
 

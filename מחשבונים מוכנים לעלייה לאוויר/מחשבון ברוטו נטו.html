@@ -601,14 +601,22 @@ if (!document.querySelector('meta[name="viewport"]')) {
 }
 
 .wpc-calc-salary-g8n2-awg-content {
-  display: none !important;
-  margin-top: 25px !important;
-  padding-top: 25px !important;
-  border-top: 2px dashed var(--wpc-salary-border) !important;
+  max-height: 0 !important;
+  overflow: hidden !important;
+  opacity: 0 !important;
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+  border-top: none !important;
+  transition: max-height 0.4s ease, opacity 0.3s ease, margin-top 0.3s ease, padding-top 0.3s ease !important;
 }
 
 .wpc-calc-salary-g8n2-awg-content.active {
-  display: block !important;
+  max-height: 2000px !important;
+  opacity: 1 !important;
+  margin-top: 25px !important;
+  padding-top: 25px !important;
+  border-top: 2px dashed var(--wpc-salary-border) !important;
+  overflow: visible !important;
 }
 
 /* Content Section */
@@ -2072,10 +2080,28 @@ if (!document.querySelector('meta[name="viewport"]')) {
     // ==========================================
     function openAWG() {
         const awgContent = document.getElementById('awg-content');
+        if (!awgContent) return;
+        
+        const isOpening = !awgContent.classList.contains('active');
         awgContent.classList.toggle('active');
         
-        if (awgContent.classList.contains('active')) {
-            awgContent.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        if (isOpening) {
+            // גלילה לטופס
+            setTimeout(function() {
+                awgContent.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 100);
+            
+            // טריגר resize לאתחול טפסים שתלויים בגודל
+            setTimeout(function() {
+                window.dispatchEvent(new Event('resize'));
+            }, 400);
+            
+            // טריגר נוסף לטפסים שמשתמשים ב-jQuery
+            if (typeof jQuery !== 'undefined') {
+                setTimeout(function() {
+                    jQuery(window).trigger('resize');
+                }, 450);
+            }
         }
     }
 
@@ -2112,213 +2138,66 @@ if (!document.querySelector('meta[name="viewport"]')) {
             'button_type': 'copy-embed-code'
         });
         
-        const calculator = document.getElementById('wpc-calc-salary-g8n2-calculator');
-        const calcClone = calculator.cloneNode(true);
+        let code = '';
         
-        // Get styles - find the main style element
-        let styles = '';
+        // 1. Viewport Script - חובה בתחילה
+        code += '<script>\n';
+        code += 'if (!document.querySelector(\'meta[name="viewport"]\')) {\n';
+        code += '  const viewport = document.createElement(\'meta\');\n';
+        code += '  viewport.name = \'viewport\';\n';
+        code += '  viewport.content = \'width=device-width, initial-scale=1.0, user-scalable=yes\';\n';
+        code += '  document.head.appendChild(viewport);\n';
+        code += '}\n';
+        code += '<\/script>\n\n';
+        
+        // 2. CSS - מציאת ה-style element הראשי
+        let styleElement = null;
+        let maxLength = 0;
         const allStyles = document.querySelectorAll('style');
-        allStyles.forEach(style => {
-            if (style.textContent.includes('wpc-calc-salary-g8n2')) {
-                styles = style.textContent;
+        for (let style of allStyles) {
+            if (style.textContent.includes('wpc-calc-salary-g8n2') && style.textContent.length > maxLength) {
+                styleElement = style;
+                maxLength = style.textContent.length;
             }
-        });
+        }
         
-        // Build embed code with CSS
-        let code = '<style>\n' + styles + '\n</style>\n';
-        code += '<div class="wpc-calc-salary-g8n2-wrapper" id="wpc-calc-salary-g8n2-main">\n';
-        code += '<div class="wpc-calc-salary-g8n2-calculator" id="wpc-calc-salary-g8n2-calculator">' + calcClone.innerHTML + '</div>\n';
-        code += '</div>\n';
+        if (styleElement) {
+            code += styleElement.outerHTML + '\n\n';
+        }
+        
+        // 3. HTML - המחשבון בלבד (בלי AWG ואזורי תוכן)
+        const calculator = document.getElementById('wpc-calc-salary-g8n2-calculator');
+        if (calculator) {
+            const calcClone = calculator.cloneNode(true);
+            code += '<div class="wpc-calc-salary-g8n2-wrapper" id="wpc-calc-salary-g8n2-main">\n';
+            code += calcClone.outerHTML + '\n';
+            code += '</div>\n';
+        }
+        
+        // 4. קרדיט
         code += `<p style="text-align:center; font-size:0.9em; margin-top:20px; color:#666;">
             מחשבון ${CALCULATOR_NAME} פותח על ידי 
             <a href="https://loan-israel.co.il/" target="_blank" rel="nofollow noopener" 
                style="color:#1e5490; text-decoration:underline;">
                רק תבקש פיננסים
             </a>
-        </p>\n`;
+        </p>\n\n`;
         
-        // Add embedded JavaScript
-        code += getEmbedScript();
+        // 5. JavaScript הראשי - מעתיק את הסקריפט המקורי!
+        const allScripts = Array.from(document.querySelectorAll('script'));
+        const mainScript = allScripts.find(s => 
+            s.textContent && s.textContent.includes('WPC_CalcSalary_G8N2')
+        );
+        
+        if (mainScript) {
+            code += mainScript.outerHTML + '\n';
+        }
         
         navigator.clipboard.writeText(code).then(() => {
-            alert('✅ הקוד הועתק בהצלחה! הדביקו אותו באתר שלכם.');
+            alert('✅ הקוד הועתק בהצלחה! הדביקו אותו באתר שלכם במצב Text/HTML');
         });
     }
     
-    function getEmbedScript() {
-        // Build the script as a string array to avoid escaping issues
-        const scriptLines = [
-            '<script>',
-            'document.addEventListener("DOMContentLoaded", function() {',
-            '  (function() {',
-            '    "use strict";',
-            '    var NS = "WPC_CalcSalary_Embed";',
-            '    if (window[NS]) return;',
-            '    var container = document.getElementById("wpc-calc-salary-g8n2-main");',
-            '    if (!container) { console.error("Calculator container not found"); return; }',
-            '    var TAX_BRACKETS = [',
-            '      { min: 0, max: 7010, rate: 0.10 },',
-            '      { min: 7010, max: 10060, rate: 0.14 },',
-            '      { min: 10060, max: 16150, rate: 0.20 },',
-            '      { min: 16150, max: 22870, rate: 0.31 },',
-            '      { min: 22870, max: 46690, rate: 0.35 },',
-            '      { min: 46690, max: 60130, rate: 0.47 },',
-            '      { min: 60130, max: Infinity, rate: 0.50 }',
-            '    ];',
-            '    var CREDIT_VALUE = 242;',
-            '    var NI_THRESHOLD = 7522;',
-            '    var NI_CEILING = 50695;',
-            '    function formatCurrency(n) { return Math.round(n).toLocaleString("he-IL") + " ₪"; }',
-            '    function calcTax(gross) {',
-            '      var tax = 0, rem = gross;',
-            '      for (var i = 0; i < TAX_BRACKETS.length; i++) {',
-            '        var b = TAX_BRACKETS[i];',
-            '        if (rem <= 0) break;',
-            '        var t = Math.min(rem, b.max - b.min);',
-            '        if (t > 0) { tax += t * b.rate; rem -= t; }',
-            '      }',
-            '      return tax;',
-            '    }',
-            '    function calcNI(gross) {',
-            '      var cap = Math.min(gross, NI_CEILING);',
-            '      if (cap <= NI_THRESHOLD) return cap * 0.004;',
-            '      return NI_THRESHOLD * 0.004 + (cap - NI_THRESHOLD) * 0.07;',
-            '    }',
-            '    function calcHealth(gross) {',
-            '      var cap = Math.min(gross, NI_CEILING);',
-            '      if (cap <= NI_THRESHOLD) return cap * 0.031;',
-            '      return NI_THRESHOLD * 0.031 + (cap - NI_THRESHOLD) * 0.05;',
-            '    }',
-            '    function calcNet(gross, credits, pension, study) {',
-            '      var tax = Math.max(0, calcTax(gross) - credits * CREDIT_VALUE);',
-            '      var ni = calcNI(gross);',
-            '      var health = calcHealth(gross);',
-            '      var pen = gross * pension / 100;',
-            '      var st = gross * (study || 0) / 100;',
-            '      var ded = tax + ni + health + pen + st;',
-            '      return { gross: gross, tax: tax, ni: ni, health: health, pen: pen, st: st, ded: ded, net: gross - ded };',
-            '    }',
-            '    function calcGrossFromNet(net, credits, pension) {',
-            '      var low = net, high = net * 2;',
-            '      for (var i = 0; i < 50 && high - low > 1; i++) {',
-            '        var mid = (low + high) / 2;',
-            '        if (calcNet(mid, credits, pension, 0).net < net) low = mid;',
-            '        else high = mid;',
-            '      }',
-            '      return Math.round(high);',
-            '    }',
-            '    var state = {',
-            '      basic: { gross: 15000, credits: 2.75, pension: 6 },',
-            '      detailed: { gross: 20000, credits: 2.25, pension: 6, study: 2.5 },',
-            '      compare: { grossA: 15000, grossB: 20000, credits: 2.25, pension: 6 },',
-            '      reverse: { targetNet: 12000, credits: 2.25, pension: 6 }',
-            '    };',
-            '    function el(id) { return document.getElementById(id); }',
-            '    function updateBasic() {',
-            '      var r = calcNet(state.basic.gross, state.basic.credits, state.basic.pension, 0);',
-            '      if(el("basic-gross-value")) el("basic-gross-value").textContent = formatCurrency(state.basic.gross);',
-            '      if(el("basic-result-gross")) el("basic-result-gross").textContent = formatCurrency(r.gross);',
-            '      if(el("basic-result-deductions")) el("basic-result-deductions").textContent = formatCurrency(r.ded);',
-            '      if(el("basic-result-net")) el("basic-result-net").textContent = formatCurrency(r.net);',
-            '    }',
-            '    function updateDetailed() {',
-            '      var r = calcNet(state.detailed.gross, state.detailed.credits, state.detailed.pension, state.detailed.study);',
-            '      if(el("detailed-gross-value")) el("detailed-gross-value").textContent = formatCurrency(state.detailed.gross);',
-            '      if(el("detailed-credits-value")) el("detailed-credits-value").textContent = state.detailed.credits.toFixed(2);',
-            '      if(el("detailed-pension-value")) el("detailed-pension-value").textContent = state.detailed.pension + "%";',
-            '      if(el("detailed-study-value")) el("detailed-study-value").textContent = state.detailed.study + "%";',
-            '      if(el("detailed-tax-before")) el("detailed-tax-before").textContent = formatCurrency(calcTax(state.detailed.gross));',
-            '      if(el("detailed-tax-credit")) el("detailed-tax-credit").textContent = "-" + formatCurrency(state.detailed.credits * CREDIT_VALUE);',
-            '      if(el("detailed-tax-final")) el("detailed-tax-final").innerHTML = "<strong>" + formatCurrency(r.tax) + "</strong>";',
-            '      if(el("detailed-ni")) el("detailed-ni").textContent = formatCurrency(r.ni);',
-            '      if(el("detailed-health")) el("detailed-health").textContent = formatCurrency(r.health);',
-            '      if(el("detailed-pension")) el("detailed-pension").textContent = formatCurrency(r.pen);',
-            '      if(el("detailed-study")) el("detailed-study").textContent = formatCurrency(r.st);',
-            '      if(el("detailed-total-ded")) el("detailed-total-ded").innerHTML = "<strong>" + formatCurrency(r.ded) + "</strong>";',
-            '      if(el("detailed-net")) el("detailed-net").innerHTML = "<strong>" + formatCurrency(r.net) + "</strong>";',
-            '    }',
-            '    function updateCompare() {',
-            '      var rA = calcNet(state.compare.grossA, state.compare.credits, state.compare.pension, 0);',
-            '      var rB = calcNet(state.compare.grossB, state.compare.credits, state.compare.pension, 0);',
-            '      if(el("compare-a-gross-value")) el("compare-a-gross-value").textContent = formatCurrency(state.compare.grossA);',
-            '      if(el("compare-b-gross-value")) el("compare-b-gross-value").textContent = formatCurrency(state.compare.grossB);',
-            '      if(el("compare-a-net")) el("compare-a-net").textContent = formatCurrency(rA.net);',
-            '      if(el("compare-b-net")) el("compare-b-net").textContent = formatCurrency(rB.net);',
-            '      if(el("compare-diff-gross")) el("compare-diff-gross").textContent = formatCurrency(state.compare.grossB - state.compare.grossA);',
-            '      if(el("compare-diff-net")) el("compare-diff-net").textContent = formatCurrency(rB.net - rA.net);',
-            '      if(el("compare-diff-annual")) el("compare-diff-annual").textContent = formatCurrency((rB.net - rA.net) * 12);',
-            '    }',
-            '    function updateReverse() {',
-            '      var gross = calcGrossFromNet(state.reverse.targetNet, state.reverse.credits, state.reverse.pension);',
-            '      var r = calcNet(gross, state.reverse.credits, state.reverse.pension, 0);',
-            '      if(el("reverse-net-value")) el("reverse-net-value").textContent = formatCurrency(state.reverse.targetNet);',
-            '      if(el("reverse-result-net")) el("reverse-result-net").textContent = formatCurrency(state.reverse.targetNet);',
-            '      if(el("reverse-result-gross")) el("reverse-result-gross").textContent = formatCurrency(gross);',
-            '      if(el("reverse-result-deductions")) el("reverse-result-deductions").textContent = formatCurrency(r.ded);',
-            '    }',
-            '    function switchTab(tab) {',
-            '      var tabs = container.querySelectorAll(".wpc-calc-salary-g8n2-tab-btn");',
-            '      var contents = container.querySelectorAll(".wpc-calc-salary-g8n2-tab-content");',
-            '      for (var i = 0; i < tabs.length; i++) tabs[i].classList.remove("active");',
-            '      for (var j = 0; j < contents.length; j++) contents[j].classList.remove("active");',
-            '      var tabBtn = container.querySelector("[data-tab=\\"" + tab + "\\"]");',
-            '      if (tabBtn) tabBtn.classList.add("active");',
-            '      var tabContent = document.getElementById("tab-" + tab);',
-            '      if (tabContent) tabContent.classList.add("active");',
-            '    }',
-            '    container.addEventListener("click", function(e) {',
-            '      var action = e.target.closest("[data-action]");',
-            '      if (!action) return;',
-            '      var act = action.dataset.action;',
-            '      if (act === "switch-tab") switchTab(action.dataset.tab);',
-            '      else if (act === "set-credits") {',
-            '        var btns = container.querySelectorAll("#basic-credits-group .wpc-calc-salary-g8n2-btn-option");',
-            '        for (var i = 0; i < btns.length; i++) btns[i].classList.remove("active");',
-            '        action.classList.add("active");',
-            '        state.basic.credits = parseFloat(action.dataset.value);',
-            '        updateBasic();',
-            '      }',
-            '      else if (act === "set-pension") {',
-            '        var btns2 = container.querySelectorAll("#basic-pension-group .wpc-calc-salary-g8n2-btn-option");',
-            '        for (var i = 0; i < btns2.length; i++) btns2[i].classList.remove("active");',
-            '        action.classList.add("active");',
-            '        state.basic.pension = parseFloat(action.dataset.value);',
-            '        updateBasic();',
-            '      }',
-            '      else if (act === "set-reverse-credits") {',
-            '        var btns3 = container.querySelectorAll("#reverse-credits-group .wpc-calc-salary-g8n2-btn-option");',
-            '        for (var i = 0; i < btns3.length; i++) btns3[i].classList.remove("active");',
-            '        action.classList.add("active");',
-            '        state.reverse.credits = parseFloat(action.dataset.value);',
-            '        updateReverse();',
-            '      }',
-            '      else if (act === "set-reverse-pension") {',
-            '        var btns4 = container.querySelectorAll("#reverse-pension-group .wpc-calc-salary-g8n2-btn-option");',
-            '        for (var i = 0; i < btns4.length; i++) btns4[i].classList.remove("active");',
-            '        action.classList.add("active");',
-            '        state.reverse.pension = parseFloat(action.dataset.value);',
-            '        updateReverse();',
-            '      }',
-            '    });',
-            '    container.addEventListener("input", function(e) {',
-            '      var id = e.target.id;',
-            '      if (id === "basic-gross-slider") { state.basic.gross = parseInt(e.target.value); updateBasic(); }',
-            '      else if (id === "detailed-gross-slider") { state.detailed.gross = parseInt(e.target.value); updateDetailed(); }',
-            '      else if (id === "detailed-credits-slider") { state.detailed.credits = parseFloat(e.target.value); updateDetailed(); }',
-            '      else if (id === "detailed-pension-slider") { state.detailed.pension = parseFloat(e.target.value); updateDetailed(); }',
-            '      else if (id === "detailed-study-slider") { state.detailed.study = parseFloat(e.target.value); updateDetailed(); }',
-            '      else if (id === "compare-a-gross-slider") { state.compare.grossA = parseInt(e.target.value); updateCompare(); }',
-            '      else if (id === "compare-b-gross-slider") { state.compare.grossB = parseInt(e.target.value); updateCompare(); }',
-            '      else if (id === "reverse-net-slider") { state.reverse.targetNet = parseInt(e.target.value); updateReverse(); }',
-            '    });',
-            '    updateBasic(); updateDetailed(); updateCompare(); updateReverse();',
-            '    window[NS] = { version: "1.0.0" };',
-            '  })();',
-            '});'
-        ];
-        return scriptLines.join('\n') + '\n</' + 'script>';
-    }
-
     function showPreview(color, colorName) {
         state.selectedColor = color;
         state.selectedColorName = colorName;
@@ -2502,37 +2381,66 @@ if (!document.querySelector('meta[name="viewport"]')) {
         const color = state.selectedColor;
         const colorDark = darkenColor(color, 15);
         
-        const calculator = document.getElementById('wpc-calc-salary-g8n2-calculator');
-        const calcClone = calculator.cloneNode(true);
+        let code = '';
         
-        // Get and modify styles - find the main style element
-        let styles = '';
+        // 1. Viewport Script - חובה בתחילה
+        code += '<script>\n';
+        code += 'if (!document.querySelector(\'meta[name="viewport"]\')) {\n';
+        code += '  const viewport = document.createElement(\'meta\');\n';
+        code += '  viewport.name = \'viewport\';\n';
+        code += '  viewport.content = \'width=device-width, initial-scale=1.0, user-scalable=yes\';\n';
+        code += '  document.head.appendChild(viewport);\n';
+        code += '}\n';
+        code += '<\/script>\n\n';
+        
+        // 2. CSS - מציאת ה-style element הראשי והחלפת צבעים
+        let styleElement = null;
+        let maxLength = 0;
         const allStyles = document.querySelectorAll('style');
-        allStyles.forEach(style => {
-            if (style.textContent.includes('wpc-calc-salary-g8n2')) {
-                styles = style.textContent
-                    .replace(/#1e5490/g, color)
-                    .replace(/#163d6b/g, colorDark);
+        for (let style of allStyles) {
+            if (style.textContent.includes('wpc-calc-salary-g8n2') && style.textContent.length > maxLength) {
+                styleElement = style;
+                maxLength = style.textContent.length;
             }
-        });
+        }
         
-        let code = '<style>\n' + styles + '\n</style>\n';
-        code += '<div class="wpc-calc-salary-g8n2-wrapper" id="wpc-calc-salary-g8n2-main">\n';
-        code += '<div class="wpc-calc-salary-g8n2-calculator" id="wpc-calc-salary-g8n2-calculator">' + calcClone.innerHTML + '</div>\n';
-        code += '</div>\n';
+        if (styleElement) {
+            let modifiedStyles = styleElement.textContent
+                .replace(/#1e5490/g, color)
+                .replace(/#163d6b/g, colorDark);
+            code += '<style>\n' + modifiedStyles + '\n</style>\n\n';
+        }
+        
+        // 3. HTML - המחשבון בלבד
+        const calculator = document.getElementById('wpc-calc-salary-g8n2-calculator');
+        if (calculator) {
+            const calcClone = calculator.cloneNode(true);
+            code += '<div class="wpc-calc-salary-g8n2-wrapper" id="wpc-calc-salary-g8n2-main">\n';
+            code += calcClone.outerHTML + '\n';
+            code += '</div>\n';
+        }
+        
+        // 4. קרדיט
         code += `<p style="text-align:center; font-size:0.9em; margin-top:20px; color:#666;">
             מחשבון ${CALCULATOR_NAME} פותח על ידי 
             <a href="https://loan-israel.co.il/" target="_blank" rel="nofollow noopener" 
                style="color:${color}; text-decoration:underline;">
                רק תבקש פיננסים
             </a>
-        </p>\n`;
+        </p>\n\n`;
         
-        // Add embedded JavaScript
-        code += getEmbedScript();
+        // 5. JavaScript הראשי - מעתיק את הסקריפט המקורי!
+        const allScripts = Array.from(document.querySelectorAll('script'));
+        const mainScript = allScripts.find(s => 
+            s.textContent && s.textContent.includes('WPC_CalcSalary_G8N2')
+        );
+        
+        if (mainScript) {
+            code += mainScript.outerHTML + '\n';
+        }
         
         navigator.clipboard.writeText(code).then(() => {
-            alert(`✅ הקוד הועתק בצבע "${state.selectedColorName}"! הדביקו אותו באתר שלכם.`);
+            alert(`✅ הקוד הועתק בצבע "${state.selectedColorName}"! הדביקו אותו באתר שלכם במצב Text/HTML`);
         });
     }
 

@@ -24,6 +24,64 @@ C:\Users\eyal\loan-israel-updaets\loan-israel-updates\מחשבונים חדשי�
 
 ## רשימת בעיות מרכזיות שיש לוודא שתוקנו:
 
+### 🚨0️⃣ בעיית תאימות ES5 לוורדפרס - הכי קריטי!
+| בעיה | פתרון |
+|------|-------|
+| Arrow Functions (`=>`) | **החלף ל-`function() {}`** - וורדפרס לא תומך! |
+| `const` / `let` | **החלף ל-`var`** - וורדפרס לא תומך! |
+| `&&` / `\|\|` | **החלף ל-`if` מקונן** - וורדפרס ממיר ל-`&#038;&#038;`! |
+| Template Literals (\`\`) | **החלף לחיבור מחרוזות** - backticks נשברים! |
+| `₪` | **החלף ל-`\u20AA`** - Unicode escape |
+| `<script>` במחרוזת | **החלף ל-`'<scr' + 'ipt>'`** - מפורש כתג! |
+| `display: none` על AWG | **החלף ל-`max-height: 0`** - מונע אתחול טפסים! |
+
+**בדיקה (CRITICAL!):**
+```javascript
+function checkES5Compatibility(content) {
+    var errors = [];
+    
+    // Arrow Functions
+    if (content.match(/=>\s*{|=>\s*[^{]/g)) {
+        errors.push('❌ Arrow Functions - להחליף ל-function()');
+    }
+    
+    // const/let
+    if (content.match(/\bconst\s+\w|\blet\s+\w/g)) {
+        errors.push('❌ const/let - להחליף ל-var');
+    }
+    
+    // && and || (WordPress converts to HTML entities!)
+    if (content.match(/\s&&\s|\s\|\|\s/g)) {
+        errors.push('🚨 && או || - וורדפרס ממיר ל-HTML entities!');
+    }
+    
+    // Shekel symbol
+    if (content.match(/₪/g)) {
+        errors.push('❌ ₪ - להחליף ל-\\u20AA');
+    }
+    
+    // Unsplit script tags
+    if (content.match(/'<script>'|"<script>"|'<\/script>'|"<\/script>"/g)) {
+        errors.push('❌ תג script לא מפוצל');
+    }
+    
+    return errors;
+}
+```
+
+**דוגמאות תיקון:**
+```javascript
+// ❌ שגוי
+const calc = () => values.map(v => v * 2);
+while (bal < target && years < 100) { ... }
+const text = \`סכום: ₪\${amount}\`;
+
+// ✅ נכון
+var calc = function() { return values.map(function(v) { return v * 2; }); };
+while (bal < target) { if (!(years < 100)) break; ... }
+var text = 'סכום: \u20AA' + amount;
+```
+
 ### 1️⃣ בעיית `cloneNode(true)` - לא מעתיק Event Listeners!
 | בעיה | פתרון |
 |------|-------|
@@ -98,15 +156,26 @@ const hasDisplayNone = content.includes("style.display = 'none'") ||
                         content.includes('style.display = "none"');
 ```
 
-### 7️⃣ 🚨 בעיית getEmbedScript - רק טאב אחד עובד בהעתקה!
+### 7️⃣ 🚨 בעיית getEmbedScript - הגישה הישנה לא עובדת!
 | בעיה | פתרון |
 |------|-------|
-| רק הטאב הראשון עובד | הוסף state לכל הטאבים: `state = { basic: {...}, compare: {...}, schedule: {...} }` |
-| חסר `updateCompare()` | הוסף פונקציה שמעדכנת את טבלת ההשוואה (4 שורות) |
-| חסר `updateSchedule()` | הוסף פונקציה שמייצרת לוח סילוקין דינמי |
-| סליידרים לא מעדכנים טאב נכון | כל slider צריך לבדוק את ה-ID ולקרוא לפונקציה המתאימה |
-| `switchTab` לא מעדכן תוכן | צריך לקרוא ל-update המתאים: `if (tab === "compare") updateCompare();` |
-| אתחול חסר | חייב לקרוא `updateBasic(); updateCompare(); updateSchedule();` בסוף |
+| `getEmbedScript` בונה סקריפט מאפס | **❌ מיושן!** יש להעתיק את הסקריפט המקורי מה-DOM |
+| הסקריפט המינימלי לא עובד בוורדפרס | **✅ פתרון:** `mainScript.outerHTML` במקום `getEmbedScript()` |
+| רק טאב אחד עובד | כשמעתיקים את הסקריפט המקורי - כל הטאבים עובדים! |
+| חישובים לא מדויקים | הסקריפט המקורי כולל את כל הנוסחאות המדויקות |
+
+**🚨 הפתרון הנכון - כמו במחשבון משכנתא:**
+```javascript
+// במקום getEmbedScript() - להעתיק את הסקריפט המקורי!
+const allScripts = Array.from(document.querySelectorAll('script'));
+const mainScript = allScripts.find(s => 
+    s.textContent && s.textContent.includes('WPC_CalcXXX')
+);
+
+if (mainScript) {
+    code += mainScript.outerHTML + '\n';
+}
+```
 
 **בדיקה (CRITICAL):**
 ```javascript
@@ -347,7 +416,77 @@ if (!hasShowPreview) {
 }
 ```
 
-### 1️⃣4️⃣ 🚨 בעיית סקרולים כפולים בתצוגה מקדימה!
+### 1️⃣4️⃣ 🚨 בעיית AWG display:none - טפסי וורדפרס לא נטענים!
+| בעיה | פתרון |
+|------|-------|
+| `display: none` על awg-content | **החלף ל-`max-height: 0`** - וורדפרס לא מאתחל טפסים מוסתרים! |
+| הטופס לא נטען אחרי פתיחה | **הוסף `resize` events** ב-openAWG |
+| AWG נראה שבור בוורדפרס | CSS עם transitions במקום display |
+
+**בדיקה (CRITICAL!):**
+```javascript
+// בדוק שלא משתמשים ב-display:none על AWG
+var awgDisplayNone = content.match(/awg-content[\s\S]*?display:\s*none/);
+if (awgDisplayNone) {
+    console.error('🚨 CRITICAL: AWG עם display:none - הטופס לא יעבוד בוורדפרס!');
+}
+
+// בדוק שיש resize events
+var hasResizeDispatch = content.includes("dispatchEvent(new Event('resize'))");
+if (!hasResizeDispatch) {
+    console.error('❌ חסר resize event ב-openAWG - טפסי וורדפרס לא יאותחלו!');
+}
+```
+
+**CSS נכון לAWG:**
+```css
+/* ❌ שגוי - הטופס לא יעבוד! */
+.wpc-calc-xxx-awg-content {
+    display: none !important;
+}
+
+/* ✅ נכון - מאפשר לטופס להתאתחל */
+.wpc-calc-xxx-awg-content {
+    max-height: 0 !important;
+    overflow: hidden !important;
+    opacity: 0 !important;
+    transition: max-height 0.4s ease, opacity 0.3s ease !important;
+}
+
+.wpc-calc-xxx-awg-content.active {
+    max-height: 2000px !important;
+    opacity: 1 !important;
+    overflow: visible !important;
+}
+```
+
+**פונקציית openAWG נכונה:**
+```javascript
+function openAWG() {
+    var awgContent = document.getElementById('awg-content');
+    if (!awgContent) return;
+    
+    var isOpening = !awgContent.classList.contains('active');
+    awgContent.classList.toggle('active');
+    
+    if (isOpening) {
+        setTimeout(function() {
+            awgContent.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 100);
+        // 🚨 חובה! שולח resize לאתחול טפסי וורדפרס
+        setTimeout(function() {
+            window.dispatchEvent(new Event('resize'));
+        }, 400);
+        if (typeof jQuery !== 'undefined') {
+            setTimeout(function() {
+                jQuery(window).trigger('resize');
+            }, 450);
+        }
+    }
+}
+```
+
+### 1️⃣6️⃣ 🚨 בעיית סקרולים כפולים בתצוגה מקדימה!
 | בעיה | פתרון |
 |------|-------|
 | `preview-container` עם `max-height` + `overflow-y: auto` | גורם לסקרול כפול עם הטבלאות בפנים |
@@ -380,7 +519,7 @@ if (previewContainerCSS) {
 }
 ```
 
-### 1️⃣5️⃣ 🚨 בעיית עדכון רק טאב אחד בתצוגה מקדימה!
+### 1️⃣7️⃣ 🚨 בעיית עדכון רק טאב אחד בתצוגה מקדימה!
 | בעיה | פתרון |
 |------|-------|
 | רק `updatePreviewBasic()` קיים | צריך גם `updatePreviewCompare()` ו-`updatePreviewSchedule()` |
@@ -2390,6 +2529,112 @@ initPreviewCalculator(clonedCalc, color);
 
 ## 📝 יומן שינויים
 
+### גרסה 5.2 (דצמבר 2025) - תיקון העתקת קוד!
+
+**בעיה קריטית שנתגלה ותוקנה:**
+
+17. **🚨 CRITICAL: `getEmbedScript` בונה סקריפט חדש במקום להעתיק את המקורי!**
+    - בעיה: הפונקציה `getEmbedScript()` בונה סקריפט מינימלי מאפס במקום להעתיק את הקוד שכבר עובד
+    - סימן: קוד מיוצא לא עובד בוורדפרס / רק טאב אחד עובד / JS לא פועל
+    - פתרון: **להעתיק את הסקריפט המקורי מה-DOM!**
+    
+**הגישה השגויה (❌):**
+```javascript
+function getEmbedScript() {
+    const scriptLines = [
+        '<script>',
+        'document.addEventListener("DOMContentLoaded", function() {',
+        // ... בניית סקריפט מינימלי מאפס
+        '});'
+    ];
+    return scriptLines.join('\n') + '\n</' + 'script>';
+}
+
+function copyEmbedCode() {
+    // ...
+    code += getEmbedScript(); // ❌ סקריפט חדש שלא עובד!
+}
+```
+
+**הגישה הנכונה (✅) - כמו במחשבון משכנתא:**
+```javascript
+function copyEmbedCode() {
+    let code = '';
+    
+    // 1. Viewport Script
+    code += '<script>\n';
+    code += 'if (!document.querySelector(\'meta[name="viewport"]\')) {\n';
+    code += '  const viewport = document.createElement(\'meta\');\n';
+    code += '  viewport.name = \'viewport\';\n';
+    code += '  viewport.content = \'width=device-width, initial-scale=1.0, user-scalable=yes\';\n';
+    code += '  document.head.appendChild(viewport);\n';
+    code += '}\n';
+    code += '<\/script>\n\n';
+    
+    // 2. CSS - מציאת ה-style element הראשי
+    let styleElement = null;
+    let maxLength = 0;
+    const allStyles = document.querySelectorAll('style');
+    for (let style of allStyles) {
+        if (style.textContent.includes('wpc-calc-xxx') && style.textContent.length > maxLength) {
+            styleElement = style;
+            maxLength = style.textContent.length;
+        }
+    }
+    if (styleElement) {
+        code += styleElement.outerHTML + '\n\n';
+    }
+    
+    // 3. HTML
+    const calculator = document.getElementById('wpc-calc-xxx-calculator');
+    if (calculator) {
+        const calcClone = calculator.cloneNode(true);
+        code += '<div class="wpc-calc-xxx-wrapper" id="wpc-calc-xxx-main">\n';
+        code += calcClone.outerHTML + '\n';
+        code += '</div>\n';
+    }
+    
+    // 4. קרדיט
+    code += '<p style="...">מחשבון X פותח על ידי...</p>\n\n';
+    
+    // 5. ✅ JavaScript הראשי - מעתיק את הסקריפט המקורי!
+    const allScripts = Array.from(document.querySelectorAll('script'));
+    const mainScript = allScripts.find(s => 
+        s.textContent && s.textContent.includes('WPC_CalcXXX')
+    );
+    
+    if (mainScript) {
+        code += mainScript.outerHTML + '\n';
+    }
+    
+    navigator.clipboard.writeText(code);
+}
+```
+
+**בדיקה:**
+```javascript
+// בדוק שאין getEmbedScript שבונה סקריפט מאפס
+const hasOldGetEmbedScript = content.match(/function getEmbedScript[\s\S]*?scriptLines\s*=\s*\[/);
+if (hasOldGetEmbedScript) {
+    console.error('🚨 CRITICAL: getEmbedScript בונה סקריפט חדש - צריך להעתיק את המקורי!');
+}
+
+// בדוק שcopyEmbedCode מעתיק את הסקריפט מה-DOM
+const copiesRealScript = content.match(/copyEmbedCode[\s\S]*?querySelectorAll\(['"]script['"]\)[\s\S]*?mainScript\.outerHTML/);
+if (!copiesRealScript) {
+    console.error('🚨 CRITICAL: copyEmbedCode לא מעתיק את הסקריפט המקורי מה-DOM!');
+}
+```
+
+**יתרונות הגישה החדשה:**
+1. ✅ מעתיק את הקוד שכבר עובד בדף
+2. ✅ אין צורך לתחזק שתי גרסאות של הסקריפט
+3. ✅ כל הלשוניות עובדות בהטמעה
+4. ✅ כל החישובים מדויקים
+5. ✅ תאימות מלאה לוורדפרס
+
+---
+
 ### גרסה 5.0 (דצמבר 2025) - תיקוני באגים קריטיים!
 **בעיות חדשות שנתגלו ונוספו לבדיקה:**
 
@@ -2522,6 +2767,55 @@ const previewState = {
 - בדיקה ש-initPreviewCalculator נקרא מ-showPreview (לא רק קיים)
 - בדיקת previewState בתוך initPreviewCalculator
 - עדכון תבנית הדוח עם כל הבדיקות החדשות
+
+### גרסה 5.0 (דצמבר 2025) - תאימות וורדפרס!
+**בעיות חדשות שנתגלו ונוספו לבדיקה:**
+
+13. **🚨 CRITICAL: Arrow Functions (=>) לא עובדות בוורדפרס**
+    - בעיה: וורדפרס לא תומך ב-ES6 Arrow Functions
+    - פתרון: להחליף כל `=>` ל-`function() {}`
+    
+14. **🚨 CRITICAL: const/let לא עובדות בוורדפרס**
+    - בעיה: וורדפרס לא תומך ב-ES6 declarations
+    - פתרון: להחליף כל `const`/`let` ל-`var`
+
+15. **🚨 CRITICAL: && ו-|| נשברות בוורדפרס!**
+    - בעיה: וורדפרס ממיר `&&` ל-`&#038;&#038;` (HTML entities)
+    - פתרון: להחליף `a && b` ל-`if(a){if(b){}}` או ternary
+
+16. **סימן ₪ לא עובד בוורדפרס**
+    - בעיה: תווים מיוחדים נשברים
+    - פתרון: להחליף `₪` ל-`\u20AA`
+
+17. **תגי script במחרוזות נשברים**
+    - בעיה: וורדפרס מפרש `<script>` כתג אמיתי
+    - פתרון: לפצל ל-`'<scr' + 'ipt>'`
+
+18. **AWG עם display:none לא עובד**
+    - בעיה: טפסי וורדפרס לא נטענים כשהאלמנט מוסתר
+    - פתרון: להשתמש ב-`max-height: 0` + `opacity: 0` + resize events
+
+## ✅ צ'קליסט מהיר - תאימות וורדפרס
+
+### בדיקות ES5 (קריטי!):
+- [ ] **אין Arrow Functions** - רק `function() {}`
+- [ ] **אין const/let** - רק `var`
+- [ ] **אין Template Literals** - רק חיבור מחרוזות
+- [ ] **אין && או ||** - וורדפרס ממיר ל-HTML entities!
+- [ ] **אין ₪** - להחליף ב-`\u20AA`
+- [ ] **תגי script מפוצלים** - `'<scr' + 'ipt>'`
+
+### בדיקות AWG:
+- [ ] **AWG עם max-height** - לא display:none!
+- [ ] **resize event ב-openAWG** - לאתחול טפסי וורדפרס
+- [ ] **overflow: visible** כשactive
+
+### בדיקות הטמעה:
+- [ ] **העתקת script מה-DOM** - לא getEmbedScript מאפס
+- [ ] **CSS מועתק** - ID על style element
+- [ ] **קרדיט עם nofollow** - בקוד המיוצא
+
+---
 
 ### גרסה 3.0 (דצמבר 2025)
 **תיקונים קריטיים שנתגלו:**

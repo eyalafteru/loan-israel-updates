@@ -371,18 +371,22 @@ if (!document.querySelector('meta[name="viewport"]')) {
 .wpc-calc-factoring-n8k3-awg-content {
   width: 100% !important;
   text-align: center !important;
-  padding: 25px !important;
   border-radius: 12px !important;
-  opacity: 0 !important;
-  height: 0 !important;
+  max-height: 0 !important;
   overflow: hidden !important;
-  transition: all 0.5s ease !important;
+  opacity: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  margin-top: 0 !important;
+  transition: max-height 0.4s ease, opacity 0.3s ease, margin-top 0.3s ease, padding 0.3s ease !important;
 }
 
 .wpc-calc-factoring-n8k3-awg-content.show {
+  max-height: 2000px !important;
   opacity: 1 !important;
-  height: auto !important;
   padding: 25px !important;
+  margin-top: 20px !important;
+  overflow: visible !important;
 }
 
 /* === FAQ Accordion === */
@@ -1162,8 +1166,26 @@ if (!document.querySelector('meta[name="viewport"]')) {
     // פתיחת AWG
     function openAWG() {
         const content = el('awg-content');
-        if (content) {
-            content.classList.toggle('show');
+        if (!content) return;
+        
+        const isOpening = !content.classList.contains('show');
+        content.classList.toggle('show');
+        
+        // Dispatch resize events for WordPress form initialization
+        if (isOpening) {
+            setTimeout(function() {
+                content.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 100);
+            // Trigger resize for form scripts
+            setTimeout(function() {
+                window.dispatchEvent(new Event('resize'));
+            }, 400);
+            // jQuery resize for WordPress plugins
+            if (typeof jQuery !== 'undefined') {
+                setTimeout(function() {
+                    jQuery(window).trigger('resize');
+                }, 450);
+            }
         }
     }
     
@@ -1193,19 +1215,34 @@ if (!document.querySelector('meta[name="viewport"]')) {
         }
     }
     
-    // העתקת קוד הטמעה
+    // העתקת קוד הטמעה - מעתיק את הסקריפט הראשי מה-DOM!
     function copyEmbedCode(color) {
         // DataLayer Push - Tag Manager tracking
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
             'event': 'copy_code_click',
-            'calculator_name': 'מחשבון עלות ניכיון צ'קים',
+            'calculator_name': 'מחשבון עלות ניכיון צ\'קים',
             'button_type': 'copy-embed-code'
         });
         
         color = color || PRIMARY_COLOR;
         const calculator = el('wpc-calc-factoring-n8k3-calculator');
         if (!calculator) return;
+        
+        // שכפל את המחשבון ללא אלמנטים שלא נחוצים בהטמעה
+        const calcClone = calculator.cloneNode(true);
+        
+        // הסר את אזור ההטמעה מהעותק
+        const embedSection = calcClone.querySelector('#embed-section');
+        if (embedSection) embedSection.remove();
+        
+        // הסר את תיבת התצוגה המקדימה
+        const previewContainer = calcClone.querySelector('#preview-container');
+        if (previewContainer) previewContainer.remove();
+        
+        // הסר את אזור ה-AWG
+        const awgSection = calcClone.querySelector('.wpc-calc-factoring-n8k3-awg-section');
+        if (awgSection) awgSection.remove();
         
         let styles = '';
         document.querySelectorAll('style').forEach(function(style) {
@@ -1216,120 +1253,22 @@ if (!document.querySelector('meta[name="viewport"]')) {
         
         let code = '<style>\n' + styles + '\n</style>\n';
         code += '<div class="wpc-calc-factoring-n8k3-wrapper" id="wpc-calc-factoring-n8k3-main">\n';
-        code += calculator.outerHTML + '\n';
+        code += '<div class="wpc-calc-factoring-n8k3-calculator" id="wpc-calc-factoring-n8k3-calculator">' + calcClone.innerHTML + '</div>\n';
         code += '</div>\n';
         code += '<p style="text-align:center; font-size:0.9em; margin-top:20px; color:#666;">מחשבון ניכיון צ\'קים פותח על ידי <a href="https://loan-israel.co.il/" target="_blank" rel="nofollow noopener" style="color:' + color + '; text-decoration:underline;">רק תבקש פיננסים</a></p>\n';
-        code += getEmbedScript();
+        
+        // העתקת הסקריפט הראשי מה-DOM - לא לבנות מחדש!
+        const allScripts = Array.from(document.querySelectorAll('script'));
+        const mainScript = allScripts.find(function(s) {
+            return s.textContent && s.textContent.indexOf('WPC_CalcFactoring_N8K3') !== -1;
+        });
+        if (mainScript) {
+            code += mainScript.outerHTML + '\n';
+        }
         
         navigator.clipboard.writeText(code).then(function() {
-            alert('הקוד הועתק בהצלחה! הדביקו אותו בעמוד שלכם.');
+            alert('✅ הקוד הועתק בהצלחה! הדביקו אותו באתר שלכם במצב Text/HTML');
         });
-    }
-    
-    function getEmbedScript() {
-        return '<scr' + 'ipt>\n' +
-        'document.addEventListener("DOMContentLoaded", function() {\n' +
-        '  (function() {\n' +
-        '    "use strict";\n' +
-        '    var ns = "WPC_CalcFactoring_Embed";\n' +
-        '    if (window[ns]) return;\n' +
-        '    var c = document.getElementById("wpc-calc-factoring-n8k3-main");\n' +
-        '    if (!c) return;\n' +
-        '    function fmt(n) { return "₪ " + Math.round(n).toLocaleString("he-IL"); }\n' +
-        '    function pct(n) { return n.toFixed(2) + "%"; }\n' +
-        '    function el(id) { return document.getElementById(id); }\n' +
-        '    function calc(a, d, r, f) {\n' +
-        '      var dr = r / 100 / 365;\n' +
-        '      var di = a * dr * d;\n' +
-        '      var tc = di + f;\n' +
-        '      var na = a - tc;\n' +
-        '      var er = (tc / na) * (365 / d) * 100;\n' +
-        '      return { na: na, di: di, f: f, tc: tc, er: er };\n' +
-        '    }\n' +
-        '    function upBasic() {\n' +
-        '      var a = parseInt(el("basic-amount-slider").value);\n' +
-        '      var d = parseInt(el("basic-days-slider").value);\n' +
-        '      var r = parseFloat(el("basic-rate-slider").value);\n' +
-        '      var f = parseInt(el("basic-fee-slider").value);\n' +
-        '      el("basic-amount-value").textContent = fmt(a);\n' +
-        '      el("basic-days-value").textContent = d + " ימים";\n' +
-        '      el("basic-rate-value").textContent = r + "%";\n' +
-        '      el("basic-fee-value").textContent = fmt(f);\n' +
-        '      var res = calc(a, d, r, f);\n' +
-        '      el("basic-result-net").textContent = fmt(res.na);\n' +
-        '      el("basic-result-interest").textContent = fmt(res.di);\n' +
-        '      el("basic-result-fee").textContent = fmt(res.f);\n' +
-        '      el("basic-result-total-cost").textContent = fmt(res.tc);\n' +
-        '      el("basic-result-effective").textContent = pct(res.er);\n' +
-        '    }\n' +
-        '    function upCompare() {\n' +
-        '      var a = parseInt(el("compare-amount-slider").value);\n' +
-        '      var d = parseInt(el("compare-days-slider").value);\n' +
-        '      var rA = parseFloat(el("compare-rate-a-slider").value);\n' +
-        '      var fA = parseInt(el("compare-fee-a-slider").value);\n' +
-        '      var rB = parseFloat(el("compare-rate-b-slider").value);\n' +
-        '      var fB = parseInt(el("compare-fee-b-slider").value);\n' +
-        '      el("compare-amount-value").textContent = fmt(a);\n' +
-        '      el("compare-days-value").textContent = d + " ימים";\n' +
-        '      el("compare-rate-a-value").textContent = rA + "%";\n' +
-        '      el("compare-fee-a-value").textContent = fmt(fA);\n' +
-        '      el("compare-rate-b-value").textContent = rB + "%";\n' +
-        '      el("compare-fee-b-value").textContent = fmt(fB);\n' +
-        '      var resA = calc(a, d, rA, fA);\n' +
-        '      var resB = calc(a, d, rB, fB);\n' +
-        '      el("compare-net-a").textContent = fmt(resA.na);\n' +
-        '      el("compare-effective-a").textContent = pct(resA.er);\n' +
-        '      el("compare-net-b").textContent = fmt(resB.na);\n' +
-        '      el("compare-effective-b").textContent = pct(resB.er);\n' +
-        '      var diff = Math.abs(resA.na - resB.na);\n' +
-        '      if (resA.na > resB.na) el("compare-winner").textContent = "הצעה א\' - חיסכון של " + fmt(diff);\n' +
-        '      else if (resB.na > resA.na) el("compare-winner").textContent = "הצעה ב\' - חיסכון של " + fmt(diff);\n' +
-        '      else el("compare-winner").textContent = "ההצעות שוות!";\n' +
-        '    }\n' +
-        '    function upMulti() {\n' +
-        '      var t = parseInt(el("multi-total-slider").value);\n' +
-        '      var n = parseInt(el("multi-count-slider").value);\n' +
-        '      var d = parseInt(el("multi-days-slider").value);\n' +
-        '      var r = parseFloat(el("multi-rate-slider").value);\n' +
-        '      var fp = parseInt(el("multi-fee-slider").value);\n' +
-        '      el("multi-total-value").textContent = fmt(t);\n' +
-        '      el("multi-count-value").textContent = n + " צ\'קים";\n' +
-        '      el("multi-days-value").textContent = d + " ימים";\n' +
-        '      el("multi-rate-value").textContent = r + "%";\n' +
-        '      el("multi-fee-value").textContent = fmt(fp);\n' +
-        '      var tf = fp * n;\n' +
-        '      var res = calc(t, d, r, tf);\n' +
-        '      el("multi-result-net").textContent = fmt(res.na);\n' +
-        '      el("multi-result-interest").textContent = fmt(res.di);\n' +
-        '      el("multi-result-fees").textContent = fmt(tf);\n' +
-        '      el("multi-result-total").textContent = fmt(res.tc);\n' +
-        '      el("multi-result-effective").textContent = pct(res.er);\n' +
-        '    }\n' +
-        '    function switchTab(t) {\n' +
-        '      c.querySelectorAll(".wpc-calc-factoring-n8k3-tab").forEach(function(b) { b.classList.remove("active"); });\n' +
-        '      c.querySelectorAll(".wpc-calc-factoring-n8k3-panel").forEach(function(p) { p.classList.remove("active"); });\n' +
-        '      var btn = c.querySelector("[data-tab=\\"" + t + "\\"]");\n' +
-        '      if (btn) btn.classList.add("active");\n' +
-        '      var pan = document.getElementById("tab-" + t);\n' +
-        '      if (pan) pan.classList.add("active");\n' +
-        '    }\n' +
-        '    c.addEventListener("click", function(e) {\n' +
-        '      var act = e.target.closest("[data-action]");\n' +
-        '      if (!act) return;\n' +
-        '      var a = act.dataset.action;\n' +
-        '      if (a === "switch-tab") switchTab(act.dataset.tab);\n' +
-        '    });\n' +
-        '    c.addEventListener("input", function(e) {\n' +
-        '      var id = e.target.id;\n' +
-        '      if (id.indexOf("basic") !== -1) upBasic();\n' +
-        '      else if (id.indexOf("compare") !== -1) upCompare();\n' +
-        '      else if (id.indexOf("multi") !== -1) upMulti();\n' +
-        '    });\n' +
-        '    upBasic(); upCompare(); upMulti();\n' +
-        '    window[ns] = { v: "1.0.0" };\n' +
-        '  })();\n' +
-        '});\n' +
-        '</scr' + 'ipt>';
     }
     
     // פונקציות עזר לצבעים

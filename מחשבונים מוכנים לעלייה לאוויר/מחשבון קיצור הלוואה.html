@@ -1,7 +1,7 @@
 <script>
 // בדיקה והוספת viewport meta tag אם חסר
 if (!document.querySelector('meta[name="viewport"]')) {
-  const viewport = document.createElement('meta');
+  var viewport = document.createElement('meta');
   viewport.name = 'viewport';
   viewport.content = 'width=device-width, initial-scale=1.0, user-scalable=yes';
   document.head.appendChild(viewport);
@@ -848,7 +848,7 @@ if (!document.querySelector('meta[name="viewport"]')) {
     <!-- Calculator Section -->
     <div class="wpc-calc-snowball-m4k7-container">
         <div class="wpc-calc-snowball-m4k7-title-container">
-            <h1 class="wpc-calc-snowball-m4k7-title">מחשבון קיצור תקופת הלוואה (שיטת כדור השלג)</h1>
+            <h1 class="wpc-calc-snowball-m4k7-title">מחשבון קיצור תקופת הלוואה </h1>
             <p style="text-align: center; color: var(--text-light); margin-bottom: 20px; font-size: 1.1em;">
                 <strong>עודכן לאחרונה:</strong> [current_date format="F Y" hebrew="true"]
             </p>
@@ -1313,16 +1313,16 @@ if (!document.querySelector('meta[name="viewport"]')) {
 (function() {
     'use strict';
     
-    // 🔒 Namespace protection
-    const namespace = 'WPC_CalcSnowball_M4K7';
+    // Namespace protection
+    var namespace = 'WPC_CalcSnowball_M4K7';
     if (window[namespace]) return;
     
     // Container validation
-    const container = document.getElementById('wpc-calc-snowball-m4k7-main');
+    var container = document.getElementById('wpc-calc-snowball-m4k7-main');
     if (!container) return;
     
     // === State Management ===
-    const state = {
+    var state = {
         basic: {
             balance: 200000,
             payment: 3000,
@@ -1344,7 +1344,7 @@ if (!document.querySelector('meta[name="viewport"]')) {
     
     // === Helper Functions ===
     function formatCurrency(num) {
-        return Math.round(num).toLocaleString('he-IL') + ' ₪';
+        return Math.round(num).toLocaleString('he-IL') + ' \u20AA';
     }
     
     function formatPercent(num) {
@@ -1353,23 +1353,24 @@ if (!document.querySelector('meta[name="viewport"]')) {
     
     // Calculate number of months to pay off loan (NPER formula)
     function calculateNPER(balance, monthlyPayment, annualRate) {
-        const monthlyRate = annualRate / 100 / 12;
+        var monthlyRate = annualRate / 100 / 12;
         if (monthlyRate === 0) return Math.ceil(balance / monthlyPayment);
         if (monthlyPayment <= balance * monthlyRate) return Infinity; // Payment too low
         
-        const nper = -Math.log(1 - (balance * monthlyRate / monthlyPayment)) / Math.log(1 + monthlyRate);
+        var nper = -Math.log(1 - (balance * monthlyRate / monthlyPayment)) / Math.log(1 + monthlyRate);
         return Math.ceil(nper);
     }
     
     // Calculate total interest paid over loan period
     function calculateTotalInterest(balance, monthlyPayment, annualRate, months) {
-        const monthlyRate = annualRate / 100 / 12;
-        let totalPaid = 0;
-        let remainingBalance = balance;
+        var monthlyRate = annualRate / 100 / 12;
+        var totalPaid = 0;
+        var remainingBalance = balance;
         
-        for (let i = 0; i < months && remainingBalance > 0; i++) {
-            const interestPayment = remainingBalance * monthlyRate;
-            const principalPayment = Math.min(monthlyPayment - interestPayment, remainingBalance);
+        for (var i = 0; i < months; i++) {
+            if (!(remainingBalance > 0)) break;
+            var interestPayment = remainingBalance * monthlyRate;
+            var principalPayment = Math.min(monthlyPayment - interestPayment, remainingBalance);
             remainingBalance -= principalPayment;
             totalPaid += monthlyPayment;
         }
@@ -1384,9 +1385,9 @@ if (!document.querySelector('meta[name="viewport"]')) {
     
     // Get future date
     function getFutureDate(months) {
-        const date = new Date();
+        var date = new Date();
         date.setMonth(date.getMonth() + months);
-        const hebrewMonths = ['ינואר', 'פברואר', 'מרץ', 'אפריל', 'מאי', 'יוני', 'יולי', 'אוגוסט', 'ספטמבר', 'אוקטובר', 'נובמבר', 'דצמבר'];
+        var hebrewMonths = ['\u05D9\u05E0\u05D5\u05D0\u05E8', '\u05E4\u05D1\u05E8\u05D5\u05D0\u05E8', '\u05DE\u05E8\u05E5', '\u05D0\u05E4\u05E8\u05D9\u05DC', '\u05DE\u05D0\u05D9', '\u05D9\u05D5\u05E0\u05D9', '\u05D9\u05D5\u05DC\u05D9', '\u05D0\u05D5\u05D2\u05D5\u05E1\u05D8', '\u05E1\u05E4\u05D8\u05DE\u05D1\u05E8', '\u05D0\u05D5\u05E7\u05D8\u05D5\u05D1\u05E8', '\u05E0\u05D5\u05D1\u05DE\u05D1\u05E8', '\u05D3\u05E6\u05DE\u05D1\u05E8'];
         return hebrewMonths[date.getMonth()] + ' ' + date.getFullYear();
     }
     
@@ -1395,25 +1396,28 @@ if (!document.querySelector('meta[name="viewport"]')) {
     
     // === Tab 1: Basic Calculator ===
     function updateBasicTab() {
-        const { balance, payment, rate, extra } = state.basic;
+        var balance = state.basic.balance;
+        var payment = state.basic.payment;
+        var rate = state.basic.rate;
+        var extra = state.basic.extra;
         
         // Calculate original loan period
-        const originalMonths = calculateNPER(balance, payment, rate);
+        var originalMonths = calculateNPER(balance, payment, rate);
         
         // Calculate new loan period with extra payment
-        const newPayment = payment + extra;
-        const newMonths = calculateNPER(balance, newPayment, rate);
+        var newPayment = payment + extra;
+        var newMonths = calculateNPER(balance, newPayment, rate);
         
         // Calculate interest savings
-        const originalInterest = calculateTotalInterest(balance, payment, rate, originalMonths);
-        const newInterest = calculateTotalInterest(balance, newPayment, rate, newMonths);
-        const savedInterest = originalInterest - newInterest;
-        const savedMonths = originalMonths - newMonths;
+        var originalInterest = calculateTotalInterest(balance, payment, rate, originalMonths);
+        var newInterest = calculateTotalInterest(balance, newPayment, rate, newMonths);
+        var savedInterest = originalInterest - newInterest;
+        var savedMonths = originalMonths - newMonths;
         
         // Update display
-        $('basic-original-months').textContent = originalMonths + ' חודשים';
-        $('basic-new-months').textContent = newMonths + ' חודשים';
-        $('basic-saved-months').textContent = savedMonths + ' חודשים!';
+        $('basic-original-months').textContent = originalMonths + ' \u05D7\u05D5\u05D3\u05E9\u05D9\u05DD';
+        $('basic-new-months').textContent = newMonths + ' \u05D7\u05D5\u05D3\u05E9\u05D9\u05DD';
+        $('basic-saved-months').textContent = savedMonths + ' \u05D7\u05D5\u05D3\u05E9\u05D9\u05DD!';
         $('basic-saved-interest').textContent = formatCurrency(savedInterest);
         
         $('basic-old-date').textContent = getFutureDate(originalMonths);
@@ -1422,49 +1426,54 @@ if (!document.querySelector('meta[name="viewport"]')) {
     
     // === Tab 2: Compare Calculator ===
     function updateCompareTab() {
-        const { balance, payment, rate } = state.compare;
-        const originalMonths = calculateNPER(balance, payment, rate);
-        const originalInterest = calculateTotalInterest(balance, payment, rate, originalMonths);
+        var balance = state.compare.balance;
+        var payment = state.compare.payment;
+        var rate = state.compare.rate;
+        var originalMonths = calculateNPER(balance, payment, rate);
+        var originalInterest = calculateTotalInterest(balance, payment, rate, originalMonths);
         
-        const extras = [200, 500, 1000, 2000];
+        var extras = [200, 500, 1000, 2000];
         
-        extras.forEach(extra => {
-            const newPayment = payment + extra;
-            const newMonths = calculateNPER(balance, newPayment, rate);
-            const newInterest = calculateTotalInterest(balance, newPayment, rate, newMonths);
-            const savedMonths = originalMonths - newMonths;
-            const savedInterest = originalInterest - newInterest;
+        for (var i = 0; i < extras.length; i++) {
+            var extra = extras[i];
+            var newPayment = payment + extra;
+            var newMonths = calculateNPER(balance, newPayment, rate);
+            var newInterest = calculateTotalInterest(balance, newPayment, rate, newMonths);
+            var savedMonths = originalMonths - newMonths;
+            var savedInterest = originalInterest - newInterest;
             
-            $('compare-' + extra + '-months').textContent = newMonths + ' חודשים';
-            $('compare-' + extra + '-saved').textContent = savedMonths + ' חודשים';
+            $('compare-' + extra + '-months').textContent = newMonths + ' \u05D7\u05D5\u05D3\u05E9\u05D9\u05DD';
+            $('compare-' + extra + '-saved').textContent = savedMonths + ' \u05D7\u05D5\u05D3\u05E9\u05D9\u05DD';
             $('compare-' + extra + '-interest').textContent = formatCurrency(savedInterest);
-        });
+        }
     }
     
     // === Tab 3: Schedule Calculator ===
     function updateScheduleTab() {
-        const { balance, payment, rate, extra } = state.schedule;
-        const monthlyRate = rate / 100 / 12;
-        const totalPayment = payment + extra;
+        var balance = state.schedule.balance;
+        var payment = state.schedule.payment;
+        var rate = state.schedule.rate;
+        var extra = state.schedule.extra;
+        var monthlyRate = rate / 100 / 12;
+        var totalPayment = payment + extra;
         
-        let remainingBalance = balance;
-        const tbody = $('schedule-table-body');
+        var remainingBalance = balance;
+        var tbody = $('schedule-table-body');
         tbody.innerHTML = '';
         
-        for (let month = 1; month <= 12 && remainingBalance > 0; month++) {
-            const interestPayment = remainingBalance * monthlyRate;
-            const principalPayment = Math.min(totalPayment - interestPayment, remainingBalance);
+        for (var month = 1; month <= 12; month++) {
+            if (!(remainingBalance > 0)) break;
+            var interestPayment = remainingBalance * monthlyRate;
+            var principalPayment = Math.min(totalPayment - interestPayment, remainingBalance);
             remainingBalance -= principalPayment;
             
-            const row = document.createElement('tr');
+            var row = document.createElement('tr');
             row.style.background = month % 2 === 0 ? '#f9f9f9' : 'white';
-            row.innerHTML = `
-                <td style="padding: 12px; text-align: center; border-bottom: 1px solid #e0e0e0;">${month}</td>
-                <td style="padding: 12px; text-align: center; border-bottom: 1px solid #e0e0e0;">${formatCurrency(totalPayment)}</td>
-                <td style="padding: 12px; text-align: center; border-bottom: 1px solid #e0e0e0; color: var(--success); font-weight: 600;">${formatCurrency(principalPayment)}</td>
-                <td style="padding: 12px; text-align: center; border-bottom: 1px solid #e0e0e0; color: var(--warning);">${formatCurrency(interestPayment)}</td>
-                <td style="padding: 12px; text-align: center; border-bottom: 1px solid #e0e0e0; font-weight: 700;">${formatCurrency(Math.max(0, remainingBalance))}</td>
-            `;
+            row.innerHTML = '<td style="padding: 12px; text-align: center; border-bottom: 1px solid #e0e0e0;">' + month + '</td>' +
+                '<td style="padding: 12px; text-align: center; border-bottom: 1px solid #e0e0e0;">' + formatCurrency(totalPayment) + '</td>' +
+                '<td style="padding: 12px; text-align: center; border-bottom: 1px solid #e0e0e0; color: var(--success); font-weight: 600;">' + formatCurrency(principalPayment) + '</td>' +
+                '<td style="padding: 12px; text-align: center; border-bottom: 1px solid #e0e0e0; color: var(--warning);">' + formatCurrency(interestPayment) + '</td>' +
+                '<td style="padding: 12px; text-align: center; border-bottom: 1px solid #e0e0e0; font-weight: 700;">' + formatCurrency(Math.max(0, remainingBalance)) + '</td>';
             tbody.appendChild(row);
         }
     }
@@ -1472,25 +1481,37 @@ if (!document.querySelector('meta[name="viewport"]')) {
     // === Tab Switching ===
     function switchTab(tabName) {
         // Update buttons
-        container.querySelectorAll('.wpc-calc-snowball-m4k7-tab').forEach(btn => {
-            btn.classList.remove('active');
-        });
-        container.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+        var btns = container.querySelectorAll('.wpc-calc-snowball-m4k7-tab');
+        for (var i = 0; i < btns.length; i++) {
+            btns[i].classList.remove('active');
+        }
+        container.querySelector('[data-tab="' + tabName + '"]').classList.add('active');
         
         // Update panels
-        container.querySelectorAll('.wpc-calc-snowball-m4k7-panel').forEach(panel => {
-            panel.classList.remove('active');
-        });
-        container.querySelector(`[data-panel="${tabName}"]`).classList.add('active');
+        var panels = container.querySelectorAll('.wpc-calc-snowball-m4k7-panel');
+        for (var j = 0; j < panels.length; j++) {
+            panels[j].classList.remove('active');
+        }
+        container.querySelector('[data-panel="' + tabName + '"]').classList.add('active');
     }
     
     // === AWG Section ===
     function toggleAWG() {
-        const content = $('awg-content');
-        if (content.style.height === '0px' || content.style.height === '') {
+        var content = $('awg-content');
+        var isHidden = content.style.height === '0px';
+        if (!content.style.height) isHidden = true;
+        if (isHidden) {
             content.style.height = 'auto';
             content.style.opacity = '1';
             content.style.padding = '25px';
+            setTimeout(function() {
+                window.dispatchEvent(new Event('resize'));
+            }, 400);
+            if (typeof jQuery !== 'undefined') {
+                setTimeout(function() {
+                    jQuery(window).trigger('resize');
+                }, 450);
+            }
         } else {
             content.style.height = '0px';
             content.style.opacity = '0';
@@ -1500,14 +1521,15 @@ if (!document.querySelector('meta[name="viewport"]')) {
     
     // === FAQ Toggle ===
     function toggleFAQ(header) {
-        const content = header.nextElementSibling;
-        const isActive = header.classList.contains('active');
+        var content = header.nextElementSibling;
+        var isActive = header.classList.contains('active');
         
         // Close all
-        container.querySelectorAll('.wpc-calc-snowball-m4k7-accordion-header').forEach(h => {
-            h.classList.remove('active');
-            h.nextElementSibling.classList.remove('active');
-        });
+        var headers = container.querySelectorAll('.wpc-calc-snowball-m4k7-accordion-header');
+        for (var i = 0; i < headers.length; i++) {
+            headers[i].classList.remove('active');
+            headers[i].nextElementSibling.classList.remove('active');
+        }
         
         // Open clicked if wasn't active
         if (!isActive) {
@@ -1518,8 +1540,11 @@ if (!document.querySelector('meta[name="viewport"]')) {
     
     // === Event Delegation ===
     container.addEventListener('click', function(e) {
-        const action = e.target.closest('[data-action]');
+        var action = e.target.closest('[data-action]');
         if (!action) return;
+        
+        var embedSection;
+        var extraBtns;
         
         switch(action.dataset.action) {
             case 'switch-tab':
@@ -1527,9 +1552,10 @@ if (!document.querySelector('meta[name="viewport"]')) {
                 break;
             case 'select-extra':
                 // Update active state
-                container.querySelectorAll('#basic-extra-group .wpc-calc-snowball-m4k7-option').forEach(btn => {
-                    btn.classList.remove('active');
-                });
+                extraBtns = container.querySelectorAll('#basic-extra-group .wpc-calc-snowball-m4k7-option');
+                for (var i = 0; i < extraBtns.length; i++) {
+                    extraBtns[i].classList.remove('active');
+                }
                 action.classList.add('active');
                 state.basic.extra = parseInt(action.dataset.value);
                 updateBasicTab();
@@ -1538,7 +1564,7 @@ if (!document.querySelector('meta[name="viewport"]')) {
                 toggleAWG();
                 break;
             case 'scroll-to-embed':
-                const embedSection = document.getElementById('embed-section');
+                embedSection = document.getElementById('embed-section');
                 if (embedSection) embedSection.scrollIntoView({ behavior: 'smooth' });
                 break;
             case 'toggle-faq':
@@ -1561,11 +1587,11 @@ if (!document.querySelector('meta[name="viewport"]')) {
     
     // === Slider Input Events ===
     container.addEventListener('input', function(e) {
-        const target = e.target;
+        var target = e.target;
         if (!target.classList.contains('wpc-calc-snowball-m4k7-slider')) return;
         
-        const id = target.id;
-        const value = parseFloat(target.value);
+        var id = target.id;
+        var value = parseFloat(target.value);
         
         // Basic tab sliders
         if (id === 'basic-balance-slider') {
@@ -1618,138 +1644,147 @@ if (!document.querySelector('meta[name="viewport"]')) {
     });
     
     // === Embed System ===
-    let selectedColor = '#1e5490';
-    let selectedColorName = 'כחול מקצועי 💙';
+    var selectedColor = '#1e5490';
+    var selectedColorName = '\u05DB\u05D7\u05D5\u05DC \u05DE\u05E7\u05E6\u05D5\u05E2\u05D9 \uD83D\uDC99';
     
     function darkenColor(color, percent) {
-        const num = parseInt(color.replace('#', ''), 16);
-        const amt = Math.round(2.55 * percent);
-        const R = Math.max(0, (num >> 16) - amt);
-        const G = Math.max(0, ((num >> 8) & 0x00FF) - amt);
-        const B = Math.max(0, (num & 0x0000FF) - amt);
+        var num = parseInt(color.replace('#', ''), 16);
+        var amt = Math.round(2.55 * percent);
+        var R = Math.max(0, (num >> 16) - amt);
+        var G = Math.max(0, ((num >> 8) & 0x00FF) - amt);
+        var B = Math.max(0, (num & 0x0000FF) - amt);
         return '#' + (0x1000000 + R * 0x10000 + G * 0x100 + B).toString(16).slice(1);
     }
     
     function hexToRgba(hex, alpha) {
-        const r = parseInt(hex.slice(1, 3), 16);
-        const g = parseInt(hex.slice(3, 5), 16);
-        const b = parseInt(hex.slice(5, 7), 16);
-        return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+        var r = parseInt(hex.slice(1, 3), 16);
+        var g = parseInt(hex.slice(3, 5), 16);
+        var b = parseInt(hex.slice(5, 7), 16);
+        return 'rgba(' + r + ', ' + g + ', ' + b + ', ' + alpha + ')';
     }
     
-    // === showPreview - תצוגה מקדימה עם שכפול מחשבון אמיתי ===
+    // === showPreview ===
     function showPreview(color, colorName) {
         selectedColor = color;
         selectedColorName = colorName;
         
         // Update color button states
-        container.querySelectorAll('.wpc-calc-snowball-m4k7-color-btn').forEach(btn => {
-            btn.classList.remove('active');
-        });
-        const activeBtn = container.querySelector(`[data-color="${color}"]`);
+        var colorBtns = container.querySelectorAll('.wpc-calc-snowball-m4k7-color-btn');
+        for (var i = 0; i < colorBtns.length; i++) {
+            colorBtns[i].classList.remove('active');
+        }
+        var activeBtn = container.querySelector('[data-color="' + color + '"]');
         if (activeBtn) activeBtn.classList.add('active');
         
         // Update color name display
-        const colorNameEl = $('selected-color-name');
-        if (colorNameEl) colorNameEl.textContent = 'צבע נבחר: ' + colorName;
+        var colorNameEl = $('selected-color-name');
+        if (colorNameEl) colorNameEl.textContent = '\u05E6\u05D1\u05E2 \u05E0\u05D1\u05D7\u05E8: ' + colorName;
         
-        const darkColor = darkenColor(color, 15);
-        const previewContainer = $('preview-container');
-        const previewContent = $('preview-content');
+        var darkColor = darkenColor(color, 15);
+        var previewContainer = $('preview-container');
+        var previewContent = $('preview-content');
         
-        if (!previewContainer || !previewContent) return;
+        if (!previewContainer) return;
+        if (!previewContent) return;
         
         // Clone the calculator
-        const calculator = $('wpc-calc-snowball-m4k7-calculator');
+        var calculator = $('wpc-calc-snowball-m4k7-calculator');
         if (!calculator) {
-            console.error('Calculator not found');
             return;
         }
         
-        const calc = calculator.cloneNode(true);
+        var calc = calculator.cloneNode(true);
         
         // Change ID to prevent conflicts
         calc.id = 'wpc-calc-snowball-m4k7-calculator-preview';
         
         // Replace tab IDs with data attributes
-        calc.querySelectorAll('[id*="tab-"]').forEach(el => {
-            const oldId = el.id;
-            const tabName = oldId.replace(/.*tab-/, '').replace(/-content$/, '');
-            el.setAttribute('data-preview-tab', tabName);
-            el.removeAttribute('id');
-        });
+        var tabEls = calc.querySelectorAll('[id*="tab-"]');
+        for (var j = 0; j < tabEls.length; j++) {
+            var oldId = tabEls[j].id;
+            var tabName = oldId.replace(/.*tab-/, '').replace(/-content$/, '');
+            tabEls[j].setAttribute('data-preview-tab', tabName);
+            tabEls[j].removeAttribute('id');
+        }
         
         // Set CSS variables on cloned element
         calc.style.setProperty('--primary', color);
         calc.style.setProperty('--primary-dark', darkColor);
         
-        // Apply colors with setProperty + important
-        // Title
-        calc.querySelectorAll('.wpc-calc-snowball-m4k7-title').forEach(el => {
-            el.style.setProperty('color', color, 'important');
-        });
+        // Apply colors - Title
+        var titles = calc.querySelectorAll('.wpc-calc-snowball-m4k7-title');
+        for (var k = 0; k < titles.length; k++) {
+            titles[k].style.setProperty('color', color, 'important');
+        }
         
         // Active tab button
-        const activeTabBtn = calc.querySelector('.wpc-calc-snowball-m4k7-tab.active');
+        var activeTabBtn = calc.querySelector('.wpc-calc-snowball-m4k7-tab.active');
         if (activeTabBtn) {
-            activeTabBtn.style.setProperty('background', `linear-gradient(135deg, ${color} 0%, ${darkColor} 100%)`, 'important');
+            activeTabBtn.style.setProperty('background', 'linear-gradient(135deg, ' + color + ' 0%, ' + darkColor + ' 100%)', 'important');
             activeTabBtn.style.setProperty('color', 'white', 'important');
             activeTabBtn.style.setProperty('border-color', darkColor, 'important');
         }
         
         // Highlight cards
-        calc.querySelectorAll('.wpc-calc-snowball-m4k7-highlight-card').forEach(el => {
-            el.style.setProperty('background', `linear-gradient(135deg, ${color} 0%, ${darkColor} 100%)`, 'important');
-        });
+        var highlightCards = calc.querySelectorAll('.wpc-calc-snowball-m4k7-highlight-card');
+        for (var m = 0; m < highlightCards.length; m++) {
+            highlightCards[m].style.setProperty('background', 'linear-gradient(135deg, ' + color + ' 0%, ' + darkColor + ' 100%)', 'important');
+        }
         
         // Panel titles
-        calc.querySelectorAll('.wpc-calc-snowball-m4k7-panel h4').forEach(el => {
-            el.style.setProperty('color', color, 'important');
-        });
+        var panelTitles = calc.querySelectorAll('.wpc-calc-snowball-m4k7-panel h4');
+        for (var n = 0; n < panelTitles.length; n++) {
+            panelTitles[n].style.setProperty('color', color, 'important');
+        }
         
         // Sliders
-        calc.querySelectorAll('input[type="range"]').forEach(slider => {
-            slider.style.setProperty('accent-color', color, 'important');
-        });
+        var sliders = calc.querySelectorAll('input[type="range"]');
+        for (var p = 0; p < sliders.length; p++) {
+            sliders[p].style.setProperty('accent-color', color, 'important');
+        }
         
         // Slider values
-        calc.querySelectorAll('.wpc-calc-snowball-m4k7-slider-value').forEach(el => {
-            el.style.setProperty('color', color, 'important');
-        });
+        var sliderVals = calc.querySelectorAll('.wpc-calc-snowball-m4k7-slider-value');
+        for (var q = 0; q < sliderVals.length; q++) {
+            sliderVals[q].style.setProperty('color', color, 'important');
+        }
         
         // Active option buttons
-        calc.querySelectorAll('.wpc-calc-snowball-m4k7-option.active').forEach(btn => {
-            btn.style.setProperty('background', color, 'important');
-            btn.style.setProperty('border-color', color, 'important');
-            btn.style.setProperty('color', 'white', 'important');
-        });
+        var activeBtns = calc.querySelectorAll('.wpc-calc-snowball-m4k7-option.active');
+        for (var r = 0; r < activeBtns.length; r++) {
+            activeBtns[r].style.setProperty('background', color, 'important');
+            activeBtns[r].style.setProperty('border-color', color, 'important');
+            activeBtns[r].style.setProperty('color', 'white', 'important');
+        }
         
         // Result labels
-        calc.querySelectorAll('.wpc-calc-snowball-m4k7-result-label').forEach(el => {
-            el.style.setProperty('color', color, 'important');
-        });
+        var resultLabels = calc.querySelectorAll('.wpc-calc-snowball-m4k7-result-label');
+        for (var s = 0; s < resultLabels.length; s++) {
+            resultLabels[s].style.setProperty('color', color, 'important');
+        }
         
         // Table headers
-        calc.querySelectorAll('th').forEach(el => {
-            el.style.setProperty('background', color, 'important');
-        });
+        var tableHeaders = calc.querySelectorAll('th');
+        for (var t = 0; t < tableHeaders.length; t++) {
+            tableHeaders[t].style.setProperty('background', color, 'important');
+        }
         
         // Build preview with title and copy button
-        const previewTitle = `<div style="text-align: center; margin-bottom: 20px;">
-            <h3 style="color: ${color}; margin: 0 0 5px 0;">👁️ תצוגה מקדימה - ${colorName}</h3>
-            <p style="color: #666; margin: 0; font-size: 0.9em;">כך יראה המחשבון באתר שלך</p>
-        </div>`;
+        var previewTitle = '<div style="text-align: center; margin-bottom: 20px;">' +
+            '<h3 style="color: ' + color + '; margin: 0 0 5px 0;">\uD83D\uDC41\uFE0F \u05EA\u05E6\u05D5\u05D2\u05D4 \u05DE\u05E7\u05D3\u05D9\u05DE\u05D4 - ' + colorName + '</h3>' +
+            '<p style="color: #666; margin: 0; font-size: 0.9em;">\u05DB\u05DA \u05D9\u05E8\u05D0\u05D4 \u05D4\u05DE\u05D7\u05E9\u05D1\u05D5\u05DF \u05D1\u05D0\u05EA\u05E8 \u05E9\u05DC\u05DA</p>' +
+        '</div>';
         
-        const copyBtn = `<div style="text-align: center; margin-top: 20px;">
-            <button data-action="copy-preview-code" data-color="${color}" 
-                    style="background: linear-gradient(135deg, ${color} 0%, ${darkColor} 100%); color: white; padding: 15px 40px; border: none; border-radius: 10px; font-size: 1.1em; cursor: pointer; font-weight: 600; box-shadow: 0 4px 15px ${hexToRgba(color, 0.3)};">
-                📋 העתק קוד עם צבע ${colorName}
-            </button>
-        </div>`;
+        var copyBtn = '<div style="text-align: center; margin-top: 20px;">' +
+            '<button data-action="copy-preview-code" data-color="' + color + '" ' +
+                    'style="background: linear-gradient(135deg, ' + color + ' 0%, ' + darkColor + ' 100%); color: white; padding: 15px 40px; border: none; border-radius: 10px; font-size: 1.1em; cursor: pointer; font-weight: 600; box-shadow: 0 4px 15px ' + hexToRgba(color, 0.3) + ';">' +
+                '\uD83D\uDCCB \u05D4\u05E2\u05EA\u05E7 \u05E7\u05D5\u05D3 \u05E2\u05DD \u05E6\u05D1\u05E2 ' + colorName +
+            '</button>' +
+        '</div>';
         
-        const creditText = `<p style="text-align: center; font-size: 0.85em; color: #666; margin-top: 15px;">
-            מחשבון קיצור הלוואה פותח על ידי <a href="https://loan-israel.co.il/" target="_blank" rel="nofollow noopener" style="color: ${color};">רק תבקש פיננסים</a>
-        </p>`;
+        var creditText = '<p style="text-align: center; font-size: 0.85em; color: #666; margin-top: 15px;">' +
+            '\u05DE\u05D7\u05E9\u05D1\u05D5\u05DF \u05E7\u05D9\u05E6\u05D5\u05E8 \u05D4\u05DC\u05D5\u05D5\u05D0\u05D4 \u05E4\u05D5\u05EA\u05D7 \u05E2\u05DC \u05D9\u05D3\u05D9 <a href="https://loan-israel.co.il/" target="_blank" rel="nofollow noopener" style="color: ' + color + ';">\u05E8\u05E7 \u05EA\u05D1\u05E7\u05E9 \u05E4\u05D9\u05E0\u05E0\u05E1\u05D9\u05DD</a>' +
+        '</p>';
         
         // Set preview content
         previewContent.innerHTML = previewTitle + calc.outerHTML + creditText + copyBtn;
@@ -1758,8 +1793,10 @@ if (!document.querySelector('meta[name="viewport"]')) {
         previewContainer.style.display = 'block';
         
         // Initialize the cloned calculator
-        const clonedCalc = previewContent.querySelector('[id*="preview"]') || 
-                           previewContent.querySelector('.wpc-calc-snowball-m4k7-calculator');
+        var clonedCalc = previewContent.querySelector('[id*="preview"]');
+        if (!clonedCalc) {
+            clonedCalc = previewContent.querySelector('.wpc-calc-snowball-m4k7-calculator');
+        }
         if (clonedCalc) {
             initPreviewCalculator(clonedCalc, color);
         }
@@ -1768,35 +1805,36 @@ if (!document.querySelector('meta[name="viewport"]')) {
         previewContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
     
-    // === initPreviewCalculator - אתחול מחשבון בתצוגה מקדימה ===
+    // === initPreviewCalculator ===
     function initPreviewCalculator(calc, primaryColor) {
-        const darkColor = darkenColor(primaryColor, 15);
+        var darkColor = darkenColor(primaryColor, 15);
         
         // Preview state
-        const previewState = {
+        var previewState = {
             basic: { balance: 200000, payment: 3000, rate: 5.5, extra: 500 },
             compare: { balance: 200000, payment: 3000, rate: 5.5 },
             schedule: { balance: 200000, payment: 3000, rate: 5.5, extra: 500 }
         };
         
         // Helper functions
-        function fmtCurrency(n) { return Math.round(n).toLocaleString('he-IL') + ' ₪'; }
+        function fmtCurrency(n) { return Math.round(n).toLocaleString('he-IL') + ' \u20AA'; }
         function fmtPercent(n) { return n.toFixed(1) + '%'; }
         
         function calcNPER(balance, payment, rate) {
-            const monthlyRate = rate / 100 / 12;
+            var monthlyRate = rate / 100 / 12;
             if (monthlyRate === 0) return Math.ceil(balance / payment);
             if (payment <= balance * monthlyRate) return 999;
             return Math.ceil(-Math.log(1 - (balance * monthlyRate / payment)) / Math.log(1 + monthlyRate));
         }
         
         function calcTotalInterest(balance, payment, rate, months) {
-            const monthlyRate = rate / 100 / 12;
-            let totalPaid = 0;
-            let remaining = balance;
-            for (let i = 0; i < months && remaining > 0; i++) {
-                const interestPart = remaining * monthlyRate;
-                const principalPart = Math.min(payment - interestPart, remaining);
+            var monthlyRate = rate / 100 / 12;
+            var totalPaid = 0;
+            var remaining = balance;
+            for (var i = 0; i < months; i++) {
+                if (!(remaining > 0)) break;
+                var interestPart = remaining * monthlyRate;
+                var principalPart = Math.min(payment - interestPart, remaining);
                 remaining -= principalPart;
                 totalPaid += payment;
             }
@@ -1805,150 +1843,149 @@ if (!document.querySelector('meta[name="viewport"]')) {
         }
         
         function getFutureDate(months) {
-            const d = new Date();
+            var d = new Date();
             d.setMonth(d.getMonth() + months);
-            const hebrewMonths = ['ינואר', 'פברואר', 'מרץ', 'אפריל', 'מאי', 'יוני', 'יולי', 'אוגוסט', 'ספטמבר', 'אוקטובר', 'נובמבר', 'דצמבר'];
+            var hebrewMonths = ['\u05D9\u05E0\u05D5\u05D0\u05E8', '\u05E4\u05D1\u05E8\u05D5\u05D0\u05E8', '\u05DE\u05E8\u05E5', '\u05D0\u05E4\u05E8\u05D9\u05DC', '\u05DE\u05D0\u05D9', '\u05D9\u05D5\u05E0\u05D9', '\u05D9\u05D5\u05DC\u05D9', '\u05D0\u05D5\u05D2\u05D5\u05E1\u05D8', '\u05E1\u05E4\u05D8\u05DE\u05D1\u05E8', '\u05D0\u05D5\u05E7\u05D8\u05D5\u05D1\u05E8', '\u05E0\u05D5\u05D1\u05DE\u05D1\u05E8', '\u05D3\u05E6\u05DE\u05D1\u05E8'];
             return hebrewMonths[d.getMonth()] + ' ' + d.getFullYear();
         }
         
         function updatePreviewBasic() {
-            const s = previewState.basic;
-            const origMonths = calcNPER(s.balance, s.payment, s.rate);
-            const newMonths = calcNPER(s.balance, s.payment + s.extra, s.rate);
-            const origInt = calcTotalInterest(s.balance, s.payment, s.rate, origMonths);
-            const newInt = calcTotalInterest(s.balance, s.payment + s.extra, s.rate, newMonths);
+            var s = previewState.basic;
+            var origMonths = calcNPER(s.balance, s.payment, s.rate);
+            var newMonths = calcNPER(s.balance, s.payment + s.extra, s.rate);
+            var origInt = calcTotalInterest(s.balance, s.payment, s.rate, origMonths);
+            var newInt = calcTotalInterest(s.balance, s.payment + s.extra, s.rate, newMonths);
             
-            const savedMonths = origMonths - newMonths;
-            const savedInterest = origInt - newInt;
+            var savedMonths = origMonths - newMonths;
+            var savedInterest = origInt - newInt;
             
             // Update preview display
-            const els = {
-                'basic-original-months': origMonths + ' חודשים',
-                'basic-new-months': newMonths + ' חודשים',
-                'basic-saved-months': savedMonths + ' חודשים!',
-                'basic-saved-interest': fmtCurrency(savedInterest),
-                'basic-old-date': getFutureDate(origMonths),
-                'basic-new-date': getFutureDate(newMonths)
-            };
+            var ids = ['basic-original-months', 'basic-new-months', 'basic-saved-months', 'basic-saved-interest', 'basic-old-date', 'basic-new-date'];
+            var vals = [origMonths + ' \u05D7\u05D5\u05D3\u05E9\u05D9\u05DD', newMonths + ' \u05D7\u05D5\u05D3\u05E9\u05D9\u05DD', savedMonths + ' \u05D7\u05D5\u05D3\u05E9\u05D9\u05DD!', fmtCurrency(savedInterest), getFutureDate(origMonths), getFutureDate(newMonths)];
             
-            Object.entries(els).forEach(([id, val]) => {
-                const el = calc.querySelector(`#${id}`) || calc.querySelector(`[id*="${id}"]`);
-                if (el) el.textContent = val;
-            });
+            for (var i = 0; i < ids.length; i++) {
+                var el = calc.querySelector('#' + ids[i]);
+                if (!el) el = calc.querySelector('[id*="' + ids[i] + '"]');
+                if (el) el.textContent = vals[i];
+            }
         }
         
-        // === Tab 2: Compare - טבלת השוואה ===
+        // === Tab 2: Compare ===
         function updatePreviewCompare() {
-            const s = previewState.compare;
-            const originalMonths = calcNPER(s.balance, s.payment, s.rate);
-            const originalInterest = calcTotalInterest(s.balance, s.payment, s.rate, originalMonths);
+            var s = previewState.compare;
+            var originalMonths = calcNPER(s.balance, s.payment, s.rate);
+            var originalInterest = calcTotalInterest(s.balance, s.payment, s.rate, originalMonths);
             
-            const extras = [200, 500, 1000, 2000];
+            var extras = [200, 500, 1000, 2000];
             
-            extras.forEach(extra => {
-                const newPayment = s.payment + extra;
-                const newMonths = calcNPER(s.balance, newPayment, s.rate);
-                const newInterest = calcTotalInterest(s.balance, newPayment, s.rate, newMonths);
-                const savedMonths = originalMonths - newMonths;
-                const savedInterest = originalInterest - newInterest;
+            for (var i = 0; i < extras.length; i++) {
+                var extra = extras[i];
+                var newPayment = s.payment + extra;
+                var newMonths = calcNPER(s.balance, newPayment, s.rate);
+                var newInterest = calcTotalInterest(s.balance, newPayment, s.rate, newMonths);
+                var savedMonths = originalMonths - newMonths;
+                var savedInterest = originalInterest - newInterest;
                 
                 // Update table cells
-                const monthsEl = calc.querySelector(`#compare-${extra}-months`) || calc.querySelector(`[id*="compare-${extra}-months"]`);
-                const savedEl = calc.querySelector(`#compare-${extra}-saved`) || calc.querySelector(`[id*="compare-${extra}-saved"]`);
-                const interestEl = calc.querySelector(`#compare-${extra}-interest`) || calc.querySelector(`[id*="compare-${extra}-interest"]`);
+                var monthsEl = calc.querySelector('#compare-' + extra + '-months');
+                if (!monthsEl) monthsEl = calc.querySelector('[id*="compare-' + extra + '-months"]');
+                var savedEl = calc.querySelector('#compare-' + extra + '-saved');
+                if (!savedEl) savedEl = calc.querySelector('[id*="compare-' + extra + '-saved"]');
+                var interestEl = calc.querySelector('#compare-' + extra + '-interest');
+                if (!interestEl) interestEl = calc.querySelector('[id*="compare-' + extra + '-interest"]');
                 
-                if (monthsEl) monthsEl.textContent = newMonths + ' חודשים';
-                if (savedEl) savedEl.textContent = savedMonths + ' חודשים';
+                if (monthsEl) monthsEl.textContent = newMonths + ' \u05D7\u05D5\u05D3\u05E9\u05D9\u05DD';
+                if (savedEl) savedEl.textContent = savedMonths + ' \u05D7\u05D5\u05D3\u05E9\u05D9\u05DD';
                 if (interestEl) interestEl.textContent = fmtCurrency(savedInterest);
-            });
+            }
         }
         
-        // === Tab 3: Schedule - לוח סילוקין ===
+        // === Tab 3: Schedule ===
         function updatePreviewSchedule() {
-            const s = previewState.schedule;
-            const monthlyRate = s.rate / 100 / 12;
-            const totalPayment = s.payment + s.extra;
+            var s = previewState.schedule;
+            var monthlyRate = s.rate / 100 / 12;
+            var totalPayment = s.payment + s.extra;
             
-            let remainingBalance = s.balance;
-            const tbody = calc.querySelector('#schedule-table-body') || calc.querySelector('[id*="schedule-table-body"]');
+            var remainingBalance = s.balance;
+            var tbody = calc.querySelector('#schedule-table-body');
+            if (!tbody) tbody = calc.querySelector('[id*="schedule-table-body"]');
             if (!tbody) return;
             
             tbody.innerHTML = '';
             
-            for (let month = 1; month <= 12 && remainingBalance > 0; month++) {
-                const interestPayment = remainingBalance * monthlyRate;
-                const principalPayment = Math.min(totalPayment - interestPayment, remainingBalance);
+            for (var month = 1; month <= 12; month++) {
+                if (!(remainingBalance > 0)) break;
+                var interestPayment = remainingBalance * monthlyRate;
+                var principalPayment = Math.min(totalPayment - interestPayment, remainingBalance);
                 remainingBalance -= principalPayment;
                 
-                const row = document.createElement('tr');
+                var row = document.createElement('tr');
                 row.style.background = month % 2 === 0 ? '#f9f9f9' : 'white';
-                row.innerHTML = `
-                    <td style="padding: 12px; text-align: center; border-bottom: 1px solid #e0e0e0;">${month}</td>
-                    <td style="padding: 12px; text-align: center; border-bottom: 1px solid #e0e0e0;">${fmtCurrency(totalPayment)}</td>
-                    <td style="padding: 12px; text-align: center; border-bottom: 1px solid #e0e0e0; color: #25D366; font-weight: 600;">${fmtCurrency(principalPayment)}</td>
-                    <td style="padding: 12px; text-align: center; border-bottom: 1px solid #e0e0e0; color: #FF9800;">${fmtCurrency(interestPayment)}</td>
-                    <td style="padding: 12px; text-align: center; border-bottom: 1px solid #e0e0e0; font-weight: 700;">${fmtCurrency(Math.max(0, remainingBalance))}</td>
-                `;
+                row.innerHTML = '<td style="padding: 12px; text-align: center; border-bottom: 1px solid #e0e0e0;">' + month + '</td>' +
+                    '<td style="padding: 12px; text-align: center; border-bottom: 1px solid #e0e0e0;">' + fmtCurrency(totalPayment) + '</td>' +
+                    '<td style="padding: 12px; text-align: center; border-bottom: 1px solid #e0e0e0; color: #25D366; font-weight: 600;">' + fmtCurrency(principalPayment) + '</td>' +
+                    '<td style="padding: 12px; text-align: center; border-bottom: 1px solid #e0e0e0; color: #FF9800;">' + fmtCurrency(interestPayment) + '</td>' +
+                    '<td style="padding: 12px; text-align: center; border-bottom: 1px solid #e0e0e0; font-weight: 700;">' + fmtCurrency(Math.max(0, remainingBalance)) + '</td>';
                 tbody.appendChild(row);
             }
         }
         
         // Tab switching with stopPropagation
-        const tabs = calc.querySelectorAll('.wpc-calc-snowball-m4k7-tab');
-        const panels = calc.querySelectorAll('.wpc-calc-snowball-m4k7-panel');
+        var tabs = calc.querySelectorAll('.wpc-calc-snowball-m4k7-tab');
+        var panels = calc.querySelectorAll('.wpc-calc-snowball-m4k7-panel');
         
-        tabs.forEach(tab => {
-            tab.addEventListener('click', function(e) {
+        for (var ti = 0; ti < tabs.length; ti++) {
+            tabs[ti].addEventListener('click', function(e) {
                 e.preventDefault();
-                e.stopPropagation(); // Prevent bubbling to original calculator
+                e.stopPropagation();
                 
-                const tabName = this.dataset.tab;
+                var tabName = this.dataset.tab;
                 
                 // Remove active from all tabs
-                tabs.forEach(t => {
-                    t.classList.remove('active');
-                    t.style.setProperty('background', 'var(--bg-light)', 'important');
-                    t.style.setProperty('color', 'var(--text-dark)', 'important');
-                });
+                for (var tj = 0; tj < tabs.length; tj++) {
+                    tabs[tj].classList.remove('active');
+                    tabs[tj].style.setProperty('background', 'var(--bg-light)', 'important');
+                    tabs[tj].style.setProperty('color', 'var(--text-dark)', 'important');
+                }
                 
                 // Hide all panels
-                panels.forEach(p => {
-                    p.classList.remove('active');
-                    p.style.display = 'none';
-                });
+                for (var pi = 0; pi < panels.length; pi++) {
+                    panels[pi].classList.remove('active');
+                    panels[pi].style.display = 'none';
+                }
                 
                 // Activate selected tab
                 this.classList.add('active');
-                this.style.setProperty('background', `linear-gradient(135deg, ${primaryColor} 0%, ${darkColor} 100%)`, 'important');
+                this.style.setProperty('background', 'linear-gradient(135deg, ' + primaryColor + ' 0%, ' + darkColor + ' 100%)', 'important');
                 this.style.setProperty('color', 'white', 'important');
                 
                 // Show selected panel
-                const activePanel = calc.querySelector(`[data-panel="${tabName}"]`) ||
-                                   calc.querySelector(`[data-preview-tab="${tabName}"]`) ||
-                                   calc.querySelector(`#tab-${tabName}`);
+                var activePanel = calc.querySelector('[data-panel="' + tabName + '"]');
+                if (!activePanel) activePanel = calc.querySelector('[data-preview-tab="' + tabName + '"]');
+                if (!activePanel) activePanel = calc.querySelector('#tab-' + tabName);
                 if (activePanel) {
                     activePanel.classList.add('active');
                     activePanel.style.display = 'block';
                 }
             });
-        });
+        }
         
         // Sliders with stopPropagation
-        const sliders = calc.querySelectorAll('input[type="range"]');
-        sliders.forEach(slider => {
-            slider.style.setProperty('accent-color', primaryColor, 'important');
+        var sliders = calc.querySelectorAll('input[type="range"]');
+        for (var si = 0; si < sliders.length; si++) {
+            sliders[si].style.setProperty('accent-color', primaryColor, 'important');
             
-            slider.addEventListener('input', function(e) {
+            sliders[si].addEventListener('input', function(e) {
                 e.stopPropagation();
                 
-                const id = this.id;
-                const val = parseFloat(this.value);
+                var id = this.id;
+                var val = parseFloat(this.value);
                 
                 // Update value display
-                const valueId = id.replace('-slider', '-value');
-                const valueEl = calc.querySelector(`#${valueId}`);
+                var valueId = id.replace('-slider', '-value');
+                var valueEl = calc.querySelector('#' + valueId);
                 if (valueEl) {
-                    if (id.includes('rate')) {
+                    if (id.indexOf('rate') !== -1) {
                         valueEl.textContent = fmtPercent(val);
                     } else {
                         valueEl.textContent = fmtCurrency(val);
@@ -1957,35 +1994,36 @@ if (!document.querySelector('meta[name="viewport"]')) {
                 
                 // Update state based on which slider
                 // Basic tab sliders
-                if (id.includes('basic-balance')) { previewState.basic.balance = val; updatePreviewBasic(); }
-                else if (id.includes('basic-payment')) { previewState.basic.payment = val; updatePreviewBasic(); }
-                else if (id.includes('basic-rate')) { previewState.basic.rate = val; updatePreviewBasic(); }
+                if (id.indexOf('basic-balance') !== -1) { previewState.basic.balance = val; updatePreviewBasic(); }
+                else if (id.indexOf('basic-payment') !== -1) { previewState.basic.payment = val; updatePreviewBasic(); }
+                else if (id.indexOf('basic-rate') !== -1) { previewState.basic.rate = val; updatePreviewBasic(); }
                 // Compare tab sliders
-                else if (id.includes('compare-balance')) { previewState.compare.balance = val; updatePreviewCompare(); }
-                else if (id.includes('compare-payment')) { previewState.compare.payment = val; updatePreviewCompare(); }
-                else if (id.includes('compare-rate')) { previewState.compare.rate = val; updatePreviewCompare(); }
+                else if (id.indexOf('compare-balance') !== -1) { previewState.compare.balance = val; updatePreviewCompare(); }
+                else if (id.indexOf('compare-payment') !== -1) { previewState.compare.payment = val; updatePreviewCompare(); }
+                else if (id.indexOf('compare-rate') !== -1) { previewState.compare.rate = val; updatePreviewCompare(); }
                 // Schedule tab sliders
-                else if (id.includes('schedule-balance')) { previewState.schedule.balance = val; updatePreviewSchedule(); }
-                else if (id.includes('schedule-payment')) { previewState.schedule.payment = val; updatePreviewSchedule(); }
-                else if (id.includes('schedule-rate')) { previewState.schedule.rate = val; updatePreviewSchedule(); }
-                else if (id.includes('schedule-extra')) { previewState.schedule.extra = val; updatePreviewSchedule(); }
+                else if (id.indexOf('schedule-balance') !== -1) { previewState.schedule.balance = val; updatePreviewSchedule(); }
+                else if (id.indexOf('schedule-payment') !== -1) { previewState.schedule.payment = val; updatePreviewSchedule(); }
+                else if (id.indexOf('schedule-rate') !== -1) { previewState.schedule.rate = val; updatePreviewSchedule(); }
+                else if (id.indexOf('schedule-extra') !== -1) { previewState.schedule.extra = val; updatePreviewSchedule(); }
             });
-        });
+        }
         
         // Option buttons with stopPropagation
-        const optionBtns = calc.querySelectorAll('.wpc-calc-snowball-m4k7-option');
-        optionBtns.forEach(btn => {
-            btn.addEventListener('click', function(e) {
+        var optionBtns = calc.querySelectorAll('.wpc-calc-snowball-m4k7-option');
+        for (var oi = 0; oi < optionBtns.length; oi++) {
+            optionBtns[oi].addEventListener('click', function(e) {
                 e.stopPropagation();
                 
-                const group = this.closest('.wpc-calc-snowball-m4k7-options');
+                var group = this.closest('.wpc-calc-snowball-m4k7-options');
                 if (group) {
-                    group.querySelectorAll('.wpc-calc-snowball-m4k7-option').forEach(b => {
-                        b.classList.remove('active');
-                        b.style.setProperty('background', 'transparent', 'important');
-                        b.style.setProperty('border-color', 'var(--border)', 'important');
-                        b.style.setProperty('color', 'var(--text-dark)', 'important');
-                    });
+                    var groupBtns = group.querySelectorAll('.wpc-calc-snowball-m4k7-option');
+                    for (var gi = 0; gi < groupBtns.length; gi++) {
+                        groupBtns[gi].classList.remove('active');
+                        groupBtns[gi].style.setProperty('background', 'transparent', 'important');
+                        groupBtns[gi].style.setProperty('border-color', 'var(--border)', 'important');
+                        groupBtns[gi].style.setProperty('color', 'var(--text-dark)', 'important');
+                    }
                 }
                 
                 this.classList.add('active');
@@ -1993,11 +2031,11 @@ if (!document.querySelector('meta[name="viewport"]')) {
                 this.style.setProperty('border-color', primaryColor, 'important');
                 this.style.setProperty('color', 'white', 'important');
                 
-                const val = parseInt(this.dataset.value);
+                var val = parseInt(this.dataset.value);
                 previewState.basic.extra = val;
                 updatePreviewBasic();
             });
-        });
+        }
         
         // Initial calculation for all tabs
         updatePreviewBasic();
@@ -2005,29 +2043,30 @@ if (!document.querySelector('meta[name="viewport"]')) {
         updatePreviewSchedule();
     }
     
-    // === copyPreviewCode - העתקה מתצוגה מקדימה עם צבע ===
+    // === copyPreviewCode ===
     function copyPreviewCode(color) {
-        // DataLayer Push - Tag Manager tracking
+        // DataLayer Push
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
             'event': 'copy_code_click',
-            'calculator_name': 'מחשבון קיצור תקופת הלוואה (שיטת כדור השלג)',
+            'calculator_name': '\u05DE\u05D7\u05E9\u05D1\u05D5\u05DF \u05E7\u05D9\u05E6\u05D5\u05E8 \u05EA\u05E7\u05D5\u05E4\u05EA \u05D4\u05DC\u05D5\u05D5\u05D0\u05D4 (\u05E9\u05D9\u05D8\u05EA \u05DB\u05D3\u05D5\u05E8 \u05D4\u05E9\u05DC\u05D2)',
             'button_type': 'copy-preview-code'
         });
         
-        const targetColor = color || selectedColor;
-        const darkColor = darkenColor(targetColor, 15);
+        var targetColor = color ? color : selectedColor;
+        var darkColor = darkenColor(targetColor, 15);
         
-        const calculator = $('wpc-calc-snowball-m4k7-calculator');
+        var calculator = $('wpc-calc-snowball-m4k7-calculator');
         if (!calculator) return;
         
         // Get styles
-        let styles = '';
-        document.querySelectorAll('style').forEach(styleEl => {
-            if (styleEl.textContent.includes('wpc-calc-snowball-m4k7')) {
-                styles = styleEl.textContent;
+        var styles = '';
+        var styleEls = document.querySelectorAll('style');
+        for (var i = 0; i < styleEls.length; i++) {
+            if (styleEls[i].textContent.indexOf('wpc-calc-snowball-m4k7') !== -1) {
+                styles = styleEls[i].textContent;
             }
-        });
+        }
         
         // Replace colors
         if (targetColor !== '#1e5490') {
@@ -2035,76 +2074,99 @@ if (!document.querySelector('meta[name="viewport"]')) {
             styles = styles.replace(/#2a5fa0/g, darkColor);
         }
         
-        // Build code
-        let code = '<style>\n' + styles + '\n</style>\n';
+        // Build code - copy main script from DOM
+        var code = '<style>\n' + styles + '\n</style>\n';
         code += '<div class="wpc-calc-snowball-m4k7-wrapper" id="wpc-calc-snowball-m4k7-main">\n';
         code += calculator.outerHTML;
         code += '\n</div>\n';
-        code += `<p style="text-align:center; font-size:0.9em; margin-top:20px; color:#666;">
-    מחשבון קיצור הלוואה פותח על ידי 
-    <a href="https://loan-israel.co.il/" target="_blank" rel="nofollow noopener" 
-       style="color:${targetColor}; text-decoration:underline;">רק תבקש פיננסים</a>
-</p>\n`;
-        code += getEmbedScript(targetColor, darkColor);
+        code += '<p style="text-align:center; font-size:0.9em; margin-top:20px; color:#666;">\n';
+        code += '    \u05DE\u05D7\u05E9\u05D1\u05D5\u05DF \u05E7\u05D9\u05E6\u05D5\u05E8 \u05D4\u05DC\u05D5\u05D5\u05D0\u05D4 \u05E4\u05D5\u05EA\u05D7 \u05E2\u05DC \u05D9\u05D3\u05D9\n';
+        code += '    <a href="https://loan-israel.co.il/" target="_blank" rel="nofollow noopener"\n';
+        code += '       style="color:' + targetColor + '; text-decoration:underline;">\u05E8\u05E7 \u05EA\u05D1\u05E7\u05E9 \u05E4\u05D9\u05E0\u05E0\u05E1\u05D9\u05DD</a>\n';
+        code += '</p>\n';
         
-        navigator.clipboard.writeText(code).then(() => {
-            alert('✅ הקוד הועתק בהצלחה עם הצבע הנבחר!\n\nהדביקו אותו בעורך וורדפרס במצב HTML.');
-        }).catch(() => {
-            alert('שגיאה בהעתקה - נסו שוב');
+        // Copy main script from DOM
+        var allScripts = document.querySelectorAll('script');
+        var mainScript = null;
+        for (var j = 0; j < allScripts.length; j++) {
+            if (allScripts[j].textContent) {
+                if (allScripts[j].textContent.indexOf('WPC_CalcSnowball_M4K7') !== -1) {
+                    mainScript = allScripts[j];
+                    break;
+                }
+            }
+        }
+        if (mainScript) {
+            code += mainScript.outerHTML + '\n';
+        }
+        
+        navigator.clipboard.writeText(code).then(function() {
+            alert('\u2705 \u05D4\u05E7\u05D5\u05D3 \u05D4\u05D5\u05E2\u05EA\u05E7 \u05D1\u05D4\u05E6\u05DC\u05D7\u05D4!');
         });
     }
     
-    function copyEmbedCode(withColor = false) {
-        // DataLayer Push - Tag Manager tracking
+    function copyEmbedCode(withColor) {
+        // DataLayer Push
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
             'event': 'copy_code_click',
-            'calculator_name': 'מחשבון קיצור תקופת הלוואה (שיטת כדור השלג)',
+            'calculator_name': '\u05DE\u05D7\u05E9\u05D1\u05D5\u05DF \u05E7\u05D9\u05E6\u05D5\u05E8 \u05EA\u05E7\u05D5\u05E4\u05EA \u05D4\u05DC\u05D5\u05D5\u05D0\u05D4',
             'button_type': 'copy-embed-code'
         });
         
-        const calculator = $('wpc-calc-snowball-m4k7-calculator');
+        var calculator = $('wpc-calc-snowball-m4k7-calculator');
         if (!calculator) return;
         
-        const color = withColor ? selectedColor : '#1e5490';
-        const darkColor = darkenColor(color, 15);
+        var color = withColor ? selectedColor : '#1e5490';
+        var darkColor = darkenColor(color, 15);
         
         // Get all styles
-        let styles = '';
-        document.querySelectorAll('style').forEach(styleEl => {
-            if (styleEl.textContent.includes('wpc-calc-snowball-m4k7')) {
-                styles = styleEl.textContent;
+        var styles = '';
+        var styleEls = document.querySelectorAll('style');
+        for (var i = 0; i < styleEls.length; i++) {
+            if (styleEls[i].textContent.indexOf('wpc-calc-snowball-m4k7') !== -1) {
+                styles = styleEls[i].textContent;
             }
-        });
+        }
         
         // Replace colors if custom color
-        if (withColor && color !== '#1e5490') {
-            styles = styles.replace(/#1e5490/g, color);
-            styles = styles.replace(/#2a5fa0/g, darkColor);
+        if (withColor) {
+            if (color !== '#1e5490') {
+                styles = styles.replace(/#1e5490/g, color);
+                styles = styles.replace(/#2a5fa0/g, darkColor);
+            }
         }
         
         // Build embed code
-        let embedCode = '<style>\n' + styles + '\n</style>\n';
+        var embedCode = '<style>\n' + styles + '\n</style>\n';
         embedCode += '<div class="wpc-calc-snowball-m4k7-wrapper" id="wpc-calc-snowball-m4k7-main">\n';
         embedCode += calculator.outerHTML;
         embedCode += '\n</div>\n';
         
         // Add credit link
-        embedCode += `<p style="text-align:center; font-size:0.9em; margin-top:20px; color:#666;">
-    מחשבון קיצור הלוואה פותח על ידי 
-    <a href="https://loan-israel.co.il/" target="_blank" rel="nofollow noopener" 
-       style="color:${color}; text-decoration:underline;">
-       רק תבקש פיננסים
-    </a>
-</p>\n`;
+        embedCode += '<p style="text-align:center; font-size:0.9em; margin-top:20px; color:#666;">\n';
+        embedCode += '    \u05DE\u05D7\u05E9\u05D1\u05D5\u05DF \u05E7\u05D9\u05E6\u05D5\u05E8 \u05D4\u05DC\u05D5\u05D5\u05D0\u05D4 \u05E4\u05D5\u05EA\u05D7 \u05E2\u05DC \u05D9\u05D3\u05D9\n';
+        embedCode += '    <a href="https://loan-israel.co.il/" target="_blank" rel="nofollow noopener"\n';
+        embedCode += '       style="color:' + color + '; text-decoration:underline;">\u05E8\u05E7 \u05EA\u05D1\u05E7\u05E9 \u05E4\u05D9\u05E0\u05E0\u05E1\u05D9\u05DD</a>\n';
+        embedCode += '</p>\n';
         
-        // Add standalone JS
-        embedCode += getEmbedScript(color, darkColor);
+        // Copy main script from DOM
+        var allScripts = document.querySelectorAll('script');
+        var mainScript = null;
+        for (var j = 0; j < allScripts.length; j++) {
+            if (allScripts[j].textContent) {
+                if (allScripts[j].textContent.indexOf('WPC_CalcSnowball_M4K7') !== -1) {
+                    mainScript = allScripts[j];
+                    break;
+                }
+            }
+        }
+        if (mainScript) {
+            embedCode += mainScript.outerHTML + '\n';
+        }
         
-        navigator.clipboard.writeText(embedCode).then(() => {
-            alert('✅ הקוד הועתק בהצלחה!\n\nהדביקו אותו בעורך וורדפרס במצב HTML.');
-        }).catch(() => {
-            alert('שגיאה בהעתקה - נסו שוב');
+        navigator.clipboard.writeText(embedCode).then(function() {
+            alert('\u2705 \u05D4\u05E7\u05D5\u05D3 \u05D4\u05D5\u05E2\u05EA\u05E7 \u05D1\u05D4\u05E6\u05DC\u05D7\u05D4!');
         });
     }
     
@@ -2283,10 +2345,10 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     
     // Custom color picker
-    const customColorPicker = document.getElementById('custom-color-picker');
+    var customColorPicker = document.getElementById('custom-color-picker');
     if (customColorPicker) {
         customColorPicker.addEventListener('input', function(e) {
-            showPreview(e.target.value, 'צבע מותאם אישית 🎨');
+            showPreview(e.target.value, '\u05E6\u05D1\u05E2 \u05DE\u05D5\u05EA\u05D0\u05DD \u05D0\u05D9\u05E9\u05D9\u05EA \uD83C\uDFA8');
         });
     }
     

@@ -564,14 +564,22 @@ if (!document.querySelector('meta[name="viewport"]')) {
 }
 
 .wpc-calc-carval-v4m7-awg-content {
-  display: none !important;
-  margin-top: 25px !important;
-  padding-top: 25px !important;
-  border-top: 2px dashed var(--wpc-carval-border) !important;
+  max-height: 0 !important;
+  overflow: hidden !important;
+  opacity: 0 !important;
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+  border-top: none !important;
+  transition: max-height 0.4s ease, opacity 0.3s ease, margin-top 0.3s ease, padding-top 0.3s ease !important;
 }
 
 .wpc-calc-carval-v4m7-awg-content.active {
-  display: block !important;
+  max-height: 2000px !important;
+  opacity: 1 !important;
+  margin-top: 25px !important;
+  padding-top: 25px !important;
+  border-top: 2px dashed var(--wpc-carval-border) !important;
+  overflow: visible !important;
 }
 
 /* Content Section */
@@ -1694,10 +1702,25 @@ if (!document.querySelector('meta[name="viewport"]')) {
     // ==========================================
     function openAWG() {
         const awgContent = document.getElementById('awg-content');
+        if (!awgContent) return;
+        
+        const isOpening = !awgContent.classList.contains('active');
         awgContent.classList.toggle('active');
         
-        if (awgContent.classList.contains('active')) {
-            awgContent.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        if (isOpening) {
+            setTimeout(function() {
+                awgContent.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 100);
+            // Dispatch resize for WordPress form initialization
+            setTimeout(function() {
+                window.dispatchEvent(new Event('resize'));
+            }, 400);
+            // jQuery resize for WordPress plugins
+            if (typeof jQuery !== 'undefined') {
+                setTimeout(function() {
+                    jQuery(window).trigger('resize');
+                }, 450);
+            }
         }
     }
 

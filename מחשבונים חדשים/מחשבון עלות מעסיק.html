@@ -5,7 +5,7 @@
 <script>
 // בדיקה והוספת viewport meta tag אם חסר
 if (!document.querySelector('meta[name="viewport"]')) {
-  var viewport = document.createElement('meta');
+  const viewport = document.createElement('meta');
   viewport.name = 'viewport';
   viewport.content = 'width=device-width, initial-scale=1.0, user-scalable=yes';
   document.head.appendChild(viewport);
@@ -625,22 +625,14 @@ if (!document.querySelector('meta[name="viewport"]')) {
 }
 
 .wpc-calc-employer-k7m3-awg-content {
-  max-height: 0 !important;
-  overflow: hidden !important;
-  opacity: 0 !important;
-  margin-top: 0 !important;
-  padding-top: 0 !important;
-  border-top: none !important;
-  transition: max-height 0.4s ease, opacity 0.3s ease, margin-top 0.3s ease, padding-top 0.3s ease !important;
-}
-
-.wpc-calc-employer-k7m3-awg-content.active {
-  max-height: 2000px !important;
-  opacity: 1 !important;
-  overflow: visible !important;
+  display: none !important;
   margin-top: 25px !important;
   padding-top: 25px !important;
   border-top: 2px dashed var(--wpc-employer-border) !important;
+}
+
+.wpc-calc-employer-k7m3-awg-content.active {
+  display: block !important;
 }
 
 /* Content Section */
@@ -1812,25 +1804,25 @@ if (!document.querySelector('meta[name="viewport"]')) {
 (function() {
     'use strict';
     
-    var NS = 'WPC_CalcEmployer_K7M3';
+    const NS = 'WPC_CalcEmployer_K7M3';
     if (window[NS]) return;
     
-    var CALCULATOR_NAME = 'עלות מעסיק';
-    var container = document.getElementById('wpc-calc-employer-k7m3-main');
+    const CALCULATOR_NAME = 'עלות מעסיק';
+    const container = document.getElementById('wpc-calc-employer-k7m3-main');
     if (!container) return;
 
     // Constants 2025
-    var NI_THRESHOLD = 7522;
-    var NI_CEILING = 50695;
-    var NI_EMPLOYER_LOW_RATE = 0.0451;
-    var NI_EMPLOYER_HIGH_RATE = 0.076;
-    var PENSION_EMPLOYER_RATE = 0.065;
-    var SEVERANCE_RATE = 0.0833;
-    var RECREATION_DAY_VALUE = 418;
-    var WORK_DAYS_PER_MONTH = 22;
+    const NI_THRESHOLD = 7522;
+    const NI_CEILING = 50695;
+    const NI_EMPLOYER_LOW_RATE = 0.0451;
+    const NI_EMPLOYER_HIGH_RATE = 0.076;
+    const PENSION_EMPLOYER_RATE = 0.065;
+    const SEVERANCE_RATE = 0.0833;
+    const RECREATION_DAY_VALUE = 418;
+    const WORK_DAYS_PER_MONTH = 22;
 
     function formatCurrency(num) {
-        return Math.round(num).toLocaleString('he-IL') + ' \u20AA';
+        return Math.round(num).toLocaleString('he-IL') + ' ₪';
     }
 
     function formatPercent(num) {
@@ -1838,28 +1830,28 @@ if (!document.querySelector('meta[name="viewport"]')) {
     }
 
     function calculateEmployerNI(grossSalary) {
-        var cappedSalary = Math.min(grossSalary, NI_CEILING);
+        const cappedSalary = Math.min(grossSalary, NI_CEILING);
         if (cappedSalary <= NI_THRESHOLD) {
             return { lowPart: cappedSalary * NI_EMPLOYER_LOW_RATE, highPart: 0, total: cappedSalary * NI_EMPLOYER_LOW_RATE };
         }
-        var lowPart = NI_THRESHOLD * NI_EMPLOYER_LOW_RATE;
-        var highPart = (cappedSalary - NI_THRESHOLD) * NI_EMPLOYER_HIGH_RATE;
-        return { lowPart: lowPart, highPart: highPart, total: lowPart + highPart };
+        const lowPart = NI_THRESHOLD * NI_EMPLOYER_LOW_RATE;
+        const highPart = (cappedSalary - NI_THRESHOLD) * NI_EMPLOYER_HIGH_RATE;
+        return { lowPart, highPart, total: lowPart + highPart };
     }
 
     function calculateEmployerCost(grossSalary, vacationDays, recreationDays, hasStudyFund) {
-        var ni = calculateEmployerNI(grossSalary);
-        var pension = grossSalary * PENSION_EMPLOYER_RATE;
-        var severance = grossSalary * SEVERANCE_RATE;
-        var recreation = (recreationDays * RECREATION_DAY_VALUE) / 12;
-        var vacation = (grossSalary / WORK_DAYS_PER_MONTH * vacationDays) / 12;
-        var studyFund = hasStudyFund ? grossSalary * 0.075 : 0;
-        var pensionTotal = pension + severance;
-        var socialTotal = recreation + vacation;
-        var additions = ni.total + pensionTotal + socialTotal + studyFund;
-        var total = grossSalary + additions;
+        const ni = calculateEmployerNI(grossSalary);
+        const pension = grossSalary * PENSION_EMPLOYER_RATE;
+        const severance = grossSalary * SEVERANCE_RATE;
+        const recreation = (recreationDays * RECREATION_DAY_VALUE) / 12;
+        const vacation = (grossSalary / WORK_DAYS_PER_MONTH * vacationDays) / 12;
+        const studyFund = hasStudyFund ? grossSalary * 0.075 : 0;
+        const pensionTotal = pension + severance;
+        const socialTotal = recreation + vacation;
+        const additions = ni.total + pensionTotal + socialTotal + studyFund;
+        const total = grossSalary + additions;
         return {
-            grossSalary: grossSalary, ni: ni, pension: pension, severance: severance, pensionTotal: pensionTotal, recreation: recreation, vacation: vacation, socialTotal: socialTotal, studyFund: studyFund, additions: additions, total: total,
+            grossSalary, ni, pension, severance, pensionTotal, recreation, vacation, socialTotal, studyFund, additions, total,
             overheadPercent: (additions / grossSalary) * 100,
             salaryPercent: (grossSalary / total) * 100,
             niPercent: (ni.total / total) * 100,
@@ -1869,10 +1861,9 @@ if (!document.querySelector('meta[name="viewport"]')) {
     }
 
     function calculateGrossFromBudget(budget, vacationDays, recreationDays, hasStudyFund) {
-        var low = budget * 0.7, high = budget;
-        for (var i = 0; i < 50; i++) {
-            if (!(high - low > 1)) break;
-            var mid = (low + high) / 2;
+        let low = budget * 0.7, high = budget;
+        for (let i = 0; i < 50 && high - low > 1; i++) {
+            const mid = (low + high) / 2;
             if (calculateEmployerCost(mid, vacationDays, recreationDays, hasStudyFund).total < budget) low = mid;
             else high = mid;
         }
@@ -1882,7 +1873,7 @@ if (!document.querySelector('meta[name="viewport"]')) {
     function getVacationDays(s) { return s <= 4 ? 12 : s === 5 ? 14 : s === 6 ? 16 : 18; }
     function getRecreationDays(s) { return s <= 1 ? 5 : s <= 3 ? 6 : 7; }
 
-    var state = {
+    const state = {
         basic: { gross: 15000, vacation: 12, recreation: 5, hasStudy: false },
         detailed: { gross: 20000, vacation: 12, recreation: 5, studyRate: 0 },
         compare: { grossA: 12000, seniorityA: 1, grossB: 20000, seniorityB: 5 },
@@ -1891,7 +1882,7 @@ if (!document.querySelector('meta[name="viewport"]')) {
     };
 
     function updateBasicTab() {
-        var r = calculateEmployerCost(state.basic.gross, state.basic.vacation, state.basic.recreation, state.basic.hasStudy);
+        const r = calculateEmployerCost(state.basic.gross, state.basic.vacation, state.basic.recreation, state.basic.hasStudy);
         document.getElementById('basic-gross-value').textContent = formatCurrency(state.basic.gross);
         document.getElementById('basic-result-gross').textContent = formatCurrency(r.grossSalary);
         document.getElementById('basic-result-additions').textContent = formatCurrency(r.additions);
@@ -1905,8 +1896,8 @@ if (!document.querySelector('meta[name="viewport"]')) {
     }
 
     function updateDetailedTab() {
-        var hasStudy = state.detailed.studyRate > 0;
-        var r = calculateEmployerCost(state.detailed.gross, state.detailed.vacation, state.detailed.recreation, hasStudy);
+        const hasStudy = state.detailed.studyRate > 0;
+        const r = calculateEmployerCost(state.detailed.gross, state.detailed.vacation, state.detailed.recreation, hasStudy);
         document.getElementById('detailed-gross-value').textContent = formatCurrency(state.detailed.gross);
         document.getElementById('detailed-vacation-value').textContent = state.detailed.vacation + ' ימים';
         document.getElementById('detailed-recreation-value').textContent = state.detailed.recreation + ' ימים';
@@ -1930,14 +1921,14 @@ if (!document.querySelector('meta[name="viewport"]')) {
     }
 
     function updateCompareTab() {
-        var rA = calculateEmployerCost(state.compare.grossA, getVacationDays(state.compare.seniorityA), getRecreationDays(state.compare.seniorityA), false);
-        var rB = calculateEmployerCost(state.compare.grossB, getVacationDays(state.compare.seniorityB), getRecreationDays(state.compare.seniorityB), false);
+        const rA = calculateEmployerCost(state.compare.grossA, getVacationDays(state.compare.seniorityA), getRecreationDays(state.compare.seniorityA), false);
+        const rB = calculateEmployerCost(state.compare.grossB, getVacationDays(state.compare.seniorityB), getRecreationDays(state.compare.seniorityB), false);
         document.getElementById('compare-a-gross-value').textContent = formatCurrency(state.compare.grossA);
         document.getElementById('compare-b-gross-value').textContent = formatCurrency(state.compare.grossB);
         document.getElementById('compare-a-total').textContent = formatCurrency(rA.total);
         document.getElementById('compare-b-total').textContent = formatCurrency(rB.total);
-        var diffGross = state.compare.grossB - state.compare.grossA;
-        var diffTotal = rB.total - rA.total;
+        const diffGross = state.compare.grossB - state.compare.grossA;
+        const diffTotal = rB.total - rA.total;
         document.getElementById('compare-diff-gross').textContent = (diffGross >= 0 ? '+' : '') + formatCurrency(diffGross);
         document.getElementById('compare-diff-total').textContent = (diffTotal >= 0 ? '+' : '') + formatCurrency(diffTotal);
         document.getElementById('compare-diff-annual').textContent = (diffTotal >= 0 ? '+' : '') + formatCurrency(diffTotal * 12);
@@ -1945,9 +1936,9 @@ if (!document.querySelector('meta[name="viewport"]')) {
     }
 
     function updateBudgetTab() {
-        var vacation = getVacationDays(state.budget.seniority);
-        var recreation = getRecreationDays(state.budget.seniority);
-        var grossFromBudget = calculateGrossFromBudget(state.budget.total, vacation, recreation, state.budget.hasStudy);
+        const vacation = getVacationDays(state.budget.seniority);
+        const recreation = getRecreationDays(state.budget.seniority);
+        const grossFromBudget = calculateGrossFromBudget(state.budget.total, vacation, recreation, state.budget.hasStudy);
         document.getElementById('budget-total-value').textContent = formatCurrency(state.budget.total);
         document.getElementById('budget-result-total').textContent = formatCurrency(state.budget.total);
         document.getElementById('budget-result-gross').textContent = formatCurrency(grossFromBudget);
@@ -1956,464 +1947,85 @@ if (!document.querySelector('meta[name="viewport"]')) {
     }
 
     function switchTab(tabName) {
-        container.querySelectorAll('.wpc-calc-employer-k7m3-tab-btn').forEach(function(btn) {
+        container.querySelectorAll('.wpc-calc-employer-k7m3-tab-btn').forEach(btn => {
             btn.classList.remove('active');
             if (btn.dataset.tab === tabName) btn.classList.add('active');
         });
-        container.querySelectorAll('.wpc-calc-employer-k7m3-tab-content').forEach(function(c) { c.classList.remove('active'); });
+        container.querySelectorAll('.wpc-calc-employer-k7m3-tab-content').forEach(c => c.classList.remove('active'));
         document.getElementById('tab-' + tabName).classList.add('active');
     }
 
     function darkenColor(hex, percent) {
-        var num = parseInt(hex.replace('#', ''), 16);
-        var amt = Math.round(2.55 * percent);
-        var R = Math.max((num >> 16) - amt, 0);
-        var G = Math.max((num >> 8 & 0x00FF) - amt, 0);
-        var B = Math.max((num & 0x0000FF) - amt, 0);
+        const num = parseInt(hex.replace('#', ''), 16);
+        const amt = Math.round(2.55 * percent);
+        const R = Math.max((num >> 16) - amt, 0);
+        const G = Math.max((num >> 8 & 0x00FF) - amt, 0);
+        const B = Math.max((num & 0x0000FF) - amt, 0);
         return '#' + (0x1000000 + R * 0x10000 + G * 0x100 + B).toString(16).slice(1);
-    }
-    
-    function hexToRgba(hex, alpha) {
-        var num = parseInt(hex.replace('#', ''), 16);
-        var R = (num >> 16) & 255;
-        var G = (num >> 8) & 255;
-        var B = num & 255;
-        return 'rgba(' + R + ',' + G + ',' + B + ',' + alpha + ')';
     }
 
     function copyEmbedCode() {
-        // DataLayer Push - Tag Manager tracking
-        if (!window.dataLayer) { window.dataLayer = []; }
-        window.dataLayer.push({
-            'event': 'copy_code_click',
-            'calculator_name': 'עלות מעסיק',
-            'button_type': 'copy-embed-code'
-        });
-        
-        var calculator = document.getElementById('wpc-calc-employer-k7m3-calculator');
-        var styles = '';
-        document.querySelectorAll('style').forEach(function(s) { if (s.textContent.includes('wpc-calc-employer-k7m3')) styles = s.textContent; });
-        var code = '<style>\n' + styles + '\n</style>\n';
+        const calculator = document.getElementById('wpc-calc-employer-k7m3-calculator');
+        let styles = '';
+        document.querySelectorAll('style').forEach(s => { if (s.textContent.includes('wpc-calc-employer-k7m3')) styles = s.textContent; });
+        let code = '<style>\n' + styles + '\n</style>\n';
         code += '<div class="wpc-calc-employer-k7m3-wrapper" id="wpc-calc-employer-k7m3-main">\n';
         code += '<div class="wpc-calc-employer-k7m3-calculator" id="wpc-calc-employer-k7m3-calculator">' + calculator.innerHTML + '</div>\n</div>\n';
         code += '<p style="text-align:center;font-size:0.9em;margin-top:20px;color:#666;">מחשבון עלות מעסיק פותח על ידי <a href="https://loan-israel.co.il/" target="_blank" rel="nofollow noopener" style="color:#1e5490;text-decoration:underline;">רק תבקש פיננסים</a></p>\n';
         code += getEmbedScript();
-        navigator.clipboard.writeText(code).then(function() { alert('הקוד הועתק בהצלחה!'); });
+        navigator.clipboard.writeText(code).then(() => alert('✅ הקוד הועתק בהצלחה!'));
     }
 
     function getEmbedScript() {
-        return '<scr' + 'ipt>\n' +
-'document.addEventListener("DOMContentLoaded",function(){(function(){"use strict";\n' +
-'var NS="WPC_CalcEmployer_Embed";if(window[NS])return;\n' +
-'var container=document.getElementById("wpc-calc-employer-k7m3-main");if(!container)return;\n' +
-'\n' +
-'// פונקציות עזר\n' +
-'function fmt(n){return Math.round(n).toLocaleString("he-IL")+" \\u20AA";}\n' +
-'function pct(n){return n.toFixed(1)+"%";}\n' +
-'function calcNI(g){var c=Math.min(g,50695);return c<=7522?c*0.0451:7522*0.0451+(c-7522)*0.076;}\n' +
-'function calcCost(g,v,r,s){var ni=calcNI(g);var pen=g*0.065;var sev=g*0.0833;var rec=(r*418)/12;var vac=(g/22*v)/12;var stud=s?g*0.075:0;var add=ni+pen+sev+rec+vac+stud;return{g:g,ni:ni,pen:pen,sev:sev,penT:pen+sev,rec:rec,vac:vac,stud:stud,add:add,tot:g+add};}\n' +
-'function getVac(s){return s<=4?12:s===5?14:s===6?16:18;}\n' +
-'function getRec(s){return s<=1?5:s<=3?6:7;}\n' +
-'function calcFromBudget(b,v,r,s){var lo=b*0.7,hi=b;for(var i=0;i<50;i++){if(!(hi-lo>1))break;var m=(lo+hi)/2;if(calcCost(m,v,r,s).tot<b)lo=m;else hi=m;}return Math.round(lo);}\n' +
-'\n' +
-'// State לכל הטאבים\n' +
-'var state={basic:{g:15000,v:12,r:5,s:false},detailed:{g:20000,v:12,r:5,sr:0},compare:{gA:12000,sA:1,gB:20000,sB:5},budget:{t:20000,sen:1,s:false}};\n' +
-'\n' +
-'// עדכון טאב בסיסי\n' +
-'function updateBasic(){var c=calcCost(state.basic.g,state.basic.v,state.basic.r,state.basic.s);var el=function(id){return document.getElementById(id);};if(el("basic-gross-value"))el("basic-gross-value").textContent=fmt(state.basic.g);if(el("basic-result-gross"))el("basic-result-gross").textContent=fmt(c.g);if(el("basic-result-additions"))el("basic-result-additions").textContent=fmt(c.add);if(el("basic-result-total"))el("basic-result-total").textContent=fmt(c.tot);if(el("basic-overhead-percent"))el("basic-overhead-percent").textContent="+"+pct(c.add/c.g*100);if(el("basic-study-label"))el("basic-study-label").textContent=state.basic.s?"כן (7.5%)":"לא (0%)";}\n' +
-'\n' +
-'// עדכון טאב מפורט\n' +
-'function updateDetailed(){var hs=state.detailed.sr>0;var c=calcCost(state.detailed.g,state.detailed.v,state.detailed.r,hs);var el=function(id){return document.getElementById(id);};if(el("detailed-gross-value"))el("detailed-gross-value").textContent=fmt(state.detailed.g);if(el("detailed-vacation-value"))el("detailed-vacation-value").textContent=state.detailed.v+" ימים";if(el("detailed-recreation-value"))el("detailed-recreation-value").textContent=state.detailed.r+" ימים";if(el("detailed-study-value"))el("detailed-study-value").textContent=state.detailed.sr+"%";if(el("detailed-salary-row"))el("detailed-salary-row").textContent=fmt(c.g);if(el("detailed-ni-low"))el("detailed-ni-low").textContent=fmt(Math.min(c.g,7522)*0.0451);if(el("detailed-ni-high"))el("detailed-ni-high").textContent=fmt(c.g>7522?(Math.min(c.g,50695)-7522)*0.076:0);if(el("detailed-ni-total"))el("detailed-ni-total").innerHTML="<strong>"+fmt(c.ni)+"</strong>";if(el("detailed-pension-employer"))el("detailed-pension-employer").textContent=fmt(c.pen);if(el("detailed-severance"))el("detailed-severance").textContent=fmt(c.sev);if(el("detailed-pension-total"))el("detailed-pension-total").innerHTML="<strong>"+fmt(c.penT)+"</strong>";if(el("detailed-vacation-cost"))el("detailed-vacation-cost").textContent=fmt(c.vac);if(el("detailed-recreation-cost"))el("detailed-recreation-cost").textContent=fmt(c.rec);if(el("detailed-study-rate"))el("detailed-study-rate").textContent=state.detailed.sr+"%";if(el("detailed-study-cost"))el("detailed-study-cost").textContent=fmt(c.stud);if(el("detailed-total-cost"))el("detailed-total-cost").innerHTML="<strong>"+fmt(c.tot)+"</strong>";if(el("detailed-result-gross"))el("detailed-result-gross").textContent=fmt(c.g);if(el("detailed-result-total"))el("detailed-result-total").textContent=fmt(c.tot);if(el("detailed-result-annual"))el("detailed-result-annual").textContent=fmt(c.tot*12);if(el("detailed-overhead-text"))el("detailed-overhead-text").textContent=pct(c.add/c.g*100);}\n' +
-'\n' +
-'// עדכון טאב השוואה\n' +
-'function updateCompare(){var cA=calcCost(state.compare.gA,getVac(state.compare.sA),getRec(state.compare.sA),false);var cB=calcCost(state.compare.gB,getVac(state.compare.sB),getRec(state.compare.sB),false);var el=function(id){return document.getElementById(id);};if(el("compare-a-gross-value"))el("compare-a-gross-value").textContent=fmt(state.compare.gA);if(el("compare-b-gross-value"))el("compare-b-gross-value").textContent=fmt(state.compare.gB);if(el("compare-a-total"))el("compare-a-total").textContent=fmt(cA.tot);if(el("compare-b-total"))el("compare-b-total").textContent=fmt(cB.tot);var dg=state.compare.gB-state.compare.gA;var dt=cB.tot-cA.tot;if(el("compare-diff-gross"))el("compare-diff-gross").textContent=(dg>=0?"+":"")+fmt(dg);if(el("compare-diff-total"))el("compare-diff-total").textContent=(dt>=0?"+":"")+fmt(dt);if(el("compare-diff-annual"))el("compare-diff-annual").textContent=(dt>=0?"+":"")+fmt(dt*12);}\n' +
-'\n' +
-'// עדכון טאב תקציב\n' +
-'function updateBudget(){var v=getVac(state.budget.sen);var r=getRec(state.budget.sen);var gfb=calcFromBudget(state.budget.t,v,r,state.budget.s);var el=function(id){return document.getElementById(id);};if(el("budget-total-value"))el("budget-total-value").textContent=fmt(state.budget.t);if(el("budget-result-total"))el("budget-result-total").textContent=fmt(state.budget.t);if(el("budget-result-gross"))el("budget-result-gross").textContent=fmt(gfb);if(el("budget-result-percent"))el("budget-result-percent").textContent=pct(gfb/state.budget.t*100);}\n' +
-'\n' +
-'// מעבר טאבים\n' +
-'function switchTab(t){var tabs=container.querySelectorAll(".wpc-calc-employer-k7m3-tab-btn");var contents=container.querySelectorAll(".wpc-calc-employer-k7m3-tab-content");for(var i=0;i<tabs.length;i++)tabs[i].classList.remove("active");for(var j=0;j<contents.length;j++){contents[j].classList.remove("active");contents[j].style.display="none";}var btn=container.querySelector("[data-tab=\\""+t+"\\"]");if(btn)btn.classList.add("active");var c=document.getElementById("tab-"+t);if(c){c.classList.add("active");c.style.display="block";}}\n' +
-'\n' +
-'// כפתורים בקבוצה\n' +
-'function setActiveBtn(btn){var g=btn.closest(".wpc-calc-employer-k7m3-btn-group");if(g){var bs=g.querySelectorAll("button");for(var i=0;i<bs.length;i++)bs[i].classList.remove("active");}btn.classList.add("active");}\n' +
-'\n' +
-'// Event delegation\n' +
-'container.addEventListener("click",function(e){var a=e.target.closest("[data-action]");if(!a)return;var act=a.dataset.action;\n' +
-'if(act==="switch-tab")switchTab(a.dataset.tab);\n' +
-'else if(act==="set-vacation"){setActiveBtn(a);state.basic.v=parseInt(a.dataset.value);updateBasic();}\n' +
-'else if(act==="set-recreation"){setActiveBtn(a);state.basic.r=parseInt(a.dataset.value);updateBasic();}\n' +
-'else if(act==="set-compare-a-seniority"){setActiveBtn(a);state.compare.sA=parseInt(a.dataset.value);updateCompare();}\n' +
-'else if(act==="set-compare-b-seniority"){setActiveBtn(a);state.compare.sB=parseInt(a.dataset.value);updateCompare();}\n' +
-'else if(act==="set-budget-seniority"){setActiveBtn(a);state.budget.sen=parseInt(a.dataset.value);updateBudget();}\n' +
-'else if(act==="set-budget-study"){setActiveBtn(a);state.budget.s=parseFloat(a.dataset.value)>0;updateBudget();}\n' +
-'else if(act==="toggle-faq"){var item=a.closest(".wpc-calc-employer-k7m3-faq-item");if(item)item.classList.toggle("active");}\n' +
-'});\n' +
-'\n' +
-'// Sliders\n' +
-'container.addEventListener("input",function(e){var id=e.target.id;var v=parseInt(e.target.value);\n' +
-'if(id==="basic-gross-slider"){state.basic.g=v;updateBasic();}\n' +
-'else if(id==="detailed-gross-slider"){state.detailed.g=v;updateDetailed();}\n' +
-'else if(id==="detailed-vacation-slider"){state.detailed.v=v;updateDetailed();}\n' +
-'else if(id==="detailed-recreation-slider"){state.detailed.r=v;updateDetailed();}\n' +
-'else if(id==="detailed-study-slider"){state.detailed.sr=parseFloat(e.target.value);updateDetailed();}\n' +
-'else if(id==="compare-a-gross-slider"){state.compare.gA=v;updateCompare();}\n' +
-'else if(id==="compare-b-gross-slider"){state.compare.gB=v;updateCompare();}\n' +
-'else if(id==="budget-total-slider"){state.budget.t=v;updateBudget();}\n' +
-'});\n' +
-'\n' +
-'// Toggle\n' +
-'container.addEventListener("change",function(e){if(e.target.id==="basic-study-toggle"){state.basic.s=e.target.checked;updateBasic();}});\n' +
-'\n' +
-'// Init\n' +
-'updateBasic();updateDetailed();updateCompare();updateBudget();\n' +
-'window[NS]={v:"1.0.0"};\n' +
-'})();});\n' +
-'</' + 'script>';
+        return '<script>\ndocument.addEventListener("DOMContentLoaded",function(){(function(){"use strict";var NS="WPC_CalcEmployer_Embed";if(window[NS])return;var container=document.getElementById("wpc-calc-employer-k7m3-main");if(!container)return;function formatCurrency(n){return Math.round(n).toLocaleString("he-IL")+" ₪";}function calcCost(g,v,r,s){var ni=g<=7522?g*0.0451:7522*0.0451+(Math.min(g,50695)-7522)*0.076;var pen=g*0.1483;var rec=(r*418)/12;var vac=(g/22*v)/12;var study=s?g*0.075:0;return{total:g+ni+pen+rec+vac+study,additions:ni+pen+rec+vac+study};}var state={gross:15000,vac:12,rec:5,study:false};function update(){var r=calcCost(state.gross,state.vac,state.rec,state.study);var el=function(id){return document.getElementById(id);};if(el("basic-gross-value"))el("basic-gross-value").textContent=formatCurrency(state.gross);if(el("basic-result-gross"))el("basic-result-gross").textContent=formatCurrency(state.gross);if(el("basic-result-additions"))el("basic-result-additions").textContent=formatCurrency(r.additions);if(el("basic-result-total"))el("basic-result-total").textContent=formatCurrency(r.total);}function switchTab(t){var tabs=container.querySelectorAll(".wpc-calc-employer-k7m3-tab-btn");var contents=container.querySelectorAll(".wpc-calc-employer-k7m3-tab-content");for(var i=0;i<tabs.length;i++)tabs[i].classList.remove("active");for(var j=0;j<contents.length;j++)contents[j].classList.remove("active");var btn=container.querySelector("[data-tab=\\\""+t+"\\\"]");if(btn)btn.classList.add("active");var c=document.getElementById("tab-"+t);if(c)c.classList.add("active");}container.addEventListener("click",function(e){var a=e.target.closest("[data-action]");if(!a)return;var act=a.dataset.action;if(act==="switch-tab")switchTab(a.dataset.tab);else if(act==="set-vacation"){var btns=container.querySelectorAll("#basic-vacation-group .wpc-calc-employer-k7m3-btn-option");for(var i=0;i<btns.length;i++)btns[i].classList.remove("active");a.classList.add("active");state.vac=parseInt(a.dataset.value);update();}else if(act==="set-recreation"){var btns2=container.querySelectorAll("#basic-recreation-group .wpc-calc-employer-k7m3-btn-option");for(var i=0;i<btns2.length;i++)btns2[i].classList.remove("active");a.classList.add("active");state.rec=parseInt(a.dataset.value);update();}});container.addEventListener("input",function(e){if(e.target.id==="basic-gross-slider"){state.gross=parseInt(e.target.value);update();}});container.addEventListener("change",function(e){if(e.target.id==="basic-study-toggle"){state.study=e.target.checked;var l=document.getElementById("basic-study-label");if(l)l.textContent=state.study?"כן (7.5%)":"לא (0%)";update();}});update();window[NS]={version:"1.0.0"};})();});\n</' + 'script>';
     }
 
     function showPreview(color, colorName) {
         state.selectedColor = color; state.selectedColorName = colorName;
-        container.querySelectorAll('.wpc-calc-employer-k7m3-color-btn').forEach(function(b) { b.classList.remove('active'); if (b.dataset.color === color) b.classList.add('active'); });
+        container.querySelectorAll('.wpc-calc-employer-k7m3-color-btn').forEach(b => { b.classList.remove('active'); if (b.dataset.color === color) b.classList.add('active'); });
         document.getElementById('preview-container').style.display = 'block';
         document.getElementById('preview-color-name').textContent = colorName;
-        var calc = document.getElementById('wpc-calc-employer-k7m3-calculator').cloneNode(true);
-        calc.id = 'wpc-calc-employer-k7m3-calculator-preview';
-        
-        // עדכון IDs של תוכן הטאבים כדי למנוע קונפליקטים + הגדרת תצוגה ראשונית
-        calc.querySelectorAll('.wpc-calc-employer-k7m3-tab-content').forEach(function(tab, index) {
-            if (tab.id) {
-                tab.setAttribute('data-preview-tab', tab.id.replace('tab-', ''));
-                tab.removeAttribute('id');
-            }
-            // הטאב הראשון מוצג, השאר מוסתרים
-            if (index === 0) {
-                tab.classList.add('active');
-                tab.style.display = 'block';
-            } else {
-                tab.classList.remove('active');
-                tab.style.display = 'none';
-            }
-        });
-        
-        // וודא שהטאב הראשון מסומן ככפתור פעיל
-        calc.querySelectorAll('.wpc-calc-employer-k7m3-tab-btn').forEach(function(btn, index) {
-            if (index === 0) {
-                btn.classList.add('active');
-            } else {
-                btn.classList.remove('active');
-            }
-        });
-        
-        // === החלפת צבעים מקיפה באמצעות CSS Variables ===
-        var darkColor = darkenColor(color, 15);
-        var lightColor = hexToRgba(color, 0.15);
-        
-        // דריסת CSS Variables על האלמנט המשוכפל - זה הפתרון העיקרי!
-        calc.style.setProperty('--wpc-employer-primary', color);
-        calc.style.setProperty('--wpc-employer-primary-dark', darkColor);
-        calc.style.setProperty('--wpc-employer-primary-light', hexToRgba(color, 0.1));
-        calc.style.setProperty('--wpc-employer-gradient', 'linear-gradient(135deg, ' + color + ' 0%, ' + darkColor + ' 100%)');
-        
-        // כותרות - inline style לוודא שעובד
-        calc.querySelectorAll('.wpc-calc-employer-k7m3-title, .wpc-calc-employer-k7m3-tab-title, .wpc-calc-employer-k7m3-results-title, .wpc-calc-employer-k7m3-section-title, .wpc-calc-employer-k7m3-breakdown-title').forEach(function(el) {
-            el.style.setProperty('color', color, 'important');
-        });
-        
-        // כרטיסי תוצאה מודגשים
-        calc.querySelectorAll('.wpc-calc-employer-k7m3-result-card.highlight').forEach(function(el) {
-            el.style.setProperty('background', 'linear-gradient(135deg,' + color + ' 0%,' + darkColor + ' 100%)', 'important');
-        });
-        
-        // ערכי סליידר
-        calc.querySelectorAll('.wpc-calc-employer-k7m3-slider-value').forEach(function(el) {
-            el.style.setProperty('color', color, 'important');
-        });
-        
-        // כפתורי טאב פעילים
-        calc.querySelectorAll('.wpc-calc-employer-k7m3-tab-btn.active').forEach(function(el) {
-            el.style.setProperty('color', color, 'important');
-            el.style.setProperty('border-bottom-color', color, 'important');
-        });
-        
-        // כפתורי אפשרויות פעילים
-        calc.querySelectorAll('.wpc-calc-employer-k7m3-btn-option.active').forEach(function(el) {
-            el.style.setProperty('background', color, 'important');
-            el.style.setProperty('border-color', color, 'important');
-        });
-        
-        // כותרות טבלאות
-        calc.querySelectorAll('.wpc-calc-employer-k7m3-breakdown-table th, .wpc-calc-employer-k7m3-cost-table th').forEach(function(el) {
-            el.style.setProperty('background', color, 'important');
-        });
-        
-        // סליידרים
-        calc.querySelectorAll('.wpc-calc-employer-k7m3-slider').forEach(function(el) {
-            el.style.setProperty('background', 'linear-gradient(to left, ' + color + ' 0%, ' + lightColor + ' 100%)', 'important');
-        });
-        
-        // פס התקדמות - פנסיה
-        calc.querySelectorAll('.wpc-calc-employer-k7m3-progress-segment.pension').forEach(function(el) {
-            el.style.setProperty('background', color, 'important');
-        });
-        
-        // גבולות כותרות סקציה
-        calc.querySelectorAll('.wpc-calc-employer-k7m3-section-title').forEach(function(el) {
-            el.style.setProperty('border-right-color', color, 'important');
-        });
-        
-        // תוצאות - גבול
-        calc.querySelectorAll('.wpc-calc-employer-k7m3-results').forEach(function(el) {
-            el.style.setProperty('border-color', lightColor, 'important');
-        });
-        
-        // שורת סיכום בטבלה
-        calc.querySelectorAll('.wpc-calc-employer-k7m3-breakdown-table .total-row td').forEach(function(el) {
-            el.style.setProperty('color', color, 'important');
-        });
-        
+        const calc = document.getElementById('wpc-calc-employer-k7m3-calculator').cloneNode(true);
+        calc.querySelectorAll('.wpc-calc-employer-k7m3-title,.wpc-calc-employer-k7m3-tab-title,.wpc-calc-employer-k7m3-results-title').forEach(el => el.style.color = color);
+        calc.querySelectorAll('.wpc-calc-employer-k7m3-result-card.highlight').forEach(el => el.style.background = 'linear-gradient(135deg,' + color + ' 0%,' + darkenColor(color, 15) + ' 100%)');
+        calc.querySelectorAll('.wpc-calc-employer-k7m3-slider-value').forEach(el => el.style.color = color);
         document.getElementById('preview-content').innerHTML = '';
         document.getElementById('preview-content').appendChild(calc);
-        
-        // אתחול מלא של התצוגה המקדימה
-        initPreviewCalculator(calc, color);
-    }
-    
-    // === פונקציית אתחול מחשבון בתצוגה מקדימה ===
-    function initPreviewCalculator(calc, primaryColor) {
-        // State מקומי לתצוגה מקדימה
-        var previewState = {
-            basic: { gross: 15000, vacation: 12, recreation: 5, hasStudy: false },
-            detailed: { gross: 20000, vacation: 12, recreation: 5, studyRate: 0 },
-            compare: { grossA: 12000, seniorityA: 1, grossB: 20000, seniorityB: 5 },
-            budget: { total: 20000, seniority: 1, hasStudy: false }
-        };
-        
-        // פונקציות עזר
-        function formatCurrency(num) {
-            return Math.round(num).toLocaleString('he-IL') + ' \u20AA';
-        }
-        
-        function calculateEmployerNI(grossSalary) {
-            var cappedSalary = Math.min(grossSalary, 50695);
-            if (cappedSalary <= 7522) {
-                return cappedSalary * 0.0451;
-            }
-            return 7522 * 0.0451 + (cappedSalary - 7522) * 0.076;
-        }
-        
-        function calculateEmployerCost(gross, vacation, recreation, hasStudy) {
-            var ni = calculateEmployerNI(gross);
-            var pension = gross * 0.065;
-            var severance = gross * 0.0833;
-            var rec = (recreation * 418) / 12;
-            var vac = (gross / 22 * vacation) / 12;
-            var study = hasStudy ? gross * 0.075 : 0;
-            var additions = ni + pension + severance + rec + vac + study;
-            return { gross: gross, ni: ni, pension: pension, severance: severance, rec: rec, vac: vac, study: study, additions: additions, total: gross + additions };
-        }
-        
-        // עדכון טאב בסיסי
-        function updateBasicTab() {
-            var r = calculateEmployerCost(previewState.basic.gross, previewState.basic.vacation, previewState.basic.recreation, previewState.basic.hasStudy);
-            function findEl(sel) { return calc.querySelector(sel); }
-            function findById(id) { var found = calc.querySelector('[id="' + id + '"], [data-id="' + id + '"]'); return found ? found : calc.querySelector('#' + id); }
-            
-            // עדכון ערכים
-            var grossValue = findEl('[id*="basic-gross-value"]'); if (!grossValue) grossValue = findById('basic-gross-value');
-            if (grossValue) grossValue.textContent = formatCurrency(previewState.basic.gross);
-            
-            var resultGross = findEl('[id*="basic-result-gross"]'); if (!resultGross) resultGross = findById('basic-result-gross');
-            if (resultGross) resultGross.textContent = formatCurrency(r.gross);
-            
-            var resultAdditions = findEl('[id*="basic-result-additions"]'); if (!resultAdditions) resultAdditions = findById('basic-result-additions');
-            if (resultAdditions) resultAdditions.textContent = formatCurrency(r.additions);
-            
-            var resultTotal = findEl('[id*="basic-result-total"]'); if (!resultTotal) resultTotal = findById('basic-result-total');
-            if (resultTotal) resultTotal.textContent = formatCurrency(r.total);
-            
-            var overhead = findEl('[id*="basic-overhead-percent"]'); if (!overhead) overhead = findById('basic-overhead-percent');
-            if (overhead) overhead.textContent = '+' + ((r.additions / r.gross) * 100).toFixed(1) + '%';
-            
-            var studyLabel = findEl('[id*="basic-study-label"]'); if (!studyLabel) studyLabel = findById('basic-study-label');
-            if (studyLabel) studyLabel.textContent = previewState.basic.hasStudy ? 'כן (7.5%)' : 'לא (0%)';
-        }
-        
-        // פונקציית עזר להפעלת כפתור בקבוצה
-        function activateButton(btn) {
-            var group = btn.closest('.wpc-calc-employer-k7m3-btn-group');
-            if (group) {
-                group.querySelectorAll('button').forEach(function(b) {
-                    b.classList.remove('active');
-                    b.style.removeProperty('background');
-                    b.style.removeProperty('border-color');
-                    b.style.removeProperty('color');
-                });
-            }
-            btn.classList.add('active');
-            btn.style.setProperty('background', primaryColor, 'important');
-            btn.style.setProperty('border-color', primaryColor, 'important');
-            btn.style.setProperty('color', '#fff', 'important');
-        }
-        
-        // Event delegation לכל האינטראקציות
-        calc.addEventListener('click', function(e) {
-            var a = e.target.closest('[data-action]');
-            if (!a) return;
-            var act = a.dataset.action;
-            
-            e.stopPropagation();
-            e.preventDefault();
-            
-            // מעבר טאבים
-            if (act === 'switch-tab') {
-                var tabName = a.dataset.tab;
-                calc.querySelectorAll('.wpc-calc-employer-k7m3-tab-btn').forEach(function(btn) {
-                    btn.classList.remove('active');
-                    btn.style.removeProperty('color');
-                    btn.style.removeProperty('border-bottom-color');
-                    if (btn.dataset.tab === tabName) {
-                        btn.classList.add('active');
-                        btn.style.setProperty('color', primaryColor, 'important');
-                        btn.style.setProperty('border-bottom-color', primaryColor, 'important');
-                    }
-                });
-                calc.querySelectorAll('.wpc-calc-employer-k7m3-tab-content').forEach(function(c) {
-                    c.classList.remove('active');
-                    c.style.display = 'none';
-                });
-                var tabContent = calc.querySelector('[data-preview-tab="' + tabName + '"]');
-                if (tabContent) {
-                    tabContent.classList.add('active');
-                    tabContent.style.display = 'block';
-                }
-            }
-            
-            // כפתורי ימי חופשה
-            else if (act === 'set-vacation') {
-                activateButton(a);
-                previewState.basic.vacation = parseInt(a.dataset.value);
-                updateBasicTab();
-            }
-            
-            // כפתורי ימי הבראה
-            else if (act === 'set-recreation') {
-                activateButton(a);
-                previewState.basic.recreation = parseInt(a.dataset.value);
-                updateBasicTab();
-            }
-            
-            // כפתורי ותק/בחירה אחרים
-            else if (act === 'set-compare-a-seniority') { activateButton(a); }
-            else if (act === 'set-compare-b-seniority') { activateButton(a); }
-            else if (act === 'set-budget-seniority') { activateButton(a); }
-            else if (act === 'set-budget-study') { activateButton(a); }
-        });
-        
-        // סליידרים
-        calc.addEventListener('input', function(e) {
-            e.stopPropagation();
-            
-            if (e.target.type === 'range') {
-                var id = e.target.id ? e.target.id : e.target.getAttribute('id');
-                var value = parseInt(e.target.value);
-                
-                // עדכון ערך מוצג ליד הסליידר
-                var valueEl = null;
-                if (id) {
-                    var valueId = id.replace('-slider', '-value');
-                    valueEl = calc.querySelector('[id="' + valueId + '"]');
-                    if (!valueEl) valueEl = calc.querySelector('#' + valueId);
-                }
-                
-                // סליידר ברוטו בסיסי
-                if (id) { if (id.includes('basic-gross')) {
-                    previewState.basic.gross = value;
-                    if (valueEl) valueEl.textContent = formatCurrency(value);
-                    updateBasicTab();
-                } }
-                // סליידרים אחרים - עדכון תצוגה בלבד
-                else if (valueEl) {
-                    if (id) { 
-                        if (id.includes('vacation')) {
-                            valueEl.textContent = value + ' ימים';
-                        } else if (id.includes('recreation')) {
-                            valueEl.textContent = value + ' ימים';
-                        } else if (id.includes('study')) {
-                            valueEl.textContent = value + '%';
-                        } else {
-                            valueEl.textContent = formatCurrency(value);
-                        }
-                    } else {
-                        valueEl.textContent = formatCurrency(value);
-                    }
-                }
-            }
-        });
-        
-        // Toggle קרן השתלמות
-        calc.addEventListener('change', function(e) {
-            e.stopPropagation();
-            
-            if (e.target.type === 'checkbox') { if (e.target.id) { if (e.target.id.includes('study-toggle')) {
-                previewState.basic.hasStudy = e.target.checked;
-                updateBasicTab();
-            } } }
-        });
-        
-        // עדכון ראשוני
-        updateBasicTab();
     }
 
     function copyPreviewCode() {
-        // DataLayer Push - Tag Manager tracking
-        if (!window.dataLayer) { window.dataLayer = []; }
-        window.dataLayer.push({
-            'event': 'copy_code_click',
-            'calculator_name': 'עלות מעסיק',
-            'button_type': 'copy-preview-code'
-        });
-        
-        var color = state.selectedColor;
-        var styles = '';
-        document.querySelectorAll('style').forEach(function(s) { if (s.textContent.includes('wpc-calc-employer-k7m3')) styles = s.textContent.replace(/#1e5490/g, color).replace(/#163d6b/g, darkenColor(color, 15)); });
-        var code = '<style>\n' + styles + '\n</style>\n';
+        const color = state.selectedColor;
+        let styles = '';
+        document.querySelectorAll('style').forEach(s => { if (s.textContent.includes('wpc-calc-employer-k7m3')) styles = s.textContent.replace(/#1e5490/g, color).replace(/#163d6b/g, darkenColor(color, 15)); });
+        let code = '<style>\n' + styles + '\n</style>\n';
         code += '<div class="wpc-calc-employer-k7m3-wrapper" id="wpc-calc-employer-k7m3-main">\n';
         code += '<div class="wpc-calc-employer-k7m3-calculator" id="wpc-calc-employer-k7m3-calculator">' + document.getElementById('wpc-calc-employer-k7m3-calculator').innerHTML + '</div>\n</div>\n';
         code += '<p style="text-align:center;font-size:0.9em;margin-top:20px;color:#666;">מחשבון עלות מעסיק פותח על ידי <a href="https://loan-israel.co.il/" target="_blank" rel="nofollow noopener" style="color:' + color + ';text-decoration:underline;">רק תבקש פיננסים</a></p>\n';
         code += getEmbedScript();
-        navigator.clipboard.writeText(code).then(function() { alert('הקוד הועתק בצבע "' + state.selectedColorName + '"!'); });
+        navigator.clipboard.writeText(code).then(() => alert('✅ הקוד הועתק בצבע "' + state.selectedColorName + '"!'));
     }
 
     container.addEventListener('click', function(e) {
-        var a = e.target.closest('[data-action]');
+        const a = e.target.closest('[data-action]');
         if (!a) return;
-        var act = a.dataset.action;
+        const act = a.dataset.action;
         if (act === 'switch-tab') switchTab(a.dataset.tab);
-        else if (act === 'open-awg') { 
-            var c = document.getElementById('awg-content'); 
-            var isOpening = !c.classList.contains('active');
-            c.classList.toggle('active'); 
-            if (isOpening) { 
-                setTimeout(function() { c.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 100);
-                setTimeout(function() { window.dispatchEvent(new Event('resize')); }, 400);
-                if (typeof jQuery !== 'undefined') { setTimeout(function() { jQuery(window).trigger('resize'); }, 450); }
-            } 
-        }
+        else if (act === 'open-awg') { const c = document.getElementById('awg-content'); c.classList.toggle('active'); if (c.classList.contains('active')) c.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
         else if (act === 'scroll-to-embed') document.getElementById('wpc-calc-employer-k7m3-embed').scrollIntoView({ behavior: 'smooth' });
         else if (act === 'copy-embed-code') copyEmbedCode();
         else if (act === 'preview-color') showPreview(a.dataset.color, a.dataset.name);
         else if (act === 'copy-preview-code') copyPreviewCode();
         else if (act === 'toggle-faq') a.closest('.wpc-calc-employer-k7m3-faq-item').classList.toggle('active');
-        else if (act === 'set-vacation') { document.querySelectorAll('#basic-vacation-group .wpc-calc-employer-k7m3-btn-option').forEach(function(b) { b.classList.remove('active'); }); a.classList.add('active'); state.basic.vacation = parseInt(a.dataset.value); updateBasicTab(); }
-        else if (act === 'set-recreation') { document.querySelectorAll('#basic-recreation-group .wpc-calc-employer-k7m3-btn-option').forEach(function(b) { b.classList.remove('active'); }); a.classList.add('active'); state.basic.recreation = parseInt(a.dataset.value); updateBasicTab(); }
-        else if (act === 'set-compare-a-seniority') { document.querySelectorAll('#compare-a-seniority-group .wpc-calc-employer-k7m3-btn-option').forEach(function(b) { b.classList.remove('active'); }); a.classList.add('active'); state.compare.seniorityA = parseInt(a.dataset.value); updateCompareTab(); }
-        else if (act === 'set-compare-b-seniority') { document.querySelectorAll('#compare-b-seniority-group .wpc-calc-employer-k7m3-btn-option').forEach(function(b) { b.classList.remove('active'); }); a.classList.add('active'); state.compare.seniorityB = parseInt(a.dataset.value); updateCompareTab(); }
-        else if (act === 'set-budget-seniority') { document.querySelectorAll('#budget-seniority-group .wpc-calc-employer-k7m3-btn-option').forEach(function(b) { b.classList.remove('active'); }); a.classList.add('active'); state.budget.seniority = parseInt(a.dataset.value); updateBudgetTab(); }
-        else if (act === 'set-budget-study') { document.querySelectorAll('#budget-study-group .wpc-calc-employer-k7m3-btn-option').forEach(function(b) { b.classList.remove('active'); }); a.classList.add('active'); state.budget.hasStudy = parseFloat(a.dataset.value) > 0; updateBudgetTab(); }
+        else if (act === 'set-vacation') { document.querySelectorAll('#basic-vacation-group .wpc-calc-employer-k7m3-btn-option').forEach(b => b.classList.remove('active')); a.classList.add('active'); state.basic.vacation = parseInt(a.dataset.value); updateBasicTab(); }
+        else if (act === 'set-recreation') { document.querySelectorAll('#basic-recreation-group .wpc-calc-employer-k7m3-btn-option').forEach(b => b.classList.remove('active')); a.classList.add('active'); state.basic.recreation = parseInt(a.dataset.value); updateBasicTab(); }
+        else if (act === 'set-compare-a-seniority') { document.querySelectorAll('#compare-a-seniority-group .wpc-calc-employer-k7m3-btn-option').forEach(b => b.classList.remove('active')); a.classList.add('active'); state.compare.seniorityA = parseInt(a.dataset.value); updateCompareTab(); }
+        else if (act === 'set-compare-b-seniority') { document.querySelectorAll('#compare-b-seniority-group .wpc-calc-employer-k7m3-btn-option').forEach(b => b.classList.remove('active')); a.classList.add('active'); state.compare.seniorityB = parseInt(a.dataset.value); updateCompareTab(); }
+        else if (act === 'set-budget-seniority') { document.querySelectorAll('#budget-seniority-group .wpc-calc-employer-k7m3-btn-option').forEach(b => b.classList.remove('active')); a.classList.add('active'); state.budget.seniority = parseInt(a.dataset.value); updateBudgetTab(); }
+        else if (act === 'set-budget-study') { document.querySelectorAll('#budget-study-group .wpc-calc-employer-k7m3-btn-option').forEach(b => b.classList.remove('active')); a.classList.add('active'); state.budget.hasStudy = parseFloat(a.dataset.value) > 0; updateBudgetTab(); }
     });
 
     container.addEventListener('input', function(e) {
-        var id = e.target.id;
+        const id = e.target.id;
         if (id === 'basic-gross-slider') { state.basic.gross = parseInt(e.target.value); updateBasicTab(); }
         else if (id === 'detailed-gross-slider') { state.detailed.gross = parseInt(e.target.value); updateDetailedTab(); }
         else if (id === 'detailed-vacation-slider') { state.detailed.vacation = parseInt(e.target.value); updateDetailedTab(); }

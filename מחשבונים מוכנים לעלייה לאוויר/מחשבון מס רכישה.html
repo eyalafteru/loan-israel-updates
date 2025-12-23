@@ -8,7 +8,7 @@ if (!document.querySelector('meta[name="viewport"]')) {
 }
 </script>
 
-<style>
+<style id="wpc-calc-tax-r4k8-main-styles">
 /* === CSS Variables === */
 :root {
   --wpc-tax-primary: #1e5490;
@@ -561,15 +561,22 @@ if (!document.querySelector('meta[name="viewport"]')) {
 }
 
 .wpc-calc-tax-r4k8-awg-content {
-  display: none !important;
-  margin-top: 20px !important;
-  padding: 20px !important;
+  max-height: 0 !important;
+  overflow: hidden !important;
+  opacity: 0 !important;
+  margin-top: 0 !important;
+  padding: 0 20px !important;
   background: var(--wpc-tax-white) !important;
   border-radius: var(--wpc-tax-radius-md) !important;
+  transition: max-height 0.4s ease, opacity 0.3s ease, margin-top 0.3s ease, padding 0.3s ease !important;
 }
 
 .wpc-calc-tax-r4k8-awg-content.active {
-  display: block !important;
+  max-height: 2000px !important;
+  opacity: 1 !important;
+  overflow: visible !important;
+  margin-top: 20px !important;
+  padding: 20px !important;
 }
 
 /* === FAQ Section === */
@@ -799,7 +806,7 @@ if (!document.querySelector('meta[name="viewport"]')) {
   
   <!-- Title Section -->
   <div class="wpc-calc-tax-r4k8-title-section">
-    <h1 class="wpc-calc-tax-r4k8-title">מחשבון מס רכישה 2024-2025</h1>
+    <h1 class="wpc-calc-tax-r4k8-title">מחשבון מס רכישה 2025</h1>
     <p class="wpc-calc-tax-r4k8-subtitle">חשבו בקלות כמה מס רכישה תשלמו על דירה יחידה או דירה נוספת</p>
     <span class="wpc-calc-tax-r4k8-update-date">📅 עודכן: ינואר 2025 | מדרגות בתוקף: 16.1.2024 - 15.1.2025</span>
   </div>
@@ -1463,7 +1470,7 @@ if (!document.querySelector('meta[name="viewport"]')) {
     // UTILITY FUNCTIONS
     // ==========================================
     function formatCurrency(num) {
-        return '₪' + Math.round(num).toLocaleString('he-IL');
+        return '\u20AA' + Math.round(num).toLocaleString('he-IL');
     }
 
     function formatPercent(num) {
@@ -1542,20 +1549,20 @@ if (!document.querySelector('meta[name="viewport"]')) {
         const tbody = el('basic-breakdown-body');
         let html = '';
         
-        result.breakdown.forEach((row, index) => {
-            const rateLabel = row.rate === 0 ? 'פטור' : (row.rate * 100) + '%';
-            html += `<tr>
-                <td>${index + 1}</td>
-                <td>${formatCurrency(row.amount)}</td>
-                <td>${rateLabel}</td>
-                <td>${formatCurrency(row.tax)}</td>
-            </tr>`;
+        result.breakdown.forEach(function(row, index) {
+            var rateLabel = row.rate === 0 ? 'פטור' : (row.rate * 100) + '%';
+            html += '<tr>' +
+                '<td>' + (index + 1) + '</td>' +
+                '<td>' + formatCurrency(row.amount) + '</td>' +
+                '<td>' + rateLabel + '</td>' +
+                '<td>' + formatCurrency(row.tax) + '</td>' +
+            '</tr>';
         });
         
-        html += `<tr>
-            <td colspan="3"><strong>סה"כ מס רכישה</strong></td>
-            <td><strong>${formatCurrency(result.total)}</strong></td>
-        </tr>`;
+        html += '<tr>' +
+            '<td colspan="3"><strong>סה"כ מס רכישה</strong></td>' +
+            '<td><strong>' + formatCurrency(result.total) + '</strong></td>' +
+        '</tr>';
         
         tbody.innerHTML = html;
     }
@@ -1607,13 +1614,13 @@ if (!document.querySelector('meta[name="viewport"]')) {
         state.activeTab = tabName;
         
         // Update tab buttons
-        container.querySelectorAll('.wpc-calc-tax-r4k8-tab-btn').forEach(btn => {
+        container.querySelectorAll('.wpc-calc-tax-r4k8-tab-btn').forEach(function(btn) {
             btn.classList.remove('active');
         });
-        container.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+        container.querySelector('[data-tab="' + tabName + '"]').classList.add('active');
         
         // Update tab contents
-        container.querySelectorAll('.wpc-calc-tax-r4k8-tab-content').forEach(content => {
+        container.querySelectorAll('.wpc-calc-tax-r4k8-tab-content').forEach(function(content) {
             content.classList.remove('active');
         });
         el('tab-' + tabName).classList.add('active');
@@ -1627,10 +1634,10 @@ if (!document.querySelector('meta[name="viewport"]')) {
                          context === 'brackets' ? '#tab-brackets .wpc-calc-tax-r4k8-type-selector' :
                          '#tab-reverse .wpc-calc-tax-r4k8-type-selector';
         
-        const buttons = container.querySelectorAll(selector + ' .wpc-calc-tax-r4k8-type-btn');
-        buttons.forEach(btn => btn.classList.remove('active'));
+        var buttons = container.querySelectorAll(selector + ' .wpc-calc-tax-r4k8-type-btn');
+        buttons.forEach(function(btn) { btn.classList.remove('active'); });
         
-        const activeBtn = container.querySelector(selector + ` [data-type="${type}"]`);
+        var activeBtn = container.querySelector(selector + ' [data-type="' + type + '"]');
         if (activeBtn) activeBtn.classList.add('active');
 
         if (context === 'basic') {
@@ -1649,10 +1656,26 @@ if (!document.querySelector('meta[name="viewport"]')) {
     // AWG & FAQ HANDLERS
     // ==========================================
     function openAWG() {
-        const awgContent = el('awg-content');
+        var awgContent = el('awg-content');
+        if (!awgContent) return;
+        
+        var isOpening = !awgContent.classList.contains('active');
         awgContent.classList.toggle('active');
-        if (awgContent.classList.contains('active')) {
-            awgContent.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        
+        if (isOpening) {
+            setTimeout(function() {
+                awgContent.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 100);
+            // Dispatch resize for WordPress form initialization
+            setTimeout(function() {
+                window.dispatchEvent(new Event('resize'));
+            }, 400);
+            // jQuery resize for WordPress plugins
+            if (typeof jQuery !== 'undefined') {
+                setTimeout(function() {
+                    jQuery(window).trigger('resize');
+                }, 450);
+            }
         }
     }
 
@@ -1677,25 +1700,24 @@ if (!document.querySelector('meta[name="viewport"]')) {
     }
 
     function getEmbedCSS(color) {
-        const darkColor = darkenColor(color, 15);
+        var darkColor = darkenColor(color, 15);
         // Convert hex to rgba for light color
-        const r = parseInt(color.slice(1, 3), 16);
-        const g = parseInt(color.slice(3, 5), 16);
-        const b = parseInt(color.slice(5, 7), 16);
-        const lightColor = `rgba(${r}, ${g}, ${b}, 0.1)`;
+        var r = parseInt(color.slice(1, 3), 16);
+        var g = parseInt(color.slice(3, 5), 16);
+        var b = parseInt(color.slice(5, 7), 16);
+        var lightColor = 'rgba(' + r + ', ' + g + ', ' + b + ', 0.1)';
         
-        let css = '';
-        const styleElements = document.querySelectorAll('style');
-        for (let i = 0; i < styleElements.length; i++) {
-            const styleText = styleElements[i].textContent;
-            if (styleText && styleText.includes('wpc-calc-tax-r4k8')) {
-                css = styleText;
-                break;
-            }
+        // Get main CSS by ID directly
+        var mainStyleEl = document.getElementById('wpc-calc-tax-r4k8-main-styles');
+        var css = '';
+        
+        if (mainStyleEl) {
+            css = mainStyleEl.textContent || mainStyleEl.innerHTML || '';
+            console.log('[DEBUG] Found main CSS by ID! Length: ' + css.length);
         }
         
         if (!css) {
-            console.error('CSS not found for embed');
+            console.error('[ERROR] Main CSS not found for embed - looking for style#wpc-calc-tax-r4k8-main-styles');
             return '';
         }
         
@@ -1703,170 +1725,63 @@ if (!document.querySelector('meta[name="viewport"]')) {
         css = css.replace(/#1e5490/g, color);
         css = css.replace(/#163d6b/g, darkColor);
         css = css.replace(/rgba\(30,\s*84,\s*144,\s*0\.1\)/g, lightColor);
-        css = css.replace(/--wpc-tax-primary:\s*#1e5490/g, `--wpc-tax-primary: ${color}`);
-        css = css.replace(/--wpc-tax-primary-dark:\s*#163d6b/g, `--wpc-tax-primary-dark: ${darkColor}`);
-        css = css.replace(/--wpc-tax-primary-light:\s*rgba\(30,\s*84,\s*144,\s*0\.1\)/g, `--wpc-tax-primary-light: ${lightColor}`);
+        css = css.replace(/--wpc-tax-primary:\s*#1e5490/g, '--wpc-tax-primary: ' + color);
+        css = css.replace(/--wpc-tax-primary-dark:\s*#163d6b/g, '--wpc-tax-primary-dark: ' + darkColor);
+        css = css.replace(/--wpc-tax-primary-light:\s*rgba\(30,\s*84,\s*144,\s*0\.1\)/g, '--wpc-tax-primary-light: ' + lightColor);
         
         return css;
     }
 
     function getEmbedScript() {
-        return `<script>
-document.addEventListener("DOMContentLoaded", function() {
-    (function() {
-        "use strict";
-        var NS = "WPC_CalcTax_Embed";
-        if (window[NS]) return;
-        var container = document.getElementById("wpc-calc-tax-r4k8-main");
-        if (!container) return;
-
-        var BRACKETS_SINGLE = [
-            { min: 0, max: 1978745, rate: 0 },
-            { min: 1978745, max: 2347040, rate: 0.035 },
-            { min: 2347040, max: 6055070, rate: 0.05 },
-            { min: 6055070, max: 20183565, rate: 0.08 },
-            { min: 20183565, max: Infinity, rate: 0.10 }
-        ];
-        var BRACKETS_ADDITIONAL = [
-            { min: 0, max: 6055070, rate: 0.08 },
-            { min: 6055070, max: Infinity, rate: 0.10 }
-        ];
-
-        var state = {
-            basicType: "single",
-            basicPrice: 2500000,
-            comparePrice: 3000000,
-            bracketsType: "single",
-            reverseType: "single",
-            reverseBudget: 3000000
-        };
-
-        function formatCurrency(n) { return "₪" + Math.round(n).toLocaleString("he-IL"); }
-        function formatPercent(n) { return (n * 100).toFixed(2) + "%"; }
-        function el(id) { return document.getElementById(id); }
-
-        function calculateTax(price, type) {
-            var brackets = type === "single" ? BRACKETS_SINGLE : BRACKETS_ADDITIONAL;
-            var totalTax = 0;
-            var breakdown = [];
-            for (var i = 0; i < brackets.length; i++) {
-                var bracket = brackets[i];
-                if (price <= bracket.min) break;
-                var taxableInBracket = Math.min(price, bracket.max) - bracket.min;
-                if (taxableInBracket > 0) {
-                    var taxInBracket = taxableInBracket * bracket.rate;
-                    totalTax += taxInBracket;
-                    breakdown.push({ min: bracket.min, max: Math.min(price, bracket.max), rate: bracket.rate, amount: taxableInBracket, tax: taxInBracket });
-                }
-            }
-            return { total: Math.round(totalTax), effectiveRate: price > 0 ? totalTax / price : 0, breakdown: breakdown };
-        }
-
-        function calculateMaxPrice(budget, type) {
-            var low = 0, high = budget;
-            while (high - low > 100) {
-                var mid = (low + high) / 2;
-                var tax = calculateTax(mid, type).total;
-                if (mid + tax <= budget) low = mid; else high = mid;
-            }
-            return Math.round(low);
-        }
-
-        function updateBasic() {
-            var price = state.basicPrice;
-            var result = calculateTax(price, state.basicType);
-            if(el("basic-price-value")) el("basic-price-value").textContent = formatCurrency(price);
-            if(el("basic-result-price")) el("basic-result-price").textContent = formatCurrency(price);
-            if(el("basic-result-tax")) el("basic-result-tax").textContent = formatCurrency(result.total);
-            if(el("basic-result-percent")) el("basic-result-percent").textContent = formatPercent(result.effectiveRate);
-            var tbody = el("basic-breakdown-body");
-            if (tbody) {
-                var html = "";
-                for(var i=0; i<result.breakdown.length; i++) {
-                    var row = result.breakdown[i];
-                    var rateLabel = row.rate === 0 ? "פטור" : (row.rate * 100) + "%";
-                    html += "<tr><td>" + (i+1) + "</td><td>" + formatCurrency(row.amount) + "</td><td>" + rateLabel + "</td><td>" + formatCurrency(row.tax) + "</td></tr>";
-                }
-                html += "<tr><td colspan=\\"3\\"><strong>סהכ מס רכישה</strong></td><td><strong>" + formatCurrency(result.total) + "</strong></td></tr>";
-                tbody.innerHTML = html;
-            }
-        }
-
-        function updateCompare() {
-            var price = state.comparePrice;
-            var singleResult = calculateTax(price, "single");
-            var additionalResult = calculateTax(price, "additional");
-            var savings = additionalResult.total - singleResult.total;
-            if(el("compare-price-value")) el("compare-price-value").textContent = formatCurrency(price);
-            if(el("compare-single-price")) el("compare-single-price").textContent = formatCurrency(price);
-            if(el("compare-single-exempt")) el("compare-single-exempt").textContent = formatCurrency(Math.min(price, 1978745));
-            if(el("compare-single-tax")) el("compare-single-tax").textContent = formatCurrency(singleResult.total);
-            if(el("compare-additional-price")) el("compare-additional-price").textContent = formatCurrency(price);
-            if(el("compare-additional-tax")) el("compare-additional-tax").textContent = formatCurrency(additionalResult.total);
-            if(el("compare-savings")) el("compare-savings").textContent = "💰 חיסכון ברכישת דירה יחידה: " + formatCurrency(savings);
-        }
-
-        function updateReverse() {
-            var budget = state.reverseBudget;
-            var maxPrice = calculateMaxPrice(budget, state.reverseType);
-            var taxResult = calculateTax(maxPrice, state.reverseType);
-            if(el("reverse-budget-value")) el("reverse-budget-value").textContent = formatCurrency(budget);
-            if(el("reverse-result-budget")) el("reverse-result-budget").textContent = formatCurrency(budget);
-            if(el("reverse-result-max-price")) el("reverse-result-max-price").textContent = formatCurrency(maxPrice);
-            if(el("reverse-result-tax")) el("reverse-result-tax").textContent = formatCurrency(taxResult.total);
-        }
-
-        function switchTab(tabName) {
-            container.querySelectorAll(".wpc-calc-tax-r4k8-tab-btn").forEach(function(btn) { btn.classList.remove("active"); });
-            var activeBtn = container.querySelector("[data-tab=\\"" + tabName + "\\"]");
-            if (activeBtn) activeBtn.classList.add("active");
-            container.querySelectorAll(".wpc-calc-tax-r4k8-tab-content").forEach(function(c) { c.classList.remove("active"); });
-            var tabContent = el("tab-" + tabName);
-            if (tabContent) tabContent.classList.add("active");
-        }
-
-        container.addEventListener("click", function(e) {
-            var action = e.target.closest("[data-action]");
-            if (!action) return;
-            var act = action.dataset.action;
-            if (act === "switch-tab") switchTab(action.dataset.tab);
-            else if (act === "select-type") {
-                state.basicType = action.dataset.type;
-                container.querySelectorAll("#tab-basic .wpc-calc-tax-r4k8-type-btn").forEach(function(b){b.classList.remove("active");});
-                action.classList.add("active");
-                updateBasic();
-            }
-            else if (act === "select-bracket-type") {
-                state.bracketsType = action.dataset.type;
-                container.querySelectorAll("#tab-brackets .wpc-calc-tax-r4k8-type-btn").forEach(function(b){b.classList.remove("active");});
-                action.classList.add("active");
-                el("brackets-single").style.display = state.bracketsType === "single" ? "grid" : "none";
-                el("brackets-additional").style.display = state.bracketsType === "additional" ? "grid" : "none";
-            }
-            else if (act === "select-reverse-type") {
-                state.reverseType = action.dataset.type;
-                container.querySelectorAll("#tab-reverse .wpc-calc-tax-r4k8-type-btn").forEach(function(b){b.classList.remove("active");});
-                action.classList.add("active");
-                updateReverse();
-            }
-            else if (act === "toggle-faq") {
-                var faqItem = action.closest(".wpc-calc-tax-r4k8-faq-item");
-                if (faqItem) faqItem.classList.toggle("active");
-            }
-        });
-
-        container.addEventListener("input", function(e) {
-            var id = e.target.id;
-            if (id === "basic-price-slider") { state.basicPrice = parseInt(e.target.value); updateBasic(); }
-            else if (id === "compare-price-slider") { state.comparePrice = parseInt(e.target.value); updateCompare(); }
-            else if (id === "reverse-budget-slider") { state.reverseBudget = parseInt(e.target.value); updateReverse(); }
-        });
-
-        updateBasic(); updateCompare(); updateReverse();
-        window[NS] = { version: "1.0.0" };
-    })();
-});
-<` + `/script>`;
+        var script = '<scr' + 'ipt>\n';
+        script += 'document.addEventListener("DOMContentLoaded", function() {\n';
+        script += '    (function() {\n';
+        script += '        "use strict";\n';
+        script += '        var NS = "WPC_CalcTax_Embed";\n';
+        script += '        if (window[NS]) return;\n';
+        script += '        var container = document.getElementById("wpc-calc-tax-r4k8-main");\n';
+        script += '        if (!container) return;\n';
+        script += '\n';
+        script += '        var BRACKETS_SINGLE = [\n';
+        script += '            { min: 0, max: 1978745, rate: 0 },\n';
+        script += '            { min: 1978745, max: 2347040, rate: 0.035 },\n';
+        script += '            { min: 2347040, max: 6055070, rate: 0.05 },\n';
+        script += '            { min: 6055070, max: 20183565, rate: 0.08 },\n';
+        script += '            { min: 20183565, max: Infinity, rate: 0.10 }\n';
+        script += '        ];\n';
+        script += '        var BRACKETS_ADDITIONAL = [\n';
+        script += '            { min: 0, max: 6055070, rate: 0.08 },\n';
+        script += '            { min: 6055070, max: Infinity, rate: 0.10 }\n';
+        script += '        ];\n';
+        script += '\n';
+        script += '        var state = { basicType: "single", basicPrice: 2500000, comparePrice: 3000000, bracketsType: "single", reverseType: "single", reverseBudget: 3000000 };\n';
+        script += '\n';
+        script += '        function formatCurrency(n) { return "\\u20AA" + Math.round(n).toLocaleString("he-IL"); }\n';
+        script += '        function formatPercent(n) { return (n * 100).toFixed(2) + "%"; }\n';
+        script += '        function el(id) { return document.getElementById(id); }\n';
+        script += '\n';
+        script += '        function calculateTax(price, type) { var brackets = type === "single" ? BRACKETS_SINGLE : BRACKETS_ADDITIONAL; var totalTax = 0; var breakdown = []; for (var i = 0; i < brackets.length; i++) { var bracket = brackets[i]; if (price <= bracket.min) break; var taxableInBracket = Math.min(price, bracket.max) - bracket.min; if (taxableInBracket > 0) { var taxInBracket = taxableInBracket * bracket.rate; totalTax += taxInBracket; breakdown.push({ min: bracket.min, max: Math.min(price, bracket.max), rate: bracket.rate, amount: taxableInBracket, tax: taxInBracket }); } } return { total: Math.round(totalTax), effectiveRate: price > 0 ? totalTax / price : 0, breakdown: breakdown }; }\n';
+        script += '\n';
+        script += '        function calculateMaxPrice(budget, type) { var low = 0, high = budget; while (high - low > 100) { var mid = (low + high) / 2; var tax = calculateTax(mid, type).total; if (mid + tax <= budget) low = mid; else high = mid; } return Math.round(low); }\n';
+        script += '\n';
+        script += '        function updateBasic() { var price = state.basicPrice; var result = calculateTax(price, state.basicType); if(el("basic-price-value")) el("basic-price-value").textContent = formatCurrency(price); if(el("basic-result-price")) el("basic-result-price").textContent = formatCurrency(price); if(el("basic-result-tax")) el("basic-result-tax").textContent = formatCurrency(result.total); if(el("basic-result-percent")) el("basic-result-percent").textContent = formatPercent(result.effectiveRate); var tbody = el("basic-breakdown-body"); if (tbody) { var html = ""; for(var i=0; i<result.breakdown.length; i++) { var row = result.breakdown[i]; var rateLabel = row.rate === 0 ? "פטור" : (row.rate * 100) + "%"; html += "<tr><td>" + (i+1) + "</td><td>" + formatCurrency(row.amount) + "</td><td>" + rateLabel + "</td><td>" + formatCurrency(row.tax) + "</td></tr>"; } html += "<tr><td colspan=\\"3\\"><strong>סהכ מס רכישה</strong></td><td><strong>" + formatCurrency(result.total) + "</strong></td></tr>"; tbody.innerHTML = html; } }\n';
+        script += '\n';
+        script += '        function updateCompare() { var price = state.comparePrice; var singleResult = calculateTax(price, "single"); var additionalResult = calculateTax(price, "additional"); var savings = additionalResult.total - singleResult.total; if(el("compare-price-value")) el("compare-price-value").textContent = formatCurrency(price); if(el("compare-single-price")) el("compare-single-price").textContent = formatCurrency(price); if(el("compare-single-exempt")) el("compare-single-exempt").textContent = formatCurrency(Math.min(price, 1978745)); if(el("compare-single-tax")) el("compare-single-tax").textContent = formatCurrency(singleResult.total); if(el("compare-additional-price")) el("compare-additional-price").textContent = formatCurrency(price); if(el("compare-additional-tax")) el("compare-additional-tax").textContent = formatCurrency(additionalResult.total); if(el("compare-savings")) el("compare-savings").textContent = "חיסכון ברכישת דירה יחידה: " + formatCurrency(savings); }\n';
+        script += '\n';
+        script += '        function updateReverse() { var budget = state.reverseBudget; var maxPrice = calculateMaxPrice(budget, state.reverseType); var taxResult = calculateTax(maxPrice, state.reverseType); if(el("reverse-budget-value")) el("reverse-budget-value").textContent = formatCurrency(budget); if(el("reverse-result-budget")) el("reverse-result-budget").textContent = formatCurrency(budget); if(el("reverse-result-max-price")) el("reverse-result-max-price").textContent = formatCurrency(maxPrice); if(el("reverse-result-tax")) el("reverse-result-tax").textContent = formatCurrency(taxResult.total); }\n';
+        script += '\n';
+        script += '        function switchTab(tabName) { container.querySelectorAll(".wpc-calc-tax-r4k8-tab-btn").forEach(function(btn) { btn.classList.remove("active"); }); var activeBtn = container.querySelector("[data-tab=\\"" + tabName + "\\"]"); if (activeBtn) activeBtn.classList.add("active"); container.querySelectorAll(".wpc-calc-tax-r4k8-tab-content").forEach(function(c) { c.classList.remove("active"); }); var tabContent = el("tab-" + tabName); if (tabContent) tabContent.classList.add("active"); }\n';
+        script += '\n';
+        script += '        container.addEventListener("click", function(e) { var action = e.target.closest("[data-action]"); if (!action) return; var act = action.dataset.action; if (act === "switch-tab") switchTab(action.dataset.tab); else if (act === "select-type") { state.basicType = action.dataset.type; container.querySelectorAll("#tab-basic .wpc-calc-tax-r4k8-type-btn").forEach(function(b){b.classList.remove("active");}); action.classList.add("active"); updateBasic(); } else if (act === "select-bracket-type") { state.bracketsType = action.dataset.type; container.querySelectorAll("#tab-brackets .wpc-calc-tax-r4k8-type-btn").forEach(function(b){b.classList.remove("active");}); action.classList.add("active"); el("brackets-single").style.display = state.bracketsType === "single" ? "grid" : "none"; el("brackets-additional").style.display = state.bracketsType === "additional" ? "grid" : "none"; } else if (act === "select-reverse-type") { state.reverseType = action.dataset.type; container.querySelectorAll("#tab-reverse .wpc-calc-tax-r4k8-type-btn").forEach(function(b){b.classList.remove("active");}); action.classList.add("active"); updateReverse(); } else if (act === "toggle-faq") { var faqItem = action.closest(".wpc-calc-tax-r4k8-faq-item"); if (faqItem) faqItem.classList.toggle("active"); } });\n';
+        script += '\n';
+        script += '        container.addEventListener("input", function(e) { var id = e.target.id; if (id === "basic-price-slider") { state.basicPrice = parseInt(e.target.value); updateBasic(); } else if (id === "compare-price-slider") { state.comparePrice = parseInt(e.target.value); updateCompare(); } else if (id === "reverse-budget-slider") { state.reverseBudget = parseInt(e.target.value); updateReverse(); } });\n';
+        script += '\n';
+        script += '        updateBasic(); updateCompare(); updateReverse();\n';
+        script += '        window[NS] = { version: "1.0.0" };\n';
+        script += '    })();\n';
+        script += '});\n';
+        script += '</scr' + 'ipt>';
+        return script;
     }
 
     function copyEmbedCode() {
@@ -1882,8 +1797,8 @@ document.addEventListener("DOMContentLoaded", function() {
         const calcClone = calculator.cloneNode(true);
         
         // Remove preview elements
-        const previewElements = calcClone.querySelectorAll('[id^="preview"]');
-        previewElements.forEach(el => el.remove());
+        var previewElements = calcClone.querySelectorAll('[id^="preview"]');
+        previewElements.forEach(function(el) { el.remove(); });
 
         const css = getEmbedCSS('#1e5490');
         
@@ -1891,27 +1806,27 @@ document.addEventListener("DOMContentLoaded", function() {
         code += '<div class="wpc-calc-tax-r4k8-wrapper" id="wpc-calc-tax-r4k8-main">\n';
         code += calcClone.outerHTML + '\n';
         code += '</div>\n\n';
-        code += `<p style="text-align:center; font-size:0.9em; margin-top:20px; color:#666;">
-    מחשבון ${CALCULATOR_NAME} פותח על ידי 
-    <a href="https://loan-israel.co.il/" target="_blank" rel="nofollow noopener" 
-       style="color:#1e5490; text-decoration:underline;">
-       רק תבקש פיננסים
-    </a>
-</p>\n\n`;
+        code += '<p style="text-align:center; font-size:0.9em; margin-top:20px; color:#666;">' +
+    'מחשבון ' + CALCULATOR_NAME + ' פותח על ידי ' +
+    '<a href="https://loan-israel.co.il/" target="_blank" rel="nofollow noopener" ' +
+       'style="color:#1e5490; text-decoration:underline;">' +
+       'רק תבקש פיננסים' +
+    '</a>' +
+'</p>\n\n';
         code += getEmbedScript();
 
-        navigator.clipboard.writeText(code).then(() => {
-            alert('✅ הקוד הועתק בהצלחה! הדביקו אותו בעורך HTML שלכם.');
+        navigator.clipboard.writeText(code).then(function() {
+            alert('הקוד הועתק בהצלחה! הדביקו אותו בעורך HTML שלכם.');
         });
     }
 
     function applyColorToCalculator(calcElement, color) {
-        const darkColor = darkenColor(color, 15);
+        var darkColor = darkenColor(color, 15);
         // Convert hex to rgba for light color
-        const r = parseInt(color.slice(1, 3), 16);
-        const g = parseInt(color.slice(3, 5), 16);
-        const b = parseInt(color.slice(5, 7), 16);
-        const lightColor = `rgba(${r}, ${g}, ${b}, 0.1)`;
+        var r = parseInt(color.slice(1, 3), 16);
+        var g = parseInt(color.slice(3, 5), 16);
+        var b = parseInt(color.slice(5, 7), 16);
+        var lightColor = 'rgba(' + r + ', ' + g + ', ' + b + ', 0.1)';
         
         // Override CSS Variables on the element itself
         calcElement.style.setProperty('--wpc-tax-primary', color);
@@ -1919,56 +1834,56 @@ document.addEventListener("DOMContentLoaded", function() {
         calcElement.style.setProperty('--wpc-tax-primary-light', lightColor);
         
         // Tab buttons - active state (use setProperty with priority)
-        calcElement.querySelectorAll('.wpc-calc-tax-r4k8-tab-btn.active').forEach(btn => {
+        calcElement.querySelectorAll('.wpc-calc-tax-r4k8-tab-btn.active').forEach(function(btn) {
             btn.style.setProperty('border-bottom-color', color, 'important');
             btn.style.setProperty('color', color, 'important');
         });
         
         // Results sections
-        calcElement.querySelectorAll('.wpc-calc-tax-r4k8-results').forEach(el => {
-            el.style.setProperty('background', `linear-gradient(135deg, ${color} 0%, ${darkColor} 100%)`, 'important');
+        calcElement.querySelectorAll('.wpc-calc-tax-r4k8-results').forEach(function(el) {
+            el.style.setProperty('background', 'linear-gradient(135deg, ' + color + ' 0%, ' + darkColor + ' 100%)', 'important');
         });
         
         // Breakdown title
-        calcElement.querySelectorAll('.wpc-calc-tax-r4k8-breakdown-title').forEach(el => {
+        calcElement.querySelectorAll('.wpc-calc-tax-r4k8-breakdown-title').forEach(function(el) {
             el.style.setProperty('background', color, 'important');
         });
         
         // Type buttons - active state
-        calcElement.querySelectorAll('.wpc-calc-tax-r4k8-type-btn.active').forEach(btn => {
+        calcElement.querySelectorAll('.wpc-calc-tax-r4k8-type-btn.active').forEach(function(btn) {
             btn.style.setProperty('border-color', color, 'important');
             btn.style.setProperty('background', lightColor, 'important');
         });
         
         // Info boxes
-        calcElement.querySelectorAll('.wpc-calc-tax-r4k8-info-box').forEach(el => {
+        calcElement.querySelectorAll('.wpc-calc-tax-r4k8-info-box').forEach(function(el) {
             el.style.setProperty('border-right-color', color, 'important');
             el.style.setProperty('background', lightColor, 'important');
         });
         
         // Tab titles
-        calcElement.querySelectorAll('.wpc-calc-tax-r4k8-tab-title').forEach(el => {
+        calcElement.querySelectorAll('.wpc-calc-tax-r4k8-tab-title').forEach(function(el) {
             el.style.setProperty('color', color, 'important');
         });
         
         // Slider value displays
-        calcElement.querySelectorAll('.wpc-calc-tax-r4k8-slider-value').forEach(el => {
+        calcElement.querySelectorAll('.wpc-calc-tax-r4k8-slider-value').forEach(function(el) {
             el.style.setProperty('background', lightColor, 'important');
             el.style.setProperty('color', color, 'important');
         });
         
         // Compare row last child (totals)
-        calcElement.querySelectorAll('.wpc-calc-tax-r4k8-compare-row:last-child').forEach(el => {
+        calcElement.querySelectorAll('.wpc-calc-tax-r4k8-compare-row:last-child').forEach(function(el) {
             el.style.setProperty('color', color, 'important');
         });
         
         // Bracket rate circles based on color theme
-        calcElement.querySelectorAll('.wpc-calc-tax-r4k8-bracket-rate').forEach(el => {
+        calcElement.querySelectorAll('.wpc-calc-tax-r4k8-bracket-rate').forEach(function(el) {
             // Keep original colors for rate indicators
         });
 
         // Savings badge
-        calcElement.querySelectorAll('.wpc-calc-tax-r4k8-savings-badge').forEach(el => {
+        calcElement.querySelectorAll('.wpc-calc-tax-r4k8-savings-badge').forEach(function(el) {
             el.style.setProperty('background', color, 'important');
         });
     }
@@ -1997,7 +1912,7 @@ document.addEventListener("DOMContentLoaded", function() {
         initPreviewCalculator(calcClone, color);
 
         // Update color buttons
-        container.querySelectorAll('.wpc-calc-tax-r4k8-color-btn').forEach(btn => {
+        container.querySelectorAll('.wpc-calc-tax-r4k8-color-btn').forEach(function(btn) {
             btn.classList.remove('active');
             if (btn.dataset.color === color) btn.classList.add('active');
         });
@@ -2043,12 +1958,12 @@ document.addEventListener("DOMContentLoaded", function() {
             if (resultPercent) resultPercent.textContent = formatPercent(result.effectiveRate);
             
             if (tbody) {
-                let html = '';
-                result.breakdown.forEach((row, index) => {
-                    const rateLabel = row.rate === 0 ? 'פטור' : (row.rate * 100) + '%';
-                    html += `<tr><td>${index + 1}</td><td>${formatCurrency(row.amount)}</td><td>${rateLabel}</td><td>${formatCurrency(row.tax)}</td></tr>`;
+                var html = '';
+                result.breakdown.forEach(function(row, index) {
+                    var rateLabel = row.rate === 0 ? 'פטור' : (row.rate * 100) + '%';
+                    html += '<tr><td>' + (index + 1) + '</td><td>' + formatCurrency(row.amount) + '</td><td>' + rateLabel + '</td><td>' + formatCurrency(row.tax) + '</td></tr>';
                 });
-                html += `<tr><td colspan="3"><strong>סה"כ מס רכישה</strong></td><td><strong>${formatCurrency(result.total)}</strong></td></tr>`;
+                html += '<tr><td colspan="3"><strong>סה"כ מס רכישה</strong></td><td><strong>' + formatCurrency(result.total) + '</strong></td></tr>';
                 tbody.innerHTML = html;
             }
         }
@@ -2094,12 +2009,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
         function switchPreviewTab(tabName) {
             // Update tab buttons
-            calcClone.querySelectorAll('.wpc-calc-tax-r4k8-tab-btn').forEach(btn => {
+            calcClone.querySelectorAll('.wpc-calc-tax-r4k8-tab-btn').forEach(function(btn) {
                 btn.classList.remove('active');
                 btn.style.removeProperty('color');
                 btn.style.removeProperty('border-bottom-color');
             });
-            const activeBtn = calcClone.querySelector(`[data-tab="${tabName}"]`);
+            var activeBtn = calcClone.querySelector('[data-tab="' + tabName + '"]');
             if (activeBtn) {
                 activeBtn.classList.add('active');
                 activeBtn.style.setProperty('color', color, 'important');
@@ -2107,11 +2022,11 @@ document.addEventListener("DOMContentLoaded", function() {
             }
             
             // Update tab contents
-            calcClone.querySelectorAll('.wpc-calc-tax-r4k8-tab-content').forEach(content => {
+            calcClone.querySelectorAll('.wpc-calc-tax-r4k8-tab-content').forEach(function(content) {
                 content.classList.remove('active');
                 content.style.setProperty('display', 'none', 'important');
             });
-            const activeContent = cloneEl('#tab-' + tabName);
+            var activeContent = cloneEl('#tab-' + tabName);
             if (activeContent) {
                 activeContent.classList.add('active');
                 activeContent.style.setProperty('display', 'block', 'important');
@@ -2119,10 +2034,10 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         // Convert hex to rgba
-        const r = parseInt(color.slice(1, 3), 16);
-        const g = parseInt(color.slice(3, 5), 16);
-        const b = parseInt(color.slice(5, 7), 16);
-        const lightColor = `rgba(${r}, ${g}, ${b}, 0.1)`;
+        var r = parseInt(color.slice(1, 3), 16);
+        var g = parseInt(color.slice(3, 5), 16);
+        var b = parseInt(color.slice(5, 7), 16);
+        var lightColor = 'rgba(' + r + ', ' + g + ', ' + b + ', 0.1)';
         
         // Helper to apply color to type buttons
         function applyTypeButtonColor(btn, isActive) {
@@ -2149,7 +2064,7 @@ document.addEventListener("DOMContentLoaded", function() {
             } else if (act === 'select-type') {
                 e.preventDefault();
                 previewState.basicType = action.dataset.type;
-                calcClone.querySelectorAll('#tab-basic .wpc-calc-tax-r4k8-type-btn').forEach(b => {
+                calcClone.querySelectorAll('#tab-basic .wpc-calc-tax-r4k8-type-btn').forEach(function(b) {
                     b.classList.remove('active');
                     applyTypeButtonColor(b, false);
                 });
@@ -2159,20 +2074,20 @@ document.addEventListener("DOMContentLoaded", function() {
             } else if (act === 'select-bracket-type') {
                 e.preventDefault();
                 previewState.bracketsType = action.dataset.type;
-                calcClone.querySelectorAll('#tab-brackets .wpc-calc-tax-r4k8-type-btn').forEach(b => {
+                calcClone.querySelectorAll('#tab-brackets .wpc-calc-tax-r4k8-type-btn').forEach(function(b) {
                     b.classList.remove('active');
                     applyTypeButtonColor(b, false);
                 });
                 action.classList.add('active');
                 applyTypeButtonColor(action, true);
-                const singleBrackets = cloneEl('#brackets-single');
-                const additionalBrackets = cloneEl('#brackets-additional');
+                var singleBrackets = cloneEl('#brackets-single');
+                var additionalBrackets = cloneEl('#brackets-additional');
                 if (singleBrackets) singleBrackets.style.display = previewState.bracketsType === 'single' ? 'grid' : 'none';
                 if (additionalBrackets) additionalBrackets.style.display = previewState.bracketsType === 'additional' ? 'grid' : 'none';
             } else if (act === 'select-reverse-type') {
                 e.preventDefault();
                 previewState.reverseType = action.dataset.type;
-                calcClone.querySelectorAll('#tab-reverse .wpc-calc-tax-r4k8-type-btn').forEach(b => {
+                calcClone.querySelectorAll('#tab-reverse .wpc-calc-tax-r4k8-type-btn').forEach(function(b) {
                     b.classList.remove('active');
                     applyTypeButtonColor(b, false);
                 });
@@ -2204,16 +2119,10 @@ document.addEventListener("DOMContentLoaded", function() {
             let existingStyle = document.getElementById(styleId);
             if (existingStyle) existingStyle.remove();
             
-            const style = document.createElement('style');
+            var style = document.createElement('style');
             style.id = styleId;
-            style.textContent = `
-                #preview-content .wpc-calc-tax-r4k8-slider::-webkit-slider-thumb {
-                    background: ${color} !important;
-                }
-                #preview-content .wpc-calc-tax-r4k8-slider::-moz-range-thumb {
-                    background: ${color} !important;
-                }
-            `;
+            style.textContent = '#preview-content .wpc-calc-tax-r4k8-slider::-webkit-slider-thumb { background: ' + color + ' !important; } ' +
+                '#preview-content .wpc-calc-tax-r4k8-slider::-moz-range-thumb { background: ' + color + ' !important; }';
             document.head.appendChild(style);
         }
         applySliderColor();
@@ -2237,23 +2146,23 @@ document.addEventListener("DOMContentLoaded", function() {
         const calculator = el('wpc-calc-tax-r4k8-calculator');
         const calcClone = calculator.cloneNode(true);
 
-        const css = getEmbedCSS(color);
+        var css = getEmbedCSS(color);
         
-        let code = '<style>\n' + css + '\n</style>\n\n';
+        var code = '<style>\n' + css + '\n</style>\n\n';
         code += '<div class="wpc-calc-tax-r4k8-wrapper" id="wpc-calc-tax-r4k8-main">\n';
         code += calcClone.outerHTML + '\n';
         code += '</div>\n\n';
-        code += `<p style="text-align:center; font-size:0.9em; margin-top:20px; color:#666;">
-    מחשבון ${CALCULATOR_NAME} פותח על ידי 
-    <a href="https://loan-israel.co.il/" target="_blank" rel="nofollow noopener" 
-       style="color:${color}; text-decoration:underline;">
-       רק תבקש פיננסים
-    </a>
-</p>\n\n`;
+        code += '<p style="text-align:center; font-size:0.9em; margin-top:20px; color:#666;">' +
+    'מחשבון ' + CALCULATOR_NAME + ' פותח על ידי ' +
+    '<a href="https://loan-israel.co.il/" target="_blank" rel="nofollow noopener" ' +
+       'style="color:' + color + '; text-decoration:underline;">' +
+       'רק תבקש פיננסים' +
+    '</a>' +
+'</p>\n\n';
         code += getEmbedScript();
 
-        navigator.clipboard.writeText(code).then(() => {
-            alert('✅ הקוד עם הצבע הנבחר הועתק בהצלחה!');
+        navigator.clipboard.writeText(code).then(function() {
+            alert('הקוד עם הצבע הנבחר הועתק בהצלחה!');
         });
     }
 

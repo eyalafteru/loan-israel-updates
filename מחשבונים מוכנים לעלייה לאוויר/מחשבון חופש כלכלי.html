@@ -536,18 +536,22 @@ if (!document.querySelector('meta[name="viewport"]')) {
 .wpc-calc-fire-m8k3-awg-content {
   width: 100% !important;
   text-align: center !important;
-  padding: 25px !important;
   border-radius: 12px !important;
-  opacity: 0 !important;
-  height: 0 !important;
+  max-height: 0 !important;
   overflow: hidden !important;
-  transition: all 0.5s ease !important;
+  opacity: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  margin-top: 0 !important;
+  transition: max-height 0.4s ease, opacity 0.3s ease, margin-top 0.3s ease, padding 0.3s ease !important;
 }
 
 .wpc-calc-fire-m8k3-awg-content.show {
+  max-height: 2000px !important;
   opacity: 1 !important;
-  height: auto !important;
   padding: 25px !important;
+  margin-top: 20px !important;
+  overflow: visible !important;
 }
 
 .wpc-calc-fire-m8k3-shortcode-item {
@@ -1640,16 +1644,28 @@ if (!document.querySelector('meta[name="viewport"]')) {
 (function() {
     'use strict';
     
+    console.log('[FIRE] Script starting...');
+    
     // Namespace check
-    const NS = 'WPC_CalcFire_M8K3';
-    if (window[NS]) return;
+    var NS = 'WPC_CalcFire_M8K3';
+    if (window[NS]) {
+        console.log('[FIRE] Already initialized');
+        return;
+    }
     
     // Container validation
-    const container = document.getElementById('wpc-calc-fire-m8k3-main');
-    if (!container) return;
+    var container = document.getElementById('wpc-calc-fire-m8k3-main');
+    console.log('[FIRE] Container:', container);
+    
+    if (!container) {
+        console.error('[FIRE] Container NOT found!');
+        return;
+    }
+    
+    console.log('[FIRE] Initializing...');
     
     // Primary color for embed
-    const PRIMARY_COLOR = '#1e5490';
+    var PRIMARY_COLOR = '#1e5490';
     
     // State
     const state = {
@@ -1691,7 +1707,7 @@ if (!document.querySelector('meta[name="viewport"]')) {
     
     // Utility functions
     function formatCurrency(num) {
-        return '₪' + Math.round(num).toLocaleString('he-IL');
+        return '\u20AA' + Math.round(num).toLocaleString('he-IL');
     }
     
     function formatPercent(num) {
@@ -1705,11 +1721,11 @@ if (!document.querySelector('meta[name="viewport"]')) {
     }
     
     function darkenColor(color, amount = 15) {
-        const hex = color.replace('#', '');
-        const r = Math.max(0, parseInt(hex.substr(0, 2), 16) - amount);
-        const g = Math.max(0, parseInt(hex.substr(2, 2), 16) - amount);
-        const b = Math.max(0, parseInt(hex.substr(4, 2), 16) - amount);
-        return '#' + [r, g, b].map(x => x.toString(16).padStart(2, '0')).join('');
+        var hex = color.replace('#', '');
+        var r = Math.max(0, parseInt(hex.substr(0, 2), 16) - amount);
+        var g = Math.max(0, parseInt(hex.substr(2, 2), 16) - amount);
+        var b = Math.max(0, parseInt(hex.substr(4, 2), 16) - amount);
+        return '#' + [r, g, b].map(function(x) { return x.toString(16).padStart(2, '0'); }).join('');
     }
     
     // ===== Financial Formulas =====
@@ -1862,50 +1878,50 @@ if (!document.querySelector('meta[name="viewport"]')) {
             );
             
             // Return sensitivity
-            [5, 6, 7, 8, 9, 10].forEach(rate => {
-                const years = calculateYearsToFire(
+            [5, 6, 7, 8, 9, 10].forEach(function(rate) {
+                var years = calculateYearsToFire(
                     state.sensitivityTarget,
                     state.sensitivityCapital,
                     state.sensitivitySavings,
                     rate
                 );
-                const el = document.getElementById('sens-' + rate);
-                const diffEl = document.getElementById('sens-diff-' + rate);
+                var el = document.getElementById('sens-' + rate);
+                var diffEl = document.getElementById('sens-diff-' + rate);
                 if (el) el.textContent = years.toFixed(1);
                 if (diffEl) {
                     if (rate === baseReturn) {
                         diffEl.textContent = 'בסיס';
                     } else {
-                        const diff = years - baseYears;
+                        var diff = years - baseYears;
                         diffEl.textContent = (diff >= 0 ? '+' : '') + diff.toFixed(1);
                     }
                 }
             });
             
             // Savings sensitivity
-            const baseSavings = state.sensitivitySavings;
-            [3000, 4000, 5000, 6000, 7000, 10000].forEach(savings => {
-                const years = calculateYearsToFire(
+            var baseSavings = state.sensitivitySavings;
+            [3000, 4000, 5000, 6000, 7000, 10000].forEach(function(savings) {
+                var years = calculateYearsToFire(
                     state.sensitivityTarget,
                     state.sensitivityCapital,
                     savings,
                     baseReturn
                 );
-                const baseYearsForSavings = calculateYearsToFire(
+                var baseYearsForSavings = calculateYearsToFire(
                     state.sensitivityTarget,
                     state.sensitivityCapital,
                     baseSavings,
                     baseReturn
                 );
                 
-                const el = document.getElementById('sens-sav-' + savings);
-                const diffEl = document.getElementById('sens-sav-diff-' + savings);
+                var el = document.getElementById('sens-sav-' + savings);
+                var diffEl = document.getElementById('sens-sav-diff-' + savings);
                 if (el) el.textContent = years.toFixed(1);
                 if (diffEl) {
                     if (savings === baseSavings) {
                         diffEl.textContent = 'בסיס';
                     } else {
-                        const diff = years - baseYearsForSavings;
+                        var diff = years - baseYearsForSavings;
                         diffEl.textContent = (diff >= 0 ? '+' : '') + diff.toFixed(1);
                     }
                 }
@@ -1918,19 +1934,19 @@ if (!document.querySelector('meta[name="viewport"]')) {
     const handlers = {
         'switch-tab': function(element, e) {
             e.preventDefault();
-            const tabName = element.dataset.tab;
+            var tabName = element.dataset.tab;
             
             // Update button states
-            container.querySelectorAll('.wpc-calc-fire-m8k3-tab').forEach(btn => {
+            container.querySelectorAll('.wpc-calc-fire-m8k3-tab').forEach(function(btn) {
                 btn.classList.remove('active');
             });
             element.classList.add('active');
             
             // Update panels
-            container.querySelectorAll('.wpc-calc-fire-m8k3-panel').forEach(panel => {
+            container.querySelectorAll('.wpc-calc-fire-m8k3-panel').forEach(function(panel) {
                 panel.classList.remove('active');
             });
-            const targetPanel = document.getElementById('wpc-calc-fire-m8k3-' + tabName);
+            var targetPanel = document.getElementById('wpc-calc-fire-m8k3-' + tabName);
             if (targetPanel) {
                 targetPanel.classList.add('active');
             }
@@ -1942,7 +1958,7 @@ if (!document.querySelector('meta[name="viewport"]')) {
             e.preventDefault();
             state.swrRate = parseFloat(element.dataset.value);
             
-            container.querySelectorAll('[data-action="set-swr"]').forEach(btn => {
+            container.querySelectorAll('[data-action="set-swr"]').forEach(function(btn) {
                 btn.classList.remove('active');
             });
             element.classList.add('active');
@@ -1956,7 +1972,7 @@ if (!document.querySelector('meta[name="viewport"]')) {
             e.preventDefault();
             state.taxRate = parseFloat(element.dataset.value);
             
-            container.querySelectorAll('[data-action="set-tax"]').forEach(btn => {
+            container.querySelectorAll('[data-action="set-tax"]').forEach(function(btn) {
                 btn.classList.remove('active');
             });
             element.classList.add('active');
@@ -1968,7 +1984,7 @@ if (!document.querySelector('meta[name="viewport"]')) {
             e.preventDefault();
             state.expectedReturn = parseFloat(element.dataset.value);
             
-            container.querySelectorAll('[data-action="set-return"]').forEach(btn => {
+            container.querySelectorAll('[data-action="set-return"]').forEach(function(btn) {
                 btn.classList.remove('active');
             });
             element.classList.add('active');
@@ -1980,29 +1996,39 @@ if (!document.querySelector('meta[name="viewport"]')) {
         
         'open-awg': function(element, e) {
             e.preventDefault();
-            const awgContent = container.querySelector('.wpc-calc-fire-m8k3-awg-content');
-            const ctaButton = element;
+            var awgContent = container.querySelector('.wpc-calc-fire-m8k3-awg-content');
+            var ctaButton = element;
             
-            if (awgContent && ctaButton) {
+            if (awgContent) { if (ctaButton) {
                 awgContent.classList.add('show');
                 ctaButton.style.display = 'none';
                 
-                setTimeout(() => {
-                    awgContent.scrollIntoView({ behavior: 'smooth' });
-                }, 300);
-            }
+                setTimeout(function() {
+                    awgContent.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 100);
+                // Dispatch resize for WordPress form initialization
+                setTimeout(function() {
+                    window.dispatchEvent(new Event('resize'));
+                }, 400);
+                // jQuery resize for WordPress plugins
+                if (typeof jQuery !== 'undefined') {
+                    setTimeout(function() {
+                        jQuery(window).trigger('resize');
+                    }, 450);
+                }
+            } }
         },
         
         'toggle-faq': function(element, e) {
             e.preventDefault();
-            const content = element.nextElementSibling;
-            const isActive = element.classList.contains('active');
+            var content = element.nextElementSibling;
+            var isActive = element.classList.contains('active');
             
             // Close all other FAQ items
-            container.querySelectorAll('.wpc-calc-fire-m8k3-accordion-header').forEach(header => {
+            container.querySelectorAll('.wpc-calc-fire-m8k3-accordion-header').forEach(function(header) {
                 if (header !== element) {
                     header.classList.remove('active');
-                    const otherContent = header.nextElementSibling;
+                    var otherContent = header.nextElementSibling;
                     if (otherContent) {
                         otherContent.classList.remove('active');
                     }
@@ -2047,18 +2073,20 @@ if (!document.querySelector('meta[name="viewport"]')) {
     
     // Debounce
     function debounce(func, wait) {
-        let timeout;
-        return function executedFunction(...args) {
-            const later = () => {
+        var timeout;
+        return function() {
+            var context = this;
+            var args = arguments;
+            var later = function() {
                 clearTimeout(timeout);
-                func(...args);
+                func.apply(context, args);
             };
             clearTimeout(timeout);
             timeout = setTimeout(later, wait);
         };
     }
     
-    const debouncedUpdate = debounce(() => {
+    var debouncedUpdate = debounce(function() {
         switch(state.activeTab) {
             case 'fire-number':
                 ui.updateFireNumberResults();
@@ -2077,10 +2105,10 @@ if (!document.querySelector('meta[name="viewport"]')) {
     
     // Event delegation
     container.addEventListener('click', function(e) {
-        const target = e.target.closest('[data-action]');
-        if (target && handlers[target.dataset.action]) {
+        var target = e.target.closest('[data-action]');
+        if (target) { if (handlers[target.dataset.action]) {
             handlers[target.dataset.action](target, e);
-        }
+        } }
     });
     
     // Slider and input synchronization
@@ -2118,10 +2146,22 @@ if (!document.querySelector('meta[name="viewport"]')) {
                 state.monthlySavings = value;
                 document.getElementById('monthly-savings').value = Math.min(30000, Math.max(1000, value));
             }
-            else if (inputId === 'fire-target') state.fireTarget = value;
-            else if (inputId === 'sensitivity-target') state.sensitivityTarget = value;
-            else if (inputId === 'sensitivity-capital') state.sensitivityCapital = value;
-            else if (inputId === 'sensitivity-savings') state.sensitivitySavings = value;
+            else if (inputId === 'fire-target') {
+                state.fireTarget = value;
+                ui.updateTimeToFireResults(); // עדכון ישיר
+            }
+            else if (inputId === 'sensitivity-target') {
+                state.sensitivityTarget = value;
+                ui.updateSensitivityResults(); // עדכון ישיר
+            }
+            else if (inputId === 'sensitivity-capital') {
+                state.sensitivityCapital = value;
+                ui.updateSensitivityResults(); // עדכון ישיר
+            }
+            else if (inputId === 'sensitivity-savings') {
+                state.sensitivitySavings = value;
+                ui.updateSensitivityResults(); // עדכון ישיר
+            }
             
             debouncedUpdate();
         }
@@ -2141,24 +2181,25 @@ if (!document.querySelector('meta[name="viewport"]')) {
         let code = '';
         
         // 1. Viewport Script
-        code += '<script>\n';
+        code += '<scr' + 'ipt>\n';
         code += 'if (!document.querySelector(\'meta[name="viewport"]\')) {\n';
         code += '  const viewport = document.createElement(\'meta\');\n';
         code += '  viewport.name = \'viewport\';\n';
         code += '  viewport.content = \'width=device-width, initial-scale=1.0, user-scalable=yes\';\n';
         code += '  document.head.appendChild(viewport);\n';
         code += '}\n';
-        code += '<\/script>\n\n';
+        code += '</scr' + 'ipt>\n\n';
         
         // 2. CSS
         let styleElement = null;
         let maxLength = 0;
         const allStyles = document.querySelectorAll('style');
-        for (let style of allStyles) {
-            if (style.textContent.includes('wpc-calc-fire-m8k3') && style.textContent.length > maxLength) {
+        for (var i = 0; i < allStyles.length; i++) {
+            var style = allStyles[i];
+            if (style.textContent.includes('wpc-calc-fire-m8k3')) { if (style.textContent.length > maxLength) {
                 styleElement = style;
                 maxLength = style.textContent.length;
-            }
+            } }
         }
         
         if (styleElement) {
@@ -2192,8 +2233,14 @@ if (!document.querySelector('meta[name="viewport"]')) {
         code += '</div>\n';
         code += '</div>\n\n';
         
-        // 4. JavaScript
-        code += getEmbedScript();
+        // 4. JavaScript - העתקת הסקריפט הראשי מה-DOM!
+        var allScripts = Array.from(document.querySelectorAll('script'));
+        var mainScript = allScripts.find(function(s) {
+            return s.textContent ? s.textContent.includes('WPC_CalcFire_M8K3') : false;
+        });
+        if (mainScript) {
+            code += mainScript.outerHTML + '\n';
+        }
         
         copyToClipboard(code, 'קוד HTML הועתק בהצלחה! 🎉\nהדבק בעורך וורדפרס במצב Text/HTML');
     }
@@ -2201,34 +2248,36 @@ if (!document.querySelector('meta[name="viewport"]')) {
     function copyEmbedCodeWithColor(color, colorName) {
         let code = '';
         
-        // Same as copyEmbedCode but with color replacement
-        code += '<script>\n';
+        // 1. Viewport Script
+        code += '<scr' + 'ipt>\n';
         code += 'if (!document.querySelector(\'meta[name="viewport"]\')) {\n';
         code += '  const viewport = document.createElement(\'meta\');\n';
         code += '  viewport.name = \'viewport\';\n';
         code += '  viewport.content = \'width=device-width, initial-scale=1.0, user-scalable=yes\';\n';
         code += '  document.head.appendChild(viewport);\n';
         code += '}\n';
-        code += '<\/script>\n\n';
+        code += '</scr' + 'ipt>\n\n';
         
-        let styleElement = null;
-        let maxLength = 0;
-        const allStyles = document.querySelectorAll('style');
-        for (let style of allStyles) {
-            if (style.textContent.includes('wpc-calc-fire-m8k3') && style.textContent.length > maxLength) {
+        // 2. CSS with color replacement
+        var styleElement = null;
+        var maxLength = 0;
+        var allStyles = document.querySelectorAll('style');
+        for (var i = 0; i < allStyles.length; i++) {
+            var style = allStyles[i];
+            if (style.textContent.includes('wpc-calc-fire-m8k3')) { if (style.textContent.length > maxLength) {
                 styleElement = style;
                 maxLength = style.textContent.length;
-            }
+            } }
         }
         
         if (styleElement) {
-            // Replace primary color in CSS
-            let cssContent = styleElement.textContent;
+            var cssContent = styleElement.textContent;
             cssContent = cssContent.replace(/#1e5490/g, color);
             cssContent = cssContent.replace(/#2a5fa0/g, darkenColor(color));
             code += '<style>\n' + cssContent + '\n</style>\n\n';
         }
         
+        // 3. HTML
         code += '<div class="wpc-calc-fire-m8k3-wrapper" id="wpc-calc-fire-m8k3-main">\n';
         
         const calculatorContainer = container.querySelector('.wpc-calc-fire-m8k3-container');
@@ -2250,83 +2299,16 @@ if (!document.querySelector('meta[name="viewport"]')) {
         code += '</div>\n';
         code += '</div>\n\n';
         
-        code += getEmbedScript();
+        // 4. JavaScript - העתקת הסקריפט הראשי מה-DOM!
+        var allScripts = Array.from(document.querySelectorAll('script'));
+        var mainScript = allScripts.find(function(s) {
+            return s.textContent ? s.textContent.includes('WPC_CalcFire_M8K3') : false;
+        });
+        if (mainScript) {
+            code += mainScript.outerHTML + '\n';
+        }
         
         copyToClipboard(code, 'קוד HTML עם ' + colorName + ' הועתק! 🎉\nהדבק בעורך וורדפרס במצב Text/HTML');
-    }
-    
-    function getEmbedScript() {
-        return '<script>\n' +
-        'document.addEventListener("DOMContentLoaded", function() {\n' +
-        '  (function() {\n' +
-        '    "use strict";\n' +
-        '    var NS = "WPC_CalcFire_Embed";\n' +
-        '    if (window[NS]) return;\n' +
-        '    var container = document.getElementById("wpc-calc-fire-m8k3-main");\n' +
-        '    if (!container) return;\n' +
-        '    \n' +
-        '    var state = { monthlyExpenses: 15000, swrRate: 4, taxRate: 25 };\n' +
-        '    \n' +
-        '    function formatCurrency(n) { return "₪" + Math.round(n).toLocaleString("he-IL"); }\n' +
-        '    function formatPercent(n) { return n.toFixed(1) + "%"; }\n' +
-        '    \n' +
-        '    function calculateFireNumber(annual, swr, tax) {\n' +
-        '      var basic = annual / (swr / 100);\n' +
-        '      var withTax = annual / ((1 - tax / 100) * (swr / 100));\n' +
-        '      return { basic: basic, withTax: withTax };\n' +
-        '    }\n' +
-        '    \n' +
-        '    function updateResults() {\n' +
-        '      var annual = state.monthlyExpenses * 12;\n' +
-        '      var result = calculateFireNumber(annual, state.swrRate, state.taxRate);\n' +
-        '      var el1 = document.getElementById("fire-number-result");\n' +
-        '      var el2 = document.getElementById("annual-expenses-result");\n' +
-        '      var el3 = document.getElementById("fire-number-basic");\n' +
-        '      if (el1) el1.textContent = formatCurrency(result.withTax);\n' +
-        '      if (el2) el2.textContent = formatCurrency(annual);\n' +
-        '      if (el3) el3.textContent = formatCurrency(result.basic);\n' +
-        '    }\n' +
-        '    \n' +
-        '    function switchTab(tabName) {\n' +
-        '      var tabs = container.querySelectorAll(".wpc-calc-fire-m8k3-tab");\n' +
-        '      var panels = container.querySelectorAll(".wpc-calc-fire-m8k3-panel");\n' +
-        '      for (var i = 0; i < tabs.length; i++) tabs[i].classList.remove("active");\n' +
-        '      for (var j = 0; j < panels.length; j++) panels[j].classList.remove("active");\n' +
-        '      var tabBtn = container.querySelector("[data-tab=\\"" + tabName + "\\"]");\n' +
-        '      if (tabBtn) tabBtn.classList.add("active");\n' +
-        '      var panel = document.getElementById("wpc-calc-fire-m8k3-" + tabName);\n' +
-        '      if (panel) panel.classList.add("active");\n' +
-        '    }\n' +
-        '    \n' +
-        '    container.addEventListener("click", function(e) {\n' +
-        '      var action = e.target.closest("[data-action]");\n' +
-        '      if (!action) return;\n' +
-        '      var act = action.dataset.action;\n' +
-        '      if (act === "switch-tab") switchTab(action.dataset.tab);\n' +
-        '      if (act === "set-swr") { state.swrRate = parseFloat(action.dataset.value); updateResults(); }\n' +
-        '      if (act === "set-tax") { state.taxRate = parseFloat(action.dataset.value); updateResults(); }\n' +
-        '    });\n' +
-        '    \n' +
-        '    container.addEventListener("input", function(e) {\n' +
-        '      if (e.target.id === "monthly-expenses") {\n' +
-        '        state.monthlyExpenses = parseFloat(e.target.value);\n' +
-        '        var valEl = document.getElementById("monthly-expenses-value");\n' +
-        '        if (valEl) valEl.textContent = formatCurrency(state.monthlyExpenses);\n' +
-        '        updateResults();\n' +
-        '      }\n' +
-        '      if (e.target.id === "swr-rate") {\n' +
-        '        state.swrRate = parseFloat(e.target.value);\n' +
-        '        var valEl2 = document.getElementById("swr-rate-value");\n' +
-        '        if (valEl2) valEl2.textContent = formatPercent(state.swrRate);\n' +
-        '        updateResults();\n' +
-        '      }\n' +
-        '    });\n' +
-        '    \n' +
-        '    updateResults();\n' +
-        '    window[NS] = { version: "1.0.0" };\n' +
-        '  })();\n' +
-        '});\n' +
-        '</' + 'script>';
     }
     
     function showPreview(color, colorName) {
@@ -2350,11 +2332,6 @@ if (!document.querySelector('meta[name="viewport"]')) {
         const awgSection = clone.querySelector('.wpc-calc-fire-m8k3-awg-section');
         if (awgSection) awgSection.remove();
         
-        // Remove data-action from tabs
-        clone.querySelectorAll('.wpc-calc-fire-m8k3-tab').forEach(tab => {
-            tab.removeAttribute('data-action');
-        });
-        
         // Create preview wrapper
         const previewWrapper = document.createElement('div');
         previewWrapper.className = 'wpc-calc-fire-m8k3-wrapper';
@@ -2370,31 +2347,124 @@ if (!document.querySelector('meta[name="viewport"]')) {
         previewContainer.innerHTML = '';
         previewContainer.appendChild(previewWrapper);
         
-        // Initialize preview calculator tabs
-        previewWrapper.querySelectorAll('.wpc-calc-fire-m8k3-tab').forEach(tab => {
-            tab.addEventListener('click', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                const tabName = this.dataset.tab;
-                
-                previewWrapper.querySelectorAll('.wpc-calc-fire-m8k3-tab').forEach(t => t.classList.remove('active'));
-                this.classList.add('active');
-                
-                previewWrapper.querySelectorAll('.wpc-calc-fire-m8k3-panel').forEach(p => p.classList.remove('active'));
-                const panel = previewWrapper.querySelector('#wpc-calc-fire-m8k3-' + tabName);
-                if (panel) panel.classList.add('active');
-            });
-        });
+        // Initialize preview calculator with full functionality
+        initPreviewCalculator(previewWrapper, color);
         
         previewSection.style.display = 'block';
         previewSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
     
+    // אתחול טאבים וסליידרים בתצוגה מקדימה - עם חישובים!
+    function initPreviewCalculator(wrapper, color) {
+        // State לתצוגה מקדימה
+        var pState = {
+            monthlyExpenses: 15000, swrRate: 4, taxRate: 25,
+            currentCapital: 200000, monthlySavings: 5000, expectedReturn: 7, inflationRate: 2,
+            fireTarget: 6000000, currentExpenses: 15000, typesSwr: 4
+        };
+        
+        function fmt(n) { return '\u20AA' + Math.round(n).toLocaleString('he-IL'); }
+        function pct(n) { return n.toFixed(1) + '%'; }
+        function yrs(n) { return (n < 0 || !isFinite(n)) ? 'מיידי!' : (n > 100 ? '100+ שנים' : n.toFixed(1) + ' שנים'); }
+        
+        function calcYearsToFire(target, capital, savings, returnRate) {
+            if (returnRate <= 0) return Math.ceil((target - capital) / (savings * 12));
+            var r = returnRate / 100;
+            var years = 0, bal = capital;
+            while (bal < target) { if (years >= 100) break; bal = bal * (1 + r) + savings * 12; years++; }
+            return years;
+        }
+        
+        function updatePreviewResults() {
+            var annual = pState.monthlyExpenses * 12;
+            var fireNum = annual / (pState.swrRate / 100);
+            var fireWithTax = annual / ((1 - pState.taxRate / 100) * (pState.swrRate / 100));
+            
+            var el1 = wrapper.querySelector('#fire-number-result');
+            var el2 = wrapper.querySelector('#annual-expenses-result');
+            var el3 = wrapper.querySelector('#fire-number-basic');
+            if (el1) el1.textContent = fmt(fireWithTax);
+            if (el2) el2.textContent = fmt(annual);
+            if (el3) el3.textContent = fmt(fireNum);
+            
+            var years = calcYearsToFire(pState.fireTarget, pState.currentCapital, pState.monthlySavings, pState.expectedReturn - pState.inflationRate);
+            var el4 = wrapper.querySelector('#years-to-fire');
+            var el5 = wrapper.querySelector('#total-contributions');
+            var el6 = wrapper.querySelector('#compound-profit');
+            if (el4) el4.textContent = yrs(years);
+            if (el5) el5.textContent = fmt(pState.currentCapital + pState.monthlySavings * years * 12);
+            if (el6) el6.textContent = fmt(Math.max(0, pState.fireTarget - pState.currentCapital - pState.monthlySavings * years * 12));
+        }
+        
+        // טאבים
+        var tabs = wrapper.querySelectorAll('.wpc-calc-fire-m8k3-tab');
+        var panels = wrapper.querySelectorAll('.wpc-calc-fire-m8k3-panel');
+        
+        tabs.forEach(function(tab) {
+            tab.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                var targetTab = this.dataset.tab;
+                tabs.forEach(function(t) { t.classList.remove('active'); });
+                panels.forEach(function(p) { p.classList.remove('active'); });
+                this.classList.add('active');
+                var targetPanel = wrapper.querySelector('#wpc-calc-fire-m8k3-' + targetTab);
+                if (targetPanel) targetPanel.classList.add('active');
+            });
+        });
+        
+        // סליידרים - עדכון ערך + חישובים
+        var sliders = wrapper.querySelectorAll('input[type="range"]');
+        sliders.forEach(function(slider) {
+            slider.addEventListener('input', function(e) {
+                e.stopPropagation();
+                var id = this.id;
+                var val = parseFloat(this.value);
+                var valueEl = wrapper.querySelector('#' + id + '-value');
+                
+                // עדכון state
+                if (id === 'monthly-expenses') pState.monthlyExpenses = val;
+                else if (id === 'swr-rate') pState.swrRate = val;
+                else if (id === 'current-capital') pState.currentCapital = val;
+                else if (id === 'monthly-savings') pState.monthlySavings = val;
+                else if (id === 'expected-return') pState.expectedReturn = val;
+                else if (id === 'inflation-rate') pState.inflationRate = val;
+                else if (id === 'current-expenses') pState.currentExpenses = val;
+                else if (id === 'types-swr') pState.typesSwr = val;
+                
+                // עדכון תצוגה
+                if (valueEl) {
+                    if (id.indexOf('expenses') !== -1 || id.indexOf('capital') !== -1 || id.indexOf('savings') !== -1) {
+                        valueEl.textContent = fmt(val);
+                    } else {
+                        valueEl.textContent = pct(val);
+                    }
+                }
+                
+                updatePreviewResults();
+            });
+        });
+        
+        // שדות מספר
+        var inputs = wrapper.querySelectorAll('input[type="number"]');
+        inputs.forEach(function(input) {
+            input.addEventListener('input', function(e) {
+                e.stopPropagation();
+                var id = this.id;
+                var val = parseFloat(this.value) || 0;
+                if (id === 'fire-target') pState.fireTarget = val;
+                updatePreviewResults();
+            });
+        });
+        
+        updatePreviewResults();
+    }
+    
     function copyToClipboard(text, message) {
         if (navigator.clipboard) {
-            navigator.clipboard.writeText(text).then(() => {
+            navigator.clipboard.writeText(text).then(function() {
                 alert(message);
-            }).catch(err => {
+            }).catch(function(err) {
                 fallbackCopy(text, message);
             });
         } else {
@@ -2428,16 +2498,19 @@ if (!document.querySelector('meta[name="viewport"]')) {
     
     // Initialize
     function init() {
+        console.log('[FIRE] Running init...');
         ui.updateFireNumberResults();
         ui.updateTimeToFireResults();
         ui.updateFireTypesResults();
         ui.updateSensitivityResults();
+        console.log('[FIRE] Init complete');
     }
     
     init();
     
     // Expose minimal API
     window[NS] = { version: '1.0.0' };
+    console.log('[FIRE] Calculator ready!');
 })();
 </script>
 

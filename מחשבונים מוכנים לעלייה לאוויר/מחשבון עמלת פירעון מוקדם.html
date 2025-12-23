@@ -496,14 +496,20 @@ if (!document.querySelector('link[href*="Assistant"]')) {
 }
 
 .wpc-calc-prepay-m5r9-awg-content {
-  display: none !important;
-  padding: 25px !important;
+  max-height: 0 !important;
+  overflow: hidden !important;
+  opacity: 0 !important;
+  padding: 0 !important;
   border-radius: 12px !important;
   background: var(--bg-light) !important;
+  transition: max-height 0.4s ease, opacity 0.3s ease, padding 0.3s ease !important;
 }
 
 .wpc-calc-prepay-m5r9-awg-content.active {
-  display: block !important;
+  max-height: 2000px !important;
+  opacity: 1 !important;
+  overflow: visible !important;
+  padding: 25px !important;
 }
 
 /* === שאלות נפוצות === */
@@ -1575,7 +1581,21 @@ if (!document.querySelector('link[href*="Assistant"]')) {
   function openAwg() {
     var awgForm = $('wpc-calc-prepay-m5r9-awg-form');
     if (awgForm) {
+      var isOpening = !awgForm.classList.contains('active');
       awgForm.classList.toggle('active');
+      if (isOpening) {
+        setTimeout(function() {
+          awgForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 100);
+        setTimeout(function() {
+          window.dispatchEvent(new Event('resize'));
+        }, 400);
+        if (typeof jQuery !== 'undefined') {
+          setTimeout(function() {
+            jQuery(window).trigger('resize');
+          }, 450);
+        }
+      }
     }
   }
   

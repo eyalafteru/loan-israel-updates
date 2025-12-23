@@ -5,7 +5,7 @@
 <script>
 // בדיקה והוספת viewport meta tag אם חסר
 if (!document.querySelector('meta[name="viewport"]')) {
-  const viewport = document.createElement('meta');
+  var viewport = document.createElement('meta');
   viewport.name = 'viewport';
   viewport.content = 'width=device-width, initial-scale=1.0, user-scalable=yes';
   document.head.appendChild(viewport);
@@ -642,14 +642,22 @@ if (!document.querySelector('meta[name="viewport"]')) {
 }
 
 .wpc-calc-comp360-k7m4-awg-content {
-  display: none !important;
-  margin-top: 25px !important;
-  padding-top: 25px !important;
-  border-top: 2px dashed var(--wpc-comp360-border) !important;
+  max-height: 0 !important;
+  overflow: hidden !important;
+  opacity: 0 !important;
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+  border-top: none !important;
+  transition: max-height 0.4s ease, opacity 0.3s ease, margin-top 0.3s ease, padding-top 0.3s ease !important;
 }
 
 .wpc-calc-comp360-k7m4-awg-content.active {
-  display: block !important;
+  max-height: 2000px !important;
+  opacity: 1 !important;
+  overflow: visible !important;
+  margin-top: 25px !important;
+  padding-top: 25px !important;
+  border-top: 2px dashed var(--wpc-comp360-border) !important;
 }
 
 /* Content Section */
@@ -1896,7 +1904,7 @@ if (!document.querySelector('meta[name="viewport"]')) {
     <div class="wpc-calc-comp360-k7m4-awg-container">
       <div class="wpc-calc-comp360-k7m4-cta-buttons">
         <button class="wpc-calc-comp360-k7m4-cta-btn primary" data-action="open-awg">
-          ⚖️ קבל ייעוץ משפטי חינם - מעורך דין מומחה לנזיקין!
+          💰 הגש בקשה להלוואה מהירה!
         </button>
         <button class="wpc-calc-comp360-k7m4-cta-btn secondary" data-action="scroll-to-embed">
           🎁 רוצה להטמיע את המחשבון בחינם באתרך? לחץ כאן!
@@ -2217,30 +2225,30 @@ if (!document.querySelector('meta[name="viewport"]')) {
     'use strict';
     
     // Namespace check
-    const NS = 'WPC_CalcComp360_K7M4';
+    var NS = 'WPC_CalcComp360_K7M4';
     if (window[NS]) return;
     
     // Container validation
-    const container = document.getElementById('wpc-calc-comp360-k7m4-main');
+    var container = document.getElementById('wpc-calc-comp360-k7m4-main');
     if (!container) return;
     
     // ==========================================
     // CONSTANTS 2025
     // ==========================================
-    const CALCULATOR_NAME = 'פיצויים 360';
-    const AVERAGE_SALARY = 13600; // שכר ממוצע במשק 2025
-    const RETIREMENT_AGE = 67;
-    const LIFE_EXPECTANCY = 83;
-    const DISCOUNT_RATE = 0.03; // 3% היוון
-    const PAIN_CEILING_PELETD = 180000; // תקרת כאב וסבל פלת"ד 2025
-    const HOSPITAL_DAY_RATE = 900; // ₪ ליום אשפוז
-    const HOURLY_HELP_RATE = 65; // ₪ לשעת עזרה
-    const SOCIAL_CONTRIBUTION_RATE = 0.125; // 12.5%
-    const INTEREST_RATE_PAST = 0.04; // 4% ריבית והצמדה לעבר
-    const VAT_RATE = 1.17;
+    var CALCULATOR_NAME = '\u05E4\u05D9\u05E6\u05D5\u05D9\u05D9\u05DD 360';
+    var AVERAGE_SALARY = 13600; // שכר ממוצע במשק 2025
+    var RETIREMENT_AGE = 67;
+    var LIFE_EXPECTANCY = 83;
+    var DISCOUNT_RATE = 0.03; // 3% היוון
+    var PAIN_CEILING_PELETD = 180000; // תקרת כאב וסבל פלת"ד 2025
+    var HOSPITAL_DAY_RATE = 900; // ₪ ליום אשפוז
+    var HOURLY_HELP_RATE = 65; // ₪ לשעת עזרה
+    var SOCIAL_CONTRIBUTION_RATE = 0.125; // 12.5%
+    var INTEREST_RATE_PAST = 0.04; // 4% ריבית והצמדה לעבר
+    var VAT_RATE = 1.17;
     
     // Age factors for pain and suffering
-    const AGE_FACTORS = {
+    var AGE_FACTORS = {
         30: 1.0,
         50: 0.9,
         70: 0.8
@@ -2249,7 +2257,7 @@ if (!document.querySelector('meta[name="viewport"]')) {
     // ==========================================
     // STATE
     // ==========================================
-    const state = {
+    var state = {
         caseType: 'peletd', // 'peletd' or 'nezikin'
         basic: {
             age: 35,
@@ -2303,27 +2311,29 @@ if (!document.querySelector('meta[name="viewport"]')) {
     
     // Calculate months passed since incident
     function getMonthsPassed() {
-        const incidentDate = new Date(state.basic.incidentDate);
-        const today = new Date();
-        const months = (today.getFullYear() - incidentDate.getFullYear()) * 12 + 
+        var incidentDate = new Date(state.basic.incidentDate);
+        var today = new Date();
+        var months = (today.getFullYear() - incidentDate.getFullYear()) * 12 + 
                        (today.getMonth() - incidentDate.getMonth());
         return Math.max(0, months);
     }
     
     // Calculate current age
     function getCurrentAge() {
-        const incidentDate = new Date(state.basic.incidentDate);
-        const today = new Date();
-        const monthsPassed = getMonthsPassed();
+        var incidentDate = new Date(state.basic.incidentDate);
+        var today = new Date();
+        var monthsPassed = getMonthsPassed();
         return state.basic.age + Math.floor(monthsPassed / 12);
     }
     
     // Calculate years to retirement
     function getYearsToRetirement() {
-        const currentAge = getCurrentAge();
-        if (state.basic.status === 'minor' && currentAge < 21) {
-            // For minors, start counting from age 21
-            return RETIREMENT_AGE - 21;
+        var currentAge = getCurrentAge();
+        if (state.basic.status === 'minor') {
+            if (currentAge < 21) {
+                // For minors, start counting from age 21
+                return RETIREMENT_AGE - 21;
+            }
         }
         return Math.max(0, RETIREMENT_AGE - currentAge);
     }
@@ -2337,15 +2347,18 @@ if (!document.querySelector('meta[name="viewport"]')) {
     function calculateDiscountFactor(years) {
         if (years <= 0) return 0;
         // Monthly discount factor for n years at r% annual rate
-        const monthlyRate = DISCOUNT_RATE / 12;
-        const months = years * 12;
+        var monthlyRate = DISCOUNT_RATE / 12;
+        var months = years * 12;
         // Present value of annuity formula
         return (1 - Math.pow(1 + monthlyRate, -months)) / monthlyRate;
     }
     
     // Get base salary for calculations
     function getBaseSalary() {
-        if (state.basic.status === 'minor' || state.basic.status === 'unemployed') {
+        if (state.basic.status === 'minor') {
+            return AVERAGE_SALARY;
+        }
+        if (state.basic.status === 'unemployed') {
             return AVERAGE_SALARY;
         }
         return state.basic.netSalary;
@@ -2353,7 +2366,7 @@ if (!document.querySelector('meta[name="viewport"]')) {
     
     // Get age factor for pain and suffering
     function getAgeFactor() {
-        const age = state.basic.age;
+        var age = state.basic.age;
         if (age <= 30) return 1.0;
         if (age <= 50) return 0.9;
         return 0.8;
@@ -2364,12 +2377,12 @@ if (!document.querySelector('meta[name="viewport"]')) {
     // ==========================================
     
     function calculateIncomeLossPast() {
-        const monthsPassed = getMonthsPassed();
-        const salary = getBaseSalary();
-        const disability = state.basic.functionalDisability / 100;
+        var monthsPassed = getMonthsPassed();
+        var salary = getBaseSalary();
+        var disability = state.basic.functionalDisability / 100;
         
-        const basicLoss = salary * disability * monthsPassed;
-        const interest = basicLoss * (INTEREST_RATE_PAST * monthsPassed / 12);
+        var basicLoss = salary * disability * monthsPassed;
+        var interest = basicLoss * (INTEREST_RATE_PAST * monthsPassed / 12);
         
         return {
             basic: basicLoss,
@@ -2379,13 +2392,13 @@ if (!document.querySelector('meta[name="viewport"]')) {
     }
     
     function calculateIncomeLossFuture() {
-        const yearsToRetirement = getYearsToRetirement();
-        const salary = getBaseSalary();
-        const disability = state.basic.functionalDisability / 100;
+        var yearsToRetirement = getYearsToRetirement();
+        var salary = getBaseSalary();
+        var disability = state.basic.functionalDisability / 100;
         
-        const monthlyLoss = salary * disability;
-        const discountFactor = calculateDiscountFactor(yearsToRetirement);
-        const total = monthlyLoss * discountFactor;
+        var monthlyLoss = salary * disability;
+        var discountFactor = calculateDiscountFactor(yearsToRetirement);
+        var total = monthlyLoss * discountFactor;
         
         return {
             monthlyLoss: monthlyLoss,
@@ -2396,8 +2409,8 @@ if (!document.querySelector('meta[name="viewport"]')) {
     }
     
     function calculateSocialContributions(pastLoss, futureLoss) {
-        const pastSocial = pastLoss * SOCIAL_CONTRIBUTION_RATE;
-        const futureSocial = futureLoss * SOCIAL_CONTRIBUTION_RATE;
+        var pastSocial = pastLoss * SOCIAL_CONTRIBUTION_RATE;
+        var futureSocial = futureLoss * SOCIAL_CONTRIBUTION_RATE;
         return {
             past: pastSocial,
             future: futureSocial,
@@ -2410,12 +2423,12 @@ if (!document.querySelector('meta[name="viewport"]')) {
     // ==========================================
     
     function calculatePainPeletd() {
-        const disability = state.basic.medicalDisability / 100;
-        const ageFactor = getAgeFactor();
-        const hospitalDays = state.basic.hospitalDays;
+        var disability = state.basic.medicalDisability / 100;
+        var ageFactor = getAgeFactor();
+        var hospitalDays = state.basic.hospitalDays;
         
-        const disabilityAmount = PAIN_CEILING_PELETD * disability * ageFactor;
-        const hospitalAmount = hospitalDays * HOSPITAL_DAY_RATE;
+        var disabilityAmount = PAIN_CEILING_PELETD * disability * ageFactor;
+        var hospitalAmount = hospitalDays * HOSPITAL_DAY_RATE;
         
         return {
             disabilityAmount: disabilityAmount,
@@ -2430,8 +2443,8 @@ if (!document.querySelector('meta[name="viewport"]')) {
             return { total: state.manualPainAmount };
         }
         // Formula method: disability × average salary × 9 (triple × triple)
-        const disability = state.basic.medicalDisability / 100;
-        const total = disability * AVERAGE_SALARY * 9;
+        var disability = state.basic.medicalDisability / 100;
+        var total = disability * AVERAGE_SALARY * 9;
         return { total: total };
     }
     
@@ -2440,22 +2453,22 @@ if (!document.querySelector('meta[name="viewport"]')) {
     // ==========================================
     
     function calculateExpenses() {
-        const yearsToLife = getYearsToLifeExpectancy();
-        const discountFactor = calculateDiscountFactor(yearsToLife);
+        var yearsToLife = getYearsToLifeExpectancy();
+        var discountFactor = calculateDiscountFactor(yearsToLife);
         
         // Third party help
-        const pastHelp = state.expenses.pastHelp;
-        const weeklyHelpCost = state.expenses.futureHoursPerWeek * HOURLY_HELP_RATE;
-        const monthlyHelpCost = weeklyHelpCost * 4.33;
-        const futureHelp = monthlyHelpCost * discountFactor;
+        var pastHelp = state.expenses.pastHelp;
+        var weeklyHelpCost = state.expenses.futureHoursPerWeek * HOURLY_HELP_RATE;
+        var monthlyHelpCost = weeklyHelpCost * 4.33;
+        var futureHelp = monthlyHelpCost * discountFactor;
         
         // Medical expenses
-        const medicalPast = state.expenses.medicalPast;
-        const medicalFuture = state.expenses.monthlyExpenses * discountFactor;
+        var medicalPast = state.expenses.medicalPast;
+        var medicalFuture = state.expenses.monthlyExpenses * discountFactor;
         
         // Transport and housing
-        const transport = state.expenses.transport;
-        const housing = state.expenses.housing;
+        var transport = state.expenses.transport;
+        var housing = state.expenses.housing;
         
         return {
             help: {
@@ -2481,19 +2494,21 @@ if (!document.querySelector('meta[name="viewport"]')) {
     // ==========================================
     
     function calculateDeductions(grossTotal) {
-        const yearsToLife = getYearsToLifeExpectancy();
-        const discountFactor = calculateDiscountFactor(yearsToLife);
+        var yearsToLife = getYearsToLifeExpectancy();
+        var discountFactor = calculateDiscountFactor(yearsToLife);
         
-        const niGrant = state.deductions.niGrant;
-        const niPensionCapitalized = state.deductions.niPension * discountFactor;
-        const frequentPayments = state.deductions.frequentPayments;
+        var niGrant = state.deductions.niGrant;
+        var niPensionCapitalized = state.deductions.niPension * discountFactor;
+        var frequentPayments = state.deductions.frequentPayments;
         
-        let subtotal = niGrant + niPensionCapitalized + frequentPayments;
+        var subtotal = niGrant + niPensionCapitalized + frequentPayments;
         
         // Negligence only applies to nezikin, not peletd
-        let negligenceAmount = 0;
-        if (state.caseType === 'nezikin' && state.deductions.negligence > 0) {
-            negligenceAmount = (grossTotal - subtotal) * (state.deductions.negligence / 100);
+        var negligenceAmount = 0;
+        if (state.caseType === 'nezikin') {
+            if (state.deductions.negligence > 0) {
+                negligenceAmount = (grossTotal - subtotal) * (state.deductions.negligence / 100);
+            }
         }
         
         return {
@@ -2510,8 +2525,8 @@ if (!document.querySelector('meta[name="viewport"]')) {
     // ==========================================
     
     function calculateLawyerFee(netCompensation) {
-        const fee = netCompensation * (state.lawyerFeePercent / 100);
-        const feeWithVat = fee * VAT_RATE;
+        var fee = netCompensation * (state.lawyerFeePercent / 100);
+        var feeWithVat = fee * VAT_RATE;
         return {
             fee: feeWithVat,
             netToVictim: netCompensation - feeWithVat
@@ -2523,8 +2538,8 @@ if (!document.querySelector('meta[name="viewport"]')) {
     // ==========================================
     
     function calculateSettlement(netCompensation) {
-        const offer = netCompensation * (state.settlementPercent / 100);
-        const lawyerFee = offer * (state.lawyerFeePercent / 100) * VAT_RATE;
+        var offer = netCompensation * (state.settlementPercent / 100);
+        var lawyerFee = offer * (state.lawyerFeePercent / 100) * VAT_RATE;
         return {
             offer: offer,
             netToVictim: offer - lawyerFee
@@ -2537,39 +2552,39 @@ if (!document.querySelector('meta[name="viewport"]')) {
     
     function updateAllCalculations() {
         // Calculate all components
-        const incomePast = calculateIncomeLossPast();
-        const incomeFuture = calculateIncomeLossFuture();
-        const social = calculateSocialContributions(incomePast.total, incomeFuture.total);
-        const pain = state.caseType === 'peletd' ? calculatePainPeletd() : calculatePainNezikin();
-        const expenses = calculateExpenses();
+        var incomePast = calculateIncomeLossPast();
+        var incomeFuture = calculateIncomeLossFuture();
+        var social = calculateSocialContributions(incomePast.total, incomeFuture.total);
+        var pain = state.caseType === 'peletd' ? calculatePainPeletd() : calculatePainNezikin();
+        var expenses = calculateExpenses();
         
         // Calculate gross total
-        const grossTotal = incomePast.total + incomeFuture.total + social.total + 
+        var grossTotal = incomePast.total + incomeFuture.total + social.total + 
                           pain.total + expenses.grandTotal;
         
         // Calculate deductions
-        const deductions = calculateDeductions(grossTotal);
+        var deductions = calculateDeductions(grossTotal);
         
         // Calculate net
-        const netCompensation = grossTotal - deductions.total;
+        var netCompensation = grossTotal - deductions.total;
         
         // Calculate lawyer fee
-        const lawyer = calculateLawyerFee(netCompensation);
+        var lawyer = calculateLawyerFee(netCompensation);
         
         // Calculate settlement
-        const settlement = calculateSettlement(netCompensation);
+        var settlement = calculateSettlement(netCompensation);
         
         return {
-            incomePast,
-            incomeFuture,
-            social,
-            pain,
-            expenses,
-            grossTotal,
-            deductions,
-            netCompensation,
-            lawyer,
-            settlement
+            incomePast: incomePast,
+            incomeFuture: incomeFuture,
+            social: social,
+            pain: pain,
+            expenses: expenses,
+            grossTotal: grossTotal,
+            deductions: deductions,
+            netCompensation: netCompensation,
+            lawyer: lawyer,
+            settlement: settlement
         };
     }
     
@@ -2578,9 +2593,9 @@ if (!document.querySelector('meta[name="viewport"]')) {
     // ==========================================
     
     function updateBasicTab() {
-        const monthsPassed = getMonthsPassed();
-        const currentAge = getCurrentAge();
-        const yearsToRetire = getYearsToRetirement();
+        var monthsPassed = getMonthsPassed();
+        var currentAge = getCurrentAge();
+        var yearsToRetire = getYearsToRetirement();
         
         // Update display values
         if (el('basic-age-value')) el('basic-age-value').textContent = state.basic.age + ' שנים';
@@ -2596,16 +2611,16 @@ if (!document.querySelector('meta[name="viewport"]')) {
         if (el('basic-result-months-passed')) el('basic-result-months-passed').textContent = monthsPassed;
         
         // Show/hide hospitalization for peletd only
-        const hospGroup = el('hospitalization-group');
+        var hospGroup = el('hospitalization-group');
         if (hospGroup) {
             hospGroup.style.display = state.caseType === 'peletd' ? 'flex' : 'none';
         }
     }
     
     function updateIncomeTab() {
-        const calc = updateAllCalculations();
-        const monthsPassed = getMonthsPassed();
-        const yearsToRetire = getYearsToRetirement();
+        var calc = updateAllCalculations();
+        var monthsPassed = getMonthsPassed();
+        var yearsToRetire = getYearsToRetirement();
         
         // Past income loss
         if (el('income-past-salary-detail')) el('income-past-salary-detail').textContent = formatCurrency(getBaseSalary());
@@ -2637,11 +2652,11 @@ if (!document.querySelector('meta[name="viewport"]')) {
     }
     
     function updatePainTab() {
-        const calc = updateAllCalculations();
+        var calc = updateAllCalculations();
         
         // Show/hide sections based on case type
-        const peletdSection = el('pain-peletd-section');
-        const nezikinSection = el('pain-nezikin-section');
+        var peletdSection = el('pain-peletd-section');
+        var nezikinSection = el('pain-nezikin-section');
         
         if (state.caseType === 'peletd') {
             if (peletdSection) peletdSection.style.display = 'block';
@@ -2668,7 +2683,7 @@ if (!document.querySelector('meta[name="viewport"]')) {
     }
     
     function updateExpensesTab() {
-        const calc = updateAllCalculations();
+        var calc = updateAllCalculations();
         
         // Update slider displays
         if (el('exp-past-help-value')) el('exp-past-help-value').textContent = formatCurrency(state.expenses.pastHelp);
@@ -2704,7 +2719,7 @@ if (!document.querySelector('meta[name="viewport"]')) {
     }
     
     function updateSummaryTab() {
-        const calc = updateAllCalculations();
+        var calc = updateAllCalculations();
         
         // Summary table
         if (el('summary-income-past')) el('summary-income-past').textContent = formatCurrency(calc.incomePast.total);
@@ -2725,8 +2740,8 @@ if (!document.querySelector('meta[name="viewport"]')) {
         if (el('summary-exp-future')) el('summary-exp-future').textContent = formatCurrency(calc.expenses.medical.future);
         if (el('summary-exp-total')) el('summary-exp-total').textContent = formatCurrency(calc.expenses.medical.total + calc.expenses.transport + calc.expenses.housing);
         
-        const totalPast = calc.incomePast.total + calc.social.past + calc.expenses.totalPast;
-        const totalFuture = calc.incomeFuture.total + calc.social.future + calc.expenses.totalFuture + calc.pain.total;
+        var totalPast = calc.incomePast.total + calc.social.past + calc.expenses.totalPast;
+        var totalFuture = calc.incomeFuture.total + calc.social.future + calc.expenses.totalFuture + calc.pain.total;
         
         if (el('summary-total-past')) el('summary-total-past').innerHTML = '<strong>' + formatCurrency(totalPast) + '</strong>';
         if (el('summary-total-future')) el('summary-total-future').innerHTML = '<strong>' + formatCurrency(totalFuture) + '</strong>';
@@ -2742,8 +2757,8 @@ if (!document.querySelector('meta[name="viewport"]')) {
         if (el('ded-negligence-value')) el('ded-negligence-value').textContent = formatPercent(state.deductions.negligence);
         
         // Show/hide negligence row based on case type
-        const negligenceRow = el('ded-negligence-row');
-        const negligenceGroup = el('ded-negligence-group');
+        var negligenceRow = el('ded-negligence-row');
+        var negligenceGroup = el('ded-negligence-group');
         if (state.caseType === 'peletd') {
             if (negligenceRow) negligenceRow.style.display = 'none';
             if (negligenceGroup) negligenceGroup.style.display = 'none';
@@ -2782,18 +2797,20 @@ if (!document.querySelector('meta[name="viewport"]')) {
     // ==========================================
     
     function switchTab(tabName) {
-        container.querySelectorAll('.wpc-calc-comp360-k7m4-tab-btn').forEach(btn => {
-            btn.classList.remove('active');
-            if (btn.dataset.tab === tabName) {
-                btn.classList.add('active');
+        var tabBtns = container.querySelectorAll('.wpc-calc-comp360-k7m4-tab-btn');
+        for (var i = 0; i < tabBtns.length; i++) {
+            tabBtns[i].classList.remove('active');
+            if (tabBtns[i].dataset.tab === tabName) {
+                tabBtns[i].classList.add('active');
             }
-        });
+        }
         
-        container.querySelectorAll('.wpc-calc-comp360-k7m4-tab-content').forEach(content => {
-            content.classList.remove('active');
-        });
+        var tabContents = container.querySelectorAll('.wpc-calc-comp360-k7m4-tab-content');
+        for (var j = 0; j < tabContents.length; j++) {
+            tabContents[j].classList.remove('active');
+        }
         
-        const tabContent = el('tab-' + tabName);
+        var tabContent = el('tab-' + tabName);
         if (tabContent) tabContent.classList.add('active');
         
         updateAll();
@@ -2806,23 +2823,25 @@ if (!document.querySelector('meta[name="viewport"]')) {
     function setCaseType(type) {
         state.caseType = type;
         
-        container.querySelectorAll('.wpc-calc-comp360-k7m4-case-btn').forEach(btn => {
-            btn.classList.remove('active');
-            if (btn.dataset.value === type) {
-                btn.classList.add('active');
+        var caseBtns = container.querySelectorAll('.wpc-calc-comp360-k7m4-case-btn');
+        for (var i = 0; i < caseBtns.length; i++) {
+            caseBtns[i].classList.remove('active');
+            if (caseBtns[i].dataset.value === type) {
+                caseBtns[i].classList.add('active');
             }
-        });
+        }
         
         // Update lawyer fee default
         state.lawyerFeePercent = type === 'peletd' ? 13 : 20;
         
         // Update lawyer fee buttons
-        container.querySelectorAll('#lawyer-fee-group .wpc-calc-comp360-k7m4-btn-option').forEach(btn => {
-            btn.classList.remove('active');
-            if (parseInt(btn.dataset.value) === state.lawyerFeePercent) {
-                btn.classList.add('active');
+        var feeBtns = container.querySelectorAll('#lawyer-fee-group .wpc-calc-comp360-k7m4-btn-option');
+        for (var j = 0; j < feeBtns.length; j++) {
+            feeBtns[j].classList.remove('active');
+            if (parseInt(feeBtns[j].dataset.value) === state.lawyerFeePercent) {
+                feeBtns[j].classList.add('active');
             }
-        });
+        }
         
         updateAll();
     }
@@ -2832,11 +2851,22 @@ if (!document.querySelector('meta[name="viewport"]')) {
     // ==========================================
     
     function openAWG() {
-        const awgContent = el('awg-content');
+        var awgContent = el('awg-content');
         if (awgContent) {
+            var isOpening = !awgContent.classList.contains('active');
             awgContent.classList.toggle('active');
-            if (awgContent.classList.contains('active')) {
-                awgContent.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            if (isOpening) {
+                setTimeout(function() {
+                    awgContent.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 100);
+                setTimeout(function() {
+                    window.dispatchEvent(new Event('resize'));
+                }, 400);
+                if (typeof jQuery !== 'undefined') {
+                    setTimeout(function() {
+                        jQuery(window).trigger('resize');
+                    }, 450);
+                }
             }
         }
     }
@@ -2846,7 +2876,7 @@ if (!document.querySelector('meta[name="viewport"]')) {
     // ==========================================
     
     function toggleFAQ(header) {
-        const faqItem = header.closest('.wpc-calc-comp360-k7m4-faq-item');
+        var faqItem = header.closest('.wpc-calc-comp360-k7m4-faq-item');
         if (faqItem) {
             faqItem.classList.toggle('active');
         }
@@ -2856,36 +2886,36 @@ if (!document.querySelector('meta[name="viewport"]')) {
     // EMBED FUNCTIONS - Fixed Version with all required functions
     // ==========================================
     
-    const PREFIX = 'wpc-calc-comp360-k7m4-';
+    var PREFIX = 'wpc-calc-comp360-k7m4-';
     
     // === Color helper functions ===
     function darkenColor(hex, percent) {
-        const num = parseInt(hex.replace('#', ''), 16);
-        const amt = Math.round(2.55 * percent);
-        const R = Math.max((num >> 16) - amt, 0);
-        const G = Math.max((num >> 8 & 0x00FF) - amt, 0);
-        const B = Math.max((num & 0x0000FF) - amt, 0);
+        var num = parseInt(hex.replace('#', ''), 16);
+        var amt = Math.round(2.55 * percent);
+        var R = Math.max((num >> 16) - amt, 0);
+        var G = Math.max((num >> 8 & 0x00FF) - amt, 0);
+        var B = Math.max((num & 0x0000FF) - amt, 0);
         return '#' + (0x1000000 + R * 0x10000 + G * 0x100 + B).toString(16).slice(1);
     }
     
     function lightenColor(hex, percent) {
-        const num = parseInt(hex.replace('#', ''), 16);
-        const amt = Math.round(2.55 * percent);
-        const R = Math.min((num >> 16) + amt, 255);
-        const G = Math.min((num >> 8 & 0x00FF) + amt, 255);
-        const B = Math.min((num & 0x0000FF) + amt, 255);
+        var num = parseInt(hex.replace('#', ''), 16);
+        var amt = Math.round(2.55 * percent);
+        var R = Math.min((num >> 16) + amt, 255);
+        var G = Math.min((num >> 8 & 0x00FF) + amt, 255);
+        var B = Math.min((num & 0x0000FF) + amt, 255);
         return '#' + (0x1000000 + R * 0x10000 + G * 0x100 + B).toString(16).slice(1);
     }
     
     function hexToRgba(hex, alpha) {
-        const r = parseInt(hex.slice(1, 3), 16);
-        const g = parseInt(hex.slice(3, 5), 16);
-        const b = parseInt(hex.slice(5, 7), 16);
+        var r = parseInt(hex.slice(1, 3), 16);
+        var g = parseInt(hex.slice(3, 5), 16);
+        var b = parseInt(hex.slice(5, 7), 16);
         return 'rgba(' + r + ', ' + g + ', ' + b + ', ' + alpha + ')';
     }
     
     function scrollToEmbed() {
-        const embedSection = el('wpc-calc-comp360-k7m4-embed');
+        var embedSection = el('wpc-calc-comp360-k7m4-embed');
         if (embedSection) {
             embedSection.scrollIntoView({ behavior: 'smooth' });
         }
@@ -2893,7 +2923,7 @@ if (!document.querySelector('meta[name="viewport"]')) {
     
     // === getEmbedScript - יצירת קוד JS להטמעה ===
     function getEmbedScript() {
-        return '<script>\n' +
+        return '<scr' + 'ipt>\n' +
 'document.addEventListener("DOMContentLoaded", function() {\n' +
 '  (function() {\n' +
 '    "use strict";\n' +
@@ -2902,7 +2932,6 @@ if (!document.querySelector('meta[name="viewport"]')) {
 '    var container = document.querySelector("[class*=\'wpc-calc-comp360\']");\n' +
 '    if (!container) return;\n' +
 '\n' +
-'    // State\n' +
 '    var state = {\n' +
 '      caseType: "peletd",\n' +
 '      basic: { age: 35, grossSalary: 15000, netSalary: 11000, medicalDisability: 15, functionalDisability: 20, hospitalDays: 7, status: "adult" },\n' +
@@ -2912,18 +2941,18 @@ if (!document.querySelector('meta[name="viewport"]')) {
 '    };\n' +
 '\n' +
 '    function fmt(n) { return Math.round(n).toLocaleString("he-IL") + " \\u20AA"; }\n' +
-'    function pct(n) { return n + "%"; }\n' +
 '\n' +
-'    // Tab switching\n' +
 '    function switchTab(tabName) {\n' +
-'      container.querySelectorAll("[data-action=\'switch-tab\']").forEach(function(b) {\n' +
-'        b.classList.remove("active");\n' +
-'        if (b.dataset.tab === tabName) b.classList.add("active");\n' +
-'      });\n' +
-'      container.querySelectorAll("[class*=\'tab-content\']").forEach(function(c) {\n' +
-'        c.classList.remove("active");\n' +
-'        c.style.display = "none";\n' +
-'      });\n' +
+'      var btns = container.querySelectorAll("[data-action=\'switch-tab\']");\n' +
+'      for (var i = 0; i < btns.length; i++) {\n' +
+'        btns[i].classList.remove("active");\n' +
+'        if (btns[i].dataset.tab === tabName) btns[i].classList.add("active");\n' +
+'      }\n' +
+'      var tabs = container.querySelectorAll("[class*=\'tab-content\']");\n' +
+'      for (var j = 0; j < tabs.length; j++) {\n' +
+'        tabs[j].classList.remove("active");\n' +
+'        tabs[j].style.display = "none";\n' +
+'      }\n' +
 '      var tabContent = container.querySelector("[id*=\'tab-" + tabName + "\']");\n' +
 '      if (tabContent) {\n' +
 '        tabContent.classList.add("active");\n' +
@@ -2931,65 +2960,62 @@ if (!document.querySelector('meta[name="viewport"]')) {
 '      }\n' +
 '    }\n' +
 '\n' +
-'    // Case type\n' +
 '    function setCaseType(type) {\n' +
 '      state.caseType = type;\n' +
-'      container.querySelectorAll("[data-action=\'set-case-type\']").forEach(function(b) {\n' +
-'        b.classList.remove("active");\n' +
-'        if (b.dataset.value === type) b.classList.add("active");\n' +
-'      });\n' +
+'      var btns = container.querySelectorAll("[data-action=\'set-case-type\']");\n' +
+'      for (var i = 0; i < btns.length; i++) {\n' +
+'        btns[i].classList.remove("active");\n' +
+'        if (btns[i].dataset.value === type) btns[i].classList.add("active");\n' +
+'      }\n' +
 '      state.lawyerFeePercent = type === "peletd" ? 13 : 20;\n' +
 '    }\n' +
 '\n' +
-'    // Toggle settlement panel\n' +
 '    function toggleSettlement() {\n' +
 '      var panel = document.getElementById("settlement-panel");\n' +
 '      if (panel) panel.classList.toggle("active");\n' +
 '    }\n' +
 '\n' +
-'    // Set settlement percent\n' +
 '    function setSettlement(value) {\n' +
 '      state.settlementPercent = parseInt(value);\n' +
 '      var group = document.getElementById("settlement-percent-group");\n' +
 '      if (group) {\n' +
-'        group.querySelectorAll("button").forEach(function(b) {\n' +
-'          b.classList.remove("active");\n' +
-'          if (b.dataset.value === value) b.classList.add("active");\n' +
-'        });\n' +
+'        var btns = group.querySelectorAll("button");\n' +
+'        for (var i = 0; i < btns.length; i++) {\n' +
+'          btns[i].classList.remove("active");\n' +
+'          if (btns[i].dataset.value === value) btns[i].classList.add("active");\n' +
+'        }\n' +
 '      }\n' +
-'      // Update settlement display\n' +
 '      var origEl = document.getElementById("settlement-original");\n' +
 '      var offerEl = document.getElementById("settlement-offer");\n' +
 '      var netEl = document.getElementById("settlement-net");\n' +
 '      var finalEl = document.getElementById("final-net");\n' +
-'      if (origEl && offerEl && netEl && finalEl) {\n' +
-'        var netComp = parseInt(finalEl.textContent.replace(/[^0-9]/g, "")) || 0;\n' +
+'      if (origEl) { if (offerEl) { if (netEl) { if (finalEl) {\n' +
+'        var raw = finalEl.textContent.replace(/[^0-9]/g, "");\n' +
+'        var netComp = parseInt(raw);\n' +
+'        if (!netComp) netComp = 0;\n' +
 '        var offer = netComp * (state.settlementPercent / 100);\n' +
 '        var lawyerFee = offer * (state.lawyerFeePercent / 100) * 1.17;\n' +
 '        origEl.textContent = fmt(netComp);\n' +
 '        offerEl.textContent = fmt(offer);\n' +
 '        netEl.textContent = fmt(offer - lawyerFee);\n' +
-'      }\n' +
+'      } } } }\n' +
 '    }\n' +
 '\n' +
-'    // Print summary\n' +
 '    function printSummary() {\n' +
 '      var printContent = container.cloneNode(true);\n' +
-'      // Hide embed section, FAQ, etc for print\n' +
 '      var embedSection = printContent.querySelector("[class*=\'embed-section\']");\n' +
 '      if (embedSection) embedSection.style.display = "none";\n' +
 '      var faqSection = printContent.querySelector("[class*=\'faq-section\']");\n' +
 '      if (faqSection) faqSection.style.display = "none";\n' +
 '      var ctaButtons = printContent.querySelectorAll("[class*=\'cta-btn\']");\n' +
-'      ctaButtons.forEach(function(b) { b.style.display = "none"; });\n' +
-'      \n' +
+'      for (var i = 0; i < ctaButtons.length; i++) { ctaButtons[i].style.display = "none"; }\n' +
 '      var printWindow = window.open("", "_blank");\n' +
 '      if (printWindow) {\n' +
-'        printWindow.document.write("<html><head><title>תחשיב נזק - מחשבון פיצויים 360</title>");\n' +
+'        printWindow.document.write("<html><head><title>\\u05EA\\u05D7\\u05E9\\u05D9\\u05D1 \\u05E0\\u05D6\\u05E7</title>");\n' +
 '        printWindow.document.write("<style>body{font-family:Arial,sans-serif;direction:rtl;padding:20px}table{width:100%;border-collapse:collapse}th,td{border:1px solid #ddd;padding:8px;text-align:right}.wpc-calc-comp360-k7m4-tab-content:not(.active){display:none!important}</style>");\n' +
 '        printWindow.document.write("</head><body>");\n' +
-'        printWindow.document.write("<h1 style=\\"text-align:center;color:#1e5490\\">תחשיב נזק - מחשבון פיצויים 360</h1>");\n' +
-'        printWindow.document.write("<p style=\\"text-align:center\\">תאריך: " + new Date().toLocaleDateString("he-IL") + "</p>");\n' +
+'        printWindow.document.write("<h1 style=\\"text-align:center;color:#1e5490\\">\\u05EA\\u05D7\\u05E9\\u05D9\\u05D1 \\u05E0\\u05D6\\u05E7</h1>");\n' +
+'        printWindow.document.write("<p style=\\"text-align:center\\">\\u05EA\\u05D0\\u05E8\\u05D9\\u05DA: " + new Date().toLocaleDateString("he-IL") + "</p>");\n' +
 '        printWindow.document.write(printContent.innerHTML);\n' +
 '        printWindow.document.write("</body></html>");\n' +
 '        printWindow.document.close();\n' +
@@ -2998,50 +3024,51 @@ if (!document.querySelector('meta[name="viewport"]')) {
 '      }\n' +
 '    }\n' +
 '\n' +
-'    // Event delegation\n' +
 '    container.addEventListener("click", function(e) {\n' +
 '      var action = e.target.closest("[data-action]");\n' +
 '      if (!action) return;\n' +
 '      var act = action.dataset.action;\n' +
-'      if (act === "switch-tab") switchTab(action.dataset.tab);\n' +
-'      else if (act === "set-case-type") setCaseType(action.dataset.value);\n' +
-'      else if (act === "toggle-settlement") toggleSettlement();\n' +
-'      else if (act === "set-settlement") setSettlement(action.dataset.value);\n' +
-'      else if (act === "print-summary") printSummary();\n' +
+'      if (act === "switch-tab") { switchTab(action.dataset.tab); }\n' +
+'      else if (act === "set-case-type") { setCaseType(action.dataset.value); }\n' +
+'      else if (act === "toggle-settlement") { toggleSettlement(); }\n' +
+'      else if (act === "set-settlement") { setSettlement(action.dataset.value); }\n' +
+'      else if (act === "print-summary") { printSummary(); }\n' +
 '      else if (act === "toggle-faq") {\n' +
 '        var item = action.closest("[class*=\'faq-item\']");\n' +
 '        if (item) item.classList.toggle("active");\n' +
 '      }\n' +
-'      else if (act.includes("set-")) {\n' +
+'      else if (act.indexOf("set-") !== -1) {\n' +
 '        var group = action.closest("[id*=\'group\']");\n' +
 '        if (group) {\n' +
-'          group.querySelectorAll("button").forEach(function(b) { b.classList.remove("active"); });\n' +
+'          var btns = group.querySelectorAll("button");\n' +
+'          for (var i = 0; i < btns.length; i++) { btns[i].classList.remove("active"); }\n' +
 '          action.classList.add("active");\n' +
 '        }\n' +
 '      }\n' +
 '    });\n' +
 '\n' +
-'    // Sliders\n' +
 '    container.addEventListener("input", function(e) {\n' +
 '      if (e.target.type !== "range") return;\n' +
 '      var id = e.target.id;\n' +
 '      var val = parseInt(e.target.value);\n' +
-'      // Update value display\n' +
 '      var valueId = id.replace("-slider", "-value").replace("-input", "-value");\n' +
-'      var valueEl = document.getElementById(valueId) || container.querySelector("[id*=\'" + valueId.split("-").pop() + "-value\']");\n' +
+'      var valueEl = document.getElementById(valueId);\n' +
+'      if (!valueEl) { valueEl = container.querySelector("[id*=\'" + valueId.split("-").pop() + "-value\']"); }\n' +
 '      if (valueEl) {\n' +
-'        if (id.includes("percent") || id.includes("disability") || id.includes("negligence")) {\n' +
-'          valueEl.textContent = val + "%";\n' +
-'        } else {\n' +
-'          valueEl.textContent = val.toLocaleString("he-IL");\n' +
-'        }\n' +
+'        var isPercent = id.indexOf("percent") !== -1;\n' +
+'        var isDisability = id.indexOf("disability") !== -1;\n' +
+'        var isNegligence = id.indexOf("negligence") !== -1;\n' +
+'        if (isPercent) { valueEl.textContent = val + "%"; }\n' +
+'        else if (isDisability) { valueEl.textContent = val + "%"; }\n' +
+'        else if (isNegligence) { valueEl.textContent = val + "%"; }\n' +
+'        else { valueEl.textContent = val.toLocaleString("he-IL"); }\n' +
 '      }\n' +
 '    });\n' +
 '\n' +
 '    window[NS] = { v: "1.0" };\n' +
 '  })();\n' +
 '});\n' +
-'</' + 'script>';
+'</scr' + 'ipt>';
     }
     
     // === copyEmbedCode - העתקת קוד מלא כולל JS ===
@@ -3050,34 +3077,49 @@ if (!document.querySelector('meta[name="viewport"]')) {
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
             'event': 'copy_code_click',
-            'calculator_name': 'פיצויים 360',
+            'calculator_name': '\u05E4\u05D9\u05E6\u05D5\u05D9\u05D9\u05DD 360',
             'button_type': 'copy-embed-code'
         });
         
-        const calculator = el('wpc-calc-comp360-k7m4-calculator');
+        var calculator = el('wpc-calc-comp360-k7m4-calculator');
         if (!calculator) return;
         
         // Get styles
-        let styles = '';
-        document.querySelectorAll('style').forEach(style => {
-            if (style.textContent.includes('wpc-calc-comp360-k7m4')) {
-                styles = style.textContent;
+        var styles = '';
+        var styleEls = document.querySelectorAll('style');
+        for (var i = 0; i < styleEls.length; i++) {
+            if (styleEls[i].textContent.indexOf('wpc-calc-comp360-k7m4') !== -1) {
+                styles = styleEls[i].textContent;
             }
-        });
+        }
         
         // Build embed code
-        let code = '<style>\n' + styles + '\n</style>\n\n';
+        var code = '<style>\n' + styles + '\n</style>\n\n';
         code += '<div class="wpc-calc-comp360-k7m4-wrapper" id="wpc-calc-comp360-k7m4-main">\n';
         code += calculator.outerHTML + '\n';
         code += '</div>\n\n';
         code += '<p style="text-align:center; font-size:0.9em; margin-top:20px; color:#666;">\n';
-        code += '    מחשבון ' + CALCULATOR_NAME + ' פותח על ידי \n';
-        code += '    <a href="https://loan-israel.co.il/" target="_blank" rel="nofollow noopener" style="color:#1e5490; text-decoration:underline;">רק תבקש פיננסים</a>\n';
+        code += '    \u05DE\u05D7\u05E9\u05D1\u05D5\u05DF ' + CALCULATOR_NAME + ' \u05E4\u05D5\u05EA\u05D7 \u05E2\u05DC \u05D9\u05D3\u05D9 \n';
+        code += '    <a href="https://loan-israel.co.il/" target="_blank" rel="nofollow noopener" style="color:#1e5490; text-decoration:underline;">\u05E8\u05E7 \u05EA\u05D1\u05E7\u05E9 \u05E4\u05D9\u05E0\u05E0\u05E1\u05D9\u05DD</a>\n';
         code += '</p>\n\n';
-        code += getEmbedScript();
         
-        navigator.clipboard.writeText(code).then(() => {
-            alert('✅ הקוד הועתק בהצלחה! הדביקו אותו באתר שלכם.\n\nהקוד כולל:\n• CSS מלא\n• HTML של המחשבון\n• JavaScript לטאבים וסליידרים\n• קישור קרדיט');
+        // Copy main script from DOM instead of using getEmbedScript
+        var allScripts = document.querySelectorAll('script');
+        var mainScript = null;
+        for (var j = 0; j < allScripts.length; j++) {
+            if (allScripts[j].textContent) {
+                if (allScripts[j].textContent.indexOf('WPC_CalcComp360_K7M4') !== -1) {
+                    mainScript = allScripts[j];
+                    break;
+                }
+            }
+        }
+        if (mainScript) {
+            code += mainScript.outerHTML + '\n';
+        }
+        
+        navigator.clipboard.writeText(code).then(function() {
+            alert('\u2705 \u05D4\u05E7\u05D5\u05D3 \u05D4\u05D5\u05E2\u05EA\u05E7 \u05D1\u05D4\u05E6\u05DC\u05D7\u05D4! \u05D4\u05D3\u05D1\u05D9\u05E7\u05D5 \u05D0\u05D5\u05EA\u05D5 \u05D1\u05D0\u05EA\u05E8 \u05E9\u05DC\u05DB\u05DD.');
         });
     }
     
@@ -3087,123 +3129,136 @@ if (!document.querySelector('meta[name="viewport"]')) {
         state.selectedColorName = colorName;
         
         // Update color buttons
-        container.querySelectorAll('.wpc-calc-comp360-k7m4-color-btn').forEach(btn => {
-            btn.classList.remove('active');
-            if (btn.dataset.color === color) btn.classList.add('active');
-        });
+        var colorBtns = container.querySelectorAll('.wpc-calc-comp360-k7m4-color-btn');
+        for (var i = 0; i < colorBtns.length; i++) {
+            colorBtns[i].classList.remove('active');
+            if (colorBtns[i].dataset.color === color) colorBtns[i].classList.add('active');
+        }
         
         // Show preview container
-        const previewContainer = document.getElementById('preview-container');
+        var previewContainer = document.getElementById('preview-container');
         if (previewContainer) {
             previewContainer.style.display = 'block';
         }
         
         // Update color name
-        const colorNameEl = document.getElementById('preview-color-name');
+        var colorNameEl = document.getElementById('preview-color-name');
         if (colorNameEl) {
             colorNameEl.textContent = colorName;
         }
         
         // Clone calculator
-        const calculator = el('wpc-calc-comp360-k7m4-calculator');
+        var calculator = el('wpc-calc-comp360-k7m4-calculator');
         if (!calculator) return;
         
-        const calc = calculator.cloneNode(true);
+        var calc = calculator.cloneNode(true);
         calc.id = PREFIX + 'calculator-preview';
         
         // Change tab IDs to data attributes to avoid conflicts
-        const tabContents = calc.querySelectorAll('[id*="tab-"]');
-        tabContents.forEach(tabContent => {
-            const oldId = tabContent.id;
-            const tabName = oldId.replace(/.*tab-/, '');
-            tabContent.setAttribute('data-preview-tab', tabName);
-        });
+        var tabContents = calc.querySelectorAll('[id*="tab-"]');
+        for (var j = 0; j < tabContents.length; j++) {
+            var oldId = tabContents[j].id;
+            var tabNameStr = oldId.replace(/.*tab-/, '');
+            tabContents[j].setAttribute('data-preview-tab', tabNameStr);
+        }
         
         // Set first tab as active
-        const firstTabContent = calc.querySelector('[data-preview-tab]');
+        var firstTabContent = calc.querySelector('[data-preview-tab]');
         if (firstTabContent) {
             firstTabContent.classList.add('active');
             firstTabContent.style.display = 'block';
         }
         
         // Hide other tabs
-        calc.querySelectorAll('[data-preview-tab]').forEach((tab, i) => {
-            if (i > 0) {
-                tab.classList.remove('active');
-                tab.style.display = 'none';
+        var previewTabs = calc.querySelectorAll('[data-preview-tab]');
+        for (var k = 0; k < previewTabs.length; k++) {
+            if (k > 0) {
+                previewTabs[k].classList.remove('active');
+                previewTabs[k].style.display = 'none';
             }
-        });
+        }
         
         // Set CSS Variables on the cloned element
-        const gradient = 'linear-gradient(135deg, ' + color + ' 0%, ' + darkenColor(color, 15) + ' 100%)';
+        var gradient = 'linear-gradient(135deg, ' + color + ' 0%, ' + darkenColor(color, 15) + ' 100%)';
         calc.style.setProperty('--wpc-comp360-primary', color);
         calc.style.setProperty('--wpc-comp360-primary-dark', darkenColor(color, 15));
         calc.style.setProperty('--wpc-comp360-primary-light', hexToRgba(color, 0.1));
         calc.style.setProperty('--wpc-comp360-gradient', gradient);
         
-        // Apply gradient to highlight cards (important - gradient doesn't inherit from CSS variables on cloned elements)
-        calc.querySelectorAll('.wpc-calc-comp360-k7m4-result-card.highlight').forEach(card => {
-            card.style.setProperty('background', gradient, 'important');
-            card.style.setProperty('color', 'white', 'important');
-        });
+        // Apply gradient to highlight cards
+        var highlightCards = calc.querySelectorAll('.wpc-calc-comp360-k7m4-result-card.highlight');
+        for (var m = 0; m < highlightCards.length; m++) {
+            highlightCards[m].style.setProperty('background', gradient, 'important');
+            highlightCards[m].style.setProperty('color', 'white', 'important');
+        }
         
         // Replace colors with setProperty + important
         // Headers and titles
-        calc.querySelectorAll('[class*="title"], [class*="header"], h1, h2, h3, h4').forEach(el => {
-            if (getComputedStyle(el).color.includes('30, 84, 144') || el.style.color) {
-                el.style.setProperty('color', color, 'important');
+        var titles = calc.querySelectorAll('[class*="title"], [class*="header"], h1, h2, h3, h4');
+        for (var n = 0; n < titles.length; n++) {
+            if (getComputedStyle(titles[n]).color.indexOf('30, 84, 144') !== -1) {
+                titles[n].style.setProperty('color', color, 'important');
+            } else if (titles[n].style.color) {
+                titles[n].style.setProperty('color', color, 'important');
             }
-        });
+        }
         
         // Active tabs
-        const activeTabBtn = calc.querySelector('[data-action="switch-tab"].active');
+        var activeTabBtn = calc.querySelector('[data-action="switch-tab"].active');
         if (activeTabBtn) {
             activeTabBtn.style.setProperty('background', 'linear-gradient(135deg, ' + color + ' 0%, ' + darkenColor(color, 15) + ' 100%)', 'important');
             activeTabBtn.style.setProperty('color', 'white', 'important');
         }
         
         // Active buttons
-        calc.querySelectorAll('.active[class*="btn"], button.active').forEach(btn => {
-            if (!btn.classList.contains('wpc-calc-comp360-k7m4-tab-btn')) {
-                btn.style.setProperty('background', 'linear-gradient(135deg, ' + color + ' 0%, ' + darkenColor(color, 15) + ' 100%)', 'important');
-                btn.style.setProperty('border-color', color, 'important');
-                btn.style.setProperty('color', 'white', 'important');
+        var activeBtns = calc.querySelectorAll('.active[class*="btn"], button.active');
+        for (var p = 0; p < activeBtns.length; p++) {
+            if (!activeBtns[p].classList.contains('wpc-calc-comp360-k7m4-tab-btn')) {
+                activeBtns[p].style.setProperty('background', 'linear-gradient(135deg, ' + color + ' 0%, ' + darkenColor(color, 15) + ' 100%)', 'important');
+                activeBtns[p].style.setProperty('border-color', color, 'important');
+                activeBtns[p].style.setProperty('color', 'white', 'important');
             }
-        });
+        }
         
         // CTA buttons
-        calc.querySelectorAll('[class*="cta"], [class*="primary-btn"]').forEach(el => {
-            el.style.setProperty('background', 'linear-gradient(135deg, ' + color + ' 0%, ' + darkenColor(color, 15) + ' 100%)', 'important');
-        });
+        var ctaBtns = calc.querySelectorAll('[class*="cta"], [class*="primary-btn"]');
+        for (var q = 0; q < ctaBtns.length; q++) {
+            ctaBtns[q].style.setProperty('background', 'linear-gradient(135deg, ' + color + ' 0%, ' + darkenColor(color, 15) + ' 100%)', 'important');
+        }
         
         // Case type selector
-        calc.querySelectorAll('.wpc-calc-comp360-k7m4-case-btn.active').forEach(el => {
-            el.style.setProperty('background', 'linear-gradient(135deg, ' + color + ' 0%, ' + darkenColor(color, 15) + ' 100%)', 'important');
-        });
+        var caseBtnsActive = calc.querySelectorAll('.wpc-calc-comp360-k7m4-case-btn.active');
+        for (var r = 0; r < caseBtnsActive.length; r++) {
+            caseBtnsActive[r].style.setProperty('background', 'linear-gradient(135deg, ' + color + ' 0%, ' + darkenColor(color, 15) + ' 100%)', 'important');
+        }
         
         // Sliders
-        calc.querySelectorAll('input[type="range"]').forEach(slider => {
-            slider.style.setProperty('accent-color', color, 'important');
-        });
+        var sliders = calc.querySelectorAll('input[type="range"]');
+        for (var s = 0; s < sliders.length; s++) {
+            sliders[s].style.setProperty('accent-color', color, 'important');
+        }
         
         // Table headers
-        calc.querySelectorAll('th, [class*="table-header"]').forEach(el => {
-            el.style.setProperty('background', color, 'important');
-        });
+        var tableHeaders = calc.querySelectorAll('th, [class*="table-header"]');
+        for (var t = 0; t < tableHeaders.length; t++) {
+            tableHeaders[t].style.setProperty('background', color, 'important');
+        }
         
         // Result highlights
-        calc.querySelectorAll('[class*="highlight"], [class*="result-box"]').forEach(el => {
-            el.style.setProperty('border-color', color, 'important');
-            el.style.setProperty('background', hexToRgba(color, 0.05), 'important');
-        });
+        var highlights = calc.querySelectorAll('[class*="highlight"], [class*="result-box"]');
+        for (var u = 0; u < highlights.length; u++) {
+            highlights[u].style.setProperty('border-color', color, 'important');
+            highlights[u].style.setProperty('background', hexToRgba(color, 0.05), 'important');
+        }
         
         // Slider values
-        calc.querySelectorAll('[class*="slider-value"], [class*="value-display"]').forEach(el => {
-            el.style.setProperty('color', color, 'important');
-        });
+        var sliderValues = calc.querySelectorAll('[class*="slider-value"], [class*="value-display"]');
+        for (var v = 0; v < sliderValues.length; v++) {
+            sliderValues[v].style.setProperty('color', color, 'important');
+        }
         
         // Display in preview area
-        const previewContent = document.getElementById('preview-content');
+        var previewContent = document.getElementById('preview-content');
         if (previewContent) {
             previewContent.innerHTML = calc.outerHTML;
             
@@ -3218,118 +3273,121 @@ if (!document.querySelector('meta[name="viewport"]')) {
     // === initPreviewCalculator - אתחול מחשבון בתצוגה מקדימה ===
     function initPreviewCalculator(previewArea, primaryColor) {
         // Tab switching
-        const tabs = previewArea.querySelectorAll('[data-action="switch-tab"]');
-        const contents = previewArea.querySelectorAll('[data-preview-tab], [class*="tab-content"]');
+        var tabs = previewArea.querySelectorAll('[data-action="switch-tab"]');
+        var contents = previewArea.querySelectorAll('[data-preview-tab], [class*="tab-content"]');
         
-        tabs.forEach(tab => {
-            tab.addEventListener('click', function(e) {
+        for (var ti = 0; ti < tabs.length; ti++) {
+            tabs[ti].addEventListener('click', function(e) {
                 e.preventDefault();
-                e.stopPropagation(); // Prevent bubbling to original calculator
+                e.stopPropagation();
                 
-                const tabName = this.dataset.tab;
+                var tabName = this.dataset.tab;
                 
-                // Remove active from all tabs
-                tabs.forEach(t => {
-                    t.classList.remove('active');
-                    t.style.setProperty('background', 'transparent', 'important');
-                    t.style.setProperty('color', '#374151', 'important');
-                });
+                for (var tj = 0; tj < tabs.length; tj++) {
+                    tabs[tj].classList.remove('active');
+                    tabs[tj].style.setProperty('background', 'transparent', 'important');
+                    tabs[tj].style.setProperty('color', '#374151', 'important');
+                }
                 
-                contents.forEach(c => {
-                    c.classList.remove('active');
-                    c.style.display = 'none';
-                });
+                for (var tk = 0; tk < contents.length; tk++) {
+                    contents[tk].classList.remove('active');
+                    contents[tk].style.display = 'none';
+                }
                 
-                // Add active to selected
                 this.classList.add('active');
                 this.style.setProperty('background', 'linear-gradient(135deg, ' + primaryColor + ' 0%, ' + darkenColor(primaryColor, 15) + ' 100%)', 'important');
                 this.style.setProperty('color', 'white', 'important');
                 
-                // Show content
-                const activeContent = previewArea.querySelector('[data-preview-tab="' + tabName + '"], [id*="tab-' + tabName + '"]');
+                var activeContent = previewArea.querySelector('[data-preview-tab="' + tabName + '"], [id*="tab-' + tabName + '"]');
                 if (activeContent) {
                     activeContent.classList.add('active');
                     activeContent.style.display = 'block';
                 }
             });
-        });
+        }
         
         // Sliders
-        const sliders = previewArea.querySelectorAll('input[type="range"]');
-        sliders.forEach(slider => {
-            slider.addEventListener('input', function(e) {
+        var sliders = previewArea.querySelectorAll('input[type="range"]');
+        for (var si = 0; si < sliders.length; si++) {
+            sliders[si].addEventListener('input', function(e) {
                 e.stopPropagation();
-                const val = parseInt(this.value);
-                const valueId = this.id.replace('-slider', '-value');
-                const valueEl = previewArea.querySelector('#' + valueId) || previewArea.querySelector('[id*="' + this.id.split('-').pop() + '-value"]');
+                var val = parseInt(this.value);
+                var valueId = this.id.replace('-slider', '-value');
+                var valueEl = previewArea.querySelector('#' + valueId);
+                if (!valueEl) {
+                    valueEl = previewArea.querySelector('[id*="' + this.id.split('-').pop() + '-value"]');
+                }
                 if (valueEl) {
-                    if (this.id.includes('percent') || this.id.includes('disability') || this.id.includes('negligence')) {
+                    if (this.id.indexOf('percent') !== -1) {
+                        valueEl.textContent = val + '%';
+                    } else if (this.id.indexOf('disability') !== -1) {
+                        valueEl.textContent = val + '%';
+                    } else if (this.id.indexOf('negligence') !== -1) {
                         valueEl.textContent = val + '%';
                     } else {
                         valueEl.textContent = val.toLocaleString('he-IL');
                     }
                 }
             });
-            
-            // Set accent color
-            slider.style.setProperty('accent-color', primaryColor, 'important');
-        });
+            sliders[si].style.setProperty('accent-color', primaryColor, 'important');
+        }
         
         // Case type buttons
-        const caseButtons = previewArea.querySelectorAll('[data-action="set-case-type"]');
-        caseButtons.forEach(btn => {
-            btn.addEventListener('click', function(e) {
+        var caseButtons = previewArea.querySelectorAll('[data-action="set-case-type"]');
+        for (var ci = 0; ci < caseButtons.length; ci++) {
+            caseButtons[ci].addEventListener('click', function(e) {
                 e.stopPropagation();
-                caseButtons.forEach(b => {
-                    b.classList.remove('active');
-                    b.style.setProperty('background', 'white', 'important');
-                    b.style.setProperty('color', '#222', 'important');
-                });
+                for (var cj = 0; cj < caseButtons.length; cj++) {
+                    caseButtons[cj].classList.remove('active');
+                    caseButtons[cj].style.setProperty('background', 'white', 'important');
+                    caseButtons[cj].style.setProperty('color', '#222', 'important');
+                }
                 this.classList.add('active');
                 this.style.setProperty('background', 'linear-gradient(135deg, ' + primaryColor + ' 0%, ' + darkenColor(primaryColor, 15) + ' 100%)', 'important');
                 this.style.setProperty('color', 'white', 'important');
             });
-        });
+        }
         
         // Option buttons
-        const optionButtons = previewArea.querySelectorAll('[class*="btn-option"]');
-        optionButtons.forEach(btn => {
-            btn.addEventListener('click', function(e) {
+        var optionButtons = previewArea.querySelectorAll('[class*="btn-option"]');
+        for (var oi = 0; oi < optionButtons.length; oi++) {
+            optionButtons[oi].addEventListener('click', function(e) {
                 e.stopPropagation();
-                const group = this.closest('[id*="group"]');
+                var group = this.closest('[id*="group"]');
                 if (group) {
-                    group.querySelectorAll('button').forEach(b => {
-                        b.classList.remove('active');
-                        b.style.setProperty('background', 'transparent', 'important');
-                        b.style.setProperty('border-color', '#e5e7eb', 'important');
-                        b.style.setProperty('color', '#374151', 'important');
-                    });
+                    var groupBtns = group.querySelectorAll('button');
+                    for (var oj = 0; oj < groupBtns.length; oj++) {
+                        groupBtns[oj].classList.remove('active');
+                        groupBtns[oj].style.setProperty('background', 'transparent', 'important');
+                        groupBtns[oj].style.setProperty('border-color', '#e5e7eb', 'important');
+                        groupBtns[oj].style.setProperty('color', '#374151', 'important');
+                    }
                 }
                 this.classList.add('active');
                 this.style.setProperty('background', primaryColor, 'important');
                 this.style.setProperty('border-color', primaryColor, 'important');
                 this.style.setProperty('color', 'white', 'important');
             });
-        });
+        }
         
         // FAQ items
-        const faqHeaders = previewArea.querySelectorAll('[data-action="toggle-faq"]');
-        faqHeaders.forEach(header => {
-            header.addEventListener('click', function(e) {
+        var faqHeaders = previewArea.querySelectorAll('[data-action="toggle-faq"]');
+        for (var fi = 0; fi < faqHeaders.length; fi++) {
+            faqHeaders[fi].addEventListener('click', function(e) {
                 e.stopPropagation();
-                const item = this.closest('[class*="faq-item"]');
+                var item = this.closest('[class*="faq-item"]');
                 if (item) {
                     item.classList.toggle('active');
                 }
             });
-        });
+        }
         
         // Settlement toggle
-        const settlementToggle = previewArea.querySelector('[data-action="toggle-settlement"]');
+        var settlementToggle = previewArea.querySelector('[data-action="toggle-settlement"]');
         if (settlementToggle) {
             settlementToggle.addEventListener('click', function(e) {
                 e.stopPropagation();
-                const panel = previewArea.querySelector('#settlement-panel, [id*="settlement-panel"]');
+                var panel = previewArea.querySelector('#settlement-panel, [id*="settlement-panel"]');
                 if (panel) {
                     panel.classList.toggle('active');
                 }
@@ -3337,28 +3395,29 @@ if (!document.querySelector('meta[name="viewport"]')) {
         }
         
         // Settlement percent buttons
-        const settlementButtons = previewArea.querySelectorAll('[data-action="set-settlement"]');
-        settlementButtons.forEach(btn => {
-            btn.addEventListener('click', function(e) {
+        var settlementButtons = previewArea.querySelectorAll('[data-action="set-settlement"]');
+        for (var bi = 0; bi < settlementButtons.length; bi++) {
+            settlementButtons[bi].addEventListener('click', function(e) {
                 e.stopPropagation();
-                const group = this.closest('[id*="group"]');
+                var group = this.closest('[id*="group"]');
                 if (group) {
-                    group.querySelectorAll('button').forEach(b => {
-                        b.classList.remove('active');
-                        b.style.setProperty('background', 'transparent', 'important');
-                        b.style.setProperty('border-color', '#e5e7eb', 'important');
-                        b.style.setProperty('color', '#374151', 'important');
-                    });
+                    var grpBtns = group.querySelectorAll('button');
+                    for (var bj = 0; bj < grpBtns.length; bj++) {
+                        grpBtns[bj].classList.remove('active');
+                        grpBtns[bj].style.setProperty('background', 'transparent', 'important');
+                        grpBtns[bj].style.setProperty('border-color', '#e5e7eb', 'important');
+                        grpBtns[bj].style.setProperty('color', '#374151', 'important');
+                    }
                 }
                 this.classList.add('active');
                 this.style.setProperty('background', primaryColor, 'important');
                 this.style.setProperty('border-color', primaryColor, 'important');
                 this.style.setProperty('color', 'white', 'important');
             });
-        });
+        }
         
         // Print button
-        const printBtn = previewArea.querySelector('[data-action="print-summary"]');
+        var printBtn = previewArea.querySelector('[data-action="print-summary"]');
         if (printBtn) {
             printBtn.addEventListener('click', function(e) {
                 e.stopPropagation();
@@ -3373,42 +3432,58 @@ if (!document.querySelector('meta[name="viewport"]')) {
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
             'event': 'copy_code_click',
-            'calculator_name': 'פיצויים 360',
+            'calculator_name': '\u05E4\u05D9\u05E6\u05D5\u05D9\u05D9\u05DD 360',
             'button_type': 'copy-preview-code'
         });
         
-        const color = state.selectedColor || '#1e5490';
-        const calculator = el('wpc-calc-comp360-k7m4-calculator');
+        var color = state.selectedColor ? state.selectedColor : '#1e5490';
+        var calculator = el('wpc-calc-comp360-k7m4-calculator');
         if (!calculator) return;
         
         // Get styles and replace colors
-        let styles = '';
-        document.querySelectorAll('style').forEach(style => {
-            if (style.textContent.includes('wpc-calc-comp360-k7m4')) {
-                styles = style.textContent
+        var styles = '';
+        var styleEls = document.querySelectorAll('style');
+        for (var i = 0; i < styleEls.length; i++) {
+            if (styleEls[i].textContent.indexOf('wpc-calc-comp360-k7m4') !== -1) {
+                styles = styleEls[i].textContent
                     .replace(/#1e5490/gi, color)
                     .replace(/#163d6b/gi, darkenColor(color, 15));
             }
-        });
+        }
         
         // Build embed code
-        let code = '<style>\n' + styles + '\n</style>\n\n';
+        var code = '<style>\n' + styles + '\n</style>\n\n';
         code += '<div class="wpc-calc-comp360-k7m4-wrapper" id="wpc-calc-comp360-k7m4-main">\n';
         code += calculator.outerHTML + '\n';
         code += '</div>\n\n';
         code += '<p style="text-align:center; font-size:0.9em; margin-top:20px; color:#666;">\n';
-        code += '    מחשבון ' + CALCULATOR_NAME + ' פותח על ידי \n';
-        code += '    <a href="https://loan-israel.co.il/" target="_blank" rel="nofollow noopener" style="color:' + color + '; text-decoration:underline;">רק תבקש פיננסים</a>\n';
+        code += '    \u05DE\u05D7\u05E9\u05D1\u05D5\u05DF ' + CALCULATOR_NAME + ' \u05E4\u05D5\u05EA\u05D7 \u05E2\u05DC \u05D9\u05D3\u05D9 \n';
+        code += '    <a href="https://loan-israel.co.il/" target="_blank" rel="nofollow noopener" style="color:' + color + '; text-decoration:underline;">\u05E8\u05E7 \u05EA\u05D1\u05E7\u05E9 \u05E4\u05D9\u05E0\u05E0\u05E1\u05D9\u05DD</a>\n';
         code += '</p>\n\n';
-        code += getEmbedScript();
         
-        navigator.clipboard.writeText(code).then(() => {
-            alert('✅ הקוד הועתק בצבע "' + (state.selectedColorName || 'נבחר') + '"!');
+        // Copy main script from DOM instead of using getEmbedScript
+        var allScripts = document.querySelectorAll('script');
+        var mainScript = null;
+        for (var j = 0; j < allScripts.length; j++) {
+            if (allScripts[j].textContent) {
+                if (allScripts[j].textContent.indexOf('WPC_CalcComp360_K7M4') !== -1) {
+                    mainScript = allScripts[j];
+                    break;
+                }
+            }
+        }
+        if (mainScript) {
+            code += mainScript.outerHTML + '\n';
+        }
+        
+        navigator.clipboard.writeText(code).then(function() {
+            var colorName = state.selectedColorName ? state.selectedColorName : '\u05E0\u05D1\u05D7\u05E8';
+            alert('\u2705 \u05D4\u05E7\u05D5\u05D3 \u05D4\u05D5\u05E2\u05EA\u05E7 \u05D1\u05E6\u05D1\u05E2 "' + colorName + '"!');
         });
     }
     
     function toggleSettlement() {
-        const panel = el('settlement-panel');
+        var panel = el('settlement-panel');
         if (panel) {
             panel.classList.toggle('active');
         }
@@ -3423,10 +3498,10 @@ if (!document.querySelector('meta[name="viewport"]')) {
     // ==========================================
     
     container.addEventListener('click', function(e) {
-        const action = e.target.closest('[data-action]');
+        var action = e.target.closest('[data-action]');
         if (!action) return;
         
-        const act = action.dataset.action;
+        var act = action.dataset.action;
         
         switch(act) {
             case 'switch-tab':
@@ -3454,35 +3529,39 @@ if (!document.querySelector('meta[name="viewport"]')) {
                 printSummary();
                 break;
             case 'set-status':
-                container.querySelectorAll('#basic-status-group .wpc-calc-comp360-k7m4-btn-option').forEach(btn => btn.classList.remove('active'));
+                var statusBtns = container.querySelectorAll('#basic-status-group .wpc-calc-comp360-k7m4-btn-option');
+                for (var si = 0; si < statusBtns.length; si++) { statusBtns[si].classList.remove('active'); }
                 action.classList.add('active');
                 state.basic.status = action.dataset.value;
                 updateAll();
                 break;
             case 'set-pain-method':
-                container.querySelectorAll('#pain-method-group .wpc-calc-comp360-k7m4-btn-option').forEach(btn => btn.classList.remove('active'));
+                var painBtns = container.querySelectorAll('#pain-method-group .wpc-calc-comp360-k7m4-btn-option');
+                for (var pi = 0; pi < painBtns.length; pi++) { painBtns[pi].classList.remove('active'); }
                 action.classList.add('active');
                 state.painMethod = action.dataset.value;
-                const manualInput = el('pain-manual-input');
+                var manualInput = el('pain-manual-input');
                 if (manualInput) {
                     manualInput.style.display = action.dataset.value === 'manual' ? 'flex' : 'none';
                 }
                 updateAll();
                 break;
             case 'set-lawyer-fee':
-                container.querySelectorAll('#lawyer-fee-group .wpc-calc-comp360-k7m4-btn-option').forEach(btn => btn.classList.remove('active'));
+                var lawyerBtns = container.querySelectorAll('#lawyer-fee-group .wpc-calc-comp360-k7m4-btn-option');
+                for (var li = 0; li < lawyerBtns.length; li++) { lawyerBtns[li].classList.remove('active'); }
                 action.classList.add('active');
                 state.lawyerFeePercent = parseInt(action.dataset.value);
                 updateAll();
                 break;
             case 'set-settlement':
-                container.querySelectorAll('#settlement-percent-group .wpc-calc-comp360-k7m4-btn-option').forEach(btn => btn.classList.remove('active'));
+                var settleBtns = container.querySelectorAll('#settlement-percent-group .wpc-calc-comp360-k7m4-btn-option');
+                for (var xi = 0; xi < settleBtns.length; xi++) { settleBtns[xi].classList.remove('active'); }
                 action.classList.add('active');
                 state.settlementPercent = parseInt(action.dataset.value);
                 updateAll();
                 break;
             case 'preview-color':
-                showPreview(action.dataset.color, action.dataset.name || 'צבע נבחר');
+                showPreview(action.dataset.color, action.dataset.name ? action.dataset.name : '\u05E6\u05D1\u05E2 \u05E0\u05D1\u05D7\u05E8');
                 break;
             case 'copy-preview-code':
                 copyPreviewCode();
@@ -3491,8 +3570,8 @@ if (!document.querySelector('meta[name="viewport"]')) {
     });
     
     container.addEventListener('input', function(e) {
-        const id = e.target.id;
-        const value = e.target.value;
+        var id = e.target.id;
+        var value = e.target.value;
         
         // Basic tab sliders
         if (id === 'basic-age-slider') {
@@ -3570,7 +3649,7 @@ if (!document.querySelector('meta[name="viewport"]')) {
         updateAll();
         
         // Custom color picker listener (fallback)
-        const customColorPicker = document.getElementById('wpc-calc-comp360-k7m4-custom-color');
+        var customColorPicker = document.getElementById('wpc-calc-comp360-k7m4-custom-color');
         if (customColorPicker) {
             customColorPicker.addEventListener('change', function(e) {
                 showPreview(e.target.value, 'צבע מותאם אישית');

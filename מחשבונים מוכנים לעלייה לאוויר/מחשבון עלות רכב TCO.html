@@ -314,6 +314,7 @@ if (!document.querySelector('meta[name="viewport"]')) {
   margin: 0 0 20px 0 !important;
   text-align: center !important;
   opacity: 0.9 !important;
+  color: var(--wpc-tco-white) !important;
 }
 
 .wpc-calc-tco-v8m3-results-grid {
@@ -420,12 +421,18 @@ if (!document.querySelector('meta[name="viewport"]')) {
 }
 
 .wpc-calc-tco-v8m3-awg-content {
-  display: none !important;
-  margin-top: 20px !important;
+  max-height: 0 !important;
+  overflow: hidden !important;
+  opacity: 0 !important;
+  margin-top: 0 !important;
+  transition: max-height 0.4s ease, opacity 0.3s ease, margin-top 0.3s ease !important;
 }
 
 .wpc-calc-tco-v8m3-awg-content.active {
-  display: block !important;
+  max-height: 2000px !important;
+  opacity: 1 !important;
+  overflow: visible !important;
+  margin-top: 20px !important;
 }
 
 /* === Comparison Table === */
@@ -582,7 +589,7 @@ if (!document.querySelector('meta[name="viewport"]')) {
   
   <!-- Title Section -->
   <div class="wpc-calc-tco-v8m3-title-section">
-    <h1 class="wpc-calc-tco-v8m3-title">מחשבון עלות רכב אמיתית (TCO)</h1>
+    <h1 class="wpc-calc-tco-v8m3-title">מחשבון עלות רכב אמיתית </h1>
     <p class="wpc-calc-tco-v8m3-subtitle">גלו כמה באמת עולה לכם הרכב בחודש - כולל ירידת ערך, דלק, ביטוחים וטיפולים</p>
     <span class="wpc-calc-tco-v8m3-update-date">📅 מעודכן ל-2025 (כולל רכב חשמלי)</span>
   </div>
@@ -1210,7 +1217,22 @@ if (!document.querySelector('meta[name="viewport"]')) {
             el('advanced-options').classList.toggle('active');
         }
         else if (act === 'open-awg') {
-            el('awg-content').classList.toggle('active');
+            var awgContent = el('awg-content');
+            var isOpening = !awgContent.classList.contains('active');
+            awgContent.classList.toggle('active');
+            if (isOpening) {
+                setTimeout(function() {
+                    awgContent.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 100);
+                setTimeout(function() {
+                    window.dispatchEvent(new Event('resize'));
+                }, 400);
+                if (typeof jQuery !== 'undefined') {
+                    setTimeout(function() {
+                        jQuery(window).trigger('resize');
+                    }, 450);
+                }
+            }
         }
         else if (act === 'toggle-faq') {
             action.closest('.wpc-calc-tco-v8m3-faq-item').classList.toggle('active');
