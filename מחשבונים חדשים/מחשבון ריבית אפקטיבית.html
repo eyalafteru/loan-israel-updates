@@ -1,0 +1,1860 @@
+<script>
+// בדיקה והוספת viewport meta tag אם חסר
+if (!document.querySelector('meta[name="viewport"]')) {
+  const viewport = document.createElement('meta');
+  viewport.name = 'viewport';
+  viewport.content = 'width=device-width, initial-scale=1.0, user-scalable=yes';
+  document.head.appendChild(viewport);
+}
+</script>
+
+<style>
+/* === 🎨 משתני צבע ועיצוב בסיס - wpc-calc-effrate-r4k2 === */
+:root {
+  --primary: #1e5490;
+  --primary-dark: #164070;
+  --gradient-primary: linear-gradient(135deg, #1e5490 0%, #2a5fa0 100%);
+  --success: #25D366;
+  --danger: #ff3b3b;
+  --warning: #FF9800;
+  --text-dark: #222222;
+  --text-light: #444444;
+  --bg-light: #f5f5f5;
+  --white: #ffffff;
+  --border: #e0e0e0;
+  --max-width-container: 1200px;
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+  --shadow-md: 0 5px 20px rgba(0,0,0,0.1);
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 15px;
+  --transition: all 0.3s ease;
+}
+
+/* === 🏠 Wrapper ראשי === */
+.wpc-calc-effrate-r4k2-wrapper {
+  all: initial !important;
+  font-family: 'Assistant', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+  direction: rtl !important;
+  color-scheme: light !important;
+  box-sizing: border-box !important;
+  display: block !important;
+  max-width: 1800px !important;
+  margin: 0 auto !important;
+}
+
+.wpc-calc-effrate-r4k2-wrapper *,
+.wpc-calc-effrate-r4k2-wrapper *::before,
+.wpc-calc-effrate-r4k2-wrapper *::after {
+  box-sizing: inherit !important;
+}
+
+/* === 🏠 Hero Section === */
+.wpc-calc-effrate-r4k2-hero-section {
+  width: 100% !important;
+  background: var(--gradient-primary) !important;
+  padding: 60px 20px !important;
+  position: relative !important;
+  overflow: hidden !important;
+  direction: rtl !important;
+  font-family: 'Assistant', sans-serif !important;
+}
+
+.wpc-calc-effrate-r4k2-hero-container {
+  max-width: var(--max-width-container) !important;
+  width: 100% !important;
+  margin: 0 auto !important;
+  text-align: center !important;
+  direction: rtl !important;
+}
+
+.wpc-calc-effrate-r4k2-hero-title {
+  font-size: clamp(2rem, 6vw, 3rem) !important;
+  font-weight: 800 !important;
+  color: white !important;
+  margin: 0 0 20px !important;
+  line-height: 1.2 !important;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3) !important;
+  direction: rtl !important;
+}
+
+.wpc-calc-effrate-r4k2-update-date {
+  font-size: 0.95em !important;
+  color: rgba(255,255,255,0.9) !important;
+  margin-bottom: 15px !important;
+}
+
+.wpc-calc-effrate-r4k2-hero-subtitle {
+  font-size: clamp(1rem, 3vw, 1.3rem) !important;
+  color: rgba(255,255,255,0.95) !important;
+  max-width: 800px !important;
+  margin: 0 auto 30px !important;
+  line-height: 1.6 !important;
+}
+
+.wpc-calc-effrate-r4k2-hero-cta {
+  display: flex !important;
+  gap: 15px !important;
+  justify-content: center !important;
+  flex-wrap: wrap !important;
+}
+
+.wpc-calc-effrate-r4k2-hero-btn {
+  padding: 15px 30px !important;
+  border-radius: var(--radius-md) !important;
+  font-size: 1.1rem !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+  transition: var(--transition) !important;
+  border: none !important;
+  font-family: 'Assistant', sans-serif !important;
+  min-height: 50px !important;
+}
+
+.wpc-calc-effrate-r4k2-hero-btn-primary {
+  background: var(--danger) !important;
+  color: white !important;
+  box-shadow: 0 4px 15px rgba(255,59,59,0.4) !important;
+}
+
+.wpc-calc-effrate-r4k2-hero-btn-primary:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 20px rgba(255,59,59,0.5) !important;
+}
+
+.wpc-calc-effrate-r4k2-hero-btn-secondary {
+  background: rgba(255,255,255,0.2) !important;
+  color: white !important;
+  border: 2px solid white !important;
+}
+
+.wpc-calc-effrate-r4k2-hero-btn-secondary:hover {
+  background: white !important;
+  color: var(--primary) !important;
+}
+
+/* === 🧮 Calculator Container === */
+.wpc-calc-effrate-r4k2-calc-container {
+  max-width: var(--max-width-container) !important;
+  margin: 0 auto !important;
+  padding: 40px 20px !important;
+  direction: rtl !important;
+  font-family: 'Assistant', sans-serif !important;
+}
+
+.wpc-calc-effrate-r4k2-section-header {
+  text-align: center !important;
+  margin-bottom: 30px !important;
+}
+
+.wpc-calc-effrate-r4k2-section-title {
+  font-size: 2.5em !important;
+  font-weight: 700 !important;
+  color: var(--primary) !important;
+  margin: 0 auto 20px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 15px !important;
+  position: relative !important;
+  padding-right: 25px !important;
+}
+
+.wpc-calc-effrate-r4k2-section-title::after {
+  content: '' !important;
+  position: absolute !important;
+  right: 0 !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  width: 4px !important;
+  height: 60px !important;
+  background: linear-gradient(135deg, #e74c3c, #c0392b) !important;
+  border-radius: 2px !important;
+}
+
+.wpc-calc-effrate-r4k2-calc-wrapper {
+  background: white !important;
+  border-radius: var(--radius-lg) !important;
+  box-shadow: var(--shadow-md) !important;
+  overflow: hidden !important;
+  direction: rtl !important;
+}
+
+/* === 📑 Tabs Navigation === */
+.wpc-calc-effrate-r4k2-calc-nav {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)) !important;
+  gap: 8px !important;
+  padding: 5px !important;
+  background: var(--bg-light) !important;
+  direction: rtl !important;
+}
+
+.wpc-calc-effrate-r4k2-calc-tab {
+  background: var(--bg-light) !important;
+  border: 2px solid transparent !important;
+  border-radius: var(--radius-md) !important;
+  padding: 15px 10px !important;
+  min-height: 80px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  transition: var(--transition) !important;
+  font-family: 'Assistant', sans-serif !important;
+  box-shadow: var(--shadow-sm) !important;
+}
+
+.wpc-calc-effrate-r4k2-calc-tab:hover {
+  background: white !important;
+  border-color: var(--primary) !important;
+  transform: translateY(-2px) !important;
+}
+
+.wpc-calc-effrate-r4k2-calc-tab.active {
+  background: var(--gradient-primary) !important;
+  border-color: var(--primary-dark) !important;
+  color: white !important;
+}
+
+.wpc-calc-effrate-r4k2-calc-tab-icon {
+  font-size: 1.8em !important;
+  margin-bottom: 8px !important;
+}
+
+.wpc-calc-effrate-r4k2-calc-tab span:last-child {
+  font-size: 0.95em !important;
+  font-weight: 600 !important;
+}
+
+/* === 📊 Calculator Content === */
+.wpc-calc-effrate-r4k2-calc-content {
+  padding: 30px !important;
+}
+
+.wpc-calc-effrate-r4k2-calc-panel {
+  display: none !important;
+}
+
+.wpc-calc-effrate-r4k2-calc-panel.active {
+  display: block !important;
+}
+
+/* === 🎚️ Sliders === */
+.wpc-calc-effrate-r4k2-slider-wrapper {
+  position: relative !important;
+  margin: 25px 0 !important;
+  direction: rtl !important;
+}
+
+.wpc-calc-effrate-r4k2-slider-wrapper label {
+  display: block !important;
+  font-weight: 600 !important;
+  margin-bottom: 10px !important;
+  color: var(--text-dark) !important;
+  font-size: 1.1em !important;
+}
+
+.wpc-calc-effrate-r4k2-slider {
+  width: 100% !important;
+  height: 8px !important;
+  background: var(--border) !important;
+  border-radius: 4px !important;
+  outline: none !important;
+  -webkit-appearance: none !important;
+  margin-bottom: 10px !important;
+  direction: ltr !important;
+}
+
+.wpc-calc-effrate-r4k2-slider::-webkit-slider-thumb {
+  -webkit-appearance: none !important;
+  width: 28px !important;
+  height: 28px !important;
+  background: var(--primary) !important;
+  border-radius: 50% !important;
+  cursor: pointer !important;
+  box-shadow: var(--shadow-sm) !important;
+}
+
+.wpc-calc-effrate-r4k2-slider::-moz-range-thumb {
+  width: 28px !important;
+  height: 28px !important;
+  background: var(--primary) !important;
+  border-radius: 50% !important;
+  cursor: pointer !important;
+  border: none !important;
+}
+
+.wpc-calc-effrate-r4k2-slider-value {
+  text-align: center !important;
+  font-size: 1.3em !important;
+  font-weight: 700 !important;
+  color: var(--primary) !important;
+  direction: rtl !important;
+}
+
+/* === 📦 Results Box === */
+.wpc-calc-effrate-r4k2-calc-result {
+  background: var(--bg-light) !important;
+  border-radius: var(--radius-lg) !important;
+  padding: 25px !important;
+  margin-top: 25px !important;
+  border-right: 4px solid var(--success) !important;
+}
+
+.wpc-calc-effrate-r4k2-result-item {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  margin: 12px 0 !important;
+  padding: 10px 0 !important;
+  border-bottom: 1px solid #eee !important;
+}
+
+.wpc-calc-effrate-r4k2-result-item:last-child {
+  border-bottom: none !important;
+}
+
+.wpc-calc-effrate-r4k2-result-label {
+  font-weight: 600 !important;
+  color: var(--text-dark) !important;
+  font-size: 1em !important;
+}
+
+.wpc-calc-effrate-r4k2-result-value {
+  font-weight: 700 !important;
+  font-size: 1.2em !important;
+  color: var(--primary) !important;
+}
+
+.wpc-calc-effrate-r4k2-result-highlight {
+  color: var(--success) !important;
+  font-size: 1.4em !important;
+  font-weight: 800 !important;
+}
+
+.wpc-calc-effrate-r4k2-result-warning {
+  color: var(--danger) !important;
+  font-size: 1.2em !important;
+  font-weight: 700 !important;
+}
+
+/* === 🏆 Winner Box === */
+.wpc-calc-effrate-r4k2-winner-box {
+  background: linear-gradient(135deg, var(--success) 0%, #1da851 100%) !important;
+  color: white !important;
+  padding: 25px !important;
+  border-radius: var(--radius-lg) !important;
+  text-align: center !important;
+  margin-top: 20px !important;
+  box-shadow: 0 5px 20px rgba(37, 211, 102, 0.3) !important;
+}
+
+.wpc-calc-effrate-r4k2-winner-title {
+  font-size: 1.5em !important;
+  font-weight: 800 !important;
+  margin-bottom: 10px !important;
+}
+
+.wpc-calc-effrate-r4k2-winner-text {
+  font-size: 1.1em !important;
+  opacity: 0.95 !important;
+}
+
+/* === 📊 Comparison Grid === */
+.wpc-calc-effrate-r4k2-comparison-grid {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 20px !important;
+  margin-bottom: 20px !important;
+}
+
+.wpc-calc-effrate-r4k2-offer-box {
+  background: white !important;
+  border: 2px solid var(--border) !important;
+  border-radius: var(--radius-md) !important;
+  padding: 20px !important;
+}
+
+.wpc-calc-effrate-r4k2-offer-title {
+  font-size: 1.2em !important;
+  font-weight: 700 !important;
+  color: var(--primary) !important;
+  text-align: center !important;
+  margin-bottom: 20px !important;
+  padding-bottom: 10px !important;
+  border-bottom: 2px solid var(--bg-light) !important;
+}
+
+.wpc-calc-effrate-r4k2-offer-box.winner {
+  border-color: var(--success) !important;
+  box-shadow: 0 5px 20px rgba(37, 211, 102, 0.2) !important;
+}
+
+/* === 📱 Mobile Responsive === */
+@media (max-width: 768px) {
+  .wpc-calc-effrate-r4k2-hero-section {
+    padding: 30px 15px !important;
+  }
+  
+  .wpc-calc-effrate-r4k2-hero-title {
+    font-size: clamp(1.5rem, 6vw, 2rem) !important;
+  }
+  
+  .wpc-calc-effrate-r4k2-hero-cta {
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+  
+  .wpc-calc-effrate-r4k2-hero-btn {
+    width: 100% !important;
+    max-width: 300px !important;
+  }
+  
+  .wpc-calc-effrate-r4k2-calc-nav {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  
+  .wpc-calc-effrate-r4k2-calc-tab {
+    min-height: 70px !important;
+    padding: 10px 8px !important;
+  }
+  
+  .wpc-calc-effrate-r4k2-calc-tab-icon {
+    font-size: 1.4em !important;
+  }
+  
+  .wpc-calc-effrate-r4k2-calc-tab span:last-child {
+    font-size: 0.85em !important;
+  }
+  
+  .wpc-calc-effrate-r4k2-section-title {
+    font-size: 1.8em !important;
+    padding-right: 20px !important;
+  }
+  
+  .wpc-calc-effrate-r4k2-section-title::after {
+    width: 3px !important;
+    height: 40px !important;
+  }
+  
+  .wpc-calc-effrate-r4k2-calc-content {
+    padding: 20px 15px !important;
+  }
+  
+  .wpc-calc-effrate-r4k2-comparison-grid {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .wpc-calc-effrate-r4k2-result-item {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 5px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .wpc-calc-effrate-r4k2-calc-nav {
+    grid-template-columns: 1fr !important;
+    gap: 5px !important;
+  }
+  
+  .wpc-calc-effrate-r4k2-calc-tab {
+    min-height: 60px !important;
+    flex-direction: row !important;
+    gap: 10px !important;
+  }
+  
+  .wpc-calc-effrate-r4k2-calc-tab-icon {
+    margin-bottom: 0 !important;
+  }
+  
+  .wpc-calc-effrate-r4k2-section-title {
+    font-size: 1.5em !important;
+  }
+  
+  .wpc-calc-effrate-r4k2-slider-value {
+    font-size: 1.1em !important;
+  }
+}
+</style>
+
+<!-- 🎯 Main Wrapper -->
+<div class="wpc-calc-effrate-r4k2-wrapper" id="wpc-calc-effrate-r4k2-main">
+
+<!-- 🏠 Hero Section -->
+<section class="wpc-calc-effrate-r4k2-hero-section">
+  <div class="wpc-calc-effrate-r4k2-hero-container">
+    <h1 class="wpc-calc-effrate-r4k2-hero-title">מחשבון ריבית אפקטיבית | המחיר האמיתי של ההלוואה</h1>
+    <p class="wpc-calc-effrate-r4k2-update-date"><strong>עודכן לאחרונה:</strong> [current_date format="F Y" hebrew="true"]</p>
+    <p class="wpc-calc-effrate-r4k2-hero-subtitle">גלה את העלות האמיתית של הלוואה אחרי כל העמלות והעלויות הנסתרות. השווה בין הצעות שונות וראה איזו באמת זולה יותר!</p>
+    <div class="wpc-calc-effrate-r4k2-hero-cta">
+      <button class="wpc-calc-effrate-r4k2-hero-btn wpc-calc-effrate-r4k2-hero-btn-primary" data-action="scroll-to-awg">בדוק זכאות להלוואה עכשיו</button>
+      <button class="wpc-calc-effrate-r4k2-hero-btn wpc-calc-effrate-r4k2-hero-btn-secondary" data-action="scroll-to-calculator">חשב ריבית אפקטיבית</button>
+    </div>
+  </div>
+</section>
+
+<!-- 🧮 Calculator Section -->
+<section id="wpc-calc-effrate-r4k2-calculator" class="wpc-calc-effrate-r4k2-calc-container">
+  <div class="wpc-calc-effrate-r4k2-section-header">
+    <h2 class="wpc-calc-effrate-r4k2-section-title">מחשבון ריבית אפקטיבית - גלה את המחיר האמיתי!</h2>
+  </div>
+  
+  <div class="wpc-calc-effrate-r4k2-calc-wrapper">
+    <!-- Tabs Navigation -->
+    <div class="wpc-calc-effrate-r4k2-calc-nav">
+      <button class="wpc-calc-effrate-r4k2-calc-tab active" data-action="switch-tab" data-tab="basic">
+        <div class="wpc-calc-effrate-r4k2-calc-tab-icon">🧮</div>
+        <span>חישוב ריבית אפקטיבית</span>
+      </button>
+      <button class="wpc-calc-effrate-r4k2-calc-tab" data-action="switch-tab" data-tab="compare">
+        <div class="wpc-calc-effrate-r4k2-calc-tab-icon">⚖️</div>
+        <span>השוואת הצעות</span>
+      </button>
+    </div>
+    
+    <!-- Calculator Content -->
+    <div class="wpc-calc-effrate-r4k2-calc-content">
+      
+      <!-- Tab 1: Basic Calculation -->
+      <div class="wpc-calc-effrate-r4k2-calc-panel active" id="tab-basic">
+        <p style="text-align: center; font-size: 1.1em; margin-bottom: 25px; color: var(--text-light);">
+          הזן את פרטי ההלוואה וגלה מה הריבית האפקטיבית האמיתית (כולל כל העמלות)
+        </p>
+        
+        <!-- סכום הלוואה -->
+        <div class="wpc-calc-effrate-r4k2-slider-wrapper">
+          <label for="basic-amount-slider">💰 סכום הלוואה:</label>
+          <input type="range" id="basic-amount-slider" class="wpc-calc-effrate-r4k2-slider" 
+                 min="10000" max="500000" step="5000" value="100000">
+          <div id="basic-amount-value" class="wpc-calc-effrate-r4k2-slider-value">100,000 ₪</div>
+        </div>
+        
+        <!-- ריבית נקובה -->
+        <div class="wpc-calc-effrate-r4k2-slider-wrapper">
+          <label for="basic-rate-slider">📊 ריבית נקובה (נומינלית) שנתית:</label>
+          <input type="range" id="basic-rate-slider" class="wpc-calc-effrate-r4k2-slider" 
+                 min="2" max="25" step="0.1" value="6">
+          <div id="basic-rate-value" class="wpc-calc-effrate-r4k2-slider-value">6.0%</div>
+        </div>
+        
+        <!-- עמלת פתיחת תיק -->
+        <div class="wpc-calc-effrate-r4k2-slider-wrapper">
+          <label for="basic-fee-slider">📋 עמלת פתיחת תיק / דמי טיפול:</label>
+          <input type="range" id="basic-fee-slider" class="wpc-calc-effrate-r4k2-slider" 
+                 min="0" max="10000" step="100" value="1500">
+          <div id="basic-fee-value" class="wpc-calc-effrate-r4k2-slider-value">1,500 ₪</div>
+        </div>
+        
+        <!-- תקופת הלוואה -->
+        <div class="wpc-calc-effrate-r4k2-slider-wrapper">
+          <label for="basic-months-slider">📅 תקופת הלוואה:</label>
+          <input type="range" id="basic-months-slider" class="wpc-calc-effrate-r4k2-slider" 
+                 min="12" max="120" step="6" value="48">
+          <div id="basic-months-value" class="wpc-calc-effrate-r4k2-slider-value">48 חודשים (4 שנים)</div>
+        </div>
+        
+        <!-- Results -->
+        <div class="wpc-calc-effrate-r4k2-calc-result">
+          <div class="wpc-calc-effrate-r4k2-result-item">
+            <span class="wpc-calc-effrate-r4k2-result-label">תשלום חודשי:</span>
+            <span id="basic-monthly-payment" class="wpc-calc-effrate-r4k2-result-value">2,348 ₪</span>
+          </div>
+          <div class="wpc-calc-effrate-r4k2-result-item">
+            <span class="wpc-calc-effrate-r4k2-result-label">סה"כ החזר (קרן + ריבית):</span>
+            <span id="basic-total-payment" class="wpc-calc-effrate-r4k2-result-value">112,704 ₪</span>
+          </div>
+          <div class="wpc-calc-effrate-r4k2-result-item">
+            <span class="wpc-calc-effrate-r4k2-result-label">סה"כ ריבית + עמלות:</span>
+            <span id="basic-total-interest" class="wpc-calc-effrate-r4k2-result-value">14,204 ₪</span>
+          </div>
+          <div class="wpc-calc-effrate-r4k2-result-item" style="background: rgba(30,84,144,0.1); padding: 15px; border-radius: 10px; margin-top: 15px;">
+            <span class="wpc-calc-effrate-r4k2-result-label">📌 ריבית נקובה (נומינלית):</span>
+            <span id="basic-nominal-rate" class="wpc-calc-effrate-r4k2-result-value">6.0%</span>
+          </div>
+          <div class="wpc-calc-effrate-r4k2-result-item" style="background: rgba(37,211,102,0.15); padding: 15px; border-radius: 10px;">
+            <span class="wpc-calc-effrate-r4k2-result-label">🎯 ריבית אפקטיבית אמיתית:</span>
+            <span id="basic-effective-rate" class="wpc-calc-effrate-r4k2-result-highlight">6.82%</span>
+          </div>
+          <div class="wpc-calc-effrate-r4k2-result-item">
+            <span class="wpc-calc-effrate-r4k2-result-label">ההפרש (מה שנסתר):</span>
+            <span id="basic-rate-diff" class="wpc-calc-effrate-r4k2-result-warning">+0.82%</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Tab 2: Compare Offers -->
+      <div class="wpc-calc-effrate-r4k2-calc-panel" id="tab-compare">
+        <p style="text-align: center; font-size: 1.1em; margin-bottom: 25px; color: var(--text-light);">
+          השווה בין שתי הצעות הלוואה וגלה איזו באמת זולה יותר!
+        </p>
+        
+        <!-- סכום הלוואה משותף -->
+        <div class="wpc-calc-effrate-r4k2-slider-wrapper">
+          <label for="compare-amount-slider">💰 סכום הלוואה (משותף לשתי ההצעות):</label>
+          <input type="range" id="compare-amount-slider" class="wpc-calc-effrate-r4k2-slider" 
+                 min="10000" max="500000" step="5000" value="100000">
+          <div id="compare-amount-value" class="wpc-calc-effrate-r4k2-slider-value">100,000 ₪</div>
+        </div>
+        
+        <!-- תקופת הלוואה משותפת -->
+        <div class="wpc-calc-effrate-r4k2-slider-wrapper">
+          <label for="compare-months-slider">📅 תקופת הלוואה (משותפת):</label>
+          <input type="range" id="compare-months-slider" class="wpc-calc-effrate-r4k2-slider" 
+                 min="12" max="120" step="6" value="48">
+          <div id="compare-months-value" class="wpc-calc-effrate-r4k2-slider-value">48 חודשים (4 שנים)</div>
+        </div>
+        
+        <!-- Comparison Grid -->
+        <div class="wpc-calc-effrate-r4k2-comparison-grid">
+          
+          <!-- Offer A -->
+          <div class="wpc-calc-effrate-r4k2-offer-box" id="offer-a-box">
+            <div class="wpc-calc-effrate-r4k2-offer-title">🅰️ הצעה א'</div>
+            
+            <div class="wpc-calc-effrate-r4k2-slider-wrapper">
+              <label for="offer-a-rate">ריבית נקובה:</label>
+              <input type="range" id="offer-a-rate" class="wpc-calc-effrate-r4k2-slider" 
+                     min="2" max="25" step="0.1" value="5.5">
+              <div id="offer-a-rate-value" class="wpc-calc-effrate-r4k2-slider-value">5.5%</div>
+            </div>
+            
+            <div class="wpc-calc-effrate-r4k2-slider-wrapper">
+              <label for="offer-a-fee">עמלת פתיחת תיק:</label>
+              <input type="range" id="offer-a-fee" class="wpc-calc-effrate-r4k2-slider" 
+                     min="0" max="10000" step="100" value="2500">
+              <div id="offer-a-fee-value" class="wpc-calc-effrate-r4k2-slider-value">2,500 ₪</div>
+            </div>
+            
+            <div class="wpc-calc-effrate-r4k2-calc-result" style="margin-top: 15px;">
+              <div class="wpc-calc-effrate-r4k2-result-item">
+                <span class="wpc-calc-effrate-r4k2-result-label">תשלום חודשי:</span>
+                <span id="offer-a-monthly" class="wpc-calc-effrate-r4k2-result-value">2,307 ₪</span>
+              </div>
+              <div class="wpc-calc-effrate-r4k2-result-item">
+                <span class="wpc-calc-effrate-r4k2-result-label">סה"כ עלות:</span>
+                <span id="offer-a-total" class="wpc-calc-effrate-r4k2-result-value">113,236 ₪</span>
+              </div>
+              <div class="wpc-calc-effrate-r4k2-result-item" style="background: rgba(37,211,102,0.15); padding: 10px; border-radius: 8px;">
+                <span class="wpc-calc-effrate-r4k2-result-label">ריבית אפקטיבית:</span>
+                <span id="offer-a-effective" class="wpc-calc-effrate-r4k2-result-highlight">6.87%</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Offer B -->
+          <div class="wpc-calc-effrate-r4k2-offer-box" id="offer-b-box">
+            <div class="wpc-calc-effrate-r4k2-offer-title">🅱️ הצעה ב'</div>
+            
+            <div class="wpc-calc-effrate-r4k2-slider-wrapper">
+              <label for="offer-b-rate">ריבית נקובה:</label>
+              <input type="range" id="offer-b-rate" class="wpc-calc-effrate-r4k2-slider" 
+                     min="2" max="25" step="0.1" value="6.5">
+              <div id="offer-b-rate-value" class="wpc-calc-effrate-r4k2-slider-value">6.5%</div>
+            </div>
+            
+            <div class="wpc-calc-effrate-r4k2-slider-wrapper">
+              <label for="offer-b-fee">עמלת פתיחת תיק:</label>
+              <input type="range" id="offer-b-fee" class="wpc-calc-effrate-r4k2-slider" 
+                     min="0" max="10000" step="100" value="500">
+              <div id="offer-b-fee-value" class="wpc-calc-effrate-r4k2-slider-value">500 ₪</div>
+            </div>
+            
+            <div class="wpc-calc-effrate-r4k2-calc-result" style="margin-top: 15px;">
+              <div class="wpc-calc-effrate-r4k2-result-item">
+                <span class="wpc-calc-effrate-r4k2-result-label">תשלום חודשי:</span>
+                <span id="offer-b-monthly" class="wpc-calc-effrate-r4k2-result-value">2,371 ₪</span>
+              </div>
+              <div class="wpc-calc-effrate-r4k2-result-item">
+                <span class="wpc-calc-effrate-r4k2-result-label">סה"כ עלות:</span>
+                <span id="offer-b-total" class="wpc-calc-effrate-r4k2-result-value">114,308 ₪</span>
+              </div>
+              <div class="wpc-calc-effrate-r4k2-result-item" style="background: rgba(37,211,102,0.15); padding: 10px; border-radius: 8px;">
+                <span class="wpc-calc-effrate-r4k2-result-label">ריבית אפקטיבית:</span>
+                <span id="offer-b-effective" class="wpc-calc-effrate-r4k2-result-highlight">6.78%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Winner Box -->
+        <div class="wpc-calc-effrate-r4k2-winner-box" id="compare-winner-box">
+          <div class="wpc-calc-effrate-r4k2-winner-title">🏆 הצעה ב' זולה יותר!</div>
+          <div class="wpc-calc-effrate-r4k2-winner-text">
+            תחסוך <span id="compare-savings">1,072</span> ₪ לאורך כל התקופה
+          </div>
+        </div>
+        
+      </div>
+      
+    </div>
+  </div>
+</section>
+
+<!-- 🎯 AWG Section - בדיקת זכאות -->
+<section class="wpc-calc-effrate-r4k2-awg-section" style="padding: 60px 20px !important; background: #ffffff !important; border-top: 1px solid #e0e0e0 !important; border-bottom: 1px solid #e0e0e0 !important; direction: rtl !important; font-family: 'Assistant', sans-serif !important;">
+  <div class="wpc-calc-effrate-r4k2-awg-container" style="max-width: 1200px !important; margin: 0 auto !important; padding: 30px !important; text-align: center !important; background: #ffffff !important; border-radius: 15px !important; box-shadow: 0 5px 20px rgba(0,0,0,0.08) !important; border: 1px solid #f0f0f0 !important;">
+    <div class="wpc-calc-effrate-r4k2-awg-title" style="margin-bottom: 30px !important; padding-bottom: 20px !important; border-bottom: 2px solid #f0f0f0 !important;">
+      <h2 style="font-size: 2em !important; font-weight: 700 !important; color: #1e5490 !important; margin: 0 !important;">🎯 בדיקת זכאות להלוואה בריבית משתלמת</h2>
+      <p style="font-size: 1.2em !important; color: #444444 !important; margin-top: 15px !important;">מצאת הצעה טובה? בוא נבדוק אם אתה זכאי להלוואה בתנאים הטובים ביותר!</p>
+    </div>
+    
+    <!-- כפתורים כפולים -->
+    <div style="display: flex !important; flex-wrap: wrap !important; gap: 15px !important; justify-content: center !important; margin-bottom: 25px !important;">
+      <button data-action="scroll-to-awg" style="background: linear-gradient(135deg, #ff3b3b 0%, #cc2f2f 100%) !important; color: white !important; padding: 15px 30px !important; font-size: 1.1em !important; font-weight: 700 !important; border: none !important; border-radius: 10px !important; cursor: pointer !important; box-shadow: 0 4px 15px rgba(255,59,59,0.3) !important; font-family: 'Assistant', sans-serif !important;">
+        בדוק זכאות להלוואה עכשיו - קבל הצעה מיידית!
+      </button>
+      <button data-action="scroll-to-embed" style="background: linear-gradient(135deg, #1e5490 0%, #2a5fa0 100%) !important; color: white !important; padding: 15px 30px !important; font-size: 1.1em !important; font-weight: 700 !important; border: none !important; border-radius: 10px !important; cursor: pointer !important; box-shadow: 0 4px 15px rgba(30,84,144,0.3) !important; font-family: 'Assistant', sans-serif !important;">
+        🎁 רוצה להוסיף את המחשבון בחינם לאתרך? לחץ כאן!
+      </button>
+    </div>
+    
+    <div class="wpc-calc-effrate-r4k2-awg-content">
+      <div class="wpc-calc-effrate-r4k2-shortcode-item">
+        [awg postid="32400"]
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 📝 Content Section - הסבר על ריבית אפקטיבית -->
+<section style="padding: 60px 20px !important; background: #f8f9fa !important; direction: rtl !important; font-family: 'Assistant', sans-serif !important;">
+  <div style="max-width: 1200px !important; margin: 0 auto !important;">
+    <div style="text-align: center !important; margin-bottom: 40px !important;">
+      <h2 style="font-size: 2.2em !important; font-weight: 700 !important; color: #1e5490 !important; position: relative !important; display: inline-block !important; padding-right: 25px !important;">💡 למה חשוב לדעת את הריבית האפקטיבית?</h2>
+    </div>
+    
+    <div style="display: grid !important; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) !important; gap: 25px !important;">
+      
+      <div style="background: white !important; padding: 25px !important; border-radius: 15px !important; box-shadow: 0 3px 15px rgba(0,0,0,0.08) !important; border-right: 4px solid #1e5490 !important;">
+        <h3 style="color: #1e5490 !important; font-size: 1.3em !important; margin-bottom: 15px !important;">🔍 מה זה ריבית נקובה (נומינלית)?</h3>
+        <p style="color: #444 !important; line-height: 1.7 !important;">הריבית הנקובה היא המספר שהבנק או חברת האשראי מציגים לכם בפרסומת. היא <strong>לא כוללת</strong> עמלות, דמי טיפול, או עלויות נלוות אחרות.</p>
+      </div>
+      
+      <div style="background: white !important; padding: 25px !important; border-radius: 15px !important; box-shadow: 0 3px 15px rgba(0,0,0,0.08) !important; border-right: 4px solid #25D366 !important;">
+        <h3 style="color: #25D366 !important; font-size: 1.3em !important; margin-bottom: 15px !important;">🎯 מה זה ריבית אפקטיבית?</h3>
+        <p style="color: #444 !important; line-height: 1.7 !important;">הריבית האפקטיבית היא <strong>העלות האמיתית</strong> של ההלוואה. היא כוללת את כל העמלות והעלויות הנסתרות, ומראה כמה באמת תשלמו על הכסף שלוויתם.</p>
+      </div>
+      
+      <div style="background: white !important; padding: 25px !important; border-radius: 15px !important; box-shadow: 0 3px 15px rgba(0,0,0,0.08) !important; border-right: 4px solid #FF9800 !important;">
+        <h3 style="color: #FF9800 !important; font-size: 1.3em !important; margin-bottom: 15px !important;">⚠️ למה יש הבדל?</h3>
+        <p style="color: #444 !important; line-height: 1.7 !important;">בנקים וגופי מימון מוסיפים עמלות כמו: פתיחת תיק, דמי ניהול, ביטוחים חובה ועוד. כל אלה מעלים את העלות האמיתית מעבר לריבית המפורסמת.</p>
+      </div>
+      
+    </div>
+    
+    <div style="background: linear-gradient(135deg, #1e5490 0%, #2a5fa0 100%) !important; color: white !important; padding: 30px !important; border-radius: 15px !important; margin-top: 30px !important; text-align: center !important;">
+      <h3 style="font-size: 1.4em !important; margin-bottom: 15px !important; color: white !important;">💡 טיפ חשוב</h3>
+      <p style="font-size: 1.1em !important; line-height: 1.7 !important; margin: 0 !important; color: rgba(255,255,255,0.95) !important;">
+        תמיד בקשו לראות את <strong>הריבית האפקטיבית (ע"פ ריבית שנתית אפקטיבית)</strong> לפני חתימה על הלוואה. על פי חוק, כל גוף מימון חייב להציג מידע זה!
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ❓ FAQ Section - שאלות נפוצות -->
+<section class="wpc-calc-effrate-r4k2-faq-section" style="padding: 80px 20px !important; background: linear-gradient(135deg, #f8f9fa, #e9ecef) !important; direction: rtl !important; font-family: 'Assistant', sans-serif !important;">
+  <div style="text-align: center !important; margin-bottom: 50px !important;">
+    <h2 style="font-size: 2.5em !important; font-weight: 700 !important; color: #1e5490 !important; display: inline-flex !important; align-items: center !important; gap: 15px !important; position: relative !important; padding-right: 25px !important;">❓ שאלות נפוצות על ריבית אפקטיבית</h2>
+    <p style="font-size: 1.3em !important; color: #444 !important; margin-top: 15px !important; font-weight: 600 !important;">כל מה שרצית לדעת על עלות ההלוואה האמיתית</p>
+  </div>
+  
+  <div style="max-width: 900px !important; margin: 0 auto !important;">
+    
+    <!-- שאלה 1 -->
+    <div class="wpc-calc-effrate-r4k2-accordion-item" style="border: 1px solid #e0e0e0 !important; border-radius: 8px !important; margin-bottom: 10px !important; overflow: hidden !important; background: white !important;">
+      <div class="wpc-calc-effrate-r4k2-accordion-header" data-action="toggle-faq" style="background: #f8f9fa !important; padding: 20px !important; cursor: pointer !important; font-weight: 600 !important; font-size: 1.1em !important; position: relative !important; transition: all 0.2s ease !important; border: 2px solid transparent !important;">
+        🧮 מה ההבדל בין ריבית נומינלית לאפקטיבית?
+        <span style="position: absolute !important; left: 20px !important; top: 50% !important; transform: translateY(-50%) !important; font-size: 1.2em !important; transition: transform 0.3s ease !important;">←</span>
+      </div>
+      <div class="wpc-calc-effrate-r4k2-accordion-content" style="max-height: 0 !important; overflow: hidden !important; transition: max-height 0.3s ease !important;">
+        <div style="padding: 20px !important; background: white !important;">
+          <p style="margin: 0 !important; line-height: 1.6 !important; color: #333 !important;">
+            <strong style="color: #1e5490 !important;">ריבית נומינלית (נקובה)</strong> היא הריבית הבסיסית שמציגים לכם - ללא העמלות והעלויות הנלוות.<br><br>
+            <strong style="color: #25D366 !important;">ריבית אפקטיבית</strong> היא העלות האמיתית של ההלוואה אחרי שמוסיפים את כל העמלות, דמי הטיפול, וההשפעה של תדירות התשלומים. זו התמונה המלאה של כמה תשלמו.
+          </p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- שאלה 2 -->
+    <div class="wpc-calc-effrate-r4k2-accordion-item" style="border: 1px solid #e0e0e0 !important; border-radius: 8px !important; margin-bottom: 10px !important; overflow: hidden !important; background: white !important;">
+      <div class="wpc-calc-effrate-r4k2-accordion-header" data-action="toggle-faq" style="background: #f8f9fa !important; padding: 20px !important; cursor: pointer !important; font-weight: 600 !important; font-size: 1.1em !important; position: relative !important; transition: all 0.2s ease !important; border: 2px solid transparent !important;">
+        💰 איך מחשבים ריבית אפקטיבית?
+        <span style="position: absolute !important; left: 20px !important; top: 50% !important; transform: translateY(-50%) !important; font-size: 1.2em !important; transition: transform 0.3s ease !important;">←</span>
+      </div>
+      <div class="wpc-calc-effrate-r4k2-accordion-content" style="max-height: 0 !important; overflow: hidden !important; transition: max-height 0.3s ease !important;">
+        <div style="padding: 20px !important; background: white !important;">
+          <p style="margin: 0 !important; line-height: 1.6 !important; color: #333 !important;">
+            החישוב נעשה בשיטת <strong>IRR (Internal Rate of Return)</strong> - שיעור התשואה הפנימי. זוהי הריבית שמשווה בין מה שקיבלת בפועל (הקרן פחות העמלות) לבין מה שתחזירי לאורך כל התקופה. המחשבון שלנו עושה את החישוב המורכב הזה באופן אוטומטי!
+          </p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- שאלה 3 -->
+    <div class="wpc-calc-effrate-r4k2-accordion-item" style="border: 1px solid #e0e0e0 !important; border-radius: 8px !important; margin-bottom: 10px !important; overflow: hidden !important; background: white !important;">
+      <div class="wpc-calc-effrate-r4k2-accordion-header" data-action="toggle-faq" style="background: #f8f9fa !important; padding: 20px !important; cursor: pointer !important; font-weight: 600 !important; font-size: 1.1em !important; position: relative !important; transition: all 0.2s ease !important; border: 2px solid transparent !important;">
+        📊 למה הלוואה עם ריבית גבוהה יותר יכולה להיות זולה יותר?
+        <span style="position: absolute !important; left: 20px !important; top: 50% !important; transform: translateY(-50%) !important; font-size: 1.2em !important; transition: transform 0.3s ease !important;">←</span>
+      </div>
+      <div class="wpc-calc-effrate-r4k2-accordion-content" style="max-height: 0 !important; overflow: hidden !important; transition: max-height 0.3s ease !important;">
+        <div style="padding: 20px !important; background: white !important;">
+          <p style="margin: 0 !important; line-height: 1.6 !important; color: #333 !important;">
+            כי העמלות משנות את התמונה! <strong>דוגמה:</strong> הלוואה בריבית 5.5% עם עמלת פתיחה של 3,000 ₪ יכולה להיות יקרה יותר מהלוואה בריבית 6.5% ללא עמלות. ככל שתקופת ההלוואה קצרה יותר, ההשפעה של העמלות גדולה יותר!
+          </p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- שאלה 4 -->
+    <div class="wpc-calc-effrate-r4k2-accordion-item" style="border: 1px solid #e0e0e0 !important; border-radius: 8px !important; margin-bottom: 10px !important; overflow: hidden !important; background: white !important;">
+      <div class="wpc-calc-effrate-r4k2-accordion-header" data-action="toggle-faq" style="background: #f8f9fa !important; padding: 20px !important; cursor: pointer !important; font-weight: 600 !important; font-size: 1.1em !important; position: relative !important; transition: all 0.2s ease !important; border: 2px solid transparent !important;">
+        ⚖️ האם הבנק חייב לגלות לי את הריבית האפקטיבית?
+        <span style="position: absolute !important; left: 20px !important; top: 50% !important; transform: translateY(-50%) !important; font-size: 1.2em !important; transition: transform 0.3s ease !important;">←</span>
+      </div>
+      <div class="wpc-calc-effrate-r4k2-accordion-content" style="max-height: 0 !important; overflow: hidden !important; transition: max-height 0.3s ease !important;">
+        <div style="padding: 20px !important; background: white !important;">
+          <p style="margin: 0 !important; line-height: 1.6 !important; color: #333 !important;">
+            <strong style="color: #25D366 !important;">כן!</strong> על פי חוק האשראי ההוגן והוראות בנק ישראל, כל גוף מימון חייב להציג ללקוח את <strong>שיעור העלות הכוללת לאשראי</strong> (שזו בעצם הריבית האפקטיבית). אם לא הציגו לכם - דרשו לראות!
+          </p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- שאלה 5 -->
+    <div class="wpc-calc-effrate-r4k2-accordion-item" style="border: 1px solid #e0e0e0 !important; border-radius: 8px !important; margin-bottom: 10px !important; overflow: hidden !important; background: white !important;">
+      <div class="wpc-calc-effrate-r4k2-accordion-header" data-action="toggle-faq" style="background: #f8f9fa !important; padding: 20px !important; cursor: pointer !important; font-weight: 600 !important; font-size: 1.1em !important; position: relative !important; transition: all 0.2s ease !important; border: 2px solid transparent !important;">
+        📋 מה עמלות נוספות משפיעות על הריבית האפקטיבית?
+        <span style="position: absolute !important; left: 20px !important; top: 50% !important; transform: translateY(-50%) !important; font-size: 1.2em !important; transition: transform 0.3s ease !important;">←</span>
+      </div>
+      <div class="wpc-calc-effrate-r4k2-accordion-content" style="max-height: 0 !important; overflow: hidden !important; transition: max-height 0.3s ease !important;">
+        <div style="padding: 20px !important; background: white !important;">
+          <p style="margin: 0 !important; line-height: 1.6 !important; color: #333 !important;">
+            עמלות שמשפיעות על העלות האמיתית: <br>
+            • <strong>עמלת פתיחת תיק</strong> - נגבית בתחילה<br>
+            • <strong>דמי ניהול חודשיים</strong> - נגבים כל חודש<br>
+            • <strong>ביטוח חיים/אשראי</strong> - לעתים חובה<br>
+            • <strong>עמלת פירעון מוקדם</strong> - אם תרצו לסגור מוקדם<br>
+            • <strong>דמי שליחויות</strong> - בחלק מההלוואות
+          </p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- שאלה 6 -->
+    <div class="wpc-calc-effrate-r4k2-accordion-item" style="border: 1px solid #e0e0e0 !important; border-radius: 8px !important; margin-bottom: 10px !important; overflow: hidden !important; background: white !important;">
+      <div class="wpc-calc-effrate-r4k2-accordion-header" data-action="toggle-faq" style="background: #f8f9fa !important; padding: 20px !important; cursor: pointer !important; font-weight: 600 !important; font-size: 1.1em !important; position: relative !important; transition: all 0.2s ease !important; border: 2px solid transparent !important;">
+        🎯 מה נחשב ריבית אפקטיבית טובה בישראל?
+        <span style="position: absolute !important; left: 20px !important; top: 50% !important; transform: translateY(-50%) !important; font-size: 1.2em !important; transition: transform 0.3s ease !important;">←</span>
+      </div>
+      <div class="wpc-calc-effrate-r4k2-accordion-content" style="max-height: 0 !important; overflow: hidden !important; transition: max-height 0.3s ease !important;">
+        <div style="padding: 20px !important; background: white !important;">
+          <p style="margin: 0 !important; line-height: 1.6 !important; color: #333 !important;">
+            זה תלוי בסוג ההלוואה (נכון לסוף 2025):<br>
+            • <strong style="color: #25D366 !important;">הלוואה מקרן השתלמות:</strong> 5-6% - מצוין!<br>
+            • <strong style="color: #25D366 !important;">הלוואה בנקאית לבעלי נכס:</strong> 6-8%<br>
+            • <strong style="color: #FF9800 !important;">הלוואה צרכנית רגילה:</strong> 8-12%<br>
+            • <strong style="color: #ff3b3b !important;">הלוואה חוץ-בנקאית:</strong> 12-24%
+          </p>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</section>
+
+<!-- 🎁 Embed Section - מערכת הטמעה -->
+<section class="wpc-calc-effrate-r4k2-embed-section" id="embed-section" style="padding: 60px 20px !important; background: #ffffff !important; direction: rtl !important; font-family: 'Assistant', sans-serif !important;">
+  <div style="max-width: 1200px !important; margin: 0 auto !important;">
+    
+    <h2 style="font-size: 2.2em !important; font-weight: 700 !important; color: #1e5490 !important; text-align: center !important; margin-bottom: 30px !important;">🎁 רוצים להטמיע את מחשבון הריבית האפקטיבית באתר שלכם? חינם לחלוטין!</h2>
+    
+    <!-- הצעת ערך -->
+    <div style="background: linear-gradient(135deg, #e8f4fc, #d4e9f7) !important; padding: 25px !important; border-radius: 15px !important; margin-bottom: 30px !important; border-right: 4px solid #1e5490 !important;">
+      <p style="margin: 0 !important; font-size: 1.15em !important; line-height: 1.7 !important; color: #333 !important;">
+        <strong>💎 אנחנו נותנים לכם את מחשבון הריבית האפקטיבית המתקדם הזה לחלוטין בחינם!</strong><br>
+        תמורת קישור קרדיט קטן לאתר שלנו, תקבלו מחשבון מקצועי עם 2 לשוניות, חישובי IRR מדויקים, ועיצוב שמתאים לכל מסך.<br>
+        <strong>שווי המחשבון:</strong> מעל ₪12,000 בפיתוח 💰 | <strong>מה ששילמתם:</strong> ₪0 🎉
+      </p>
+    </div>
+    
+    <!-- יתרונות SEO -->
+    <div style="background: #f8f9fa !important; padding: 30px !important; border-radius: 15px !important; margin-bottom: 30px !important;">
+      <h3 style="color: #1e5490 !important; font-size: 1.5em !important; margin-bottom: 20px !important; text-align: center !important;">🚀 למה להוסיף מחשבון לאתר? זה משפר את הדירוג בגוגל!</h3>
+      <div style="display: grid !important; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)) !important; gap: 15px !important;">
+        <div style="display: flex !important; align-items: flex-start !important; gap: 10px !important;">
+          <span>📈</span>
+          <p style="margin: 0 !important;"><strong>תוכן אינטראקטיבי איכותי</strong> - גוגל אוהבת עמודים עם כלים שימושיים</p>
+        </div>
+        <div style="display: flex !important; align-items: flex-start !important; gap: 10px !important;">
+          <span>⏱️</span>
+          <p style="margin: 0 !important;"><strong>מבקרים נשארים יותר זמן</strong> - משתמשים מתעסקים עם המחשבון</p>
+        </div>
+        <div style="display: flex !important; align-items: flex-start !important; gap: 10px !important;">
+          <span>🔗</span>
+          <p style="margin: 0 !important;"><strong>מילות מפתח רלוונטיות</strong> - ריבית אפקטיבית, השוואת הלוואות</p>
+        </div>
+        <div style="display: flex !important; align-items: flex-start !important; gap: 10px !important;">
+          <span>📱</span>
+          <p style="margin: 0 !important;"><strong>מתאים לנייד</strong> - מחשבון שעובד על כל מסך</p>
+        </div>
+      </div>
+      <p style="margin-top: 20px !important; text-align: center !important; color: #666 !important;">
+        💡 <strong>טיפ:</strong> הוסיפו את המחשבון בעמודים רלוונטיים כמו "השוואת הלוואות", "מחשבון הלוואה" - זה יחזק את העמוד בדיוק במילות החיפוש שאתם רוצים לדרג עליהן!
+      </p>
+    </div>
+    
+    <!-- הוראות הטמעה -->
+    <h3 style="font-size: 1.4em !important; color: #333 !important; margin-bottom: 20px !important;">📋 איך מוסיפים? (3 דקות בלבד)</h3>
+    <p style="color: #25D366 !important; font-weight: 600 !important; margin-bottom: 15px !important;">✅ יתרון לדירוג: קישור הקרדיט נמצא בתוך הקוד - גוגל רואה אותו ומזהה אותו מיד!</p>
+    <ol style="font-size: 1.1em !important; line-height: 1.8 !important; color: #333 !important; padding-right: 25px !important;">
+      <li><strong>לחצו</strong> על הכפתור הירוק "העתק קוד" למטה 👇</li>
+      <li><strong>פתחו</strong> את עורך וורדפרס שלכם (מצב <code style="background: #f0f0f0; padding: 2px 6px; border-radius: 4px;">טקסט/HTML</code>, לא עיצוב)</li>
+      <li><strong>הדביקו</strong> את הקוד במיקום הרצוי בעמוד</li>
+      <li><strong>פרסמו!</strong> המחשבון יעבוד מיד ללא הגדרות נוספות ✨</li>
+    </ol>
+    
+    <!-- כפתור העתקה ראשי -->
+    <div style="text-align: center !important; margin: 30px 0 !important;">
+      <button data-action="copy-embed-code" style="background: linear-gradient(135deg, #25D366 0%, #1da851 100%) !important; color: white !important; padding: 20px 50px !important; font-size: 1.3em !important; font-weight: 700 !important; border: none !important; border-radius: 12px !important; cursor: pointer !important; box-shadow: 0 5px 20px rgba(37,211,102,0.3) !important; transition: all 0.3s ease !important; font-family: 'Assistant', sans-serif !important;">
+        📋 העתק קוד מלא - לחצו כאן!
+      </button>
+    </div>
+    
+    <!-- בורר צבעים -->
+    <div style="margin: 30px 0 !important;">
+      <h4 style="text-align: center !important; color: #333 !important; margin-bottom: 20px !important;">🎨 בחרו צבע מותאם לאתר שלכם:</h4>
+      <div style="display: flex !important; flex-wrap: wrap !important; justify-content: center !important; gap: 12px !important;">
+        <button style="background: #1e5490 !important; width: 50px !important; height: 50px !important; border-radius: 50% !important; border: 3px solid #fff !important; cursor: pointer !important; box-shadow: 0 2px 8px rgba(0,0,0,0.2) !important;" data-action="preview-color" data-color="#1e5490" data-name="כחול מקצועי" title="כחול מקצועי 💙"></button>
+        <button style="background: #10b981 !important; width: 50px !important; height: 50px !important; border-radius: 50% !important; border: 3px solid #fff !important; cursor: pointer !important; box-shadow: 0 2px 8px rgba(0,0,0,0.2) !important;" data-action="preview-color" data-color="#10b981" data-name="ירוק צמיחה" title="ירוק צמיחה 💚"></button>
+        <button style="background: #ef4444 !important; width: 50px !important; height: 50px !important; border-radius: 50% !important; border: 3px solid #fff !important; cursor: pointer !important; box-shadow: 0 2px 8px rgba(0,0,0,0.2) !important;" data-action="preview-color" data-color="#ef4444" data-name="אדום אנרגטי" title="אדום אנרגטי ❤️"></button>
+        <button style="background: #8b5cf6 !important; width: 50px !important; height: 50px !important; border-radius: 50% !important; border: 3px solid #fff !important; cursor: pointer !important; box-shadow: 0 2px 8px rgba(0,0,0,0.2) !important;" data-action="preview-color" data-color="#8b5cf6" data-name="סגול יוקרתי" title="סגול יוקרתי 💜"></button>
+        <button style="background: #f59e0b !important; width: 50px !important; height: 50px !important; border-radius: 50% !important; border: 3px solid #fff !important; cursor: pointer !important; box-shadow: 0 2px 8px rgba(0,0,0,0.2) !important;" data-action="preview-color" data-color="#f59e0b" data-name="כתום דינמי" title="כתום דינמי 🧡"></button>
+        <button style="background: #ec4899 !important; width: 50px !important; height: 50px !important; border-radius: 50% !important; border: 3px solid #fff !important; cursor: pointer !important; box-shadow: 0 2px 8px rgba(0,0,0,0.2) !important;" data-action="preview-color" data-color="#ec4899" data-name="ורוד מודרני" title="ורוד מודרני 💗"></button>
+        <button style="background: #06b6d4 !important; width: 50px !important; height: 50px !important; border-radius: 50% !important; border: 3px solid #fff !important; cursor: pointer !important; box-shadow: 0 2px 8px rgba(0,0,0,0.2) !important;" data-action="preview-color" data-color="#06b6d4" data-name="טורקיז רענן" title="טורקיז רענן 🩵"></button>
+        <button style="background: #84cc16 !important; width: 50px !important; height: 50px !important; border-radius: 50% !important; border: 3px solid #fff !important; cursor: pointer !important; box-shadow: 0 2px 8px rgba(0,0,0,0.2) !important;" data-action="preview-color" data-color="#84cc16" data-name="ליים עז" title="ליים עז 💛"></button>
+        <button style="background: #f97316 !important; width: 50px !important; height: 50px !important; border-radius: 50% !important; border: 3px solid #fff !important; cursor: pointer !important; box-shadow: 0 2px 8px rgba(0,0,0,0.2) !important;" data-action="preview-color" data-color="#f97316" data-name="כתום בוהק" title="כתום בוהק 🔥"></button>
+        <button style="background: #0891b2 !important; width: 50px !important; height: 50px !important; border-radius: 50% !important; border: 3px solid #fff !important; cursor: pointer !important; box-shadow: 0 2px 8px rgba(0,0,0,0.2) !important;" data-action="preview-color" data-color="#0891b2" data-name="כחול ים" title="כחול ים 🌊"></button>
+        <input type="color" id="custom-color-picker" value="#1e5490" data-action="preview-custom-color" style="width: 50px !important; height: 50px !important; border-radius: 50% !important; cursor: pointer !important; border: 2px solid #ddd !important;" title="בחר צבע מותאם אישית">
+      </div>
+    </div>
+    
+    <!-- תצוגה מקדימה -->
+    <div id="embed-preview-container" style="display: none !important; margin: 30px 0 !important; padding: 20px !important; background: #f8f9fa !important; border-radius: 15px !important; border: 2px dashed #1e5490 !important;">
+      <h4 style="text-align: center !important; color: #1e5490 !important; margin-bottom: 15px !important;">👁️ תצוגה מקדימה בצבע: <span id="preview-color-name">כחול מקצועי</span></h4>
+      <div id="embed-preview-content" style="overflow: visible !important; border: 1px solid #ddd !important; border-radius: 10px !important; background: white !important; padding: 15px !important;"></div>
+      <div style="text-align: center !important; margin-top: 20px !important;">
+        <button data-action="copy-preview-code" style="background: linear-gradient(135deg, #1e5490 0%, #2a5fa0 100%) !important; color: white !important; padding: 15px 40px !important; font-size: 1.1em !important; font-weight: 700 !important; border: none !important; border-radius: 10px !important; cursor: pointer !important; font-family: 'Assistant', sans-serif !important;">
+          📋 העתק קוד עם הצבע הנבחר
+        </button>
+      </div>
+    </div>
+    
+    <!-- תנאי שימוש -->
+    <div style="background: #fff3cd !important; padding: 20px !important; border-radius: 10px !important; margin-top: 30px !important; border-right: 4px solid #FF9800 !important;">
+      <h4 style="color: #856404 !important; margin-bottom: 15px !important;">⚠️ חשוב לדעת - זכויות יוצרים ומגבלות שימוש</h4>
+      <p style="margin: 0 !important; color: #856404 !important; line-height: 1.6 !important;">
+        מחשבון זה מוגן בזכויות יוצרים © וניתן להוספה לאתר שלכם בחינם רק תמורת השארת קישור הקרדיט.<br>
+        <strong>אסור בהחלט:</strong> הסרת/שינוי/הסתרת קישור הקרדיט, שימוש מסחרי ישיר ללא אישור, מכירת המחשבון.
+      </p>
+    </div>
+    
+    <!-- CTA למחשבון מותאם -->
+    <div style="background: linear-gradient(135deg, #1e5490 0%, #2a5fa0 100%) !important; padding: 30px !important; border-radius: 15px !important; text-align: center !important; margin-top: 30px !important; color: white !important;">
+      <h3 style="font-size: 1.4em !important; margin-bottom: 15px !important; color: white !important;">🎯 רוצים מחשבון מותאם אישית לאתר שלכם?</h3>
+      <p style="font-size: 1.1em !important; margin-bottom: 10px !important; color: rgba(255,255,255,0.9) !important;">יש לכם צורך בלוגיקת חישוב שונה? עיצוב מותאם? שדות נוספים? אנחנו נשמח לפתח לכם מחשבון ייעודי בחינם!</p>
+      <p style="margin: 0 !important; color: white !important;">📧 שלחו לנו מייל ל: <strong>info@loan-israel.co.il</strong></p>
+    </div>
+    
+  </div>
+</section>
+
+
+</div>
+
+<script>
+// 🧮 Calculator JavaScript - IRR Calculation with Namespace
+(function() {
+    'use strict';
+    
+    // 1. בדיקת כפילויות
+    const namespace = 'WPC_CalcEffrate_R4K2';
+    if (window[namespace]) {
+        console.warn(namespace + ' כבר קיים');
+        return;
+    }
+    
+    // 2. בדיקה שהמחשבון קיים
+    const container = document.getElementById('wpc-calc-effrate-r4k2-main');
+    if (!container) {
+        console.error('Calculator container לא נמצא');
+        return;
+    }
+    
+    // 3. AbortController לניקוי
+    const controller = new AbortController();
+    const signal = controller.signal;
+    
+    // === פונקציות עזר ===
+    function formatCurrency(num) {
+        return Math.round(num).toLocaleString('he-IL') + ' ₪';
+    }
+    
+    function formatPercent(num) {
+        return num.toFixed(2) + '%';
+    }
+    
+    function formatMonths(months) {
+        const years = Math.floor(months / 12);
+        const remainingMonths = months % 12;
+        if (years === 0) return months + ' חודשים';
+        if (remainingMonths === 0) return months + ' חודשים (' + years + ' שנים)';
+        return months + ' חודשים (' + years + ' שנים ו-' + remainingMonths + ' חודשים)';
+    }
+    
+    // === נוסחת PMT - תשלום חודשי ===
+    function calculateMonthlyPayment(principal, annualRate, months) {
+        const monthlyRate = annualRate / 100 / 12;
+        if (monthlyRate === 0) return principal / months;
+        return principal * (monthlyRate * Math.pow(1 + monthlyRate, months)) / 
+               (Math.pow(1 + monthlyRate, months) - 1);
+    }
+    
+    // === חישוב IRR - Internal Rate of Return ===
+    // זהו הלב של המחשבון - חישוב הריבית האפקטיבית האמיתית
+    function calculateIRR(cashFlows, guess = 0.1) {
+        const maxIterations = 100;
+        const tolerance = 0.00001;
+        let rate = guess;
+        
+        for (let i = 0; i < maxIterations; i++) {
+            let npv = 0;
+            let derivative = 0;
+            
+            for (let j = 0; j < cashFlows.length; j++) {
+                npv += cashFlows[j] / Math.pow(1 + rate, j);
+                derivative -= j * cashFlows[j] / Math.pow(1 + rate, j + 1);
+            }
+            
+            const newRate = rate - npv / derivative;
+            
+            if (Math.abs(newRate - rate) < tolerance) {
+                return newRate;
+            }
+            
+            rate = newRate;
+        }
+        
+        return rate; // אם לא התכנס, מחזיר את הקירוב האחרון
+    }
+    
+    // === חישוב ריבית אפקטיבית ===
+    function calculateEffectiveRate(principal, nominalRate, fee, months) {
+        // חישוב תשלום חודשי לפי הריבית הנקובה
+        const monthlyPayment = calculateMonthlyPayment(principal, nominalRate, months);
+        
+        // יצירת זרם מזומנים
+        // הלווה מקבל: קרן פחות עמלה
+        // הלווה משלם: תשלום חודשי כל חודש
+        const cashFlows = [principal - fee]; // מה שהלווה באמת מקבל ביד
+        for (let i = 0; i < months; i++) {
+            cashFlows.push(-monthlyPayment);
+        }
+        
+        // חישוב IRR חודשי
+        const monthlyIRR = calculateIRR(cashFlows, nominalRate / 100 / 12);
+        
+        // המרה לריבית שנתית אפקטיבית
+        const effectiveAnnualRate = Math.pow(1 + monthlyIRR, 12) - 1;
+        
+        return effectiveAnnualRate * 100;
+    }
+    
+    // === מצב המחשבון ===
+    const state = {
+        basic: {
+            amount: 100000,
+            rate: 6,
+            fee: 1500,
+            months: 48
+        },
+        compare: {
+            amount: 100000,
+            months: 48,
+            offerA: { rate: 5.5, fee: 2500 },
+            offerB: { rate: 6.5, fee: 500 }
+        }
+    };
+    
+    // === עדכון תצוגה - לשונית בסיסית ===
+    function updateBasicTab() {
+        const { amount, rate, fee, months } = state.basic;
+        
+        // עדכון ערכי סליידרים
+        document.getElementById('basic-amount-value').textContent = formatCurrency(amount);
+        document.getElementById('basic-rate-value').textContent = formatPercent(rate);
+        document.getElementById('basic-fee-value').textContent = formatCurrency(fee);
+        document.getElementById('basic-months-value').textContent = formatMonths(months);
+        
+        // חישובים
+        const monthlyPayment = calculateMonthlyPayment(amount, rate, months);
+        const totalPayment = monthlyPayment * months;
+        const totalInterest = totalPayment - amount + fee;
+        const effectiveRate = calculateEffectiveRate(amount, rate, fee, months);
+        const rateDiff = effectiveRate - rate;
+        
+        // עדכון תוצאות
+        document.getElementById('basic-monthly-payment').textContent = formatCurrency(monthlyPayment);
+        document.getElementById('basic-total-payment').textContent = formatCurrency(totalPayment);
+        document.getElementById('basic-total-interest').textContent = formatCurrency(totalInterest);
+        document.getElementById('basic-nominal-rate').textContent = formatPercent(rate);
+        document.getElementById('basic-effective-rate').textContent = formatPercent(effectiveRate);
+        document.getElementById('basic-rate-diff').textContent = '+' + formatPercent(rateDiff);
+    }
+    
+    // === עדכון תצוגה - לשונית השוואה ===
+    function updateCompareTab() {
+        const { amount, months, offerA, offerB } = state.compare;
+        
+        // עדכון ערכים משותפים
+        document.getElementById('compare-amount-value').textContent = formatCurrency(amount);
+        document.getElementById('compare-months-value').textContent = formatMonths(months);
+        
+        // עדכון הצעה א'
+        document.getElementById('offer-a-rate-value').textContent = formatPercent(offerA.rate);
+        document.getElementById('offer-a-fee-value').textContent = formatCurrency(offerA.fee);
+        
+        const monthlyA = calculateMonthlyPayment(amount, offerA.rate, months);
+        const totalA = monthlyA * months + offerA.fee;
+        const effectiveA = calculateEffectiveRate(amount, offerA.rate, offerA.fee, months);
+        
+        document.getElementById('offer-a-monthly').textContent = formatCurrency(monthlyA);
+        document.getElementById('offer-a-total').textContent = formatCurrency(totalA);
+        document.getElementById('offer-a-effective').textContent = formatPercent(effectiveA);
+        
+        // עדכון הצעה ב'
+        document.getElementById('offer-b-rate-value').textContent = formatPercent(offerB.rate);
+        document.getElementById('offer-b-fee-value').textContent = formatCurrency(offerB.fee);
+        
+        const monthlyB = calculateMonthlyPayment(amount, offerB.rate, months);
+        const totalB = monthlyB * months + offerB.fee;
+        const effectiveB = calculateEffectiveRate(amount, offerB.rate, offerB.fee, months);
+        
+        document.getElementById('offer-b-monthly').textContent = formatCurrency(monthlyB);
+        document.getElementById('offer-b-total').textContent = formatCurrency(totalB);
+        document.getElementById('offer-b-effective').textContent = formatPercent(effectiveB);
+        
+        // עדכון מנצח
+        const winnerBox = document.getElementById('compare-winner-box');
+        const savingsEl = document.getElementById('compare-savings');
+        const offerABox = document.getElementById('offer-a-box');
+        const offerBBox = document.getElementById('offer-b-box');
+        
+        // הסרת קלאס winner מכולם
+        offerABox.classList.remove('winner');
+        offerBBox.classList.remove('winner');
+        
+        if (Math.abs(totalA - totalB) < 1) {
+            winnerBox.innerHTML = '<div class="wpc-calc-effrate-r4k2-winner-title">🤝 ההצעות שוות!</div>' +
+                '<div class="wpc-calc-effrate-r4k2-winner-text">שתי ההצעות עולות כמעט אותו דבר</div>';
+            winnerBox.style.background = 'linear-gradient(135deg, var(--warning) 0%, #e68a00 100%)';
+        } else if (totalA < totalB) {
+            offerABox.classList.add('winner');
+            winnerBox.innerHTML = '<div class="wpc-calc-effrate-r4k2-winner-title">🏆 הצעה א\' זולה יותר!</div>' +
+                '<div class="wpc-calc-effrate-r4k2-winner-text">תחסוך <span id="compare-savings">' + 
+                Math.round(totalB - totalA).toLocaleString('he-IL') + '</span> ₪ לאורך כל התקופה</div>';
+            winnerBox.style.background = 'linear-gradient(135deg, var(--success) 0%, #1da851 100%)';
+        } else {
+            offerBBox.classList.add('winner');
+            winnerBox.innerHTML = '<div class="wpc-calc-effrate-r4k2-winner-title">🏆 הצעה ב\' זולה יותר!</div>' +
+                '<div class="wpc-calc-effrate-r4k2-winner-text">תחסוך <span id="compare-savings">' + 
+                Math.round(totalA - totalB).toLocaleString('he-IL') + '</span> ₪ לאורך כל התקופה</div>';
+            winnerBox.style.background = 'linear-gradient(135deg, var(--success) 0%, #1da851 100%)';
+        }
+    }
+    
+    // === מעבר בין לשוניות ===
+    function switchTab(tabName) {
+        // עדכון כפתורי טאבים
+        container.querySelectorAll('.wpc-calc-effrate-r4k2-calc-tab').forEach(tab => {
+            tab.classList.remove('active');
+        });
+        container.querySelector('[data-tab="' + tabName + '"]').classList.add('active');
+        
+        // עדכון תוכן
+        container.querySelectorAll('.wpc-calc-effrate-r4k2-calc-panel').forEach(panel => {
+            panel.classList.remove('active');
+        });
+        document.getElementById('tab-' + tabName).classList.add('active');
+        
+        // עדכון חישובים
+        if (tabName === 'basic') {
+            updateBasicTab();
+        } else {
+            updateCompareTab();
+        }
+    }
+    
+    // === גלילה לאלמנט ===
+    function scrollToElement(selector) {
+        const element = container.querySelector(selector) || document.querySelector(selector);
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    }
+    
+    // === טיפול באירועים - Click ===
+    container.addEventListener('click', function(e) {
+        const action = e.target.closest('[data-action]');
+        if (!action) return;
+        
+        const actionType = action.dataset.action;
+        
+        switch(actionType) {
+            case 'switch-tab':
+                switchTab(action.dataset.tab);
+                break;
+            case 'scroll-to-awg':
+                scrollToElement('.wpc-calc-effrate-r4k2-awg-section');
+                break;
+            case 'scroll-to-calculator':
+                scrollToElement('#wpc-calc-effrate-r4k2-calculator');
+                break;
+            case 'toggle-faq':
+                toggleFaq(action);
+                break;
+            case 'scroll-to-embed':
+                scrollToElement('#embed-section');
+                break;
+            case 'copy-embed-code':
+                copyEmbedCode();
+                break;
+            case 'preview-color':
+                previewColor(action.dataset.color, action.dataset.name);
+                break;
+            case 'copy-preview-code':
+                copyPreviewCode();
+                break;
+        }
+    }, { signal });
+    
+    // === טיפול בבורר צבע מותאם אישית ===
+    const customColorPicker = document.getElementById('custom-color-picker');
+    if (customColorPicker) {
+        customColorPicker.addEventListener('input', function(e) {
+            previewColor(e.target.value, 'צבע מותאם אישית');
+        }, { signal });
+    }
+    
+    // === מצב הטמעה ===
+    let currentEmbedColor = '#1e5490';
+    
+    // === פונקציות עזר לצבעים ===
+    function darkenColor(hex, percent) {
+        const num = parseInt(hex.replace('#', ''), 16);
+        const amt = Math.round(2.55 * percent);
+        const R = Math.max(0, (num >> 16) - amt);
+        const G = Math.max(0, ((num >> 8) & 0x00FF) - amt);
+        const B = Math.max(0, (num & 0x0000FF) - amt);
+        return '#' + (0x1000000 + R * 0x10000 + G * 0x100 + B).toString(16).slice(1);
+    }
+    
+    function hexToRgba(hex, alpha) {
+        const r = parseInt(hex.slice(1, 3), 16);
+        const g = parseInt(hex.slice(3, 5), 16);
+        const b = parseInt(hex.slice(5, 7), 16);
+        return 'rgba(' + r + ', ' + g + ', ' + b + ', ' + alpha + ')';
+    }
+    
+    // === העתקת קוד הטמעה ===
+    function copyEmbedCode() {
+        const code = generateEmbedCode('#1e5490');
+        navigator.clipboard.writeText(code).then(() => {
+            alert('✅ הקוד הועתק בהצלחה! הדביקו אותו בעורך HTML שלכם.');
+        }).catch(() => {
+            alert('שגיאה בהעתקה. נסו שוב.');
+        });
+    }
+    
+    // === העתקת קוד עם צבע נבחר ===
+    function copyPreviewCode() {
+        const code = generateEmbedCode(currentEmbedColor);
+        navigator.clipboard.writeText(code).then(() => {
+            alert('✅ הקוד עם הצבע הנבחר הועתק בהצלחה!');
+        }).catch(() => {
+            alert('שגיאה בהעתקה. נסו שוב.');
+        });
+    }
+    
+    // === תצוגה מקדימה עם שכפול מחשבון אמיתי ===
+    function previewColor(color, name) {
+        currentEmbedColor = color;
+        showPreview(color, name);
+    }
+    
+    function showPreview(color, colorName) {
+        const previewContainer = document.getElementById('embed-preview-container');
+        const previewContent = document.getElementById('embed-preview-content');
+        const colorNameEl = document.getElementById('preview-color-name');
+        
+        if (!previewContainer || !previewContent) return;
+        
+        previewContainer.style.setProperty('display', 'block', 'important');
+        colorNameEl.textContent = colorName;
+        
+        // מצא את המחשבון המקורי - ה-wrapper עם הטאבים והתוכן
+        const calculator = container.querySelector('.wpc-calc-effrate-r4k2-calc-wrapper');
+        if (!calculator) {
+            console.error('לא נמצא מחשבון לשכפול');
+            return;
+        }
+        
+        // שכפל את המחשבון
+        const calc = calculator.cloneNode(true);
+        
+        // שנה ID למניעת התנגשות
+        calc.id = 'wpc-calc-effrate-r4k2-calculator-preview';
+        
+        // החלף IDs של טאבים ב-data attributes
+        const tabContents = calc.querySelectorAll('[id*="tab-"]');
+        tabContents.forEach(tabContent => {
+            const oldId = tabContent.id;
+            const tabName = oldId.replace(/.*tab-/, '').replace(/-content$/, '');
+            tabContent.setAttribute('data-preview-tab', tabName);
+            tabContent.removeAttribute('id');
+        });
+        
+        // הגדר CSS Variables על האלמנט המשוכפל
+        calc.style.setProperty('--primary', color);
+        calc.style.setProperty('--primary-dark', darkenColor(color, 15));
+        calc.style.setProperty('--primary-light', hexToRgba(color, 0.1));
+        calc.style.setProperty('--primary-gradient', 'linear-gradient(135deg, ' + color + ' 0%, ' + darkenColor(color, 20) + ' 100%)');
+        
+        // החלף צבעים עם setProperty + important
+        // כותרות
+        calc.querySelectorAll('[class*="title"], [class*="header"], h3').forEach(el => {
+            if (getComputedStyle(el).color !== 'rgb(255, 255, 255)') {
+                el.style.setProperty('color', color, 'important');
+            }
+        });
+        
+        // Hero section
+        const heroSection = calc.querySelector('[class*="hero"], [class*="gradient-header"]');
+        if (heroSection) {
+            heroSection.style.setProperty('background', 'linear-gradient(135deg, ' + color + ' 0%, ' + darkenColor(color, 20) + ' 100%)', 'important');
+        }
+        
+        // טאבים פעילים
+        const activeTabBtn = calc.querySelector('[data-action="switch-tab"].active');
+        if (activeTabBtn) {
+            activeTabBtn.style.setProperty('background', color, 'important');
+            activeTabBtn.style.setProperty('color', 'white', 'important');
+            activeTabBtn.style.setProperty('border-color', color, 'important');
+        }
+        
+        // טאבים לא פעילים
+        calc.querySelectorAll('[data-action="switch-tab"]:not(.active)').forEach(tab => {
+            tab.style.setProperty('border-color', color, 'important');
+            tab.style.setProperty('color', color, 'important');
+        });
+        
+        // ערכי סליידר
+        calc.querySelectorAll('[class*="slider-value"], [id*="-val"]').forEach(el => {
+            el.style.setProperty('color', color, 'important');
+        });
+        
+        // סליידרים
+        calc.querySelectorAll('input[type="range"]').forEach(slider => {
+            slider.style.setProperty('accent-color', color, 'important');
+        });
+        
+        // כותרות טבלאות
+        calc.querySelectorAll('th, [class*="table-header"]').forEach(el => {
+            el.style.setProperty('background', color, 'important');
+        });
+        
+        // כפתורים ראשיים
+        calc.querySelectorAll('[class*="cta"], [class*="primary-btn"]').forEach(el => {
+            el.style.setProperty('background', 'linear-gradient(135deg, ' + color + ' 0%, ' + darkenColor(color, 20) + ' 100%)', 'important');
+        });
+        
+        // הצג
+        previewContent.innerHTML = '';
+        previewContent.appendChild(calc);
+        
+        // אתחל את ה-JS של המחשבון המשוכפל
+        initPreviewCalculator(calc, color);
+        
+        // גלול לתצוגה
+        previewContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    
+    // === אתחול מחשבון בתצוגה מקדימה ===
+    function initPreviewCalculator(calc, primaryColor) {
+        // State מקומי לתצוגה המקדימה - מותאם ל-IDs במחשבון זה
+        const previewState = {
+            basic: { amount: 100000, rate: 6, fee: 1500, months: 48 },
+            compare: { 
+                offerA: { amount: 100000, rate: 6, fee: 1500, months: 48 },
+                offerB: { amount: 100000, rate: 5.5, fee: 3000, months: 48 }
+            }
+        };
+        
+        // פונקציות עזר
+        function fmt(n) { return Math.round(n).toLocaleString('he-IL') + ' ₪'; }
+        function pct(n) { return n.toFixed(2) + '%'; }
+        
+        function pmt(p, r, m) {
+            const mr = r / 100 / 12;
+            if (mr === 0) return p / m;
+            return p * (mr * Math.pow(1 + mr, m)) / (Math.pow(1 + mr, m) - 1);
+        }
+        
+        function irr(cf, g) {
+            g = g || 0.1;
+            for (let i = 0; i < 100; i++) {
+                let npv = 0, d = 0;
+                for (let j = 0; j < cf.length; j++) {
+                    npv += cf[j] / Math.pow(1 + g, j);
+                    d -= j * cf[j] / Math.pow(1 + g, j + 1);
+                }
+                const ng = g - npv / d;
+                if (Math.abs(ng - g) < 0.00001) return ng;
+                g = ng;
+            }
+            return g;
+        }
+        
+        function eff(p, r, f, m) {
+            const mp = pmt(p, r, m);
+            const cf = [p - f];
+            for (let i = 0; i < m; i++) cf.push(-mp);
+            const mi = irr(cf, r / 100 / 12);
+            return (Math.pow(1 + mi, 12) - 1) * 100;
+        }
+        
+        // עדכון טאב בסיסי - מותאם ל-IDs: basic-monthly-payment, basic-effective-rate וכו'
+        function updateBasic() {
+            const s = previewState.basic;
+            const mp = pmt(s.amount, s.rate, s.months);
+            const tot = mp * s.months;
+            const interest = tot - s.amount;
+            const er = eff(s.amount, s.rate, s.fee, s.months);
+            const diff = er - s.rate;
+            
+            // מצא את כל אלמנטי התוצאה בתוך ה-calc (לא לפי ID כי הם הוסרו)
+            const monthlyEl = calc.querySelector('[id*="basic-monthly"], [class*="monthly-payment"]');
+            const totalEl = calc.querySelector('[id*="basic-total-payment"], [class*="total-payment"]');
+            const interestEl = calc.querySelector('[id*="basic-total-interest"], [class*="total-interest"]');
+            const nominalEl = calc.querySelector('[id*="basic-nominal"], [class*="nominal-rate"]');
+            const effectiveEl = calc.querySelector('[id*="basic-effective"], [class*="effective-rate"]');
+            const diffEl = calc.querySelector('[id*="basic-rate-diff"], [class*="rate-diff"]');
+            
+            if (monthlyEl) monthlyEl.textContent = fmt(mp);
+            if (totalEl) totalEl.textContent = fmt(tot);
+            if (interestEl) interestEl.textContent = fmt(interest);
+            if (nominalEl) nominalEl.textContent = pct(s.rate);
+            if (effectiveEl) effectiveEl.textContent = pct(er);
+            if (diffEl) diffEl.textContent = '+' + pct(diff);
+        }
+        
+        // עדכון טאב השוואה - מותאם ל-IDs: offer-a-monthly, offer-b-effective וכו'
+        function updateCompare() {
+            const oA = previewState.compare.offerA;
+            const oB = previewState.compare.offerB;
+            
+            const effA = eff(oA.amount, oA.rate, oA.fee, oA.months);
+            const effB = eff(oB.amount, oB.rate, oB.fee, oB.months);
+            
+            const mpA = pmt(oA.amount, oA.rate, oA.months);
+            const mpB = pmt(oB.amount, oB.rate, oB.months);
+            
+            const totA = mpA * oA.months;
+            const totB = mpB * oB.months;
+            
+            // הצעה א'
+            const mpAEl = calc.querySelector('[id*="offer-a-monthly"]');
+            const totAEl = calc.querySelector('[id*="offer-a-total"]');
+            const effAEl = calc.querySelector('[id*="offer-a-effective"]');
+            
+            // הצעה ב'
+            const mpBEl = calc.querySelector('[id*="offer-b-monthly"]');
+            const totBEl = calc.querySelector('[id*="offer-b-total"]');
+            const effBEl = calc.querySelector('[id*="offer-b-effective"]');
+            
+            if (mpAEl) mpAEl.textContent = fmt(mpA);
+            if (totAEl) totAEl.textContent = fmt(totA);
+            if (effAEl) effAEl.textContent = pct(effA);
+            
+            if (mpBEl) mpBEl.textContent = fmt(mpB);
+            if (totBEl) totBEl.textContent = fmt(totB);
+            if (effBEl) effBEl.textContent = pct(effB);
+            
+            // עדכון תוצאת ההשוואה
+            const resultEl = calc.querySelector('[class*="comparison-result"], [class*="winner"]');
+            if (resultEl) {
+                const winner = effA < effB ? "א'" : "ב'";
+                const savings = Math.abs(totA - totB);
+                resultEl.innerHTML = '🏆 הצעה ' + winner + ' זולה יותר!<br>תחסוך ' + fmt(savings) + ' לאורך כל התקופה';
+            }
+        }
+        
+        // טאבים - עם stopPropagation
+        const tabs = calc.querySelectorAll('[data-action="switch-tab"]');
+        const contents = calc.querySelectorAll('[data-preview-tab], [class*="calc-panel"]');
+        
+        tabs.forEach(tab => {
+            tab.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation(); // מונע bubble למחשבון המקורי
+                
+                const tabName = this.dataset.tab;
+                
+                // הסר active מכולם
+                tabs.forEach(t => {
+                    t.classList.remove('active');
+                    t.style.setProperty('background', 'transparent', 'important');
+                    t.style.setProperty('color', primaryColor, 'important');
+                    t.style.setProperty('border-color', primaryColor, 'important');
+                });
+                
+                contents.forEach(c => {
+                    c.classList.remove('active');
+                    c.style.display = 'none';
+                });
+                
+                // הוסף active לנבחר
+                this.classList.add('active');
+                this.style.setProperty('background', primaryColor, 'important');
+                this.style.setProperty('color', 'white', 'important');
+                
+                // הצג תוכן הטאב
+                const activeContent = calc.querySelector('[data-preview-tab="' + tabName + '"], [id*="tab-' + tabName + '"]');
+                if (activeContent) {
+                    activeContent.classList.add('active');
+                    activeContent.style.display = 'block';
+                }
+                
+                // עדכן חישובים
+                if (tabName === 'basic') updateBasic();
+                else if (tabName === 'compare') updateCompare();
+            });
+        });
+        
+        // סליידרים - עם stopPropagation
+        const sliders = calc.querySelectorAll('input[type="range"]');
+        sliders.forEach(slider => {
+            slider.addEventListener('input', function(e) {
+                e.stopPropagation();
+                
+                const id = this.id;
+                const val = parseFloat(this.value);
+                
+                // עדכון ערך מוצג
+                const valueId = id.replace('-slider', '-val').replace('-input', '-val');
+                let valueEl = calc.querySelector('#' + valueId);
+                if (!valueEl) {
+                    valueEl = this.parentElement.querySelector('[class*="value"], [id*="-val"]');
+                }
+                
+                if (valueEl) {
+                    if (id.includes('rate')) {
+                        valueEl.textContent = val.toFixed(1) + '%';
+                    } else if (id.includes('month')) {
+                        valueEl.textContent = val + ' חודשים';
+                    } else {
+                        valueEl.textContent = fmt(val);
+                    }
+                }
+                
+                // עדכון state לפי הסליידר - מותאם ל-IDs במחשבון זה
+                if (id.includes('basic')) {
+                    if (id.includes('amount')) previewState.basic.amount = val;
+                    else if (id.includes('rate')) previewState.basic.rate = val;
+                    else if (id.includes('fee')) previewState.basic.fee = val;
+                    else if (id.includes('month')) previewState.basic.months = val;
+                    updateBasic();
+                } else if (id.includes('offer-a') || id.includes('offer_a')) {
+                    if (id.includes('amount')) previewState.compare.offerA.amount = val;
+                    else if (id.includes('rate')) previewState.compare.offerA.rate = val;
+                    else if (id.includes('fee')) previewState.compare.offerA.fee = val;
+                    else if (id.includes('month')) previewState.compare.offerA.months = val;
+                    updateCompare();
+                } else if (id.includes('offer-b') || id.includes('offer_b')) {
+                    if (id.includes('amount')) previewState.compare.offerB.amount = val;
+                    else if (id.includes('rate')) previewState.compare.offerB.rate = val;
+                    else if (id.includes('fee')) previewState.compare.offerB.fee = val;
+                    else if (id.includes('month')) previewState.compare.offerB.months = val;
+                    updateCompare();
+                }
+            });
+            
+            // צבע סליידר
+            slider.style.setProperty('accent-color', primaryColor, 'important');
+        });
+        
+        // אתחול ראשוני - עדכן את כל הטאבים
+        updateBasic();
+        updateCompare();
+    }
+    
+    // === יצירת קוד הטמעה מלא ===
+    function generateEmbedCode(primaryColor) {
+        const darkColor = darkenColor(primaryColor, 20);
+        
+        return '<!-- מחשבון ריבית אפקטיבית - רק תבקש פיננסים -->\n' +
+'<style>\n' +
+'.wpc-effrate-embed-wrapper { all: initial !important; font-family: Assistant, sans-serif !important; direction: rtl !important; max-width: 800px !important; margin: 0 auto !important; display: block !important; }\n' +
+'.wpc-effrate-embed-wrapper * { box-sizing: border-box !important; }\n' +
+'.wpc-effrate-embed-header { background: linear-gradient(135deg, ' + primaryColor + ' 0%, ' + darkColor + ' 100%) !important; padding: 25px !important; border-radius: 15px 15px 0 0 !important; color: white !important; text-align: center !important; }\n' +
+'.wpc-effrate-embed-title { font-size: 1.5em !important; font-weight: 700 !important; margin: 0 0 10px !important; color: white !important; }\n' +
+'.wpc-effrate-embed-content { background: white !important; padding: 25px !important; border: 1px solid #e0e0e0 !important; border-top: none !important; border-radius: 0 0 15px 15px !important; }\n' +
+'.wpc-effrate-embed-slider-wrap { margin: 20px 0 !important; }\n' +
+'.wpc-effrate-embed-slider-wrap label { display: block !important; font-weight: 600 !important; margin-bottom: 8px !important; color: #333 !important; }\n' +
+'.wpc-effrate-embed-slider { width: 100% !important; height: 8px !important; border-radius: 4px !important; background: #e0e0e0 !important; -webkit-appearance: none !important; direction: ltr !important; }\n' +
+'.wpc-effrate-embed-slider::-webkit-slider-thumb { -webkit-appearance: none !important; width: 24px !important; height: 24px !important; background: ' + primaryColor + ' !important; border-radius: 50% !important; cursor: pointer !important; }\n' +
+'.wpc-effrate-embed-value { text-align: center !important; font-size: 1.2em !important; font-weight: 700 !important; color: ' + primaryColor + ' !important; margin-top: 8px !important; }\n' +
+'.wpc-effrate-embed-results { background: #f5f5f5 !important; padding: 20px !important; border-radius: 10px !important; margin-top: 20px !important; border-right: 4px solid #25D366 !important; }\n' +
+'.wpc-effrate-embed-result-row { display: flex !important; justify-content: space-between !important; padding: 10px 0 !important; border-bottom: 1px solid #ddd !important; }\n' +
+'.wpc-effrate-embed-result-row:last-child { border-bottom: none !important; }\n' +
+'.wpc-effrate-embed-result-label { color: #333 !important; font-weight: 600 !important; }\n' +
+'.wpc-effrate-embed-result-value { color: ' + primaryColor + ' !important; font-weight: 700 !important; }\n' +
+'.wpc-effrate-embed-highlight { background: rgba(37,211,102,0.15) !important; padding: 12px !important; border-radius: 8px !important; margin-top: 10px !important; }\n' +
+'.wpc-effrate-embed-highlight .wpc-effrate-embed-result-value { color: #25D366 !important; font-size: 1.3em !important; }\n' +
+'@media (max-width: 600px) { .wpc-effrate-embed-result-row { flex-direction: column !important; gap: 5px !important; } }\n' +
+'</style>\n' +
+'<div class="wpc-effrate-embed-wrapper" id="wpc-effrate-embed-main">\n' +
+'<div class="wpc-effrate-embed-header"><h3 class="wpc-effrate-embed-title">מחשבון ריבית אפקטיבית</h3><p style="margin:0;opacity:0.9;">גלה את העלות האמיתית של ההלוואה שלך</p></div>\n' +
+'<div class="wpc-effrate-embed-content">\n' +
+'<div class="wpc-effrate-embed-slider-wrap"><label>💰 סכום הלוואה:</label><input type="range" class="wpc-effrate-embed-slider" id="embed-amount" min="10000" max="500000" step="5000" value="100000"><div class="wpc-effrate-embed-value" id="embed-amount-val">100,000 ₪</div></div>\n' +
+'<div class="wpc-effrate-embed-slider-wrap"><label>📊 ריבית נקובה (שנתית):</label><input type="range" class="wpc-effrate-embed-slider" id="embed-rate" min="2" max="25" step="0.1" value="6"><div class="wpc-effrate-embed-value" id="embed-rate-val">6.0%</div></div>\n' +
+'<div class="wpc-effrate-embed-slider-wrap"><label>📋 עמלת פתיחת תיק:</label><input type="range" class="wpc-effrate-embed-slider" id="embed-fee" min="0" max="10000" step="100" value="1500"><div class="wpc-effrate-embed-value" id="embed-fee-val">1,500 ₪</div></div>\n' +
+'<div class="wpc-effrate-embed-slider-wrap"><label>📅 תקופה (חודשים):</label><input type="range" class="wpc-effrate-embed-slider" id="embed-months" min="12" max="120" step="6" value="48"><div class="wpc-effrate-embed-value" id="embed-months-val">48 חודשים</div></div>\n' +
+'<div class="wpc-effrate-embed-results">\n' +
+'<div class="wpc-effrate-embed-result-row"><span class="wpc-effrate-embed-result-label">תשלום חודשי:</span><span class="wpc-effrate-embed-result-value" id="embed-monthly">2,348 ₪</span></div>\n' +
+'<div class="wpc-effrate-embed-result-row"><span class="wpc-effrate-embed-result-label">סה"כ החזר:</span><span class="wpc-effrate-embed-result-value" id="embed-total">112,704 ₪</span></div>\n' +
+'<div class="wpc-effrate-embed-result-row"><span class="wpc-effrate-embed-result-label">ריבית נקובה:</span><span class="wpc-effrate-embed-result-value" id="embed-nominal">6.0%</span></div>\n' +
+'<div class="wpc-effrate-embed-highlight"><div class="wpc-effrate-embed-result-row"><span class="wpc-effrate-embed-result-label">🎯 ריבית אפקטיבית:</span><span class="wpc-effrate-embed-result-value" id="embed-effective">6.82%</span></div></div>\n' +
+'</div></div></div>\n' +
+'<p style="text-align:center;font-size:0.9em;margin-top:20px;color:#666;">מחשבון ריבית אפקטיבית פותח על ידי <a href="https://loan-israel.co.il/" target="_blank" rel="nofollow noopener" style="color:' + primaryColor + ';text-decoration:underline;">רק תבקש פיננסים</a></p>\n' +
+'<script>\n' +
+'document.addEventListener("DOMContentLoaded",function(){(function(){"use strict";var ns="WPC_EffrateEmbed";if(window[ns])return;var c=document.getElementById("wpc-effrate-embed-main");if(!c)return;var s={amount:100000,rate:6,fee:1500,months:48};function fmt(n){return Math.round(n).toLocaleString("he-IL")+" ₪";}function pct(n){return n.toFixed(2)+"%";}function pmt(p,r,m){var mr=r/100/12;if(mr===0)return p/m;return p*(mr*Math.pow(1+mr,m))/(Math.pow(1+mr,m)-1);}function irr(cf,g){g=g||0.1;for(var i=0;i<100;i++){var npv=0,d=0;for(var j=0;j<cf.length;j++){npv+=cf[j]/Math.pow(1+g,j);d-=j*cf[j]/Math.pow(1+g,j+1);}var ng=g-npv/d;if(Math.abs(ng-g)<0.00001)return ng;g=ng;}return g;}function eff(p,r,f,m){var mp=pmt(p,r,m);var cf=[p-f];for(var i=0;i<m;i++)cf.push(-mp);var mi=irr(cf,r/100/12);return(Math.pow(1+mi,12)-1)*100;}function upd(){var a=s.amount,r=s.rate,f=s.fee,m=s.months;document.getElementById("embed-amount-val").textContent=fmt(a);document.getElementById("embed-rate-val").textContent=pct(r);document.getElementById("embed-fee-val").textContent=fmt(f);document.getElementById("embed-months-val").textContent=m+" חודשים";var mp=pmt(a,r,m);var tot=mp*m;var er=eff(a,r,f,m);document.getElementById("embed-monthly").textContent=fmt(mp);document.getElementById("embed-total").textContent=fmt(tot);document.getElementById("embed-nominal").textContent=pct(r);document.getElementById("embed-effective").textContent=pct(er);}c.addEventListener("input",function(e){var id=e.target.id,v=parseFloat(e.target.value);if(id==="embed-amount")s.amount=v;else if(id==="embed-rate")s.rate=v;else if(id==="embed-fee")s.fee=v;else if(id==="embed-months")s.months=v;upd();});upd();window[ns]={v:"1.0"};})();});\n' +
+'</' + 'script>';
+    }
+    
+    // === פתיחה/סגירה של שאלות נפוצות ===
+    function toggleFaq(header) {
+        const item = header.closest('.wpc-calc-effrate-r4k2-accordion-item');
+        const content = item.querySelector('.wpc-calc-effrate-r4k2-accordion-content');
+        const arrow = header.querySelector('span');
+        const isOpen = content.style.maxHeight && content.style.maxHeight !== '0px';
+        
+        // סגור את כל השאלות האחרות
+        document.querySelectorAll('.wpc-calc-effrate-r4k2-accordion-content').forEach(c => {
+            c.style.maxHeight = '0px';
+        });
+        document.querySelectorAll('.wpc-calc-effrate-r4k2-accordion-header span').forEach(a => {
+            a.style.transform = 'translateY(-50%)';
+        });
+        document.querySelectorAll('.wpc-calc-effrate-r4k2-accordion-header').forEach(h => {
+            h.style.background = '#f8f9fa';
+            h.style.borderColor = 'transparent';
+        });
+        
+        // פתח/סגור את הנוכחי
+        if (!isOpen) {
+            content.style.maxHeight = content.scrollHeight + 'px';
+            arrow.style.transform = 'translateY(-50%) rotate(-90deg)';
+            header.style.background = '#e8f4fc';
+            header.style.borderColor = '#1e5490';
+        }
+    }
+    
+    // === טיפול באירועים - Input (סליידרים) ===
+    container.addEventListener('input', function(e) {
+        const id = e.target.id;
+        const value = parseFloat(e.target.value);
+        
+        // לשונית בסיסית
+        if (id === 'basic-amount-slider') {
+            state.basic.amount = value;
+            updateBasicTab();
+        } else if (id === 'basic-rate-slider') {
+            state.basic.rate = value;
+            updateBasicTab();
+        } else if (id === 'basic-fee-slider') {
+            state.basic.fee = value;
+            updateBasicTab();
+        } else if (id === 'basic-months-slider') {
+            state.basic.months = value;
+            updateBasicTab();
+        }
+        
+        // לשונית השוואה - משותפים
+        else if (id === 'compare-amount-slider') {
+            state.compare.amount = value;
+            updateCompareTab();
+        } else if (id === 'compare-months-slider') {
+            state.compare.months = value;
+            updateCompareTab();
+        }
+        
+        // הצעה א'
+        else if (id === 'offer-a-rate') {
+            state.compare.offerA.rate = value;
+            updateCompareTab();
+        } else if (id === 'offer-a-fee') {
+            state.compare.offerA.fee = value;
+            updateCompareTab();
+        }
+        
+        // הצעה ב'
+        else if (id === 'offer-b-rate') {
+            state.compare.offerB.rate = value;
+            updateCompareTab();
+        } else if (id === 'offer-b-fee') {
+            state.compare.offerB.fee = value;
+            updateCompareTab();
+        }
+    }, { signal });
+    
+    // === אתחול ===
+    function init() {
+        updateBasicTab();
+        updateCompareTab();
+        console.log(namespace + ' initialized successfully');
+    }
+    
+    init();
+    
+    // === חשיפה מוגבלת ===
+    window[namespace] = {
+        version: '1.0.0',
+        destroy: function() {
+            controller.abort();
+            delete window[namespace];
+        }
+    };
+})();
+</script>
+
+<!-- 🔍 Schema.org Structured Data for Google -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "מה ההבדל בין ריבית נומינלית לאפקטיבית?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "ריבית נומינלית (נקובה) היא הריבית הבסיסית שמציגים לכם - ללא העמלות והעלויות הנלוות. ריבית אפקטיבית היא העלות האמיתית של ההלוואה אחרי שמוסיפים את כל העמלות, דמי הטיפול, וההשפעה של תדירות התשלומים."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "איך מחשבים ריבית אפקטיבית?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "החישוב נעשה בשיטת IRR (Internal Rate of Return) - שיעור התשואה הפנימי. זוהי הריבית שמשווה בין מה שקיבלת בפועל (הקרן פחות העמלות) לבין מה שתחזירי לאורך כל התקופה."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "למה הלוואה עם ריבית גבוהה יותר יכולה להיות זולה יותר?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "כי העמלות משנות את התמונה! הלוואה בריבית 5.5% עם עמלת פתיחה של 3,000 ₪ יכולה להיות יקרה יותר מהלוואה בריבית 6.5% ללא עמלות. ככל שתקופת ההלוואה קצרה יותר, ההשפעה של העמלות גדולה יותר."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "האם הבנק חייב לגלות לי את הריבית האפקטיבית?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "כן! על פי חוק האשראי ההוגן והוראות בנק ישראל, כל גוף מימון חייב להציג ללקוח את שיעור העלות הכוללת לאשראי (שזו בעצם הריבית האפקטיבית)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "מה נחשב ריבית אפקטיבית טובה בישראל?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "זה תלוי בסוג ההלוואה: הלוואה מקרן השתלמות 5-6% (מצוין), הלוואה בנקאית לבעלי נכס 6-8%, הלוואה צרכנית רגילה 8-12%, הלוואה חוץ-בנקאית 12-24%."
+      }
+    }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FinancialProduct",
+  "name": "מחשבון ריבית אפקטיבית - המחיר האמיתי של הלוואה",
+  "description": "מחשבון חינמי לחישוב הריבית האפקטיבית האמיתית של הלוואה, כולל השוואה בין הצעות שונות לגילוי ההצעה הזולה באמת",
+  "category": "מחשבון פיננסי",
+  "featureList": [
+    "חישוב ריבית אפקטיבית בשיטת IRR",
+    "השוואה בין שתי הצעות הלוואה",
+    "חישוב עלות כוללת כולל עמלות",
+    "תצוגה ויזואלית של ההצעה המשתלמת"
+  ],
+  "provider": {
+    "@type": "Organization",
+    "name": "רק תבקש - אפטריו בע״מ",
+    "url": "https://loan-israel.co.il"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "ILS",
+    "availability": "https://schema.org/InStock"
+  }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "איך להשתמש במחשבון ריבית אפקטיבית",
+  "description": "מדריך שלב אחר שלב לחישוב הריבית האפקטיבית האמיתית של הלוואה",
+  "step": [
+    {
+      "@type": "HowToStep",
+      "position": 1,
+      "name": "הזנת סכום ההלוואה",
+      "text": "הזינו את סכום ההלוואה שאתם מעוניינים לקחת בפס הגלילה"
+    },
+    {
+      "@type": "HowToStep",
+      "position": 2,
+      "name": "הזנת הריבית הנקובה",
+      "text": "הזינו את הריבית השנתית שהוצעה לכם (הריבית הנומינלית)"
+    },
+    {
+      "@type": "HowToStep",
+      "position": 3,
+      "name": "הזנת עמלת פתיחת תיק",
+      "text": "הזינו את עמלת פתיחת התיק או דמי הטיפול בשקלים"
+    },
+    {
+      "@type": "HowToStep",
+      "position": 4,
+      "name": "בחירת תקופת ההלוואה",
+      "text": "בחרו את תקופת ההחזר בחודשים"
+    },
+    {
+      "@type": "HowToStep",
+      "position": 5,
+      "name": "צפייה בתוצאות",
+      "text": "המחשבון יציג את הריבית האפקטיבית האמיתית ואת ההפרש מהריבית הנקובה"
+    }
+  ]
+}
+</script>
+

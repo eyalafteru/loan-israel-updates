@@ -1,0 +1,2351 @@
+<script>
+// בדיקה והוספת viewport meta tag אם חסר
+if (!document.querySelector('meta[name="viewport"]')) {
+  const viewport = document.createElement('meta');
+  viewport.name = 'viewport';
+  viewport.content = 'width=device-width, initial-scale=1.0, user-scalable=yes';
+  document.head.appendChild(viewport);
+}
+</script>
+
+<style>
+/* === תיקון צבעים למכשירים אמיתיים === */
+.wpc-calc-snowball-m4k7-wrapper {
+    color-scheme: light !important;
+    forced-color-adjust: none !important;
+    -webkit-forced-color-adjust: none !important;
+    -ms-high-contrast-adjust: none !important;
+}
+
+@media (prefers-color-scheme: dark) {
+    .wpc-calc-snowball-m4k7-wrapper {
+        color-scheme: light !important;
+        background-color: white !important;
+    }
+    .wpc-calc-snowball-m4k7-wrapper * {
+        color-scheme: light !important;
+    }
+}
+
+.wpc-calc-snowball-m4k7-wrapper * {
+    forced-color-adjust: none !important;
+    -webkit-forced-color-adjust: none !important;
+    -webkit-text-fill-color: initial !important;
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale !important;
+}
+
+/* CSS Variables */
+:root {
+  --primary: #1e5490;
+  --primary-dark: #2a5fa0;
+  --danger: #ff3b3b;
+  --success: #25D366;
+  --warning: #FF9800;
+  --text-dark: #222222;
+  --text-light: #444444;
+  --bg-light: #f5f5f5;
+  --white: #ffffff;
+  --border: #999999;
+  --max-width-container: 1200px;
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+  --shadow-md: 0 5px 20px rgba(0,0,0,0.1);
+  --shadow-lg: 0 10px 40px rgba(0,0,0,0.15);
+  --radius-sm: 8px;
+  --radius-md: 15px;
+  --radius-lg: 20px;
+  --transition: all 0.3s ease;
+  --gradient-primary: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  --gradient-success: linear-gradient(135deg, var(--success) 0%, #1da851 100%);
+}
+
+/* Global Wrapper */
+.wpc-calc-snowball-m4k7-wrapper {
+    all: initial !important;
+    font-family: 'Assistant', sans-serif !important;
+    direction: rtl !important;
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+    width: 100% !important;
+    padding: 0 20px !important;
+    box-sizing: border-box !important;
+    background: white !important;
+}
+
+.wpc-calc-snowball-m4k7-wrapper * {
+    box-sizing: border-box !important;
+    font-family: 'Assistant', sans-serif !important;
+}
+
+/* Title with Red Line */
+.wpc-calc-snowball-m4k7-title {
+    font-size: 2.5em !important;
+    font-weight: 700 !important;
+    color: var(--primary) !important;
+    margin: 0 auto 30px auto !important;
+    line-height: 1.3 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 15px !important;
+    width: fit-content !important;
+    justify-content: center !important;
+    direction: rtl !important;
+    position: relative !important;
+    padding-right: 25px !important;
+}
+
+.wpc-calc-snowball-m4k7-title::after {
+    content: '' !important;
+    width: 4px !important;
+    height: 60px !important;
+    background: linear-gradient(135deg, #e74c3c, #c0392b) !important;
+    position: absolute !important;
+    right: 0 !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    border-radius: 2px !important;
+    box-shadow: 0 2px 4px rgba(231, 76, 60, 0.3) !important;
+}
+
+/* Calculator Container */
+.wpc-calc-snowball-m4k7-container {
+  max-width: var(--max-width-container) !important;
+  margin: 0 auto !important;
+  padding: 20px !important;
+}
+
+.wpc-calc-snowball-m4k7-title-container {
+  width: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.wpc-calc-snowball-m4k7-calc-wrapper {
+  background: white !important;
+  border-radius: var(--radius-lg) !important;
+  box-shadow: var(--shadow-md) !important;
+  overflow: hidden !important;
+}
+
+/* Tabs Navigation */
+.wpc-calc-snowball-m4k7-nav {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)) !important;
+  gap: 8px !important;
+  padding: 5px !important;
+  background: var(--bg-light) !important;
+}
+
+.wpc-calc-snowball-m4k7-tab {
+  background: var(--bg-light) !important;
+  border: 2px solid transparent !important;
+  border-radius: 12px !important;
+  padding: 12px 8px !important;
+  min-height: 70px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  transition: var(--transition) !important;
+  font-family: inherit !important;
+  box-shadow: var(--shadow-sm) !important;
+  color: var(--text-dark) !important;
+}
+
+.wpc-calc-snowball-m4k7-tab:hover {
+  background: white !important;
+  border-color: var(--primary) !important;
+  transform: translateY(-2px) !important;
+}
+
+.wpc-calc-snowball-m4k7-tab.active {
+  background: var(--gradient-primary) !important;
+  border-color: var(--primary-dark) !important;
+  color: white !important;
+}
+
+.wpc-calc-snowball-m4k7-tab-icon {
+  font-size: 1.5em !important;
+  margin-bottom: 8px !important;
+}
+
+.wpc-calc-snowball-m4k7-tab span:last-child {
+  font-size: 0.85em !important;
+  font-weight: 600 !important;
+}
+
+/* Tab Content */
+.wpc-calc-snowball-m4k7-content {
+  padding: 30px !important;
+}
+
+.wpc-calc-snowball-m4k7-panel {
+  display: none !important;
+}
+
+.wpc-calc-snowball-m4k7-panel.active {
+  display: block !important;
+}
+
+.wpc-calc-snowball-m4k7-panel h4 {
+  color: var(--primary) !important;
+  margin-bottom: 20px !important;
+  font-size: 1.5em !important;
+  font-weight: 700 !important;
+}
+
+/* Form Elements */
+.wpc-calc-snowball-m4k7-form-group {
+    margin-bottom: 25px !important;
+}
+
+.wpc-calc-snowball-m4k7-label {
+    display: block !important;
+    font-size: 1em !important;
+    font-weight: 600 !important;
+    color: var(--text-dark) !important;
+    margin-bottom: 10px !important;
+}
+
+/* Slider Styles */
+.wpc-calc-snowball-m4k7-slider-wrapper {
+  position: relative !important;
+  margin-bottom: 15px !important;
+}
+
+.wpc-calc-snowball-m4k7-slider {
+  width: 100% !important;
+  height: 10px !important;
+  background: #666666 !important;
+  border-radius: 5px !important;
+  outline: none !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  margin-bottom: 10px !important;
+  border: 1px solid #333333 !important;
+  direction: ltr !important;
+}
+
+.wpc-calc-snowball-m4k7-slider::-webkit-slider-thumb {
+  -webkit-appearance: none !important;
+  width: 28px !important;
+  height: 28px !important;
+  background: var(--primary) !important;
+  border-radius: 50% !important;
+  cursor: pointer !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3) !important;
+  border: 2px solid #ffffff !important;
+}
+
+.wpc-calc-snowball-m4k7-slider::-moz-range-thumb {
+  width: 28px !important;
+  height: 28px !important;
+  background: var(--primary) !important;
+  border-radius: 50% !important;
+  cursor: pointer !important;
+  border: 2px solid #ffffff !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3) !important;
+}
+
+.wpc-calc-snowball-m4k7-slider-value {
+  text-align: center !important;
+  font-size: 1.2em !important;
+  font-weight: 700 !important;
+  color: var(--primary) !important;
+  direction: rtl !important;
+}
+
+/* Button Groups */
+.wpc-calc-snowball-m4k7-button-group {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)) !important;
+    gap: 10px !important;
+    margin-bottom: 20px !important;
+}
+
+.wpc-calc-snowball-m4k7-option {
+    background: #ffffff !important;
+    border: 2px solid #666666 !important;
+    border-radius: var(--radius-sm) !important;
+    padding: 15px 10px !important;
+    cursor: pointer !important;
+    transition: var(--transition) !important;
+    text-align: center !important;
+    color: #222222 !important;
+}
+
+.wpc-calc-snowball-m4k7-option:hover {
+    border-color: var(--primary) !important;
+    background: #f0f7ff !important;
+}
+
+.wpc-calc-snowball-m4k7-option.active {
+    background: var(--gradient-primary) !important;
+    border-color: var(--primary-dark) !important;
+    color: white !important;
+}
+
+/* Results Section */
+.wpc-calc-snowball-m4k7-results {
+    background: linear-gradient(135deg, #f0f7ff 0%, #ffffff 100%) !important;
+    border: 2px solid var(--primary) !important;
+    border-radius: var(--radius-md) !important;
+    padding: 25px !important;
+    margin-top: 25px !important;
+}
+
+.wpc-calc-snowball-m4k7-results h4 {
+    color: var(--primary) !important;
+    margin-bottom: 20px !important;
+    font-size: 1.3em !important;
+    font-weight: 700 !important;
+    text-align: center !important;
+    border-bottom: 2px solid var(--bg-light) !important;
+    padding-bottom: 15px !important;
+}
+
+.wpc-calc-snowball-m4k7-result-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
+    gap: 20px !important;
+}
+
+.wpc-calc-snowball-m4k7-result-item {
+    background: white !important;
+    border-radius: var(--radius-sm) !important;
+    padding: 15px !important;
+    text-align: center !important;
+    box-shadow: var(--shadow-sm) !important;
+    border: 1px solid var(--bg-light) !important;
+}
+
+.wpc-calc-snowball-m4k7-result-label {
+    font-size: 0.9em !important;
+    color: var(--text-light) !important;
+    margin-bottom: 8px !important;
+    font-weight: 600 !important;
+}
+
+.wpc-calc-snowball-m4k7-result-value {
+    font-size: 1.5em !important;
+    font-weight: 700 !important;
+    color: var(--primary) !important;
+}
+
+.wpc-calc-snowball-m4k7-result-value.savings {
+    color: var(--success) !important;
+}
+
+.wpc-calc-snowball-m4k7-result-value.warning {
+    color: var(--warning) !important;
+}
+
+/* Comparison Box */
+.wpc-calc-snowball-m4k7-comparison {
+    background: linear-gradient(135deg, #e8f5e9 0%, #ffffff 100%) !important;
+    border: 2px solid var(--success) !important;
+    border-radius: var(--radius-md) !important;
+    padding: 25px !important;
+    margin-top: 20px !important;
+}
+
+.wpc-calc-snowball-m4k7-comparison h5 {
+    color: var(--success) !important;
+    font-size: 1.2em !important;
+    margin-bottom: 15px !important;
+    text-align: center !important;
+}
+
+.wpc-calc-snowball-m4k7-comparison-row {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 12px 0 !important;
+    border-bottom: 1px solid #e0e0e0 !important;
+}
+
+.wpc-calc-snowball-m4k7-comparison-row:last-child {
+    border-bottom: none !important;
+}
+
+.wpc-calc-snowball-m4k7-comparison-label {
+    font-weight: 600 !important;
+    color: var(--text-dark) !important;
+}
+
+.wpc-calc-snowball-m4k7-comparison-value {
+    font-weight: 700 !important;
+    font-size: 1.1em !important;
+}
+
+.wpc-calc-snowball-m4k7-comparison-value.old {
+    color: var(--danger) !important;
+    text-decoration: line-through !important;
+}
+
+.wpc-calc-snowball-m4k7-comparison-value.new {
+    color: var(--success) !important;
+}
+
+/* AWG Section */
+.wpc-calc-snowball-m4k7-awg-section {
+    background: #ffffff !important;
+    padding: 60px 20px !important;
+    margin: 40px 0 !important;
+    border-top: 1px solid #e0e0e0 !important;
+    border-bottom: 1px solid #e0e0e0 !important;
+}
+
+.wpc-calc-snowball-m4k7-awg-container {
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+    padding: 30px !important;
+    text-align: center !important;
+    background: #ffffff !important;
+    border-radius: 15px !important;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08) !important;
+    border: 1px solid #f0f0f0 !important;
+}
+
+.wpc-calc-snowball-m4k7-cta-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 10px !important;
+    padding: 15px 40px !important;
+    min-height: 54px !important;
+    font-size: 1.2rem !important;
+    font-weight: 700 !important;
+    border: none !important;
+    border-radius: 50px !important;
+    cursor: pointer !important;
+    text-decoration: none !important;
+    transition: all 0.2s ease !important;
+    background: var(--danger) !important;
+    color: white !important;
+    box-shadow: var(--shadow-md) !important;
+    margin-bottom: 20px !important;
+}
+
+.wpc-calc-snowball-m4k7-cta-btn:hover {
+    background: #e63530 !important;
+    box-shadow: 0 8px 25px rgba(255,59,59,0.4) !important;
+    transform: translateY(-2px) !important;
+}
+
+.wpc-calc-snowball-m4k7-embed-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 10px !important;
+    padding: 12px 30px !important;
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+    border: none !important;
+    border-radius: 50px !important;
+    cursor: pointer !important;
+    background: var(--gradient-success) !important;
+    color: white !important;
+    box-shadow: var(--shadow-sm) !important;
+    margin-top: 15px !important;
+}
+
+.wpc-calc-snowball-m4k7-embed-btn:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3) !important;
+}
+
+.wpc-calc-snowball-m4k7-awg-content {
+    width: 100% !important;
+    text-align: center !important;
+    padding: 25px !important;
+    border-radius: 12px !important;
+    transition: all 0.3s ease !important;
+}
+
+/* Embed Section */
+.wpc-calc-snowball-m4k7-embed-section {
+    background: linear-gradient(135deg, #e8f4fd 0%, #ffffff 100%) !important;
+    padding: 60px 20px !important;
+    margin: 40px 0 !important;
+    border: 2px solid var(--primary) !important;
+    border-radius: var(--radius-lg) !important;
+}
+
+.wpc-calc-snowball-m4k7-embed-container {
+    max-width: var(--max-width-container) !important;
+    margin: 0 auto !important;
+}
+
+.wpc-calc-snowball-m4k7-embed-title {
+    font-size: 2em !important;
+    font-weight: 700 !important;
+    color: var(--primary) !important;
+    text-align: center !important;
+    margin-bottom: 30px !important;
+}
+
+.wpc-calc-snowball-m4k7-embed-value-box {
+    background: var(--gradient-success) !important;
+    color: white !important;
+    padding: 25px !important;
+    border-radius: var(--radius-md) !important;
+    margin-bottom: 30px !important;
+    text-align: center !important;
+}
+
+.wpc-calc-snowball-m4k7-embed-seo-box {
+    background: white !important;
+    padding: 25px !important;
+    border-radius: var(--radius-md) !important;
+    margin-bottom: 30px !important;
+    box-shadow: var(--shadow-sm) !important;
+    border-right: 4px solid var(--primary) !important;
+}
+
+.wpc-calc-snowball-m4k7-embed-seo-box h3 {
+    color: var(--primary) !important;
+    margin-bottom: 15px !important;
+    font-size: 1.3em !important;
+}
+
+.wpc-calc-snowball-m4k7-embed-seo-box ul {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.wpc-calc-snowball-m4k7-embed-seo-box ul li {
+    padding: 8px 0 !important;
+    border-bottom: 1px solid #f0f0f0 !important;
+}
+
+.wpc-calc-snowball-m4k7-embed-steps {
+    background: white !important;
+    padding: 25px !important;
+    border-radius: var(--radius-md) !important;
+    margin-bottom: 30px !important;
+    box-shadow: var(--shadow-sm) !important;
+}
+
+.wpc-calc-snowball-m4k7-embed-steps ol {
+    padding-right: 20px !important;
+    margin: 0 !important;
+}
+
+.wpc-calc-snowball-m4k7-embed-steps ol li {
+    padding: 10px 0 !important;
+    font-size: 1.1em !important;
+}
+
+.wpc-calc-snowball-m4k7-copy-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 10px !important;
+    padding: 18px 50px !important;
+    font-size: 1.3rem !important;
+    font-weight: 700 !important;
+    border: none !important;
+    border-radius: 50px !important;
+    cursor: pointer !important;
+    background: var(--gradient-success) !important;
+    color: white !important;
+    box-shadow: var(--shadow-md) !important;
+    margin: 20px auto !important;
+    display: block !important;
+}
+
+.wpc-calc-snowball-m4k7-copy-btn:hover {
+    transform: translateY(-3px) !important;
+    box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4) !important;
+}
+
+.wpc-calc-snowball-m4k7-color-picker {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 12px !important;
+    margin: 30px 0 !important;
+}
+
+.wpc-calc-snowball-m4k7-color-btn {
+    width: 50px !important;
+    height: 50px !important;
+    border-radius: 50% !important;
+    border: 3px solid #fff !important;
+    cursor: pointer !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2) !important;
+    transition: transform 0.2s ease !important;
+}
+
+.wpc-calc-snowball-m4k7-color-btn:hover {
+    transform: scale(1.15) !important;
+}
+
+.wpc-calc-snowball-m4k7-color-btn.active {
+    border-color: #333 !important;
+    transform: scale(1.2) !important;
+}
+
+.wpc-calc-snowball-m4k7-preview-container {
+    background: #f8f9fa !important;
+    border: 2px dashed var(--primary) !important;
+    border-radius: var(--radius-md) !important;
+    padding: 20px !important;
+    margin-top: 30px !important;
+    overflow: visible !important;
+}
+
+.wpc-calc-snowball-m4k7-preview-title {
+    text-align: center !important;
+    font-weight: 700 !important;
+    color: var(--primary) !important;
+    margin-bottom: 15px !important;
+    font-size: 1.2em !important;
+}
+
+.wpc-calc-snowball-m4k7-embed-terms {
+    background: #fff5f5 !important;
+    border: 1px solid var(--danger) !important;
+    border-radius: var(--radius-md) !important;
+    padding: 20px !important;
+    margin-top: 30px !important;
+}
+
+.wpc-calc-snowball-m4k7-embed-terms h4 {
+    color: var(--danger) !important;
+    margin-bottom: 10px !important;
+}
+
+.wpc-calc-snowball-m4k7-embed-cta {
+    background: var(--gradient-primary) !important;
+    padding: 30px !important;
+    border-radius: var(--radius-md) !important;
+    margin-top: 30px !important;
+    text-align: center !important;
+    color: white !important;
+}
+
+.wpc-calc-snowball-m4k7-embed-cta h3 {
+    color: white !important;
+    margin-bottom: 15px !important;
+}
+
+/* Mobile Embed Section */
+@media (max-width: 768px) {
+    .wpc-calc-snowball-m4k7-embed-section {
+        padding: 30px 15px !important;
+    }
+    
+    .wpc-calc-snowball-m4k7-embed-title {
+        font-size: 1.5em !important;
+    }
+    
+    .wpc-calc-snowball-m4k7-copy-btn {
+        width: 100% !important;
+        padding: 15px 30px !important;
+        font-size: 1.1rem !important;
+    }
+    
+    .wpc-calc-snowball-m4k7-color-btn {
+        width: 40px !important;
+        height: 40px !important;
+    }
+}
+
+/* FAQ Accordion */
+.wpc-calc-snowball-m4k7-faq-section {
+    padding: 60px 20px !important;
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef) !important;
+}
+
+.wpc-calc-snowball-m4k7-faq-container {
+    max-width: var(--max-width-container) !important;
+    margin: 0 auto !important;
+}
+
+.wpc-calc-snowball-m4k7-faq-title {
+    font-size: 2em !important;
+    font-weight: 700 !important;
+    color: var(--primary) !important;
+    text-align: center !important;
+    margin-bottom: 40px !important;
+    position: relative !important;
+    padding-right: 25px !important;
+    display: inline-flex !important;
+    width: fit-content !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+.wpc-calc-snowball-m4k7-faq-title::after {
+    content: '' !important;
+    width: 4px !important;
+    height: 50px !important;
+    background: linear-gradient(135deg, #e74c3c, #c0392b) !important;
+    position: absolute !important;
+    right: 0 !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    border-radius: 2px !important;
+}
+
+.wpc-calc-snowball-m4k7-accordion-item {
+    border: 1px solid var(--border) !important;
+    border-radius: 8px !important;
+    margin-bottom: 10px !important;
+    overflow: hidden !important;
+    background: white !important;
+}
+
+.wpc-calc-snowball-m4k7-accordion-header {
+    background: #f8f9fa !important;
+    padding: 20px !important;
+    cursor: pointer !important;
+    font-weight: 600 !important;
+    font-size: 1.1em !important;
+    position: relative !important;
+    transition: all 0.2s ease !important;
+    user-select: none !important;
+    border: 2px solid transparent !important;
+    color: var(--text-dark) !important;
+}
+
+.wpc-calc-snowball-m4k7-accordion-header:hover {
+    background: #e9ecef !important;
+}
+
+.wpc-calc-snowball-m4k7-accordion-header.active {
+    background: var(--gradient-primary) !important;
+    color: white !important;
+}
+
+.wpc-calc-snowball-m4k7-accordion-arrow {
+    position: absolute !important;
+    left: 20px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    font-size: 1.2em !important;
+    transition: transform 0.3s ease !important;
+    width: 24px !important;
+    height: 24px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: 50% !important;
+    background: rgba(0,0,0,0.1) !important;
+}
+
+.wpc-calc-snowball-m4k7-accordion-header.active .wpc-calc-snowball-m4k7-accordion-arrow {
+    transform: translateY(-50%) rotate(90deg) !important;
+    background: rgba(255,255,255,0.2) !important;
+}
+
+.wpc-calc-snowball-m4k7-accordion-content {
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: max-height 0.3s ease !important;
+}
+
+.wpc-calc-snowball-m4k7-accordion-content.active {
+    max-height: 500px !important;
+}
+
+.wpc-calc-snowball-m4k7-accordion-body {
+    padding: 20px !important;
+    background: white !important;
+    line-height: 1.6 !important;
+    color: var(--text-dark) !important;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .wpc-calc-snowball-m4k7-title {
+        font-size: 1.8em !important;
+        padding-right: 20px !important;
+    }
+    
+    .wpc-calc-snowball-m4k7-title::after {
+        width: 3px !important;
+        height: 40px !important;
+    }
+    
+    .wpc-calc-snowball-m4k7-nav {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+    
+    .wpc-calc-snowball-m4k7-tab {
+        min-height: 60px !important;
+        padding: 10px 8px !important;
+    }
+    
+    .wpc-calc-snowball-m4k7-content {
+        padding: 20px 15px !important;
+    }
+    
+    .wpc-calc-snowball-m4k7-result-grid {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .wpc-calc-snowball-m4k7-button-group {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+    
+    .wpc-calc-snowball-m4k7-comparison-row {
+        flex-direction: column !important;
+        gap: 5px !important;
+        text-align: center !important;
+    }
+    
+    .wpc-calc-snowball-m4k7-faq-title {
+        font-size: 1.5em !important;
+    }
+    
+}
+
+@media (max-width: 480px) {
+    .wpc-calc-snowball-m4k7-nav {
+        grid-template-columns: 1fr !important;
+        gap: 5px !important;
+    }
+    
+    .wpc-calc-snowball-m4k7-tab {
+        flex-direction: row !important;
+        min-height: 50px !important;
+        gap: 10px !important;
+    }
+    
+    .wpc-calc-snowball-m4k7-tab-icon {
+        margin-bottom: 0 !important;
+    }
+    
+    .wpc-calc-snowball-m4k7-button-group {
+        grid-template-columns: 1fr 1fr !important;
+    }
+    
+    .wpc-calc-snowball-m4k7-cta-btn {
+        width: 100% !important;
+        padding: 12px 20px !important;
+        font-size: 1rem !important;
+    }
+    
+    .wpc-calc-snowball-m4k7-accordion-header {
+        font-size: 1em !important;
+        padding: 15px !important;
+    }
+}
+</style>
+
+<!-- 🏠 Main Wrapper -->
+<div class="wpc-calc-snowball-m4k7-wrapper" id="wpc-calc-snowball-m4k7-main">
+    
+    <!-- Calculator Section -->
+    <div class="wpc-calc-snowball-m4k7-container">
+        <div class="wpc-calc-snowball-m4k7-title-container">
+            <h1 class="wpc-calc-snowball-m4k7-title">מחשבון קיצור תקופת הלוואה (שיטת כדור השלג)</h1>
+            <p style="text-align: center; color: var(--text-light); margin-bottom: 20px; font-size: 1.1em;">
+                <strong>עודכן לאחרונה:</strong> [current_date format="F Y" hebrew="true"]
+            </p>
+        </div>
+        
+        <div class="wpc-calc-snowball-m4k7-calc-wrapper" id="wpc-calc-snowball-m4k7-calculator">
+            <!-- Tabs Navigation -->
+            <div class="wpc-calc-snowball-m4k7-nav">
+                <button class="wpc-calc-snowball-m4k7-tab active" data-action="switch-tab" data-tab="basic">
+                    <div class="wpc-calc-snowball-m4k7-tab-icon">⚡</div>
+                    <span>חישוב מהיר</span>
+                </button>
+                <button class="wpc-calc-snowball-m4k7-tab" data-action="switch-tab" data-tab="compare">
+                    <div class="wpc-calc-snowball-m4k7-tab-icon">📊</div>
+                    <span>השוואת תוספות</span>
+                </button>
+                <button class="wpc-calc-snowball-m4k7-tab" data-action="switch-tab" data-tab="schedule">
+                    <div class="wpc-calc-snowball-m4k7-tab-icon">📅</div>
+                    <span>לוח סילוקין</span>
+                </button>
+            </div>
+            
+            <!-- Tab Content -->
+            <div class="wpc-calc-snowball-m4k7-content">
+                
+                <!-- Tab 1: Basic Calculator -->
+                <div class="wpc-calc-snowball-m4k7-panel active" data-panel="basic">
+                    <h4>⚡ חישוב מהיר - כמה תחסכו בתוספת קטנה?</h4>
+                    
+                    <!-- יתרת הלוואה -->
+                    <div class="wpc-calc-snowball-m4k7-form-group">
+                        <label class="wpc-calc-snowball-m4k7-label">יתרת הלוואה נוכחית (₪)</label>
+                        <div class="wpc-calc-snowball-m4k7-slider-wrapper">
+                            <input type="range" class="wpc-calc-snowball-m4k7-slider" id="basic-balance-slider" 
+                                   min="10000" max="1000000" step="5000" value="200000">
+                            <div class="wpc-calc-snowball-m4k7-slider-value" id="basic-balance-value">200,000 ₪</div>
+                        </div>
+                    </div>
+                    
+                    <!-- החזר חודשי נוכחי -->
+                    <div class="wpc-calc-snowball-m4k7-form-group">
+                        <label class="wpc-calc-snowball-m4k7-label">החזר חודשי נוכחי (₪)</label>
+                        <div class="wpc-calc-snowball-m4k7-slider-wrapper">
+                            <input type="range" class="wpc-calc-snowball-m4k7-slider" id="basic-payment-slider" 
+                                   min="500" max="15000" step="100" value="3000">
+                            <div class="wpc-calc-snowball-m4k7-slider-value" id="basic-payment-value">3,000 ₪</div>
+                        </div>
+                    </div>
+                    
+                    <!-- ריבית שנתית -->
+                    <div class="wpc-calc-snowball-m4k7-form-group">
+                        <label class="wpc-calc-snowball-m4k7-label">ריבית שנתית (%)</label>
+                        <div class="wpc-calc-snowball-m4k7-slider-wrapper">
+                            <input type="range" class="wpc-calc-snowball-m4k7-slider" id="basic-rate-slider" 
+                                   min="2" max="15" step="0.1" value="5.5">
+                            <div class="wpc-calc-snowball-m4k7-slider-value" id="basic-rate-value">5.5%</div>
+                        </div>
+                    </div>
+                    
+                    <!-- תוספת חודשית -->
+                    <div class="wpc-calc-snowball-m4k7-form-group">
+                        <label class="wpc-calc-snowball-m4k7-label">תוספת חודשית להחזר (₪)</label>
+                        <div class="wpc-calc-snowball-m4k7-button-group" id="basic-extra-group">
+                            <button class="wpc-calc-snowball-m4k7-option" data-action="select-extra" data-value="200">+200 ₪</button>
+                            <button class="wpc-calc-snowball-m4k7-option active" data-action="select-extra" data-value="500">+500 ₪</button>
+                            <button class="wpc-calc-snowball-m4k7-option" data-action="select-extra" data-value="1000">+1,000 ₪</button>
+                            <button class="wpc-calc-snowball-m4k7-option" data-action="select-extra" data-value="2000">+2,000 ₪</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Results -->
+                    <div class="wpc-calc-snowball-m4k7-results">
+                        <h4>📊 התוצאות שלך</h4>
+                        <div class="wpc-calc-snowball-m4k7-result-grid">
+                            <div class="wpc-calc-snowball-m4k7-result-item">
+                                <div class="wpc-calc-snowball-m4k7-result-label">תקופה מקורית</div>
+                                <div class="wpc-calc-snowball-m4k7-result-value" id="basic-original-months">78 חודשים</div>
+                            </div>
+                            <div class="wpc-calc-snowball-m4k7-result-item">
+                                <div class="wpc-calc-snowball-m4k7-result-label">תקופה חדשה</div>
+                                <div class="wpc-calc-snowball-m4k7-result-value savings" id="basic-new-months">58 חודשים</div>
+                            </div>
+                            <div class="wpc-calc-snowball-m4k7-result-item">
+                                <div class="wpc-calc-snowball-m4k7-result-label">🎉 חודשים שנחסכו</div>
+                                <div class="wpc-calc-snowball-m4k7-result-value savings" id="basic-saved-months">20 חודשים!</div>
+                            </div>
+                            <div class="wpc-calc-snowball-m4k7-result-item">
+                                <div class="wpc-calc-snowball-m4k7-result-label">💰 ריבית שנחסכה</div>
+                                <div class="wpc-calc-snowball-m4k7-result-value savings" id="basic-saved-interest">15,420 ₪</div>
+                            </div>
+                        </div>
+                        
+                        <div class="wpc-calc-snowball-m4k7-comparison">
+                            <h5>📅 השוואת תאריכי סיום</h5>
+                            <div class="wpc-calc-snowball-m4k7-comparison-row">
+                                <span class="wpc-calc-snowball-m4k7-comparison-label">תאריך סיום מקורי:</span>
+                                <span class="wpc-calc-snowball-m4k7-comparison-value old" id="basic-old-date">יוני 2032</span>
+                            </div>
+                            <div class="wpc-calc-snowball-m4k7-comparison-row">
+                                <span class="wpc-calc-snowball-m4k7-comparison-label">תאריך סיום חדש:</span>
+                                <span class="wpc-calc-snowball-m4k7-comparison-value new" id="basic-new-date">אוקטובר 2030</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tab 2: Compare Options -->
+                <div class="wpc-calc-snowball-m4k7-panel" data-panel="compare">
+                    <h4>📊 השוואת תוספות שונות</h4>
+                    
+                    <!-- יתרת הלוואה -->
+                    <div class="wpc-calc-snowball-m4k7-form-group">
+                        <label class="wpc-calc-snowball-m4k7-label">יתרת הלוואה נוכחית (₪)</label>
+                        <div class="wpc-calc-snowball-m4k7-slider-wrapper">
+                            <input type="range" class="wpc-calc-snowball-m4k7-slider" id="compare-balance-slider" 
+                                   min="10000" max="1000000" step="5000" value="200000">
+                            <div class="wpc-calc-snowball-m4k7-slider-value" id="compare-balance-value">200,000 ₪</div>
+                        </div>
+                    </div>
+                    
+                    <!-- החזר חודשי נוכחי -->
+                    <div class="wpc-calc-snowball-m4k7-form-group">
+                        <label class="wpc-calc-snowball-m4k7-label">החזר חודשי נוכחי (₪)</label>
+                        <div class="wpc-calc-snowball-m4k7-slider-wrapper">
+                            <input type="range" class="wpc-calc-snowball-m4k7-slider" id="compare-payment-slider" 
+                                   min="500" max="15000" step="100" value="3000">
+                            <div class="wpc-calc-snowball-m4k7-slider-value" id="compare-payment-value">3,000 ₪</div>
+                        </div>
+                    </div>
+                    
+                    <!-- ריבית שנתית -->
+                    <div class="wpc-calc-snowball-m4k7-form-group">
+                        <label class="wpc-calc-snowball-m4k7-label">ריבית שנתית (%)</label>
+                        <div class="wpc-calc-snowball-m4k7-slider-wrapper">
+                            <input type="range" class="wpc-calc-snowball-m4k7-slider" id="compare-rate-slider" 
+                                   min="2" max="15" step="0.1" value="5.5">
+                            <div class="wpc-calc-snowball-m4k7-slider-value" id="compare-rate-value">5.5%</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Comparison Table -->
+                    <div class="wpc-calc-snowball-m4k7-results" style="overflow-x: auto;">
+                        <h4>טבלת השוואה - איזו תוספת הכי משתלמת?</h4>
+                        <table style="width: 100%; border-collapse: collapse; margin-top: 15px; font-family: inherit;">
+                            <thead>
+                                <tr style="background: var(--gradient-primary); color: white;">
+                                    <th style="padding: 15px; text-align: center; font-weight: 700;">תוספת חודשית</th>
+                                    <th style="padding: 15px; text-align: center; font-weight: 700;">תקופה חדשה</th>
+                                    <th style="padding: 15px; text-align: center; font-weight: 700;">חודשים שנחסכו</th>
+                                    <th style="padding: 15px; text-align: center; font-weight: 700;">ריבית שנחסכה</th>
+                                </tr>
+                            </thead>
+                            <tbody id="compare-table-body">
+                                <tr style="background: #f9f9f9;">
+                                    <td style="padding: 12px; text-align: center; border-bottom: 1px solid #e0e0e0;">+200 ₪</td>
+                                    <td style="padding: 12px; text-align: center; border-bottom: 1px solid #e0e0e0;" id="compare-200-months">68 חודשים</td>
+                                    <td style="padding: 12px; text-align: center; border-bottom: 1px solid #e0e0e0; color: var(--success); font-weight: 700;" id="compare-200-saved">10 חודשים</td>
+                                    <td style="padding: 12px; text-align: center; border-bottom: 1px solid #e0e0e0; color: var(--success); font-weight: 700;" id="compare-200-interest">6,850 ₪</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 12px; text-align: center; border-bottom: 1px solid #e0e0e0;">+500 ₪</td>
+                                    <td style="padding: 12px; text-align: center; border-bottom: 1px solid #e0e0e0;" id="compare-500-months">58 חודשים</td>
+                                    <td style="padding: 12px; text-align: center; border-bottom: 1px solid #e0e0e0; color: var(--success); font-weight: 700;" id="compare-500-saved">20 חודשים</td>
+                                    <td style="padding: 12px; text-align: center; border-bottom: 1px solid #e0e0e0; color: var(--success); font-weight: 700;" id="compare-500-interest">15,420 ₪</td>
+                                </tr>
+                                <tr style="background: #f9f9f9;">
+                                    <td style="padding: 12px; text-align: center; border-bottom: 1px solid #e0e0e0;">+1,000 ₪</td>
+                                    <td style="padding: 12px; text-align: center; border-bottom: 1px solid #e0e0e0;" id="compare-1000-months">50 חודשים</td>
+                                    <td style="padding: 12px; text-align: center; border-bottom: 1px solid #e0e0e0; color: var(--success); font-weight: 700;" id="compare-1000-saved">28 חודשים</td>
+                                    <td style="padding: 12px; text-align: center; border-bottom: 1px solid #e0e0e0; color: var(--success); font-weight: 700;" id="compare-1000-interest">24,780 ₪</td>
+                                </tr>
+                                <tr style="background: linear-gradient(135deg, #e8f5e9 0%, #ffffff 100%);">
+                                    <td style="padding: 12px; text-align: center; font-weight: 700; color: var(--success);">+2,000 ₪ 🏆</td>
+                                    <td style="padding: 12px; text-align: center;" id="compare-2000-months">40 חודשים</td>
+                                    <td style="padding: 12px; text-align: center; color: var(--success); font-weight: 700;" id="compare-2000-saved">38 חודשים</td>
+                                    <td style="padding: 12px; text-align: center; color: var(--success); font-weight: 700;" id="compare-2000-interest">38,640 ₪</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- Tab 3: Schedule -->
+                <div class="wpc-calc-snowball-m4k7-panel" data-panel="schedule">
+                    <h4>📅 לוח סילוקין מקוצר</h4>
+                    
+                    <!-- יתרת הלוואה -->
+                    <div class="wpc-calc-snowball-m4k7-form-group">
+                        <label class="wpc-calc-snowball-m4k7-label">יתרת הלוואה נוכחית (₪)</label>
+                        <div class="wpc-calc-snowball-m4k7-slider-wrapper">
+                            <input type="range" class="wpc-calc-snowball-m4k7-slider" id="schedule-balance-slider" 
+                                   min="10000" max="1000000" step="5000" value="200000">
+                            <div class="wpc-calc-snowball-m4k7-slider-value" id="schedule-balance-value">200,000 ₪</div>
+                        </div>
+                    </div>
+                    
+                    <!-- החזר חודשי נוכחי -->
+                    <div class="wpc-calc-snowball-m4k7-form-group">
+                        <label class="wpc-calc-snowball-m4k7-label">החזר חודשי נוכחי (₪)</label>
+                        <div class="wpc-calc-snowball-m4k7-slider-wrapper">
+                            <input type="range" class="wpc-calc-snowball-m4k7-slider" id="schedule-payment-slider" 
+                                   min="500" max="15000" step="100" value="3000">
+                            <div class="wpc-calc-snowball-m4k7-slider-value" id="schedule-payment-value">3,000 ₪</div>
+                        </div>
+                    </div>
+                    
+                    <!-- ריבית שנתית -->
+                    <div class="wpc-calc-snowball-m4k7-form-group">
+                        <label class="wpc-calc-snowball-m4k7-label">ריבית שנתית (%)</label>
+                        <div class="wpc-calc-snowball-m4k7-slider-wrapper">
+                            <input type="range" class="wpc-calc-snowball-m4k7-slider" id="schedule-rate-slider" 
+                                   min="2" max="15" step="0.1" value="5.5">
+                            <div class="wpc-calc-snowball-m4k7-slider-value" id="schedule-rate-value">5.5%</div>
+                        </div>
+                    </div>
+                    
+                    <!-- תוספת חודשית -->
+                    <div class="wpc-calc-snowball-m4k7-form-group">
+                        <label class="wpc-calc-snowball-m4k7-label">תוספת חודשית להחזר (₪)</label>
+                        <div class="wpc-calc-snowball-m4k7-slider-wrapper">
+                            <input type="range" class="wpc-calc-snowball-m4k7-slider" id="schedule-extra-slider" 
+                                   min="100" max="5000" step="100" value="500">
+                            <div class="wpc-calc-snowball-m4k7-slider-value" id="schedule-extra-value">500 ₪</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Schedule Table -->
+                    <div class="wpc-calc-snowball-m4k7-results" style="overflow-x: auto; max-height: 500px; overflow-y: auto;">
+                        <h4>לוח סילוקין - 12 החודשים הראשונים</h4>
+                        <table style="width: 100%; border-collapse: collapse; margin-top: 15px; font-family: inherit;">
+                            <thead style="position: sticky; top: 0;">
+                                <tr style="background: var(--gradient-primary); color: white;">
+                                    <th style="padding: 12px; text-align: center; font-weight: 700;">חודש</th>
+                                    <th style="padding: 12px; text-align: center; font-weight: 700;">תשלום</th>
+                                    <th style="padding: 12px; text-align: center; font-weight: 700;">קרן</th>
+                                    <th style="padding: 12px; text-align: center; font-weight: 700;">ריבית</th>
+                                    <th style="padding: 12px; text-align: center; font-weight: 700;">יתרה</th>
+                                </tr>
+                            </thead>
+                            <tbody id="schedule-table-body">
+                                <!-- Will be populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <!-- AWG Section -->
+    <div class="wpc-calc-snowball-m4k7-awg-section">
+        <div class="wpc-calc-snowball-m4k7-awg-container">
+            <button class="wpc-calc-snowball-m4k7-cta-btn" data-action="open-awg">
+                בדוק זכאות להלוואה עכשיו - קבל הצעה מיידית! 💰
+            </button>
+            <button class="wpc-calc-snowball-m4k7-embed-btn" data-action="scroll-to-embed">
+                🎁 רוצה להטמיע את המחשבון בחינם באתרך? לחץ כאן!
+            </button>
+            <div class="wpc-calc-snowball-m4k7-awg-content" id="awg-content" style="opacity: 0; height: 0; overflow: hidden; padding: 0;">
+                <div class="wpc-shortcode-item">
+                    [awg postid="32400"]
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Embed Section -->
+    <div class="wpc-calc-snowball-m4k7-embed-section" id="embed-section">
+        <div class="wpc-calc-snowball-m4k7-embed-container">
+            <h2 class="wpc-calc-snowball-m4k7-embed-title">🎁 רוצים להטמיע את מחשבון קיצור ההלוואה באתר שלכם? חינם לחלוטין!</h2>
+            
+            <!-- Value Box -->
+            <div class="wpc-calc-snowball-m4k7-embed-value-box">
+                <p style="margin: 0; font-size: 1.2em;">
+                    <strong>💎 אנחנו נותנים לכם את מחשבון קיצור ההלוואה המתקדם הזה לחלוטין בחינם!</strong><br>
+                    תמורת קישור קרדיט קטן לאתר שלנו, תקבלו מחשבון מקצועי עם 3 לשוניות, חישובים מדויקים, ועיצוב שמתאים לכל מסך.<br>
+                    <strong>שווי המחשבון:</strong> מעל ₪12,000 בפיתוח 💰 | <strong>מה ששילמתם:</strong> ₪0 🎉
+                </p>
+            </div>
+            
+            <!-- SEO Benefits -->
+            <div class="wpc-calc-snowball-m4k7-embed-seo-box">
+                <h3>🚀 למה להוסיף מחשבון לאתר? זה משפר את הדירוג בגוגל!</h3>
+                <p><strong>הוספת מחשבון אינטראקטיבי לאתר היא אחת הדרכים הטובות ביותר לשפר את הדירוג במנועי החיפוש!</strong></p>
+                <ul>
+                    <li>📈 <strong>תוכן אינטראקטיבי איכותי</strong> - גוגל אוהבת עמודים עם כלים שימושיים</li>
+                    <li>⏱️ <strong>מבקרים נשארים יותר זמן</strong> - משתמשים נשארים בעמוד יותר זמן</li>
+                    <li>🔗 <strong>מילות מפתח רלוונטיות</strong> - המחשבון כולל מילות חיפוש כמו "קיצור הלוואה, חיסכון בריבית"</li>
+                    <li>🎯 <strong>מחשבון בחינם להוספה</strong> - תוכן ייחודי בלי עלות פיתוח</li>
+                    <li>💼 <strong>מקצועיות ואמינות</strong> - אתר עם כלי מחשבון נראה מקצועי יותר</li>
+                    <li>📱 <strong>מתאים לנייד</strong> - מחשבון שעובד על כל מסך = נקודות דירוג נוספות</li>
+                </ul>
+                <p style="margin-top: 15px; padding: 10px; background: #f0f7ff; border-radius: 8px;">
+                    💡 <strong>טיפ:</strong> הוסיפו את המחשבון בעמודים רלוונטיים כמו "הלוואות, מימון, ניהול חובות" - 
+                    זה יחזק את העמוד בדיוק במילות החיפוש שאתם רוצים לדרג עליהן!
+                </p>
+            </div>
+            
+            <!-- Steps -->
+            <div class="wpc-calc-snowball-m4k7-embed-steps">
+                <h3 style="color: var(--primary); margin-bottom: 15px;">📋 איך מוסיפים? (3 דקות בלבד)</h3>
+                <p><strong>✅ יתרון לדירוג:</strong> קישור הקרדיט נמצא בתוך הקוד - גוגל רואה אותו ומזהה אותו מיד!</p>
+                <ol>
+                    <li><strong>בחרו צבע</strong> מהעיגולים למטה (או השתמשו בבורר הצבע החופשי) 🎨</li>
+                    <li><strong>לחצו</strong> על הכפתור הירוק "העתק קוד" 👇</li>
+                    <li><strong>פתחו</strong> את עורך וורדפרס שלכם (מצב <code>טקסט/HTML</code>, לא עיצוב)</li>
+                    <li><strong>הדביקו</strong> את הקוד במיקום הרצוי בעמוד</li>
+                    <li><strong>פרסמו!</strong> המחשבון יעבוד מיד ללא הגדרות נוספות ✨</li>
+                </ol>
+            </div>
+            
+            <!-- Main Copy Button -->
+            <button class="wpc-calc-snowball-m4k7-copy-btn" data-action="copy-embed-code">
+                📋 העתק קוד מלא - לחצו כאן!
+            </button>
+            
+            <!-- Color Picker -->
+            <div style="text-align: center; margin: 30px 0;">
+                <h4 style="color: var(--primary); margin-bottom: 15px;">🎨 בחרו צבע לעיצוב המחשבון:</h4>
+                <div class="wpc-calc-snowball-m4k7-color-picker">
+                    <button class="wpc-calc-snowball-m4k7-color-btn active" style="background: #1e5490;" data-action="preview-color" data-color="#1e5490" data-name="כחול מקצועי 💙" title="כחול מקצועי 💙"></button>
+                    <button class="wpc-calc-snowball-m4k7-color-btn" style="background: #10b981;" data-action="preview-color" data-color="#10b981" data-name="ירוק צמיחה 💚" title="ירוק צמיחה 💚"></button>
+                    <button class="wpc-calc-snowball-m4k7-color-btn" style="background: #ef4444;" data-action="preview-color" data-color="#ef4444" data-name="אדום אנרגטי ❤️" title="אדום אנרגטי ❤️"></button>
+                    <button class="wpc-calc-snowball-m4k7-color-btn" style="background: #8b5cf6;" data-action="preview-color" data-color="#8b5cf6" data-name="סגול יוקרתי 💜" title="סגול יוקרתי 💜"></button>
+                    <button class="wpc-calc-snowball-m4k7-color-btn" style="background: #f59e0b;" data-action="preview-color" data-color="#f59e0b" data-name="כתום דינמי 🧡" title="כתום דינמי 🧡"></button>
+                    <button class="wpc-calc-snowball-m4k7-color-btn" style="background: #ec4899;" data-action="preview-color" data-color="#ec4899" data-name="ורוד מודרני 💗" title="ורוד מודרני 💗"></button>
+                    <button class="wpc-calc-snowball-m4k7-color-btn" style="background: #06b6d4;" data-action="preview-color" data-color="#06b6d4" data-name="טורקיז רענן 🩵" title="טורקיז רענן 🩵"></button>
+                    <button class="wpc-calc-snowball-m4k7-color-btn" style="background: #84cc16;" data-action="preview-color" data-color="#84cc16" data-name="ליים עז 💛" title="ליים עז 💛"></button>
+                    <button class="wpc-calc-snowball-m4k7-color-btn" style="background: #f97316;" data-action="preview-color" data-color="#f97316" data-name="כתום בוהק 🔥" title="כתום בוהק 🔥"></button>
+                    <button class="wpc-calc-snowball-m4k7-color-btn" style="background: #0891b2;" data-action="preview-color" data-color="#0891b2" data-name="כחול ים 🌊" title="כחול ים 🌊"></button>
+                    <input type="color" id="custom-color-picker" value="#1e5490" style="width: 50px; height: 50px; border-radius: 50%; cursor: pointer; border: 3px solid #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.2);" title="בחר צבע מותאם אישית">
+                </div>
+                <p id="selected-color-name" style="margin-top: 10px; font-weight: 600; color: var(--primary);">צבע נבחר: כחול מקצועי 💙</p>
+            </div>
+            
+            <!-- Preview Container -->
+            <div class="wpc-calc-snowball-m4k7-preview-container" id="preview-container" style="display: none;">
+                <div id="preview-content">
+                    <!-- Preview will be generated by JS -->
+                </div>
+            </div>
+            
+            <!-- Copy with Color Button -->
+            <button class="wpc-calc-snowball-m4k7-copy-btn" data-action="copy-with-color" style="margin-top: 20px;">
+                📋 העתק קוד עם הצבע הנבחר
+            </button>
+            
+            <!-- Terms -->
+            <div class="wpc-calc-snowball-m4k7-embed-terms">
+                <h4>⚠️ חשוב לדעת - זכויות יוצרים ומגבלות שימוש</h4>
+                <p>
+                    מחשבון זה מוגן בזכויות יוצרים © וניתן להוספה לאתר שלכם בחינם רק תמורת השארת קישור הקרדיט.<br>
+                    המחשבון כולל מנגנוני הגנה מתקדמים שישיבו אוטומטית את הקרדיט אם ינסו להסירו.
+                </p>
+                <p><strong>אסור בהחלט:</strong> הסרת/שינוי/הסתרת קישור הקרדיט, שימוש מסחרי ישיר ללא אישור, מכירת המחשבון.</p>
+            </div>
+            
+            <!-- Custom CTA -->
+            <div class="wpc-calc-snowball-m4k7-embed-cta">
+                <h3>🎯 רוצים מחשבון מותאם אישית לאתר שלכם?</h3>
+                <p>יש לכם צורך בלוגיקת חישוב שונה? עיצוב מותאם? שדות נוספים? אנחנו נשמח לפתח לכם מחשבון ייעודי בחינם!</p>
+                <p>📧 שלחו לנו מייל ל: <strong>info@loan-israel.co.il</strong></p>
+                <p>כתבו: "בקשה למחשבון מותאם" + תיאור קצר של מה שאתם צריכים 💚</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- FAQ Section -->
+    <div class="wpc-calc-snowball-m4k7-faq-section">
+        <div class="wpc-calc-snowball-m4k7-faq-container">
+            <div style="text-align: center;">
+                <h2 class="wpc-calc-snowball-m4k7-faq-title">❓ שאלות נפוצות על קיצור הלוואות</h2>
+            </div>
+            
+            <!-- FAQ 1 -->
+            <div class="wpc-calc-snowball-m4k7-accordion-item">
+                <div class="wpc-calc-snowball-m4k7-accordion-header" data-action="toggle-faq">
+                    💡 מה זה "שיטת כדור השלג"?
+                    <span class="wpc-calc-snowball-m4k7-accordion-arrow">←</span>
+                </div>
+                <div class="wpc-calc-snowball-m4k7-accordion-content">
+                    <div class="wpc-calc-snowball-m4k7-accordion-body">
+                        <p>שיטת כדור השלג היא אסטרטגיה לפירעון מהיר של הלוואות. הרעיון פשוט: מוסיפים סכום קבוע נוסף להחזר החודשי. כמו כדור שלג שמתגלגל ומתגדל, כל תוספת קטנה מצטברת לחיסכון עצום בריבית ובזמן.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- FAQ 2 -->
+            <div class="wpc-calc-snowball-m4k7-accordion-item">
+                <div class="wpc-calc-snowball-m4k7-accordion-header" data-action="toggle-faq">
+                    📊 כמה כסף אפשר לחסוך בפועל?
+                    <span class="wpc-calc-snowball-m4k7-accordion-arrow">←</span>
+                </div>
+                <div class="wpc-calc-snowball-m4k7-accordion-content">
+                    <div class="wpc-calc-snowball-m4k7-accordion-body">
+                        <p>החיסכון תלוי בגובה ההלוואה, הריבית ותקופת ההחזר. <strong style="color: var(--success);">לדוגמה:</strong> בהלוואה של 200,000 ₪ בריבית 5.5%, תוספת של 500 ₪ לחודש יכולה לחסוך <strong>יותר מ-15,000 ₪</strong> בריבית ולקצר את ההלוואה ב-20 חודשים!</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- FAQ 3 -->
+            <div class="wpc-calc-snowball-m4k7-accordion-item">
+                <div class="wpc-calc-snowball-m4k7-accordion-header" data-action="toggle-faq">
+                    ⚠️ האם יש עמלת פירעון מוקדם?
+                    <span class="wpc-calc-snowball-m4k7-accordion-arrow">←</span>
+                </div>
+                <div class="wpc-calc-snowball-m4k7-accordion-content">
+                    <div class="wpc-calc-snowball-m4k7-accordion-body">
+                        <p>תלוי בסוג ההלוואה. <strong>הלוואות בריבית משתנה</strong> בדרך כלל פטורות מעמלת פירעון מוקדם. <strong>הלוואות בריבית קבועה</strong> עשויות לכלול עמלה של עד 1% מיתרת הקרן. תמיד כדאי לבדוק את תנאי ההסכם לפני התחלת תוספת להחזרים.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- FAQ 4 -->
+            <div class="wpc-calc-snowball-m4k7-accordion-item">
+                <div class="wpc-calc-snowball-m4k7-accordion-header" data-action="toggle-faq">
+                    🤔 מתי עדיף לא להוסיף להחזר?
+                    <span class="wpc-calc-snowball-m4k7-accordion-arrow">←</span>
+                </div>
+                <div class="wpc-calc-snowball-m4k7-accordion-content">
+                    <div class="wpc-calc-snowball-m4k7-accordion-body">
+                        <p>אם יש לכם הלוואות בריבית גבוהה יותר (כמו כרטיס אשראי), כדאי לפרוע אותן קודם. כמו כן, אם אין לכם קרן חירום של 3-6 חודשי הוצאות, עדיף לבנות אותה לפני שמאיצים פירעון הלוואות.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- FAQ 5 -->
+            <div class="wpc-calc-snowball-m4k7-accordion-item">
+                <div class="wpc-calc-snowball-m4k7-accordion-header" data-action="toggle-faq">
+                    💰 האם כדאי תשלום חד-פעמי או תוספת חודשית?
+                    <span class="wpc-calc-snowball-m4k7-accordion-arrow">←</span>
+                </div>
+                <div class="wpc-calc-snowball-m4k7-accordion-content">
+                    <div class="wpc-calc-snowball-m4k7-accordion-body">
+                        <p><strong>שניהם טובים!</strong> תשלום חד-פעמי גדול (בונוס, ירושה) מורידה את הקרן מיד ומקטינה את הריבית הכוללת. תוספת חודשית קבועה יותר קלה לתכנון ויוצרת הרגל פיננסי בריא. השילוב האידיאלי: תוספת חודשית קבועה + תשלומים חד-פעמיים כשיש הזדמנות.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- FAQ 6 -->
+            <div class="wpc-calc-snowball-m4k7-accordion-item">
+                <div class="wpc-calc-snowball-m4k7-accordion-header" data-action="toggle-faq">
+                    📅 איך מתחילים לקצר את ההלוואה?
+                    <span class="wpc-calc-snowball-m4k7-accordion-arrow">←</span>
+                </div>
+                <div class="wpc-calc-snowball-m4k7-accordion-content">
+                    <div class="wpc-calc-snowball-m4k7-accordion-body">
+                        <p><strong>3 צעדים פשוטים:</strong><br>
+                        1️⃣ בדקו את יתרת ההלוואה והריבית הנוכחית<br>
+                        2️⃣ חשבו עם המחשבון כמה תוכלו להוסיף בנוחות<br>
+                        3️⃣ פנו לבנק או לגוף המלווה ובקשו להגדיל את ההחזר החודשי</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+<script>
+(function() {
+    'use strict';
+    
+    // 🔒 Namespace protection
+    const namespace = 'WPC_CalcSnowball_M4K7';
+    if (window[namespace]) return;
+    
+    // Container validation
+    const container = document.getElementById('wpc-calc-snowball-m4k7-main');
+    if (!container) return;
+    
+    // === State Management ===
+    const state = {
+        basic: {
+            balance: 200000,
+            payment: 3000,
+            rate: 5.5,
+            extra: 500
+        },
+        compare: {
+            balance: 200000,
+            payment: 3000,
+            rate: 5.5
+        },
+        schedule: {
+            balance: 200000,
+            payment: 3000,
+            rate: 5.5,
+            extra: 500
+        }
+    };
+    
+    // === Helper Functions ===
+    function formatCurrency(num) {
+        return Math.round(num).toLocaleString('he-IL') + ' ₪';
+    }
+    
+    function formatPercent(num) {
+        return num.toFixed(1) + '%';
+    }
+    
+    // Calculate number of months to pay off loan (NPER formula)
+    function calculateNPER(balance, monthlyPayment, annualRate) {
+        const monthlyRate = annualRate / 100 / 12;
+        if (monthlyRate === 0) return Math.ceil(balance / monthlyPayment);
+        if (monthlyPayment <= balance * monthlyRate) return Infinity; // Payment too low
+        
+        const nper = -Math.log(1 - (balance * monthlyRate / monthlyPayment)) / Math.log(1 + monthlyRate);
+        return Math.ceil(nper);
+    }
+    
+    // Calculate total interest paid over loan period
+    function calculateTotalInterest(balance, monthlyPayment, annualRate, months) {
+        const monthlyRate = annualRate / 100 / 12;
+        let totalPaid = 0;
+        let remainingBalance = balance;
+        
+        for (let i = 0; i < months && remainingBalance > 0; i++) {
+            const interestPayment = remainingBalance * monthlyRate;
+            const principalPayment = Math.min(monthlyPayment - interestPayment, remainingBalance);
+            remainingBalance -= principalPayment;
+            totalPaid += monthlyPayment;
+        }
+        
+        // Add final payment if remaining balance
+        if (remainingBalance > 0) {
+            totalPaid += remainingBalance + (remainingBalance * monthlyRate);
+        }
+        
+        return Math.max(0, totalPaid - balance);
+    }
+    
+    // Get future date
+    function getFutureDate(months) {
+        const date = new Date();
+        date.setMonth(date.getMonth() + months);
+        const hebrewMonths = ['ינואר', 'פברואר', 'מרץ', 'אפריל', 'מאי', 'יוני', 'יולי', 'אוגוסט', 'ספטמבר', 'אוקטובר', 'נובמבר', 'דצמבר'];
+        return hebrewMonths[date.getMonth()] + ' ' + date.getFullYear();
+    }
+    
+    // === DOM Helpers ===
+    function $(id) { return document.getElementById(id); }
+    
+    // === Tab 1: Basic Calculator ===
+    function updateBasicTab() {
+        const { balance, payment, rate, extra } = state.basic;
+        
+        // Calculate original loan period
+        const originalMonths = calculateNPER(balance, payment, rate);
+        
+        // Calculate new loan period with extra payment
+        const newPayment = payment + extra;
+        const newMonths = calculateNPER(balance, newPayment, rate);
+        
+        // Calculate interest savings
+        const originalInterest = calculateTotalInterest(balance, payment, rate, originalMonths);
+        const newInterest = calculateTotalInterest(balance, newPayment, rate, newMonths);
+        const savedInterest = originalInterest - newInterest;
+        const savedMonths = originalMonths - newMonths;
+        
+        // Update display
+        $('basic-original-months').textContent = originalMonths + ' חודשים';
+        $('basic-new-months').textContent = newMonths + ' חודשים';
+        $('basic-saved-months').textContent = savedMonths + ' חודשים!';
+        $('basic-saved-interest').textContent = formatCurrency(savedInterest);
+        
+        $('basic-old-date').textContent = getFutureDate(originalMonths);
+        $('basic-new-date').textContent = getFutureDate(newMonths);
+    }
+    
+    // === Tab 2: Compare Calculator ===
+    function updateCompareTab() {
+        const { balance, payment, rate } = state.compare;
+        const originalMonths = calculateNPER(balance, payment, rate);
+        const originalInterest = calculateTotalInterest(balance, payment, rate, originalMonths);
+        
+        const extras = [200, 500, 1000, 2000];
+        
+        extras.forEach(extra => {
+            const newPayment = payment + extra;
+            const newMonths = calculateNPER(balance, newPayment, rate);
+            const newInterest = calculateTotalInterest(balance, newPayment, rate, newMonths);
+            const savedMonths = originalMonths - newMonths;
+            const savedInterest = originalInterest - newInterest;
+            
+            $('compare-' + extra + '-months').textContent = newMonths + ' חודשים';
+            $('compare-' + extra + '-saved').textContent = savedMonths + ' חודשים';
+            $('compare-' + extra + '-interest').textContent = formatCurrency(savedInterest);
+        });
+    }
+    
+    // === Tab 3: Schedule Calculator ===
+    function updateScheduleTab() {
+        const { balance, payment, rate, extra } = state.schedule;
+        const monthlyRate = rate / 100 / 12;
+        const totalPayment = payment + extra;
+        
+        let remainingBalance = balance;
+        const tbody = $('schedule-table-body');
+        tbody.innerHTML = '';
+        
+        for (let month = 1; month <= 12 && remainingBalance > 0; month++) {
+            const interestPayment = remainingBalance * monthlyRate;
+            const principalPayment = Math.min(totalPayment - interestPayment, remainingBalance);
+            remainingBalance -= principalPayment;
+            
+            const row = document.createElement('tr');
+            row.style.background = month % 2 === 0 ? '#f9f9f9' : 'white';
+            row.innerHTML = `
+                <td style="padding: 12px; text-align: center; border-bottom: 1px solid #e0e0e0;">${month}</td>
+                <td style="padding: 12px; text-align: center; border-bottom: 1px solid #e0e0e0;">${formatCurrency(totalPayment)}</td>
+                <td style="padding: 12px; text-align: center; border-bottom: 1px solid #e0e0e0; color: var(--success); font-weight: 600;">${formatCurrency(principalPayment)}</td>
+                <td style="padding: 12px; text-align: center; border-bottom: 1px solid #e0e0e0; color: var(--warning);">${formatCurrency(interestPayment)}</td>
+                <td style="padding: 12px; text-align: center; border-bottom: 1px solid #e0e0e0; font-weight: 700;">${formatCurrency(Math.max(0, remainingBalance))}</td>
+            `;
+            tbody.appendChild(row);
+        }
+    }
+    
+    // === Tab Switching ===
+    function switchTab(tabName) {
+        // Update buttons
+        container.querySelectorAll('.wpc-calc-snowball-m4k7-tab').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        container.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+        
+        // Update panels
+        container.querySelectorAll('.wpc-calc-snowball-m4k7-panel').forEach(panel => {
+            panel.classList.remove('active');
+        });
+        container.querySelector(`[data-panel="${tabName}"]`).classList.add('active');
+    }
+    
+    // === AWG Section ===
+    function toggleAWG() {
+        const content = $('awg-content');
+        if (content.style.height === '0px' || content.style.height === '') {
+            content.style.height = 'auto';
+            content.style.opacity = '1';
+            content.style.padding = '25px';
+        } else {
+            content.style.height = '0px';
+            content.style.opacity = '0';
+            content.style.padding = '0';
+        }
+    }
+    
+    // === FAQ Toggle ===
+    function toggleFAQ(header) {
+        const content = header.nextElementSibling;
+        const isActive = header.classList.contains('active');
+        
+        // Close all
+        container.querySelectorAll('.wpc-calc-snowball-m4k7-accordion-header').forEach(h => {
+            h.classList.remove('active');
+            h.nextElementSibling.classList.remove('active');
+        });
+        
+        // Open clicked if wasn't active
+        if (!isActive) {
+            header.classList.add('active');
+            content.classList.add('active');
+        }
+    }
+    
+    // === Event Delegation ===
+    container.addEventListener('click', function(e) {
+        const action = e.target.closest('[data-action]');
+        if (!action) return;
+        
+        switch(action.dataset.action) {
+            case 'switch-tab':
+                switchTab(action.dataset.tab);
+                break;
+            case 'select-extra':
+                // Update active state
+                container.querySelectorAll('#basic-extra-group .wpc-calc-snowball-m4k7-option').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                action.classList.add('active');
+                state.basic.extra = parseInt(action.dataset.value);
+                updateBasicTab();
+                break;
+            case 'open-awg':
+                toggleAWG();
+                break;
+            case 'scroll-to-embed':
+                const embedSection = document.getElementById('embed-section');
+                if (embedSection) embedSection.scrollIntoView({ behavior: 'smooth' });
+                break;
+            case 'toggle-faq':
+                toggleFAQ(action);
+                break;
+            case 'copy-embed-code':
+                copyEmbedCode(false);
+                break;
+            case 'copy-with-color':
+                copyEmbedCode(true);
+                break;
+            case 'preview-color':
+                showPreview(action.dataset.color, action.dataset.name);
+                break;
+            case 'copy-preview-code':
+                copyPreviewCode(action.dataset.color);
+                break;
+        }
+    });
+    
+    // === Slider Input Events ===
+    container.addEventListener('input', function(e) {
+        const target = e.target;
+        if (!target.classList.contains('wpc-calc-snowball-m4k7-slider')) return;
+        
+        const id = target.id;
+        const value = parseFloat(target.value);
+        
+        // Basic tab sliders
+        if (id === 'basic-balance-slider') {
+            state.basic.balance = value;
+            $('basic-balance-value').textContent = formatCurrency(value);
+            updateBasicTab();
+        } else if (id === 'basic-payment-slider') {
+            state.basic.payment = value;
+            $('basic-payment-value').textContent = formatCurrency(value);
+            updateBasicTab();
+        } else if (id === 'basic-rate-slider') {
+            state.basic.rate = value;
+            $('basic-rate-value').textContent = formatPercent(value);
+            updateBasicTab();
+        }
+        
+        // Compare tab sliders
+        else if (id === 'compare-balance-slider') {
+            state.compare.balance = value;
+            $('compare-balance-value').textContent = formatCurrency(value);
+            updateCompareTab();
+        } else if (id === 'compare-payment-slider') {
+            state.compare.payment = value;
+            $('compare-payment-value').textContent = formatCurrency(value);
+            updateCompareTab();
+        } else if (id === 'compare-rate-slider') {
+            state.compare.rate = value;
+            $('compare-rate-value').textContent = formatPercent(value);
+            updateCompareTab();
+        }
+        
+        // Schedule tab sliders
+        else if (id === 'schedule-balance-slider') {
+            state.schedule.balance = value;
+            $('schedule-balance-value').textContent = formatCurrency(value);
+            updateScheduleTab();
+        } else if (id === 'schedule-payment-slider') {
+            state.schedule.payment = value;
+            $('schedule-payment-value').textContent = formatCurrency(value);
+            updateScheduleTab();
+        } else if (id === 'schedule-rate-slider') {
+            state.schedule.rate = value;
+            $('schedule-rate-value').textContent = formatPercent(value);
+            updateScheduleTab();
+        } else if (id === 'schedule-extra-slider') {
+            state.schedule.extra = value;
+            $('schedule-extra-value').textContent = formatCurrency(value);
+            updateScheduleTab();
+        }
+    });
+    
+    // === Embed System ===
+    let selectedColor = '#1e5490';
+    let selectedColorName = 'כחול מקצועי 💙';
+    
+    function darkenColor(color, percent) {
+        const num = parseInt(color.replace('#', ''), 16);
+        const amt = Math.round(2.55 * percent);
+        const R = Math.max(0, (num >> 16) - amt);
+        const G = Math.max(0, ((num >> 8) & 0x00FF) - amt);
+        const B = Math.max(0, (num & 0x0000FF) - amt);
+        return '#' + (0x1000000 + R * 0x10000 + G * 0x100 + B).toString(16).slice(1);
+    }
+    
+    function hexToRgba(hex, alpha) {
+        const r = parseInt(hex.slice(1, 3), 16);
+        const g = parseInt(hex.slice(3, 5), 16);
+        const b = parseInt(hex.slice(5, 7), 16);
+        return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+    }
+    
+    // === showPreview - תצוגה מקדימה עם שכפול מחשבון אמיתי ===
+    function showPreview(color, colorName) {
+        selectedColor = color;
+        selectedColorName = colorName;
+        
+        // Update color button states
+        container.querySelectorAll('.wpc-calc-snowball-m4k7-color-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        const activeBtn = container.querySelector(`[data-color="${color}"]`);
+        if (activeBtn) activeBtn.classList.add('active');
+        
+        // Update color name display
+        const colorNameEl = $('selected-color-name');
+        if (colorNameEl) colorNameEl.textContent = 'צבע נבחר: ' + colorName;
+        
+        const darkColor = darkenColor(color, 15);
+        const previewContainer = $('preview-container');
+        const previewContent = $('preview-content');
+        
+        if (!previewContainer || !previewContent) return;
+        
+        // Clone the calculator
+        const calculator = $('wpc-calc-snowball-m4k7-calculator');
+        if (!calculator) {
+            console.error('Calculator not found');
+            return;
+        }
+        
+        const calc = calculator.cloneNode(true);
+        
+        // Change ID to prevent conflicts
+        calc.id = 'wpc-calc-snowball-m4k7-calculator-preview';
+        
+        // Replace tab IDs with data attributes
+        calc.querySelectorAll('[id*="tab-"]').forEach(el => {
+            const oldId = el.id;
+            const tabName = oldId.replace(/.*tab-/, '').replace(/-content$/, '');
+            el.setAttribute('data-preview-tab', tabName);
+            el.removeAttribute('id');
+        });
+        
+        // Set CSS variables on cloned element
+        calc.style.setProperty('--primary', color);
+        calc.style.setProperty('--primary-dark', darkColor);
+        
+        // Apply colors with setProperty + important
+        // Title
+        calc.querySelectorAll('.wpc-calc-snowball-m4k7-title').forEach(el => {
+            el.style.setProperty('color', color, 'important');
+        });
+        
+        // Active tab button
+        const activeTabBtn = calc.querySelector('.wpc-calc-snowball-m4k7-tab.active');
+        if (activeTabBtn) {
+            activeTabBtn.style.setProperty('background', `linear-gradient(135deg, ${color} 0%, ${darkColor} 100%)`, 'important');
+            activeTabBtn.style.setProperty('color', 'white', 'important');
+            activeTabBtn.style.setProperty('border-color', darkColor, 'important');
+        }
+        
+        // Highlight cards
+        calc.querySelectorAll('.wpc-calc-snowball-m4k7-highlight-card').forEach(el => {
+            el.style.setProperty('background', `linear-gradient(135deg, ${color} 0%, ${darkColor} 100%)`, 'important');
+        });
+        
+        // Panel titles
+        calc.querySelectorAll('.wpc-calc-snowball-m4k7-panel h4').forEach(el => {
+            el.style.setProperty('color', color, 'important');
+        });
+        
+        // Sliders
+        calc.querySelectorAll('input[type="range"]').forEach(slider => {
+            slider.style.setProperty('accent-color', color, 'important');
+        });
+        
+        // Slider values
+        calc.querySelectorAll('.wpc-calc-snowball-m4k7-slider-value').forEach(el => {
+            el.style.setProperty('color', color, 'important');
+        });
+        
+        // Active option buttons
+        calc.querySelectorAll('.wpc-calc-snowball-m4k7-option.active').forEach(btn => {
+            btn.style.setProperty('background', color, 'important');
+            btn.style.setProperty('border-color', color, 'important');
+            btn.style.setProperty('color', 'white', 'important');
+        });
+        
+        // Result labels
+        calc.querySelectorAll('.wpc-calc-snowball-m4k7-result-label').forEach(el => {
+            el.style.setProperty('color', color, 'important');
+        });
+        
+        // Table headers
+        calc.querySelectorAll('th').forEach(el => {
+            el.style.setProperty('background', color, 'important');
+        });
+        
+        // Build preview with title and copy button
+        const previewTitle = `<div style="text-align: center; margin-bottom: 20px;">
+            <h3 style="color: ${color}; margin: 0 0 5px 0;">👁️ תצוגה מקדימה - ${colorName}</h3>
+            <p style="color: #666; margin: 0; font-size: 0.9em;">כך יראה המחשבון באתר שלך</p>
+        </div>`;
+        
+        const copyBtn = `<div style="text-align: center; margin-top: 20px;">
+            <button data-action="copy-preview-code" data-color="${color}" 
+                    style="background: linear-gradient(135deg, ${color} 0%, ${darkColor} 100%); color: white; padding: 15px 40px; border: none; border-radius: 10px; font-size: 1.1em; cursor: pointer; font-weight: 600; box-shadow: 0 4px 15px ${hexToRgba(color, 0.3)};">
+                📋 העתק קוד עם צבע ${colorName}
+            </button>
+        </div>`;
+        
+        const creditText = `<p style="text-align: center; font-size: 0.85em; color: #666; margin-top: 15px;">
+            מחשבון קיצור הלוואה פותח על ידי <a href="https://loan-israel.co.il/" target="_blank" rel="nofollow noopener" style="color: ${color};">רק תבקש פיננסים</a>
+        </p>`;
+        
+        // Set preview content
+        previewContent.innerHTML = previewTitle + calc.outerHTML + creditText + copyBtn;
+        
+        // Show preview container
+        previewContainer.style.display = 'block';
+        
+        // Initialize the cloned calculator
+        const clonedCalc = previewContent.querySelector('[id*="preview"]') || 
+                           previewContent.querySelector('.wpc-calc-snowball-m4k7-calculator');
+        if (clonedCalc) {
+            initPreviewCalculator(clonedCalc, color);
+        }
+        
+        // Scroll to preview
+        previewContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    
+    // === initPreviewCalculator - אתחול מחשבון בתצוגה מקדימה ===
+    function initPreviewCalculator(calc, primaryColor) {
+        const darkColor = darkenColor(primaryColor, 15);
+        
+        // Preview state
+        const previewState = {
+            basic: { balance: 200000, payment: 3000, rate: 5.5, extra: 500 },
+            compare: { balance: 200000, payment: 3000, rate: 5.5 },
+            schedule: { balance: 200000, payment: 3000, rate: 5.5, extra: 500 }
+        };
+        
+        // Helper functions
+        function fmtCurrency(n) { return Math.round(n).toLocaleString('he-IL') + ' ₪'; }
+        function fmtPercent(n) { return n.toFixed(1) + '%'; }
+        
+        function calcNPER(balance, payment, rate) {
+            const monthlyRate = rate / 100 / 12;
+            if (monthlyRate === 0) return Math.ceil(balance / payment);
+            if (payment <= balance * monthlyRate) return 999;
+            return Math.ceil(-Math.log(1 - (balance * monthlyRate / payment)) / Math.log(1 + monthlyRate));
+        }
+        
+        function calcTotalInterest(balance, payment, rate, months) {
+            const monthlyRate = rate / 100 / 12;
+            let totalPaid = 0;
+            let remaining = balance;
+            for (let i = 0; i < months && remaining > 0; i++) {
+                const interestPart = remaining * monthlyRate;
+                const principalPart = Math.min(payment - interestPart, remaining);
+                remaining -= principalPart;
+                totalPaid += payment;
+            }
+            if (remaining > 0) totalPaid += remaining + remaining * monthlyRate;
+            return Math.max(0, totalPaid - balance);
+        }
+        
+        function getFutureDate(months) {
+            const d = new Date();
+            d.setMonth(d.getMonth() + months);
+            const hebrewMonths = ['ינואר', 'פברואר', 'מרץ', 'אפריל', 'מאי', 'יוני', 'יולי', 'אוגוסט', 'ספטמבר', 'אוקטובר', 'נובמבר', 'דצמבר'];
+            return hebrewMonths[d.getMonth()] + ' ' + d.getFullYear();
+        }
+        
+        function updatePreviewBasic() {
+            const s = previewState.basic;
+            const origMonths = calcNPER(s.balance, s.payment, s.rate);
+            const newMonths = calcNPER(s.balance, s.payment + s.extra, s.rate);
+            const origInt = calcTotalInterest(s.balance, s.payment, s.rate, origMonths);
+            const newInt = calcTotalInterest(s.balance, s.payment + s.extra, s.rate, newMonths);
+            
+            const savedMonths = origMonths - newMonths;
+            const savedInterest = origInt - newInt;
+            
+            // Update preview display
+            const els = {
+                'basic-original-months': origMonths + ' חודשים',
+                'basic-new-months': newMonths + ' חודשים',
+                'basic-saved-months': savedMonths + ' חודשים!',
+                'basic-saved-interest': fmtCurrency(savedInterest),
+                'basic-old-date': getFutureDate(origMonths),
+                'basic-new-date': getFutureDate(newMonths)
+            };
+            
+            Object.entries(els).forEach(([id, val]) => {
+                const el = calc.querySelector(`#${id}`) || calc.querySelector(`[id*="${id}"]`);
+                if (el) el.textContent = val;
+            });
+        }
+        
+        // === Tab 2: Compare - טבלת השוואה ===
+        function updatePreviewCompare() {
+            const s = previewState.compare;
+            const originalMonths = calcNPER(s.balance, s.payment, s.rate);
+            const originalInterest = calcTotalInterest(s.balance, s.payment, s.rate, originalMonths);
+            
+            const extras = [200, 500, 1000, 2000];
+            
+            extras.forEach(extra => {
+                const newPayment = s.payment + extra;
+                const newMonths = calcNPER(s.balance, newPayment, s.rate);
+                const newInterest = calcTotalInterest(s.balance, newPayment, s.rate, newMonths);
+                const savedMonths = originalMonths - newMonths;
+                const savedInterest = originalInterest - newInterest;
+                
+                // Update table cells
+                const monthsEl = calc.querySelector(`#compare-${extra}-months`) || calc.querySelector(`[id*="compare-${extra}-months"]`);
+                const savedEl = calc.querySelector(`#compare-${extra}-saved`) || calc.querySelector(`[id*="compare-${extra}-saved"]`);
+                const interestEl = calc.querySelector(`#compare-${extra}-interest`) || calc.querySelector(`[id*="compare-${extra}-interest"]`);
+                
+                if (monthsEl) monthsEl.textContent = newMonths + ' חודשים';
+                if (savedEl) savedEl.textContent = savedMonths + ' חודשים';
+                if (interestEl) interestEl.textContent = fmtCurrency(savedInterest);
+            });
+        }
+        
+        // === Tab 3: Schedule - לוח סילוקין ===
+        function updatePreviewSchedule() {
+            const s = previewState.schedule;
+            const monthlyRate = s.rate / 100 / 12;
+            const totalPayment = s.payment + s.extra;
+            
+            let remainingBalance = s.balance;
+            const tbody = calc.querySelector('#schedule-table-body') || calc.querySelector('[id*="schedule-table-body"]');
+            if (!tbody) return;
+            
+            tbody.innerHTML = '';
+            
+            for (let month = 1; month <= 12 && remainingBalance > 0; month++) {
+                const interestPayment = remainingBalance * monthlyRate;
+                const principalPayment = Math.min(totalPayment - interestPayment, remainingBalance);
+                remainingBalance -= principalPayment;
+                
+                const row = document.createElement('tr');
+                row.style.background = month % 2 === 0 ? '#f9f9f9' : 'white';
+                row.innerHTML = `
+                    <td style="padding: 12px; text-align: center; border-bottom: 1px solid #e0e0e0;">${month}</td>
+                    <td style="padding: 12px; text-align: center; border-bottom: 1px solid #e0e0e0;">${fmtCurrency(totalPayment)}</td>
+                    <td style="padding: 12px; text-align: center; border-bottom: 1px solid #e0e0e0; color: #25D366; font-weight: 600;">${fmtCurrency(principalPayment)}</td>
+                    <td style="padding: 12px; text-align: center; border-bottom: 1px solid #e0e0e0; color: #FF9800;">${fmtCurrency(interestPayment)}</td>
+                    <td style="padding: 12px; text-align: center; border-bottom: 1px solid #e0e0e0; font-weight: 700;">${fmtCurrency(Math.max(0, remainingBalance))}</td>
+                `;
+                tbody.appendChild(row);
+            }
+        }
+        
+        // Tab switching with stopPropagation
+        const tabs = calc.querySelectorAll('.wpc-calc-snowball-m4k7-tab');
+        const panels = calc.querySelectorAll('.wpc-calc-snowball-m4k7-panel');
+        
+        tabs.forEach(tab => {
+            tab.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation(); // Prevent bubbling to original calculator
+                
+                const tabName = this.dataset.tab;
+                
+                // Remove active from all tabs
+                tabs.forEach(t => {
+                    t.classList.remove('active');
+                    t.style.setProperty('background', 'var(--bg-light)', 'important');
+                    t.style.setProperty('color', 'var(--text-dark)', 'important');
+                });
+                
+                // Hide all panels
+                panels.forEach(p => {
+                    p.classList.remove('active');
+                    p.style.display = 'none';
+                });
+                
+                // Activate selected tab
+                this.classList.add('active');
+                this.style.setProperty('background', `linear-gradient(135deg, ${primaryColor} 0%, ${darkColor} 100%)`, 'important');
+                this.style.setProperty('color', 'white', 'important');
+                
+                // Show selected panel
+                const activePanel = calc.querySelector(`[data-panel="${tabName}"]`) ||
+                                   calc.querySelector(`[data-preview-tab="${tabName}"]`) ||
+                                   calc.querySelector(`#tab-${tabName}`);
+                if (activePanel) {
+                    activePanel.classList.add('active');
+                    activePanel.style.display = 'block';
+                }
+            });
+        });
+        
+        // Sliders with stopPropagation
+        const sliders = calc.querySelectorAll('input[type="range"]');
+        sliders.forEach(slider => {
+            slider.style.setProperty('accent-color', primaryColor, 'important');
+            
+            slider.addEventListener('input', function(e) {
+                e.stopPropagation();
+                
+                const id = this.id;
+                const val = parseFloat(this.value);
+                
+                // Update value display
+                const valueId = id.replace('-slider', '-value');
+                const valueEl = calc.querySelector(`#${valueId}`);
+                if (valueEl) {
+                    if (id.includes('rate')) {
+                        valueEl.textContent = fmtPercent(val);
+                    } else {
+                        valueEl.textContent = fmtCurrency(val);
+                    }
+                }
+                
+                // Update state based on which slider
+                // Basic tab sliders
+                if (id.includes('basic-balance')) { previewState.basic.balance = val; updatePreviewBasic(); }
+                else if (id.includes('basic-payment')) { previewState.basic.payment = val; updatePreviewBasic(); }
+                else if (id.includes('basic-rate')) { previewState.basic.rate = val; updatePreviewBasic(); }
+                // Compare tab sliders
+                else if (id.includes('compare-balance')) { previewState.compare.balance = val; updatePreviewCompare(); }
+                else if (id.includes('compare-payment')) { previewState.compare.payment = val; updatePreviewCompare(); }
+                else if (id.includes('compare-rate')) { previewState.compare.rate = val; updatePreviewCompare(); }
+                // Schedule tab sliders
+                else if (id.includes('schedule-balance')) { previewState.schedule.balance = val; updatePreviewSchedule(); }
+                else if (id.includes('schedule-payment')) { previewState.schedule.payment = val; updatePreviewSchedule(); }
+                else if (id.includes('schedule-rate')) { previewState.schedule.rate = val; updatePreviewSchedule(); }
+                else if (id.includes('schedule-extra')) { previewState.schedule.extra = val; updatePreviewSchedule(); }
+            });
+        });
+        
+        // Option buttons with stopPropagation
+        const optionBtns = calc.querySelectorAll('.wpc-calc-snowball-m4k7-option');
+        optionBtns.forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                
+                const group = this.closest('.wpc-calc-snowball-m4k7-options');
+                if (group) {
+                    group.querySelectorAll('.wpc-calc-snowball-m4k7-option').forEach(b => {
+                        b.classList.remove('active');
+                        b.style.setProperty('background', 'transparent', 'important');
+                        b.style.setProperty('border-color', 'var(--border)', 'important');
+                        b.style.setProperty('color', 'var(--text-dark)', 'important');
+                    });
+                }
+                
+                this.classList.add('active');
+                this.style.setProperty('background', primaryColor, 'important');
+                this.style.setProperty('border-color', primaryColor, 'important');
+                this.style.setProperty('color', 'white', 'important');
+                
+                const val = parseInt(this.dataset.value);
+                previewState.basic.extra = val;
+                updatePreviewBasic();
+            });
+        });
+        
+        // Initial calculation for all tabs
+        updatePreviewBasic();
+        updatePreviewCompare();
+        updatePreviewSchedule();
+    }
+    
+    // === copyPreviewCode - העתקה מתצוגה מקדימה עם צבע ===
+    function copyPreviewCode(color) {
+        const targetColor = color || selectedColor;
+        const darkColor = darkenColor(targetColor, 15);
+        
+        const calculator = $('wpc-calc-snowball-m4k7-calculator');
+        if (!calculator) return;
+        
+        // Get styles
+        let styles = '';
+        document.querySelectorAll('style').forEach(styleEl => {
+            if (styleEl.textContent.includes('wpc-calc-snowball-m4k7')) {
+                styles = styleEl.textContent;
+            }
+        });
+        
+        // Replace colors
+        if (targetColor !== '#1e5490') {
+            styles = styles.replace(/#1e5490/g, targetColor);
+            styles = styles.replace(/#2a5fa0/g, darkColor);
+        }
+        
+        // Build code
+        let code = '<style>\n' + styles + '\n</style>\n';
+        code += '<div class="wpc-calc-snowball-m4k7-wrapper" id="wpc-calc-snowball-m4k7-main">\n';
+        code += calculator.outerHTML;
+        code += '\n</div>\n';
+        code += `<p style="text-align:center; font-size:0.9em; margin-top:20px; color:#666;">
+    מחשבון קיצור הלוואה פותח על ידי 
+    <a href="https://loan-israel.co.il/" target="_blank" rel="nofollow noopener" 
+       style="color:${targetColor}; text-decoration:underline;">רק תבקש פיננסים</a>
+</p>\n`;
+        code += getEmbedScript(targetColor, darkColor);
+        
+        navigator.clipboard.writeText(code).then(() => {
+            alert('✅ הקוד הועתק בהצלחה עם הצבע הנבחר!\n\nהדביקו אותו בעורך וורדפרס במצב HTML.');
+        }).catch(() => {
+            alert('שגיאה בהעתקה - נסו שוב');
+        });
+    }
+    
+    function copyEmbedCode(withColor = false) {
+        const calculator = $('wpc-calc-snowball-m4k7-calculator');
+        if (!calculator) return;
+        
+        const color = withColor ? selectedColor : '#1e5490';
+        const darkColor = darkenColor(color, 15);
+        
+        // Get all styles
+        let styles = '';
+        document.querySelectorAll('style').forEach(styleEl => {
+            if (styleEl.textContent.includes('wpc-calc-snowball-m4k7')) {
+                styles = styleEl.textContent;
+            }
+        });
+        
+        // Replace colors if custom color
+        if (withColor && color !== '#1e5490') {
+            styles = styles.replace(/#1e5490/g, color);
+            styles = styles.replace(/#2a5fa0/g, darkColor);
+        }
+        
+        // Build embed code
+        let embedCode = '<style>\n' + styles + '\n</style>\n';
+        embedCode += '<div class="wpc-calc-snowball-m4k7-wrapper" id="wpc-calc-snowball-m4k7-main">\n';
+        embedCode += calculator.outerHTML;
+        embedCode += '\n</div>\n';
+        
+        // Add credit link
+        embedCode += `<p style="text-align:center; font-size:0.9em; margin-top:20px; color:#666;">
+    מחשבון קיצור הלוואה פותח על ידי 
+    <a href="https://loan-israel.co.il/" target="_blank" rel="nofollow noopener" 
+       style="color:${color}; text-decoration:underline;">
+       רק תבקש פיננסים
+    </a>
+</p>\n`;
+        
+        // Add standalone JS
+        embedCode += getEmbedScript(color, darkColor);
+        
+        navigator.clipboard.writeText(embedCode).then(() => {
+            alert('✅ הקוד הועתק בהצלחה!\n\nהדביקו אותו בעורך וורדפרס במצב HTML.');
+        }).catch(() => {
+            alert('שגיאה בהעתקה - נסו שוב');
+        });
+    }
+    
+    function getEmbedScript(color, darkColor) {
+        return `<script>
+document.addEventListener("DOMContentLoaded", function() {
+    (function() {
+        "use strict";
+        var ns = "WPC_CalcSnowball_Embed";
+        if (window[ns]) return;
+        var container = document.getElementById("wpc-calc-snowball-m4k7-main");
+        if (!container) return;
+        
+        // State לכל הטאבים
+        var state = {
+            basic: { balance: 200000, payment: 3000, rate: 5.5, extra: 500 },
+            compare: { balance: 200000, payment: 3000, rate: 5.5 },
+            schedule: { balance: 200000, payment: 3000, rate: 5.5, extra: 500 }
+        };
+        
+        function fmt(n) { return Math.round(n).toLocaleString("he-IL") + " ₪"; }
+        function pct(n) { return n.toFixed(1) + "%"; }
+        
+        function nper(bal, pmt, r) {
+            var mr = r / 100 / 12;
+            if (mr === 0) return Math.ceil(bal / pmt);
+            if (pmt <= bal * mr) return 999;
+            return Math.ceil(-Math.log(1 - (bal * mr / pmt)) / Math.log(1 + mr));
+        }
+        
+        function totalInt(bal, pmt, r, m) {
+            var mr = r / 100 / 12, tot = 0, rem = bal;
+            for (var i = 0; i < m && rem > 0; i++) {
+                var ip = rem * mr, pp = Math.min(pmt - ip, rem);
+                rem -= pp; tot += pmt;
+            }
+            if (rem > 0) tot += rem + rem * mr;
+            return Math.max(0, tot - bal);
+        }
+        
+        function futureDate(m) {
+            var d = new Date(); d.setMonth(d.getMonth() + m);
+            var months = ["ינואר","פברואר","מרץ","אפריל","מאי","יוני","יולי","אוגוסט","ספטמבר","אוקטובר","נובמבר","דצמבר"];
+            return months[d.getMonth()] + " " + d.getFullYear();
+        }
+        
+        function $(id) { return document.getElementById(id); }
+        
+        // === Tab 1: Basic - חישוב מהיר ===
+        function updateBasic() {
+            var s = state.basic;
+            var orig = nper(s.balance, s.payment, s.rate);
+            var newM = nper(s.balance, s.payment + s.extra, s.rate);
+            var origInt = totalInt(s.balance, s.payment, s.rate, orig);
+            var newInt = totalInt(s.balance, s.payment + s.extra, s.rate, newM);
+            
+            if ($("basic-original-months")) $("basic-original-months").textContent = orig + " חודשים";
+            if ($("basic-new-months")) $("basic-new-months").textContent = newM + " חודשים";
+            if ($("basic-saved-months")) $("basic-saved-months").textContent = (orig - newM) + " חודשים!";
+            if ($("basic-saved-interest")) $("basic-saved-interest").textContent = fmt(origInt - newInt);
+            if ($("basic-old-date")) $("basic-old-date").textContent = futureDate(orig);
+            if ($("basic-new-date")) $("basic-new-date").textContent = futureDate(newM);
+        }
+        
+        // === Tab 2: Compare - טבלת השוואה ===
+        function updateCompare() {
+            var s = state.compare;
+            var origMonths = nper(s.balance, s.payment, s.rate);
+            var origInt = totalInt(s.balance, s.payment, s.rate, origMonths);
+            var extras = [200, 500, 1000, 2000];
+            
+            for (var i = 0; i < extras.length; i++) {
+                var ex = extras[i];
+                var newMonths = nper(s.balance, s.payment + ex, s.rate);
+                var newInt = totalInt(s.balance, s.payment + ex, s.rate, newMonths);
+                var saved = origMonths - newMonths;
+                var savedInt = origInt - newInt;
+                
+                if ($("compare-" + ex + "-months")) $("compare-" + ex + "-months").textContent = newMonths + " חודשים";
+                if ($("compare-" + ex + "-saved")) $("compare-" + ex + "-saved").textContent = saved + " חודשים";
+                if ($("compare-" + ex + "-interest")) $("compare-" + ex + "-interest").textContent = fmt(savedInt);
+            }
+        }
+        
+        // === Tab 3: Schedule - לוח סילוקין ===
+        function updateSchedule() {
+            var s = state.schedule;
+            var mr = s.rate / 100 / 12;
+            var totalPmt = s.payment + s.extra;
+            var rem = s.balance;
+            var tbody = $("schedule-table-body");
+            if (!tbody) return;
+            
+            tbody.innerHTML = "";
+            for (var m = 1; m <= 12 && rem > 0; m++) {
+                var intPmt = rem * mr;
+                var prinPmt = Math.min(totalPmt - intPmt, rem);
+                rem -= prinPmt;
+                
+                var row = document.createElement("tr");
+                row.style.background = m % 2 === 0 ? "#f9f9f9" : "white";
+                row.innerHTML = '<td style="padding:12px;text-align:center;border-bottom:1px solid #e0e0e0;">' + m + '</td>' +
+                    '<td style="padding:12px;text-align:center;border-bottom:1px solid #e0e0e0;">' + fmt(totalPmt) + '</td>' +
+                    '<td style="padding:12px;text-align:center;border-bottom:1px solid #e0e0e0;color:#25D366;font-weight:600;">' + fmt(prinPmt) + '</td>' +
+                    '<td style="padding:12px;text-align:center;border-bottom:1px solid #e0e0e0;color:#FF9800;">' + fmt(intPmt) + '</td>' +
+                    '<td style="padding:12px;text-align:center;border-bottom:1px solid #e0e0e0;font-weight:700;">' + fmt(Math.max(0, rem)) + '</td>';
+                tbody.appendChild(row);
+            }
+        }
+        
+        function switchTab(tab) {
+            container.querySelectorAll(".wpc-calc-snowball-m4k7-tab").forEach(function(b) { 
+                b.classList.remove("active"); 
+                b.style.background = "var(--bg-light)";
+                b.style.color = "var(--text-dark)";
+            });
+            container.querySelectorAll(".wpc-calc-snowball-m4k7-panel").forEach(function(p) { 
+                p.classList.remove("active"); 
+                p.style.display = "none";
+            });
+            var btn = container.querySelector("[data-tab=\\"" + tab + "\\"]");
+            var panel = container.querySelector("[data-panel=\\"" + tab + "\\"]");
+            if (btn) {
+                btn.classList.add("active");
+                btn.style.background = "var(--primary-gradient)";
+                btn.style.color = "white";
+            }
+            if (panel) {
+                panel.classList.add("active");
+                panel.style.display = "block";
+            }
+            // עדכון הטאב המתאים
+            if (tab === "basic") updateBasic();
+            else if (tab === "compare") updateCompare();
+            else if (tab === "schedule") updateSchedule();
+        }
+        
+        container.addEventListener("click", function(e) {
+            var t = e.target.closest("[data-action]");
+            if (!t) return;
+            var a = t.dataset.action;
+            if (a === "switch-tab") switchTab(t.dataset.tab);
+            if (a === "select-extra") {
+                container.querySelectorAll("#basic-extra-group .wpc-calc-snowball-m4k7-option").forEach(function(b) { b.classList.remove("active"); });
+                t.classList.add("active");
+                state.basic.extra = parseInt(t.dataset.value);
+                updateBasic();
+            }
+        });
+        
+        container.addEventListener("input", function(e) {
+            var id = e.target.id, v = parseFloat(e.target.value);
+            // Basic tab sliders
+            if (id === "basic-balance-slider") { state.basic.balance = v; $("basic-balance-value").textContent = fmt(v); updateBasic(); }
+            else if (id === "basic-payment-slider") { state.basic.payment = v; $("basic-payment-value").textContent = fmt(v); updateBasic(); }
+            else if (id === "basic-rate-slider") { state.basic.rate = v; $("basic-rate-value").textContent = pct(v); updateBasic(); }
+            // Compare tab sliders
+            else if (id === "compare-balance-slider") { state.compare.balance = v; $("compare-balance-value").textContent = fmt(v); updateCompare(); }
+            else if (id === "compare-payment-slider") { state.compare.payment = v; $("compare-payment-value").textContent = fmt(v); updateCompare(); }
+            else if (id === "compare-rate-slider") { state.compare.rate = v; $("compare-rate-value").textContent = pct(v); updateCompare(); }
+            // Schedule tab sliders
+            else if (id === "schedule-balance-slider") { state.schedule.balance = v; $("schedule-balance-value").textContent = fmt(v); updateSchedule(); }
+            else if (id === "schedule-payment-slider") { state.schedule.payment = v; $("schedule-payment-value").textContent = fmt(v); updateSchedule(); }
+            else if (id === "schedule-rate-slider") { state.schedule.rate = v; $("schedule-rate-value").textContent = pct(v); updateSchedule(); }
+            else if (id === "schedule-extra-slider") { state.schedule.extra = v; $("schedule-extra-value").textContent = fmt(v); updateSchedule(); }
+        });
+        
+        // אתחול כל הטאבים
+        updateBasic();
+        updateCompare();
+        updateSchedule();
+        window[ns] = { v: "1.0.0" };
+    })();
+});
+<` + `/script>`;
+    }
+    
+    // Custom color picker
+    const customColorPicker = document.getElementById('custom-color-picker');
+    if (customColorPicker) {
+        customColorPicker.addEventListener('input', function(e) {
+            showPreview(e.target.value, 'צבע מותאם אישית 🎨');
+        });
+    }
+    
+    // === Initialize ===
+    function init() {
+        updateBasicTab();
+        updateCompareTab();
+        updateScheduleTab();
+        updatePreview();
+    }
+    
+    init();
+    
+    // Expose namespace
+    window[namespace] = { version: '1.0.0' };
+})();
+</script>
+
+<!-- Schema.org Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "מה זה שיטת כדור השלג?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "שיטת כדור השלג היא אסטרטגיה לפירעון מהיר של הלוואות. הרעיון פשוט: מוסיפים סכום קבוע נוסף להחזר החודשי. כמו כדור שלג שמתגלגל ומתגדל, כל תוספת קטנה מצטברת לחיסכון עצום בריבית ובזמן."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "כמה כסף אפשר לחסוך בקיצור הלוואה?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "החיסכון תלוי בגובה ההלוואה, הריבית ותקופת ההחזר. לדוגמה: בהלוואה של 200,000 ₪ בריבית 5.5%, תוספת של 500 ₪ לחודש יכולה לחסוך יותר מ-15,000 ₪ בריבית ולקצר את ההלוואה ב-20 חודשים."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "האם יש עמלת פירעון מוקדם?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "תלוי בסוג ההלוואה. הלוואות בריבית משתנה בדרך כלל פטורות מעמלת פירעון מוקדם. הלוואות בריבית קבועה עשויות לכלול עמלה של עד 1% מיתרת הקרן."
+      }
+    }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FinancialProduct",
+  "name": "מחשבון קיצור תקופת הלוואה",
+  "description": "מחשבון לחישוב חיסכון בריבית וקיצור תקופת הלוואה באמצעות הגדלת ההחזר החודשי (שיטת כדור השלג)",
+  "category": "מחשבון פיננסי",
+  "featureList": [
+    "חישוב מהיר של חיסכון בריבית",
+    "השוואת תוספות שונות להחזר",
+    "לוח סילוקין מפורט",
+    "תאריכי סיום מקורי וחדש"
+  ],
+  "provider": {
+    "@type": "Organization",
+    "name": "רק תבקש - אפטריו בע\"מ",
+    "url": "https://loan-israel.co.il"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "ILS"
+  }
+}
+</script>
+

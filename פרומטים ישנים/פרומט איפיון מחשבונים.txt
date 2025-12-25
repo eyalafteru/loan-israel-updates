@@ -1,0 +1,3919 @@
+## 🎯 תזכורת אחרונה לקלוד:
+
+### 🚨🚨🚨 זה איפיון לקורסר - לא קוד מוכן!
+**🚫 אסור לכתוב קוד HTML/CSS/JavaScript מוכן!**
+**📝 רק איפיון טכני מפורט שקורסר יבנה לפיו!**
+
+### 🚨 חובה מוחלטת - פלט מעודכן עם הוראות לקורסר!
+**🎯 פתרון למגבלת טוקנים/תווים של קורסר:**
+
+**📝 פלט יחיד בקנבס עם הוראות לקורסר לעבוד בשני שלבים:**
+1. **ניתוח ותכנון** (PREFIX, טאבים, מורכבות)
+2. **איפיון מחשבון מלא** (מבנה, עיצוב, פונקציונליות)
+3. **איפיון AWG** (בדיקת זכאות עם כפתור CTA)
+4. **תוכן מקצועי מלא** (כותרות, פסקאות, FAQ)
+5. **תגיות Schema JSON-LD** (מושלמות לSEO)
+6. **תגיות HEAD** (meta, title, description)
+7. **🚨 הוראות לקורסר לעבוד בשני שלבים** - TODO ליסט מפורט
+
+### 🎯 פלט יחיד בקנבס עם הוראות פיתוח בשלבים:
+
+**📝 בקנבס - איפיון מלא + הוראות שלבים לקורסר**
+- 🚫 **לא קוד מוכן!** רק איפיון טכני מלא לקורסר
+- 📋 מפרט מחשבון מלא (מבנה, עיצוב, פונקציונליות)
+- 📄 תוכן מקצועי מלא (כותרות, פסקאות, FAQ)
+- 🏷️ תגיות Schema JSON-LD מושלמות
+- 🔧 תגיות HEAD מוכנות להעתקה
+- 🔍 הנחיות חיפוש בvisual.txt
+- ✅ **הוראות לקורסר לפיתוח בשני שלבים** - TODO ליסט מפורט
+
+### 📁 קובץ הפיתוח הייעודי - חובה מוחלטת!
+- **קובץ הפיתוח:** `C:\Users\eyal\Final-page.html`
+- **מיקום הקוד:** כל הקוד המוגמר יירשם לקובץ `C:\Users\eyal\Final-page.html`
+- **הוראה לקורסר:** לכתוב את כל הקוד המוגמר לקובץ הזה בלבד
+- **לא קבצים נוספים:** הכל באותו קובץ HTML אחד מאוחד
+- **הוראות לקורסר:** לעבוד בשני שלבים לפתרון מגבלת טוקנים
+- **שלב 1 לקורסר:** מחשבון → AWG (ולבקש המשך)
+- **שלב 2 לקורסר:** תוכן → Schema → השלמה
+
+---
+
+# 🧮 מחולל איפיוני מחשבונים פיננסיים דינמי v6.0 - WordPress Safe + EAT SEO
+
+## 🚨🚨🚨 הדגשה קריטית - איפיון דינמי בלבד!
+**זה מחולל איפיונים טכניים דינמיים לקורסר - לא מחולל קוד מוכן!**
+
+### 🚫 אסור בהחלט:
+- ❌ **קוד HTML מוכן** - אפילו לא דוגמאות קוד
+- ❌ **קוד CSS מוכן** - אפילו לא קטעי עיצוב
+- ❌ **קוד JavaScript מוכן** - אפילו לא פונקציות
+- ❌ **תגיות HTML בפלט** - רק תיאור מה לבנות
+- ❌ **העתקת קוד** - אפילו לא מהמקרא העיצובי
+
+### ✅ מה המחולל מייצר:
+- 📝 **איפיון מפורט ודינמי** מותאם למחשבון הספציפי
+- 🎯 **הוראות בנייה** - מה לבנות, איך לעצב, איך לתכנת
+- 🔍 **הנחיות חיפוש** - איפה למצוא עיצובים בvisual.txt
+- 📋 **מפרט טכני** - מבנה, רכיבים, פונקציונליות
+- 🎨 **תיאור ויזואלי** - איך הרכיבים צריכים להיראות
+
+### 🏗️ מי בונה את הקוד:
+- **קורסר בלבד** בונה את כל הקוד לפי האיפיון
+- **לא המחולל** - המחולל רק מתאר מה לבנות
+- **לא המשתמש** - המשתמש מקבל איפיון מוכן
+
+### 🎯 דינמיות חובה:
+- כל רכיב ויזואלי חייב להיות רלוונטי למחשבון הספציפי
+- מינימום תוכן: 500-600 מילים לכל מחשבון
+- מפרט טכני חובה בתחילת כל פלט
+
+## 📁 קובץ הפיתוח - הוראה קריטית לקורסר!
+**🚨 קורסר יכתוב את כל הקוד המוגמר לקובץ: `C:\Users\eyal\Final-page.html`**
+- **לא קבצים נוספים** - הכל באותו קובץ HTML אחד מאוחד
+- **הוראה ברורה לקורסר** - לכתוב את כל הקוד לקובץ הזה בלבד
+
+---
+
+## 🎨 מפרט טכני לקורסר - איפיון מפורט לבנייה
+
+### 📐 מבנה HTML נדרש:
+
+**🏗️ מבנה עמוד כללי (דינמי לפי מחשבון):**
+```
+Container ראשי: .wpc-calc-[topic]-[4random]-wrapper
+├── כותרת H2 עם קו אדום: .wpc-calc-[topic]-[4random]-title  
+├── Container מחשבון: .wpc-calc-[topic]-[4random]-container
+│   ├── ניווט טאבים: .wpc-calc-[topic]-[4random]-tabs ([מספר דינמי] טאבים)
+│   ├── תוכן טאב 1: [שם דינמי לפי מחשבון] (#[id-דינמי])
+│   ├── תוכן טאב 2: [שם דינמי לפי מחשבון] (#[id-דינמי])
+│   ├── תוכן טאב 3: [שם דינמי לפי מחשבון] (#[id-דינמי])
+│   └── תוכן טאב 4: [שם דינמי לפי מחשבון] (#[id-דינמי])
+├── אזור CTA + AWG: .wpc-awg-demo-section (עם כפתור פתיחה)
+└── תוכן מקצועי: .content-sections
+```
+
+**🎯 רכיבים נדרשים לכל טאב (דינמי לפי מחשבון):**
+- **טאב 1:** [רכיבים ספציפיים למחשבון הנדרש]
+- **טאב 2:** [רכיבים ספציפיים למחשבון הנדרש]
+- **טאב 3:** [רכיבים ספציפיים למחשבון הנדרש]
+- **טאב 4:** [רכיבים ספציפיים למחשבון הנדרש]
+
+**🚨 חשוב: קורסר צריך לבנות את הקוד בעצמו - לא להעתיק קוד מוכן!**
+
+### 🔧 תיקון צבעים למכשירים אמיתיים - חובה מוחלטת:
+
+**📱 הוסף בראש הCSS (לפני כל דבר אחר):**
+```css
+/* === תיקון צבעים למכשירים אמיתיים - חובה להוסיף בראש הקובץ === */
+.wpc-calc-[topic]-[4random]-wrapper {
+    color-scheme: light !important;
+    forced-color-adjust: none !important;
+    -webkit-forced-color-adjust: none !important;
+    -ms-high-contrast-adjust: none !important;
+}
+
+@media (prefers-color-scheme: dark) {
+    .wpc-calc-[topic]-[4random]-wrapper {
+        color-scheme: light !important;
+        background-color: white !important;
+    }
+    
+    .wpc-calc-[topic]-[4random]-wrapper * {
+        color-scheme: light !important;
+    }
+}
+
+.wpc-calc-[topic]-[4random]-wrapper * {
+    forced-color-adjust: none !important;
+    -webkit-forced-color-adjust: none !important;
+    -webkit-text-fill-color: initial !important;
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale !important;
+}
+```
+
+**📱 הוסף fallback colors במובייל (לכל @media query):**
+```css
+@media (max-width: 768px) {
+    /* תיקון צבעים למכשירים אמיתיים - רק האלמנטים הבעייתיים */
+    .wpc-calc-[topic]-[4random]-tab:not(.active) { color: #222222 !important; }
+    .wpc-calc-[topic]-[4random]-tab:not(.active) span:last-child { color: #222222 !important; }
+    .wpc-calc-[topic]-[4random]-example-label { color: #222222 !important; }
+    .wpc-calc-[topic]-[4random]-example-item:not(.highlight) { color: #222222 !important; }
+    .wpc-calc-[topic]-[4random]-comparison-card.regular { color: #222222 !important; }
+    .wpc-calc-[topic]-[4random]-case-param { color: #222222 !important; }
+    .wpc-calc-[topic]-[4random]-faq-header { color: #222222 !important; }
+}
+
+@media (max-width: 480px) {
+    /* חזור על אותם תיקונים */
+    .wpc-calc-[topic]-[4random]-tab:not(.active) { color: #222222 !important; }
+    .wpc-calc-[topic]-[4random]-tab:not(.active) span:last-child { color: #222222 !important; }
+    .wpc-calc-[topic]-[4random]-example-label { color: #222222 !important; }
+    .wpc-calc-[topic]-[4random]-example-item:not(.highlight) { color: #222222 !important; }
+    .wpc-calc-[topic]-[4random]-comparison-card.regular { color: #222222 !important; }
+    .wpc-calc-[topic]-[4random]-case-param { color: #222222 !important; }
+    .wpc-calc-[topic]-[4random]-faq-header { color: #222222 !important; }
+}
+
+@media (max-width: 375px) {
+    /* חזור על אותם תיקונים */
+    .wpc-calc-[topic]-[4random]-tab:not(.active) { color: #222222 !important; }
+    .wpc-calc-[topic]-[4random]-tab:not(.active) span:last-child { color: #222222 !important; }
+    .wpc-calc-[topic]-[4random]-example-label { color: #222222 !important; }
+    .wpc-calc-[topic]-[4random]-example-item:not(.highlight) { color: #222222 !important; }
+    .wpc-calc-[topic]-[4random]-comparison-card.regular { color: #222222 !important; }
+    .wpc-calc-[topic]-[4random]-case-param { color: #222222 !important; }
+    .wpc-calc-[topic]-[4random]-faq-header { color: #222222 !important; }
+    
+    /* עיצוב AWG במובייל - מינימליסטי ונקי */
+    .wpc-calc-[topic]-[4random]-awg-container {
+        padding: 0 !important;
+        box-shadow: none !important;
+    }
+    
+    .wpc-calc-[topic]-[4random]-shortcode-item {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+        padding: 15px !important;
+        box-sizing: border-box !important;
+    }
+}
+```
+
+**🎯 למה זה חשוב:** מכשירים אמיתיים לא תמיד טוענים CSS Variables נכון, וזה גורם לטקסט לבן במקום שחור. התיקון הזה מבטיח שהעמוד ייראה זהה בדפדפן ובמכשיר האמיתי.
+
+**📱 עיצוב AWG במובייל:** AWG container ללא פדינג וקופסא לעיצוב מינימליסטי, shortcode-item ברוחב מלא וממורכז לניצול מקסימלי של השטח.
+
+### 🎨 דרישות עיצוב מהמקרא:
+
+**🎨 צבעים חובה:**
+- Primary: #1e5490 (כחול ראשי)
+- Danger: #ff3b3b (אדום לCTA)  
+- Success: #25D366 (ירוק לWhatsApp)
+- Warning: #FF9800 (כתום לאזהרות)
+
+**📝 טיפוגרפיה חובה:**
+- פונט: Assistant בכל המקום
+- כותרות: clamp() responsive
+- קו אדום דקורטיבי לכותרות H2
+
+**📱 Responsive חובה:**
+- **Desktop: max-width 1200px** - רוחב מקסימלי קבוע לכל wrapper/container
+- **מרכוז נכון:** margin: 0 auto לכל wrapper ראשי
+- **רוחב אחיד:** כל האזורים באותו רוחב מקסימלי 1200px
+- Tablet: 768px breakpoint  
+- Mobile: 767px breakpoint
+- Small: 375px breakpoint
+
+### ⚡ דרישות JavaScript:
+
+**🔧 מבנה JavaScript נדרש:**
+- Namespace: WPC_Calc[Topic][4Random]
+- IIFE wrapper עם 'use strict'
+- Container validation: #wpc-calc-[topic]-[4random]-main
+- Event delegation לכפתורים וטאבים
+
+**🧮 חישובים נדרשים (דינמי לפי מחשבון):**
+- [נוסחאות מתמטיות ספציפיות למחשבון הנדרש]
+- [חישובים רלוונטיים לתחום המחשבון]
+- [השוואות ספציפיות לנושא]
+- ולידציות קלט מלאות לכל פרמטר
+
+**🎛️ UI/UX מובייל מושלם - סליידרים וכפתורים ויזואליים:**
+- **סליידרים אינטראקטיביים:** כל שדה מספרי (סכום, תקופה, ריבית) עם סליידר + תצוגת ערך
+- **כפתורי בחירה ויזואליים:** במקום dropdown - כפתורי toggle צבעוניים
+- **פחות הזנת טקסט:** מינימום שדות input, מקסימום אינטראקציה ויזואלית
+- **נוח למובייל:** כל אלמנט מותאם למגע ולמסכים קטנים
+
+**📱 אינטראקטיביות נדרשת - UI/UX מובייל מושלם:**
+- **🎛️ סליידרים ויזואליים:** כל שדה מספרי עם סליידר אינטראקטיבי + תצוגת ערך דינמית
+- **🎨 כפתורים ויזואליים:** בחירות עם כפתורי toggle צבעוניים במקום dropdown
+- **📱 מובייל מושלם:** פחות שדות הזנת טקסט, יותר אינטראקציה ויזואלית
+- **⚡ סנכרון מיידי:** בין inputs, sliders וכפתורי בחירה
+- **🔄 עדכון בזמן אמת:** תוצאות מתעדכנות בכל שינוי
+- **🎯 מעבר חלק:** בין טאבים עם אנימציות
+- **📊 טבלאות חכמות:** הפיכה אוטומטית לכרטיסים במובייל
+- **🚨 AWG Toggle:** כפתור CTA פותח AWG מוסתר + טעינת JS מחדש
+
+### 🎯 הנחיות חיפוש בvisual.txt:
+
+**🔍 חיפושים נדרשים לפני בנייה (דינמי לפי מחשבון):**
+- `wpc-calc-tabs-demo` - עיצוב טאבים אינטראקטיביים
+- `[חיפושים ספציפיים לסוג המחשבון]` - לפי הרכיבים הנדרשים
+- `wpc-awg-demo-section` - אזור AWG מעוצב
+- `wpc-section-demo-title` - כותרות עם קו אדום
+- `[חיפושים נוספים לפי הצורך]` - מותאם למחשבון
+
+**📱 חיפושי Mobile חובה:**
+- `@media (max-width: 768px)` - טאבלט
+- `@media (max-width: 767px)` - מובייל
+- `@media (max-width: 480px)` - מובייל קטן
+
+**🚨 חשוב: קורסר חייב לחפש בvisual.txt ולהעתיק בדיוק!**
+
+### 🎯 אזור CTA + AWG ווידג'ט - מפרט טכני:
+
+**📍 מיקום חובה:**
+- **מיד אחרי המחשבון** - לפני כל תוכן אחר
+- **🚨 AWG מופיע פעם אחת בלבד** - רק באזור הזה ולא במקומות אחרים
+- **AWG מוסתר בברירת מחדל** - נפתח רק אחרי לחיצה על CTA
+- **Mobile friendly** - עובד מצוין במובייל
+
+**🎨 עיצוב חובה מ-visual.txt:**
+**🔍 חיפוש מדויק:** `wpc-awg-demo-section`
+- Container: `.wpc-awg-demo-container`
+- CTA Button: `.wpc-cta-demo-btn-primary` (כפתור פתיחה)
+- AWG Content: `.wpc-awg-demo-content` (מוסתר בברירת מחדל)
+- Shortcode: `.wpc-shortcode-item`
+
+**🚨 דרישות עיצוב קריטיות לAWG:**
+- **רוחב מלא:** האזור [awg postid="32400"] מקבל width: 100% מהקונטיינר
+- **רקע לבן:** background: white או background-color: #ffffff
+- **מוסתר בברירת מחדל:** display: none עד לחיצה על CTA
+- **רוחב עקבי:** max-width: 1200px כמו שאר האזורים
+
+**📝 מבנה HTML נדרש:**
+```
+<div class="wpc-awg-demo-section">
+  <div class="wpc-awg-demo-container">
+    <!-- כפתור CTA לפתיחה -->
+    <button class="wpc-cta-demo-btn-primary" data-action="open-awg">
+      בדוק זכאות להלוואה עכשיו - קבל הצעה מיידית!
+    </button>
+    
+    <!-- אזור AWG מוסתר -->
+    <div class="wpc-awg-demo-content" style="display: none;">
+      <div class="wpc-awg-demo-title">
+        <h3>בדוק זכאות להלוואה עכשיו</h3>
+        <p>קבל אישור עקרוני תוך דקות ובחינם</p>
+      </div>
+      <div class="wpc-shortcode-item">
+        [awg postid="32400"]
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+**⚡ JavaScript נדרש לפתיחה וטעינה מחדש:**
+```javascript
+// פתיחת AWG וטעינת JS מחדש
+function openAWG() {
+  const awgContent = document.querySelector('.wpc-awg-demo-content');
+  const ctaButton = document.querySelector('[data-action="open-awg"]');
+  
+  // הצג את אזור ה-AWG
+  awgContent.style.display = 'block';
+  
+  // הסתר את כפתור ה-CTA
+  ctaButton.style.display = 'none';
+  
+  // טען את ה-JS של AWG מחדש (חשוב!)
+  setTimeout(() => {
+    // AWG הוא ב-JS ודורש טעינה מחדש
+    if (window.AWG && typeof window.AWG.init === 'function') {
+      window.AWG.init();
+    }
+    
+    // או אלטרנטיבה - טען את הסקריפט מחדש
+    const scripts = document.querySelectorAll('script[src*="awg"]');
+    scripts.forEach(script => {
+      const newScript = document.createElement('script');
+      newScript.src = script.src;
+      document.head.appendChild(newScript);
+    });
+  }, 100);
+  
+  // גלול לאזור AWG
+  awgContent.scrollIntoView({ behavior: 'smooth' });
+}
+
+// Event listener לכפתור
+document.addEventListener('click', function(e) {
+  if (e.target.matches('[data-action="open-awg"]')) {
+    e.preventDefault();
+    openAWG();
+  }
+});
+```
+
+---
+
+## 🚨 הוראות לקורסר לפיתוח בשני שלבים
+
+### 🎯 פתרון למגבלת טוקנים/תווים של קורסר:
+האיפיון יכלול הוראות ברורות לקורסר לעבוד בשני שלבים כדי לפתור את בעיית מגבלת הטוקנים/תווים.
+
+### 📋 הוראות שיופיעו באיפיון לקורסר:
+
+**🔥 שלב 1 לקורסר - מחשבון + AWG:**
+1. **בנה את המחשבון** לפי המפרט הטכני המלא
+2. **הוסף את אזור AWG** עם כפתור CTA מוסתר
+3. **שמור ב-Final-page.html** את החלק הזה
+4. **כתוב בצ'אט "המשך"** לקבלת השלב הבא
+
+**📝 שלב 2 לקורסר - תוכן + Schema:**
+1. **הוסף את התוכן המקצועי** (כותרות, פסקאות, FAQ)
+2. **הוסף תגיות Schema JSON-LD** בסוף הקובץ
+3. **הוסף תגיות HEAD** בתחילת הקובץ
+4. **השלם את העמוד** באותו קובץ Final-page.html
+
+### 🎯 יתרונות הגישה:
+- פתרון למגבלת טוקנים של קורסר
+- עבודה מסודרת בשלבים
+- אפס איבוד מידע
+- קובץ אחד מאוחד בסוף
+
+---
+
+## 🎯 הוראות שימוש
+
+**🔥 כתוב:** "צור לי מחשבון [שם המחשבון]"  
+**🔥 דוגמאות:** 
+- "צור לי מחשבון משכנתא מתקדם"
+- "צור לי מחשבון ביטוח רכב"
+- "צור לי מחשבון תיק השקעות"
+- "צור לי מחשבון חיסכון לפנסיה"
+
+### 🚨 חשוב: מבנה הפלט החובה!
+**כל פלט חייב להתחיל במפרט הטכני הזה:**
+1. 🎨 **מפרט טכני לקורסר** - מבנה HTML, עיצוב, JavaScript
+2. 🧮 **ניתוח מחשבון** - קטגוריה, מורכבות, PREFIX
+3. 📝 **תוכן מקצועי** - כותרות, מדריך, FAQ
+4. 🔧 **תגיות HEAD** - SEO, Schema, Meta tags
+
+## 📖 מבנה העמוד ומיקום המחשבון
+
+### 🎯 סדר התוכן באמוד (מלמעלה למטה):
+**🚨 חשוב: כל רכיב ויזואלי מהתוכן המקצועי חייב להופיע במקום המתאים!**
+
+```
+1. 🏆 כותרת H1 + תיאור קצר (50 מילים)
+   "מחשבון [שם] מתקדם - [תיאור ערך מוסף קצר]"
+
+2. 🧮 **המחשבון עצמו** ← כאן ממוקם המחשבון!
+   [הממשק האינטראקטיבי המלא עם כל הטאבים]
+
+3. 🎯 **אזור CTA + AWG ווידג'ט** ← חובה מוחלטת!
+   [כפתור CTA "בדוק זכאות להלוואה עכשיו" → פותח AWG מוסתר + טעינת JS מחדש]
+   [🚨 שורטקוד awg postid="32400" מופיע פעם אחת בלבד - רק כאן ומוסתר בברירת מחדל]
+
+4. 📊 סיכום תוצאות מהיר דינמי (50-150 מילים לפי מורכבות)
+   "מה המחשבון מראה לך ואיך להשתמש בתוצאות - מותאם לסוג המחשבון"
+
+5. 📖 מדריך מומחה מקיף עם רכיבים ויזואליים דינמיים (500-1500 מילים לפי מורכבות)
+   [כל התוכן המקצועי מותאם לסוג המחשבון הספציפי]
+   
+   🚨 **הוראות דינמיות:** כל רכיב ויזואלי חייב להיות רלוונטי למחשבון הספציפי!
+   
+   5.1 🎨 אינפוגרפיקת מצב השוק בתחום [נושא המחשבון]
+   5.2 🃏 כרטיסי "מלכודות נפוצות" ספציפיות לתחום  
+   5.3 🧮 נוסחה מתמטית רלוונטיות + כרטיסי פרמטרים ספציפיים
+   5.4 📊 השוואה ויזואלית + מדדים רלוונטיים לנושא
+   5.5 🚫 כרטיס "שגיאות נפוצות" בתחום הספציפי
+   5.6 💰 כרטיסי "טיפים זהב" מותאמים למחשבון
+   5.7 📋 מקרה טיפוסי עם נתונים אמיתיים מהתחום
+   5.8 ⚠️ מקרה מורכב עם התרעות ספציפיות
+   5.9 ✅ נקודות מרכזיות רלוונטיות למחשבון
+   5.10 🔢 צעדים הבאים ספציפיים לנושא
+
+6. 👨‍🎓 פרופיל המומחה עם תמונה אמיתית
+   [כרטיס אייל עובדיה עם תמונה + סטטיסטיקות ויזואליות]
+
+7. 📚 תוכן מומחיות עם רכיבים ויזואליים דינמיים
+   7.1 📈 רקע כלכלי ספציפי לתחום המחשבון
+   7.2 📋 טבלת השוואה רלוונטית לנושא  
+   7.3 📊 גרף מגמות ספציפיות לתחום
+
+8. 🔍 שאלות נפוצות בכרטיסים צבעוניים (FAQ)
+   [8-15 שאלות ספציפיות למחשבון באזור אחד עם כרטיסים צבעוניים]
+```
+
+### 🎮 עקרונות מיקום המחשבון:
+
+**🚀 למה המחשבון למעלה:**
+- **מתן ערך מיידי** - המשתמש רוצה לחשב מיד
+- **שמירה על engagement** - לא לאבד אותו בתוכן ארוך
+- **Mobile First** - במובייל חשוב שהכלי יהיה נגיש מיד
+- **Conversion optimization** - שימוש מיידי = שביעות רצון
+
+**📱 התאמה למובייל:**
+- המחשבון תמיד עם קישור קבוע בחלק העליון
+- "דבק" (sticky) navigation למחשבון במובייל
+- תוכן ארוך מתחת, ניתן לגלילה
+
+**⚡ חוויית משתמש:**
+```
+משתמש נכנס → רואה כותרת → מיד יכול להשתמש במחשבון
+↓
+אחרי שקיבל תוצאה → עכשיו מעוניין לקרוא ולהבין יותר
+↓
+גולל למטה לתוכן המקצועי והסברים מפורטים
+```
+
+---
+
+## 🚨🚨🚨 כללי זהב מוחלטים - אסור להפר!
+
+### 📄 פלט מעודכן - 3 חלקים מובנים!
+- **חלק 1 בצ'אט:** ניתוח ותכנון המחשבון (PREFIX, טאבים, מורכבות)
+- **חלק 2 בקנבס:** האיפיון המלא + תגיות Schema בסוף
+- **חלק 3 בצ'אט:** תגיות HEAD מוכנות להעתקה
+- **תשובה מסודרת:** כל חלק במקום הנכון
+- **מוכן לשימוש:** איפיון + SEO מושלם לקובץ `C:\Users\eyal\Final-page.html`
+
+### 📁 קובץ פיתוח יעודי - הוראות חובה!
+- **קובץ הפיתוח:** `C:\Users\eyal\Final-page.html`
+- **מיקום הקוד:** כל הקוד המוגמר יירשם לקובץ `C:\Users\eyal\Final-page.html`
+- **הוראה לקורסר:** לכתוב את כל הקוד המוגמר לקובץ הזה בלבד
+- **לא קבצים נוספים:** הכל באותו קובץ HTML אחד מאוחד
+
+### 🚨🚨🚨 אסור תגיות HTML כלליות - הכלל החשוב ביותר!
+- **🚨 אסור לחלוטין:** `<!DOCTYPE html>`, `<html>`, `<head>`, `<body>`
+- **🚨 אסור בדוגמאות:** גם לא בדוגמאות או הסברים!
+- **🚨 אסור בקוד:** התחל תמיד ישירות מ-`<style>` ואחר כך `<div>`
+- **✅ פורמט נכון:** `<style>...</style>` → `<div class="wpc-calc-...">` → `<script>...</script>`
+- **✅ זה וורדפרס:** תוכן פנימי בלבד שנדבק בעמוד/פוסט קיים
+
+### 🛡️ WordPress Safety - חובה מוחלטת
+- **PREFIX דינמי:** `wpc-calc-[topic]-[4random]-` (לכל CSS class)
+- **NAMESPACE דינמי:** `WPC_Calc[Topic][4Random]` (לכל JavaScript)
+- **CSS בטוח:** רק selectors עם PREFIX - כללים גלובליים רק בתוך `.${PREFIX}wrapper`!
+- **JavaScript בטוח:** IIFE + namespace + container validation חובה
+- **אסור להשפיע על וורדפרס:** תפריטים, admin, כפתורים גלובליים
+
+### 🚨🚨🚨 אסור תגיות HTML כלליות - חובה מוחלטת!
+- **🚨 אסור DOCTYPE/HTML/HEAD/BODY:** רק תוכן פנימי בלבד!
+- **🚨 אסור תגיות עטיפה:** לא `<!DOCTYPE>`, לא `<html>`, לא `<head>`, לא `<body>`
+- **🚨 אסור דוגמאות מטעות:** אף דוגמה לא תכלול תגיות HTML חיצוניות
+- **✅ רק תוכן פנימי:** התחל ישירות מ-`<style>` ו-`<div>` של המחשבון
+- **✅ פורמט נכון:** `<style>...</style>` + `<div class="wpc-calc-...">` + `<script>...</script>`
+
+#### **⚡ כלל CSS #3: פיתוח רזה ויעיל - LEAN DEVELOPMENT**
+- 🎯 **עיקרון הזהב:** CSS גלובלי חכם במקום חזרות אינסופיות לכל אזור!
+- ✅ **גישה רזה:** `.wpc-calc-[topic]-[4random]-wrapper h2 { }` במקום `.wpc-calc-[topic]-[4random]-zone-N-title` נפרד לכל אזור
+- 🔥 **CSS Variables מרכזי:** `:root` עם כל הצבעים והמשתנים פעם אחת בלבד בתחילת הקובץ
+- 📱 **Mobile גלובלי:** `@media` rules כלליים ל-`.wpc-calc-[topic]-[4random]-wrapper` במקום חזרה לכל אזור
+- 🚀 **JavaScript מרוכז:** IIFE אחד עם namespace גלובלי במקום IIFE נפרד לכל אזור
+- 📊 **יעד רזה:** 200-300 שורות לאזור במקום 1,500+ שורות לאזור!
+- 📐 **רוחב עקבי 1200px:** max-width: 1200px לכל wrapper/container + margin: 0 auto
+- 🎯 **AWG רוחב מלא:** האזור [awg postid="32400"] עם width: 100% ו-background: white
+- 🛡️ **WordPress Safe:** כל הכללים הגלובליים רק בתוך wrapper עם PREFIX מלא!
+- 🧮 **אסטרטגיה חכמה:**
+  - CSS: כללים גלובליים ל-`.${PREFIX}wrapper` + overrides ספציפיים בלבד
+  - JavaScript: מבנה מודולרי אחד עם פונקציות לכל אזור
+  - HTML: מבנה עקבי עם classes דינמיים
+  - Mobile: @media rules כלליים עם breakpoints אחידים
+- 🎨 **עקרונות יישום:**
+  - כל אלמנט זהה (h2, p, button) מקבל עיצוב גלובלי אחד
+  - רק הבדלים ייחודיים מקבלים CSS ספציפי
+  - JavaScript functions משותפות לפונקציונליות דומה
+  - Mobile-first approach עם כללים כלליים
+
+**💡 דוגמה לגישה הרזה:**
+```css
+/* ❌ גישה ישנה - חזרות מיותרות */
+.wpc-calc-mortgage-x7k3-zone-1-title { font-size: 2rem; color: #1e5490; }
+.wpc-calc-mortgage-x7k3-zone-2-title { font-size: 2rem; color: #1e5490; }
+.wpc-calc-mortgage-x7k3-zone-3-title { font-size: 2rem; color: #1e5490; }
+
+/* ✅ גישה רזה - כלל אחד לכולם */
+.wpc-calc-mortgage-x7k3-wrapper h2 { font-size: 2rem; color: var(--primary); }
+```
+
+**🎯 סיכום LEAN DEVELOPMENT:**
+- ✅ כל הכללים הגלובליים רק בתוך `.wpc-calc-[topic]-[4random]-wrapper`
+- ✅ WordPress Safe - אין השפעה על שאר האתר
+- ✅ קוד קצר ויעיל - 200-300 שורות במקום 1,500+
+- ✅ תחזוקה קלה - שינוי אחד משפיע על כל האלמנטים הדומים
+- ✅ רוחב עקבי - max-width: 1200px לכל wrapper עם מרכוז אוטומטי
+- ✅ AWG מותאם - רוחב מלא 100% עם רקע לבן נקי
+
+### 🔍 חיפוש בvisual.txt - חובה מוחלטת
+- **לפני כל CSS:** grep_search בvisual.txt תחילה!
+- **חיפושים נדרשים:** `wpc-calc-tabs-demo`, `wpc-slider-demo`, `wpc-stats-demo`, `wpc-awg-demo-section`
+- **מובייל חובה:** `@media (max-width: 768px)` ו-`@media (max-width: 480px)`
+- **COPY EXACTLY:** העתק מדויק מvisual.txt + הוסף PREFIX בלבד
+
+### 🇮🇱 עברית ו-RTL - חובה מוחלטת
+- **100% עברית:** כל הטקסטים, labels, הודעות, tooltips
+- **פונט Assistant:** font-family: Assistant, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif
+- **RTL Direction:** direction: rtl לכל wrapper ו-container
+- **פורמט עברי:** מטבע (₪), תאריכים, מספרים עבריים
+
+### 📊 שימוש במאגר המידע - לאימות בלבד!
+- **🚨 אסור העתקה:** המאגר למטה הוא לאימות ריביות בלבד!
+- **בדיקת נתונים:** השתמש במאגר לוודא שהריביות במחשבון מדויקות
+- **יצירה מקורית:** כתוב תוכן מקורי מותאם למחשבון הספציפי
+- **השראה בלבד:** השתמש בטווחים כהשראה לנתונים ריאליים
+
+### 🎯 אזור CTA + AWG ווידג'ט - חובה מוחלטת
+- **מיקום:** תמיד אחרי המחשבון ולפני התוכן המקצועי
+- **🚨 מופיע פעם אחת בלבד:** רק באזור הזה ולא במקומות אחרים בעמוד
+- **עיצוב חובה:** מ-visual.txt בלבד - `wpc-awg-demo-section`
+- **שורטקוד חובה:** `[awg postid="32400"]` - בדיוק כך!
+- **כפתור פתיחה:** "בדוק זכאות להלוואה עכשיו" 
+- **WordPress Safe:** עיצוב מותאם עם PREFIX ייחודי
+
+---
+
+## 🎨 מקרא עיצובי מושלם - לעקביות גרפית מלאה
+
+**🚨🚨🚨 חשוב: זה מקרא לחיפוש - לא קוד לפלט!**
+- **המקרא הזה** מיועד לקורסר לחיפוש עיצובים בvisual.txt
+- **אסור להעתיק** מהמקרא הזה לפלט האיפיון
+- **רק לתיאור** איך הרכיבים צריכים להיראות
+- **קורסר יחפש** בvisual.txt ויבנה את הקוד בעצמו
+
+### 📐 מבנה וממדים בסיסיים
+- **Max Width:** 1200px לכל container ראשי
+- **Container:** `.wpc-calc-[topic]-[4random]-wrapper { max-width: 1200px; margin: 0 auto; }`
+- **Section Padding:** Desktop: 60px 20px, Mobile: 40px 15px
+- **Card Padding:** Desktop: 30px, Mobile: 20px
+- **Gap Between Elements:** 20px desktop, 15px mobile
+
+### 🎨 פלטת צבעים מלאה
+```css
+:root {
+  --primary: #1e5490;           /* כחול ראשי - כותרות, כפתורים משניים, borders */
+  --primary-dark: #2a5fa0;      /* כחול כהה - hover states */
+  --danger: #ff3b3b;            /* אדום - כפתורי CTA, שגיאות */
+  --success: #25D366;           /* ירוק - WhatsApp, הצלחות */
+  --warning: #FF9800;           /* כתום - אזהרות, badges */
+  --text-dark: #222222;         /* טקסט עיקרי - נגיש WCAG 2.1 AA */
+  --text-light: #444444;        /* טקסט משני - נגיש WCAG 2.1 AA */
+  --bg-light: #f5f5f5;          /* רקע אפור בהיר - נגיש */
+  --white: #ffffff;             /* רקע לבן */
+  --border: #d0d0d0;            /* גבולות - נגיש */
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+  --shadow-md: 0 5px 20px rgba(0,0,0,0.1);
+  --shadow-lg: 0 10px 40px rgba(0,0,0,0.15);
+  --radius-sm: 8px;             /* בורדר קטן */
+  --radius-md: 15px;            /* בורדר בינוני */
+  --radius-lg: 20px;            /* בורדר גדול */
+  --transition: all 0.3s ease;
+  --gradient-primary: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  --gradient-success: linear-gradient(135deg, var(--success) 0%, #1da851 100%);
+}
+```
+
+### 📝 Typography System - Assistant Font חובה
+```css
+/* בסיס טיפוגרפי */
+body, * {
+  font-family: Assistant, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* רמות גדלים רספונסיביות */
+--fs-hero: clamp(2.5rem, 5vw, 4rem);      /* כותרת ראשית */
+--fs-h1: clamp(2rem, 4vw, 3rem);          /* כותרת H1 */
+--fs-h2: clamp(1.5rem, 3vw, 2rem);        /* כותרת H2 */
+--fs-h3: clamp(1.25rem, 2.5vw, 1.5rem);  /* כותרת H3 */
+--fs-body: clamp(1rem, 2vw, 1.25rem);     /* טקסט רגיל */
+--fs-small: clamp(1rem, 1.5vw, 1.125rem); /* טקסט קטן - נגיש ≥1rem */
+--fs-input-min: 16px;                     /* מינימום לשדות קלט - מונע זום באייפון */
+--fs-mobile-min: 1rem;                    /* 🚨 מינימום נגיש במובייל - אסור פחות מ-1rem! */
+
+/* משקלי פונט */
+--fw-light: 300;
+--fw-regular: 400;
+--fw-medium: 500;
+--fw-semibold: 600;
+--fw-bold: 700;
+--fw-extrabold: 800;
+
+/* Line Heights */
+--lh-tight: 1.2;      /* לכותרות */
+--lh-normal: 1.5;     /* לטקסט רגיל */
+--lh-relaxed: 1.8;    /* לטקסט ארוך */
+```
+
+### 🎛️ כפתורים - עיצוב אחיד
+**💡 הערה:** הדוגמאות למטה הן למקרא בלבד. בפועל השתמש בגישה הרזה: `.wpc-calc-[topic]-[4random]-wrapper button { }`
+
+```css
+.wpc-calc-[topic]-[4random]-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 15px 40px;
+  min-height: 54px;
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  font-weight: 700;
+  border: none;
+  border-radius: 50px;                    /* עגול מלא */
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  font-family: Assistant, sans-serif;
+  box-shadow: var(--shadow-md);
+}
+
+/* כפתור ראשי אדום */
+.wpc-calc-[topic]-[4random]-btn-primary {
+  background: var(--danger);
+  color: white;
+}
+
+.wpc-calc-[topic]-[4random]-btn-primary:hover {
+  background: #e63530;
+  box-shadow: 0 8px 25px rgba(255,59,59,0.4);
+  transform: translateY(-2px);
+}
+
+/* כפתור WhatsApp */
+.wpc-calc-[topic]-[4random]-btn-whatsapp {
+  background: var(--success);
+  color: white;
+}
+
+.wpc-calc-[topic]-[4random]-btn-whatsapp:hover {
+  background: #1da851;
+  box-shadow: 0 8px 25px rgba(37,211,102,0.4);
+  transform: translateY(-2px);
+}
+
+/* כפתור משני כחול */
+.wpc-calc-[topic]-[4random]-btn-secondary {
+  background: transparent;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+}
+
+.wpc-calc-[topic]-[4random]-btn-secondary:hover {
+  background: var(--primary);
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* נגישות למובייל */
+@media (max-width: 767px) {
+  .wpc-calc-[topic]-[4random]-btn {
+    width: 100%;
+    max-width: 100%;
+    min-height: 54px;
+    font-size: 1.2rem;
+    font-weight: 800;
+    padding: 16px 24px;
+    letter-spacing: 0.3px;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+/* כרטיס מומחה עם תמונה */
+.wpc-calc-[topic]-[4random]-expert-profile {
+  background: linear-gradient(135deg, #f8f9ff 0%, #eef4ff 100%);
+  border-radius: var(--radius-lg);
+  padding: 30px;
+  margin: 30px 0;
+  border: 2px solid var(--primary);
+}
+
+.wpc-calc-[topic]-[4random]-expert-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 25px;
+  background: white;
+  border-radius: var(--radius-md);
+  padding: 25px;
+  box-shadow: var(--shadow-md);
+}
+
+.wpc-calc-[topic]-[4random]-expert-image {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.wpc-calc-[topic]-[4random]-expert-photo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--primary);
+  box-shadow: 0 4px 15px rgba(30,84,144,0.3);
+}
+
+.wpc-calc-[topic]-[4random]-expert-badge {
+  position: absolute;
+  bottom: -5px;
+  right: -5px;
+  background: var(--success);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.wpc-calc-[topic]-[4random]-expert-content h3 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 8px;
+}
+
+.wpc-calc-[topic]-[4random]-expert-content .expert-title {
+  font-size: 1.1rem;
+  color: var(--text-light);
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.wpc-calc-[topic]-[4random]-expert-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.wpc-calc-[topic]-[4random]-expert-stats .stat-item {
+  text-align: center;
+  padding: 12px;
+  background: #f8f9fa;
+  border-radius: var(--radius-sm);
+  border-top: 3px solid var(--warning);
+}
+
+.wpc-calc-[topic]-[4random]-expert-stats .number {
+  display: block;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 5px;
+}
+
+.wpc-calc-[topic]-[4random]-expert-stats .label {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  font-weight: 600;
+}
+
+/* FAQ ויזואלי */
+.wpc-calc-[topic]-[4random]-faq-section {
+  margin: 40px 0;
+}
+
+.wpc-calc-[topic]-[4random]-faq-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 20px;
+  margin-top: 25px;
+}
+
+.wpc-calc-[topic]-[4random]-faq-card {
+  background: white;
+  border-radius: var(--radius-md);
+  padding: 25px;
+  box-shadow: var(--shadow-sm);
+  border-top: 4px solid var(--primary);
+  transition: var(--transition);
+  position: relative;
+}
+
+.wpc-calc-[topic]-[4random]-faq-card.basic {
+  border-top-color: var(--success);
+}
+
+.wpc-calc-[topic]-[4random]-faq-card.advanced {
+  border-top-color: var(--warning);
+}
+
+.wpc-calc-[topic]-[4random]-faq-card.expert {
+  border-top-color: var(--danger);
+}
+
+.wpc-calc-[topic]-[4random]-faq-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+}
+
+.wpc-calc-[topic]-[4random]-faq-card .faq-icon {
+  position: absolute;
+  top: -15px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.wpc-calc-[topic]-[4random]-faq-card .faq-category {
+  display: inline-block;
+  background: var(--primary);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.wpc-calc-[topic]-[4random]-faq-card.basic .faq-category {
+  background: var(--success);
+}
+
+.wpc-calc-[topic]-[4random]-faq-card.advanced .faq-category {
+  background: var(--warning);
+}
+
+.wpc-calc-[topic]-[4random]-faq-card.expert .faq-category {
+  background: var(--danger);
+}
+
+.wpc-calc-[topic]-[4random]-faq-card .faq-question {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 15px;
+  line-height: 1.4;
+}
+
+.wpc-calc-[topic]-[4random]-faq-card .faq-answer {
+  color: var(--text-light);
+  line-height: 1.6;
+}
+
+/* כרטיסי צוות מומחים (ללא שמות פיקטיביים) */
+.wpc-calc-[topic]-[4random]-team-expertise {
+  background: linear-gradient(135deg, #f0fff4 0%, #e6ffed 100%);
+  border: 2px solid var(--success);
+  border-radius: var(--radius-md);
+  padding: 25px;
+  margin: 20px 0;
+}
+
+.wpc-calc-[topic]-[4random]-team-expertise h4 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--success);
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.wpc-calc-[topic]-[4random]-team-expertise .expertise-areas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.wpc-calc-[topic]-[4random]-team-expertise .expertise-item {
+  background: white;
+  padding: 20px;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.wpc-calc-[topic]-[4random]-team-expertise .expertise-icon {
+  font-size: 2rem;
+  flex-shrink: 0;
+  width: 50px;
+  text-align: center;
+}
+
+.wpc-calc-[topic]-[4random]-team-expertise .expertise-text h5,
+.wpc-calc-[topic]-[4random]-team-expertise .expertise-text strong {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 8px;
+  display: block;
+}
+
+.wpc-calc-[topic]-[4random]-team-expertise .expertise-text p {
+  font-size: 0.95rem;
+  color: var(--text-light);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* עדכון כרטיס המומחה עם שיתוף צוות */
+.wpc-calc-[topic]-[4random]-expert-content .collaboration-note {
+  font-size: 1rem;
+  color: var(--success);
+  font-weight: 600;
+  margin-bottom: 20px;
+  padding: 10px 15px;
+  background: #f0fff4;
+  border-radius: var(--radius-sm);
+  border-right: 4px solid var(--success);
+}
+
+/* הסרת כרטיסי שיתוף פעולה עם שמות פיקטיביים */
+.wpc-calc-[topic]-[4random]-collaboration-card {
+  display: none; /* הסתרת כרטיסים עם שמות פיקטיביים */
+}
+
+/* מובייל - צוות מומחים */
+@media (max-width: 767px) {
+  .wpc-calc-[topic]-[4random]-team-expertise .expertise-areas {
+    grid-template-columns: 1fr;
+  }
+  
+  .wpc-calc-[topic]-[4random]-team-expertise .expertise-item {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .wpc-calc-[topic]-[4random]-team-expertise .expertise-icon {
+    width: 100%;
+  }
+}
+
+@media (max-width: 375px) {
+  .wpc-calc-[topic]-[4random]-team-expertise {
+    padding: 20px;
+  }
+  
+  .wpc-calc-[topic]-[4random]-team-expertise .expertise-item {
+    padding: 16px;
+  }
+}
+
+/* מובייל - כרטיסי מומחה */
+@media (max-width: 767px) {
+  .wpc-calc-[topic]-[4random]-expert-card {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .wpc-calc-[topic]-[4random]-expert-photo {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .wpc-calc-[topic]-[4random]-expert-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .wpc-calc-[topic]-[4random]-faq-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .wpc-calc-[topic]-[4random]-team-expertise .expertise-areas {
+    grid-template-columns: 1fr;
+  }
+  
+  .wpc-calc-[topic]-[4random]-team-expertise .expertise-item {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+@media (max-width: 375px) {
+  .wpc-calc-[topic]-[4random]-expert-stats {
+    grid-template-columns: 1fr;
+  }
+  
+  .wpc-calc-[topic]-[4random]-expert-card {
+    padding: 20px;
+  }
+  
+  .wpc-calc-[topic]-[4random]-faq-card {
+    padding: 20px;
+  }
+  
+  .wpc-calc-[topic]-[4random]-team-expertise {
+    padding: 20px;
+  }
+}
+
+/* מגע אקטיבי */
+.wpc-calc-[topic]-[4random]-btn:active {
+  transform: scale(0.96);
+}
+```
+
+### 🏷️ כרטיסים - עיצוב מאוחד
+**💡 הערה:** הדוגמאות למטה הן למקרא בלבד. בפועל השתמש בגישה הרזה: `.wpc-calc-[topic]-[4random]-wrapper .card { }`
+
+```css
+.wpc-calc-[topic]-[4random]-card {
+  background: white;
+  border-radius: var(--radius-md);        /* 15px */
+  box-shadow: var(--shadow-sm);
+  padding: 30px;
+  transition: var(--transition);
+  border: 2px solid transparent;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.wpc-calc-[topic]-[4random]-card:hover {
+  border-color: var(--primary);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.wpc-calc-[topic]-[4random]-card.selected {
+  background: var(--gradient-primary);
+  border-color: var(--primary-dark);
+  color: white;
+  box-shadow: 0 4px 12px rgba(30,84,144,0.3);
+}
+
+/* במובייל */
+@media (max-width: 767px) {
+  .wpc-calc-[topic]-[4random]-card {
+    padding: 20px;
+    border-radius: var(--radius-sm);      /* 8px */
+  }
+}
+
+@media (max-width: 375px) {
+  .wpc-calc-[topic]-[4random]-card {
+    padding: 16px;
+  }
+}
+```
+
+### 📋 כותרות - עם קו אדום דקורטיבי
+**💡 הערה:** הדוגמאות למטה הן למקרא בלבד. בפועל השתמש בגישה הרזה: `.wpc-calc-[topic]-[4random]-wrapper h1, .wpc-calc-[topic]-[4random]-wrapper h2 { }`
+
+```css
+.wpc-calc-[topic]-[4random]-title {
+  font-size: clamp(2rem, 4vw, 2.5rem);
+  font-weight: 700;
+  color: var(--primary);
+  margin: 0 auto 20px;
+  line-height: var(--lh-tight);
+  text-align: center;
+  font-family: Assistant, sans-serif;
+  position: relative;
+  width: fit-content;              /* צמוד לטקסט */
+  margin: 0 auto 20px auto;        /* ממורכז */
+  padding-right: 25px;             /* מקום לקו האדום */
+  direction: rtl;
+}
+
+/* הקו האדום הדקורטיבי - בצד ימין צמוד לטקסט */
+.wpc-calc-[topic]-[4random]-title::after {
+  content: '';
+  position: absolute;
+  right: 0;                        /* בצד ימין */
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 60px;
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+  border-radius: 2px;
+  box-shadow: 0 2px 4px rgba(231, 76, 60, 0.3);
+}
+
+/* הסרת הקו האדום מכותרות הירו */
+.wpc-calc-[topic]-[4random]-hero .wpc-calc-[topic]-[4random]-title::after {
+  display: none;
+}
+
+.wpc-calc-[topic]-[4random]-hero .wpc-calc-[topic]-[4random]-title {
+  padding-right: 0;               /* אין צורך בpadding */
+}
+
+/* במובייל - קו קטן יותר */
+@media (max-width: 767px) {
+  .wpc-calc-[topic]-[4random]-title::after {
+    width: 3px;
+    height: 40px;
+  }
+  
+  .wpc-calc-[topic]-[4random]-title {
+    padding-right: 20px;
+  }
+}
+```
+
+### 📱 Responsive Breakpoints - 3 נקודות שבירה
+```css
+/* Desktop First */
+.wpc-calc-[topic]-[4random]-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 20px;
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  .wpc-calc-[topic]-[4random]-container {
+    padding: 50px 18px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+  .wpc-calc-[topic]-[4random]-container {
+    padding: 40px 15px;
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+  
+  .wpc-calc-[topic]-[4random]-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+}
+
+/* Small Mobile - 375px ומטה */
+@media (max-width: 375px) {
+  .wpc-calc-[topic]-[4random]-container {
+    padding: 30px 12px;
+  }
+  
+  .wpc-calc-[topic]-[4random]-title {
+    font-size: clamp(1.3rem, 6vw, 1.8rem);
+    padding-right: 18px;
+  }
+  
+  .wpc-calc-[topic]-[4random]-title::after {
+    width: 2px;
+    height: 30px;
+  }
+  
+  .wpc-calc-[topic]-[4random]-card {
+    padding: 12px;
+  }
+  
+  .wpc-calc-[topic]-[4random]-btn {
+    min-height: 48px;
+    padding: 12px 20px;
+    font-size: 1.1rem;
+  }
+}
+```
+
+### 🏗️ Layout Grids - מערכות רשת
+```css
+/* Grid בסיסי */
+.wpc-calc-[topic]-[4random]-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+/* Grid 2 עמודות */
+.wpc-calc-[topic]-[4random]-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+/* Grid 3 עמודות */
+.wpc-calc-[topic]-[4random]-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+/* Grid 4 עמודות */
+.wpc-calc-[topic]-[4random]-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+/* התאמה למובייל */
+@media (max-width: 767px) {
+  .wpc-calc-[topic]-[4random]-grid-2,
+  .wpc-calc-[topic]-[4random]-grid-3,
+  .wpc-calc-[topic]-[4random]-grid-4 {
+    grid-template-columns: 1fr;
+  }
+  
+  .wpc-calc-[topic]-[4random]-grid {
+    gap: 15px;
+  }
+}
+
+@media (max-width: 375px) {
+  .wpc-calc-[topic]-[4random]-grid {
+    gap: 12px;
+  }
+}
+```
+
+### 🎪 אנימציות ואפקטים
+```css
+/* אנימציות כניסה */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { 
+    box-shadow: 0 0 0 0 rgba(255, 59, 59, 0.7); 
+  }
+  70% { 
+    box-shadow: 0 0 0 15px rgba(255, 59, 59, 0); 
+  }
+}
+
+/* אפקט ריפל לכפתורים */
+.wpc-calc-[topic]-[4random]-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255,255,255,0.1);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+}
+
+.wpc-calc-[topic]-[4random]-btn:hover::before {
+  transform: translateX(0);
+}
+```
+
+### 📊 טבלאות רספונסיביות
+```css
+/* טבלה בדסקטופ */
+.wpc-calc-[topic]-[4random]-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.wpc-calc-[topic]-[4random]-table thead th {
+  background: var(--primary);
+  color: white;
+  padding: 18px 20px;
+  font-weight: 600;
+  text-align: right;
+  font-family: Assistant, sans-serif;
+}
+
+.wpc-calc-[topic]-[4random]-table td {
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--border);
+  font-family: Assistant, sans-serif;
+}
+
+/* במובייל - כרטיסים במקום טבלה */
+@media (max-width: 767px) {
+  .wpc-calc-[topic]-[4random]-table {
+    display: none;
+  }
+  
+  .wpc-calc-[topic]-[4random]-mobile-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .wpc-calc-[topic]-[4random]-mobile-card {
+    background: white;
+    border-radius: var(--radius-md);
+    padding: 20px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border);
+  }
+  
+  .wpc-calc-[topic]-[4random]-mobile-card-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 16px;
+    text-align: center;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #f0f0f0;
+    font-family: Assistant, sans-serif;
+  }
+  
+  .wpc-calc-[topic]-[4random]-mobile-card-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #f5f5f5;
+  }
+  
+  .wpc-calc-[topic]-[4random]-mobile-card-row:last-child {
+    border-bottom: none;
+  }
+  
+  .wpc-calc-[topic]-[4random]-mobile-card-label {
+    font-weight: 600;
+    color: var(--text-light);
+    font-size: 0.95rem;
+    font-family: Assistant, sans-serif;
+  }
+  
+  .wpc-calc-[topic]-[4random]-mobile-card-value {
+    font-weight: 700;
+    color: var(--text-dark);
+    font-size: 1rem;
+    text-align: left;
+    font-family: Assistant, sans-serif;
+  }
+}
+
+@media (max-width: 375px) {
+  .wpc-calc-[topic]-[4random]-mobile-card {
+    padding: 16px;
+  }
+  
+  .wpc-calc-[topic]-[4random]-mobile-card-title {
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+  }
+  
+  .wpc-calc-[topic]-[4random]-mobile-card-row {
+    padding: 10px 0;
+  }
+}
+```
+
+### 🎨 תוכן ויזואלי עשיר - רכיבים חובה לאיפיון
+```css
+/* כרטיסי דוגמה ויזואליים */
+.wpc-calc-[topic]-[4random]-example-card {
+  background: linear-gradient(135deg, #f8f9ff 0%, #e8f2ff 100%);
+  border: 2px solid var(--primary);
+  border-radius: var(--radius-md);
+  padding: 25px;
+  margin: 20px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.wpc-calc-[topic]-[4random]-example-card::before {
+  content: '💡';
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 1.5rem;
+  opacity: 0.8;
+}
+
+.wpc-calc-[topic]-[4random]-example-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 15px;
+  padding-right: 40px;
+}
+
+.wpc-calc-[topic]-[4random]-example-data {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  margin: 15px 0;
+}
+
+.wpc-calc-[topic]-[4random]-data-item {
+  background: white;
+  padding: 12px 15px;
+  border-radius: var(--radius-sm);
+  border-right: 4px solid var(--success);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.wpc-calc-[topic]-[4random]-data-label {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  margin-bottom: 5px;
+}
+
+.wpc-calc-[topic]-[4random]-data-value {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+/* אינפוגרפיקות פשוטות */
+.wpc-calc-[topic]-[4random]-infographic {
+  background: linear-gradient(135deg, #fff5f5 0%, #fff0f0 100%);
+  border-radius: var(--radius-lg);
+  padding: 30px;
+  margin: 25px 0;
+  text-align: center;
+  border: 1px solid #ffe0e0;
+}
+
+.wpc-calc-[topic]-[4random]-info-icon {
+  width: 60px;
+  height: 60px;
+  background: var(--danger);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 15px;
+  font-size: 1.8rem;
+  color: white;
+}
+
+.wpc-calc-[topic]-[4random]-info-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--danger);
+  margin-bottom: 10px;
+}
+
+.wpc-calc-[topic]-[4random]-info-desc {
+  font-size: 1rem;
+  color: var(--text-dark);
+  line-height: 1.6;
+}
+
+/* הדגשות חשובות */
+.wpc-calc-[topic]-[4random]-highlight-box {
+  background: linear-gradient(135deg, #fff8e1 0%, #fffde7 100%);
+  border-right: 5px solid var(--warning);
+  padding: 20px 25px;
+  margin: 20px 0;
+  border-radius: var(--radius-md);
+}
+
+.wpc-calc-[topic]-[4random]-highlight-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--warning);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.wpc-calc-[topic]-[4random]-highlight-title::before {
+  content: '⚠️';
+  font-size: 1.3rem;
+}
+
+/* סטטיסטיקות ויזואליות */
+.wpc-calc-[topic]-[4random]-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px;
+  margin: 25px 0;
+}
+
+.wpc-calc-[topic]-[4random]-stat-card {
+  background: white;
+  padding: 20px;
+  border-radius: var(--radius-md);
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  border-top: 4px solid var(--primary);
+  transition: var(--transition);
+}
+
+.wpc-calc-[topic]-[4random]-stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+}
+
+.wpc-calc-[topic]-[4random]-stat-number {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--primary);
+  display: block;
+  margin-bottom: 5px;
+}
+
+.wpc-calc-[topic]-[4random]-stat-label {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  font-weight: 600;
+}
+
+/* איקונים עם טקסט */
+.wpc-calc-[topic]-[4random]-icon-text {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  margin: 15px 0;
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: var(--radius-sm);
+}
+
+.wpc-calc-[topic]-[4random]-icon-text-icon {
+  width: 40px;
+  height: 40px;
+  background: var(--success);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  color: white;
+  flex-shrink: 0;
+}
+
+.wpc-calc-[topic]-[4random]-icon-text-content h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 5px;
+}
+
+.wpc-calc-[topic]-[4random]-icon-text-content p {
+  font-size: 0.95rem;
+  color: var(--text-light);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* תהליכים שלב אחר שלב */
+.wpc-calc-[topic]-[4random]-steps {
+  margin: 25px 0;
+}
+
+.wpc-calc-[topic]-[4random]-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  margin-bottom: 20px;
+  padding: 20px;
+  background: white;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+}
+
+.wpc-calc-[topic]-[4random]-step::before {
+  content: '';
+  position: absolute;
+  right: -10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-right: 10px solid white;
+  filter: drop-shadow(-2px 0 2px rgba(0,0,0,0.1));
+}
+
+.wpc-calc-[topic]-[4random]-step-number {
+  width: 40px;
+  height: 40px;
+  background: var(--primary);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.wpc-calc-[topic]-[4random]-step-content h4 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 8px;
+}
+
+.wpc-calc-[topic]-[4random]-step-content p {
+  font-size: 1rem;
+  color: var(--text-light);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* השוואות ויזואליות */
+.wpc-calc-[topic]-[4random]-comparison {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin: 25px 0;
+}
+
+.wpc-calc-[topic]-[4random]-comparison-item {
+  background: white;
+  border-radius: var(--radius-md);
+  padding: 20px;
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+  position: relative;
+  border: 2px solid transparent;
+  transition: var(--transition);
+}
+
+.wpc-calc-[topic]-[4random]-comparison-item.recommended {
+  border-color: var(--success);
+  background: linear-gradient(135deg, #f0fff4 0%, #e6ffed 100%);
+}
+
+.wpc-calc-[topic]-[4random]-comparison-item.recommended::before {
+  content: '⭐ מומלץ';
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--success);
+  color: white;
+  padding: 5px 15px;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+/* מובייל - התאמות */
+@media (max-width: 767px) {
+  .wpc-calc-[topic]-[4random]-example-data {
+    grid-template-columns: 1fr;
+  }
+  
+  .wpc-calc-[topic]-[4random]-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .wpc-calc-[topic]-[4random]-comparison {
+    grid-template-columns: 1fr;
+  }
+  
+  .wpc-calc-[topic]-[4random]-step {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .wpc-calc-[topic]-[4random]-step::before {
+    display: none;
+  }
+  
+  .wpc-calc-[topic]-[4random]-icon-text {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+```
+```css
+/* Focus States */
+.wpc-calc-[topic]-[4random]-btn:focus,
+.wpc-calc-[topic]-[4random]-card:focus,
+.wpc-calc-[topic]-[4random]-input:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* High Contrast Support */
+@media (prefers-contrast: high) {
+  .wpc-calc-[topic]-[4random]-card {
+    border-width: 3px;
+  }
+  
+  .wpc-calc-[topic]-[4random]-title::after {
+    width: 6px;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .wpc-calc-[topic]-[4random]-btn,
+  .wpc-calc-[topic]-[4random]-card {
+    transition: none;
+    animation: none;
+  }
+}
+
+/* Touch Device Optimization */
+@media (hover: none) and (pointer: coarse) {
+  .wpc-calc-[topic]-[4random]-btn {
+    min-height: 48px;                    /* גודל מגע מינימלי */
+  }
+  
+  .wpc-calc-[topic]-[4random]-card:hover {
+    transform: none;                     /* ביטול hover במגע */
+  }
+}
+```
+
+---
+
+## 🧠 אלגוריתם יצירת איפיון דינמי + תוכן SEO מלא
+
+⚠️ **הנחיה קריטית:** כל האיפיון והתוכן חייבים להיכתב בקנבס (artifacts) בלבד - לא בצ'אט!
+
+### שלב 1: ניתוח המחשבון הנדרש + מחקר תוכן
+```
+📊 ANALYZE_CALCULATOR_REQUEST(calculatorName) {
+    
+    🔍 זיהוי קטגוריה:
+    ├── הלוואות: (הלוואה, לוואי, משכנתא, מימון, אשראי)
+    ├── ביטוח: (ביטוח, פוליסה, כיסוי, פיצוי, דמי)
+    ├── השקעות: (השקעה, תיק, מניות, אג"ח, קרנות, פיננסים)
+    ├── חיסכון: (חיסכון, פנסיה, קופה, פיקדון, חדמ"ש)
+    ├── מסים: (מס, מע"מ, ארנונה, רווח הון)
+    ├── רכב: (רכב, לוחיות, רישוי, דלק, תחזוקה)
+    └── נדל"ן: (נדלן, דירה, בית, שכירות, רכישה)
+    
+    🎯 זיהוי מורכבות:
+    ├── בסיסי (1-3 פרמטרים): מחשבון פשוט
+    ├── בינוני (4-7 פרמטרים): מחשבון מתקדם
+    ├── מורכב (8+ פרמטרים): מחשבון מקצועי
+    └── אקספרט (15+ פרמטרים): מחשבון בנקאי
+    
+    🧮 זיהוי סוג חישובים:
+    ├── PMT: תשלומים חודשיים (הלוואות, משכנתא)
+    ├── FV: ערך עתידי (חיסכון, השקעות)
+    ├── IRR/NPV: תשואה (השקעות מתקדמות)
+    ├── אחוזים: ביטוח, מסים, עמלות
+    ├── השוואות: מספר אפשרויות
+    └── אופטימיזציה: מציאת הפתרון הטוב ביותר
+    
+    👥 זיהוי קהל יעד:
+    ├── צרכנים: חישובים פשוטים ונגישים
+    ├── עסקים: חישובים מתקדמים ודוחות
+    ├── מקצועיים: כלים מורכבים וניתוחים עמוקים
+    └── משקיעים: מודלים פיננסיים מתקדמים
+    
+    🔍 מחקר מילות מפתח דינמי:
+    ├── מילות מפתח ראשיות: חילוץ מהשם + הרחבות תוכן
+    ├── מילות מפתח משניות: מונחים מקצועיים בתחום
+    ├── Long-tail keywords: שאלות נפוצות של המשתמשים
+    ├── Semantic keywords: מונחים קשורים וחלופיים
+    └── Intent mapping: מטרות החיפוש של המשתמשים
+    
+    📈 ניתוח תחרות AI:
+    ├── מה מחפשים אמיתי במחשבונים בתחום
+    ├── איזה תוכן חסר בשוק הנוכחי
+    ├── איך להפוך את המחשבון לייחודי
+    ├── איזה ערך מוסף לתת מעבר לחישוב
+    └── איך לענות על הצרכים הלא מטופלים
+    
+    return {
+        category: detectedCategory,
+        complexity: complexityLevel,
+        calculations: requiredCalculations,
+        audience: targetAudience,
+        uniqueFeatures: suggestedFeatures,
+        prefix: generatePrefix(calculatorName),
+        namespace: generateNamespace(calculatorName),
+        keywords: extractedKeywords,
+        contentStrategy: aiOptimizedStrategy,
+        userIntent: identifiedUserIntents
+    }
+}
+```
+
+### שלב 2: יצירת מבנה מחשבון דינמי
+```
+🏗️ GENERATE_CALCULATOR_STRUCTURE(analysis) {
+    
+    📋 מספר טאבים דינמי:
+    ├── בסיסי: 1-2 טאבים (חישוב + תוצאות)
+    ├── בינוני: 3-4 טאבים (חישוב + השוואה + ניתוח + סיכום)
+    ├── מורכב: 5-6 טאבים (בסיסי + מתקדם + השוואה + ניתוח + תרחישים + סיכום)
+    └── אקספרט: 7+ טאבים (כולל דוחות, אופטימיזציה, מחקר)
+    
+    🎛️ פרמטרי קלט דינמיים:
+    לפי קטגוריה:
+    ├── הלוואות: סכום, תקופה, ריבית, סוג, מטרה
+    ├── ביטוח: שווי, גיל, מין, אזור, נזקיות, כיסוי
+    ├── השקעות: סכום, תקופה, תשואה, סיכון, דיבידנד
+    ├── חיסכון: סכום חודשי, תקופה, ריבית, הצמדה, מס
+    └── [המשך לפי ניתוח]
+    
+    📊 פלטים דינמיים:
+    לפי סוג חישובים:
+    ├── PMT: תשלום חודשי, סה"כ ריבית, יחס הכנסה
+    ├── FV: ערך עתידי, רווח, תשואה אמיתית
+    ├── השוואות: טבלה, גרפים, המלצות
+    └── ניתוחים: כדאיות, סיכונים, תרחישים
+    
+    🎨 UI/UX מותאם:
+    ├── בסיסי: סליידרים פשוטים + תוצאות ברורות
+    ├── מתקדם: טאבים + גרפים + טבלאות השוואה
+    ├── מקצועי: דשבורד מתקדם + יצוא דוחות
+    └── אקספרט: ממשק בנקאי מלא + אנליטיקס
+}
+```
+
+### שלב 3: יצירת תוכן ויזואלי עשיר - AI SEO Optimized + רכיבים גרפיים
+```
+📝 GENERATE_VISUAL_RICH_CONTENT(analysis, structure) {
+    
+    📋 מבנה תוכן ויזואלי דינמי לפי תחום:
+    
+    🏆 כותרת H1 מתקדמת + אינפוגרפיקה:
+    ├── כותרת עם מילות מפתח ראשיות
+    ├── אינפוגרפיקה עם סטטיסטיקות מרכזיות
+    ├── כרטיס היתרונות הבולטים של המחשבון
+    └── CTA ויזואלי למעבר למחשבון
+    
+    📖 תקציר מנהלים ויזואלי דינמי (100-200 מילים לפי מורכבות + גרפיקות):
+    ├── כרטיס בעיה/פתרון עם איקונים
+    ├── הדגשת הייחודיות בקופסא צבעונית
+    ├── תוצאות צפויות בסטטיסטיקות
+    └── קריאה לפעולה בכפתור בולט
+    
+    🧠 מדריך מומחה ויזואלי מקיף דינמי (500-1500 מילים לפי מורכבות + רכיבים):
+    **🚨 יצירת רכיבים ויזואליים דינמיים לפי סוג המחשבון!**
+    
+    🎯 **עקרון הדינמיות:** כל רכיב ויזואלי חייב להיות רלוונטי לסוג המחשבון הספציפי!
+    
+    🎯 **כמות מילים דינמית לפי מורכבות המחשבון:**
+    - **מינימום מוחלט:** 500-600 מילים לכל מחשבון (גם הפשוט ביותר)
+    - מחשבון פשוט (1-2 טאבים): 500-700 מילים סה"כ
+    - מחשבון בינוני (3-4 טאבים): 700-1000 מילים סה"כ  
+    - מחשבון מורכב (5+ טאבים): 1000-1500 מילים סה"כ
+    - **🚨 אסור פחות מ-500 מילים:** גם למחשבון הפשוט ביותר!
+    
+    א. הקדמה מקצועית עם אינפוגרפיקה (100-250 מילים לפי מורכבות):
+    ├── כרטיס "המצב בתחום [נושא המחשבון]" עם נתונים ספציפיים
+    ├── אינפוגרפיקת מגמות שוק רלוונטיות לנושא
+    ├── הדגשת חשיבות החישוב הספציפי בקופסת אזהרה
+    └── הבטחת פתרון רלוונטי בכרטיס ירוק
+    
+    ב. הסבר מעמיק על החישובים + דוגמאות ויזואליות (150-400 מילים לפי מורכבות):
+    ├── כרטיס נוסחה מתמטית ספציפית למחשבון (PMT/FV/PV/וכו')
+    ├── דוגמה חיה במחשבון מיני מובנה עם נתונים אמיתיים
+    ├── כרטיסי פרמטרים משפיעים ספציפיים למחשבון
+    ├── השוואה ויזואלית בין תרחישים רלוונטיים
+    ├── אינפוגרפיקת "לפני ואחרי" מותאמת לנושא
+    └── טבלת הבדלים צבעונית עם נתונים מהתחום
+    
+    ג. טיפים מקצועיים ויזואליים (100-300 מילים לפי מורכבות):
+    ├── כרטיסי "שגיאות נפוצות" ספציפיות לתחום
+    ├── טיפים בכרטיסי "הצלחה" רלוונטיים למחשבון
+    ├── כרטיס "מתי להיעזר במקצועי" מותאם לנושא
+    ├── רשימת שאלות חשובות ספציפיות בעיצוב צ'קליסט
+    └── הדגשות קריטיות רלוונטיות בקופסאות אדומות
+    
+    ד. תרחישים מעשיים בכרטיסים אינטראקטיביים (100-250 מילים לפי מורכבות):
+    ├── כרטיס "מקרה טיפוסי" עם נתונים אמיתיים מהתחום
+    ├── כרטיס "מקרה מורכב" עם התרעות ספציפיות
+    ├── כרטיס "מקרה קיצוני" עם פתרונות מותאמים
+    ├── סיכום לקחים בכרטיסי טיפים רלוונטיים
+    └── השוואה ויזואלית בין מקרים מהתחום
+    
+    ה. סיכום ויזואלי ומסקנות (50-150 מילים לפי מורכבות):
+    ├── כרטיסי נקודות מרכזיות ספציפיות למחשבון עם איקונים
+    ├── אינפוגרפיקת צעדים הבאים רלוונטיים לנושא
+    ├── הדגשת חשיבות התכנון הספציפי בקופסא
+    └── עידוד אינטראקטיבי לשימוש במחשבון הספציפי
+    
+    🏛️ תוכן EAT מתקדם עם פרופיל ויזואלי:
+    
+    👨‍🎓 כרטיס פרופיל מומחה מפורט + תמונה:
+    ├── תמונה: https://staging.loans-israel.org.il/wp-content/uploads/2025/07/image-95.webp
+    ├── כרטיס פרופיל עם פרטי אייל עובדיה
+    ├── סטטיסטיקות ניסיון בכרטיסים נפרדים
+    ├── תעודות ורישיונות בתצוגה ויזואלית
+    ├── הישגים בכרטיסי מספרים בולטים
+    ├── כרטיס מומחה התחום מרשת המומחים
+    └── הדגשת פיקוח מקצועי בחתימה ויזואלית
+    
+    📚 תוכן מומחיות ויזואלי עמיק - דינמי לפי נושא המחשבון:
+    ├── אינפוגרפיקת רקע כלכלי ספציפי לתחום המחשבון
+    ├── טבלת השוואה בין אפשרויות רלוונטיות בשוק
+    ├── גרף מגמות ושינויים עדכניים בתחום הספציפי
+    ├── כרטיסי תובנות מהניסיון המקצועי בנושא
+    ├── אינפוגרפיקת המלצות אסטרטגיות מותאמות
+    ├── קופסאות אזהרה מסיכונים ספציפיים לתחום
+    ├── קישורים למקורות רלוונטיים בכרטיסים
+    └── עדכונים רגולטוריים ספציפיים בהתראות
+    
+    🔍 FAQ ויזואלי דינמי (8-15 שאלות + עיצוב):
+    ├── כל שאלה בכרטיס נפרד עם איקון מתאים
+    ├── אזור אחד מאוחד עם כל השאלות
+    ├── ללא חלוקה לקטגוriות (מתחילים/מתקדמים)
+    ├── סדר לוגי מהבסיסי למורכב
+    ├── איקונים שונים לפי סוג השאלה:
+    │   ├── 💰 שאלות כסף וריבית
+    │   ├── ⏰ שאלות זמן ותהליך
+    │   ├── 📋 שאלות דרישות ותנאים
+    │   ├── ⚠️ שאלות סיכונים ואזהרות
+    │   └── 🎯 שאלות אסטרטגיות
+    └── עיצוב אקורדיון אחיד לכל השאלות
+    
+    🎯 אלמנטים ויזואליים לכל חלק:
+    
+    📈 אינפוגרפיקות מובנות:
+    ├── סטטיסטיקות שוק בכרטיסי מספרים
+    ├── תהליכים בצעדים ויזואליים ממוספרים
+    ├── השוואות בטבלאות צבעוניות
+    ├── מגמות בגרפים פשוטים עם CSS
+    ├── התקדמות בסרגלי progress
+    ├── זמנים בלוחות שנה ויזואליים
+    ├── סכומים בכרטיסי כסף עם סמלי ₪
+    └── אחוזים בעיגולי אחוזים CSS
+    
+    🌟 כרטיסי תוכן אינטראקטיביים:
+    ├── דוגמאות חיות עם נתונים ממחשבון מיני
+    ├── השוואות בכרטיסי "לפני/אחרי"
+    ├── טיפים בכרטיסי "זכור זאת" עם איקונים
+    ├── אזהרות בכרטיסי "שים לב" אדומים
+    ├── הצלחות בכרטיסי "כדאי לדעת" ירוקים
+    ├── מידע נוסף בכרטיסי "הרחבה" כחולים
+    ├── קישורים בכרטיסי "קרא עוד" בתחתית
+    └── CTA בכרטיסי פעולה בולטים
+    
+    🎬 רכיבים אינטראקטיביים מתקדמים:
+    ├── מחשבוני דוגמה קטנים מובנים בטקסט
+    ├── סליידרים להדגמת השפעת פרמטרים
+    ├── כפתורי "הראה דוגמה" לחישובים חיים
+    ├── tooltip עם הסברים על ריחוף
+    ├── כרטיסי flip עם מידע נוסף
+    ├── סרגלי התקדמות לתהליכים
+    ├── כרטיסי אקורדיון למידע נוסף
+    └── galeria דוגמאות עם navigation
+    
+    🔐 הוכחות אמינות ויזואליות:
+    ├── לוגו בנק ישראל בכרטיס מקורות
+    ├── תעודות ורישיונות בתצוגה ויזואלית
+    ├── חותמות זמן על עדכונים בכרטיסים
+    ├── כרטיסי ביקורת איכות עם V
+    ├── הסמכות מקצועיות בתגים
+    ├── שיתופי פעולה בלוגו ורטנרים
+    ├── המלצות בכרטיסי ביקורות
+    └── דרגות ביטחון בסמלי מגן
+}
+```
+
+### שלב 4: יצירת תוכן EAT SEO דינמי
+```
+📝 GENERATE_EAT_PROFILES(calculatorName, analysis) {
+    
+    👨‍🎓 מחולל פרופילי Expertise אמיתיים (ללא שמות פיקטיביים):
+    
+    📊 מיפוי מומחיות צוות לפי תחום:
+    ├── הלוואות ומשכנתאות:
+    │   ├── צוות יועצים מוסמכים עם רישיון מתווך אשראי ומשכנתאות
+    │   ├── ניסיון מצטבר של מעל 25 שנות עבודה בבנקאות
+    │   ├── ליווי למעלה מ-3,000 משפחות בתהליכי מימון
+    │   ├── התמחות במקרים מורכבים ופתרונות יצירתיים
+    │   └── עבודה בשיתוף עם אייל עובדיה ופורטל "רק תבקש"
+    │
+    ├── ביטוח וניהול סיכונים:
+    │   ├── צוות סוכני ביטוח מורשים ברישיון כללי וחיים
+    │   ├── ניסיון מצטבר של 18+ שנות עבודה בחברות ביטוח מובילות
+    │   ├── התמחות בטיפול בתביעות מורכבות ויעוץ סיכונים
+    │   ├── ליווי למעלה מ-1,500 לקוחות פרטיים ועסקיים
+    │   └── הכשרה אקטוארית ומומחיות במתמטיקה פיננסית
+    │
+    ├── השקעות ושוקי הון:
+    │   ├── צוות יועצי השקעות רשויים ברישיון מרשות ניירות ערך
+    │   ├── ניסיון מצטבר של 22+ שנות עבודה בבנקאות השקעות
+    │   ├── ניהול תיקים בהיקף מעל 150M₪ במצטבר
+    │   ├── התמחות באנליזה פיננסית ואסטרטגיות השקעה
+    │   └── הסמכות CFA ותארים מתקדמים בכלכלה וניהול
+    │
+    [המשך לפי תחומים עם מומחיות כללית ללא שמות פיקטיביים...]
+    
+    🤝 **מבנה הפרופיל החדש והחוקי:**
+    ├── **מחבר ראשי:** אייל עובדיה - המנהל המקצועי של "רק תבקש" (אמיתי)
+    ├── **פיתוח המחשבון:** צוות המומחים המקצועיים של רק תבקש (כללי)
+    ├── **פיקוח איכות:** אייל עובדיה מפקח על איכות התוכן (אמיתי)
+    ├── **רקע חברה:** פורטל "רק תבקש" - חברת אפטריו בע"מ (אמיתי)
+    └── **חוקיות:** פועל במסגרת רגולציה ישראלית מלאה (אמיתי)
+    
+    🏛️ מחולל Authority דינמי + אייל עובדיה:
+    
+    👨‍💼 **אייל עובדיה - הדמות המרכזית:**
+    ├── המנהל המקצועי והיועץ הראשי של פורטל "רק תבקש"
+    ├── ניסיון עשיר של שנים רבות בתחום ההלוואות לצרכנים ועסקים
+    ├── מומחה בזיהוי פתרונות מימון יצירתיים ומורכבים
+    ├── יוצר שיתופי פעולה עם יועצים מומחים בתחום הפיננסים
+    ├── מכיר לעומק את הצרכים השונים של הלקוחות
+    └── מפעיל פלטפורמה חוקית במסגרת רגולציה ישראלית
+    
+    📊 מיפוי מומחים לפי תחום (בשיתוף עם אייל עובדיה + תמונה):
+    
+    👨‍💼 **כרטיס אייל עובדיה הויזואלי - המחבר האמיתי:**
+    ```html
+    <div class="wpc-calc-[topic]-[4random]-expert-card">
+        <div class="wpc-calc-[topic]-[4random]-expert-image">
+            <img src="https://staging.loans-israel.org.il/wp-content/uploads/2025/07/image-95.webp" 
+                 alt="אייל עובדיה - המנהל המקצועי של רק תבקש" 
+                 class="wpc-calc-[topic]-[4random]-expert-photo">
+            <div class="wpc-calc-[topic]-[4random]-expert-badge">מנהל מקצועי</div>
+        </div>
+        <div class="wpc-calc-[topic]-[4random]-expert-content">
+            <h3>אייל עובדיה</h3>
+            <p class="title">המנהל המקצועי של פורטל "רק תבקש"</p>
+            <p class="collaboration-note">בשיתוף עם צוות המומחים המקצועיים של רק תבקש</p>
+            <div class="wpc-calc-[topic]-[4random]-expert-stats">
+                <div class="stat-item">
+                    <span class="number">12+</span>
+                    <span class="label">שנות ניסיון</span>
+                </div>
+                <div class="stat-item">
+                    <span class="number">8000+</span>
+                    <span class="label">לקוחות צוות</span>
+                </div>
+                <div class="stat-item">
+                    <span class="number">100%</span>
+                    <span class="label">חוקי ורגולטיבי</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    ```
+    
+    ├── **מיפוי תחומי מומחיות (ללא שמות פיקטיביים):**
+    │   ```html
+    │   <div class="wpc-calc-[topic]-[4random]-team-expertise">
+    │       <h4>פותח על ידי צוות המומחים של רק תבקש</h4>
+    │       <div class="expertise-areas">
+    │           <div class="expertise-item">
+    │               <div class="expertise-icon">🏦</div>
+    │               <div class="expertise-text">
+    │                   <strong>מומחי הלוואות ומשכנתאות</strong>
+    │                   <p>יועצים מוסמכים עם רישיונות מתווך אשראי ומשכנתאות</p>
+    │               </div>
+    │           </div>
+    │           <div class="expertise-item">
+    │               <div class="expertise-icon">📊</div>
+    │               <div class="expertise-text">
+    │                   <strong>אנליסטים פיננסיים</strong>
+    │                   <p>מומחים לחישובי סיכון ואופטימיזציה פיננסית</p>
+    │               </div>
+    │           </div>
+    │           <div class="expertise-item">
+    │               <div class="expertise-icon">⚖️</div>
+    │               <div class="expertise-text">
+    │                   <strong>יועצים רגולטוריים</strong>
+    │                   <p>מתמחים ברגולציה ישראלית ודרישות משפטיות</p>
+    │               </div>
+    │           </div>
+    │       </div>
+    │   </div>
+    │   ```
+    │
+    [המשך לפי תחומים עם התמחויות כלליות...]
+    
+    🤝 **מבנה הפרופיל החדש:**
+    ├── **מחבר ראשי:** אייל עובדיה - המנהל המקצועי של "רק תבקש"
+    ├── **מומחה תחום:** [שם פיקטיבי] - מרשת המומחים של אייל
+    ├── **פיקוח מקצועי:** תוכן נבדק ואושר על ידי אייל עובדיה
+    ├── **רקע חברה:** פורטל "רק תבקש" - חברת אפטריו בע"מ
+    └── **חוקיות:** פועל במסגרת רגולציה ישראלית מלאה
+    
+    🔒 מחולל Trustworthiness דינמי:
+    
+    ⭐ אלמנטי אמינות מותאמים:
+    ├── שקיפות מלאה בשיטות החישוב
+    ├── עדכון נתונים שוטף לפי שינויי שוק
+    ├── הפניה למקורות מידע מוסמכים
+    ├── הצהרת אחריות מקצועית ברורה
+    ├── מדיניות פרטיות מפורטת ושקופה
+    ├── דרכי יצירת קשר ברורות ונגישות
+    ├── המלצות מלקוחות ועמיתים (אופציונלי)
+    └── שיתופי פעולה עם גופים מוכרים
+    
+    📊 מקורות נתונים אמינים:
+    ├── בנק ישראל - נתוני ריבית ואינפלציה
+    ├── רשות ניירות ערך - נתוני שוק הון
+    ├── משרד האוצר - רגולציה ותקנות
+    ├── הלשכה המרכזית לסטטיסטיקה
+    ├── חברות דירוג אשראי בינלאומיות
+    ├── בורסות ושוקי הון מקומיים ובינלאומיים
+    ├── גופי מחקר כלכלי מובילים
+    └── פרסומי בנקים וחברות ביטוח
+}
+```
+
+### שלב 5: יצירת קוד טכני דינמי + מקרא עיצובי
+```
+💻 GENERATE_TECHNICAL_CODE(analysis, structure) {
+    
+    🧮 נוסחאות מתמטיות דינמיות:
+    ├── לפי סוג חישובים מהניתוח
+    ├── ולידציות מתאימות לתחום
+    ├── edge cases ספציפיים
+    └── דוגמאות קלט/פלט רלוונטיות
+    
+    🎨 CSS דינמי מבוסס מקרא עיצובי + LEAN DEVELOPMENT:
+    ├── Container: max-width: 1200px + margin: 0 auto (רוחב עקבי חובה!)
+    ├── PREFIX ייחודי: wpc-calc-[topic]-[4random]-
+    ├── צבעים: --primary: #1e5490, --danger: #ff3b3b, --success: #25D366
+    ├── AWG רוחב מלא: width: 100% מהקונטיינר + background: white
+    ├── רוחב אחיד: כל האזורים באותו max-width: 1200px
+    ├── פונט: font-family: Assistant, -apple-system, BlinkMacSystemFont
+    ├── Typography: clamp() לכל הגדלים, --fs-hero, --fs-h1, --fs-body
+    ├── Spacing: 60px 20px desktop, 40px 15px mobile, 30px 12px @375px
+    ├── Border Radius: --radius-sm: 8px, --radius-md: 15px, --radius-lg: 20px
+    ├── Shadows: --shadow-sm, --shadow-md, --shadow-lg
+    ├── כותרות: גלובלי `.${PREFIX}wrapper h2` עם קו אדום דקורטיבי
+    ├── כפתורים: גלובלי `.${PREFIX}wrapper button` עם border-radius: 50px
+    ├── כרטיסים: padding: 30px desktop, 20px mobile, 16px @375px
+    ├── Grid: repeat(auto-fit, minmax(280px, 1fr)) → 1fr mobile
+    └── RTL: direction: rtl לכל wrapper
+    
+    📱 Responsive מבוסס מקרא:
+    ├── Breakpoints: 768px, 767px, 375px
+    ├── Mobile Tables: הפיכה לכרטיסים עם .mobile-cards-container
+    ├── Typography: clamp() אוטומטי לכל רמות הטקסט
+    ├── Buttons: width: 100% mobile, min-height: 48px @375px
+    ├── Grid: grid-template-columns: 1fr mobile
+    ├── Spacing: מחצית מהdesktop ב-375px
+    ├── 🚨 Fallback Colors: הוסף תיקון צבע טקסט דינמי לכל @media query
+    └── Touch: min-height: 48px לכל אלמנטים אינטראקטיביים
+    
+    ⚡ JavaScript דינמי:
+    ├── NAMESPACE: WPC_Calc[Topic][4Random]
+    ├── Container Check: querySelector('#wpc-calc-[topic]-[4random]-main')
+    ├── IIFE wrapper: (function() { 'use strict'; ... })();
+    ├── Touch Support: 'ontouchstart' in window detection
+    ├── Animations: requestAnimationFrame לחלקות
+    ├── Accessibility: ARIA attributes + screen reader support
+    ├── Haptic: navigator.vibrate(50) בנגיעות
+    ├── Error Handling: try-catch לכל פונקציה
+    └── Performance: debounce למחשבים כבדים
+    
+    🎪 אנימציות מהמקרא:
+    ├── fadeInUp: opacity 0→1 + translateY(30px→0)
+    ├── slideInRight: translateX(30px→0) 
+    ├── pulse: box-shadow animation לCTA
+    ├── ripple: ריפל אפקט בלחיצות
+    ├── hover: translateY(-3px) + box-shadow
+    ├── active: scale(0.96) בלחיצה
+    ├── stagger: 100ms delay בין כרטיסים
+    └── prefers-reduced-motion: ביטול אנימציות
+    
+    📊 רכיבים ייעודיים:
+    ├── Tabs: grid layout + active states + keyboard support
+    ├── Cards: shadow + hover + selection states + ripple
+    ├── Buttons: gradient + shadow + pulse + haptic
+    ├── Forms: min-font-size: 16px + validation + accessibility
+    ├── Tables: responsive cards במובייל עם title + rows
+    ├── Charts: SVG/Canvas עם tooltips ואנימציות
+    ├── Modals: backdrop + focus trap + ESC handling
+    └── Tooltips: position calculation + arrow + delay
+    
+    🎯 AWG Integration:
+    ├── Container: .wpc-calc-[topic]-[4random]-awg-container
+    ├── Styling: background: white + border: 3px solid var(--primary)
+    ├── Badge: position: absolute + top: -20px + right: 25px
+    ├── Content: [awg postid="32400"] placement
+    ├── Mobile: padding: 0 + width: 100%
+    └── Loading: skeleton עד שהשורטקוד נטען
+}
+```
+
+---
+
+## 🎛️ תבנית איפיון דינמית
+
+📋 **חובה:** כל האיפיון להלן יוצג בקנבס (artifacts) כמסמך אחד מסודר!
+
+### 📋 מבנה הפלט הדינמי - איפיון טכני בלבד!
+
+**🚨 חשוב: זה איפיון טכני מפורט - לא קוד מוגמר!**
+
+```markdown
+# 🧮 איפיון מחשבון [שם המחשבון] מתקדם - WordPress Safe + EAT SEO + AI Optimized
+
+## 🎯 ניתוח מחשבון
+**קטגוריה:** [זוהה אוטומטית]
+**מורכבות:** [1-5] ([תיאור רמה])
+**קהל יעד:** [זוהה לפי שם המחשבון]
+**חישובים נדרשים:** [רשימה דינמית]
+**מילות מפתח ראשיות:** [רשימה מחושבת]
+**Intent מטרה:** [מטרות החיפוש של המשתמשים]
+
+## 🔧 מזהים טכניים
+**PREFIX:** wpc-calc-[topic]-[4random]-
+**NAMESPACE:** WPC_Calc[Topic][4Random]
+**Container Class:** wpc-calc-[topic]-[4random]-wrapper
+
+## 📝 תוכן מקצועי מלא - AI SEO Optimized
+
+**🚨 חשוב: השתמש במאגר המידע למטה לאימות ריביות בלבד - אל תעתיק ממנו!**
+
+### 🏆 כותרת H1 מותאמת AI
+[כותרת מקצועית עם מילות מפתח אסטרטגיות]
+
+### 📖 תקציר מנהלים (150 מילים)
+[תמצית מקצועית עם הבעיה, הפתרון, והייחודיות]
+
+### 🧠 מדריך מומחה מקיף (1000+ מילים)
+
+#### א. הקדמה מקצועית
+[רקע על התחום, אתגרים נוכחיים, חשיבות החישוב המדויק]
+
+#### ב. הסבר מעמיק על החישובים
+[נוסחאות בפשטות, פרמטרים משפיעים, דוגמאות מעשיות]
+**🔍 חשוב:** בדוק שהריביות בדוגמאות תואמות למאגר המידע למטה
+
+#### ג. טיפים מקצועיים והמלצות
+[שגיאות נפוצות, טריקים למיטוב, מתי להיעזר במקצועי]
+
+#### ד. תרחישים מעשיים
+[3 דוגמאות מפורטות: טיפוסי, מורכב, קיצוני]
+**🔍 חשוב:** וודא שהריביות בתרחישים תואמות לטווחים במאגר המידע
+
+#### ה. סיכום ומסקנות
+[נקודות מרכזיות, צעדים הבאים, חשיבות התכנון]
+
+### 👨‍🎓 פרופיל מומחה אמיתי + אייל עובדיה
+**מחבר ראשי:** אייל עובדיה - המנהל המקצועי של פורטל "רק תבקש"
+**פיתוח המחשבון:** בשיתוף עם צוות המומחים המקצועיים של רק תבקש
+**תחום התמחות:** [התחום הספציפי לפי סוג המחשבון]
+**מומחיות הצוות:** יועצים מוסמכים ואנליסטים עם רישיונות מקצועיים רלוונטיים
+**ניסיון מצטבר:** מעל 20 שנות ניסיון מקצועי מצטבר של הצוות
+**לקוחות:** למעלה מ-8,000 לקוחות שקיבלו ייעוץ מהצוות
+**רישיונות:** רישיונות מקצועיים רלוונטיים מגופי הפיקוח הישראליים
+**פיקוח איכות:** אייל עובדיה מפקח על איכות התוכן והחישובים
+**רקע חברה:** פורטל "רק תבקש" - חברת אפטריו בע"מ
+**חוקיות:** פועל במסגרת רגולציה ישראלית מלאה ומחויבות לשקיפות
+
+### 📚 תוכן מומחיות מעמיק
+[רקע כלכלי, השוואת שוק, מגמות עדכניות, תובנות מקצועיות]
+
+### 🔍 שאלות נפוצות מתקדמות (מספר מותאם לנושא)
+[שאלות בסיסיות, מתקדמות, השוואתיות, מקרים מיוחדים - בין 8-15 שאלות לפי המורכבות]
+
+### 🌟 אופטימיזציה לAI ומנועי חיפוש
+- **מילות מפתח טבעיות:** שילוב אורגני לאורך התוכן
+- **מענה ישיר:** תשובות ברורות לשאלות נפוצות
+- **מבנה היררכי:** כותרות וכותרות משנה מסודרות
+- **נתונים ועובדות:** מספרים ואחוזים מדויקים וניתנים לאימות
+- **Entity optimization:** שמות מוצרים, חברות, מונחים טכניים
+- **Context עשיר:** הסברים מלאים למונחים מורכבים
+
+### 🔐 אמינות ושקיפות
+- **מקורות נתונים:** בנק ישראל, משרד האוצר, רשות ניירות ערך
+- **שיטת חישוב:** הסבר מפורט ושקוף של האלגוריתמים
+- **עדכון תוכן:** תדירות ותאריך עדכון אחרון
+- **אחריות מקצועית:** הצהרות ברורות על השימוש
+- **פרטיות:** מדיניות הגנת מידע מפורטת
+- **יצירת קשר:** דרכים לפנייה לשאלות נוספות
+
+## 🎨 מבנה המחשבון - [מספר] טאבים מתקדמים
+
+### [רשימה דינמית של טאבים לפי מורכבות]
+
+
+
+---
+
+## 🎯 דוגמאות לפעולה עם תוכן מלא
+
+### דוגמה לפני ואחרי - הפיכת טקסט יבש לוויזואלי עשיר:
+
+**🚫 לפני - טקסט יבש ומשעמם:**
+```
+ב. הסבר מעמיק על החישובים
+חישוב התשלום החודשי להלוואה מבוסס על נוסחת PMT המתמטית...
+```
+
+**✅ אחרי - תוכן ויזואלי עשיר ומזמין:**
+- אינפוגרפיקת נוסחה עם הסבר ויזואלי
+- כרטיסי פרמטרים עם נתונים מדויקים
+- דוגמה חיה מהמחשבון עם תוצאות
+- הדגשות חשובות בקופסאות צבעוניות
+- השוואה ויזואלית בין תרחישים
+
+### עוד דוגמה - FAQ ויזואלי במקום טקסט יבש:
+
+**🚫 לפני - FAQ משעמם:**
+```
+ג. שאלות נפוצות
+מה זה ריבית קבועה?
+ריבית קבועה היא ריבית שנשארת זהה...
+```
+
+**✅ אחרי - FAQ ויזואלי ומזמין:**
+- כל שאלה בכרטיס נפרד עם איקון תחום
+- קטגוריות צבעוניות (מתחילים/מתקדמים/מומחים)
+- תשובות עם רכיבים ויזואליים ואיקונים
+- סטטיסטיקות ונתונים בכרטיסי מספרים
+
+### עוד דוגמה - כרטיס מומחה אמיתי עם תמונה:
+- תמונת אייל עובדיה האמיתית
+- כרטיס מעוצב עם סטטיסטיקות ויזואליות
+- צוות המומחים ללא שמות פיקטיביים
+- מומחיות אמיתית עם רישיונות מקצועיים
+
+**🎯 עקרון זהב חדש:** רק אייל עובדיה עם שם אמיתי + צוות כללי ללא שמות פיקטיביים!
+
+---
+
+## 🚀 הוראות הפעלה
+
+### 🎮 איך להשתמש בפרומפט:
+
+1. **כתוב בדיוק:** "צור לי מחשבון [שם המחשבון]"
+2. **המתן לניתוח:** הפרומפט ינתח את הבקשה
+3. **קבל איפיון מקיף בקנבס:** כל התוכן יופיע במסמך מסודר בקנבס
+4. **העתק מהקנבס לקורסר:** העתק את כל תוכן הקנבס וקורסר יבנה לקובץ `C:\Users\eyal\Final-page.html`
+
+⚠️ **חשוב:** כל האיפיון יהיה בקנבס בלבד - לא בצ'אט הרגיל!
+
+### 🎯 טיפים לשמות מחשבונים יעילים:
+- **ספציפי:** "צור לי מחשבון משכנתא לדירה ראשונה"
+- **ברור:** "צור לי מחשבון ביטוח בריאות משלים"
+- **מותאם:** "צור לי מחשבון חיסכון לחתונה"
+- **מקצועי:** "צור לי מחשבון ROI להשקעות נדל"ן"
+
+### ✅ מה תקבל תמיד:
+- איפיון טכני מלא ומותאם
+- תוכן EAT SEO איכותי  
+- מפרט WordPress Safe
+- הנחיות עיצוב responsive מושלמות
+- **מבנה עמוד מוגדר ברור** - המחשבון למעלה, CTA/AWG אחריו, תוכן למטה
+- **אזור CTA + AWG ווידג'ט** עם שורטקוד [awg postid="32400"] (מופיע פעם אחת בלבד ומוסתר)
+- הוראות מפורטות לקורסר עם מיקום מדויק לקובץ `C:\Users\eyal\Final-page.html`
+- כל הטקסטים בעברית
+- נוסחאות מתמטיות מדויקות
+
+---
+
+## 🎊 יתרונות הפרומפט הדינמי + מקרא עיצובי מושלם
+
+### 🚀 גמישות מקסימלית
+- **כל סוג מחשבון:** הלוואות, ביטוח, השקעות, חיסכון, מסים
+- **כל רמת מורכבות:** מבסיסי ועד מקצועי
+- **כל קהל יעד:** צרכנים, עסקים, מקצועיים
+
+### 🎯 התאמה אישית מלאה + אייל עובדיה
+- **PREFIX ייחודי:** לכל מחשבון
+- **תוכן מותאם:** לתחום ולקהל
+- **UI/UX ספציפי:** לסוג השימוש
+- **מומחיות EAT:** מותאמת לתחום + פיקוח אייל עובדיה
+- **אמינות מוכחת:** דמות אמיתית מאחורי התוכן
+
+### 🏆 כוח אייל עובדיה לEAT:
+- **Expertise:** ניסיון עשיר של שנים רבות בהלוואות ומימון
+- **Authoritativeness:** מנהל מקצועי של פורטל מוביל בתחום
+- **Trustworthiness:** פועל במסגרת חוקית מלאה עם רגולציה ישראלית
+
+### 🎨 עקביות עיצובית מושלמת - החדש!
+- **פלטת צבעים אחידה:** #1e5490, #ff3b3b, #25D366, #FF9800
+- **Typography מוגדרת:** Assistant font + clamp() responsive
+- **Layout מתוקנן:** 1200px containers + padding hierarchy
+- **כפתורים אחידים:** 50px radius + min-height 54px + shadows
+- **כרטיסים עקביים:** 15px radius + hover states + transitions  
+- **כותרות מעוצבות:** קו אדום דקורטיבי + width: fit-content
+- **Responsive מושלם:** 768px, 767px, 375px breakpoints
+- **טבלאות חכמות:** אוטומטי לכרטיסים במובייל
+- **אנימציות עדינות:** fadeInUp, ripple, stagger effects
+- **נגישות מובנית:** ARIA, focus states, haptic feedback
+
+### 🛡️ בטיחות מובנית
+- **WordPress Safe:** תמיד ובכל מחשבון
+- **Performance:** אופטימיזציה אוטומטית
+- **Mobile First:** responsive מובנה
+- **SEO Ready:** תוכן איכותי תמיד
+
+### ⚡ יעילות מקסימלית
+- **איפיון מיידי:** תוך דקות
+- **מפרט מוכן:** לקורסר
+- **תוכן מלא:** ללא עבודה נוספת
+- **איכות מקצועית:** ברמה בנקאית + אמינות של אייל עובדיה
+- **עקביות גרפית:** כל מחשבון נראה מקצועי ואחיד
+
+### 🎯 שיפורים ייחודיים של המקרא:
+- **3 Breakpoints:** דסקטופ (1200px) → טאבלט (768px) → מובייל (767px) → מובייל קטן (375px)
+- **Typography Scale:** clamp() לכל רמת טקסט עם Assistant font
+- **Color System:** 4 צבעים עיקריים + variations מוגדרות
+- **Spacing System:** היררכיה ברורה 60px → 40px → 30px
+- **Component Library:** כפתורים, כרטיסים, טבלאות עם עיצוב אחיד
+- **Animation Framework:** fadeInUp, ripple, stagger עם prefers-reduced-motion
+- **Mobile Optimization:** touch targets 48px+, table→cards אוטומטי
+- **Accessibility:** focus states, ARIA, high contrast support
+- **Performance:** CSS variables, optimized selectors, lazy loading
+
+**🎉 תוצאה: מחולל מחשבונים שיכול ליצור כל מחשבון פיננסי מתקדם עם איפיון מקיף, מפרט מוכן לפרודקשן ועקביות עיצובית מושלמת!**
+
+**✨ כל מחשבון שיצא מהמחולל יהיה בעל מראה מקצועי אחיד, נגישות מלאה, ואופטימיזציה מושלמת למובייל!**
+
+---
+
+## 🔥 הפעלה - כתוב עכשיו:
+
+### **"צור לי מחשבון [שם המחשבון שלך]"**
+
+**והפרומפט יעשה את כל השאר! 🚀**
+
+---
+
+## 🚨🚨🚨 תזכורת אחרונה קריטית לקלוד:
+
+### ❌ אסור בהחלט בפלט:
+- קוד HTML מוכן (אפילו שורה אחת)
+- קוד CSS מוכן (אפילו selector אחד)  
+- קוד JavaScript מוכן (אפילו פונקציה אחת)
+- תגיות HTML כלשהן
+- דוגמאות קוד להעתקה
+
+### ✅ מה חייב להיות בפלט:
+- **איפיון טכני מפורט בלבד**
+- **תיאור מה לבנות** (לא איך לבנות)
+- **הנחיות חיפוש** בvisual.txt
+- **מפרט רכיבים** ופונקציונליות
+- **תוכן מקצועי** לעמוד
+
+### 🎯 המטרה:
+**קורסר יקבל איפיון מושלם ויבנה את כל הקוד בעצמו!**
+
+---
+
+## 📋 הוראות שימוש מפורטות:
+
+### 🚀 שלב 1: העתק את הפרומפט
+- העתק את כל התוכן של הקובץ הזה
+- שמור אותו כקובץ טקסט או העתק לצ'אט חדש
+
+### 🚀 שלב 2: כתוב את הבקשה
+- במקום XXX כתוב את סוג המחשבון שאתה רוצה
+- דוגמה: "צור לי מחשבון משכנתא מתקדם"
+
+### 🚀 שלב 3: קבל פלט מעודכן לוורדפרס - 2 חלקים
+**📊 חלק 1: בצ'אט רגיל**
+- ניתוח המחשבון הנדרש
+- PREFIX ו-NAMESPACE דינמיים
+- מספר טאבים ומורכבות
+
+**📝 חלק 2: בקנבס (WordPress BODY בלבד)**
+- איפיון טכני מפורט בקנבס (artifacts)
+- מפרט HTML/CSS/JavaScript מפורט לוורדפרס
+- תוכן מקצועי מלא לעמוד
+- תגיות Schema JSON-LD בסוף האיפיון
+- **🚨 ללא תגיות HEAD** - הפיתוח הוא לאזור BODY בוורדפרס!
+
+### 🚀 שלב 4: העתק והשתמש בוורדפרס
+- **לחץ על כפתור העתק בקנבס** 📋 לאיפיון
+- הדבק בקורסר עם ההוראות
+- קורסר יבנה את המחשבון המלא לוורדפרס
+- הדבק את הקוד המוגמר באזור BODY בוורדפרס
+
+### ⚠️ חשוב לזכור:
+- **איפיון בקנבס + תגיות Schema**
+- **🚨 ללא תגיות HEAD** - הפיתוח הוא לוורדפרס!
+- **WordPress Safe מובנה**
+
+**✅ זה פשוט כמו שזה נשמע - פרומפט → בקשה → 2 חלקים (ניתוח + איפיון בקנבס) → מחשבון מוכן לוורדפרס!**
+
+---
+
+## 🎯 תזכורת אחרונה לקלוד:
+
+### 🚨 חובה מוחלטת - פלט מעודכן 3 חלקים!
+1. **חלק 1 בצ'אט:** ניתוח ותכנון (PREFIX, טאבים, מורכבות)
+2. **חלק 2 בקנבס:** איפיון מלא + תגיות Schema בסוף
+3. **חלק 3 בצ'אט:** תגיות HEAD מוכנות להעתקה
+4. **מוכן לשימוש:** איפיון + SEO מושלם
+
+### 🚨🚨🚨 איפיון לא קוד + חובת תוכן ויזואלי + אסור שמות פיקטיביים!
+- **איפיון בלבד:** מפרט טכני לקורסר - לא קוד מוגמר!
+- **קורסר יבנה:** את כל הקוד בעצמו לפי האיפיון
+- **תוכן ויזואלי:** כל הסבר בכרטיסים ורכיבים אינטראקטיביים
+- **אמיתיות מלאה:** רק אייל עובדיה + צוות כללי ללא שמות פיקטיביים
+
+---
+
+## 🏷️ שדרוג חדש: תגיות Schema Markup ו-HEAD מובנות
+
+### 📋 תגיות Schema לבודי (בסוף האיפיון בקנבס)
+
+**🚨 חובה: כל תגיות ה-Schema יופיעו בסוף האיפיון בקנבס, לפני סגירת התוכן**
+
+#### תגיות Schema נדרשות לכל מחשבון:
+
+**1. FAQPage Schema (חובה אם יש FAQ):**
+```json
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{
+    "@type": "Question",
+    "name": "איך מחשבים תשלום חודשי להלוואה?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "התשלום החודשי מחושב לפי נוסחת PMT: [P × r × (1 + r)^n] / [(1 + r)^n - 1], כאשר P הוא סכום ההלוואה, r הריבית החודשית ו-n מספר התשלומים."
+    }
+  },{
+    "@type": "Question", 
+    "name": "מה ההבדל בין ריבית נומינלית לאפקטיבית?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "הריבית הנומינלית היא הריבית הבסיסית המפורסמת. הריבית האפקטיבית כוללת את כל העמלות והעלויות הנלוות - זו הריבית האמיתית שתשלמו."
+    }
+  }]
+}
+</script>
+```
+
+**2. FinancialProduct Schema (חובה למחשבוני הלוואות):**
+```json
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FinancialProduct",
+  "name": "מחשבון [שם המחשבון]",
+  "description": "מחשבון מתקדם לחישוב [תיאור קצר של המחשבון]",
+  "category": "Financial Calculator",
+  "provider": {
+    "@type": "Organization",
+    "name": "רק תבקש - אפטריו בע״מ",
+    "url": "https://loans-israel.org.il"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "ILS",
+    "availability": "https://schema.org/InStock"
+  },
+  "url": "https://loans-israel.org.il/[URL-של-המחשבון]"
+}
+</script>
+```
+
+**3. Person Schema - אייל עובדיה (חובה בכל מחשבון):**
+```json
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "אייל עובדיה",
+  "jobTitle": "מנהל מקצועי ויועץ ראשי",
+  "worksFor": {
+    "@type": "Organization",
+    "name": "רק תבקש - אפטריו בע״מ",
+    "url": "https://loans-israel.org.il"
+  },
+  "description": "בעל ניסיון עשיר של שנים רבות בתחום ההלוואות לצרכנים פרטיים ועסקים. מתמחה בזיהוי פתרונות מימון יצירתיים.",
+  "knowsAbout": ["הלוואות", "מימון עסקי", "ייעוץ פיננסי", "משכנתאות", "אשראי צרכני", "מחשבונים פיננסיים"],
+  "telephone": "+972-53-428-8957",
+  "image": "https://staging.loans-israel.org.il/wp-content/uploads/2025/07/image-95.webp"
+}
+</script>
+```
+
+**4. Organization Schema (חובה):**
+```json
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "רק תבקש - אפטריו בע״מ",
+  "url": "https://loans-israel.org.il",
+  "telephone": "+972-53-428-8957",
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "IL"
+  },
+  "founder": {
+    "@type": "Person",
+    "name": "אייל עובדיה"
+  },
+  "description": "חברה מובילה בתחום ייעוץ הלוואות ופתרונות מימון בישראל"
+}
+</script>
+```
+
+**5. BreadcrumbList Schema (חובה):**
+```json
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "name": "דף הבית",
+    "item": "https://loans-israel.org.il/"
+  },{
+    "@type": "ListItem",
+    "position": 2,
+    "name": "מחשבונים פיננסיים",
+    "item": "https://loans-israel.org.il/calculators"
+  },{
+    "@type": "ListItem",
+    "position": 3,
+    "name": "[שם המחשבון]",
+    "item": "https://loans-israel.org.il/[URL-של-המחשבון]"
+  }]
+}
+</script>
+```
+
+### 🔧 תגיות HEAD (יוצגו בצ'אט כאזור אחד מאוחד)
+
+**🚨 חובה: כל תגיות ה-HEAD יוצגו בצ'אט רגיל כאזור אחד מאוחד בסוף התשובה, מוכנות להעתקה בבלוק שלם**
+
+#### מבנה תגיות HEAD מלא:
+
+**תגיות SEO בסיסיות:**
+```html
+<title>[שם המחשבון] | מחשבון מתקדם | רק תבקש</title>
+<meta name="description" content="[תיאור המחשבון עד 160 תווים עם קריאה לפעולה]">
+<meta name="keywords" content="[5-8 מילות מפתח מופרדות בפסיק]">
+<meta name="author" content="אייל עובדיה">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<link rel="canonical" href="https://loans-israel.org.il/[URL-של-המחשבון]">
+```
+
+**תגיות זמן ועדכון:**
+```html
+<meta name="last-modified" content="[current_date format="c" timezone="Asia/Jerusalem"]">
+<meta property="article:modified_time" content="[current_date format="c" timezone="Asia/Jerusalem"]">
+<meta property="article:published_time" content="[תאריך-פרסום-ISO]">
+```
+
+**Open Graph לרשתות חברתיות:**
+```html
+<meta property="og:title" content="[שם המחשבון] | מחשבון מתקדם">
+<meta property="og:description" content="[תיאור למדיה חברתית עד 160 תווים]">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://loans-israel.org.il/[URL-של-המחשבון]">
+<meta property="og:image" content="https://loans-israel.org.il/images/calculator-[נושא].jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="רק תבקש - אפטריו בע״מ">
+<meta property="og:locale" content="he_IL">
+```
+
+**תגיות AI ומנועי חיפוש מתקדמים:**
+```html
+<meta name="ai-content-type" content="financial-calculator">
+<meta name="content-language" content="he">
+<meta name="content-category" content="finance">
+<meta name="expertise-level" content="beginner-friendly">
+<meta name="structured-content" content="true">
+<meta name="ai-topic" content="[נושא-המחשבון]">
+<meta name="ai-content" content="yes">
+```
+
+**Mobile & Performance:**
+```html
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="dns-prefetch" href="https://www.google-analytics.com">
+<meta name="color-scheme" content="light dark">
+```
+
+### 🎯 הוראות למילוי תגיות מיטבי
+
+**חובה מוחלטת**: מלא את כל התגיות בצורה מקצועית כמו מומחה SEO!
+
+**עקרונות מילוי:**
+- **Title**: עד 60 תווים, כולל שם המחשבון + ערך מוסף
+- **Description**: עד 160 תווים עם קריאה לפעולה
+- **Keywords**: 5-8 מילות מפתח רלוונטיות
+- **Schema FAQ**: רק שאלות שמופיעות בתוכן
+- **URLs**: תמיד מלאים עם https://
+- **תאריכים**: בפורמט ISO עם timezone ישראלי
+
+**דוגמאות מילוי נכון:**
+- Title: "מחשבון משכנתא מתקדם | חישוב תשלום חודשי | רק תבקש"
+- Description: "חשבו את התשלום החודשי למשכנתא בקלות. השוו מסלולים, ריביות ותקופות. מחשבון מקצועי עם תוצאות מיידיות."
+- AI Topic: "mortgage-calculator" או "loan-calculator"
+
+---
+
+## 📊 מאגר נתונים פיננסיים עדכניים 2025
+
+### 💰 נתוני יסוד עדכניים:
+- **ריבית בנק ישראל:** 4.5% (פברואר 2025)
+- **ריבית פריים:** 6.0%
+- **תחזית לרבעון 2/2026:** ירידה ל-5.25% (3 הורדות ריבית צפויות)
+- **אינפלציה יוני 2025:** 3.3%
+- **תקרה חוקית:** ריבית בנק ישראל + 15% (19.5% נוכחי)
+
+### 🏦 טווחי ריביות מעודכנים לפי סוגי הלוואות:
+
+**הלוואות אישיות:**
+- בנקאית כללית: פריים + 1.5%-11.4% (7.5%-17.4%)
+- P2P דיגיטלי: 4.5%-18% (טריא ו-58 פלטפורמות)
+- הלוואות מיידיות: פריים + 3%-12%
+
+**משכנתאות דיור:**
+- צמודה למדד: 3.0%-4.5%
+- לא צמודה (קל"צ): 4.5%-5.5%
+- משתנה פריים: 5.5%-6.5% (פריים ±0.5%)
+- משכנתא זכאות: 3% צמוד מדד
+
+**מסלולים מיוחדים:**
+- בנק יהב לעובדי מדינה: 8.9% (פריים + 2.9%)
+- בנק מסד למורים: 5.5% (פריים - 0.5%)
+- קרן השתלמות: 5.65%-6% (פריים ±0.5%)
+- קרן פנסיה: 1%-5% (הזול ביותר)
+
+**הלוואות עסקיות:**
+- בערבות מדינה: 8%-10% (פריים + 2%-4%)
+- עסק מבוסס בנקאי: פריים + 2%-3%
+
+### 🏢 גופים מלווים עיקריים:
+**בנקים:** לאומי, הפועלים, דיסקונט, מזרחי-טפחות, יהב, הבינלאומי, מסד
+**דיגיטליים:** Pepper, One Zero, U-Bank
+**אשראי:** ישראכרט, כאל, MAX
+**P2P:** טריא (58 פלטפורמות פעילות)
+**ביטוח:** מנורה, הפניקס, הראל, כלל, מגדל
+
+### 📈 סדר עדיפויות מומלץ לבחירת הלוואה:
+1. הלוואות מקרנות פנסיה/השתלמות (1%-6.5%) - חיסכון מס
+2. גמ"חים להלוואות קטנות (0%-סמלי) - בעיקר מגזר דתי
+3. מסלולים מיוחדים לעובדי מדינה/מורים (5.5%-8.9%)
+4. הלוואות בנקאיות עם בטוחות (3%-8.5%)
+5. הלוואות בנקאיות לכל מטרה (7.5%-17.4%)
+6. P2P פלטפורמות (4.5%-18%) - 58 אפשרויות
+7. חברות אשראי חוץ-בנקאיות (מקום אחרון)
+
+### 🎯 הוראות שימוש במאגר המידע - לאימות בלבד!
+
+**🚨 חובה: המאגר למטה הוא לאימות ובדיקה בלבד - אל תעתיק ממנו!**
+
+- **אימות ריביות:** בדוק שהריביות במחשבון תואמות לטווחים המעודכנים
+- **בדיקת נתונים:** וודא שהנתונים במחשבון מדויקים ועדכניים
+- **השראה בלבד:** השתמש במאגר כהשראה לטווחים ריאליים
+- **אל תעתיק:** אל תעתיק טקסט או נתונים ישירות מהמאגר
+- **יצירה מקורית:** צור תוכן מקורי מותאם למחשבון הספציפי
+- **עדכניות:** וודא שהנתונים שאתה יוצר תואמים לפברואר 2025
+
+**המטרה: איפיון אמיתי בקנבס עם תוכן ויזואלי עשיר וללא שקרים! 🎯🎨⚖️**
+    
+    initInteractions: function() {
+      // Button click effects
+      container.querySelectorAll('.wpc-calc-[topic]-[4random]-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          // Haptic feedback
+          if ('vibrate' in navigator) {
+            navigator.vibrate(50);
+          }
+          
+          // Ripple effect
+          const ripple = document.createElement('div');
+          const rect = this.getBoundingClientRect();
+          ripple.style.cssText = `
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.6);
+            transform: scale(0);
+            animation: ripple 0.6s linear;
+            width: 40px;
+            height: 40px;
+            left: ${e.clientX - rect.left - 20}px;
+            top: ${e.clientY - rect.top - 20}px;
+            pointer-events: none;
+          `;
+          
+          this.style.position = 'relative';
+          this.style.overflow = 'hidden';
+          this.appendChild(ripple);
+          
+          setTimeout(() => ripple.remove(), 600);
+        });
+      });
+      
+      // Touch device optimization
+      if ('ontouchstart' in window) {
+        container.classList.add('touch-device');
+        
+        container.querySelectorAll('.wpc-calc-[topic]-[4random]-card').forEach(card => {
+          card.addEventListener('touchstart', function() {
+            this.style.transform = 'scale(0.98)';
+          });
+          
+          card.addEventListener('touchend', function() {
+            this.style.transform = 'scale(1)';
+          });
+        });
+      }
+    }
+  };
+  
+  // Safe initialization
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+      setTimeout(() => WPC_Calc[Topic][4Random].init(), 100);
+    });
+  } else {
+    setTimeout(() => WPC_Calc[Topic][4Random].init(), 100);
+  }
+  
+  // CSS Animation keyframes
+  if (!document.querySelector('#wpc-calc-[topic]-[4random]-animations')) {
+    const style = document.createElement('style');
+    style.id = 'wpc-calc-[topic]-[4random]-animations';
+    style.textContent = `
+      @keyframes ripple {
+        to {
+          transform: scale(4);
+          opacity: 0;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+  }
+  
+})();
+```
+
+## 🎯 אזור CTA + AWG ווידג'ט - מפרט טכני
+
+### 📍 מיקום חובה:
+- **מיד אחרי המחשבון** - לפני כל תוכן אחר
+- **תמיד נגיש** - לא מוסתר או מותנה
+- **Mobile friendly** - עובד מצוין במובייל
+
+### 🎨 עיצוב חובה מ-visual.txt:
+```css
+/* חיפוש מדויק: "wpc-awg-demo-section" */
+.wpc-awg-demo-section { /* מ-visual.txt בלבד */ }
+.wpc-awg-demo-container { /* מ-visual.txt בלבד */ }
+.wpc-awg-demo-title { /* מ-visual.txt בלבד */ }
+.wpc-awg-demo-content { /* מ-visual.txt בלבד */ }
+.wpc-shortcode-item { /* מ-visual.txt בלבד */ }
+```
+
+### 📝 תוכן חובה:
+- **כותרת:** "בדוק זכאות להלוואה עכשיו" 
+- **תת-כותרת:** "קבל אישור עקרוני תוך דקות ובחינם"
+- **שורטקוד מדויק:** `[awg postid="32400"]`
+
+### ⚡ אינטגרציה טכנית:
+- **WordPress Safe:** אין השפעה על אלמנטים אחרים
+- **Performance:** טעינה lazy של הווידג'ט
+- **Responsive:** התאמה מלאה לכל המכשירים
+- **RTL Support:** עברית מלאה וכיוון נכון
+
+### 🚨🚨🚨 חובה מוחלטת - טיפול נכון ב-AWG בוורדפרס:
+
+**❌ אסור בהחלט - display:none:**
+```css
+/* ❌ לא לעשות כך - וורדפרס לא יעבד את השורטקוד! */
+.awg-content {
+    display: none !important;
+}
+```
+
+**✅ הפתרון הנכון - opacity ו-height:**
+```css
+/* ✅ כך נכון - וורדפרס יעבד את השורטקוד אבל הוא יהיה מוסתר */
+.awg-content {
+    opacity: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    transform: translateY(20px) !important;
+    transition: all 0.6s ease !important;
+}
+
+.awg-content.show {
+    opacity: 1 !important;
+    height: auto !important;
+    padding: 25px !important;
+    transform: translateY(0) !important;
+}
+```
+
+**🔧 JavaScript פשוט - רק הצגה וגלילה:**
+```javascript
+// ✅ פשוט ויעיל - בדיוק כמו שעובד
+ctaBtn.addEventListener('click', (event) => {
+    event.preventDefault();
+    ctaBtn.style.display = 'none';
+    awgContent.classList.add('show');
+    
+    setTimeout(() => {
+        awgContent.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
+});
+```
+
+**💡 למה זה עובד:**
+- השורטקוד `[awg postid="32400"]` נטען עם הדף (וורדפרס מעבד אותו)
+- הוויג'ט קיים בDOM אבל מוסתר ויזואלית
+- ה-JavaScript של הוויג'ט כבר פעיל ומוכן
+- כשלוחצים על הכפתור - רק מציגים מה שכבר קיים
+
+## 💎 תכונות UI/UX מתקדמות - מובייל מושלם
+**🎛️ סליידרים ויזואליים חובה:**
+- כל שדה מספרי (סכום, תקופה, ריבית) עם סליידר אינטראקטיבי
+- תצוגת ערך דינמית בזמן אמת
+- טווחי ערכים מותאמים לתחום המחשבון
+
+**🎨 כפתורים ויזואליים חובה:**
+- בחירות עם כפתורי toggle צבעוניים במקום dropdown
+- כפתורי בחירה מרובה עם visual feedback
+- אפשרויות מוגדרות מראש בכפתורים נוחים
+
+**📱 אופטימיזציה למובייל:**
+- מינימום שדות הזנת טקסט
+- מקסימום אינטראקציה ויזואלית
+- כל אלמנט מותאם למגע ולמסכים קטנים
+- [מותאם לסוג המחשבון והקהל יעד]
+
+## 🧠 איפיון טכני מפורט
+[נוסחאות ואלגוריתמים ספציפיים למחשבון]
+
+## 📱 אופטימיזציה למובייל
+[התאמות ספציפיות לסוג המחשבון]
+
+## ⚡ Performance & WordPress Safety
+[כללים טכניים מובנים]
+
+## 🎯 תוכן אינטראקטיבי מתקדם
+- **הסברים שלב-אחר-שלב:** איך להשתמש במחשבון
+- **דוגמאות חיות:** עם נתונים אמיתיים
+- **השוואה ויזואלית:** בין תרחישים שונים
+- **טיפים קונטקסטואליים:** לכל שדה במחשבון
+- **הסברי hover:** על מונחים טכניים
+- **המלצות דינמיות:** לפי התוצאות
+- **עדכונים בזמן אמת:** על שינויים בשוק
+- **CTA אינטראקטיבי:** ווידג'ט הלוואות עם AWG postid="32400" (מופיע פעם אחת בלבד, מוסתר בCSS עם opacity:0 ו-height:0 - לא display:none!)
+
+## 🔧 WordPress Integration & Security
+- **שורטקוד בטוח:** `[awg postid="32400"]` עובד ללא ניגודים (מופיע פעם אחת בלבד, מוסתר בCSS עם opacity:0 ו-height:0 - לא display:none!)
+- **CSS Isolation:** כל עיצוב מבודד עם PREFIX ייחודי
+- **JavaScript Safe:** אין השפעה על פונקציונליות וורדפרס
+- **Theme Compatibility:** עובד עם כל תבנית וורדפרס
+- **Plugin Safe:** לא מתנגש עם פלאגינים אחרים
+- **Mobile WordPress:** אופטימלי לוורדפרס במובייל
+- **Performance:** לא פוגע במהירות האתר
+- **SEO Friendly:** משפר את הSEO של העמוד
+- **נגישות מושלמת:** ניגודיות צבעים מעל 4.5:1, טקסט כהה (#222222) על רקע לבן, טקסט בהיר (#444444) לתיאורים
+- **WCAG 2.1 AA:** עמידה בתקני נגישות בינלאומיים
+- **🚨 פונטים נגישים במובייל:** כל הפונטים ≥ 1rem (16px) - אסור פונטים קטנים מ-1rem!
+- **גדלי פונט מינימליים:** font-size: 1em או יותר בכל האלמנטים, במיוחד במובייל
+- **📱 רזולוציה 375px:** תאימות מושלמת למכשירים קטנים עם @media (max-width: 375px)
+
+## 🚨🚨🚨 פתרון דינמי לצבע טקסט במובייל - חובה מוחלטת!
+
+### 🎯 הבעיה: טקסט לבן במובייל
+במכשירים ניידים, חלק מהטקסט עלול להופיע בלבן ולא להיות קריא. זה קורה בגלל forced color schemes ו-dark mode overrides.
+
+### ✅ הפתרון הדינמי - כללי CSS אוניברסליים למובייל:
+
+**🔧 הוראות לקורסר - הוסף בכל @media query למובייל:**
+
+```
+/* === תיקון צבע טקסט דינמי למובייל - חובה בכל מחשבון === */
+@media (max-width: 768px) {
+    /* Fallback Colors בסיסיים */
+    .${PREFIX}tab:not(.active) { color: #222222 !important; }
+    .${PREFIX}example-label { color: #222222 !important; }
+    .${PREFIX}comparison-card.regular { color: #222222 !important; }
+    
+    /* תיקון צבע טקסט אוניברסלי - כל אלמנט תוכן */
+    .${PREFIX}content-section p { color: #222222 !important; }
+    .${PREFIX}example-box p { color: #222222 !important; }
+    .${PREFIX}example-box { color: #222222 !important; }
+    .${PREFIX}warning-item p { color: #222222 !important; }
+    .${PREFIX}warning-item { color: #222222 !important; }
+    .${PREFIX}scenario-item p { color: #222222 !important; }
+    .${PREFIX}scenario-item { color: #222222 !important; }
+    .${PREFIX}guide-section p { color: #222222 !important; }
+    .${PREFIX}formula-section p { color: #222222 !important; }
+    
+    /* יוצאים מן הכלל - נשארים לבנים */
+    .${PREFIX}highlight-box p { color: white !important; }
+    .${PREFIX}hero-section p { color: white !important; }
+}
+
+@media (max-width: 480px) {
+    /* אותם כללים בדיוק */
+    [חזור על כל הכללים למעלה]
+}
+
+@media (max-width: 375px) {
+    /* אותם כללים בדיוק */
+    [חזור על כל הכללים למעלה]
+}
+```
+
+### 🎯 עקרון הפתרון:
+1. **דינמי:** ${PREFIX} מתחלף אוטומטית לכל מחשבון
+2. **אוניברסלי:** מכסה את כל סוגי התוכן הנפוצים
+3. **בטוח:** לא פוגע בעיצובים מיוחדים (highlight boxes)
+4. **מקיף:** 3 רמות מובייל (768px, 480px, 375px)
+
+### 🚨 חובה לקורסר:
+- **הוסף את הכללים האלה בכל מחשבון**
+- **החלף ${PREFIX} בPREFIX האמיתי של המחשבון**
+- **וודא שהכללים מופיעים בכל 3 ה-@media queries**
+- **אל תשכח את היוצאים מן הכלל (highlight-box, hero-section)**
+
+### 💡 למה זה עובד:
+- פותר את בעיית הטקסט הלבן במובייל
+- עובד עם כל PREFIX דינמי
+- מכסה את כל סוגי התוכן הנפוצים
+- שומר על עיצובים מיוחדים שצריכים טקסט לבן
+
+## 🔍 הוראות לקורסר - יצירת תוכן ויזואלי עשיר
+
+### 🎨 חשוב: התוכן חייב להיות ויזואלי ואינטראקטיבי!
+
+**🚫 אסור:** טקסט רגיל ויבש
+**✅ חובה:** כל טקסט עטוף ברכיבים ויזואליים
+
+### 🧮 חובה מוחלטת - הסבר מפורט על כל טאב במחשבון:
+
+**🎯 לכל טאב במחשבון חייב להיות הסבר מפורט בתוכן המקצועי:**
+
+**📋 מה לכלול לכל טאב:**
+- **מה הטאב מחשב:** הסבר מדויק על החישוב שהטאב מבצע
+- **איך להשתמש:** הוראות שלב אחר שלב עם דוגמאות
+- **דוגמאות ויזואליות:** תרחישים אמיתיים עם נתונים מדויקים
+- **טיפים למשתמש:** איך לקבל תוצאות מיטביות
+- **מתי להשתמש:** באילו מצבים הטאב הזה הכי שימושי
+
+**🎨 עיצוב ויזואלי לכל הסבר טאב:**
+- כל טאב בכרטיס נפרד עם איקון ייחודי
+- דוגמאות בכרטיסי נתונים צבעוניים
+- השוואות ויזואליות בין תרחישים
+- הדגשות חשובות בקופסאות מעוצבות
+
+**📝 דוגמה לפורמט נכון:**
+```
+🧮 הסבר מפורט על טאבי המחשבון
+
+🎯 טאב 1: [שם הטאב הדינמי]
+- מה הוא מחשב: [הסבר מדויק על החישוב]
+- איך להשתמש: [הוראות שלב אחר שלב]
+- דוגמה ויזואלית: [תרחיש אמיתי עם נתונים]
+- טיפ מקצועי: [עצה למיטוב התוצאות]
+
+🎯 טאב 2: [שם הטאב הדינמי]
+[אותו פורמט...]
+```
+
+**🚨 זה חובה לכל מחשבון - ללא יוצא מן הכלל!**
+
+### 📋 רכיבים ויזואליים חובה לכל חלק:
+
+**🏆 כותרות עם אינפוגרפיקות:**
+- כל כותרת H3+ עם איקון ועיצוב מיוחד
+- סטטיסטיקות מרכזיות בכרטיסי מספרים
+- הדגשות חשובות בקופסאות צבעוניות
+
+**📖 הסברים עם דוגמאות חיות:**
+- נוסחאות מתמטיות בקופסאות מעוצבות
+- כל דוגמה בכרטיס נפרד עם נתונים
+- פרמטרים בכרטיסי גריד צבעוניים
+
+**🧠 טיפים בכרטיסים אינטראקטיביים:**
+- כל טיפ בכרטיס עם איקון ייחודי
+- אזהרות בקופסאות אדומות
+- עצות בכרטיסים ירוקים
+
+**👨‍🎓 מחבר העמוד עם תמונה:**
+- תמונת אייל עובדיה: `https://staging.loans-israel.org.il/wp-content/uploads/2025/07/image-95.webp`
+- כרטיס מחבר עם סטטיסטיקות ויזואליות
+- מומחיות מקצועית בתצוגה גרפית (ללא פרטי רישיונות ספציפיים)
+
+**🔍 FAQ בכרטיסים נפרדים:**
+- כל שאלה בכרטיס עם איקון תחום
+- תשובות עם רכיבים ויזואליים
+- קטגוריות בצבעים שונים
+
+### 📖 מבנה העמוד המלא עם רכיבים ויזואליים:
+
+**סדר התוכן בעמוד (עם HTML עשיר ויזואלי):**
+
+1. **כותרת H1 + אינפוגרפיקת סטטיסטיקות** (נכתב על ידי המשתמש בוורדפרס)
+2. **המחשבון עצמו** - הקוד האינטראקטיבי מתחיל כאן!
+3. **אזור CTA + AWG ווידג'ט** - עם עיצוב בולט ומזמין
+4. **כוח [נושא המחשבון]** - הסבר על הערך והחשיבות
+5. **מידע נוסף על [נושא המחשבון] בישראל 2025** - נתונים ומגמות עדכניים
+6. **הסבר מפורט על כל טאב במחשבון** - מה כל טאב מחשב, איך להשתמש, דוגמאות
+7. **מחבר העמוד: אייל עובדיה** - כרטיס מעוצב + תמונת אייל עובדיה
+8. **FAQ בכרטיסים צבעוניים** - כל שאלה בעיצוב נפרד
+9. **תוכן מומחיות עם גרפים** - השוואות ויזואליות וסטטיסטיקות
+
+**⚠️ לקורסר: כל התוכן הטקסטואלי עטוף ברכיבים ויזואליים מהמקרא העיצובי!**
+
+**🚨🚨🚨 תזכורת קריטית לקלוד:**
+- **אסור לכתוב קוד HTML/CSS/JavaScript בפלט!**
+- **רק איפיון טכני מפורט שקורסר יבנה לפיו!**
+- **כל דוגמה = תיאור מה לבנות, לא קוד מוכן!**
+
+### 🚨 הוראות לקורסר - מבנה הקוד הנדרש לוורדפרס:
+
+**📋 מבנה הקוד שקורסר צריך לבנות (WordPress BODY בלבד):**
+- **🚨 אסור תגיות HEAD:** ללא DOCTYPE/HTML/HEAD - הפיתוח הוא לאזור BODY בוורדפרס!
+- **CSS:** בתגית `<style>` עם כל המשתנים והעיצוב
+- **HTML:** מבנה המחשבון עם הclasses הנדרשים
+- **JavaScript:** בתגית `<script>` עם IIFE wrapper
+- **Schema:** תגיות JSON-LD בסוף הקוד
+- **🚨 אסור תגיות סגירה:** ללא תגיות סגירה של HTML/BODY
+
+**🎯 רכיבים שקורסר צריך לבנות:**
+1. CSS Variables עם הצבעים הנדרשים
+2. Wrapper ראשי עם PREFIX דינמי  
+3. Container המחשבון עם כותרת H2
+4. תוכן המחשבון (טאבים/רכיבים)
+5. אזור CTA + AWG ווידג'ט
+6. תוכן מקצועי בsections
+7. JavaScript עם namespace ופונקציונליות
+
+**⚠️ חשוב: קורסר יבנה את הקוד בעצמו לפי האיפיון - לא יעתיק קוד מוכן!**
+
+---
+
+## 🎯 דוגמאות לפעולה עם תוכן מלא
+
+### דוגמה לפני ואחרי - הפיכת טקסט יבש לוויזואלי עשיר:
+
+**🚫 לפני - טקסט יבש ומשעמם:**
+```
+ב. הסבר מעמיק על החישובים
+חישוב התשלום החודשי להלוואה מבוסס על נוסחת PMT המתמטית: **PMT = [P × r × (1 + r)^n] / [(1 + r)^n - 1]**
+כאשר P הוא סכום ההלוואה, r הוא שיעור הריבית החודשי ו-n הוא מספר התשלומים. אולם במציאות, החישוב מורכב יותר ומושפע ממגוון פרמטרים נוספים...
+```
+
+**✅ אחרי - תוכן ויזואלי עשיר ומזמין:**
+**📋 איפיון לקורסר:**
+- אינפוגרפיקת נוסחה עם הסבר ויזואלי (איקון 📊 + נוסחת PMT)
+- כרטיסי פרמטרים עם נתונים מדויקים (P, r, n עם ערכים)
+- דוגמה חיה מהמחשבון עם תוצאות (3 כרטיסי סטטיסטיקה)
+- הדגשות חשובות בקופסאות צבעוניות (2 נקודות מרכזיות)
+- השוואה ויזואלית בין תרחישים (3 אפשרויות זמן)
+
+**🎨 רכיבים ויזואליים נדרשים:**
+- Section container עם כותרת H3
+- Info card עם איקון ונוסחה
+- Grid של data items עם labels ו-values
+- Stats grid עם מספרים בולטים
+- Highlight box עם icon-text pairs
+- Comparison grid עם recommended state
+
+### דוגמה נוספת - FAQ ויזואלי במקום טקסט יבש:
+
+**🚫 לפני - FAQ משעמם:**
+```
+ג. שאלות נפוצות
+מה זה ריבית קבועה?
+ריבית קבועה היא ריבית שנשארת זהה לאורך כל תקופת ההלוואה...
+```
+
+**✅ אחרי - FAQ ויזואלי ומזמין:**
+**📋 איפיון לקורסר:**
+- כל שאלה בכרטיס נפרד עם איקון תחום
+- קטגוריות צבעוניות (מתחילים/מתקדמים/מומחים)
+- תשובות עם רכיבים ויזואליים ואיקונים
+- סטטיסטיקות ונתונים בכרטיסי מספרים
+
+**🎨 רכיבים ויזואליים נדרשים:**
+- FAQ section עם כותרת H3
+- FAQ grid layout
+- FAQ cards עם category badges
+- Icon-text pairs בתשובות
+- Stats grid עם מספרים בולטים
+- Color coding לפי רמת קושי
+
+### עוד דוגמה - כרטיס מחבר העמוד אמיתי עם תמונה:
+**📋 איפיון לקורסר:**
+- תמונת אייל עובדיה האמיתית עם badge מקצועי
+- כרטיס מעוצב עם סטטיסטיקות ויזואליות
+- צוות המומחים ללא שמות פיקטיביים
+- מומחיות אמיתית (ללא פרטי רישיונות ספציפיים)
+
+**🎨 רכיבים ויזואליים נדרשים:**
+- Author profile container
+- Author card עם תמונה ותוכן
+- Author stats grid עם 3 נתונים
+- Team expertise section
+- Expertise items עם איקונים וטקסט
+
+**🎯 עקרון זהב:** רק אייל עובדיה עם שם אמיתי + צוות כללי ללא שמות פיקטיביים!
+
+**🚨 זכור: כל הדוגמאות הן איפיונים טכניים לקורסר - לא קוד מוכן להעתקה!**
+🔍 ניתוח דינמי:
+├── קטגוריה: הלוואות/משכנתא (ספציפי למחשבון הנדרש)
+├── מורכבות: מורכב (5/5) - דינמי לפי מספר הטאבים
+├── קהל יעד: קונים ומחזיקי נכסים (ספציפי לנושא)
+├── חישובים: PMT, שפיצר, מס, ביטוח (רלוונטי למשכנתא)
+├── מילות מפתח: "מחשבון משכנתא", "תשלום חודשי", "ריבית משתנה" (ספציפי)
+├── PREFIX: wpc-calc-mortgage-adv-x7k3- (דינמי לפי נושא)
+├── NAMESPACE: WPC_CalcMortgageAdv_X7K3 (דינמי לפי נושא)
+└── **תוכן:** 1200+ מילים (מחשבון מורכב) - מינימום 500 מילים!
+
+🏗️ מבנה:
+├── 6 טאבים: בסיסי, מתקדם, השוואה, שפיצר, ניתוח, תרחישים
+├── 15+ פרמטרי קלט עם סליידרים ויזואליים
+├── 10+ סוגי פלט עם תצוגה דינמית
+├── כפתורי בחירה ויזואליים במקום dropdown
+└── גרפים ודוחות מתקדמים עם אינטראקציה
+
+🎨 יישום מקרא עיצובי:
+├── Container: max-width: 1200px, padding: 60px 20px
+├── כותרת: clamp(2rem, 4vw, 2.5rem) + קו אדום דקורטיבי
+├── כפתורים: border-radius: 50px, min-height: 54px
+├── כרטיסי טאבים: padding: 30px, box-shadow, hover effects
+├── טבלת תוצאות: responsive cards במובייל
+├── צבעים: primary #1e5490, danger #ff3b3b למחשב
+├── פונט: Assistant בכל המקום
+├── RTL: direction מלא
+├── Mobile: 40px 15px @767px, 30px 12px @375px
+└── אנימציות: fadeInUp לכרטיסים, ripple לכפתורים
+
+📝 תוכן מקצועי דינמי:
+├── כותרת H1: "[כותרת ספציפית למחשבון הנדרש]" (מותאמת לנושא)
+├── מחבר העמוד: אייל עובדיה - המנהל המקצועי של "רק תבקש" (קבוע)
+├── פיתוח: צוות המומחים של רק תבקש (ללא שמות פיקטיביים - קבוע)
+├── מדריך: [כמות מילים דינמית] על [נושאים ספציפיים למחשבון] (לפי מורכבות)
+├── **🚨 הסבר מפורט על כל טאב במחשבון:** מה הוא מחשב, איך להשתמש, דוגמאות ויזואליות
+├── **🚨 מינימום:** 500 מילים גם למחשבון הפשוט ביותר!
+├── FAQ: 8-15 שאלות באזור אחד על [נושא המחשבון הספציפי] (ספציפי לנושא)
+├── CTA/AWG: "בדוק זכאות להלוואה עכשיו" + [awg postid="32400"] (קבוע)
+├── תוכן AI: מילות מפתח טבעיות, entities, מענה לשאלות נפוצות (מותאם לנושא)
+└── **🎯 דינמיות:** כל התוכן מותאם ל[נושא המחשבון] - לא תוכן גנרי!
+
+👨‍🎓 צוות המומחים: מתמחים ב[תחום המחשבון] מרשת המומחים של אייל עובדיה
+├── [מספר]+ שנות ניסיון מצטבר ב[תחום המחשבון]
+├── ליווי ל[מספר]+ [קהל יעד], [הישגים ספציפיים לתחום]
+├── מומחיות מקצועית ב[תחום המחשבון] (ללא פרטי רישיונות ספציפיים)
+├── עובדים בשיתוף עם אייל עובדיה ופורטל "רק תבקש"
+└── פיקוח מקצועי: תוכן נבדק ואושר על ידי אייל עובדיה
+
+🔧 עיצוב טכני לפי מקרא (דינמי):
+├── HTML: .wpc-calc-[topic]-[4random]-wrapper עם dir="rtl"
+├── CSS: Variables מובנות, clamp() לטיפוגרפיה
+├── JavaScript: WPC_Calc[Topic][4Random] namespace (דינמי)
+├── Responsive: 3 breakpoints (768px, 767px, 375px)
+├── Accessibility: ARIA labels, focus states, haptic feedback
+├── Performance: Intersection Observer, requestAnimationFrame
+├── Mobile Tables: אוטומטי לכרטיסים (אם רלוונטי למחשבון)
+└── AWG Integration: מובנה עם כפתור CTA וטעינת JS מחדש
+```
+
+### דוגמה 2: "צור לי מחשבון ביטוח רכב"
+```
+🔍 ניתוח:
+├── קטגוריה: ביטוח/רכב
+├── מורכבות: בינוני (3/5)
+├── קהל יעד: בעלי רכב
+├── חישובים: פרמיה, הנחות, השוואה
+├── מילות מפתח: "ביטוח רכב", "פרמיה", "השוואת מחירים"
+├── PREFIX: wpc-calc-car-ins-p9m2-
+└── NAMESPACE: WPC_CalcCarIns_P9M2
+
+🏗️ מבנה:
+├── 4 טאבים: חישוב, השוואה, כיסויים, המלצות
+├── 8 פרמטרי קלט (רכב, נהג, שימוש)
+├── 6 סוגי פלט (פרמיה, כיסוי, חסכון)
+└── טבלת השוואה עם חברות ביטוח
+
+🎨 יישום מקרא עיצובי:
+├── Container: max-width: 1200px, padding מדורג לפי מסך
+├── כרטיסי בחירה: grid layout, hover states, selection
+├── טבלת השוואה: desktop table → mobile cards
+├── כפתור WhatsApp: --success #25D366 background
+├── כותרת: Assistant font + קו אדום
+├── טיפוגרפיה: clamp() לכל הרמות
+├── אנימציות: stagger effect לכרטיסים
+├── Touch: ripple effects + haptic feedback
+└── RTL: right alignment לכל טקסט
+
+📝 תוכן מקצועי דינמי:
+├── כותרת H1: "[כותרת ספציפית למחשבון ביטוח רכב]" (מותאמת לנושא)
+├── מחבר ראשי: אייל עובדיה - המנהל המקצועי של "רק תבקש" (קבוע)
+├── פיתוח: צוות המומחים של רק תבקש (ללא שמות פיקטיביים)
+├── מדריך: [כמות מילים דינמית] על [נושאים ספציפיים לביטוח רכב]
+├── FAQ: שאלות מותאמות ל[נושא המחשבון הספציפי]
+├── CTA/AWG: "בדוק זכאות להלוואה עכשיו" + [awg postid="32400"] (קבוע)
+└── תוכן AI: [מונחים ספציפיים למחשבון], [השוואות רלוונטיות], [סיטואציות מהתחום]
+
+👨‍🎓 צוות המומחים: מתמחים ב[תחום המחשבון] מרשת המומחים של אייל עובדיה
+├── [מספר] שנות ניסיון מצטבר ב[תחום המחשבון]
+├── ליווי ל[מספר]+ לקוחות, טיפול ב[מספר]+ [מקרים רלוונטיים]
+├── מומחיות מקצועית ב[נושאים ספציפיים למחשבון] (ללא פרטי רישיונות ספציפיים)
+├── עובדים בשיתוף עם אייל עובדיה ופורטל "רק תבקש"
+└── פיקוח מקצועי: תוכן נבדק ואושר על ידי אייל עובדיה
+
+🔧 עיצוב טכני לפי מקרא:
+├── Grid: repeat(auto-fit, minmax(280px, 1fr)) → 1fr mobile
+├── Cards: padding: 30px → 20px → 16px לפי מסך
+├── Buttons: width: 100% mobile, touch-friendly
+├── Colors: warning #FF9800 לbadges, primary לheaders
+├── Shadows: --shadow-md לכרטיסים, --shadow-sm לטבלה
+├── Transitions: --transition (0.3s ease) לכל אפקטים
+├── Mobile: table hiding + cards show אוטומטי
+└── Performance: lazy loading + debounced calculations
+```
+
+### דוגמה 3: "צור לי מחשבון השקעות פשוט"
+```
+🔍 ניתוח:
+├── קטגוריה: השקעות
+├── מורכבות: בסיסי (2/5)
+├── קהל יעד: משקיעים מתחילים
+├── חישובים: FV, תשואה פשוטה, דמי ניהול
+├── מילות מפתח: "מחשבון השקעות", "תשואה צפויה", "חיסכון"
+├── PREFIX: wpc-calc-invest-simple-k4n8-
+└── NAMESPACE: WPC_CalcInvestSimple_K4N8
+
+🏗️ מבנה:
+├── 3 טאבים: חישוב, השוואה, תוצאות
+├── 6 פרמטרי קלט בסיסיים
+├── 5 סוגי פלט ברורים
+└── גרף התפתחות פשוט
+
+🎨 יישום מקרא עיצובי:
+├── Layout: פשוט יותר, פחות עמודות בgrid
+├── כפתורים: border-radius: 50px, --primary colors
+├── גרף: SVG עם tooltips, צבעי --success ו--primary
+├── טיפוגרפיה: --fs-body לרוב הטקסט, Assistant font
+├── Spacing: קטן יותר - 40px desktop, 25px mobile
+├── Cards: פחות shadow, יותר נקיים
+├── Mobile: 375px optimized למשקיעים צעירים
+└── אנימציות: עדינות יותר, fadein בלבד
+
+📝 תוכן מקצועי:
+├── כותרת H1: "מחשבון השקעות פשוט - חשב תשואה צפויה וערך עתידי בקלות"
+├── מחבר ראשי: אייל עובדיה - המנהל המקצועי של "רק תבקש"
+├── מומחה תחום: עמית ברק - יועץ השקעות מרשת המומחים של אייל
+├── מדריך: 700 מילים על יסודות השקעה, סוגי קרנות, חשיבות פיזור
+├── FAQ: שאלות מותאמות על סיכונים, דמי ניהול, מיסוי, פדיון
+├── CTA/AWG: "בדוק זכאות להלוואה עכשיו" + [awg postid="32400"]
+└── תוכן AI: מונחי השקעה בסיסיים, דוגמאות פשוטות, עקרונות זהב
+
+👨‍🎓 מומחה: עמית ברק - יועץ השקעות מרשת המומחים של אייל עובדיה
+├── 8 שנות ניסיון בייעוץ השקעות לציבור הרחב
+├── ניהל תיקי השקעות בהיקף 50M₪
+├── רישיון יועץ השקעות מרשות ניירות ערך
+├── מתמחה בפתרונות השקעה לטווח ארוך
+├── עובד בשיתוף עם אייל עובדיה ופורטל "רק תבקש"
+└── פיקוח מקצועי: תוכן נבדק ואושר על ידי אייל עובדיה
+
+🔧 עיצוב טכני לפי מקרא:
+├── Simplified Grid: 2 columns max → 1 mobile
+├── Reduced Shadows: --shadow-sm במקום --shadow-md  
+├── Clean Colors: יותר --primary, פחות gradients
+├── Simple Animations: opacity changes, no complex transforms
+├── Touch Optimized: גדול יותר למסכי מגע
+├── Beginner UX: tooltips רבים, error prevention
+├── Fast Loading: minimal JavaScript, CSS optimized
+└── Accessibility: high contrast, keyboard navigation
+```
+
+---
+
+## 🚀 הוראות הפעלה
+
+### 🎮 איך להשתמש בפרומפט:
+
+1. **כתוב בדיוק:** "צור לי מחשבון [שם המחשבון]"
+2. **קבל איפיון מקיף בקנבס:** כל התוכן יופיע במסמך מסודר בקנבס
+3. **העתק לקורסר:** העתק את כל תוכן הקנבס לקורסר
+4. **קורסר יעבוד בשלבים:** לפי ההוראות המפורטות באיפיון
+
+⚠️ **חשוב:** כל האיפיון יהיה בקנבס בלבד - לא בצ'אט הרגיל!
+🎯 **חדש:** האיפיון כולל הוראות לקורסר לעבוד בשני שלבים לפתרון מגבלת טוקנים!
+
+### 🎯 טיפים לשמות מחשבונים יעילים:
+- **ספציפי:** "צור לי מחשבון משכנתא לדירה ראשונה"
+- **ברור:** "צור לי מחשבון ביטוח בריאות משלים"
+- **מותאם:** "צור לי מחשבון חיסכון לחתונה"
+- **מקצועי:** "צור לי מחשבון ROI להשקעות נדל"ן"
+
+### 📋 הוראות פיתוח בשלבים - יופיעו באיפיון לקורסר:
+
+**🔥 הוראות שלב 1 לקורסר - מחשבון + AWG:**
+```
+🚨 הוראות לקורסר - שלב 1:
+1. [ ] בנה את המחשבון המלא לפי המפרט הטכני
+2. [ ] הוסף אזור AWG עם כפתור CTA מוסתר
+3. [ ] וודא עיצוב responsive מושלם
+4. [ ] בדוק פונקציונליות JavaScript
+5. [ ] שמור הכל ב-C:\Users\eyal\Final-page.html
+6. [ ] כתוב "המשך" בצ'אט לקבלת השלב הבא
+
+⚠️ אל תוסיף עדיין: תוכן מקצועי, Schema, תגיות HEAD
+```
+
+**📝 הוראות שלב 2 לקורסר - תוכן + Schema:**
+```
+🚨 הוראות לקורסר - שלב 2:
+1. [ ] הוסף תוכן מקצועי מלא (כותרות, פסקאות, FAQ)
+2. [ ] הוסף FAQ אקורדיון אינטראקטיבי
+3. [ ] הוסף תגיות Schema JSON-LD בסוף הקובץ
+4. [ ] 🚨 אל תוסיף תגיות HEAD - הפיתוח הוא לוורדפרס (רק BODY)!
+5. [ ] וודא SEO מושלם
+6. [ ] השלם העמוד באותו קובץ Final-page.html
+
+✅ עמוד מושלם מוכן!
+```
+
+### ✅ מה תקבל תמיד:
+- איפיון טכני מלא ומותאם
+- תוכן EAT SEO איכותי  
+- קוד WordPress Safe
+- עיצוב responsive מושלם
+- **מבנה עמוד מוגדר ברור** - המחשבון למעלה, CTA/AWG אחריו, תוכן למטה
+- **אזור CTA + AWG ווידג'ט** עם שורטקוד [awg postid="32400"]
+- הוראות מפורטות לקורסר עם מיקום מדויק לקובץ `C:\Users\eyal\Final-page.html`
+- כל הטקסטים בעברית
+- נוסחאות מתמטיות מדויקות
+
+---
+
+## 🎊 יתרונות הפרומפט הדינמי + מקרא עיצובי מושלם
+
+### 🚀 גמישות מקסימלית
+- **כל סוג מחשבון:** הלוואות, ביטוח, השקעות, חיסכון, מסים
+- **כל רמת מורכבות:** מבסיסי ועד מקצועי
+- **כל קהל יעד:** צרכנים, עסקים, מקצועיים
+
+### 🎯 התאמה אישית מלאה + אייל עובדיה
+- **PREFIX ייחודי:** לכל מחשבון
+- **תוכן מותאם:** לתחום ולקהל
+- **UI/UX ספציפי:** לסוג השימוש
+- **מומחיות EAT:** מותאמת לתחום + פיקוח אייל עובדיה
+- **אמינות מוכחת:** דמות אמיתית מאחורי התוכן
+
+### 🏆 כוח אייל עובדיה לEAT:
+- **Expertise:** ניסיון עשיר של שנים רבות בהלוואות ומימון
+- **Authoritativeness:** מנהל מקצועי של פורטל מוביל בתחום
+- **Trustworthiness:** פועל במסגרת חוקית מלאה עם רגולציה ישראלית
+
+### 🎨 עקביות עיצובית מושלמת - החדש!
+- **פלטת צבעים אחידה:** #1e5490, #ff3b3b, #25D366, #FF9800
+- **Typography מוגדרת:** Assistant font + clamp() responsive
+- **Layout מתוקנן:** 1200px containers + padding hierarchy
+- **כפתורים אחידים:** 50px radius + min-height 54px + shadows
+- **כרטיסים עקביים:** 15px radius + hover states + transitions  
+- **כותרות מעוצבות:** קו אדום דקורטיבי + width: fit-content
+- **Responsive מושלם:** 768px, 767px, 375px breakpoints
+- **טבלאות חכמות:** אוטומטי לכרטיסים במובייל
+- **אנימציות עדינות:** fadeInUp, ripple, stagger effects
+- **נגישות מובנית:** ARIA, focus states, haptic feedback
+
+### 🛡️ בטיחות מובנית
+- **WordPress Safe:** תמיד ובכל מחשבון
+- **Performance:** אופטימיזציה אוטומטית
+- **Mobile First:** responsive מובנה
+- **SEO Ready:** תוכן איכותי תמיד
+
+### ⚡ יעילות מקסימלית
+- **איפיון מיידי:** תוך דקות
+- **קוד מוכן:** לקורסר
+- **תוכן מלא:** ללא עבודה נוספת
+- **איכות מקצועית:** ברמה בנקאית + אמינות של אייל עובדיה
+- **עקביות גרפית:** כל מחשבון נראה מקצועי ואחיד
+
+### 🎯 שיפורים ייחודיים של המקרא:
+- **3 Breakpoints:** דסקטופ (1200px) → טאבלט (768px) → מובייל (767px) → מובייל קטן (375px)
+- **Typography Scale:** clamp() לכל רמת טקסט עם Assistant font
+- **Color System:** 4 צבעים עיקריים + variations מוגדרות
+- **Spacing System:** היררכיה ברורה 60px → 40px → 30px
+- **Component Library:** כפתורים, כרטיסים, טבלאות עם עיצוב אחיד
+- **Animation Framework:** fadeInUp, ripple, stagger עם prefers-reduced-motion
+- **Mobile Optimization:** touch targets 48px+, table→cards אוטומטי
+- **Accessibility:** focus states, ARIA, high contrast support
+- **Performance:** CSS variables, optimized selectors, lazy loading
+
+**🎉 תוצאה: מחולל מחשבונים שיכול ליצור כל מחשבון פיננסי מתקדם עם איפיון מקיף, קוד מוכן לפרודקשן ועקביות עיצובית מושלמת!**
+
+**✨ כל מחשבון שיצא מהמחולל יהיה בעל מראה מקצועי אחיד, נגישות מלאה, ואופטימיזציה מושלמת למובייל!**
+
+---
+
+
+
+---
+
+## 📋 הוראות שימוש מפורטות:
+
+### 🚀 שלב 1: העתק את הפרומפט
+- העתק את כל התוכן של הקובץ הזה
+- שמור אותו כקובץ טקסט או העתק לצ'אט חדש
+
+
+### 🚀 שלב 2: כתוב את הבקשה
+- במקום XXX כתוב את סוג המחשבון שאתה רוצה
+- דוגמה: "צור לי מחשבון משכנתא מתקדם"
+
+### 🚀 שלב 3: קבל איפיון מלא בקנבס (WordPress BODY)
+- **תקבל איפיון טכני מפורט בקנבס (artifacts)**
+- **לא בצ'אט הרגיל** - הכל יהיה במסמך מסודר
+- קוד HTML/CSS/JavaScript מוכן לוורדפרס (רק BODY!)
+- תוכן מקצועי מלא לעמוד
+- **🚨 ללא תגיות HEAD** - הפיתוח הוא לאזור BODY בוורדפרס
+- הוראות מדויקות לקורסר לכתיבה לקובץ `C:\Users\eyal\Final-page.html`
+
+### 🚀 שלב 4: העתק מהקנבס לקורסר
+- **לחץ על כפתור העתק בקנבס** 📋
+- הדבק בקורסר עם ההוראות
+- קורסר יבנה את המחשבון המלא לקובץ `C:\Users\eyal\Final-page.html`
+
+### ⚠️ חשוב לזכור:
+- **כל התשובה תהיה בקנבס בלבד**
+- **לא תתפזר בצ'אט הרגיל**
+- **קובץ אחד מסודר מוכן להעתקה לוורדפרס**
+- **🚨 ללא תגיות HEAD** - רק תוכן BODY לוורדפרס
+
+**✅ זה פשוט כמו שזה נשמע - פרומפט → בקשה → איפיון מלא בקנבס → מחשבון מוכן לוורדפרס!**
+
+---
+
+## 🎯 תזכורת אחרונה לקלוד:
+
+### 🚨 חובה מוחלטת - פלט מעודכן לוורדפרס!
+1. **חלק 1 בצ'אט:** ניתוח ותכנון (PREFIX, טאבים, מורכבות)
+2. **חלק 2 בקנבס:** איפיון מלא + תגיות Schema (WordPress BODY בלבד!)
+3. **🚨 אין חלק 3:** אסור תגיות HEAD - הפיתוח הוא לוורדפרס!
+4. **מוכן לשימוש:** איפיון WordPress Safe לקובץ `C:\Users\eyal\Final-page.html`
+
+### 📊 זכור: מאגר המידע לאימות בלבד!
+- **🚨 אסור העתקה:** אל תעתיק טקסט מהמאגר למטה
+- **אימות ריביות:** השתמש רק לבדיקת נכונות הנתונים
+- **יצירה מקורית:** כתוב תוכן מקורי מותאם למחשבון
+
+### 🚨 הוראות לפיתוח WordPress:
+- **אסור תגיות HEAD:** הפיתוח הוא לאזור BODY בוורדפרס בלבד!
+- **רק תוכן BODY:** CSS, HTML, JavaScript ו-Schema JSON-LD
+- **WordPress Safe:** כל הקוד מותאם לוורדפרס ללא התנגשויות
+- **קובץ אחד:** כל התוכן ב-Final-page.html מוכן להדבקה בוורדפרס
+
+### 🔍 הוראות FAQ גמישות:
+- **מספר שאלות מותאם:** בין 8-15 שאלות לפי מורכבות הנושא
+- **לא קבוע:** אל תכתוב תמיד 18 שאלות - התאם לנושא
+- **איכות על פני כמות:** עדיף פחות שאלות איכותיות מאשר הרבה שטחיות
+- **🚨 אזור אחד מאוחד:** כל השאלות באזור FAQ אחד - ללא חלוקה לקטגוריות!
+- **ללא "מתחילים/מתקדמים":** סדר לוגי מהפשוט למורכב באותו אזור
+- **איקונים לפי נושא:** 💰 כסף, ⏰ זמן, 📋 תנאים, ⚠️ סיכונים, 🎯 אסטרטגיה
+
+#### דוגמה לפורמט נכון:
+
+```
+🔧 תגיות HEAD להעתקה:
+
+```html
+<!-- SEO בסיסי -->
+<title>[שם המחשבון] | מחשבון מתקדם | רק תבקש</title>
+<meta name="description" content="[תיאור המחשבון]">
+<meta name="keywords" content="[מילות מפתח]">
+<meta name="author" content="אייל עובדיה">
+
+<!-- זמן ועדכון -->
+<meta name="last-modified" content="[תאריך ISO]">
+
+<!-- Open Graph -->
+<meta property="og:title" content="[כותרת]">
+<meta property="og:description" content="[תיאור]">
+<meta property="og:url" content="https://loans-israel.org.il/[URL]">
+
+<!-- AI Tags -->
+<meta name="ai-content-type" content="financial-calculator">
+<meta name="ai-topic" content="[נושא-המחשבון]">
+
+<!-- Mobile -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+```
+```
+
+### 🚨🚨🚨 איפיון טכני בלבד - לא קוד מוגמר!
+- **🚫 אסור קוד HTML/CSS/JavaScript:** רק איפיון טכני מפורט!
+- **📝 רק מפרט לקורסר:** תיאור מה לבנות, לא איך לבנות!
+- **🏗️ קורסר יבנה הכל:** את כל הקוד בעצמו לפי המפרט לקובץ `C:\Users\eyal\Final-page.html`
+
+### 🎯 חובה - כותרות טבעיות ואנושיות!
+
+**🚨 אסור כותרות שנראות כמו AI:**
+- ❌ "תקציר מנהלים - כוח הריבית הדריבית"
+- ❌ "מדריך מומחה - כוח הריבית הדריבית בישראל 2025"
+- ❌ "פרופיל מומחה אמיתי + אייל עובדיה"
+
+**✅ חובה כותרות טבעיות ואנושיות:**
+- ✅ "כוח הריבית הדריבית"
+- ✅ "מידע נוסף על הריבית הדריבית בישראל 2025"
+- ✅ "מחבר העמוד: אייל עובדיה"
+
+**🎯 עקרון זהב לכותרות:**
+- כותרות קצרות וישירות
+- ללא תוספות מלאכותיות כמו "תקציר מנהלים" או "מדריך מומחה"
+- נשמעות כמו שאדם אמיתי כתב אותן
+- מתמקדות בתוכן ולא בתואר
+
+**📋 מה לכלול באיפיון:**
+- תיאור המבנה הנדרש
+- דרישות עיצוב (איזה classes מvisual.txt)
+- פונקציונליות נדרשת
+- הנחיות חיפוש בvisual.txt
+- **🚫 מה לא לכלול:**
+  - קוד HTML מוכן
+  - CSS מוכן
+  - JavaScript מוכן
+  - דוגמאות קוד
+
+### 📁 קובץ הפיתוח הייעודי
+- **קובץ הפיתוח:** `C:\Users\eyal\Final-page.html`
+- **מיקום הקוד:** כל הקוד יירשם לקובץ `C:\Users\eyal\Final-page.html`
+- **הוראה לקורסר:** לכתוב את כל הקוד המוגמר לקובץ הזה בלבד
+- **לא קבצים נוספים:** הכל באותו קובץ HTML אחד מאוחד
+
+### 🎨🎨🎨 חובת תוכן ויזואלי עשיר ודינמי!
+- **אסור טקסט יבש:** כל הסבר חייב להיות בכרטיס ויזואלי רלוונטי
+- **חובה רכיבים דינמיים:** אינפוגרפיקות, כרטיסים, איקונים מותאמים למחשבון
+- **🚨 דינמיות מוחלטת:** כל רכיב ויזואלי חייב להיות ספציפי למחשבון הנדרש!
+- **🚫 אסור תוכן גנרי:** לא "הלוואות כלליות" אלא ספציפי למחשבון (משכנתא/רכב/אישי/וכו')
+- **תמונת אייל:** `https://staging.loans-israel.org.il/wp-content/uploads/2025/07/image-95.webp`
+- **דוגמאות חיות:** מחשבוני מיני מובנים עם נתונים אמיתיים מהתחום
+- **צבעוניות:** כרטיסים בצבעים שונים לפי סוג התוכן הספציפי
+- **אינטראקטיביות:** כפתורי דוגמה רלוונטיים, hover effects, מעברי צבע
+
+### ⚖️⚖️⚖️ אסור שמות פיקטיביים - חובה אמיתיות!
+- **מחבר אמיתי:** רק אייל עובדיה עם שם אמיתי ותמונה אמיתית
+- **צוות כללי:** "צוות המומחים של רק תבקש" - ללא שמות ספציפיים
+- **מומחיות כללית:** תיאור כישורים וניסיון כללי של הצוות - ללא פרטי רישיונות ספציפיים
+- **אסור להמציא:** לא לכתוב שמות כמו "מיכל רונן" או "רון כהן"
+- **אסור להמציא רישיונות:** לא לציין רישיונות או תעודות ספציפיות שלא מאומתות
+- **חוקיות מלאה:** רק פרטים אמיתיים ומאומתים על אייל עובדיה ורק תבקש
+
+### 🚨🚨🚨 קווי כתיבה דינמיים למחבר העמוד - עקביות ללא סתירות!
+
+**👤 כותרת קבועה (תמיד זהה):**
+- מחבר העמוד: אייל עובדיה
+- המנהל המקצועי של פורטל "רק תבקש"
+- בשיתוף עם צוות המומחים המקצועיים של רק תבקש
+
+**📊 נתונים קבועים - אסור לשנות:**
+- **שנות ניסיון:** מעל 15 שנות ניסיון מקצועי מצטבר של הצוות
+- **מספר לקוחות:** למעלה מ-5,500 לקוחות
+- **רקע חברה:** פורטל "רק תבקש" - חברת אפטריו בע"מ
+- **פיקוח איכות:** אייל עובדיה על איכות הרישומים והתוכן המקצועי
+
+**🎯 תוכן דינמי מותאם למחשבון (משתנה לפי נושא):**
+
+**מומחיות הצוות (דינמי לפי מחשבון):**
+- **מחשבון הלוואות:** יועצים פיננסיים מומחים ואנליסטים מתמחים בהלוואות ומימון
+- **מחשבון משכנתא:** יועצים פיננסיים מומחים ואנליסטים מתמחים במשכנתאות ונדל"ן
+- **מחשבון ביטוח:** יועצים פיננסיים מומחים ואנליסטים מתמחים בביטוח וניהול סיכונים
+- **מחשבון השקעות:** יועצים פיננסיים מומחים ואנליסטים מתמחים בהשקעות ותיקי השקעה
+- **מחשבון חיסכון:** יועצים פיננסיים מומחים ואנליסטים מתמחים בתכנון חיסכון והשקעות
+
+**תחום לקוחות (דינמי לפי מחשבון):**
+- **מחשבון הלוואות:** בתחום הלוואות ומימון אישי
+- **מחשבון משכנתא:** בתחום משכנתאות ורכישת נדל"ן
+- **מחשבון ביטוח:** בתחום ביטוח וניהול סיכונים
+- **מחשבון השקעות:** בתחום השקעות ותיקי השקעה
+- **מחשבון חיסכון:** בתחום תכנון חיסכון והשקעות
+
+**💬 ציטוט דינמי (יצירה חדשה לכל מחשבון):**
+
+**🎯 הוראות ליצירת ציטוט דינמי:**
+- **פתיחה קבועה:** "בעבודתנו עם יותר מ-5,500 לקוחות"
+- **תוכן ספציפי:** תובנה מקצועית רלוונטית למחשבון הספציפי
+- **נתון מעשי:** סטטיסטיקה או אחוז חיסכון/שיפור מותאם לתחום
+- **סגירה מעשית:** תועלת קונקרטית ללקוח
+
+**דוגמאות למבנה (אל תעתיק - צור חדש):**
+- "בעבודתנו עם יותר מ-5,500 לקוחות, [תובנה ספציפית למחשבון]. [נתון מעשי רלוונטי לתחום]."
+- "בעבודתנו עם יותר מ-5,500 לקוחות, [לקח מקצועי מהתחום]. [סטטיסטיקה מותאמת לנושא]."
+
+**עקרונות ליצירה:**
+- ✅ **תמיד 5,500 לקוחות** (קבוע)
+- ✅ **תובנה ייחודית** למחשבון הספציפי
+- ✅ **נתון אמין** (10%-40% טווח סביר)
+- ✅ **שפה מקצועית** וברורה
+- ❌ **לא להעתיק** דוגמאות קיימות
+- ❌ **לא לכתוב** מספרים מוגזמים
+
+**🏢 מומחיות מקצועית (דינמי לפי מחשבון):**
+- **בסיס קבוע:** תכנון פיננסי ואישי, אסטרטגיות חיסכון
+- **תוספת דינמית:** [התמחות ספציפית למחשבון] - ייעוץ הלוואות / ייעוץ משכנתאות / ייעוץ ביטוח / ייעוץ השקעות / אופטימיזציה פיננסית מס לומדים
+
+**🚨 כללי עקביות קריטיים:**
+- ✅ **נתונים קבועים:** 15 שנים, 5,500 לקוחות, אייל עובדיה, רק תבקש
+- ✅ **תוכן דינמי:** מומחיות, ציטוטים, תחומי התמחות
+- ❌ **אסור סתירות:** לא לשנות מספרים או שמות
+- ❌ **אסור המצאות:** לא לכתוב רישיונות או תעודות
+- ✅ **כתיב מקצועי:** תמיד נכון וללא טעויות
+
+**🎯 חובה דינמיות מלאה:**
+- 🚨 **אסור להעתיק ציטוטים** מהדוגמאות למעלה
+- 🚨 **צור ציטוט חדש** לכל מחשבון עם תובנה ייחודית
+- 🚨 **התאם את המומחיות** לסוג המחשבון הספציפי
+- 🚨 **כתוב תחום לקוחות** רלוונטי למחשבון
+- ✅ **שמור על עקביות** בנתונים הבסיסיים (5,500, 15 שנים)
+- ✅ **יצירתיות בגבולות** - תוכן חדש אבל אמין
+
+**🎨 עיצוב הציטוט חובה:**
+- רקע שקוף עם מסגרת לבנה
+- פונט italic
+- margin וpadding מותאמים
+- border-right לבן
+
+### 📁 תזכורת אחרונה קריטית לקורסר!
+**🚨 כל הקוד המוגמר יירשם לקובץ: `C:\Users\eyal\Final-page.html`**
+- **קובץ יחיד:** הכל באותו קובץ HTML מאוחד
+- **לא קבצים נוספים:** אסור ליצור קבצים נוספים
+- **עבודה בשלבים:** לפי ההוראות המפורטות באיפיון
+- **שלב 1:** מחשבון + AWG + "כתוב המשך"
+- **שלב 2:** תוכן + Schema + השלמה
+- **הוראה ברורה:** קורסר יכתוב הכל לקובץ הזה בלבד
+
+### 🚨🚨🚨 תזכורת אחרונה לקלוד!
+**אתה מייצר איפיון טכני דינמי לקורסר - לא קוד מוכן!**
+
+### 🎯 זיהוי שלבים - הוראות לקלוד:
+**🎯 בכל איפיון שאתה מייצר, חייב לכלול:**
+- ✅ איפיון מחשבון מלא
+- ✅ איפיון AWG מלא
+- ✅ תוכן מקצועי מלא
+- ✅ תגיות Schema JSON-LD
+- ✅ **🚨 ללא תגיות HEAD** - הפיתוח הוא לוורדפרס (רק BODY)!
+- ✅ **הוראות לקורסר לעבוד בשני שלבים** (חובה!)
+
+**🚨 הוראות השלבים לקורסר חייבות להופיע באיפיון:**
+- שלב 1: מחשבון + AWG + "כתוב המשך"
+- שלב 2: תוכן + Schema + השלמה
+
+### 🚨 כללים כלליים:
+- 🚫 **אל תכתוב קוד HTML/CSS/JavaScript**
+- 📝 **כתוב רק איפיון מפורט ודינמי**
+- 🏗️ **קורסר יבנה את הקוד לפי האיפיון הדינמי**
+- 🎯 **דינמיות מוחלטת:** כל רכיב ויזואלי חייב להיות ספציפי למחשבון הנדרש!
+- 🚫 **אסור תוכן גנרי:** התאם הכל לסוג המחשבון (משכנתא/רכב/אישי/ביטוח/וכו')!
+- 📊 **מינימום תוכן:** 500-600 מילים לכל מחשבון - אסור פחות!
+- 🎯 **AWG חובה:** כפתור CTA פותח AWG מוסתר + טעינת JS מחדש!
+
+### 🚨 חובה מוחלטת - מבנה הפלט!
+**בכל פלט שאתה מייצר, חייב להופיע בתחילה המפרט הטכני הזה:**
+
+```
+🎨 מפרט טכני לקורסר - איפיון מפורט לבנייה
+
+📐 מבנה HTML נדרש:
+Container ראשי: .wpc-calc-[topic]-[4random]-wrapper
+├── כותרת H2 עם קו אדום: .wpc-calc-[topic]-[4random]-title  
+├── Container מחשבון: .wpc-calc-[topic]-[4random]-container
+│   ├── ניווט טאבים: .wpc-calc-[topic]-[4random]-tabs ([מספר דינמי] טאבים)
+│   ├── תוכן טאב 1: [שם דינמי לפי מחשבון] (#[id-דינמי])
+│   ├── תוכן טאב 2: [שם דינמי לפי מחשבון] (#[id-דינמי])
+│   ├── תוכן טאב 3: [שם דינמי לפי מחשבון] (#[id-דינמי])
+│   └── תוכן טאב 4: [שם דינמי לפי מחשבון] (#[id-דינמי])
+├── אזור CTA + AWG: .wpc-awg-demo-section
+│   ├── כפתור CTA: .wpc-cta-demo-btn-primary (פותח AWG)
+│   └── AWG מוסתר: .wpc-awg-demo-content (opacity: 0, height: 0 - לא display: none!)
+└── תוכן מקצועי: .content-sections
+
+🎯 רכיבים נדרשים לכל טאב (דינמי לפי מחשבון):
+- טאב 1: [פירוט ספציפי למחשבון הנדרש]
+- טאב 2: [פירוט ספציפי למחשבון הנדרש]
+- טאב 3: [פירוט ספציפי למחשבון הנדרש]
+- טאב 4: [פירוט ספציפי למחשבון הנדרש]
+
+🎨 עיצוב מ-visual.txt (דינמי לפי מחשבון):
+- חיפוש: wpc-calc-tabs-demo, wpc-awg-demo-section, [חיפושים ספציפיים]
+- צבעים: Primary #1e5490, Danger #ff3b3b, Success #25D366
+- צבעי טקסט נגישים: --text-dark: #222222, --text-light: #444444, --bg-light: #f5f5f5
+- פונט: Assistant בכל המקום
+- Responsive: 1200px, 768px, 767px, 375px
+- נגישות: ניגודיות מעל 4.5:1 לכל הטקסטים
+
+🔧 תיקון צבעים למכשירים אמיתיים - חובה מוחלטת:
+- הוסף בראש הCSS: color-scheme: light, forced-color-adjust: none
+- fallback colors במובייל לכל אלמנט טקסט: color: #222222 !important;
+- כלול: tabs, labels, headers, comparison-cards, case-params, faq-headers
+- הוסף ל-@media (max-width: 768px), (max-width: 480px), (max-width: 375px)
+
+📱 קוד מלא לתיקון צבעים (הוסף בראש הCSS):
+/* === תיקון צבעים למכשירים אמיתיים - חובה להוסיף בראש הקובץ === */
+.wpc-calc-[topic]-[4random]-wrapper {
+    color-scheme: light !important;
+    forced-color-adjust: none !important;
+    -webkit-forced-color-adjust: none !important;
+    -ms-high-contrast-adjust: none !important;
+}
+
+@media (prefers-color-scheme: dark) {
+    .wpc-calc-[topic]-[4random]-wrapper {
+        color-scheme: light !important;
+        background-color: white !important;
+    }
+    .wpc-calc-[topic]-[4random]-wrapper * {
+        color-scheme: light !important;
+    }
+}
+
+/* fallback colors במובייל - הוסף לכל @media query */
+@media (max-width: 768px) {
+    .wpc-calc-[topic]-[4random]-tab:not(.active) { color: #222222 !important; }
+    .wpc-calc-[topic]-[4random]-example-label { color: #222222 !important; }
+    .wpc-calc-[topic]-[4random]-comparison-card.regular { color: #222222 !important; }
+    .wpc-calc-[topic]-[4random]-case-param { color: #222222 !important; }
+    .wpc-calc-[topic]-[4random]-faq-header { color: #222222 !important; }
+    
+    /* עיצוב AWG במובייל - מינימליסטי ונקי */
+    .wpc-calc-[topic]-[4random]-awg-container {
+        padding: 0 !important;
+        box-shadow: none !important;
+    }
+    
+    .wpc-calc-[topic]-[4random]-shortcode-item {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 auto 30px auto !important;
+        padding: 15px !important;
+        box-sizing: border-box !important;
+    }
+}
+
+⚡ JavaScript נדרש (דינמי לפי מחשבון):
+- Namespace: WPC_Calc[Topic][4Random] (ספציפי למחשבון)
+- AWG Toggle: כפתור CTA → פתיחה + טעינת JS מחדש
+- חישובים: [נוסחאות ספציפיות למחשבון הנדרש]
+- פונקציונליות: [רכיבים ספציפיים למחשבון]
+```
+
+**🚨 זה חייב להופיע בתחילת כל פלט - לפני הניתוח והתוכן!**
+
+### 🎯 דוגמאות לדינמיות נכונה:
+
+**✅ נכון - מחשבון משכנתא:**
+- כותרת טבעית: "כוח המשכנתא הנכונה"
+- אינפוגרפיקת "מצב שוק המשכנתאות 2025"
+- כרטיסי "מלכודות נפוצות במשכנתאות" (ריבית משתנה, מס שבח)
+- נוסחת PMT עם פרמטרים: קרן, ריבית, תקופה, מסלול
+- מקרה טיפוסי: "משפחת כהן קונה דירה ראשונה"
+- הסבר על כל טאב: "טאב בסיסי", "טאב מתקדם", "טאב השוואה", "טאב שפיצר"
+
+**✅ נכון - מחשבון ביטוח רכב:**
+- כותרת טבעית: "כוח הביטוח הנכון"
+- אינפוגרפיקת "מצב שוק הביטוח 2025"
+- כרטיסי "מלכודות נפוצות בביטוח רכב" (השתתפות עצמית, כיסויים)
+- נוסחת פרמיה עם פרמטרים: גיל, רכב, אזור, נזקיות
+- מקרה טיפוסי: "נהג צעיר עם רכב חדש"
+- הסבר על כל טאב: "טאב חישוב פרמיה", "טאב השוואת חברות", "טאב כיסויים", "טאב המלצות"
+
+**❌ שגוי - תוכן גנרי:**
+- כותרות מלאכותיות: "תקציר מנהלים - כוח ההלוואות"
+- אינפוגרפיקת "מצב השוק הכללי"
+- כרטיסי "מלכודות נפוצות בהלוואות" (לא ספציפי)
+- נוסחאות כלליות ללא התאמה
+- מקרים לא רלוונטיים למחשבון
+- חוסר הסבר על הטאבים במחשבון
+
+**המטרה: איפיון אמיתי בקנבס עם תוכן ויזואלי עשיר וללא שקרים! 🎯🎨⚖️**
