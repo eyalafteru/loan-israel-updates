@@ -1,0 +1,4069 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Management Dashboard</title>
+    <style>
+        :root {
+            --bg-primary: #0f0f0f;
+            --bg-secondary: #1a1a2e;
+            --bg-tertiary: #16213e;
+            --accent: #e94560;
+            --accent-hover: #ff6b6b;
+            --text-primary: #eee;
+            --text-secondary: #aaa;
+            --border: #333;
+            --success: #4ade80;
+            --warning: #fbbf24;
+            --info: #60a5fa;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
+        
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--accent);
+        }
+        
+        .header h1 {
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .header-controls {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+        
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .tab {
+            padding: 0.5rem 1rem;
+            background: transparent;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .tab:hover {
+            border-color: var(--accent);
+            color: var(--text-primary);
+        }
+        
+        .tab.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: white;
+        }
+        
+        /* Buttons */
+        .btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--accent-hover);
+        }
+        
+        .btn-secondary {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+        
+        .btn-secondary:hover {
+            border-color: var(--accent);
+        }
+        
+        .btn-success {
+            background: var(--success);
+            color: #000;
+        }
+        
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+            animation: pulse 1.5s infinite;
+        }
+        
+        .btn-danger:hover {
+            background: #c82333;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.7); }
+            70% { box-shadow: 0 0 0 6px rgba(220, 53, 69, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0); }
+        }
+        
+        .btn-small {
+            padding: 0.3rem 0.6rem;
+            font-size: 0.8rem;
+        }
+        
+        /* Select */
+        select {
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            font-size: 0.9rem;
+        }
+        
+        /* Main Layout */
+        .main {
+            display: flex;
+            height: calc(100vh - 70px);
+        }
+        
+        /* Sidebar - Page List */
+        .sidebar {
+            width: 400px;
+            background: var(--bg-secondary);
+            border-left: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .sidebar-header {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .sidebar-header h2 {
+            font-size: 1rem;
+            font-weight: normal;
+        }
+        
+        .page-list {
+            flex: 1;
+            overflow-y: auto;
+        }
+        
+        .page-item {
+            padding: 0.8rem 1rem;
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        .page-item:hover {
+            background: var(--bg-tertiary);
+        }
+        
+        .page-item.selected {
+            background: var(--bg-tertiary);
+            border-right: 3px solid var(--accent);
+        }
+        
+        .page-item-title {
+            font-weight: 500;
+            margin-bottom: 0.3rem;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            direction: rtl;
+            gap: 0.5rem;
+        }
+        
+        .page-item-meta {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .page-item-folder {
+            color: var(--info);
+        }
+        
+        .page-item.is-running {
+            border-right: 4px solid var(--warning);
+            background: rgba(251, 191, 36, 0.1);
+        }
+        
+        .page-item.is-completed {
+            border-right: 4px solid var(--success);
+            background: rgba(74, 222, 128, 0.1);
+        }
+        
+        .page-status-dot {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 0;
+            margin-left: 8px;
+            flex-shrink: 0;
+        }
+        
+        .page-name {
+            flex: 1;
+            text-align: right;
+        }
+        
+        .page-status-dot.running {
+            background: var(--warning);
+            animation: pulse-dot 1s ease-in-out infinite;
+            box-shadow: 0 0 8px var(--warning);
+        }
+        
+        .page-status-dot.completed {
+            background: var(--success);
+            box-shadow: 0 0 8px var(--success);
+        }
+        
+        .page-status-dot.pending {
+            background: var(--border);
+            border: 1px solid var(--text-secondary);
+        }
+        
+        .page-status-dot.step1 {
+            background: var(--info);
+            box-shadow: 0 0 6px var(--info);
+        }
+        
+        .page-status-dot.step2 {
+            background: #f59e0b;
+            box-shadow: 0 0 6px #f59e0b;
+        }
+        
+        .page-status-dot.step3 {
+            background: #8b5cf6;
+            box-shadow: 0 0 6px #8b5cf6;
+        }
+        
+        .page-status-dot.step4 {
+            background: #ec4899;
+            box-shadow: 0 0 6px #ec4899;
+        }
+        
+        .page-status-dot.step5 {
+            background: #14b8a6;
+            box-shadow: 0 0 6px #14b8a6;
+        }
+        
+        .page-status-dot.step6 {
+            background: #06b6d4;
+            box-shadow: 0 0 6px #06b6d4;
+        }
+        
+        /* Multi-agent status display */
+        .multi-agent-status {
+            display: flex;
+            gap: 8px;
+            margin-top: 4px;
+        }
+        
+        .agent-progress {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 0.65rem;
+            padding: 2px 6px;
+            border-radius: 4px;
+            background: rgba(255,255,255,0.05);
+        }
+        
+        .agent-progress.atomic {
+            border-left: 2px solid #f59e0b;
+        }
+        
+        .agent-progress.seo {
+            border-left: 2px solid #06b6d4;
+        }
+        
+        .agent-progress .agent-label {
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+        
+        .progress-bar-mini {
+            display: flex;
+            gap: 2px;
+        }
+        
+        .progress-bar-mini .step-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--border);
+        }
+        
+        .progress-bar-mini .step-dot.completed {
+            background: var(--success);
+        }
+        
+        .progress-bar-mini .step-dot.atomic.completed {
+            background: #f59e0b;
+        }
+        
+        .progress-bar-mini .step-dot.seo.completed {
+            background: #06b6d4;
+        }
+        
+        .agent-progress.is-done {
+            background: rgba(16, 185, 129, 0.1);
+            border-color: var(--success);
+        }
+        
+        .agent-done-badge {
+            color: var(--success);
+            font-weight: bold;
+            font-size: 0.7rem;
+            margin-right: 2px;
+        }
+        
+        .page-item.is-step3 {
+            border-left: 3px solid #8b5cf6;
+        }
+        
+        .step-badge.step3 {
+            background: #8b5cf6;
+            color: white;
+            font-size: 0.7rem;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        
+        .page-item.is-step1 {
+            border-right: 4px solid var(--info);
+            background: rgba(96, 165, 250, 0.1);
+        }
+        
+        .page-item.is-step2 {
+            border-right: 4px solid #f59e0b;
+            background: rgba(245, 158, 11, 0.1);
+        }
+        
+        .step-badge {
+            font-size: 0.7rem;
+            padding: 0.1rem 0.4rem;
+            border-radius: 4px;
+            margin-right: 0.5rem;
+        }
+        
+        .step-badge.running {
+            background: var(--warning);
+            color: #000;
+        }
+        
+        .step-badge.step1 {
+            background: var(--info);
+            color: #000;
+        }
+        
+        .step-badge.step2 {
+            background: #f59e0b;
+            color: #000;
+        }
+        
+        .step-badge.step3 {
+            background: #8b5cf6;
+            color: white;
+        }
+        
+        .step-badge.step4 {
+            background: #ec4899;
+            color: white;
+        }
+        
+        .step-badge.step5 {
+            background: #14b8a6;
+            color: white;
+        }
+        
+        .step-badge.step6 {
+            background: #06b6d4;
+            color: white;
+        }
+        
+        .step-badge.completed {
+            background: var(--success);
+            color: #000;
+        }
+        
+        @keyframes pulse-dot {
+            0%, 100% { 
+                opacity: 1; 
+                transform: scale(1);
+            }
+            50% { 
+                opacity: 0.5; 
+                transform: scale(0.8);
+            }
+        }
+        
+        .running-indicator {
+            margin-left: 0.3rem;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+        }
+        
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Content Area */
+        .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        .content-header {
+            padding: 1rem;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .agent-selector {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+        
+        .workflow-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        /* Panels */
+        .panels {
+            flex: 1;
+            display: flex;
+            overflow: hidden;
+        }
+        
+        .panel {
+            min-width: 200px;
+            display: flex;
+            flex-direction: column;
+            border-left: 1px solid var(--border);
+            overflow: hidden;
+        }
+        
+        #reportPanel {
+            flex: 1 1 50%;
+        }
+        
+        #previewPanel {
+            flex: 1 1 50%;
+        }
+        
+        .panel:first-child {
+            border-left: none;
+        }
+        
+        /* Resize Handle */
+        .resize-handle {
+            width: 8px;
+            background: var(--bg-tertiary);
+            cursor: col-resize;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s ease;
+            flex-shrink: 0;
+            position: relative;
+        }
+        
+        .resize-handle:hover,
+        .resize-handle.dragging {
+            background: var(--accent);
+        }
+        
+        .resize-handle::before {
+            content: '⋮';
+            color: var(--text-secondary);
+            font-size: 14px;
+            letter-spacing: -2px;
+        }
+        
+        .resize-handle:hover::before,
+        .resize-handle.dragging::before {
+            color: white;
+        }
+        
+        body.resizing {
+            cursor: col-resize !important;
+            user-select: none !important;
+        }
+        
+        body.resizing iframe {
+            pointer-events: none;
+        }
+        
+        .panel-header {
+            padding: 0.8rem 1rem;
+            background: var(--bg-tertiary);
+            border-bottom: 1px solid var(--border);
+            font-weight: 500;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .panel-content {
+            flex: 1;
+            overflow: auto;
+            padding: 1rem;
+            min-width: 0;
+        }
+        
+        .panel-content.report {
+            background: #111;
+            font-family: 'Consolas', monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+        
+        
+        .panel-content.report h1,
+        .panel-content.report h2,
+        .panel-content.report h3 {
+            color: var(--accent);
+            margin: 1rem 0 0.5rem;
+        }
+        
+        .panel-content.report ul,
+        .panel-content.report ol {
+            padding-right: 1.5rem;
+        }
+        
+        .panel-content.report code {
+            background: var(--bg-secondary);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            word-wrap: break-word;
+        }
+        
+        .panel-content.report pre {
+            background: var(--bg-secondary);
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            max-width: 100%;
+        }
+        
+        .panel-content iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: white;
+            border-radius: 8px;
+        }
+        
+        /* Empty State */
+        .empty-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: var(--text-secondary);
+        }
+        
+        .empty-state-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .no-report {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: var(--text-secondary);
+            text-align: center;
+            padding: 2rem;
+            font-size: 1.1rem;
+        }
+        
+        /* Report Tabs */
+        .report-tabs {
+            display: flex;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        
+        .report-tab {
+            padding: 0.5rem 1rem;
+            border: none;
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+        
+        .report-tab:hover {
+            background: var(--accent-color);
+            color: white;
+        }
+        
+        .report-tab.active {
+            background: var(--success-color);
+            color: white;
+        }
+        
+        .report-content-tab {
+            display: none;
+            padding: 1rem;
+        }
+        
+        .report-content-tab.active {
+            display: block;
+        }
+        
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            display: none;
+        }
+        
+        .modal-overlay.active {
+            display: flex;
+        }
+        
+        .modal {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+        
+        .modal-header {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-header h2 {
+            font-size: 1.2rem;
+        }
+        
+        .modal-close {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .modal-close:hover {
+            color: var(--accent);
+        }
+        
+        .modal-body {
+            padding: 1.5rem;
+            overflow-y: auto;
+            max-height: calc(80vh - 130px);
+        }
+        
+        .modal-footer {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.5rem;
+        }
+        
+        /* Form */
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.7rem 1rem;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-size: 0.9rem;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
+        .form-section {
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+        
+        .form-section-title {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        /* Status Badge */
+        .status-badge {
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        
+        .status-pending { background: var(--border); color: var(--text-secondary); }
+        .status-report { background: var(--warning); color: #000; }
+        .status-fixed { background: var(--info); color: #000; }
+        .status-uploaded { background: var(--success); color: #000; }
+        
+        /* Toast */
+        .toast-container {
+            position: fixed;
+            top: 0.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2000;
+            max-width: 400px;
+        }
+        
+        .toast {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1rem 1.5rem;
+            margin-top: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            animation: slideIn 0.3s ease;
+        }
+        
+        .toast.success { border-color: var(--success); }
+        .toast.error { border-color: var(--accent); }
+        .toast.info { border-color: var(--info); }
+        
+        @keyframes slideIn {
+            from { transform: translateX(-100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        /* Loading */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--border);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Command Display */
+        .command-display {
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1rem;
+            font-family: 'Consolas', monospace;
+            font-size: 0.9rem;
+            word-break: break-all;
+            margin: 1rem 0;
+        }
+        
+        /* Agent List */
+        .agent-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .agent-list-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 1rem;
+            background: var(--bg-primary);
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+        
+        .agent-list-item-info {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .agent-list-item-name {
+            font-weight: 500;
+        }
+        
+        .agent-list-item-type {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+        
+        .agent-list-item-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        /* WordPress Sites */
+        .wp-site {
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .wp-site-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .wp-site-title {
+            color: var(--accent);
+            font-weight: 500;
+        }
+        
+        .wp-site-status {
+            font-size: 0.8rem;
+        }
+        
+        .wp-site-status.connected {
+            color: var(--success);
+        }
+        
+        .wp-site-status.disconnected {
+            color: var(--text-secondary);
+        }
+        
+        /* Work Status Panel */
+        .work-status-panel {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--bg-secondary);
+            border-top: 2px solid var(--accent);
+            max-height: 300px;
+            transition: transform 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .work-status-panel.hidden {
+            transform: translateY(100%);
+        }
+        
+        .work-status-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            background: var(--bg-tertiary);
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
+        }
+        
+        .work-status-header h3 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .work-status-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1rem;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            background: #0a0a0a;
+            white-space: pre-wrap;
+            word-break: break-word;
+            max-height: 220px;
+        }
+        
+        .work-status-content .step-header {
+            color: var(--accent);
+            font-weight: bold;
+            margin: 0.5rem 0;
+        }
+        
+        .work-status-content .tool-use {
+            color: var(--warning);
+        }
+        
+        .work-status-content .file-op {
+            color: var(--success);
+        }
+        
+        .work-status-content .thinking {
+            color: var(--info);
+            font-style: italic;
+        }
+        
+        .work-status-controls {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+        
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--text-secondary);
+        }
+        
+        .status-dot.running {
+            background: var(--success);
+            animation: pulse 1s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .status-dot.completed {
+            background: var(--info);
+        }
+        
+        .status-dot.error {
+            background: var(--accent);
+        }
+        
+        .minimize-btn {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 0.2rem;
+        }
+        
+        .minimize-btn:hover {
+            color: var(--text-primary);
+        }
+        
+        .work-status-input input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+        
+        .work-status-input input::placeholder {
+            color: var(--text-secondary);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <h1>📄 Page Management Dashboard</h1>
+        <div class="header-controls">
+            <div class="tabs">
+                <button class="tab active" data-tab="edit">📝 עריכה</button>
+                <button class="tab" data-tab="build">🏗️ בנייה</button>
+            </div>
+            <select id="modeSelect">
+                <option value="claude">מצב: Claude Code (אוטומטי)</option>
+                <option value="cursor">מצב: Cursor (ידני)</option>
+            </select>
+            <button class="btn btn-secondary" onclick="openSettings()">⚙️ הגדרות</button>
+            <button class="btn btn-secondary" onclick="restartServer()" title="אתחול שרת">🔄</button>
+            <button id="stopClaudeBtn" class="btn btn-danger" onclick="stopClaude()" style="display: none;" title="עצור את Claude">🛑 עצור</button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Sidebar - Page List -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>📁 עמודים</h2>
+                <div style="display: flex; gap: 0.3rem;">
+                    <button class="btn btn-small btn-secondary" onclick="loadPages()" title="רענן">🔄</button>
+                    <button class="btn btn-small btn-secondary" onclick="clearAllStatus()" title="נקה סטטוסים">🧹</button>
+                </div>
+            </div>
+            <div class="page-list" id="pageList">
+                <!-- Pages loaded dynamically -->
+            </div>
+        </aside>
+
+        <!-- Content Area -->
+        <section class="content">
+            <div class="content-header">
+                <div class="agent-selector">
+                    <label>סוכן:</label>
+                    <select id="agentSelect">
+                        <!-- Agents loaded dynamically -->
+                    </select>
+                    <span id="agentType" class="status-badge"></span>
+                </div>
+                <div class="workflow-buttons" id="workflowButtons">
+                    <!-- Buttons shown based on agent type -->
+                </div>
+            </div>
+
+            <div class="panels">
+                <!-- Report Panel -->
+                <div class="panel" id="reportPanel">
+                    <div class="panel-header">
+                        <span>📋 דוח</span>
+                        <div style="display: flex; gap: 0.5rem; align-items: center;">
+                            <button id="deleteReportBtn" class="btn btn-small btn-danger" onclick="deleteCurrentReport()" style="display:none;" title="מחק דוח">🗑️</button>
+                            <span id="statusIndicator" class="status-badge status-pending">ממתין</span>
+                            <select id="reportSelect" style="display:none;">
+                                <!-- Reports loaded dynamically -->
+                            </select>
+                        </div>
+                    </div>
+                    <div class="panel-content report" id="reportContent">
+                        <div class="empty-state">
+                            <div class="empty-state-icon">📋</div>
+                            <p>בחר עמוד והרץ סוכן דוח</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Resize Handle -->
+                <div class="resize-handle" id="resizeHandle" title="גרור לשינוי גודל"></div>
+
+                <!-- Preview Panel -->
+                <div class="panel" id="previewPanel">
+                    <div class="panel-header">
+                        <span>👁️ תצוגה מקדימה</span>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <button class="btn btn-small" onclick="loadPreview()" title="רענן תצוגה">
+                                🔄
+                            </button>
+                            <button class="btn btn-small btn-success" id="uploadBtn" style="display:none;" onclick="uploadToWordPress()">
+                                🌐 העלה ל-WordPress
+                            </button>
+                        </div>
+                    </div>
+                    <div class="panel-content" id="previewContent">
+                        <div class="empty-state">
+                            <div class="empty-state-icon">👁️</div>
+                            <p>בחר עמוד לתצוגה מקדימה</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Work Status Panel -->
+    <div class="work-status-panel hidden" id="workStatusPanel">
+        <div class="work-status-header" onclick="toggleWorkStatus()">
+            <h3>
+                <span class="status-dot" id="workStatusDot"></span>
+                <span id="workStatusTitle">סטטוס עבודה</span>
+            </h3>
+            <div class="work-status-controls">
+                <span id="workStatusTime"></span>
+                <button class="minimize-btn" id="minimizeBtn">▼</button>
+            </div>
+        </div>
+        <div class="work-status-content" id="workStatusContent">
+            מחכה להתחלת עבודה...
+        </div>
+        <div class="work-status-input" id="workStatusInput" style="display: none;">
+            <div style="display: flex; gap: 0.5rem; padding: 0.5rem 1rem; background: var(--bg-tertiary); border-top: 1px solid var(--border);">
+                <input type="text" id="correctionInput" placeholder="כתוב תיקון או הוראה נוספת..." 
+                       style="flex: 1; padding: 0.5rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg-primary); color: var(--text-primary);"
+                       onkeypress="if(event.key === 'Enter') sendCorrection()">
+                <button class="btn btn-primary" onclick="sendCorrection()">📤 שלח</button>
+                <button class="btn btn-secondary" onclick="hideCorrectionsInput()">✕</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div class="modal-overlay" id="settingsModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>⚙️ הגדרות</h2>
+                <button class="modal-close" onclick="closeModal('settingsModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="tabs" style="margin-bottom: 1rem;">
+                    <button class="tab active" data-settings-tab="wordpress">🌐 WordPress</button>
+                    <button class="tab" data-settings-tab="agents">🤖 סוכנים</button>
+                </div>
+
+                <!-- WordPress Settings -->
+                <div id="settingsWordpress">
+                    <div class="wp-site" id="wpSiteMain">
+                        <div class="wp-site-header">
+                            <span class="wp-site-title">אתר ראשי</span>
+                            <span class="wp-site-status disconnected" id="wpStatusMain">לא מחובר</span>
+                        </div>
+                        <div class="form-group">
+                            <label>URL</label>
+                            <input type="text" id="wpUrlMain" value="https://loan-israel.co.il">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>שם משתמש</label>
+                                <input type="text" id="wpUserMain">
+                            </div>
+                            <div class="form-group">
+                                <label>סיסמה</label>
+                                <input type="password" id="wpPassMain">
+                            </div>
+                        </div>
+                        <button class="btn btn-secondary" onclick="testWpConnection('main')">🔌 בדוק חיבור</button>
+                    </div>
+
+                    <div class="wp-site" id="wpSiteBusiness">
+                        <div class="wp-site-header">
+                            <span class="wp-site-title">אתר עסקים (Business)</span>
+                            <span class="wp-site-status disconnected" id="wpStatusBusiness">לא מחובר</span>
+                        </div>
+                        <div class="form-group">
+                            <label>URL</label>
+                            <input type="text" id="wpUrlBusiness" value="https://loan-israel.co.il/Business">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>שם משתמש</label>
+                                <input type="text" id="wpUserBusiness" value="eyal10_Business">
+                            </div>
+                            <div class="form-group">
+                                <label>סיסמה</label>
+                                <input type="password" id="wpPassBusiness">
+                            </div>
+                        </div>
+                        <button class="btn btn-secondary" onclick="testWpConnection('business')">🔌 בדוק חיבור</button>
+                    </div>
+                </div>
+
+                <!-- Agents Settings -->
+                <div id="settingsAgents" style="display:none;">
+                    <div class="agent-list" id="agentList">
+                        <!-- Agents loaded dynamically -->
+                    </div>
+                    <button class="btn btn-primary" style="margin-top: 1rem;" onclick="openAddAgent()">➕ הוסף סוכן</button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal('settingsModal')">סגור</button>
+                <button class="btn btn-primary" onclick="saveSettings()">💾 שמור</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Agent Modal -->
+    <div class="modal-overlay" id="addAgentModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>➕ הוספת סוכן</h2>
+                <button class="modal-close" onclick="closeModal('addAgentModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>שם הסוכן</label>
+                    <input type="text" id="newAgentName" placeholder="לדוגמה: בדיקת נגישות">
+                </div>
+                <div class="form-group">
+                    <label>מזהה (ID)</label>
+                    <input type="text" id="newAgentId" placeholder="לדוגמה: accessibility">
+                </div>
+                <div class="form-group">
+                    <label>תיאור</label>
+                    <input type="text" id="newAgentDesc">
+                </div>
+                <div class="form-group">
+                    <label>סוג סוכן</label>
+                    <select id="newAgentType" onchange="toggleAgentTypeFields()">
+                        <option value="single-step">חד-שלבי</option>
+                        <option value="two-step">דו-שלבי</option>
+                    </select>
+                </div>
+
+                <!-- Single Step Fields -->
+                <div id="singleStepFields">
+                    <div class="form-group">
+                        <label>קובץ סוכן</label>
+                        <input type="text" id="singleAgentFile" placeholder="פרומטים/סוכן-חדש.md">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>סיומת פלט</label>
+                            <input type="text" id="singleOutputSuffix" value="_מתוקן.html">
+                        </div>
+                        <div class="form-group">
+                            <label>תיקיית פלט</label>
+                            <input type="text" id="singleOutputFolder" value="עמודים מתוקנים">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Two Step Fields -->
+                <div id="twoStepFields" style="display:none;">
+                    <div class="form-section">
+                        <div class="form-section-title">שלב 1 - דוח</div>
+                        <div class="form-group">
+                            <label>קובץ סוכן דוח</label>
+                            <input type="text" id="step1AgentFile" placeholder="פרומטים/סוכן-דוח.md">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>סיומת דוח</label>
+                                <input type="text" id="step1OutputSuffix" value="_דוח.md">
+                            </div>
+                            <div class="form-group">
+                                <label>תיקיית דוח</label>
+                                <input type="text" id="step1OutputFolder" value="תיקונים לעמודים">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-section">
+                        <div class="form-section-title">שלב 2 - ביצוע</div>
+                        <div class="form-group">
+                            <label>קובץ סוכן מבצע</label>
+                            <input type="text" id="step2AgentFile" placeholder="פרומטים/סוכן-מבצע.md">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>סיומת פלט</label>
+                                <input type="text" id="step2OutputSuffix" value="_מתוקן.html">
+                            </div>
+                            <div class="form-group">
+                                <label>תיקיית פלט</label>
+                                <input type="text" id="step2OutputFolder" value="עמודים מתוקנים">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group" style="margin-top: 1rem;">
+                    <label>
+                        <input type="checkbox" id="createAgentFile" checked>
+                        צור קבצי סוכן עם תבנית בסיסית
+                    </label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal('addAgentModal')">ביטול</button>
+                <button class="btn btn-primary" onclick="saveNewAgent()">💾 שמור</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Command Modal -->
+    <div class="modal-overlay" id="commandModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>📋 פקודה ל-Cursor</h2>
+                <button class="modal-close" onclick="closeModal('commandModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>הפקודה הועתקה ל-Clipboard. הדבק ב-Cursor והרץ:</p>
+                <div class="command-display" id="commandDisplay"></div>
+                <p style="color: var(--text-secondary); font-size: 0.9rem;">
+                    אחרי שהסוכן סיים, לחץ "סיום" כדי להמשיך.
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal('commandModal')">ביטול</button>
+                <button class="btn btn-primary" onclick="markStepComplete()">✅ סיום</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script>
+        // ============ State ============
+        let pages = [];
+        let agents = {};
+        let selectedPage = null;
+        let selectedAgent = null;
+        let currentStep = 0;
+        let currentMode = 'cursor';
+        let isRunning = false;
+        let expectedReportPath = null;
+        let pollInterval = null;
+
+        // ============ Helper Functions for New Folder Structure ============
+        
+        function getPageFolder(pagePath) {
+            // pagePath might use \ on Windows or / on other systems
+            // Normalize to forward slashes first
+            const normalizedPath = pagePath.replace(/\\/g, '/');
+            const parts = normalizedPath.split('/');
+            parts.pop(); // Remove filename
+            return parts.join('/');
+        }
+        
+        function getAgentFolder(pagePath, agentConfig) {
+            // Returns the agent folder for a page
+            // e.g., "דפים לשינוי/הלוואה בצ_יקים/שיווק אטומי"
+            const pageFolder = getPageFolder(pagePath);
+            const agentFolderName = agentConfig?.folder_name || agentConfig?.name || 'שיווק אטומי';
+            return `${pageFolder}/${agentFolderName}`;
+        }
+        
+        // ============ API Calls ============
+        const API_BASE = '';
+
+        async function apiCall(endpoint, options = {}) {
+            try {
+                const response = await fetch(`${API_BASE}${endpoint}`, {
+                    headers: { 'Content-Type': 'application/json' },
+                    ...options
+                });
+                return await response.json();
+            } catch (error) {
+                console.error('API Error:', error);
+                showToast('שגיאה בתקשורת עם השרת', 'error');
+                return { success: false, error: error.message };
+            }
+        }
+
+        // ============ Pages ============
+        let runningPagesMap = {};  // Track which pages are running (from server)
+        let localRunningPages = {};  // Track locally which pages we started
+        let pageStatusMap = {};  // Track page status (hasReport, hasFixed)
+        let multiAgentStatusMap = {};  // Track status for ALL agents per page
+        
+        async function loadPages() {
+            const result = await apiCall('/api/pages');
+            if (result.success) {
+                pages = result.pages;
+                // Also load running status and page status
+                await loadRunningStatus();
+                await loadPageStatus();
+                await loadMultiAgentStatus();
+                renderPageList();
+            }
+        }
+        
+        async function loadRunningStatus() {
+            const result = await apiCall('/api/status/running');
+            if (result.success) {
+                runningPagesMap = result.running || {};
+                // Debug: log running pages
+                console.log('Running pages from server:', Object.keys(runningPagesMap));
+                if (pages.length > 0) {
+                    console.log('First page path in list:', pages[0].path);
+                }
+            }
+        }
+        
+        async function loadPageStatus() {
+            // Get status for all pages based on selected agent
+            const agentId = selectedAgent?.id || '';
+            const result = await apiCall(`/api/status/pages?agent=${encodeURIComponent(agentId)}`);
+            if (result.success) {
+                pageStatusMap = result.status || {};
+                console.log('Page status loaded:', Object.keys(pageStatusMap).length, 'pages with status');
+            }
+        }
+        
+        async function loadMultiAgentStatus() {
+            // Get status for ALL agents per page
+            const result = await apiCall('/api/status/multi-agent');
+            if (result.success) {
+                multiAgentStatusMap = result.status || {};
+                console.log('Multi-agent status loaded:', Object.keys(multiAgentStatusMap).length, 'pages');
+            }
+        }
+        
+        function renderMultiAgentProgress(pagePath) {
+            const normalizedPath = pagePath.replace(/\\/g, '/');
+            const status = multiAgentStatusMap[pagePath] || multiAgentStatusMap[normalizedPath];
+            if (!status) return '';
+            
+            let html = '<div class="multi-agent-status">';
+            
+            // Atomic Marketing progress
+            const atomic = status.atomic_marketing;
+            if (atomic) {
+                const isCompleted = atomic.completedSteps >= atomic.maxSteps;
+                html += `<div class="agent-progress atomic ${isCompleted ? 'is-done' : ''}" title="שיווק אטומי">`;
+                html += '<span class="agent-label">אטומי</span>';
+                html += '<div class="progress-bar-mini">';
+                for (let i = 1; i <= atomic.maxSteps; i++) {
+                    const completed = i <= atomic.completedSteps ? 'completed atomic' : '';
+                    html += `<span class="step-dot ${completed}"></span>`;
+                }
+                html += '</div>';
+                if (isCompleted) {
+                    html += '<span class="agent-done-badge">✓</span>';
+                }
+                html += '</div>';
+            }
+            
+            // SEO progress
+            const seo = status.seo;
+            if (seo) {
+                const isCompleted = seo.completedSteps >= seo.maxSteps;
+                html += `<div class="agent-progress seo ${isCompleted ? 'is-done' : ''}" title="SEO">`;
+                html += '<span class="agent-label">SEO</span>';
+                html += '<div class="progress-bar-mini">';
+                for (let i = 1; i <= seo.maxSteps; i++) {
+                    const completed = i <= seo.completedSteps ? 'completed seo' : '';
+                    html += `<span class="step-dot ${completed}"></span>`;
+                }
+                html += '</div>';
+                if (isCompleted) {
+                    html += '<span class="agent-done-badge">✓</span>';
+                }
+                html += '</div>';
+            }
+            
+            html += '</div>';
+            return html;
+        }
+        
+        async function clearAllStatus() {
+            const result = await apiCall('/api/status/clear-all', { method: 'POST' });
+            if (result.success) {
+                runningPagesMap = {};
+                localRunningPages = {};
+                pageStatusMap = {};
+                renderPageList();
+                hideWorkStatusPanel();
+                showToast('🧹 כל הסטטוסים נוקו', 'success');
+            }
+        }
+
+        function renderPageList() {
+            const list = document.getElementById('pageList');
+            
+            list.innerHTML = pages.map((page, index) => {
+                // Normalize path for comparison (handle both / and \)
+                const normalizedPath = page.path.replace(/\\/g, '/');
+                
+                // Check running status from LOCAL tracking (more reliable)
+                let isRunning = localRunningPages[page.path] || localRunningPages[normalizedPath];
+                
+                // Also check by page name in local running
+                if (!isRunning) {
+                    for (const [runPath, runInfo] of Object.entries(localRunningPages)) {
+                        const runPathNorm = runPath.replace(/\\/g, '/');
+                        if (runPathNorm.includes(page.name + '.html') || runPathNorm.includes(page.name)) {
+                            isRunning = runInfo;
+                            break;
+                        }
+                    }
+                }
+                
+                const pageStatus = pageStatusMap[page.path] || pageStatusMap[normalizedPath] || {};
+                
+                let statusDot = '';
+                let stepInfo = '';
+                let itemClass = selectedPage?.path === page.path ? 'selected' : '';
+                
+                if (isRunning) {
+                    // Yellow pulsing dot for running
+                    const step = isRunning.step || '?';
+                    statusDot = `<span class="page-status-dot running" title="רץ שלב ${step}"></span>`;
+                    stepInfo = `<span class="step-badge running">שלב ${step}</span>`;
+                    itemClass += ' is-running';
+                } else if (pageStatus.hasStep6Report) {
+                    // Step 6 done - fully completed (six-step)
+                    statusDot = '<span class="page-status-dot completed" title="הושלם"></span>';
+                    stepInfo = '<span class="step-badge completed">✓ הושלם</span>';
+                    itemClass += ' is-completed';
+                } else if (pageStatus.hasStep5Report) {
+                    // Step 5 done
+                    statusDot = '<span class="page-status-dot step5" title="שלב 5 הושלם"></span>';
+                    stepInfo = '<span class="step-badge step5">שלב 5 ✓</span>';
+                } else if (pageStatus.hasStep4Report) {
+                    // Step 4 done - fully completed for four-step, or step 4 for six-step
+                    const isSixStep = selectedAgent?.type === 'six-step';
+                    if (isSixStep) {
+                        statusDot = '<span class="page-status-dot step4" title="שלב 4 הושלם"></span>';
+                        stepInfo = '<span class="step-badge step4">שלב 4 ✓</span>';
+                    } else {
+                        statusDot = '<span class="page-status-dot completed" title="הושלם"></span>';
+                        stepInfo = '<span class="step-badge completed">✓ הושלם</span>';
+                        itemClass += ' is-completed';
+                    }
+                } else if (pageStatus.hasStep3Report) {
+                    // Step 3 done - check if four-step, six-step, or three-step
+                    const isFourStep = selectedAgent?.type === 'four-step';
+                    const isSixStep = selectedAgent?.type === 'six-step';
+                    if (isFourStep || isSixStep) {
+                        statusDot = '<span class="page-status-dot step3" title="שלב 3 הושלם"></span>';
+                        stepInfo = '<span class="step-badge step3">שלב 3 ✓</span>';
+                        itemClass += ' is-step3';
+                    } else {
+                        statusDot = '<span class="page-status-dot completed" title="הושלם"></span>';
+                        stepInfo = '<span class="step-badge completed">✓ הושלם</span>';
+                        itemClass += ' is-completed';
+                    }
+                } else if (pageStatus.hasStep2Report) {
+                    // Step 2 done
+                    statusDot = '<span class="page-status-dot step2" title="שלב 2 הושלם"></span>';
+                    stepInfo = '<span class="step-badge step2">שלב 2 ✓</span>';
+                    itemClass += ' is-step2';
+                } else if (pageStatus.hasReport) {
+                    // Has report - step 1 done
+                    statusDot = '<span class="page-status-dot step1" title="דוח מוכן"></span>';
+                    stepInfo = '<span class="step-badge step1">שלב 1 ✓</span>';
+                    itemClass += ' is-step1';
+                } else {
+                    // Pending - gray dot
+                    statusDot = '<span class="page-status-dot pending" title="ממתין"></span>';
+                }
+                
+                // Get multi-agent progress display
+                const multiAgentProgress = renderMultiAgentProgress(page.path);
+                
+                return `
+                <div class="page-item ${itemClass}" data-index="${index}">
+                    <div class="page-item-title"><span class="page-name">${page.name}</span>${statusDot}</div>
+                    <div class="page-item-meta">
+                        <span class="page-item-folder">📁 ${page.folder}</span>
+                        ${stepInfo}
+                        ${page.post_id ? `<span>ID: ${page.post_id}</span>` : ''}
+                    </div>
+                    ${multiAgentProgress}
+                </div>
+            `}).join('');
+            
+            // Add click handlers
+            list.querySelectorAll('.page-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    const index = parseInt(item.dataset.index);
+                    selectPage(index);
+                });
+            });
+        }
+
+        async function selectPage(index) {
+            selectedPage = pages[index];
+            
+            // Refresh running status before rendering
+            await loadRunningStatus();
+            renderPageList();
+            loadPreview();
+            loadReports(); // Load report and update workflow buttons
+            
+            // Check if this page is running
+            const isRunning = runningPagesMap[selectedPage.path];
+            const pageName = selectedPage.name?.replace('.html', '') || 'עמוד';
+            
+            if (isRunning) {
+                // Page is running - show work status panel
+                const info = isRunning;
+                showWorkStatusPanel();
+                updateWorkStatusTitle(`📄 ${pageName} - שלב ${info.step} רץ...`);
+                setWorkStatusDot('running');
+                lastLogContent = '';  // Reset to force refresh
+                showStopButton();
+                startStatusPolling();
+                startWorkLogPolling();
+            } else {
+                // Page is not running - check if there's a recent log
+                stopStatusPolling();
+                hideStopButton();
+                
+                // Try to load log anyway (might have finished recently)
+                const logResult = await apiCall(`/api/worklog?page=${encodeURIComponent(selectedPage.path)}`);
+                if (logResult.success && logResult.content && logResult.content.trim()) {
+                    // There's a log for this page - show it
+                    showWorkStatusPanel();
+                    const content = document.getElementById('workStatusContent');
+                    content.innerHTML = formatWorkLog(logResult.content);
+                    content.scrollTop = content.scrollHeight;
+                    
+                    // Check if it finished or still running based on log
+                    if (logResult.content.includes('🏁 סיום!') || logResult.content.includes('✅ Claude סיים!')) {
+                        setWorkStatusDot('completed');
+                        updateWorkStatusTitle(`📄 ${pageName} - הסתיים ✅`);
+                        // Refresh reports since it's completed
+                        loadReports();
+                    } else {
+                        setWorkStatusDot('running');
+                        updateWorkStatusTitle(`📄 ${pageName} - רץ...`);
+                        startWorkLogPolling();
+                    }
+                } else {
+                    // No log - hide panel
+                    stopWorkLogPolling();
+                    hideWorkStatusPanel();
+                }
+            }
+        }
+
+        function loadPreview() {
+            if (!selectedPage) return;
+            const previewContent = document.getElementById('previewContent');
+            const encodedPath = encodeURIComponent(selectedPage.path);
+            previewContent.innerHTML = `<iframe src="/api/preview/${encodedPath}"></iframe>`;
+        }
+
+        // ============ Agents ============
+        async function loadAgents() {
+            const result = await apiCall('/api/agents');
+            if (result.success) {
+                agents = result.agents;
+                renderAgentSelect();
+                renderAgentList();
+            }
+        }
+
+        function renderAgentSelect() {
+            const select = document.getElementById('agentSelect');
+            
+            // Define preferred order - atomic_marketing first, seo second
+            const preferredOrder = ['atomic_marketing', 'seo'];
+            const agentEntries = Object.entries(agents);
+            
+            // Sort agents: preferred order first, then rest alphabetically
+            agentEntries.sort(([idA], [idB]) => {
+                const indexA = preferredOrder.indexOf(idA);
+                const indexB = preferredOrder.indexOf(idB);
+                
+                if (indexA !== -1 && indexB !== -1) return indexA - indexB;
+                if (indexA !== -1) return -1;
+                if (indexB !== -1) return 1;
+                return idA.localeCompare(idB);
+            });
+            
+            select.innerHTML = agentEntries.map(([id, agent]) => 
+                `<option value="${id}">${agent.name}</option>`
+            ).join('');
+            
+            if (agentEntries.length > 0) {
+                selectAgent(agentEntries[0][0]);
+            }
+        }
+
+        async function selectAgent(agentId) {
+            selectedAgent = { id: agentId, ...agents[agentId] };
+            
+            const typeSpan = document.getElementById('agentType');
+            if (selectedAgent.type === 'six-step') {
+                typeSpan.textContent = '6-שלבי';
+                typeSpan.className = 'status-badge status-info';
+            } else if (selectedAgent.type === 'four-step') {
+                typeSpan.textContent = '4-שלבי';
+                typeSpan.className = 'status-badge status-report';
+            } else if (selectedAgent.type === 'three-step') {
+                typeSpan.textContent = '3-שלבי';
+                typeSpan.className = 'status-badge status-report';
+            } else if (selectedAgent.type === 'two-step') {
+                typeSpan.textContent = 'דו-שלבי';
+                typeSpan.className = 'status-badge status-report';
+            } else if (selectedAgent.type === 'multi-step') {
+                typeSpan.textContent = 'רב-שלבי';
+                typeSpan.className = 'status-badge status-info';
+            } else {
+                typeSpan.textContent = 'חד-שלבי';
+                typeSpan.className = 'status-badge status-pending';
+            }
+            
+            // Reload page status for new agent and re-render
+            await loadPageStatus();
+            await loadMultiAgentStatus();
+            renderPageList();
+            loadReports(); // Reload reports and update workflow buttons
+            updateWorkflowButtons(); // Also update workflow buttons
+        }
+
+        async function updateWorkflowButtons() {
+            const container = document.getElementById('workflowButtons');
+            
+            if (!selectedPage || !selectedAgent) {
+                container.innerHTML = '';
+                return;
+            }
+
+            // Check page status using new folder structure
+            const normalizedPath = selectedPage.path.replace(/\\/g, '/');
+            const status = pageStatusMap[selectedPage.path] || pageStatusMap[normalizedPath] || {};
+            const hasReport = status.hasReport || currentReportPath !== null;
+            const hasStep2Report = status.hasStep2Report || false;
+            const hasStep3Report = status.hasStep3Report || false;
+            
+            // Combined Auto button (always visible if both agents exist)
+            const hasBothAgents = agents?.atomic_marketing && agents?.seo;
+            const combinedAutoBtn = hasBothAgents ? 
+                `<button class="btn btn-danger" onclick="runCombinedAuto()" title="הרצת שיווק אטומי + SEO">⚡ Combined Auto</button>` : '';
+
+            if (selectedAgent.type === 'six-step') {
+                // Six-step workflow: report → QA → fixes → QA fixes → AI removal → AI debug
+                let buttons = '';
+                const hasStep2Report = status.hasStep2Report || false;
+                const hasStep3Report = status.hasStep3Report || false;
+                const hasStep4Report = status.hasStep4Report || false;
+                const hasStep5Report = status.hasStep5Report || false;
+                const hasStep6Report = status.hasStep6Report || false;
+                
+                // Full Auto button (if supported)
+                if (selectedAgent.supports_full_auto) {
+                    buttons += `<button class="btn btn-warning" onclick="runFullAuto()" title="הרצה אוטומטית">🚀 Full Auto</button>`;
+                }
+                
+                if (hasStep6Report) {
+                    // All steps done
+                    buttons += `
+                        <button class="btn btn-secondary btn-small" onclick="runStep1()">1️⃣</button>
+                        <button class="btn btn-secondary btn-small" onclick="runStep2()">2️⃣</button>
+                        <button class="btn btn-secondary btn-small" onclick="runStep3()">3️⃣</button>
+                        <button class="btn btn-secondary btn-small" onclick="runStep4()">4️⃣</button>
+                        <button class="btn btn-secondary btn-small" onclick="runStep5()">5️⃣</button>
+                        <button class="btn btn-secondary btn-small" onclick="runStep6()">6️⃣</button>
+                        <span class="completed-badge">✓ הושלם</span>
+                    `;
+                } else if (hasStep5Report) {
+                    // Step 5 done - show step 6
+                    buttons += `
+                        <button class="btn btn-secondary btn-small" onclick="runStep1()">1️⃣</button>
+                        <button class="btn btn-secondary btn-small" onclick="runStep2()">2️⃣</button>
+                        <button class="btn btn-secondary btn-small" onclick="runStep3()">3️⃣</button>
+                        <button class="btn btn-secondary btn-small" onclick="runStep4()">4️⃣</button>
+                        <button class="btn btn-secondary btn-small" onclick="runStep5()">5️⃣</button>
+                        <button class="btn btn-success" onclick="runStep6()">🔍 שלב 6: דיבאג AI</button>
+                    `;
+                } else if (hasStep4Report) {
+                    // Step 4 done - show step 5
+                    buttons += `
+                        <button class="btn btn-secondary btn-small" onclick="runStep1()">1️⃣</button>
+                        <button class="btn btn-secondary btn-small" onclick="runStep2()">2️⃣</button>
+                        <button class="btn btn-secondary btn-small" onclick="runStep3()">3️⃣</button>
+                        <button class="btn btn-secondary btn-small" onclick="runStep4()">4️⃣</button>
+                        <button class="btn btn-success" onclick="runStep5()">🤖 שלב 5: הסרת AI</button>
+                        <button class="btn btn-secondary btn-small" style="opacity: 0.5;">6️⃣</button>
+                    `;
+                } else if (hasStep3Report) {
+                    // Step 3 done - show step 4
+                    buttons += `
+                        <button class="btn btn-secondary btn-small" onclick="runStep1()">1️⃣</button>
+                        <button class="btn btn-secondary btn-small" onclick="runStep2()">2️⃣</button>
+                        <button class="btn btn-secondary btn-small" onclick="runStep3()">3️⃣</button>
+                        <button class="btn btn-success" onclick="runStep4()">✓ שלב 4: QA לתיקונים</button>
+                        <button class="btn btn-secondary btn-small" style="opacity: 0.5;">5️⃣</button>
+                        <button class="btn btn-secondary btn-small" style="opacity: 0.5;">6️⃣</button>
+                    `;
+                } else if (hasStep2Report) {
+                    // Step 2 done - show step 3
+                    buttons += `
+                        <button class="btn btn-secondary btn-small" onclick="runStep1()">1️⃣</button>
+                        <button class="btn btn-secondary btn-small" onclick="runStep2()">2️⃣</button>
+                        <button class="btn btn-success" onclick="runStep3()">🔧 שלב 3: תיקונים</button>
+                        <button class="btn btn-secondary btn-small" style="opacity: 0.5;">4️⃣</button>
+                        <button class="btn btn-secondary btn-small" style="opacity: 0.5;">5️⃣</button>
+                        <button class="btn btn-secondary btn-small" style="opacity: 0.5;">6️⃣</button>
+                    `;
+                } else if (hasReport) {
+                    // Step 1 done - show step 2
+                    buttons += `
+                        <button class="btn btn-secondary btn-small" onclick="runStep1()">1️⃣</button>
+                        <button class="btn btn-success" onclick="runStep2()">📋 שלב 2: QA</button>
+                        <button class="btn btn-secondary btn-small" style="opacity: 0.5;">3️⃣</button>
+                        <button class="btn btn-secondary btn-small" style="opacity: 0.5;">4️⃣</button>
+                        <button class="btn btn-secondary btn-small" style="opacity: 0.5;">5️⃣</button>
+                        <button class="btn btn-secondary btn-small" style="opacity: 0.5;">6️⃣</button>
+                    `;
+                } else {
+                    // Nothing done - show step 1
+                    buttons += `
+                        <button class="btn btn-primary" onclick="runStep1()">📋 שלב 1: דוח</button>
+                        <button class="btn btn-secondary btn-small" style="opacity: 0.5;">2️⃣</button>
+                        <button class="btn btn-secondary btn-small" style="opacity: 0.5;">3️⃣</button>
+                        <button class="btn btn-secondary btn-small" style="opacity: 0.5;">4️⃣</button>
+                        <button class="btn btn-secondary btn-small" style="opacity: 0.5;">5️⃣</button>
+                        <button class="btn btn-secondary btn-small" style="opacity: 0.5;">6️⃣</button>
+                    `;
+                }
+                
+                container.innerHTML = combinedAutoBtn + buttons;
+            } else if (selectedAgent.type === 'four-step') {
+                // Four-step workflow: report → QA → fixes → debug
+                let buttons = '';
+                const hasStep2Report = status.hasStep2Report || false;  // QA report (דוח מורחב)
+                const hasStep3Report = status.hasStep3Report || false;  // Fixes report
+                const hasStep4Report = status.hasStep4Report || false;  // Debug report
+                
+                // Full Auto button (if supported)
+                if (selectedAgent.supports_full_auto) {
+                    buttons += `<button class="btn btn-warning" onclick="runFullAuto()" title="הרצה אוטומטית">🚀 Full Auto</button>`;
+                }
+                
+                if (hasStep4Report) {
+                    // All steps done
+                    buttons += `
+                        <button class="btn btn-secondary btn-small" onclick="runStep1()">1️⃣</button>
+                        <button class="btn btn-secondary btn-small" onclick="runStep2()">2️⃣</button>
+                        <button class="btn btn-secondary btn-small" onclick="runStep3()">3️⃣</button>
+                        <button class="btn btn-secondary btn-small" onclick="runStep4()">4️⃣</button>
+                        <span class="completed-badge">✓ הושלם</span>
+                    `;
+                } else if (hasStep3Report) {
+                    // Step 3 done - show step 4
+                    buttons += `
+                        <button class="btn btn-secondary btn-small" onclick="runStep1()">1️⃣</button>
+                        <button class="btn btn-secondary btn-small" onclick="runStep2()">2️⃣</button>
+                        <button class="btn btn-secondary btn-small" onclick="runStep3()">3️⃣</button>
+                        <button class="btn btn-success" onclick="runStep4()">🔍 שלב 4: דיבאג</button>
+                    `;
+                } else if (hasStep2Report) {
+                    // Step 2 done - show step 3
+                    buttons += `
+                        <button class="btn btn-secondary btn-small" onclick="runStep1()">1️⃣</button>
+                        <button class="btn btn-secondary btn-small" onclick="runStep2()">2️⃣</button>
+                        <button class="btn btn-success" onclick="runStep3()">🔧 שלב 3: תיקונים</button>
+                        <button class="btn btn-secondary btn-small" style="opacity: 0.5;">4️⃣</button>
+                    `;
+                } else if (hasReport) {
+                    // Step 1 done - show step 2
+                    buttons += `
+                        <button class="btn btn-secondary btn-small" onclick="runStep1()">1️⃣</button>
+                        <button class="btn btn-success" onclick="runStep2()">📋 שלב 2: QA</button>
+                        <button class="btn btn-secondary btn-small" style="opacity: 0.5;">3️⃣</button>
+                        <button class="btn btn-secondary btn-small" style="opacity: 0.5;">4️⃣</button>
+                    `;
+                } else {
+                    // Nothing done - show step 1
+                    buttons += `
+                        <button class="btn btn-primary" onclick="runStep1()">📋 שלב 1: דוח</button>
+                        <button class="btn btn-secondary btn-small" style="opacity: 0.5;">2️⃣</button>
+                        <button class="btn btn-secondary btn-small" style="opacity: 0.5;">3️⃣</button>
+                        <button class="btn btn-secondary btn-small" style="opacity: 0.5;">4️⃣</button>
+                    `;
+                }
+                
+                container.innerHTML = combinedAutoBtn + buttons;
+            } else if (selectedAgent.type === 'three-step') {
+                // Three-step workflow (like atomic marketing with debug)
+                let buttons = '';
+                
+                // Full Auto button (if supported)
+                if (selectedAgent.supports_full_auto) {
+                    buttons += `<button class="btn btn-warning" onclick="runFullAuto()" title="הרצה אוטומטית של כל השלבים">🚀 Full Auto</button>`;
+                }
+                
+                if (hasStep3Report) {
+                    // All steps done
+                    buttons += `
+                        <button class="btn btn-secondary btn-small" onclick="runStep1()">1️⃣</button>
+                        <button class="btn btn-secondary btn-small" onclick="runStep2()">2️⃣</button>
+                        <button class="btn btn-secondary btn-small" onclick="runStep3()">3️⃣</button>
+                        <span class="completed-badge">✓ הושלם</span>
+                    `;
+                } else if (hasStep2Report) {
+                    // Step 2 done - show step 3 as primary
+                    buttons += `
+                        <button class="btn btn-secondary btn-small" onclick="runStep1()">1️⃣</button>
+                        <button class="btn btn-secondary btn-small" onclick="runStep2()">2️⃣</button>
+                        <button class="btn btn-success" onclick="runStep3()">🔍 שלב 3: דיבאג</button>
+                    `;
+                } else if (hasReport) {
+                    // Step 1 done - show step 2 as primary
+                    buttons += `
+                        <button class="btn btn-secondary btn-small" onclick="runStep1()">1️⃣</button>
+                        <button class="btn btn-success" onclick="runStep2()">🔧 שלב 2: תיקונים</button>
+                        <button class="btn btn-secondary btn-small" onclick="showToast('צריך קודם שלב 2', 'error')" style="opacity: 0.5;">3️⃣</button>
+                    `;
+                } else {
+                    // Nothing done - show step 1
+                    buttons += `
+                        <button class="btn btn-primary" onclick="runStep1()">📋 שלב 1: דוח</button>
+                        <button class="btn btn-secondary btn-small" style="opacity: 0.5;">2️⃣</button>
+                        <button class="btn btn-secondary btn-small" style="opacity: 0.5;">3️⃣</button>
+                    `;
+                }
+                
+                container.innerHTML = combinedAutoBtn + buttons;
+            } else if (selectedAgent.type === 'two-step') {
+                // Two-step workflow
+                if (hasReport) {
+                    container.innerHTML = combinedAutoBtn + `
+                        <button class="btn btn-secondary" onclick="runStep1()">📋 שלב 1: צור דוח מחדש</button>
+                        <button class="btn btn-success" onclick="runStep2()">🔧 שלב 2: בצע תיקונים</button>
+                    `;
+                } else {
+                    container.innerHTML = combinedAutoBtn + `
+                        <button class="btn btn-primary" onclick="runStep1()">📋 שלב 1: צור דוח</button>
+                        <button class="btn btn-secondary" onclick="showToast('צריך קודם ליצור דוח (שלב 1)', 'error')" style="opacity: 0.5;">🔧 שלב 2: בצע תיקונים</button>
+                    `;
+                }
+            } else if (selectedAgent.type === 'single-step') {
+                container.innerHTML = combinedAutoBtn + `
+                    <button class="btn btn-primary" onclick="runSingleStep()">▶️ הרץ סוכן</button>
+                `;
+            } else if (selectedAgent.type === 'multi-step') {
+                container.innerHTML = combinedAutoBtn + `
+                    <button class="btn btn-primary" onclick="runBuildStep(0)">🏗️ התחל בנייה</button>
+                `;
+            }
+        }
+
+        // ============ Workflow ============
+        async function runStep1() {
+            if (!selectedPage || !selectedAgent) {
+                showToast('בחר עמוד וסוכן', 'error');
+                return;
+            }
+
+            currentMode = document.getElementById('modeSelect').value;
+            isRunning = true;
+            currentStep = 1;
+            
+            // Calculate expected report path
+            const suffix = selectedAgent.step1?.output_suffix || '_דוח.md';
+            const folder = selectedAgent.step1?.output_folder || 'תיקונים לעמודים';
+            const expectedPath = `${folder}/${selectedPage.name}${suffix}`;
+            
+            updateStatusDisplay('running', 'מריץ שלב 1...');
+            
+            const result = await apiCall('/api/workflow/step1', {
+                method: 'POST',
+                body: JSON.stringify({
+                    agent_id: selectedAgent.id,
+                    page_path: selectedPage.path,
+                    keyword: selectedPage.keywords || selectedPage.name,
+                    mode: currentMode
+                })
+            });
+
+            if (result.success) {
+                if (currentMode === 'cursor') {
+                    document.getElementById('commandDisplay').textContent = result.command;
+                    openModal('commandModal');
+                    // Start polling for file creation
+                    startPolling(expectedPath);
+                } else {
+                    // Claude Code mode - show live progress
+                    startPolling(expectedPath);
+                    showStopButton();
+                    startStatusPolling();
+                    showWorkStatusPanel();  // Show the live progress panel
+                    const pageName = selectedPage?.name?.replace('.html', '') || 'העמוד';
+                    updateWorkStatusTitle(`📄 ${pageName} - שלב 1 רץ...`);
+                    setWorkStatusDot('running');
+                    showToast(`🔄 רץ על: ${pageName}`, 'info');
+                    
+                    // Mark locally as running and refresh sidebar
+                    localRunningPages[selectedPage.path] = { step: 1, started: Date.now() };
+                    renderPageList();
+                    
+                    // Start report polling for Full Auto or Combined Auto mode
+                    if (fullAutoMode || combinedAutoMode) {
+                        startReportPolling(1);
+                    }
+                }
+            } else {
+                isRunning = false;
+                const errorMsg = result.error || result.stderr || 'שגיאה לא ידועה';
+                updateStatusDisplay('error', 'שגיאה');
+                showToast(errorMsg, 'error');
+                console.error('Step1 error:', result);
+                
+                // Reset Full Auto if error
+                if (fullAutoMode) {
+                    fullAutoMode = false;
+                    fullAutoStep = 0;
+                    stopReportPolling();
+                    showToast('❌ Full Auto נעצר עקב שגיאה', 'error');
+                }
+            }
+        }
+
+        async function runStep2() {
+            if (!selectedPage || !selectedAgent) {
+                showToast('בחר עמוד וסוכן', 'error');
+                return;
+            }
+
+            const agentFolder = getAgentFolder(selectedPage.path, selectedAgent);
+            currentMode = document.getElementById('modeSelect').value;
+            
+            // For four-step/six-step agents: step2 is QA
+            // For other agents: step2 is fixes (calls step3 endpoint internally)
+            const isFourOrSixStep = selectedAgent.type === 'four-step' || selectedAgent.type === 'six-step';
+            const reportName = selectedAgent.step1?.output_name || 'דוח שלב 1.md';
+            const report1Path = `${agentFolder}/${reportName}`;
+            
+            const body = isFourOrSixStep 
+                ? { agent_id: selectedAgent.id, page_path: selectedPage.path, report1_path: report1Path, mode: currentMode }
+                : { agent_id: selectedAgent.id, page_path: selectedPage.path, report_path: report1Path, mode: currentMode };
+            
+            const result = await apiCall('/api/workflow/step2', {
+                method: 'POST',
+                body: JSON.stringify(body)
+            });
+
+            if (result.success) {
+                if (currentMode === 'cursor') {
+                    document.getElementById('commandDisplay').textContent = result.command;
+                    currentStep = 2;
+                    openModal('commandModal');
+                } else {
+                    showStopButton();
+                    startStatusPolling();
+                    showWorkStatusPanel();
+                    const pageName = selectedPage?.name?.replace('.html', '') || 'העמוד';
+                    const stepName = isFourOrSixStep ? 'QA' : 'תיקונים';
+                    updateWorkStatusTitle(`📄 ${pageName} - שלב 2 (${stepName}) רץ...`);
+                    setWorkStatusDot('running');
+                    showToast(`📋 שלב 2 רץ על: ${pageName}`, 'info');
+                    
+                    // Poll for the output
+                    const outputName = selectedAgent.step2?.output_name || 'דוח שלב 1 מורחב.md';
+                    const outputPath = `${agentFolder}/${outputName}`;
+                    startPolling(outputPath);
+                    
+                    localRunningPages[selectedPage.path] = { step: 2, started: Date.now() };
+                    renderPageList();
+                    
+                    // Start report polling for Full Auto or Combined Auto mode
+                    if (fullAutoMode || combinedAutoMode) {
+                        startReportPolling(2);
+                    }
+                }
+            } else {
+                showToast(result.error || 'שגיאה', 'error');
+                if (fullAutoMode) {
+                    fullAutoMode = false;
+                    fullAutoStep = 0;
+                    stopReportPolling();
+                    showToast('❌ Full Auto נעצר עקב שגיאה', 'error');
+                }
+            }
+        }
+
+        async function runStep3() {
+            if (!selectedPage || !selectedAgent) {
+                showToast('בחר עמוד וסוכן', 'error');
+                return;
+            }
+
+            const agentFolder = getAgentFolder(selectedPage.path, selectedAgent);
+            const isFourStep = selectedAgent.type === 'four-step';
+            const isSixStep = selectedAgent.type === 'six-step';
+            currentMode = document.getElementById('modeSelect').value;
+            
+            let result;
+            if (isFourStep || isSixStep) {
+                // For four-step/six-step: step3 is fixes (uses expanded report from step2)
+                const reportName = selectedAgent.step2?.output_name || 'דוח שלב 1 מורחב.md';
+                const reportPath = `${agentFolder}/${reportName}`;
+                
+                result = await apiCall('/api/workflow/step3', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        agent_id: selectedAgent.id,
+                        page_path: selectedPage.path,
+                        report_path: reportPath,
+                        mode: currentMode
+                    })
+                });
+            } else {
+                // For three-step: step3 is debug
+                const report1Name = selectedAgent.step1?.output_name || 'דוח שלב 1.md';
+                const report2Name = selectedAgent.step2?.report_name || 'דוח שלב 2.md';
+                const report1Path = `${agentFolder}/${report1Name}`;
+                const report2Path = `${agentFolder}/${report2Name}`;
+                
+                result = await apiCall('/api/workflow/step4', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        agent_id: selectedAgent.id,
+                        page_path: selectedPage.path,
+                        report1_path: report1Path,
+                        report2_path: report2Path,
+                        mode: currentMode
+                    })
+                });
+            }
+
+            if (result.success) {
+                if (currentMode === 'cursor') {
+                    document.getElementById('commandDisplay').textContent = result.command;
+                    currentStep = 3;
+                    openModal('commandModal');
+                } else {
+                    showStopButton();
+                    startStatusPolling();
+                    showWorkStatusPanel();
+                    const pageName = selectedPage?.name?.replace('.html', '') || 'העמוד';
+                    const stepName = isFourStep ? 'תיקונים' : 'דיבאג';
+                    updateWorkStatusTitle(`📄 ${pageName} - שלב 3 ${stepName}...`);
+                    setWorkStatusDot('running');
+                    showToast(`🔧 שלב 3 רץ על: ${pageName}`, 'info');
+                    
+                    localRunningPages[selectedPage.path] = { step: 3, started: Date.now() };
+                    renderPageList();
+                    
+                    // Start report polling for Full Auto or Combined Auto mode
+                    if (fullAutoMode || combinedAutoMode) {
+                        startReportPolling(3);
+                    }
+                }
+            } else {
+                showToast(result.error || 'שגיאה', 'error');
+                if (fullAutoMode) {
+                    fullAutoMode = false;
+                    fullAutoStep = 0;
+                    stopReportPolling();
+                    showToast('❌ Full Auto נעצר עקב שגיאה', 'error');
+                }
+            }
+        }
+
+        async function runStep4() {
+            if (!selectedPage || !selectedAgent) {
+                showToast('בחר עמוד וסוכן', 'error');
+                return;
+            }
+
+            // Step 4 is only for four-step and six-step agents
+            if (selectedAgent.type !== 'four-step' && selectedAgent.type !== 'six-step') {
+                showToast('שלב 4 קיים רק בסוכן 4/6 שלבים', 'error');
+                return;
+            }
+
+            const agentFolder = getAgentFolder(selectedPage.path, selectedAgent);
+            const report1Name = selectedAgent.step2?.output_name || 'דוח שלב 1 מורחב.md';
+            const report3Name = selectedAgent.step3?.report_name || 'דוח שלב 3.md';
+            const report1Path = `${agentFolder}/${report1Name}`;
+            const report3Path = `${agentFolder}/${report3Name}`;
+
+            currentMode = document.getElementById('modeSelect').value;
+            
+            const result = await apiCall('/api/workflow/step4', {
+                method: 'POST',
+                body: JSON.stringify({
+                    agent_id: selectedAgent.id,
+                    page_path: selectedPage.path,
+                    report1_path: report1Path,
+                    report2_path: report3Path,
+                    mode: currentMode
+                })
+            });
+
+            if (result.success) {
+                if (currentMode === 'cursor') {
+                    document.getElementById('commandDisplay').textContent = result.command;
+                    currentStep = 4;
+                    openModal('commandModal');
+                } else {
+                    showStopButton();
+                    startStatusPolling();
+                    showWorkStatusPanel();
+                    const pageName = selectedPage?.name?.replace('.html', '') || 'העמוד';
+                    const stepLabel = selectedAgent.type === 'six-step' ? 'QA לתיקונים' : 'דיבאג';
+                    updateWorkStatusTitle(`📄 ${pageName} - שלב 4 ${stepLabel}...`);
+                    setWorkStatusDot('running');
+                    showToast(`🔍 שלב 4 ${stepLabel} רץ על: ${pageName}`, 'info');
+                    
+                    localRunningPages[selectedPage.path] = { step: 4, started: Date.now() };
+                    renderPageList();
+                    
+                    // Start report polling for Full Auto or Combined Auto mode
+                    if (fullAutoMode || combinedAutoMode) {
+                        startReportPolling(4);
+                    }
+                }
+            } else {
+                showToast(result.error || 'שגיאה', 'error');
+                if (fullAutoMode) {
+                    fullAutoMode = false;
+                    fullAutoStep = 0;
+                    stopReportPolling();
+                    showToast('❌ Full Auto נעצר עקב שגיאה', 'error');
+                }
+            }
+        }
+
+        async function runStep5() {
+            if (!selectedPage || !selectedAgent) {
+                showToast('בחר עמוד וסוכן', 'error');
+                return;
+            }
+
+            // Step 5 is only for six-step agents (AI removal)
+            if (selectedAgent.type !== 'six-step') {
+                showToast('שלב 5 קיים רק בסוכן 6 שלבים', 'error');
+                return;
+            }
+
+            const agentFolder = getAgentFolder(selectedPage.path, selectedAgent);
+            currentMode = document.getElementById('modeSelect').value;
+            
+            const result = await apiCall('/api/workflow/step5', {
+                method: 'POST',
+                body: JSON.stringify({
+                    agent_id: selectedAgent.id,
+                    page_path: selectedPage.path,
+                    mode: currentMode
+                })
+            });
+
+            if (result.success) {
+                if (currentMode === 'cursor') {
+                    document.getElementById('commandDisplay').textContent = result.command;
+                    currentStep = 5;
+                    openModal('commandModal');
+                } else {
+                    showStopButton();
+                    startStatusPolling();
+                    showWorkStatusPanel();
+                    const pageName = selectedPage?.name?.replace('.html', '') || 'העמוד';
+                    updateWorkStatusTitle(`📄 ${pageName} - שלב 5 הסרת AI...`);
+                    setWorkStatusDot('running');
+                    showToast(`🤖 שלב 5 הסרת AI רץ על: ${pageName}`, 'info');
+                    
+                    localRunningPages[selectedPage.path] = { step: 5, started: Date.now() };
+                    renderPageList();
+                    
+                    // Start report polling for Full Auto or Combined Auto mode
+                    if (fullAutoMode || combinedAutoMode) {
+                        startReportPolling(5);
+                    }
+                }
+            } else {
+                showToast(result.error || 'שגיאה', 'error');
+                if (fullAutoMode) {
+                    fullAutoMode = false;
+                    fullAutoStep = 0;
+                    stopReportPolling();
+                    showToast('❌ Full Auto נעצר עקב שגיאה', 'error');
+                }
+            }
+        }
+
+        async function runStep6() {
+            if (!selectedPage || !selectedAgent) {
+                showToast('בחר עמוד וסוכן', 'error');
+                return;
+            }
+
+            // Step 6 is only for six-step agents (AI debug)
+            if (selectedAgent.type !== 'six-step') {
+                showToast('שלב 6 קיים רק בסוכן 6 שלבים', 'error');
+                return;
+            }
+
+            const agentFolder = getAgentFolder(selectedPage.path, selectedAgent);
+            const step5ReportName = selectedAgent.step5?.report_name || 'דוח שלב 5.md';
+            const step5ReportPath = `${agentFolder}/${step5ReportName}`;
+
+            currentMode = document.getElementById('modeSelect').value;
+            
+            const result = await apiCall('/api/workflow/step6', {
+                method: 'POST',
+                body: JSON.stringify({
+                    agent_id: selectedAgent.id,
+                    page_path: selectedPage.path,
+                    step5_report_path: step5ReportPath,
+                    mode: currentMode
+                })
+            });
+
+            if (result.success) {
+                if (currentMode === 'cursor') {
+                    document.getElementById('commandDisplay').textContent = result.command;
+                    currentStep = 6;
+                    openModal('commandModal');
+                } else {
+                    showStopButton();
+                    startStatusPolling();
+                    showWorkStatusPanel();
+                    const pageName = selectedPage?.name?.replace('.html', '') || 'העמוד';
+                    updateWorkStatusTitle(`📄 ${pageName} - שלב 6 דיבאג AI...`);
+                    setWorkStatusDot('running');
+                    showToast(`🔍 שלב 6 דיבאג AI רץ על: ${pageName}`, 'info');
+                    
+                    localRunningPages[selectedPage.path] = { step: 6, started: Date.now() };
+                    renderPageList();
+                    
+                    // Start report polling for Full Auto or Combined Auto mode
+                    if (fullAutoMode || combinedAutoMode) {
+                        startReportPolling(6);
+                    }
+                }
+            } else {
+                showToast(result.error || 'שגיאה', 'error');
+                if (fullAutoMode) {
+                    fullAutoMode = false;
+                    fullAutoStep = 0;
+                    stopReportPolling();
+                    showToast('❌ Full Auto נעצר עקב שגיאה', 'error');
+                }
+            }
+        }
+
+        // Full Auto mode - run all steps automatically
+        let fullAutoMode = false;
+        let fullAutoStep = 0;
+        let lastCompletedStep = 0;  // Track which step we last completed
+        let fullAutoLastLogCheck = null;  // Timestamp when we last saw completion marker
+        let fullAutoExpectedReport = null;  // The report file we're waiting for
+        let fullAutoReportCheckInterval = null;  // Interval for checking report existence
+        
+        // Debounce for completion handling - prevent multiple refreshes
+        let lastCompletionRefresh = 0;
+        const COMPLETION_DEBOUNCE_MS = 3000;  // Don't refresh more than once per 3 seconds
+        
+        function shouldRefreshOnCompletion() {
+            const now = Date.now();
+            if (now - lastCompletionRefresh < COMPLETION_DEBOUNCE_MS) {
+                console.log('⏳ Debouncing completion refresh');
+                return false;
+            }
+            lastCompletionRefresh = now;
+            return true;
+        }
+        
+        // Get the expected report name for a specific step
+        function getExpectedReportName(agent, step) {
+            if (!agent) return null;
+            
+            const stepConfig = agent[`step${step}`];
+            if (!stepConfig) return null;
+            
+            // step1 and step2 use output_name, step3+ use report_name
+            return stepConfig.output_name || stepConfig.report_name || null;
+        }
+        
+        // Get full path to expected report
+        function getExpectedReportPath(step) {
+            if (!selectedAgent || !selectedPage) return null;
+            
+            const reportName = getExpectedReportName(selectedAgent, step);
+            if (!reportName) return null;
+            
+            const agentFolder = getAgentFolder(selectedPage.path, selectedAgent);
+            return `${agentFolder}/${reportName}`;
+        }
+        
+        // Start polling for report file existence
+        function startReportPolling(step) {
+            if (fullAutoReportCheckInterval) {
+                clearInterval(fullAutoReportCheckInterval);
+            }
+            
+            const expectedPath = getExpectedReportPath(step);
+            if (!expectedPath) {
+                console.warn('⚠️ Could not determine expected report path for step', step);
+                return;
+            }
+            
+            fullAutoExpectedReport = expectedPath;
+            console.log(`📋 Waiting for report: ${expectedPath}`);
+            
+            // Check every 2 seconds if the report exists
+            fullAutoReportCheckInterval = setInterval(async () => {
+                await checkReportExists();
+            }, 2000);
+        }
+        
+        // Stop polling for report
+        function stopReportPolling() {
+            if (fullAutoReportCheckInterval) {
+                clearInterval(fullAutoReportCheckInterval);
+                fullAutoReportCheckInterval = null;
+            }
+            fullAutoExpectedReport = null;
+        }
+        
+        // Check if the expected report exists and trigger next step
+        async function checkReportExists() {
+            if (!fullAutoMode || !fullAutoExpectedReport) return;
+            
+            try {
+                const encodedPath = encodeURIComponent(fullAutoExpectedReport);
+                const result = await apiCall(`/api/file/exists?path=${encodedPath}`);
+                
+                if (result.success && result.exists) {
+                    console.log(`✅ Report detected: ${fullAutoExpectedReport}`);
+                    
+                    // Stop polling
+                    stopReportPolling();
+                    
+                    // Debounce check
+                    if (!shouldRefreshOnCompletion()) {
+                        return;
+                    }
+                    
+                    // Update UI
+                    const pageName = selectedPage?.name?.replace('.html', '') || 'עמוד';
+                    setWorkStatusDot('completed');
+                    updateWorkStatusTitle(`📄 ${pageName} - שלב ${fullAutoStep} הסתיים ✅`);
+                    
+                    // Clear from local running
+                    if (selectedPage?.path) {
+                        delete localRunningPages[selectedPage.path];
+                    }
+                    
+                    // Refresh data
+                    await loadPageStatus();
+                    await loadMultiAgentStatus();
+                    loadReports();
+                    loadPreview();
+                    renderPageList();
+                    updateWorkflowButtons();
+                    hideStopButton();
+                    
+                    // Trigger next step!
+                    checkFullAutoNext();
+                }
+            } catch (e) {
+                console.error('Error checking report existence:', e);
+            }
+        }
+        
+        async function runFullAuto() {
+            if (!selectedPage || !selectedAgent) {
+                showToast('בחר עמוד וסוכן', 'error');
+                return;
+            }
+            
+            const isFourStep = selectedAgent.type === 'four-step';
+            const isSixStep = selectedAgent.type === 'six-step';
+            const totalSteps = isSixStep ? 6 : (isFourStep ? 4 : 3);
+            
+            // Determine current step based on existing reports
+            const normalizedPath = selectedPage.path.replace(/\\/g, '/');
+            const pageStatus = pageStatusMap[selectedPage.path] || pageStatusMap[normalizedPath] || {};
+            let startStep = 1;
+            let stepsText = isSixStep ? 'שלב 1 → 2 → 3 → 4 → 5 → 6' : (isFourStep ? 'שלב 1 → 2 → 3 → 4' : 'שלב 1 → 2 → 3');
+            
+            console.log('Full Auto - checking status:', pageStatus, 'isFourStep:', isFourStep, 'isSixStep:', isSixStep);
+            
+            if (isSixStep) {
+                if (pageStatus.hasStep6Report) {
+                    // In Combined Auto mode, don't stop - just mark as done
+                    if (!combinedAutoMode) {
+                        showToast('כל השלבים הושלמו!', 'info');
+                        return;
+                    }
+                    // Already done, skip to next phase
+                    showToast('✅ כל שלבי SEO הושלמו', 'info');
+                    return;
+                } else if (pageStatus.hasStep5Report) {
+                    startStep = 6;
+                    stepsText = 'שלב 6';
+                } else if (pageStatus.hasStep4Report) {
+                    startStep = 5;
+                    stepsText = 'שלב 5 → 6';
+                } else if (pageStatus.hasStep3Report) {
+                    startStep = 4;
+                    stepsText = 'שלב 4 → 5 → 6';
+                } else if (pageStatus.hasStep2Report) {
+                    startStep = 3;
+                    stepsText = 'שלב 3 → 4 → 5 → 6';
+                } else if (pageStatus.hasReport) {
+                    startStep = 2;
+                    stepsText = 'שלב 2 → 3 → 4 → 5 → 6';
+                }
+            } else if (isFourStep) {
+                if (pageStatus.hasStep4Report) {
+                    // In Combined Auto mode, don't stop - just mark as done and proceed
+                    if (!combinedAutoMode) {
+                        showToast('כל השלבים הושלמו!', 'info');
+                        return;
+                    }
+                    // Already done, move to SEO phase
+                    showToast('✅ כל שלבי שיווק אטומי הושלמו, עובר ל-SEO', 'info');
+                    combinedAutoPhase = 'seo';
+                    setTimeout(async () => {
+                        await selectAgent('seo');
+                        await new Promise(r => setTimeout(r, 1000));
+                        showToast('🚀 מתחיל SEO Full Auto...', 'info');
+                        await runFullAuto();
+                    }, 2000);
+                    return;
+                } else if (pageStatus.hasStep3Report) {
+                    startStep = 4;
+                    stepsText = 'שלב 4';
+                } else if (pageStatus.hasStep2Report) {
+                    startStep = 3;
+                    stepsText = 'שלב 3 → 4';
+                } else if (pageStatus.hasReport) {
+                    startStep = 2;
+                    stepsText = 'שלב 2 → 3 → 4';
+                }
+            } else {
+                if (pageStatus.hasStep3Report) {
+                    showToast('כל השלבים הושלמו!', 'info');
+                    return;
+                } else if (pageStatus.hasStep2Report) {
+                    startStep = 3;
+                    stepsText = 'שלב 3';
+                } else if (pageStatus.hasReport) {
+                    startStep = 2;
+                    stepsText = 'שלב 2 → 3';
+                }
+            }
+            
+            // Skip confirm dialog if already in Combined Auto mode
+            if (!combinedAutoMode) {
+                if (!confirm(`להריץ אוטומטית? (${stepsText})`)) {
+                    return;
+                }
+            }
+            
+            fullAutoMode = true;
+            fullAutoStep = startStep;
+            fullAutoLastLogCheck = null;
+            fullAutoTransitioning = false;
+            
+            const agentName = selectedAgent.name || selectedAgent.id;
+            if (startStep === 1) {
+                showToast(`🚀 ${agentName} - מתחיל שלב 1`, 'info');
+                await runStep1();
+            } else if (startStep === 2) {
+                showToast(`🚀 ${agentName} - מתחיל שלב 2`, 'info');
+                await runStep2();
+            } else if (startStep === 3) {
+                showToast(`🚀 ${agentName} - מתחיל שלב 3`, 'info');
+                await runStep3();
+            } else if (startStep === 4) {
+                showToast(`🚀 ${agentName} - מתחיל שלב 4`, 'info');
+                await runStep4();
+            } else if (startStep === 5 && isSixStep) {
+                showToast(`🚀 ${agentName} - מתחיל שלב 5`, 'info');
+                await runStep5();
+            } else if (startStep === 6 && isSixStep) {
+                showToast(`🚀 ${agentName} - מתחיל שלב 6`, 'info');
+                await runStep6();
+            }
+        }
+        
+        // Called when a step completes to trigger next step in Full Auto mode
+        let fullAutoTransitioning = false;  // Prevent double calls
+        
+        async function checkFullAutoNext() {
+            console.log('🔄 checkFullAutoNext called! fullAutoMode:', fullAutoMode, 'fullAutoStep:', fullAutoStep, 'transitioning:', fullAutoTransitioning, 'combinedMode:', combinedAutoMode, 'combinedPhase:', combinedAutoPhase);
+            
+            // Check for Full Auto OR Combined Auto mode
+            if (!fullAutoMode && !combinedAutoMode) {
+                console.log('❌ Not in Full Auto or Combined Auto mode, skipping');
+                return;
+            }
+            
+            // If in Combined Auto mode, treat it like Full Auto
+            if (combinedAutoMode && !fullAutoMode) {
+                fullAutoMode = true;
+                console.log('🔗 Combined Auto mode detected, enabling fullAutoMode');
+            }
+            
+            // Prevent double-calling during transition
+            if (fullAutoTransitioning) {
+                console.log('⏳ Already transitioning, skipping duplicate call');
+                return;
+            }
+            
+            // Prevent calling again within 3 seconds of last call (debounce)
+            const now = Date.now();
+            if (fullAutoLastLogCheck && (now - fullAutoLastLogCheck) < 3000) {
+                console.log('⏳ Called too soon after last check, skipping (debounce)');
+                return;
+            }
+            fullAutoLastLogCheck = now;
+            
+            fullAutoTransitioning = true;
+            fullAutoStep++;
+            console.log('📈 Moving to step:', fullAutoStep, 'agent:', selectedAgent?.id);
+            
+            const isFourStep = selectedAgent?.type === 'four-step';
+            const isSixStep = selectedAgent?.type === 'six-step';
+            const totalSteps = isSixStep ? 6 : (isFourStep ? 4 : 3);
+            
+            if (fullAutoStep === 2) {
+                const agentName = selectedAgent?.name || 'סוכן';
+                showToast(`🚀 ${agentName} - עובר לשלב 2 (מחכה 3 שניות)`, 'info');
+                setTimeout(async () => {
+                    // Clear all debounce timestamps so next step can be detected
+                    fullAutoLastLogCheck = null;
+                    fullAutoTransitioning = false;
+                    lastCompletionRefresh = 0;  // Reset UI debounce too
+                    console.log('▶️ Starting step 2...');
+                    await runStep2();
+                    await new Promise(r => setTimeout(r, 2000));
+                }, 3000);
+            } else if (fullAutoStep === 3) {
+                const agentName = selectedAgent?.name || 'סוכן';
+                showToast(`🚀 ${agentName} - עובר לשלב 3 (מחכה 5 שניות)`, 'info');
+                setTimeout(async () => {
+                    fullAutoLastLogCheck = null;
+                    fullAutoTransitioning = false;
+                    lastCompletionRefresh = 0;
+                    
+                    // Verify step 2 report exists before proceeding
+                    const step2ReportPath = getExpectedReportPath(2);
+                    if (step2ReportPath) {
+                        const checkResult = await apiCall(`/api/file/exists?path=${encodeURIComponent(step2ReportPath)}`);
+                        if (!checkResult?.exists) {
+                            console.log('⏳ Step 2 report not ready yet, waiting 3 more seconds...');
+                            await new Promise(r => setTimeout(r, 3000));
+                        }
+                    }
+                    
+                    console.log('▶️ Starting step 3...');
+                    await runStep3();
+                    await new Promise(r => setTimeout(r, 2000));
+                }, 5000);
+            } else if (fullAutoStep === 4 && (isFourStep || isSixStep)) {
+                const agentName = selectedAgent?.name || 'סוכן';
+                showToast(`🚀 ${agentName} - עובר לשלב 4 (מחכה 5 שניות)`, 'info');
+                setTimeout(async () => {
+                    fullAutoLastLogCheck = null;
+                    fullAutoTransitioning = false;
+                    lastCompletionRefresh = 0;
+                    
+                    // Verify step 3 report exists before proceeding
+                    const step3ReportPath = getExpectedReportPath(3);
+                    if (step3ReportPath) {
+                        const checkResult = await apiCall(`/api/file/exists?path=${encodeURIComponent(step3ReportPath)}`);
+                        if (!checkResult?.exists) {
+                            console.log('⏳ Step 3 report not ready yet, waiting 3 more seconds...');
+                            await new Promise(r => setTimeout(r, 3000));
+                        }
+                    }
+                    
+                    console.log('▶️ Starting step 4...');
+                    await runStep4();
+                    await new Promise(r => setTimeout(r, 2000));
+                }, 5000);
+            } else if (fullAutoStep === 5 && isSixStep) {
+                const agentName = selectedAgent?.name || 'סוכן';
+                showToast(`🚀 ${agentName} - עובר לשלב 5 (מחכה 5 שניות)`, 'info');
+                setTimeout(async () => {
+                    fullAutoLastLogCheck = null;
+                    fullAutoTransitioning = false;
+                    lastCompletionRefresh = 0;
+                    
+                    // Verify step 4 report exists before proceeding
+                    const step4ReportPath = getExpectedReportPath(4);
+                    if (step4ReportPath) {
+                        const checkResult = await apiCall(`/api/file/exists?path=${encodeURIComponent(step4ReportPath)}`);
+                        if (!checkResult?.exists) {
+                            console.log('⏳ Step 4 report not ready yet, waiting 3 more seconds...');
+                            await new Promise(r => setTimeout(r, 3000));
+                        }
+                    }
+                    
+                    console.log('▶️ Starting step 5...');
+                    await runStep5();
+                    await new Promise(r => setTimeout(r, 2000));
+                }, 5000);
+            } else if (fullAutoStep === 6 && isSixStep) {
+                const agentName = selectedAgent?.name || 'סוכן';
+                showToast(`🚀 ${agentName} - עובר לשלב 6 (מחכה 5 שניות)`, 'info');
+                setTimeout(async () => {
+                    fullAutoLastLogCheck = null;
+                    fullAutoTransitioning = false;
+                    lastCompletionRefresh = 0;
+                    
+                    // Verify step 5 report exists before proceeding
+                    const step5ReportPath = getExpectedReportPath(5);
+                    if (step5ReportPath) {
+                        const checkResult = await apiCall(`/api/file/exists?path=${encodeURIComponent(step5ReportPath)}`);
+                        if (!checkResult?.exists) {
+                            console.log('⏳ Step 5 report not ready yet, waiting 3 more seconds...');
+                            await new Promise(r => setTimeout(r, 3000));
+                        }
+                    }
+                    
+                    console.log('▶️ Starting step 6...');
+                    await runStep6();
+                    await new Promise(r => setTimeout(r, 2000));
+                }, 5000);
+            } else if (fullAutoStep > totalSteps) {
+                console.log('🏁 All steps completed! combinedAutoMode:', combinedAutoMode, 'combinedAutoPhase:', combinedAutoPhase);
+                
+                fullAutoMode = false;
+                fullAutoStep = 0;
+                fullAutoTransitioning = false;
+                fullAutoLastLogCheck = null;
+                
+                // Check if we're in Combined Auto mode and need to switch to SEO
+                if (combinedAutoMode && combinedAutoPhase === 'atomic') {
+                    console.log('🔄 Switching from Atomic to SEO...');
+                    showToast('🎉 שיווק אטומי הושלם! עובר ל-SEO...', 'success');
+                    combinedAutoPhase = 'seo';
+                    
+                    // Switch to SEO agent and continue
+                    setTimeout(async () => {
+                        try {
+                            console.log('🔄 Selecting SEO agent...');
+                            await selectAgent('seo');
+                            await new Promise(r => setTimeout(r, 1500));
+                            
+                            // Refresh page status before running SEO
+                            await loadPageStatus();
+                            await new Promise(r => setTimeout(r, 500));
+                            
+                            console.log('🚀 Starting SEO Full Auto...');
+                            showToast('🚀 מתחיל SEO Full Auto...', 'info');
+                            await runFullAuto();
+                        } catch (e) {
+                            console.error('Error switching to SEO:', e);
+                            showToast('❌ שגיאה במעבר ל-SEO', 'error');
+                            combinedAutoMode = false;
+                            combinedAutoPhase = null;
+                        }
+                    }, 3000);
+                } else if (combinedAutoMode && combinedAutoPhase === 'seo') {
+                    console.log('🎉 Combined Auto fully completed!');
+                    combinedAutoMode = false;
+                    combinedAutoPhase = null;
+                    showToast('🎉 Combined Auto הושלם! (שיווק אטומי + SEO)', 'success');
+                } else {
+                    console.log('🎉 Full Auto completed (single agent)');
+                    showToast('🎉 Full Auto הושלם!', 'success');
+                }
+            } else {
+                // If we get here with an unexpected step number, reset
+                console.warn('⚠️ Unexpected fullAutoStep:', fullAutoStep, 'for totalSteps:', totalSteps);
+                fullAutoTransitioning = false;
+            }
+        }
+        
+        // Safety timeout - reset transitioning state if stuck for too long
+        setInterval(() => {
+            if (fullAutoTransitioning) {
+                const now = Date.now();
+                if (fullAutoLastLogCheck && (now - fullAutoLastLogCheck) > 60000) {
+                    console.warn('⚠️ Full Auto seems stuck, resetting transitioning state');
+                    fullAutoTransitioning = false;
+                }
+            }
+        }, 10000);
+        
+        // Combined Auto Mode - runs Atomic Marketing then SEO
+        let combinedAutoMode = false;
+        let combinedAutoPhase = null;  // 'atomic' or 'seo'
+        
+        async function runCombinedAuto() {
+            console.log('🔥 runCombinedAuto started!');
+            
+            if (!selectedPage) {
+                showToast('בחר עמוד', 'error');
+                return;
+            }
+            
+            // Check if both Atomic Marketing and SEO agents exist
+            if (!agents?.atomic_marketing || !agents?.seo) {
+                showToast('חסרים סוכנים להרצה משולבת', 'error');
+                return;
+            }
+            
+            if (!confirm('להריץ שיווק אטומי + SEO בזה אחר זה?\n\nזה יריץ את כל השלבים של שני הסוכנים אוטומטית.')) {
+                return;
+            }
+            
+            console.log('🔥 Combined Auto confirmed, starting Atomic Marketing phase...');
+            combinedAutoMode = true;
+            combinedAutoPhase = 'atomic';
+            
+            // Reset Full Auto state
+            fullAutoMode = false;
+            fullAutoStep = 0;
+            fullAutoTransitioning = false;
+            fullAutoLastLogCheck = null;
+            
+            // First, select atomic_marketing agent and start its Full Auto
+            try {
+                console.log('🔄 Selecting atomic_marketing agent...');
+                await selectAgent('atomic_marketing');
+                await new Promise(r => setTimeout(r, 1000));
+                
+                // Refresh page status
+                await loadPageStatus();
+                await new Promise(r => setTimeout(r, 500));
+                
+                console.log('🚀 Starting Atomic Marketing Full Auto...');
+                showToast('🚀 Combined Auto - מתחיל שיווק אטומי', 'info');
+                await runFullAuto();
+            } catch (e) {
+                console.error('Error starting Combined Auto:', e);
+                showToast('❌ שגיאה בהתחלת Combined Auto', 'error');
+                combinedAutoMode = false;
+                combinedAutoPhase = null;
+            }
+        }
+
+        async function runSingleStep() {
+            if (!selectedPage || !selectedAgent) {
+                showToast('בחר עמוד וסוכן', 'error');
+                return;
+            }
+
+            currentMode = document.getElementById('modeSelect').value;
+            
+            const result = await apiCall('/api/workflow/single', {
+                method: 'POST',
+                body: JSON.stringify({
+                    agent_id: selectedAgent.id,
+                    page_path: selectedPage.path,
+                    mode: currentMode
+                })
+            });
+
+            if (result.success) {
+                if (currentMode === 'cursor') {
+                    document.getElementById('commandDisplay').textContent = result.command;
+                    currentStep = 1;
+                    openModal('commandModal');
+                } else {
+                    showToast('הסוכן רץ בהצלחה', 'success');
+                }
+            } else {
+                showToast(result.error || 'שגיאה', 'error');
+            }
+        }
+
+        function markStepComplete() {
+            closeModal('commandModal');
+            stopPolling();
+            hideStopButton();
+            isRunning = false;
+            
+            if (currentStep === 1 && selectedAgent?.type === 'two-step') {
+                showToast('שלב 1 הושלם - אפשר להמשיך לשלב 2', 'success');
+                loadReports();
+                updateStatusDisplay('report_ready', 'הדוח מוכן! בדוק אותו ולחץ על שלב 2');
+            } else {
+                showToast('הפעולה הושלמה', 'success');
+                document.getElementById('uploadBtn').style.display = 'inline-flex';
+                loadPreview();
+                updateStatusDisplay('fixed', 'הקובץ מתוקן! אפשר להעלות ל-WordPress');
+            }
+        }
+        
+        // ============ Status & Polling ============
+        function updateStatusDisplay(status, message) {
+            const indicator = document.getElementById('statusIndicator');
+            
+            const statusConfig = {
+                'pending': { text: 'ממתין', class: 'status-pending' },
+                'running': { text: '🔄 רץ...', class: 'status-report' },
+                'report_ready': { text: '📋 דוח שלב 1', class: 'status-report' },
+                'step2_done': { text: '🔧 שלב 2 הושלם', class: 'status-fixed' },
+                'completed': { text: '✅ הושלם', class: 'status-uploaded' },
+                'fixed': { text: '✅ מתוקן', class: 'status-uploaded' },
+                'error': { text: '❌ שגיאה', class: 'status-pending' }
+            };
+            
+            const config = statusConfig[status] || statusConfig.pending;
+            indicator.textContent = config.text;
+            indicator.className = `status-badge ${config.class}`;
+            
+            if (message) {
+                showToast(message, status === 'error' ? 'error' : 'info');
+            }
+        }
+        
+        function startPolling(expectedPath) {
+            expectedReportPath = expectedPath;
+            updateStatusDisplay('running', 'הסוכן רץ... מחכה לקובץ');
+            
+            pollInterval = setInterval(async () => {
+                const result = await apiCall('/api/status/check-files', {
+                    method: 'POST',
+                    body: JSON.stringify({ files: [expectedPath] })
+                });
+                
+                if (result.success && result.files[expectedPath]?.exists) {
+                    stopPolling();
+                    hideStopButton();
+                    isRunning = false;
+                    
+                    showToast('הסוכן סיים! הקובץ נוצר', 'success');
+                    updateStatusDisplay('report_ready', 'הדוח מוכן!');
+                    
+                    // Auto-load the report
+                    loadReport(expectedPath);
+                    
+                    // If in Claude Code mode, auto-close modal
+                    if (currentMode === 'claude') {
+                        closeModal('commandModal');
+                    }
+                }
+            }, 3000); // Check every 3 seconds
+        }
+        
+        function stopPolling() {
+            if (pollInterval) {
+                clearInterval(pollInterval);
+                pollInterval = null;
+            }
+        }
+        
+        let statusPollInterval = null;
+        
+        function startStatusPolling() {
+            if (statusPollInterval) return;
+            
+            statusPollInterval = setInterval(async () => {
+                // Update running status for all pages
+                await loadRunningStatus();
+                renderPageList();
+                
+                if (!selectedPage) return;
+                
+                const result = await apiCall(`/api/status/page/${encodeURIComponent(selectedPage.path)}`);
+                
+                if (result.success) {
+                    const pageName = selectedPage?.name?.replace('.html', '') || 'העמוד';
+                    if (result.running) {
+                        updateStatusDisplay('running', `🔄 רץ שלב ${result.info.step}...`);
+                        updateWorkStatusTitle(`📄 ${pageName} - שלב ${result.info.step} רץ...`);
+                        setWorkStatusDot('running');
+                    } else {
+                        // Job finished - reload reports
+                        stopStatusPolling();
+                        stopPolling();
+                        hideStopButton();
+                        setWorkStatusDot('completed');
+                        updateWorkStatusTitle(`📄 ${pageName} - הסתיים ✅`);
+                        // Refresh page list
+                        await loadRunningStatus();
+                        renderPageList();
+                        loadReports();
+                        showToast(`✅ סיים: ${pageName}`, 'success');
+                    }
+                }
+            }, 2000);
+        }
+        
+        function stopStatusPolling() {
+            if (statusPollInterval) {
+                clearInterval(statusPollInterval);
+                statusPollInterval = null;
+            }
+        }
+
+        // ============ Work Status Panel ============
+        let workLogPollInterval = null;
+        let workStatusMinimized = false;
+        let lastLogContent = '';
+        
+        function showWorkStatusPanel() {
+            const panel = document.getElementById('workStatusPanel');
+            panel.classList.remove('hidden');
+            const content = document.getElementById('workStatusContent');
+            content.innerHTML = '⏳ מחכה להתחלת עבודה...';
+            lastLogContent = '';
+            startWorkLogPolling();
+        }
+        
+        function hideWorkStatusPanel() {
+            const panel = document.getElementById('workStatusPanel');
+            panel.classList.add('hidden');
+            stopWorkLogPolling();
+        }
+        
+        function toggleWorkStatus() {
+            workStatusMinimized = !workStatusMinimized;
+            const content = document.getElementById('workStatusContent');
+            const btn = document.getElementById('minimizeBtn');
+            
+            if (workStatusMinimized) {
+                content.style.display = 'none';
+                btn.textContent = '▲';
+            } else {
+                content.style.display = 'block';
+                btn.textContent = '▼';
+            }
+        }
+        
+        function startWorkLogPolling() {
+            if (workLogPollInterval) return;
+            
+            // Initial fetch
+            fetchWorkLog();
+            
+            // Poll every 300ms for real-time updates
+            workLogPollInterval = setInterval(fetchWorkLog, 300);
+        }
+        
+        function stopWorkLogPolling() {
+            if (workLogPollInterval) {
+                clearInterval(workLogPollInterval);
+                workLogPollInterval = null;
+            }
+        }
+        
+        async function fetchWorkLog() {
+            try {
+                // Get log for the currently selected page
+                const pagePath = selectedPage?.path || '';
+                const encodedPath = encodeURIComponent(pagePath);
+                const result = await apiCall(`/api/worklog?page=${encodedPath}`);
+                if (result.success) {
+                    const content = document.getElementById('workStatusContent');
+                    
+                    // Only update if content changed
+                    if (result.content !== lastLogContent) {
+                        lastLogContent = result.content;
+                        
+                        if (result.content) {
+                            // Format and colorize the output
+                            let formattedContent = formatWorkLog(result.content);
+                            content.innerHTML = formattedContent;
+                            
+                            // Auto-scroll to bottom
+                            content.scrollTop = content.scrollHeight;
+                            
+                            // Check if still running or completed based on log content
+                            const pageName = selectedPage?.name?.replace('.html', '') || 'עמוד';
+                            const isCompleted = result.content.includes('🏁 סיום!') || result.content.includes('✅ Claude סיים!');
+                            
+                            if (isCompleted) {
+                                // Check if this is an old log (less than 10 lines means it might be stale/clearing)
+                                const logLines = result.content.split('\n').filter(l => l.trim()).length;
+                                if (logLines < 10) {
+                                    console.log('⚠️ Log too short, might be stale - skipping completion check');
+                                    return;
+                                }
+                                
+                                // Debounce - prevent multiple refreshes
+                                if (!shouldRefreshOnCompletion()) {
+                                    return;
+                                }
+                                
+                                console.log('🎉 Log shows completion!');
+                                setWorkStatusDot('completed');
+                                updateWorkStatusTitle(`📄 ${pageName} - הסתיים ✅`);
+                                
+                                // Stop log polling
+                                stopWorkLogPolling();
+                                
+                                // Clear from local running
+                                if (selectedPage?.path) {
+                                    delete localRunningPages[selectedPage.path];
+                                }
+                                
+                                // Auto-refresh data (once)
+                                await loadPageStatus();
+                                await loadMultiAgentStatus();
+                                loadReports();
+                                loadPreview();
+                                renderPageList();
+                                updateWorkflowButtons();
+                                hideStopButton();
+                                
+                                // Trigger Full Auto next step!
+                                checkFullAutoNext();
+                            } else if (result.content.includes('🔄') || result.content.includes('💭') || result.content.includes('🔧')) {
+                                setWorkStatusDot('running');
+                                updateWorkStatusTitle(`📄 ${pageName} - רץ...`);
+                            }
+                        }
+                    }
+                }
+            } catch (e) {
+                console.error('Error fetching work log:', e);
+            }
+        }
+        
+        function formatWorkLog(text) {
+            // Escape HTML
+            let html = text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            
+            // Color specific patterns - Hebrew patterns
+            // Headers with emoji
+            html = html.replace(/(🚀.*|🔧.*שלב 2.*)/g, '<span class="step-header">$1</span>');
+            html = html.replace(/(={60})/g, '<span style="color: #666;">$1</span>');
+            html = html.replace(/(-{60})/g, '<span style="color: #444;">$1</span>');
+            
+            // Tool usage (🔧)
+            html = html.replace(/(🔧 משתמש בכלי:.*)/g, '<span class="tool-use">$1</span>');
+            
+            // Thinking (💭)
+            html = html.replace(/(💭.*)/g, '<span class="thinking">$1</span>');
+            
+            // Success (✅)
+            html = html.replace(/(✅.*)/g, '<span class="file-op">$1</span>');
+            
+            // Finish (🏁)
+            html = html.replace(/(🏁.*)/g, '<span class="step-header">$1</span>');
+            
+            // Warnings (⚠️)
+            html = html.replace(/(⚠️.*)/g, '<span style="color: #fbbf24;">$1</span>');
+            
+            // Error (❌)
+            html = html.replace(/(❌.*)/g, '<span style="color: #e94560;">$1</span>');
+            
+            // Page info (📄)
+            html = html.replace(/(📄.*|📋.*)/g, '<span style="color: #60a5fa;">$1</span>');
+            
+            // Running (🔄)
+            html = html.replace(/(🔄.*)/g, '<span style="color: #fbbf24;">$1</span>');
+            
+            // Server update (📡)
+            html = html.replace(/(📡.*)/g, '<span style="color: #4ade80;">$1</span>');
+            
+            return html;
+        }
+        
+        function updateWorkStatusTitle(title) {
+            document.getElementById('workStatusTitle').textContent = title || 'סטטוס עבודה';
+        }
+        
+        function setWorkStatusDot(status) {
+            const dot = document.getElementById('workStatusDot');
+            dot.className = 'status-dot';
+            if (status === 'running') {
+                dot.classList.add('running');
+                hideCorrectionsInput();
+            } else if (status === 'completed') {
+                dot.classList.add('completed');
+                showCorrectionsInput();  // Show input when completed
+            } else if (status === 'error') {
+                dot.classList.add('error');
+            }
+        }
+        
+        function showCorrectionsInput() {
+            document.getElementById('workStatusInput').style.display = 'block';
+        }
+        
+        function hideCorrectionsInput() {
+            document.getElementById('workStatusInput').style.display = 'none';
+        }
+        
+        async function sendCorrection() {
+            const input = document.getElementById('correctionInput');
+            const correction = input.value.trim();
+            
+            if (!correction) {
+                showToast('כתוב תיקון או הוראה', 'error');
+                return;
+            }
+            
+            if (!selectedPage) {
+                showToast('בחר עמוד', 'error');
+                return;
+            }
+            
+            // Clear input
+            input.value = '';
+            hideCorrectionsInput();
+            setWorkStatusDot('running');
+            const pageName = selectedPage.name?.replace('.html', '') || 'עמוד';
+            updateWorkStatusTitle(`📄 ${pageName} - ממשיך עם תיקון...`);
+            
+            // Send correction to server
+            const result = await apiCall('/api/workflow/continue', {
+                method: 'POST',
+                body: JSON.stringify({
+                    page_path: selectedPage.path,
+                    correction: correction
+                })
+            });
+            
+            if (result.success) {
+                showToast('📤 התיקון נשלח - Claude ממשיך...', 'info');
+                showStopButton();
+                startStatusPolling();
+                startWorkLogPolling();  // Resume log polling
+            } else {
+                showToast(result.error || 'שגיאה בשליחת התיקון', 'error');
+                setWorkStatusDot('error');
+                showCorrectionsInput();  // Show input again on error
+            }
+        }
+
+        // ============ Reports ============
+        let currentReportPath = null;
+        
+        async function loadReports() {
+            const deleteBtn = document.getElementById('deleteReportBtn');
+            deleteBtn.style.display = 'none';
+            currentReportPath = null;
+            
+            if (!selectedPage) {
+                document.getElementById('reportContent').innerHTML = '<p class="no-report">בחר עמוד כדי לראות דוח</p>';
+                return;
+            }
+            
+            // Check if this page is currently running
+            const statusResult = await apiCall(`/api/status/page/${encodeURIComponent(selectedPage.path)}`);
+            if (statusResult.success && statusResult.running) {
+                updateStatusDisplay('running', `רץ שלב ${statusResult.info.step}...`);
+                // Keep polling while running
+                if (!pollInterval) {
+                    startStatusPolling();
+                }
+            }
+            
+            if (!selectedAgent) {
+                document.getElementById('reportContent').innerHTML = '<p class="no-report">בחר סוכן כדי לראות דוח</p>';
+                return;
+            }
+            
+            // For single-step agents, no report to show
+            if (selectedAgent.type === 'single-step') {
+                document.getElementById('reportContent').innerHTML = '<p class="no-report">סוכן חד-שלבי - אין דוח.<br>הסוכן מבצע תיקונים ישירות.</p>';
+                updateStatusDisplay('pending', 'מוכן להרצה');
+                updateWorkflowButtons();
+                return;
+            }
+            
+            // Use new folder structure - check agent folder directly
+            const agentFolder = getAgentFolder(selectedPage.path, selectedAgent);
+            const isFourStep = selectedAgent.type === 'four-step';
+            const isSixStep = selectedAgent.type === 'six-step';
+            
+            // Get report names based on agent type
+            const report1Name = selectedAgent.step1?.output_name || 'דוח שלב 1.md';
+            let report2Name, report3Name, report4Name, report5Name, report6Name;
+            
+            if (isSixStep) {
+                report2Name = selectedAgent.step2?.output_name || 'דוח שלב 1 מורחב.md';  // QA for report
+                report3Name = selectedAgent.step3?.report_name || 'דוח שלב 3.md';  // Fixes
+                report4Name = selectedAgent.step4?.report_name || 'דוח שלב 4.md';  // QA for fixes
+                report5Name = selectedAgent.step5?.report_name || 'דוח שלב 5.md';  // AI removal
+                report6Name = selectedAgent.step6?.report_name || 'דוח דיבאג AI.md';  // AI debug
+            } else if (isFourStep) {
+                report2Name = selectedAgent.step2?.output_name || 'דוח שלב 1 מורחב.md';  // QA
+                report3Name = selectedAgent.step3?.report_name || 'דוח שלב 3.md';  // Fixes
+                report4Name = selectedAgent.step4?.report_name || 'דוח דיבאג.md';  // Debug
+                report5Name = null;
+                report6Name = null;
+            } else {
+                report2Name = selectedAgent.step2?.report_name || 'דוח שלב 2.md';
+                report3Name = selectedAgent.step3?.report_name || 'דוח דיבאג.md';
+                report4Name = null;
+                report5Name = null;
+                report6Name = null;
+            }
+            
+            const report1Path = `${agentFolder}/${report1Name}`;
+            const report2Path = `${agentFolder}/${report2Name}`;
+            const report3Path = report3Name ? `${agentFolder}/${report3Name}` : null;
+            const report4Path = report4Name ? `${agentFolder}/${report4Name}` : null;
+            const report5Path = report5Name ? `${agentFolder}/${report5Name}` : null;
+            const report6Path = report6Name ? `${agentFolder}/${report6Name}` : null;
+            
+            // Build list of files to check
+            const filesToCheck = [report1Path, report2Path];
+            if (report3Path) filesToCheck.push(report3Path);
+            if (report4Path) filesToCheck.push(report4Path);
+            if (report5Path) filesToCheck.push(report5Path);
+            if (report6Path) filesToCheck.push(report6Path);
+            
+            // Check which reports exist
+            const checkFiles = await apiCall('/api/status/check-files', {
+                method: 'POST',
+                body: JSON.stringify({ files: filesToCheck })
+            });
+            
+            if (checkFiles.success) {
+                const hasReport1 = checkFiles.files[report1Path]?.exists;
+                const hasReport2 = checkFiles.files[report2Path]?.exists;
+                const hasReport3 = report3Path ? checkFiles.files[report3Path]?.exists : false;
+                const hasReport4 = report4Path ? checkFiles.files[report4Path]?.exists : false;
+                const hasReport5 = report5Path ? checkFiles.files[report5Path]?.exists : false;
+                const hasReport6 = report6Path ? checkFiles.files[report6Path]?.exists : false;
+                
+                console.log('Report check:', { 
+                    isFourStep,
+                    isSixStep,
+                    report1Path, hasReport1, 
+                    report2Path, hasReport2, 
+                    report3Path, hasReport3,
+                    report4Path, hasReport4,
+                    report5Path, hasReport5,
+                    report6Path, hasReport6,
+                    agentFolder
+                });
+                
+                // Build list of available reports
+                const availableReports = [];
+                if (hasReport1) availableReports.push({ path: report1Path, name: 'דוח שלב 1', step: 1 });
+                if (hasReport2) {
+                    const name = (isFourStep || isSixStep) ? 'דוח QA מורחב' : 'דוח שלב 2';
+                    availableReports.push({ path: report2Path, name, step: 2 });
+                }
+                if (hasReport3) {
+                    const name = (isFourStep || isSixStep) ? 'דוח תיקונים' : 'דוח דיבאג';
+                    availableReports.push({ path: report3Path, name, step: 3 });
+                }
+                if (hasReport4) {
+                    const name = isSixStep ? 'דוח QA תיקונים' : 'דוח דיבאג';
+                    availableReports.push({ path: report4Path, name, step: 4 });
+                }
+                if (hasReport5) {
+                    availableReports.push({ path: report5Path, name: 'דוח הסרת AI', step: 5 });
+                }
+                if (hasReport6) {
+                    availableReports.push({ path: report6Path, name: 'דוח דיבאג AI', step: 6 });
+                }
+                
+                if (availableReports.length > 0) {
+                    // Show tabs for multiple reports
+                    await loadMultipleReports(availableReports);
+                    deleteBtn.style.display = 'inline-flex';
+                    
+                    // Set status based on highest completed step
+                    const maxStep = Math.max(...availableReports.map(r => r.step));
+                    const totalSteps = isSixStep ? 6 : (isFourStep ? 4 : 3);
+                    
+                    if (maxStep >= totalSteps) {
+                        updateStatusDisplay('completed', '✓ הושלם');
+                    } else if (maxStep === 5 && isSixStep) {
+                        updateStatusDisplay('step5_done', 'שלב 5 הושלם');
+                    } else if (maxStep === 4 && isSixStep) {
+                        updateStatusDisplay('step4_done', 'שלב 4 הושלם');
+                    } else if (maxStep === 3 && (isFourStep || isSixStep)) {
+                        updateStatusDisplay('step3_done', 'שלב 3 הושלם');
+                    } else if (maxStep === 2) {
+                        updateStatusDisplay('step2_done', 'שלב 2 הושלם');
+                    } else {
+                        updateStatusDisplay('report_ready', 'דוח שלב 1 מוכן');
+                    }
+                    
+                    // Set current report path to the latest
+                    currentReportPath = availableReports[availableReports.length - 1].path;
+                } else {
+                    const agentName = selectedAgent.name || selectedAgent.id;
+                    document.getElementById('reportContent').innerHTML = `<p class="no-report">אין דוח "${agentName}" לעמוד זה.<br>הרץ שלב 1 כדי ליצור דוח.</p>`;
+                    updateStatusDisplay('pending', 'ממתין לדוח');
+                }
+            } else {
+                document.getElementById('reportContent').innerHTML = '<p class="no-report">אין דוחות.<br>הרץ שלב 1 כדי ליצור דוח.</p>';
+                updateStatusDisplay('pending', 'ממתין');
+            }
+            
+            // Update workflow buttons based on report availability
+            updateWorkflowButtons();
+        }
+
+        async function loadReport(path) {
+            const result = await apiCall(`/api/report/${path}?render=true`);
+            if (result.success) {
+                document.getElementById('reportContent').innerHTML = result.html || `<pre>${result.content}</pre>`;
+            }
+        }
+        
+        async function loadMultipleReports(reports) {
+            // Create tabs for each report
+            let tabsHtml = '<div class="report-tabs">';
+            reports.forEach((report, index) => {
+                const activeClass = index === reports.length - 1 ? 'active' : '';
+                tabsHtml += `<button class="report-tab ${activeClass}" data-index="${index}" onclick="switchReportTab(${index})">${report.name}</button>`;
+            });
+            tabsHtml += '</div><div class="report-contents">';
+            
+            // Load all reports
+            for (let i = 0; i < reports.length; i++) {
+                const report = reports[i];
+                const result = await apiCall(`/api/report/${report.path}?render=true`);
+                const content = result.success ? (result.html || `<pre>${result.content}</pre>`) : '<p>שגיאה בטעינת הדוח</p>';
+                const activeClass = i === reports.length - 1 ? 'active' : '';
+                tabsHtml += `<div class="report-content-tab ${activeClass}" data-index="${i}">${content}</div>`;
+            }
+            tabsHtml += '</div>';
+            
+            document.getElementById('reportContent').innerHTML = tabsHtml;
+            
+            // Store reports for tab switching
+            window.currentReports = reports;
+        }
+        
+        function switchReportTab(index) {
+            // Update tabs
+            document.querySelectorAll('.report-tab').forEach((tab, i) => {
+                tab.classList.toggle('active', i === index);
+            });
+            // Update content
+            document.querySelectorAll('.report-content-tab').forEach((content, i) => {
+                content.classList.toggle('active', i === index);
+            });
+            // Update current report path for delete
+            if (window.currentReports && window.currentReports[index]) {
+                currentReportPath = window.currentReports[index].path;
+            }
+        }
+        
+        async function deleteCurrentReport() {
+            if (!currentReportPath) {
+                showToast('אין דוח למחיקה', 'error');
+                return;
+            }
+            
+            if (!confirm('האם אתה בטוח שרוצה למחוק את הדוח?')) {
+                return;
+            }
+            
+            const result = await apiCall(`/api/report/delete`, {
+                method: 'POST',
+                body: JSON.stringify({ path: currentReportPath })
+            });
+            
+            if (result.success) {
+                showToast('הדוח נמחק', 'success');
+                currentReportPath = null;
+                document.getElementById('deleteReportBtn').style.display = 'none';
+                document.getElementById('reportContent').innerHTML = '<p class="no-report">הדוח נמחק.<br>הרץ שלב 1 כדי ליצור דוח חדש.</p>';
+            } else {
+                showToast(result.error || 'שגיאה במחיקה', 'error');
+            }
+        }
+
+        // ============ WordPress ============
+        async function testWpConnection(siteId) {
+            const user = document.getElementById(`wpUser${capitalize(siteId)}`).value;
+            const pass = document.getElementById(`wpPass${capitalize(siteId)}`).value;
+            const url = document.getElementById(`wpUrl${capitalize(siteId)}`).value;
+
+            // First save settings
+            await apiCall('/api/wordpress/settings', {
+                method: 'POST',
+                body: JSON.stringify({
+                    site_id: siteId,
+                    username: user,
+                    password: pass,
+                    site_url: url
+                })
+            });
+
+            // Then test connection
+            const result = await apiCall('/api/wordpress/test', {
+                method: 'POST',
+                body: JSON.stringify({ site_id: siteId })
+            });
+
+            const statusEl = document.getElementById(`wpStatus${capitalize(siteId)}`);
+            if (result.success) {
+                statusEl.textContent = '✅ מחובר';
+                statusEl.className = 'wp-site-status connected';
+                showToast(`מחובר בהצלחה! ${result.user_display_name || ''}`, 'success');
+            } else {
+                statusEl.textContent = '❌ נכשל';
+                statusEl.className = 'wp-site-status disconnected';
+                showToast(result.error || 'שגיאת התחברות', 'error');
+            }
+        }
+
+        async function uploadToWordPress() {
+            if (!selectedPage || !selectedPage.post_id) {
+                showToast('חסר Post ID לעמוד זה', 'error');
+                return;
+            }
+
+            // Get fixed content
+            const fixedPath = `עמודים מתוקנים/${selectedPage.name}${selectedAgent?.step2?.output_suffix || selectedAgent?.output_suffix || '_מתוקן.html'}`;
+            const contentResult = await apiCall(`/api/page/${fixedPath}`);
+            
+            if (!contentResult.success) {
+                showToast('לא נמצא קובץ מתוקן', 'error');
+                return;
+            }
+
+            const result = await apiCall('/api/wordpress/update', {
+                method: 'POST',
+                body: JSON.stringify({
+                    post_id: selectedPage.post_id,
+                    content: contentResult.content,
+                    url: selectedPage.url
+                })
+            });
+
+            if (result.success) {
+                showToast(`העמוד עודכן בהצלחה ב-${result.site}!`, 'success');
+                
+                // Save to archive
+                await apiCall('/api/archive/save', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        page_name: selectedPage.name,
+                        page_path: selectedPage.path,
+                        fixed_path: fixedPath
+                    })
+                });
+            } else {
+                showToast(result.error || 'שגיאה בעדכון', 'error');
+            }
+        }
+
+        // ============ Agent Management ============
+        function renderAgentList() {
+            const list = document.getElementById('agentList');
+            list.innerHTML = Object.entries(agents).map(([id, agent]) => `
+                <div class="agent-list-item">
+                    <div class="agent-list-item-info">
+                        <span class="agent-list-item-name">${agent.name}</span>
+                        <span class="agent-list-item-type">${agent.type === 'two-step' ? 'דו-שלבי' : agent.type === 'multi-step' ? 'רב-שלבי' : 'חד-שלבי'}</span>
+                    </div>
+                    <div class="agent-list-item-actions">
+                        <button class="btn btn-small btn-secondary" onclick="editAgent('${id}')">✏️</button>
+                        <button class="btn btn-small btn-secondary" onclick="deleteAgent('${id}')">🗑️</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function openAddAgent() {
+            // Reset form
+            document.getElementById('newAgentName').value = '';
+            document.getElementById('newAgentId').value = '';
+            document.getElementById('newAgentDesc').value = '';
+            document.getElementById('newAgentType').value = 'single-step';
+            toggleAgentTypeFields();
+            openModal('addAgentModal');
+        }
+
+        function toggleAgentTypeFields() {
+            const type = document.getElementById('newAgentType').value;
+            document.getElementById('singleStepFields').style.display = type === 'single-step' ? 'block' : 'none';
+            document.getElementById('twoStepFields').style.display = type === 'two-step' ? 'block' : 'none';
+        }
+
+        async function saveNewAgent() {
+            const id = document.getElementById('newAgentId').value;
+            const name = document.getElementById('newAgentName').value;
+            const desc = document.getElementById('newAgentDesc').value;
+            const type = document.getElementById('newAgentType').value;
+            const createFile = document.getElementById('createAgentFile').checked;
+
+            if (!id || !name) {
+                showToast('נא למלא שם ומזהה', 'error');
+                return;
+            }
+
+            let config;
+            if (type === 'single-step') {
+                config = {
+                    type: 'single-step',
+                    name,
+                    description: desc,
+                    agent: document.getElementById('singleAgentFile').value,
+                    output_suffix: document.getElementById('singleOutputSuffix').value,
+                    output_folder: document.getElementById('singleOutputFolder').value
+                };
+            } else {
+                config = {
+                    type: 'two-step',
+                    name,
+                    description: desc,
+                    step1: {
+                        agent: document.getElementById('step1AgentFile').value,
+                        output_suffix: document.getElementById('step1OutputSuffix').value,
+                        output_folder: document.getElementById('step1OutputFolder').value
+                    },
+                    step2: {
+                        agent: document.getElementById('step2AgentFile').value,
+                        output_suffix: document.getElementById('step2OutputSuffix').value,
+                        output_folder: document.getElementById('step2OutputFolder').value
+                    }
+                };
+            }
+
+            const result = await apiCall('/api/agents/create', {
+                method: 'POST',
+                body: JSON.stringify({ id, config, create_file: createFile })
+            });
+
+            if (result.success) {
+                showToast('הסוכן נוסף בהצלחה', 'success');
+                closeModal('addAgentModal');
+                loadAgents();
+            } else {
+                showToast(result.error || 'שגיאה', 'error');
+            }
+        }
+
+        async function deleteAgent(id) {
+            if (!confirm(`למחוק את הסוכן "${agents[id].name}"?`)) return;
+            
+            const result = await apiCall(`/api/agents/${id}`, { method: 'DELETE' });
+            if (result.success) {
+                showToast('הסוכן נמחק', 'success');
+                loadAgents();
+            } else {
+                showToast(result.error || 'שגיאה', 'error');
+            }
+        }
+
+        // ============ Modals ============
+        function openModal(id) {
+            document.getElementById(id).classList.add('active');
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('active');
+        }
+
+        function openSettings() {
+            loadWpSettings();
+            openModal('settingsModal');
+        }
+
+        async function loadWpSettings() {
+            const result = await apiCall('/api/wordpress/settings');
+            if (result.success) {
+                for (const [siteId, site] of Object.entries(result.sites)) {
+                    const capId = capitalize(siteId);
+                    document.getElementById(`wpUrl${capId}`).value = site.site_url;
+                    document.getElementById(`wpUser${capId}`).value = site.username;
+                    if (site.has_password) {
+                        document.getElementById(`wpStatus${capId}`).textContent = '🔑 יש סיסמה';
+                    }
+                }
+            }
+        }
+
+        async function saveSettings() {
+            // Save WordPress settings for both sites
+            for (const siteId of ['main', 'business']) {
+                const capId = capitalize(siteId);
+                await apiCall('/api/wordpress/settings', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        site_id: siteId,
+                        username: document.getElementById(`wpUser${capId}`).value,
+                        password: document.getElementById(`wpPass${capId}`).value,
+                        site_url: document.getElementById(`wpUrl${capId}`).value
+                    })
+                });
+            }
+            
+            showToast('ההגדרות נשמרו', 'success');
+            closeModal('settingsModal');
+        }
+
+        // ============ UI Helpers ============
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toastContainer');
+            // Clear previous toasts - show only one at a time
+            container.innerHTML = '';
+            
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.innerHTML = `<span>${message}</span>`;
+            container.appendChild(toast);
+            
+            setTimeout(() => toast.remove(), 4000);
+        }
+
+        function capitalize(str) {
+            return str.charAt(0).toUpperCase() + str.slice(1);
+        }
+
+        // ============ Event Listeners ============
+        document.getElementById('agentSelect').addEventListener('change', (e) => {
+            selectAgent(e.target.value);
+        });
+
+        document.getElementById('modeSelect').addEventListener('change', (e) => {
+            currentMode = e.target.value;
+        });
+
+        // Settings tabs
+        document.querySelectorAll('[data-settings-tab]').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('[data-settings-tab]').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                const tabName = tab.dataset.settingsTab;
+                document.getElementById('settingsWordpress').style.display = tabName === 'wordpress' ? 'block' : 'none';
+                document.getElementById('settingsAgents').style.display = tabName === 'agents' ? 'block' : 'none';
+            });
+        });
+
+        // Mode tabs
+        document.querySelectorAll('[data-tab]').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('[data-tab]').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                // TODO: Switch between edit and build modes
+            });
+        });
+
+        // ============ Server Control ============
+        async function restartServer() {
+            if (!confirm('לאתחל את השרת?')) return;
+            
+            showToast('מאתחל שרת...', 'info');
+            
+            try {
+                await apiCall('/api/server/restart', { method: 'POST' });
+            } catch (e) {
+                // Expected - server is restarting
+            }
+            
+            // Wait and reload
+            showToast('ממתין לשרת...', 'info');
+            setTimeout(() => {
+                location.reload();
+            }, 3000);
+        }
+        
+        async function reloadConfig() {
+            const result = await apiCall('/api/server/reload-config', { method: 'POST' });
+            if (result.success) {
+                showToast('ההגדרות נטענו מחדש', 'success');
+                loadAgents();
+            } else {
+                showToast(result.error || 'שגיאה', 'error');
+            }
+        }
+
+        // ============ Claude Control ============
+        async function stopClaude() {
+            try {
+                const result = await apiCall('/api/workflow/stop', { method: 'POST' });
+                if (result.success) {
+                    showToast('Claude הופסק', 'success');
+                    hideStopButton();
+                    stopPolling();
+                } else {
+                    showToast(result.error || 'שגיאה בעצירה', 'error');
+                }
+            } catch (e) {
+                showToast('שגיאה: ' + e.message, 'error');
+            }
+        }
+        
+        function showStopButton() {
+            document.getElementById('stopClaudeBtn').style.display = 'inline-block';
+        }
+        
+        function hideStopButton() {
+            document.getElementById('stopClaudeBtn').style.display = 'none';
+        }
+
+        // ============ Global Status Refresh ============
+        let globalStatusInterval = null;
+        
+        function startGlobalStatusRefresh() {
+            if (globalStatusInterval) return;
+            
+            globalStatusInterval = setInterval(async () => {
+                // Check if current page was running locally
+                let wasCurrentPageRunning = false;
+                let currentPageKey = null;
+                if (selectedPage) {
+                    for (const [runPath, runInfo] of Object.entries(localRunningPages)) {
+                        if (runPath.includes(selectedPage.name) || selectedPage.path.includes(selectedPage.name)) {
+                            wasCurrentPageRunning = true;
+                            currentPageKey = runPath;
+                            break;
+                        }
+                    }
+                }
+                
+                const oldStatus = JSON.stringify(pageStatusMap);
+                await loadPageStatus();
+                await loadMultiAgentStatus();
+                const newStatus = JSON.stringify(pageStatusMap);
+                
+                // Check if current page completed (has log with completion marker OR has step 2 report)
+                let isCurrentPageRunning = wasCurrentPageRunning;
+                if (wasCurrentPageRunning && selectedPage) {
+                    // Check log to see if completed
+                    const logResult = await apiCall(`/api/worklog?page=${encodeURIComponent(selectedPage.path)}`);
+                    if (logResult.success && logResult.content) {
+                        if (logResult.content.includes('🏁 סיום!') || logResult.content.includes('✅ Claude סיים!')) {
+                            isCurrentPageRunning = false;
+                            // Remove from local running
+                            if (currentPageKey) delete localRunningPages[currentPageKey];
+                            
+                            // Debounce - skip if already handled recently
+                            if (!shouldRefreshOnCompletion()) {
+                                return;
+                            }
+                            
+                            // Update ALL status indicators
+                            const pageName = selectedPage.name || 'העמוד';
+                            
+                            // 1. Update work status panel
+                            updateWorkStatusTitle(`📄 ${pageName} - הושלם ✅`);
+                            setWorkStatusDot('completed');
+                            hideStopButton();
+                            
+                            // 2. Refresh page status and sidebar
+                            await loadPageStatus();
+                            await loadMultiAgentStatus();
+                            renderPageList();
+                            
+                            // 3. Refresh preview to show updated page
+                            loadPreview();
+                            
+                            // 4. Reload reports to show step 2 report
+                            loadReports();
+                            
+                            // 5. Update header status
+                            updateStatusDisplay('completed', 'הושלם');
+                            
+                            // 6. Notify user
+                            showToast(`✅ ${pageName} - הושלם!`, 'success');
+                            
+                            // 7. Check if Full Auto mode - trigger next step
+                            checkFullAutoNext();
+                        }
+                    }
+                    
+                    // Also check if step 2 report was created (backup check)
+                    const normalizedPath = selectedPage.path.replace(/\\/g, '/');
+                    const status = pageStatusMap[selectedPage.path] || pageStatusMap[normalizedPath] || {};
+                    if ((status.hasStep2Report || status.hasFixed) && isCurrentPageRunning) {
+                        isCurrentPageRunning = false;
+                        if (currentPageKey) delete localRunningPages[currentPageKey];
+                        
+                        // Update ALL status indicators
+                        const pageName = selectedPage.name || 'העמוד';
+                        
+                        updateWorkStatusTitle(`📄 ${pageName} - הושלם ✅`);
+                        setWorkStatusDot('completed');
+                        hideStopButton();
+                        renderPageList();
+                        loadPreview();
+                        loadReports();
+                        updateStatusDisplay('completed', 'הושלם');
+                        showToast(`✅ ${pageName} - הושלם!`, 'success');
+                    }
+                }
+                
+                // Re-render if any status changed
+                if (oldStatus !== newStatus || Object.keys(localRunningPages).length > 0) {
+                    renderPageList();
+                }
+                
+                // If current page stopped running, update the bottom status bar
+                if (wasCurrentPageRunning && !isCurrentPageRunning && selectedPage) {
+                    const pageName = selectedPage.name || 'העמוד';
+                    
+                    // Check if it completed normally (has completion marker in log)
+                    const logResult = await apiCall(`/api/worklog?page=${encodeURIComponent(selectedPage.path)}`);
+                    const completedNormally = logResult.success && logResult.content && 
+                        (logResult.content.includes('🏁 סיום!') || logResult.content.includes('✅ Claude סיים!'));
+                    
+                    if (completedNormally) {
+                        // Check if this is an old log (less than 10 lines means it might be stale/clearing)
+                        const logLines = logResult.content.split('\n').filter(l => l.trim()).length;
+                        if (logLines < 10) {
+                            console.log('⚠️ Log too short in status poll, might be stale - skipping');
+                            return;
+                        }
+                        
+                        // Debounce - skip if already handled recently
+                        if (!shouldRefreshOnCompletion()) {
+                            return;
+                        }
+                        
+                        console.log('✅ Process completed normally!');
+                        updateWorkStatusTitle(`📄 ${pageName} - הסתיים`);
+                        setWorkStatusDot('completed');
+                        showToast(`✅ ${pageName} הסתיים`, 'success');
+                        
+                        // Auto-refresh reports and preview
+                        await loadPageStatus();
+                        await loadMultiAgentStatus();
+                        loadReports();
+                        loadPreview();
+                        renderPageList();
+                        updateWorkflowButtons();
+                        
+                        // Check if Full Auto should continue
+                        checkFullAutoNext();
+                    } else {
+                        // Stopped mid-process - delete the log
+                        await apiCall(`/api/worklog/page/${encodeURIComponent(selectedPage.path)}`, { method: 'DELETE' });
+                        updateWorkStatusTitle(`📄 ${pageName} - הופסק`);
+                        setWorkStatusDot('pending');
+                        hideWorkStatusPanel();
+                        showToast(`⚠️ ${pageName} הופסק`, 'warning');
+                    }
+                    hideStopButton();
+                }
+            }, 2000);  // Check every 2 seconds
+        }
+        
+        // ============ Panel Resize ============
+        function initPanelResize() {
+            const resizeHandle = document.getElementById('resizeHandle');
+            const reportPanel = document.getElementById('reportPanel');
+            const previewPanel = document.getElementById('previewPanel');
+            const panels = document.querySelector('.panels');
+            
+            if (!resizeHandle || !reportPanel || !previewPanel || !panels) return;
+            
+            let isResizing = false;
+            let startX = 0;
+            let startReportWidth = 0;
+            let startPreviewWidth = 0;
+            
+            resizeHandle.addEventListener('mousedown', (e) => {
+                isResizing = true;
+                startX = e.clientX;
+                startReportWidth = reportPanel.offsetWidth;
+                startPreviewWidth = previewPanel.offsetWidth;
+                
+                document.body.classList.add('resizing');
+                resizeHandle.classList.add('dragging');
+                
+                e.preventDefault();
+            });
+            
+            document.addEventListener('mousemove', (e) => {
+                if (!isResizing) return;
+                
+                const dx = e.clientX - startX;
+                const totalWidth = panels.offsetWidth - resizeHandle.offsetWidth;
+                
+                let newReportWidth = startReportWidth + dx;
+                let newPreviewWidth = startPreviewWidth - dx;
+                
+                // Minimum widths
+                const minWidth = 200;
+                if (newReportWidth < minWidth) {
+                    newReportWidth = minWidth;
+                    newPreviewWidth = totalWidth - minWidth;
+                }
+                if (newPreviewWidth < minWidth) {
+                    newPreviewWidth = minWidth;
+                    newReportWidth = totalWidth - minWidth;
+                }
+                
+                // Convert to percentages for flex
+                const reportPercent = (newReportWidth / totalWidth) * 100;
+                const previewPercent = (newPreviewWidth / totalWidth) * 100;
+                
+                reportPanel.style.flex = `0 0 ${reportPercent}%`;
+                previewPanel.style.flex = `0 0 ${previewPercent}%`;
+            });
+            
+            document.addEventListener('mouseup', () => {
+                if (isResizing) {
+                    isResizing = false;
+                    document.body.classList.remove('resizing');
+                    resizeHandle.classList.remove('dragging');
+                    
+                    // Save preference to localStorage
+                    const totalWidth = panels.offsetWidth - resizeHandle.offsetWidth;
+                    const reportPercent = (reportPanel.offsetWidth / totalWidth) * 100;
+                    localStorage.setItem('panelReportWidth', reportPercent.toFixed(1));
+                }
+            });
+            
+            // Restore saved width
+            const savedWidth = localStorage.getItem('panelReportWidth');
+            if (savedWidth) {
+                const reportPercent = parseFloat(savedWidth);
+                const previewPercent = 100 - reportPercent;
+                reportPanel.style.flex = `0 0 ${reportPercent}%`;
+                previewPanel.style.flex = `0 0 ${previewPercent}%`;
+            }
+        }
+        
+        // ============ Init ============
+        document.addEventListener('DOMContentLoaded', () => {
+            loadPages();
+            loadAgents();
+            startGlobalStatusRefresh();  // Start global status monitoring
+            initPanelResize();  // Initialize panel resize functionality
+        });
+    </script>
+</body>
+</html>
+
