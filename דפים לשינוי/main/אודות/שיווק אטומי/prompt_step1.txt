@@ -1,0 +1,5 @@
+=== פרומפט שנשלח לקלוד - step1 ===
+זמן: 2026-01-01 18:40:25
+============================================================
+
+קרא את קובץ ההוראות C:\Users\eyal\loan-israel-updaets\loan-israel-updates\פרומטים\סוכן מוציא דוח תוכן שיווק אטומי ובצע את ההוראות על הקובץ C:\Users\eyal\loan-israel-updaets\loan-israel-updates\דפים לשינוי\אודות\אודות.html. מילת מפתח: אודות. בסוף חובה לשמור את הדוח בנתיב המדויק: C:\Users\eyal\loan-israel-updaets\loan-israel-updates\דפים לשינוי\אודות\שיווק אטומי\דוח שלב 1.md

@@ -1,0 +1,19 @@
+=== פרומפט שנשלח לקלוד - step3 ===
+זמן: 2026-01-03 18:46:03
+============================================================
+
+קרא את קובץ ההוראות C:\Users\eyal\loan-israel-updaets\loan-israel-updates\פרומטים\הלוואות לעסקים\שלב 3.md.
+
+## דוח התוכן משלב 2:
+C:\Users\eyal\loan-israel-updaets\loan-israel-updates\דפים לשינוי\business\מימון נכס מסחרי\הלוואות לעסקים\דוח תוכן.md
+
+## העמוד לעריכה:
+C:\Users\eyal\loan-israel-updaets\loan-israel-updates\דפים לשינוי\business\מימון נכס מסחרי\מימון נכס מסחרי.html
+
+## נתוני עמוד:
+- **מילת מפתח ראשית:** מימון נכס מסחרי
+
+## מאגר מידע כללי (לפרטי Schema):
+C:\Users\eyal\loan-israel-updaets\loan-israel-updates\מאגרי מידע\תחום הלוואות לעסקים.md
+
+**חובה לשמור את הדוח בנתיב:** C:\Users\eyal\loan-israel-updaets\loan-israel-updates\דפים לשינוי\business\מימון נכס מסחרי\הלוואות לעסקים\דוח SEO.md זה שם הקובץ 

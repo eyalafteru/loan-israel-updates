@@ -1,0 +1,7018 @@
+!-- עמוד עם כל האלמנטים מהקובץ visual -->
+
+<!--
+🎯 CLAUDE VISUAL GUIDE 2.0 - מקרא עיצובי מושלם
+================================================================
+font-family: Assistant
+משקלי פונטים**
+--fw-light: 300;
+--fw-regular: 400;
+--fw-medium: 500;
+--fw-semibold: 600;
+--fw-bold: 700;
+--fw-extrabold: 800;
+** גובה שורות**
+--lh-tight: 1.2;    /* כותרות */
+--lh-normal: 1.5;   /* טקסט רגיל */
+--lh-relaxed: 1.8;  /* טקסט מרווח */
+עוד מידע:**
+H1: 3em → 1.8em (60%)
+H2: 2.5em → 1.8em (72%)
+Body: 1.25em → 1em (80%)
+Button Height: 50px → 48px (96%)
+Padding Section: 60px → 40px (67%)
+Padding Card: 40px → 20px (50%)
+
+## 📐 מקרא רוחב אלמנטים ועמודות
+
+### 🌐 רוחבים ראשיים
+```
+--max-width-container: 1200px    /* רוחב מקסימלי למיכלים */
+--max-width-content: 1200px      /* רוחב מקסימלי לתוכן */
+
+Container Width: 100%
+Max Container Width: 1200px
+Min Width (Mobile): 320px
+``
+/* חפש בתחילת visual.txt ותעתיק בדיוק: */
+body {
+    font-family: 'Assistant', sans-serif !important;
+    font-size: 1.25em !important; /* גודל בסיס - חובה! */
+    line-height: 1.8 !important;
+    color: #333333 !important;
+}
+
+/* גדלי כותרות - חובה להעתיק מהקובץ! */
+h1 { font-size: 3em !important; }
+h2 { font-size: 2.5em !important; }
+h3 { font-size: 2em !important; }
+h4 { font-size: 1.75em !important; }`
+
+/* חפש בתחילת visual.txt ותעתיק בדיוק: */
+body {
+    font-family: 'Assistant', sans-serif !important;
+    font-size: 1.25em !important; /* גודל בסיס - חובה! */
+    line-height: 1.8 !important;
+    color: #333333 !important;
+}
+
+/* גדלי כותרות - חובה להעתיק מהקובץ! */
+h1 { font-size: 3em !important; }
+h2 { font-size: 2.5em !important; }
+h3 { font-size: 2em !important; }
+h4 { font-size: 1.75em !important; }
+### 📱 Breakpoints
+```
+Desktop: > 768px
+Tablet: 768px - 481px
+Mobile: ≤ 767px
+Small Mobile: ≤ 480px
+Extra Small: ≤ 375px
+```
+
+### 🎯 רוחב אלמנטים ספציפיים
+
+#### כרטיסים וגרידים
+```
+Goal Cards Grid:
+- Desktop: repeat(auto-fit, minmax(150px, 1fr))
+- Mobile: repeat(2, 1fr) - 2 עמודות
+
+Rate Cards Grid:
+- Desktop: repeat(auto-fit, minmax(280px, 1fr))
+- Mobile: 1fr - עמודה אחת
+
+Comparison Cards:
+- Desktop: repeat(auto-fit, minmax(280px, 1fr))
+- Mobile: 1fr - עמודה אחת
+
+Info Cards:
+- Desktop: repeat(auto-fit, minmax(300px, 1fr))
+- Mobile: 1fr - עמודה אחת
+
+Stats Grid:
+- Desktop: repeat(auto-fit, minmax(200px, 1fr))
+- Mobile (480px): repeat(2, 1fr) - 2 עמודות
+- Mobile Max Width: 400px (מרוכז)
+
+Chart Container:
+- Desktop: repeat(auto-fit, minmax(400px, 1fr))
+- Mobile: 1fr - עמודה אחת
+
+Data Visualizations:
+- Desktop: repeat(auto-fit, minmax(350px, 1fr))
+- Mobile: 1fr - עמודה אחת
+```
+
+#### כפתורים
+```
+Desktop:
+- Width: auto (inline-flex)
+- Min Width: תלוי בתוכן
+
+Mobile:
+- Width: 100% !important
+- Max Width: 100% !important
+```
+
+#### אלמנטים מיוחדים
+```
+Timeline:
+- Wrapper Max Width: 700px
+- Mobile: 100%
+
+AWG Container:
+- Max Width: 1200px
+- Padding: 40px 20px
+- Mobile: padding: 30px 15px
+
+Disclaimer:
+- Max Width: 1800px
+- Width: calc(100% - 40px)
+- Mobile: margin: 20px 10px
+
+Summary Grid:
+- Desktop: repeat(auto-fit, minmax(300px, 1fr))
+- Mobile: 1fr - עמודה אחת
+
+Summary Stats:
+- Desktop: repeat(auto-fit, minmax(200px, 1fr))
+- Mobile: repeat(2, 1fr) - 2 עמודות
+```
+
+### 📊 טבלאות
+```
+Desktop: 
+- Width: 100%
+- Display: table
+
+Mobile (≤768px):
+- Display: none (מוחלף בכרטיסים)
+- Cards: width: 100%
+```
+
+### 🔧 Padding לפי רוחב מסך
+```
+Desktop Sections:
+- Padding: 60px 20px או 40px 20px
+
+Mobile Sections:
+- 767px: padding: 30px 20px
+- 480px: padding: 30px 15px
+- 375px: padding: 25px 15px או 20px 12px
+```
+
+### ⚡ כללי Overflow
+```
+כל האלמנטים:
+- max-width: 100% !important
+- overflow-x: hidden
+- box-sizing: border-box
+- word-wrap: break-word
+```
+
+כפתורים:
+- Desktop: 1.2rem (font-weight: 700)
+- Mobile: 1.15-1.2rem (font-weight: 800)
+
+כותרות Hero:
+- Desktop: clamp(2rem, 6vw, 3rem)
+- Mobile: clamp(1.5rem, 7vw, 2.2rem)
+
+תת-כותרות Hero:
+- Desktop: clamp(1rem, 3vw, 1.4rem)
+- Mobile: clamp(0.9rem, 4vw, 1.1rem)
+
+Section Headers:
+- Desktop: 2.5em
+- Mobile: 1.8em
+
+אקורדיון:
+- Desktop: 1.1em
+- Mobile: 1rem
+
+כרטיסי ריבית:
+- Desktop: 1.2em (title), 1.1em (rate)
+- Mobile: שומר על הגדלים
+
+סטטיסטיקות:
+- Desktop: 3em (number), 1.25em (label)
+- Mobile: 2em (number), 0.9em (label)
+📋 1. CLASS NAMING RULES (חובה מוחלטת):
+✅ נכון: .wpc-[topic]-[4random]-[component]-[element]
+❌ שגוי: .calculator, .btn, .card (ללא prefix)
+
+🏷️ [topic] Rules:
+✅ מותר: loans, mortgage, insurance, credit, bank, finance, invest
+❌ אסור: עברית, מילים ארוכות מעל 8 אותיות, רווחים
+
+🎲 [4random] Format: [אות][מספר][אות][מספר]
+✅ נכון: x7k2, p3r8, m9n4, f5c1, h8d6
+❌ שגוי: 1234, abcd, xy12, x7k
+
+⛔ 2. CSS FORBIDDEN RULES:
+❌ background: white; (לכפתורים)
+❌ height: 100vh; (ל-Hero Section)  
+❌ font-size: 14px; (לשדות קלט - minimum 16px)
+❌ z-index: 9999; (ערכים קיצוניים)
+❌ position: fixed; (למעט modals)
+❌ קווים דקורטיביים בכותרות (הוסרו לפי בקשה!)
+❌ כפתורים לא ממורכזים אנכית (תמיד top: 50% + translateY(-50%)!)
+
+⛔ 3. JAVASCRIPT FORBIDDEN:
+❌ jQuery (אלא אם נדרש מפורשות)
+❌ document.write, eval(), innerHTML = 
+❌ Global variables ללא prefix
+❌ Event listeners על window/document
+
+⛔ 4. CONTENT FORBIDDEN:
+❌ פרטי קשר ישירים (טלפון, אימייל)
+❌ כתובות פיזיות, מחירים ספציפיים
+
+🌈 5. COLOR USAGE GUIDE:
+🔵 
+#1e5490 (כחול): כותרות, כפתורים שניוניים, borders, אייקונים
+🔴 
+#ff3b3b (אדום): כפתורי CTA, שגיאות (לא לכותרות!)
+🟢 
+#25D366 (ירוק): WhatsApp, הצלחות, אינדיקטורים חיוביים
+🟠 
+#FF9800 (כתום): אזהרות, badges, highlights
+
+📱 6. DESKTOP → MOBILE CONVERSION TABLE:
+H1: 3em → 1.8em (60%)
+H2: 2.5em → 1.8em (72%) 
+Body: 1.25em → 1em (80%)
+Padding section: 60px → 40px (67%)
+Padding card: 40px → 20px (50%)
+Button height: 50px → 48px (touch target)
+
+📊 7. PERFORMANCE STANDARDS:
+First Contentful Paint: < 1.5s
+Largest Contentful Paint: < 2.5s
+Cumulative Layout Shift: < 0.1
+Mobile PageSpeed: > 85
+CSS: < 50KB compressed
+
+📱 8. MOBILE TABLE FIX:
+✅ טבלאות מוחלפות בכרטיסים במובייל
+✅ JavaScript אוטומטי לזיהוי גודל מסך
+✅ CSS נקי ללא !important מיותר
+✅ אנימציות כניסה חלקות
+
+🔴 9. RED LINE DECORATIVE:
+✅ הקו האדום צמוד לטקסט (width: fit-content + margin: auto)
+✅ הקו בצד ימין ליד הטקסט, לא בקצה העמוד
+✅ הקו האדום הוסר רק מהבאנר הירו
+✅ במובייל: קו קטן יותר (3px) צמוד לטקסט
+✅ RTL תואם: right: 0 + padding-right
+✅ ממוקם נכון: .wpc-hero-demo-section .wpc-section-demo-title::after {display:none}
+✅ דיסקליימר: אותו עיצוב ל-.wpc-disclaimer-d4k9-title
+
+✅ 11. ANIMATIONS ALLOWED:
+fadeIn (0.3s ease), slideUp (0.4s ease), scale hover (0.2s)
+❌ ANIMATIONS FORBIDDEN:
+flash/blink, >1s duration, 3D transforms, parallax
+
+✅ 12. QUALITY CHECKLIST:
+□ Class names עם prefix וייחודיים
+□ Mobile responsive ב-4 נקודות שבירה  
+□ ARIA labels לכל אלמנט אינטראקטיבי
+□ Touch targets מינימום 44px
+□ Contrast ratio מעל 4.5:1
+□ Font minimum 16px בשדות קלט
+□ Loading states + Error handling
+□ RTL support
+□ JavaScript עטוף בcontainer check
+□ כפתורים/אייקונים ממורכזים אנכית עם top:50% + translateY(-50%)
+□ טבלאות במובייל הוחלפו בכרטיסים קלים לקריאה
+□ הוסר קוד מיותר שלא התבקש (error states, debug elements)
+□ קווים דקורטיביים צמודים לטקסט (width: fit-content + margin: auto)
+
+🔧 13. JS WRAPPER TEMPLATE:
+(function() {
+  'use strict';
+  const mainContainer = document.querySelector('#wpc-[topic]-[4random]-main');
+  if (!mainContainer) return;
+  // כל הקוד כאן
+})();
+
+🏗️ 14. CSS STRUCTURE ORDER:
+1. CSS Variables (:root)
+2. Reset/Base  
+3. Layout Components (לפי סדר DOM)
+4. Mobile Responsive (מגדול לקטן)
+5. Animations (אחרון)
+
+🚀 15. QUICK COMMANDS FOR CLAUDE:
+כשמבקשים קומפוננט חדש:
+1. שאל [topic] ו[4random]
+2. HTML → Mobile CSS → Desktop CSS → JS
+3. הוסף loading states + error handling
+4. בדוק accessibility + performance
+
+⚠️ CRITICAL RULES - כללים קריטיים:
+- Class names: wpc-[topic]-[4random]-[component]
+- Colors: #1e5490 (blue), #ff3b3b (red), #25D366 (green)
+- Mobile fonts: minimum 16px for inputs
+- Touch targets: minimum 44px
+- No localStorage/sessionStorage
+- Hebrew text only!
+================================================================
+-->
+
+<!-- ⚠️ חשוב! הוסף את השורה הזו ל-HEAD של האתר WordPress: -->
+<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes"> -->
+
+<!-- אם אין אפשרות להוסיף ל-HEAD, הוסף את הסקריפט הזה: -->
+<script>
+// Immediate viewport fix
+(function() {
+  if (!document.querySelector('meta[name="viewport"]')) {
+    const viewport = document.createElement('meta');
+    viewport.name = 'viewport';
+    viewport.content = 'width=device-width, initial-scale=1.0, user-scalable=yes';
+    document.head.appendChild(viewport);
+  }
+  
+  // Immediate mobile detection
+  const isMobile = window.innerWidth <= 767 || 
+                   /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  
+  if (isMobile) {
+    // Immediate overflow fix
+    document.documentElement.style.fontSize = '16px';
+    document.documentElement.style.overflowX = 'hidden';
+    document.documentElement.style.maxWidth = '100vw';
+    
+    document.body.style.margin = '0';
+    document.body.style.padding = '0';
+    document.body.style.overflowX = 'hidden';
+    document.body.style.width = '100%';
+    document.body.style.maxWidth = '100vw';
+    document.body.style.minWidth = '320px';
+    document.body.style.boxSizing = 'border-box';
+    
+         // Add immediate CSS for overflow prevention
+     const immediateStyle = document.createElement('style');
+     immediateStyle.textContent = `
+       * { 
+         max-width: 100% !important; 
+         box-sizing: border-box !important; 
+         overflow-wrap: break-word !important;
+         word-wrap: break-word !important;
+       }
+       html, body { 
+         overflow-x: hidden !important; 
+         width: 100% !important; 
+         max-width: 100vw !important; 
+       }
+       .wpc-demo-container,
+       .wpc-demo-container * {
+         max-width: 100% !important;
+         overflow-x: hidden !important;
+       }
+       .wpc-element-title {
+         width: 100% !important;
+         max-width: 100vw !important;
+         margin: 0 !important;
+         padding: 12px 15px !important;
+       }
+     `;
+     document.head.appendChild(immediateStyle);
+    
+         console.log('📱 Mobile mode activated + overflow fixed!', {
+       width: window.innerWidth,
+       userAgent: navigator.userAgent,
+       viewport: !!document.querySelector('meta[name="viewport"]'),
+       bodyWidth: document.body.style.width,
+       bodyOverflow: document.body.style.overflowX
+     });
+     
+     // Check if any elements are still overflowing after 500ms
+     setTimeout(() => {
+       const allElements = document.querySelectorAll('*');
+       let overflowingElements = 0;
+       allElements.forEach(el => {
+         const rect = el.getBoundingClientRect();
+         if (rect.width > window.innerWidth) {
+           overflowingElements++;
+           console.warn('⚠️ Still overflowing:', el.tagName, el.className, 'width:', rect.width);
+         }
+       });
+       
+       if (overflowingElements === 0) {
+         console.log('✅ No overflow detected - mobile layout perfect!');
+         
+         // Check hero height ratio
+         const heroSection = document.querySelector('.wpc-hero-demo-section');
+         if (heroSection) {
+           const heightRatio = heroSection.offsetHeight / window.innerHeight * 100;
+           if (heightRatio <= 85) {
+             console.log('📏 ✅ Hero height optimized - ' + heightRatio.toFixed(1) + '% of screen');
+           } else {
+             console.warn('📏 ⚠️ Hero might be too tall - ' + heightRatio.toFixed(1) + '% of screen');
+           }
+         }
+         
+         // Check table header visibility  
+         const tableHead = document.querySelector('.wpc-table-demo thead');
+         if (tableHead) {
+           const isVisible = tableHead.offsetHeight > 0 && window.getComputedStyle(tableHead).display !== 'none';
+           if (isVisible) {
+             console.log('📊 ✅ Table header visible in mobile - height: ' + tableHead.offsetHeight + 'px');
+           } else {
+             console.warn('📊 ⚠️ Table header not visible in mobile');
+           }
+         }
+         
+         // Check comparison table cards formatting
+         const comparisonTable = document.querySelector('.wpc-table-demo');
+         if (comparisonTable && window.innerWidth <= 480) {
+           const cardRows = comparisonTable.querySelectorAll('tbody tr');
+           if (cardRows.length > 0) {
+             console.log('📋 📱 Comparison table optimized for mobile cards:');
+             console.log('  ✅ Labels separated from values with proper spacing');
+             console.log('  ✅ Removed colon separator for cleaner look');
+             console.log('  ✅ Added label underline and better margins');
+             console.log('  ✅ Enhanced value styling with colors and weights');
+             console.log('  ✅ Card-style layout with shadows and borders');
+             console.log('  📏 Found ' + cardRows.length + ' comparison cards');
+           }
+         }
+         
+         // Check comparison badge visibility
+         const comparisonBadge = document.querySelector('.wpc-comparison-demo-badge');
+         if (comparisonBadge) {
+           const badgeRect = comparisonBadge.getBoundingClientRect();
+           const isFullyVisible = badgeRect.top >= 0 && 
+                                  badgeRect.left >= 0 && 
+                                  badgeRect.right <= window.innerWidth && 
+                                  badgeRect.bottom >= 0;
+           
+           if (isFullyVisible) {
+             console.log('🏷️ ✅ Comparison badge fully visible - top: ' + badgeRect.top.toFixed(0) + 'px');
+           } else {
+             console.warn('🏷️ ⚠️ Comparison badge might be cut off:', {
+               top: badgeRect.top.toFixed(0),
+               left: badgeRect.left.toFixed(0),
+               right: badgeRect.right.toFixed(0),
+               screenWidth: window.innerWidth
+             });
+           }
+         }
+         
+         // Check flip cards height and content visibility
+         const flipCards = document.querySelectorAll('.wpc-flip-card-demo');
+         flipCards.forEach((card, index) => {
+           const cardRect = card.getBoundingClientRect();
+           const front = card.querySelector('.wpc-flip-card-demo-front');
+           const back = card.querySelector('.wpc-flip-card-demo-back');
+           
+           if (front) {
+             const frontContent = front.scrollHeight;
+             const frontVisible = front.clientHeight;
+             const isContentVisible = frontContent <= frontVisible + 5; // 5px tolerance
+             
+             if (isContentVisible) {
+               console.log('🃏 ✅ Flip card ' + (index + 1) + ' content fits - height: ' + cardRect.height.toFixed(0) + 'px');
+             } else {
+               console.warn('🃏 ⚠️ Flip card ' + (index + 1) + ' content overflow:', {
+                 cardHeight: cardRect.height.toFixed(0),
+                 contentHeight: frontContent,
+                 visibleHeight: frontVisible,
+                 overflow: (frontContent - frontVisible) + 'px'
+               });
+             }
+           }
+         });
+       } else {
+         console.warn(`⚠️ ${overflowingElements} elements still overflowing`);
+       }
+     }, 500);
+  } else {
+    console.log('🖥️ Desktop mode', {
+      width: window.innerWidth,
+      viewport: !!document.querySelector('meta[name="viewport"]')
+    });
+  }
+})();
+</script>
+
+<style>
+/* CSS Variables */
+:root {
+  --primary: #1e5490;
+  --primary-dark: #2a5fa0;
+  --danger: #ff3b3b;
+  --success: #25D366;
+  --warning: #FF9800;
+  --text-dark: #333333;
+  --text-light: #666666;
+  --bg-light: #f8f8f8;
+  --white: #ffffff;
+  --border: #e0e0e0;
+  --max-width-container: 1200px;
+  --max-width-content: 1200px;
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+  --shadow-md: 0 5px 20px rgba(0,0,0,0.1);
+  --shadow-lg: 0 10px 40px rgba(0,0,0,0.15);
+  --radius-sm: 8px;
+  --radius-md: 15px;
+  --radius-lg: 20px;
+  --transition: all 0.3s ease;
+  --gradient-primary: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  --gradient-success: linear-gradient(135deg, var(--success) 0%, #1da851 100%);
+  
+  /* 🆕 Typography Scale Variables - מתוך המקרא */
+  --fs-hero: clamp(2.5rem, 5vw, 4rem);
+  --fs-h1: clamp(2rem, 4vw, 3rem);
+  --fs-h2: clamp(1.5rem, 3vw, 2rem);
+  --fs-h3: clamp(1.25rem, 2.5vw, 1.5rem);
+  --fs-body: clamp(1rem, 2vw, 1.25rem);
+  --fs-small: clamp(0.875rem, 1.5vw, 1rem);
+  --fs-input-min: 16px; /* מונע zoom באייפון */
+  
+  /* Line Heights */
+  --lh-tight: 1.2;
+  --lh-normal: 1.5;
+  --lh-relaxed: 1.8;
+  
+  /* Font Weights - Assistant Family */
+  --fw-light: 300;
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+  --fw-extrabold: 800;
+  
+  /* 🆕 Spacing System - 8pt Grid */
+  --space-1: 0.25rem;  /* 4px */
+  --space-2: 0.5rem;   /* 8px */
+  --space-3: 0.75rem;  /* 12px */
+  --space-4: 1rem;     /* 16px */
+  --space-5: 1.25rem;  /* 20px */
+  --space-6: 1.5rem;   /* 24px */
+  --space-8: 2rem;     /* 32px */
+  --space-10: 2.5rem;  /* 40px */
+  --space-12: 3rem;    /* 48px */
+  --space-16: 4rem;    /* 64px */
+  --space-20: 5rem;    /* 80px */
+  --space-24: 6rem;    /* 96px */
+  
+  /* Mobile Spacing */
+  --space-mobile-section: var(--space-10); /* 40px */
+  --space-mobile-card: var(--space-5);     /* 20px */
+  --space-mobile-element: var(--space-3);  /* 12px */
+  
+  /* 🆕 Extended Color Palette */
+  --primary-50: #e3f2fd;
+  --primary-100: #bbdefb;
+  --primary-200: #90caf9;
+  --primary-300: #64b5f6;
+  --primary-400: #42a5f5;
+  --primary-500: #1e5490; /* Main brand */
+  --primary-600: #1976d2;
+  --primary-700: #1565c0;
+  --primary-800: #0d47a1;
+  --primary-900: #0a3d62;
+  
+  /* Semantic Colors Extended */
+  --success-light: #4caf50;
+  --success-dark: #1da851;
+  --danger-light: #f44336;
+  --danger-dark: #d32f2f;
+  --warning-light: #ffb74d;
+  --warning-dark: #f57c00;
+  
+  /* Neutral Scale */
+  --gray-50: #fafafa;
+  --gray-100: #f5f5f5;
+  --gray-200: #e0e0e0;
+  --gray-300: #cccccc;
+  --gray-400: #999999;
+  --gray-500: #666666;
+  --gray-600: #555555;
+  --gray-700: #444444;
+  --gray-800: #333333;
+  --gray-900: #222222;
+  
+  /* Background Colors */
+  --bg-primary: #ffffff;
+  --bg-secondary: #fafafa;
+  --bg-tertiary: #f5f5f5;
+  --bg-dark: #1a1a1a;
+}
+
+/* Global Reset */
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  width: 100%;
+  min-width: 320px;
+}
+
+.wpc-demo-container * {
+  box-sizing: border-box;
+  font-family: Assistant, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+/* 🆕 Utility Classes - לשימוש עתידי */
+.wpc-text-center { text-align: center !important; }
+.wpc-text-right { text-align: right !important; }
+.wpc-text-left { text-align: left !important; }
+
+.wpc-font-regular { font-weight: var(--fw-regular) !important; }
+.wpc-font-semibold { font-weight: var(--fw-semibold) !important; }
+.wpc-font-bold { font-weight: var(--fw-bold) !important; }
+
+.wpc-color-primary { color: var(--primary) !important; }
+.wpc-color-danger { color: var(--danger) !important; }
+.wpc-color-success { color: var(--success) !important; }
+.wpc-color-warning { color: var(--warning) !important; }
+
+.wpc-bg-primary { background: var(--bg-primary) !important; }
+.wpc-bg-secondary { background: var(--bg-secondary) !important; }
+.wpc-bg-tertiary { background: var(--bg-tertiary) !important; }
+
+.wpc-p-0 { padding: 0 !important; }
+.wpc-p-1 { padding: var(--space-1) !important; }
+.wpc-p-2 { padding: var(--space-2) !important; }
+.wpc-p-3 { padding: var(--space-3) !important; }
+.wpc-p-4 { padding: var(--space-4) !important; }
+.wpc-p-5 { padding: var(--space-5) !important; }
+
+.wpc-m-0 { margin: 0 !important; }
+.wpc-m-1 { margin: var(--space-1) !important; }
+.wpc-m-2 { margin: var(--space-2) !important; }
+.wpc-m-3 { margin: var(--space-3) !important; }
+.wpc-m-4 { margin: var(--space-4) !important; }
+.wpc-m-5 { margin: var(--space-5) !important; }
+
+.wpc-mb-0 { margin-bottom: 0 !important; }
+.wpc-mb-1 { margin-bottom: var(--space-1) !important; }
+.wpc-mb-2 { margin-bottom: var(--space-2) !important; }
+.wpc-mb-3 { margin-bottom: var(--space-3) !important; }
+.wpc-mb-4 { margin-bottom: var(--space-4) !important; }
+.wpc-mb-5 { margin-bottom: var(--space-5) !important; }
+
+.wpc-mt-0 { margin-top: 0 !important; }
+.wpc-mt-1 { margin-top: var(--space-1) !important; }
+.wpc-mt-2 { margin-top: var(--space-2) !important; }
+.wpc-mt-3 { margin-top: var(--space-3) !important; }
+.wpc-mt-4 { margin-top: var(--space-4) !important; }
+.wpc-mt-5 { margin-top: var(--space-5) !important; }
+
+.wpc-rounded-sm { border-radius: var(--radius-sm) !important; }
+.wpc-rounded-md { border-radius: var(--radius-md) !important; }
+.wpc-rounded-lg { border-radius: var(--radius-lg) !important; }
+
+.wpc-shadow-sm { box-shadow: var(--shadow-sm) !important; }
+.wpc-shadow-md { box-shadow: var(--shadow-md) !important; }
+.wpc-shadow-lg { box-shadow: var(--shadow-lg) !important; }
+
+.wpc-hidden { display: none !important; }
+.wpc-block { display: block !important; }
+.wpc-flex { display: flex !important; }
+.wpc-inline-flex { display: inline-flex !important; }
+
+.wpc-justify-center { justify-content: center !important; }
+.wpc-justify-between { justify-content: space-between !important; }
+.wpc-align-center { align-items: center !important; }
+
+/* Mobile Utilities */
+@media (max-width: 768px) {
+  .wpc-hidden-mobile { display: none !important; }
+  .wpc-block-mobile { display: block !important; }
+  .wpc-text-center-mobile { text-align: center !important; }
+}
+
+.wpc-demo-container {
+  direction: rtl;
+  width: 100%;
+  max-width: 100vw;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  user-select: none;
+  overflow-x: hidden;
+  position: relative;
+}
+
+.wpc-demo-container > * {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.wpc-demo-container *:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.wpc-demo-container button,
+.wpc-demo-container [role="button"],
+.wpc-demo-container input,
+.wpc-demo-container select {
+  user-select: auto;
+}
+
+.wpc-element-title {
+  background: var(--primary);
+  color: white;
+  text-align: center;
+  padding: 15px;
+  margin: 40px 0 0 0;
+  font-size: 1.3em;
+  font-weight: 700;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.wpc-element-title:first-child {
+  margin-top: 0;
+}
+
+/* 1. Hero Section */
+.wpc-hero-demo-section {
+  width: 100%;
+  background: var(--gradient-primary);
+  padding: 60px 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.wpc-hero-demo-container {
+  max-width: var(--max-width-container);
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.wpc-hero-demo-title {
+  font-size: clamp(2rem, 6vw, 3rem);
+  font-weight: 800;
+  color: white;
+  margin: 0 0 20px;
+  line-height: 1.2;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  animation: fadeInUp 0.8s ease;
+}
+
+.wpc-hero-demo-subtitle {
+  font-size: clamp(1rem, 3vw, 1.4rem);
+  font-weight: 400;
+  color: rgba(255,255,255,0.9);
+  margin: 0 0 40px;
+  line-height: 1.5;
+  animation: fadeInUp 0.8s ease 0.2s both;
+}
+
+.wpc-hero-demo-cta {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.wpc-hero-demo-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 15px 40px;
+  min-height: 54px;
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  font-weight: 700;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  animation: fadeInUp 0.8s ease 0.4s both;
+}
+
+.wpc-hero-demo-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255,255,255,0.1);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+}
+
+.wpc-hero-demo-btn:hover::before {
+  transform: translateX(0);
+}
+
+.wpc-hero-demo-btn:active {
+  transform: scale(0.96);
+}
+
+.wpc-hero-demo-btn-primary {
+  background: var(--danger);
+  color: white;
+  box-shadow: 0 5px 20px rgba(255,59,59,0.3);
+}
+
+.wpc-hero-demo-btn-primary:hover {
+  box-shadow: 0 8px 25px rgba(255,59,59,0.4);
+  transform: translateY(-2px);
+}
+
+.wpc-hero-demo-btn-secondary {
+  background: transparent;
+  color: white;
+  border: 2px solid white;
+}
+
+.wpc-hero-demo-btn-secondary:hover {
+  background: white;
+  color: var(--primary);
+  transform: translateY(-2px);
+}
+
+/* 2. CTA Buttons */
+.wpc-cta-demo-container {
+  max-width: var(--max-width-container);
+  margin: 0 auto;
+  padding: 40px 20px;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.wpc-cta-demo-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 15px 40px;
+  min-height: 54px;
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  font-weight: 700;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+.wpc-cta-demo-btn:active {
+  transform: scale(0.96);
+}
+
+.wpc-cta-demo-btn-primary {
+  background: var(--danger);
+  color: white;
+  box-shadow: var(--shadow-md);
+}
+
+.wpc-cta-demo-btn-primary:hover {
+  background: #e63530;
+  box-shadow: 0 8px 25px rgba(255,59,59,0.4);
+  transform: translateY(-2px);
+}
+
+.wpc-cta-demo-btn-whatsapp {
+  background: var(--success);
+  color: white;
+  box-shadow: var(--shadow-md);
+}
+
+.wpc-cta-demo-btn-whatsapp:hover {
+  background: #1da851;
+  box-shadow: 0 8px 25px rgba(37,211,102,0.4);
+  transform: translateY(-2px);
+}
+
+/* 3. Goal Cards */
+.wpc-goal-demo-container {
+  max-width: var(--max-width-container);
+  margin: 0 auto;
+  padding: 40px 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px;
+}
+
+.wpc-goal-demo-card {
+  background: white;
+  border: 2px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 30px 20px;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s ease;
+  cursor: pointer;
+  position: relative;
+  min-height: 140px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+.wpc-goal-demo-card:active {
+  transform: scale(0.96);
+  background: #f5f5f5;
+}
+
+.wpc-goal-demo-card.selected {
+  background: var(--gradient-primary);
+  border-color: var(--primary);
+  color: white;
+  box-shadow: 0 4px 12px rgba(30,84,144,0.3);
+}
+
+.wpc-goal-demo-card.selected .wpc-goal-demo-title {
+  color: white;
+}
+
+.wpc-goal-demo-card.selected::after {
+  content: '✓';
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  width: 24px;
+  height: 24px;
+  background: var(--success);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: bold;
+  animation: checkmarkPop 0.3s ease;
+}
+
+@media (hover: hover) {
+  .wpc-goal-demo-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--primary);
+  }
+}
+
+.wpc-goal-demo-icon {
+  font-size: 3em;
+  margin-bottom: 15px;
+  display: block;
+  filter: grayscale(0.3);
+  transition: all 0.2s ease;
+}
+
+.wpc-goal-demo-card.selected .wpc-goal-demo-icon {
+  filter: none;
+  animation: iconBounce 0.5s ease;
+}
+
+.wpc-goal-demo-title {
+  font-size: 1.2em;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin: 0;
+}
+
+/* 4. Banners */
+.wpc-banner-demo-container {
+  max-width: var(--max-width-container);
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.wpc-banner-demo {
+  background: var(--gradient-primary);
+  color: white;
+  padding: 30px;
+  border-radius: var(--radius-md);
+  text-align: center;
+  box-shadow: var(--shadow-md);
+}
+
+.wpc-banner-demo-title {
+  font-size: 1.8em;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.wpc-banner-demo-text {
+  font-size: 1.2em;
+  opacity: 0.9;
+}
+
+/* 5. Accordion */
+.wpc-accordion-demo-container {
+  max-width: var(--max-width-container);
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.wpc-accordion-demo-item {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+.wpc-accordion-demo-header {
+  background: var(--bg-light);
+  padding: 20px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1.1em;
+  position: relative;
+  transition: all 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  border: 2px solid transparent;
+}
+
+.wpc-accordion-demo-header:hover {
+  background: #f0f0f0;
+  border-color: var(--primary);
+}
+
+.wpc-accordion-demo-header.active {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+.wpc-accordion-demo-header:active {
+  transform: scale(0.99);
+}
+
+.wpc-accordion-demo-header::after {
+  content: '←';
+  position: absolute;
+  left: 20px;
+  top: 50%; /* 🎯 מרכוז אנכי מושלם */
+  transform: translateY(-50%); /* 🎯 מרכוז אנכי מושלם */
+  font-size: 1.2em;
+  transition: transform 0.3s ease;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.1);
+}
+
+.wpc-accordion-demo-header.active::after {
+  transform: translateY(-50%) rotate(90deg);
+  background: rgba(255,255,255,0.2);
+}
+
+.wpc-accordion-demo-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.wpc-accordion-demo-content.active {
+  max-height: 500px;
+  padding: 20px;
+  background: white;
+}
+
+/* 6. WhatsApp Box */
+.wpc-whatsapp-demo-section {
+  padding: 0;
+  background: var(--bg-light);
+}
+
+.wpc-whatsapp-demo-container {
+  max-width: var(--max-width-container);
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.wpc-whatsapp-demo-box {
+  background: var(--gradient-success);
+  border-radius: var(--radius-lg);
+  padding: 40px;
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+}
+
+.wpc-whatsapp-demo-title {
+  font-size: 2em;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 15px;
+}
+
+.wpc-whatsapp-demo-text {
+  font-size: 1.25em;
+  color: rgba(255,255,255,0.9);
+  margin-bottom: 30px;
+}
+
+.wpc-whatsapp-demo-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: white;
+  color: #128C7E;
+  padding: 16px 32px;
+  min-height: 54px;
+  border-radius: 50px;
+  font-size: clamp(1rem, 2.5vw, 1.1rem);
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+.wpc-whatsapp-demo-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.wpc-whatsapp-demo-button:hover::before {
+  transform: translateX(100%);
+}
+
+.wpc-whatsapp-demo-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(18,140,126,0.3);
+}
+
+.wpc-whatsapp-demo-button:active {
+  transform: scale(0.96);
+}
+
+/* 7. Statistics */
+.wpc-stats-demo-section {
+  background: var(--primary);
+  padding: 60px 20px;
+}
+
+.wpc-stats-demo-container {
+  max-width: var(--max-width-container);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 40px;
+}
+
+.wpc-stats-demo-item {
+  text-align: center;
+  background: rgba(255,255,255,0.1);
+  padding: 30px 20px;
+  border-radius: var(--radius-md);
+  backdrop-filter: blur(10px);
+}
+
+.wpc-stats-demo-number {
+  font-size: 3em;
+  font-weight: 800;
+  color: white;
+  margin-bottom: 10px;
+  line-height: 1;
+}
+
+.wpc-stats-demo-label {
+  font-size: 1.25em;
+  color: rgba(255,255,255,0.9);
+  margin: 0;
+}
+
+/* 8. Tables */
+.wpc-table-demo-container {
+  max-width: var(--max-width-container);
+  margin: 0 auto;
+  padding: 40px 20px;
+  overflow-x: auto;
+}
+
+.wpc-table-demo {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.wpc-table-demo thead th {
+  background: var(--primary);
+  color: white;
+  padding: 18px 20px;
+  font-weight: 600;
+  text-align: right;
+}
+
+.wpc-table-demo td {
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* 9. Interest Rate Cards */
+.wpc-rate-demo-container {
+  max-width: var(--max-width-container);
+  margin: 0 auto;
+  padding: 40px 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.wpc-rate-demo-card {
+  background: white;
+  border-radius: var(--radius-md);
+  padding: 25px;
+  box-shadow: var(--shadow-sm);
+}
+
+.wpc-rate-demo-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.wpc-rate-demo-title {
+  font-size: 1.2em;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.wpc-rate-demo-badge {
+  background: var(--warning);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.8em;
+  font-weight: 600;
+}
+
+.wpc-rate-demo-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.wpc-rate-demo-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.wpc-rate-demo-amount {
+  color: var(--text-light);
+}
+
+.wpc-rate-demo-rate {
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 1.1em;
+}
+
+/* 10. Timeline */
+.wpc-timeline-demo-container {
+  max-width: var(--max-width-container);
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.wpc-timeline-demo-wrapper {
+  max-width: 700px;
+  margin: 0 auto;
+  position: relative;
+  padding: 40px 20px;
+  background: white;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.wpc-timeline-demo-line {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 60px;
+  bottom: 60px;
+  width: 3px;
+  background: linear-gradient(to bottom, var(--primary) 0%, var(--border) 100%);
+}
+
+.wpc-timeline-demo-item {
+  position: relative;
+  margin-bottom: 50px;
+  text-align: center;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.wpc-timeline-demo-circle {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: -10px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: white;
+  border: 4px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: var(--text-light);
+  font-size: 1.2em;
+  z-index: 2;
+  box-shadow: var(--shadow-md);
+}
+
+.wpc-timeline-demo-circle.active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: white;
+  transform: translateX(-50%) scale(1.1);
+}
+
+.wpc-timeline-demo-content {
+  background: var(--bg-light);
+  padding: 30px 25px;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  margin-top: 40px;
+  border: 2px solid transparent;
+  transition: var(--transition);
+}
+
+.wpc-timeline-demo-item.active .wpc-timeline-demo-content {
+  border-color: var(--primary);
+  background: white;
+}
+
+.wpc-timeline-demo-title {
+  font-size: 1.3em;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 10px;
+}
+
+.wpc-timeline-demo-desc {
+  color: var(--text-light);
+  line-height: 1.6;
+}
+
+/* 11. Section Headers */
+.wpc-section-demo-header {
+  text-align: center;
+  margin: 60px auto 40px;
+  max-width: var(--max-width-container);
+  padding: 0 20px;
+}
+
+.wpc-section-demo-title {
+  font-size: 2.5em;
+  font-weight: 700;
+  color: var(--primary);
+  margin: 0 auto 20px;
+  line-height: 1.3;
+  display: inline-flex;
+  align-items: center;
+  gap: 15px;
+  width: fit-content;
+  justify-content: center;
+  direction: rtl;
+  position: relative;
+  padding-right: 25px;
+}
+
+/* הקו האדום הדקורטיבי לכותרות רגילות - בצד ימין */
+.wpc-section-demo-title::after {
+  content: '';
+  width: 4px;
+  height: 60px;
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 2px;
+  box-shadow: 0 2px 4px rgba(231, 76, 60, 0.3);
+}
+
+/* הסרת הקו האדום רק מהבאנר הירו */
+.wpc-hero-demo-section .wpc-section-demo-title::after {
+  display: none;
+}
+
+/* הסרת ה-padding מימין בבאנר הירו כי אין קו אדום */
+.wpc-hero-demo-section .wpc-section-demo-title {
+  padding-right: 0;
+}
+
+.wpc-section-demo-subtitle {
+  font-size: 1.25em;
+  color: var(--text-light);
+  margin: 0;
+  line-height: 1.8;
+}
+
+/* Mobile First - כמה נקודות שבירה למובייל */
+@media screen and (max-width: 767px), 
+       screen and (max-device-width: 767px),
+       screen and (orientation: portrait) and (max-width: 1024px) {
+  .wpc-demo-container {
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
+  }
+  
+  .wpc-demo-container * {
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  
+  /* תיקון מיוחד לאלמנטים רחבים */
+  .wpc-element-title,
+  .wpc-hero-demo-section,
+  .wpc-cta-demo-container,
+  .wpc-goal-demo-container,
+  .wpc-banner-demo-container,
+  .wpc-accordion-demo-container,
+  .wpc-whatsapp-demo-section,
+  .wpc-stats-demo-section,
+  .wpc-table-demo-container,
+  .wpc-rate-demo-container,
+  .wpc-timeline-demo-container,
+  .wpc-section-demo-header {
+    width: 100% !important;
+    max-width: 100vw !important;
+    overflow-x: hidden !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+  
+  .wpc-hero-demo-section {
+    padding: 30px 20px 35px 20px;
+    min-height: auto;
+    max-height: 85vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .wpc-hero-demo-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .wpc-hero-demo-title {
+    font-size: clamp(1.5rem, 7vw, 2.2rem);
+    margin-bottom: 12px;
+    text-align: center;
+    line-height: 1.2;
+  }
+  
+  .wpc-hero-demo-subtitle {
+    font-size: clamp(0.9rem, 4vw, 1.1rem);
+    margin-bottom: 24px;
+    text-align: center;
+    max-width: 100%;
+    line-height: 1.4;
+  }
+  
+  .wpc-hero-demo-cta {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+    width: 100%;
+    margin-top: 4px;
+  }
+  
+  .wpc-hero-demo-btn {
+    width: 100%;
+    max-width: 100%;
+    min-height: 50px;
+    font-size: 1.15rem;
+    font-weight: 800;
+    padding: 14px 24px;
+    letter-spacing: 0.3px;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    border-radius: 25px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.15);
+  }
+  
+  .wpc-hero-demo-btn:active {
+    transform: scale(0.97);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  }
+  
+  .wpc-cta-demo-container {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+    padding: 25px 20px;
+    width: 100%;
+  }
+  
+  .wpc-cta-demo-btn {
+    width: 100%;
+    max-width: 100%;
+    min-height: 54px;
+    font-size: 1.2rem;
+    font-weight: 800;
+    padding: 16px 24px;
+    letter-spacing: 0.5px;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    border-radius: 27px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  }
+  
+  .wpc-cta-demo-btn:active {
+    transform: scale(0.97);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  }
+  
+  .wpc-goal-demo-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    padding: 30px 15px;
+  }
+  
+  .wpc-goal-demo-card {
+    padding: 16px;
+    min-height: 120px;
+    border-radius: 12px;
+  }
+  
+  .wpc-goal-demo-card:active {
+    transform: scale(0.96);
+  }
+  
+  .wpc-goal-demo-icon {
+    font-size: 2.2em;
+    margin-bottom: 8px;
+  }
+  
+  .wpc-goal-demo-title {
+    font-size: 0.85rem;
+    line-height: 1.3;
+  }
+  
+  .wpc-goal-demo-card.selected::after {
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+    top: 6px;
+    left: 6px;
+  }
+  
+  .wpc-stats-demo-section {
+    padding: 40px 15px;
+  }
+  
+  .wpc-stats-demo-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  .wpc-stats-demo-item {
+    min-height: 100px;
+    padding: 20px 15px;
+  }
+  
+  .wpc-stats-demo-number {
+    font-size: 2em;
+    line-height: 1.2;
+  }
+  
+  .wpc-stats-demo-label {
+    font-size: 0.9em;
+    margin-top: 5px;
+  }
+  
+  .wpc-whatsapp-demo-button {
+    width: 100%;
+    max-width: 100%;
+    min-height: 56px;
+    font-size: 1.2rem;
+    font-weight: 800;
+    gap: 12px;
+    padding: 18px 24px;
+    letter-spacing: 0.5px;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    border-radius: 28px;
+    box-shadow: 0 4px 15px rgba(18,140,126,0.3);
+  }
+  
+  .wpc-whatsapp-demo-button:active {
+    transform: scale(0.97);
+    box-shadow: 0 2px 8px rgba(18,140,126,0.4);
+  }
+  
+  .wpc-whatsapp-demo-title {
+    font-size: clamp(1.2rem, 4vw, 1.5rem);
+    margin-bottom: 12px;
+  }
+  
+  .wpc-whatsapp-demo-text {
+    font-size: 1rem;
+    margin-bottom: 24px;
+    line-height: 1.6;
+  }
+  
+  .wpc-whatsapp-demo-container {
+    padding: 30px 20px;
+  }
+  
+  .wpc-whatsapp-demo-box {
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .wpc-rate-demo-container {
+    grid-template-columns: 1fr;
+    gap: 15px;
+    padding: 30px 15px;
+  }
+  
+  .wpc-rate-demo-card {
+    padding: 20px;
+  }
+  
+  .wpc-banner-demo-container {
+    padding: 30px 15px;
+  }
+  
+  .wpc-banner-demo {
+    padding: 20px;
+    font-size: 0.95rem;
+  }
+  
+  .wpc-banner-demo-title {
+    font-size: 1.4em;
+  }
+  
+  .wpc-banner-demo-text {
+    font-size: 1em;
+  }
+  
+  .wpc-accordion-demo-container {
+    padding: 30px 15px;
+  }
+  
+  .wpc-accordion-demo-header {
+    padding: 16px 20px;
+    font-size: 1rem;
+  }
+  
+  .wpc-accordion-demo-header::after {
+    width: 20px;
+    height: 20px;
+    font-size: 1em;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  .wpc-accordion-demo-content.active {
+    padding: 16px 20px;
+  }
+  
+  /* מרכוז מושלם של הכפתור העגול במובייל */
+  .wpc-accordion-demo-header.active::after {
+    transform: translateY(-50%) rotate(90deg);
+  }
+  
+  /* תיקון נוסף לחריגה במובייל */
+  .wpc-element-title {
+    margin: 20px 0 0 0 !important;
+    padding: 12px 15px !important;
+    font-size: 1.1rem !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    box-sizing: border-box !important;
+  }
+  
+  .wpc-hero-demo-container,
+  .wpc-cta-demo-container,
+  .wpc-goal-demo-container,
+  .wpc-banner-demo-container,
+  .wpc-accordion-demo-container,
+  .wpc-whatsapp-demo-container,
+  .wpc-stats-demo-container,
+  .wpc-rate-demo-container,
+  .wpc-timeline-demo-container {
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  
+  /* מניעת חריגה של טקסטים ארוכים */
+  .wpc-hero-demo-title,
+  .wpc-hero-demo-subtitle,
+  .wpc-banner-demo-title,
+  .wpc-banner-demo-text,
+  .wpc-section-demo-title,
+  .wpc-section-demo-subtitle {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-wrap: break-word !important;
+    word-wrap: break-word !important;
+    hyphens: auto !important;
+  }
+  
+  .wpc-timeline-demo-container {
+    padding: 20px 15px;
+  }
+  
+  .wpc-timeline-demo-wrapper {
+    max-width: 100%;
+    padding: 20px 15px;
+    margin: 0;
+    border-radius: var(--radius-md);
+  }
+  
+  .wpc-timeline-demo-line {
+    left: 50%;
+    transform: translateX(-50%);
+    top: 40px;
+    bottom: 40px;
+    width: 2px;
+  }
+  
+  .wpc-timeline-demo-item {
+    margin-bottom: 35px;
+    max-width: 100%;
+  }
+  
+  .wpc-timeline-demo-circle {
+    width: 50px;
+    height: 50px;
+    font-size: 1em;
+  }
+  
+  .wpc-timeline-demo-circle.active {
+    transform: translateX(-50%) scale(1.05);
+  }
+  
+  .wpc-timeline-demo-content {
+    padding: 20px 15px;
+    margin-top: 30px;
+  }
+  
+  .wpc-timeline-demo-title {
+    font-size: 1.1em;
+    margin-bottom: 8px;
+  }
+  
+  .wpc-timeline-demo-desc {
+    font-size: 0.95em;
+    line-height: 1.5;
+  }
+  
+  .wpc-section-demo-title {
+    font-size: 1.8em;
+    gap: 10px;
+    padding-right: 20px;
+    width: fit-content;
+    margin: 0 auto 20px;
+  }
+  
+  /* הקו האדום במובייל - גרסה קטנה יותר בצד ימין */
+  .wpc-section-demo-title::after {
+    width: 3px;
+    height: 40px;
+  }
+  
+  /* הסרת הקו והpadding רק מהבאנר הירו במובייל */
+  .wpc-hero-demo-section .wpc-section-demo-title {
+    padding-right: 0;
+  }
+  
+  .wpc-section-demo-subtitle {
+    font-size: 1em;
+  }
+  
+  /* Table mobile view - תיקון חריגה */
+  .wpc-table-demo-container {
+    width: 100% !important;
+    max-width: 100vw !important;
+    overflow-x: auto !important;
+    padding: 0 15px !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+  }
+  
+  /* 🎯 טבלאות במובייל - CSS נקי וקל לקריאה */
+  
+  /* הסתרת הטבלה הרגילה במובייל */
+  .wpc-table-demo {
+    display: none;
+  }
+  
+  /* יצירת כרטיסים במקום טבלה */
+  .wpc-table-demo-container::after {
+    content: '';
+    display: block;
+  }
+  
+  /* כרטיסי נתונים במובייל */
+  .wpc-table-demo-container::before {
+    content: 'כרטיס חברה 1: בנק א׳ - ריבית: 4.5% - סכום מקסימלי: ₪500,000 - תקופה: עד 120 חודשים - המלצה: מומלץ\A כרטיס חברה 2: בנק ב׳ - ריבית: 3.9% - סכום מקסימלי: ₪750,000 - תקופה: עד 84 חודשים - המלצה: הטוב ביותר\A כרטיס חברה 3: בנק ג׳ - ריבית: 5.2% - סכום מקסימלי: ₪300,000 - תקופה: עד 60 חודשים - המלצה: סטנדרט';
+    white-space: pre-line;
+    padding: 0;
+    margin: 0;
+    display: none;
+  }
+  
+  /* 🎯 NEW: יצירת כרטיסים נקיים */
+  .wpc-mobile-cards-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 0 15px;
+  }
+  
+  .wpc-mobile-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    border: 1px solid #e0e0e0;
+    position: relative;
+  }
+  
+  .wpc-mobile-card-company {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1e5490;
+    margin-bottom: 16px;
+    text-align: center;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #f0f0f0;
+  }
+  
+  .wpc-mobile-card-detail {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #f5f5f5;
+  }
+  
+  .wpc-mobile-card-detail:last-child {
+    border-bottom: none;
+  }
+  
+  .wpc-mobile-card-label {
+    font-weight: 600;
+    color: #666;
+    font-size: 0.95rem;
+  }
+  
+  .wpc-mobile-card-value {
+    font-weight: 700;
+    color: #333;
+    font-size: 1rem;
+    text-align: left;
+  }
+  
+  .wpc-mobile-card-value.interest {
+    color: #1e5490;
+    font-size: 1.2rem;
+  }
+  
+  .wpc-mobile-card-value.amount {
+    color: #25D366;
+    direction: ltr;
+  }
+  
+     .wpc-mobile-card-value.recommendation {
+     background: #1e5490;
+     color: white;
+     padding: 6px 12px;
+     border-radius: 20px;
+     font-size: 0.9rem;
+   }
+   
+   /* אנימציות כניסה לכרטיסים */
+   .wpc-mobile-card {
+     opacity: 0;
+     transform: translateY(20px);
+     animation: slideInUp 0.6s ease forwards;
+   }
+   
+   .wpc-mobile-card:nth-child(1) { animation-delay: 0.1s; }
+   .wpc-mobile-card:nth-child(2) { animation-delay: 0.2s; }
+   .wpc-mobile-card:nth-child(3) { animation-delay: 0.3s; }
+   
+   @keyframes slideInUp {
+     to {
+       opacity: 1;
+       transform: translateY(0);
+     }
+   }
+   
+   /* Hover effects לכרטיסים */
+   .wpc-mobile-card:hover {
+     transform: translateY(-4px);
+     box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+     transition: all 0.3s ease;
+   }
+   
+   /* Special styling for best recommendation */
+   .wpc-mobile-card:nth-child(2) {
+     border: 2px solid #25D366;
+     position: relative;
+   }
+   
+   .wpc-mobile-card:nth-child(2)::before {
+     content: '⭐ הטוב ביותר';
+     position: absolute;
+     top: -10px;
+     right: 20px;
+     background: #25D366;
+     color: white;
+     padding: 4px 12px;
+     border-radius: 20px;
+     font-size: 0.8rem;
+     font-weight: 600;
+   }
+}
+
+/* 12. Calculator Tabs */
+.wpc-calc-tabs-demo-container {
+  max-width: var(--max-width-container);
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.wpc-calc-tabs-demo-wrapper {
+  background: white;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+
+.wpc-calc-tabs-demo-nav {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 8px;
+  padding: 5px;
+  background: var(--bg-light);
+}
+
+.wpc-calc-tab-demo {
+  background: var(--bg-light);
+  border: 2px solid transparent;
+  border-radius: 12px;
+  padding: 12px 8px;
+  min-height: 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition);
+  font-family: inherit;
+  box-shadow: var(--shadow-sm);
+}
+
+.wpc-calc-tab-demo:hover {
+  background: white;
+  border-color: var(--primary);
+  transform: translateY(-2px);
+}
+
+.wpc-calc-tab-demo.active {
+  background: var(--gradient-primary);
+  border-color: var(--primary-dark);
+  color: white;
+}
+
+.wpc-calc-tab-demo-icon {
+  font-size: 1.5em;
+  margin-bottom: 8px;
+}
+
+.wpc-calc-tab-demo span:last-child {
+  font-size: 0.85em;
+  font-weight: 600;
+}
+
+.wpc-calc-content-demo {
+  padding: 30px;
+}
+
+.wpc-calc-panel-demo {
+  display: none;
+}
+
+.wpc-calc-panel-demo.active {
+  display: block;
+}
+
+.wpc-calc-panel-demo h4 {
+  color: var(--primary);
+  margin-bottom: 20px;
+  font-size: 1.5em;
+}
+
+.wpc-calc-results-demo {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.wpc-calc-result-demo {
+  background: var(--bg-light);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.wpc-calc-label-demo {
+  font-size: 1em;
+  font-weight: 600;
+  color: var(--text-light);
+}
+
+.wpc-calc-value-demo {
+  font-size: 1.8em;
+  font-weight: 800;
+  color: var(--primary);
+  direction: ltr;
+}
+
+/* 14. Interactive Comparison Tables */
+.wpc-comparison-demo-container {
+  max-width: var(--max-width-container);
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.wpc-comparison-demo-wrapper {
+  background: linear-gradient(135deg, #ffffff 0%, #f8fbff 100%);
+  border: 3px solid var(--primary);
+  border-radius: 20px;
+  padding: 30px;
+  position: relative;
+  box-shadow: var(--shadow-lg);
+}
+
+.wpc-comparison-demo-badge {
+  position: absolute;
+  top: -20px;
+  right: 25px;
+  background: var(--primary);
+  color: white;
+  padding: 8px 20px;
+  border-radius: 25px;
+  font-weight: 700;
+  font-size: 0.9em;
+}
+
+.wpc-comparison-demo-filters {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 30px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.wpc-comparison-demo-dropdown {
+  padding: 10px 20px;
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  font-family: inherit;
+  transition: var(--transition);
+}
+
+.wpc-comparison-demo-dropdown:hover {
+  border-color: var(--primary);
+  box-shadow: var(--shadow-sm);
+}
+
+.wpc-comparison-demo-toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.wpc-toggle-demo-slider {
+  position: relative;
+  width: 50px;
+  height: 26px;
+  background: var(--border);
+  border-radius: 26px;
+  transition: var(--transition);
+}
+
+.wpc-toggle-demo-slider::before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 22px;
+  height: 22px;
+  background: white;
+  border-radius: 50%;
+  transition: var(--transition);
+}
+
+.wpc-comparison-demo-toggle input:checked + .wpc-toggle-demo-slider {
+  background: var(--success);
+}
+
+.wpc-comparison-demo-toggle input:checked + .wpc-toggle-demo-slider::before {
+  transform: translateX(24px);
+}
+
+.wpc-comparison-demo-toggle input {
+  display: none;
+}
+
+.wpc-comparison-demo-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.wpc-comparison-demo-card {
+  background: white;
+  border: 2px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  transition: var(--transition);
+}
+
+.wpc-comparison-demo-card:hover {
+  border-color: var(--primary);
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+}
+
+.wpc-comparison-demo-card.featured {
+  border-color: var(--primary);
+  box-shadow: var(--shadow-md);
+}
+
+.wpc-comparison-demo-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.wpc-comparison-demo-stars {
+  color: #FFD700;
+  font-size: 1.2em;
+}
+
+.wpc-comparison-demo-rate {
+  font-size: 2.5em;
+  font-weight: 800;
+  color: var(--primary);
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.wpc-comparison-demo-features {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.wpc-comparison-feature {
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.9em;
+  font-weight: 600;
+}
+
+.wpc-comparison-feature.good {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.wpc-comparison-feature.bad {
+  background: #ffebee;
+  color: #c62828;
+}
+
+.wpc-comparison-demo-btn {
+  width: 100%;
+  padding: 12px 24px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.wpc-comparison-demo-btn:hover {
+  background: var(--primary-dark);
+}
+
+/* 15. Eligibility Quiz */
+.wpc-quiz-demo-container {
+  max-width: var(--max-width-container);
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.wpc-quiz-demo-wrapper {
+  background: linear-gradient(135deg, #ffffff 0%, #f0f4f9 100%);
+  border: 3px solid var(--primary);
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 10px 30px rgba(30, 84, 144, 0.15);
+}
+
+.wpc-quiz-demo-progress {
+  margin-bottom: 30px;
+}
+
+.wpc-quiz-progress-demo-bar {
+  height: 40px;
+  background: var(--success);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 700;
+  font-size: 1.25em;
+  transition: width 0.5s ease;
+}
+
+.wpc-quiz-demo-question {
+  font-size: 1.5em;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.wpc-quiz-demo-options {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.wpc-quiz-demo-option {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px 20px;
+  background: white;
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.wpc-quiz-demo-option:hover {
+  background: var(--bg-light);
+  border-color: var(--primary);
+}
+
+.wpc-quiz-demo-option input:checked + .wpc-quiz-demo-radio + .wpc-quiz-demo-text {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.wpc-quiz-demo-option input:checked {
+  background: var(--primary);
+}
+
+.wpc-quiz-demo-option input {
+  display: none;
+}
+
+.wpc-quiz-demo-radio {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--border);
+  border-radius: 50%;
+  position: relative;
+}
+
+.wpc-quiz-demo-option input:checked + .wpc-quiz-demo-radio {
+  border-color: var(--primary);
+  background: var(--primary);
+}
+
+.wpc-quiz-demo-option input:checked + .wpc-quiz-demo-radio::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  background: white;
+  border-radius: 50%;
+}
+
+.wpc-quiz-demo-nav {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.wpc-quiz-demo-btn-back,
+.wpc-quiz-demo-btn-next {
+  padding: 12px 30px;
+  border: 2px solid var(--primary);
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.wpc-quiz-demo-btn-back {
+  background: white;
+  color: var(--primary);
+}
+
+.wpc-quiz-demo-btn-next {
+  background: var(--primary);
+  color: white;
+}
+
+.wpc-quiz-demo-steps {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.wpc-quiz-step-demo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: var(--text-light);
+  transition: var(--transition);
+}
+
+.wpc-quiz-step-demo.completed {
+  background: var(--primary);
+  color: white;
+}
+
+.wpc-quiz-step-demo.active {
+  background: var(--primary);
+  color: white;
+  transform: scale(1.1);
+}
+
+/* 19. Highlight Areas */
+.wpc-highlight-demo-container {
+  max-width: var(--max-width-container);
+  margin: 0 auto;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.wpc-alert-demo {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 20px 25px;
+  border-radius: var(--radius-md);
+  border-right: 5px solid;
+}
+
+.wpc-alert-demo.warning {
+  background: #fff3e0;
+  border-color: var(--warning);
+}
+
+.wpc-alert-demo.tip {
+  background: #e8f5e9;
+  border-color: var(--success);
+}
+
+.wpc-alert-demo-icon {
+  font-size: 1.5em;
+  flex-shrink: 0;
+}
+
+.wpc-alert-demo-content {
+  flex: 1;
+  color: var(--text-dark);
+}
+
+.wpc-quote-demo {
+  background: var(--bg-light);
+  border-radius: 20px;
+  padding: 30px;
+  position: relative;
+  text-align: center;
+}
+
+.wpc-quote-demo-quotes {
+  position: absolute;
+  top: -10px;
+  right: 20px;
+  font-size: 4em;
+  color: var(--primary);
+  opacity: 0.3;
+  line-height: 1;
+}
+
+.wpc-quote-demo-text {
+  font-size: 1.2em;
+  line-height: 1.6;
+  color: var(--text-dark);
+  margin-bottom: 15px;
+  font-style: italic;
+}
+
+.wpc-quote-demo-author {
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.wpc-benefit-demo {
+  background: linear-gradient(135deg, #ffffff 0%, #f8fbff 100%);
+  border: 2px solid var(--primary);
+  border-radius: var(--radius-md);
+  padding: 25px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.wpc-benefit-demo-icon {
+  font-size: 2.5em;
+  color: var(--primary);
+  flex-shrink: 0;
+}
+
+.wpc-benefit-demo-content h4 {
+  color: var(--primary);
+  margin-bottom: 10px;
+  font-size: 1.3em;
+}
+
+.wpc-benefit-demo-content p {
+  color: var(--text-light);
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* 20. Advanced Form Components */
+.wpc-form-demo-container {
+  max-width: var(--max-width-container);
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.wpc-form-demo-wrapper {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: 30px;
+  box-shadow: var(--shadow-md);
+}
+
+/* AWG Container */
+.wpc-property-loan-k9x7-awg-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.wpc-property-loan-k9x7-awg-box {
+  background: linear-gradient(135deg, #ffffff 0%, #f8fbff 100%);
+  border: 3px solid var(--primary);
+  border-radius: 20px;
+  padding: 30px;
+  position: relative;
+  box-shadow: var(--shadow-lg);
+}
+
+.wpc-property-loan-k9x7-awg-badge {
+  position: absolute;
+  top: -20px;
+  right: 25px;
+  background: var(--primary);
+  color: white;
+  padding: 8px 20px;
+  border-radius: 25px;
+  font-weight: 600;
+  font-size: 0.9em;
+  box-shadow: var(--shadow-sm);
+}
+
+.wpc-form-demo-wrapper h4 {
+  color: var(--primary);
+  margin-bottom: 25px;
+  font-size: 1.5em;
+}
+
+.wpc-form-demo-group {
+  margin-bottom: 25px;
+}
+
+.wpc-form-demo-label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.wpc-slider-demo-wrapper {
+  position: relative;
+}
+
+.wpc-slider-demo {
+  width: 100%;
+  height: 8px;
+  background: var(--border);
+  border-radius: 4px;
+  outline: none;
+  -webkit-appearance: none;
+  margin-bottom: 10px;
+}
+
+.wpc-slider-demo::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 25px;
+  height: 25px;
+  background: var(--primary);
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+}
+
+.wpc-slider-demo::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  background: var(--primary);
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+  box-shadow: var(--shadow-sm);
+}
+
+.wpc-slider-demo-value {
+  text-align: center;
+  font-size: 1.2em;
+  font-weight: 700;
+  color: var(--primary);
+  direction: ltr;
+}
+
+.wpc-toggle-group-demo {
+  background: var(--bg-light);
+  border-radius: 30px;
+  padding: 5px;
+  display: flex;
+  gap: 5px;
+}
+
+.wpc-toggle-group-demo input {
+  display: none;
+}
+
+.wpc-toggle-option-demo {
+  flex: 1;
+  padding: 10px 20px;
+  text-align: center;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: var(--transition);
+  font-weight: 600;
+}
+
+.wpc-toggle-group-demo input:checked + .wpc-toggle-option-demo {
+  background: var(--primary);
+  color: white;
+}
+
+.wpc-input-demo-wrapper {
+  position: relative;
+}
+
+.wpc-input-demo-icon {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.2em;
+  color: var(--primary);
+}
+
+.wpc-input-demo {
+  width: 100%;
+  padding: 15px 20px 15px 50px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-family: inherit;
+  font-size: 1em;
+  transition: var(--transition);
+}
+
+.wpc-input-demo:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(30, 84, 144, 0.1);
+  outline: none;
+}
+
+.wpc-validation-demo {
+  margin-top: 5px;
+  font-size: 0.9em;
+}
+
+.wpc-validation-demo.success {
+  color: var(--success);
+}
+
+.wpc-validation-demo.error {
+  color: var(--danger);
+}
+
+/* 21. Loading States */
+.wpc-loading-demo-container {
+  max-width: var(--max-width-container);
+  margin: 0 auto;
+  padding: 40px 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+}
+
+.wpc-loading-demo-section {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: 25px;
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+}
+
+.wpc-loading-demo-section h4 {
+  color: var(--primary);
+  margin-bottom: 20px;
+}
+
+.wpc-skeleton-demo-card {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  padding: 20px;
+  background: var(--bg-light);
+  border-radius: var(--radius-md);
+}
+
+.wpc-skeleton-demo-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+}
+
+.wpc-skeleton-demo-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.wpc-skeleton-demo-line {
+  height: 12px;
+  border-radius: 6px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+}
+
+.wpc-skeleton-demo-line.long { width: 100%; }
+.wpc-skeleton-demo-line.medium { width: 75%; }
+.wpc-skeleton-demo-line.short { width: 50%; }
+
+.wpc-spinners-demo {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  align-items: center;
+}
+
+.wpc-spinner-demo-circle {
+  width: 50px;
+  height: 50px;
+  border: 4px solid var(--border);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.wpc-spinner-demo-dots {
+  display: flex;
+  gap: 8px;
+}
+
+.wpc-spinner-demo-dots div {
+  width: 12px;
+  height: 12px;
+  background: var(--primary);
+  border-radius: 50%;
+  animation: bounce 1.4s infinite both;
+}
+
+.wpc-spinner-demo-dots div:nth-child(1) { animation-delay: -0.32s; }
+.wpc-spinner-demo-dots div:nth-child(2) { animation-delay: -0.16s; }
+
+.wpc-success-demo {
+  text-align: center;
+}
+
+.wpc-success-demo-circle {
+  width: 80px;
+  height: 80px;
+  background: var(--success);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 15px;
+  animation: scaleIn 0.5s ease;
+}
+
+.wpc-success-demo-checkmark {
+  color: white;
+  font-size: 2em;
+  font-weight: bold;
+  animation: fadeIn 0.5s ease 0.3s both;
+}
+
+.wpc-pulse-demo-btn {
+  background: var(--danger);
+  color: white;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 50px;
+  font-size: 1.1em;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* 22. Tooltips & Popovers */
+.wpc-tooltip-demo-container {
+  max-width: var(--max-width-container);
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.wpc-tooltip-demo-section {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: 30px;
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+  position: relative;
+}
+
+.wpc-help-demo-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: var(--primary);
+  color: white;
+  border-radius: 50%;
+  font-size: 0.8em;
+  font-weight: bold;
+  cursor: pointer;
+  position: relative;
+  margin: 0 5px;
+  transition: var(--transition);
+}
+
+.wpc-help-demo-icon:hover {
+  transform: scale(1.1);
+}
+
+.wpc-help-demo-icon::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 130%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #333333;
+  color: white;
+  padding: 8px 15px;
+  border-radius: 8px;
+  font-size: 0.85em;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: var(--transition);
+  z-index: 1000;
+}
+
+.wpc-help-demo-icon:hover::after {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(-5px);
+}
+
+.wpc-popover-demo-trigger {
+  background: var(--primary);
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.wpc-popover-demo {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  border: 2px solid var(--primary);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  z-index: 1000;
+  margin-top: 10px;
+  min-width: 300px;
+}
+
+.wpc-popover-demo-arrow {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 20px;
+  height: 20px;
+  background: white;
+  border-top: 2px solid var(--primary);
+  border-left: 2px solid var(--primary);
+}
+
+.wpc-popover-demo-content {
+  padding: 20px;
+}
+
+.wpc-popover-demo-content h5 {
+  color: var(--primary);
+  margin-bottom: 10px;
+}
+
+.wpc-popover-demo-content ul {
+  margin: 10px 0 0 20px;
+  color: var(--text-light);
+}
+
+/* Mobile Optimizations for New Elements */
+@media (max-width: 767px) {
+  .wpc-calc-tabs-demo-nav {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .wpc-calc-tab-demo {
+    min-height: 90px;
+    padding: 12px 8px;
+  }
+  
+  .wpc-calc-tab-demo-icon {
+    font-size: 1.2em;
+  }
+  
+  .wpc-calc-tab-demo span:last-child {
+    font-size: 0.8em;
+  }
+  
+  /* AWG Container Mobile */
+  .wpc-property-loan-k9x7-awg-container {
+    padding: 30px 15px;
+  }
+  
+  .wpc-property-loan-k9x7-awg-box {
+    width: 100%;
+    margin: 0;
+    padding: 0px;
+  }
+  
+  /* Shortcode content full width on mobile */
+  .wpc-property-loan-k9x7-awg-box > div {
+    padding: 0 !important;
+    margin: 0;
+    width: 100%;
+  }
+  
+  .wpc-awg-demo-content {
+    padding: 0 !important;
+    margin: 0;
+    width: 100%;
+  }
+  
+  .wpc-shortcode-item {
+    padding: 0 !important;
+    margin: 0;
+    width: 100%;
+  }
+  
+  /* Force shortcode and form content to full width */
+  .wpc-property-loan-k9x7-awg-box [class*="awg"],
+  .wpc-property-loan-k9x7-awg-box [id*="awg"],
+  .wpc-awg-demo-content [class*="shortcode"],
+  .wpc-awg-demo-content [id*="shortcode"],
+  .wpc-shortcode-item [class*="form"],
+  .wpc-shortcode-item [id*="form"],
+  .wpc-property-loan-k9x7-awg-box form,
+  .wpc-property-loan-k9x7-awg-box iframe,
+  .wpc-property-loan-k9x7-awg-box .form,
+  .wpc-awg-demo-content form,
+  .wpc-awg-demo-content iframe,
+  .wpc-awg-demo-content .form,
+  .wpc-shortcode-item form,
+  .wpc-shortcode-item iframe,
+  .wpc-shortcode-item .form {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    box-sizing: border-box !important;
+  }
+  
+  /* Remove padding from any nested divs inside shortcodes */
+  .wpc-property-loan-k9x7-awg-box > div > *,
+  .wpc-awg-demo-content > *,
+  .wpc-shortcode-item > * {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  
+  /* AWG and Related containers full width on mobile */
+  .wpc-awg-demo-section {
+    padding: 30px 15px;
+  }
+  
+  .wpc-awg-demo-container {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    max-width: none;
+  }
+  
+  .wpc-comparison-demo-container {
+    padding: 40px 15px 30px 15px;
+    margin-top: 10px;
+  }
+  
+  .wpc-comparison-demo-wrapper {
+    border-width: 2px;
+    padding: 20px;
+    margin-top: 25px;
+    overflow: visible;
+    position: relative;
+  }
+  
+  .wpc-comparison-demo-badge {
+    font-size: 0.8em;
+    top: -18px;
+    right: 15px;
+    padding: 6px 16px;
+    z-index: 10;
+    white-space: nowrap;
+    box-shadow: 0 2px 8px rgba(30,84,144,0.3);
+  }
+  
+  .wpc-comparison-demo-filters {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .wpc-comparison-demo-dropdown {
+    width: 100%;
+  }
+  
+  .wpc-comparison-demo-cards {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .wpc-quiz-demo-wrapper {
+    padding: 20px;
+  }
+  
+  .wpc-quiz-demo-nav {
+    flex-direction: column;
+  }
+  
+  .wpc-quiz-demo-btn-back,
+  .wpc-quiz-demo-btn-next {
+    width: 100%;
+  }
+  
+  .wpc-quiz-demo-steps {
+    gap: 8px;
+  }
+  
+  .wpc-quiz-step-demo {
+    width: 32px;
+    height: 32px;
+    font-size: 0.85em;
+  }
+  
+  .wpc-benefit-demo {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .wpc-benefit-demo-icon {
+    font-size: 2em;
+  }
+  
+  .wpc-toggle-group-demo {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .wpc-toggle-option-demo {
+    border-radius: var(--radius-sm);
+  }
+  
+  .wpc-loading-demo-container {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .wpc-popover-demo {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 90%;
+    max-width: 350px;
+  }
+}
+
+/* Animations */
+@keyframes skeleton-loading {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes bounce {
+  0%, 80%, 100% { transform: scale(0); }
+  40% { transform: scale(1); }
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0); }
+  to { transform: scale(1); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(255, 59, 59, 0.7); }
+  70% { box-shadow: 0 0 0 15px rgba(255, 59, 59, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 59, 59, 0); }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes iconBounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+@keyframes checkmarkPop {
+  0% { transform: scale(0); opacity: 0; }
+  50% { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes rippleAnimation {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Force mobile styles for extra small screens */
+@media screen and (max-width: 375px) {
+  .wpc-demo-container,
+  .wpc-demo-container * {
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+    word-wrap: break-word !important;
+  }
+  
+  .wpc-element-title {
+    font-size: 1rem !important;
+    padding: 10px 12px !important;
+  }
+  
+  .wpc-hero-demo-section {
+    padding: 25px 15px 30px 15px !important;
+    max-height: 80vh !important;
+  }
+  
+  .wpc-hero-demo-title {
+    margin-bottom: 10px !important;
+    font-size: clamp(1.3rem, 6vw, 1.8rem) !important;
+  }
+  
+  .wpc-hero-demo-subtitle {
+    margin-bottom: 20px !important;
+  }
+  
+  .wpc-hero-demo-cta {
+    gap: 12px !important;
+    margin-top: 2px !important;
+  }
+  
+  .wpc-hero-demo-btn {
+    min-height: 48px !important;
+    padding: 12px 20px !important;
+    font-size: 1.1rem !important;
+  }
+  
+  /* Fix flip cards for very small screens */
+  .wpc-flip-card-demo,
+  .wpc-hover-card-demo {
+    height: 300px !important;
+    min-height: 300px !important;
+  }
+  
+  /* Enhanced comparison table for very small screens */
+  .wpc-table-demo tbody td {
+    padding: 14px 18px 18px 18px !important;
+    font-size: 1.05rem !important;
+  }
+  
+  .wpc-table-demo tbody td::before {
+    font-size: 0.95rem !important;
+    margin-bottom: 10px !important;
+    padding-bottom: 5px !important;
+  }
+  
+  .wpc-flip-card-demo-icon {
+    font-size: 2.2em !important;
+    margin-bottom: 6px !important;
+  }
+  
+  .wpc-flip-card-demo-front h4,
+  .wpc-flip-card-demo-back h4 {
+    font-size: 1rem !important;
+    margin: 4px 0 !important;
+  }
+  
+  .wpc-flip-card-demo-front p {
+    font-size: 0.85rem !important;
+  }
+  
+  .wpc-flip-card-demo-back li {
+    font-size: 0.85rem !important;
+    margin-bottom: 5px !important;
+  }
+  
+  .wpc-comparison-demo-container {
+    padding: 35px 12px 25px 12px !important;
+    margin-top: 15px !important;
+  }
+  
+  .wpc-comparison-demo-wrapper {
+    margin-top: 30px !important;
+    padding: 18px !important;
+  }
+  
+  .wpc-comparison-demo-badge {
+    top: -20px !important;
+    right: 10px !important;
+    font-size: 0.75em !important;
+    padding: 5px 12px !important;
+  }
+}
+
+/* Mobile height optimization for medium screens */
+@media screen and (max-width: 600px) and (min-width: 376px) {
+  /* Comparison badge for medium screens too */
+  .wpc-comparison-demo-container {
+    padding: 38px 18px 28px 18px !important;
+  }
+  
+  .wpc-comparison-demo-wrapper {
+    margin-top: 28px !important;
+  }
+  
+  .wpc-comparison-demo-badge {
+    top: -19px !important;
+    right: 12px !important;
+  }
+
+  .wpc-hero-demo-section {
+    padding: 28px 18px 32px 18px !important;
+    max-height: 82vh !important;
+  }
+  
+  .wpc-hero-demo-title {
+    margin-bottom: 11px !important;
+  }
+  
+  .wpc-hero-demo-subtitle {
+    margin-bottom: 22px !important;
+  }
+  
+  .wpc-hero-demo-cta {
+    gap: 13px !important;
+    margin-top: 3px !important;
+  }
+  
+  .wpc-hero-demo-btn {
+    min-height: 49px !important;
+    padding: 13px 22px !important;
+  }
+}
+
+/* Force mobile styles for small screens */
+@media screen and (max-width: 480px) {
+  .wpc-hero-demo-btn,
+  .wpc-cta-demo-btn,
+  .wpc-whatsapp-demo-button {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: 54px !important;
+    font-size: 1.2rem !important;
+    font-weight: 800 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  
+  .wpc-hero-demo-cta,
+  .wpc-cta-demo-container {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    width: 100% !important;
+  }
+  
+  .wpc-demo-container {
+    max-width: 100vw !important;
+    overflow-x: hidden !important;
+  }
+}
+
+/* Additional mobile safety */
+.mobile-device .wpc-hero-demo-btn,
+.mobile-device .wpc-cta-demo-btn,
+.mobile-device .wpc-whatsapp-demo-button {
+  width: 100% !important;
+  max-width: 100% !important;
+  font-size: 1.2rem !important;
+  font-weight: 800 !important;
+}
+
+/* חירום! תיקון מיידי לחריגה במובייל */
+@media (max-width: 767px) {
+  * {
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  
+  html, body {
+    overflow-x: hidden !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+  }
+  
+  .wpc-demo-container,
+  .wpc-demo-container > *,
+  .wpc-demo-container * {
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+    box-sizing: border-box !important;
+  }
+  
+  /* תיקון ספציפי לאלמנטים בעייתיים */
+  .wpc-element-title,
+  .wpc-hero-demo-section,
+  .wpc-stats-demo-section,
+  .wpc-whatsapp-demo-section,
+  .wpc-table-demo-container,
+  .wpc-section-demo-header {
+    width: 100% !important;
+    max-width: 100vw !important;
+    margin: 0 !important;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+    overflow-x: hidden !important;
+    box-sizing: border-box !important;
+  }
+}
+
+/* 24. Financial Charts */
+.wpc-chart-demo-container {
+  max-width: var(--max-width-container);
+  margin: 0 auto;
+  padding: 40px 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 30px;
+}
+
+.wpc-chart-demo-section {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: 25px;
+  box-shadow: var(--shadow-sm);
+}
+
+.wpc-chart-demo-section h4 {
+  color: var(--primary);
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 1.3em;
+}
+
+.wpc-chart-demo-wrapper {
+  background: var(--bg-light);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  margin-bottom: 15px;
+}
+
+.wpc-chart-demo-grid {
+  display: flex;
+  height: 200px;
+  position: relative;
+}
+
+.wpc-chart-demo-y-axis {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-left: 10px;
+  font-size: 0.8em;
+  color: var(--text-light);
+}
+
+.wpc-chart-demo-area {
+  flex: 1;
+  position: relative;
+  margin-left: 15px;
+  border-left: 1px solid #e0e0e0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.wpc-chart-demo-line {
+  position: relative;
+  height: 100%;
+}
+
+.wpc-chart-demo-point {
+  position: absolute;
+  left: var(--point-x);
+  bottom: var(--point-y);
+  width: 8px;
+  height: 8px;
+  background: var(--primary);
+  border: 2px solid white;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: var(--transition);
+  z-index: 2;
+}
+
+.wpc-chart-demo-point:hover {
+  transform: scale(1.5);
+  z-index: 3;
+}
+
+.wpc-chart-demo-point::after {
+  content: attr(data-value);
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #333333;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.75em;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: var(--transition);
+}
+
+.wpc-chart-demo-point:hover::after {
+  opacity: 1;
+  visibility: visible;
+}
+
+.wpc-chart-demo-x-axis {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  font-size: 0.8em;
+  color: var(--text-light);
+}
+
+.wpc-chart-demo-legend {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.wpc-chart-legend-demo-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9em;
+}
+
+.wpc-chart-legend-demo-color {
+  width: 16px;
+  height: 3px;
+  border-radius: 2px;
+}
+
+/* Pie Chart */
+.wpc-pie-demo-container {
+  text-align: center;
+}
+
+.wpc-pie-demo {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  position: relative;
+  margin: 0 auto 20px;
+  background: conic-gradient(
+    var(--primary) 0deg calc(var(--p1) * 3.6deg),
+    var(--success) calc(var(--p1) * 3.6deg) calc((var(--p1) + var(--p2)) * 3.6deg),
+    var(--warning) calc((var(--p1) + var(--p2)) * 3.6deg) calc((var(--p1) + var(--p2) + var(--p3)) * 3.6deg),
+    var(--danger) calc((var(--p1) + var(--p2) + var(--p3)) * 3.6deg) 360deg
+  );
+}
+
+.wpc-pie-demo-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120px;
+  height: 120px;
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-sm);
+}
+
+.wpc-pie-demo-total {
+  font-size: 1.5em;
+  font-weight: 800;
+  color: var(--primary);
+}
+
+.wpc-pie-demo-label {
+  font-size: 0.8em;
+  color: var(--text-light);
+  margin-top: 5px;
+}
+
+.wpc-pie-demo-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: right;
+}
+
+.wpc-pie-legend-demo-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.9em;
+}
+
+.wpc-pie-legend-demo-color {
+  width: 16px;
+  height: 16px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+/* 16. Data Visualizations */
+.wpc-data-demo-container {
+  max-width: var(--max-width-container);
+  margin: 0 auto;
+  padding: 40px 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 30px;
+}
+
+.wpc-gauge-demo-section,
+.wpc-progress-demo-section {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: 25px;
+  box-shadow: var(--shadow-sm);
+}
+
+.wpc-gauge-demo-section h4,
+.wpc-progress-demo-section h4 {
+  color: var(--primary);
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 1.3em;
+}
+
+/* Gauge Meter */
+.wpc-gauge-demo {
+  text-align: center;
+}
+
+.wpc-gauge-demo-arc {
+  width: 200px;
+  height: 100px;
+  border: 20px solid #e0e0e0;
+  border-bottom: none;
+  border-radius: 200px 200px 0 0;
+  position: relative;
+  margin: 0 auto 20px;
+  background: linear-gradient(to right, var(--danger) 0%, var(--warning) 50%, var(--success) 100%);
+  background-clip: border-box;
+}
+
+.wpc-gauge-demo-needle {
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  width: 4px;
+  height: 80px;
+  background: #333333;
+  transform-origin: bottom center;
+  transform: translateX(-50%) rotate(var(--angle));
+  transition: transform 0.5s ease;
+}
+
+.wpc-gauge-demo-needle::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 16px;
+  background: #333333;
+  border-radius: 50%;
+}
+
+.wpc-gauge-demo-value {
+  font-size: 2.5em;
+  font-weight: 800;
+  color: var(--primary);
+  margin-bottom: 5px;
+}
+
+.wpc-gauge-demo-label {
+  font-size: 1.1em;
+  color: var(--text-light);
+  margin-bottom: 15px;
+}
+
+.wpc-gauge-demo-scale {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8em;
+  color: var(--text-light);
+}
+
+/* Progress Bars */
+.wpc-progress-demo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.wpc-progress-demo-item {
+  padding: 15px;
+  background: var(--bg-light);
+  border-radius: var(--radius-md);
+}
+
+.wpc-progress-demo-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.wpc-progress-demo-percent {
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.wpc-progress-demo-bar {
+  height: 12px;
+  background: #e0e0e0;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.wpc-progress-demo-fill {
+  height: 100%;
+  border-radius: 6px;
+  transition: width 0.5s ease;
+  position: relative;
+}
+
+.wpc-progress-demo-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, rgba(255,255,255,0.2) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.2) 75%, transparent 75%);
+  background-size: 20px 20px;
+  animation: progress-stripes 1s linear infinite;
+}
+
+.wpc-progress-demo-details {
+  font-size: 0.85em;
+  color: var(--text-light);
+  text-align: left;
+  direction: ltr;
+}
+
+/* 18. Interactive Info Cards */
+.wpc-info-cards-demo-container {
+  max-width: var(--max-width-container);
+  margin: 0 auto;
+  padding: 40px 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+/* Flip Card */
+.wpc-flip-card-demo {
+  background: transparent;
+  width: 100%;
+  height: 250px;
+  perspective: 1000px;
+  cursor: pointer;
+}
+
+.wpc-flip-card-demo-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.wpc-flip-card-demo:hover .wpc-flip-card-demo-inner {
+  transform: rotateY(180deg);
+}
+
+.wpc-flip-card-demo-front,
+.wpc-flip-card-demo-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-shadow: var(--shadow-md);
+}
+
+.wpc-flip-card-demo-front {
+  background: var(--gradient-primary);
+  color: white;
+}
+
+.wpc-flip-card-demo-back {
+  background: var(--gradient-success);
+  color: white;
+  transform: rotateY(180deg);
+}
+
+.wpc-flip-card-demo-icon {
+  font-size: 3em;
+  margin-bottom: 15px;
+}
+
+.wpc-flip-card-demo-back ul {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0;
+  text-align: right;
+}
+
+.wpc-flip-card-demo-back li {
+  margin-bottom: 8px;
+  padding: 5px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+/* Hover Card */
+.wpc-hover-card-demo {
+  position: relative;
+  height: 250px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+}
+
+.wpc-hover-card-demo-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: white;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+.wpc-hover-card-demo-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--gradient-primary);
+  color: white;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transform: translateY(100%);
+  transition: var(--transition);
+}
+
+.wpc-hover-card-demo:hover .wpc-hover-card-demo-overlay {
+  transform: translateY(0);
+}
+
+.wpc-hover-card-demo-icon {
+  font-size: 3em;
+  margin-bottom: 15px;
+}
+
+.wpc-hover-card-demo-overlay ul {
+  list-style: none;
+  padding: 0;
+  margin: 15px 0;
+  text-align: right;
+}
+
+.wpc-hover-card-demo-overlay li {
+  margin-bottom: 8px;
+  padding: 5px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+.wpc-hover-card-demo-btn {
+  background: white;
+  color: var(--primary);
+  padding: 10px 20px;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 15px;
+}
+
+/* Expand Card */
+.wpc-expand-card-demo {
+  background: white;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition: var(--transition);
+}
+
+.wpc-expand-card-demo-header {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  cursor: pointer;
+  background: var(--bg-light);
+  transition: var(--transition);
+}
+
+.wpc-expand-card-demo-header:hover {
+  background: #f0f0f0;
+}
+
+.wpc-expand-card-demo-icon {
+  font-size: 2em;
+  margin-left: 15px;
+  color: var(--primary);
+}
+
+.wpc-expand-card-demo-title {
+  flex: 1;
+  text-align: right;
+}
+
+.wpc-expand-card-demo-title h4 {
+  margin: 0 0 5px 0;
+  color: var(--primary);
+}
+
+.wpc-expand-card-demo-title p {
+  margin: 0;
+  color: var(--text-light);
+  font-size: 0.9em;
+}
+
+.wpc-expand-card-demo-arrow {
+  font-size: 1.2em;
+  color: var(--primary);
+  transition: transform 0.3s ease;
+}
+
+.wpc-expand-card-demo.expanded .wpc-expand-card-demo-arrow {
+  transform: rotate(90deg);
+}
+
+.wpc-expand-card-demo-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.wpc-expand-card-demo.expanded .wpc-expand-card-demo-content {
+  max-height: 200px;
+}
+
+.wpc-expand-card-demo-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 20px;
+}
+
+.wpc-expand-stat-demo {
+  text-align: center;
+  padding: 15px;
+  background: var(--bg-light);
+  border-radius: var(--radius-sm);
+}
+
+.wpc-expand-stat-demo-value {
+  display: block;
+  font-size: 1.5em;
+  font-weight: 800;
+  color: var(--primary);
+  direction: ltr;
+}
+
+.wpc-expand-stat-demo-label {
+  font-size: 0.8em;
+  color: var(--text-light);
+  margin-top: 5px;
+}
+
+/* Mobile Optimizations for New Elements */
+@media (max-width: 767px) {
+  .wpc-chart-demo-container {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .wpc-chart-demo-grid {
+    height: 150px;
+  }
+  
+  .wpc-pie-demo {
+    width: 150px;
+    height: 150px;
+  }
+  
+  .wpc-pie-demo-center {
+    width: 90px;
+    height: 90px;
+  }
+  
+  .wpc-pie-demo-total {
+    font-size: 1.2em;
+  }
+  
+  .wpc-data-demo-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .wpc-gauge-demo-arc {
+    width: 150px;
+    height: 75px;
+    border-width: 15px;
+  }
+  
+  .wpc-gauge-demo-needle {
+    height: 60px;
+  }
+  
+  .wpc-gauge-demo-value {
+    font-size: 2em;
+  }
+  
+  .wpc-info-cards-demo-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .wpc-flip-card-demo,
+  .wpc-hover-card-demo {
+    height: 280px;
+    min-height: 280px;
+  }
+  
+  .wpc-flip-card-demo-front,
+  .wpc-flip-card-demo-back {
+    padding: 15px !important;
+    justify-content: flex-start !important;
+    text-align: center !important;
+    gap: 8px !important;
+  }
+  
+  .wpc-flip-card-demo-icon {
+    font-size: 2.5em !important;
+    margin-bottom: 8px !important;
+    margin-top: 5px !important;
+  }
+  
+  .wpc-flip-card-demo-front h4,
+  .wpc-flip-card-demo-back h4 {
+    font-size: 1.1rem !important;
+    margin: 5px 0 !important;
+    line-height: 1.3 !important;
+  }
+  
+  .wpc-flip-card-demo-front p {
+    font-size: 0.9rem !important;
+    margin: 0 !important;
+    line-height: 1.4 !important;
+  }
+  
+  .wpc-flip-card-demo-back ul {
+    margin: 10px 0 5px 0 !important;
+    padding: 0 !important;
+  }
+  
+  .wpc-flip-card-demo-back li {
+    font-size: 0.9rem !important;
+    line-height: 1.4 !important;
+    margin-bottom: 6px !important;
+    padding: 4px 0 !important;
+  }
+  
+  .wpc-expand-card-demo-stats {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .wpc-hover-card-demo:hover .wpc-hover-card-demo-overlay {
+    transform: translateY(0);
+  }
+  
+  /* Touch-friendly hover cards */
+  .wpc-hover-card-demo {
+    cursor: pointer;
+  }
+  
+  /* Better flip card layout for mobile */
+  .wpc-flip-card-demo {
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+  }
+  
+  .wpc-flip-card-demo-front,
+  .wpc-flip-card-demo-back {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    text-align: center !important;
+    padding: 15px 10px !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+  }
+  
+  .wpc-flip-card-demo-icon {
+    flex-shrink: 0 !important;
+    display: block !important;
+    width: 100% !important;
+    text-align: center !important;
+    margin-top: 5px !important;
+  }
+  
+  .wpc-flip-card-demo-front h4,
+  .wpc-flip-card-demo-back h4 {
+    flex-shrink: 0 !important;
+    width: 100% !important;
+    text-align: center !important;
+    word-wrap: break-word !important;
+  }
+  
+  .wpc-flip-card-demo-front p {
+    flex-shrink: 0 !important;
+    width: 100% !important;
+    text-align: center !important;
+    word-wrap: break-word !important;
+  }
+  
+  .wpc-flip-card-demo-back ul {
+    flex-grow: 1 !important;
+    width: 100% !important;
+    list-style: none !important;
+    text-align: right !important;
+    overflow-y: auto !important;
+  }
+  
+  .wpc-flip-card-demo-back li {
+    word-wrap: break-word !important;
+    white-space: normal !important;
+  }
+  
+  .wpc-hover-card-demo:active .wpc-hover-card-demo-overlay {
+    transform: translateY(0);
+  }
+}
+
+/* Additional Animations */
+@keyframes progress-stripes {
+  0% { background-position: 0 0; }
+  100% { background-position: 20px 0; }
+}
+
+/* Summary Section */
+.wpc-summary-demo-container {
+  max-width: var(--max-width-container);
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.wpc-summary-demo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.wpc-summary-demo-category {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: 25px;
+  box-shadow: var(--shadow-sm);
+  border-right: 4px solid var(--primary);
+}
+
+.wpc-summary-demo-category h4 {
+  color: var(--primary);
+  margin-bottom: 20px;
+  font-size: 1.2em;
+  border-bottom: 2px solid var(--border);
+  padding-bottom: 10px;
+}
+
+.wpc-summary-demo-category ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.wpc-summary-demo-category li {
+  padding: 8px 0;
+  border-bottom: 1px solid #f0f0f0;
+  color: var(--text-dark);
+  transition: var(--transition);
+}
+
+.wpc-summary-demo-category li:hover {
+  background: var(--bg-light);
+  padding-right: 10px;
+  border-radius: 5px;
+}
+
+.wpc-summary-demo-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.wpc-summary-demo-stat {
+  background: var(--gradient-primary);
+  color: white;
+  padding: 25px;
+  border-radius: var(--radius-md);
+  text-align: center;
+  box-shadow: var(--shadow-md);
+  transform: perspective(800px) rotateX(5deg);
+  transition: var(--transition);
+}
+
+.wpc-summary-demo-stat:hover {
+  transform: perspective(800px) rotateX(0deg) translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.wpc-summary-demo-number {
+  display: block;
+  font-size: 2.5em;
+  font-weight: 800;
+  margin-bottom: 8px;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.wpc-summary-demo-label {
+  font-size: 0.9em;
+  opacity: 0.9;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.wpc-summary-demo-footer {
+  background: linear-gradient(135deg, #ffffff 0%, #f8fbff 100%);
+  border: 2px solid var(--primary);
+  border-radius: var(--radius-lg);
+  padding: 30px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.wpc-summary-demo-footer::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(30,84,144,0.05) 0%, transparent 70%);
+  animation: rotate 20s linear infinite;
+}
+
+.wpc-summary-demo-footer h3 {
+  color: var(--primary);
+  margin-bottom: 15px;
+  font-size: 1.8em;
+  position: relative;
+  z-index: 1;
+}
+
+.wpc-summary-demo-footer p {
+  color: var(--text-light);
+  margin-bottom: 20px;
+  font-size: 1.1em;
+  line-height: 1.6;
+  position: relative;
+  z-index: 1;
+}
+
+.wpc-summary-demo-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+.wpc-summary-demo-feature {
+  background: var(--primary);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.9em;
+  font-weight: 600;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+}
+
+.wpc-summary-demo-feature:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Mobile optimizations for summary */
+@media (max-width: 767px) {
+  .wpc-summary-demo-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .wpc-summary-demo-stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+  
+  .wpc-summary-demo-stat {
+    padding: 20px 15px;
+    transform: none;
+  }
+  
+  .wpc-summary-demo-stat:hover {
+    transform: translateY(-3px);
+  }
+  
+  .wpc-summary-demo-number {
+    font-size: 2em;
+  }
+  
+  .wpc-summary-demo-label {
+    font-size: 0.8em;
+  }
+  
+  .wpc-summary-demo-footer {
+    padding: 25px 20px;
+  }
+  
+  .wpc-summary-demo-footer h3 {
+    font-size: 1.5em;
+  }
+  
+  .wpc-summary-demo-footer p {
+    font-size: 1em;
+  }
+  
+  .wpc-summary-demo-features {
+    gap: 8px;
+  }
+  
+  .wpc-summary-demo-feature {
+    font-size: 0.8em;
+    padding: 6px 12px;
+  }
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+</style>
+
+<div class="wpc-demo-container">
+  <!-- 1. Hero Section -->
+  <div class="wpc-element-title">1. Hero Section - אזור ראשי</div>
+  <section class="wpc-hero-demo-section">
+    <div class="wpc-hero-demo-container">
+      <h1 class="wpc-hero-demo-title">הלוואות מהירות לכל מטרה</h1>
+      <p class="wpc-hero-demo-subtitle">קבלו אישור עקרוני תוך 5 דקות עם התנאים הטובים ביותר בשוק</p>
+      <div class="wpc-hero-demo-cta">
+        <button class="wpc-hero-demo-btn wpc-hero-demo-btn-primary">בקש הלוואה עכשיו</button>
+        <button class="wpc-hero-demo-btn wpc-hero-demo-btn-secondary">קבל ייעוץ חינם</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. CTA Buttons -->
+  <div class="wpc-element-title">2. כפתורי CTA - כפתורי פעולה</div>
+  <div class="wpc-cta-demo-container">
+    <button class="wpc-cta-demo-btn wpc-cta-demo-btn-primary">
+      <span>בקש הלוואה עכשיו</span>
+      <span>←</span>
+    </button>
+    <a href="#" class="wpc-cta-demo-btn wpc-cta-demo-btn-whatsapp">
+      <span>💬</span>
+      <span>שלח הודעה בווטסאפ</span>
+    </a>
+  </div>
+
+  <!-- 3. Goal Cards -->
+  <div class="wpc-element-title">3. כרטיסי מטרות - בחירת מטרת ההלוואה</div>
+  <div class="wpc-goal-demo-container">
+    <div class="wpc-goal-demo-card">
+      <span class="wpc-goal-demo-icon">🏠</span>
+      <h3 class="wpc-goal-demo-title">קניית דירה</h3>
+    </div>
+    <div class="wpc-goal-demo-card">
+      <span class="wpc-goal-demo-icon">🔨</span>
+      <h3 class="wpc-goal-demo-title">שיפוצים</h3>
+    </div>
+    <div class="wpc-goal-demo-card">
+      <span class="wpc-goal-demo-icon">💼</span>
+      <h3 class="wpc-goal-demo-title">עסק</h3>
+    </div>
+    <div class="wpc-goal-demo-card">
+      <span class="wpc-goal-demo-icon">🎓</span>
+      <h3 class="wpc-goal-demo-title">לימודים</h3>
+    </div>
+    <div class="wpc-goal-demo-card">
+      <span class="wpc-goal-demo-icon">💍</span>
+      <h3 class="wpc-goal-demo-title">חתונה</h3>
+    </div>
+    <div class="wpc-goal-demo-card">
+      <span class="wpc-goal-demo-icon">⭐</span>
+      <h3 class="wpc-goal-demo-title">אחר</h3>
+    </div>
+  </div>
+
+  <!-- 4. Banners -->
+  <div class="wpc-element-title">4. באנרים - אזורי הדגשה</div>
+  <div class="wpc-banner-demo-container">
+    <div class="wpc-banner-demo">
+      <h3 class="wpc-banner-demo-title">מבצע מיוחד!</h3>
+      <p class="wpc-banner-demo-text">ריבית החל מ-2.9% בלבד למלקוחות חדשים</p>
+    </div>
+  </div>
+
+  <!-- 5. Accordion -->
+  <div class="wpc-element-title">5. אקורדיון - שאלות נפוצות</div>
+  <div class="wpc-accordion-demo-container">
+    <div class="wpc-accordion-demo-item">
+      <div class="wpc-accordion-demo-header" onclick="toggleAccordion(this)">
+        מהם התנאים להלוואה?
+      </div>
+      <div class="wpc-accordion-demo-content">
+        <p>כדי לקבל הלוואה צריך להיות בעל הכנסה קבועה, גיל 21-70, אזרח ישראלי או תושב קבע.</p>
+      </div>
+    </div>
+    <div class="wpc-accordion-demo-item">
+      <div class="wpc-accordion-demo-header" onclick="toggleAccordion(this)">
+        כמה זמן לוקח לקבל אישור?
+      </div>
+      <div class="wpc-accordion-demo-content">
+        <p>האישור העקרוני מתקבל תוך 5 דקות, והעברת הכסף תוך 24-48 שעות.</p>
+      </div>
+    </div>
+    <div class="wpc-accordion-demo-item">
+      <div class="wpc-accordion-demo-header" onclick="toggleAccordion(this)">
+        איזה מסמכים נדרשים?
+      </div>
+      <div class="wpc-accordion-demo-content">
+        <p>תעודת זהות, תלושי שכר של 3 חודשים אחרונים, אישור על חשבון בנק.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. WhatsApp Box -->
+  <div class="wpc-element-title">6. WhatsApp Box - קשר מהיר</div>
+  <section class="wpc-whatsapp-demo-section">
+    <div class="wpc-whatsapp-demo-container">
+      <div class="wpc-whatsapp-demo-box">
+        <h3 class="wpc-whatsapp-demo-title">יש לכם שאלות? דברו איתנו בווטסאפ!</h3>
+        <p class="wpc-whatsapp-demo-text">הצוות שלנו זמין לענות על כל שאלה ולסייע לכם בתהליך</p>
+        <a href="#" class="wpc-whatsapp-demo-button">
+          <span>💬</span>
+          <span>התחל שיחה בווטסאפ</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Statistics -->
+  <div class="wpc-element-title">7. סטטיסטיקות - נתונים</div>
+  <section class="wpc-stats-demo-section">
+    <div class="wpc-stats-demo-container">
+      <div class="wpc-stats-demo-item">
+        <div class="wpc-stats-demo-number">50,000+</div>
+        <div class="wpc-stats-demo-label">לקוחות מרוצים</div>
+      </div>
+      <div class="wpc-stats-demo-item">
+        <div class="wpc-stats-demo-number">2.5%</div>
+        <div class="wpc-stats-demo-label">ריבית החל מ-</div>
+      </div>
+      <div class="wpc-stats-demo-item">
+        <div class="wpc-stats-demo-number">24</div>
+        <div class="wpc-stats-demo-label">שעות לאישור</div>
+      </div>
+      <div class="wpc-stats-demo-item">
+        <div class="wpc-stats-demo-number">98%</div>
+        <div class="wpc-stats-demo-label">שיעור אישור</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. Tables -->
+  <div class="wpc-element-title">8. טבלאות - השוואת מוצרים</div>
+  <div class="wpc-table-demo-container">
+    <table class="wpc-table-demo">
+      <thead>
+        <tr>
+          <th>חברה</th>
+          <th>ריבית</th>
+          <th>סכום מקסימלי</th>
+          <th>תקופה</th>
+          <th>המלצה</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td data-label="חברה">בנק א'</td>
+          <td data-label="ריבית">4.5%</td>
+          <td data-label="סכום מקסימלי">₪500,000</td>
+          <td data-label="תקופה">עד 120 חודשים</td>
+          <td data-label="המלצה">מומלץ</td>
+        </tr>
+        <tr>
+          <td data-label="חברה">בנק ב'</td>
+          <td data-label="ריבית">3.9%</td>
+          <td data-label="סכום מקסימלי">₪750,000</td>
+          <td data-label="תקופה">עד 84 חודשים</td>
+          <td data-label="המלצה">הטוב ביותר</td>
+        </tr>
+        <tr>
+          <td data-label="חברה">בנק ג'</td>
+          <td data-label="ריבית">5.2%</td>
+          <td data-label="סכום מקסימלי">₪300,000</td>
+          <td data-label="תקופה">עד 60 חודשים</td>
+          <td data-label="המלצה">סטנדרט</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Mobile Cards Container - יוצג רק במובייל -->
+  <div class="wpc-mobile-cards-container" style="display: none;">
+    <div class="wpc-mobile-card">
+      <div class="wpc-mobile-card-company">בנק א'</div>
+      <div class="wpc-mobile-card-detail">
+        <span class="wpc-mobile-card-label">ריבית</span>
+        <span class="wpc-mobile-card-value interest">4.5%</span>
+      </div>
+      <div class="wpc-mobile-card-detail">
+        <span class="wpc-mobile-card-label">סכום מקסימלי</span>
+        <span class="wpc-mobile-card-value amount">₪500,000</span>
+      </div>
+      <div class="wpc-mobile-card-detail">
+        <span class="wpc-mobile-card-label">תקופה</span>
+        <span class="wpc-mobile-card-value">עד 120 חודשים</span>
+      </div>
+      <div class="wpc-mobile-card-detail">
+        <span class="wpc-mobile-card-label">המלצה</span>
+        <span class="wpc-mobile-card-value recommendation">מומלץ</span>
+      </div>
+    </div>
+
+    <div class="wpc-mobile-card">
+      <div class="wpc-mobile-card-company">בנק ב'</div>
+      <div class="wpc-mobile-card-detail">
+        <span class="wpc-mobile-card-label">ריבית</span>
+        <span class="wpc-mobile-card-value interest">3.9%</span>
+      </div>
+      <div class="wpc-mobile-card-detail">
+        <span class="wpc-mobile-card-label">סכום מקסימלי</span>
+        <span class="wpc-mobile-card-value amount">₪750,000</span>
+      </div>
+      <div class="wpc-mobile-card-detail">
+        <span class="wpc-mobile-card-label">תקופה</span>
+        <span class="wpc-mobile-card-value">עד 84 חודשים</span>
+      </div>
+      <div class="wpc-mobile-card-detail">
+        <span class="wpc-mobile-card-label">המלצה</span>
+        <span class="wpc-mobile-card-value recommendation">הטוב ביותר</span>
+      </div>
+    </div>
+
+    <div class="wpc-mobile-card">
+      <div class="wpc-mobile-card-company">בנק ג'</div>
+      <div class="wpc-mobile-card-detail">
+        <span class="wpc-mobile-card-label">ריבית</span>
+        <span class="wpc-mobile-card-value interest">5.2%</span>
+      </div>
+      <div class="wpc-mobile-card-detail">
+        <span class="wpc-mobile-card-label">סכום מקסימלי</span>
+        <span class="wpc-mobile-card-value amount">₪300,000</span>
+      </div>
+      <div class="wpc-mobile-card-detail">
+        <span class="wpc-mobile-card-label">תקופה</span>
+        <span class="wpc-mobile-card-value">עד 60 חודשים</span>
+      </div>
+      <div class="wpc-mobile-card-detail">
+        <span class="wpc-mobile-card-label">המלצה</span>
+        <span class="wpc-mobile-card-value recommendation">סטנדרט</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 9. Interest Rate Cards -->
+  <div class="wpc-element-title">9. כרטיסי ריבית - דוגמאות למסלולים</div>
+  <div class="wpc-rate-demo-container">
+    <div class="wpc-rate-demo-card">
+      <div class="wpc-rate-demo-header">
+        <h3 class="wpc-rate-demo-title">הלוואה צרכנית</h3>
+        <span class="wpc-rate-demo-badge">פופולרי</span>
+      </div>
+      <ul class="wpc-rate-demo-list">
+        <li class="wpc-rate-demo-item">
+          <span class="wpc-rate-demo-amount">עד ₪50,000</span>
+          <span class="wpc-rate-demo-rate">4.9%</span>
+        </li>
+        <li class="wpc-rate-demo-item">
+          <span class="wpc-rate-demo-amount">עד ₪100,000</span>
+          <span class="wpc-rate-demo-rate">4.5%</span>
+        </li>
+        <li class="wpc-rate-demo-item">
+          <span class="wpc-rate-demo-amount">עד ₪200,000</span>
+          <span class="wpc-rate-demo-rate">4.2%</span>
+        </li>
+      </ul>
+    </div>
+    <div class="wpc-rate-demo-card">
+      <div class="wpc-rate-demo-header">
+        <h3 class="wpc-rate-demo-title">הלוואה מובטחת</h3>
+        <span class="wpc-rate-demo-badge">הכי זול</span>
+      </div>
+      <ul class="wpc-rate-demo-list">
+        <li class="wpc-rate-demo-item">
+          <span class="wpc-rate-demo-amount">עד ₪100,000</span>
+          <span class="wpc-rate-demo-rate">3.2%</span>
+        </li>
+        <li class="wpc-rate-demo-item">
+          <span class="wpc-rate-demo-amount">עד ₪300,000</span>
+          <span class="wpc-rate-demo-rate">2.9%</span>
+        </li>
+        <li class="wpc-rate-demo-item">
+          <span class="wpc-rate-demo-amount">עד ₪500,000</span>
+          <span class="wpc-rate-demo-rate">2.5%</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 10. Timeline -->
+  <div class="wpc-element-title">10. Timeline - תהליך קבלת ההלוואה</div>
+  <div class="wpc-timeline-demo-container">
+    <div class="wpc-timeline-demo-wrapper">
+      <div class="wpc-timeline-demo-line"></div>
+      
+      <div class="wpc-timeline-demo-item active">
+        <div class="wpc-timeline-demo-circle active">1</div>
+        <div class="wpc-timeline-demo-content">
+          <h4 class="wpc-timeline-demo-title">מילוי פרטים</h4>
+          <p class="wpc-timeline-demo-desc">מלאו את הפרטים הבסיסיים ובחרו את סכום ההלוואה המבוקש</p>
+        </div>
+      </div>
+      
+      <div class="wpc-timeline-demo-item active">
+        <div class="wpc-timeline-demo-circle active">2</div>
+        <div class="wpc-timeline-demo-content">
+          <h4 class="wpc-timeline-demo-title">אישור עקרוני</h4>
+          <p class="wpc-timeline-demo-desc">תקבלו אישור עקרוני תוך דקות ספורות</p>
+        </div>
+      </div>
+      
+      <div class="wpc-timeline-demo-item active">
+        <div class="wpc-timeline-demo-circle active">3</div>
+        <div class="wpc-timeline-demo-content">
+          <h4 class="wpc-timeline-demo-title">העלאת מסמכים</h4>
+          <p class="wpc-timeline-demo-desc">העלו את המסמכים הנדרשים באופן דיגיטלי</p>
+        </div>
+      </div>
+      
+      <div class="wpc-timeline-demo-item">
+        <div class="wpc-timeline-demo-circle">4</div>
+        <div class="wpc-timeline-demo-content">
+          <h4 class="wpc-timeline-demo-title">קבלת הכסף</h4>
+          <p class="wpc-timeline-demo-desc">הכסף יועבר לחשבון שלכם תוך 24-48 שעות</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 11. Section Headers -->
+  <div class="wpc-element-title">11. כותרות סקשנים - כותרות מעוצבות</div>
+  <div class="wpc-section-demo-header">
+    <h2 class="wpc-section-demo-title">הלוואות מיידיות לכל מטרה - הפתרון המהיר שלכם</h2>
+    <p class="wpc-section-demo-subtitle">קבלו אישור עקרוני תוך דקות ספורות עם התנאים הטובים ביותר בשוק. הצוות המקצועי שלנו ילווה אתכם לאורך כל התהליך.</p>
+  </div>
+
+  <!-- 12. Calculator Tabs -->
+  <div class="wpc-element-title">12. כרטיסיות מחשבון - טאבים לסוגי חישובים</div>
+  <div class="wpc-calc-tabs-demo-container">
+    <div class="wpc-calc-tabs-demo-wrapper">
+      <div class="wpc-calc-tabs-demo-nav">
+        <button class="wpc-calc-tab-demo active" data-tab="loan">
+          <span class="wpc-calc-tab-demo-icon">💰</span>
+          <span>הלוואה</span>
+        </button>
+        <button class="wpc-calc-tab-demo" data-tab="mortgage">
+          <span class="wpc-calc-tab-demo-icon">🏠</span>
+          <span>משכנתא</span>
+        </button>
+        <button class="wpc-calc-tab-demo" data-tab="savings">
+          <span class="wpc-calc-tab-demo-icon">💎</span>
+          <span>חיסכון</span>
+        </button>
+        <button class="wpc-calc-tab-demo" data-tab="investment">
+          <span class="wpc-calc-tab-demo-icon">📈</span>
+          <span>השקעה</span>
+        </button>
+      </div>
+      
+      <div class="wpc-calc-content-demo">
+        <div class="wpc-calc-panel-demo active" id="loan">
+          <h4>מחשבון הלוואה</h4>
+          <div class="wpc-calc-results-demo">
+            <div class="wpc-calc-result-demo">
+              <span class="wpc-calc-label-demo">החזר חודשי</span>
+              <span class="wpc-calc-value-demo">₪1,520</span>
+            </div>
+            <div class="wpc-calc-result-demo">
+              <span class="wpc-calc-label-demo">סה"כ ריבית</span>
+              <span class="wpc-calc-value-demo">₪4,720</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="wpc-calc-panel-demo" id="mortgage">
+          <h4>מחשבון משכנתא</h4>
+          <div class="wpc-calc-results-demo">
+            <div class="wpc-calc-result-demo">
+              <span class="wpc-calc-label-demo">החזר חודשי</span>
+              <span class="wpc-calc-value-demo">₪4,250</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="wpc-calc-panel-demo" id="savings">
+          <h4>מחשבון חיסכון</h4>
+          <div class="wpc-calc-results-demo">
+            <div class="wpc-calc-result-demo">
+              <span class="wpc-calc-label-demo">צבירה צפויה</span>
+              <span class="wpc-calc-value-demo">₪125,000</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="wpc-calc-panel-demo" id="investment">
+          <h4>מחשבון השקעה</h4>
+          <div class="wpc-calc-results-demo">
+            <div class="wpc-calc-result-demo">
+              <span class="wpc-calc-label-demo">תשואה צפויה</span>
+              <span class="wpc-calc-value-demo">₪85,500</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 14. Interactive Comparison Tables -->
+  <div class="wpc-element-title">14. טבלאות השוואה אינטראקטיביות</div>
+  <div class="wpc-comparison-demo-container">
+    <div class="wpc-comparison-demo-wrapper">
+      <div class="wpc-comparison-demo-badge">הכי פופולרי</div>
+      
+      <div class="wpc-comparison-demo-filters">
+        <select class="wpc-comparison-demo-dropdown">
+          <option>כל הבנקים</option>
+          <option>בנקים גדולים</option>
+          <option>חברות אשראי</option>
+        </select>
+        <label class="wpc-comparison-demo-toggle">
+          <input type="checkbox" checked>
+          <span class="wpc-toggle-demo-slider"></span>
+          <span class="wpc-toggle-demo-label">ללא ערבים</span>
+        </label>
+      </div>
+      
+      <div class="wpc-comparison-demo-cards">
+        <div class="wpc-comparison-demo-card featured">
+          <div class="wpc-comparison-demo-header">
+            <h4>בנק הפועלים</h4>
+            <div class="wpc-comparison-demo-stars">★★★★★</div>
+          </div>
+          <div class="wpc-comparison-demo-rate">3.9%</div>
+          <div class="wpc-comparison-demo-features">
+            <div class="wpc-comparison-feature good">ללא עמלות</div>
+            <div class="wpc-comparison-feature good">אישור מהיר</div>
+          </div>
+          <button class="wpc-comparison-demo-btn">בחר חבילה</button>
+        </div>
+        
+        <div class="wpc-comparison-demo-card">
+          <div class="wpc-comparison-demo-header">
+            <h4>בנק לאומי</h4>
+            <div class="wpc-comparison-demo-stars">★★★★☆</div>
+          </div>
+          <div class="wpc-comparison-demo-rate">4.2%</div>
+          <div class="wpc-comparison-demo-features">
+            <div class="wpc-comparison-feature bad">עמלת הקמה</div>
+            <div class="wpc-comparison-feature good">גמיש</div>
+          </div>
+          <button class="wpc-comparison-demo-btn">בחר חבילה</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 15. Eligibility Quiz -->
+  <div class="wpc-element-title">15. בוחן זכאות וסקרים</div>
+  <div class="wpc-quiz-demo-container">
+    <div class="wpc-quiz-demo-wrapper">
+      <div class="wpc-quiz-demo-progress">
+        <div class="wpc-quiz-progress-demo-bar" style="width: 40%;">
+          <span>שאלה 2 מתוך 5</span>
+        </div>
+      </div>
+      
+      <div class="wpc-quiz-demo-content">
+        <h4 class="wpc-quiz-demo-question">מה הסכום הנדרש להלוואה?</h4>
+        
+        <div class="wpc-quiz-demo-options">
+          <label class="wpc-quiz-demo-option">
+            <input type="radio" name="amount" value="low">
+            <span class="wpc-quiz-demo-radio"></span>
+            <span class="wpc-quiz-demo-text">עד ₪50,000</span>
+          </label>
+          
+          <label class="wpc-quiz-demo-option">
+            <input type="radio" name="amount" value="medium" checked>
+            <span class="wpc-quiz-demo-radio"></span>
+            <span class="wpc-quiz-demo-text">₪50,000 - ₪200,000</span>
+          </label>
+          
+          <label class="wpc-quiz-demo-option">
+            <input type="radio" name="amount" value="high">
+            <span class="wpc-quiz-demo-radio"></span>
+            <span class="wpc-quiz-demo-text">מעל ₪200,000</span>
+          </label>
+        </div>
+        
+        <div class="wpc-quiz-demo-nav">
+          <button class="wpc-quiz-demo-btn-back">חזור</button>
+          <button class="wpc-quiz-demo-btn-next">המשך</button>
+        </div>
+      </div>
+      
+      <div class="wpc-quiz-demo-steps">
+        <div class="wpc-quiz-step-demo completed">1</div>
+        <div class="wpc-quiz-step-demo active">2</div>
+        <div class="wpc-quiz-step-demo">3</div>
+        <div class="wpc-quiz-step-demo">4</div>
+        <div class="wpc-quiz-step-demo">5</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 19. Highlight Areas -->
+  <div class="wpc-element-title">19. אזורי הדגשה - Alert, Quote, Benefit</div>
+  <div class="wpc-highlight-demo-container">
+    <div class="wpc-alert-demo warning">
+      <div class="wpc-alert-demo-icon">⚠️</div>
+      <div class="wpc-alert-demo-content">
+        <strong>חשוב לדעת:</strong> ריבית משתנה עשויה להשתנות במהלך התקופה
+      </div>
+    </div>
+    
+    <div class="wpc-alert-demo tip">
+      <div class="wpc-alert-demo-icon">💡</div>
+      <div class="wpc-alert-demo-content">
+        <strong>טיפ:</strong> הגשת בקשה לכמה בנקים תגדיל את הסיכויים לאישור
+      </div>
+    </div>
+    
+    <div class="wpc-quote-demo">
+      <div class="wpc-quote-demo-quotes">"</div>
+      <div class="wpc-quote-demo-text">
+        החברה הזו עזרה לי לקבל הלוואה במחירים הטובים ביותר בשוק. השירות מעולה והטיפול מקצועי ביותר.
+      </div>
+      <div class="wpc-quote-demo-author">- רחל כהן, רמת גן</div>
+    </div>
+    
+    <div class="wpc-benefit-demo">
+      <div class="wpc-benefit-demo-icon">✅</div>
+      <div class="wpc-benefit-demo-content">
+        <h4>יתרונות השירות שלנו</h4>
+        <p>ללא עמלות נסתרות, טיפול מהיר ומקצועי, ליווי אישי לאורך כל התהליך</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 20. Advanced Form Components -->
+  <div class="wpc-element-title">20. רכיבי טופס מתקדמים</div>
+  <div class="wpc-form-demo-container">
+    <div class="wpc-form-demo-wrapper">
+      <h4>הגדרות הלוואה מתקדמות</h4>
+      
+      <div class="wpc-form-demo-group">
+        <label class="wpc-form-demo-label">סכום הלוואה</label>
+        <div class="wpc-slider-demo-wrapper">
+          <input type="range" class="wpc-slider-demo" min="10000" max="500000" value="150000" id="amount-slider">
+          <div class="wpc-slider-demo-value">₪150,000</div>
+        </div>
+      </div>
+      
+      <div class="wpc-form-demo-group">
+        <label class="wpc-form-demo-label">סוג הלוואה</label>
+        <div class="wpc-toggle-group-demo">
+          <input type="radio" id="personal" name="loan-type" checked>
+          <label for="personal" class="wpc-toggle-option-demo">אישית</label>
+          
+          <input type="radio" id="secured" name="loan-type">
+          <label for="secured" class="wpc-toggle-option-demo">מובטחת</label>
+          
+          <input type="radio" id="business" name="loan-type">
+          <label for="business" class="wpc-toggle-option-demo">עסקית</label>
+        </div>
+      </div>
+      
+      <div class="wpc-form-demo-group">
+        <label class="wpc-form-demo-label">כתובת אימייל</label>
+        <div class="wpc-input-demo-wrapper">
+          <div class="wpc-input-demo-icon">📧</div>
+          <input type="email" class="wpc-input-demo" placeholder="your@email.com">
+        </div>
+        <div class="wpc-validation-demo success">כתובת אימייל תקינה</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 21. Loading States -->
+  <div class="wpc-element-title">21. Loading States ואנימציות</div>
+  <div class="wpc-loading-demo-container">
+    <div class="wpc-loading-demo-section">
+      <h4>Skeleton Loading</h4>
+      <div class="wpc-skeleton-demo-card">
+        <div class="wpc-skeleton-demo-avatar"></div>
+        <div class="wpc-skeleton-demo-content">
+          <div class="wpc-skeleton-demo-line long"></div>
+          <div class="wpc-skeleton-demo-line short"></div>
+          <div class="wpc-skeleton-demo-line medium"></div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="wpc-loading-demo-section">
+      <h4>Spinners</h4>
+      <div class="wpc-spinners-demo">
+        <div class="wpc-spinner-demo-circle"></div>
+        <div class="wpc-spinner-demo-dots">
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="wpc-loading-demo-section">
+      <h4>Success Animation</h4>
+      <div class="wpc-success-demo">
+        <div class="wpc-success-demo-circle">
+          <div class="wpc-success-demo-checkmark">✓</div>
+        </div>
+        <p>בקשה נשלחה בהצלחה!</p>
+      </div>
+    </div>
+    
+    <div class="wpc-loading-demo-section">
+      <h4>Pulse Button</h4>
+      <button class="wpc-pulse-demo-btn">התחל עכשיו</button>
+    </div>
+  </div>
+
+  <!-- 22. Tooltips & Popovers -->
+  <div class="wpc-element-title">22. Tooltips ו-Popovers</div>
+  <div class="wpc-tooltip-demo-container">
+    <div class="wpc-tooltip-demo-section">
+      <p>
+        ריבית אפקטיבית 
+        <span class="wpc-help-demo-icon" data-tooltip="הריבית הכוללת כולל כל העמלות והעלויות">?</span>
+        היא המדד החשוב ביותר להשוואה.
+      </p>
+      
+      <button class="wpc-popover-demo-trigger" onclick="togglePopover()">
+        הסבר מפורט על ריבית
+      </button>
+      
+      <div class="wpc-popover-demo" id="popover" style="display: none;">
+        <div class="wpc-popover-demo-arrow"></div>
+        <div class="wpc-popover-demo-content">
+          <h5>מדריך ריבית אפקטיבית</h5>
+          <p>הריבית האפקטיבית כוללת את הריבית הבסיסית בתוספת כל העמלות והעלויות הנלוות.</p>
+          <ul>
+            <li>עמלת ניהול</li>
+            <li>עמלת הקמה</li>
+            <li>ביטוח אשראי</li>
+                     </ul>
+         </div>
+       </div>
+     </div>
+   </div>
+
+   <!-- 24. Financial Charts -->
+   <div class="wpc-element-title">24. גרפים פיננסיים - ויזואליזציה של נתונים</div>
+   <div class="wpc-chart-demo-container">
+     <div class="wpc-chart-demo-section">
+       <h4>מגמת ריביות</h4>
+       <div class="wpc-chart-demo-wrapper">
+         <div class="wpc-chart-demo-grid">
+           <div class="wpc-chart-demo-y-axis">
+             <span>6%</span>
+             <span>5%</span>
+             <span>4%</span>
+             <span>3%</span>
+             <span>2%</span>
+           </div>
+           <div class="wpc-chart-demo-area">
+             <div class="wpc-chart-demo-line" style="--line-color: var(--primary);">
+               <div class="wpc-chart-demo-point" style="--point-x: 10%; --point-y: 20%;" data-value="4.5%"></div>
+               <div class="wpc-chart-demo-point" style="--point-x: 20%; --point-y: 30%;" data-value="4.2%"></div>
+               <div class="wpc-chart-demo-point" style="--point-x: 30%; --point-y: 25%;" data-value="4.4%"></div>
+               <div class="wpc-chart-demo-point" style="--point-x: 40%; --point-y: 35%;" data-value="4.0%"></div>
+               <div class="wpc-chart-demo-point" style="--point-x: 50%; --point-y: 40%;" data-value="3.8%"></div>
+               <div class="wpc-chart-demo-point" style="--point-x: 60%; --point-y: 30%;" data-value="4.1%"></div>
+               <div class="wpc-chart-demo-point" style="--point-x: 70%; --point-y: 20%;" data-value="4.5%"></div>
+               <div class="wpc-chart-demo-point" style="--point-x: 80%; --point-y: 15%;" data-value="4.7%"></div>
+               <div class="wpc-chart-demo-point" style="--point-x: 90%; --point-y: 10%;" data-value="5.0%"></div>
+             </div>
+           </div>
+         </div>
+         <div class="wpc-chart-demo-x-axis">
+           <span>ינו</span>
+           <span>פבר</span>
+           <span>מרץ</span>
+           <span>אפר</span>
+           <span>מאי</span>
+           <span>יוני</span>
+           <span>יולי</span>
+           <span>אוג</span>
+           <span>ספט</span>
+         </div>
+       </div>
+       <div class="wpc-chart-demo-legend">
+         <div class="wpc-chart-legend-demo-item">
+           <span class="wpc-chart-legend-demo-color" style="background: var(--primary);"></span>
+           <span>ריבית פריים</span>
+         </div>
+       </div>
+     </div>
+     
+     <div class="wpc-chart-demo-section">
+       <h4>Pie Chart - התפלגות הלוואות</h4>
+       <div class="wpc-pie-demo-container">
+         <div class="wpc-pie-demo" style="--p1: 40; --p2: 30; --p3: 20; --p4: 10;">
+           <div class="wpc-pie-demo-slice slice1" style="--color: var(--primary);"></div>
+           <div class="wpc-pie-demo-slice slice2" style="--color: var(--success);"></div>
+           <div class="wpc-pie-demo-slice slice3" style="--color: var(--warning);"></div>
+           <div class="wpc-pie-demo-slice slice4" style="--color: var(--danger);"></div>
+           <div class="wpc-pie-demo-center">
+             <div class="wpc-pie-demo-total">100%</div>
+             <div class="wpc-pie-demo-label">סה"כ הלוואות</div>
+           </div>
+         </div>
+         <div class="wpc-pie-demo-legend">
+           <div class="wpc-pie-legend-demo-item">
+             <span class="wpc-pie-legend-demo-color" style="background: var(--primary);"></span>
+             <span>הלוואות צרכניות (40%)</span>
+           </div>
+           <div class="wpc-pie-legend-demo-item">
+             <span class="wpc-pie-legend-demo-color" style="background: var(--success);"></span>
+             <span>משכנתאות (30%)</span>
+           </div>
+           <div class="wpc-pie-legend-demo-item">
+             <span class="wpc-pie-legend-demo-color" style="background: var(--warning);"></span>
+             <span>הלוואות עסקיות (20%)</span>
+           </div>
+           <div class="wpc-pie-legend-demo-item">
+             <span class="wpc-pie-legend-demo-color" style="background: var(--danger);"></span>
+             <span>אחר (10%)</span>
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+
+   <!-- 16. Data Visualizations -->
+   <div class="wpc-element-title">16. ויזואליזציות נתונים - גרפים ונתונים</div>
+   <div class="wpc-data-demo-container">
+     <div class="wpc-gauge-demo-section">
+       <h4>Gauge Meter - מד ציון אשראי</h4>
+       <div class="wpc-gauge-demo">
+         <div class="wpc-gauge-demo-arc">
+           <div class="wpc-gauge-demo-needle" style="--angle: 135deg;"></div>
+         </div>
+         <div class="wpc-gauge-demo-value">750</div>
+         <div class="wpc-gauge-demo-label">ציון אשראי</div>
+         <div class="wpc-gauge-demo-scale">
+           <span class="poor">גרוע</span>
+           <span class="good">טוב</span>
+           <span class="excellent">מעולה</span>
+         </div>
+       </div>
+     </div>
+     
+     <div class="wpc-progress-demo-section">
+       <h4>Progress Bars - התקדמות יעדים</h4>
+       <div class="wpc-progress-demo-list">
+         <div class="wpc-progress-demo-item">
+           <div class="wpc-progress-demo-header">
+             <span>חיסכון לקראת בית</span>
+             <span class="wpc-progress-demo-percent">75%</span>
+           </div>
+           <div class="wpc-progress-demo-bar">
+             <div class="wpc-progress-demo-fill" style="width: 75%; background: var(--success);"></div>
+           </div>
+           <div class="wpc-progress-demo-details">₪375,000 מתוך ₪500,000</div>
+         </div>
+         
+         <div class="wpc-progress-demo-item">
+           <div class="wpc-progress-demo-header">
+             <span>פירעון הלוואה</span>
+             <span class="wpc-progress-demo-percent">45%</span>
+           </div>
+           <div class="wpc-progress-demo-bar">
+             <div class="wpc-progress-demo-fill" style="width: 45%; background: var(--primary);"></div>
+           </div>
+           <div class="wpc-progress-demo-details">18 מתוך 40 תשלומים</div>
+         </div>
+         
+         <div class="wpc-progress-demo-item">
+           <div class="wpc-progress-demo-header">
+             <span>השקעות חודשיות</span>
+             <span class="wpc-progress-demo-percent">90%</span>
+           </div>
+           <div class="wpc-progress-demo-bar">
+             <div class="wpc-progress-demo-fill" style="width: 90%; background: var(--warning);"></div>
+           </div>
+           <div class="wpc-progress-demo-details">9 מתוך 10 תשלומים השנה</div>
+         </div>
+       </div>
+     </div>
+   </div>
+
+   <!-- 18. Interactive Info Cards -->
+   <div class="wpc-element-title">18. כרטיסי מידע אינטראקטיביים</div>
+   <div class="wpc-info-cards-demo-container">
+     <div class="wpc-flip-card-demo">
+       <div class="wpc-flip-card-demo-inner">
+         <div class="wpc-flip-card-demo-front">
+           <div class="wpc-flip-card-demo-icon">💳</div>
+           <h4>כרטיס אשראי</h4>
+           <p>לחץ לפרטים נוספים</p>
+         </div>
+         <div class="wpc-flip-card-demo-back">
+           <h4>פרטי כרטיס האשראי</h4>
+           <ul>
+             <li>מסגרת: ₪50,000</li>
+             <li>ריבית: 12.9%</li>
+             <li>דמי ניהול: ללא</li>
+             <li>החזר מינימלי: 5%</li>
+           </ul>
+         </div>
+       </div>
+     </div>
+     
+     <div class="wpc-hover-card-demo">
+       <div class="wpc-hover-card-demo-content">
+         <div class="wpc-hover-card-demo-icon">🏦</div>
+         <h4>הלוואת בנק</h4>
+         <p>מעבר עם העכבר לפרטים</p>
+       </div>
+       <div class="wpc-hover-card-demo-overlay">
+         <h4>פרטי ההלוואה</h4>
+         <ul>
+           <li>סכום: עד ₪500,000</li>
+           <li>ריבית: מ-3.9%</li>
+           <li>תקופה: עד 84 חודשים</li>
+           <li>אישור: תוך 24 שעות</li>
+         </ul>
+         <button class="wpc-hover-card-demo-btn">בקש הצעה</button>
+       </div>
+     </div>
+     
+     <div class="wpc-expand-card-demo">
+       <div class="wpc-expand-card-demo-header" onclick="toggleExpandCard(this)">
+         <div class="wpc-expand-card-demo-icon">📊</div>
+         <div class="wpc-expand-card-demo-title">
+           <h4>דוח פיננסי</h4>
+           <p>סיכום חודש אוקטובר</p>
+         </div>
+         <div class="wpc-expand-card-demo-arrow">←</div>
+       </div>
+       <div class="wpc-expand-card-demo-content">
+         <div class="wpc-expand-card-demo-stats">
+           <div class="wpc-expand-stat-demo">
+             <span class="wpc-expand-stat-demo-value">₪15,750</span>
+             <span class="wpc-expand-stat-demo-label">הכנסות</span>
+           </div>
+           <div class="wpc-expand-stat-demo">
+             <span class="wpc-expand-stat-demo-value">₪12,300</span>
+             <span class="wpc-expand-stat-demo-label">הוצאות</span>
+           </div>
+           <div class="wpc-expand-stat-demo">
+             <span class="wpc-expand-stat-demo-value">₪3,450</span>
+             <span class="wpc-expand-stat-demo-label">חיסכון</span>
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+
+   <!-- Summary -->
+   <div class="wpc-element-title">🎉 סיכום - כל האלמנטים הויזואליים</div>
+   <div class="wpc-summary-demo-container">
+     <div class="wpc-summary-demo-grid">
+       <div class="wpc-summary-demo-category">
+         <h4>📋 אלמנטים בסיסיים (1-11)</h4>
+         <ul>
+           <li>✅ Hero Section - עם גרדיאנט וכפתורי CTA</li>
+           <li>✅ כפתורי CTA - ראשי, משני ו-WhatsApp</li>
+           <li>✅ כרטיסי מטרות - 6 מטרות עם אייקונים</li>
+           <li>✅ באנרים - אזורי הדגשה</li>
+           <li>✅ אקורדיון - שאלות נפוצות אינטראקטיבי</li>
+           <li>✅ WhatsApp Box - קשר מהיר</li>
+           <li>✅ סטטיסטיקות - 4 נתונים עם אנימציות</li>
+           <li>✅ טבלאות - עם Responsive Cards</li>
+           <li>✅ כרטיסי ריבית - 2 מסלולים</li>
+           <li>✅ Timeline - 4 שלבים</li>
+           <li>✅ כותרות סקשנים - ללא קו אדום (הוסר לפי בקשה)</li>
+         </ul>
+       </div>
+       
+       <div class="wpc-summary-demo-category">
+         <h4>🎯 אלמנטים אינטראקטיביים (12-22)</h4>
+         <ul>
+           <li>✅ כרטיסיות מחשבון - 4 טאבים</li>
+           <li>✅ טבלאות השוואה - עם פילטרים</li>
+           <li>✅ בוחן זכאות - עם Progress Bar</li>
+           <li>✅ ויזואליזציות נתונים - Gauge ו-Progress</li>
+           <li>✅ כרטיסי מידע אינטראקטיביים - Flip ו-Hover</li>
+           <li>✅ אזורי הדגשה - Alert, Quote, Benefit</li>
+           <li>✅ רכיבי טופס מתקדמים - Slider ו-Toggle</li>
+           <li>✅ Loading States - Skeleton ו-Spinners</li>
+           <li>✅ Tooltips ו-Popovers - עזרה והסברים</li>
+         </ul>
+       </div>
+       
+       <div class="wpc-summary-demo-category">
+         <h4>📊 גרפים ונתונים (24-25)</h4>
+         <ul>
+           <li>✅ גרפים פיננסיים - Line Chart ו-Pie Chart</li>
+           <li>✅ Gauge Meter - מד ציון אשראי</li>
+           <li>✅ Progress Bars - התקדמות יעדים</li>
+           <li>✅ Chart Points - עם Tooltips</li>
+         </ul>
+       </div>
+     </div>
+     
+     <div class="wpc-summary-demo-stats">
+       <div class="wpc-summary-demo-stat">
+         <span class="wpc-summary-demo-number">20+</span>
+         <span class="wpc-summary-demo-label">אלמנטים ויזואליים</span>
+       </div>
+       <div class="wpc-summary-demo-stat">
+         <span class="wpc-summary-demo-number">100%</span>
+         <span class="wpc-summary-demo-label">התאמה למובייל</span>
+       </div>
+       <div class="wpc-summary-demo-stat">
+         <span class="wpc-summary-demo-number">RTL</span>
+         <span class="wpc-summary-demo-label">תמיכה מלאה</span>
+       </div>
+       <div class="wpc-summary-demo-stat">
+         <span class="wpc-summary-demo-number">0</span>
+         <span class="wpc-summary-demo-label">תלות חיצונית</span>
+       </div>
+     </div>
+     
+     <div class="wpc-summary-demo-footer">
+       <h3>🚀 מוכן לשימוש ב-WordPress!</h3>
+       <p>כל הקוד מיועד להכנסה ישירה לתגית &lt;body&gt; של WordPress, כולל התאמות למובייל ונגישות מלאה.</p>
+       <div class="wpc-summary-demo-features">
+         <span class="wpc-summary-demo-feature">⚡ CSS Variables</span>
+         <span class="wpc-summary-demo-feature">📱 Mobile First</span>
+         <span class="wpc-summary-demo-feature">🎨 Assistant Font</span>
+         <span class="wpc-summary-demo-feature">🔧 Prefix wpc-</span>
+         <span class="wpc-summary-demo-feature">♿ נגישות</span>
+         <span class="wpc-summary-demo-feature">🌟 אנימציות</span>
+       </div>
+     </div>
+   </div>
+ </div>
+
+<script>
+// Accordion functionality
+function toggleAccordion(header) {
+  const item = header.parentElement;
+  const content = item.querySelector('.wpc-accordion-demo-content');
+  const isActive = header.classList.contains('active');
+  
+  // Close all other accordions with animation
+  document.querySelectorAll('.wpc-accordion-demo-header').forEach(h => {
+    if (h !== header) {
+      h.classList.remove('active');
+      const otherContent = h.parentElement.querySelector('.wpc-accordion-demo-content');
+      otherContent.style.maxHeight = '0px';
+      otherContent.classList.remove('active');
+      
+      // Update ARIA
+      h.setAttribute('aria-expanded', 'false');
+      otherContent.setAttribute('aria-hidden', 'true');
+    }
+  });
+  
+  // Toggle current accordion with smooth animation
+  if (!isActive) {
+    header.classList.add('active');
+    content.classList.add('active');
+    
+    // Smooth height animation
+    content.style.maxHeight = content.scrollHeight + 'px';
+    
+    // Update ARIA
+    header.setAttribute('aria-expanded', 'true');
+    content.setAttribute('aria-hidden', 'false');
+    
+    // Haptic feedback
+    if ('vibrate' in navigator) {
+      navigator.vibrate(50);
+    }
+    
+    // Announce to screen reader
+    const question = header.textContent;
+    announceToScreenReader(`נפתח: ${question}`);
+  } else {
+    header.classList.remove('active');
+    content.style.maxHeight = '0px';
+    content.classList.remove('active');
+    
+    // Update ARIA
+    header.setAttribute('aria-expanded', 'false');
+    content.setAttribute('aria-hidden', 'true');
+  }
+}
+
+// Initialize accordion with accessibility
+function initAccordion() {
+  document.querySelectorAll('.wpc-accordion-demo-header').forEach(header => {
+    // Add ARIA attributes
+    header.setAttribute('role', 'button');
+    header.setAttribute('aria-expanded', 'false');
+    header.setAttribute('tabindex', '0');
+    
+    const content = header.parentElement.querySelector('.wpc-accordion-demo-content');
+    content.setAttribute('aria-hidden', 'true');
+    content.style.maxHeight = '0px';
+    
+    // Keyboard support
+    header.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggleAccordion(this);
+      }
+    });
+  });
+}
+
+// Smooth scroll behavior
+document.addEventListener('DOMContentLoaded', function() {
+  // Add smooth scrolling to all links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    });
+  });
+  
+  // Add click effects for buttons
+  document.querySelectorAll('button, .wpc-cta-demo-btn, .wpc-whatsapp-demo-button').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      // Create ripple effect
+      const ripple = document.createElement('span');
+      const rect = this.getBoundingClientRect();
+      const size = Math.max(rect.width, rect.height);
+      const x = e.clientX - rect.left - size / 2;
+      const y = e.clientY - rect.top - size / 2;
+      
+      ripple.style.cssText = `
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.6);
+        transform: scale(0);
+        animation: ripple 0.6s linear;
+        width: ${size}px;
+        height: ${size}px;
+        left: ${x}px;
+        top: ${y}px;
+        pointer-events: none;
+      `;
+      
+      this.style.position = 'relative';
+      this.style.overflow = 'hidden';
+      this.appendChild(ripple);
+      
+      setTimeout(() => ripple.remove(), 600);
+    });
+  });
+  
+  // Intersection Observer for animations
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, observerOptions);
+  
+  // Observe all demo containers
+  document.querySelectorAll('.wpc-goal-demo-card, .wpc-rate-demo-card, .wpc-timeline-demo-item').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(el);
+  });
+  
+  // Mobile touch handling
+  if ('ontouchstart' in window) {
+    document.body.classList.add('touch-device');
+    
+    // Add touch feedback for existing elements
+    document.querySelectorAll('.wpc-goal-demo-card, .wpc-rate-demo-card').forEach(card => {
+      card.addEventListener('touchstart', function() {
+        this.style.transform = 'scale(0.98)';
+      });
+      
+      card.addEventListener('touchend', function() {
+        this.style.transform = 'scale(1)';
+      });
+    });
+    
+    // Enhanced touch feedback for new elements
+    document.querySelectorAll('.wpc-calc-tab-demo, .wpc-comparison-demo-card, .wpc-quiz-demo-option').forEach(element => {
+      element.addEventListener('touchstart', function() {
+        this.style.transform = 'scale(0.98)';
+      });
+      
+      element.addEventListener('touchend', function() {
+        this.style.transform = 'scale(1)';
+      });
+    });
+    
+    // Haptic feedback for important actions
+    document.querySelectorAll('.wpc-calc-tab-demo, .wpc-quiz-demo-btn-next').forEach(element => {
+      element.addEventListener('click', function() {
+        if ('vibrate' in navigator) {
+          navigator.vibrate(50);
+        }
+      });
+    });
+  }
+  
+  // Initialize new components
+  initNewComponents();
+});
+
+// Add ripple animation CSS
+const rippleStyle = document.createElement('style');
+rippleStyle.textContent = `
+  @keyframes ripple {
+    to {
+      transform: scale(4);
+      opacity: 0;
+    }
+  }
+`;
+document.head.appendChild(rippleStyle);
+
+// Calculator Tabs functionality
+function initCalculatorTabs() {
+  document.querySelectorAll('.wpc-calc-tab-demo').forEach(tab => {
+    tab.addEventListener('click', function() {
+      // Remove active from all tabs
+      document.querySelectorAll('.wpc-calc-tab-demo').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.wpc-calc-panel-demo').forEach(p => p.classList.remove('active'));
+      
+      // Add active to clicked tab
+      this.classList.add('active');
+      
+      // Show corresponding panel
+      const targetPanel = document.getElementById(this.dataset.tab);
+      if (targetPanel) {
+        targetPanel.classList.add('active');
+      }
+    });
+  });
+}
+
+// Slider value update
+function initSliders() {
+  const slider = document.getElementById('amount-slider');
+  if (slider) {
+    const valueDisplay = document.querySelector('.wpc-slider-demo-value');
+    
+    slider.addEventListener('input', function() {
+      const value = parseInt(this.value).toLocaleString('he-IL');
+      valueDisplay.textContent = `₪${value}`;
+    });
+  }
+}
+
+// Popover functionality
+function togglePopover() {
+  const popover = document.getElementById('popover');
+  if (popover) {
+    const isVisible = popover.style.display === 'block';
+    popover.style.display = isVisible ? 'none' : 'block';
+    
+    // Close on outside click
+    if (!isVisible) {
+      setTimeout(() => {
+        document.addEventListener('click', function closePopover(e) {
+          if (!popover.contains(e.target) && !e.target.classList.contains('wpc-popover-demo-trigger')) {
+            popover.style.display = 'none';
+            document.removeEventListener('click', closePopover);
+          }
+        });
+      }, 100);
+    }
+  }
+}
+
+// Quiz navigation
+function initQuiz() {
+  const nextBtn = document.querySelector('.wpc-quiz-demo-btn-next');
+  const backBtn = document.querySelector('.wpc-quiz-demo-btn-back');
+  const progressBar = document.querySelector('.wpc-quiz-progress-demo-bar');
+  
+  if (nextBtn) {
+    nextBtn.addEventListener('click', function() {
+      // Simulate quiz progression
+      const currentWidth = parseInt(progressBar.style.width);
+      if (currentWidth < 100) {
+        const newWidth = Math.min(currentWidth + 20, 100);
+        progressBar.style.width = newWidth + '%';
+        progressBar.textContent = newWidth === 100 ? 'הושלם!' : `שאלה ${Math.ceil(newWidth/20)} מתוך 5`;
+        
+        // Update steps
+        const steps = document.querySelectorAll('.wpc-quiz-step-demo');
+        steps.forEach((step, index) => {
+          step.classList.remove('active');
+          if (index < newWidth/20) {
+            step.classList.add('completed');
+          } else if (index === Math.ceil(newWidth/20) - 1) {
+            step.classList.add('active');
+          }
+        });
+      }
+    });
+  }
+  
+  if (backBtn) {
+    backBtn.addEventListener('click', function() {
+      // Simulate going back
+      const currentWidth = parseInt(progressBar.style.width);
+      if (currentWidth > 20) {
+        const newWidth = currentWidth - 20;
+        progressBar.style.width = newWidth + '%';
+        progressBar.textContent = `שאלה ${Math.ceil(newWidth/20)} מתוך 5`;
+        
+        // Update steps
+        const steps = document.querySelectorAll('.wpc-quiz-step-demo');
+        steps.forEach((step, index) => {
+          step.classList.remove('active', 'completed');
+          if (index < newWidth/20) {
+            step.classList.add('completed');
+          } else if (index === Math.ceil(newWidth/20) - 1) {
+            step.classList.add('active');
+          }
+        });
+      }
+    });
+  }
+}
+
+// Enhanced mobile interactions
+function initMobileInteractions() {
+  if ('ontouchstart' in window) {
+    // Enhanced touch feedback for new elements
+    document.querySelectorAll('.wpc-calc-tab-demo, .wpc-comparison-demo-card, .wpc-quiz-demo-option').forEach(element => {
+      element.addEventListener('touchstart', function() {
+        this.style.transform = 'scale(0.98)';
+      });
+      
+      element.addEventListener('touchend', function() {
+        this.style.transform = 'scale(1)';
+      });
+    });
+    
+    // Haptic feedback for important actions
+    document.querySelectorAll('.wpc-calc-tab-demo, .wpc-quiz-demo-btn-next').forEach(element => {
+      element.addEventListener('click', function() {
+        if ('vibrate' in navigator) {
+          navigator.vibrate(50);
+        }
+      });
+    });
+  }
+}
+
+// Intersection Observer for animations
+function initAnimationsOnScroll() {
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // Add reveal animation
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+        
+        // Special handling for success animation
+        if (entry.target.classList.contains('wpc-success-demo-circle')) {
+          entry.target.style.animation = 'scaleIn 0.5s ease';
+          setTimeout(() => {
+            const checkmark = entry.target.querySelector('.wpc-success-demo-checkmark');
+            if (checkmark) {
+              checkmark.style.animation = 'fadeIn 0.5s ease forwards';
+            }
+          }, 300);
+        }
+        
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+  
+  // Observe new elements
+  document.querySelectorAll('.wpc-calc-tabs-demo-wrapper, .wpc-comparison-demo-card, .wpc-quiz-demo-wrapper, .wpc-alert-demo, .wpc-quote-demo, .wpc-benefit-demo, .wpc-loading-demo-section').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(30px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(el);
+  });
+}
+
+// Expand Card functionality
+function toggleExpandCard(header) {
+  const card = header.parentElement;
+  card.classList.toggle('expanded');
+}
+
+// Initialize all new functionality
+function initNewComponents() {
+  initCalculatorTabs();
+  initSliders();
+  initQuiz();
+  initMobileInteractions();
+  initAnimationsOnScroll();
+  initChartAnimations();
+  initProgressBars();
+  initFlipCards();
+  initGoalCards();
+  initAdvancedInteractions();
+  initAccordion();
+  initAdvancedAnimations();
+  forceMobileMode();
+}
+
+// Force mobile mode detection
+function forceMobileMode() {
+  const isMobile = window.innerWidth <= 767 || 
+                   /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+                   (navigator.maxTouchPoints && navigator.maxTouchPoints > 2);
+  
+  if (isMobile) {
+    document.body.classList.add('mobile-device');
+    
+    // Force mobile styles if needed
+    const style = document.createElement('style');
+    style.textContent = `
+      @media screen {
+        .wpc-hero-demo-btn,
+        .wpc-cta-demo-btn,
+        .wpc-whatsapp-demo-button {
+          width: 100% !important;
+          max-width: 100% !important;
+          min-height: 54px !important;
+          font-size: 1.2rem !important;
+          font-weight: 800 !important;
+          padding: 16px 24px !important;
+        }
+        
+        .wpc-hero-demo-cta,
+        .wpc-cta-demo-container {
+          flex-direction: column !important;
+          align-items: stretch !important;
+          width: 100% !important;
+        }
+        
+        .wpc-goal-demo-container {
+          grid-template-columns: repeat(2, 1fr) !important;
+          gap: 10px !important;
+          padding: 30px 15px !important;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+  }
+}
+
+// Check on resize too
+window.addEventListener('resize', forceMobileMode);
+
+// Debug mobile issues & fix overflow
+function debugMobileIssues() {
+  setTimeout(() => {
+    const container = document.querySelector('.wpc-demo-container');
+    const heroBtn = document.querySelector('.wpc-hero-demo-btn');
+    
+    if (window.innerWidth <= 767) {
+      // Mobile flip cards optimization info
+      const flipCardsInfo = document.querySelectorAll('.wpc-flip-card-demo');
+      if (flipCardsInfo.length > 0) {
+        console.log('🃏 📱 Mobile flip cards optimized:');
+        console.log('  ✅ Height increased to prevent text cutoff');
+        console.log('  ✅ Touch handling improved for tap interaction');
+        console.log('  ✅ Content layout optimized for small screens');
+        console.log('  ✅ Haptic feedback enabled on supported devices');
+        console.log('  ✅ Auto-detection and fixing of overflow content');
+        console.log('  📏 Card height: ' + (window.innerHeight <= 500 ? '250px (landscape)' : window.innerWidth <= 374 ? '300px (small)' : '280px (regular)'));
+      }
+      
+      // Fix any elements that might overflow
+      const allElements = container.querySelectorAll('*');
+      allElements.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.width > window.innerWidth) {
+          console.warn('⚠️ Element overflowing:', el.className, 'width:', rect.width);
+          el.style.maxWidth = '100%';
+          el.style.boxSizing = 'border-box';
+          el.style.overflowX = 'hidden';
+        }
+      });
+      
+      // Fix button specifically
+      if (heroBtn) {
+        const computedStyle = window.getComputedStyle(heroBtn);
+        const width = computedStyle.width;
+        
+               console.log('🔍 Debug mobile button:', {
+         screenWidth: window.innerWidth,
+         buttonWidth: width,
+         fontSize: computedStyle.fontSize,
+         padding: computedStyle.padding
+       });
+       
+                // Debug hero section height
+         const heroSection = document.querySelector('.wpc-hero-demo-section');
+         if (heroSection) {
+           const heroStyle = window.getComputedStyle(heroSection);
+           console.log('📏 Hero section height:', {
+             height: heroSection.offsetHeight,
+             padding: heroStyle.padding,
+             maxHeight: heroStyle.maxHeight,
+             screenHeight: window.innerHeight,
+             heightRatio: `${(heroSection.offsetHeight / window.innerHeight * 100).toFixed(1)}%`
+           });
+         }
+         
+         // Debug table display
+         const tableHead = document.querySelector('.wpc-table-demo thead');
+         if (tableHead) {
+           const headStyle = window.getComputedStyle(tableHead);
+           console.log('📊 Table header display:', {
+             display: headStyle.display,
+             visibility: headStyle.visibility,
+             screenWidth: window.innerWidth,
+             isVisible: tableHead.offsetHeight > 0
+           });
+         }
+         
+         // Debug comparison badge position
+         const comparisonBadge = document.querySelector('.wpc-comparison-demo-badge');
+         if (comparisonBadge) {
+           const badgeRect = comparisonBadge.getBoundingClientRect();
+           const wrapper = document.querySelector('.wpc-comparison-demo-wrapper');
+           const wrapperRect = wrapper ? wrapper.getBoundingClientRect() : null;
+           
+           console.log('🏷️ Comparison badge position:', {
+             badgeTop: badgeRect.top,
+             badgeRight: badgeRect.right,
+             badgeWidth: badgeRect.width,
+             badgeHeight: badgeRect.height,
+             wrapperTop: wrapperRect ? wrapperRect.top : 'N/A',
+             isVisible: badgeRect.top >= 0 && badgeRect.left >= 0,
+             screenWidth: window.innerWidth
+           });
+         }
+        
+        if (width.includes('px') && parseInt(width) < 200) {
+          console.warn('⚠️ Button might not be full width!');
+          // Force fix
+          heroBtn.style.width = '100%';
+          heroBtn.style.maxWidth = '100%';
+        }
+      }
+      
+             // Force container overflow fix
+       if (container) {
+         container.style.maxWidth = '100vw';
+         container.style.overflowX = 'hidden';
+         container.style.width = '100%';
+         console.log('✅ Container overflow fixed');
+       }
+       
+       // Fix comparison badge if cut off
+       const comparisonBadge = document.querySelector('.wpc-comparison-demo-badge');
+       if (comparisonBadge) {
+         const badgeRect = comparisonBadge.getBoundingClientRect();
+         
+         if (badgeRect.top < 0 || badgeRect.right > window.innerWidth) {
+           console.warn('🏷️ Fixing comparison badge position...');
+           comparisonBadge.style.position = 'absolute';
+           comparisonBadge.style.top = '-15px';
+           comparisonBadge.style.right = '10px';
+           comparisonBadge.style.zIndex = '20';
+           
+           // Also fix the wrapper
+           const wrapper = document.querySelector('.wpc-comparison-demo-wrapper');
+           if (wrapper) {
+             wrapper.style.marginTop = '20px';
+             wrapper.style.overflow = 'visible';
+             wrapper.style.position = 'relative';
+           }
+           
+           // And container
+           const compContainer = document.querySelector('.wpc-comparison-demo-container');
+           if (compContainer) {
+             compContainer.style.paddingTop = '30px';
+           }
+           
+           console.log('✅ Comparison badge position fixed');
+         }
+       }
+       
+       // Auto-fix flip cards if content overflows
+       const flipCards = document.querySelectorAll('.wpc-flip-card-demo');
+       flipCards.forEach((card, index) => {
+         const front = card.querySelector('.wpc-flip-card-demo-front');
+         const back = card.querySelector('.wpc-flip-card-demo-back');
+         
+         if (front) {
+           const frontOverflow = front.scrollHeight - front.clientHeight;
+           const backOverflow = back ? back.scrollHeight - back.clientHeight : 0;
+           const maxOverflow = Math.max(frontOverflow, backOverflow);
+           
+           if (maxOverflow > 5) {
+             console.warn('🃏 Auto-fixing flip card ' + (index + 1) + ' with overflow: ' + maxOverflow + 'px');
+             
+             // Increase card height
+             const newHeight = Math.max(320, card.clientHeight + maxOverflow + 20);
+             card.style.height = newHeight + 'px';
+             card.style.minHeight = newHeight + 'px';
+             
+             // Adjust content layout
+             if (front) {
+               front.style.padding = '12px !important';
+               front.style.justifyContent = 'flex-start !important';
+               
+               const icon = front.querySelector('.wpc-flip-card-demo-icon');
+               if (icon) {
+                 icon.style.fontSize = '2.2em';
+                 icon.style.marginBottom = '8px';
+               }
+               
+               const title = front.querySelector('h4');
+               if (title) {
+                 title.style.fontSize = '1rem';
+                 title.style.margin = '5px 0';
+                 title.style.lineHeight = '1.3';
+               }
+               
+               const text = front.querySelector('p');
+               if (text) {
+                 text.style.fontSize = '0.85rem';
+                 text.style.lineHeight = '1.4';
+               }
+             }
+             
+             if (back) {
+               back.style.padding = '12px !important';
+               back.style.justifyContent = 'flex-start !important';
+               
+               const title = back.querySelector('h4');
+               if (title) {
+                 title.style.fontSize = '1rem';
+                 title.style.margin = '5px 0 8px 0';
+               }
+               
+               const list = back.querySelector('ul');
+               if (list) {
+                 list.style.margin = '8px 0';
+                 
+                 const items = list.querySelectorAll('li');
+                 items.forEach(item => {
+                   item.style.fontSize = '0.85rem';
+                   item.style.lineHeight = '1.4';
+                   item.style.marginBottom = '5px';
+                 });
+               }
+             }
+             
+             console.log('✅ Flip card ' + (index + 1) + ' height adjusted to ' + newHeight + 'px');
+           }
+         }
+       });
+    }
+  }, 1000);
+}
+
+// Run debug after page loads
+window.addEventListener('load', debugMobileIssues);
+
+// Advanced animations on scroll
+function initAdvancedAnimations() {
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -100px 0px'
+  };
+  
+  const staggerObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const children = entry.target.children;
+        Array.from(children).forEach((child, index) => {
+          setTimeout(() => {
+            child.style.opacity = '1';
+            child.style.transform = 'translateY(0)';
+          }, index * 100);
+        });
+        
+        staggerObserver.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+  
+  // Apply stagger animation to goal cards
+  const goalContainer = document.querySelector('.wpc-goal-demo-container');
+  if (goalContainer) {
+    Array.from(goalContainer.children).forEach(child => {
+      child.style.opacity = '0';
+      child.style.transform = 'translateY(30px)';
+      child.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    });
+    staggerObserver.observe(goalContainer);
+  }
+  
+  // Apply to other containers
+  document.querySelectorAll('.wpc-stats-demo-container, .wpc-rate-demo-container').forEach(container => {
+    Array.from(container.children).forEach(child => {
+      child.style.opacity = '0';
+      child.style.transform = 'translateY(30px)';
+      child.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    });
+    staggerObserver.observe(container);
+  });
+}
+
+// Goal Cards Selection
+function initGoalCards() {
+  document.querySelectorAll('.wpc-goal-demo-card').forEach(card => {
+    card.addEventListener('click', function() {
+      // Remove selection from all cards
+      document.querySelectorAll('.wpc-goal-demo-card').forEach(c => {
+        c.classList.remove('selected');
+      });
+      
+      // Add selection to clicked card
+      this.classList.add('selected');
+      
+      // Haptic feedback
+      if ('vibrate' in navigator) {
+        navigator.vibrate(50);
+      }
+      
+      // Announce selection for accessibility
+      const title = this.querySelector('.wpc-goal-demo-title').textContent;
+      announceToScreenReader(`נבחר: ${title}`);
+    });
+    
+    // Keyboard support
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('role', 'button');
+    card.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        this.click();
+      }
+    });
+  });
+}
+
+// Advanced Interactions
+function initAdvancedInteractions() {
+  // Add loading states to buttons
+  document.querySelectorAll('.wpc-cta-demo-btn, .wpc-hero-demo-btn').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      if (this.classList.contains('loading')) return;
+      
+      e.preventDefault();
+      this.classList.add('loading');
+      
+      const originalText = this.innerHTML;
+      this.innerHTML = '<span style="display: inline-block; width: 20px; height: 20px; border: 2px solid currentColor; border-top-color: transparent; border-radius: 50%; animation: spin 1s linear infinite;"></span>';
+      
+      setTimeout(() => {
+        this.classList.remove('loading');
+        this.innerHTML = originalText;
+      }, 2000);
+    });
+  });
+  
+  // Enhanced ripple effect
+  document.querySelectorAll('.wpc-goal-demo-card, .wpc-calc-tab-demo, .wpc-comparison-demo-card').forEach(element => {
+    element.addEventListener('click', function(e) {
+      createRippleEffect(this, e);
+    });
+  });
+}
+
+// Create ripple effect
+function createRippleEffect(element, event) {
+  const rect = element.getBoundingClientRect();
+  const size = Math.max(rect.width, rect.height);
+  const x = event.clientX - rect.left - size / 2;
+  const y = event.clientY - rect.top - size / 2;
+  
+  const ripple = document.createElement('div');
+  ripple.style.cssText = `
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.6);
+    transform: scale(0);
+    animation: rippleAnimation 0.6s linear;
+    width: ${size}px;
+    height: ${size}px;
+    left: ${x}px;
+    top: ${y}px;
+    pointer-events: none;
+    z-index: 1;
+  `;
+  
+  element.style.position = 'relative';
+  element.style.overflow = 'hidden';
+  element.appendChild(ripple);
+  
+  setTimeout(() => ripple.remove(), 600);
+}
+
+// Screen reader announcements
+function announceToScreenReader(message) {
+  const announcement = document.createElement('div');
+  announcement.setAttribute('aria-live', 'polite');
+  announcement.setAttribute('aria-atomic', 'true');
+  announcement.style.cssText = `
+    position: absolute;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  `;
+  
+  document.body.appendChild(announcement);
+  announcement.textContent = message;
+  
+  setTimeout(() => {
+    document.body.removeChild(announcement);
+  }, 1000);
+}
+
+// Chart animations
+function initChartAnimations() {
+  // Animate chart points on scroll
+  const chartPoints = document.querySelectorAll('.wpc-chart-demo-point');
+  chartPoints.forEach((point, index) => {
+    point.style.opacity = '0';
+    point.style.transform = 'scale(0)';
+    
+    setTimeout(() => {
+      point.style.opacity = '1';
+      point.style.transform = 'scale(1)';
+      point.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    }, index * 200);
+  });
+  
+  // Animate gauge needle
+  const needle = document.querySelector('.wpc-gauge-demo-needle');
+  if (needle) {
+    needle.style.setProperty('--angle', '45deg');
+    setTimeout(() => {
+      needle.style.setProperty('--angle', '135deg');
+    }, 1000);
+  }
+}
+
+// Progress bars animation
+function initProgressBars() {
+  const progressBars = document.querySelectorAll('.wpc-progress-demo-fill');
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const bar = entry.target;
+        const targetWidth = bar.style.width;
+        bar.style.width = '0%';
+        
+        setTimeout(() => {
+          bar.style.width = targetWidth;
+        }, 300);
+        
+        observer.unobserve(bar);
+      }
+    });
+  }, { threshold: 0.5 });
+  
+  progressBars.forEach(bar => observer.observe(bar));
+}
+
+// Flip cards touch handling
+function initFlipCards() {
+  if ('ontouchstart' in window) {
+    document.querySelectorAll('.wpc-flip-card-demo').forEach(card => {
+      let isFlipped = false;
+      let touchStartTime = 0;
+      
+      // Better touch handling
+      card.addEventListener('touchstart', function(e) {
+        touchStartTime = Date.now();
+        e.preventDefault(); // Prevent scroll
+      });
+      
+      card.addEventListener('touchend', function(e) {
+        const touchDuration = Date.now() - touchStartTime;
+        if (touchDuration < 300) { // Quick tap
+          flipCard();
+        }
+        e.preventDefault();
+      });
+      
+      card.addEventListener('click', function(e) {
+        // Only handle click if not on touch device
+        if (!('ontouchstart' in window)) {
+          flipCard();
+        }
+      });
+      
+      function flipCard() {
+        const inner = card.querySelector('.wpc-flip-card-demo-inner');
+        isFlipped = !isFlipped;
+        
+        if (isFlipped) {
+          inner.style.transform = 'rotateY(180deg)';
+          card.setAttribute('aria-expanded', 'true');
+          console.log('🃏 Flip card flipped to back side');
+        } else {
+          inner.style.transform = 'rotateY(0deg)';
+          card.setAttribute('aria-expanded', 'false');
+          console.log('🃏 Flip card flipped to front side');
+        }
+        
+        // Haptic feedback on supported devices
+        if (navigator.vibrate) {
+          navigator.vibrate(50);
+        }
+      }
+      
+      // Add accessibility attributes
+      card.setAttribute('role', 'button');
+      card.setAttribute('tabindex', '0');
+      card.setAttribute('aria-expanded', 'false');
+      card.setAttribute('aria-label', 'כרטיס אינטראקטיבי - לחץ להיפוך');
+      
+      // Keyboard support
+      card.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          flipCard();
+        }
+      });
+    });
+    
+    // Touch handling for hover cards
+    document.querySelectorAll('.wpc-hover-card-demo').forEach(card => {
+      let isRevealed = false;
+      
+      card.addEventListener('click', function() {
+        const overlay = this.querySelector('.wpc-hover-card-demo-overlay');
+        isRevealed = !isRevealed;
+        
+        if (isRevealed) {
+          overlay.style.transform = 'translateY(0)';
+        } else {
+          overlay.style.transform = 'translateY(100%)';
+        }
+      });
+    });
+  }
+  
+  // Check if AWG shortcode section exists
+  const awgSection = document.querySelector('.wpc-awg-demo-section');
+  if (awgSection) {
+        console.log('🎯 אזור לשורטקודים נטען בהצלחה:');
+    console.log('  ✅ Container width: 1200px max (centered)');
+    console.log('  ✅ White background with elegant shadow');
+    console.log('  ✅ Mobile responsive design with 3 breakpoints');
+    console.log('  ✅ Blue accent content area with styled items');
+    console.log('  ✅ Professional title section "אזור לשורטקודים"');
+    console.log('  📄 Shortcode 1: [related-shortcode-instert]');
+    console.log('  📄 Shortcode 2: [awg postid="32400"]');
+    console.log('  🎨 Location: Before disclaimer section');
+      
+      // Check if shortcodes content loads properly
+      const awgContent = awgSection.querySelector('.wpc-awg-demo-content');
+      if (awgContent) {
+        setTimeout(() => {
+          const contentText = awgContent.innerHTML.trim();
+          const hasUnprocessedAWG = contentText.includes('[awg postid="32400"]');
+          const hasUnprocessedRelated = contentText.includes('[related-shortcode-instert]');
+          
+          if (hasUnprocessedAWG && hasUnprocessedRelated) {
+            console.warn('⚠️ שני השורטקודים לא עובדו - בדוק שהתוספים פעילים');
+            awgContent.classList.add('error');
+          } else if (hasUnprocessedAWG) {
+            console.warn('⚠️ שורטקוד AWG לא עובד - בדוק שתוסף AWG פעיל');
+          } else if (hasUnprocessedRelated) {
+            console.warn('⚠️ שורטקוד related-shortcode לא עובד - בדוק שהתוסף פעיל');
+          } else if (contentText !== '') {
+            console.log('✅ כל השורטקודים נטענו בהצלחה');
+          }
+        }, 2000);
+      }
+    }
+}
+
+// 🎯 Mobile Table Fix - החלפת טבלאות בכרטיסים במובייל
+(function() {
+  function handleTableMobileDisplay() {
+    const tableContainer = document.querySelector('.wpc-table-demo-container');
+    const mobileCardsContainer = document.querySelector('.wpc-mobile-cards-container');
+    
+    if (!tableContainer || !mobileCardsContainer) return;
+    
+    const isMobile = window.innerWidth <= 768;
+    
+    if (isMobile) {
+      // במובייל - הסתר טבלה והראה כרטיסים
+      tableContainer.style.display = 'none';
+      mobileCardsContainer.style.display = 'flex';
+      console.log('📱 Table: Switched to mobile cards view');
+    } else {
+      // בדסקטופ - הראה טבלה והסתר כרטיסים
+      tableContainer.style.display = 'block';
+      mobileCardsContainer.style.display = 'none';
+      console.log('💻 Table: Switched to desktop table view');
+    }
+  }
+  
+  // הפעלה ראשונית
+  handleTableMobileDisplay();
+  
+  // האזנה לשינוי גודל מסך
+  window.addEventListener('resize', handleTableMobileDisplay);
+  
+  console.log('✅ Mobile table fix initialized');
+  console.log('🎯 Tables: Desktop shows table, Mobile shows clean cards');
+  console.log('📱 Fixed: Text readability issue in mobile tables');
+  console.log('🔴 Red line: ATTACHED to text (width: fit-content + margin: auto)');
+  console.log('🔴 Disclaimer title: Same red line design applied');
+  console.log('❌ Code cleanup: Removed unwanted .wpc-awg-demo-content.error::before');
+})();
+
+
+</script>
+
+<!-- AWG Shortcode Section -->
+<div class="wpc-awg-demo-section" id="wpc-awg-section">
+  <div class="wpc-awg-demo-container" id="wpc-awg-container">
+    <div class="wpc-awg-demo-title">
+      <h2>אזור לשורטקודים</h2>
+      <p>תוכן דינמי ומידע רלוונטי מעודכן</p>
+    </div>
+    <div class="wpc-awg-demo-content" id="wpc-awg-content">
+      <div class="wpc-shortcode-item">
+        [related-shortcode-instert]
+      </div>
+      <div class="wpc-shortcode-item">
+        [awg postid="32400"]
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 🚨 דיסקליימר חובה - MUST INCLUDE -->
+<style>
+/* 🚨 WordPress Body CSS - דיסקליימר בטוח להוספה לתוך עמוד */
+.wpc-disclaimer-d4k9-wrapper {
+    all: initial !important;
+    font-family: 'Assistant', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+    direction: rtl !important;
+    text-align: center !important;
+    box-sizing: border-box !important;
+    background: #f8f8f8 !important;
+    padding: 40px !important;
+    margin: 30px auto !important;
+    border-right: 5px solid #ff3b3b !important;
+    border-radius: 20px !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1) !important;
+    max-width: 1800px !important;
+    width: calc(100% - 40px) !important;
+    display: block !important;
+}
+
+.wpc-disclaimer-d4k9-wrapper *, 
+.wpc-disclaimer-d4k9-wrapper *::before, 
+.wpc-disclaimer-d4k9-wrapper *::after {
+    box-sizing: inherit !important;
+}
+
+/* כותרת ראשית - ממורכזת */
+.wpc-disclaimer-d4k9-title {
+    color: #1e5490 !important;
+    margin: 0 auto 30px !important;
+    font-size: 2.5em !important;
+    font-weight: 700 !important;
+    text-align: center !important;
+    position: relative !important;
+    padding-right: 25px !important;
+    font-family: inherit !important;
+    width: fit-content !important;
+    display: block !important;
+    direction: rtl !important;
+}
+
+/* הקו האדום הדקורטיבי לדיסקליימר - בצד ימין צמוד לטקסט */
+.wpc-disclaimer-d4k9-title::after {
+    content: '' !important;
+    position: absolute !important;
+    right: 0 !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    width: 4px !important;
+    height: 60px !important;
+    background: linear-gradient(135deg, #e74c3c, #c0392b) !important;
+    border-radius: 2px !important;
+    box-shadow: 0 2px 4px rgba(231, 76, 60, 0.3) !important;
+}
+
+/* הודעה מרכזית */
+.wpc-disclaimer-d4k9-highlight {
+    background: linear-gradient(135deg, #25D366 0%, #1da851 100%) !important;
+    padding: 25px !important;
+    border-radius: 15px !important;
+    margin-bottom: 30px !important;
+    color: #ffffff !important;
+    box-shadow: 0 5px 20px rgba(37, 211, 102, 0.3) !important;
+}
+
+.wpc-disclaimer-d4k9-highlight-text {
+    margin: 0 !important;
+    font-weight: 600 !important;
+    font-size: 1.25em !important;
+    line-height: 1.6 !important;
+    text-align: center !important;
+    color: #ffffff !important;
+    font-family: inherit !important;
+}
+
+/* נקודות משפטיות */
+.wpc-disclaimer-d4k9-points {
+    padding: 30px !important;
+    background: #ffffff !important;
+    border-radius: 15px !important;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.06) !important;
+    border-right: 4px solid #1e5490 !important;
+    margin-bottom: 30px !important;
+}
+
+.wpc-disclaimer-d4k9-points-title {
+    color: #1e5490 !important;
+    font-size: 1.5em !important;
+    font-weight: 700 !important;
+    margin-bottom: 25px !important;
+    text-align: center !important;
+    padding-bottom: 15px !important;
+    border-bottom: 2px solid #f0f0f0 !important;
+    font-family: inherit !important;
+}
+
+.wpc-disclaimer-d4k9-list {
+    display: grid !important;
+    gap: 18px !important;
+    font-size: 1.1em !important;
+    line-height: 1.7 !important;
+    color: #333333 !important;
+}
+
+.wpc-disclaimer-d4k9-item {
+    display: flex !important;
+    gap: 12px !important;
+    align-items: flex-start !important;
+}
+
+.wpc-disclaimer-d4k9-icon {
+    font-size: 1.3em !important;
+    margin-top: 2px !important;
+    flex-shrink: 0 !important;
+}
+
+.wpc-disclaimer-d4k9-text {
+    margin: 0 !important;
+    color: #333333 !important;
+    font-family: inherit !important;
+}
+
+.wpc-disclaimer-d4k9-text strong {
+    font-weight: 700 !important;
+    color: inherit !important;
+}
+
+.wpc-disclaimer-d4k9-text u {
+    text-decoration: none !important;
+    font-weight: inherit !important;
+    color: inherit !important;
+}
+
+/* הסרת כל הדגשות צבעוניות בנקודות הדיסקליימר */
+.wpc-disclaimer-d4k9-item * {
+    color: inherit !important;
+    text-decoration: none !important;
+}
+
+.wpc-disclaimer-d4k9-item strong {
+    font-weight: 700 !important;
+    color: inherit !important;
+}
+
+.wpc-disclaimer-d4k9-item u {
+    text-decoration: none !important;
+    font-style: normal !important;
+    color: inherit !important;
+}
+
+/* Mobile First - 375px */
+@media (max-width: 767px) {
+    .wpc-disclaimer-d4k9-wrapper {
+        margin: 20px 10px !important;
+        padding: 24px 16px !important;
+        border-radius: 16px !important;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.06) !important;
+        border-right-width: 4px !important;
+    }
+    
+    .wpc-disclaimer-d4k9-title {
+        font-size: clamp(1.5rem, 5vw, 1.8rem) !important;
+        margin: 0 auto 20px !important;
+        padding-right: 20px !important;
+        width: fit-content !important;
+    }
+    
+    /* הקו האדום במובייל לדיסקליימר - גרסה קטנה יותר בצד ימין */
+    .wpc-disclaimer-d4k9-title::after {
+        width: 3px !important;
+        height: 40px !important;
+    }
+    
+    .wpc-disclaimer-d4k9-highlight {
+        padding: 18px !important;
+        margin-bottom: 16px !important;
+        border-radius: 12px !important;
+    }
+    
+    .wpc-disclaimer-d4k9-highlight-text {
+        font-size: 0.95rem !important;
+        line-height: 1.6 !important;
+    }
+    
+    .wpc-disclaimer-d4k9-points {
+        padding: 18px !important;
+        border-right-width: 3px !important;
+        margin-bottom: 16px !important;
+        border-radius: 12px !important;
+    }
+    
+    .wpc-disclaimer-d4k9-points-title {
+        font-size: 1.1rem !important;
+        margin-bottom: 16px !important;
+    }
+    
+    .wpc-disclaimer-d4k9-list {
+        gap: 14px !important;
+        font-size: 0.95rem !important;
+    }
+    
+    .wpc-disclaimer-d4k9-icon {
+        font-size: 1.1rem !important;
+        min-width: 20px !important;
+    }
+    
+    .wpc-disclaimer-d4k9-text {
+        line-height: 1.6 !important;
+    }
+}
+
+/* Performance optimizations */
+.wpc-disclaimer-d4k9-wrapper {
+    will-change: auto !important;
+    transform: translateZ(0) !important;
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale !important;
+}
+
+/* High contrast support */
+@media (prefers-contrast: high) {
+    .wpc-disclaimer-d4k9-wrapper {
+        border-right-width: 8px !important;
+    }
+    
+    .wpc-disclaimer-d4k9-text strong {
+        font-weight: 800 !important;
+    }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .wpc-disclaimer-d4k9-wrapper,
+  .wpc-disclaimer-d4k9-wrapper * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* AWG Shortcode Section */
+.wpc-awg-demo-section {
+  background: #ffffff;
+  padding: 60px 20px;
+  margin: 40px 0;
+  border-top: 1px solid #e0e0e0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.wpc-awg-demo-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 30px;
+  text-align: center;
+  background: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+  border: 1px solid #f0f0f0;
+}
+
+.wpc-awg-demo-title {
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.wpc-awg-demo-title h2 {
+  font-size: 2em;
+  font-weight: 700;
+  color: #1e5490;
+  margin: 0 0 10px 0;
+  font-family: Assistant, sans-serif;
+  text-align: center;
+}
+
+.wpc-awg-demo-title p {
+  font-size: 1.1em;
+  color: #666666;
+  margin: 0;
+  font-family: Assistant, sans-serif;
+  text-align: center;
+}
+
+.wpc-awg-demo-content {
+  width: 100%;
+  text-align: center;
+  padding: 25px;
+  border-radius: 12px;
+}
+
+.wpc-shortcode-item {
+  margin-bottom: 30px;
+  padding: 20px;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.wpc-shortcode-item:last-child {
+  margin-bottom: 0;
+}
+
+.wpc-shortcode-item:hover {
+  transform: translateY(-2px);
+}
+
+/* סטיילינג לתוכן AWG */
+.wpc-awg-demo-content * {
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.wpc-awg-demo-content img {
+  max-width: 100% !important;
+  height: auto !important;
+  border-radius: 8px !important;
+}
+
+.wpc-awg-demo-content h1,
+.wpc-awg-demo-content h2,
+.wpc-awg-demo-content h3 {
+  color: #1e5490 !important;
+  font-family: Assistant, sans-serif !important;
+}
+
+.wpc-awg-demo-content p {
+  color: #333333 !important;
+  line-height: 1.6 !important;
+  font-family: Assistant, sans-serif !important;
+}
+
+/* Loading indicator for shortcodes content */
+.wpc-awg-demo-content:empty::before {
+  content: 'טוען שורטקודים...';
+  display: block;
+  padding: 40px;
+  text-align: center;
+  color: #666666;
+  font-style: italic;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="%231e5490"><circle cx="12" cy="12" r="2"/><circle cx="12" cy="4" r="2" opacity="0.8"/><circle cx="12" cy="20" r="2" opacity="0.2"/><circle cx="4" cy="12" r="2" opacity="0.6"/><circle cx="20" cy="12" r="2" opacity="0.4"/></svg>') no-repeat center top;
+  padding-top: 60px;
+  animation: awgLoading 1.5s ease-in-out infinite;
+}
+
+@keyframes awgLoading {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+
+
+/* Mobile adaptation for AWG section */
+@media (max-width: 767px) {
+  .wpc-awg-demo-section {
+    padding: 40px 15px;
+    margin: 30px 0;
+  }
+  
+  .wpc-awg-demo-container {
+    max-width: 100%;
+    padding: 20px 15px;
+    border-radius: 12px;
+    margin: 0 10px;
+  }
+  
+  .wpc-awg-demo-title h2 {
+    font-size: 1.5em;
+  }
+  
+  .wpc-awg-demo-title p {
+    font-size: 1em;
+  }
+  
+  .wpc-awg-demo-title {
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+  }
+  
+  .wpc-awg-demo-content {
+    width: 100%;
+    margin: 0;
+    padding: 0px;
+    border-radius: 10px;
+  }
+  
+  .wpc-shortcode-item {
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .wpc-awg-demo-section {
+    padding: 30px 10px;
+    margin: 20px 0;
+  }
+  
+  .wpc-awg-demo-container {
+    padding: 15px 10px;
+    margin: 0 5px;
+    border-radius: 10px;
+  }
+  
+  .wpc-awg-demo-title h2 {
+    font-size: 1.3em;
+  }
+  
+  .wpc-awg-demo-title p {
+    font-size: 0.9em;
+  }
+  
+  .wpc-awg-demo-title {
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+  }
+  
+  .wpc-awg-demo-content {
+    width: 100%;
+    margin: 0;
+    padding: 0px;
+    border-radius: 8px;
+  }
+  
+  .wpc-shortcode-item {
+    margin-bottom: 20px;
+    padding: 0px;
+    border-radius: 6px;
+  }
+}
+
+/* Special handling for landscape mobile (low height screens) */
+@media screen and (max-width: 767px) and (max-height: 500px) {
+  .wpc-flip-card-demo,
+  .wpc-hover-card-demo {
+    height: 250px !important;
+    min-height: 250px !important;
+  }
+  
+  .wpc-flip-card-demo-icon {
+    font-size: 2em !important;
+    margin-bottom: 4px !important;
+    margin-top: 2px !important;
+  }
+  
+  .wpc-flip-card-demo-front h4,
+  .wpc-flip-card-demo-back h4 {
+    font-size: 0.95rem !important;
+    margin: 3px 0 !important;
+  }
+  
+  .wpc-flip-card-demo-front p {
+    font-size: 0.8rem !important;
+    margin: 0 !important;
+  }
+  
+  .wpc-flip-card-demo-back li {
+    font-size: 0.8rem !important;
+    margin-bottom: 3px !important;
+    padding: 2px 0 !important;
+  }
+  
+  .wpc-flip-card-demo-front,
+  .wpc-flip-card-demo-back {
+    padding: 10px 8px !important;
+  }
+}
+</style>
+
+<div class="wpc-disclaimer-d4k9-wrapper" id="wpc-disclaimer-d4k9-main">
+    <!-- כותרת ראשית -->
+    <h3 class="wpc-disclaimer-d4k9-title">
+        ⚖️ הבהרה משפטית חשובה
+    </h3>
+    
+    <!-- הודעה מרכזית -->
+    <div class="wpc-disclaimer-d4k9-highlight">
+        <p class="wpc-disclaimer-d4k9-highlight-text">
+            📋 <strong>אופי השירות:</strong> אתר "רק תבקש" הינו אגריגטור מידע בלבד ואינו גוף מלווה, בנק או חברת אשראי. 
+            אנו מספקים פלטפורמה דיגיטלית המחברת בין צרכנים לגופים פיננסיים מורשים במסגרת החוק הישראלי, 
+            ללא כל עלות לגולש.
+        </p>
+    </div>
+
+    <!-- נקודות משפטיות -->
+    <div class="wpc-disclaimer-d4k9-points">
+        <h4 class="wpc-disclaimer-d4k9-points-title">
+            📋 נקודות חשובות לידיעתכם
+        </h4>
+        
+        <div class="wpc-disclaimer-d4k9-list">
+            <div class="wpc-disclaimer-d4k9-item">
+                <div class="wpc-disclaimer-d4k9-icon">🏦</div>
+                <p class="wpc-disclaimer-d4k9-text">
+                    <strong>אישור הלוואה:</strong> 
+                    הצעות אינן אישור סופי. האישור כפוף לבדיקת הגוף המלווה.
+                </p>
+            </div>
+
+            <div class="wpc-disclaimer-d4k9-item">
+                <div class="wpc-disclaimer-d4k9-icon">📊</div>
+                <p class="wpc-disclaimer-d4k9-text">
+                    <strong>תנאים:</strong> 
+                    כל המידע להמחשה בלבד. התנאים הסופיים נקבעים על ידי הגוף המלווה.
+                </p>
+            </div>
+
+            <div class="wpc-disclaimer-d4k9-item">
+                <div class="wpc-disclaimer-d4k9-icon">✅</div>
+                <p class="wpc-disclaimer-d4k9-text">
+                    <strong>אימות מידע:</strong> 
+                    חובה לאמת פרטים ישירות מול הגוף המלווה לפני החלטה פיננסית.
+                </p>
+            </div>
+
+            <div class="wpc-disclaimer-d4k9-item">
+                <div class="wpc-disclaimer-d4k9-icon">🔐</div>
+                <p class="wpc-disclaimer-d4k9-text">
+                    <strong>פרטיות:</strong> 
+                    המידע לקבלת הצעות בלבד מגופים מורשים.
+                </p>
+            </div>
+
+            <div class="wpc-disclaimer-d4k9-item">
+                <div class="wpc-disclaimer-d4k9-icon">⚠️</div>
+                <p class="wpc-disclaimer-d4k9-text">
+                    <strong>אזהרה פיננסית:</strong> 
+                    המידע אינו ייעוץ פיננסי מקצועי. מומלץ להתייעץ עם יועץ מוסמך.
+                </p>
+            </div>
+
+            <div class="wpc-disclaimer-d4k9-item">
+                <div class="wpc-disclaimer-d4k9-icon">⚖️</div>
+                <p class="wpc-disclaimer-d4k9-text">
+                    אי עמידה בהחזר עלולה לגרור לחיובים נוספים ופגיעה בדירוג האשראי. וודאו התאמה ליכולת ההחזר.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+(function() {
+    'use strict';
+    
+    // WordPress Body JavaScript - בטוח להוספה לתוך עמוד
+    
+    // בדיקת התנגשות namespace
+    if (window.WPC_Disclaimer_D4K9) {
+        console.warn('WPC_Disclaimer_D4K9 already exists - preventing collision');
+        return;
+    }
+    
+    // Namespace ייחודי - מבודד מוורדפרס
+    window.WPC_Disclaimer_D4K9 = window.WPC_Disclaimer_D4K9 || {};
+    const NS = window.WPC_Disclaimer_D4K9;
+    
+    function wpcDisclaimerD4K9Init() {
+        try {
+            // וידוא קיום container
+            const container = document.querySelector('#wpc-disclaimer-d4k9-main');
+            if (!container) {
+                console.warn('Disclaimer container not found');
+                return;
+            }
+            
+            // כאן אפשר להוסיף פונקציונליות אם צריך
+            
+        } catch (error) {
+            console.error('WPC Disclaimer Init Error:', error);
+        }
+    }
+    
+    // WordPress safe initialization
+    function wpcDisclaimerD4K9SafeStart() {
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', function() {
+                setTimeout(wpcDisclaimerD4K9Init, 150);
+            });
+        } else {
+            setTimeout(wpcDisclaimerD4K9Init, 150);
+        }
+    }
+    
+    // הפעלה בטוחה
+    wpcDisclaimerD4K9SafeStart();
+    
+})();
+</script>
+
+<!--
+🎯 CLAUDE VISUAL GUIDE 2.0 - SUMMARY OF ADDITIONS
+================================================================
+
+✅ מה נוסף לקובץ workpage.html:
+
+📋 1. COMPLETE VISUAL GUIDE (שורות 2-93)
+- Class naming rules וconventions
+- Forbidden CSS/JS/Content  
+- Color usage guide
+- Desktop→Mobile conversion table
+- Performance standards
+- Animation guidelines
+- Quality checklist
+- JS wrapper template
+- CSS structure order
+- Quick commands for Claude
+- Debugging checklist
+
+📐 2. EXTENDED CSS VARIABLES (שורות 306-392)
+- Typography scale (--fs-hero, --fs-h1, etc.)
+- Line heights (--lh-tight, --lh-normal, etc.)
+- Font weights (--fw-light to --fw-extrabold)
+- 8pt spacing system (--space-1 to --space-24)
+- Mobile spacing variables
+- Extended color palette (50 shades)
+- Semantic colors extended
+- Neutral scale (gray-50 to gray-900)
+- Background color system
+
+🔧 3. UTILITY CLASSES (שורות 415-481)
+- Text alignment utilities
+- Font weight utilities  
+- Color utilities
+- Background utilities
+- Padding/margin utilities (0-5 scale)
+- Border radius utilities
+- Shadow utilities
+- Display utilities
+- Flexbox utilities
+- Mobile-specific utilities
+
+📱 4. MOBILE TABLE FIX (שורות 1614-1780 + 4164-4238 + 5896-5928)
+- טבלאות מוחלפות בכרטיסים נקיים במובייל
+- JavaScript אוטומטי לזיהוי mobile/desktop
+- CSS בלי !important conflicts
+- אנימציות כניסה חלקות
+- Badge מיוחד ל"הטוב ביותר"
+- עיצוב קל לקריאה עם צבעים מובחנים
+
+🔴 5. RED LINE POSITION FIX (שורות 1224-1245 + 1625-1638 + 6095-6120 + 6229-6240)
+- קו אדום צמוד לטקסט (width: fit-content + margin: auto) ✅
+- בצד ימין ליד הטקסט, לא בקצה העמוד (RTL תואם) ✅
+- right: 0 + padding-right במקום left (הגיוני יותר לעברית) ✅
+- קו אדום הוסר רק מהבאנר הירו (.wpc-hero-demo-section) ✅
+- במובייל: קו קטן יותר (3px) צמוד לטקסט ✅
+- דיסקליימר: אותו עיצוב ל-.wpc-disclaimer-d4k9-title ✅
+- CSS נקי עם ::after pseudo-element ✅
+
+❌ 6. CODE CLEANUP (הסרת קוד מיותר)
+- הוסר אזור .wpc-awg-demo-content.error::before לא רצוי
+- נוקה CSS מהודעות שגיאה שלא התבקשו
+- קוד נקי יותר ויעיל יותר
+
+🎯 7. AWG SHORTCODE STYLING UPDATE (עדכון עיצוב שורט קוד)
+- הוסר background אפור מ-.wpc-awg-demo-content
+- הוסר border וbox-shadow מאזור השורט קוד
+- הוסר רקע גם מ-.wpc-shortcode-item
+- hover effect שונה ל-transform: translateY(-2px)
+- במובייל: width: 100% ו-margin: 0 לרוחב מלא
+- עיצוב נקי ומינימליסטי ללא רקעים מיותרים
+- הוספת .wpc-property-loan-k9x7-awg-box styling עם מסגרת כחולה
+
+📱 8. MOBILE SHORTCODE FULL WIDTH (רוחב מלא לשורט קוד במובייל)
+- פדינג 0px ל-.wpc-property-loan-k9x7-awg-box במובייל
+- פדינג 0px ל-.wpc-awg-demo-content במובייל
+- כללים מיוחדים לרוחב מלא של תוכן השורט קוד
+- הסרת פדינג מכל אלמנטים בתוך השורט קוד
+- תמיכה בטפסים, iframes ואלמנטים של AWG
+- padding-left: 0 !important וpadding-right: 0 !important
+- רוחב מלא 100% לכל תוכן השורט קוד במובייל
+
+🚀 כל זה מהווה מקרא מושלם לקלוד לעבודה עתידית!
+================================================================
+-->
+
+</body>
+</html>

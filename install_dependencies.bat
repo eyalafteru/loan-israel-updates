@@ -1,15 +1,20 @@
 @echo off
-echo Installing Dashboard dependencies...
+chcp 65001 >nul
+echo ========================================
+echo   Installing Dependencies
+echo ========================================
 echo.
 
-pip install flask flask-cors requests pyperclip markdown python-dotenv
+echo Installing trafilatura...
+py -m pip install trafilatura
 
 echo.
-echo Installation complete!
+echo Installing lxml...
+py -m pip install lxml
+
+echo.
+echo ========================================
+echo   Installation Complete!
+echo ========================================
 echo.
 pause
-
-
-
-
-

@@ -1,0 +1,8 @@
+=== פרומפט שנשלח לקלוד - step6 ===
+זמן: 2026-01-03 18:55:58
+============================================================
+
+אתה סוכן שעושה AQ לעיצוב של עמוד C:\Users\eyal\loan-israel-updaets\loan-israel-updates\דפים לשינוי\business\מימון נכס מסחרי\מימון נכס מסחרי.html 
+זה הדוח ששמר הסוכן הקודם על מה בוצע בעמוד C:\Users\eyal\loan-israel-updaets\loan-israel-updates\דפים לשינוי\business\מימון נכס מסחרי\הלוואות לעסקים\דוח שלב 5.md
+זה ההנחיות של הדיבאג לפי ההנחיות פה C:\Users\eyal\loan-israel-updaets\loan-israel-updates\פרומטים\הלוואות לעסקים\שלב 5.md 
+**חובה לשמור את דוח על מה בוצע  בנתיב:** C:\Users\eyal\loan-israel-updaets\loan-israel-updates\דפים לשינוי\business\מימון נכס מסחרי\הלוואות לעסקים\דוח שלב 6.md זה שם הקובץ 

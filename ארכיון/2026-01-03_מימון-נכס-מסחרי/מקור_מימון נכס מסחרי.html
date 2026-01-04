@@ -1,0 +1,1165 @@
+<style>
+/* WPC-LOANS-M3K7 - מימון נכס מסחרי */
+/* Max content width: 1200px */
+
+:root {
+  --wpc-max-width: 1200px;
+}
+
+/* Content Container */
+.wpc-loans-m3k7-content-wrapper {
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+  padding: 0 20px !important;
+}
+
+/* Statistics Section */
+.wpc-loans-m3k7-stats-section {
+  background: #1e5490 !important;
+  padding: 60px 20px !important;
+  contain: layout style paint !important;
+  margin: 30px 0 !important;
+  border-radius: 16px !important;
+}
+
+.wpc-loans-m3k7-stats-container {
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
+  gap: 40px !important;
+}
+
+.wpc-loans-m3k7-stats-item {
+  text-align: center !important;
+  background: rgba(255,255,255,0.1) !important;
+  padding: 30px 20px !important;
+  border-radius: 12px !important;
+}
+
+.wpc-loans-m3k7-stats-number {
+  font-size: 3em !important;
+  font-weight: 800 !important;
+  color: white !important;
+  margin-bottom: 10px !important;
+  line-height: 1 !important;
+}
+
+.wpc-loans-m3k7-stats-label {
+  font-size: 1.25em !important;
+  color: rgba(255,255,255,0.9) !important;
+  margin: 0 !important;
+}
+
+/* Timeline */
+.wpc-loans-m3k7-timeline-container {
+  max-width: 1200px !important;
+  margin: 40px auto !important;
+  padding: 40px 20px !important;
+  contain: layout style paint !important;
+}
+
+.wpc-loans-m3k7-timeline-title {
+  text-align: center !important;
+  font-size: 1.8em !important;
+  color: #1e5490 !important;
+  margin-bottom: 40px !important;
+}
+
+.wpc-loans-m3k7-timeline-wrapper {
+  max-width: 700px !important;
+  margin: 0 auto !important;
+  position: relative !important;
+  padding: 40px 20px 40px 40px !important;
+  background: white !important;
+  border-radius: 16px !important;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1) !important;
+}
+
+.wpc-loans-m3k7-timeline-line {
+  position: absolute !important;
+  right: 48px !important;
+  top: 70px !important;
+  bottom: 70px !important;
+  width: 4px !important;
+  background: linear-gradient(to bottom, #1e5490 0%, #3a7bc8 50%, #e0e0e0 100%) !important;
+  border-radius: 2px !important;
+}
+
+.wpc-loans-m3k7-timeline-item {
+  position: relative !important;
+  margin-bottom: 40px !important;
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 20px !important;
+  padding-right: 100px !important;
+  direction: rtl !important;
+}
+
+.wpc-loans-m3k7-timeline-item:last-child {
+  margin-bottom: 0 !important;
+}
+
+.wpc-loans-m3k7-timeline-circle {
+  position: absolute !important;
+  right: 20px !important;
+  top: 0 !important;
+  width: 60px !important;
+  height: 60px !important;
+  border-radius: 50% !important;
+  background: white !important;
+  border: 3px solid #e0e0e0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-weight: 700 !important;
+  font-size: 1.4em !important;
+  z-index: 2 !important;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important;
+  color: #1e5490 !important;
+  flex-shrink: 0 !important;
+}
+
+.wpc-loans-m3k7-timeline-circle.active {
+  background: #1e5490 !important;
+  border-color: #1e5490 !important;
+  color: white !important;
+  transform: scale(1.1) !important;
+}
+
+.wpc-loans-m3k7-timeline-content {
+  flex: 1 !important;
+  text-align: right !important;
+  padding-top: 10px !important;
+}
+
+.wpc-loans-m3k7-timeline-step-title {
+  margin: 0 0 5px 0 !important;
+  font-size: 1.3em !important;
+  font-weight: 700 !important;
+  color: #1e5490 !important;
+}
+
+.wpc-loans-m3k7-timeline-desc {
+  color: #666666 !important;
+  margin: 0 !important;
+  font-size: 0.95em !important;
+  line-height: 1.5 !important;
+}
+
+/* Features Grid */
+.wpc-loans-m3k7-features-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)) !important;
+  gap: 25px !important;
+  padding: 20px 0 !important;
+  contain: layout style paint !important;
+  margin: 30px 0 !important;
+}
+
+.wpc-loans-m3k7-feature-card {
+  background: #f8f8f8 !important;
+  padding: 30px 20px !important;
+  border-radius: 12px !important;
+  text-align: center !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+.wpc-loans-m3k7-feature-card:hover {
+  transform: translateY(-5px) !important;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1) !important;
+}
+
+.wpc-loans-m3k7-feature-icon {
+  font-size: 2.5em !important;
+  margin-bottom: 15px !important;
+}
+
+.wpc-loans-m3k7-feature-title {
+  font-size: 1.2em !important;
+  color: #1e5490 !important;
+  margin-bottom: 10px !important;
+}
+
+.wpc-loans-m3k7-feature-desc {
+  color: #666666 !important;
+  line-height: 1.5 !important;
+  margin: 0 !important;
+}
+
+/* Callout Boxes */
+.wpc-loans-m3k7-callout {
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 15px !important;
+  padding: 20px !important;
+  border-radius: 12px !important;
+  margin: 20px 0 !important;
+  direction: rtl !important;
+  contain: layout style paint !important;
+}
+
+.wpc-loans-m3k7-callout-icon {
+  font-size: 1.5em !important;
+  flex-shrink: 0 !important;
+}
+
+.wpc-loans-m3k7-callout-content {
+  flex: 1 !important;
+  line-height: 1.6 !important;
+}
+
+.wpc-loans-m3k7-callout-tip {
+  background: rgba(37, 211, 102, 0.1) !important;
+  border-right: 4px solid #25D366 !important;
+}
+
+.wpc-loans-m3k7-callout-warning {
+  background: rgba(255, 152, 0, 0.1) !important;
+  border-right: 4px solid #FF9800 !important;
+}
+
+.wpc-loans-m3k7-callout-info {
+  background: rgba(30, 84, 144, 0.1) !important;
+  border-right: 4px solid #1e5490 !important;
+}
+
+/* FAQ Accordion */
+.wpc-loans-m3k7-faq-container {
+  max-width: 900px !important;
+  margin: 40px auto !important;
+  padding: 0 20px !important;
+  contain: layout style paint !important;
+}
+
+.wpc-loans-m3k7-faq-item {
+  border: 1px solid #e0e0e0 !important;
+  border-radius: 12px !important;
+  margin-bottom: 12px !important;
+  overflow: hidden !important;
+  background: white !important;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05) !important;
+}
+
+.wpc-loans-m3k7-faq-header {
+  background: #f8f8f8 !important;
+  padding: 20px 60px 20px 25px !important;
+  cursor: pointer !important;
+  font-weight: 600 !important;
+  font-size: 1.1em !important;
+  color: #333333 !important;
+  position: relative !important;
+  transition: all 0.2s ease !important;
+  -webkit-tap-highlight-color: transparent !important;
+  user-select: none !important;
+  text-align: right !important;
+  direction: rtl !important;
+}
+
+.wpc-loans-m3k7-faq-header:hover {
+  background: #f0f0f0 !important;
+}
+
+.wpc-loans-m3k7-faq-header.active {
+  background: #1e5490 !important;
+  color: white !important;
+}
+
+.wpc-loans-m3k7-faq-header::after {
+  content: '←' !important;
+  position: absolute !important;
+  left: 20px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  font-size: 1.2em !important;
+  width: 28px !important;
+  height: 28px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 50% !important;
+  background: rgba(0,0,0,0.08) !important;
+  transition: all 0.3s ease !important;
+}
+
+.wpc-loans-m3k7-faq-header.active::after {
+  transform: translateY(-50%) rotate(90deg) !important;
+  background: rgba(255,255,255,0.2) !important;
+}
+
+.wpc-loans-m3k7-faq-content {
+  max-height: 0 !important;
+  overflow: hidden !important;
+  transition: max-height 0.3s ease, padding 0.3s ease !important;
+  background: white !important;
+  padding: 0 25px !important;
+  text-align: right !important;
+  direction: rtl !important;
+}
+
+.wpc-loans-m3k7-faq-content.active {
+  max-height: 500px !important;
+  padding: 20px 25px !important;
+}
+
+.wpc-loans-m3k7-faq-content p {
+  color: #666666 !important;
+  line-height: 1.7 !important;
+  margin: 0 !important;
+}
+
+/* Progress Bars */
+.wpc-loans-m3k7-progress-section {
+  max-width: 800px !important;
+  margin: 30px auto !important;
+  padding: 20px !important;
+  contain: layout style paint !important;
+  background: #f8f8f8 !important;
+  border-radius: 12px !important;
+}
+
+.wpc-loans-m3k7-progress-title {
+  text-align: center !important;
+  font-size: 1.4em !important;
+  color: #1e5490 !important;
+  margin-bottom: 25px !important;
+}
+
+.wpc-loans-m3k7-progress-item {
+  margin-bottom: 25px !important;
+}
+
+.wpc-loans-m3k7-progress-header {
+  display: flex !important;
+  justify-content: space-between !important;
+  margin-bottom: 8px !important;
+  direction: rtl !important;
+}
+
+.wpc-loans-m3k7-progress-label {
+  font-weight: 600 !important;
+  color: #333333 !important;
+}
+
+.wpc-loans-m3k7-progress-value {
+  font-weight: 700 !important;
+  color: #1e5490 !important;
+}
+
+.wpc-loans-m3k7-progress-bar {
+  height: 12px !important;
+  background: #e0e0e0 !important;
+  border-radius: 6px !important;
+  overflow: hidden !important;
+}
+
+.wpc-loans-m3k7-progress-fill {
+  height: 100% !important;
+  background: #25D366 !important;
+  border-radius: 6px !important;
+  /* No animation on width for performance */
+}
+
+/* CTA Section */
+.wpc-loans-m3k7-cta-section {
+  text-align: center !important;
+  margin: 40px 0 !important;
+}
+
+.wpc-loans-m3k7-cta-btn {
+  display: inline-block !important;
+  background: #ff3b3b !important;
+  color: white !important;
+  padding: 18px 40px !important;
+  border-radius: 8px !important;
+  font-size: 1.2em !important;
+  font-weight: 700 !important;
+  text-decoration: none !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+  min-height: 44px !important;
+  cursor: pointer !important;
+}
+
+.wpc-loans-m3k7-cta-btn:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 25px rgba(255, 59, 59, 0.3) !important;
+  color: white !important;
+  text-decoration: none !important;
+}
+
+.wpc-loans-m3k7-cta-btn:active {
+  transform: scale(0.98) !important;
+}
+
+/* Comparison Table Enhanced */
+.wpc-loans-m3k7-compare-section {
+  margin: 30px 0 !important;
+  contain: layout style paint !important;
+}
+
+.wpc-loans-m3k7-compare-title {
+  text-align: center !important;
+  font-size: 1.5em !important;
+  color: #1e5490 !important;
+  margin-bottom: 20px !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .wpc-loans-m3k7-stats-section {
+    padding: 40px 15px !important;
+  }
+  .wpc-loans-m3k7-stats-container {
+    gap: 20px !important;
+  }
+  .wpc-loans-m3k7-stats-number {
+    font-size: 2em !important;
+  }
+  .wpc-loans-m3k7-stats-label {
+    font-size: 0.9em !important;
+  }
+  .wpc-loans-m3k7-timeline-wrapper {
+    padding: 30px 15px 30px 20px !important;
+  }
+  .wpc-loans-m3k7-timeline-line {
+    right: 38px !important;
+  }
+  .wpc-loans-m3k7-timeline-item {
+    padding-right: 80px !important;
+  }
+  .wpc-loans-m3k7-timeline-circle {
+    width: 50px !important;
+    height: 50px !important;
+    font-size: 1.2em !important;
+    right: 15px !important;
+  }
+  .wpc-loans-m3k7-timeline-step-title {
+    font-size: 1.1em !important;
+  }
+  .wpc-loans-m3k7-timeline-desc {
+    font-size: 0.9em !important;
+  }
+  .wpc-loans-m3k7-features-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 15px !important;
+  }
+  .wpc-loans-m3k7-feature-card {
+    padding: 20px 15px !important;
+  }
+  .wpc-loans-m3k7-feature-icon {
+    font-size: 2em !important;
+  }
+  .wpc-loans-m3k7-cta-btn {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 16px 30px !important;
+  }
+  .wpc-loans-m3k7-faq-container {
+    padding: 0 15px !important;
+    margin: 30px auto !important;
+  }
+  .wpc-loans-m3k7-faq-header {
+    padding: 16px 50px 16px 20px !important;
+    font-size: 1rem !important;
+  }
+  .wpc-loans-m3k7-faq-header::after {
+    left: 15px !important;
+    width: 24px !important;
+    height: 24px !important;
+    font-size: 1em !important;
+  }
+  .wpc-loans-m3k7-faq-content.active {
+    padding: 16px 20px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .wpc-loans-m3k7-stats-container {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  .wpc-loans-m3k7-features-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .wpc-loans-m3k7-callout {
+    padding: 15px !important;
+    gap: 10px !important;
+  }
+  .wpc-loans-m3k7-callout-icon {
+    font-size: 1.2em !important;
+  }
+}
+
+@media (max-width: 375px) {
+  .wpc-loans-m3k7-stats-number {
+    font-size: 1.6em !important;
+  }
+  .wpc-loans-m3k7-stats-label {
+    font-size: 0.8em !important;
+  }
+}
+</style>
+
+<div dir="rtl" style="text-align: right; max-width: 1200px; margin: 0 auto; padding: 0 20px;" id="wpc-loans-m3k7-main">
+
+<h1>מימון נכס מסחרי - משכנתא לנכס מסחרי והלוואות לעסקים</h1>
+<p><strong>עודכן לאחרונה:</strong> [current_date format="F Y" hebrew="true"]</p>
+<p>💡 הריביות בתוכן מעודכנות לפי ריבית פריים 5.75% (ריבית בנק ישראל 4.25%, נכון לינואר 2026)</p>
+<p>מחפש <strong>מימון נכס מסחרי</strong>? בין אם מדובר במשרד, חנות, מבנה תעשייה או מחסן - התהליך שונה ממשכנתא למגורים. הנכס עצמו יכול לייצר הכנסות, וזה משנה את הכללים. כאן תמצא את כל מה שצריך לדעת: ריביות, אחוזי מימון, השוואת בנקים ותנאים עדכניים לשנת 2026.</p>
+
+<!-- Statistics Cards -->
+<div class="wpc-loans-m3k7-stats-section">
+  <div class="wpc-loans-m3k7-stats-container">
+    <div class="wpc-loans-m3k7-stats-item">
+      <div class="wpc-loans-m3k7-stats-number">70%</div>
+      <div class="wpc-loans-m3k7-stats-label">מימון מקסימלי</div>
+    </div>
+    <div class="wpc-loans-m3k7-stats-item">
+      <div class="wpc-loans-m3k7-stats-number">20 שנה</div>
+      <div class="wpc-loans-m3k7-stats-label">תקופת החזר</div>
+    </div>
+    <div class="wpc-loans-m3k7-stats-item">
+      <div class="wpc-loans-m3k7-stats-number">3-6</div>
+      <div class="wpc-loans-m3k7-stats-label">שבועות לאישור</div>
+    </div>
+    <div class="wpc-loans-m3k7-stats-item">
+      <div class="wpc-loans-m3k7-stats-number">4+</div>
+      <div class="wpc-loans-m3k7-stats-label">בנקים להשוואה</div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA Button -->
+<div class="wpc-loans-m3k7-cta-section">
+  <a href="#awg-form" class="wpc-loans-m3k7-cta-btn" data-action="scroll-to-form">
+    בדוק זכאות למימון נכס מסחרי
+  </a>
+</div>
+
+<div id="awg-form">
+[awg postid="3470"]
+</div>
+
+<p class="disclaimer"><strong>גילוי נאות:</strong> אנו אגריגטור המחבר בין לקוחות לגופי מימון מורשים. התנאים הסופיים נקבעים על ידי הגוף המלווה ובכפוף לאישורו.</p>
+
+<h2>מימון נכס מסחרי - מהו ולמי זה מתאים?</h2>
+<p><strong>משכנתא לעסקים</strong> או מימון נכס מסחרי מיועדים לרכישה, מימון מחדש או שדרוג של נכסים עסקיים: משרדים, חנויות, מבני תעשייה, מחסנים, בתי מלון ועוד. בשונה מדירת מגורים, נכס מסחרי מייצר הכנסה שוטפת מדמי שכירות - ולכן הבנקים מתייחסים אליו אחרת.</p>
+<p><strong>משכנתא לחברה בע"מ</strong> היא אפשרות נפוצה במיוחד: חברות רבות רוכשות נכסים מסחריים דרך החברה ולא באופן פרטי, מה שמאפשר יתרונות מיסוי והפרדה משפטית. גם <strong>הלוואה כנגד נכס</strong> קיים - לשעבד נכס מסחרי קיים כדי לקבל מימון להשקעות נוספות.</p>
+
+<!-- Features Grid - למי מתאים -->
+<h3>מימון נכס מסחרי - למי מתאים?</h3>
+<div class="wpc-loans-m3k7-features-grid">
+  <div class="wpc-loans-m3k7-feature-card">
+    <div class="wpc-loans-m3k7-feature-icon">🏢</div>
+    <h4 class="wpc-loans-m3k7-feature-title">יזמי נדל"ן מסחרי</h4>
+    <p class="wpc-loans-m3k7-feature-desc">רכישת נכס להשכרה או לשימוש עצמי</p>
+  </div>
+  <div class="wpc-loans-m3k7-feature-card">
+    <div class="wpc-loans-m3k7-feature-icon">💼</div>
+    <h4 class="wpc-loans-m3k7-feature-title">בעלי עסקים</h4>
+    <p class="wpc-loans-m3k7-feature-desc">רכישת משרד או חנות לעסק הקיים</p>
+  </div>
+  <div class="wpc-loans-m3k7-feature-card">
+    <div class="wpc-loans-m3k7-feature-icon">🏛️</div>
+    <h4 class="wpc-loans-m3k7-feature-title">חברות בע"מ</h4>
+    <p class="wpc-loans-m3k7-feature-desc">השקעה בנדל"ן מניב כחלק מאסטרטגיה עסקית</p>
+  </div>
+  <div class="wpc-loans-m3k7-feature-card">
+    <div class="wpc-loans-m3k7-feature-icon">📈</div>
+    <h4 class="wpc-loans-m3k7-feature-title">משקיעים</h4>
+    <p class="wpc-loans-m3k7-feature-desc">פיזור תיק ההשקעות לנדל"ן מסחרי</p>
+  </div>
+</div>
+
+<h2>ריבית משכנתא לנכס מסחרי - הנתונים לשנת 2026</h2>
+<p><strong>ריבית משכנתא לנכס מסחרי</strong> גבוהה יותר ממשכנתא למגורים. למה? כי הסיכון גבוה יותר מנקודת מבט הבנק - נכס מסחרי יכול להישאר ריק, ושווי השוק שלו תנודתי יותר.</p>
+
+<!-- Callout Warning -->
+<div class="wpc-loans-m3k7-callout wpc-loans-m3k7-callout-warning">
+  <div class="wpc-loans-m3k7-callout-icon">⚠️</div>
+  <div class="wpc-loans-m3k7-callout-content">
+    <strong>שים לב:</strong> הריבית הסופית נקבעת לפי פרופיל הלווה, סוג הנכס והערכת שמאי. מומלץ לקבל הצעות מכמה בנקים לפני החלטה.
+  </div>
+</div>
+
+<h3>מימון נכס מסחרי - טבלת ריביות ותנאים</h3>
+<table border="1" cellpadding="10" cellspacing="0" style="width:100%; border-collapse: collapse;">
+<thead>
+<tr style="background-color: #f5f5f5;">
+<th>פרמטר</th>
+<th>טווח מקובל</th>
+<th>הערות</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ריבית</strong></td>
+<td>פריים + 1.5% עד פריים + 4%</td>
+<td>תלוי בפרופיל הלווה וסוג הנכס. ריבית פריים נוכחית: 6%</td>
+</tr>
+<tr>
+<td><strong>אחוזי מימון (LTV)</strong></td>
+<td>50% - 70%</td>
+<td>מרבית הבנקים מממנים עד 60%-65%</td>
+</tr>
+<tr>
+<td><strong>תקופת החזר</strong></td>
+<td>10 - 20 שנה</td>
+<td>חלק מהבנקים מציעים עד 25-30 שנה</td>
+</tr>
+<tr>
+<td><strong>הון עצמי נדרש</strong></td>
+<td>30% - 50%</td>
+<td>בהתאם לאחוזי המימון</td>
+</tr>
+</tbody>
+</table>
+<p><em>הנתונים אינדיקטיביים ומשתנים בהתאם לפרופיל הלווה, סוג הנכס והערכת שמאי. הריבית הסופית נקבעת לפי תנאי הגוף המממן.</em></p>
+
+<!-- Progress Bars - אחוזי מימון -->
+<div class="wpc-loans-m3k7-progress-section">
+  <h3 class="wpc-loans-m3k7-progress-title">אחוזי מימון לפי סוג נכס</h3>
+  <div class="wpc-loans-m3k7-progress-item">
+    <div class="wpc-loans-m3k7-progress-header">
+      <span class="wpc-loans-m3k7-progress-label">משרדים במיקום מרכזי</span>
+      <span class="wpc-loans-m3k7-progress-value">עד 70%</span>
+    </div>
+    <div class="wpc-loans-m3k7-progress-bar">
+      <div class="wpc-loans-m3k7-progress-fill" style="width: 70%"></div>
+    </div>
+  </div>
+  <div class="wpc-loans-m3k7-progress-item">
+    <div class="wpc-loans-m3k7-progress-header">
+      <span class="wpc-loans-m3k7-progress-label">חנויות ומרכזי מסחר</span>
+      <span class="wpc-loans-m3k7-progress-value">עד 65%</span>
+    </div>
+    <div class="wpc-loans-m3k7-progress-bar">
+      <div class="wpc-loans-m3k7-progress-fill" style="width: 65%"></div>
+    </div>
+  </div>
+  <div class="wpc-loans-m3k7-progress-item">
+    <div class="wpc-loans-m3k7-progress-header">
+      <span class="wpc-loans-m3k7-progress-label">מבני תעשייה ומחסנים</span>
+      <span class="wpc-loans-m3k7-progress-value">עד 60%</span>
+    </div>
+    <div class="wpc-loans-m3k7-progress-bar">
+      <div class="wpc-loans-m3k7-progress-fill" style="width: 60%"></div>
+    </div>
+  </div>
+  <div class="wpc-loans-m3k7-progress-item">
+    <div class="wpc-loans-m3k7-progress-header">
+      <span class="wpc-loans-m3k7-progress-label">נכסים בפריפריה</span>
+      <span class="wpc-loans-m3k7-progress-value">עד 50%</span>
+    </div>
+    <div class="wpc-loans-m3k7-progress-bar">
+      <div class="wpc-loans-m3k7-progress-fill" style="width: 50%"></div>
+    </div>
+  </div>
+</div>
+
+<h2>משכנתא לנכס מסחרי בנק לאומי ובנקים נוספים - השוואה</h2>
+<p>מחפש <strong>משכנתא לנכס מסחרי בנק לאומי</strong>? או אולי <strong>משכנתא עסקית לאומי</strong> במסלול אחר? כל הבנקים הגדולים מציעים מימון לנכסים מסחריים, אבל התנאים משתנים. הנה השוואה:</p>
+
+<table border="1" cellpadding="10" cellspacing="0" style="width:100%; border-collapse: collapse;">
+<thead>
+<tr style="background-color: #f5f5f5;">
+<th>בנק</th>
+<th>אחוז מימון</th>
+<th>תקופת החזר</th>
+<th>יתרונות</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="https://loans-israel.org.il/wp-content/uploads/2024/01/%D7%9C%D7%90%D7%95%D7%9E%D7%99-300x137.webp" alt="בנק לאומי" width="50" height="30" style="vertical-align: middle;"> בנק לאומי</td>
+<td>עד 65%</td>
+<td>עד 20 שנה</td>
+<td>חטיבה עסקית מקצועית, תהליך דיגיטלי</td>
+</tr>
+<tr>
+<td><img src="https://loans-israel.org.il/wp-content/uploads/2024/01/%D7%9E%D7%96%D7%A8%D7%97%D7%99-300x137.webp" alt="מזרחי טפחות" width="50" height="30" style="vertical-align: middle;"> מזרחי-טפחות</td>
+<td>50% - 70%</td>
+<td>עד 20 שנה</td>
+<td>התמחות במשכנתאות, שירות אישי</td>
+</tr>
+<tr>
+<td><img src="https://loans-israel.org.il/wp-content/uploads/2024/01/%D7%93%D7%99%D7%A1%D7%A7%D7%95%D7%A0%D7%98-300x137.webp" alt="בנק דיסקונט" width="50" height="30" style="vertical-align: middle;"> בנק דיסקונט</td>
+<td>עד 60%</td>
+<td>עד 15 שנה</td>
+<td>מסלול דיגיטלי מהיר</td>
+</tr>
+<tr>
+<td><img src="https://loans-israel.org.il/wp-content/uploads/2024/01/%D7%99%D7%A8%D7%95%D7%A9%D7%9C%D7%99%D7%9D-300x137.webp" alt="בנק ירושלים" width="50" height="30" style="vertical-align: middle;"> בנק ירושלים</td>
+<td>עד 65%</td>
+<td>עד 15 שנה</td>
+<td>יחס אישי, טיפול זריז</td>
+</tr>
+</tbody>
+</table>
+<p><em>התנאים בפועל כפופים לאישור הבנק ולבדיקת הנכס. מומלץ לפנות לכמה בנקים ולהשוות הצעות.</em></p>
+
+<!-- Callout Tip -->
+<div class="wpc-loans-m3k7-callout wpc-loans-m3k7-callout-tip">
+  <div class="wpc-loans-m3k7-callout-icon">💡</div>
+  <div class="wpc-loans-m3k7-callout-content">
+    <strong>טיפ:</strong> הגשת בקשה למספר בנקים במקביל מגדילה את הסיכויים לקבל תנאים טובים יותר. אנחנו עושים את זה עבורך בהשאת פרטים אחת.
+  </div>
+</div>
+
+<h2>מחשבון הלוואה לנכס מסחרי - איך לחשב החזר חודשי?</h2>
+<p>רוצה לדעת כמה תשלם כל חודש? <strong>מחשבון הלוואה לנכס מסחרי</strong> או <strong>מחשבון משכנתא מסחרית</strong> יכול לעזור לך להבין את התמונה המלאה. הנה נוסחה פשוטה:</p>
+
+<h3>מימון נכס מסחרי - דוגמה לחישוב</h3>
+<p>נניח שאתה רוכש נכס מסחרי ב-2,000,000 ₪:</p>
+<ul>
+<li><strong>אחוז מימון:</strong> 60% = הלוואה של 1,200,000 ₪</li>
+<li><strong>הון עצמי נדרש:</strong> 40% = 800,000 ₪</li>
+<li><strong>ריבית:</strong> פריים + 2% = 8% שנתי (לצורך הדוגמה)</li>
+<li><strong>תקופה:</strong> 15 שנה (180 חודשים)</li>
+<li><strong>החזר חודשי משוער:</strong> כ-11,500 ₪</li>
+</ul>
+<p><em>זוהי דוגמה להמחשה בלבד. הסכומים בפועל תלויים בתנאי ההלוואה הספציפיים, סוג הריבית (קבועה/משתנה) ומסלול ההחזר.</em></p>
+
+<!-- CTA Button Mid-page -->
+<div class="wpc-loans-m3k7-cta-section">
+  <a href="#awg-form" class="wpc-loans-m3k7-cta-btn" data-action="scroll-to-form">
+    קבל הצעות מימון מותאמות
+  </a>
+</div>
+
+<h2>מימון נכס מסחרי - ההבדלים ממשכנתא למגורים</h2>
+<p>הרבה אנשים חושבים שמימון נכס מסחרי דומה למשכנתא למגורים. בפועל, יש הבדלים משמעותיים:</p>
+
+<table border="1" cellpadding="10" cellspacing="0" style="width:100%; border-collapse: collapse;">
+<thead>
+<tr style="background-color: #f5f5f5;">
+<th>פרמטר</th>
+<th>משכנתא למגורים</th>
+<th>מימון נכס מסחרי</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>אחוזי מימון</td>
+<td>עד 75%</td>
+<td>50%-70%</td>
+</tr>
+<tr>
+<td>ריבית</td>
+<td>נמוכה יותר</td>
+<td>גבוהה ב-0.5%-2%</td>
+</tr>
+<tr>
+<td>תקופת החזר</td>
+<td>עד 30 שנה</td>
+<td>10-20 שנה (לרוב)</td>
+</tr>
+<tr>
+<td>בדיקת לווה</td>
+<td>הכנסה אישית</td>
+<td>הכנסה + תזרים הנכס</td>
+</tr>
+<tr>
+<td>מע"מ</td>
+<td>אין</td>
+<td>יש - 17% על הרכישה</td>
+</tr>
+</tbody>
+</table>
+
+<!-- Callout Info -->
+<div class="wpc-loans-m3k7-callout wpc-loans-m3k7-callout-info">
+  <div class="wpc-loans-m3k7-callout-icon">ℹ️</div>
+  <div class="wpc-loans-m3k7-callout-content">
+    <strong>חשוב לדעת:</strong> רכישת נכס מסחרי חייבת במע"מ של 17%. עוסק מורשה או חברה בע"מ יכולים לקזז את המע"מ, אך פרטי לא - וזו עלות נוספת לתכנון.
+  </div>
+</div>
+
+<h3>מימון נכס מסחרי - מע"מ וחשבוניות</h3>
+<p>נקודה חשובה שהרבה לא יודעים: <strong>רכישת נכס מסחרי חייבת במע"מ</strong>. אם אתה עוסק מורשה או חברה בע"מ, תוכל לקזז את המע"מ. אם לא - זו עלות נוספת של 17% על מחיר הנכס. חשוב לקחת את זה בחשבון בתכנון התקציב.</p>
+
+<h2>הלוואה כנגד נכס - מימון נכס מסחרי קיים</h2>
+<p>יש לך כבר נכס מסחרי? <strong>הלוואה כנגד נכס</strong> מאפשרת לשעבד אותו ולקבל מימון לכל מטרה: הרחבת העסק, רכישת נכס נוסף, או הון חוזר. היתרון - הריבית נמוכה יותר מהלוואה רגילה כי יש ביטחון לבנק.</p>
+<p>התנאים דומים למימון נכס מסחרי חדש: עד 50%-60% משווי הנכס, ריבית סביב פריים + 2%, ותקופת החזר של 10-15 שנה.</p>
+
+<!-- Timeline - תהליך קבלת מימון -->
+<div class="wpc-loans-m3k7-timeline-container">
+  <h2 class="wpc-loans-m3k7-timeline-title">תהליך קבלת מימון לנכס מסחרי</h2>
+  <div class="wpc-loans-m3k7-timeline-wrapper">
+    <div class="wpc-loans-m3k7-timeline-line"></div>
+
+    <div class="wpc-loans-m3k7-timeline-item">
+      <div class="wpc-loans-m3k7-timeline-circle active">1</div>
+      <div class="wpc-loans-m3k7-timeline-content">
+        <h3 class="wpc-loans-m3k7-timeline-step-title">הגשת בקשה</h3>
+        <p class="wpc-loans-m3k7-timeline-desc">מילוי טופס קצר עם פרטי הנכס והעסק</p>
+      </div>
+    </div>
+
+    <div class="wpc-loans-m3k7-timeline-item">
+      <div class="wpc-loans-m3k7-timeline-circle">2</div>
+      <div class="wpc-loans-m3k7-timeline-content">
+        <h3 class="wpc-loans-m3k7-timeline-step-title">בדיקת מסמכים</h3>
+        <p class="wpc-loans-m3k7-timeline-desc">העלאת דוחות כספיים, נסח טאבו והסכם רכישה</p>
+      </div>
+    </div>
+
+    <div class="wpc-loans-m3k7-timeline-item">
+      <div class="wpc-loans-m3k7-timeline-circle">3</div>
+      <div class="wpc-loans-m3k7-timeline-content">
+        <h3 class="wpc-loans-m3k7-timeline-step-title">הערכת שמאי</h3>
+        <p class="wpc-loans-m3k7-timeline-desc">שמאי מטעם הבנק מעריך את שווי הנכס</p>
+      </div>
+    </div>
+
+    <div class="wpc-loans-m3k7-timeline-item">
+      <div class="wpc-loans-m3k7-timeline-circle">4</div>
+      <div class="wpc-loans-m3k7-timeline-content">
+        <h3 class="wpc-loans-m3k7-timeline-step-title">אישור ועדת אשראי</h3>
+        <p class="wpc-loans-m3k7-timeline-desc">הבנק בודק ומאשר את הבקשה</p>
+      </div>
+    </div>
+
+    <div class="wpc-loans-m3k7-timeline-item">
+      <div class="wpc-loans-m3k7-timeline-circle">5</div>
+      <div class="wpc-loans-m3k7-timeline-content">
+        <h3 class="wpc-loans-m3k7-timeline-step-title">חתימה וביצוע</h3>
+        <p class="wpc-loans-m3k7-timeline-desc">חתימה על ההסכם והעברת הכספים</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h2>מימון נכס מסחרי - מה הבנק בודק?</h2>
+<p>לפני שמאשרים לך מימון, הבנק יבדוק כמה דברים:</p>
+<ul>
+<li><strong>הערכת שמאי:</strong> כמה הנכס באמת שווה</li>
+<li><strong>תזרים מזומנים:</strong> ההכנסות הצפויות מהנכס (דמי שכירות)</li>
+<li><strong>יחס החזר להכנסה:</strong> יכולת ההחזר שלך ביחס להכנסות</li>
+<li><strong>היסטוריית אשראי:</strong> התנהלות פיננסית קודמת</li>
+<li><strong>הון עצמי:</strong> כמה כסף יש לך להשקיע</li>
+<li><strong>סוג הנכס:</strong> משרד, חנות, מחסן - לכל אחד פרופיל סיכון שונה</li>
+</ul>
+
+<h2>מימון נכס מסחרי - שאלות נפוצות (FAQ)</h2>
+
+<!-- FAQ Accordion -->
+<div class="wpc-loans-m3k7-faq-container">
+  <div class="wpc-loans-m3k7-faq-item">
+    <div class="wpc-loans-m3k7-faq-header">
+      מה ריבית משכנתא לנכס מסחרי היום?
+    </div>
+    <div class="wpc-loans-m3k7-faq-content">
+      <p><strong>ריבית משכנתא לנכס מסחרי</strong> נעה בדרך כלל בין פריים + 1.5% לפריים + 4%. עם ריבית פריים של 6%, זה אומר ריבית של 7.5%-10% שנתי. הריבית המדויקת תלויה בפרופיל שלך, גודל ההלוואה וסוג הנכס. מומלץ לקבל הצעות מכמה בנקים.</p>
+    </div>
+  </div>
+  
+  <div class="wpc-loans-m3k7-faq-item">
+    <div class="wpc-loans-m3k7-faq-header">
+      כמה אחוז מימון אפשר לקבל על נכס מסחרי?
+    </div>
+    <div class="wpc-loans-m3k7-faq-content">
+      <p>רוב הבנקים מממנים בין <strong>50% ל-70%</strong> משווי הנכס המסחרי. זה פחות מדירת מגורים (עד 75%). אם יש לך הכנסות גבוהות ויציבות, נכס במיקום מבוקש, ושוכר קיים - יש סיכוי טוב יותר לאחוז מימון גבוה.</p>
+    </div>
+  </div>
+  
+  <div class="wpc-loans-m3k7-faq-item">
+    <div class="wpc-loans-m3k7-faq-header">
+      האם אפשר לקבל משכנתא לחברה בע"מ?
+    </div>
+    <div class="wpc-loans-m3k7-faq-content">
+      <p>כן! <strong>משכנתא לחברה בע"מ</strong> היא אופציה נפוצה. חברות רבות רוכשות נכסים מסחריים דרך החברה בגלל יתרונות מיסוי. הבנק יבדוק את הדוחות הכספיים של החברה, התזרים, ולרוב ידרוש ערבות אישית של בעלי המניות.</p>
+    </div>
+  </div>
+  
+  <div class="wpc-loans-m3k7-faq-item">
+    <div class="wpc-loans-m3k7-faq-header">
+      מה ההבדל בין משכנתא לנכס מסחרי להלוואה עסקית רגילה?
+    </div>
+    <div class="wpc-loans-m3k7-faq-content">
+      <p><strong>משכנתא לנכס מסחרי</strong> היא הלוואה לטווח ארוך (10-20 שנה) שמובטחת בנכס עצמו, עם ריבית נמוכה יחסית. <strong>הלוואה עסקית רגילה</strong> היא לרוב לטווח קצר יותר (עד 5 שנים), עם ריבית גבוהה יותר, ולא בהכרח מובטחת בנכס.</p>
+    </div>
+  </div>
+  
+  <div class="wpc-loans-m3k7-faq-item">
+    <div class="wpc-loans-m3k7-faq-header">
+      האם יש מע"מ על רכישת נכס מסחרי?
+    </div>
+    <div class="wpc-loans-m3k7-faq-content">
+      <p>כן. <strong>רכישת נכס מסחרי חייבת במע"מ של 17%</strong>. אם אתה עוסק מורשה או חברה בע"מ, תוכל לקזז את המע"מ כנגד מע"מ עסקאות. אם אתה רוכש כפרטי - המע"מ הוא עלות נוספת. חשוב לקחת בחשבון בתכנון!</p>
+    </div>
+  </div>
+  
+  <div class="wpc-loans-m3k7-faq-item">
+    <div class="wpc-loans-m3k7-faq-header">
+      כמה זמן לוקח לקבל אישור למימון נכס מסחרי?
+    </div>
+    <div class="wpc-loans-m3k7-faq-content">
+      <p>התהליך ארוך יותר ממשכנתא למגורים. <strong>צפה ל-3-6 שבועות</strong> מרגע הגשת כל המסמכים ועד לאישור סופי. התהליך כולל: בדיקת המסמכים, הערכת שמאי לנכס, אישור ועדת אשראי, וחתימה על ההסכם. הכנה מראש של כל המסמכים יכולה לקצר את הזמן.</p>
+    </div>
+  </div>
+  
+  <div class="wpc-loans-m3k7-faq-item">
+    <div class="wpc-loans-m3k7-faq-header">
+      מה צריך להביא לבנק לבקשת מימון נכס מסחרי?
+    </div>
+    <div class="wpc-loans-m3k7-faq-content">
+      <p>המסמכים הנדרשים כוללים: תעודת זהות, דוחות כספיים של העסק (2-3 שנים), דוחות מע"מ, אישורי הכנסה, הסכם רכישה או הערכת שווי לנכס, נסח טאבו, ותכנית עסקית אם מדובר בעסק חדש. לחברה בע"מ - גם תקנון החברה ופרוטוקול מורשי חתימה.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  'use strict';
+  
+  var ns = 'WPC_Loans_M3K7_FAQ';
+  if (window[ns]) return;
+  
+  var faqContainer = document.querySelector('.wpc-loans-m3k7-faq-container');
+  if (!faqContainer) return;
+  
+  faqContainer.addEventListener('click', function(e) {
+    var header = e.target.closest('.wpc-loans-m3k7-faq-header');
+    if (!header) return;
+    
+    var item = header.parentElement;
+    var content = item.querySelector('.wpc-loans-m3k7-faq-content');
+    var isActive = header.classList.contains('active');
+    
+    // Close all other items within this container only
+    faqContainer.querySelectorAll('.wpc-loans-m3k7-faq-header').forEach(function(h) {
+      if (h !== header) {
+        h.classList.remove('active');
+        var c = h.parentElement.querySelector('.wpc-loans-m3k7-faq-content');
+        if (c) {
+          c.style.maxHeight = '0px';
+          c.classList.remove('active');
+        }
+      }
+    });
+    
+    // Toggle current
+    if (!isActive) {
+      header.classList.add('active');
+      content.classList.add('active');
+      content.style.maxHeight = content.scrollHeight + 'px';
+    } else {
+      header.classList.remove('active');
+      content.style.maxHeight = '0px';
+      content.classList.remove('active');
+    }
+  });
+  
+  window[ns] = { version: '1.0.0' };
+})();
+</script>
+
+<h2>מימון נכס מסחרי - למה לפנות אלינו?</h2>
+<p>אנחנו ב"רק תבקש" <strong>לא מלווים בעצמנו</strong>. אנחנו אגריגטור - מחברים בין לקוחות לגופי מימון מורשים: בנקים, חברות מימון, וגופים מוסדיים. השירות חינמי עבורך.</p>
+<p>היתרון? אתה מקבל השוואה בין כמה גופים במקום אחד, חוסך זמן בריצה בין בנקים, ומקבל ליווי מקצועי בתהליך. השאר פרטים ונחזור אליך עם אפשרויות מימון מותאמות לנכס שלך.</p>
+
+<!-- Features Grid - למה אנחנו -->
+<div class="wpc-loans-m3k7-features-grid">
+  <div class="wpc-loans-m3k7-feature-card">
+    <div class="wpc-loans-m3k7-feature-icon">⚡</div>
+    <h4 class="wpc-loans-m3k7-feature-title">השוואה מהירה</h4>
+    <p class="wpc-loans-m3k7-feature-desc">הצעות מכמה גופי מימון במקום אחד</p>
+  </div>
+  <div class="wpc-loans-m3k7-feature-card">
+    <div class="wpc-loans-m3k7-feature-icon">💰</div>
+    <h4 class="wpc-loans-m3k7-feature-title">חינם לחלוטין</h4>
+    <p class="wpc-loans-m3k7-feature-desc">השירות שלנו ללא עלות עבורך</p>
+  </div>
+  <div class="wpc-loans-m3k7-feature-card">
+    <div class="wpc-loans-m3k7-feature-icon">🤝</div>
+    <h4 class="wpc-loans-m3k7-feature-title">ליווי מקצועי</h4>
+    <p class="wpc-loans-m3k7-feature-desc">מומחה פיננסי צמוד לאורך התהליך</p>
+  </div>
+  <div class="wpc-loans-m3k7-feature-card">
+    <div class="wpc-loans-m3k7-feature-icon">🏦</div>
+    <h4 class="wpc-loans-m3k7-feature-title">גופים מורשים</h4>
+    <p class="wpc-loans-m3k7-feature-desc">עבודה רק עם בנקים וגופי מימון מפוקחים</p>
+  </div>
+</div>
+
+<!-- Final CTA -->
+<div class="wpc-loans-m3k7-cta-section">
+  <a href="#awg-form" class="wpc-loans-m3k7-cta-btn" data-action="scroll-to-form">
+    התחל את תהליך המימון עכשיו
+  </a>
+</div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "מה ריבית משכנתא לנכס מסחרי היום?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "ריבית משכנתא לנכס מסחרי נעה בדרך כלל בין פריים + 1.5% לפריים + 4%. עם ריבית פריים של 6%, זה אומר ריבית של 7.5%-10% שנתי. הריבית המדויקת תלויה בפרופיל שלך, גודל ההלוואה וסוג הנכס."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "כמה אחוז מימון אפשר לקבל על נכס מסחרי?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "רוב הבנקים מממנים בין 50% ל-70% משווי הנכס המסחרי. זה פחות מדירת מגורים (עד 75%). אם יש לך הכנסות גבוהות ויציבות, נכס במיקום מבוקש, ושוכר קיים - יש סיכוי טוב יותר לאחוז מימון גבוה."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "האם אפשר לקבל משכנתא לחברה בע\"מ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "כן! משכנתא לחברה בע\"מ היא אופציה נפוצה. חברות רבות רוכשות נכסים מסחריים דרך החברה בגלל יתרונות מיסוי. הבנק יבדוק את הדוחות הכספיים של החברה, התזרים, ולרוב ידרוש ערבות אישית של בעלי המניות."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "מה ההבדל בין משכנתא לנכס מסחרי להלוואה עסקית רגילה?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "משכנתא לנכס מסחרי היא הלוואה לטווח ארוך (10-20 שנה) שמובטחת בנכס עצמו, עם ריבית נמוכה יחסית. הלוואה עסקית רגילה היא לרוב לטווח קצר יותר (עד 5 שנים), עם ריבית גבוהה יותר, ולא בהכרח מובטחת בנכס."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "האם יש מע\"מ על רכישת נכס מסחרי?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "כן. רכישת נכס מסחרי חייבת במע\"מ של 17%. אם אתה עוסק מורשה או חברה בע\"מ, תוכל לקזז את המע\"מ כנגד מע\"מ עסקאות. אם אתה רוכש כפרטי - המע\"מ הוא עלות נוספת."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "כמה זמן לוקח לקבל אישור למימון נכס מסחרי?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "התהליך ארוך יותר ממשכנתא למגורים. צפה ל-3-6 שבועות מרגע הגשת כל המסמכים ועד לאישור סופי. התהליך כולל: בדיקת המסמכים, הערכת שמאי לנכס, אישור ועדת אשראי, וחתימה על ההסכם."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "מה צריך להביא לבנק לבקשת מימון נכס מסחרי?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "המסמכים הנדרשים כוללים: תעודת זהות, דוחות כספיים של העסק (2-3 שנים), דוחות מע\"מ, אישורי הכנסה, הסכם רכישה או הערכת שווי לנכס, נסח טאבו, ותכנית עסקית אם מדובר בעסק חדש. לחברה בע\"מ - גם תקנון החברה ופרוטוקול מורשי חתימה."
+      }
+    }
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "אייל עובדיה",
+  "jobTitle": "מנהל מקצועי ויועץ ראשי",
+  "worksFor": {
+    "@type": "Organization",
+    "name": "רק תבקש - אפטריו בע״מ",
+    "url": "https://loan-israel.co.il"
+  },
+  "description": "בעל ניסיון עשיר בתחום ההלוואות לעסקים ומימון נכסים מסחריים",
+  "knowsAbout": ["מימון נכס מסחרי", "משכנתא לנכס מסחרי", "הלוואות לעסקים", "משכנתא לחברה בע״מ"],
+  "telephone": "+972-53-428-8957"
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "רק תבקש - אפטריו בע״מ",
+  "url": "https://loan-israel.co.il",
+  "telephone": "+972-53-428-8957",
+  "description": "אגריגטור מימון המחבר בין עסקים לגופי מימון מורשים בישראל",
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "IL"
+  }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "name": "דף הבית",
+    "item": "https://loan-israel.co.il/"
+  },{
+    "@type": "ListItem",
+    "position": 2,
+    "name": "הלוואות לעסקים",
+    "item": "https://loan-israel.co.il/Business/"
+  },{
+    "@type": "ListItem",
+    "position": 3,
+    "name": "מימון נכס מסחרי",
+    "item": "https://loan-israel.co.il/Business/commercial-property-financing/"
+  }]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FinancialProduct",
+  "name": "מימון נכס מסחרי",
+  "description": "משכנתא לנכס מסחרי והלוואות לרכישת משרדים, חנויות ומבני תעשייה בישראל",
+  "provider": {
+    "@type": "Organization",
+    "name": "רק תבקש - אפטריו בע״מ",
+    "url": "https://loan-israel.co.il"
+  },
+  "annualPercentageRate": {
+    "@type": "QuantitativeValue",
+    "minValue": "7.5",
+    "maxValue": "10",
+    "unitText": "%"
+  },
+  "interestRate": {
+    "@type": "QuantitativeValue",
+    "minValue": "7.5",
+    "maxValue": "10",
+    "unitText": "%"
+  },
+  "feesAndCommissionsSpecification": "ריבית פריים + 1.5% עד פריים + 4%. אחוזי מימון 50%-70% משווי הנכס.",
+  "url": "https://loan-israel.co.il/Business/commercial-property-financing/"
+}
+</script>
+
+</div>
+
+<script>
+(function() {
+    'use strict';
+
+    var namespace = 'WPC_Loans_M3K7';
+    if (window[namespace]) return;
+
+    var container = document.getElementById('wpc-loans-m3k7-main');
+    if (!container) return;
+
+    container.addEventListener('click', function(e) {
+        var ctaBtn = e.target.closest('[data-action="scroll-to-form"]');
+        if (ctaBtn) {
+            e.preventDefault();
+            var form = document.getElementById('awg-form');
+            if (form) {
+                form.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+    });
+
+    window[namespace] = { version: '1.0.0' };
+})();
+</script>

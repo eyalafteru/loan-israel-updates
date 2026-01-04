@@ -1,0 +1,15 @@
+=== פרומפט שנשלח לקלוד - step4 ===
+זמן: 2026-01-03 12:09:59
+============================================================
+
+קרא את קובץ ההוראות C:\Users\eyal\loan-israel-updaets\loan-israel-updates\פרומטים\סוכן דיבאג שיווק אטומי.md.
+
+להלן הדוח משלב התיקונים:
+
+C:\Users\eyal\loan-israel-updaets\loan-israel-updates\דפים לשינוי\הלוואה מיידית\שיווק אטומי\דוח שלב 3.md
+
+קובץ העמוד לדיבאג: C:\Users\eyal\loan-israel-updaets\loan-israel-updates\דפים לשינוי\הלוואה מיידית\הלוואה מיידית.html
+
+בצע דיבאג ותיקון שגיאות.
+
+בסוף חובה לשמור את הדוח בנתיב המדויק: C:\Users\eyal\loan-israel-updaets\loan-israel-updates\דפים לשינוי\הלוואה מיידית\שיווק אטומי\דוח דיבאג.md

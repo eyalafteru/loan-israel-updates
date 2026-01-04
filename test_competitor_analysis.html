@@ -1,0 +1,1820 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ניתוח פערים מול מתחרים</title>
+    <style>
+        :root {
+            --bg-primary: #0f0f0f;
+            --bg-secondary: #1a1a1a;
+            --bg-tertiary: #252525;
+            --text-primary: #ffffff;
+            --text-secondary: #9ca3af;
+            --text-muted: #6b7280;
+            --accent-primary: #3b82f6;
+            --accent-success: #10b981;
+            --accent-warning: #f59e0b;
+            --accent-error: #ef4444;
+            --border-color: #374151;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--accent-primary);
+        }
+        
+        /* Input Section */
+        .input-section {
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 1rem;
+            align-items: flex-end;
+            flex-wrap: wrap;
+        }
+        
+        .input-group {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .input-group input, .input-group select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+        
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        
+        .btn-primary {
+            background: var(--accent-primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #2563eb;
+        }
+        
+        .btn-primary:disabled {
+            background: #4b5563;
+            cursor: not-allowed;
+        }
+        
+        .btn-success {
+            background: var(--accent-success);
+            color: white;
+        }
+        
+        .btn-success:hover:not(:disabled) {
+            background: #059669;
+        }
+        
+        .btn:disabled, .btn[disabled] {
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+        
+        .btn-success:not(:disabled) {
+            cursor: pointer;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+            50% { box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+        }
+        
+        /* Progress Section */
+        .progress-section {
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+        }
+        
+        .progress-title {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .progress-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        
+        .progress-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            background: var(--bg-tertiary);
+            border-radius: 8px;
+            border-right: 3px solid var(--border-color);
+        }
+        
+        .progress-step.active {
+            border-right-color: var(--accent-warning);
+            background: rgba(245, 158, 11, 0.1);
+        }
+        
+        .progress-step.done {
+            border-right-color: var(--accent-success);
+            background: rgba(16, 185, 129, 0.1);
+        }
+        
+        .progress-step.error {
+            border-right-color: var(--accent-error);
+            background: rgba(239, 68, 68, 0.1);
+        }
+        
+        .step-icon {
+            font-size: 1.2rem;
+            min-width: 24px;
+        }
+        
+        .step-content {
+            flex: 1;
+        }
+        
+        .step-title {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        
+        .step-details {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+        
+        .step-data {
+            margin-top: 0.5rem;
+            padding: 0.5rem;
+            background: var(--bg-primary);
+            border-radius: 6px;
+            font-size: 0.8rem;
+            max-height: 150px;
+            overflow-y: auto;
+        }
+        
+        .step-data .tag {
+            display: inline-block;
+            background: var(--accent-primary);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin: 2px;
+            font-size: 0.75rem;
+        }
+        
+        /* Comparison Table */
+        .comparison-section {
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            overflow-x: auto;
+        }
+        
+        .comparison-title {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+        
+        .comparison-table th, .comparison-table td {
+            padding: 0.75rem;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .comparison-table th {
+            background: var(--bg-tertiary);
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+        }
+        
+        .comparison-table th:first-child,
+        .comparison-table td:first-child {
+            text-align: right;
+            position: sticky;
+            right: 0;
+            background: var(--bg-secondary);
+            z-index: 1;
+        }
+        
+        .comparison-table tr:hover {
+            background: rgba(59, 130, 246, 0.05);
+        }
+        
+        .gap-critical {
+            background: rgba(239, 68, 68, 0.2) !important;
+            color: var(--accent-error);
+            font-weight: 600;
+        }
+        
+        .gap-high {
+            background: rgba(245, 158, 11, 0.2) !important;
+            color: var(--accent-warning);
+        }
+        
+        .gap-medium {
+            background: rgba(59, 130, 246, 0.2) !important;
+            color: var(--accent-primary);
+        }
+        
+        .gap-ok {
+            background: rgba(16, 185, 129, 0.2) !important;
+            color: var(--accent-success);
+        }
+        
+        .my-page-col {
+            background: rgba(59, 130, 246, 0.1) !important;
+            font-weight: 600;
+        }
+        
+        .avg-col {
+            background: rgba(156, 163, 175, 0.1) !important;
+        }
+        
+        /* AI Analysis Section */
+        .ai-section {
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+        }
+        
+        .ai-title {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .ai-content {
+            background: var(--bg-tertiary);
+            padding: 1.5rem;
+            border-radius: 8px;
+            line-height: 1.8;
+        }
+        
+        .ai-content h2 {
+            color: var(--accent-primary);
+            margin: 1.5rem 0 1rem;
+            font-size: 1.3rem;
+        }
+        
+        .ai-content h3 {
+            color: var(--text-primary);
+            margin: 1rem 0 0.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .ai-content ul {
+            padding-right: 1.5rem;
+        }
+        
+        .ai-content li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .ai-content input[type="checkbox"] {
+            margin-left: 0.5rem;
+        }
+        
+        /* Spinner */
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--border-color);
+            border-top-color: var(--accent-primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Category Headers in Table */
+        .category-row {
+            background: var(--bg-primary) !important;
+        }
+        
+        .category-row td {
+            font-weight: 700;
+            color: var(--accent-primary);
+            text-align: right !important;
+            padding: 0.5rem 0.75rem;
+        }
+        
+        /* Text rows for Title/Description */
+        .text-row td {
+            font-size: 0.7rem;
+            vertical-align: top;
+        }
+        
+        .text-cell {
+            display: block;
+            max-width: 150px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            cursor: help;
+            color: var(--text-secondary);
+            font-size: 0.7rem;
+            line-height: 1.3;
+        }
+        
+        .text-cell:hover {
+            white-space: normal;
+            overflow: visible;
+            position: relative;
+            z-index: 100;
+            background: var(--bg-tertiary);
+            padding: 4px;
+            border-radius: 4px; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        
+        /* Hidden */
+        .hidden {
+            display: none !important;
+        }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--bg-primary);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #4b5563;
+        }
+        
+        /* Competitor mini cards */
+        .competitor-cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        
+        .competitor-card {
+            background: var(--bg-primary);
+            padding: 0.5rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .competitor-card.loading {
+            opacity: 0.6;
+        }
+        
+        .competitor-card.done {
+            border: 1px solid var(--accent-success);
+        }
+        
+        .competitor-card .domain {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .competitor-card .metrics {
+            color: var(--text-secondary);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 ניתוח פערים מול מתחרים</h1>
+        
+        <!-- Input Section -->
+        <div class="input-section">
+            <div class="input-group">
+                <label>מילת מפתח</label>
+                <input type="text" id="keywordInput" placeholder="הלוואה דיגיטלית">
+        </div>
+            <div class="input-group">
+                <label>תיקיית העמוד שלי</label>
+                <select id="pageSelect">
+                    <option value="">טוען עמודים...</option>
+            </select>
+        </div>
+            <button class="btn btn-primary" id="startBtn" onclick="startAnalysis()">
+                🚀 התחל ניתוח
+            </button>
+            <button class="btn" id="rescanBtn" onclick="forceNewScan()" style="background: #4b5563; display: none;">
+                🔄 סרוק מחדש
+            </button>
+    </div>
+    
+        <!-- Progress Section -->
+        <div class="progress-section" id="progressSection">
+            <div class="progress-title">📊 התקדמות הניתוח</div>
+            <div class="progress-steps" id="progressSteps">
+                <div class="progress-step" id="step-autocomplete">
+                    <span class="step-icon">⏳</span>
+                    <div class="step-content">
+                        <div class="step-title">שלב 1: השלמות גוגל</div>
+                        <div class="step-details">מחפש מילות מפתח קשורות...</div>
+                        <div class="step-data hidden" id="autocomplete-data"></div>
+    </div>
+    </div>
+                <div class="progress-step" id="step-serp">
+                    <span class="step-icon">⏳</span>
+                    <div class="step-content">
+                        <div class="step-title">שלב 2: תוצאות חיפוש</div>
+                        <div class="step-details">מחפש את 10 התוצאות הראשונות בגוגל...</div>
+                        <div class="step-data hidden" id="serp-data"></div>
+                    </div>
+                </div>
+                <div class="progress-step" id="step-mypage">
+                    <span class="step-icon">⏳</span>
+                    <div class="step-content">
+                        <div class="step-title">שלב 3: ניתוח העמוד שלי</div>
+                        <div class="step-details">מנתח את כל האלמנטים בעמוד...</div>
+                        <div class="step-data hidden" id="mypage-data"></div>
+                    </div>
+                </div>
+                <div class="progress-step" id="step-competitors">
+                    <span class="step-icon">⏳</span>
+                    <div class="step-content">
+                        <div class="step-title">שלב 4: סריקת מתחרים</div>
+                        <div class="step-details">סורק ומנתח 5 מתחרים מובילים...</div>
+                        <div class="competitor-cards hidden" id="competitor-cards"></div>
+                    </div>
+                </div>
+                <div class="progress-step" id="step-comparison">
+                    <span class="step-icon">⏳</span>
+                    <div class="step-content">
+                        <div class="step-title">שלב 5: טבלת השוואה</div>
+                        <div class="step-details">בונה טבלת פערים...</div>
+                    </div>
+                </div>
+        </div>
+    </div>
+    
+        <!-- Comparison Table Section -->
+        <div class="comparison-section hidden" id="comparisonSection">
+            <div class="comparison-title">
+                <span>📊 טבלת השוואה - העמוד שלי מול מתחרים</span>
+                <button class="btn btn-success" id="sendToAiBtn" onclick="sendToAI()" disabled>
+                    🤖 שלח ל-Claude Opus לניתוח
+                </button>
+        </div>
+            <table class="comparison-table" id="comparisonTable">
+                <thead>
+                    <tr>
+                        <th>מדד</th>
+                        <th class="my-page-col">העמוד שלי</th>
+                        <th>מתחרה 1</th>
+                        <th>מתחרה 2</th>
+                        <th>מתחרה 3</th>
+                        <th>מתחרה 4</th>
+                        <th>מתחרה 5</th>
+                        <th class="avg-col">ממוצע</th>
+                        <th>פער</th>
+                        <th>עדיפות</th>
+                    </tr>
+                </thead>
+                <tbody id="comparisonBody">
+                </tbody>
+            </table>
+    </div>
+    
+        <!-- AI Analysis Section -->
+        <div class="ai-section hidden" id="aiSection">
+            <div class="ai-title">
+                <span>🤖 ניתוח Claude Opus 4.5 - מה חסר בעמוד שלי</span>
+                <div class="spinner hidden" id="aiSpinner"></div>
+            </div>
+            <div class="ai-content" id="aiContent">
+                לחץ על "שלח ל-Claude Opus לניתוח" לקבלת המלצות מפורטות.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ============ State ============
+        let analysisState = {
+            keyword: '',
+            pagePath: '',
+            autocomplete: [],
+            serpResults: [],
+            myPageAnalysis: null,
+            competitorAnalyses: [],
+            comparisonData: null
+        };
+        
+        // ============ API Helper ============
+        async function apiCall(endpoint, options = {}, timeoutMs = 30000) {
+            // For Claude API calls, use longer timeout
+            if (endpoint.includes('analyze-gaps')) {
+                timeoutMs = 180000; // 3 minutes for Claude
+            }
+            
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+            
+            try {
+                console.log(`[API] Calling ${endpoint} (timeout: ${timeoutMs/1000}s)...`);
+                const response = await fetch(endpoint, {
+                    headers: { 'Content-Type': 'application/json' },
+                    signal: controller.signal,
+                    ...options
+                });
+                clearTimeout(timeoutId);
+                
+                console.log(`[API] Response status: ${response.status}`);
+                
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    console.error(`[API] HTTP Error ${response.status}:`, errorText);
+                    return { success: false, error: `HTTP ${response.status}: ${errorText.substring(0, 200)}` };
+                }
+                
+                const data = await response.json();
+                console.log(`[API] Success:`, data.success !== undefined ? data.success : 'no success field');
+                return data;
+            } catch (error) {
+                clearTimeout(timeoutId);
+                if (error.name === 'AbortError') {
+                    console.error(`[API] Timeout after ${timeoutMs/1000}s`);
+                    return { success: false, error: `Timeout - הבקשה לא הסתיימה תוך ${timeoutMs/1000} שניות` };
+                }
+                console.error('[API] Error:', error);
+                return { success: false, error: error.message };
+            }
+        }
+        
+        // ============ Progress UI ============
+        function updateStep(stepId, status, details = '', data = null) {
+            const step = document.getElementById(`step-${stepId}`);
+            if (!step) return;
+            
+            step.classList.remove('active', 'done', 'error');
+            step.classList.add(status);
+            
+            const icon = step.querySelector('.step-icon');
+            if (status === 'active') icon.textContent = '⏳';
+            else if (status === 'done') icon.textContent = '✅';
+            else if (status === 'error') icon.textContent = '❌';
+            
+            if (details) {
+                step.querySelector('.step-details').textContent = details;
+            }
+            
+            if (data) {
+                const dataDiv = step.querySelector('.step-data') || step.querySelector('.competitor-cards');
+                if (dataDiv) {
+                    dataDiv.classList.remove('hidden');
+                    dataDiv.innerHTML = data;
+                }
+            }
+        }
+        
+        // ============ Load Pages ============
+        async function loadPages() {
+            const result = await apiCall('/api/pages');
+            const select = document.getElementById('pageSelect');
+            
+            if (result.success && result.pages) {
+                select.innerHTML = '<option value="">בחר עמוד...</option>' + 
+                    result.pages.map(p => 
+                        `<option value="${p.path}">${p.name}</option>`
+                    ).join('');
+                
+                // Add change event to load keyword
+                select.addEventListener('change', loadKeywordFromPage);
+            } else {
+                select.innerHTML = '<option value="">שגיאה בטעינת עמודים</option>';
+            }
+        }
+        
+        // ============ Load Keyword from page_info.json ============
+        async function loadKeywordFromPage() {
+            const pagePath = document.getElementById('pageSelect').value;
+            if (!pagePath) return;
+            
+            try {
+                const result = await apiCall(`/api/page/info?path=${encodeURIComponent(pagePath)}`);
+                
+                if (result.success && result.has_info && result.info) {
+                    const keyword = result.info.keyword || '';
+                    if (keyword) {
+                        document.getElementById('keywordInput').value = keyword;
+                        console.log(`📝 Loaded keyword: ${keyword}`);
+                    }
+                }
+                
+                // Check for existing competitor data
+                await checkAndShowExistingData(pagePath);
+                
+                    } catch (e) {
+                console.log('Could not load keyword from page_info.json');
+            }
+        }
+        
+        // ============ Check and Show Existing Data Status ============
+        async function checkAndShowExistingData(pagePath) {
+            try {
+                const result = await apiCall(`/api/seo/load-competitor-data?page_path=${encodeURIComponent(pagePath)}`);
+                
+                if (result.success && result.exists && result.analysis) {
+                    const scanDate = result.analysis.scan_date 
+                        ? new Date(result.analysis.scan_date).toLocaleDateString('he-IL') 
+                        : 'לא ידוע';
+                    const competitorsCount = (result.analysis.competitors_data || []).length;
+                    
+                    // Show existing data indicator
+                    updateStep('autocomplete', 'done', `✅ נמצאו ${(result.analysis.autocomplete_suggestions || []).length} השלמות (${scanDate})`);
+                    updateStep('serp', 'done', `✅ נמצאו ${(result.analysis.serp_results || []).length} תוצאות`);
+                    updateStep('competitors', 'done', `✅ נמצאו ${competitorsCount} מתחרים מסריקה קודמת`);
+                    
+                    // Store the existing data for later use
+                    window.existingCompetitorData = result;
+                    
+                    // Update button text
+                    document.getElementById('startBtn').innerHTML = '📊 נתח עם נתונים קיימים';
+                    document.getElementById('startBtn').title = `סריקה מ-${scanDate}`;
+                    document.getElementById('rescanBtn').style.display = 'inline-block';
+                    
+                    console.log(`✅ Found existing data from ${scanDate}`);
+                } else {
+                    // Reset steps to waiting
+                    resetProgressSteps();
+                    window.existingCompetitorData = null;
+                    document.getElementById('startBtn').innerHTML = '🚀 התחל ניתוח';
+                    document.getElementById('startBtn').title = 'יבצע סריקה חדשה';
+                    document.getElementById('rescanBtn').style.display = 'none';
+                }
+            } catch (e) {
+                console.log('No existing competitor data');
+                window.existingCompetitorData = null;
+            }
+        }
+        
+        // ============ Reset Progress Steps ============
+        function resetProgressSteps() {
+            ['autocomplete', 'serp', 'mypage', 'competitors', 'comparison'].forEach(stepId => {
+                const step = document.getElementById(`step-${stepId}`);
+                if (step) {
+                    step.classList.remove('active', 'done', 'error');
+                    step.querySelector('.step-icon').textContent = '⏳';
+                }
+            });
+        }
+        
+        // ============ Force New Scan ============
+        async function forceNewScan() {
+            // Clear existing data
+            window.existingCompetitorData = null;
+            resetProgressSteps();
+            document.getElementById('startBtn').innerHTML = '🚀 התחל ניתוח';
+            document.getElementById('rescanBtn').style.display = 'none';
+            
+            // Run full analysis
+            await startAnalysis();
+        }
+        
+        // ============ Clean HTML Content ============
+        function cleanHtmlForAnalysis(doc) {
+            // Clone the document to avoid modifying original
+            const cleanDoc = doc.cloneNode(true);
+            
+            // Remove script and style elements
+            const removeSelectors = [
+                'script', 'style', 'noscript', 'iframe',
+                'header', 'footer', 'nav',
+                '.header', '.footer', '.nav', '.navigation',
+                '#header', '#footer', '#nav', '#navigation',
+                '.sidebar', '#sidebar', '.menu', '#menu',
+                '.cookie-notice', '.popup', '.modal',
+                '.advertisement', '.ads', '.ad',
+                '[role="banner"]', '[role="navigation"]', '[role="contentinfo"]',
+                '.wp-block-template-part', // WordPress template parts
+                '.elementor-location-header', '.elementor-location-footer',
+                '.site-header', '.site-footer',
+                '.masthead', '.colophon',
+                'form', // Forms usually not content
+                '.breadcrumbs', '.breadcrumb',
+                '.social-share', '.share-buttons',
+                '.related-posts', '.recommended',
+                '.comments', '#comments',
+                '.author-box', '.author-info'
+            ];
+            
+            removeSelectors.forEach(selector => {
+                try {
+                    cleanDoc.querySelectorAll(selector).forEach(el => el.remove());
+                } catch (e) {}
+            });
+            
+            return cleanDoc;
+        }
+        
+        // ============ Full Page Analyzer ============
+        function analyzePageFull(htmlContent, keyword) {
+            const parser = new DOMParser();
+            const rawDoc = parser.parseFromString(htmlContent, 'text/html');
+            
+            // Clean the document before analysis
+            const doc = cleanHtmlForAnalysis(rawDoc);
+            
+            // Helper: Normalize Hebrew
+            function normalizeHebrew(text) {
+                if (!text) return '';
+                return text.replace(/[\u0591-\u05C7]/g, '')
+                           .replace(/[^\u0590-\u05FF\s]/g, ' ')
+                           .replace(/\s+/g, ' ')
+                           .trim();
+            }
+            
+            // Helper: Check if contains keyword
+            function containsKeyword(text) {
+                const normalized = normalizeHebrew(text);
+                const normalizedKw = normalizeHebrew(keyword);
+                return normalized.includes(normalizedKw);
+            }
+            
+            // ---- Content Metrics ----
+            // Get main content area if exists, otherwise body
+            const mainContent = doc.querySelector('main, article, .content, #content, .entry-content, .post-content') || doc.body;
+            const bodyText = mainContent?.textContent || '';
+            const words = bodyText.split(/\s+/).filter(w => w.length > 0);
+            const wordCount = words.length;
+            
+            // Keyword occurrences
+            const normalizedBody = normalizeHebrew(bodyText);
+            const normalizedKw = normalizeHebrew(keyword);
+            let keywordCount = 0;
+            if (normalizedKw) {
+                const regex = new RegExp(normalizedKw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+                const matches = normalizedBody.match(regex);
+                keywordCount = matches ? matches.length : 0;
+            }
+            const keywordDensity = wordCount > 0 ? (keywordCount / wordCount * 100) : 0;
+            
+            // Paragraphs (from main content only)
+            const paragraphs = [...mainContent.querySelectorAll('p')].filter(p => p.textContent.trim().length > 10);
+            const avgParagraphLength = paragraphs.length > 0 
+                ? paragraphs.reduce((sum, p) => sum + p.textContent.split(/\s+/).length, 0) / paragraphs.length 
+                : 0;
+            
+            // ---- Headings (from main content only) ----
+            const headings = {};
+            ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].forEach(tag => {
+                const elements = [...mainContent.querySelectorAll(tag)].filter(h => h.textContent.trim().length > 0);
+                const withKeyword = elements.filter(h => containsKeyword(h.textContent));
+                headings[tag] = {
+                    count: elements.length,
+                    withKeyword: withKeyword.length,
+                    spamRatio: elements.length > 0 ? Math.round(withKeyword.length / elements.length * 100) : 0,
+                    texts: elements.map(h => h.textContent.trim())
+                };
+            });
+            
+            // ---- Meta Tags (from raw document) ----
+            const title = rawDoc.querySelector('title')?.textContent?.trim() || '';
+            const metaDesc = rawDoc.querySelector('meta[name="description"]')?.getAttribute('content') || '';
+            const ogTitle = rawDoc.querySelector('meta[property="og:title"]')?.getAttribute('content') || '';
+            const ogDesc = rawDoc.querySelector('meta[property="og:description"]')?.getAttribute('content') || '';
+            const ogImage = rawDoc.querySelector('meta[property="og:image"]')?.getAttribute('content') || '';
+            
+            // Schema.org (from raw document)
+            const schemas = [...rawDoc.querySelectorAll('script[type="application/ld+json"]')];
+            const schemaTypes = [];
+            schemas.forEach(s => {
+                try {
+                    const data = JSON.parse(s.textContent);
+                    if (data['@type']) schemaTypes.push(data['@type']);
+                    if (Array.isArray(data)) data.forEach(d => d['@type'] && schemaTypes.push(d['@type']));
+                } catch (e) {}
+            });
+            
+            // ---- Content Elements (from main content) ----
+            const tables = mainContent.querySelectorAll('table').length;
+            const images = mainContent.querySelectorAll('img').length;
+            const imagesWithAlt = [...mainContent.querySelectorAll('img')].filter(img => img.alt && img.alt.trim().length > 0).length;
+            const videos = mainContent.querySelectorAll('iframe[src*="youtube"], iframe[src*="vimeo"], video').length;
+            const ulLists = mainContent.querySelectorAll('ul').length;
+            const olLists = mainContent.querySelectorAll('ol').length;
+            const blockquotes = mainContent.querySelectorAll('blockquote').length;
+            
+            // ---- Special Sections (from raw document for structure detection) ----
+            // FAQ detection
+            const hasFaq = rawDoc.querySelector('[itemtype*="FAQPage"]') !== null 
+                || rawDoc.querySelector('.faq, #faq, [class*="faq"]') !== null
+                || bodyText.includes('שאלות נפוצות')
+                || bodyText.includes('שאלות ותשובות');
+            const faqQuestions = hasFaq ? rawDoc.querySelectorAll('[itemprop="name"], .faq-question, [class*="question"]').length : 0;
+            
+            // Table of Contents
+            const hasToc = rawDoc.querySelector('[class*="toc"], [id*="toc"], [class*="table-of-contents"]') !== null
+                || bodyText.includes('תוכן עניינים');
+            
+            // Author info
+            const hasAuthor = rawDoc.querySelector('[rel="author"], [class*="author"], [itemprop="author"]') !== null;
+            
+            // Last updated
+            const hasLastUpdated = rawDoc.querySelector('[class*="updated"], [class*="modified"], time[datetime]') !== null
+                || /עודכן|נכתב בתאריך/i.test(bodyText);
+            
+            // CTA buttons (from main content)
+            const ctaButtons = mainContent.querySelectorAll('a.btn, button.btn, .cta, [class*="cta"], a[class*="button"]').length;
+            
+            // Contact forms (from raw - forms might be anywhere)
+            const hasContactForm = rawDoc.querySelector('form[action*="contact"], form[class*="contact"], .contact-form') !== null
+                || rawDoc.querySelectorAll('form').length > 0;
+            
+            // Phone numbers
+            const phoneRegex = /0[2-9]\d{7,8}|1-800-\d{6}|(\+972|972)[\s-]?\d{8,9}/g;
+            const phoneMatches = bodyText.match(phoneRegex) || [];
+            const clickablePhones = doc.querySelectorAll('a[href^="tel:"]').length;
+            
+            // ---- Links (from main content) ----
+            const allLinks = [...mainContent.querySelectorAll('a[href]')];
+            const internalLinks = allLinks.filter(a => {
+                const href = a.getAttribute('href') || '';
+                return href.startsWith('/') || href.startsWith('#');
+            }).length;
+            const externalLinks = allLinks.filter(a => {
+                const href = a.getAttribute('href') || '';
+                return href.startsWith('http');
+            }).length;
+            
+            // ---- Trust Signals (from raw document) ----
+            const testimonials = rawDoc.querySelectorAll('[class*="testimonial"], [class*="review"], [itemprop="review"]').length;
+            const trustBadges = rawDoc.querySelectorAll('[class*="badge"], [class*="trust"], [class*="secure"]').length;
+            
+            // ---- Hebrew Specific ----
+            const hasPrices = /₪|\u20aa|ש"ח|שקל/i.test(bodyText);
+            const hasHebrewDates = /\d{1,2}[\/\.-]\d{1,2}[\/\.-]\d{2,4}/.test(bodyText) 
+                || /ינואר|פברואר|מרץ|אפריל|מאי|יוני|יולי|אוגוסט|ספטמבר|אוקטובר|נובמבר|דצמבר/.test(bodyText);
+            
+            return {
+                content: {
+                    wordCount,
+                    keywordCount,
+                    keywordDensity: Math.round(keywordDensity * 100) / 100,
+                    paragraphs: paragraphs.length,
+                    avgParagraphLength: Math.round(avgParagraphLength)
+                },
+                headings,
+                meta: {
+                    title: { text: title, length: title.length, hasKeyword: containsKeyword(title) },
+                    description: { text: metaDesc, length: metaDesc.length, hasKeyword: containsKeyword(metaDesc) },
+                    ogTitle: ogTitle ? true : false,
+                    ogDesc: ogDesc ? true : false,
+                    ogImage: ogImage ? true : false,
+                    schemas: schemaTypes
+                },
+                elements: {
+                    tables,
+                    images,
+                    imagesWithAlt,
+                    videos,
+                    ulLists,
+                    olLists,
+                    blockquotes
+                },
+                sections: {
+                    hasFaq,
+                    faqQuestions,
+                    hasToc,
+                    hasAuthor,
+                    hasLastUpdated,
+                    ctaButtons,
+                    hasContactForm,
+                    phoneCount: phoneMatches.length,
+                    clickablePhones
+                },
+                links: {
+                    internal: internalLinks,
+                    external: externalLinks
+                },
+                trust: {
+                    testimonials,
+                    trustBadges
+                },
+                hebrew: {
+                    hasPrices,
+                    hasHebrewDates
+                }
+            };
+        }
+        
+        // ============ Build Comparison Table ============
+        function buildComparisonTable(myAnalysis, competitorAnalyses) {
+            const table = document.getElementById('comparisonTable');
+            const tbody = document.getElementById('comparisonBody');
+            const avgCalc = (arr) => arr.length > 0 ? arr.reduce((a, b) => a + b, 0) / arr.length : 0;
+            const percentCalc = (arr) => arr.length > 0 ? Math.round(arr.filter(v => v).length / arr.length * 100) : 0;
+            
+            // Build dynamic header with competitor info
+            const thead = table.querySelector('thead');
+            let headerHtml = `
+                <tr>
+                    <th>מדד</th>
+                    <th class="my-page-col">העמוד שלי</th>`;
+            
+            competitorAnalyses.forEach((comp, i) => {
+                const rank = comp.googleRank || (i + 1);
+                const domain = comp.domain || `מתחרה ${i + 1}`;
+                const url = comp.url || '#';
+                headerHtml += `
+                    <th title="${url}">
+                        <div style="font-size: 0.7rem; color: var(--accent-warning);">#${rank} בגוגל</div>
+                        <a href="${url}" target="_blank" style="color: var(--text-primary); text-decoration: none; font-size: 0.75rem;" title="${url}">
+                            ${domain.replace('www.', '')}
+                        </a>
+                    </th>`;
+            });
+            
+            // Add empty columns if less than 5 competitors
+            for (let i = competitorAnalyses.length; i < 5; i++) {
+                headerHtml += `<th style="opacity: 0.3;">מתחרה ${i + 1}</th>`;
+            }
+            
+            headerHtml += `
+                    <th class="avg-col">ממוצע</th>
+                    <th>פער</th>
+                    <th>עדיפות</th>
+                </tr>`;
+            
+            thead.innerHTML = headerHtml;
+            
+            // Helper to determine gap priority
+            function getGapPriority(myVal, avgVal, metric) {
+                const diff = myVal - avgVal;
+                const percentDiff = avgVal > 0 ? Math.abs(diff / avgVal * 100) : 0;
+                
+                // Special cases
+                if (metric === 'h2SpamRatio' && myVal > 50) return { gap: `+${Math.round(myVal - avgVal)}%`, priority: 'CRITICAL', class: 'gap-critical' };
+                if (metric === 'hasFaq' && !myVal && avgVal > 50) return { gap: 'חסר!', priority: 'HIGH', class: 'gap-high' };
+                if (metric === 'hasToc' && !myVal && avgVal > 50) return { gap: 'חסר!', priority: 'MEDIUM', class: 'gap-medium' };
+                
+                if (diff < 0) {
+                    if (percentDiff > 50) return { gap: diff.toFixed(0), priority: 'CRITICAL', class: 'gap-critical' };
+                    if (percentDiff > 25) return { gap: diff.toFixed(0), priority: 'HIGH', class: 'gap-high' };
+                    if (percentDiff > 10) return { gap: diff.toFixed(0), priority: 'MEDIUM', class: 'gap-medium' };
+                }
+                return { gap: diff >= 0 ? `+${diff.toFixed(0)}` : diff.toFixed(0), priority: 'OK', class: 'gap-ok' };
+            }
+            
+            // Build rows
+            const rows = [];
+            
+            // Category: Content
+            rows.push({ category: '📝 תוכן' });
+            rows.push({
+                metric: 'מילים',
+                myVal: myAnalysis.content.wordCount,
+                compVals: competitorAnalyses.map(c => c.content.wordCount),
+                format: v => v.toLocaleString(),
+                gapMetric: 'wordCount'
+            });
+            rows.push({
+                metric: 'צפיפות מילת מפתח',
+                myVal: myAnalysis.content.keywordDensity,
+                compVals: competitorAnalyses.map(c => c.content.keywordDensity),
+                format: v => v.toFixed(2) + '%',
+                gapMetric: 'density'
+            });
+            rows.push({
+                metric: 'פסקאות',
+                myVal: myAnalysis.content.paragraphs,
+                compVals: competitorAnalyses.map(c => c.content.paragraphs),
+                format: v => v,
+                gapMetric: 'paragraphs'
+            });
+            
+            // Category: Headings
+            rows.push({ category: '📑 כותרות' });
+            rows.push({
+                metric: 'H1',
+                myVal: myAnalysis.headings.h1.count,
+                compVals: competitorAnalyses.map(c => c.headings.h1.count),
+                format: v => v,
+                gapMetric: 'h1'
+            });
+            rows.push({
+                metric: 'H2',
+                myVal: myAnalysis.headings.h2.count,
+                compVals: competitorAnalyses.map(c => c.headings.h2.count),
+                format: v => v,
+                gapMetric: 'h2'
+            });
+            rows.push({
+                metric: 'H2 עם מילת מפתח %',
+                myVal: myAnalysis.headings.h2.spamRatio,
+                compVals: competitorAnalyses.map(c => c.headings.h2.spamRatio),
+                format: v => v + '%',
+                gapMetric: 'h2SpamRatio'
+            });
+            rows.push({
+                metric: 'H3',
+                myVal: myAnalysis.headings.h3.count,
+                compVals: competitorAnalyses.map(c => c.headings.h3.count),
+                format: v => v,
+                gapMetric: 'h3'
+            });
+            
+            // Category: Meta
+            rows.push({ category: '🏷️ מטא' });
+            rows.push({
+                metric: 'Title',
+                myVal: myAnalysis.meta.title.text || '',
+                compVals: competitorAnalyses.map(c => c.meta.title?.text || ''),
+                format: v => {
+                    if (!v) return '<span style="color:#666;">חסר</span>';
+                    const escaped = v.replace(/"/g, '&quot;').replace(/</g, '&lt;');
+                    const short = v.substring(0, 40) + (v.length > 40 ? '...' : '');
+                    return `<span class="text-cell" title="${escaped}">${short}</span>`;
+                },
+                isText: true,
+                gapMetric: 'none'
+            });
+            rows.push({
+                metric: 'Title אורך',
+                myVal: myAnalysis.meta.title.length || 0,
+                compVals: competitorAnalyses.map(c => c.meta.title?.length || 0),
+                format: v => v + ' תווים',
+                gapMetric: 'titleLen'
+            });
+            rows.push({
+                metric: 'Title עם מילת מפתח',
+                myVal: myAnalysis.meta.title.hasKeyword ? 1 : 0,
+                compVals: competitorAnalyses.map(c => c.meta.title?.hasKeyword ? 1 : 0),
+                format: v => v ? '✅' : '❌',
+                gapMetric: 'titleKw'
+            });
+            rows.push({
+                metric: 'Meta Description',
+                myVal: myAnalysis.meta.description.text || '',
+                compVals: competitorAnalyses.map(c => c.meta.description?.text || ''),
+                format: v => {
+                    if (!v) return '<span style="color:#666;">חסר</span>';
+                    const escaped = v.replace(/"/g, '&quot;').replace(/</g, '&lt;');
+                    const short = v.substring(0, 50) + (v.length > 50 ? '...' : '');
+                    return `<span class="text-cell" title="${escaped}">${short}</span>`;
+                },
+                isText: true,
+                gapMetric: 'none'
+            });
+            rows.push({
+                metric: 'Description אורך',
+                myVal: myAnalysis.meta.description.length || 0,
+                compVals: competitorAnalyses.map(c => c.meta.description?.length || 0),
+                format: v => v + ' תווים',
+                gapMetric: 'descLen'
+            });
+            rows.push({
+                metric: 'Description עם מילת מפתח',
+                myVal: myAnalysis.meta.description.hasKeyword ? 1 : 0,
+                compVals: competitorAnalyses.map(c => c.meta.description?.hasKeyword ? 1 : 0),
+                format: v => v ? '✅' : '❌',
+                gapMetric: 'metaKw'
+            });
+            rows.push({
+                metric: 'Schema.org',
+                myVal: myAnalysis.meta.schemas.length,
+                compVals: competitorAnalyses.map(c => c.meta.schemas?.length || 0),
+                format: v => v,
+                gapMetric: 'schemas'
+            });
+            
+            // Category: Elements
+            rows.push({ category: '🎨 אלמנטים' });
+            rows.push({
+                metric: 'טבלאות',
+                myVal: myAnalysis.elements.tables,
+                compVals: competitorAnalyses.map(c => c.elements.tables),
+                format: v => v,
+                gapMetric: 'tables'
+            });
+            rows.push({
+                metric: 'תמונות',
+                myVal: myAnalysis.elements.images,
+                compVals: competitorAnalyses.map(c => c.elements.images),
+                format: v => v,
+                gapMetric: 'images'
+            });
+            rows.push({
+                metric: 'תמונות עם Alt',
+                myVal: myAnalysis.elements.imagesWithAlt,
+                compVals: competitorAnalyses.map(c => c.elements.imagesWithAlt),
+                format: v => v,
+                gapMetric: 'imagesAlt'
+            });
+            rows.push({
+                metric: 'סרטונים',
+                myVal: myAnalysis.elements.videos,
+                compVals: competitorAnalyses.map(c => c.elements.videos),
+                format: v => v,
+                gapMetric: 'videos'
+            });
+            rows.push({
+                metric: 'רשימות (UL+OL)',
+                myVal: myAnalysis.elements.ulLists + myAnalysis.elements.olLists,
+                compVals: competitorAnalyses.map(c => c.elements.ulLists + c.elements.olLists),
+                format: v => v,
+                gapMetric: 'lists'
+            });
+            
+            // Category: Sections
+            rows.push({ category: '📦 סקשנים מיוחדים' });
+            rows.push({
+                metric: 'FAQ',
+                myVal: myAnalysis.sections.hasFaq ? 100 : 0,
+                compVals: competitorAnalyses.map(c => c.sections.hasFaq ? 100 : 0),
+                format: v => v > 0 ? '✅' : '❌',
+                gapMetric: 'hasFaq'
+            });
+            rows.push({
+                metric: 'תוכן עניינים',
+                myVal: myAnalysis.sections.hasToc ? 100 : 0,
+                compVals: competitorAnalyses.map(c => c.sections.hasToc ? 100 : 0),
+                format: v => v > 0 ? '✅' : '❌',
+                gapMetric: 'hasToc'
+            });
+            rows.push({
+                metric: 'כפתורי CTA',
+                myVal: myAnalysis.sections.ctaButtons,
+                compVals: competitorAnalyses.map(c => c.sections.ctaButtons),
+                format: v => v,
+                gapMetric: 'cta'
+            });
+            rows.push({
+                metric: 'טופס יצירת קשר',
+                myVal: myAnalysis.sections.hasContactForm ? 100 : 0,
+                compVals: competitorAnalyses.map(c => c.sections.hasContactForm ? 100 : 0),
+                format: v => v > 0 ? '✅' : '❌',
+                gapMetric: 'contactForm'
+            });
+            
+            // Category: Links
+            rows.push({ category: '🔗 קישורים' });
+            rows.push({
+                metric: 'קישורים פנימיים',
+                myVal: myAnalysis.links.internal,
+                compVals: competitorAnalyses.map(c => c.links.internal),
+                format: v => v,
+                gapMetric: 'internalLinks'
+            });
+            rows.push({
+                metric: 'קישורים חיצוניים',
+                myVal: myAnalysis.links.external,
+                compVals: competitorAnalyses.map(c => c.links.external),
+                format: v => v,
+                gapMetric: 'externalLinks'
+            });
+            
+            // Render table
+            let html = '';
+            rows.forEach(row => {
+                if (row.category) {
+                    html += `<tr class="category-row"><td colspan="10">${row.category}</td></tr>`;
+                } else if (row.isText) {
+                    // Text rows - no gap calculation
+                    html += `<tr class="text-row">
+                        <td>${row.metric}</td>
+                        <td class="my-page-col">${row.format(row.myVal)}</td>
+                        ${row.compVals.map(v => `<td>${row.format(v)}</td>`).join('')}
+                        ${row.compVals.length < 5 ? '<td>-</td>'.repeat(5 - row.compVals.length) : ''}
+                        <td class="avg-col">-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>`;
+                } else {
+                    const avg = avgCalc(row.compVals);
+                    const gapInfo = getGapPriority(row.myVal, avg, row.gapMetric);
+                    
+                    html += `<tr>
+                        <td>${row.metric}</td>
+                        <td class="my-page-col">${row.format(row.myVal)}</td>
+                        ${row.compVals.map(v => `<td>${row.format(v)}</td>`).join('')}
+                        ${row.compVals.length < 5 ? '<td>-</td>'.repeat(5 - row.compVals.length) : ''}
+                        <td class="avg-col">${row.format(avg)}</td>
+                        <td class="${gapInfo.class}">${gapInfo.gap}</td>
+                        <td class="${gapInfo.class}">${gapInfo.priority}</td>
+                    </tr>`;
+                }
+            });
+            
+            tbody.innerHTML = html;
+            
+            // Store for AI
+            analysisState.comparisonData = { rows, myAnalysis, competitorAnalyses };
+        }
+        
+        // ============ Check for Existing Data ============
+        async function checkExistingData() {
+            const pagePath = document.getElementById('pageSelect').value;
+            if (!pagePath) return;
+            
+            try {
+                const result = await apiCall(`/api/seo/load-competitor-data?page_path=${encodeURIComponent(pagePath)}`);
+                
+                if (result.success && result.exists && result.analysis) {
+                    const scanDate = result.analysis.scan_date 
+                        ? new Date(result.analysis.scan_date).toLocaleDateString('he-IL') 
+                        : 'לא ידוע';
+                    
+                    // Show existing data option
+                    const useExisting = confirm(`נמצאו נתונים קיימים מסריקה קודמת (${scanDate}).\n\nהאם להשתמש בהם?\n\n• לחץ OK להשתמש בנתונים הקיימים\n• לחץ Cancel לסרוק מחדש`);
+                    
+                    if (useExisting) {
+                        return result;
+                    }
+                }
+            } catch (e) {
+                console.log('No existing data found');
+            }
+            return null;
+        }
+        
+        // ============ Use Existing Data ============
+        async function useExistingData(existingData) {
+            const keyword = document.getElementById('keywordInput').value.trim() || existingData.analysis.target_keyword;
+            analysisState.keyword = keyword;
+            
+            // Update progress steps to show using existing data
+            updateStep('autocomplete', 'done', `נמצאו ${(existingData.analysis.autocomplete_suggestions || []).length} השלמות (מהמטמון)`);
+            analysisState.autocomplete = existingData.analysis.autocomplete_suggestions || [];
+            
+            updateStep('serp', 'done', `נמצאו ${(existingData.analysis.serp_results || []).length} תוצאות (מהמטמון)`);
+            analysisState.serpResults = existingData.analysis.serp_results || [];
+            
+            // Analyze my page (always fresh) - use full path API
+            updateStep('mypage', 'active', 'מנתח את העמוד שלי...');
+            const myPageResult = await apiCall(`/api/page/${encodeURIComponent(analysisState.pagePath)}`);
+            
+            if (myPageResult.success && myPageResult.content) {
+                analysisState.myPageAnalysis = analyzePageFull(myPageResult.content, keyword);
+                const summary = `מילים: ${analysisState.myPageAnalysis.content.wordCount} | צפיפות: ${analysisState.myPageAnalysis.content.keywordDensity}%`;
+                updateStep('mypage', 'done', summary);
+            } else {
+                updateStep('mypage', 'error', 'לא ניתן לטעון את העמוד');
+                return;
+            }
+            
+            // Try to load saved HTML for competitors
+            updateStep('competitors', 'active', 'טוען HTML של מתחרים מהמטמון...');
+            
+            analysisState.competitorAnalyses = [];
+            const cardsContainer = document.getElementById('competitor-cards');
+            cardsContainer.classList.remove('hidden');
+            cardsContainer.innerHTML = '';
+            
+            // Try to load saved HTML
+            const htmlResult = await apiCall(`/api/seo/load-competitor-html?page_path=${encodeURIComponent(analysisState.pagePath)}`);
+            
+            if (htmlResult.success && htmlResult.exists && htmlResult.competitors.length > 0) {
+                // Analyze from saved HTML
+                for (let i = 0; i < htmlResult.competitors.length && i < 5; i++) {
+                    const comp = htmlResult.competitors[i];
+                    const domain = comp.domain;
+                    
+                    cardsContainer.innerHTML += `
+                        <div class="competitor-card loading" id="comp-card-cached-${i}">
+                            <span class="spinner" style="width:12px;height:12px;"></span>
+                            <span class="domain">${domain}</span>
+                            <span class="metrics">מנתח...</span>
+                        </div>`;
+                    
+                    // Full analysis from cached HTML
+                    const analysis = analyzePageFull(comp.html, keyword);
+                    analysis.domain = domain;
+                    analysis.googleRank = i + 1; // Approximate rank from saved order
+                    analysisState.competitorAnalyses.push(analysis);
+                    
+                    // Update card
+                    document.getElementById(`comp-card-cached-${i}`).outerHTML = `
+                        <div class="competitor-card done">
+                            <span>✅</span>
+                            <span class="domain">${domain}</span>
+                            <span class="metrics">${analysis.content.wordCount} מילים</span>
+                        </div>`;
+                }
+                
+                updateStep('competitors', 'done', `נותחו ${analysisState.competitorAnalyses.length} מתחרים מ-HTML שמור`);
+                } else {
+                // Fall back to basic cached data
+                const competitorsData = existingData.analysis.competitors_data || [];
+                
+                for (let i = 0; i < competitorsData.length && i < 5; i++) {
+                    const comp = competitorsData[i];
+                    const domain = comp.domain || (comp.url ? new URL(comp.url).hostname : 'unknown');
+                    
+                    // Create analysis object from cached data (limited)
+                    const analysis = {
+                        url: comp.url || '',
+                        domain: domain,
+                        content: {
+                            wordCount: comp.word_count || 0,
+                            keywordCount: 0,
+                            keywordDensity: comp.keyword_density || 0,
+                            paragraphs: 0,
+                            avgParagraphLength: 0
+                        },
+                        headings: {
+                            h1: { count: comp.h1_count || 0, withKeyword: 0, spamRatio: 0, texts: comp.h1_text ? [comp.h1_text] : [] },
+                            h2: { count: comp.h2_count || 0, withKeyword: 0, spamRatio: 0, texts: comp.h2_texts || [] },
+                            h3: { count: comp.h3_count || 0, withKeyword: 0, spamRatio: 0, texts: [] },
+                            h4: { count: 0, withKeyword: 0, spamRatio: 0, texts: [] },
+                            h5: { count: 0, withKeyword: 0, spamRatio: 0, texts: [] },
+                            h6: { count: 0, withKeyword: 0, spamRatio: 0, texts: [] }
+                        },
+                        meta: {
+                            title: { text: comp.title || '', length: (comp.title || '').length, hasKeyword: (comp.title || '').includes(keyword) },
+                            description: { text: comp.meta_description || '', length: (comp.meta_description || '').length, hasKeyword: (comp.meta_description || '').includes(keyword) },
+                            ogTitle: false,
+                            ogDesc: false,
+                            ogImage: false,
+                            schemas: comp.schema_types || []
+                        },
+                        elements: {
+                            tables: comp.tables_count || 0,
+                            images: comp.images_count || 0,
+                            imagesWithAlt: 0,
+                            videos: comp.videos_count || 0,
+                            ulLists: comp.lists_count || 0,
+                            olLists: 0,
+                            blockquotes: 0
+                        },
+                        sections: {
+                            hasFaq: comp.has_faq || false,
+                            faqQuestions: 0,
+                            hasToc: false,
+                            hasAuthor: false,
+                            hasLastUpdated: false,
+                            ctaButtons: 0,
+                            hasContactForm: false,
+                            phoneCount: 0,
+                            clickablePhones: 0
+                        },
+                        links: {
+                            internal: comp.internal_links || 0,
+                            external: comp.external_links || 0
+                        },
+                        trust: {
+                            testimonials: 0,
+                            trustBadges: 0
+                        },
+                        hebrew: {
+                            hasPrices: false,
+                            hasHebrewDates: false
+                        }
+                    };
+                    
+                    analysisState.competitorAnalyses.push(analysis);
+                    
+                    cardsContainer.innerHTML += `
+                        <div class="competitor-card done" style="border-color: orange;">
+                            <span>⚠️</span>
+                            <span class="domain">${domain}</span>
+                            <span class="metrics">${analysis.content.wordCount} מילים (נתונים חלקיים)</span>
+                        </div>`;
+                }
+                
+                updateStep('competitors', 'done', `נטענו ${analysisState.competitorAnalyses.length} מתחרים (נתונים חלקיים - סרוק מחדש לניתוח מלא)`);
+            }
+            
+            // Build comparison table
+            updateStep('comparison', 'active', 'בונה טבלת השוואה...');
+            
+            if (analysisState.competitorAnalyses.length > 0) {
+                buildComparisonTable(analysisState.myPageAnalysis, analysisState.competitorAnalyses);
+                document.getElementById('comparisonSection').classList.remove('hidden');
+                document.getElementById('aiSection').classList.remove('hidden');
+                document.getElementById('sendToAiBtn').disabled = false;
+                updateStep('comparison', 'done', 'טבלת ההשוואה מוכנה! (מנתונים קיימים)');
+            }
+            
+            // If there's an existing report, show it
+            if (existingData.report) {
+                let html = existingData.report
+                    .replace(/## (.*)/g, '<h2>$1</h2>')
+                    .replace(/### (.*)/g, '<h3>$1</h3>')
+                    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                    .replace(/- \[ \] (.*)/g, '<li><input type="checkbox"> $1</li>')
+                    .replace(/-\s+(.*)/g, '<li>$1</li>')
+                    .replace(/\n\n/g, '</p><p>')
+                    .replace(/\n/g, '<br>');
+                
+                document.getElementById('aiContent').innerHTML = `
+                    <div style="background: rgba(16,185,129,0.1); padding: 0.5rem 1rem; border-radius: 6px; margin-bottom: 1rem;">
+                        📋 דוח קיים מהמטמון. לחץ על הכפתור לניתוח חדש.
+                    </div>
+                    ${html}`;
+            }
+        }
+        
+        // ============ Main Analysis Flow ============
+        async function startAnalysis() {
+            const keyword = document.getElementById('keywordInput').value.trim();
+            const pagePath = document.getElementById('pageSelect').value;
+            
+            if (!keyword) {
+                alert('נא להזין מילת מפתח');
+                return;
+            }
+            if (!pagePath) {
+                alert('נא לבחור עמוד');
+                return;
+            }
+            
+            analysisState.keyword = keyword;
+            analysisState.pagePath = pagePath;
+            
+            // Disable start button
+            document.getElementById('startBtn').disabled = true;
+            document.getElementById('sendToAiBtn').disabled = true;
+            
+            // Use existing data if available (already checked when page was selected)
+            if (window.existingCompetitorData) {
+                await useExistingData(window.existingCompetitorData);
+                document.getElementById('startBtn').disabled = false;
+                document.getElementById('startBtn').innerHTML = '🔄 סרוק מחדש';
+                return;
+            }
+            
+            try {
+                // Step 1: Autocomplete
+                updateStep('autocomplete', 'active', 'מחפש השלמות גוגל...');
+                const autoResult = await apiCall('/api/seo/autocomplete', {
+                    method: 'POST',
+                    body: JSON.stringify({ keyword })
+                });
+                
+                if (autoResult.success) {
+                    analysisState.autocomplete = autoResult.suggestions || [];
+                    updateStep('autocomplete', 'done', `נמצאו ${analysisState.autocomplete.length} השלמות`, 
+                        analysisState.autocomplete.slice(0, 10).map(s => `<span class="tag">${s}</span>`).join(''));
+                } else {
+                    updateStep('autocomplete', 'error', autoResult.error || 'שגיאה');
+                }
+                
+                // Step 2: SERP
+                updateStep('serp', 'active', 'מחפש תוצאות בגוגל...');
+                const serpResult = await apiCall('/api/seo/serp', {
+                    method: 'POST',
+                    body: JSON.stringify({ keyword, max_results: 10 })
+                });
+                
+                if (serpResult.success) {
+                    analysisState.serpResults = serpResult.results || [];
+                    const domains = analysisState.serpResults.slice(0, 5).map(r => {
+                        try { return new URL(r.url).hostname; } catch { return r.url; }
+                    });
+                    updateStep('serp', 'done', `נמצאו ${analysisState.serpResults.length} תוצאות`,
+                        domains.map((d, i) => `<span class="tag">${i+1}. ${d}</span>`).join(''));
+                } else {
+                    updateStep('serp', 'error', serpResult.error || 'שגיאה');
+                }
+                
+                // Step 3: Analyze my page - use full path API
+                updateStep('mypage', 'active', 'מנתח את העמוד שלי...');
+                const myPageResult = await apiCall(`/api/page/${encodeURIComponent(pagePath)}`);
+                
+                if (myPageResult.success && myPageResult.content) {
+                    analysisState.myPageAnalysis = analyzePageFull(myPageResult.content, keyword);
+                    const summary = `מילים: ${analysisState.myPageAnalysis.content.wordCount} | צפיפות: ${analysisState.myPageAnalysis.content.keywordDensity}% | H2: ${analysisState.myPageAnalysis.headings.h2.count}`;
+                    updateStep('mypage', 'done', summary);
+                        } else {
+                    updateStep('mypage', 'error', 'לא ניתן לטעון את העמוד');
+                    return;
+                }
+                
+                // Step 4: Scrape and analyze competitors - ensure we get 5 successful
+                updateStep('competitors', 'active', 'סורק מתחרים...');
+                
+                // Filter out our own domain from competitors
+                const OUR_DOMAINS = ['loan-israel.co.il', 'www.loan-israel.co.il'];
+                const allCompetitorUrls = analysisState.serpResults
+                    .map(r => r.url)
+                    .filter(url => {
+                        try {
+                            const domain = new URL(url).hostname.toLowerCase();
+                            return !OUR_DOMAINS.some(ourDomain => domain.includes(ourDomain.replace('www.', '')));
+                        } catch {
+                            return false;
+                        }
+                    });
+                
+                console.log(`[Competitors] Filtered ${analysisState.serpResults.length} SERP results to ${allCompetitorUrls.length} competitors (removed our domain)`);
+                
+                const cardsContainer = document.getElementById('competitor-cards');
+                cardsContainer.classList.remove('hidden');
+                cardsContainer.innerHTML = '';
+                
+                // Scrape competitors until we have 5 successful
+                analysisState.competitorAnalyses = [];
+                const TARGET_COMPETITORS = 5;
+                let successCount = 0;
+                let blockedCount = 0;
+                let urlIndex = 0;
+                
+                while (successCount < TARGET_COMPETITORS && urlIndex < allCompetitorUrls.length) {
+                    const url = allCompetitorUrls[urlIndex];
+                    let domain;
+                    try {
+                        domain = new URL(url).hostname;
+                    } catch {
+                        urlIndex++;
+                        continue;
+                    }
+                    
+                    // Add loading card
+                    const cardId = `comp-card-${urlIndex}`;
+                    cardsContainer.innerHTML += `
+                        <div class="competitor-card loading" id="${cardId}">
+                            <span class="spinner"></span>
+                            <span class="domain">${domain}</span>
+                            <span class="metrics">סורק... (${successCount + 1}/${TARGET_COMPETITORS})</span>
+                        </div>`;
+                    
+                    try {
+                        const scrapeResult = await apiCall('/api/seo/scrape-single', {
+                            method: 'POST',
+                            body: JSON.stringify({ url, keyword })
+                        });
+                        
+                        // Check if blocked by website
+                        if (scrapeResult.blocked) {
+                            // Website blocked the scrape (captcha, etc.)
+                            blockedCount++;
+                            document.getElementById(cardId).outerHTML = `
+                                <div class="competitor-card" id="${cardId}" style="opacity: 0.5; border-color: #f59e0b;">
+                                    <span>🚫</span>
+                                    <span class="domain">${domain}</span>
+                                    <span class="metrics" title="${scrapeResult.error || 'חסום'}">חסום - ${scrapeResult.error ? scrapeResult.error.substring(0, 30) + '...' : 'מנסה הבא'}</span>
+                                </div>`;
+                        } else if (scrapeResult.success && (scrapeResult.html || scrapeResult.content)) {
+                            const htmlContent = scrapeResult.html || scrapeResult.content;
+                            
+                            if (htmlContent.length > 1000) {
+                                const analysis = analyzePageFull(htmlContent, keyword);
+                                
+                                // Validate analysis - must have reasonable word count
+                                if (analysis.content.wordCount > 100) {
+                                    analysis.url = url;
+                                    analysis.domain = domain;
+                                    analysis.googleRank = urlIndex + 1; // Position in SERP
+                                    analysisState.competitorAnalyses.push(analysis);
+                                    successCount++;
+                                    
+                                    // Save HTML for future use
+                                    await apiCall('/api/seo/save-competitor-html', {
+                                        method: 'POST',
+                                        body: JSON.stringify({
+                                            page_path: pagePath,
+                                            url: url,
+                                            html: htmlContent,
+                                            index: successCount - 1
+                                        })
+                                    });
+                                    
+                                    // Update card to success
+                                    document.getElementById(cardId).outerHTML = `
+                                        <div class="competitor-card done" id="${cardId}">
+                                            <span>✅</span>
+                                            <span class="domain">${domain}</span>
+                                            <span class="metrics">${analysis.content.wordCount} מילים | ${analysis.content.keywordDensity}%</span>
+                                        </div>`;
+                                } else {
+                                    // Content too short after cleaning
+                                    document.getElementById(cardId).outerHTML = `
+                                        <div class="competitor-card" id="${cardId}" style="opacity: 0.5;">
+                                            <span>⚠️</span>
+                                            <span class="domain">${domain}</span>
+                                            <span class="metrics">תוכן קצר (${analysis.content.wordCount} מילים) - מדלג</span>
+                                        </div>`;
+                                }
+                } else {
+                                // HTML too short - likely blocked or error page
+                                document.getElementById(cardId).outerHTML = `
+                                    <div class="competitor-card" id="${cardId}" style="opacity: 0.5;">
+                                        <span>⚠️</span>
+                                        <span class="domain">${domain}</span>
+                                        <span class="metrics">HTML קצר מדי (${htmlContent.length} bytes)</span>
+                                    </div>`;
+                            }
+                        } else {
+                            // Scrape failed with error
+                            const errorMsg = scrapeResult.error || 'נכשל';
+                            document.getElementById(cardId).outerHTML = `
+                                <div class="competitor-card" id="${cardId}" style="opacity: 0.5;">
+                                    <span>❌</span>
+                                    <span class="domain">${domain}</span>
+                                    <span class="metrics" title="${errorMsg}">${errorMsg.substring(0, 25)}...</span>
+                                </div>`;
+                        }
+                    } catch (e) {
+                        // Error, try next
+                        console.error(`[ScrapeCompetitors] Error scraping ${domain}:`, e);
+                        document.getElementById(cardId).outerHTML = `
+                            <div class="competitor-card" id="${cardId}" style="opacity: 0.5;">
+                                <span>❌</span>
+                                <span class="domain">${domain}</span>
+                                <span class="metrics" title="${e.message || 'שגיאה'}">שגיאה - ${e.message ? e.message.substring(0, 15) + '...' : 'מנסה הבא'}</span>
+                            </div>`;
+                    }
+                    
+                    urlIndex++;
+                    
+                    // Update step with progress
+                    updateStep('competitors', 'active', `סורק מתחרים... (${successCount}/${TARGET_COMPETITORS} הצליחו)`);
+                }
+                
+                // Final status
+                if (successCount >= TARGET_COMPETITORS) {
+                    const blockedNote = blockedCount > 0 ? ` (${blockedCount} אתרים חסמו)` : '';
+                    updateStep('competitors', 'done', `✅ נסרקו ${successCount} מתחרים בהצלחה${blockedNote}`);
+                } else {
+                    const blockedNote = blockedCount > 0 ? ` | ${blockedCount} חסמו` : '';
+                    updateStep('competitors', 'done', `⚠️ נסרקו ${successCount}/${TARGET_COMPETITORS} מתחרים (נגמרו תוצאות${blockedNote})`);
+                }
+                
+                // Step 5: Build comparison table
+                updateStep('comparison', 'active', 'בונה טבלת השוואה...');
+                
+                if (analysisState.competitorAnalyses.length > 0) {
+                    buildComparisonTable(analysisState.myPageAnalysis, analysisState.competitorAnalyses);
+                    document.getElementById('comparisonSection').classList.remove('hidden');
+                    document.getElementById('aiSection').classList.remove('hidden');
+                    document.getElementById('sendToAiBtn').disabled = false;
+                    updateStep('comparison', 'done', 'טבלת ההשוואה מוכנה!');
+                } else {
+                    updateStep('comparison', 'error', 'לא נמצאו מתחרים לניתוח');
+                }
+                
+            } catch (error) {
+                console.error('Analysis error:', error);
+                alert('שגיאה בניתוח: ' + error.message);
+            }
+            
+            document.getElementById('startBtn').disabled = false;
+        }
+        
+        // ============ Send to AI ============
+        async function sendToAI() {
+            console.log('[sendToAI] Starting...');
+            console.log('[sendToAI] analysisState:', analysisState);
+            
+            if (!analysisState.comparisonData) {
+                alert('אין נתונים לניתוח - יש להריץ קודם את הניתוח');
+                console.error('[sendToAI] No comparisonData available');
+                return;
+            }
+            
+            if (!analysisState.myPageAnalysis) {
+                alert('אין ניתוח של העמוד שלי');
+                console.error('[sendToAI] No myPageAnalysis available');
+                return;
+            }
+            
+            if (!analysisState.competitorAnalyses || analysisState.competitorAnalyses.length === 0) {
+                alert('אין ניתוח של מתחרים');
+                console.error('[sendToAI] No competitorAnalyses available');
+                return;
+            }
+            
+            document.getElementById('sendToAiBtn').disabled = true;
+            document.getElementById('aiSpinner').classList.remove('hidden');
+            document.getElementById('aiContent').innerHTML = '<p>🔄 מנתח את הפערים עם Claude Opus 4.5... (עד 2 דקות)</p>';
+            
+            try {
+                console.log('[sendToAI] Calling /api/seo/analyze-gaps...');
+                const payload = {
+                    keyword: analysisState.keyword,
+                    pagePath: analysisState.pagePath,
+                    myAnalysis: analysisState.myPageAnalysis,
+                    competitorAnalyses: analysisState.competitorAnalyses,
+                    comparisonData: analysisState.comparisonData
+                };
+                console.log('[sendToAI] Payload:', payload);
+                
+                const result = await apiCall('/api/seo/analyze-gaps', {
+                    method: 'POST',
+                    body: JSON.stringify(payload)
+                });
+                
+                console.log('[sendToAI] Result:', result);
+                
+                if (result.success && result.analysis) {
+                    // Format the AI response
+                    let html = result.analysis
+                        .replace(/## (.*)/g, '<h2>$1</h2>')
+                        .replace(/### (.*)/g, '<h3>$1</h3>')
+                        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                        .replace(/- \[ \] (.*)/g, '<li><input type="checkbox"> $1</li>')
+                        .replace(/-\s+(.*)/g, '<li>$1</li>')
+                        .replace(/\n\n/g, '</p><p>')
+                        .replace(/\n/g, '<br>');
+                    
+                    document.getElementById('aiContent').innerHTML = html;
+                    console.log('[sendToAI] Success!');
+                } else {
+                    const errorMsg = result.error || 'לא ניתן לנתח';
+                    document.getElementById('aiContent').innerHTML = `
+                        <div style="color: var(--accent-error); padding: 1rem; background: rgba(239,68,68,0.1); border-radius: 8px;">
+                            <strong>❌ שגיאה בניתוח AI:</strong><br>
+                            ${errorMsg}<br><br>
+                            <small>בדוק שמפתח API של Anthropic מוגדר בקובץ .env או api_config.env</small>
+                        </div>`;
+                    console.error('[sendToAI] API Error:', errorMsg);
+                }
+            } catch (error) {
+                console.error('[sendToAI] Exception:', error);
+                document.getElementById('aiContent').innerHTML = `
+                    <div style="color: var(--accent-error); padding: 1rem; background: rgba(239,68,68,0.1); border-radius: 8px;">
+                        <strong>❌ שגיאת רשת:</strong><br>
+                        ${error.message}<br><br>
+                        <small>וודא שהשרת רץ ב-localhost:5000</small>
+                    </div>`;
+            }
+            
+            document.getElementById('aiSpinner').classList.add('hidden');
+            document.getElementById('sendToAiBtn').disabled = false;
+        }
+        
+        // ============ Init ============
+        document.addEventListener('DOMContentLoaded', () => {
+            loadPages();
+        });
+    </script>
+</body>
+</html>

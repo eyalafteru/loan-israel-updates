@@ -1,0 +1,178 @@
+{
+  "agents": {
+    "atomic_marketing": {
+      "type": "four-step",
+      "name": "שיווק אטומי",
+      "description": "ניתוח תוכן לפי עקרונות שיווק אטומי: דוח → QA → תיקון → דיבאג",
+      "supports_full_auto": true,
+      "folder_name": "שיווק אטומי",
+      "step1": {
+        "name": "הפקת דוח",
+        "agent": "v2/פרומטים/שיווק-אטומי/שלב-1-auditor.md",
+        "output_name": "דוח שלב 1.md"
+      },
+      "step2": {
+        "name": "QA והרחבה",
+        "agent": "v2/פרומטים/שיווק-אטומי/שלב-2-qa.md",
+        "input_report": "דוח שלב 1.md",
+        "output_name": "דוח שלב 1 מורחב.md"
+      },
+      "step3": {
+        "name": "ביצוע תיקונים",
+        "agent": "v2/פרומטים/שיווק-אטומי/שלב-3-fixer.md",
+        "input_report": "דוח שלב 1 מורחב.md",
+        "report_name": "דוח שלב 3.md"
+      },
+      "step4": {
+        "name": "דיבאג",
+        "agent": "v2/פרומטים/שיווק-אטומי/debug.md",
+        "report_name": "דוח דיבאג.md"
+      }
+    },
+    "seo": {
+      "type": "six-step",
+      "name": "SEO Audit",
+      "description": "בדיקת SEO: תוכן+מבנה (1-3) ואמינות+קישורים (2-4) + הסרת AI (5-6)",
+      "supports_full_auto": true,
+      "folder_name": "SEO",
+      "step1": {
+        "name": "1️⃣ בדיקת תוכן ומבנה",
+        "short_name": "תוכן/מבנה",
+        "agent": "v2/פרומטים/seo/שלב-1-auditor.md",
+        "output_name": "דוח שלב 1.md",
+        "focus": "כותרות H1-H6, Keyword Stuffing, Bold Spam, Schema"
+      },
+      "step2": {
+        "name": "2️⃣ בדיקת אמינות וקישורים",
+        "short_name": "אמינות/קישורים",
+        "agent": "v2/פרומטים/seo/שלב-2-qa.md",
+        "output_name": "דוח שלב 2.md",
+        "focus": "YMYL, E-E-A-T, קישורים פנימיים/חיצוניים, צפיפות"
+      },
+      "step3": {
+        "name": "3️⃣ תיקון תוכן ומבנה",
+        "short_name": "תיקון תוכן",
+        "agent": "v2/פרומטים/seo/שלב-3-fixer.md",
+        "input_report": "דוח שלב 1.md",
+        "report_name": "דוח שלב 3.md",
+        "focus": "מתקן H1-H6, Bold Spam, Schema לפי דוח שלב 1"
+      },
+      "step4": {
+        "name": "4️⃣ תיקון אמינות וקישורים",
+        "short_name": "תיקון קישורים",
+        "agent": "v2/פרומטים/seo/שלב-4-qa-fixes.md",
+        "input_report": "דוח שלב 2.md",
+        "report_name": "דוח שלב 4.md",
+        "focus": "מתקן YMYL, קישורים, צפיפות לפי דוח שלב 2"
+      },
+      "step5": {
+        "name": "5️⃣ הסרת עקבות AI",
+        "short_name": "הסרת AI",
+        "agent": "v2/פרומטים/seo/שלב-5-ai-remover.md",
+        "report_name": "דוח שלב 5.md"
+      },
+      "step6": {
+        "name": "6️⃣ דיבאג הסרת AI",
+        "short_name": "דיבאג AI",
+        "agent": "v2/פרומטים/seo/שלב-6-debug.md",
+        "report_name": "דוח דיבאג AI.md"
+      }
+    },
+    "qa_embed": {
+      "type": "single-step",
+      "name": "QA אזור הטמעה",
+      "description": "בדיקה ותיקון אזור הטמעת מחשבונים",
+      "agent": "פרומטים/סוכן QA אזור הטמעה.md",
+      "output_suffix": "_מתוקן_QA.html",
+      "output_folder": "עמודים מתוקנים"
+    },
+    "datalayer": {
+      "type": "single-step",
+      "name": "הטמעת DataLayer",
+      "description": "הוספת DataLayer לכפתורי העתקה",
+      "agent": "פרומטים/סוכן הטמעת DataLayer לכפתורי העתקה.md",
+      "output_suffix": "_עם_DataLayer.html",
+      "output_folder": "עמודים מתוקנים"
+    },
+    "title_description": {
+      "type": "single-step",
+      "name": "טייטל ודסקריפשן",
+      "description": "יצירת Meta Title ו-Description מנצחים (SEO + שיווק אטומי)",
+      "agent": "פרומטים/סוכן טייטלים ודסקריפשנים.md",
+      "output_name": "המלצות טייטל ודסקריפשן.md",
+      "uses_atomic_marketing": true
+    },
+    "build_calculator": {
+      "type": "multi-step",
+      "name": "בניית עמוד מחשבון",
+      "description": "בניית עמוד מחשבון חדש מאפס עם 2 שלבי QA",
+      "mode": "build",
+      "steps": [
+        {
+          "name": "בנייה",
+          "agent": "פרומטים/סוכן AI - בניית עמודי מחשבון.md",
+          "output_suffix": ".html",
+          "output_folder": "מחשבונים חדשים"
+        },
+        {
+          "name": "QA פלט",
+          "agent": "פרומטים/סוכן QA לפלט.md",
+          "output_suffix": "_QA1.html",
+          "output_folder": "מחשבונים חדשים"
+        },
+        {
+          "name": "QA הטמעה",
+          "agent": "פרומטים/סוכן QA אזור הטמעה.md",
+          "output_suffix": "_סופי.html",
+          "output_folder": "דפים לשינוי/מחשבונים מוכנים לעלייה לאוויר"
+        }
+      ],
+      "post_action": "register_new_page"
+    }
+  },
+  "wordpress": {
+    "sites": {
+      "main": {
+        "name": "אתר ראשי",
+        "site_url": "https://loan-israel.co.il",
+        "api_base": "/wp-json/wp/v2",
+        "token_endpoint": "/wp-json/jwt-auth/v1/token",
+        "username": "admin",
+        "password": "WaxEfc$753"
+      },
+      "business": {
+        "name": "עסקים (Business)",
+        "site_url": "https://loan-israel.co.il/Business",
+        "api_base": "/wp-json/wp/v2",
+        "token_endpoint": "/wp-json/jwt-auth/v1/token",
+        "username": "eyal10_Business",
+        "password": "WaxEfc$753"
+      }
+    },
+    "auth_type": "jwt"
+  },
+  "paths": {
+    "editable_pages": {
+      "main": "דפים לשינוי/main",
+      "business": "דפים לשינוי/business"
+    },
+    "new_calculators": "מחשבונים חדשים",
+    "agents": "v2/פרומטים",
+    "archive": "ארכיון",
+    "csv_file": "קישורי ויקי - מילות מפתח.csv"
+  },
+  "dashboard": {
+    "version": "2.0",
+    "path": "v2/dashboard"
+  },
+  "claude_code": {
+    "enabled": true,
+    "command": "C:\\Users\\eyal\\AppData\\Roaming\\npm\\claude.cmd"
+  },
+  "apify": {
+    "token": "apify_api_EgPRMEMxWZMbq3nxHZs7MORf97C3dE3pxSB4",
+    "autocomplete_actor": "afteru7~hshlmvt-gvgl",
+    "serp_actor": "nFJndFXA5zjCTuudP"
+  }
+}
+

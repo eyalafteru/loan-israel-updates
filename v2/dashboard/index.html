@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🛠️ Dashboard v2 - ניהול עמודים</title>
+    <link rel="stylesheet" href="/v2/styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <h1>🛠️ Dashboard v2.0</h1>
+        <div class="header-controls">
+            <div class="tabs">
+                <button class="tab active" data-tab="pages">📄 עמודים</button>
+                <button class="tab" data-tab="agents">🤖 סוכנים</button>
+                <button class="tab" data-tab="wordpress">📤 WordPress</button>
+                <button class="tab" data-tab="settings">⚙️ הגדרות</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Sidebar - Page List -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h2>📁 רשימת עמודים</h2>
+                <button class="btn btn-secondary btn-small" onclick="refreshPages()">🔄 רענן</button>
+            </div>
+            <div class="page-list" id="pageList">
+                <!-- Pages loaded dynamically -->
+            </div>
+        </aside>
+
+        <!-- Content Area -->
+        <section class="content" id="content">
+            <div class="empty-state">
+                <h3>👈 בחר עמוד מהרשימה</h3>
+                <p>או צור עמוד חדש</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modals -->
+    <div id="modalContainer"></div>
+
+    <!-- Toast Notifications -->
+    <div id="toastContainer"></div>
+
+    <!-- Scripts (modular) -->
+    <script src="/v2/config.js"></script>
+    <script src="/v2/api.js"></script>
+    <script src="/v2/analyzers.js"></script>
+    <script src="/v2/ui.js"></script>
+    <script src="/v2/pages.js"></script>
+    <script src="/v2/agents.js"></script>
+    <script src="/v2/wordpress.js"></script>
+    <script src="/v2/app.js"></script>
+</body>
+</html>
+

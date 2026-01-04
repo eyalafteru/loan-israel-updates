@@ -1,0 +1,129 @@
+# ==============================================
+# Page Management Dashboard - .gitignore
+# מערכת ניהול אתרים
+# ==============================================
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+ENV/
+env/
+.venv/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.project
+.pydevproject
+.settings/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ==============================================
+# Temporary files - DO NOT COMMIT
+# ==============================================
+
+# Temp folders
+tmp/
+logs/
+job_locks/
+
+# Temp files
+*.log
+*.tmp
+temp_*.py
+temp_*.bat
+temp_*.md
+temp_*.txt
+nul
+
+# Running state files (regenerated on startup)
+running_jobs.json
+full_auto_jobs.json
+
+# Debug logs
+*_debug.log
+backup_thread_debug.log
+trigger_step_debug.log
+webhook_debug.log
+
+# Test files
+apify_debug_response.json
+wp_test_*.html
+wp_test_*.json
+wp_test_*.txt
+TEST.txt
+
+# ==============================================
+# IMPORTANT: Files to INCLUDE (not ignored)
+# ==============================================
+
+# API config with keys - INCLUDE in private repo
+# !api_config.env
+
+# Config files - INCLUDE
+# !config.json
+
+# ==============================================
+# Large/generated files
+# ==============================================
+
+# NLP models (too large, install separately)
+*.pt
+*.bin
+*.safetensors
+
+# Node modules (if any local)
+node_modules/
+
+# ==============================================
+# Backup files
+# ==============================================
+
+# Config backups (keep only current)
+config_backup_*.json
+
+# Old/deprecated
+פרומטים ישנים/
+
+# ==============================================
+# Archive - optional, can be large
+# ==============================================
+
+# Uncomment to exclude archive from repo:
+# ארכיון/
+
+# ==============================================
+# Images/screenshots - optional
+# ==============================================
+
+# Uncomment to exclude images:
+# images/
+

@@ -1,0 +1,15 @@
+=== פרומפט שנשלח לקלוד - step2 ===
+זמן: 2026-01-04 09:01:51
+============================================================
+
+קרא את קובץ ההוראות C:\Users\eyal\loan-israel-updaets\loan-israel-updates\פרומטים\אטומי\שלב 2.md.
+
+להלן הדוח משלב 1 לבדיקה והרחבה:
+
+C:\Users\eyal\loan-israel-updaets\loan-israel-updates\דפים לשינוי\main\הלוואה בצ_יקים\שיווק אטומי\דוח שלב 1.md
+
+קובץ העמוד המקורי: C:\Users\eyal\loan-israel-updaets\loan-israel-updates\דפים לשינוי\main\הלוואה בצ_יקים\הלוואה בצ_יקים.html
+
+בצע בדיקת QA על הדוח והרחב אותו לפי ההוראות.
+
+בסוף חובה לשמור את הדוח בנתיב המדויק: C:\Users\eyal\loan-israel-updaets\loan-israel-updates\דפים לשינוי\main\הלוואה בצ_יקים\שיווק אטומי\דוח שלב 1 מורחב.md

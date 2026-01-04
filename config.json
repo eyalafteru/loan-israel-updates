@@ -1,4 +1,14 @@
 {
+  "ui": {
+    "preferred_agent_order": ["atomic_marketing", "seo"]
+  },
+  "global_values": {
+    "BOI_INTEREST_RATE": {
+      "name": "ריבית בנק ישראל",
+      "value": "5.75%",
+      "description": "ריבית בנק ישראל הנוכחית"
+    }
+  },
   "agents": {
     "atomic_marketing": {
       "type": "four-step",
@@ -8,24 +18,24 @@
       "folder_name": "שיווק אטומי",
       "step1": {
         "name": "הפקת דוח",
-        "agent": "פרומטים/סוכן מוציא דוח תוכן שיווק אטומי",
+        "agent": "פרומטים/אטומי/שלב 1.md",
         "output_name": "דוח שלב 1.md"
       },
       "step2": {
         "name": "QA והרחבה",
-        "agent": "פרומטים/סוכן QA לדוח שלב 1.md",
+        "agent": "פרומטים/אטומי/שלב 2.md",
         "input_report": "דוח שלב 1.md",
         "output_name": "דוח שלב 1 מורחב.md"
       },
       "step3": {
         "name": "ביצוע תיקונים",
-        "agent": "פרומטים/סוכן מתקן שיווק אטומי.md",
+        "agent": "פרומטים/אטומי/שלב 3.md",
         "input_report": "דוח שלב 1 מורחב.md",
         "report_name": "דוח שלב 3.md"
       },
       "step4": {
         "name": "דיבאג",
-        "agent": "פרומטים/סוכן דיבאג שיווק אטומי.md",
+        "agent": "פרומטים/אטומי/שלב 4.md",
         "report_name": "דוח דיבאג.md"
       }
     },
@@ -38,21 +48,21 @@
       "step1": {
         "name": "1️⃣ בדיקת תוכן ומבנה",
         "short_name": "תוכן/מבנה",
-        "agent": "פרומטים/סוכן SEO Auditor.md",
+        "agent": "פרומטים/SEO/שלב 1.md",
         "output_name": "דוח שלב 1.md",
         "focus": "כותרות H1-H6, Keyword Stuffing, Bold Spam, Schema"
       },
       "step2": {
         "name": "2️⃣ בדיקת אמינות וקישורים",
         "short_name": "אמינות/קישורים",
-        "agent": "פרומטים/סוכן QA לדוח SEO.md",
+        "agent": "פרומטים/SEO/שלב 2.md",
         "output_name": "דוח שלב 2.md",
         "focus": "YMYL, E-E-A-T, קישורים פנימיים/חיצוניים, צפיפות"
       },
       "step3": {
         "name": "3️⃣ תיקון תוכן ומבנה",
         "short_name": "תיקון תוכן",
-        "agent": "פרומטים/סוכן מתקן SEO.md",
+        "agent": "פרומטים/SEO/שלב 3.md",
         "input_report": "דוח שלב 1.md",
         "report_name": "דוח שלב 3.md",
         "focus": "מתקן H1-H6, Bold Spam, Schema לפי דוח שלב 1"
@@ -60,7 +70,7 @@
       "step4": {
         "name": "4️⃣ תיקון אמינות וקישורים",
         "short_name": "תיקון קישורים",
-        "agent": "פרומטים/סוכן QA לתיקוני SEO.md",
+        "agent": "פרומטים/SEO/שלב 4.md",
         "input_report": "דוח שלב 2.md",
         "report_name": "דוח שלב 4.md",
         "focus": "מתקן YMYL, קישורים, צפיפות לפי דוח שלב 2"
@@ -68,93 +78,129 @@
       "step5": {
         "name": "5️⃣ הסרת עקבות AI",
         "short_name": "הסרת AI",
-        "agent": "פרומטים/סוכן הסרת עקבות AI.md",
+        "agent": "פרומטים/SEO/שלב 5.md",
         "report_name": "דוח שלב 5.md"
       },
       "step6": {
         "name": "6️⃣ דיבאג הסרת AI",
         "short_name": "דיבאג AI",
-        "agent": "פרומטים/סוכן דיבאג הסרת AI.md",
+        "agent": "פרומטים/SEO/שלב 6.md",
         "report_name": "דוח דיבאג AI.md"
       }
-    },
-    "qa_embed": {
-      "type": "single-step",
-      "name": "QA אזור הטמעה",
-      "description": "בדיקה ותיקון אזור הטמעת מחשבונים",
-      "agent": "פרומטים/סוכן QA אזור הטמעה.md",
-      "output_suffix": "_מתוקן_QA.html",
-      "output_folder": "עמודים מתוקנים"
-    },
-    "datalayer": {
-      "type": "single-step",
-      "name": "הטמעת DataLayer",
-      "description": "הוספת DataLayer לכפתורי העתקה",
-      "agent": "פרומטים/סוכן הטמעת DataLayer לכפתורי העתקה.md",
-      "output_suffix": "_עם_DataLayer.html",
-      "output_folder": "עמודים מתוקנים"
-    },
-    "build_calculator": {
-      "type": "multi-step",
-      "name": "בניית עמוד מחשבון",
-      "description": "בניית עמוד מחשבון חדש מאפס עם 2 שלבי QA",
-      "mode": "build",
-      "steps": [
-        {
-          "name": "בנייה",
-          "agent": "פרומטים/סוכן AI - בניית עמודי מחשבון.md",
-          "output_suffix": ".html",
-          "output_folder": "מחשבונים חדשים"
-        },
-        {
-          "name": "QA פלט",
-          "agent": "פרומטים/סוכן QA לפלט.md",
-          "output_suffix": "_QA1.html",
-          "output_folder": "מחשבונים חדשים"
-        },
-        {
-          "name": "QA הטמעה",
-          "agent": "פרומטים/סוכן QA אזור הטמעה.md",
-          "output_suffix": "_סופי.html",
-          "output_folder": "דפים לשינוי/מחשבונים מוכנים לעלייה לאוויר"
-        }
-      ],
-      "post_action": "register_new_page"
     }
   },
+  "custom_data_sources": [
+    {
+      "id": "internal_links",
+      "name": "קישורים פנימיים",
+      "shortcode": "INTERNAL_LINKS_DB",
+      "path": "דטה בייס לקישורים פנימיים רק תבקש.txt",
+      "type": "text",
+      "description": "מאגר קישורים פנימיים לאתר"
+    },
+    {
+      "id": "financial_data",
+      "name": "מידע פיננסי",
+      "shortcode": "FINANCIAL_DATA",
+      "path": "תוכן פיננסי על מסלולי הלוואות",
+      "type": "text",
+      "description": "מידע פיננסי מעודכן על מסלולי הלוואות"
+    },
+    {
+      "id": "approved_domains",
+      "name": "דומיינים מאושרים",
+      "shortcode": "APPROVED_DOMAINS",
+      "path": "דומיינים מאושרים למידע פיננסי.txt",
+      "type": "text",
+      "description": "רשימת דומיינים מאושרים למידע פיננסי (boi.org.il, gov.il וכו')"
+    },
+    {
+      "id": "knowledge-base-general",
+      "name": "מאגר מידע עסקים",
+      "shortcode": "KNOWLEDGE_BASE_GENERAL",
+      "path": "מאגרי מידע\\תחום הלוואות לעסקים.md",
+      "type": "file_path",
+      "description": "מאגר מידע כללי על הלוואות לעסקים"
+    },
+    {
+      "id": "knowledge-base-tracks",
+      "name": "מאגר מסלולי הלוואות",
+      "shortcode": "KNOWLEDGE_BASE_TRACKS",
+      "path": "מאגרי מידע\\מסלולי הלוואות לעסקים 2026.md",
+      "type": "file_path",
+      "description": "מידע על מסלולי הלוואות שונים לעסקים"
+    }
+  ],
   "wordpress": {
     "sites": {
       "main": {
         "name": "אתר ראשי",
+        "icon": "🏠",
         "site_url": "https://loan-israel.co.il",
         "api_base": "/wp-json/wp/v2",
         "token_endpoint": "/wp-json/jwt-auth/v1/token",
-        "username": "",
-        "password": ""
+        "username": "admin",
+        "password": "WaxEfc$753"
       },
       "business": {
-        "name": "עסקים (Business)",
+        "name": "עסקים",
+        "icon": "💼",
         "site_url": "https://loan-israel.co.il/Business",
         "api_base": "/wp-json/wp/v2",
         "token_endpoint": "/wp-json/jwt-auth/v1/token",
         "username": "eyal10_Business",
-        "password": ""
+        "password": "WaxEfc$753"
       }
     },
     "auth_type": "jwt"
   },
   "paths": {
-    "editable_pages": [
-      "דפים לשינוי"
-    ],
+    "editable_pages": {
+      "main": "דפים לשינוי/main",
+      "business": "דפים לשינוי/business"
+    },
     "new_calculators": "מחשבונים חדשים",
+    "agents_folder": "agents",
     "agents": "פרומטים",
     "archive": "ארכיון",
     "csv_file": "קישורי ויקי - מילות מפתח.csv"
   },
   "claude_code": {
     "enabled": true,
-    "command": "C:\\Users\\eyal\\AppData\\Roaming\\npm\\claude.cmd"
-  }
+    "command": "C:\\Users\\eyal\\AppData\\Roaming\\npm\\claude.cmd",
+    "models": {
+      "claude-sonnet-4": {
+        "name": "Claude Sonnet 4",
+        "flag": "sonnet"
+      },
+      "claude-opus-4": {
+        "name": "Claude Opus 4",
+        "flag": "opus"
+      },
+      "claude-sonnet-4-5": {
+        "name": "Claude Sonnet 4.5",
+        "flag": "claude-sonnet-4-5-20250514"
+      },
+      "claude-opus-4-5": {
+        "name": "Claude Opus 4.5",
+        "flag": "claude-opus-4-5-20250514"
+      }
+    }
+  },
+  "apify": {
+    "token": "apify_api_EgPRMEMxWZMbq3nxHZs7MORf97C3dE3pxSB4",
+    "autocomplete_actor": "afteru7~hshlmvt-gvgl",
+    "serp_actor": "nFJndFXA5zjCTuudP"
+  },
+  "approved_domains": [
+    "boi.org.il",
+    "gov.il",
+    "bankisrael.gov.il",
+    "cbs.gov.il",
+    "btl.gov.il",
+    "justice.gov.il",
+    "calcalist.co.il",
+    "globes.co.il",
+    "themarker.com"
+  ]
 }
-

@@ -1,0 +1,1074 @@
+בשמחה. הנה קטע אחיד ומלא שמאגד גם את **החוקיות המחייבת של הפיתוח עם Cursor**, וגם את **העקרונות הקריטיים ל־Core Web Vitals** — בצורה חדה, אכיפה וברורה, לשימוש בראש כל קובץ פיתוח או כתנאי עבודה למנוע AI:
+
+---
+
+````plaintext
+📢 חובה מוחלטת – כל רכיב נבנה לפי הכללים הבאים בלבד. כל סטייה = תקלה.
+
+אתה מפתח מודולים עבור אתר WordPress קיים, **בתוך `<body>` בלבד**, בהתאם לחוקי יעילות קוד, אבטחה ודירוג גבוה ב־Core Web Vitals. אין לפרש או להמציא – רק לפעול לפי ההוראות:
+
+---
+
+🔒 כללי פיתוח מחייבים:
+
+1. ❗ **אין DOCTYPE / HTML / HEAD / BODY**
+   - הקוד מוזרק לתוך BODY – כתוב רק HTML נטו
+
+2. 🎯 **עיצוב רק מתוך `visual.txt`**
+   - חובה לפתוח את `C:\Users\eyal\visual.txt`
+   - חיפוש לפי מחרוזות כמו:
+     - "wpc-hero-demo-section"
+     - "wpc-calc-tabs-demo"
+     - "wpc-disclaimer"
+   - חובה להעתיק בדיוק דסקטופ + מובייל (כולל @media)
+
+3. 🧬 **שמות ייחודיים חובה**
+   - CSS: `wpc-[topic]-[4random]-`
+   - JS: `WPC_[Topic]_[Random]`
+
+4. 📱 **Mobile First**
+   - כל רכיב חייב לכלול:
+     - `@media (max-width: 768px)`
+     - `@media (max-width: 480px)`
+   - אם אין – לציין זאת במפורש
+
+5. 🇮🇱 **עברית בלבד**
+   - ❌ אין אנגלית בכפתורים / placeholders
+   - ✅ רק מילים כמו: "שלח", "נקה", "הכנס ערך"
+
+6. 🛡️ **קוד בטוח בלבד**
+   - עטוף ב־IIFE עם namespace ייחודי
+   - אין לגעת ב־`window`, `document`, `jQuery`, `wp.*`
+   - Event Delegation רק ב־container שלך
+   - אין listeners גלובליים
+
+7. 🧠 **ניקוי זיכרון חובה**
+   - כל `observer`, `interval`, `listener` חייב להימחק ב־`cleanup()`
+   - השתמש ב־`AbortController`, `WeakMap`, `requestAnimationFrame`
+
+---
+
+⚡ קריטי ל־Core Web Vitals:
+
+> **כל רכיב נבדק לפי הקריטריונים הבאים – חובה לעמוד בכולם כדי לקבל ציון PageSpeed 95+**
+
+1. **LCP – זמן הצגת תוכן ראשי**
+   - הטען Hero עם גובה קבוע
+   - אין JS/animation על רכיב `<h1>`
+   - מיקום מוקדם בקוד
+
+2. **FID / INP – תגובה ראשונה**
+   - מקסימום 10 listeners
+   - זמן תגובה לכפתור < 100ms
+   - אין JS כבד או חוסם
+
+3. **CLS – קפיצות עיצוב**
+   - כל אלמנט עם גובה קבוע / aspect-ratio
+   - אין הכנסת תוכן בלי מקום שמור
+   - רק `transform` או `opacity` לאנימציות
+
+4. **TBT – חסימות JavaScript**
+   - JS < 30KB
+   - שימוש ב־`debounce`, `lazy load`, `dynamic import`
+
+5. **Lazy Loading לכל asset**
+   ```html
+   <img src="..." loading="lazy" decoding="async" />
+   <iframe src="..." loading="lazy"></iframe>
+````
+
+6. **Containment לכל רכיב**
+
+   ```css
+   contain: layout style paint !important;
+   will-change: transform, opacity !important;
+   ```
+
+7. **כל כפתור עובד**
+
+   * חובה `onclick` או `data-action`
+   * אין כפתורים מתים
+
+8. **כל מחשבון = נוסחה מדויקת בלבד**
+
+9. **בדיקה ב־375px + 768px**
+
+   * אין גלילה רוחבית
+   * אין overflow לא מנוהל
+
+10. **בדיקות ביצועים עצמאיות**
+
+```javascript
+performance.mark('start'); heavyCalc(); performance.mark('end');
+performance.measure('heavy', 'start', 'end');
+```
+
+---
+
+✅ רכיבים חובה בכל עמוד:
+
+* Hero עם תאריך (`[current_date]`)
+* AWG מעוצב
+* דיסקליימר מתוך visual.txt
+* Related Posts (בסוף בלבד)
+
+---
+
+🚫 **מה אסור לעשות:**
+
+* ❌ להמציא עיצוב / צבעים
+* ❌ להשתמש באנגלית
+* ❌ לחרוג מ־visual.txt
+* ❌ כפתורים שלא מגיבים
+* ❌ Global listeners
+* ❌ Override ל־CSS של WordPress
+
+---
+
+🎯 **זכור:**
+המטרה: רכיבים מהירים, בטוחים, עבריים, חכמים ונראים מעולה בכל מסך.
+**ביצוע לא מדויק = מחיקה מיידית של הרכיב.**
+
+```
+
+---
+
+אם תרצה גם **גרסת קובץ `.txt` או `.md`** שאפשר לשלב אוטומטית ב־Cursor או בקבצי readme לפרויקט – אפשר להכין לך גם את זה.
+```
+
+# 🚀 הנחיות פיתוח קוד עם Cursor - מדריך קצר
+
+## 🚨 5 כללי הזהב הקריטיים
+
+### 1. **התחלת קוד חובה**
+```html
+<script>
+// בדיקה והוספת viewport meta tag אם חסר
+if (!document.querySelector('meta[name="viewport"]')) {
+  const viewport = document.createElement('meta');
+  viewport.name = 'viewport';
+  viewport.content = 'width=device-width, initial-scale=1.0, user-scalable=yes';
+  document.head.appendChild(viewport);
+}
+</script>
+```
+**אסור DOCTYPE, HTML, HEAD או BODY!**
+
+### 2. **PREFIX ייחודי חובה**
+```
+CSS: wpc-[topic]-[4random]-
+JS: WPC_[Topic]_[Random]
+
+דוגמאות:
+- הלוואות: wpc-loans-x7k9-, WPC_Loans_X7K9  
+- ביטוח: wpc-insurance-m3n8-, WPC_Insurance_M3N8
+```
+
+### 3. **עיצוב מקובץ visual.txt בלבד**
+🚨 **חובה לפתוח:** `C:\Users\eyal\visual.txt`
+```
+חיפוש מדויק לפי אלמנט:
+• Hero: "wpc-hero-demo-section"
+• מחשבון: "wpc-calc-tabs-demo"
+• FAQ: "wpc-accordion-demo"  
+• טבלאות: "wpc-table-demo"
+• כפתורים: "wpc-cta-demo-btn-primary"
+• AWG: "wpc-awg-demo-section"
+• דיסקליימר: "wpc-disclaimer"
+```
+
+### 4. **מובייל חובה מוחלטת**
+**לכל אלמנט:** `COPY EXACTLY from visual.txt - both desktop AND mobile @media!`
+```
+חיפוש mobile:
+@media (max-width: 768px)
+@media (max-width: 480px)
+```
+
+### 5. **עברית 100%**
+🇮🇱 **אסור באנגלית:**
+- ❌ Submit, Cancel, Error
+- ❌ "Enter value", "Full Name"  
+- ✅ "שלח", "נקה", "שגיאה"
+- ✅ "הכנס ערך", "שם מלא"
+
+---
+
+## 🏗️ מבנה קוד בטוח לוורדפרס
+
+### CSS עם !important חובה
+```css
+.wpc-[topic]-[4random]-wrapper {
+    all: initial !important;
+    font-family: 'Assistant', sans-serif !important;
+    direction: rtl !important;
+    max-width: 1800px !important;
+    margin: 0 auto !important;
+}
+
+/* גם ב-media queries */
+@media (max-width: 768px) {
+    .wpc-[topic]-[4random]-title {
+        font-size: 24px !important;
+        margin-bottom: 15px !important;
+    }
+}
+```
+
+### JavaScript בטוח 
+```javascript
+(function() {
+    'use strict';
+    
+    // בדיקת namespace
+    const NS = 'WPC_[Topic]_[Random]';
+    if (window[NS]) return;
+    
+    // רק אלמנטים בתוך container
+    const container = document.getElementById('wpc-[topic]-[4random]-main');
+    if (!container) return;
+    
+    // Event delegation - מקסימום 10 listeners בכל העמוד
+    container.addEventListener('click', function(e) {
+        const action = e.target.closest('[data-action]');
+        if (action && handlers[action.dataset.action]) {
+            handlers[action.dataset.action](e);
+        }
+    });
+    
+    window[NS] = { /* API */ };
+})();
+```
+
+---
+
+## 📱 הנחיות מובייל
+
+### מה לבדוק בvisual.txt
+```
+לכל אלמנט חובה:
+1. עיצוב דסקטופ
+2. @media (max-width: 768px)  
+3. @media (max-width: 480px)
+4. אם אין @media - ציין זאת בקוד!
+```
+
+### גדלים מינימלים
+```css
+/* Touch targets */
+button { min-height: 44px !important; }
+
+/* Font sizes */  
+input { font-size: 16px !important; } /* מונע zoom באייפון */
+
+/* בדיקה ב-375px שהכל עובד */
+```
+
+---
+
+## 🔧 פונקציונליות חובה
+
+### כל כפתור חייב לעבוד
+```javascript
+// בדיקת כפתורים מתים
+const buttons = document.querySelectorAll('button');
+buttons.forEach(btn => {
+    if (!btn.onclick && !btn.hasAttribute('data-action')) {
+        console.error('❌ כפתור מת:', btn.textContent);
+        // למחוק או לתקן!
+    }
+});
+```
+
+### מחשבונים - חובה נוסחאות מדויקות
+```javascript
+function calculateMonthlyPayment(principal, rate, months) {
+    const monthlyRate = rate / 100 / 12;
+    const payment = principal * (monthlyRate * Math.pow(1 + monthlyRate, months)) / 
+                   (Math.pow(1 + monthlyRate, months) - 1);
+    return Math.round(payment);
+}
+```
+
+---
+
+## 🚨 אזורים חובה בכל עמוד
+
+### 1. Hero עם תאריך
+```html
+<h1>כותרת ראשית</h1>
+<p class="wpc-[topic]-[4random]-update-date">
+    <strong>עודכן לאחרונה:</strong> [current_date format="F Y" hebrew="true"]
+</p>
+```
+
+### 2. AWG עם עיצוב חובה
+```html
+<div class="wpc-awg-demo-section">
+    <div class="wpc-awg-demo-container">
+        <div class="wpc-awg-demo-title">
+            <h2>בדיקת זכאות להלוואה</h2>
+        </div>
+        <div class="wpc-awg-demo-content">
+            <div class="wpc-shortcode-item">
+                [awg postid="32400"]
+            </div>
+        </div>
+    </div>
+</div>
+```
+
+### 3. סיום עמוד חובה
+```html
+<!-- דיסקליימר משפטי - עיצוב מvisual.txt -->
+<div class="wpc-disclaimer">...</div>
+
+<!-- Related Posts - חובה אחרון! -->
+[related-shortcode-instert]
+```
+
+---
+
+## 🛡️ בטיחות JavaScript בוורדפרס - חובה מוחלטת!
+
+### ❌ אסור בהחלט - יהרוס את האתר!
+
+#### 1. **אל תיגע ב-WordPress Globals**
+```javascript
+// ❌ אסור - יהרוס את האתר
+window.jQuery = myCustomJQuery;
+$ = myJQuery;
+wp.api.models = myModels;
+jQuery.fn.myPlugin = function() {};
+
+// ✅ נכון - השתמש ללא שינוי
+const $ = window.jQuery ? window.jQuery.noConflict(true) : null;
+```
+
+#### 2. **אל תשנה Classes של וורדפרס**
+```javascript
+// ❌ אסור - יהרוס עיצוב
+document.querySelector('.wp-header').style.display = 'none';
+document.querySelector('.wp-admin-bar').remove();
+document.querySelector('#wp-content').innerHTML = 'משהו';
+
+// ✅ נכון - רק בתוך הcontainer שלך
+document.querySelector('#wpc-[topic]-[4random]-main .my-element');
+```
+
+#### 3. **אל תוסיף Event Listeners גלובליים**
+```javascript
+// ❌ אסור - יפגע בפונקציונליות
+document.addEventListener('click', myHandler);
+window.addEventListener('scroll', myScroll);
+document.body.addEventListener('keydown', myKeys);
+
+// ✅ נכון - רק על הcontainer שלך
+container.addEventListener('click', myHandler);
+```
+
+#### 4. **אל תשנה window/document properties**
+```javascript
+// ❌ אסור - יהרוס SEO ופונקציונליות
+document.title = 'כותרת חדשה';
+window.location.hash = '#something';
+document.body.className = 'my-class';
+history.pushState({}, '', '/new-url');
+
+// ✅ מותר רק בתוך הcontainer
+container.scrollIntoView();
+```
+
+#### 5. **אל תגע ב-AJAX של וורדפרס**
+```javascript
+// ❌ אסור - יפגע בטפסים ובפלאגינים
+window.ajaxurl = 'my-url';
+jQuery.post(ajaxurl, myData);
+wp.ajax.post('my_action', data);
+
+// ✅ אם צריך AJAX - השתמש ב-fetch רגיל
+fetch('/wp-json/wp/v2/posts').then(response => response.json());
+```
+
+### 🔒 דפוס בטיחות חובה
+
+#### מבנה IIFE מלא
+```javascript
+(function() {
+    'use strict';
+    
+    // 1. בדיקת התנגשויות כפולה
+    const namespace = 'WPC_[Topic]_[Random]';
+    if (window[namespace]) {
+        console.warn(namespace + ' כבר קיים');
+        return;
+    }
+    
+    // 2. jQuery בטוח (אם צריך)
+    const $ = window.jQuery ? window.jQuery.noConflict(true) : null;
+    
+    // 3. Container validation
+    const container = document.getElementById('wpc-[topic]-[4random]-main');
+    if (!container) {
+        console.error('Container לא נמצא');
+        return;
+    }
+    
+    // 4. State מבודד
+    const state = {
+        initialized: false,
+        components: new Map(),
+        listeners: new WeakMap()
+    };
+    
+    // 5. Error boundaries
+    function safeExecute(fn, context = 'unknown') {
+        try {
+            return fn();
+        } catch (error) {
+            console.error(`שגיאה ב-${context}:`, error);
+            return null;
+        }
+    }
+    
+    // 6. Cleanup מובנה
+    function cleanup() {
+        // הסר observers
+        state.components.forEach(component => {
+            if (component.observer) component.observer.disconnect();
+        });
+        
+        // נקה intervals
+        state.components.forEach(component => {
+            if (component.interval) clearInterval(component.interval);
+        });
+        
+        // הסר listeners (Event Delegation אוטומטי)
+        container.removeEventListener('click', delegatedHandler);
+        
+        // נקה state
+        state.components.clear();
+        state.listeners = new WeakMap();
+        
+        // הסר מ-window
+        delete window[namespace];
+    }
+    
+    // 7. Page visibility cleanup
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+            cleanup();
+        }
+    });
+    
+    // 8. חשיפה מוגבלת
+    window[namespace] = {
+        version: '1.0.0',
+        destroy: cleanup
+        // אל תחשוף פונקציות פנימיות!
+    };
+    
+})();
+```
+
+### 🎯 Event Delegation נכון
+
+#### דפוס מומלץ
+```javascript
+// Event delegation מרכזי - רק אחד!
+const eventHandler = {
+    init() {
+        container.addEventListener('click', this.handleClick.bind(this), { 
+            passive: true 
+        });
+        
+        // אם צריך keyboard
+        container.addEventListener('keydown', this.handleKeydown.bind(this), { 
+            passive: true 
+        });
+    },
+    
+    handleClick(e) {
+        // בדיקה מהירה
+        const target = e.target.closest('[data-action]');
+        if (!target) return;
+        
+        // מניעת default רק אם צריך
+        const action = target.dataset.action;
+        if (this.preventDefaultActions.includes(action)) {
+            e.preventDefault();
+        }
+        
+        // Route לפונקציה המתאימה
+        if (this.actions[action]) {
+            safeExecute(() => this.actions[action](target, e), `action-${action}`);
+        }
+    },
+    
+    preventDefaultActions: ['submit', 'calculate', 'toggle'],
+    
+    actions: {
+        'calculate': (el, e) => {
+            // לוגיקת חישוב
+        },
+        'toggle-faq': (el, e) => {
+            // פתיחת FAQ
+        },
+        'scroll-to': (el, e) => {
+            const targetId = el.dataset.target;
+            const targetEl = container.querySelector('#' + targetId);
+            if (targetEl) {
+                targetEl.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    }
+};
+```
+
+### 🧹 Cleanup Patterns
+
+#### Memory Management
+```javascript
+const memoryManager = {
+    refs: new Set(),
+    observers: new Set(),
+    intervals: new Set(),
+    
+    addRef(ref) {
+        this.refs.add(ref);
+    },
+    
+    addObserver(observer) {
+        this.observers.add(observer);
+    },
+    
+    addInterval(intervalId) {
+        this.intervals.add(intervalId);
+    },
+    
+    cleanup() {
+        // Observers
+        this.observers.forEach(observer => {
+            if (observer && typeof observer.disconnect === 'function') {
+                observer.disconnect();
+            }
+        });
+        
+        // Intervals
+        this.intervals.forEach(intervalId => {
+            clearInterval(intervalId);
+        });
+        
+        // References
+        this.refs.clear();
+        this.observers.clear();
+        this.intervals.clear();
+    }
+};
+```
+
+### ⚠️ טעויות נפוצות שהורסות וורדפרס
+
+#### 1. **Override של פונקציות קריטיות**
+```javascript
+// ❌ יהרוס את העורך
+window.wp.editor = myEditor;
+
+// ❌ יהרוס טפסים
+window.FormData = MyFormData;
+
+// ❌ יהרוס navigation
+window.history.pushState = myPushState;
+```
+
+#### 2. **שינוי DOM של וורדפרס**
+```javascript
+// ❌ יהרוס את הממשק
+document.querySelector('#adminmenu').style.display = 'none';
+document.querySelector('.wp-toolbar').remove();
+
+// ❌ יהרוס תפריטים
+document.querySelector('#wp-admin-bar-root-default').innerHTML = '';
+```
+
+#### 3. **התנגשויות CSS via JavaScript**
+```javascript
+// ❌ יהרוס עיצוב
+document.body.style.margin = '0';
+document.documentElement.style.fontSize = '14px';
+
+// ✅ רק בתוך הcontainer
+container.style.fontSize = '16px';
+```
+
+---
+
+## ⚡ ביצועים ובטיחות
+
+### Lazy Loading
+```javascript
+const lazyObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            loadComponent(entry.target);
+            lazyObserver.unobserve(entry.target);
+        }
+    });
+});
+```
+
+### מגבלות ביצועים
+```
+• JavaScript: < 30KB
+• CSS: < 20KB  
+• סה"כ: < 80KB
+• Event listeners: מקסימום 10
+• PageSpeed Mobile: 95+
+```
+
+---
+
+## 🚀 אופטימיזציה מתקדמת - קוד הכי יעיל שיש
+
+### 💾 CSS Performance - Zero Layout Thrashing
+
+#### 1. **CSS Containment - חובה לכל רכיב**
+```css
+/* מונע reflow/repaint בכל הדף */
+.wpc-[topic]-[4random]-calculator,
+.wpc-[topic]-[4random]-widget,
+.wpc-[topic]-[4random]-table {
+    contain: layout style paint !important;
+    will-change: auto !important; /* רק כשצריך */
+}
+
+/* לאנימציות - רק transform/opacity */
+.wpc-[topic]-[4random]-animate {
+    contain: layout !important;
+    will-change: transform, opacity !important;
+}
+```
+
+#### 2. **CSS Selectors - מקסימום יעילות**
+```css
+/* ✅ מהיר - ID + class */
+#wpc-[topic]-[4random]-main .btn { }
+
+/* ✅ מהיר - child selector */
+.wrapper > .item { }
+
+/* ❌ איטי - universal selectors */
+.wrapper * { }
+.wrapper div div div { }
+
+/* ❌ איטי - attribute selectors מורכבים */
+[class*="wpc"][data-type~="heavy"] { }
+```
+
+#### 3. **Animations רק עם GPU**
+```css
+/* ✅ GPU accelerated - מהיר */
+.wpc-[topic]-[4random]-slide {
+    transform: translateX(100%) !important;
+    transition: transform 0.3s ease !important;
+}
+
+/* ❌ CPU intensive - איטי */
+.wpc-[topic]-[4random]-bad {
+    left: 100px; /* גורם ל-layout */
+    width: 200px; /* גורם ל-layout */
+    background: linear-gradient(...); /* גורם ל-paint */
+}
+```
+
+### ⚡ JavaScript Performance - אפס Blocking
+
+#### 1. **Debounce & Throttle חכם**
+```javascript
+// Debounce לinput - 300ms
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func.apply(this, args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+// Throttle לscroll - 16ms (60fps)
+function throttle(func, limit) {
+    let inThrottle;
+    return function(...args) {
+        if (!inThrottle) {
+            func.apply(this, args);
+            inThrottle = true;
+            setTimeout(() => inThrottle = false, limit);
+        }
+    };
+}
+
+// שימוש
+const calculateDebounced = debounce(calculate, 300);
+const updateScrollThrottled = throttle(updateScroll, 16);
+```
+
+#### 2. **Memoization לחישובים כבדים**
+```javascript
+const memoize = (fn) => {
+    const cache = new Map();
+    return (...args) => {
+        const key = JSON.stringify(args);
+        if (cache.has(key)) {
+            return cache.get(key);
+        }
+        const result = fn.apply(this, args);
+        cache.set(key, result);
+        return result;
+    };
+};
+
+// חישובים כבדים עם cache
+const calculateLoan = memoize((amount, rate, term) => {
+    // חישוב מורכב...
+    return result;
+});
+```
+
+#### 3. **RequestAnimationFrame לעדכונים**
+```javascript
+// במקום setInterval
+let animationId;
+function updateAnimation() {
+    // עדכון הUI
+    updateProgressBar();
+    updateNumbers();
+    
+    // המשך רק אם צריך
+    if (isAnimating) {
+        animationId = requestAnimationFrame(updateAnimation);
+    }
+}
+
+// התחלה
+isAnimating = true;
+requestAnimationFrame(updateAnimation);
+
+// עצירה
+isAnimating = false;
+if (animationId) {
+    cancelAnimationFrame(animationId);
+}
+```
+
+### 🧠 Memory Management - אפס דליפות
+
+#### 1. **WeakMap/WeakSet לreferences**
+```javascript
+// במקום Map רגיל
+const elementData = new WeakMap();
+const activeElements = new WeakSet();
+
+// שימוש
+elementData.set(element, { value: 100, state: 'active' });
+activeElements.add(element);
+
+// ניקוי אוטומטי כשהelement נמחק מהDOM
+```
+
+#### 2. **Event Listeners עם AbortController**
+```javascript
+const controller = new AbortController();
+const signal = controller.signal;
+
+// הוספת listeners עם cleanup אוטומטי
+container.addEventListener('click', handleClick, { signal });
+container.addEventListener('scroll', handleScroll, { signal, passive: true });
+
+// ניקוי אחד לכולם
+function cleanup() {
+    controller.abort(); // מסיר את כל הlisteners
+}
+```
+
+#### 3. **Object Pooling לאובייקטים חוזרים**
+```javascript
+const objectPool = {
+    pool: [],
+    get() {
+        return this.pool.pop() || { x: 0, y: 0, visible: false };
+    },
+    release(obj) {
+        // איפוס
+        obj.x = 0;
+        obj.y = 0;
+        obj.visible = false;
+        this.pool.push(obj);
+    }
+};
+
+// שימוש במקום new Object()
+const item = objectPool.get();
+// עבודה עם item...
+objectPool.release(item);
+```
+
+### 📦 Code Splitting & Lazy Loading חכם
+
+#### 1. **Dynamic Imports לרכיבים כבדים**
+```javascript
+const lazyLoader = {
+    async loadCalculator() {
+        const { Calculator } = await import('./calculator.js');
+        return new Calculator();
+    },
+    
+    async loadChart() {
+        // טען רק כש-intersection observer מזהה
+        if ('IntersectionObserver' in window) {
+            const { Chart } = await import('./chart.js');
+            return new Chart();
+        }
+        return null;
+    }
+};
+```
+
+#### 2. **Intersection Observer מאופטם**
+```javascript
+const optimizedObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting && !entry.target.dataset.loaded) {
+            // טען component
+            loadComponent(entry.target);
+            // סמן כטעון
+            entry.target.dataset.loaded = 'true';
+            // הפסק לצפות
+            optimizedObserver.unobserve(entry.target);
+        }
+    });
+}, {
+    threshold: 0.1,
+    rootMargin: '50px' // טען קצת לפני שנכנס לviewport
+});
+```
+
+### 🎨 Font & Resource Optimization (מותאם ל-BODY)
+
+#### 1. **Font Loading מאופטם ב-BODY**
+```css
+/* ⚠️ @font-face ב-BODY פחות יעיל אבל עובד */
+@font-face {
+    font-family: 'Assistant';
+    font-display: swap; /* מציג fallback מיד */
+    unicode-range: U+0590-05FF, U+FB1D-FB4F; /* רק עברית */
+    src: url('assistant-hebrew-subset.woff2') format('woff2');
+}
+
+/* ✅ מומלץ ב-BODY - system fonts מהירים */
+.wpc-[topic]-[4random]-text {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Assistant', sans-serif !important;
+}
+```
+
+#### 2. **Resource Loading ב-BODY (JavaScript)**
+```javascript
+// ✅ עובד מצוין ב-BODY - טעינה דינמית
+function loadExternalResource(url, type = 'script') {
+    return new Promise((resolve, reject) => {
+        const element = document.createElement(type);
+        element.onload = resolve;
+        element.onerror = reject;
+        
+        if (type === 'script') {
+            element.src = url;
+            element.async = true;
+        } else if (type === 'link') {
+            element.href = url;
+            element.rel = 'stylesheet';
+        }
+        
+        document.head.appendChild(element);
+    });
+}
+
+// שימוש רק כשצריך
+async function loadChartLibrary() {
+    try {
+        await loadExternalResource('https://cdnjs.cloudflare.com/ajax/libs/chart.js/3.9.1/chart.min.js');
+        console.log('Chart.js נטען בהצלחה');
+    } catch (error) {
+        console.error('שגיאה בטעינת Chart.js:', error);
+    }
+}
+```
+
+#### 3. **❌ לא עובד ב-BODY - Resource Hints**
+```html
+<!-- ❌ אלה חייבים להיות ב-HEAD, לא ב-BODY -->
+<!-- <link rel="preconnect" href="https://fonts.googleapis.com"> -->
+<!-- <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com"> -->
+
+<!-- ✅ במקום זה - JavaScript ב-BODY -->
+<script>
+// DNS prefetch דינמי
+const link = document.createElement('link');
+link.rel = 'dns-prefetch';
+link.href = 'https://cdnjs.cloudflare.com';
+document.head.appendChild(link);
+</script>
+```
+
+### 📊 Performance Monitoring מובנה
+
+#### 1. **Performance API**
+```javascript
+// מדידת ביצועים
+function measurePerformance(name, fn) {
+    performance.mark(`${name}-start`);
+    const result = fn();
+    performance.mark(`${name}-end`);
+    performance.measure(name, `${name}-start`, `${name}-end`);
+    
+    // לוג רק בdevelopment
+    if (window.location.hostname === 'localhost') {
+        const measure = performance.getEntriesByName(name)[0];
+        console.log(`${name}: ${measure.duration.toFixed(2)}ms`);
+    }
+    
+    return result;
+}
+
+// שימוש
+const result = measurePerformance('calculate-loan', () => {
+    return calculateLoanPayment(amount, rate, term);
+});
+```
+
+#### 2. **Memory Usage Monitoring**
+```javascript
+// בדיקת זיכרון (רק Chrome)
+function checkMemory() {
+    if (performance.memory) {
+        const used = performance.memory.usedJSHeapSize;
+        const limit = performance.memory.jsHeapSizeLimit;
+        const percentage = (used / limit * 100).toFixed(1);
+        
+        if (percentage > 70) {
+            console.warn(`זיכרון גבוה: ${percentage}%`);
+            // נקה cache או הפעל cleanup
+            cleanupCache();
+        }
+    }
+}
+
+// בדיקה כל 30 שניות
+setInterval(checkMemory, 30000);
+```
+
+### 🔥 Critical Performance Rules
+
+#### מגבלות קשיחות
+```javascript
+const PERFORMANCE_LIMITS = {
+    MAX_JS_SIZE: 30 * 1024, // 30KB
+    MAX_CSS_SIZE: 20 * 1024, // 20KB
+    MAX_EVENT_LISTENERS: 10,
+    MAX_DOM_QUERIES: 5, // cache את השאר
+    MAX_ANIMATION_DURATION: 300, // ms
+    MIN_TOUCH_TARGET: 44, // px
+    MAX_INITIAL_RENDER: 1000, // ms
+    MAX_INTERACTION_DELAY: 100 // ms
+};
+```
+
+#### Self-Check Functions
+```javascript
+// בדיקה עצמית של הקוד
+function performanceSelfCheck() {
+    const issues = [];
+    
+    // בדיקת גודל
+    const jsSize = document.querySelector('script').textContent.length;
+    if (jsSize > PERFORMANCE_LIMITS.MAX_JS_SIZE) {
+        issues.push(`JS גדול מדי: ${jsSize} bytes`);
+    }
+    
+    // בדיקת listeners
+    const listenerCount = getAllEventListeners().length;
+    if (listenerCount > PERFORMANCE_LIMITS.MAX_EVENT_LISTENERS) {
+        issues.push(`יותר מדי listeners: ${listenerCount}`);
+    }
+    
+    // בדיקת animations
+    const animations = document.getAnimations();
+    animations.forEach(anim => {
+        if (anim.effect.getTiming().duration > PERFORMANCE_LIMITS.MAX_ANIMATION_DURATION) {
+            issues.push('אנימציה ארוכה מדי');
+        }
+    });
+    
+    return issues;
+}
+```
+
+---
+
+## ✅ רשימת בדיקה סופית
+
+### בדיקות חובה
+- [ ] התחיל עם viewport script
+- [ ] חיפש במחרוזות המדויקות בvisual.txt
+- [ ] COPY EXACTLY - desktop + mobile @media
+- [ ] כל הטקסטים בעברית
+- [ ] כל האזורים המאופיינים קיימים
+- [ ] כל הכפתורים עובדים
+- [ ] AWG עם container מעוצב  
+- [ ] דיסקליימר + Related Posts
+- [ ] בדיקה ב-375px, 768px
+
+### בדיקת פונקציונליות  
+```javascript
+// קוד בדיקה לשים בסוף
+console.log('=== בדיקת פונקציונליות ===');
+console.log('מחשבונים:', document.querySelectorAll('[class*="calculator"]').length);
+console.log('כפתורים פעילים:', document.querySelectorAll('button:not([disabled])').length);
+
+// בדיקת עברית
+const englishTexts = [];
+document.querySelectorAll('button, label, input').forEach(el => {
+    if (/[a-zA-Z]{4,}/.test(el.textContent || el.placeholder)) {
+        englishTexts.push(el);
+    }
+});
+console.log('טקסטים באנגלית:', englishTexts.length);
+```
+
+---
+
+## 🚫 אסור בהחלט
+
+### אל תעשה
+- ❌ להמציא עיצוב משלך
+- ❌ להשתמש בצבעים אחרים  
+- ❌ לדלג על @media במובייל
+- ❌ ליצור כפתורים שלא עושים כלום
+- ❌ להשתמש באנגלית
+- ❌ לעטוף Related Posts בעיצוב
+- ❌ להשתמש ב-AWG בלי container
+- ❌ לנגוע ב-WordPress globals (.wp-*, jQuery)
+
+### תמיד עשה  
+- ✅ פתח את visual.txt
+- ✅ חפש במחרוזות המדויקות
+- ✅ העתק עיצוב דסקטופ + מובייל
+- ✅ בדוק שהכל עובד
+- ✅ תרגם הכל לעברית
+- ✅ השתמש ב-prefix ייחודי
+- ✅ עטוף JavaScript ב-IIFE
+
+---
+
+**זכור: המטרה היא עמודים שנותנים ערך אמיתי לגולש עם חוויה מדהימה! 🚀**
