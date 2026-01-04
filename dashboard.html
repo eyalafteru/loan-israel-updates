@@ -88,13 +88,27 @@
             background: #ef4444;
             color: white;
         }
-        .git-badge.pushing, .git-badge.pulling {
+        .git-badge.pushing, .git-badge.pulling, .git-badge.syncing {
             background: #3b82f6;
             color: white;
         }
         .btn-git {
             padding: 0.25rem 0.5rem;
             font-size: 0.75rem;
+        }
+        .btn-git.btn-sync {
+            background: linear-gradient(135deg, #10b981, #3b82f6);
+            color: white;
+            font-weight: 600;
+            padding: 0.35rem 0.75rem;
+        }
+        .btn-git.btn-sync:hover {
+            background: linear-gradient(135deg, #059669, #2563eb);
+        }
+        .btn-git.btn-small {
+            padding: 0.2rem 0.4rem;
+            font-size: 0.7rem;
+            min-width: 28px;
             border-radius: 4px;
             border: none;
             cursor: pointer;
@@ -4596,11 +4610,14 @@
                     <span class="git-icon">✓</span>
                     <span class="git-text">בודק...</span>
                 </span>
-                <button id="gitPullBtn" class="btn btn-git" onclick="gitPull()" disabled title="משוך מGit">
-                    ⬇ Pull
+                <button id="gitSyncBtn" class="btn btn-git btn-sync" onclick="gitSync()" title="סנכרן אוטומטי">
+                    🔄 סנכרן
                 </button>
-                <button id="gitPushBtn" class="btn btn-git" onclick="gitPush()" disabled title="העלה לGit">
-                    ⬆ Push
+                <button id="gitPullBtn" class="btn btn-git btn-small" onclick="gitPull()" disabled title="משוך מGit">
+                    ↓
+                </button>
+                <button id="gitPushBtn" class="btn btn-git btn-small" onclick="gitPush()" disabled title="העלה לGit">
+                    ↑
                 </button>
             </div>
         </div>
@@ -18359,11 +18376,12 @@ ${additionalInstructions}
                 const pushBtn = document.getElementById('gitPushBtn');
                 const pullBtn = document.getElementById('gitPullBtn');
                 
-                // Determine status
+                // Determine status - show BOTH behind and ahead with arrows
+                let statusParts = [];
+                
+                // Check if behind (need to pull)
                 if (result.behind > 0) {
-                    // Behind remote - need to pull
-                    badge.className = 'git-badge behind';
-                    badge.innerHTML = `<span class="git-icon">⬇</span><span class="git-text">${result.behind} מאחור</span>`;
+                    statusParts.push(`↓${result.behind}`);
                     pullBtn.disabled = false;
                     pullBtn.classList.add('active');
                 } else {
@@ -18371,24 +18389,37 @@ ${additionalInstructions}
                     pullBtn.classList.remove('active');
                 }
                 
+                // Check if has local changes or ahead (need to push)
                 if (result.has_changes) {
-                    // Local changes - need to push
-                    badge.className = 'git-badge has-changes';
-                    badge.innerHTML = `<span class="git-icon">!</span><span class="git-text">${result.changed_files} שינויים</span>`;
+                    statusParts.push(`↑${result.changed_files}`);
                     pushBtn.disabled = false;
                     pushBtn.classList.add('active');
                 } else if (result.ahead > 0) {
-                    // Ahead of remote - need to push
-                    badge.className = 'git-badge has-changes';
-                    badge.innerHTML = `<span class="git-icon">⬆</span><span class="git-text">${result.ahead} לדחוף</span>`;
+                    statusParts.push(`↑${result.ahead}`);
                     pushBtn.disabled = false;
                     pushBtn.classList.add('active');
-                } else if (result.behind === 0) {
+                } else {
+                    pushBtn.disabled = true;
+                    pushBtn.classList.remove('active');
+                }
+                
+                // Set badge based on combined status
+                if (result.behind > 0 && (result.has_changes || result.ahead > 0)) {
+                    // Both - need pull AND push
+                    badge.className = 'git-badge behind';
+                    badge.innerHTML = `<span class="git-icon">↕</span><span class="git-text">${statusParts.join(' ')}</span>`;
+                } else if (result.behind > 0) {
+                    // Only behind - arrow down
+                    badge.className = 'git-badge behind';
+                    badge.innerHTML = `<span class="git-icon">↓</span><span class="git-text">${result.behind} למשוך</span>`;
+                } else if (result.has_changes || result.ahead > 0) {
+                    // Only ahead/changes - arrow up
+                    badge.className = 'git-badge has-changes';
+                    badge.innerHTML = `<span class="git-icon">↑</span><span class="git-text">${statusParts.join(' ')}</span>`;
+                } else {
                     // All synced
                     badge.className = 'git-badge synced';
                     badge.innerHTML = '<span class="git-icon">✓</span><span class="git-text">מסונכרן</span>';
-                    pushBtn.disabled = true;
-                    pushBtn.classList.remove('active');
                 }
             } catch (e) {
                 console.error('Git status error:', e);
@@ -18428,6 +18459,30 @@ ${additionalInstructions}
                 showToast('❌ שגיאה: ' + e.message, 'error');
             }
             
+            await checkGitStatus();
+        }
+        
+        async function gitSync() {
+            const syncBtn = document.getElementById('gitSyncBtn');
+            const badge = document.getElementById('gitStatusBadge');
+            
+            syncBtn.disabled = true;
+            badge.className = 'git-badge syncing';
+            badge.innerHTML = '<span class="git-icon">🔄</span><span class="git-text">מסנכרן...</span>';
+            
+            try {
+                const result = await apiCall('/api/git/sync', { method: 'POST', body: '{}' });
+                if (result.success) {
+                    showToast('✅ ' + result.message, 'success');
+                } else {
+                    const errorMsg = result.errors ? result.errors.join(', ') : result.error;
+                    showToast('❌ ' + errorMsg, 'error');
+                }
+            } catch (e) {
+                showToast('❌ שגיאה: ' + e.message, 'error');
+            }
+            
+            syncBtn.disabled = false;
             await checkGitStatus();
         }
         

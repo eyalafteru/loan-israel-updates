@@ -11459,6 +11459,99 @@ def git_push():
     except Exception as e:
         return jsonify({"success": False, "error": str(e)}), 500
 
+@app.route('/api/git/sync', methods=['POST'])
+def git_sync():
+    """Smart sync - pull first if behind, then push if has changes"""
+    try:
+        actions = []
+        errors = []
+        
+        # First, fetch to check status
+        subprocess.run(['git', 'fetch'], capture_output=True, cwd=BASE_DIR)
+        
+        # Check status
+        status_result = subprocess.run(['git', 'status', '--porcelain'], 
+                                      capture_output=True, text=True, cwd=BASE_DIR)
+        has_changes = bool(status_result.stdout.strip())
+        
+        # Get branch name
+        branch = subprocess.run(['git', 'branch', '--show-current'],
+                               capture_output=True, text=True, cwd=BASE_DIR)
+        branch_name = branch.stdout.strip() or 'main'
+        
+        # Check if behind
+        behind_check = subprocess.run(
+            ['git', 'rev-list', '--count', f'HEAD..origin/{branch_name}'],
+            capture_output=True, text=True, cwd=BASE_DIR
+        )
+        behind_count = int(behind_check.stdout.strip()) if behind_check.returncode == 0 else 0
+        
+        # Check if ahead
+        ahead_check = subprocess.run(
+            ['git', 'rev-list', '--count', f'origin/{branch_name}..HEAD'],
+            capture_output=True, text=True, cwd=BASE_DIR
+        )
+        ahead_count = int(ahead_check.stdout.strip()) if ahead_check.returncode == 0 else 0
+        
+        # Step 1: Pull if behind
+        if behind_count > 0:
+            if has_changes:
+                # Stash local changes first
+                subprocess.run(['git', 'stash'], cwd=BASE_DIR, capture_output=True)
+                actions.append(f"שמרתי {status_result.stdout.count(chr(10))} שינויים זמנית")
+            
+            pull_result = subprocess.run(['git', 'pull'], cwd=BASE_DIR, capture_output=True, text=True)
+            if pull_result.returncode == 0:
+                actions.append(f"משכתי {behind_count} עדכונים")
+            else:
+                errors.append(f"שגיאה במשיכה: {pull_result.stderr}")
+            
+            if has_changes:
+                # Restore stashed changes
+                stash_pop = subprocess.run(['git', 'stash', 'pop'], cwd=BASE_DIR, capture_output=True, text=True)
+                if stash_pop.returncode == 0:
+                    actions.append("שחזרתי שינויים מקומיים")
+                else:
+                    errors.append("קונפליקט בשחזור שינויים - צריך לפתור ידנית")
+        
+        # Recheck for changes after pull
+        status_result = subprocess.run(['git', 'status', '--porcelain'], 
+                                      capture_output=True, text=True, cwd=BASE_DIR)
+        has_changes = bool(status_result.stdout.strip())
+        
+        # Recheck ahead count
+        ahead_check = subprocess.run(
+            ['git', 'rev-list', '--count', f'origin/{branch_name}..HEAD'],
+            capture_output=True, text=True, cwd=BASE_DIR
+        )
+        ahead_count = int(ahead_check.stdout.strip()) if ahead_check.returncode == 0 else 0
+        
+        # Step 2: Push if has changes or ahead
+        if has_changes or ahead_count > 0:
+            if has_changes:
+                subprocess.run(['git', 'add', '.'], cwd=BASE_DIR, check=True)
+                message = f"Auto sync: {datetime.now().strftime('%Y-%m-%d %H:%M')}"
+                subprocess.run(['git', 'commit', '-m', message], cwd=BASE_DIR)
+                actions.append("שמרתי שינויים מקומיים")
+            
+            push_result = subprocess.run(['git', 'push'], cwd=BASE_DIR, capture_output=True, text=True)
+            if push_result.returncode == 0:
+                actions.append("דחפתי לשרת")
+            else:
+                errors.append(f"שגיאה בדחיפה: {push_result.stderr}")
+        
+        if not actions and not errors:
+            actions.append("הכל מסונכרן!")
+        
+        return jsonify({
+            "success": len(errors) == 0,
+            "actions": actions,
+            "errors": errors,
+            "message": " → ".join(actions) if actions else "מסונכרן"
+        })
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
 # ============ Server Control ============
 
 @app.route('/api/server/restart', methods=['POST'])
