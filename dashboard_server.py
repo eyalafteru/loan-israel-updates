@@ -14,6 +14,37 @@ import time
 from datetime import datetime
 from pathlib import Path
 
+def get_python_command():
+    """Get the correct Python command for this system"""
+    # Try py -3 first (Windows Python Launcher)
+    try:
+        result = subprocess.run(['py', '-3', '--version'], capture_output=True, text=True)
+        if result.returncode == 0:
+            return 'py -3'
+    except:
+        pass
+    
+    # Try python
+    try:
+        result = subprocess.run(['python', '--version'], capture_output=True, text=True)
+        if result.returncode == 0 and 'Python' in result.stdout:
+            return 'python'
+    except:
+        pass
+    
+    # Fallback to python3
+    try:
+        result = subprocess.run(['python3', '--version'], capture_output=True, text=True)
+        if result.returncode == 0:
+            return 'python3'
+    except:
+        pass
+    
+    return 'python'  # Default fallback
+
+PYTHON_CMD = get_python_command()
+print(f"[System] Using Python command: {PYTHON_CMD}")
+
 from flask import Flask, jsonify, request, send_file, send_from_directory
 from flask_cors import CORS
 
@@ -2741,7 +2772,7 @@ except Exception as e:
             batch_content = f'''@echo off
 chcp 65001 >nul
 cd /d "{BASE_DIR}"
-python "{runner_script}"
+{PYTHON_CMD} "{runner_script}"
 '''
             batch_path = TMP_FOLDER / "temp_claude_run.bat"
             with open(batch_path, 'w', encoding='utf-8') as f:
@@ -3318,7 +3349,7 @@ except Exception as e:
             batch_content = f'''@echo off
 chcp 65001 >nul
 cd /d "{BASE_DIR}"
-python "{runner_script}"
+{PYTHON_CMD} "{runner_script}"
 '''
             batch_path = TMP_FOLDER / "temp_claude_run.bat"
             with open(batch_path, 'w', encoding='utf-8') as f:
@@ -3665,7 +3696,7 @@ except Exception as e:
             batch_content = f'''@echo off
 chcp 65001 >nul
 cd /d "{BASE_DIR}"
-python "{runner_script}"
+{PYTHON_CMD} "{runner_script}"
 '''
             batch_path = TMP_FOLDER / "temp_claude_run.bat"
             with open(batch_path, 'w', encoding='utf-8') as f:
@@ -4021,7 +4052,7 @@ chcp 65001 >nul
 echo ============================================================
 echo   Running Claude Code - Step 4 Debug
 echo ============================================================
-python "{runner_script}"
+{PYTHON_CMD} "{runner_script}"
 echo.
 echo ============================================================
 echo   Step 4 finished!
@@ -4370,7 +4401,7 @@ except Exception as e:
             batch_content = f'''@echo off
 chcp 65001 >nul
 cd /d "{BASE_DIR}"
-python "{runner_script}"
+{PYTHON_CMD} "{runner_script}"
 '''
             batch_path = TMP_FOLDER / "temp_claude_run.bat"
             with open(batch_path, 'w', encoding='utf-8') as f:
@@ -4716,7 +4747,7 @@ except Exception as e:
             batch_content = f'''@echo off
 chcp 65001 >nul
 cd /d "{BASE_DIR}"
-python "{runner_script}"
+{PYTHON_CMD} "{runner_script}"
 '''
             batch_path = TMP_FOLDER / "temp_claude_run.bat"
             with open(batch_path, 'w', encoding='utf-8') as f:
@@ -5110,7 +5141,7 @@ except Exception as e:
         batch_content = f'''@echo off
 chcp 65001 >nul
 cd /d "{BASE_DIR}"
-python "{runner_script}"
+{PYTHON_CMD} "{runner_script}"
 '''
         batch_path = TMP_FOLDER / "temp_claude_run.bat"
         with open(batch_path, 'w', encoding='utf-8') as f:
@@ -6835,7 +6866,7 @@ except Exception as e:
         batch_content = f'''@echo off
 chcp 65001 >nul
 cd /d "{BASE_DIR}"
-python "{runner_script}"
+{PYTHON_CMD} "{runner_script}"
 '''
         # Use unique batch file name for parallel job support
         batch_path = TMP_FOLDER / f"temp_run_{job_uuid}.bat"
@@ -11059,7 +11090,7 @@ log("=" * 60)
         batch_content = f'''@echo off
 chcp 65001 >nul
 cd /d "{BASE_DIR}"
-python "{runner_script}"
+{PYTHON_CMD} "{runner_script}"
 '''
         batch_path = TMP_FOLDER / "temp_annotation_run.bat"
         with open(batch_path, 'w', encoding='utf-8') as f:
@@ -11245,7 +11276,7 @@ log("=" * 60)
         batch_content = f'''@echo off
 chcp 65001 >nul
 cd /d "{BASE_DIR}"
-python "{runner_script}"
+{PYTHON_CMD} "{runner_script}"
 '''
         batch_path = TMP_FOLDER / "temp_agent_run.bat"
         with open(batch_path, 'w', encoding='utf-8') as f:
