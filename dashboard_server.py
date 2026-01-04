@@ -2307,12 +2307,13 @@ def run_step1():
                             
                             if ai_texts:
                                 ai_status = f"**סטטוס:** אנחנו מופיעים במיקום {ai_rank}" if ai_rank else "**סטטוס:** לא מופיעים ב-AI Overview"
+                                ai_texts_str = '\n'.join(ai_texts)
                                 keywords_instruction += f"""
 ## תוצאות AI Overview של גוגל
 
 הנה מה שגוגל AI מציג לגולשים שמחפשים את מילת המפתח:
 
-{'\\n'.join(ai_texts)}
+{ai_texts_str}
 
 {ai_status}
 """
@@ -2468,13 +2469,14 @@ def run_step1():
                                 
                                 if ai_texts:
                                     ai_status = f"אנחנו מופיעים במיקום {ai_rank}" if ai_rank else "אנחנו לא מופיעים ב-AI Overview"
+                                    ai_texts_str = '\n'.join(ai_texts)
                                     keywords_instruction += f"""
 
 ## תוצאות AI Overview של גוגל
 
 הנה מה שגוגל AI מציג לגולשים שמחפשים את מילת המפתח:
 
-{"\\n".join(ai_texts)}
+{ai_texts_str}
 
 **סטטוס:** {ai_status}
 
@@ -2942,12 +2944,13 @@ def run_step2():
                             
                             if ai_texts:
                                 ai_status = f"**סטטוס:** אנחנו מופיעים במיקום {ai_rank}" if ai_rank else "**סטטוס:** לא מופיעים ב-AI Overview"
+                                ai_texts_str = '\n'.join(ai_texts)
                                 keywords_instruction += f"""
 ## תוצאות AI Overview של גוגל
 
 הנה מה שגוגל AI מציג לגולשים שמחפשים את מילת המפתח:
 
-{'\\n'.join(ai_texts)}
+{ai_texts_str}
 
 {ai_status}
 """
@@ -3097,13 +3100,14 @@ def run_step2():
                                 
                                 if ai_texts:
                                     ai_status = f"אנחנו מופיעים במיקום {ai_rank}" if ai_rank else "אנחנו לא מופיעים ב-AI Overview"
+                                    ai_texts_str = '\n'.join(ai_texts)
                                     keywords_instruction += f"""
 
 ## תוצאות AI Overview של גוגל
 
 הנה מה שגוגל AI מציג לגולשים שמחפשים את מילת המפתח:
 
-{"\\n".join(ai_texts)}
+{ai_texts_str}
 
 **סטטוס:** {ai_status}
 
