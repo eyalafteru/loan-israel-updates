@@ -11522,10 +11522,44 @@ def git_sync():
                 if stash_pop.returncode == 0:
                     actions.append("שחזרתי שינויים מקומיים")
                 elif "CONFLICT" in stash_pop.stdout or "CONFLICT" in stash_pop.stderr:
-                    # There's a conflict - abort and let user know
-                    subprocess.run(['git', 'checkout', '--theirs', '.'], cwd=BASE_DIR, capture_output=True)
+                    # There's a conflict - resolve by keeping the newer file
+                    # Get list of conflicting files
+                    conflict_result = subprocess.run(['git', 'diff', '--name-only', '--diff-filter=U'], 
+                                                    cwd=BASE_DIR, capture_output=True, text=True)
+                    conflict_files = conflict_result.stdout.strip().split('\n') if conflict_result.stdout.strip() else []
+                    
+                    for conflict_file in conflict_files:
+                        if not conflict_file:
+                            continue
+                        file_path = BASE_DIR / conflict_file
+                        
+                        # Get local file modification time (from working directory before conflict)
+                        try:
+                            local_mtime = file_path.stat().st_mtime if file_path.exists() else 0
+                        except:
+                            local_mtime = 0
+                        
+                        # Get remote file time from git log
+                        remote_time_result = subprocess.run(
+                            ['git', 'log', '-1', '--format=%ct', f'origin/{branch_name}', '--', conflict_file],
+                            cwd=BASE_DIR, capture_output=True, text=True
+                        )
+                        try:
+                            remote_mtime = int(remote_time_result.stdout.strip()) if remote_time_result.stdout.strip() else 0
+                        except:
+                            remote_mtime = 0
+                        
+                        # Keep the newer version
+                        if local_mtime > remote_mtime:
+                            subprocess.run(['git', 'checkout', '--ours', conflict_file], cwd=BASE_DIR, capture_output=True)
+                            actions.append(f"⚠️ קונפליקט ב-{conflict_file} - שמרתי גרסה מקומית (חדשה יותר)")
+                        else:
+                            subprocess.run(['git', 'checkout', '--theirs', conflict_file], cwd=BASE_DIR, capture_output=True)
+                            actions.append(f"⚠️ קונפליקט ב-{conflict_file} - לקחתי גרסת שרת (חדשה יותר)")
+                    
+                    # Mark conflicts as resolved and commit
+                    subprocess.run(['git', 'add', '.'], cwd=BASE_DIR, capture_output=True)
                     subprocess.run(['git', 'stash', 'drop'], cwd=BASE_DIR, capture_output=True)
-                    actions.append("⚠️ היה קונפליקט - לקחתי גרסת השרת")
                 else:
                     errors.append("קונפליקט בשחזור שינויים - צריך לפתור ידנית")
         
