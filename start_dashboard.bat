@@ -14,18 +14,21 @@ echo.
 REM ====== FIND PYTHON ======
 set PYTHON_CMD=
 
+REM Try py launcher FIRST (more reliable on Windows)
+where py >nul 2>&1
+if %errorlevel% equ 0 (
+    set PYTHON_CMD=py -3
+    goto :found_python
+)
+
+REM Try python in PATH
 where python >nul 2>&1
 if %errorlevel% equ 0 (
     set PYTHON_CMD=python
     goto :found_python
 )
 
-where py >nul 2>&1
-if %errorlevel% equ 0 (
-    set PYTHON_CMD=py
-    goto :found_python
-)
-
+REM Try common paths
 if exist "C:\Python312\python.exe" (
     set PYTHON_CMD=C:\Python312\python.exe
     goto :found_python
@@ -43,11 +46,6 @@ if exist "%LOCALAPPDATA%\Programs\Python\Python312\python.exe" (
 
 if exist "%LOCALAPPDATA%\Programs\Python\Python311\python.exe" (
     set PYTHON_CMD=%LOCALAPPDATA%\Programs\Python\Python311\python.exe
-    goto :found_python
-)
-
-if exist "%LOCALAPPDATA%\Programs\Python\Python310\python.exe" (
-    set PYTHON_CMD=%LOCALAPPDATA%\Programs\Python\Python310\python.exe
     goto :found_python
 )
 
