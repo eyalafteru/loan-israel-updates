@@ -1,0 +1,37 @@
+{
+  "id": "agent_mjzs0as1_aua5",
+  "name": "בדיקה 2",
+  "description": "",
+  "version": "1.0",
+  "type": "update",
+  "status": "test",
+  "model": {
+    "provider": "claude",
+    "name": "claude-sonnet-4",
+    "temperature": 0.7
+  },
+  "folder_name": "בדיקה 2",
+  "steps": [
+    {
+      "id": "step1",
+      "name": "שלב 1",
+      "order": 1,
+      "prompt_file": "",
+      "prompt_template": "",
+      "shortcodes": [
+        "PAGE_HTML"
+      ],
+      "output": {
+        "path": "דוח שלב 1.md",
+        "shortcode_name": "STEP1_REPORT"
+      }
+    }
+  ],
+  "chain": {
+    "enabled": false,
+    "next_agent": null
+  },
+  "wordpress": null,
+  "created": "2026-01-04T15:37:13.875696",
+  "updated": "2026-01-04T15:37:13.876350"
+}
