@@ -1,6 +1,9 @@
 {
   "ui": {
-    "preferred_agent_order": ["atomic_marketing", "seo"]
+    "preferred_agent_order": [
+      "atomic_marketing",
+      "seo"
+    ]
   },
   "global_values": {
     "BOI_INTEREST_RATE": {
@@ -167,7 +170,7 @@
   },
   "claude_code": {
     "enabled": true,
-    "command": "__CLAUDE_PATH__",
+    "command": "C:\\Users\\eyal\\AppData\\Roaming\\npm\\claude.cmd",
     "models": {
       "claude-sonnet-4": {
         "name": "Claude Sonnet 4",
