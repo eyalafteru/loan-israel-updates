@@ -67,7 +67,7 @@ CONFIG_FILE = BASE_DIR / "config.json"
 
 def load_config():
     """Load configuration from config.json"""
-    with open(CONFIG_FILE, 'r', encoding='utf-8') as f:
+    with open(CONFIG_FILE, 'r', encoding='utf-8-sig') as f:
         return json.load(f)
 
 def save_config(config):
