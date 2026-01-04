@@ -1,32 +1,24 @@
-# ============================================================================
-# PAGE MANAGEMENT DASHBOARD - STANDALONE INSTALLER
-# מערכת ניהול אתרים - התקנה עצמאית מלאה
-# ============================================================================
-#
-# This single file does EVERYTHING:
-# 1. Installs Python, Node.js, Git (if missing)
-# 2. Clones the repository from GitHub
-# 3. Installs all Python packages
-# 4. Installs and configures Claude CLI
-# 5. Creates desktop shortcut
-# 6. Launches the dashboard
-#
-# HOW TO USE:
-# 1. Download this file to any folder
-# 2. Right-click -> Run with PowerShell
-#    OR run: powershell -ExecutionPolicy Bypass -File setup_standalone.ps1
-#
-# ============================================================================
+<#
+.SYNOPSIS
+    Page Management Dashboard - Standalone Installer
+.DESCRIPTION
+    This script installs everything needed:
+    - Python, Node.js, Git (if missing)
+    - Clones repository from GitHub
+    - Installs all dependencies
+    - Configures Claude CLI
+    - Creates desktop shortcut
+.NOTES
+    Run as Administrator
+    Usage: powershell -ExecutionPolicy Bypass -File setup_standalone.ps1
+#>
 
 # ==================== CONFIGURATION ====================
-# Change these values as needed:
-
-$REPO_URL = "https://github.com/eyal10/loan-israel-updates.git"
+$REPO_URL = "https://github.com/eyalafteru/loan-israel-updates.git"
 $INSTALL_DIR = "C:\loan-dashboard"
-
 # =======================================================
 
-# Set UTF-8 encoding
+# Set encoding
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 $OutputEncoding = [System.Text.Encoding]::UTF8
 $ErrorActionPreference = "SilentlyContinue"
@@ -35,15 +27,14 @@ $ErrorActionPreference = "SilentlyContinue"
 
 function Write-Banner {
     Write-Host ""
-    Write-Host "  ╔══════════════════════════════════════════════════════════╗" -ForegroundColor Cyan
-    Write-Host "  ║     PAGE MANAGEMENT DASHBOARD - COMPLETE INSTALLER       ║" -ForegroundColor Cyan
-    Write-Host "  ║     מערכת ניהול אתרים - התקנה אוטומטית מלאה             ║" -ForegroundColor Cyan
-    Write-Host "  ╚══════════════════════════════════════════════════════════╝" -ForegroundColor Cyan
+    Write-Host "  ============================================================" -ForegroundColor Cyan
+    Write-Host "       PAGE MANAGEMENT DASHBOARD - COMPLETE INSTALLER" -ForegroundColor Cyan
+    Write-Host "  ============================================================" -ForegroundColor Cyan
     Write-Host ""
 }
 
 function Write-Step {
-    param([int]$Num, [string]$Total, [string]$Message)
+    param([int]$Num, [int]$Total, [string]$Message)
     Write-Host ""
     Write-Host "  [$Num/$Total] $Message" -ForegroundColor Magenta
     Write-Host "  $("-" * 55)" -ForegroundColor DarkGray
@@ -51,17 +42,17 @@ function Write-Step {
 
 function Write-OK {
     param([string]$Message)
-    Write-Host "      [✓] $Message" -ForegroundColor Green
+    Write-Host "      [OK] $Message" -ForegroundColor Green
 }
 
 function Write-Err {
     param([string]$Message)
-    Write-Host "      [✗] $Message" -ForegroundColor Red
+    Write-Host "      [ERROR] $Message" -ForegroundColor Red
 }
 
 function Write-Info {
     param([string]$Message)
-    Write-Host "      [i] $Message" -ForegroundColor Cyan
+    Write-Host "      [INFO] $Message" -ForegroundColor Cyan
 }
 
 function Write-Warn {
@@ -96,12 +87,10 @@ Write-Banner
 # Check admin rights
 if (-not (Test-Admin)) {
     Write-Warn "This script requires administrator privileges."
-    Write-Warn "הסקריפט דורש הרשאות מנהל."
     Write-Host ""
     Write-Host "  Restarting as administrator..." -ForegroundColor Yellow
     Start-Sleep -Seconds 2
     
-    # Restart as admin
     $scriptPath = $MyInvocation.MyCommand.Path
     Start-Process powershell -Verb RunAs -ArgumentList "-ExecutionPolicy Bypass -File `"$scriptPath`""
     exit
@@ -111,7 +100,7 @@ Write-OK "Running with administrator privileges"
 
 # ==================== STEP 1: PREREQUISITES ====================
 
-Write-Step -Num 1 -Total 8 -Message "Installing Prerequisites / התקנת דרישות מקדימות"
+Write-Step -Num 1 -Total 8 -Message "Installing Prerequisites"
 
 $wingetAvailable = Test-Command "winget"
 if ($wingetAvailable) {
@@ -210,12 +199,11 @@ if (-not (Test-Command "git")) {
     Write-OK "Git already installed: $gitVer"
 }
 
-# Final PATH refresh
 Refresh-EnvironmentPath
 
 # ==================== STEP 2: INSTALLATION DIRECTORY ====================
 
-Write-Step -Num 2 -Total 8 -Message "Setting Installation Directory / הגדרת תיקיית התקנה"
+Write-Step -Num 2 -Total 8 -Message "Setting Installation Directory"
 
 Write-Host ""
 Write-Host "      Default installation directory:" -ForegroundColor Yellow
@@ -229,7 +217,6 @@ if (-not [string]::IsNullOrWhiteSpace($customDir)) {
 
 Write-Info "Installation directory: $INSTALL_DIR"
 
-# Handle existing directory
 if (Test-Path $INSTALL_DIR) {
     Write-Warn "Directory already exists!"
     $choice = Read-Host "      [B]ackup and continue or [D]elete? (B/D)"
@@ -247,7 +234,7 @@ if (Test-Path $INSTALL_DIR) {
 
 # ==================== STEP 3: CLONE REPOSITORY ====================
 
-Write-Step -Num 3 -Total 8 -Message "Cloning Repository from GitHub / שכפול מאגר מ-GitHub"
+Write-Step -Num 3 -Total 8 -Message "Cloning Repository from GitHub"
 
 Write-Host ""
 Write-Host "      Default repository URL:" -ForegroundColor Yellow
@@ -263,7 +250,6 @@ Write-Info "Cloning: $REPO_URL"
 Write-Info "To: $INSTALL_DIR"
 Write-Host ""
 
-# Clone repository
 $cloneOutput = git clone $REPO_URL $INSTALL_DIR 2>&1
 
 if ($LASTEXITCODE -ne 0) {
@@ -274,7 +260,7 @@ if ($LASTEXITCODE -ne 0) {
     Write-Host ""
     Write-Host "      Possible solutions:" -ForegroundColor Yellow
     Write-Host "      - Check if the URL is correct" -ForegroundColor Yellow
-    Write-Host "      - For private repos, use: https://USERNAME:TOKEN@github.com/..." -ForegroundColor Yellow
+    Write-Host "      - For private repos use: https://USER:TOKEN@github.com/..." -ForegroundColor Yellow
     Write-Host "      - Check your internet connection" -ForegroundColor Yellow
     Write-Host ""
     Read-Host "      Press Enter to exit"
@@ -283,12 +269,11 @@ if ($LASTEXITCODE -ne 0) {
 
 Write-OK "Repository cloned successfully!"
 
-# Change to install directory
 Set-Location $INSTALL_DIR
 
 # ==================== STEP 4: PYTHON PACKAGES ====================
 
-Write-Step -Num 4 -Total 8 -Message "Installing Python Packages / התקנת חבילות Python"
+Write-Step -Num 4 -Total 8 -Message "Installing Python Packages"
 
 Write-Info "Upgrading pip..."
 python -m pip install --upgrade pip --quiet 2>&1 | Out-Null
@@ -308,7 +293,7 @@ if (Test-Path "requirements.txt") {
 
 # ==================== STEP 5: CLAUDE CLI ====================
 
-Write-Step -Num 5 -Total 8 -Message "Installing Claude CLI / התקנת Claude CLI"
+Write-Step -Num 5 -Total 8 -Message "Installing Claude CLI"
 
 Write-Info "Installing @anthropic-ai/claude-code..."
 $npmOutput = npm install -g @anthropic-ai/claude-code 2>&1
@@ -318,7 +303,6 @@ $claudePath = Join-Path $env:APPDATA "npm\claude.cmd"
 if (Test-Path $claudePath) {
     Write-OK "Claude CLI installed: $claudePath"
 } else {
-    # Try to find it
     $claudeCmd = Get-Command claude -ErrorAction SilentlyContinue
     if ($claudeCmd) {
         $claudePath = $claudeCmd.Source
@@ -331,21 +315,18 @@ if (Test-Path $claudePath) {
 
 # ==================== STEP 6: UPDATE CONFIGURATION ====================
 
-Write-Step -Num 6 -Total 8 -Message "Updating Configuration / עדכון הגדרות"
+Write-Step -Num 6 -Total 8 -Message "Updating Configuration"
 
-# Update config.json
 $configPath = Join-Path $INSTALL_DIR "config.json"
 
 if (Test-Path $configPath) {
     try {
         $config = Get-Content $configPath -Raw -Encoding UTF8 | ConvertFrom-Json
         
-        # Update claude path
         if ($config.claude_code) {
             $config.claude_code.command = $claudePath
         }
         
-        # Save config
         $config | ConvertTo-Json -Depth 10 | Set-Content $configPath -Encoding UTF8
         Write-OK "config.json updated with Claude CLI path"
     }
@@ -356,7 +337,6 @@ if (Test-Path $configPath) {
     Write-Warn "config.json not found"
 }
 
-# Set API key environment variable
 $apiConfigPath = Join-Path $INSTALL_DIR "api_config.env"
 
 if (Test-Path $apiConfigPath) {
@@ -380,7 +360,7 @@ if (Test-Path $apiConfigPath) {
 
 # ==================== STEP 7: CREATE FOLDERS ====================
 
-Write-Step -Num 7 -Total 8 -Message "Creating Required Folders / יצירת תיקיות"
+Write-Step -Num 7 -Total 8 -Message "Creating Required Folders"
 
 $folders = @("tmp", "logs", "tmp\job_locks")
 
@@ -396,11 +376,11 @@ foreach ($folder in $folders) {
 
 # ==================== STEP 8: DESKTOP SHORTCUT ====================
 
-Write-Step -Num 8 -Total 8 -Message "Creating Desktop Shortcut / יצירת קיצור דרך"
+Write-Step -Num 8 -Total 8 -Message "Creating Desktop Shortcut"
 
 try {
     $WshShell = New-Object -ComObject WScript.Shell
-    $shortcutPath = Join-Path $env:USERPROFILE "Desktop\Dashboard - מערכת ניהול.lnk"
+    $shortcutPath = Join-Path $env:USERPROFILE "Desktop\Dashboard.lnk"
     $Shortcut = $WshShell.CreateShortcut($shortcutPath)
     $Shortcut.TargetPath = Join-Path $INSTALL_DIR "start_dashboard.bat"
     $Shortcut.WorkingDirectory = $INSTALL_DIR
@@ -408,7 +388,7 @@ try {
     $Shortcut.Description = "Page Management Dashboard"
     $Shortcut.Save()
     
-    Write-OK "Desktop shortcut created: Dashboard - מערכת ניהול"
+    Write-OK "Desktop shortcut created: Dashboard.lnk"
 }
 catch {
     Write-Err "Could not create desktop shortcut"
@@ -417,34 +397,32 @@ catch {
 # ==================== COMPLETE ====================
 
 Write-Host ""
-Write-Host "  ╔══════════════════════════════════════════════════════════╗" -ForegroundColor Green
-Write-Host "  ║           INSTALLATION COMPLETE! / ההתקנה הושלמה!       ║" -ForegroundColor Green
-Write-Host "  ╚══════════════════════════════════════════════════════════╝" -ForegroundColor Green
+Write-Host "  ============================================================" -ForegroundColor Green
+Write-Host "       INSTALLATION COMPLETE!" -ForegroundColor Green
+Write-Host "  ============================================================" -ForegroundColor Green
 Write-Host ""
 Write-Host "      Installed Components:" -ForegroundColor Cyan
 Write-Host ""
 
-# Show installed versions
 $pyVer = python --version 2>&1
 $nodeVer = node --version 2>&1
 $gitVer = (git --version 2>&1) -replace "git version ", ""
 
-Write-Host "      [✓] Python: $pyVer" -ForegroundColor Green
-Write-Host "      [✓] Node.js: $nodeVer" -ForegroundColor Green
-Write-Host "      [✓] Git: $gitVer" -ForegroundColor Green
-Write-Host "      [✓] Claude CLI: Installed" -ForegroundColor Green
+Write-Host "      [OK] Python: $pyVer" -ForegroundColor Green
+Write-Host "      [OK] Node.js: $nodeVer" -ForegroundColor Green
+Write-Host "      [OK] Git: $gitVer" -ForegroundColor Green
+Write-Host "      [OK] Claude CLI: Installed" -ForegroundColor Green
 
 $pkgCount = (pip list 2>&1 | Measure-Object -Line).Lines - 2
-Write-Host "      [✓] Python packages: $pkgCount installed" -ForegroundColor Green
+Write-Host "      [OK] Python packages: $pkgCount installed" -ForegroundColor Green
 
 Write-Host ""
 Write-Host "      Location: $INSTALL_DIR" -ForegroundColor White
 Write-Host "      Dashboard URL: http://localhost:5000" -ForegroundColor White
-Write-Host "      Desktop Shortcut: Dashboard - מערכת ניהול" -ForegroundColor White
+Write-Host "      Desktop Shortcut: Dashboard.lnk" -ForegroundColor White
 Write-Host ""
 
-# Ask to launch
-$launch = Read-Host "      Launch dashboard now? / להפעיל עכשיו? (Y/n)"
+$launch = Read-Host "      Launch dashboard now? (Y/n)"
 
 if ($launch -ne "n" -and $launch -ne "N") {
     Write-Info "Starting dashboard..."
@@ -455,10 +433,9 @@ if ($launch -ne "n" -and $launch -ne "N") {
 }
 
 Write-Host ""
-Write-Host "  ══════════════════════════════════════════════════════════" -ForegroundColor Cyan
-Write-Host "      Thank you for installing! / תודה על ההתקנה!" -ForegroundColor Cyan
-Write-Host "  ══════════════════════════════════════════════════════════" -ForegroundColor Cyan
+Write-Host "  ============================================================" -ForegroundColor Cyan
+Write-Host "       Setup Complete! Thank you for installing." -ForegroundColor Cyan
+Write-Host "  ============================================================" -ForegroundColor Cyan
 Write-Host ""
 
-Read-Host "      Press Enter to close / לחץ Enter לסגירה"
-
+Read-Host "      Press Enter to close"

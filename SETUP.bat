@@ -1,30 +1,41 @@
 @echo off
 chcp 65001 >nul
-title Complete Dashboard Setup
+title Dashboard Setup
 color 0A
 
 echo.
-echo  ================================================================
+echo  ============================================================
 echo       PAGE MANAGEMENT DASHBOARD - ONE CLICK SETUP
-echo       מערכת ניהול אתרים - התקנה בלחיצה אחת
-echo  ================================================================
+echo  ============================================================
 echo.
-echo  This will install everything and clone from GitHub.
-echo  זה יתקין הכל וישכפל מ-GitHub.
+echo  This will:
+echo    1. Install Python, Node.js, Git (if needed)
+echo    2. Clone repository from GitHub
+echo    3. Install all dependencies
+echo    4. Configure Claude CLI
+echo    5. Create desktop shortcut
+echo    6. Launch the dashboard
 echo.
-echo  Press any key to continue or Ctrl+C to cancel...
-echo  לחץ מקש כלשהו להמשך או Ctrl+C לביטול...
+echo  ============================================================
+echo.
+echo  Press any key to start or Ctrl+C to cancel...
 pause >nul
 
-:: Check for admin and run PowerShell script
-powershell -ExecutionPolicy Bypass -NoProfile -File "%~dp0setup_standalone.ps1"
-
+:: Check for admin rights
+net session >nul 2>&1
 if %errorLevel% neq 0 (
     echo.
-    echo  [!] If there was an error, try running as administrator.
-    echo  [!] אם הייתה שגיאה, נסה להריץ כמנהל.
-    echo.
+    echo  [!] Requesting administrator privileges...
+    powershell -Command "Start-Process '%~f0' -Verb RunAs"
+    exit /b
 )
 
-pause
+:: Run PowerShell installer
+powershell -ExecutionPolicy Bypass -NoProfile -File "%~dp0setup_standalone.ps1"
 
+echo.
+echo  ============================================================
+echo       Setup finished!
+echo  ============================================================
+echo.
+pause
