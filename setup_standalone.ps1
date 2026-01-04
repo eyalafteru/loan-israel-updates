@@ -16,6 +16,8 @@
 # ==================== CONFIGURATION ====================
 $REPO_URL = "https://github.com/eyalafteru/loan-israel-updates.git"
 $INSTALL_DIR = "C:\loan-dashboard"
+# For private repos, set token here or leave empty to be prompted:
+$GIT_TOKEN = "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"
 # =======================================================
 
 # Set encoding
@@ -240,14 +242,25 @@ Write-Host ""
 Write-Host "      Default repository URL:" -ForegroundColor Yellow
 Write-Host "      $REPO_URL" -ForegroundColor White
 Write-Host ""
-$customUrl = Read-Host "      Press Enter to accept or paste a different URL"
 
-if (-not [string]::IsNullOrWhiteSpace($customUrl)) {
-    $REPO_URL = $customUrl
+# Check if token is needed for private repos
+if ([string]::IsNullOrWhiteSpace($GIT_TOKEN)) {
+    Write-Host "      For PRIVATE repos, enter GitHub Personal Access Token" -ForegroundColor Cyan
+    Write-Host "      For PUBLIC repos, just press Enter" -ForegroundColor Cyan
+    $tokenInput = Read-Host "      Token (or Enter to skip)"
+    if (-not [string]::IsNullOrWhiteSpace($tokenInput)) {
+        $GIT_TOKEN = $tokenInput
+    }
 }
 
-Write-Info "Cloning: $REPO_URL"
-Write-Info "To: $INSTALL_DIR"
+# Build URL with token if provided
+if (-not [string]::IsNullOrWhiteSpace($GIT_TOKEN)) {
+    # Insert token into URL: https://TOKEN@github.com/user/repo.git
+    $REPO_URL = $REPO_URL -replace "https://github.com", "https://$GIT_TOKEN@github.com"
+    Write-Info "Using authenticated URL"
+}
+
+Write-Info "Cloning to: $INSTALL_DIR"
 Write-Host ""
 
 $cloneOutput = git clone $REPO_URL $INSTALL_DIR 2>&1
@@ -259,9 +272,10 @@ if ($LASTEXITCODE -ne 0) {
     Write-Host "      $cloneOutput" -ForegroundColor Red
     Write-Host ""
     Write-Host "      Possible solutions:" -ForegroundColor Yellow
-    Write-Host "      - Check if the URL is correct" -ForegroundColor Yellow
-    Write-Host "      - For private repos use: https://USER:TOKEN@github.com/..." -ForegroundColor Yellow
-    Write-Host "      - Check your internet connection" -ForegroundColor Yellow
+    Write-Host "      1. For private repos - create a token at:" -ForegroundColor Yellow
+    Write-Host "         https://github.com/settings/tokens" -ForegroundColor White
+    Write-Host "      2. Make sure the repo exists and URL is correct" -ForegroundColor Yellow
+    Write-Host "      3. Check your internet connection" -ForegroundColor Yellow
     Write-Host ""
     Read-Host "      Press Enter to exit"
     exit 1
