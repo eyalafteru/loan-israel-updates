@@ -11436,7 +11436,9 @@ def get_git_status():
 def git_pull():
     """Pull latest changes from remote"""
     try:
-        result = subprocess.run(['git', 'pull'], cwd=BASE_DIR, capture_output=True, text=True)
+        git_env = os.environ.copy()
+        git_env['GIT_TERMINAL_PROMPT'] = '0'
+        result = subprocess.run(['git', 'pull'], cwd=BASE_DIR, capture_output=True, text=True, env=git_env)
         success = result.returncode == 0
         return jsonify({
             "success": success,
@@ -11449,11 +11451,14 @@ def git_pull():
 def git_push():
     """Add all, commit with auto message, and push"""
     try:
+        git_env = os.environ.copy()
+        git_env['GIT_TERMINAL_PROMPT'] = '0'
+        
         message = (request.json or {}).get('message') or f"Auto update: {datetime.now().strftime('%Y-%m-%d %H:%M')}"
         
         subprocess.run(['git', 'add', '.'], cwd=BASE_DIR, check=True)
         subprocess.run(['git', 'commit', '-m', message], cwd=BASE_DIR)
-        result = subprocess.run(['git', 'push'], cwd=BASE_DIR, capture_output=True, text=True)
+        result = subprocess.run(['git', 'push'], cwd=BASE_DIR, capture_output=True, text=True, env=git_env)
         
         return jsonify({"success": result.returncode == 0, "output": result.stdout + result.stderr})
     except Exception as e:
@@ -11466,8 +11471,13 @@ def git_sync():
         actions = []
         errors = []
         
+        # Set environment to prevent Git from prompting for credentials
+        git_env = os.environ.copy()
+        git_env['GIT_TERMINAL_PROMPT'] = '0'
+        git_env['GIT_ASKPASS'] = ''
+        
         # First, fetch to check status
-        subprocess.run(['git', 'fetch'], capture_output=True, cwd=BASE_DIR)
+        subprocess.run(['git', 'fetch'], capture_output=True, cwd=BASE_DIR, env=git_env)
         
         # Check status
         status_result = subprocess.run(['git', 'status', '--porcelain'], 
@@ -11500,7 +11510,7 @@ def git_sync():
                 subprocess.run(['git', 'stash'], cwd=BASE_DIR, capture_output=True)
                 actions.append(f"שמרתי {status_result.stdout.count(chr(10))} שינויים זמנית")
             
-            pull_result = subprocess.run(['git', 'pull'], cwd=BASE_DIR, capture_output=True, text=True)
+            pull_result = subprocess.run(['git', 'pull'], cwd=BASE_DIR, capture_output=True, text=True, env=git_env)
             if pull_result.returncode == 0:
                 actions.append(f"משכתי {behind_count} עדכונים")
             else:
@@ -11511,6 +11521,11 @@ def git_sync():
                 stash_pop = subprocess.run(['git', 'stash', 'pop'], cwd=BASE_DIR, capture_output=True, text=True)
                 if stash_pop.returncode == 0:
                     actions.append("שחזרתי שינויים מקומיים")
+                elif "CONFLICT" in stash_pop.stdout or "CONFLICT" in stash_pop.stderr:
+                    # There's a conflict - abort and let user know
+                    subprocess.run(['git', 'checkout', '--theirs', '.'], cwd=BASE_DIR, capture_output=True)
+                    subprocess.run(['git', 'stash', 'drop'], cwd=BASE_DIR, capture_output=True)
+                    actions.append("⚠️ היה קונפליקט - לקחתי גרסת השרת")
                 else:
                     errors.append("קונפליקט בשחזור שינויים - צריך לפתור ידנית")
         
@@ -11534,7 +11549,7 @@ def git_sync():
                 subprocess.run(['git', 'commit', '-m', message], cwd=BASE_DIR)
                 actions.append("שמרתי שינויים מקומיים")
             
-            push_result = subprocess.run(['git', 'push'], cwd=BASE_DIR, capture_output=True, text=True)
+            push_result = subprocess.run(['git', 'push'], cwd=BASE_DIR, capture_output=True, text=True, env=git_env)
             if push_result.returncode == 0:
                 actions.append("דחפתי לשרת")
             else:
