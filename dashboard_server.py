@@ -11356,21 +11356,56 @@ def serve_static(filename):
 
 @app.route('/api/git/status', methods=['GET'])
 def get_git_status():
-    """Check if there are uncommitted changes"""
+    """Check if there are uncommitted changes and if behind remote"""
     try:
+        # Fetch from remote to check for updates (silent)
+        subprocess.run(['git', 'fetch'], capture_output=True, cwd=BASE_DIR)
+        
+        # Check local changes
         result = subprocess.run(['git', 'status', '--porcelain'], 
                               capture_output=True, text=True, cwd=BASE_DIR)
         has_changes = bool(result.stdout.strip())
         changed_files = len([l for l in result.stdout.strip().split('\n') if l]) if has_changes else 0
         
+        # Get current branch
         branch = subprocess.run(['git', 'branch', '--show-current'],
                                capture_output=True, text=True, cwd=BASE_DIR)
+        branch_name = branch.stdout.strip() or 'main'
+        
+        # Check if behind remote
+        behind_check = subprocess.run(
+            ['git', 'rev-list', '--count', f'HEAD..origin/{branch_name}'],
+            capture_output=True, text=True, cwd=BASE_DIR
+        )
+        behind_count = int(behind_check.stdout.strip()) if behind_check.returncode == 0 else 0
+        
+        # Check if ahead of remote
+        ahead_check = subprocess.run(
+            ['git', 'rev-list', '--count', f'origin/{branch_name}..HEAD'],
+            capture_output=True, text=True, cwd=BASE_DIR
+        )
+        ahead_count = int(ahead_check.stdout.strip()) if ahead_check.returncode == 0 else 0
         
         return jsonify({
             "success": True,
             "has_changes": has_changes,
-            "branch": branch.stdout.strip(),
-            "changed_files": changed_files
+            "branch": branch_name,
+            "changed_files": changed_files,
+            "behind": behind_count,
+            "ahead": ahead_count
+        })
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+@app.route('/api/git/pull', methods=['POST'])
+def git_pull():
+    """Pull latest changes from remote"""
+    try:
+        result = subprocess.run(['git', 'pull'], cwd=BASE_DIR, capture_output=True, text=True)
+        success = result.returncode == 0
+        return jsonify({
+            "success": success,
+            "output": result.stdout + result.stderr
         })
     except Exception as e:
         return jsonify({"success": False, "error": str(e)}), 500

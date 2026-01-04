@@ -61,15 +61,20 @@
         .git-status-container {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.4rem;
+            background: rgba(0,0,0,0.3);
+            padding: 0.3rem 0.5rem;
+            border-radius: 6px;
+            border: 1px solid rgba(255,255,255,0.1);
         }
         .git-badge {
-            padding: 0.3rem 0.6rem;
+            padding: 0.25rem 0.5rem;
             border-radius: 4px;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             display: flex;
             align-items: center;
-            gap: 0.3rem;
+            gap: 0.25rem;
+            font-weight: 500;
         }
         .git-badge.synced {
             background: #10b981;
@@ -79,9 +84,33 @@
             background: #f59e0b;
             color: white;
         }
-        .git-badge.pushing {
+        .git-badge.behind {
+            background: #ef4444;
+            color: white;
+        }
+        .git-badge.pushing, .git-badge.pulling {
             background: #3b82f6;
             color: white;
+        }
+        .btn-git {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.75rem;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            background: #374151;
+            color: white;
+            transition: all 0.2s;
+        }
+        .btn-git:hover:not(:disabled) {
+            background: #4b5563;
+        }
+        .btn-git:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .btn-git.active {
+            background: #3b82f6;
         }
         
         /* Tabs */
@@ -4555,15 +4584,6 @@
                 <button class="tab active" data-tab="edit">📝 עריכה</button>
                 <button class="tab" data-tab="agents">🤖 סוכנים</button>
             </div>
-            <div class="git-status-container">
-                <span id="gitStatusBadge" class="git-badge synced" title="Git Status">
-                    <span class="git-icon">✓</span>
-                    <span class="git-text">מסונכרן</span>
-                </span>
-                <button id="gitPushBtn" class="btn btn-secondary" onclick="gitPush()" disabled title="העלה לGit">
-                    ⬆ Git
-                </button>
-            </div>
             <select id="modeSelect">
                 <option value="claude">מצב: Claude Code (אוטומטי)</option>
                 <option value="cursor">מצב: Cursor (ידני)</option>
@@ -4571,6 +4591,18 @@
             <button class="btn btn-secondary" onclick="openSettings()">⚙️ הגדרות</button>
             <button class="btn btn-secondary" onclick="restartServer()" title="אתחול שרת">🔄</button>
             <button id="stopClaudeBtn" class="btn btn-danger" onclick="stopClaude()" style="display: none;" title="עצור את Claude">🛑 עצור</button>
+            <div class="git-status-container">
+                <span id="gitStatusBadge" class="git-badge synced" title="Git Status">
+                    <span class="git-icon">✓</span>
+                    <span class="git-text">בודק...</span>
+                </span>
+                <button id="gitPullBtn" class="btn btn-git" onclick="gitPull()" disabled title="משוך מGit">
+                    ⬇ Pull
+                </button>
+                <button id="gitPushBtn" class="btn btn-git" onclick="gitPush()" disabled title="העלה לGit">
+                    ⬆ Push
+                </button>
+            </div>
         </div>
     </header>
 
@@ -18316,30 +18348,76 @@ ${additionalInstructions}
         async function checkGitStatus() {
             try {
                 const result = await apiCall('/api/git/status');
-                if (!result.success) return;
+                if (!result.success) {
+                    const badge = document.getElementById('gitStatusBadge');
+                    badge.className = 'git-badge';
+                    badge.innerHTML = '<span class="git-icon">⚠</span><span class="git-text">שגיאה</span>';
+                    return;
+                }
                 
                 const badge = document.getElementById('gitStatusBadge');
-                const btn = document.getElementById('gitPushBtn');
+                const pushBtn = document.getElementById('gitPushBtn');
+                const pullBtn = document.getElementById('gitPullBtn');
+                
+                // Determine status
+                if (result.behind > 0) {
+                    // Behind remote - need to pull
+                    badge.className = 'git-badge behind';
+                    badge.innerHTML = `<span class="git-icon">⬇</span><span class="git-text">${result.behind} מאחור</span>`;
+                    pullBtn.disabled = false;
+                    pullBtn.classList.add('active');
+                } else {
+                    pullBtn.disabled = true;
+                    pullBtn.classList.remove('active');
+                }
                 
                 if (result.has_changes) {
+                    // Local changes - need to push
                     badge.className = 'git-badge has-changes';
                     badge.innerHTML = `<span class="git-icon">!</span><span class="git-text">${result.changed_files} שינויים</span>`;
-                    btn.disabled = false;
-                } else {
+                    pushBtn.disabled = false;
+                    pushBtn.classList.add('active');
+                } else if (result.ahead > 0) {
+                    // Ahead of remote - need to push
+                    badge.className = 'git-badge has-changes';
+                    badge.innerHTML = `<span class="git-icon">⬆</span><span class="git-text">${result.ahead} לדחוף</span>`;
+                    pushBtn.disabled = false;
+                    pushBtn.classList.add('active');
+                } else if (result.behind === 0) {
+                    // All synced
                     badge.className = 'git-badge synced';
                     badge.innerHTML = '<span class="git-icon">✓</span><span class="git-text">מסונכרן</span>';
-                    btn.disabled = true;
+                    pushBtn.disabled = true;
+                    pushBtn.classList.remove('active');
                 }
             } catch (e) {
-                // Ignore errors
+                console.error('Git status error:', e);
             }
         }
         
-        async function gitPush() {
-            const btn = document.getElementById('gitPushBtn');
+        async function gitPull() {
+            const pullBtn = document.getElementById('gitPullBtn');
             const badge = document.getElementById('gitStatusBadge');
             
-            btn.disabled = true;
+            pullBtn.disabled = true;
+            badge.className = 'git-badge pulling';
+            badge.innerHTML = '<span class="git-icon">⏳</span><span class="git-text">מושך...</span>';
+            
+            try {
+                const result = await apiCall('/api/git/pull', { method: 'POST' });
+                showToast(result.success ? '✅ Git Pull בוצע!' : '❌ ' + (result.output || result.error), result.success ? 'success' : 'error');
+            } catch (e) {
+                showToast('❌ שגיאה: ' + e.message, 'error');
+            }
+            
+            await checkGitStatus();
+        }
+        
+        async function gitPush() {
+            const pushBtn = document.getElementById('gitPushBtn');
+            const badge = document.getElementById('gitStatusBadge');
+            
+            pushBtn.disabled = true;
             badge.className = 'git-badge pushing';
             badge.innerHTML = '<span class="git-icon">⏳</span><span class="git-text">מעלה...</span>';
             
