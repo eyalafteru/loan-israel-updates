@@ -321,14 +321,19 @@ $configPath = Join-Path $INSTALL_DIR "config.json"
 
 if (Test-Path $configPath) {
     try {
-        $config = Get-Content $configPath -Raw -Encoding UTF8 | ConvertFrom-Json
+        # Read file content
+        $configContent = Get-Content $configPath -Raw -Encoding UTF8
         
-        if ($config.claude_code) {
-            $config.claude_code.command = $claudePath
-        }
+        # Escape backslashes for JSON
+        $claudePathEscaped = $claudePath -replace '\\', '\\\\'
         
-        $config | ConvertTo-Json -Depth 10 | Set-Content $configPath -Encoding UTF8
+        # Replace placeholder or any existing path
+        $configContent = $configContent -replace '"command":\s*"[^"]*"', "`"command`": `"$claudePathEscaped`""
+        
+        # Save file
+        $configContent | Set-Content $configPath -Encoding UTF8 -NoNewline
         Write-OK "config.json updated with Claude CLI path"
+        Write-Info "Claude path: $claudePath"
     }
     catch {
         Write-Err "Failed to update config.json: $_"

@@ -57,9 +57,32 @@ exit /b 1
 
 :found_python
 echo [INFO] Found Python: %PYTHON_CMD%
-
-REM Get Python version
 %PYTHON_CMD% --version
+echo.
+
+REM ====== FIX CLAUDE PATH IN CONFIG ======
+echo [INFO] Checking Claude CLI configuration...
+
+set CLAUDE_PATH=%APPDATA%\npm\claude.cmd
+if exist "%CLAUDE_PATH%" (
+    echo [INFO] Found Claude CLI: %CLAUDE_PATH%
+    
+    REM Create PowerShell script to fix config.json
+    echo $configPath = "%~dp0config.json" > "%TEMP%\fix_config.ps1"
+    echo if (Test-Path $configPath) { >> "%TEMP%\fix_config.ps1"
+    echo     $content = Get-Content $configPath -Raw -Encoding UTF8 >> "%TEMP%\fix_config.ps1"
+    echo     $claudePath = "%CLAUDE_PATH%" -replace '\\', '\\\\' >> "%TEMP%\fix_config.ps1"
+    echo     $content = $content -replace '"command":\s*"[^"]*"', "`"command`": `"$claudePath`"" >> "%TEMP%\fix_config.ps1"
+    echo     $content ^| Set-Content $configPath -Encoding UTF8 -NoNewline >> "%TEMP%\fix_config.ps1"
+    echo } >> "%TEMP%\fix_config.ps1"
+    
+    powershell -ExecutionPolicy Bypass -File "%TEMP%\fix_config.ps1" >nul 2>&1
+    del "%TEMP%\fix_config.ps1" >nul 2>&1
+    echo [INFO] Configuration updated.
+) else (
+    echo [WARNING] Claude CLI not found at: %CLAUDE_PATH%
+    echo [INFO] Install with: npm install -g @anthropic-ai/claude-code
+)
 echo.
 
 REM ====== KILL ALL EXISTING PYTHON PROCESSES ======
