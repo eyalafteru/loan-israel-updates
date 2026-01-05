@@ -1505,6 +1505,18 @@
             width: 95vw;
             max-height: 95vh;
             height: 95vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .modal-fullscreen .modal-body {
+            flex: 1;
+            max-height: none;
+            overflow-y: auto;
+        }
+        
+        .modal-fullscreen .modal-footer {
+            flex-shrink: 0;
         }
         
         .modal-footer {
@@ -5530,6 +5542,7 @@
                 <div class="annotation-option" data-value="shorter" onclick="selectAnnotationOption(this, 'contentAction')">✂️ קצר</div>
                 <div class="annotation-option" data-value="longer" onclick="selectAnnotationOption(this, 'contentAction')">📄 ארוך</div>
                 <div class="annotation-option" data-value="removeLink" onclick="selectAnnotationOption(this, 'contentAction')">🔗 הסר קישור</div>
+                <div class="annotation-option" data-value="removeBold" onclick="selectAnnotationOption(this, 'contentAction')">🅱️ הסר בולד</div>
                 <div class="annotation-option" data-value="custom" onclick="selectAnnotationOption(this, 'contentAction')">💬 מותאם</div>
             </div>
         </div>
@@ -5550,9 +5563,12 @@
         
         <div class="annotation-popup-section" id="directActionsSection" style="display: none; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px; margin-top: 10px;">
             <label>⚡ פעולות מיידיות (ללא שליחה לסוכן):</label>
-            <div style="display: flex; gap: 8px; margin-top: 8px;">
+            <div style="display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap;">
                 <button class="btn btn-small btn-danger" onclick="directRemoveLink()" id="directRemoveLinkBtn" style="display: none;">
                     🔗✂️ הסר קישור עכשיו
+                </button>
+                <button class="btn btn-small" onclick="directRemoveBold()" id="directRemoveBoldBtn" style="display: none; background: #f97316;">
+                    🅱️✂️ הסר בולד עכשיו
                 </button>
             </div>
         </div>
@@ -10979,7 +10995,20 @@ ${content}
         }
 
         // Edit heading from SEO report
-        async function editHeading(tagType, index, currentText) {
+        async function editHeading(tagType, index, currentText, event) {
+            // Prevent any default behavior
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            
+            // Check if page is selected
+            if (!selectedPage || !selectedPage.path) {
+                showToast('שגיאה: לא נבחר עמוד', 'error');
+                console.error('selectedPage:', selectedPage);
+                return;
+            }
+            
             const newText = prompt(`ערוך כותרת ${tagType.toUpperCase()}:`, currentText);
             if (newText === null || newText === currentText) return;
             
@@ -10990,6 +11019,8 @@ ${content}
             
             try {
                 showToast('שומר שינויים...', 'info');
+                
+                console.log('Editing heading:', { file_path: selectedPage.path, tag_type: tagType, old_text: currentText, new_text: newText.trim() });
                 
                 const response = await fetch('/api/edit-heading', {
                     method: 'POST',
@@ -11003,6 +11034,8 @@ ${content}
                 });
                 
                 const result = await response.json();
+                console.log('Edit heading result:', result);
+                
                 if (result.success) {
                     showToast('✅ הכותרת עודכנה בהצלחה', 'success');
                     // Refresh the new content preview
@@ -11012,7 +11045,7 @@ ${content}
                 }
             } catch (error) {
                 console.error('Error editing heading:', error);
-                showToast('שגיאה בעריכת הכותרת', 'error');
+                showToast('שגיאה בעריכת הכותרת: ' + error.message, 'error');
             }
         }
 
@@ -11166,22 +11199,15 @@ ${content}
                             newFrame.classList.add('edit-mode-active');
                             injectUnifiedEditHandlers(newFrame);
                         }
+                        // Refresh the SEO report
+                        if (typeof generateSeoReport === 'function') {
+                            setTimeout(() => generateSeoReport(), 100);
+                        }
                     };
                     const newDoc = newFrame.contentDocument || newFrame.contentWindow.document;
                     newDoc.open();
                     newDoc.write(`<!DOCTYPE html><html dir="rtl"><head><meta charset="UTF-8"><style>body{font-family:Arial,sans-serif;padding:20px;margin:0;}</style></head><body>${uploadState.newContent}</body></html>`);
                     newDoc.close();
-                    
-                    // Refresh SEO analysis
-                    if (typeof generateComprehensiveSEOReport === 'function') {
-                        const reportContainer = document.getElementById('compareSeoReport');
-                        if (reportContainer) {
-                            // Re-analyze the content
-                            const keyword = uploadState.keyword || uploadState.pageInfo?.keyword || '';
-                            const analysis = analyzeHTMLContent(uploadState.newContent, keyword);
-                            // Update the report display
-                        }
-                    }
                 }
             } catch (error) {
                 console.error('Error refreshing compare view:', error);
@@ -11192,6 +11218,18 @@ ${content}
         async function refreshNewContentPreview() {
             showToast('מרענן תצוגה...', 'info');
             try {
+                // Save the open state of all <details> elements in SEO report before refresh
+                const seoReportContent = document.getElementById('seoReportContent');
+                const openDetailsIndices = [];
+                if (seoReportContent) {
+                    const allDetails = seoReportContent.querySelectorAll('details');
+                    allDetails.forEach((detail, idx) => {
+                        if (detail.open) {
+                            openDetailsIndices.push(idx);
+                        }
+                    });
+                }
+                
                 // Reload HTML content from file
                 const pageFolder = getPageFolder(selectedPage.path);
                 const response = await fetch(`/api/page/html-content?page_folder=${encodeURIComponent(pageFolder)}`);
@@ -11221,6 +11259,19 @@ ${content}
                     // Refresh the SEO report
                     if (typeof generateSeoReport === 'function') {
                         generateSeoReport();
+                    }
+                    
+                    // Restore the open state of <details> elements after regeneration
+                    if (seoReportContent && openDetailsIndices.length > 0) {
+                        // Use setTimeout to ensure DOM is updated after generateSeoReport
+                        setTimeout(() => {
+                            const newDetails = seoReportContent.querySelectorAll('details');
+                            openDetailsIndices.forEach(idx => {
+                                if (newDetails[idx]) {
+                                    newDetails[idx].open = true;
+                                }
+                            });
+                        }, 50);
                     }
                     
                     showToast('✅ התצוגה רועננה', 'success');
@@ -11589,18 +11640,27 @@ ${content}
             // Reset options
             resetAnnotationOptions();
             
-            // Show direct actions section if element is a link or contains links
+            // Show direct actions section if element is a link or contains links or has bold
             const isLink = tagName === 'a';
             const hasLinks = element.querySelectorAll('a').length > 0;
+            const isBold = tagName === 'strong' || tagName === 'b';
+            const hasBolds = element.querySelectorAll('strong, b').length > 0;
             const directActionsSection = document.getElementById('directActionsSection');
             const directRemoveLinkBtn = document.getElementById('directRemoveLinkBtn');
+            const directRemoveBoldBtn = document.getElementById('directRemoveBoldBtn');
+            
+            // Reset visibility
+            directRemoveLinkBtn.style.display = 'none';
+            directRemoveBoldBtn.style.display = 'none';
+            
+            const showDirectActions = (isLink || hasLinks || isBold || hasBolds);
+            directActionsSection.style.display = showDirectActions ? 'block' : 'none';
             
             if (isLink || hasLinks) {
-                directActionsSection.style.display = 'block';
                 directRemoveLinkBtn.style.display = 'inline-block';
-            } else {
-                directActionsSection.style.display = 'none';
-                directRemoveLinkBtn.style.display = 'none';
+            }
+            if (isBold || hasBolds) {
+                directRemoveBoldBtn.style.display = 'inline-block';
             }
         }
         
@@ -11621,7 +11681,50 @@ ${content}
             document.getElementById('annotationNote').value = '';
         }
         
-        function directRemoveLink() {
+        // Save direct edits (like remove link, remove bold) to file
+        async function saveDirectEdits() {
+            if (!selectedPage || !selectedPage.path) {
+                console.error('No page selected for saving');
+                return;
+            }
+            
+            try {
+                const pageFolder = getPageFolder(selectedPage.path);
+                const htmlFileName = selectedPage.path.split('/').pop();
+                const filePath = `${pageFolder}/${htmlFileName}`;
+                
+                // Get the current content from uploadState
+                const content = uploadState.newContent;
+                if (!content) {
+                    console.error('No content to save');
+                    return;
+                }
+                
+                const response = await fetch('/api/file/save-content', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        path: filePath,
+                        content: content
+                    })
+                });
+                
+                const result = await response.json();
+                if (result.success) {
+                    console.log('✅ Direct edits saved to file');
+                    // Refresh to show updated content
+                    await refreshNewContentPreview();
+                } else {
+                    console.error('Error saving direct edits:', result.error);
+                    showToast('שגיאה בשמירת השינויים: ' + result.error, 'error');
+                }
+            } catch (error) {
+                console.error('Error saving direct edits:', error);
+                showToast('שגיאה בשמירת השינויים', 'error');
+            }
+        }
+        
+        async function directRemoveLink() {
             if (!currentAnnotationElement) {
                 showToast('לא נבחר אלמנט', 'error');
                 return;
@@ -11676,7 +11779,77 @@ ${content}
             closeAnnotationPopup();
             
             // Auto-save to file
-            saveDirectEdits();
+            await saveDirectEdits();
+        }
+        
+        async function directRemoveBold() {
+            if (!currentAnnotationElement) {
+                showToast('לא נבחר אלמנט', 'error');
+                return;
+            }
+            
+            // Get the text content to remove bold from
+            let targetEl = currentAnnotationElement;
+            const tagName = targetEl.tagName.toLowerCase();
+            
+            // Collect all bold texts to remove
+            let boldsToRemove = [];
+            
+            if (tagName === 'strong' || tagName === 'b') {
+                // The element itself is bold
+                boldsToRemove.push(targetEl.textContent.trim());
+            } else {
+                // Find all bold elements inside
+                const bolds = Array.from(targetEl.querySelectorAll('strong, b'));
+                bolds.forEach(bold => {
+                    boldsToRemove.push(bold.textContent.trim());
+                });
+            }
+            
+            if (boldsToRemove.length === 0) {
+                showToast('לא נמצאו הדגשות להסרה', 'warning');
+                closeAnnotationPopup();
+                return;
+            }
+            
+            closeAnnotationPopup();
+            
+            // Use the same API as removeBoldFormatting for each bold
+            try {
+                const pageFolder = getPageFolder(selectedPage.path);
+                let successCount = 0;
+                
+                for (const boldText of boldsToRemove) {
+                    showToast(`מסיר הדגשה: "${boldText.substring(0, 30)}..."`, 'info');
+                    
+                    const response = await fetch('/api/page/remove-bold', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            page_folder: pageFolder,
+                            bold_text: boldText,
+                            occurrence_index: 0  // Remove first occurrence
+                        })
+                    });
+                    
+                    const result = await response.json();
+                    if (result.success) {
+                        successCount++;
+                    } else {
+                        console.error('Error removing bold:', result.error);
+                    }
+                }
+                
+                if (successCount > 0) {
+                    showToast(`✅ ${successCount} הדגשות הוסרו בהצלחה!`, 'success');
+                    await refreshNewContentPreview();
+                } else {
+                    showToast('לא הצלחנו להסיר הדגשות', 'error');
+                }
+            } catch (error) {
+                console.error('Error removing bold:', error);
+                showToast('שגיאה בהסרת הדגשות: ' + error.message, 'error');
+            }
         }
         
         function resetAnnotationOptions() {
@@ -16811,7 +16984,7 @@ ${additionalInstructions}
                             html += `<div style="padding: 4px 8px; margin: 2px 0; background: ${has ? 'rgba(16,185,129,0.15)' : 'rgba(255,255,255,0.05)'}; border-radius: 4px; font-size: 0.75rem; border-right: 3px solid ${borderColor};">
                                 <div style="display: flex; align-items: center; gap: 8px;">
                                     <span style="flex: 1;">${has ? '✅' : '⬜'} ${h} ${renderScoreBadge(score, scoreData)}</span>
-                                    <button onclick="editHeading('h1', ${idx}, '${escaped}')" style="background: #4b5563; border: none; color: white; padding: 2px 8px; border-radius: 4px; cursor: pointer; font-size: 0.65rem;">✏️ ערוך</button>
+                                    <button type="button" onclick="editHeading('h1', ${idx}, '${escaped}', event)" style="background: #4b5563; border: none; color: white; padding: 2px 8px; border-radius: 4px; cursor: pointer; font-size: 0.65rem;">✏️ ערוך</button>
                                 </div>
                             </div>`;
                         });
@@ -16850,7 +17023,7 @@ ${additionalInstructions}
                             html += `<div style="padding: 4px 8px; margin: 2px 0; background: ${bgColor}; border-radius: 4px; font-size: 0.75rem; border-right: 3px solid ${borderColor};">
                                 <div style="display: flex; align-items: center; gap: 8px;">
                                     <span style="flex: 1;">${has ? '🔴' : '⬜'} ${h} ${renderScoreBadge(score, scoreData)}</span>
-                                    <button onclick="editHeading('h2', ${idx}, '${escaped}')" style="background: #4b5563; border: none; color: white; padding: 2px 8px; border-radius: 4px; cursor: pointer; font-size: 0.65rem;">✏️ ערוך</button>
+                                    <button type="button" onclick="editHeading('h2', ${idx}, '${escaped}', event)" style="background: #4b5563; border: none; color: white; padding: 2px 8px; border-radius: 4px; cursor: pointer; font-size: 0.65rem;">✏️ ערוך</button>
                                 </div>
                             </div>`;
                         });
@@ -16887,7 +17060,7 @@ ${additionalInstructions}
                             html += `<div style="padding: 4px 8px; margin: 2px 0; background: ${has ? 'rgba(245,158,11,0.1)' : 'rgba(255,255,255,0.05)'}; border-radius: 4px; font-size: 0.7rem; border-right: 3px solid ${borderColor};">
                                 <div style="display: flex; align-items: center; gap: 8px;">
                                     <span style="flex: 1;">${has ? '⚠️' : '⬜'} ${h} ${renderScoreBadge(score, scoreData)}</span>
-                                    <button onclick="editHeading('h3', ${idx}, '${escaped}')" style="background: #4b5563; border: none; color: white; padding: 2px 6px; border-radius: 4px; cursor: pointer; font-size: 0.6rem;">✏️</button>
+                                    <button type="button" onclick="editHeading('h3', ${idx}, '${escaped}', event)" style="background: #4b5563; border: none; color: white; padding: 2px 6px; border-radius: 4px; cursor: pointer; font-size: 0.6rem;">✏️</button>
                                 </div>
                             </div>`;
                         });
@@ -17057,7 +17230,7 @@ ${additionalInstructions}
                                         <span style="background: #fef08a; color: #1f2937; padding: 1px 4px; border-radius: 2px;">${bold.text}</span>
                                         <span style="font-size: 0.75rem; color: #f87171; margin-right: 0.5rem;">📛 ${bold.reasons.join(', ')}</span>
                                     </span>
-                                    <button onclick="removeBoldFormatting('${encodeURIComponent(bold.text)}', ${bold.index})" class="seo-edit-btn" style="background: #f97316;">
+                                    <button type="button" onclick="removeBoldFormatting('${encodeURIComponent(bold.text)}', ${bold.index}, event)" class="seo-edit-btn" style="background: #f97316;">
                                         🔓 הסר
                                     </button>
                                 </div>
@@ -17183,7 +17356,7 @@ ${additionalInstructions}
                                     <div style="font-size: 0.7rem; color: #f87171; margin-bottom: 4px;">
                                         📛 ${bold.reasons.join(' | ')}
                                     </div>
-                                    <button onclick="removeBoldFormatting('${encodeURIComponent(bold.text)}', ${bold.index})" 
+                                    <button type="button" onclick="removeBoldFormatting('${encodeURIComponent(bold.text)}', ${bold.index}, event)" 
                                             style="background: #f97316; color: white; border: none; padding: 4px 12px; border-radius: 4px; cursor: pointer; font-size: 0.75rem;">
                                         🔓 הסר הדגשה
                                     </button>
@@ -17209,7 +17382,7 @@ ${additionalInstructions}
                                     <td style="padding: 0.35rem; max-width: 200px; overflow: hidden; text-overflow: ellipsis;">"${b.text}"</td>
                                     <td style="padding: 0.35rem; font-size: 0.7rem; color: #9ca3af;">${b.wordCount} מילים</td>
                                     <td style="padding: 0.35rem;">
-                                        <button onclick="removeBoldFormatting('${encodeURIComponent(b.text)}', ${idx})" 
+                                        <button type="button" onclick="removeBoldFormatting('${encodeURIComponent(b.text)}', ${idx}, event)" 
                                                 style="background: #374151; color: white; border: none; padding: 2px 8px; border-radius: 4px; cursor: pointer; font-size: 0.65rem;">
                                             הסר
                                         </button>
@@ -17225,7 +17398,13 @@ ${additionalInstructions}
             return html;
         }
         
-        async function removeBoldFormatting(encodedText, index) {
+        async function removeBoldFormatting(encodedText, index, event) {
+            // Prevent any default behavior
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            
             const text = decodeURIComponent(encodedText);
             
             if (!confirm(`האם להסיר את ההדגשה מ: "${text}"?`)) {

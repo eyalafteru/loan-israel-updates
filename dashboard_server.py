@@ -8459,8 +8459,17 @@ def edit_heading():
         old_text = data.get('old_text', '')
         new_text = data.get('new_text', '')
         
+        print(f"📝 Edit heading request: file_path={file_path}, tag_type={tag_type}")
+        print(f"   old_text={old_text[:50] if old_text else 'None'}...")
+        print(f"   new_text={new_text[:50] if new_text else 'None'}...")
+        
         if not file_path or not tag_type or not old_text or not new_text:
-            return jsonify({"success": False, "error": "Missing required parameters"}), 400
+            missing = []
+            if not file_path: missing.append('file_path')
+            if not tag_type: missing.append('tag_type')
+            if not old_text: missing.append('old_text')
+            if not new_text: missing.append('new_text')
+            return jsonify({"success": False, "error": f"Missing required parameters: {', '.join(missing)}"}), 400
         
         # Validate tag type
         if tag_type not in ['h1', 'h2', 'h3', 'h4', 'h5', 'h6']:
@@ -8483,10 +8492,23 @@ def edit_heading():
         headings = soup.find_all(tag_type)
         updated = False
         
-        for heading in headings:
+        # Normalize the search text
+        old_text_normalized = ' '.join(old_text.strip().split())
+        
+        print(f"🔍 Searching for {tag_type}: '{old_text_normalized[:50]}...'")
+        print(f"   Found {len(headings)} {tag_type} elements")
+        
+        for i, heading in enumerate(headings):
             # Get text content (strip whitespace)
             heading_text = heading.get_text(strip=True)
-            if heading_text == old_text.strip():
+            heading_text_normalized = ' '.join(heading_text.split())
+            
+            # Try exact match first, then normalized match, then contains
+            if heading_text == old_text.strip() or \
+               heading_text_normalized == old_text_normalized or \
+               old_text_normalized in heading_text_normalized or \
+               heading_text_normalized in old_text_normalized:
+                print(f"   ✅ Found match at index {i}: '{heading_text[:30]}...'")
                 # Preserve any child elements (like spans, links) but update text
                 # If heading has only text, replace it
                 if len(heading.contents) == 1 and isinstance(heading.contents[0], str):
@@ -8506,7 +8528,10 @@ def edit_heading():
                 break
         
         if not updated:
-            return jsonify({"success": False, "error": f"Heading not found: {old_text[:50]}..."}), 404
+            # Debug: show what headings were found
+            found_headings = [h.get_text(strip=True)[:50] for h in headings[:5]]
+            print(f"   ❌ No match found. First 5 {tag_type}: {found_headings}")
+            return jsonify({"success": False, "error": f"Heading not found: '{old_text[:50]}...'. Found {len(headings)} {tag_type} elements."}), 404
         
         # Save file
         with open(full_path, 'w', encoding='utf-8') as f:
@@ -8621,24 +8646,53 @@ def remove_bold_formatting():
         from bs4 import BeautifulSoup
         soup = BeautifulSoup(content, 'html.parser')
         
+        # Normalize the search text (remove extra whitespace)
+        bold_text_normalized = ' '.join(bold_text.split())
+        
         # Find bold/strong elements with matching text
         removed = False
         occurrence = 0
+        all_bolds = []
+        
+        # Collect all bold elements first (same order as frontend)
         for tag_name in ['strong', 'b']:
             for bold in soup.find_all(tag_name):
-                if bold.get_text(strip=True) == bold_text:
+                bold_content = bold.get_text(strip=True)
+                bold_content_normalized = ' '.join(bold_content.split())
+                all_bolds.append((bold, bold_content, bold_content_normalized))
+        
+        # Try exact match first
+        for idx, (bold, content_orig, content_norm) in enumerate(all_bolds):
+            if content_norm == bold_text_normalized:
+                if occurrence == occurrence_index:
+                    # Replace bold tag with just its text content
+                    bold.replace_with(bold.get_text())
+                    removed = True
+                    print(f"🔓 Removed bold formatting from: '{bold_text}' (exact match at index {idx})")
+                    break
+                occurrence += 1
+        
+        # If not found, try partial/contains match
+        if not removed:
+            occurrence = 0
+            for idx, (bold, content_orig, content_norm) in enumerate(all_bolds):
+                if bold_text_normalized in content_norm or content_norm in bold_text_normalized:
                     if occurrence == occurrence_index:
-                        # Replace bold tag with just its text content
                         bold.replace_with(bold.get_text())
                         removed = True
-                        print(f"🔓 Removed bold formatting from: '{bold_text}'")
+                        print(f"🔓 Removed bold formatting from: '{content_orig}' (partial match)")
                         break
                     occurrence += 1
-            if removed:
-                break
+        
+        # Last resort: try by index directly
+        if not removed and occurrence_index < len(all_bolds):
+            bold, content_orig, _ = all_bolds[occurrence_index]
+            bold.replace_with(bold.get_text())
+            removed = True
+            print(f"🔓 Removed bold formatting by index {occurrence_index}: '{content_orig}'")
         
         if not removed:
-            return jsonify({"success": False, "error": "Bold text not found"}), 404
+            return jsonify({"success": False, "error": f"Bold text not found. Searched for: '{bold_text}'. Found {len(all_bolds)} bold elements."}), 404
         
         # Save the modified content
         with open(html_file, 'w', encoding='utf-8') as f:
