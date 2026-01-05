@@ -170,7 +170,7 @@
   },
   "claude_code": {
     "enabled": true,
-    "command": "C:\\\\Users\\\\eyal\\\\AppData\\\\Roaming\\\\npm\\\\claude.cmd",
+    "command": "claude",
     "models": {
       "claude-sonnet-4": {
         "name": "Claude Sonnet 4",

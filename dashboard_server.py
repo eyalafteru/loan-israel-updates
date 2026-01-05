@@ -120,6 +120,31 @@ def set_jwt_token(site_id, token):
     """Set JWT token for a site"""
     jwt_tokens[site_id] = token
 
+# ============ Claude Command Helper ============
+
+def get_claude_command():
+    """Get Claude command - find dynamically or use from config.
+    This ensures the command works on any computer regardless of username."""
+    config_cmd = config.get("claude_code", {}).get("command", "claude")
+    
+    # If it's just "claude", find full path dynamically
+    if config_cmd == "claude":
+        try:
+            result = subprocess.run(['where', 'claude'], capture_output=True, text=True)
+            if result.returncode == 0:
+                # Get the .cmd version (preferred on Windows)
+                for line in result.stdout.strip().split('\n'):
+                    if line.strip().endswith('.cmd'):
+                        return line.strip()
+                # Fallback to first result
+                first_line = result.stdout.strip().split('\n')[0].strip()
+                if first_line:
+                    return first_line
+        except Exception as e:
+            print(f"[Claude] Error finding claude command: {e}")
+    
+    return config_cmd
+
 # ============ Agent Loading (New System) ============
 
 def load_agents_from_folder():
@@ -2133,7 +2158,7 @@ def run_claude_code():
         data = request.json
         prompt = data.get("prompt", "")
         
-        cmd = config["claude_code"]["command"]
+        cmd = get_claude_command()
         
         # Check if command exists
         if not Path(cmd).exists() and not shutil.which(cmd):
@@ -2381,7 +2406,7 @@ def run_step1():
         else:
             # Claude Code mode - run with streaming JSON for live progress
             global running_claude_process
-            cmd = config["claude_code"]["command"]
+            cmd = get_claude_command()
             
             # Get API key
             api_key = ANTHROPIC_API_KEY
@@ -3017,7 +3042,7 @@ def run_step2():
                 })
         else:
             # Claude Code mode
-            cmd = config["claude_code"]["command"]
+            cmd = get_claude_command()
             api_key = ANTHROPIC_API_KEY
             
             # Build prompt for QA agent
@@ -3473,7 +3498,7 @@ def run_step3_fixes():
         else:
             # Claude Code mode - run with streaming JSON for live progress
             global running_claude_process
-            cmd = config["claude_code"]["command"]
+            cmd = get_claude_command()
             api_key = ANTHROPIC_API_KEY
             report_full_path = BASE_DIR / report_path
             
@@ -3828,7 +3853,7 @@ def run_step4():
         else:
             # Claude Code mode
             global running_claude_process
-            cmd = config["claude_code"]["command"]
+            cmd = get_claude_command()
             api_key = ANTHROPIC_API_KEY
             
             # Build paths
@@ -4196,7 +4221,7 @@ def run_step5():
         else:
             # Claude Code mode
             global running_claude_process
-            cmd = config["claude_code"]["command"]
+            cmd = get_claude_command()
             api_key = ANTHROPIC_API_KEY
             
             agent_file_path = BASE_DIR / agent_file
@@ -4541,7 +4566,7 @@ def run_step6():
         else:
             # Claude Code mode
             global running_claude_process
-            cmd = config["claude_code"]["command"]
+            cmd = get_claude_command()
             api_key = ANTHROPIC_API_KEY
             
             agent_file_path = BASE_DIR / agent_file
@@ -4963,7 +4988,7 @@ def run_single_step():
                 })
         else:
             result = subprocess.run(
-                [config["claude_code"]["command"], "-p", command],
+                [get_claude_command(), "-p", command],
                 capture_output=True,
                 text=True,
                 cwd=str(BASE_DIR),
@@ -4991,7 +5016,7 @@ def continue_conversation():
         if not page_path or not correction:
             return jsonify({"success": False, "error": "Missing page_path or correction"}), 400
         
-        cmd = config["claude_code"]["command"]
+        cmd = get_claude_command()
         api_key = ANTHROPIC_API_KEY
         
         # Escape for Python script
@@ -6714,7 +6739,7 @@ def trigger_step(page_path, agent_id, step_num, total_steps):
         runner_script = TMP_FOLDER / f"temp_run_{job_uuid}.py"
         page_path_escaped = str(page_path).replace("\\", "/")
         api_key = ANTHROPIC_API_KEY
-        cmd = config["claude_code"]["command"]
+        cmd = get_claude_command()
         
         # Escape backslashes for Python string literals
         agent_file_escaped = str(agent_file_path).replace("\\", "\\\\") if agent_file_path else ""
@@ -10954,7 +10979,7 @@ def run_annotation():
         clear_live_log(page_path)
         
         # Get Claude command and API key
-        cmd = config["claude_code"]["command"]
+        cmd = get_claude_command()
         api_key = ANTHROPIC_API_KEY
         
         # Build paths
@@ -11141,7 +11166,7 @@ def run_agent_prompt():
         clear_live_log(page_path)
         
         # Get Claude command and API key
-        cmd = config["claude_code"]["command"]
+        cmd = get_claude_command()
         api_key = ANTHROPIC_API_KEY
         
         # Save the prompt to a temp file

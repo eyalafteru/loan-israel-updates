@@ -59,12 +59,6 @@ echo [INFO] Python: %PYTHON_CMD%
 %PYTHON_CMD% --version
 echo.
 
-REM ====== FIX CLAUDE PATH ======
-echo [INFO] Fixing Claude CLI path...
-%PYTHON_CMD% -c "import json,os; p=os.path.join(os.environ['APPDATA'],'npm','claude.cmd'); c=json.load(open('config.json','r',encoding='utf-8')); c['claude_code']['command']=p; json.dump(c,open('config.json','w',encoding='utf-8'),ensure_ascii=False,indent=2)" 2>nul
-echo [INFO] Done.
-echo.
-
 REM ====== CLEANUP ======
 echo [INFO] Stopping Python processes...
 taskkill /F /IM python.exe >nul 2>&1
