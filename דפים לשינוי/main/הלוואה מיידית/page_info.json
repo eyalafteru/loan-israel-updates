@@ -121,13 +121,6 @@
         "type": "unique",
         "unique_part": "עד 15000",
         "variants": []
-      },
-      {
-        "primary": "הלוואה למסורבים",
-        "source": "related",
-        "type": "unique",
-        "unique_part": "למסורבים",
-        "variants": []
       }
     ],
     "final_keywords": [
@@ -142,8 +135,7 @@
       "הלוואה מיידית לכל מטרה",
       "הלוואה מיידית במזומן",
       "הלוואה מיידית לכולם",
-      "הלוואה מיידית עד 15000",
-      "הלוואה למסורבים"
+      "הלוואה מיידית עד 15000"
     ],
     "unique_topics": [
       "אונליין",
@@ -305,5 +297,7 @@
         "url": "https://www.fibi.co.il/private/loansandmortgages/loans/clickloan/"
       }
     ]
-  }
+  },
+  "last_upload": "2026-01-05T10:14:10.578Z",
+  "last_upload_type": "content"
 }
