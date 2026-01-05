@@ -82,11 +82,11 @@ wp_test_*.txt
 TEST.txt
 
 # ==============================================
-# IMPORTANT: Files to INCLUDE (not ignored)
+# IMPORTANT: Local-only files (not synced)
 # ==============================================
 
-# API config with keys - INCLUDE in private repo
-# !api_config.env
+# API config with keys - LOCAL ONLY, not synced between computers
+api_config.env
 
 # Config files - INCLUDE
 # !config.json
