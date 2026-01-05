@@ -1,5 +1,5 @@
 === פרומפט שנשלח לקלוד - step1 ===
-זמן: 2026-01-03 15:45:21
+זמן: 2026-01-05 10:03:35
 ============================================================
 
-קרא את קובץ ההוראות C:\Users\eyal\loan-israel-updaets\loan-israel-updates\פרומטים\SEO\שלב 1.md ואת קובץ ה-HTML: C:\Users\eyal\loan-israel-updaets\loan-israel-updates\דפים לשינוי\main\הלוואה מיידית\הלוואה מיידית.html. בצע את ההוראות. בסוף שמור את הדוח בנתיב: C:\Users\eyal\loan-israel-updaets\loan-israel-updates\דפים לשינוי\main\הלוואה מיידית\SEO\דוח שלב 1.md
+קרא את קובץ ההוראות C:\loan-dashboard\פרומטים\SEO\שלב 1.md ואת קובץ ה-HTML: C:\loan-dashboard\דפים לשינוי\main\הלוואה מיידית\הלוואה מיידית.html. בצע את ההוראות. בסוף שמור את הדוח בנתיב: C:\loan-dashboard\דפים לשינוי\main\הלוואה מיידית\SEO\דוח שלב 1.md
