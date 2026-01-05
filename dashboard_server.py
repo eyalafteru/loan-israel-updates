@@ -8624,6 +8624,9 @@ def remove_bold_formatting():
         page_folder = data.get('page_folder')
         bold_text = data.get('bold_text', '')
         occurrence_index = data.get('occurrence_index', 0)
+        # New: context for precise matching
+        context_before = data.get('context_before', '')
+        context_after = data.get('context_after', '')
         
         if not page_folder or not bold_text:
             return jsonify({"success": False, "error": "Missing page_folder or bold_text"}), 400
@@ -8648,48 +8651,112 @@ def remove_bold_formatting():
         
         # Normalize the search text (remove extra whitespace)
         bold_text_normalized = ' '.join(bold_text.split())
+        context_before_normalized = ' '.join(context_before.split()) if context_before else ''
+        context_after_normalized = ' '.join(context_after.split()) if context_after else ''
         
         # Find bold/strong elements with matching text
         removed = False
         occurrence = 0
         all_bolds = []
         
-        # Collect all bold elements first (same order as frontend)
+        # Collect all bold elements first with their context
         for tag_name in ['strong', 'b']:
             for bold in soup.find_all(tag_name):
                 bold_content = bold.get_text(strip=True)
                 bold_content_normalized = ' '.join(bold_content.split())
-                all_bolds.append((bold, bold_content, bold_content_normalized))
+                
+                # Get context from parent
+                parent = bold.parent
+                parent_text = parent.get_text() if parent else ''
+                bold_pos = parent_text.find(bold_content)
+                
+                elem_context_before = ''
+                elem_context_after = ''
+                if bold_pos >= 0:
+                    elem_context_before = ' '.join(parent_text[:bold_pos].split()[-5:])
+                    after_pos = bold_pos + len(bold_content)
+                    elem_context_after = ' '.join(parent_text[after_pos:].split()[:5])
+                
+                all_bolds.append((bold, bold_content, bold_content_normalized, elem_context_before, elem_context_after))
         
-        # Try exact match first
-        for idx, (bold, content_orig, content_norm) in enumerate(all_bolds):
-            if content_norm == bold_text_normalized:
-                if occurrence == occurrence_index:
-                    # Replace bold tag with just its text content
-                    bold.replace_with(bold.get_text())
-                    removed = True
-                    print(f"🔓 Removed bold formatting from: '{bold_text}' (exact match at index {idx})")
-                    break
-                occurrence += 1
+        # Helper function to get context around the bold element
+        def get_context(bold_element, chars=40):
+            """Get text before and after the bold element"""
+            parent = bold_element.parent
+            if not parent:
+                return "", ""
+            
+            # Get all text content of parent
+            full_text = parent.get_text()
+            bold_text_content = bold_element.get_text()
+            
+            # Find position of bold text in parent
+            pos = full_text.find(bold_text_content)
+            if pos == -1:
+                return "", ""
+            
+            before = full_text[max(0, pos-chars):pos].strip()
+            after = full_text[pos+len(bold_text_content):pos+len(bold_text_content)+chars].strip()
+            return before, after
+        
+        removed_context = {"before": "", "after": "", "text": ""}
+        
+        # If context was provided, use it for precise matching (highest priority)
+        if context_before_normalized or context_after_normalized:
+            print(f"🔍 Matching with context: before='{context_before_normalized}', after='{context_after_normalized}'")
+            for idx, (bold, content_orig, content_norm, elem_ctx_before, elem_ctx_after) in enumerate(all_bolds):
+                if content_norm == bold_text_normalized:
+                    # Check if context matches
+                    before_match = not context_before_normalized or context_before_normalized in elem_ctx_before or elem_ctx_before in context_before_normalized
+                    after_match = not context_after_normalized or context_after_normalized in elem_ctx_after or elem_ctx_after in context_after_normalized
+                    
+                    if before_match and after_match:
+                        before, after = get_context(bold)
+                        removed_context = {"before": before, "after": after, "text": content_orig}
+                        bold.replace_with(bold.get_text())
+                        removed = True
+                        print(f"🔓 Removed bold with context match: '{content_orig}'")
+                        print(f"   Context: ...{before} [{content_orig}] {after}...")
+                        break
+        
+        # Fallback: Try exact match without context
+        if not removed:
+            for idx, (bold, content_orig, content_norm, elem_ctx_before, elem_ctx_after) in enumerate(all_bolds):
+                if content_norm == bold_text_normalized:
+                    if occurrence == occurrence_index:
+                        before, after = get_context(bold)
+                        removed_context = {"before": before, "after": after, "text": content_orig}
+                        bold.replace_with(bold.get_text())
+                        removed = True
+                        print(f"🔓 Removed bold formatting from: '{bold_text}' (exact match at index {idx})")
+                        print(f"   Context: ...{before} [{content_orig}] {after}...")
+                        break
+                    occurrence += 1
         
         # If not found, try partial/contains match
         if not removed:
             occurrence = 0
-            for idx, (bold, content_orig, content_norm) in enumerate(all_bolds):
+            for idx, (bold, content_orig, content_norm, elem_ctx_before, elem_ctx_after) in enumerate(all_bolds):
                 if bold_text_normalized in content_norm or content_norm in bold_text_normalized:
                     if occurrence == occurrence_index:
+                        before, after = get_context(bold)
+                        removed_context = {"before": before, "after": after, "text": content_orig}
                         bold.replace_with(bold.get_text())
                         removed = True
                         print(f"🔓 Removed bold formatting from: '{content_orig}' (partial match)")
+                        print(f"   Context: ...{before} [{content_orig}] {after}...")
                         break
                     occurrence += 1
         
         # Last resort: try by index directly
         if not removed and occurrence_index < len(all_bolds):
-            bold, content_orig, _ = all_bolds[occurrence_index]
+            bold, content_orig, _, _, _ = all_bolds[occurrence_index]
+            before, after = get_context(bold)
+            removed_context = {"before": before, "after": after, "text": content_orig}
             bold.replace_with(bold.get_text())
             removed = True
             print(f"🔓 Removed bold formatting by index {occurrence_index}: '{content_orig}'")
+            print(f"   Context: ...{before} [{content_orig}] {after}...")
         
         if not removed:
             return jsonify({"success": False, "error": f"Bold text not found. Searched for: '{bold_text}'. Found {len(all_bolds)} bold elements."}), 404
@@ -8701,7 +8768,10 @@ def remove_bold_formatting():
         return jsonify({
             "success": True,
             "message": "Bold formatting removed successfully",
-            "file": str(html_file)
+            "file": str(html_file),
+            "removed_text": removed_context["text"],
+            "context_before": removed_context["before"],
+            "context_after": removed_context["after"]
         })
     except Exception as e:
         import traceback
@@ -11526,10 +11596,31 @@ def git_pull():
     except Exception as e:
         return jsonify({"success": False, "error": str(e)}), 500
 
+def check_for_conflict_markers():
+    """Check if any HTML files have git conflict markers"""
+    conflict_files = []
+    for html_file in BASE_DIR.rglob('*.html'):
+        try:
+            content = html_file.read_text(encoding='utf-8', errors='ignore')
+            if '<<<<<<<' in content or '>>>>>>>' in content:
+                relative_path = str(html_file.relative_to(BASE_DIR))
+                conflict_files.append(relative_path)
+        except:
+            pass
+    return conflict_files
+
 @app.route('/api/git/push', methods=['POST'])
 def git_push():
     """Add all, commit with auto message, and push"""
     try:
+        # Check for conflict markers BEFORE committing
+        conflict_files = check_for_conflict_markers()
+        if conflict_files:
+            return jsonify({
+                "success": False, 
+                "error": f"❌ נמצאו קבצים עם conflict markers! יש לתקן אותם קודם: {', '.join(conflict_files[:3])}"
+            }), 400
+        
         git_env = os.environ.copy()
         git_env['GIT_TERMINAL_PROMPT'] = '0'
         
@@ -11657,6 +11748,18 @@ def git_sync():
         # Step 2: Push if has changes or ahead
         if has_changes or ahead_count > 0:
             if has_changes:
+                # Check for conflict markers BEFORE committing
+                conflict_files = check_for_conflict_markers()
+                if conflict_files:
+                    errors.append(f"❌ נמצאו קבצים עם conflict markers: {', '.join(conflict_files[:3])}")
+                    return jsonify({
+                        "success": False,
+                        "actions": actions,
+                        "errors": errors,
+                        "message": "יש קבצים עם conflicts שצריך לתקן ידנית",
+                        "conflict_files": conflict_files
+                    })
+                
                 subprocess.run(['git', 'add', '.'], cwd=BASE_DIR, check=True)
                 message = f"Auto sync: {datetime.now().strftime('%Y-%m-%d %H:%M')}"
                 subprocess.run(['git', 'commit', '-m', message], cwd=BASE_DIR)
@@ -11684,26 +11787,70 @@ def git_sync():
 
 @app.route('/api/server/restart', methods=['POST'])
 def restart_server():
-    """Restart by running start_dashboard.bat which does full cleanup"""
+    """Restart by killing old server, closing old terminal, and starting fresh"""
     import threading
+    import ctypes
     
     try:
+        # Get the current process ID and its parent (the cmd window)
+        current_pid = os.getpid()
+        
+        # Create a restart script that will:
+        # 1. Kill the old Python process and its parent terminal
+        # 2. Start fresh server
+        restart_script = BASE_DIR / "temp_restart.bat"
         batch_file = BASE_DIR / "start_dashboard.bat"
-        if batch_file.exists():
-            # Start the batch file in a new console window
-            subprocess.Popen(
-                ['cmd', '/c', 'start', 'cmd', '/k', str(batch_file)],
-                cwd=str(BASE_DIR),
-                creationflags=subprocess.CREATE_NEW_CONSOLE
-            )
         
-        # Give time for response before shutdown
-        def shutdown():
-            time.sleep(1)
-            os._exit(0)
+        # Get parent process ID (the cmd.exe running the server)
+        try:
+            import ctypes
+            kernel32 = ctypes.windll.kernel32
+            # We'll kill by port instead since getting parent PID is complex
+            parent_pid = None
+        except:
+            parent_pid = None
         
-        threading.Thread(target=shutdown).start()
+        script_content = f'''@echo off
+chcp 65001 >nul
+cd /d "{BASE_DIR}"
+
+echo [RESTART] Closing old server...
+
+REM Kill the Python process
+taskkill /F /PID {current_pid} >nul 2>&1
+
+REM Wait a moment
+timeout /t 1 /nobreak >nul
+
+REM Kill any process on port 5000 (backup)
+for /f "tokens=5" %%a in ('netstat -aon ^| findstr ":5000" ^| findstr "LISTENING"') do (
+    taskkill /F /PID %%a >nul 2>&1
+)
+
+REM Kill old cmd windows running dashboard (by exact window title)
+taskkill /F /FI "WINDOWTITLE eq Page Management Dashboard Server" >nul 2>&1
+
+timeout /t 1 /nobreak >nul
+
+echo [RESTART] Starting new server...
+start "" "{batch_file}"
+
+REM Clean up this script
+del "%~f0" >nul 2>&1
+exit
+'''
         
+        with open(restart_script, 'w', encoding='utf-8') as f:
+            f.write(script_content)
+        
+        # Start the restart script in a HIDDEN window (no new visible window)
+        subprocess.Popen(
+            ['cmd', '/c', str(restart_script)],
+            cwd=str(BASE_DIR),
+            creationflags=subprocess.CREATE_NO_WINDOW
+        )
+        
+        # Return response immediately - the script will handle killing this process
         return jsonify({"success": True, "message": "Restarting..."})
     except Exception as e:
         return jsonify({"success": False, "error": str(e)}), 500

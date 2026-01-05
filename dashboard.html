@@ -17225,12 +17225,16 @@ ${additionalInstructions}
                         </div>
                         <div style="display: flex; flex-direction: column; gap: 6px;">
                             ${suspiciousBolds.map(bold => `
-                                <div class="seo-heading-item has-keyword" style="border-right-color: #ef4444;">
-                                    <span class="heading-text">
-                                        <span style="background: #fef08a; color: #1f2937; padding: 1px 4px; border-radius: 2px;">${bold.text}</span>
-                                        <span style="font-size: 0.75rem; color: #f87171; margin-right: 0.5rem;">📛 ${bold.reasons.join(', ')}</span>
-                                    </span>
-                                    <button type="button" onclick="removeBoldFormatting('${encodeURIComponent(bold.text)}', ${bold.index}, event)" class="seo-edit-btn" style="background: #f97316;">
+                                <div class="seo-heading-item has-keyword" style="border-right-color: #ef4444; padding: 8px;">
+                                    <div style="flex: 1;">
+                                        <div style="font-size: 0.75rem; direction: rtl; margin-bottom: 4px;">
+                                            <span style="color: #6b7280;">${bold.contextBefore ? `...${bold.contextBefore} ` : ''}</span>
+                                            <span style="background: #fef08a; color: #1f2937; padding: 1px 4px; border-radius: 2px; font-weight: bold;">${bold.text}</span>
+                                            <span style="color: #6b7280;">${bold.contextAfter ? ` ${bold.contextAfter}...` : ''}</span>
+                                        </div>
+                                        <span style="font-size: 0.7rem; color: #f87171;">📛 ${bold.reasons.join(', ')}</span>
+                                    </div>
+                                    <button type="button" onclick="removeBoldWithContext('${encodeURIComponent(bold.text)}', '${encodeURIComponent(bold.contextBefore || '')}', '${encodeURIComponent(bold.contextAfter || '')}', event)" class="seo-edit-btn" style="background: #f97316;">
                                         🔓 הסר
                                     </button>
                                 </div>
@@ -17242,19 +17246,27 @@ ${additionalInstructions}
                 html += `<div style="color: #10b981; margin-bottom: 0.5rem;">✅ אין הדגשות חשודות</div>`;
             }
             
-            // All bolds list (collapsed)
+            // All bolds list (collapsed) - with context for identification
             html += `
                 <details>
                     <summary style="cursor: pointer; font-size: 0.85rem; color: var(--text-secondary);">
                         📋 כל ההדגשות (${boldItems.length})
                     </summary>
-                    <div style="max-height: 200px; overflow-y: auto; margin-top: 0.5rem;">
-                        ${boldItems.slice(0, 20).map((bold, idx) => `
-                            <div class="seo-heading-item">
-                                <span class="heading-text" style="font-size: 0.8rem;">${bold.text}</span>
+                    <div style="max-height: 300px; overflow-y: auto; margin-top: 0.5rem;">
+                        ${boldItems.slice(0, 30).map((bold, idx) => `
+                            <div class="seo-heading-item" style="display: flex; align-items: center; gap: 8px; padding: 6px; margin: 4px 0; background: rgba(255,255,255,0.03); border-radius: 4px;">
+                                <div style="flex: 1; font-size: 0.75rem; direction: rtl;">
+                                    <span style="color: #6b7280;">${bold.contextBefore ? `...${bold.contextBefore} ` : ''}</span>
+                                    <span style="background: #fef08a; color: #1f2937; padding: 1px 4px; border-radius: 2px; font-weight: bold;">${bold.text}</span>
+                                    <span style="color: #6b7280;">${bold.contextAfter ? ` ${bold.contextAfter}...` : ''}</span>
+                                </div>
+                                <button type="button" onclick="removeBoldWithContext('${encodeURIComponent(bold.text)}', '${encodeURIComponent(bold.contextBefore || '')}', '${encodeURIComponent(bold.contextAfter || '')}', event)" 
+                                        style="background: #374151; color: white; border: none; padding: 2px 8px; border-radius: 4px; cursor: pointer; font-size: 0.65rem; white-space: nowrap;">
+                                    הסר
+                                </button>
                             </div>
                         `).join('')}
-                        ${boldItems.length > 20 ? `<div style="color: var(--text-secondary); font-size: 0.8rem; padding: 0.5rem;">...ועוד ${boldItems.length - 20}</div>` : ''}
+                        ${boldItems.length > 30 ? `<div style="color: var(--text-secondary); font-size: 0.8rem; padding: 0.5rem;">...ועוד ${boldItems.length - 30}</div>` : ''}
                     </div>
                 </details>
             `;
@@ -17356,7 +17368,7 @@ ${additionalInstructions}
                                     <div style="font-size: 0.7rem; color: #f87171; margin-bottom: 4px;">
                                         📛 ${bold.reasons.join(' | ')}
                                     </div>
-                                    <button type="button" onclick="removeBoldFormatting('${encodeURIComponent(bold.text)}', ${bold.index}, event)" 
+                                    <button type="button" onclick="removeBoldWithContext('${encodeURIComponent(bold.text)}', '${encodeURIComponent(bold.contextBefore || '')}', '${encodeURIComponent(bold.contextAfter || '')}', event)" 
                                             style="background: #f97316; color: white; border: none; padding: 4px 12px; border-radius: 4px; cursor: pointer; font-size: 0.75rem;">
                                         🔓 הסר הדגשה
                                     </button>
@@ -17369,27 +17381,27 @@ ${additionalInstructions}
                 html += `<div style="color: #10b981; margin-bottom: 1rem;">✅ לא נמצאו הדגשות חשודות</div>`;
             }
             
-            // All bolds list (collapsible)
+            // All bolds list (collapsible) - with context
             html += `
                 <details>
                     <summary style="cursor: pointer; font-weight: bold; padding: 0.5rem; background: rgba(251, 191, 36, 0.1); border-radius: 4px;">
                         📋 כל ההדגשות (${boldItems.length})
                     </summary>
-                    <div style="max-height: 200px; overflow-y: auto; margin-top: 0.5rem;">
-                        <table style="width: 100%; font-size: 0.8rem; border-collapse: collapse;">
-                            ${boldItems.map((b, idx) => `
-                                <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
-                                    <td style="padding: 0.35rem; max-width: 200px; overflow: hidden; text-overflow: ellipsis;">"${b.text}"</td>
-                                    <td style="padding: 0.35rem; font-size: 0.7rem; color: #9ca3af;">${b.wordCount} מילים</td>
-                                    <td style="padding: 0.35rem;">
-                                        <button type="button" onclick="removeBoldFormatting('${encodeURIComponent(b.text)}', ${idx}, event)" 
-                                                style="background: #374151; color: white; border: none; padding: 2px 8px; border-radius: 4px; cursor: pointer; font-size: 0.65rem;">
-                                            הסר
-                                        </button>
-                                    </td>
-                                </tr>
-                            `).join('')}
-                        </table>
+                    <div style="max-height: 300px; overflow-y: auto; margin-top: 0.5rem;">
+                        ${boldItems.slice(0, 30).map((b, idx) => `
+                            <div style="display: flex; align-items: center; gap: 8px; padding: 6px; margin: 4px 0; background: rgba(255,255,255,0.03); border-radius: 4px; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                                <div style="flex: 1; font-size: 0.75rem; direction: rtl;">
+                                    <span style="color: #6b7280;">${b.contextBefore ? `...${b.contextBefore} ` : ''}</span>
+                                    <span style="background: #fef08a; color: #1f2937; padding: 1px 4px; border-radius: 2px; font-weight: bold;">${b.text}</span>
+                                    <span style="color: #6b7280;">${b.contextAfter ? ` ${b.contextAfter}...` : ''}</span>
+                                </div>
+                                <button type="button" onclick="removeBoldWithContext('${encodeURIComponent(b.text)}', '${encodeURIComponent(b.contextBefore || '')}', '${encodeURIComponent(b.contextAfter || '')}', event)" 
+                                        style="background: #374151; color: white; border: none; padding: 2px 8px; border-radius: 4px; cursor: pointer; font-size: 0.65rem; white-space: nowrap;">
+                                    הסר
+                                </button>
+                            </div>
+                        `).join('')}
+                        ${boldItems.length > 30 ? `<div style="color: #9ca3af; font-size: 0.8rem; padding: 0.5rem;">...ועוד ${boldItems.length - 30}</div>` : ''}
                     </div>
                 </details>
             `;
@@ -17427,9 +17439,68 @@ ${additionalInstructions}
                 
                 const result = await response.json();
                 if (result.success) {
-                    showToast('✅ ההדגשה הוסרה ונשמרה בהצלחה', 'success');
-                    if (typeof refreshCompareView === 'function') {
-                        await refreshCompareView();
+                    // Show context of what was removed
+                    const removedText = result.removed_text || text;
+                    const before = result.context_before ? `...${result.context_before}` : '';
+                    const after = result.context_after ? `${result.context_after}...` : '';
+                    const contextMsg = before || after ? `\n📍 הוסר מ: ${before} [${removedText}] ${after}` : '';
+                    
+                    showToast(`✅ ההדגשה הוסרה ונשמרה!${contextMsg}`, 'success');
+                    console.log(`🔓 Bold removed: "${removedText}"`);
+                    console.log(`   Context: ${before} [${removedText}] ${after}`);
+                    
+                    if (typeof refreshNewContentPreview === 'function') {
+                        await refreshNewContentPreview();
+                    }
+                } else {
+                    showToast('שגיאה: ' + result.error, 'error');
+                }
+            } catch (error) {
+                console.error('Error removing bold:', error);
+                showToast('שגיאה בהסרת ההדגשה', 'error');
+            }
+        }
+        
+        // New function: Remove bold using context for precise matching
+        async function removeBoldWithContext(encodedText, encodedContextBefore, encodedContextAfter, event) {
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            
+            const text = decodeURIComponent(encodedText);
+            const contextBefore = decodeURIComponent(encodedContextBefore);
+            const contextAfter = decodeURIComponent(encodedContextAfter);
+            
+            // Show preview of what will be removed
+            const preview = `${contextBefore ? '...' + contextBefore + ' ' : ''}[${text}]${contextAfter ? ' ' + contextAfter + '...' : ''}`;
+            if (!confirm(`האם להסיר את ההדגשה?\n\n${preview}`)) {
+                return;
+            }
+            
+            try {
+                const pageFolder = getPageFolder(selectedPage.path);
+                showToast('מסיר הדגשה...', 'info');
+                
+                const response = await fetch('/api/page/remove-bold', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        page_folder: pageFolder,
+                        bold_text: text,
+                        context_before: contextBefore,
+                        context_after: contextAfter
+                    })
+                });
+                
+                const result = await response.json();
+                if (result.success) {
+                    const removedText = result.removed_text || text;
+                    showToast(`✅ ההדגשה "${removedText}" הוסרה בהצלחה!`, 'success');
+                    console.log(`🔓 Bold removed with context: "${removedText}"`);
+                    
+                    if (typeof refreshNewContentPreview === 'function') {
+                        await refreshNewContentPreview();
                     }
                 } else {
                     showToast('שגיאה: ' + result.error, 'error');
@@ -19905,8 +19976,16 @@ ${additionalInstructions}
         
         // Auto-resize textarea based on content
         function autoResizeTextarea(textarea) {
+            // Save scroll position before resize
+            const scrollTop = window.scrollY || document.documentElement.scrollTop;
+            const scrollLeft = window.scrollX || document.documentElement.scrollLeft;
+            
+            // Resize the textarea
             textarea.style.height = 'auto';
             textarea.style.height = Math.max(350, Math.min(800, textarea.scrollHeight)) + 'px';
+            
+            // Restore scroll position after resize (prevent page jump)
+            window.scrollTo(scrollLeft, scrollTop);
         }
         
         async function loadPromptFileContent(index) {

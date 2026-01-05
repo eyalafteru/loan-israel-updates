@@ -1,5 +1,6 @@
 @echo off
 chcp 65001 >nul
+title Page Management Dashboard Server
 
 REM ====== GO TO SCRIPT DIRECTORY ======
 cd /d "%~dp0"
