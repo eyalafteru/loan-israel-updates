@@ -18,6 +18,7 @@
   "steps": [
     {
       "id": "step1",
+      "model": "claude-opus-4-5",
       "name": "1️⃣ בדיקת תוכן ומבנה",
       "order": 1,
       "output": {
@@ -37,11 +38,11 @@
         "INTERNAL_LINKS_DB",
         "APPROVED_DOMAINS",
         "DENSITY_ANALYSIS"
-      ],
-      "model": "claude-opus-4-5"
+      ]
     },
     {
       "id": "step2",
+      "model": "claude-sonnet-4-5",
       "name": "2️⃣ בדיקת אמינות וקישורים",
       "order": 2,
       "output": {
@@ -53,11 +54,11 @@
       "shortcodes": [
         "STEP1_REPORT",
         "PAGE_HTML"
-      ],
-      "model": "claude-sonnet-4-5"
+      ]
     },
     {
       "id": "step3",
+      "model": "claude-sonnet-4-5",
       "name": "3️⃣ תיקון תוכן ומבנה",
       "order": 3,
       "output": {
@@ -70,11 +71,11 @@
         "STEP1_REPORT",
         "PAGE_HTML",
         "DENSITY_ANALYSIS"
-      ],
-      "model": "claude-haiku-4-5"
+      ]
     },
     {
       "id": "step4",
+      "model": "claude-sonnet-4-5",
       "name": "4️⃣ תיקון אמינות וקישורים",
       "order": 4,
       "output": {
@@ -87,11 +88,11 @@
         "STEP2_REPORT",
         "PAGE_HTML",
         "INTERNAL_LINKS_DB"
-      ],
-      "model": "claude-sonnet-4-5"
+      ]
     },
     {
       "id": "step5",
+      "model": "claude-haiku-4-5",
       "name": "5️⃣ הסרת עקבות AI",
       "order": 5,
       "output": {
@@ -103,11 +104,11 @@
       "shortcodes": [
         "STEP4_REPORT",
         "PAGE_HTML"
-      ],
-      "model": "claude-haiku-4-5"
+      ]
     },
     {
       "id": "step6",
+      "model": "claude-haiku-4-5",
       "name": "6️⃣ דיבאג הסרת AI",
       "order": 6,
       "output": {
@@ -119,13 +120,12 @@
       "shortcodes": [
         "STEP5_REPORT",
         "PAGE_HTML"
-      ],
-      "model": "claude-haiku-4-5"
+      ]
     }
   ],
   "supports_full_auto": true,
   "type": "update",
-  "updated": "2026-01-06T11:39:53.441576",
+  "updated": "2026-01-06T17:18:36.497817",
   "wordpress": {
     "action": "update",
     "site": "main",

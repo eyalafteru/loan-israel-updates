@@ -1,5 +1,5 @@
 === פרומפט שנשלח לקלוד - step5 ===
-זמן: 2026-01-05 18:02:29
+זמן: 2026-01-06 17:30:36
 ============================================================
 
 אני מפעיל את סוכן SEO שלב 5 (Verifier - אימות הסרת עקבות AI).
@@ -14,10 +14,10 @@
 ## הנתונים לביצוע:
 
 1. **קובץ ה-HTML לבדיקה:**
-C:\Users\eyal\loan-israel-updaets\loan-israel-updates\דפים לשינוי\main\הלוואה חוץ בנקאית\הלוואה חוץ בנקאית.html
+C:\Users\eyal\loan-israel-updaets\loan-israel-updates\דפים לשינוי\main\הלוואה מיידית\הלוואה מיידית.html
 
 2. **נתיב לשמירת דוח הסיכום:**
-C:\Users\eyal\loan-israel-updaets\loan-israel-updates\דפים לשינוי\main\הלוואה חוץ בנקאית\SEO\דוח שלב 5.md
+C:\Users\eyal\loan-israel-updaets\loan-israel-updates\דפים לשינוי\main\הלוואה מיידית\SEO\דוח שלב 5.md
 **שם הקובץ:** 
 
 ---

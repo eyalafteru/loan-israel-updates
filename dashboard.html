@@ -4642,6 +4642,1134 @@
             color: var(--accent);
         }
         
+        /* ============ Duplicates Tab Styles ============ */
+        
+        .duplicates-section {
+            display: none;
+            position: fixed;
+            top: 60px;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--bg-primary);
+            z-index: 100;
+            overflow-y: auto;
+            padding: 2rem;
+        }
+        
+        .duplicates-section.active {
+            display: block;
+        }
+        
+        .duplicates-container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        .duplicates-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .duplicates-header h2 {
+            margin: 0;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+        }
+        
+        .duplicates-controls {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .duplicates-controls select {
+            padding: 0.5rem;
+            border-radius: 6px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+        }
+        
+        .duplicates-controls label {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        /* Statistics Dashboard */
+        .duplicates-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .stat-card {
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 2px solid var(--border);
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+        
+        .stat-card.alert {
+            border-color: #ef4444;
+        }
+        
+        .stat-card.warning {
+            border-color: #f59e0b;
+        }
+        
+        .stat-card.info {
+            border-color: #3b82f6;
+        }
+        
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        /* Severity Breakdown */
+        .severity-breakdown {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .severity-item {
+            flex: 1;
+            min-width: 150px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            border-radius: 6px;
+        }
+        
+        .severity-item.critical {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid #ef4444;
+        }
+        
+        .severity-item.high {
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px solid #f59e0b;
+        }
+        
+        .severity-item.medium {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid #10b981;
+        }
+        
+        .severity-badge {
+            font-weight: 600;
+        }
+        
+        .severity-count {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        /* Filters */
+        .duplicates-filters {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: var(--bg-tertiary);
+            border-radius: 8px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        
+        .duplicates-filters input[type="text"] {
+            flex: 1;
+            min-width: 250px;
+            padding: 0.5rem;
+            border-radius: 6px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+        }
+        
+        .duplicates-filters select {
+            padding: 0.5rem;
+            border-radius: 6px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+        }
+        
+        /* Bulk Actions Bar */
+        .bulk-actions-bar {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            border: 2px solid var(--accent);
+            flex-wrap: wrap;
+        }
+        
+        .bulk-actions-bar label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+        
+        #selected-count {
+            margin-left: auto;
+            font-weight: bold;
+            color: var(--accent);
+        }
+        
+        /* Selected Directories Bar */
+        .selected-directories-bar {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--border);
+            flex-wrap: wrap;
+        }
+        
+        .selected-directories-bar > span {
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+        
+        #selected-directories-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            flex: 1;
+        }
+        
+        .directory-badge {
+            padding: 0.4rem 0.8rem;
+            background: var(--accent);
+            color: white;
+            border-radius: 16px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        /* Duplicate Group */
+        .duplicate-group {
+            background: var(--bg-tertiary);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s;
+        }
+        
+        .duplicate-group.selected {
+            border-color: var(--accent);
+            background: rgba(233, 69, 96, 0.05);
+        }
+        
+        .duplicate-group:hover {
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+        
+        .duplicate-group-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .group-checkbox {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+        }
+        
+        .duplicate-header-info {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+            flex: 1;
+            flex-wrap: wrap;
+        }
+        
+        .duplicate-header-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .similarity-badge {
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            color: white;
+            font-weight: bold;
+            font-size: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        
+        .seo-impact-badge {
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            color: white;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: help;
+        }
+        
+        .pages-count {
+            padding: 0.25rem 0.75rem;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+        
+        /* Page Cards */
+        .duplicate-pages {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .page-card {
+            background: var(--bg-secondary);
+            padding: 1rem;
+            border-radius: 8px;
+            border-right: 4px solid var(--accent);
+        }
+        
+        .page-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        
+        .page-card-header strong {
+            font-size: 1.1rem;
+            color: var(--text-primary);
+        }
+        
+        .page-badge {
+            background: var(--accent);
+            color: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+        }
+        
+        .page-meta {
+            margin-bottom: 0.75rem;
+        }
+        
+        .page-title {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.25rem;
+        }
+        
+        .page-description {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+        
+        .page-path {
+            display: block;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-family: monospace;
+            margin-bottom: 0.75rem;
+            word-break: break-all;
+        }
+        
+        .page-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .btn-xs {
+            padding: 0.3rem 0.6rem;
+            font-size: 0.8rem;
+        }
+        
+        .btn-sm {
+            padding: 0.4rem 0.8rem;
+            font-size: 0.85rem;
+        }
+        
+        /* Group Details */
+        .group-details {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 2px solid var(--border);
+        }
+        
+        /* Duplicate Snippets */
+        .duplicate-snippets {
+            background: rgba(0,0,0,0.3);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+        
+        .duplicate-snippets h4 {
+            margin: 0 0 1rem 0;
+            color: var(--accent);
+        }
+        
+        .duplicate-snippet-item {
+            display: flex;
+            gap: 0.75rem;
+            padding: 1rem;
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+            margin-bottom: 0.75rem;
+            border: 2px solid transparent;
+            transition: all 0.2s;
+            align-items: flex-start;
+        }
+        
+        .duplicate-snippet-item:has(input:checked) {
+            border-color: var(--accent);
+            background: rgba(233, 69, 96, 0.1);
+        }
+        
+        .snippet-checkbox {
+            width: 22px;
+            height: 22px;
+            cursor: pointer;
+            flex-shrink: 0;
+            margin-top: 0.5rem;
+        }
+        
+        .snippet-preview {
+            flex: 1;
+            min-width: 0;
+        }
+        
+        .snippet-header {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .snippet-header strong {
+            color: var(--accent);
+        }
+        
+        .snippet-length {
+            padding: 0.2rem 0.5rem;
+            background: var(--bg-tertiary);
+            border-radius: 12px;
+            font-size: 0.75rem;
+        }
+        
+        .snippet-pages-count {
+            padding: 0.2rem 0.5rem;
+            background: #f59e0b;
+            color: black;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .snippet-preview pre {
+            background: rgba(0,0,0,0.4);
+            padding: 0.75rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            margin: 0.5rem 0;
+            white-space: pre-wrap;
+            border-left: 3px solid #f59e0b;
+            overflow-x: auto;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        .snippets-actions {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: flex-end;
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+        
+        /* Headings Duplicates */
+        .headings-duplicates {
+            background: rgba(96, 165, 250, 0.1);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid #3b82f6;
+        }
+        
+        .headings-duplicates h4 {
+            color: #60a5fa;
+            margin: 0 0 1rem 0;
+        }
+        
+        .heading-level-group {
+            margin-bottom: 1rem;
+        }
+        
+        .heading-level-group strong {
+            color: #60a5fa;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .heading-level-group ul {
+            list-style: none;
+            padding-right: 1rem;
+            margin: 0;
+        }
+        
+        .heading-level-group li {
+            padding: 0.5rem;
+            background: rgba(0,0,0,0.2);
+            border-radius: 4px;
+            margin-bottom: 0.25rem;
+        }
+        
+        /* No Duplicates */
+        .no-duplicates {
+            text-align: center;
+            padding: 4rem 2rem;
+            font-size: 1.8rem;
+            color: #10b981;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            border: 2px dashed #10b981;
+        }
+        
+        .no-snippets {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+        
+        /* Empty State */
+        .duplicates-empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            border: 2px dashed var(--border);
+        }
+        
+        .duplicates-empty-state h3 {
+            margin: 1rem 0 0.5rem 0;
+            color: var(--text-primary);
+        }
+        
+        .duplicates-empty-state p {
+            color: var(--text-secondary);
+        }
+        
+        /* Loading */
+        .duplicates-loading {
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+        
+        .duplicates-loading .loading-spinner {
+            font-size: 4rem;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .loading-spinner {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-secondary);
+        }
+        
+        /* Heatmap */
+        .heatmap-modal {
+            max-width: 1200px !important;
+        }
+        
+        .heatmap-wrapper {
+            overflow-x: auto;
+        }
+        
+        .heatmap-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .heatmap-table th,
+        .heatmap-table td {
+            padding: 0.5rem;
+            text-align: center;
+            font-size: 0.75rem;
+            border: 1px solid var(--border);
+            min-width: 40px;
+        }
+        
+        .heatmap-table th {
+            background: var(--bg-tertiary);
+            font-weight: 600;
+        }
+        
+        .heatmap-table td {
+            color: white;
+            font-weight: 600;
+        }
+        
+        /* Diff Viewer */
+        .diff-viewer-modal {
+            max-width: 1400px !important;
+        }
+        
+        .diff-viewer {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            max-height: 70vh;
+        }
+        
+        .diff-column {
+            overflow-y: auto;
+            padding: 1rem;
+            background: var(--bg-tertiary);
+            border-radius: 8px;
+        }
+        
+        .diff-column h3 {
+            position: sticky;
+            top: 0;
+            background: var(--bg-secondary);
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin: 0 0 1rem 0;
+            z-index: 10;
+        }
+        
+        .diff-column pre {
+            white-space: pre-wrap;
+            word-break: break-word;
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
+        
+        .diff-match {
+            background: rgba(239, 68, 68, 0.3);
+            border-left: 3px solid #ef4444;
+            padding: 0.25rem 0.5rem;
+            display: inline;
+        }
+        
+        /* Settings Modal */
+        .duplicate-settings-modal {
+            max-width: 900px !important;
+        }
+        
+        .settings-section {
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .settings-section:last-child {
+            border-bottom: none;
+        }
+        
+        .settings-section h3 {
+            margin: 0 0 1rem 0;
+            color: var(--accent);
+        }
+        
+        .settings-hint {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            padding: 0.75rem;
+            background: rgba(96, 165, 250, 0.1);
+            border-radius: 6px;
+            border-right: 3px solid #3b82f6;
+        }
+        
+        .directories-list {
+            display: grid;
+            gap: 0.75rem;
+            max-height: 300px;
+            overflow-y: auto;
+            padding: 0.5rem;
+        }
+        
+        .directory-item {
+            background: var(--bg-tertiary);
+            border-radius: 8px;
+            border: 2px solid var(--border);
+            transition: all 0.2s;
+        }
+        
+        .directory-item:hover {
+            border-color: var(--accent);
+        }
+        
+        .directory-checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            cursor: pointer;
+        }
+        
+        .directory-checkbox {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+        
+        .directory-info {
+            flex: 1;
+        }
+        
+        .directory-info strong {
+            display: block;
+            margin-bottom: 0.25rem;
+            font-size: 1.05rem;
+        }
+        
+        .directory-info small {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+        
+        .settings-checkbox {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 1rem;
+            background: var(--bg-tertiary);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .settings-checkbox:hover {
+            background: var(--bg-secondary);
+        }
+        
+        .settings-checkbox input {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            flex-shrink: 0;
+            margin-top: 0.1rem;
+        }
+        
+        .settings-checkbox span {
+            flex: 1;
+        }
+        
+        .settings-checkbox small {
+            display: block;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            margin-top: 0.25rem;
+        }
+        
+        /* Ignore Manager Modal */
+        .ignore-manager-modal {
+            max-width: 1000px !important;
+        }
+        
+        .ignore-manager-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        
+        .add-pattern-section {
+            background: var(--bg-tertiary);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 2px dashed var(--border);
+        }
+        
+        .add-pattern-section h3 {
+            margin: 0 0 1rem 0;
+            color: #10b981;
+        }
+        
+        .pattern-input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .pattern-input-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 6px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            font-family: inherit;
+            resize: vertical;
+        }
+        
+        .pattern-input-group input[type="text"] {
+            padding: 0.5rem;
+            border-radius: 6px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+        }
+        
+        .pattern-options {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .pattern-options label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+        
+        .pattern-options input[type="radio"] {
+            cursor: pointer;
+        }
+        
+        .current-patterns-section {
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+        
+        .patterns-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .patterns-header h3 {
+            margin: 0;
+        }
+        
+        .patterns-count {
+            padding: 0.3rem 0.8rem;
+            background: var(--accent);
+            color: white;
+            border-radius: 16px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        .patterns-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .pattern-item {
+            background: var(--bg-tertiary);
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            transition: all 0.2s;
+        }
+        
+        .pattern-item:hover {
+            border-color: var(--accent);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        
+        .pattern-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .pattern-type {
+            padding: 0.2rem 0.6rem;
+            background: #3b82f6;
+            color: white;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .btn-delete {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+        
+        .btn-delete:hover {
+            background: rgba(239, 68, 68, 0.2);
+        }
+        
+        .pattern-text {
+            padding: 0.75rem;
+            background: rgba(0,0,0,0.3);
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            white-space: pre-wrap;
+            word-break: break-word;
+            border-right: 3px solid #f59e0b;
+        }
+        
+        .pattern-description {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            padding: 0.5rem;
+            background: rgba(96, 165, 250, 0.1);
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
+        }
+        
+        .pattern-meta {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-align: left;
+        }
+        
+        .no-patterns {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+        
+        .templates-section {
+            background: var(--bg-tertiary);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+        
+        .templates-section h3 {
+            margin: 0 0 0.5rem 0;
+            color: #3b82f6;
+        }
+        
+        .templates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+        
+        .template-btn {
+            padding: 0.75rem;
+            background: var(--bg-secondary);
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-primary);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.2s;
+            text-align: right;
+        }
+        
+        .template-btn:hover {
+            border-color: var(--accent);
+            background: var(--bg-primary);
+            transform: translateY(-2px);
+        }
+        
+        /* Duplicate Fix Modal */
+        .duplicate-fix-modal {
+            max-width: 1000px !important;
+        }
+        
+        .duplicate-fix-modal textarea {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            border-radius: 8px;
+            padding: 1rem;
+        }
+        
+        /* Snippet Page Links */
+        .snippet-page-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            align-items: center;
+            margin-top: 0.75rem;
+            padding-top: 0.75rem;
+            border-top: 1px dashed var(--border);
+        }
+        
+        .snippet-links-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+        
+        .btn-link {
+            background: rgba(59, 130, 246, 0.2) !important;
+            border: 1px solid #3b82f6 !important;
+            color: #60a5fa !important;
+            transition: all 0.2s;
+        }
+        
+        .btn-link:hover {
+            background: rgba(59, 130, 246, 0.4) !important;
+            transform: translateY(-1px);
+        }
+        
+        /* Snippet Location Modal */
+        .snippet-location-modal {
+            max-width: 1000px !important;
+        }
+        
+        .snippet-location-info {
+            padding: 0.75rem;
+            background: var(--bg-tertiary);
+            border-radius: 6px;
+            margin-bottom: 1rem;
+        }
+        
+        .snippet-location-info strong {
+            color: var(--accent);
+        }
+        
+        .snippet-location-search {
+            margin-bottom: 1rem;
+        }
+        
+        .snippet-highlight-preview {
+            padding: 0.75rem;
+            background: rgba(239, 68, 68, 0.2);
+            border: 1px solid #ef4444;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+            color: var(--text-primary);
+        }
+        
+        .snippet-location-content {
+            background: var(--bg-tertiary);
+            border-radius: 8px;
+            padding: 1rem;
+            max-height: 50vh;
+            overflow-y: auto;
+        }
+        
+        .snippet-context {
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+        
+        .context-ellipsis {
+            color: var(--text-muted);
+            font-style: italic;
+        }
+        
+        .context-before,
+        .context-after {
+            color: var(--text-secondary);
+        }
+        
+        .snippet-highlight {
+            background: rgba(239, 68, 68, 0.3);
+            border: 2px solid #ef4444;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-weight: 600;
+            color: var(--text-primary);
+            display: inline;
+        }
+        
+        .full-content-toggle {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+        
+        .full-content {
+            margin-top: 1rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 6px;
+            padding: 1rem;
+        }
+        
+        .full-content pre {
+            white-space: pre-wrap;
+            word-break: break-word;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            margin: 0;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .snippet-not-found {
+            padding: 1rem;
+            background: rgba(245, 158, 11, 0.2);
+            border: 1px solid #f59e0b;
+            border-radius: 6px;
+            color: #fbbf24;
+            margin-bottom: 1rem;
+        }
+        
     </style>
 </head>
 <body>
@@ -4650,8 +5778,9 @@
         <h1>🚀 מערכת ניהול אתרים - After You</h1>
         <div class="header-controls">
             <div class="tabs">
-                <button class="tab active" data-tab="edit">📝 עריכה</button>
+                <button class="tab" data-tab="duplicates">📋 כפילויות</button>
                 <button class="tab" data-tab="agents">🤖 סוכנים</button>
+                <button class="tab active" data-tab="edit">📁 עמודים</button>
             </div>
             <select id="modeSelect">
                 <option value="claude">מצב: Claude Code (אוטומטי)</option>
@@ -4696,6 +5825,7 @@
                     <option value="all">🌐 כל האתרים</option>
                 </select>
                 <select id="sortFilter" onchange="renderPageList()">
+                    <option value="last_upload" selected>📅 עודכן לאחרונה</option>
                     <option value="name">🔤 לפי שם</option>
                     <option value="words_asc">📝 מילים ↑</option>
                     <option value="words_desc">📝 מילים ↓</option>
@@ -4772,6 +5902,9 @@
                     <div class="panel-header">
                         <span>👁️ תצוגה מקדימה</span>
                         <div style="display: flex; gap: 0.5rem;">
+                            <a href="#" id="viewOnSiteBtn" class="btn btn-small" target="_blank" title="צפה באתר" style="display: none; text-decoration: none;">
+                                🔗 צפה באתר
+                            </a>
                             <button class="btn btn-small" onclick="loadPreview()" title="רענן תצוגה">
                                 🔄
                             </button>
@@ -5065,6 +6198,337 @@
             </div>
         </div>
     </section>
+
+    <!-- Duplicates Section -->
+    <section class="duplicates-section" id="duplicatesSection">
+        <div class="duplicates-container">
+            <!-- Header with controls -->
+            <div class="duplicates-header">
+                <h2>🔍 זיהוי כפילויות תוכן</h2>
+                <div class="duplicates-controls">
+                    <button id="btn-open-settings" class="btn btn-secondary" onclick="openDuplicateSettings()">
+                        ⚙️ הגדרות סריקה
+                    </button>
+                    
+                    <select id="duplicates-threshold">
+                        <option value="0.5">50%+ דמיון (רגיש)</option>
+                        <option value="0.7" selected>70%+ דמיון (Google)</option>
+                        <option value="0.85">85%+ דמיון (מחמיר)</option>
+                    </select>
+                    
+                    <label style="display: flex; align-items: center; gap: 0.3rem;">
+                        <input type="checkbox" id="include-meta" checked>
+                        <span>Title/Description</span>
+                    </label>
+                    
+                    <label style="display: flex; align-items: center; gap: 0.3rem;">
+                        <input type="checkbox" id="include-headings" checked>
+                        <span>כותרות H1-H6</span>
+                    </label>
+                    
+                    <button id="btn-scan-duplicates" class="btn btn-primary" onclick="scanDuplicates()">
+                        🔍 סרוק כפילויות
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Selected directories indicator -->
+            <div id="selected-directories-bar" class="selected-directories-bar" style="display: none;">
+                <span>📁 תיקיות נבחרות:</span>
+                <div id="selected-directories-list"></div>
+                <button class="btn btn-xs" onclick="openDuplicateSettings()">שנה</button>
+            </div>
+            
+            <!-- Statistics Dashboard -->
+            <div id="duplicates-stats" class="duplicates-stats" style="display: none;">
+                <div class="stat-card">
+                    <div class="stat-value" id="stat-total-pages">0</div>
+                    <div class="stat-label">עמודים נסרקו</div>
+                </div>
+                <div class="stat-card alert">
+                    <div class="stat-value" id="stat-pages-with-duplicates">0</div>
+                    <div class="stat-label">עמודים עם כפילויות</div>
+                </div>
+                <div class="stat-card warning">
+                    <div class="stat-value" id="stat-duplicate-snippets">0</div>
+                    <div class="stat-label">קטעים כפולים</div>
+                </div>
+                <div class="stat-card info">
+                    <div class="stat-value" id="stat-avg-similarity">0%</div>
+                    <div class="stat-label">דמיון ממוצע</div>
+                </div>
+            </div>
+            
+            <!-- Severity Breakdown -->
+            <div id="severity-breakdown" class="severity-breakdown" style="display: none;">
+                <div class="severity-item critical">
+                    <span class="severity-badge">🔴 קריטי</span>
+                    <span class="severity-count" id="severity-critical">0</span>
+                </div>
+                <div class="severity-item high">
+                    <span class="severity-badge">🟡 גבוה</span>
+                    <span class="severity-count" id="severity-high">0</span>
+                </div>
+                <div class="severity-item medium">
+                    <span class="severity-badge">🟢 בינוני</span>
+                    <span class="severity-count" id="severity-medium">0</span>
+                </div>
+            </div>
+            
+            <!-- Filters and Sort -->
+            <div id="duplicates-filters" class="duplicates-filters" style="display: none;">
+                <input type="text" id="filter-search" placeholder="🔍 חפש עמוד או מילת מפתח..." oninput="applyDuplicatesFilter()">
+                
+                <select id="filter-sort" onchange="applyDuplicatesFilter()">
+                    <option value="similarity-desc">דמיון (גבוה → נמוך)</option>
+                    <option value="similarity-asc">דמיון (נמוך → גבוה)</option>
+                    <option value="pages-count-desc">מספר עמודים מושפעים</option>
+                    <option value="seo-impact-desc">השפעת SEO</option>
+                    <option value="keyword-asc">מילת מפתח (א-ת)</option>
+                </select>
+                
+                <select id="filter-severity" onchange="applyDuplicatesFilter()">
+                    <option value="all">כל הרמות</option>
+                    <option value="critical">🔴 קריטי בלבד</option>
+                    <option value="high">🟡 גבוה בלבד</option>
+                    <option value="medium">🟢 בינוני בלבד</option>
+                </select>
+                
+                <button id="btn-show-heatmap" class="btn btn-secondary" onclick="showHeatmap()">
+                    📊 הצג Heatmap
+                </button>
+            </div>
+            
+            <!-- Bulk Actions Bar -->
+            <div id="bulk-actions-bar" class="bulk-actions-bar" style="display: none;">
+                <label>
+                    <input type="checkbox" id="select-all-groups" onchange="toggleAllGroupsSelection()">
+                    <span>בחר הכל</span>
+                </label>
+                <span id="selected-count">0 נבחרו</span>
+                <button class="btn btn-success" onclick="bulkSendToClaude()">
+                    🤖 תקן את כל הנבחרים
+                </button>
+                <button class="btn btn-secondary" onclick="bulkIgnore()">
+                    🚫 התעלם מהנבחרים
+                </button>
+                <button class="btn btn-info" onclick="bulkExport()">
+                    📄 ייצא נבחרים
+                </button>
+            </div>
+            
+            <!-- Results Container -->
+            <div id="duplicates-results" class="duplicates-results">
+                <div class="duplicates-empty-state">
+                    <div style="font-size: 4rem;">🔍</div>
+                    <h3>בחר תיקיות והתחל סריקה</h3>
+                    <p>לחץ על "הגדרות סריקה" כדי לבחור את התיקיות לסריקה, ואז לחץ "סרוק כפילויות"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Heatmap Modal -->
+    <div id="heatmap-modal" class="modal-overlay">
+        <div class="modal heatmap-modal">
+            <div class="modal-header">
+                <h2>📊 Heatmap כפילויות</h2>
+                <button class="modal-close" onclick="closeHeatmap()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="heatmap-container"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Diff Viewer Modal -->
+    <div id="diff-viewer-modal" class="modal-overlay">
+        <div class="modal diff-viewer-modal">
+            <div class="modal-header">
+                <h2>👁️ השוואה ויזואלית</h2>
+                <button class="modal-close" onclick="closeDiffViewer()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="diff-viewer-container" class="diff-viewer">
+                    <div class="diff-column">
+                        <h3 id="diff-page1-title"></h3>
+                        <div id="diff-page1-content"></div>
+                    </div>
+                    <div class="diff-column">
+                        <h3 id="diff-page2-title"></h3>
+                        <div id="diff-page2-content"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Duplicate Settings Modal -->
+    <div id="duplicate-settings-modal" class="modal-overlay">
+        <div class="modal duplicate-settings-modal">
+            <div class="modal-header">
+                <h2>⚙️ הגדרות סריקת כפילויות</h2>
+                <button class="modal-close" onclick="closeDuplicateSettings()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="settings-section">
+                    <h3>📁 בחירת תיקיות לסריקה</h3>
+                    <p class="settings-hint">
+                        בחר אילו תיקיות תחת "דפים לשינוי" לכלול בסריקה. 
+                        כל תיקייה מייצגת אתר או פרויקט נפרד.
+                    </p>
+                    
+                    <div id="directories-loading" class="loading-spinner">
+                        טוען תיקיות...
+                    </div>
+                    
+                    <div id="directories-list" class="directories-list" style="display: none;">
+                        <!-- Populated dynamically -->
+                    </div>
+                </div>
+                
+                <div class="settings-section">
+                    <h3>🔄 סריקה חוצת תיקיות</h3>
+                    <label class="settings-checkbox">
+                        <input type="checkbox" id="cross-directory-scan">
+                        <span>
+                            אפשר זיהוי כפילויות <strong>בין תיקיות</strong>
+                            <small>(למשל, תוכן זהה בין "main" ל-"business")</small>
+                        </span>
+                    </label>
+                </div>
+                
+                <div class="settings-section">
+                    <h3>⚡ הגדרות נוספות</h3>
+                    <label class="settings-checkbox">
+                        <input type="checkbox" id="auto-scan-enabled">
+                        <span>
+                            סריקה אוטומטית בכניסה לטאב
+                            <small>(ישתמש בדוח אחרון אם קיים)</small>
+                        </span>
+                    </label>
+                </div>
+                
+                <div class="settings-section">
+                    <h3>🚫 ניהול פטורים (Ignore List)</h3>
+                    <p class="settings-hint">
+                        הוסף קטעי טקסט שחוזרים בכל העמודים באופן לגיטימי (disclaimers, תאריכים, וכו').
+                        הם לא ייחשבו ככפילויות.
+                    </p>
+                    <button class="btn btn-info" onclick="openIgnoreManager()">
+                        🚫 נהל רשימת פטורים
+                    </button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeDuplicateSettings()">ביטול</button>
+                <button class="btn btn-primary" onclick="saveDuplicateSettings()">💾 שמור הגדרות</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ignore Manager Modal -->
+    <div id="ignore-manager-modal" class="modal-overlay">
+        <div class="modal ignore-manager-modal">
+            <div class="modal-header">
+                <h2>🚫 ניהול רשימת פטורים</h2>
+                <button class="modal-close" onclick="closeIgnoreManager()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="ignore-manager-content">
+                    <!-- Add New Pattern -->
+                    <div class="add-pattern-section">
+                        <h3>➕ הוסף פטור חדש</h3>
+                        <div class="pattern-input-group">
+                            <textarea id="new-pattern-text" 
+                                      placeholder="הדבק כאן טקסט להחרגה (לדוגמה: עודכן לאחרונה...)"
+                                      rows="3"></textarea>
+                            <div class="pattern-options">
+                                <label>
+                                    <input type="radio" name="pattern-type" value="exact" checked>
+                                    <span>התאמה מדויקת</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="pattern-type" value="contains">
+                                    <span>מכיל טקסט</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="pattern-type" value="regex">
+                                    <span>ביטוי רגולרי (Regex)</span>
+                                </label>
+                            </div>
+                            <input type="text" 
+                                   id="pattern-description" 
+                                   placeholder="תיאור (אופציונלי): למה הטקסט הזה חוזר?"
+                                   style="margin-top: 0.5rem;">
+                            <button class="btn btn-success" onclick="addIgnorePattern()">
+                                ➕ הוסף לרשימה
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Current Patterns List -->
+                    <div class="current-patterns-section">
+                        <div class="patterns-header">
+                            <h3>📋 פטורים קיימים</h3>
+                            <span class="patterns-count" id="patterns-count">0 פטורים</span>
+                        </div>
+                        
+                        <div id="patterns-list" class="patterns-list">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+                    
+                    <!-- Predefined Templates -->
+                    <div class="templates-section">
+                        <h3>📦 תבניות מוכנות</h3>
+                        <p class="settings-hint">לחץ להוספה מהירה</p>
+                        <div class="templates-grid">
+                            <button class="template-btn" onclick="addTemplatePattern('date-updated')">
+                                📅 עודכן לאחרונה
+                            </button>
+                            <button class="template-btn" onclick="addTemplatePattern('interest-rate')">
+                                💰 ריבית פריים
+                            </button>
+                            <button class="template-btn" onclick="addTemplatePattern('copyright')">
+                                ©️ זכויות יוצרים
+                            </button>
+                            <button class="template-btn" onclick="addTemplatePattern('contact-cta')">
+                                📞 צור קשר
+                            </button>
+                            <button class="template-btn" onclick="addTemplatePattern('disclaimer')">
+                                ⚠️ Disclaimer
+                            </button>
+                            <button class="template-btn" onclick="addTemplatePattern('footer')">
+                                📄 Footer
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeIgnoreManager()">סגור</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Duplicate Fix Prompt Preview Modal -->
+    <div id="duplicate-fix-modal" class="modal-overlay">
+        <div class="modal duplicate-fix-modal">
+            <div class="modal-header">
+                <h2>🤖 פרומפט לתיקון כפילויות</h2>
+                <button class="modal-close" onclick="closeDuplicateFixModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p class="settings-hint">בדוק את הפרומפט לפני שליחה לקלוד:</p>
+                <textarea id="duplicate-fix-prompt" rows="20" style="width: 100%; font-family: monospace; font-size: 0.9rem;"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeDuplicateFixModal()">ביטול</button>
+                <button class="btn btn-primary" onclick="executeDuplicateFix()">🚀 שלח לקלוד</button>
+            </div>
+        </div>
+    </div>
 
     <!-- Work Status Panel -->
     <div class="work-status-panel hidden" id="workStatusPanel">
@@ -5617,6 +7081,7 @@
                 <div class="annotation-option" data-value="longer" onclick="selectAnnotationOption(this, 'contentAction')">📄 ארוך</div>
                 <div class="annotation-option" data-value="removeLink" onclick="selectAnnotationOption(this, 'contentAction')">🔗 הסר קישור</div>
                 <div class="annotation-option" data-value="removeBold" onclick="selectAnnotationOption(this, 'contentAction')">🅱️ הסר בולד</div>
+                <div class="annotation-option" data-value="removeElement" onclick="selectAnnotationOption(this, 'contentAction')" style="background: #dc2626;">🗑️ הסר אלמנט</div>
                 <div class="annotation-option" data-value="custom" onclick="selectAnnotationOption(this, 'contentAction')">💬 מותאם</div>
             </div>
         </div>
@@ -5643,6 +7108,9 @@
                 </button>
                 <button class="btn btn-small" onclick="directRemoveBold()" id="directRemoveBoldBtn" style="display: none; background: #f97316;">
                     🅱️✂️ הסר בולד עכשיו
+                </button>
+                <button class="btn btn-small" onclick="directRemoveElement()" id="directRemoveElementBtn" style="display: none; background: #dc2626;">
+                    🗑️ הסר אלמנט עכשיו
                 </button>
             </div>
         </div>
@@ -8304,7 +9772,19 @@ console.log('🚀 KeywordDensityAnalyzer, SpamAnalyzer, HeaderQualityScorer & In
             
             // Sort pages based on sortFilter
             const sortedPages = [...filteredPages];
-            if (sortFilter === 'words_asc' || sortFilter === 'words_desc') {
+            if (sortFilter === 'last_upload') {
+                // Sort by last WordPress upload date (newest first)
+                sortedPages.sort((a, b) => {
+                    const dateA = pageInfoCache[a.path]?.last_upload || '';
+                    const dateB = pageInfoCache[b.path]?.last_upload || '';
+                    // Empty dates go to the end
+                    if (!dateA && !dateB) return a.name.localeCompare(b.name, 'he');
+                    if (!dateA) return 1;
+                    if (!dateB) return -1;
+                    // Newest first
+                    return dateB.localeCompare(dateA);
+                });
+            } else if (sortFilter === 'words_asc' || sortFilter === 'words_desc') {
                 sortedPages.sort((a, b) => {
                     const wordCountA = pageInfoCache[a.path]?.word_count || 0;
                     const wordCountB = pageInfoCache[b.path]?.word_count || 0;
@@ -8693,6 +10173,8 @@ console.log('🚀 KeywordDensityAnalyzer, SpamAnalyzer, HeaderQualityScorer & In
             
             if (!selectedPage) {
                 metaBar.style.display = 'none';
+                const viewOnSiteBtn = document.getElementById('viewOnSiteBtn');
+                if (viewOnSiteBtn) viewOnSiteBtn.style.display = 'none';
                 return;
             }
             
@@ -8702,6 +10184,17 @@ console.log('🚀 KeywordDensityAnalyzer, SpamAnalyzer, HeaderQualityScorer & In
                 const keyword = infoResult.info?.keyword || '';
                 const pageUrl = infoResult.info?.url || '';
                 const slug = pageUrl.split('/').filter(p => p).pop() || '';
+                
+                // Update "View on Site" button
+                const viewOnSiteBtn = document.getElementById('viewOnSiteBtn');
+                if (viewOnSiteBtn) {
+                    if (pageUrl) {
+                        viewOnSiteBtn.href = pageUrl;
+                        viewOnSiteBtn.style.display = 'inline-flex';
+                    } else {
+                        viewOnSiteBtn.style.display = 'none';
+                    }
+                }
                 
                 // Get backup metadata (for title/description)
                 const backupResult = await apiCall(`/api/page/backup?path=${encodeURIComponent(selectedPage.path)}`);
@@ -8780,6 +10273,8 @@ console.log('🚀 KeywordDensityAnalyzer, SpamAnalyzer, HeaderQualityScorer & In
             } catch (error) {
                 console.error('Error loading preview metadata:', error);
                 metaBar.style.display = 'none';
+                const viewOnSiteBtn = document.getElementById('viewOnSiteBtn');
+                if (viewOnSiteBtn) viewOnSiteBtn.style.display = 'none';
             }
         }
         
@@ -11864,13 +13359,18 @@ ${content}
             const directActionsSection = document.getElementById('directActionsSection');
             const directRemoveLinkBtn = document.getElementById('directRemoveLinkBtn');
             const directRemoveBoldBtn = document.getElementById('directRemoveBoldBtn');
+            const directRemoveElementBtn = document.getElementById('directRemoveElementBtn');
             
             // Reset visibility
             directRemoveLinkBtn.style.display = 'none';
             directRemoveBoldBtn.style.display = 'none';
+            directRemoveElementBtn.style.display = 'none';
             
-            const showDirectActions = (isLink || hasLinks || isBold || hasBolds);
-            directActionsSection.style.display = showDirectActions ? 'block' : 'none';
+            // Always show direct actions section (at least for remove element)
+            directActionsSection.style.display = 'block';
+            
+            // Always show remove element button
+            directRemoveElementBtn.style.display = 'inline-block';
             
             if (isLink || hasLinks) {
                 directRemoveLinkBtn.style.display = 'inline-block';
@@ -12066,6 +13566,38 @@ ${content}
                 console.error('Error removing bold:', error);
                 showToast('שגיאה בהסרת הדגשות: ' + error.message, 'error');
             }
+        }
+        
+        async function directRemoveElement() {
+            if (!currentAnnotationElement) {
+                showToast('לא נבחר אלמנט', 'error');
+                return;
+            }
+            
+            const elementTag = currentAnnotationElement.tagName.toLowerCase();
+            const elementText = currentAnnotationElement.textContent.substring(0, 50);
+            
+            // Confirm deletion
+            if (!confirm(`האם למחוק את האלמנט <${elementTag}>?\n\n"${elementText}..."`)) {
+                return;
+            }
+            
+            const newFrame = document.getElementById('compareNewFrame');
+            if (!newFrame) return;
+            
+            const doc = newFrame.contentDocument || newFrame.contentWindow.document;
+            
+            // Remove the element from the DOM
+            currentAnnotationElement.remove();
+            
+            // Update the uploadState with new content
+            uploadState.newContent = doc.body.innerHTML;
+            
+            showToast('✅ אלמנט הוסר!', 'success');
+            closeAnnotationPopup();
+            
+            // Save the changes
+            await saveDirectEdits();
         }
         
         function resetAnnotationOptions() {
@@ -12292,6 +13824,7 @@ ${content}
                 shorter: '✂️ קצר',
                 longer: '📄 ארוך',
                 removeLink: '🔗 הסר קישור',
+                removeElement: '🗑️ הסר אלמנט',
                 custom: '💬 מותאם',
                 match: '🎯 התאם',
                 restyle: '✨ עצב מחדש'
@@ -12804,6 +14337,8 @@ ${content}
                 shorter: 'קצר את התוכן תוך שמירה על המסר העיקרי',
                 longer: 'הרחב את התוכן עם פרטים נוספים',
                 removeLink: 'הסר את הקישור (<a>) מהאלמנט והשאר רק את הטקסט',
+                removeElement: 'הסר את האלמנט הזה מהעמוד לחלוטין (מחק את כל הקוד שלו)',
+                removeBold: 'הסר את הבולד (<strong>/<b>) מהאלמנט והשאר רק את הטקסט',
                 custom: 'תקן לפי ההוראות',
                 match: `התאם את העיצוב לסגנון הקיים בעמוד:
 ⚠️ חוקים קריטיים:
@@ -12898,15 +14433,17 @@ ${ann.note ? `**💬 הוראות נוספות:** ${ann.note}` : ''}
                 previewModal.id = 'promptPreviewModal';
                 previewModal.className = 'modal-overlay';
                 previewModal.innerHTML = `
-                    <div class="modal" style="max-width: 800px; max-height: 80vh;">
+                    <div class="modal" style="max-width: 900px; max-height: 85vh;">
                         <div class="modal-header">
-                            <h2>📋 תצוגה מקדימה של הפרומפט</h2>
+                            <h2>📝 ערוך פרומפט לפני שליחה</h2>
                             <button class="modal-close" onclick="closePromptPreview()">&times;</button>
                         </div>
-                        <div class="modal-body" style="max-height: 60vh; overflow-y: auto;">
-                            <pre id="promptPreviewContent" style="white-space: pre-wrap; font-size: 0.85rem; background: var(--bg); padding: 1rem; border-radius: 8px; direction: ltr; text-align: left;"></pre>
+                        <div class="modal-body" style="max-height: 65vh; overflow-y: auto; padding: 0.5rem;">
+                            <textarea id="promptPreviewContent" 
+                                style="width: 100%; height: 55vh; font-size: 0.85rem; background: var(--bg); padding: 1rem; border-radius: 8px; direction: rtl; text-align: right; border: 1px solid var(--border); color: var(--text); resize: vertical; font-family: inherit; line-height: 1.6;"
+                                placeholder="ערוך את הפרומפט כאן..."></textarea>
                         </div>
-                        <div class="modal-footer" style="display: flex; gap: 0.5rem; justify-content: flex-end;">
+                        <div class="modal-footer" style="display: flex; gap: 0.5rem; justify-content: flex-end; flex-wrap: wrap;">
                             <button class="btn btn-secondary" onclick="closePromptPreview()">סגור</button>
                             <button class="btn btn-primary" onclick="copyAndClosePrompt()">📋 העתק</button>
                             <button class="btn btn-success" onclick="sendPromptToClaude()" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">
@@ -12918,12 +14455,16 @@ ${ann.note ? `**💬 הוראות נוספות:** ${ann.note}` : ''}
                 document.body.appendChild(previewModal);
             }
             
-            // Store prompt for copying
-            previewModal.dataset.prompt = prompt;
-            
-            // Show preview
-            document.getElementById('promptPreviewContent').textContent = prompt;
+            // Show preview with editable textarea
+            const textarea = document.getElementById('promptPreviewContent');
+            textarea.value = prompt;
             previewModal.classList.add('active');
+            
+            // Focus and scroll to top of textarea
+            setTimeout(() => {
+                textarea.focus();
+                textarea.scrollTop = 0;
+            }, 100);
         }
         
         function closePromptPreview() {
@@ -12932,21 +14473,22 @@ ${ann.note ? `**💬 הוראות נוספות:** ${ann.note}` : ''}
         }
         
         function copyAndClosePrompt() {
-            const modal = document.getElementById('promptPreviewModal');
-            if (modal && modal.dataset.prompt) {
-                copyToClipboardFallback(modal.dataset.prompt);
+            const textarea = document.getElementById('promptPreviewContent');
+            if (textarea && textarea.value) {
+                copyToClipboardFallback(textarea.value);
                 showToast('✅ הפרומפט הועתק!', 'success');
             }
         }
         
         async function sendPromptToClaude() {
-            const modal = document.getElementById('promptPreviewModal');
-            if (!modal || !modal.dataset.prompt) {
+            const textarea = document.getElementById('promptPreviewContent');
+            if (!textarea || !textarea.value.trim()) {
                 showToast('אין פרומפט לשליחה', 'error');
                 return;
             }
             
-            const prompt = modal.dataset.prompt;
+            // Get edited prompt from textarea
+            const prompt = textarea.value.trim();
             
             if (!selectedPage) {
                 showToast('לא נבחר עמוד', 'error');
@@ -16183,7 +17725,7 @@ ${ann.note ? `**💬 הוראות נוספות:** ${ann.note}` : ''}
                                         ${isUIPatternDup ? `<span style="color: #60a5fa; margin-right: 8px; font-size: 0.65rem;">📱 ${l.uiPatternType || 'UI'}</span>` : ''}
                                     </div>
                                     <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 4px;">
-                                        <span style="font-size: 0.65rem; direction: ltr; color: #60a5fa; max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${l.href}</span>
+                                        <a href="${l.href}" target="_blank" style="font-size: 0.65rem; direction: ltr; color: #60a5fa; max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-decoration: none;" title="לחץ לפתיחה בטאב חדש">🔗 ${l.href}</a>
                                         <button onclick="removeDuplicateLink('${encodeURIComponent(l.href)}', '${encodeURIComponent(l.text || '')}', ${idx})" 
                                                 style="background: #374151; color: white; border: none; padding: 3px 10px; border-radius: 4px; cursor: pointer; font-size: 0.7rem;">
                                             🗑️ הסר
@@ -16220,7 +17762,7 @@ ${ann.note ? `**💬 הוראות נוספות:** ${ann.note}` : ''}
                                         ${isUIPatternDup ? `<span style="color: #60a5fa; margin-right: 8px; font-size: 0.65rem;">📱 ${l.uiPatternType || 'UI'}</span>` : ''}
                                     </div>
                                     <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 4px;">
-                                        <span style="font-size: 0.65rem; direction: ltr; color: #10b981; max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${l.href}</span>
+                                        <a href="${l.href}" target="_blank" style="font-size: 0.65rem; direction: ltr; color: #10b981; max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-decoration: none;" title="לחץ לפתיחה בטאב חדש">🔗 ${l.href}</a>
                                         <button onclick="removeDuplicateLink('${encodeURIComponent(l.href)}', '${encodeURIComponent(l.text || '')}', ${idx})" 
                                                 style="background: #374151; color: white; border: none; padding: 3px 10px; border-radius: 4px; cursor: pointer; font-size: 0.7rem;">
                                             🗑️ הסר
@@ -19110,15 +20652,23 @@ ${additionalInstructions}
                 // Show/hide main sections based on tab
                 const mainEl = document.querySelector('main.main');
                 const agentsSection = document.getElementById('agentsSection');
+                const duplicatesSection = document.getElementById('duplicatesSection');
                 
                 if (tabName === 'agents') {
                     mainEl.style.display = 'none';
                     agentsSection.classList.add('active');
+                    duplicatesSection.classList.remove('active');
                     loadAgentBuilderList();
                     loadDataSources();  // Load custom data sources for shortcode sidebar
+                } else if (tabName === 'duplicates') {
+                    mainEl.style.display = 'none';
+                    agentsSection.classList.remove('active');
+                    duplicatesSection.classList.add('active');
+                    initDuplicatesTab();  // Initialize duplicates tab
                 } else {
                     mainEl.style.display = 'flex';
                     agentsSection.classList.remove('active');
+                    duplicatesSection.classList.remove('active');
                 }
             });
         });
@@ -21323,6 +22873,1311 @@ ${additionalInstructions}
             const { pagePath, step, agentType, agentId } = promptInfo;
             console.log('📝 Opening prompt for:', { pagePath, step, agentType, agentId });
             openPromptModal(pagePath, step, agentType, agentId);
+        }
+
+        // ============ Duplicates Detection System ============
+        
+        // Global state for duplicates
+        let currentDuplicatesReport = null;
+        let selectedGroups = new Set();
+        let availableDirectories = [];
+        let duplicateSettings = {
+            enabled_directories: ['main', 'business'],
+            threshold: 0.5,
+            include_meta: true,
+            include_headings: true,
+            cross_directory: false,
+            auto_scan: false
+        };
+        let ignorePatterns = [];
+        
+        // Predefined templates for ignore patterns
+        const ignoreTemplates = {
+            'date-updated': {
+                text: 'עודכן לאחרונה:',
+                type: 'contains',
+                description: 'תאריך עדכון - חוזר בכל העמודים'
+            },
+            'interest-rate': {
+                text: 'הריביות בתוכן מעודכנות לפי ריבית פריים',
+                type: 'contains',
+                description: 'הצהרת ריבית - מעודכנת לפי בנק ישראל'
+            },
+            'copyright': {
+                text: 'כל הזכויות שמורות',
+                type: 'exact',
+                description: 'זכויות יוצרים'
+            },
+            'contact-cta': {
+                text: 'צור קשר עכשיו',
+                type: 'exact',
+                description: 'קריאה לפעולה סטנדרטית'
+            },
+            'disclaimer': {
+                text: 'disclaimer',
+                type: 'contains',
+                description: 'הצהרות משפטיות'
+            },
+            'footer': {
+                text: 'footer',
+                type: 'contains',
+                description: 'תוכן Footer'
+            }
+        };
+        
+        // Initialize duplicates tab
+        async function initDuplicatesTab() {
+            await loadAvailableDirectories();
+            await loadDuplicateSettings();
+            updateSelectedDirectoriesBar();
+            
+            if (duplicateSettings.auto_scan) {
+                loadCachedReport();
+            }
+        }
+        
+        // Load available directories
+        async function loadAvailableDirectories() {
+            try {
+                const result = await apiCall('/api/duplicates/directories');
+                if (result.success) {
+                    availableDirectories = result.directories;
+                }
+            } catch (err) {
+                console.error('Error loading directories:', err);
+            }
+        }
+        
+        // Load settings
+        async function loadDuplicateSettings() {
+            try {
+                const result = await apiCall('/api/duplicates/settings');
+                if (result.success && result.settings) {
+                    duplicateSettings = result.settings;
+                    
+                    // Apply settings to UI
+                    const thresholdEl = document.getElementById('duplicates-threshold');
+                    const metaEl = document.getElementById('include-meta');
+                    const headingsEl = document.getElementById('include-headings');
+                    
+                    if (thresholdEl) thresholdEl.value = duplicateSettings.threshold || 0.5;
+                    if (metaEl) metaEl.checked = duplicateSettings.include_meta !== false;
+                    if (headingsEl) headingsEl.checked = duplicateSettings.include_headings !== false;
+                }
+            } catch (err) {
+                console.error('Error loading settings:', err);
+            }
+        }
+        
+        // Save settings
+        async function saveDuplicateSettings() {
+            const selectedDirs = Array.from(
+                document.querySelectorAll('.directory-checkbox:checked')
+            ).map(cb => cb.value);
+            
+            if (selectedDirs.length === 0) {
+                showToast('יש לבחור לפחות תיקייה אחת', 'warning');
+                return;
+            }
+            
+            duplicateSettings.enabled_directories = selectedDirs;
+            duplicateSettings.cross_directory = document.getElementById('cross-directory-scan')?.checked || false;
+            duplicateSettings.auto_scan = document.getElementById('auto-scan-enabled')?.checked || false;
+            
+            try {
+                await apiCall('/api/duplicates/settings', {
+                    method: 'POST',
+                    body: JSON.stringify({ settings: duplicateSettings })
+                });
+                
+                showToast('✅ ההגדרות נשמרו', 'success');
+                closeDuplicateSettings();
+                updateSelectedDirectoriesBar();
+            } catch (err) {
+                showToast('שגיאה בשמירת הגדרות', 'error');
+            }
+        }
+        
+        // Open settings modal
+        async function openDuplicateSettings() {
+            const modal = document.getElementById('duplicate-settings-modal');
+            const loading = document.getElementById('directories-loading');
+            const list = document.getElementById('directories-list');
+            
+            modal.classList.add('active');
+            loading.style.display = 'block';
+            list.style.display = 'none';
+            
+            // Load directories if not loaded
+            if (availableDirectories.length === 0) {
+                await loadAvailableDirectories();
+            }
+            
+            // Render directories list
+            list.innerHTML = availableDirectories.map(dir => `
+                <div class="directory-item">
+                    <label class="directory-checkbox-label">
+                        <input type="checkbox" 
+                               class="directory-checkbox" 
+                               value="${dir.id}"
+                               ${duplicateSettings.enabled_directories.includes(dir.id) ? 'checked' : ''}>
+                        <div class="directory-info">
+                            <strong>📁 ${dir.name}</strong>
+                            <small>${dir.pages_count} עמודים</small>
+                        </div>
+                    </label>
+                </div>
+            `).join('');
+            
+            // Set other settings
+            const crossDirEl = document.getElementById('cross-directory-scan');
+            const autoScanEl = document.getElementById('auto-scan-enabled');
+            if (crossDirEl) crossDirEl.checked = duplicateSettings.cross_directory || false;
+            if (autoScanEl) autoScanEl.checked = duplicateSettings.auto_scan || false;
+            
+            loading.style.display = 'none';
+            list.style.display = 'block';
+        }
+        
+        function closeDuplicateSettings() {
+            document.getElementById('duplicate-settings-modal').classList.remove('active');
+        }
+        
+        // Update selected directories bar
+        function updateSelectedDirectoriesBar() {
+            const bar = document.getElementById('selected-directories-bar');
+            const list = document.getElementById('selected-directories-list');
+            
+            if (!duplicateSettings.enabled_directories || duplicateSettings.enabled_directories.length === 0) {
+                if (bar) bar.style.display = 'none';
+                return;
+            }
+            
+            if (list) {
+                list.innerHTML = duplicateSettings.enabled_directories.map(dirId => {
+                    const dir = availableDirectories.find(d => d.id === dirId);
+                    const count = dir ? dir.pages_count : '?';
+                    return `<span class="directory-badge">📁 ${dirId} (${count})</span>`;
+                }).join('');
+            }
+            
+            if (bar) bar.style.display = 'flex';
+        }
+        
+        // Main scan function
+        async function scanDuplicates() {
+            if (!duplicateSettings.enabled_directories || duplicateSettings.enabled_directories.length === 0) {
+                showToast('יש לבחור תיקיות בהגדרות', 'warning');
+                openDuplicateSettings();
+                return;
+            }
+            
+            const threshold = parseFloat(document.getElementById('duplicates-threshold')?.value || 0.5);
+            const includeMeta = document.getElementById('include-meta')?.checked !== false;
+            const includeHeadings = document.getElementById('include-headings')?.checked !== false;
+            
+            const directoriesText = duplicateSettings.enabled_directories.join(', ');
+            showToast('סורק כפילויות...', 'info');
+            
+            // Show loading in results area
+            const resultsContainer = document.getElementById('duplicates-results');
+            resultsContainer.innerHTML = `
+                <div class="duplicates-loading">
+                    <div class="loading-spinner">🔍</div>
+                    <h3>סורק ${directoriesText}...</h3>
+                    <p>זה עשוי לקחת מספר שניות</p>
+                </div>
+            `;
+            
+            try {
+                const result = await apiCall('/api/duplicates/scan', {
+                    method: 'POST',
+                    body: JSON.stringify({ 
+                        directories: duplicateSettings.enabled_directories,
+                        threshold,
+                        include_meta: includeMeta,
+                        include_headings: includeHeadings,
+                        cross_directory: duplicateSettings.cross_directory || false
+                    })
+                });
+                
+                if (result.success) {
+                    currentDuplicatesReport = result.report;
+                    displayDuplicateReport(result.report);
+                    showToast('✅ סריקה הושלמה!', 'success');
+                } else {
+                    showToast('שגיאה: ' + (result.error || 'Unknown error'), 'error');
+                    resultsContainer.innerHTML = `
+                        <div class="duplicates-empty-state">
+                            <div style="font-size: 4rem;">❌</div>
+                            <h3>שגיאה בסריקה</h3>
+                            <p>${result.error || 'נסה שוב'}</p>
+                        </div>
+                    `;
+                }
+            } catch (err) {
+                console.error('Error scanning:', err);
+                showToast('שגיאה בסריקה', 'error');
+                resultsContainer.innerHTML = `
+                    <div class="duplicates-empty-state">
+                        <div style="font-size: 4rem;">❌</div>
+                        <h3>שגיאה בסריקה</h3>
+                        <p>${err.message}</p>
+                    </div>
+                `;
+            }
+        }
+        
+        // Load cached report
+        async function loadCachedReport() {
+            try {
+                const result = await apiCall('/api/duplicates/report');
+                if (result.success && result.report) {
+                    currentDuplicatesReport = result.report;
+                    displayDuplicateReport(result.report);
+                    showToast('טעינת דוח אחרון', 'info');
+                }
+            } catch (err) {
+                // No cached report, that's fine
+            }
+        }
+        
+        // Display statistics dashboard
+        function displayStatistics(stats) {
+            const totalPagesEl = document.getElementById('stat-total-pages');
+            const pagesWithDupsEl = document.getElementById('stat-pages-with-duplicates');
+            const snippetsEl = document.getElementById('stat-duplicate-snippets');
+            const avgSimEl = document.getElementById('stat-avg-similarity');
+            
+            if (totalPagesEl) totalPagesEl.textContent = stats.total_pages || 0;
+            if (pagesWithDupsEl) pagesWithDupsEl.textContent = stats.pages_with_duplicates || 0;
+            if (snippetsEl) snippetsEl.textContent = stats.total_duplicate_snippets || 0;
+            if (avgSimEl) avgSimEl.textContent = Math.round((stats.avg_similarity || 0) * 100) + '%';
+            
+            // Severity breakdown
+            const criticalEl = document.getElementById('severity-critical');
+            const highEl = document.getElementById('severity-high');
+            const mediumEl = document.getElementById('severity-medium');
+            
+            if (criticalEl) criticalEl.textContent = stats.severity_breakdown?.critical || 0;
+            if (highEl) highEl.textContent = stats.severity_breakdown?.high || 0;
+            if (mediumEl) mediumEl.textContent = stats.severity_breakdown?.medium || 0;
+            
+            document.getElementById('duplicates-stats').style.display = 'grid';
+            document.getElementById('severity-breakdown').style.display = 'flex';
+        }
+        
+        // Main display function
+        function displayDuplicateReport(data) {
+            const container = document.getElementById('duplicates-results');
+            
+            if (!data.groups || data.groups.length === 0) {
+                container.innerHTML = '<div class="no-duplicates">✅ לא נמצאו כפילויות!</div>';
+                document.getElementById('duplicates-stats').style.display = 'none';
+                document.getElementById('duplicates-filters').style.display = 'none';
+                document.getElementById('bulk-actions-bar').style.display = 'none';
+                document.getElementById('severity-breakdown').style.display = 'none';
+                return;
+            }
+            
+            // Show statistics
+            if (data.statistics) {
+                displayStatistics({...data.statistics, total_pages: data.total_pages});
+            }
+            
+            // Show filters
+            document.getElementById('duplicates-filters').style.display = 'flex';
+            document.getElementById('bulk-actions-bar').style.display = 'flex';
+            
+            // Render groups
+            renderDuplicateGroups(data.groups);
+        }
+        
+        function renderDuplicateGroups(groups) {
+            const container = document.getElementById('duplicates-results');
+            
+            let html = groups.map((group, idx) => {
+                const seoImpact = getSeoImpactBadge(group.seo_impact);
+                const similarity = group.similarity || 0;
+                
+                return `
+                <div class="duplicate-group ${selectedGroups.has(group.id) ? 'selected' : ''}" data-group-id="${group.id}">
+                    <div class="duplicate-group-header">
+                        <input type="checkbox" 
+                               class="group-checkbox" 
+                               data-group-id="${group.id}"
+                               onchange="toggleGroupSelection('${group.id}')"
+                               ${selectedGroups.has(group.id) ? 'checked' : ''}>
+                        
+                        <div class="duplicate-header-info">
+                            <span class="similarity-badge" style="background: ${getSimilarityColor(similarity)}">
+                                ${Math.round(similarity * 100)}% דמיון
+                            </span>
+                            ${seoImpact}
+                            <span class="pages-count">${group.pages.length} עמודים</span>
+                        </div>
+                        
+                        <div class="duplicate-header-actions">
+                            <button class="btn btn-sm" onclick="toggleGroupExpansion(${idx})">
+                                <span id="expand-icon-${idx}">▼</span> הצג פרטים
+                            </button>
+                            <button class="btn btn-sm btn-info" onclick="showDiffViewer('${group.pages[0]?.path || ''}', '${group.pages[1]?.path || ''}')">
+                                👁️ השוואה
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="duplicate-pages">
+                        ${group.pages.map((page, pIdx) => `
+                            <div class="page-card">
+                                <div class="page-card-header">
+                                    <strong>${escapeHtml(page.keyword || 'לא ידוע')}</strong>
+                                    <span class="page-badge">#${pIdx + 1}</span>
+                                </div>
+                                <div class="page-meta">
+                                    <div class="page-title">${escapeHtml(page.title || 'ללא כותרת')}</div>
+                                    <div class="page-description">${escapeHtml((page.description || '').substring(0, 100))}...</div>
+                                </div>
+                                <small class="page-path">${escapeHtml(page.path || '')}</small>
+                                <div class="page-actions">
+                                    ${page.url ? `<a href="${page.url}" target="_blank" class="btn btn-xs">🌐 צפה באתר</a>` : ''}
+                                    <button class="btn btn-xs" onclick="openPageInEditor('${escapeHtml(page.path || '')}')">✏️ ערוך</button>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    
+                    <!-- Expandable Details -->
+                    <div id="group-details-${idx}" class="group-details" style="display: none;">
+                        ${renderDuplicateSnippets(group, idx)}
+                        ${renderHeadingsDuplicates(group)}
+                    </div>
+                </div>
+                `;
+            }).join('');
+            
+            container.innerHTML = html;
+        }
+        
+        function renderDuplicateSnippets(group, groupIdx) {
+            if (!group.duplicate_snippets || group.duplicate_snippets.length === 0) {
+                return '<div class="no-snippets">לא נמצאו קטעים כפולים ספציפיים</div>';
+            }
+            
+            return `
+                <div class="duplicate-snippets">
+                    <h4>📄 קטעי תוכן כפולים</h4>
+                    ${group.duplicate_snippets.map((snippet, sIdx) => `
+                        <div class="duplicate-snippet-item">
+                            <input type="checkbox" 
+                                   id="snippet-${groupIdx}-${sIdx}" 
+                                   class="snippet-checkbox"
+                                   data-group="${groupIdx}"
+                                   data-snippet="${sIdx}"
+                                   data-text="${escapeHtmlAttr(snippet.text || '')}">
+                            <label for="snippet-${groupIdx}-${sIdx}">
+                                <div class="snippet-preview">
+                                    <div class="snippet-header">
+                                        <strong>סוג: ${getSnippetTypeLabel(snippet.type)}</strong>
+                                        <span class="snippet-length">${snippet.length || 0} תווים</span>
+                                        <span class="snippet-pages-count">מופיע ב-${(snippet.pages || []).length} עמודים</span>
+                                    </div>
+                                    <pre>${escapeHtml(snippet.text || '')}</pre>
+                                    
+                                    <!-- Links to view in each page -->
+                                    <div class="snippet-page-links">
+                                        <span class="snippet-links-label">📍 צפה בעמוד:</span>
+                                        ${(snippet.pages || group.pages?.map(p => p.path) || []).map((pagePath, pIdx) => {
+                                            const pageInfo = group.pages?.find(p => p.path === pagePath) || { keyword: getKeywordFromPath(pagePath), path: pagePath };
+                                            return `<button class="btn btn-xs btn-link" onclick="viewSnippetInPage('${escapeHtmlAttr(pagePath)}', '${escapeHtmlAttr(snippet.text || '')}')">
+                                                📄 ${escapeHtml(pageInfo.keyword || 'עמוד ' + (pIdx + 1))}
+                                            </button>`;
+                                        }).join('')}
+                                    </div>
+                                </div>
+                            </label>
+                            <button class="btn btn-xs btn-secondary" onclick="addSnippetToIgnoreFromReport('${escapeHtmlAttr(snippet.text || '')}')">
+                                🚫 התעלם
+                            </button>
+                        </div>
+                    `).join('')}
+                    
+                    <div class="snippets-actions">
+                        <button class="btn btn-sm" onclick="selectAllSnippets(${groupIdx})">
+                            ✓ בחר הכל
+                        </button>
+                        <button class="btn btn-sm btn-success" onclick="sendSelectedToClaude(${groupIdx})" 
+                                style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">
+                            🤖 שלח לקלוד לתיקון
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+        
+        function renderHeadingsDuplicates(group) {
+            if (!group.headings_duplicates || Object.keys(group.headings_duplicates).length === 0) return '';
+            
+            let html = '<div class="headings-duplicates"><h4>📌 כותרות כפולות</h4>';
+            
+            for (const [level, headings] of Object.entries(group.headings_duplicates)) {
+                if (headings && headings.length > 0) {
+                    html += `
+                        <div class="heading-level-group">
+                            <strong>${level.toUpperCase()}:</strong>
+                            <ul>
+                                ${headings.map(h => `<li>${escapeHtml(h)}</li>`).join('')}
+                            </ul>
+                        </div>
+                    `;
+                }
+            }
+            
+            html += '</div>';
+            return html;
+        }
+        
+        // Toggle group expansion
+        function toggleGroupExpansion(idx) {
+            const details = document.getElementById(`group-details-${idx}`);
+            const icon = document.getElementById(`expand-icon-${idx}`);
+            
+            if (details) {
+                const isHidden = details.style.display === 'none';
+                details.style.display = isHidden ? 'block' : 'none';
+                if (icon) icon.textContent = isHidden ? '▲' : '▼';
+            }
+        }
+        
+        // Filtering and Sorting
+        function applyDuplicatesFilter() {
+            if (!currentDuplicatesReport || !currentDuplicatesReport.groups) return;
+            
+            const searchTerm = (document.getElementById('filter-search')?.value || '').toLowerCase();
+            const sortBy = document.getElementById('filter-sort')?.value || 'similarity-desc';
+            const severity = document.getElementById('filter-severity')?.value || 'all';
+            
+            let filteredGroups = [...currentDuplicatesReport.groups];
+            
+            // Filter by search
+            if (searchTerm) {
+                filteredGroups = filteredGroups.filter(group => 
+                    group.pages.some(p => 
+                        (p.keyword || '').toLowerCase().includes(searchTerm) ||
+                        (p.title || '').toLowerCase().includes(searchTerm)
+                    )
+                );
+            }
+            
+            // Filter by severity
+            if (severity !== 'all') {
+                filteredGroups = filteredGroups.filter(g => g.seo_impact?.level === severity);
+            }
+            
+            // Sort
+            filteredGroups.sort((a, b) => {
+                switch(sortBy) {
+                    case 'similarity-desc': return (b.similarity || 0) - (a.similarity || 0);
+                    case 'similarity-asc': return (a.similarity || 0) - (b.similarity || 0);
+                    case 'pages-count-desc': return (b.pages?.length || 0) - (a.pages?.length || 0);
+                    case 'seo-impact-desc': return ((b.seo_impact?.score || 0) - (a.seo_impact?.score || 0));
+                    case 'keyword-asc': 
+                        const kw1 = a.pages?.[0]?.keyword || '';
+                        const kw2 = b.pages?.[0]?.keyword || '';
+                        return kw1.localeCompare(kw2, 'he');
+                    default: return 0;
+                }
+            });
+            
+            renderDuplicateGroups(filteredGroups);
+        }
+        
+        // Group selection
+        function toggleGroupSelection(groupId) {
+            if (selectedGroups.has(groupId)) {
+                selectedGroups.delete(groupId);
+            } else {
+                selectedGroups.add(groupId);
+            }
+            updateSelectedCount();
+            
+            // Update UI
+            const groupEl = document.querySelector(`[data-group-id="${groupId}"]`);
+            if (groupEl) {
+                groupEl.classList.toggle('selected', selectedGroups.has(groupId));
+            }
+        }
+        
+        function toggleAllGroupsSelection() {
+            const selectAll = document.getElementById('select-all-groups')?.checked;
+            const checkboxes = document.querySelectorAll('.group-checkbox');
+            
+            checkboxes.forEach(cb => {
+                cb.checked = selectAll;
+                const groupId = cb.dataset.groupId;
+                if (selectAll) {
+                    selectedGroups.add(groupId);
+                } else {
+                    selectedGroups.delete(groupId);
+                }
+            });
+            
+            updateSelectedCount();
+        }
+        
+        function updateSelectedCount() {
+            const countEl = document.getElementById('selected-count');
+            if (countEl) countEl.textContent = `${selectedGroups.size} נבחרו`;
+        }
+        
+        // Snippet selection
+        function selectAllSnippets(groupIdx) {
+            const checkboxes = document.querySelectorAll(`input[data-group="${groupIdx}"]`);
+            const allChecked = Array.from(checkboxes).every(cb => cb.checked);
+            
+            checkboxes.forEach(cb => {
+                cb.checked = !allChecked;
+            });
+            
+            showToast(allChecked ? 'ביטול בחירה' : 'נבחרו כל הקטעים', 'info');
+        }
+        
+        // Bulk actions
+        async function bulkSendToClaude() {
+            if (selectedGroups.size === 0) {
+                showToast('לא נבחרו קבוצות', 'warning');
+                return;
+            }
+            
+            const groups = currentDuplicatesReport.groups.filter(g => selectedGroups.has(g.id));
+            
+            // Build combined prompt
+            const prompt = buildBulkFixPrompt(groups);
+            showDuplicateFixPrompt(prompt, groups);
+        }
+        
+        async function bulkIgnore() {
+            if (selectedGroups.size === 0) return;
+            
+            if (!confirm(`להתעלם מ-${selectedGroups.size} קבוצות כפילויות?`)) return;
+            
+            showToast(`${selectedGroups.size} קבוצות נוספו לרשימת התעלמות`, 'success');
+            selectedGroups.clear();
+            updateSelectedCount();
+        }
+        
+        async function bulkExport() {
+            if (selectedGroups.size === 0) {
+                showToast('לא נבחרו קבוצות', 'warning');
+                return;
+            }
+            
+            const groups = currentDuplicatesReport.groups.filter(g => selectedGroups.has(g.id));
+            
+            // Export to CSV
+            let csv = 'דמיון,עמוד1,עמוד2,SEO Impact\n';
+            groups.forEach(g => {
+                const p1 = g.pages?.[0]?.keyword || '';
+                const p2 = g.pages?.[1]?.keyword || '';
+                csv += `${Math.round((g.similarity || 0) * 100)}%,${p1},${p2},${g.seo_impact?.level || ''}\n`;
+            });
+            
+            // Download
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'duplicates-export.csv';
+            a.click();
+            URL.revokeObjectURL(url);
+            
+            showToast('הקובץ הורד', 'success');
+        }
+        
+        // Send selected snippets to Claude
+        async function sendSelectedToClaude(groupIdx) {
+            const checkboxes = document.querySelectorAll(`input[data-group="${groupIdx}"]:checked`);
+            
+            if (checkboxes.length === 0) {
+                showToast('לא נבחרו קטעים לתיקון', 'warning');
+                return;
+            }
+            
+            const group = currentDuplicatesReport?.groups?.[groupIdx];
+            if (!group) return;
+            
+            const duplicates = Array.from(checkboxes).map(cb => ({
+                text: cb.dataset.text,
+                pages: group.pages.map(p => p.path)
+            }));
+            
+            const prompt = buildDuplicateFixPrompt(duplicates, group);
+            showDuplicateFixPrompt(prompt, [group]);
+        }
+        
+        function buildDuplicateFixPrompt(duplicates, group) {
+            let prompt = `# 🔧 תיקון כפילויות תוכן
+
+## 📋 הוראות
+
+זוהו ${duplicates.length} קטעי תוכן כפולים שחוזרים על עצמם במספר עמודים.
+משימתך: **להתאים אישית כל קטע** כך שיהיה ייחודי לעמוד בו הוא מופיע, תוך שמירה על המסר והערך.
+
+---
+
+## ⚠️ כללים
+
+1. **אסור להעתיק תוכן זהה** בין עמודים - זה פוגע ב-SEO
+2. שמור על **אורך דומה** לטקסט המקורי
+3. התאם את התוכן ל**מילת המפתח של העמוד**
+4. שמור על **טון שיווקי ומקצועי**
+5. וודא ש**כל עמוד מקבל גרסה ייחודית**
+
+---
+
+`;
+
+            duplicates.forEach((dup, idx) => {
+                prompt += `## 🔄 כפילות ${idx + 1}
+
+### טקסט כפול נוכחי:
+\`\`\`
+${dup.text}
+\`\`\`
+
+### מופיע בעמודים הבאים:
+${(dup.pages || []).map((pagePath, pIdx) => {
+    const page = group?.pages?.find(p => p.path === pagePath);
+    const keyword = page?.keyword || getKeywordFromPath(pagePath);
+    return `${pIdx + 1}. **${keyword}** (\`${pagePath}\`)`;
+}).join('\n')}
+
+### ✏️ דרוש: צור גרסה ייחודית לכל עמוד
+
+---
+
+`;
+            });
+
+            prompt += `## 🏁 סיום
+
+לאחר התיקונים, עדכן את כל העמודים בקבצי ה-HTML המתאימים.
+`;
+
+            return prompt;
+        }
+        
+        function buildBulkFixPrompt(groups) {
+            let prompt = `# 🔧 תיקון כפילויות תוכן - ${groups.length} קבוצות
+
+## 📋 הוראות
+
+זוהו ${groups.length} קבוצות של כפילויות תוכן שצריך לתקן.
+משימתך: **להתאים אישית כל קטע** כך שיהיה ייחודי לעמוד בו הוא מופיע.
+
+---
+
+`;
+            
+            groups.forEach((group, gIdx) => {
+                prompt += `## 📦 קבוצה ${gIdx + 1} - ${Math.round((group.similarity || 0) * 100)}% דמיון
+
+### עמודים מעורבים:
+${group.pages.map(p => `- **${p.keyword}** (\`${p.path}\`)`).join('\n')}
+
+### קטעים כפולים:
+${(group.duplicate_snippets || []).map((s, i) => `
+${i + 1}. \`\`\`
+${s.text}
+\`\`\`
+`).join('\n')}
+
+---
+
+`;
+            });
+            
+            prompt += `## 🏁 סיכום
+
+עבור על כל הקבוצות ותקן את הכפילויות. וודא שכל עמוד מקבל גרסה ייחודית!
+`;
+            
+            return prompt;
+        }
+        
+        function getKeywordFromPath(path) {
+            const match = (path || '').match(/([^\/\\]+)[\/\\][^\/\\]+\.html$/);
+            return match ? match[1] : 'לא ידוע';
+        }
+        
+        function showDuplicateFixPrompt(prompt, groups) {
+            const modal = document.getElementById('duplicate-fix-modal');
+            const textarea = document.getElementById('duplicate-fix-prompt');
+            
+            if (textarea) textarea.value = prompt;
+            if (modal) modal.classList.add('active');
+            
+            window.currentDuplicateFixContext = { prompt, groups };
+        }
+        
+        function closeDuplicateFixModal() {
+            document.getElementById('duplicate-fix-modal').classList.remove('active');
+        }
+        
+        async function executeDuplicateFix() {
+            const prompt = document.getElementById('duplicate-fix-prompt')?.value;
+            const context = window.currentDuplicateFixContext;
+            
+            if (!prompt || !context) {
+                showToast('חסר פרומפט', 'error');
+                return;
+            }
+            
+            try {
+                const result = await apiCall('/api/duplicates/bulk-fix', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        groups: context.groups,
+                        prompt: prompt
+                    })
+                });
+                
+                if (result.success) {
+                    showToast('✅ הפרומפט נשמר - מוכן לעיבוד', 'success');
+                    closeDuplicateFixModal();
+                } else {
+                    showToast('שגיאה: ' + (result.error || ''), 'error');
+                }
+            } catch (err) {
+                showToast('שגיאה: ' + err.message, 'error');
+            }
+        }
+        
+        // Heatmap
+        function showHeatmap() {
+            if (!currentDuplicatesReport || !currentDuplicatesReport.similarity_matrix) {
+                showToast('אין מטריצת דמיון זמינה', 'warning');
+                return;
+            }
+            
+            const modal = document.getElementById('heatmap-modal');
+            const container = document.getElementById('heatmap-container');
+            
+            if (container) {
+                container.innerHTML = renderHeatmap(
+                    currentDuplicatesReport.similarity_matrix,
+                    currentDuplicatesReport.heatmap_labels || []
+                );
+            }
+            if (modal) modal.classList.add('active');
+        }
+        
+        function renderHeatmap(matrix, labels) {
+            if (!matrix || matrix.length === 0) {
+                return '<p>אין נתונים להצגה</p>';
+            }
+            
+            let html = '<div class="heatmap-wrapper"><table class="heatmap-table">';
+            
+            // Header row
+            html += '<tr><th></th>';
+            labels.forEach(label => {
+                html += `<th title="${escapeHtml(label)}">${escapeHtml((label || '').substring(0, 8))}</th>`;
+            });
+            html += '</tr>';
+            
+            matrix.forEach((row, i) => {
+                html += `<tr><th title="${escapeHtml(labels[i] || '')}">${escapeHtml((labels[i] || '').substring(0, 8))}</th>`;
+                row.forEach((val, j) => {
+                    const color = getHeatmapColor(val);
+                    const display = i === j ? '-' : Math.round(val * 100);
+                    html += `<td style="background: ${color}" title="${Math.round(val * 100)}%">
+                        ${display}
+                    </td>`;
+                });
+                html += '</tr>';
+            });
+            
+            html += '</table></div>';
+            return html;
+        }
+        
+        function getHeatmapColor(val) {
+            if (val >= 0.85) return '#ef4444';
+            if (val >= 0.7) return '#f97316';
+            if (val >= 0.5) return '#eab308';
+            if (val >= 0.3) return '#84cc16';
+            return '#22c55e';
+        }
+        
+        function closeHeatmap() {
+            document.getElementById('heatmap-modal').classList.remove('active');
+        }
+        
+        // Diff Viewer
+        async function showDiffViewer(page1Path, page2Path) {
+            if (!page1Path || !page2Path) {
+                showToast('חסרים נתיבי עמודים', 'error');
+                return;
+            }
+            
+            const modal = document.getElementById('diff-viewer-modal');
+            const container = document.getElementById('diff-viewer-container');
+            
+            if (container) {
+                container.innerHTML = '<div class="loading-spinner">טוען השוואה...</div>';
+            }
+            if (modal) modal.classList.add('active');
+            
+            try {
+                const result = await apiCall('/api/duplicates/compare', {
+                    method: 'POST',
+                    body: JSON.stringify({ page1: page1Path, page2: page2Path })
+                });
+                
+                if (result.success) {
+                    displayDiffViewer(result);
+                } else {
+                    container.innerHTML = `<p>שגיאה: ${result.error || 'Unknown'}</p>`;
+                }
+            } catch (err) {
+                container.innerHTML = `<p>שגיאה: ${err.message}</p>`;
+            }
+        }
+        
+        function displayDiffViewer(diff) {
+            const title1 = document.getElementById('diff-page1-title');
+            const title2 = document.getElementById('diff-page2-title');
+            const content1 = document.getElementById('diff-page1-content');
+            const content2 = document.getElementById('diff-page2-content');
+            
+            if (title1) title1.textContent = diff.page1?.keyword || 'עמוד 1';
+            if (title2) title2.textContent = diff.page2?.keyword || 'עמוד 2';
+            
+            const highlighted1 = highlightMatches(diff.page1?.content || '', diff.matches || []);
+            const highlighted2 = highlightMatches(diff.page2?.content || '', diff.matches || []);
+            
+            if (content1) content1.innerHTML = `<pre>${highlighted1}</pre>`;
+            if (content2) content2.innerHTML = `<pre>${highlighted2}</pre>`;
+        }
+        
+        function highlightMatches(text, matches) {
+            let result = escapeHtml(text);
+            
+            matches.forEach(match => {
+                const escapedMatch = escapeHtml(match);
+                const regex = new RegExp(escapedMatch.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g');
+                result = result.replace(regex, `<span class="diff-match">${escapedMatch}</span>`);
+            });
+            
+            return result;
+        }
+        
+        function closeDiffViewer() {
+            document.getElementById('diff-viewer-modal').classList.remove('active');
+        }
+        
+        // Ignore Manager
+        async function openIgnoreManager() {
+            const modal = document.getElementById('ignore-manager-modal');
+            if (modal) modal.classList.add('active');
+            
+            await loadIgnorePatterns();
+            renderPatternsList();
+        }
+        
+        function closeIgnoreManager() {
+            document.getElementById('ignore-manager-modal').classList.remove('active');
+        }
+        
+        async function loadIgnorePatterns() {
+            try {
+                const result = await apiCall('/api/duplicates/ignore');
+                if (result.success) {
+                    ignorePatterns = result.patterns || [];
+                    updatePatternsCount();
+                }
+            } catch (err) {
+                console.error('Error loading ignore patterns:', err);
+            }
+        }
+        
+        async function addIgnorePattern() {
+            const text = document.getElementById('new-pattern-text')?.value?.trim();
+            const typeEl = document.querySelector('input[name="pattern-type"]:checked');
+            const type = typeEl?.value || 'exact';
+            const description = document.getElementById('pattern-description')?.value?.trim() || '';
+            
+            if (!text) {
+                showToast('יש להזין טקסט', 'warning');
+                return;
+            }
+            
+            try {
+                const result = await apiCall('/api/duplicates/ignore', {
+                    method: 'POST',
+                    body: JSON.stringify({ pattern: text, type, description })
+                });
+                
+                if (result.success) {
+                    showToast('✅ הפטור נוסף', 'success');
+                    document.getElementById('new-pattern-text').value = '';
+                    document.getElementById('pattern-description').value = '';
+                    await loadIgnorePatterns();
+                    renderPatternsList();
+                }
+            } catch (err) {
+                showToast('שגיאה בהוספת פטור', 'error');
+            }
+        }
+        
+        async function addTemplatePattern(templateId) {
+            const template = ignoreTemplates[templateId];
+            if (!template) return;
+            
+            try {
+                const result = await apiCall('/api/duplicates/ignore', {
+                    method: 'POST',
+                    body: JSON.stringify({ 
+                        pattern: template.text, 
+                        type: template.type, 
+                        description: template.description 
+                    })
+                });
+                
+                if (result.success) {
+                    showToast(`✅ תבנית "${template.description}" נוספה`, 'success');
+                    await loadIgnorePatterns();
+                    renderPatternsList();
+                }
+            } catch (err) {
+                showToast('שגיאה בהוספת תבנית', 'error');
+            }
+        }
+        
+        async function deleteIgnorePattern(patternId) {
+            if (!confirm('למחוק פטור זה?')) return;
+            
+            try {
+                const result = await apiCall(`/api/duplicates/ignore/${patternId}`, {
+                    method: 'DELETE'
+                });
+                
+                if (result.success) {
+                    showToast('🗑️ הפטור נמחק', 'success');
+                    await loadIgnorePatterns();
+                    renderPatternsList();
+                }
+            } catch (err) {
+                showToast('שגיאה במחיקת פטור', 'error');
+            }
+        }
+        
+        async function addSnippetToIgnoreFromReport(text) {
+            try {
+                const result = await apiCall('/api/duplicates/ignore', {
+                    method: 'POST',
+                    body: JSON.stringify({ 
+                        pattern: text, 
+                        type: 'exact',
+                        description: 'נוסף מדוח כפילויות'
+                    })
+                });
+                
+                if (result.success) {
+                    showToast('✅ נוסף לרשימת פטורים', 'success');
+                }
+            } catch (err) {
+                showToast('שגיאה', 'error');
+            }
+        }
+        
+        function renderPatternsList() {
+            const container = document.getElementById('patterns-list');
+            
+            if (!container) return;
+            
+            if (ignorePatterns.length === 0) {
+                container.innerHTML = '<div class="no-patterns">אין פטורים מוגדרים</div>';
+                return;
+            }
+            
+            const typeLabels = {
+                'exact': '🎯 התאמה מדויקת',
+                'contains': '📝 מכיל טקסט',
+                'regex': '🔣 Regex'
+            };
+            
+            container.innerHTML = ignorePatterns.map(pattern => `
+                <div class="pattern-item">
+                    <div class="pattern-header">
+                        <span class="pattern-type">${typeLabels[pattern.type] || pattern.type}</span>
+                        <button class="btn-delete" onclick="deleteIgnorePattern('${pattern.id}')" title="מחק">
+                            🗑️
+                        </button>
+                    </div>
+                    <div class="pattern-text">${escapeHtml(pattern.text || '')}</div>
+                    ${pattern.description ? `<div class="pattern-description">💬 ${escapeHtml(pattern.description)}</div>` : ''}
+                    <div class="pattern-meta">
+                        <small>נוסף: ${pattern.added_at ? new Date(pattern.added_at).toLocaleDateString('he-IL') : 'לא ידוע'}</small>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function updatePatternsCount() {
+            const countEl = document.getElementById('patterns-count');
+            if (countEl) {
+                countEl.textContent = `${ignorePatterns.length} פטורים`;
+            }
+        }
+        
+        // Helper functions
+        function getSimilarityColor(similarity) {
+            if (similarity >= 0.85) return '#ef4444';
+            if (similarity >= 0.70) return '#f59e0b';
+            return '#10b981';
+        }
+        
+        function getSeoImpactBadge(impact) {
+            if (!impact) return '';
+            
+            const colors = {
+                critical: '#ef4444',
+                high: '#f59e0b',
+                medium: '#10b981'
+            };
+            
+            const icons = {
+                critical: '🔴',
+                high: '🟡',
+                medium: '🟢'
+            };
+            
+            return `<span class="seo-impact-badge" style="background: ${colors[impact.level] || '#666'}" title="${escapeHtml(impact.reason || '')}">
+                ${icons[impact.level] || ''} SEO: ${impact.score || 0}/100
+            </span>`;
+        }
+        
+        function getSnippetTypeLabel(type) {
+            const labels = {
+                'body': 'טקסט גוף',
+                'h1': 'כותרת H1',
+                'h2': 'כותרת H2',
+                'h3': 'כותרת H3',
+                'title': 'Title',
+                'description': 'Description'
+            };
+            return labels[type] || type || 'לא ידוע';
+        }
+        
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+        
+        function escapeHtmlAttr(text) {
+            if (!text) return '';
+            return text.replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+        }
+        
+        function openPageInEditor(path) {
+            // Navigate to page in edit tab
+            const pageItem = document.querySelector(`[data-path="${path}"]`);
+            if (pageItem) {
+                pageItem.click();
+            } else {
+                showToast('העמוד לא נמצא ברשימה', 'warning');
+            }
+        }
+        
+        // View snippet in page - opens a modal showing the page content with highlighted snippet
+        async function viewSnippetInPage(pagePath, snippetText) {
+            if (!pagePath || !snippetText) {
+                showToast('חסרים נתונים', 'error');
+                return;
+            }
+            
+            // Show loading
+            showToast('טוען עמוד...', 'info');
+            
+            try {
+                // Fetch page content
+                const result = await apiCall(`/api/page/html-content?page_folder=${encodeURIComponent(pagePath.replace(/[\/\\][^\/\\]+\.html$/, ''))}`);
+                
+                if (result.success && result.content) {
+                    // Show modal with highlighted content
+                    showSnippetLocationModal(pagePath, result.content, snippetText);
+                } else {
+                    // Try alternative: get preview
+                    const previewResult = await apiCall(`/api/preview/${encodeURIComponent(pagePath)}`);
+                    if (previewResult) {
+                        showSnippetLocationModal(pagePath, previewResult, snippetText);
+                    } else {
+                        showToast('לא ניתן לטעון את תוכן העמוד', 'error');
+                    }
+                }
+            } catch (err) {
+                console.error('Error loading page:', err);
+                showToast('שגיאה בטעינת העמוד', 'error');
+            }
+        }
+        
+        function showSnippetLocationModal(pagePath, content, snippetText) {
+            // Create or get modal
+            let modal = document.getElementById('snippet-location-modal');
+            if (!modal) {
+                modal = document.createElement('div');
+                modal.id = 'snippet-location-modal';
+                modal.className = 'modal-overlay';
+                modal.innerHTML = `
+                    <div class="modal snippet-location-modal">
+                        <div class="modal-header">
+                            <h2>📍 מיקום הקטע בעמוד</h2>
+                            <button class="modal-close" onclick="closeSnippetLocationModal()">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="snippet-location-info">
+                                <strong>עמוד:</strong> <span id="snippet-location-page"></span>
+                            </div>
+                            <div class="snippet-location-search">
+                                <strong>קטע מסומן:</strong>
+                                <div id="snippet-location-text" class="snippet-highlight-preview"></div>
+                            </div>
+                            <div class="snippet-location-content" id="snippet-location-content"></div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" onclick="closeSnippetLocationModal()">סגור</button>
+                            <button class="btn btn-primary" onclick="goToEditTab()">✏️ עבור לעריכה</button>
+                        </div>
+                    </div>
+                `;
+                document.body.appendChild(modal);
+            }
+            
+            // Get page keyword from path
+            const keyword = getKeywordFromPath(pagePath);
+            
+            // Set content
+            document.getElementById('snippet-location-page').textContent = keyword + ' (' + pagePath + ')';
+            document.getElementById('snippet-location-text').textContent = snippetText.substring(0, 200) + (snippetText.length > 200 ? '...' : '');
+            
+            // Highlight snippet in content
+            const contentEl = document.getElementById('snippet-location-content');
+            const highlightedContent = highlightSnippetInContent(content, snippetText);
+            contentEl.innerHTML = highlightedContent;
+            
+            // Store current page path for navigation
+            window.currentSnippetPagePath = pagePath;
+            
+            // Show modal
+            modal.classList.add('active');
+            
+            // Scroll to first highlight
+            setTimeout(() => {
+                const firstHighlight = contentEl.querySelector('.snippet-highlight');
+                if (firstHighlight) {
+                    firstHighlight.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }, 100);
+        }
+        
+        function highlightSnippetInContent(htmlContent, snippetText) {
+            // Parse HTML to get text
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = htmlContent;
+            
+            // Remove scripts and styles
+            tempDiv.querySelectorAll('script, style').forEach(el => el.remove());
+            
+            // Get the HTML content
+            let content = tempDiv.innerHTML;
+            
+            // Escape special regex characters in snippet
+            const escapedSnippet = snippetText.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            
+            // Try to find and highlight the snippet
+            // First, try exact match
+            const regex = new RegExp(`(${escapedSnippet.substring(0, 100)})`, 'gi');
+            
+            // Create a simpler approach - show the text content with highlighting
+            const textContent = tempDiv.textContent || tempDiv.innerText;
+            
+            // Find position of snippet in text
+            const snippetStart = snippetText.substring(0, 50);
+            const position = textContent.indexOf(snippetStart);
+            
+            if (position !== -1) {
+                // Show context around the match
+                const contextStart = Math.max(0, position - 200);
+                const contextEnd = Math.min(textContent.length, position + snippetText.length + 200);
+                
+                const before = escapeHtml(textContent.substring(contextStart, position));
+                const match = escapeHtml(textContent.substring(position, position + snippetText.length));
+                const after = escapeHtml(textContent.substring(position + snippetText.length, contextEnd));
+                
+                return `
+                    <div class="snippet-context">
+                        ${contextStart > 0 ? '<span class="context-ellipsis">...</span>' : ''}
+                        <span class="context-before">${before}</span>
+                        <span class="snippet-highlight">${match}</span>
+                        <span class="context-after">${after}</span>
+                        ${contextEnd < textContent.length ? '<span class="context-ellipsis">...</span>' : ''}
+                    </div>
+                    <div class="full-content-toggle">
+                        <button class="btn btn-xs" onclick="toggleFullContent()">📄 הצג תוכן מלא</button>
+                    </div>
+                    <div id="full-content-area" class="full-content" style="display: none;">
+                        <pre>${escapeHtml(textContent)}</pre>
+                    </div>
+                `;
+            } else {
+                // Snippet not found exactly, show full content
+                return `
+                    <div class="snippet-not-found">
+                        ⚠️ הקטע לא נמצא בדיוק בעמוד. יתכן שהוא השתנה.
+                    </div>
+                    <div class="full-content">
+                        <pre>${escapeHtml(textContent.substring(0, 3000))}${textContent.length > 3000 ? '\n\n... (קוצר)' : ''}</pre>
+                    </div>
+                `;
+            }
+        }
+        
+        function toggleFullContent() {
+            const fullContent = document.getElementById('full-content-area');
+            if (fullContent) {
+                fullContent.style.display = fullContent.style.display === 'none' ? 'block' : 'none';
+            }
+        }
+        
+        function closeSnippetLocationModal() {
+            const modal = document.getElementById('snippet-location-modal');
+            if (modal) {
+                modal.classList.remove('active');
+            }
+        }
+        
+        function goToEditTab() {
+            closeSnippetLocationModal();
+            
+            // Switch to edit tab
+            const editTab = document.querySelector('[data-tab="edit"]');
+            if (editTab) {
+                editTab.click();
+            }
+            
+            // Find and click the page
+            if (window.currentSnippetPagePath) {
+                setTimeout(() => {
+                    const pageItem = document.querySelector(`[data-path*="${getKeywordFromPath(window.currentSnippetPagePath)}"]`);
+                    if (pageItem) {
+                        pageItem.click();
+                    }
+                }, 300);
+            }
         }
     </script>
 </body>

@@ -1,0 +1,81 @@
+{
+  "patterns": [
+    {
+      "id": "default_1",
+      "text": "כל הזכויות שמורות",
+      "type": "contains",
+      "description": "זכויות יוצרים - Footer",
+      "added_at": "2026-01-06T00:00:00"
+    },
+    {
+      "id": "default_2",
+      "text": "הריביות בתוכן מעודכנות לפי ריבית פריים",
+      "type": "contains",
+      "description": "הצהרת ריבית - מעודכנת לפי בנק ישראל",
+      "added_at": "2026-01-06T00:00:00"
+    },
+    {
+      "id": "default_3",
+      "text": "עודכן לאחרונה:",
+      "type": "contains",
+      "description": "תאריך עדכון - חוזר בכל העמודים",
+      "added_at": "2026-01-06T00:00:00"
+    },
+    {
+      "id": "default_4",
+      "text": "צור קשר עכשיו",
+      "type": "exact",
+      "description": "קריאה לפעולה סטנדרטית",
+      "added_at": "2026-01-06T00:00:00"
+    },
+    {
+      "id": "default_5",
+      "text": "למידע נוסף צרו קשר",
+      "type": "exact",
+      "description": "קריאה לפעולה סטנדרטית",
+      "added_at": "2026-01-06T00:00:00"
+    },
+    {
+      "id": "default_6",
+      "text": "ריבית בנק ישראל",
+      "type": "contains",
+      "description": "הצהרת ריבית בנק ישראל",
+      "added_at": "2026-01-06T00:00:00"
+    },
+    {
+      "id": "1767716313598",
+      "text": "[awg postid=\"32400\"]",
+      "type": "contains",
+      "description": "",
+      "added_at": "2026-01-06T18:18:33.598605"
+    },
+    {
+      "id": "1767716357670",
+      "text": "💡 הריביות בתוכן מעודכנות לפי ריבית פריים 5.75% (ריבית בנק ישראל 4.25%, נכון לנובמבר 2025)",
+      "type": "contains",
+      "description": "",
+      "added_at": "2026-01-06T18:19:17.670960"
+    },
+    {
+      "id": "1767716398826",
+      "text": "עודכן לאחרונה: [current_date format=\"F Y\" hebrew=\"true\"]",
+      "type": "contains",
+      "description": "",
+      "added_at": "2026-01-06T18:19:58.826952"
+    }
+  ],
+  "html_classes_to_ignore": [
+    "footer",
+    "disclaimer",
+    "copyright",
+    "site-footer",
+    "legal-notice",
+    "wp-footer"
+  ],
+  "html_ids_to_ignore": [
+    "footer",
+    "disclaimer",
+    "copyright",
+    "site-footer"
+  ]
+}

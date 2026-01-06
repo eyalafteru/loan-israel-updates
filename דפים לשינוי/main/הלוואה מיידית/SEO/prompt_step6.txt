@@ -1,5 +1,5 @@
 === פרומפט שנשלח לקלוד - step6 ===
-זמן: 2026-01-05 18:03:30
+זמן: 2026-01-06 17:31:44
 ============================================================
 
 אני מפעיל את סוכן SEO שלב 6 (QA - בדיקה טכנית סופית).
@@ -14,13 +14,13 @@
 ## הנתונים לבדיקה:
 
 1. **דוח שלב 5** (לאימות השינויים הקודמים):
-C:\Users\eyal\loan-israel-updaets\loan-israel-updates\דפים לשינוי\main\הלוואה חוץ בנקאית\SEO\דוח שלב 5.md
+C:\Users\eyal\loan-israel-updaets\loan-israel-updates\דפים לשינוי\main\הלוואה מיידית\SEO\דוח שלב 5.md
 
 2. **קובץ ה-HTML לבדיקה ועריכה סופית:**
-C:\Users\eyal\loan-israel-updaets\loan-israel-updates\דפים לשינוי\main\הלוואה חוץ בנקאית\הלוואה חוץ בנקאית.html
+C:\Users\eyal\loan-israel-updaets\loan-israel-updates\דפים לשינוי\main\הלוואה מיידית\הלוואה מיידית.html
 
 3. **נתיב לשמירת דוח הסיכום:**
-C:\Users\eyal\loan-israel-updaets\loan-israel-updates\דפים לשינוי\main\הלוואה חוץ בנקאית\SEO\דוח דיבאג AI.md
+C:\Users\eyal\loan-israel-updaets\loan-israel-updates\דפים לשינוי\main\הלוואה מיידית\SEO\דוח דיבאג AI.md
 **שם הקובץ:** 
 
 ---

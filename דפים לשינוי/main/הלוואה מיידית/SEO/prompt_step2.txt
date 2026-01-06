@@ -1,5 +1,5 @@
 === פרומפט שנשלח לקלוד - step2 ===
-זמן: 2026-01-06 18:36:52
+זמן: 2026-01-06 17:11:17
 ============================================================
 
 אני מפעיל את סוכן SEO שלב 2 (בדיקת קישורים בלבד).
@@ -14,7 +14,7 @@
 ## הנתונים והמשאבים לבדיקה:
 
 1. **העמוד לבדיקה (HTML):**
-C:\Users\eyal\loan-israel-updaets\loan-israel-updates\דפים לשינוי\main\הלוואה דיגיטלית\הלוואה דיגיטלית.html
+C:\Users\eyal\loan-israel-updaets\loan-israel-updates\דפים לשינוי\main\הלוואה מיידית\הלוואה מיידית.html
 
 2. **מאגר קישורים פנימיים** (לבדיקת הקישורים הקיימים):
 קרן הלוואות לעסקים קטנים	הלוואות לעסקים קטנים	https://loan-israel.co.il/Business/small-business-loan-fund/	50
@@ -367,7 +367,7 @@ C:\Users\eyal\loan-israel-updaets\loan-israel-updates\דפים לשינוי\main
 
 
 4. **נתיב לשמירת דוח הקישורים:**
-C:\Users\eyal\loan-israel-updaets\loan-israel-updates\דפים לשינוי\main\הלוואה דיגיטלית\SEO\דוח שלב 2.md
+C:\Users\eyal\loan-israel-updaets\loan-israel-updates\דפים לשינוי\main\הלוואה מיידית\SEO\דוח שלב 2.md
 **שם הדוח:** 
 
 ---

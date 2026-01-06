@@ -1052,10 +1052,25 @@ def simulate_wpautop(content):
     Simulate WordPress wpautop function.
     Converts double line breaks to visible breaks and single line breaks to <br>.
     Preserves content inside <pre>, <script>, <style>, <table>, etc.
+    
+    SKIPS processing for special pages that have JavaScript at the start.
     """
     import re
     
     if not content:
+        return content
+    
+    # Skip wpautop for special pages that start with <script> (complex pages with JS)
+    # These pages have their own formatting and wpautop breaks them
+    content_stripped = content.strip()
+    if content_stripped.startswith('<script') or content_stripped.startswith('//') or content_stripped.startswith('/*'):
+        # This is a special page with JavaScript - return as-is
+        return content
+    
+    # Also skip if page has lots of script tags (indicates complex page)
+    script_count = content.lower().count('<script')
+    if script_count >= 3:
+        # Complex page with multiple scripts - return as-is
         return content
     
     # Normalize line breaks
@@ -8704,18 +8719,39 @@ def upload_to_wp():
         # Build update payload
         update_data = {}
         if content:
-            # 🔄 Upload content AS IS - let WordPress wpautop handle line breaks
-            print(f"📤 Uploading content AS IS (no wp:html wrapper), length: {len(content)} chars")
-            
-            # Remove any existing wp:html markers
             import re
+            
+            # Remove any existing wp:html markers first
             clean_content = re.sub(r'<!--\s*wp:html\s*-->', '', content)
             clean_content = re.sub(r'<!--\s*/wp:html\s*-->', '', clean_content)
             clean_content = clean_content.strip()
             
-            # Upload without wrapper - let WordPress wpautop convert line breaks to <p> and <br>
-            update_data["content"] = clean_content
-            cleanup_info = {"as_is": True, "original_length": len(content), "final_length": len(clean_content)}
+            # Check if this is a "special page" with JavaScript/complex HTML
+            # Special pages need wp:html wrapper to prevent WordPress from breaking them
+            is_special_page = False
+            content_check = clean_content.strip()
+            
+            # Criteria for special pages:
+            # 1. Starts with <script> tag
+            # 2. Starts with JS comments (// or /*)
+            # 3. Has 3+ <script> tags (complex page)
+            if content_check.startswith('<script') or content_check.startswith('//') or content_check.startswith('/*'):
+                is_special_page = True
+            elif clean_content.lower().count('<script') >= 3:
+                is_special_page = True
+            
+            if is_special_page:
+                # Special page - wrap in wp:html to prevent WordPress wpautop from breaking it
+                print(f"📤 Uploading SPECIAL PAGE with wp:html wrapper, length: {len(clean_content)} chars")
+                final_content = '<!-- wp:html -->\n' + clean_content + '\n<!-- /wp:html -->'
+                cleanup_info = {"special_page": True, "wrapped": True, "original_length": len(content), "final_length": len(final_content)}
+            else:
+                # Regular page - let WordPress wpautop handle line breaks
+                print(f"📤 Uploading REGULAR PAGE (no wrapper), length: {len(clean_content)} chars")
+                final_content = clean_content
+                cleanup_info = {"special_page": False, "wrapped": False, "original_length": len(content), "final_length": len(clean_content)}
+            
+            update_data["content"] = final_content
         if title:
             update_data["title"] = title
         
@@ -11602,6 +11638,267 @@ def seo_load_competitor_data():
         
     except Exception as e:
         return jsonify({"success": False, "error": str(e)}), 500
+
+
+# ============ API Routes - Duplicate Detection ============
+
+# Import duplicate detector module
+try:
+    import duplicate_detector
+    DUPLICATE_DETECTOR_AVAILABLE = True
+except ImportError:
+    DUPLICATE_DETECTOR_AVAILABLE = False
+    print("[Warning] duplicate_detector module not found")
+
+
+@app.route('/api/duplicates/directories', methods=['GET'])
+def get_available_directories():
+    """
+    Get list of subdirectories under 'דפים לשינוי'
+    Each directory = a separate site/project
+    """
+    pages_base = BASE_DIR / "דפים לשינוי"
+    
+    directories = []
+    if pages_base.exists():
+        for item in pages_base.iterdir():
+            if item.is_dir() and not item.name.startswith('.'):
+                # Count HTML files (excluding backups)
+                html_files = list(item.rglob('*.html'))
+                html_files = [f for f in html_files if '_backup' not in f.name.lower()]
+                
+                directories.append({
+                    'id': item.name,
+                    'name': item.name,
+                    'path': str(item.relative_to(BASE_DIR)),
+                    'pages_count': len(html_files)
+                })
+    
+    return jsonify({
+        'success': True,
+        'directories': sorted(directories, key=lambda x: x['name'])
+    })
+
+
+@app.route('/api/duplicates/settings', methods=['GET'])
+def get_duplicate_settings():
+    """Get duplicate scan settings"""
+    settings_file = BASE_DIR / "cache" / "duplicate_settings.json"
+    
+    default_settings = {
+        'enabled_directories': ['main', 'business'],
+        'threshold': 0.5,
+        'include_meta': True,
+        'include_headings': True,
+        'cross_directory': False,
+        'auto_scan': False
+    }
+    
+    if settings_file.exists():
+        try:
+            with open(settings_file, 'r', encoding='utf-8') as f:
+                return jsonify({'success': True, 'settings': json.load(f)})
+        except:
+            pass
+    
+    return jsonify({'success': True, 'settings': default_settings})
+
+
+@app.route('/api/duplicates/settings', methods=['POST'])
+def save_duplicate_settings():
+    """Save duplicate scan settings"""
+    settings = request.json.get('settings', {})
+    
+    settings_file = BASE_DIR / "cache" / "duplicate_settings.json"
+    settings_file.parent.mkdir(exist_ok=True)
+    
+    with open(settings_file, 'w', encoding='utf-8') as f:
+        json.dump(settings, f, ensure_ascii=False, indent=2)
+    
+    return jsonify({'success': True})
+
+
+@app.route('/api/duplicates/scan', methods=['POST'])
+def scan_duplicates():
+    """
+    Scan for duplicate content - supports multiple directories
+    """
+    if not DUPLICATE_DETECTOR_AVAILABLE:
+        return jsonify({'success': False, 'error': 'Duplicate detector module not available'}), 500
+    
+    data = request.json
+    directories = data.get('directories', ['main'])
+    threshold = data.get('threshold', 0.5)
+    include_meta = data.get('include_meta', True)
+    include_headings = data.get('include_headings', True)
+    cross_directory = data.get('cross_directory', False)
+    
+    try:
+        if cross_directory:
+            # Cross-directory scan - check duplicates between directories
+            report = duplicate_detector.scan_cross_directories(
+                directories, threshold, include_meta, include_headings
+            )
+        else:
+            # Scan each directory separately, then merge
+            reports = {}
+            for dir_name in directories:
+                reports[dir_name] = duplicate_detector.generate_duplicate_report(
+                    f"דפים לשינוי/{dir_name}",
+                    threshold, include_meta, include_headings
+                )
+            report = duplicate_detector.merge_reports(reports)
+        
+        # Cache the report
+        cache_file = BASE_DIR / "cache" / "duplicates_report_latest.json"
+        cache_file.parent.mkdir(exist_ok=True)
+        with open(cache_file, 'w', encoding='utf-8') as f:
+            json.dump(report, f, ensure_ascii=False, indent=2)
+        
+        return jsonify({'success': True, 'report': report})
+        
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+
+@app.route('/api/duplicates/report', methods=['GET'])
+def get_duplicate_report():
+    """Get latest cached report"""
+    cache_file = BASE_DIR / "cache" / "duplicates_report_latest.json"
+    
+    if cache_file.exists():
+        try:
+            with open(cache_file, 'r', encoding='utf-8') as f:
+                report = json.load(f)
+            return jsonify({'success': True, 'report': report})
+        except:
+            pass
+    
+    return jsonify({'success': False, 'error': 'No cached report found'})
+
+
+@app.route('/api/duplicates/compare', methods=['POST'])
+def compare_two_pages():
+    """Compare two specific pages with diff view"""
+    if not DUPLICATE_DETECTOR_AVAILABLE:
+        return jsonify({'success': False, 'error': 'Duplicate detector not available'}), 500
+    
+    data = request.json
+    page1 = data.get('page1')
+    page2 = data.get('page2')
+    
+    if not page1 or not page2:
+        return jsonify({'success': False, 'error': 'Missing page paths'}), 400
+    
+    try:
+        result = duplicate_detector.compare_two_pages(page1, page2)
+        return jsonify(result)
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+
+@app.route('/api/duplicates/ignore', methods=['GET'])
+def get_ignore_list():
+    """Get list of ignore patterns"""
+    ignore_file = BASE_DIR / "ignore_patterns.json"
+    
+    if ignore_file.exists():
+        try:
+            with open(ignore_file, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+            return jsonify({'success': True, 'patterns': data.get('patterns', [])})
+        except:
+            pass
+    
+    return jsonify({'success': True, 'patterns': []})
+
+
+@app.route('/api/duplicates/ignore', methods=['POST'])
+def add_to_ignore_list():
+    """Add pattern to ignore list"""
+    data = request.json
+    pattern = data.get('pattern')
+    pattern_type = data.get('type', 'exact')
+    description = data.get('description', '')
+    
+    if not pattern:
+        return jsonify({'success': False, 'error': 'Missing pattern'}), 400
+    
+    ignore_file = BASE_DIR / "ignore_patterns.json"
+    
+    # Load existing
+    if ignore_file.exists():
+        with open(ignore_file, 'r', encoding='utf-8') as f:
+            file_data = json.load(f)
+    else:
+        file_data = {'patterns': [], 'html_classes_to_ignore': [], 'html_ids_to_ignore': []}
+    
+    # Add new pattern
+    file_data['patterns'].append({
+        'id': str(int(time.time() * 1000)),
+        'text': pattern,
+        'type': pattern_type,
+        'description': description,
+        'added_at': datetime.now().isoformat()
+    })
+    
+    # Save
+    with open(ignore_file, 'w', encoding='utf-8') as f:
+        json.dump(file_data, f, ensure_ascii=False, indent=2)
+    
+    return jsonify({'success': True})
+
+
+@app.route('/api/duplicates/ignore/<pattern_id>', methods=['DELETE'])
+def delete_ignore_pattern(pattern_id):
+    """Delete an ignore pattern"""
+    ignore_file = BASE_DIR / "ignore_patterns.json"
+    
+    if ignore_file.exists():
+        with open(ignore_file, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+        
+        data['patterns'] = [p for p in data.get('patterns', []) if p.get('id') != pattern_id]
+        
+        with open(ignore_file, 'w', encoding='utf-8') as f:
+            json.dump(data, f, ensure_ascii=False, indent=2)
+    
+    return jsonify({'success': True})
+
+
+@app.route('/api/duplicates/bulk-fix', methods=['POST'])
+def bulk_fix_duplicates():
+    """Bulk fix duplicates using Claude"""
+    data = request.json
+    groups = data.get('groups', [])
+    prompt = data.get('prompt', '')
+    
+    if not groups or not prompt:
+        return jsonify({'success': False, 'error': 'Missing groups or prompt'}), 400
+    
+    try:
+        # Save prompt to cache
+        prompt_path = BASE_DIR / "cache" / "duplicate_fix_prompt.md"
+        prompt_path.parent.mkdir(exist_ok=True)
+        prompt_path.write_text(prompt, encoding='utf-8')
+        
+        # Collect all affected pages
+        affected_pages = set()
+        for group in groups:
+            for page in group.get('pages', []):
+                affected_pages.add(page.get('path', ''))
+        
+        return jsonify({
+            'success': True,
+            'message': f'Ready to process {len(affected_pages)} pages',
+            'pages_count': len(affected_pages),
+            'prompt_path': str(prompt_path)
+        })
+        
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)}), 500
 
 
 # ============ API Routes - File Save ============
