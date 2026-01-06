@@ -1047,15 +1047,123 @@ def get_page_content(page_path):
     except Exception as e:
         return jsonify({"success": False, "error": str(e)}), 500
 
+def simulate_wpautop(content):
+    """
+    Simulate WordPress wpautop function.
+    Converts double line breaks to visible breaks and single line breaks to <br>.
+    Preserves content inside <pre>, <script>, <style>, <table>, etc.
+    """
+    import re
+    
+    if not content:
+        return content
+    
+    # Normalize line breaks
+    content = content.replace('\r\n', '\n').replace('\r', '\n')
+    
+    # Tags that should not have wpautop applied inside them
+    preserve_tags = ['script', 'style', 'pre', 'code', 'textarea']
+    
+    # Store preserved content
+    preserved = {}
+    counter = 0
+    
+    for tag in preserve_tags:
+        # Match opening and closing tags with content (non-greedy)
+        pattern = re.compile(f'(<{tag}[^>]*>.*?</{tag}>)', re.DOTALL | re.IGNORECASE)
+        for match in pattern.finditer(content):
+            placeholder = f'__PRESERVE_{counter}__'
+            preserved[placeholder] = match.group(1)
+            content = content.replace(match.group(1), placeholder, 1)
+            counter += 1
+    
+    # Block elements that create their own line breaks
+    block_tags_pattern = r'</?(?:div|article|section|aside|header|footer|nav|h[1-6]|p|blockquote|figure|figcaption|address|form|fieldset|table|thead|tbody|tr|ul|ol|hr)[^>]*>'
+    
+    # Step 1: Convert double newlines to <br><br> (paragraph break)
+    # This handles cases like:
+    # <strong>text</strong> [shortcode]
+    # 
+    # <em>more text</em>
+    content = re.sub(r'\n\s*\n', '<br><br>\n', content)
+    
+    # Step 2: Convert single newlines to <br> UNLESS:
+    # - After a block closing tag (</div>, </h1>, etc.) - block elements create their own breaks
+    # - Before a block opening tag (<div>, <h1>, etc.)
+    # - After a block opening tag
+    
+    # First, mark positions after block tags to skip
+    lines = content.split('\n')
+    result_lines = []
+    
+    for i, line in enumerate(lines):
+        result_lines.append(line)
+        
+        # Check if this line ends with a block tag or if next line starts with block tag
+        if i < len(lines) - 1:
+            current_ends_block = re.search(block_tags_pattern + r'\s*$', line, re.IGNORECASE)
+            next_starts_block = re.match(r'\s*' + block_tags_pattern, lines[i + 1], re.IGNORECASE)
+            current_has_br = line.rstrip().endswith('<br>') or line.rstrip().endswith('<br><br>')
+            
+            # Add <br> if:
+            # - Line doesn't end with a block tag
+            # - Next line doesn't start with a block tag  
+            # - Line doesn't already have <br>
+            # - Line is not empty
+            if line.strip() and not current_ends_block and not next_starts_block and not current_has_br:
+                # Check if line ends with inline content (text, </strong>, </em>, </a>, etc.)
+                if re.search(r'(?:</(?:strong|em|b|i|a|span|mark)[^>]*>|[\u0590-\u05FF\w\d\]\)\.])$', line.strip(), re.IGNORECASE):
+                    result_lines[-1] = line + '<br>'
+    
+    content = '\n'.join(result_lines)
+    
+    # Restore preserved content
+    for placeholder, original in preserved.items():
+        content = content.replace(placeholder, original)
+    
+    return content
+
 @app.route('/api/preview/<path:page_path>')
 def preview_page(page_path):
-    """Serve HTML page for preview"""
+    """Serve HTML page for preview - always wrapped in RTL document with wpautop simulation"""
     try:
         from urllib.parse import unquote
         decoded_path = unquote(page_path)
         file_path = BASE_DIR / decoded_path
         if file_path.exists():
-            return send_file(file_path, mimetype='text/html')
+            # Read content and wrap in RTL HTML document
+            with open(file_path, 'r', encoding='utf-8') as f:
+                content = f.read()
+            
+            # Apply wpautop simulation to match WordPress behavior
+            content = simulate_wpautop(content)
+            
+            # Wrap in proper RTL HTML document
+            html_doc = f'''<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {{
+            direction: rtl;
+            text-align: right;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+            margin: 0;
+            background: #fff;
+        }}
+        p {{
+            margin: 0 0 1em 0;
+        }}
+    </style>
+</head>
+<body dir="rtl">
+{content}
+</body>
+</html>'''
+            return html_doc, 200, {'Content-Type': 'text/html; charset=utf-8'}
         return f"File not found: {decoded_path}", 404
     except Exception as e:
         return str(e), 500
@@ -8596,18 +8704,18 @@ def upload_to_wp():
         # Build update payload
         update_data = {}
         if content:
-            if skip_cleanup:
-                # Skip cleanup for restore operations (content already clean from WordPress)
-                print(f"⏭️ Skipping cleanup (restore mode), content length: {len(content)} chars")
-                update_data["content"] = content
-                cleanup_info = {"skipped": True, "original_length": len(content)}
-            else:
-                # 🧹 Clean HTML before uploading to WordPress
-                cleaned_content, cleanup_info = cleanup_html_for_wordpress(content)
-                print(f"📊 Content cleanup: {cleanup_info['original_length']} → {cleanup_info['cleaned_length']} chars")
-                if cleanup_info.get('auto_fixed_tags'):
-                    print(f"🔧 Auto-fixed tags: {cleanup_info['auto_fixed_tags']}")
-                update_data["content"] = cleaned_content
+            # 🔄 Upload content AS IS - let WordPress wpautop handle line breaks
+            print(f"📤 Uploading content AS IS (no wp:html wrapper), length: {len(content)} chars")
+            
+            # Remove any existing wp:html markers
+            import re
+            clean_content = re.sub(r'<!--\s*wp:html\s*-->', '', content)
+            clean_content = re.sub(r'<!--\s*/wp:html\s*-->', '', clean_content)
+            clean_content = clean_content.strip()
+            
+            # Upload without wrapper - let WordPress wpautop convert line breaks to <p> and <br>
+            update_data["content"] = clean_content
+            cleanup_info = {"as_is": True, "original_length": len(content), "final_length": len(clean_content)}
         if title:
             update_data["title"] = title
         

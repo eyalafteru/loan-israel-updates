@@ -8649,10 +8649,38 @@ console.log('🚀 KeywordDensityAnalyzer, SpamAnalyzer, HeaderQualityScorer & In
             if (!selectedPage) return;
             const previewContent = document.getElementById('previewContent');
             const encodedPath = encodeURIComponent(selectedPage.path);
-            previewContent.innerHTML = `<iframe src="/api/preview/${encodedPath}" id="previewFrame" onload="analyzePreviewSeo()"></iframe>`;
+            previewContent.innerHTML = `<iframe src="/api/preview/${encodedPath}" id="previewFrame" onload="onPreviewLoad()"></iframe>`;
             
             // Load metadata from page_info and backup
             await loadPreviewMetadata();
+        }
+        
+        function onPreviewLoad() {
+            const frame = document.getElementById('previewFrame');
+            if (!frame) return;
+            
+            try {
+                const doc = frame.contentDocument || frame.contentWindow.document;
+                if (!doc || !doc.body) return;
+                
+                // Always set RTL direction
+                doc.body.style.direction = 'rtl';
+                doc.body.style.textAlign = 'right';
+                
+                // If no dir attribute on html or body, add it
+                if (!doc.documentElement.hasAttribute('dir')) {
+                    doc.documentElement.setAttribute('dir', 'rtl');
+                }
+                if (!doc.body.hasAttribute('dir')) {
+                    doc.body.setAttribute('dir', 'rtl');
+                }
+                
+                // Also run SEO analysis
+                analyzePreviewSeo();
+            } catch (e) {
+                console.log('Could not inject RTL into preview iframe:', e);
+                analyzePreviewSeo();
+            }
         }
         
         async function loadPreviewMetadata() {
@@ -13078,163 +13106,215 @@ ${ann.note ? `**💬 הוראות נוספות:** ${ann.note}` : ''}
             
             // Add highlight styles to BOTH documents
             const styleContent = `
-                .diff-changed {
-                    outline: 3px solid #f59e0b !important;
-                    outline-offset: 2px;
-                    border-radius: 4px;
-                    background: rgba(245, 158, 11, 0.15) !important;
+                .diff-changed-char {
+                    background: rgba(245, 158, 11, 0.5) !important;
+                    border-radius: 2px;
+                    padding: 0 2px;
                 }
-                .diff-new {
-                    outline: 3px solid #10b981 !important;
-                    outline-offset: 2px;
-                    border-radius: 4px;
-                    background: rgba(16, 185, 129, 0.15) !important;
+                .diff-new-char {
+                    background: rgba(16, 185, 129, 0.5) !important;
+                    border-radius: 2px;
+                    padding: 0 2px;
                 }
-                .diff-removed {
-                    outline: 3px solid #ef4444 !important;
+                .diff-removed-char {
+                    background: rgba(239, 68, 68, 0.5) !important;
+                    border-radius: 2px;
+                    padding: 0 2px;
+                    text-decoration: line-through;
+                }
+                .diff-element-changed {
+                    outline: 2px dashed #f59e0b !important;
                     outline-offset: 2px;
-                    border-radius: 4px;
-                    background: rgba(239, 68, 68, 0.15) !important;
+                }
+                .diff-element-new {
+                    outline: 2px solid #10b981 !important;
+                    outline-offset: 2px;
+                    background: rgba(16, 185, 129, 0.08) !important;
+                }
+                .diff-element-removed {
+                    outline: 2px solid #ef4444 !important;
+                    outline-offset: 2px;
+                    background: rgba(239, 68, 68, 0.08) !important;
                 }
             `;
             
-            // Add to new doc
-            let style = newDoc.createElement('style');
-            style.id = 'diffHighlightStyle';
-            style.textContent = styleContent;
-            newDoc.head.appendChild(style);
+            // Add styles to both docs
+            [oldDoc, newDoc].forEach(doc => {
+                if (doc.getElementById('diffHighlightStyle')) return;
+                const style = doc.createElement('style');
+                style.id = 'diffHighlightStyle';
+                style.textContent = styleContent;
+                doc.head.appendChild(style);
+            });
             
-            // Add to old doc
-            style = oldDoc.createElement('style');
-            style.id = 'diffHighlightStyle';
-            style.textContent = styleContent;
-            oldDoc.head.appendChild(style);
+            // Get all text-containing leaf elements
+            const oldElements = getLeafTextElements(oldDoc);
+            const newElements = getLeafTextElements(newDoc);
             
-            // Collect ALL text-containing elements from both documents
-            const oldTexts = collectTextElements(oldDoc);
-            const newTexts = collectTextElements(newDoc);
+            console.log(`📊 Diff: ${oldElements.length} old elements, ${newElements.length} new elements`);
             
-            console.log(`Diff: Found ${oldTexts.length} old elements, ${newTexts.length} new elements`);
+            // Create maps for quick lookup
+            const oldTextMap = new Map();
+            oldElements.forEach(el => {
+                const text = el.innerText.trim();
+                if (!oldTextMap.has(text)) oldTextMap.set(text, []);
+                oldTextMap.get(text).push(el);
+            });
             
-            // Create a map of old texts for exact matching
-            const oldExactSet = new Set(oldTexts.map(t => t.text));
+            const newTextMap = new Map();
+            newElements.forEach(el => {
+                const text = el.innerText.trim();
+                if (!newTextMap.has(text)) newTextMap.set(text, []);
+                newTextMap.get(text).push(el);
+            });
             
-            // Mark elements in new doc
-            newTexts.forEach(newItem => {
-                // Exact match - unchanged
-                if (oldExactSet.has(newItem.text)) {
+            let changesFound = 0;
+            
+            // Compare new elements against old
+            newElements.forEach(newEl => {
+                const newText = newEl.innerText.trim();
+                
+                // Exact match exists - no change
+                if (oldTextMap.has(newText)) {
                     return;
                 }
                 
-                // Find best match in old texts
+                // Find best match in old
                 let bestMatch = null;
                 let bestScore = 0;
                 
-                for (const oldItem of oldTexts) {
-                    // Skip if already matched
-                    if (oldItem.matched) continue;
-                    
-                    // Calculate similarity
-                    const score = calculateTextSimilarity(oldItem.text, newItem.text);
-                    
+                oldElements.forEach(oldEl => {
+                    const oldText = oldEl.innerText.trim();
+                    const score = quickSimilarity(oldText, newText);
                     if (score > bestScore) {
                         bestScore = score;
-                        bestMatch = oldItem;
+                        bestMatch = { el: oldEl, text: oldText };
                     }
-                }
+                });
                 
-                if (bestScore >= 0.5 && bestScore < 1.0) {
-                    // Similar but changed
-                    newItem.element.classList.add('diff-changed');
-                    if (bestMatch) {
-                        bestMatch.matched = true;
-                        bestMatch.element.classList.add('diff-changed');
-                    }
-                } else if (bestScore < 0.5) {
-                    // New content
-                    newItem.element.classList.add('diff-new');
+                if (bestScore >= 0.8) {
+                    // Very similar - highlight only the character differences
+                    changesFound++;
+                    highlightCharDifferences(bestMatch.el, bestMatch.text, newEl, newText, oldDoc, newDoc);
+                } else if (bestScore >= 0.5) {
+                    // Moderately similar - mark element as changed
+                    changesFound++;
+                    newEl.classList.add('diff-element-changed');
+                    if (bestMatch) bestMatch.el.classList.add('diff-element-changed');
+                } else {
+                    // New element
+                    changesFound++;
+                    newEl.classList.add('diff-element-new');
                 }
             });
             
-            // Mark removed elements in old doc (not matched)
-            oldTexts.forEach(oldItem => {
-                if (!oldItem.matched && !oldExactSet.has(oldItem.text)) {
-                    // Check if it exists in new
-                    const existsInNew = newTexts.some(n => n.text === oldItem.text);
-                    if (!existsInNew) {
-                        // Check if similar exists
-                        const hasSimilar = newTexts.some(n => calculateTextSimilarity(oldItem.text, n.text) >= 0.5);
-                        if (!hasSimilar) {
-                            oldItem.element.classList.add('diff-removed');
-                        }
-                    }
+            // Find removed elements
+            oldElements.forEach(oldEl => {
+                const oldText = oldEl.innerText.trim();
+                if (newTextMap.has(oldText)) return;
+                
+                // Check if similar exists in new
+                const hasSimilar = newElements.some(newEl => 
+                    quickSimilarity(oldText, newEl.innerText.trim()) >= 0.5
+                );
+                
+                if (!hasSimilar) {
+                    oldEl.classList.add('diff-element-removed');
+                    changesFound++;
                 }
             });
+            
+            console.log(`✅ Diff complete: ${changesFound} changes highlighted`);
         }
         
-        function collectTextElements(doc) {
+        function getLeafTextElements(doc) {
             const results = [];
-            const processed = new Set();
+            const skip = ['SCRIPT', 'STYLE', 'NOSCRIPT', 'META', 'LINK', 'BR', 'HR', 'IMG'];
             
-            // Walk through all elements that contain direct text
-            const walker = doc.createTreeWalker(
-                doc.body,
-                NodeFilter.SHOW_ELEMENT,
-                {
-                    acceptNode: function(node) {
-                        // Skip script, style, hidden elements
-                        if (['SCRIPT', 'STYLE', 'NOSCRIPT', 'META', 'LINK'].includes(node.tagName)) {
-                            return NodeFilter.FILTER_REJECT;
-                        }
-                        // Accept elements with meaningful text
-                        const text = getDirectText(node);
-                        if (text.length >= 10) {
-                            return NodeFilter.FILTER_ACCEPT;
-                        }
-                        return NodeFilter.FILTER_SKIP;
-                    }
-                }
-            );
-            
-            let node;
-            while (node = walker.nextNode()) {
-                const text = node.innerText.trim().replace(/\s+/g, ' ');
-                if (text.length >= 10 && !processed.has(text)) {
-                    // Don't add if parent already has same text (avoid duplicates)
-                    let parentHasSame = false;
-                    let parent = node.parentElement;
-                    while (parent && parent !== doc.body) {
-                        const parentText = parent.innerText.trim().replace(/\s+/g, ' ');
-                        if (parentText === text) {
-                            parentHasSame = true;
-                            break;
-                        }
-                        parent = parent.parentElement;
-                    }
-                    
-                    if (!parentHasSame) {
-                        results.push({
-                            element: node,
-                            text: text,
-                            matched: false
-                        });
-                        processed.add(text);
-                    }
+            function walk(node) {
+                if (node.nodeType !== Node.ELEMENT_NODE) return;
+                if (skip.includes(node.tagName)) return;
+                
+                // Check if this is a "leaf" text element (has text but no child elements with substantial text)
+                const text = node.innerText?.trim() || '';
+                if (text.length < 5) return;
+                
+                // Check children
+                const childElements = Array.from(node.children).filter(c => !skip.includes(c.tagName));
+                const hasSubstantialChildren = childElements.some(c => (c.innerText?.trim()?.length || 0) > 10);
+                
+                if (!hasSubstantialChildren && text.length >= 5) {
+                    // This is a leaf - add it
+                    results.push(node);
+                } else {
+                    // Recurse into children
+                    childElements.forEach(walk);
                 }
             }
             
+            walk(doc.body);
             return results;
         }
         
-        function getDirectText(element) {
-            // Get text directly in this element (not from children)
-            let text = '';
-            for (const child of element.childNodes) {
-                if (child.nodeType === Node.TEXT_NODE) {
-                    text += child.textContent;
-                }
+        function quickSimilarity(text1, text2) {
+            if (text1 === text2) return 1.0;
+            if (!text1 || !text2) return 0;
+            
+            const len1 = text1.length;
+            const len2 = text2.length;
+            
+            // Quick length check
+            const lenRatio = Math.min(len1, len2) / Math.max(len1, len2);
+            if (lenRatio < 0.5) return lenRatio * 0.5;
+            
+            // Count matching characters from start and end
+            let matchStart = 0;
+            let matchEnd = 0;
+            const minLen = Math.min(len1, len2);
+            
+            while (matchStart < minLen && text1[matchStart] === text2[matchStart]) matchStart++;
+            while (matchEnd < minLen - matchStart && text1[len1 - 1 - matchEnd] === text2[len2 - 1 - matchEnd]) matchEnd++;
+            
+            const totalMatch = matchStart + matchEnd;
+            return totalMatch / Math.max(len1, len2);
+        }
+        
+        function highlightCharDifferences(oldEl, oldText, newEl, newText, oldDoc, newDoc) {
+            // Find the exact differences
+            let prefixLen = 0;
+            let suffixLen = 0;
+            const minLen = Math.min(oldText.length, newText.length);
+            
+            // Find common prefix
+            while (prefixLen < minLen && oldText[prefixLen] === newText[prefixLen]) prefixLen++;
+            
+            // Find common suffix (don't overlap with prefix)
+            while (suffixLen < minLen - prefixLen && 
+                   oldText[oldText.length - 1 - suffixLen] === newText[newText.length - 1 - suffixLen]) {
+                suffixLen++;
             }
-            return text.trim();
+            
+            // Calculate the changed portions
+            const oldChanged = oldText.slice(prefixLen, oldText.length - suffixLen);
+            const newChanged = newText.slice(prefixLen, newText.length - suffixLen);
+            
+            console.log(`🔍 Diff found: "${oldChanged}" → "${newChanged}"`);
+            
+            // Only highlight if changes are small (less than 30% of text changed)
+            const changeRatio = Math.max(oldChanged.length, newChanged.length) / Math.max(oldText.length, newText.length);
+            if (changeRatio > 0.3) {
+                // Too much changed - just mark the element
+                oldEl.classList.add('diff-element-changed');
+                newEl.classList.add('diff-element-changed');
+                return;
+            }
+            
+            // Mark the element with a subtle indicator
+            oldEl.classList.add('diff-element-changed');
+            newEl.classList.add('diff-element-changed');
+            
+            // For small changes, we could highlight in-place, but this is complex with HTML
+            // For now, the dashed outline shows which elements changed
         }
         
         function calculateTextSimilarity(text1, text2) {
