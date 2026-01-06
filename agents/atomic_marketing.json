@@ -33,7 +33,8 @@
         "SERP_ORGANIC",
         "SERP_AI_OVERVIEW",
         "APPROVED_DOMAINS"
-      ]
+      ],
+      "model": "claude-sonnet-4-5"
     },
     {
       "id": "step2",
@@ -48,12 +49,13 @@
       "shortcodes": [
         "STEP2_REPORT",
         "PAGE_HTML"
-      ]
+      ],
+      "model": "claude-haiku-4-5"
     }
   ],
   "supports_full_auto": true,
   "type": "update",
-  "updated": "2026-01-05T12:29:41.016664",
+  "updated": "2026-01-06T11:37:17.420616",
   "wordpress": {
     "action": "update",
     "site": "main",

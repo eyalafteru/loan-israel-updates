@@ -425,5 +425,6 @@
         "url": "https://www.fibi.co.il/private/loansandmortgages/loans/clickloan/"
       }
     ]
-  }
+  },
+  "is_special": true
 }

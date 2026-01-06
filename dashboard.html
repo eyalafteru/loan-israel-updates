@@ -490,6 +490,43 @@
             font-size: 0.7rem;
         }
         
+        .special-badge {
+            margin-left: 4px;
+            font-size: 0.85rem;
+        }
+        
+        .page-item.is-special {
+            border-right: 3px solid #fbbf24;
+        }
+        
+        .btn-special {
+            opacity: 0.5;
+            transition: opacity 0.2s;
+        }
+        
+        .btn-special:hover {
+            opacity: 1;
+        }
+        
+        .btn-special.is-active {
+            opacity: 1;
+            background: rgba(251, 191, 36, 0.2);
+        }
+        
+        .last-upload-badge {
+            background: rgba(34, 197, 94, 0.15);
+            color: #22c55e;
+            padding: 1px 6px;
+            border-radius: 8px;
+            font-size: 0.65rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        .last-upload-badge:hover {
+            background: rgba(34, 197, 94, 0.3);
+        }
+        
         .page-item-actions {
             display: flex;
             gap: 4px;
@@ -3837,16 +3874,18 @@
         /* Site filter */
         .site-filter-bar {
             display: flex;
-            gap: 0.5rem;
-            padding: 0.5rem;
+            flex-wrap: wrap;
+            gap: 0.3rem;
+            padding: 0.4rem;
             border-bottom: 1px solid var(--border);
             background: var(--bg-tertiary);
         }
         
         .site-filter-bar select {
-            flex: 1;
-            padding: 0.4rem;
-            font-size: 0.85rem;
+            flex: 1 1 auto;
+            min-width: 70px;
+            padding: 0.3rem 0.2rem;
+            font-size: 0.75rem;
             border-radius: 4px;
             border: 1px solid var(--border);
             background: var(--bg-secondary);
@@ -4665,6 +4704,11 @@
                     <!-- Populated dynamically by populateAgentCompletionFilter() -->
                     <option value="all">🎯 כל העמודים</option>
                 </select>
+                <select id="specialFilter" onchange="renderPageList()">
+                    <option value="all">🌟 הכל</option>
+                    <option value="special">⭐ מיוחדים</option>
+                    <option value="regular">📄 רגילים</option>
+                </select>
             </div>
             <div class="batch-selection-bar" id="batchSelectionBar" style="display:none;">
                 <span class="batch-count" id="batchCount">0 עמודים נבחרו</span>
@@ -4958,10 +5002,10 @@
                             <div class="setting-row">
                                 <label>מודל Claude</label>
                                 <select id="agentModelSelect">
-                                    <option value="claude-sonnet-4">Claude Sonnet 4</option>
-                                    <option value="claude-opus-4">Claude Opus 4</option>
-                                    <option value="claude-sonnet-4-5">Claude Sonnet 4.5</option>
                                     <option value="claude-opus-4-5">Claude Opus 4.5</option>
+                                    <option value="claude-sonnet-4-5" selected>Claude Sonnet 4.5</option>
+                                    <option value="claude-sonnet-4">Claude Sonnet 4</option>
+                                    <option value="claude-haiku-4-5">Claude Haiku 4.5</option>
                                 </select>
                             </div>
                         </div>
@@ -7998,6 +8042,96 @@ console.log('🚀 KeywordDensityAnalyzer, SpamAnalyzer, HeaderQualityScorer & In
             }
         }
         
+        // Toggle special page status
+        async function toggleSpecialPage(pagePath) {
+            try {
+                const result = await fetch(`/api/pages/${encodeURIComponent(pagePath)}/special`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({})
+                }).then(r => r.json());
+                
+                if (result.success) {
+                    showToast(result.message, 'success');
+                    
+                    // Update the page in pages array
+                    const pageIndex = pages.findIndex(p => p.path.replace(/\\/g, '/') === pagePath.replace(/\\/g, '/'));
+                    if (pageIndex >= 0) {
+                        pages[pageIndex].is_special = result.is_special;
+                    }
+                    
+                    // Update cache if exists
+                    if (pageInfoCache[pagePath]) {
+                        pageInfoCache[pagePath].is_special = result.is_special;
+                    }
+                    
+                    renderPageList();
+                } else {
+                    showToast(`שגיאה: ${result.error}`, 'error');
+                }
+            } catch (e) {
+                showToast(`שגיאה: ${e.message}`, 'error');
+            }
+        }
+        
+        // Show page history in a popup
+        async function showPageHistory(pagePath) {
+            try {
+                const result = await apiCall(`/api/pages/${encodeURIComponent(pagePath)}/history`);
+                
+                if (!result.success) {
+                    showToast('לא נמצאה היסטוריה לעמוד זה', 'info');
+                    return;
+                }
+                
+                const history = result.history;
+                const runs = history.runs || [];
+                
+                if (runs.length === 0) {
+                    showToast('אין עדכונים בהיסטוריה', 'info');
+                    return;
+                }
+                
+                // Build history HTML
+                let historyHtml = '<div style="max-height:400px;overflow-y:auto;">';
+                historyHtml += '<h4 style="margin-bottom:12px;">📜 היסטוריית עדכונים</h4>';
+                historyHtml += '<table style="width:100%;font-size:0.85rem;border-collapse:collapse;">';
+                historyHtml += '<tr style="background:var(--bg-tertiary);"><th style="padding:6px;text-align:right;">תאריך</th><th style="padding:6px;text-align:right;">סוכן</th><th style="padding:6px;text-align:right;">עדכון WP</th></tr>';
+                
+                runs.slice().reverse().forEach(run => {
+                    const date = new Date(run.timestamp).toLocaleString('he-IL');
+                    const agentName = run.agent?.name || 'לא ידוע';
+                    const wpUpdate = run.wordpress_update?.performed ? 
+                        `✅ ${(run.wordpress_update.fields_updated || []).join(', ')}` : 
+                        '❌';
+                    
+                    historyHtml += `<tr style="border-bottom:1px solid var(--border);">
+                        <td style="padding:6px;">${date}</td>
+                        <td style="padding:6px;">${agentName}</td>
+                        <td style="padding:6px;">${wpUpdate}</td>
+                    </tr>`;
+                });
+                
+                historyHtml += '</table></div>';
+                
+                // Show in modal
+                const modal = document.createElement('div');
+                modal.className = 'modal-overlay';
+                modal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.7);display:flex;align-items:center;justify-content:center;z-index:9999;';
+                modal.innerHTML = `
+                    <div style="background:var(--bg-secondary);padding:20px;border-radius:8px;max-width:600px;width:90%;direction:rtl;">
+                        ${historyHtml}
+                        <button onclick="this.closest('.modal-overlay').remove()" style="margin-top:12px;padding:8px 16px;background:var(--accent);color:white;border:none;border-radius:4px;cursor:pointer;">סגור</button>
+                    </div>
+                `;
+                modal.onclick = (e) => { if (e.target === modal) modal.remove(); };
+                document.body.appendChild(modal);
+                
+            } catch (e) {
+                showToast(`שגיאה בטעינת היסטוריה: ${e.message}`, 'error');
+            }
+        }
+        
         async function loadPageStatus() {
             // Get status for all pages based on selected agent
             const agentId = selectedAgent?.id || '';
@@ -8099,6 +8233,7 @@ console.log('🚀 KeywordDensityAnalyzer, SpamAnalyzer, HeaderQualityScorer & In
             const siteFilter = document.getElementById('siteFilter')?.value || 'all';
             const sortFilter = document.getElementById('sortFilter')?.value || 'name';
             const agentCompletionFilter = document.getElementById('agentCompletionFilter')?.value || 'all';
+            const specialFilter = document.getElementById('specialFilter')?.value || 'all';
             
             // Filter out backup files and apply site filter
             const filteredPages = pages.filter(page => {
@@ -8112,6 +8247,13 @@ console.log('🚀 KeywordDensityAnalyzer, SpamAnalyzer, HeaderQualityScorer & In
                 if (siteFilter !== 'all') {
                     const pageSite = page.site || 'main';
                     if (pageSite !== siteFilter) return false;
+                }
+                
+                // Apply special page filter
+                if (specialFilter !== 'all') {
+                    const isSpecial = page.is_special || pageInfoCache[page.path]?.is_special;
+                    if (specialFilter === 'special' && !isSpecial) return false;
+                    if (specialFilter === 'regular' && isSpecial) return false;
                 }
                 
                 // Apply agent completion filter (dynamic parsing)
@@ -8262,6 +8404,20 @@ console.log('🚀 KeywordDensityAnalyzer, SpamAnalyzer, HeaderQualityScorer & In
                     rankBadge += `<span style="font-size:0.6rem;opacity:0.5;margin-right:4px;">${scanDate}</span>`;
                 }
                 
+                // Special page badge (⭐)
+                const isSpecial = page.is_special || cachedInfo.is_special;
+                const specialBadge = isSpecial ? '<span class="special-badge" title="עמוד מיוחד">⭐</span>' : '';
+                
+                // Last upload date
+                const lastUpload = page.last_upload || cachedInfo.last_upload;
+                let lastUploadDisplay = '';
+                if (lastUpload) {
+                    const uploadDate = new Date(lastUpload).toLocaleDateString('he-IL');
+                    const uploadType = page.last_upload_type || cachedInfo.last_upload_type || '';
+                    const typeEmoji = uploadType === 'title' ? '📌' : uploadType === 'content' ? '📝' : '📤';
+                    lastUploadDisplay = `<span class="last-upload-badge" onclick="event.stopPropagation(); showPageHistory('${page.path.replace(/\\/g, '/').replace(/'/g, "\\'")}')" title="עדכון אחרון: ${uploadDate} (${uploadType || 'לחץ לפרטים'})">${typeEmoji} ${uploadDate}</span>`;
+                }
+                
                 // Debug: Log if word count is available
                 if (cachedInfo.word_count) {
                     console.log(`📝 Rendering ${page.name}: ${cachedInfo.word_count} words`);
@@ -8277,14 +8433,16 @@ console.log('🚀 KeywordDensityAnalyzer, SpamAnalyzer, HeaderQualityScorer & In
                 const siteBadge = getSiteBadge(page.site || 'main');
                 
                 return `
-                <div class="page-item ${itemClass}" data-index="${originalIndex}" data-path="${page.path.replace(/"/g, '&quot;')}">
-                    <div class="page-item-title">${checkboxHtml}${siteBadge}<span class="page-name">${page.name}</span>${rankBadge}${statusDot}</div>
+                <div class="page-item ${itemClass}${isSpecial ? ' is-special' : ''}" data-index="${originalIndex}" data-path="${page.path.replace(/"/g, '&quot;')}">
+                    <div class="page-item-title">${checkboxHtml}${siteBadge}${specialBadge}<span class="page-name">${page.name}</span>${rankBadge}${statusDot}</div>
                     <div class="page-item-meta">
                         <span class="page-item-folder">📁 ${page.folder}</span>
                         ${wordCountDisplay}
+                        ${lastUploadDisplay}
                         ${stepInfo}
                     </div>
                     <div class="page-item-actions">
+                        <button class="btn-mini btn-special ${isSpecial ? 'is-active' : ''}" onclick="event.stopPropagation(); toggleSpecialPage('${page.path.replace(/\\/g, '/').replace(/'/g, "\\'")}')" title="${isSpecial ? 'הסר סימון מיוחד' : 'סמן כעמוד מיוחד'}">${isSpecial ? '⭐' : '☆'}</button>
                         <button class="btn-mini ${keywordsBtnClass}" onclick="event.stopPropagation(); togglePageKeywords('${page.path.replace(/'/g, "\\'").replace(/\\/g, "\\\\")}')" title="${keywordsBtnTitle}">${keywordsBtnIcon}</button>
                         <button class="btn-mini btn-seo" onclick="event.stopPropagation(); openSeoReportDirect(${originalIndex})" title="דוח SEO (מושך גיבוי אוטומטי)">📊</button>
                         <button class="btn-mini btn-reset" data-reset-path="${page.path.replace(/"/g, '&quot;')}" onclick="event.stopPropagation(); resetPage(this.dataset.resetPath)" title="איפוס עמוד - מחיקת דוחות סוכנים ושחזור מגיבוי">🔄</button>
@@ -19708,7 +19866,7 @@ ${additionalInstructions}
             setVal('agentFolderInput', agent.folder_name || '');
             setVal('agentTypeSelect', agent.type || 'update');
             setVal('agentStatusSelect', agent.status || 'active');
-            setVal('agentModelSelect', agent.model?.name || 'claude-sonnet-4');
+            setVal('agentModelSelect', agent.model?.name || 'claude-sonnet-4-5');
             
             // Site restrictions
             renderAgentSitesCheckboxes(agent.sites || []);
@@ -19853,6 +20011,16 @@ ${additionalInstructions}
                                        onchange="updateStepOutput(${index}, 'shortcode_name', this.value)"
                                        placeholder="STEP${index + 1}_REPORT">
                             </div>
+                        </div>
+                        <div class="setting-row">
+                            <label>🧠 מודל AI</label>
+                            <select onchange="updateStepField(${index}, 'model', this.value)" style="max-width: 250px;">
+                                <option value="" ${!step.model ? 'selected' : ''}>ברירת מחדל (מהסוכן)</option>
+                                <option value="claude-opus-4-5" ${step.model === 'claude-opus-4-5' ? 'selected' : ''}>Claude Opus 4.5</option>
+                                <option value="claude-sonnet-4-5" ${step.model === 'claude-sonnet-4-5' ? 'selected' : ''}>Claude Sonnet 4.5</option>
+                                <option value="claude-sonnet-4" ${step.model === 'claude-sonnet-4' ? 'selected' : ''}>Claude Sonnet 4</option>
+                                <option value="claude-haiku-4-5" ${step.model === 'claude-haiku-4-5' ? 'selected' : ''}>Claude Haiku 4.5</option>
+                            </select>
                         </div>
                         <div class="setting-row">
                             <label>🏷️ שורטקודים בשימוש <span style="color: var(--text-tertiary);">(הפרד בפסיקים)</span></label>

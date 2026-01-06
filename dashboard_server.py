@@ -960,15 +960,30 @@ def get_html_files():
                         if "מתוקנת" in file.name or "סופית" in file.name:
                             continue
                         name = file.stem
-                        page_info = csv_pages.get(name, {})
+                        csv_info = csv_pages.get(name, {})
+                        
+                        # Read page_info.json if exists
+                        page_info_path = page_folder / "page_info.json"
+                        page_info = {}
+                        if page_info_path.exists():
+                            try:
+                                with open(page_info_path, 'r', encoding='utf-8') as f:
+                                    page_info = json.load(f)
+                            except Exception:
+                                pass
+                        
                         files.append({
                             "name": name,
                             "path": str(file.relative_to(BASE_DIR)),
                             "folder": folder,
                             "site": site_id,
-                            "post_id": page_info.get("post_id", ""),
-                            "url": page_info.get("url", ""),
-                            "keywords": page_info.get("keywords", ""),
+                            "post_id": page_info.get("post_id", csv_info.get("post_id", "")),
+                            "url": page_info.get("url", csv_info.get("url", "")),
+                            "keywords": csv_info.get("keywords", ""),
+                            "word_count": page_info.get("word_count", 0),
+                            "is_special": page_info.get("is_special", False),
+                            "last_upload": page_info.get("last_upload", ""),
+                            "last_upload_type": page_info.get("last_upload_type", ""),
                             "modified": datetime.fromtimestamp(file.stat().st_mtime).isoformat()
                         })
     
@@ -1498,6 +1513,65 @@ def get_page_history(page_path):
             })
     except Exception as e:
         return jsonify({"success": False, "error": str(e)}), 500
+
+
+# ============ API Routes - Special Page Toggle ============
+
+@app.route('/api/pages/<path:page_path>/special', methods=['POST'])
+def toggle_special_page(page_path):
+    """Toggle the is_special flag for a page"""
+    try:
+        page_folder = BASE_DIR / get_page_folder(page_path)
+        page_info_path = page_folder / "page_info.json"
+        
+        if not page_info_path.exists():
+            return jsonify({"success": False, "error": "page_info.json not found"}), 404
+        
+        # Read current page_info
+        with open(page_info_path, 'r', encoding='utf-8') as f:
+            page_info = json.load(f)
+        
+        # Get the desired value from request, or toggle
+        data = request.json or {}
+        if 'is_special' in data:
+            page_info['is_special'] = bool(data['is_special'])
+        else:
+            # Toggle current value
+            page_info['is_special'] = not page_info.get('is_special', False)
+        
+        # Save updated page_info
+        with open(page_info_path, 'w', encoding='utf-8') as f:
+            json.dump(page_info, f, ensure_ascii=False, indent=2)
+        
+        return jsonify({
+            "success": True,
+            "is_special": page_info['is_special'],
+            "message": "עמוד סומן כמיוחד" if page_info['is_special'] else "סימון עמוד מיוחד הוסר"
+        })
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+
+@app.route('/api/pages/<path:page_path>/special', methods=['GET'])
+def get_special_page_status(page_path):
+    """Get the is_special status for a page"""
+    try:
+        page_folder = BASE_DIR / get_page_folder(page_path)
+        page_info_path = page_folder / "page_info.json"
+        
+        if not page_info_path.exists():
+            return jsonify({"success": False, "error": "page_info.json not found"}), 404
+        
+        with open(page_info_path, 'r', encoding='utf-8') as f:
+            page_info = json.load(f)
+        
+        return jsonify({
+            "success": True,
+            "is_special": page_info.get('is_special', False)
+        })
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
 
 # ============ API Routes - Custom Data Sources ============
 
@@ -6778,6 +6852,22 @@ def trigger_step(page_path, agent_id, step_num, total_steps):
         log_file_escaped = str(page_log_file).replace("\\", "\\\\")
         cmd_escaped = str(cmd).replace("\\", "\\\\")
         
+        # === DYNAMIC MODEL SELECTION ===
+        # Priority: step.model > agent.model.name > default (sonnet-4-5)
+        step_model = step_config.get("model")
+        agent_model = agent.get("model", {}).get("name", "claude-sonnet-4-5")
+        model_name = step_model or agent_model
+        
+        # Convert model name to CLI flag
+        model_flags = {
+            "claude-opus-4-5": "opus",
+            "claude-sonnet-4-5": "sonnet",
+            "claude-sonnet-4": "sonnet",
+            "claude-haiku-4-5": "haiku"
+        }
+        model_flag = model_flags.get(model_name, "sonnet")
+        print(f"[trigger_step] Using model: {model_name} (flag: {model_flag})")
+        
         runner_content = f'''# -*- coding: utf-8 -*-
 import subprocess
 import os
@@ -6827,9 +6917,11 @@ args = [
     "--output-format", "stream-json",
     "--include-partial-messages",
     "--dangerously-skip-permissions",
-    "--model", "opus",
+    "--model", "{model_flag}",
     "--max-budget-usd", "10"
 ]
+
+log(f"🧠 מודל: {model_flag}")
 
 prompt_input = open(prompt_file, "r", encoding="utf-8")
 

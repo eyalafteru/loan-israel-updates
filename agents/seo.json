@@ -13,6 +13,7 @@
     "temperature": 0.7
   },
   "name": "SEO",
+  "sites": [],
   "status": "active",
   "steps": [
     {
@@ -35,7 +36,8 @@
         "SERP_AI_OVERVIEW",
         "INTERNAL_LINKS_DB",
         "APPROVED_DOMAINS"
-      ]
+      ],
+      "model": "claude-opus-4-5"
     },
     {
       "id": "step2",
@@ -50,7 +52,8 @@
       "shortcodes": [
         "STEP1_REPORT",
         "PAGE_HTML"
-      ]
+      ],
+      "model": "claude-sonnet-4-5"
     },
     {
       "id": "step3",
@@ -65,7 +68,8 @@
       "shortcodes": [
         "STEP1_REPORT",
         "PAGE_HTML"
-      ]
+      ],
+      "model": "claude-haiku-4-5"
     },
     {
       "id": "step4",
@@ -81,7 +85,8 @@
         "STEP2_REPORT",
         "PAGE_HTML",
         "INTERNAL_LINKS_DB"
-      ]
+      ],
+      "model": "claude-sonnet-4-5"
     },
     {
       "id": "step5",
@@ -96,7 +101,8 @@
       "shortcodes": [
         "STEP4_REPORT",
         "PAGE_HTML"
-      ]
+      ],
+      "model": "claude-haiku-4-5"
     },
     {
       "id": "step6",
@@ -111,18 +117,18 @@
       "shortcodes": [
         "STEP5_REPORT",
         "PAGE_HTML"
-      ]
+      ],
+      "model": "claude-haiku-4-5"
     }
   ],
   "supports_full_auto": true,
   "type": "update",
-  "updated": "2026-01-05T12:25:08.171448",
+  "updated": "2026-01-06T11:39:53.441576",
   "wordpress": {
     "action": "update",
     "site": "main",
     "update_fields": [
       "content"
     ]
-  },
-  "sites": []
+  }
 }
