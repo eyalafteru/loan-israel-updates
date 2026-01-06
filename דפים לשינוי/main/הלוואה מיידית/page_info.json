@@ -33,5 +33,397 @@
       "reason": "מילת מפתח + רגע אהא ('אל תסתפק'). מעצים את הלקוח עם 'אתה בוחר'. מדגיש קלות ('בקליק') - 129 תווים"
     }
   ],
-  "word_count": 3142
+  "word_count": 3142,
+  "fetched_keywords": {
+    "timestamp": "2026-01-05T16:30:19.395Z",
+    "main_keyword": "הלוואה מיידית",
+    "clusters": [
+      {
+        "primary": "הלוואה מיידית",
+        "source": "autocomplete",
+        "type": "unique",
+        "unique_part": "",
+        "variants": []
+      },
+      {
+        "primary": "הלוואה מיידית למסורבים",
+        "source": "autocomplete",
+        "type": "unique",
+        "unique_part": "למסורבים",
+        "variants": []
+      },
+      {
+        "primary": "הלוואה מיידית אונליין",
+        "source": "autocomplete",
+        "type": "unique",
+        "unique_part": "אונליין",
+        "variants": []
+      },
+      {
+        "primary": "הלוואה מיידית לחשבון",
+        "source": "autocomplete",
+        "type": "unique",
+        "unique_part": "לחשבון",
+        "variants": []
+      },
+      {
+        "primary": "הלוואה מיידית ללא אשראי",
+        "source": "autocomplete",
+        "type": "unique",
+        "unique_part": "ללא אשראי",
+        "variants": []
+      },
+      {
+        "primary": "הלוואה מיידית חוץ בנקאית",
+        "source": "autocomplete",
+        "type": "unique",
+        "unique_part": "חוץ בנקאית",
+        "variants": []
+      },
+      {
+        "primary": "הלוואה מיידית לכולם",
+        "source": "autocomplete",
+        "type": "unique",
+        "unique_part": "לכולם",
+        "variants": []
+      },
+      {
+        "primary": "הלוואה מיידית מקס",
+        "source": "autocomplete",
+        "type": "unique",
+        "unique_part": "מקס",
+        "variants": []
+      },
+      {
+        "primary": "הלוואה מיידית במזומן למוגבלים",
+        "source": "autocomplete",
+        "type": "unique",
+        "unique_part": "במזומן למוגבלים",
+        "variants": []
+      },
+      {
+        "primary": "הלוואה מיידית אונליין למסורבים",
+        "source": "autocomplete",
+        "type": "unique",
+        "unique_part": "אונליין למסורבים",
+        "variants": []
+      },
+      {
+        "primary": "הלוואה מיידית עד 15000",
+        "source": "related",
+        "type": "unique",
+        "unique_part": "עד 15000",
+        "variants": []
+      },
+      {
+        "primary": "הלוואה מיידית במזומן",
+        "source": "related",
+        "type": "unique",
+        "unique_part": "במזומן",
+        "variants": []
+      },
+      {
+        "primary": "הלוואה למסורבים",
+        "source": "related",
+        "type": "unique",
+        "unique_part": "למסורבים",
+        "variants": []
+      }
+    ],
+    "final_keywords": [
+      "הלוואה מיידית",
+      "הלוואה מיידית למסורבים",
+      "הלוואה מיידית אונליין",
+      "הלוואה מיידית לחשבון",
+      "הלוואה מיידית ללא אשראי",
+      "הלוואה מיידית חוץ בנקאית",
+      "הלוואה מיידית לכולם",
+      "הלוואה מיידית מקס",
+      "הלוואה מיידית במזומן למוגבלים",
+      "הלוואה מיידית אונליין למסורבים",
+      "הלוואה מיידית עד 15000",
+      "הלוואה מיידית במזומן",
+      "הלוואה למסורבים"
+    ],
+    "unique_topics": [
+      "למסורבים",
+      "אונליין",
+      "לחשבון",
+      "ללא אשראי",
+      "חוץ בנקאית",
+      "לכולם",
+      "מקס",
+      "במזומן למוגבלים",
+      "אונליין למסורבים",
+      "עד 15000",
+      "במזומן",
+      "למסורבים"
+    ],
+    "rank_position": null,
+    "rank_checked_url": "https://loan-israel.co.il/instant-loan/",
+    "organic_results": [
+      {
+        "description": "הלוואות זה כאל – עד 200000 שקלים בפריסה ל - 84 תשלומים. הלוואה מיידית לכל מטרה ללא ערבים. היכנסו, בחרו סכום להלוואה ומספר תשלומים והכסף בדרך אליכם!",
+        "displayedUrl": "https://www.cal-online.co.il › ecredit › instant-loan",
+        "position": 1,
+        "title": "הלוואה מיידית לכל מטרה ללקוחות כל הבנקים",
+        "url": "https://www.cal-online.co.il/ecredit/instant-loan/"
+      },
+      {
+        "description": "מחשבון ההלוואה שלנו יעזור לכם בתכנון ההחזר החודשי שלכם · למה כדאי לכם לבקש הלוואה מיידית? · ללא עמלות · החזר של 2-84 תשלומים · אפשרות להתחיל להחזיר לאחר חצי שנה ...",
+        "displayedUrl": "https://www.bankhapoalim.co.il › דף הבית › הלוואות",
+        "position": 2,
+        "title": "הלוואה מהירה - הלוואה מיידית לכל מטרה בבנק הפועלים",
+        "url": "https://www.bankhapoalim.co.il/he/loans/instant-loan"
+      },
+      {
+        "description": "הלוואה מיידית עד 100000 ₪ תוך יום עסקים ישירות לחשבונך! הלוואות אקספרס מהירות ללא ערבים ומסמכים. לקבל הלוואות מיידיות ברגע זה פשוט וקל - היכנסו לאתר ...",
+        "displayedUrl": "https://digital.isracard.co.il › loansroot1 › quickLoan",
+        "position": 3,
+        "title": "הלוואה מיידית - הלוואות אונליין מהירות ללא ערבים עד 100000 ש''ח",
+        "url": "https://digital.isracard.co.il/loans/loansroot1/quickLoan/"
+      },
+      {
+        "description": "אנחנו בבנק ירושלים מציעים לך הלוואה מיידית של עד 200,000 שקלים עם ריבית אטרקטיבית, ללא צורך בביטחונות או בפיקדונות, בפריסה נוחה של עד 120 תשלומים. ניתן להגיש ...",
+        "displayedUrl": "https://www.bankjerusalem.co.il › הלוואות",
+        "position": 4,
+        "title": "הלוואה מיידית - הלוואות אונליין עד 200000 ₪",
+        "url": "https://www.bankjerusalem.co.il/loans/instant-loan"
+      },
+      {
+        "description": "הלוואה לכל מטרה אונליין במקס, לוקחים הלוואה לכל מטרה בתנאים משתלמים הלוואה מיידית עד 180000 ₪ ללקוחות כל הבנקים, הכנסו לקבלת הלוואה חוץ בנקאית במקס הלוואות.",
+        "displayedUrl": "https://www.max.co.il › loans › calc",
+        "position": 5,
+        "title": "הלוואות לכל מטרה ופתרונות אשראי - מגוון הלוואות מהירות – הלוואה ...",
+        "url": "https://www.max.co.il/loans/calc"
+      },
+      {
+        "description": "Smart Loan - הלוואה מיידית עם ריבית שמותאמת אישית! הלוואה דיגיטלית ומהירה עד 180,00 ש\"ח מיידית לחשבון בתנאי החזר נוחים באמצעות אפליקציית דיסקונט.",
+        "displayedUrl": "https://www.discountbank.co.il › private › loans › smart...",
+        "position": 6,
+        "title": "Smart Loan - הלוואה מיידית לחשבונך",
+        "url": "https://www.discountbank.co.il/private/loans/smart-loan/"
+      },
+      {
+        "description": "הלוואה ברגע עד 125000 ₪, בלי ערבים ובלי לצאת מהבית! אנו במזרחי-טפחות מציעים לך הלוואה מיידית בתנאים נוחים לכל מטרה וצורך. לקבלת ההלוואה היכנסו עכשיו>>",
+        "displayedUrl": "https://www.mizrahi-tefahot.co.il › loans › express-loan",
+        "position": 7,
+        "title": "הלוואה ברגע - הלוואה מיידית אונליין | בנק מזרחי-טפחות",
+        "url": "https://www.mizrahi-tefahot.co.il/loans/privateloanslib/express-loan/"
+      },
+      {
+        "description": "חברת מימון ישיר מציעה הלוואה מיידית לכל מטרה עד 80,000 ש\"ח בלי תורים, בלי לצאת מהבית ובפריסה נוחה של עד 60 תשלומים. מתי יש צורך בהלוואה מיידית? במהלך החיים ...",
+        "displayedUrl": "https://www.5555.co.il › מגזין › הלוואה מיידית › הלוואה מיידית",
+        "position": 8,
+        "title": "הלוואה מיידית",
+        "url": "https://www.5555.co.il/%D7%9E%D7%92%D7%96%D7%99%D7%9F/%D7%94%D7%9C%D7%95%D7%95%D7%90%D7%94-%D7%9E%D7%99%D7%99%D7%93%D7%99%D7%AA/%D7%94%D7%9C%D7%95%D7%95%D7%90%D7%94-%D7%9E%D7%99%D7%99%D7%93%D7%99%D7%AA"
+      },
+      {
+        "description": "הלוואות אונליין לכל מטרה מגוף גדול ומוכר. הלוואה לכל מטרה יכולה לשמש אותך למגוון מטרות וצרכים כגון שיפוץ דירה, מימון לימודים, רכישת רכב, אירוע משפחתי, ...",
+        "displayedUrl": "https://www.fnx.co.il › loans",
+        "position": 9,
+        "title": "הלוואה דיגיטלית חופשית – הלוואה גמישה ללא בטחונות בהפניקס",
+        "url": "https://www.fnx.co.il/loans/"
+      },
+      {
+        "description": "מחפשים הלוואה מיידית? הבנק הבינלאומי מאפשר הלוואה ללקוחות כל הבנקים בלחיצת כפתור עד 80000 שח- בלי ערבים, בלי ביטחונות וללא צורך להגיע לסניף.",
+        "displayedUrl": "https://www.fibi.co.il › private › loans › clickloan",
+        "position": 10,
+        "title": "הלוואה מיידית בקליק - הלוואה אונליין ללקוחות כל הבנקים בבינלאומי",
+        "url": "https://www.fibi.co.il/private/loansandmortgages/loans/clickloan/"
+      }
+    ],
+    "ai_mode_results": [
+      {
+        "description": "נכון לינואר 2026, קיימות מגוון אפשרויות לקבלת הלוואה מיידית בדיגיטל, הן דרך הבנקים והן דרך גופים חוץ-בנקאיים. חשוב לציין כי החל מ-1 בינואר 2026 פקעו חלק מהטבות הריבית של תקופת המלחמה, והריביות בשוק עשויות להיות גבוהות מבעבר. להלן האפשרויות המרכזיות לקבלת הלוואה מהירה: הלוואות בנקאיות (דיגיטליות) מרבית הבנקים מציעים \"הלוואה ברגע\" המועברת לחשבון באופן מיידי לאחר אישור באפליקציה: בנק הפועלים: מציע הלוואה מיידית לכל מטרה המיועדת ללקוחות כל הבנקים, בתהליך דיגיטלי מלא.בנק לאומי: מאפשר הגשת בקשה להלוואה דיגיטלית עד סכום של 400,000 ש\"ח עם פריסה לעד 120 תשלומים.בנק מזרחי טפחות: מציע את הלוואה ברגע – הלוואה אונליין עד 125,000 ש\"ח ללא ערבים.בנק דיסקונט: שירות Smart Loan להעברת כספים מהירה לחשבון.בנק ירושלים: מציע הלוואות אונליין ללקוחות כל הבנקים עד סכום של 200,000 ש\"ח ללא צורך בביטחונות. הלוואות חוץ-בנקאיות (חברות אשראי ומימון) הלוואות אלו אינן פוגעות במסגרת הבנקאית, אך לרוב נושאות ריבית גבוהה יותר: מימון ישיר: הלוואות מיידיות עד 250,000 ש\"ח, כולל אפשרות לשיעבוד רכב.חברות כרטיסי אשראי: חברות כמו Max, ישראכרט וכאל מציעות הלוואות מהירות ללקוחות כל הבנקים, לעיתים בפריסה של עד 84 תשלומים.הפניקס: מציעה הלוואה דיגיטלית חופשית ללא ביטחונות.PayBox: מציעה הלוואה חוץ-בנקאית המועברת לחשבון תוך כ-3 ימי עסקים. אפשרויות לסיוע חברתי (ללא ריבית) ארגון \"עוגן\" (Ogen): מציע הלוואות ללא ריבית או בריבית נמוכה לאנשים ומשפחות שנפגעו כלכלית, במיוחד במסגרת קרנות חירום למלחמה. לתשומת לבכם: אי עמידה בפירעון ההלוואה עלולה לגרור חיוב בריבית פיגורים והליכי הוצאה לפועל. מומלץ לבצע השוואת ריביות באתרים כמו Bwise או Check-Box לפני קבלת החלטה. האם יש הלוואות שניתן לקבל באמצעות קופת גמל או קרן השתלמות?מהן הריביות המומלצות לכל אפיק הלוואה?איך מגישים בקשה להלוואה מהירה בדיסקונט?",
+        "is_summary": true,
+        "position": 0,
+        "title": "AI Overview Summary",
+        "url": ""
+      },
+      {
+        "description": "בנק ירושלים * סניפים * דבר איתנו",
+        "position": 1,
+        "title": "הלוואה מיידית - הלוואות אונליין עד 200000 - בנק ירושלים",
+        "url": "https://www.bankjerusalem.co.il/loans/instant-loan#:~:text=%D7%91%D7%A0%D7%A7%20%D7%99%D7%A8%D7%95%D7%A9%D7%9C%D7%99%D7%9D%20*%20%D7%A1%D7%A0%D7%99%D7%A4%D7%99%D7%9D%20*%20%D7%93%D7%91%D7%A8%20%D7%90%D7%99%D7%AA%D7%A0%D7%95"
+      },
+      {
+        "description": "הארנק הירוק * הלוואות * Smart Loan.",
+        "position": 2,
+        "title": "Smart Loan - הלוואה מיידית לחשבונך - דיסקונט",
+        "url": "https://www.discountbank.co.il/private/loans/smart-loan/#:~:text=%D7%94%D7%90%D7%A8%D7%A0%D7%A7%20%D7%94%D7%99%D7%A8%D7%95%D7%A7%20*%20%D7%94%D7%9C%D7%95%D7%95%D7%90%D7%95%D7%AA%20*%20Smart%20Loan."
+      },
+      {
+        "description": "הלוואה ברגע - הלוואה מיידית אונליין | בנק מזרחי-טפחות",
+        "position": 3,
+        "title": "הלוואה ברגע - הלוואה מיידית אונליין | בנק מזרחי-טפחות",
+        "url": "https://www.mizrahi-tefahot.co.il/loans/privateloanslib/express-loan/#:~:text=%D7%94%D7%9C%D7%95%D7%95%D7%90%D7%94%20%D7%91%D7%A8%D7%92%D7%A2%20%2D%20%D7%94%D7%9C%D7%95%D7%95%D7%90%D7%94%20%D7%9E%D7%99%D7%99%D7%93%D7%99%D7%AA%20%D7%90%D7%95%D7%A0%D7%9C%D7%99%D7%99%D7%9F%20%7C%20%D7%91%D7%A0%D7%A7%20%D7%9E%D7%96%D7%A8%D7%97%D7%99%2D%D7%98%D7%A4%D7%97%D7%95%D7%AA"
+      },
+      {
+        "description": "פרטים נוספים על החבילה >. הלוואה מיידית לכל מטרה הלוואה חוץ בנקאית עד ₪200,000 ועד 84 תשלומים. פריים + 1%-11%. Facebook Email What...",
+        "position": 4,
+        "title": "השוואת מחירים: הלוואות חוץ בנקאיות לעסקים",
+        "url": "https://check-box.co.il/category/business-finance/"
+      },
+      {
+        "description": "* הלוואה מיידית * ארנק מט\"ח",
+        "position": 5,
+        "title": "הלוואות זה כאל - הלוואה מיידית לכל מטרה ללקוחות כל הבנקים",
+        "url": "https://www.cal-online.co.il/ecredit/instant-loan/#:~:text=*%20%D7%94%D7%9C%D7%95%D7%95%D7%90%D7%94%20%D7%9E%D7%99%D7%99%D7%93%D7%99%D7%AA%20*%20%D7%90%D7%A8%D7%A0%D7%A7%20%D7%9E%D7%98%22%D7%97"
+      },
+      {
+        "description": "למה לקחת הלוואה מ-MAX?",
+        "position": 6,
+        "title": "הלוואה דיגיטלית לכל מטרה - MAX",
+        "url": "https://www.max.co.il/loans/calc#:~:text=%D7%9C%D7%9E%D7%94%20%D7%9C%D7%A7%D7%97%D7%AA%20%D7%94%D7%9C%D7%95%D7%95%D7%90%D7%94%20%D7%9E%2DMAX?"
+      },
+      {
+        "description": "הלוואה באישור מהיר עד 250,000 ש״ח כנגד שיעבוד רכב",
+        "position": 7,
+        "title": "הלוואה מיידית - מימון ישיר",
+        "url": "https://www.5555.co.il/%D7%9E%D7%92%D7%96%D7%99%D7%9F/%D7%94%D7%9C%D7%95%D7%95%D7%90%D7%94-%D7%9E%D7%99%D7%99%D7%93%D7%99%D7%AA/%D7%94%D7%9C%D7%95%D7%95%D7%90%D7%94-%D7%9E%D7%99%D7%99%D7%93%D7%99%D7%AA#:~:text=%D7%94%D7%9C%D7%95%D7%95%D7%90%D7%94%20%D7%91%D7%90%D7%99%D7%A9%D7%95%D7%A8%20%D7%9E%D7%94%D7%99%D7%A8%20%D7%A2%D7%93%20250%2C000%20%D7%A9%D7%B4%D7%97%20%D7%9B%D7%A0%D7%92%D7%93%20%D7%A9%D7%99%D7%A2%D7%91%D7%95%D7%93%20%D7%A8%D7%9B%D7%91"
+      },
+      {
+        "description": "הלוואה חוץ בנקאית בפייבוקס והכסף אצלכם תוך 3 ימים | PayBox. תעקבו אחרינו!",
+        "position": 8,
+        "title": "הלוואה חוץ בנקאית בפייבוקס והכסף אצלכם תוך 3 ימים | PayBox",
+        "url": "https://www.payboxapp.com/loan/#:~:text=%D7%94%D7%9C%D7%95%D7%95%D7%90%D7%94%20%D7%97%D7%95%D7%A5%20%D7%91%D7%A0%D7%A7%D7%90%D7%99%D7%AA%20%D7%91%D7%A4%D7%99%D7%99%D7%91%D7%95%D7%A7%D7%A1%20%D7%95%D7%94%D7%9B%D7%A1%D7%A3,%D7%AA%D7%A2%D7%A7%D7%91%D7%95%20%D7%90%D7%97%D7%A8%D7%99%D7%A0%D7%95!"
+      },
+      {
+        "description": "הלוואה חופשית זה הפניקס * הלוואות אונליין * לבקשת הלוואה",
+        "position": 9,
+        "title": "הלוואה דיגיטלית חופשית – הלוואה גמישה ללא בטחונות בהפניקס | הפניקס",
+        "url": "https://www.fnx.co.il/loans/#:~:text=%D7%94%D7%9C%D7%95%D7%95%D7%90%D7%94%20%D7%97%D7%95%D7%A4%D7%A9%D7%99%D7%AA%20%D7%96%D7%94%20%D7%94%D7%A4%D7%A0%D7%99%D7%A7%D7%A1%20*%20%D7%94%D7%9C%D7%95%D7%95%D7%90%D7%95%D7%AA%20%D7%90%D7%95%D7%A0%D7%9C%D7%99%D7%99%D7%9F%20*%20%D7%9C%D7%91%D7%A7%D7%A9%D7%AA%20%D7%94%D7%9C%D7%95%D7%95%D7%90%D7%94"
+      },
+      {
+        "description": "IAJFL loans $3.4M to member agency in Israel. IAJFL and 17 of our member agencies are joining together to provide a $3.4M interest...",
+        "position": 10,
+        "title": "iajfl",
+        "url": "https://iajfl.org/#:~:text=IAJFL%20loans%20$3.4M%20to,challenges%20caused%20by%20the%20war."
+      },
+      {
+        "description": "הלוואה לכל מטרה מבנק הפועלים ללקוחות כל הבנקים",
+        "position": 11,
+        "title": "הלוואה לכל מטרה מבנק הפועלים ללקוחות כל הבנקים",
+        "url": "https://www.bankhapoalim.co.il/he/loans#:~:text=%D7%94%D7%9C%D7%95%D7%95%D7%90%D7%94%20%D7%9C%D7%9B%D7%9C%20%D7%9E%D7%98%D7%A8%D7%94%20%D7%9E%D7%91%D7%A0%D7%A7%20%D7%94%D7%A4%D7%95%D7%A2%D7%9C%D7%99%D7%9D%20%D7%9C%D7%9C%D7%A7%D7%95%D7%97%D7%95%D7%AA%20%D7%9B%D7%9C%20%D7%94%D7%91%D7%A0%D7%A7%D7%99%D7%9D"
+      },
+      {
+        "description": "הלוואה חוץ בנקאית לכל מטרה עד 250,000 ש״ח - מימון ישיר",
+        "position": 12,
+        "title": "הלוואה חוץ בנקאית כל מה שצריך לדעת - מימון ישיר",
+        "url": "https://www.5555.co.il/%D7%9E%D7%92%D7%96%D7%99%D7%9F/%D7%94%D7%9C%D7%95%D7%95%D7%90%D7%94-%D7%9C%D7%9B%D7%9C-%D7%9E%D7%98%D7%A8%D7%94/%D7%94%D7%9C%D7%95%D7%95%D7%90%D7%94-%D7%9C%D7%9B%D7%9C-%D7%9E%D7%98%D7%A8%D7%94-%D7%97%D7%95%D7%A5-%D7%91%D7%A0%D7%A7%D7%90%D7%99%D7%AA#:~:text=%D7%94%D7%9C%D7%95%D7%95%D7%90%D7%94%20%D7%97%D7%95%D7%A5%20%D7%91%D7%A0%D7%A7%D7%90%D7%99%D7%AA%20%D7%9C%D7%9B%D7%9C%20%D7%9E%D7%98%D7%A8%D7%94%20%D7%A2%D7%93%20250%2C000%20%D7%A9%D7%B4%D7%97%20%2D%20%D7%9E%D7%99%D7%9E%D7%95%D7%9F%20%D7%99%D7%A9%D7%99%D7%A8"
+      },
+      {
+        "description": "* הלוואות * הלוואה מיידית",
+        "position": 13,
+        "title": "הלוואה מהירה - הלוואה מיידית לכל מטרה בבנק הפועלים",
+        "url": "https://www.bankhapoalim.co.il/he/loans/instant-loan#:~:text=*%20%D7%94%D7%9C%D7%95%D7%95%D7%90%D7%95%D7%AA%20*%20%D7%94%D7%9C%D7%95%D7%95%D7%90%D7%94%20%D7%9E%D7%99%D7%99%D7%93%D7%99%D7%AA"
+      },
+      {
+        "description": "*העמדת ההלוואה ותנאיה נתונים לשקול דעתו הבלעדי של הבנק. אי עמידה בפירעון ההלוואה עלול לגרור חיוב בריבית פיגורים והליכי הוצאה לפועל...",
+        "position": 14,
+        "title": "הלוואה דיגיטלית - בנק לאומי",
+        "url": "https://www.leumi.co.il/he/credit/loans/digital-loan"
+      },
+      {
+        "description": "Nov 30, 2025 — The banks will continue waiting patiently. Those very same customers will eventually arrive, will pay the high interes...",
+        "position": 15,
+        "title": "Banks continue to profit as loan relief set to expire",
+        "url": "https://www.jpost.com/opinion/article-876608#:~:text=The%20banks%20will%20continue%20waiting,market%20benefit%20on%20rely%20on.&text=Even%20while%20the%20cannons%20are,700%2C000%20shekels%20at%207.5%25%20interest."
+      },
+      {
+        "description": "Oct 26, 2023 — “Through a combination of philanthropic contributions and strategic financial instruments, we harness the power of ble...",
+        "position": 16,
+        "title": "Social lender to provide interest-free credit to war-damaged ...",
+        "url": "https://www.timesofisrael.com/social-lender-to-provide-interest-free-credit-to-war-damaged-businesses-and-families/#:~:text=%E2%80%9CThrough%20a%20combination%20of%20philanthropic,and%20financially%20support%20our%20work."
+      },
+      {
+        "description": "Instant personal Loan. Apply online for a personal loan of up to NIS 125,000 without guarantors. A loan for any personal purpose y...",
+        "position": 17,
+        "title": "Instant Loan: Up to NIS 125000 For any purpose",
+        "url": "https://www.mizrahi-tefahot.co.il/en/instant-loan/#:~:text=Instant%20personal%20Loan,Call%20*8860"
+      },
+      {
+        "description": "* הלוואות * הלוואה חוץ בנקאית",
+        "position": 18,
+        "title": "השוואת הלוואה חוץ בנקאית [ריביות מעודכנות] מעודכן ינואר 2026 - Bwise",
+        "url": "https://www.bwise.co.il/loans/compare#:~:text=*%20%D7%94%D7%9C%D7%95%D7%95%D7%90%D7%95%D7%AA%20*%20%D7%94%D7%9C%D7%95%D7%95%D7%90%D7%94%20%D7%97%D7%95%D7%A5%20%D7%91%D7%A0%D7%A7%D7%90%D7%99%D7%AA"
+      },
+      {
+        "description": "At a glance. A personal unsecured loan of up to NIS 200,000 at variable interest rates, for up to ten years (120 months). Who is t...",
+        "position": 19,
+        "title": "Personal Loan - Bank of Jerusalem",
+        "url": "https://www.bankjerusalem.co.il/en/loans/all-purpose-loans#:~:text=At%20a%20glance,on%20arrears%20and%20repossession%20procedures."
+      },
+      {
+        "description": "Nov 17, 2025 — רוב התיעוד עובר אונליין – צילום תעודת זהות, תלושי שכר, אישורים – הכל מהנייד. יש לנו בשוק שני סוגים עיקריים: אלו שמגיעו...",
+        "position": 20,
+        "title": "כשהחיים לא מחכים: המדריך השלם להלוואות מיידיות ב-2025 - טיים אאוט",
+        "url": "https://timeout.co.il/ppost/%D7%9B%D7%A9%D7%94%D7%97%D7%99%D7%99%D7%9D-%D7%9C%D7%90-%D7%9E%D7%97%D7%9B%D7%99%D7%9D-%D7%94%D7%9E%D7%93%D7%A8%D7%99%D7%9A-%D7%94%D7%A9%D7%9C%D7%9D-%D7%9C%D7%94%D7%9C%D7%95%D7%95%D7%90%D7%95%D7%AA/"
+      }
+    ],
+    "ai_rank_position": null,
+    "competitor_data": [
+      {
+        "description": "הלוואות זה כאל – עד 200000 שקלים בפריסה ל - 84 תשלומים. הלוואה מיידית לכל מטרה ללא ערבים. היכנסו, בחרו סכום להלוואה ומספר תשלומים והכסף בדרך אליכם!",
+        "position": 1,
+        "title": "הלוואה מיידית לכל מטרה ללקוחות כל הבנקים",
+        "url": "https://www.cal-online.co.il/ecredit/instant-loan/"
+      },
+      {
+        "description": "מחשבון ההלוואה שלנו יעזור לכם בתכנון ההחזר החודשי שלכם · למה כדאי לכם לבקש הלוואה מיידית? · ללא עמלות · החזר של 2-84 תשלומים · אפשרות להתחיל להחזיר לאחר חצי שנה ...",
+        "position": 2,
+        "title": "הלוואה מהירה - הלוואה מיידית לכל מטרה בבנק הפועלים",
+        "url": "https://www.bankhapoalim.co.il/he/loans/instant-loan"
+      },
+      {
+        "description": "הלוואה מיידית עד 100000 ₪ תוך יום עסקים ישירות לחשבונך! הלוואות אקספרס מהירות ללא ערבים ומסמכים. לקבל הלוואות מיידיות ברגע זה פשוט וקל - היכנסו לאתר ...",
+        "position": 3,
+        "title": "הלוואה מיידית - הלוואות אונליין מהירות ללא ערבים עד 100000 ש''ח",
+        "url": "https://digital.isracard.co.il/loans/loansroot1/quickLoan/"
+      },
+      {
+        "description": "אנחנו בבנק ירושלים מציעים לך הלוואה מיידית של עד 200,000 שקלים עם ריבית אטרקטיבית, ללא צורך בביטחונות או בפיקדונות, בפריסה נוחה של עד 120 תשלומים. ניתן להגיש ...",
+        "position": 4,
+        "title": "הלוואה מיידית - הלוואות אונליין עד 200000 ₪",
+        "url": "https://www.bankjerusalem.co.il/loans/instant-loan"
+      },
+      {
+        "description": "הלוואה לכל מטרה אונליין במקס, לוקחים הלוואה לכל מטרה בתנאים משתלמים הלוואה מיידית עד 180000 ₪ ללקוחות כל הבנקים, הכנסו לקבלת הלוואה חוץ בנקאית במקס הלוואות.",
+        "position": 5,
+        "title": "הלוואות לכל מטרה ופתרונות אשראי - מגוון הלוואות מהירות – הלוואה ...",
+        "url": "https://www.max.co.il/loans/calc"
+      },
+      {
+        "description": "Smart Loan - הלוואה מיידית עם ריבית שמותאמת אישית! הלוואה דיגיטלית ומהירה עד 180,00 ש\"ח מיידית לחשבון בתנאי החזר נוחים באמצעות אפליקציית דיסקונט.",
+        "position": 6,
+        "title": "Smart Loan - הלוואה מיידית לחשבונך",
+        "url": "https://www.discountbank.co.il/private/loans/smart-loan/"
+      },
+      {
+        "description": "הלוואה ברגע עד 125000 ₪, בלי ערבים ובלי לצאת מהבית! אנו במזרחי-טפחות מציעים לך הלוואה מיידית בתנאים נוחים לכל מטרה וצורך. לקבלת ההלוואה היכנסו עכשיו>>",
+        "position": 7,
+        "title": "הלוואה ברגע - הלוואה מיידית אונליין | בנק מזרחי-טפחות",
+        "url": "https://www.mizrahi-tefahot.co.il/loans/privateloanslib/express-loan/"
+      },
+      {
+        "description": "חברת מימון ישיר מציעה הלוואה מיידית לכל מטרה עד 80,000 ש\"ח בלי תורים, בלי לצאת מהבית ובפריסה נוחה של עד 60 תשלומים. מתי יש צורך בהלוואה מיידית? במהלך החיים ...",
+        "position": 8,
+        "title": "הלוואה מיידית",
+        "url": "https://www.5555.co.il/%D7%9E%D7%92%D7%96%D7%99%D7%9F/%D7%94%D7%9C%D7%95%D7%95%D7%90%D7%94-%D7%9E%D7%99%D7%99%D7%93%D7%99%D7%AA/%D7%94%D7%9C%D7%95%D7%95%D7%90%D7%94-%D7%9E%D7%99%D7%99%D7%93%D7%99%D7%AA"
+      },
+      {
+        "description": "הלוואות אונליין לכל מטרה מגוף גדול ומוכר. הלוואה לכל מטרה יכולה לשמש אותך למגוון מטרות וצרכים כגון שיפוץ דירה, מימון לימודים, רכישת רכב, אירוע משפחתי, ...",
+        "position": 9,
+        "title": "הלוואה דיגיטלית חופשית – הלוואה גמישה ללא בטחונות בהפניקס",
+        "url": "https://www.fnx.co.il/loans/"
+      },
+      {
+        "description": "מחפשים הלוואה מיידית? הבנק הבינלאומי מאפשר הלוואה ללקוחות כל הבנקים בלחיצת כפתור עד 80000 שח- בלי ערבים, בלי ביטחונות וללא צורך להגיע לסניף.",
+        "position": 10,
+        "title": "הלוואה מיידית בקליק - הלוואה אונליין ללקוחות כל הבנקים בבינלאומי",
+        "url": "https://www.fibi.co.il/private/loansandmortgages/loans/clickloan/"
+      }
+    ]
+  }
 }

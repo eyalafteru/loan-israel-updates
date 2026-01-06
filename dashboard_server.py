@@ -2585,9 +2585,8 @@ def run_step1():
                 
                 # Process the template
                 user_prompt = engine.process(prompt_template)
-                # Add keywords instruction if available
-                if keywords_instruction:
-                    user_prompt += keywords_instruction
+                # DON'T add keywords_instruction - template already uses shortcodes like {{KEYWORDS_AUTOCOMPLETE}}
+                # The ShortcodeEngine handles all keyword-related data through proper shortcodes
                 
                 # For display purposes in log
                 agent_display_name = agent.get("name") or agent.get("folder_name") or agent_id
@@ -3196,7 +3195,38 @@ def run_step2():
                 except Exception as e:
                     print(f"[Step2] Could not load keywords: {e}")
             
-            user_prompt = f"קרא את קובץ ההוראות {agent_file_path} ואת דוח שלב 1: {report1_full} ואת קובץ ה-HTML: {page_full_path}. בדוק את הדוח, הרחב אותו והוסף הצעות טקסט מלאות.{keywords_instruction} בסוף חובה לשמור את הדוח המורחב בנתיב המדויק: {report_full_path}"
+            # DYNAMIC: Use prompt_template if defined, otherwise use hardcoded prompt
+            prompt_template = step2.get("prompt_template", "")
+            if prompt_template:
+                # Use ShortcodeEngine to process the template
+                print(f"[Step2] Using prompt_template for agent {agent_id}")
+                page_folder_for_shortcode = get_page_folder(page_path)
+                html_file_path = str(page_folder_for_shortcode / Path(page_path).name)
+                
+                engine = ShortcodeEngine(page_path=html_file_path, agent=agent, step_num=2)
+                # Set page info for shortcodes
+                page_info_data = {}
+                if page_info_path.exists():
+                    with open(page_info_path, 'r', encoding='utf-8') as f:
+                        page_info_data = json.load(f)
+                engine.context["PAGE_KEYWORD"] = page_info_data.get("keyword", "")
+                engine.context["PAGE_HTML_PATH"] = str(page_full_path)
+                engine.context["PAGE_PATH"] = str(page_full_path)
+                engine.context["OUTPUT_PATH"] = str(report_full_path)
+                engine.context["STEP1_REPORT"] = str(report1_full)
+                engine.context["STEP2_REPORT"] = str(report_full_path)
+                
+                # Load step1 report content for STEP1_REPORT shortcode
+                if report1_full.exists():
+                    with open(report1_full, 'r', encoding='utf-8') as f:
+                        engine.register_step_report(1, f.read())
+                
+                # Process the template
+                user_prompt = engine.process(prompt_template)
+                print(f"[Step2] Processed prompt_template: {len(user_prompt)} chars")
+            else:
+                # Fallback to hardcoded prompt
+                user_prompt = f"קרא את קובץ ההוראות {agent_file_path} ואת דוח שלב 1: {report1_full} ואת קובץ ה-HTML: {page_full_path}. בדוק את הדוח, הרחב אותו והוסף הצעות טקסט מלאות.{keywords_instruction} בסוף חובה לשמור את הדוח המורחב בנתיב המדויק: {report_full_path}"
             
             # Save prompt for debugging
             save_step_prompt(page_path, "step2", user_prompt, agent_folder_name)

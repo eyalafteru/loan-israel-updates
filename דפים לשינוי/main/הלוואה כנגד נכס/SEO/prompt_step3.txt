@@ -1,3 +1,7 @@
+=== פרומפט שנשלח לקלוד - step3 ===
+זמן: 2026-01-05 18:48:27
+============================================================
+
 אני מפעיל את סוכן SEO שלב 3 (Fixer - תיקון תוכן ומבנה).
 עליך לפעול בדיוק לפי הוראות העריכה בקובץ המצורף: C:\Users\eyal\loan-israel-updaets\loan-israel-updates\פרומטים\SEO\שלב 3.md.
 
@@ -10,13 +14,13 @@
 ## המשאבים והנתונים לביצוע התיקונים:
 
 1. **קובץ ה-HTML לעריכה:**
-C:\Users\eyal\loan-israel-updaets\loan-israel-updates\דפים לשינוי\main\הלוואה דיגיטלית\הלוואה דיגיטלית.html
+C:\Users\eyal\loan-israel-updaets\loan-israel-updates\דפים לשינוי\main\הלוואה כנגד נכס\הלוואה כנגד נכס.html
 
 2. **דוח הליקויים משלב 1** (המפרט מה לתקן):
 
 
 3. **נתיב לשמירת דוח הסיכום:**
-C:\Users\eyal\loan-israel-updaets\loan-israel-updates\דפים לשינוי\main\הלוואה דיגיטלית\SEO\דוח שלב 3.md
+C:\Users\eyal\loan-israel-updaets\loan-israel-updates\דפים לשינוי\main\הלוואה כנגד נכס\SEO\דוח שלב 3.md
 **שם הדוח:** 
 
 ---

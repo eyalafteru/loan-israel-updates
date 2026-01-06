@@ -1,4 +1,4 @@
-﻿{
+{
   "ui": {
     "preferred_agent_order": [
       "atomic_marketing",
@@ -8,7 +8,7 @@
   "global_values": {
     "BOI_INTEREST_RATE": {
       "name": "ריבית בנק ישראל",
-      "value": "5.75%",
+      "value": "5.5%",
       "description": "ריבית בנק ישראל הנוכחית"
     }
   },
