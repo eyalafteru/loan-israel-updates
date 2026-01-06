@@ -18,6 +18,7 @@
   "steps": [
     {
       "id": "step1",
+      "model": "claude-sonnet-4-5",
       "name": "הפקת דוח",
       "order": 1,
       "output": {
@@ -33,11 +34,11 @@
         "SERP_ORGANIC",
         "SERP_AI_OVERVIEW",
         "APPROVED_DOMAINS"
-      ],
-      "model": "claude-sonnet-4-5"
+      ]
     },
     {
       "id": "step2",
+      "model": "claude-sonnet-4-5",
       "name": "ביצוע תיקונים",
       "order": 2,
       "output": {
@@ -49,13 +50,12 @@
       "shortcodes": [
         "STEP2_REPORT",
         "PAGE_HTML"
-      ],
-      "model": "claude-haiku-4-5"
+      ]
     }
   ],
   "supports_full_auto": true,
   "type": "update",
-  "updated": "2026-01-06T11:37:17.420616",
+  "updated": "2026-01-06T13:05:19.453401",
   "wordpress": {
     "action": "update",
     "site": "main",

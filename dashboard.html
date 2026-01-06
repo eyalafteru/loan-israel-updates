@@ -4888,6 +4888,7 @@
                                 <div class="shortcode-item" onclick="copyShortcode('KEYWORDS_RELATED')" ondblclick="insertShortcode('KEYWORDS_RELATED')" title="חיפושים קשורים">📄 {{KEYWORDS_RELATED}}</div>
                                 <div class="shortcode-item" onclick="copyShortcode('SERP_ORGANIC')" ondblclick="insertShortcode('SERP_ORGANIC')" title="תוצאות">📄 {{SERP_ORGANIC}}</div>
                                 <div class="shortcode-item" onclick="copyShortcode('SERP_AI_OVERVIEW')" ondblclick="insertShortcode('SERP_AI_OVERVIEW')" title="AI">📄 {{SERP_AI_OVERVIEW}}</div>
+                                <div class="shortcode-item" onclick="copyShortcode('DENSITY_ANALYSIS')" ondblclick="insertShortcode('DENSITY_ANALYSIS')" title="ניתוח צפיפות מילות מפתח">📊 {{DENSITY_ANALYSIS}}</div>
                             </div>
                         </div>
                         
@@ -5485,6 +5486,9 @@
                     <button class="btn btn-small" id="competitorReportBtn" onclick="toggleCompetitorReport()">
                         🔍 ניתוח מתחרים
                     </button>
+                    <button class="btn btn-small" id="densityReportBtn" onclick="toggleDensityReport()">
+                        📊 צפיפות
+                    </button>
                     <button class="btn btn-small" id="aiReportBtn" onclick="toggleAiReport()">
                         🤖 דוח AI
                     </button>
@@ -5545,6 +5549,28 @@
                         </div>
                         <div id="competitorAnalysisResults" style="display: none;">
                             <!-- Results will be populated here -->
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Keyword Density Analysis Panel -->
+                <div class="seo-report-panel" id="densityReportPanel" style="display: none;">
+                    <div class="seo-report-header">
+                        <h3>📊 בודק צפיפות מילות מפתח</h3>
+                        <button class="btn btn-small" onclick="toggleDensityReport()">✕</button>
+                    </div>
+                    <div class="seo-report-content" id="densityReportContent">
+                        <div class="density-input-section" style="margin-bottom: 1rem; padding: 1rem; background: var(--bg-tertiary); border-radius: 8px;">
+                            <div style="display: flex; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                <input type="text" id="densityKeyword" placeholder="מילת מפתח" style="flex: 1; padding: 0.5rem; border-radius: 4px; border: 1px solid var(--border); background: var(--bg-primary); color: var(--text);">
+                                <button class="btn btn-primary" onclick="runDensityAnalysis()">🔍 נתח</button>
+                            </div>
+                            <small style="color: var(--text-muted);">מילת המפתח תילקח אוטומטית מפרטי העמוד אם לא תוזן</small>
+                        </div>
+                        <div id="densityAnalysisResults">
+                            <div class="empty-state" style="padding: 2rem; text-align: center; color: var(--text-muted);">
+                                לחץ על "נתח" לביצוע ניתוח צפיפות מילות מפתח
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -13050,109 +13076,208 @@ ${ann.note ? `**💬 הוראות נוספות:** ${ann.note}` : ''}
             
             if (!oldDoc || !newDoc) return;
             
-            // Add highlight styles to new document
-            const style = newDoc.createElement('style');
-            style.id = 'diffHighlightStyle';
-            style.textContent = `
+            // Add highlight styles to BOTH documents
+            const styleContent = `
                 .diff-changed {
-                    outline: 2px solid #f59e0b !important;
-                    outline-offset: 1px;
-                    border-radius: 2px;
+                    outline: 3px solid #f59e0b !important;
+                    outline-offset: 2px;
+                    border-radius: 4px;
+                    background: rgba(245, 158, 11, 0.15) !important;
                 }
                 .diff-new {
-                    outline: 2px solid #10b981 !important;
-                    outline-offset: 1px;
-                    border-radius: 2px;
+                    outline: 3px solid #10b981 !important;
+                    outline-offset: 2px;
+                    border-radius: 4px;
+                    background: rgba(16, 185, 129, 0.15) !important;
+                }
+                .diff-removed {
+                    outline: 3px solid #ef4444 !important;
+                    outline-offset: 2px;
+                    border-radius: 4px;
+                    background: rgba(239, 68, 68, 0.15) !important;
                 }
             `;
+            
+            // Add to new doc
+            let style = newDoc.createElement('style');
+            style.id = 'diffHighlightStyle';
+            style.textContent = styleContent;
             newDoc.head.appendChild(style);
             
-            // Build map of old elements by type and order
-            const oldByType = {};
-            const selectors = 'h1, h2, h3, h4, h5, h6, p, li, td, th, blockquote';
+            // Add to old doc
+            style = oldDoc.createElement('style');
+            style.id = 'diffHighlightStyle';
+            style.textContent = styleContent;
+            oldDoc.head.appendChild(style);
             
-            oldDoc.body.querySelectorAll(selectors).forEach((el, idx) => {
-                const tag = el.tagName.toLowerCase();
-                if (!oldByType[tag]) oldByType[tag] = [];
-                const text = el.innerText.trim().replace(/\s+/g, ' ').toLowerCase();
-                if (text.length >= 5) {
-                    oldByType[tag].push({
-                        index: oldByType[tag].length,
-                        text: text,
-                        textStart: text.substring(0, 50)
-                    });
+            // Collect ALL text-containing elements from both documents
+            const oldTexts = collectTextElements(oldDoc);
+            const newTexts = collectTextElements(newDoc);
+            
+            console.log(`Diff: Found ${oldTexts.length} old elements, ${newTexts.length} new elements`);
+            
+            // Create a map of old texts for exact matching
+            const oldExactSet = new Set(oldTexts.map(t => t.text));
+            
+            // Mark elements in new doc
+            newTexts.forEach(newItem => {
+                // Exact match - unchanged
+                if (oldExactSet.has(newItem.text)) {
+                    return;
+                }
+                
+                // Find best match in old texts
+                let bestMatch = null;
+                let bestScore = 0;
+                
+                for (const oldItem of oldTexts) {
+                    // Skip if already matched
+                    if (oldItem.matched) continue;
+                    
+                    // Calculate similarity
+                    const score = calculateTextSimilarity(oldItem.text, newItem.text);
+                    
+                    if (score > bestScore) {
+                        bestScore = score;
+                        bestMatch = oldItem;
+                    }
+                }
+                
+                if (bestScore >= 0.5 && bestScore < 1.0) {
+                    // Similar but changed
+                    newItem.element.classList.add('diff-changed');
+                    if (bestMatch) {
+                        bestMatch.matched = true;
+                        bestMatch.element.classList.add('diff-changed');
+                    }
+                } else if (bestScore < 0.5) {
+                    // New content
+                    newItem.element.classList.add('diff-new');
                 }
             });
             
-            // Build map of new elements
-            const newByType = {};
-            newDoc.body.querySelectorAll(selectors).forEach((el, idx) => {
-                const tag = el.tagName.toLowerCase();
-                if (!newByType[tag]) newByType[tag] = [];
-                const text = el.innerText.trim().replace(/\s+/g, ' ').toLowerCase();
-                if (text.length >= 5) {
-                    newByType[tag].push({
-                        index: newByType[tag].length,
-                        text: text,
-                        textStart: text.substring(0, 50),
-                        element: el
-                    });
+            // Mark removed elements in old doc (not matched)
+            oldTexts.forEach(oldItem => {
+                if (!oldItem.matched && !oldExactSet.has(oldItem.text)) {
+                    // Check if it exists in new
+                    const existsInNew = newTexts.some(n => n.text === oldItem.text);
+                    if (!existsInNew) {
+                        // Check if similar exists
+                        const hasSimilar = newTexts.some(n => calculateTextSimilarity(oldItem.text, n.text) >= 0.5);
+                        if (!hasSimilar) {
+                            oldItem.element.classList.add('diff-removed');
+                        }
+                    }
                 }
             });
-            
-            // Compare by element type and position
-            for (const tag in newByType) {
-                const oldList = oldByType[tag] || [];
-                const newList = newByType[tag] || [];
-                
-                // Create set of old texts for quick lookup
-                const oldTextsSet = new Set(oldList.map(o => o.text));
-                const oldStartsSet = new Set(oldList.map(o => o.textStart));
-                
-                newList.forEach((newItem, idx) => {
-                    const el = newItem.element;
-                    
-                    // Case 1: Exact match exists - no highlight
-                    if (oldTextsSet.has(newItem.text)) {
-                        return; // Unchanged
-                    }
-                    
-                    // Case 2: Same position exists in old - check if changed
-                    if (idx < oldList.length) {
-                        const oldItem = oldList[idx];
-                        
-                        // Check similarity by common words
-                        const similarity = calculateSimilarity(oldItem.text, newItem.text);
-                        
-                        if (similarity > 0.3) {
-                            // Similar content at same position = CHANGED (orange)
-                            el.classList.add('diff-changed');
-                            return;
-                        }
-                    }
-                    
-                    // Case 3: Check if start is similar to any old element
-                    let foundSimilar = false;
-                    for (const oldItem of oldList) {
-                        const similarity = calculateSimilarity(oldItem.text, newItem.text);
-                        if (similarity > 0.4) {
-                            // Found similar content elsewhere = CHANGED
-                            el.classList.add('diff-changed');
-                            foundSimilar = true;
-                            break;
-                        }
-                    }
-                    
-                    if (!foundSimilar) {
-                        // Case 4: No similar content found = NEW (green)
-                        el.classList.add('diff-new');
-                    }
-                });
-            }
         }
         
-        function calculateSimilarity(text1, text2) {
-            // Calculate Jaccard similarity of words
+        function collectTextElements(doc) {
+            const results = [];
+            const processed = new Set();
+            
+            // Walk through all elements that contain direct text
+            const walker = doc.createTreeWalker(
+                doc.body,
+                NodeFilter.SHOW_ELEMENT,
+                {
+                    acceptNode: function(node) {
+                        // Skip script, style, hidden elements
+                        if (['SCRIPT', 'STYLE', 'NOSCRIPT', 'META', 'LINK'].includes(node.tagName)) {
+                            return NodeFilter.FILTER_REJECT;
+                        }
+                        // Accept elements with meaningful text
+                        const text = getDirectText(node);
+                        if (text.length >= 10) {
+                            return NodeFilter.FILTER_ACCEPT;
+                        }
+                        return NodeFilter.FILTER_SKIP;
+                    }
+                }
+            );
+            
+            let node;
+            while (node = walker.nextNode()) {
+                const text = node.innerText.trim().replace(/\s+/g, ' ');
+                if (text.length >= 10 && !processed.has(text)) {
+                    // Don't add if parent already has same text (avoid duplicates)
+                    let parentHasSame = false;
+                    let parent = node.parentElement;
+                    while (parent && parent !== doc.body) {
+                        const parentText = parent.innerText.trim().replace(/\s+/g, ' ');
+                        if (parentText === text) {
+                            parentHasSame = true;
+                            break;
+                        }
+                        parent = parent.parentElement;
+                    }
+                    
+                    if (!parentHasSame) {
+                        results.push({
+                            element: node,
+                            text: text,
+                            matched: false
+                        });
+                        processed.add(text);
+                    }
+                }
+            }
+            
+            return results;
+        }
+        
+        function getDirectText(element) {
+            // Get text directly in this element (not from children)
+            let text = '';
+            for (const child of element.childNodes) {
+                if (child.nodeType === Node.TEXT_NODE) {
+                    text += child.textContent;
+                }
+            }
+            return text.trim();
+        }
+        
+        function calculateTextSimilarity(text1, text2) {
+            if (text1 === text2) return 1.0;
+            if (!text1 || !text2) return 0;
+            
+            // Normalize
+            const t1 = text1.toLowerCase();
+            const t2 = text2.toLowerCase();
+            
+            // 1. Check character-level similarity for small changes (numbers, dates)
+            const charSim = calculateCharSimilarity(t1, t2);
+            
+            // 2. Check word-level similarity
+            const wordSim = calculateWordSimilarity(t1, t2);
+            
+            // Return the higher score (more lenient matching)
+            return Math.max(charSim, wordSim);
+        }
+        
+        function calculateCharSimilarity(text1, text2) {
+            if (text1 === text2) return 1.0;
+            if (text1.length === 0 || text2.length === 0) return 0;
+            
+            // For very long texts, sample
+            const maxLen = Math.max(text1.length, text2.length);
+            const minLen = Math.min(text1.length, text2.length);
+            
+            // If lengths are very different, low similarity
+            if (minLen / maxLen < 0.7) return 0.3;
+            
+            // Count matching characters at same position
+            let matches = 0;
+            const len = Math.min(text1.length, text2.length, 500);
+            
+            for (let i = 0; i < len; i++) {
+                if (text1[i] === text2[i]) matches++;
+            }
+            
+            return matches / Math.max(text1.length, text2.length);
+        }
+        
+        function calculateWordSimilarity(text1, text2) {
             const words1 = new Set(text1.split(/\s+/).filter(w => w.length > 2));
             const words2 = new Set(text2.split(/\s+/).filter(w => w.length > 2));
             
@@ -13228,6 +13353,170 @@ ${ann.note ? `**💬 הוראות נוספות:** ${ann.note}` : ''}
                 panel.style.display = 'none';
                 btn.classList.remove('active');
             }
+        }
+        
+        // ============ Keyword Density Analysis Functions ============
+        
+        function toggleDensityReport() {
+            const panel = document.getElementById('densityReportPanel');
+            
+            if (panel.style.display === 'none') {
+                panel.style.display = 'flex';
+                // Hide other panels
+                document.getElementById('seoReportPanel').style.display = 'none';
+                document.getElementById('seoReportBtn').classList.remove('active');
+                document.getElementById('aiReportPanel').style.display = 'none';
+                document.getElementById('aiReportBtn').classList.remove('active');
+                document.getElementById('competitorReportPanel').style.display = 'none';
+                document.getElementById('competitorReportBtn')?.classList.remove('active');
+                
+                // Auto-fill keyword from page info
+                if (selectedPage?.keyword) {
+                    document.getElementById('densityKeyword').value = selectedPage.keyword;
+                }
+            } else {
+                panel.style.display = 'none';
+            }
+        }
+        
+        async function runDensityAnalysis() {
+            if (!selectedPage) {
+                alert('אנא בחר עמוד');
+                return;
+            }
+            
+            const keyword = document.getElementById('densityKeyword').value.trim() || selectedPage.keyword;
+            if (!keyword) {
+                alert('אנא הזן מילת מפתח');
+                return;
+            }
+            
+            const resultsDiv = document.getElementById('densityAnalysisResults');
+            resultsDiv.innerHTML = `
+                <div style="text-align: center; padding: 2rem;">
+                    <div class="spinner"></div>
+                    <p>מנתח צפיפות...</p>
+                </div>
+            `;
+            
+            try {
+                const response = await apiCall('/api/analyze-density', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        page_path: selectedPage.path,
+                        keyword: keyword
+                    })
+                });
+                
+                if (response.success) {
+                    renderDensityResults(response.analysis);
+                } else {
+                    resultsDiv.innerHTML = `
+                        <div style="color: #ef4444; padding: 1rem; text-align: center;">
+                            ❌ שגיאה: ${response.error || 'שגיאה לא ידועה'}
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                console.error('Density analysis error:', error);
+                resultsDiv.innerHTML = `
+                    <div style="color: #ef4444; padding: 1rem; text-align: center;">
+                        ❌ שגיאה בניתוח: ${error.message}
+                    </div>
+                `;
+            }
+        }
+        
+        function renderDensityResults(analysis) {
+            const resultsDiv = document.getElementById('densityAnalysisResults');
+            const status = analysis.frequencyStatus || {};
+            const distribution = analysis.distribution || {};
+            const h2 = analysis.h2Analysis || {};
+            const position = analysis.position || {};
+            
+            resultsDiv.innerHTML = `
+                <div class="density-results" style="direction: rtl;">
+                    <!-- Summary Cards -->
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; margin-bottom: 1rem;">
+                        <div style="background: var(--bg-tertiary); padding: 1rem; border-radius: 8px; text-align: center;">
+                            <div style="font-size: 1.5rem; font-weight: bold;">${analysis.frequency?.display || 'N/A'}</div>
+                            <div style="font-size: 0.8rem; color: var(--text-muted);">תדירות</div>
+                        </div>
+                        <div style="background: var(--bg-tertiary); padding: 1rem; border-radius: 8px; text-align: center;">
+                            <div style="font-size: 1.5rem; font-weight: bold;">${analysis.totalOccurrences || 0}</div>
+                            <div style="font-size: 0.8rem; color: var(--text-muted);">מופעים</div>
+                        </div>
+                        <div style="background: ${status.color || '#888'}; color: white; padding: 1rem; border-radius: 8px; text-align: center;">
+                            <div style="font-size: 1.5rem;">${status.icon || '❓'}</div>
+                            <div style="font-size: 0.8rem;">${status.label || 'לא ידוע'}</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Position Check -->
+                    <div style="background: var(--bg-tertiary); padding: 0.75rem; border-radius: 8px; margin-bottom: 0.75rem;">
+                        <div style="font-weight: bold; margin-bottom: 0.5rem;">📍 מיקום</div>
+                        <div style="display: flex; gap: 1rem;">
+                            <span>${position.inFirstParagraph ? '✅' : '❌'} פסקה ראשונה</span>
+                            <span>${position.inConclusion ? '✅' : '❌'} סיום</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Distribution -->
+                    <div style="background: var(--bg-tertiary); padding: 0.75rem; border-radius: 8px; margin-bottom: 0.75rem;">
+                        <div style="font-weight: bold; margin-bottom: 0.5rem;">📊 פיזור ${distribution.isBalanced ? '✅' : '⚠️'}</div>
+                        <div style="display: flex; gap: 0.5rem; align-items: flex-end; height: 60px;">
+                            <div style="flex: 1; display: flex; flex-direction: column; align-items: center;">
+                                <div style="background: #10b981; width: 100%; height: ${(distribution.firstThird?.percentage || 0) * 0.6}px; max-height: 60px; border-radius: 4px 4px 0 0;"></div>
+                                <small style="font-size: 0.7rem;">${distribution.firstThird?.percentage || 0}%</small>
+                            </div>
+                            <div style="flex: 1; display: flex; flex-direction: column; align-items: center;">
+                                <div style="background: #3b82f6; width: 100%; height: ${(distribution.middleThird?.percentage || 0) * 0.6}px; max-height: 60px; border-radius: 4px 4px 0 0;"></div>
+                                <small style="font-size: 0.7rem;">${distribution.middleThird?.percentage || 0}%</small>
+                            </div>
+                            <div style="flex: 1; display: flex; flex-direction: column; align-items: center;">
+                                <div style="background: #f59e0b; width: 100%; height: ${(distribution.lastThird?.percentage || 0) * 0.6}px; max-height: 60px; border-radius: 4px 4px 0 0;"></div>
+                                <small style="font-size: 0.7rem;">${distribution.lastThird?.percentage || 0}%</small>
+                            </div>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--text-muted); margin-top: 0.25rem;">
+                            <span>שליש 1</span>
+                            <span>שליש 2</span>
+                            <span>שליש 3</span>
+                        </div>
+                    </div>
+                    
+                    <!-- H2 Analysis -->
+                    <div style="background: var(--bg-tertiary); padding: 0.75rem; border-radius: 8px; margin-bottom: 0.75rem;">
+                        <div style="font-weight: bold; margin-bottom: 0.5rem;">
+                            🏷️ כותרות H2 ${h2.isOverLimit ? '⚠️' : '✅'}
+                        </div>
+                        <div style="font-size: 0.9rem;">
+                            ${h2.h2WithKeyword || 0}/${h2.totalH2 || 0} עם מילת מפתח (${h2.percentage || 0}%)
+                            <br><small style="color: var(--text-muted);">מקסימום מותר: ${h2.maxAllowed || 0}</small>
+                        </div>
+                    </div>
+                    
+                    <!-- Paragraph Issues -->
+                    ${(analysis.paragraphIssues || []).length > 0 ? `
+                        <div style="background: #fef3c7; color: #92400e; padding: 0.75rem; border-radius: 8px; margin-bottom: 0.75rem;">
+                            <div style="font-weight: bold; margin-bottom: 0.5rem;">⚠️ פסקאות בעייתיות</div>
+                            ${analysis.paragraphIssues.map(issue => `
+                                <div style="font-size: 0.85rem; margin-bottom: 0.25rem;">
+                                    <strong>פסקה ${issue.index}:</strong> ${issue.occurrences} מופעים (מקס ${issue.maxAllowed})
+                                </div>
+                            `).join('')}
+                        </div>
+                    ` : ''}
+                    
+                    <!-- Word Family -->
+                    <div style="background: var(--bg-tertiary); padding: 0.75rem; border-radius: 8px;">
+                        <div style="font-weight: bold; margin-bottom: 0.5rem;">🔤 משפחת מילים שנספרו</div>
+                        <div style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.6;">
+                            ${(analysis.variations || []).join(', ')}
+                        </div>
+                    </div>
+                </div>
+            `;
         }
         
         // ============ Competitor Analysis Functions ============
@@ -20034,6 +20323,7 @@ ${additionalInstructions}
                             <button type="button" class="shortcode-add-btn" onclick="addShortcodeToStep(${index}, 'PAGE_HTML')">PAGE_HTML</button>
                             <button type="button" class="shortcode-add-btn" onclick="addShortcodeToStep(${index}, 'PAGE_KEYWORD')">PAGE_KEYWORD</button>
                             <button type="button" class="shortcode-add-btn" onclick="addShortcodeToStep(${index}, 'KEYWORDS_AUTOCOMPLETE')">KEYWORDS</button>
+                            <button type="button" class="shortcode-add-btn" onclick="addShortcodeToStep(${index}, 'DENSITY_ANALYSIS')">DENSITY</button>
                             <button type="button" class="shortcode-add-btn" onclick="addShortcodeToStep(${index}, 'SERP_ORGANIC')">SERP</button>
                             <button type="button" class="shortcode-add-btn" onclick="addShortcodeToStep(${index}, 'SERP_AI_OVERVIEW')">AI_OVERVIEW</button>
                             <button type="button" class="shortcode-add-btn" onclick="addShortcodeToStep(${index}, 'STEP'+(index)+'_REPORT')">PREV_REPORT</button>

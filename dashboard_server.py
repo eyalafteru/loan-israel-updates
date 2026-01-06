@@ -1573,6 +1573,336 @@ def get_special_page_status(page_path):
         return jsonify({"success": False, "error": str(e)}), 500
 
 
+# ============ API Routes - Keyword Density Analysis ============
+
+def get_dynamic_threshold(total_words):
+    """Get dynamic thresholds based on total word count"""
+    if total_words <= 600:
+        return {
+            "frequency": {"ideal": 100, "max": 150},
+            "maxTotal": 6,
+            "maxPerParagraph": 2
+        }
+    if total_words <= 1000:
+        return {
+            "frequency": {"ideal": 110, "max": 170},
+            "maxTotal": 10,
+            "maxPerParagraph": 2
+        }
+    if total_words <= 1500:
+        return {
+            "frequency": {"ideal": 120, "max": 180},
+            "maxTotal": 14,
+            "maxPerParagraph": 2
+        }
+    return {
+        "frequency": {"ideal": 130, "max": 200},
+        "maxTotal": 18,
+        "maxPerParagraph": 3
+    }
+
+def get_max_h2_with_keyword(total_h2):
+    """Get max H2 headings with keyword (combined rule: min of 40% or 4)"""
+    by_percentage = int(total_h2 * 0.4)
+    absolute_max = 4
+    return max(1, min(by_percentage, absolute_max))
+
+def normalize_hebrew(text):
+    """Normalize Hebrew text for analysis"""
+    import re
+    if not text:
+        return ''
+    # Remove niqqud
+    text = re.sub(r'[\u0591-\u05C7]', '', text)
+    # Keep Hebrew, English, numbers, spaces
+    text = re.sub(r'[^\u0590-\u05FFa-zA-Z0-9\s]', ' ', text)
+    text = re.sub(r'\s+', ' ', text)
+    return text.strip()
+
+def get_keyword_variations(keyword):
+    """Generate Hebrew variations of a keyword"""
+    normalized = normalize_hebrew(keyword)
+    words = normalized.split()
+    variations = set([normalized])
+    
+    hebrew_prefixes = ['ה', 'ב', 'ל', 'מ', 'ו', 'כ', 'ש', 'וה', 'וב', 'ול', 'שה', 'שב', 'של']
+    
+    if len(words) == 1:
+        word = words[0]
+        # Add prefixed versions
+        for prefix in hebrew_prefixes:
+            variations.add(prefix + word)
+        
+        # Common plural forms
+        if word.endswith('ה'):
+            variations.add(word[:-1] + 'ות')  # הלוואה -> הלוואות
+            variations.add(word[:-1] + 'ת')   # הלוואה -> הלוואת
+        variations.add(word + 'ים')
+        variations.add(word + 'ות')
+        
+        # With article
+        if not word.startswith('ה'):
+            variations.add('ה' + word)
+    else:
+        # Multi-word: add prefix to first word
+        first_word = words[0]
+        rest = ' '.join(words[1:])
+        
+        for prefix in hebrew_prefixes[:7]:
+            if not first_word.startswith(prefix):
+                variations.add(prefix + first_word + ' ' + rest)
+    
+    return list(variations)
+
+def count_occurrences(text, variations):
+    """Count keyword occurrences in text"""
+    import re
+    normalized_text = normalize_hebrew(text.lower())
+    total_count = 0
+    
+    for variation in variations:
+        normalized_var = normalize_hebrew(variation.lower())
+        try:
+            pattern = re.compile(r'\b' + re.escape(normalized_var) + r'\b', re.IGNORECASE)
+            matches = pattern.findall(normalized_text)
+            total_count += len(matches)
+        except:
+            if normalized_var in normalized_text:
+                total_count += normalized_text.count(normalized_var)
+    
+    return total_count
+
+def extract_hebrew_words(text):
+    """Extract Hebrew words from text"""
+    import re
+    normalized = normalize_hebrew(text)
+    words = normalized.split()
+    return [w for w in words if re.search(r'[\u0590-\u05FF]', w)]
+
+def analyze_keyword_density(html_content, keyword):
+    """Analyze keyword density in HTML content"""
+    from bs4 import BeautifulSoup
+    import re
+    
+    soup = BeautifulSoup(html_content, 'html.parser')
+    
+    # Remove script and style tags
+    for tag in soup(['script', 'style']):
+        tag.decompose()
+    
+    # Get body text
+    body_text = soup.get_text(separator=' ')
+    words = extract_hebrew_words(body_text)
+    total_words = len(words)
+    
+    # Get variations
+    variations = get_keyword_variations(keyword)
+    
+    # Count total occurrences
+    total_occurrences = count_occurrences(body_text, variations)
+    
+    # Calculate frequency
+    frequency_ratio = round(total_words / total_occurrences) if total_occurrences > 0 else 0
+    frequency_display = f"1:{frequency_ratio}" if total_occurrences > 0 else "אין מופעים"
+    
+    # Get thresholds
+    thresholds = get_dynamic_threshold(total_words)
+    
+    # Determine status
+    if frequency_ratio == 0:
+        status = {"code": "missing", "label": "חסר", "color": "#ef4444", "icon": "🔴"}
+    elif frequency_ratio >= thresholds["frequency"]["ideal"]:
+        status = {"code": "ideal", "label": "מצוין", "color": "#10b981", "icon": "✅"}
+    elif frequency_ratio >= thresholds["frequency"]["max"] * 0.7:
+        status = {"code": "good", "label": "תקין", "color": "#10b981", "icon": "✅"}
+    elif frequency_ratio >= 80:
+        status = {"code": "high", "label": "גבוה", "color": "#f59e0b", "icon": "⚠️"}
+    elif frequency_ratio >= 60:
+        status = {"code": "warning", "label": "בעייתי", "color": "#f59e0b", "icon": "⚠️"}
+    else:
+        status = {"code": "critical", "label": "קריטי - ספאם", "color": "#ef4444", "icon": "🔴"}
+    
+    # Analyze paragraphs
+    paragraph_issues = []
+    paragraphs = soup.find_all('p')
+    for i, p in enumerate(paragraphs):
+        p_text = p.get_text()
+        if len(p_text) < 20:
+            continue
+        p_words = extract_hebrew_words(p_text)
+        p_word_count = len(p_words)
+        p_occurrences = count_occurrences(p_text, variations)
+        
+        # Determine max allowed based on paragraph length
+        max_allowed = 2
+        if p_word_count > 120:
+            max_allowed = 3
+        elif p_word_count < 50:
+            max_allowed = 1
+        
+        if p_occurrences > max_allowed:
+            paragraph_issues.append({
+                "index": i + 1,
+                "occurrences": p_occurrences,
+                "maxAllowed": max_allowed,
+                "preview": p_text[:100] + '...' if len(p_text) > 100 else p_text,
+                "message": f"פסקה {i + 1}: {p_occurrences} מופעים (מקס {max_allowed})"
+            })
+    
+    # Analyze position
+    first_p = paragraphs[0] if paragraphs else None
+    first_p_text = first_p.get_text() if first_p else ""
+    in_first_paragraph = count_occurrences(first_p_text, variations) > 0
+    
+    # Last 10% of words
+    last_words = words[int(len(words) * 0.9):] if words else []
+    last_text = ' '.join(last_words)
+    in_conclusion = count_occurrences(last_text, variations) > 0
+    
+    # Analyze distribution
+    if total_words >= 100:
+        third_size = len(words) // 3
+        first_third_text = ' '.join(words[:third_size])
+        middle_third_text = ' '.join(words[third_size:third_size*2])
+        last_third_text = ' '.join(words[third_size*2:])
+        
+        first_count = count_occurrences(first_third_text, variations)
+        middle_count = count_occurrences(middle_third_text, variations)
+        last_count = count_occurrences(last_third_text, variations)
+        total_in_thirds = first_count + middle_count + last_count
+        
+        distribution = {
+            "firstThird": {"count": first_count, "percentage": round(first_count / total_in_thirds * 100) if total_in_thirds > 0 else 0},
+            "middleThird": {"count": middle_count, "percentage": round(middle_count / total_in_thirds * 100) if total_in_thirds > 0 else 0},
+            "lastThird": {"count": last_count, "percentage": round(last_count / total_in_thirds * 100) if total_in_thirds > 0 else 0},
+            "isBalanced": True,
+            "issues": []
+        }
+        
+        # Check if any third has more than 50%
+        for key, data in [("firstThird", "שליש הראשון"), ("middleThird", "שליש האמצעי"), ("lastThird", "שליש האחרון")]:
+            if distribution[key]["percentage"] > 50:
+                distribution["isBalanced"] = False
+                distribution["issues"].append({
+                    "type": "distribution_unbalanced",
+                    "message": f"{distribution[key]['percentage']}% מהמופעים ב{data} - לפזר"
+                })
+    else:
+        distribution = {"firstThird": {}, "middleThird": {}, "lastThird": {}, "isBalanced": True, "issues": []}
+    
+    # Analyze H2 headings
+    h2s = soup.find_all('h2')
+    h2_total = len(h2s)
+    h2_with_keyword = sum(1 for h2 in h2s if count_occurrences(h2.get_text(), variations) > 0)
+    max_h2_allowed = get_max_h2_with_keyword(h2_total)
+    h2_percentage = round(h2_with_keyword / h2_total * 100) if h2_total > 0 else 0
+    h2_over_limit = h2_with_keyword > max_h2_allowed
+    h2_to_remove = h2_with_keyword - max_h2_allowed if h2_over_limit else 0
+    
+    h2_analysis = {
+        "totalH2": h2_total,
+        "h2WithKeyword": h2_with_keyword,
+        "maxAllowed": max_h2_allowed,
+        "percentage": h2_percentage,
+        "isOverLimit": h2_over_limit,
+        "toRemove": h2_to_remove,
+        "issues": []
+    }
+    
+    if h2_over_limit:
+        h2_analysis["issues"].append({
+            "type": "h2_over_limit",
+            "message": f"H2 עם מילת מפתח: {h2_with_keyword}/{h2_total} ({h2_percentage}%) - לגוון {h2_to_remove} כותרות"
+        })
+    
+    # Generate AI summary
+    ai_lines = []
+    ai_lines.append(f'📊 ניתוח צפיפות מילת מפתח: "{keyword}"')
+    ai_lines.append('')
+    ai_lines.append(f'סטטוס: {status["icon"]} {status["label"]} ({frequency_display}, יעד: 1:{thresholds["frequency"]["ideal"]}+)')
+    ai_lines.append(f'מופעים: {total_occurrences} | מילים: {total_words}')
+    ai_lines.append('')
+    
+    all_issues = []
+    for issue in paragraph_issues:
+        all_issues.append(f'• {issue["message"]} - לתקן')
+    
+    if not in_first_paragraph:
+        all_issues.append('• חסר מופע בפסקה הראשונה - להוסיף')
+    if not in_conclusion:
+        all_issues.append('• חסר מופע בסיום - להוסיף')
+    
+    for issue in h2_analysis["issues"]:
+        all_issues.append(f'• {issue["message"]}')
+    
+    for issue in distribution["issues"]:
+        all_issues.append(f'• {issue["message"]}')
+    
+    if all_issues:
+        ai_lines.append('בעיות שזוהו:')
+        ai_lines.extend(all_issues)
+        ai_lines.append('')
+    else:
+        ai_lines.append('✅ לא נמצאו בעיות')
+        ai_lines.append('')
+    
+    ai_lines.append('משפחת מילים שנספרו:')
+    ai_lines.append(', '.join(variations[:10]))
+    
+    ai_summary = '\n'.join(ai_lines)
+    
+    return {
+        "keyword": keyword,
+        "variations": variations[:10],
+        "totalWords": total_words,
+        "totalOccurrences": total_occurrences,
+        "frequency": {"ratio": frequency_ratio, "display": frequency_display},
+        "frequencyStatus": status,
+        "thresholds": thresholds,
+        "paragraphIssues": paragraph_issues,
+        "position": {
+            "inFirstParagraph": in_first_paragraph,
+            "inConclusion": in_conclusion
+        },
+        "distribution": distribution,
+        "h2Analysis": h2_analysis,
+        "aiSummary": ai_summary
+    }
+
+@app.route('/api/analyze-density', methods=['POST'])
+def analyze_density():
+    """Analyze keyword density for a page"""
+    try:
+        data = request.json
+        page_path = data.get('page_path')
+        keyword = data.get('keyword')
+        
+        if not page_path or not keyword:
+            return jsonify({"success": False, "error": "Missing page_path or keyword"}), 400
+        
+        # Resolve page path
+        full_path = BASE_DIR / page_path
+        
+        if not full_path.exists():
+            return jsonify({"success": False, "error": f"Page not found: {page_path}"}), 404
+        
+        # Read HTML content
+        with open(full_path, 'r', encoding='utf-8') as f:
+            html_content = f.read()
+        
+        # Run analysis
+        result = analyze_keyword_density(html_content, keyword)
+        
+        return jsonify({
+            "success": True,
+            "analysis": result
+        })
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        return jsonify({"success": False, "error": str(e)}), 500
+
+
 # ============ API Routes - Custom Data Sources ============
 
 @app.route('/api/data-sources', methods=['GET'])
@@ -6797,6 +7127,19 @@ def trigger_step(page_path, agent_id, step_num, total_steps):
             engine.context["PAGE_KEYWORD"] = keyword
             engine.context["OUTPUT_PATH"] = str(report_full_path)
             
+            # Generate density analysis for DENSITY_ANALYSIS shortcode
+            if page_full_path.exists() and keyword:
+                try:
+                    with open(page_full_path, 'r', encoding='utf-8') as f:
+                        page_html_content = f.read()
+                    density_result = analyze_keyword_density(page_html_content, keyword)
+                    engine.context["DENSITY_ANALYSIS"] = density_result.get("aiSummary", "לא זמין")
+                except Exception as density_err:
+                    print(f"[trigger_step] Density analysis error: {density_err}")
+                    engine.context["DENSITY_ANALYSIS"] = "שגיאה בניתוח צפיפות"
+            else:
+                engine.context["DENSITY_ANALYSIS"] = "לא זמין - חסר עמוד או מילת מפתח"
+            
             # Previous step report shortcode
             if prev_report:
                 engine.context[f"STEP{step_num-1}_REPORT"] = prev_report
@@ -8198,8 +8541,9 @@ def cleanup_html_for_wordpress(original_html):
     html = re.sub(r'<!--\s*/?wp:[a-z-]+\s*(?:\{[^}]*\})?\s*-->\s*', '', html)
     html = html.strip()
     
-    # Add Gutenberg HTML block marker at the start (WordPress format)
-    html = '<!-- wp:html -->\n\n\n\n' + html
+    # Add Gutenberg HTML block markers at start AND end (WordPress format)
+    # Both opening and closing tags are REQUIRED for wpautop to be disabled!
+    html = '<!-- wp:html -->\n' + html + '\n<!-- /wp:html -->'
     cleanup_info["gutenberg_wrapper_added"] = True
     
     cleanup_info["cleaned_length"] = len(html)

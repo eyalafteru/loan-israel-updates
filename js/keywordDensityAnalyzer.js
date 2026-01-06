@@ -41,6 +41,85 @@ class KeywordDensityAnalyzer {
     }
     
     /**
+     * Get dynamic thresholds based on total word count
+     * Longer content = stricter thresholds (lower frequency)
+     */
+    getDynamicThreshold(totalWords) {
+        if (totalWords <= 600) {
+            return {
+                frequency: { ideal: 100, max: 150 },  // 1:100 to 1:150
+                maxTotal: 6,
+                maxPerParagraph: 2
+            };
+        }
+        if (totalWords <= 1000) {
+            return {
+                frequency: { ideal: 110, max: 170 },
+                maxTotal: 10,
+                maxPerParagraph: 2
+            };
+        }
+        if (totalWords <= 1500) {
+            return {
+                frequency: { ideal: 120, max: 180 },
+                maxTotal: 14,
+                maxPerParagraph: 2
+            };
+        }
+        // 1500+ words
+        return {
+            frequency: { ideal: 130, max: 200 },
+            maxTotal: 18,
+            maxPerParagraph: 3
+        };
+    }
+    
+    /**
+     * Get max H2 headings with keyword (combined rule: min of 40% or 4)
+     */
+    getMaxH2WithKeyword(totalH2) {
+        const byPercentage = Math.floor(totalH2 * 0.4);  // 40%
+        const absoluteMax = 4;  // Never more than 4
+        return Math.max(1, Math.min(byPercentage, absoluteMax));
+    }
+    
+    /**
+     * Calculate frequency ratio (1:X)
+     */
+    calculateFrequency(totalWords, totalOccurrences) {
+        if (totalOccurrences === 0) return { ratio: 0, display: 'אין מופעים' };
+        const ratio = Math.round(totalWords / totalOccurrences);
+        return {
+            ratio,
+            display: `1:${ratio}`
+        };
+    }
+    
+    /**
+     * Get frequency-based status (new system)
+     */
+    getFrequencyStatus(frequency, totalWords) {
+        const thresholds = this.getDynamicThreshold(totalWords);
+        
+        if (frequency === 0) {
+            return { code: 'missing', label: 'חסר', color: '#ef4444', icon: '🔴' };
+        }
+        if (frequency >= thresholds.frequency.ideal) {
+            return { code: 'ideal', label: 'מצוין', color: '#10b981', icon: '✅' };
+        }
+        if (frequency >= thresholds.frequency.max * 0.7) {
+            return { code: 'good', label: 'תקין', color: '#10b981', icon: '✅' };
+        }
+        if (frequency >= 80) {
+            return { code: 'high', label: 'גבוה', color: '#f59e0b', icon: '⚠️' };
+        }
+        if (frequency >= 60) {
+            return { code: 'warning', label: 'בעייתי', color: '#f59e0b', icon: '⚠️' };
+        }
+        return { code: 'critical', label: 'קריטי - ספאם', color: '#ef4444', icon: '🔴' };
+    }
+    
+    /**
      * Normalize Hebrew text for analysis
      * - Removes niqqud (vowel marks)
      * - Normalizes whitespace
@@ -484,6 +563,338 @@ class KeywordDensityAnalyzer {
     }
     
     /**
+     * Analyze paragraphs for keyword density issues
+     */
+    analyzeParagraphs() {
+        const parsed = this.parseHTML();
+        const variations = this.getKeywordVariations(this.keyword);
+        const paragraphs = [];
+        const issues = [];
+        
+        // Get all paragraphs from the document
+        const doc = parsed.doc;
+        const pElements = doc.querySelectorAll('p');
+        
+        pElements.forEach((p, index) => {
+            const text = p.textContent.trim();
+            if (text.length < 20) return; // Skip very short paragraphs
+            
+            const words = this.extractHebrewWords(text);
+            const wordCount = words.length;
+            const result = this.countOccurrences(text, variations);
+            
+            // Determine max allowed based on paragraph length
+            let maxAllowed = 2;
+            if (wordCount > 120) maxAllowed = 3;
+            else if (wordCount < 50) maxAllowed = 1;
+            
+            const isIssue = result.totalCount > maxAllowed;
+            
+            const paragraphData = {
+                index: index + 1,
+                wordCount,
+                occurrences: result.totalCount,
+                maxAllowed,
+                isIssue,
+                preview: text.substring(0, 100) + (text.length > 100 ? '...' : '')
+            };
+            
+            paragraphs.push(paragraphData);
+            
+            if (isIssue) {
+                issues.push({
+                    type: 'paragraph_density',
+                    index: index + 1,
+                    occurrences: result.totalCount,
+                    maxAllowed,
+                    preview: paragraphData.preview,
+                    message: `פסקה ${index + 1}: ${result.totalCount} מופעים (מקס ${maxAllowed})`
+                });
+            }
+        });
+        
+        return { paragraphs, issues };
+    }
+    
+    /**
+     * Analyze keyword position (intro, conclusion, headings)
+     */
+    analyzePosition() {
+        const parsed = this.parseHTML();
+        const variations = this.getKeywordVariations(this.keyword);
+        const bodyText = parsed.bodyText;
+        const words = this.extractHebrewWords(bodyText);
+        const totalWords = words.length;
+        
+        // Get first 10% of content
+        const introEnd = Math.floor(totalWords * 0.1);
+        const introText = words.slice(0, Math.max(50, introEnd)).join(' ');
+        const introResult = this.countOccurrences(introText, variations);
+        
+        // Get last 10% of content
+        const conclusionStart = Math.floor(totalWords * 0.9);
+        const conclusionText = words.slice(Math.min(conclusionStart, totalWords - 50)).join(' ');
+        const conclusionResult = this.countOccurrences(conclusionText, variations);
+        
+        // First paragraph specifically
+        const doc = parsed.doc;
+        const firstP = doc.querySelector('p');
+        const firstParagraphText = firstP ? firstP.textContent : '';
+        const firstPResult = this.countOccurrences(firstParagraphText, variations);
+        
+        return {
+            inIntro: introResult.totalCount > 0,
+            inFirstParagraph: firstPResult.totalCount > 0,
+            inConclusion: conclusionResult.totalCount > 0,
+            introCount: introResult.totalCount,
+            conclusionCount: conclusionResult.totalCount,
+            issues: []
+        };
+    }
+    
+    /**
+     * Analyze distribution by thirds
+     */
+    analyzeDistribution() {
+        const parsed = this.parseHTML();
+        const variations = this.getKeywordVariations(this.keyword);
+        const bodyText = parsed.bodyText;
+        const words = this.extractHebrewWords(bodyText);
+        const totalWords = words.length;
+        
+        if (totalWords < 100) {
+            return {
+                firstThird: { percentage: 0, count: 0 },
+                middleThird: { percentage: 0, count: 0 },
+                lastThird: { percentage: 0, count: 0 },
+                isBalanced: true,
+                issues: []
+            };
+        }
+        
+        const thirdSize = Math.floor(totalWords / 3);
+        
+        const firstThirdText = words.slice(0, thirdSize).join(' ');
+        const middleThirdText = words.slice(thirdSize, thirdSize * 2).join(' ');
+        const lastThirdText = words.slice(thirdSize * 2).join(' ');
+        
+        const first = this.countOccurrences(firstThirdText, variations);
+        const middle = this.countOccurrences(middleThirdText, variations);
+        const last = this.countOccurrences(lastThirdText, variations);
+        
+        const total = first.totalCount + middle.totalCount + last.totalCount;
+        
+        const distribution = {
+            firstThird: {
+                count: first.totalCount,
+                percentage: total > 0 ? Math.round((first.totalCount / total) * 100) : 0
+            },
+            middleThird: {
+                count: middle.totalCount,
+                percentage: total > 0 ? Math.round((middle.totalCount / total) * 100) : 0
+            },
+            lastThird: {
+                count: last.totalCount,
+                percentage: total > 0 ? Math.round((last.totalCount / total) * 100) : 0
+            },
+            isBalanced: true,
+            issues: []
+        };
+        
+        // Check if any third has more than 50% of occurrences
+        if (distribution.firstThird.percentage > 50) {
+            distribution.isBalanced = false;
+            distribution.issues.push({
+                type: 'distribution_unbalanced',
+                message: `${distribution.firstThird.percentage}% מהמופעים בשליש הראשון - לפזר`
+            });
+        }
+        if (distribution.middleThird.percentage > 50) {
+            distribution.isBalanced = false;
+            distribution.issues.push({
+                type: 'distribution_unbalanced',
+                message: `${distribution.middleThird.percentage}% מהמופעים בשליש האמצעי - לפזר`
+            });
+        }
+        if (distribution.lastThird.percentage > 50) {
+            distribution.isBalanced = false;
+            distribution.issues.push({
+                type: 'distribution_unbalanced',
+                message: `${distribution.lastThird.percentage}% מהמופעים בשליש האחרון - לפזר`
+            });
+        }
+        
+        return distribution;
+    }
+    
+    /**
+     * Analyze H2 headings with combined rule
+     */
+    analyzeH2Combined() {
+        const parsed = this.parseHTML();
+        const variations = this.getKeywordVariations(this.keyword);
+        const h2s = parsed.headings.h2 || [];
+        
+        const totalH2 = h2s.length;
+        const maxAllowed = this.getMaxH2WithKeyword(totalH2);
+        
+        let h2WithKeyword = 0;
+        const h2Details = h2s.map((h, index) => {
+            const hasKeyword = this.countOccurrences(h.text, variations).totalCount > 0;
+            if (hasKeyword) h2WithKeyword++;
+            return {
+                index: index + 1,
+                text: h.text,
+                hasKeyword
+            };
+        });
+        
+        const percentage = totalH2 > 0 ? Math.round((h2WithKeyword / totalH2) * 100) : 0;
+        const isOverLimit = h2WithKeyword > maxAllowed;
+        const toRemove = isOverLimit ? h2WithKeyword - maxAllowed : 0;
+        
+        return {
+            totalH2,
+            h2WithKeyword,
+            maxAllowed,
+            percentage,
+            isOverLimit,
+            toRemove,
+            details: h2Details,
+            issues: isOverLimit ? [{
+                type: 'h2_over_limit',
+                message: `H2 עם מילת מפתח: ${h2WithKeyword}/${totalH2} (${percentage}%) - לגוון ${toRemove} כותרות`
+            }] : []
+        };
+    }
+    
+    /**
+     * Generate AI-ready summary for shortcode
+     */
+    generateAISummary() {
+        const analysis = this.analyzeAdvanced();
+        const lines = [];
+        
+        lines.push(`📊 ניתוח צפיפות מילת מפתח: "${this.keyword}"`);
+        lines.push('');
+        lines.push(`סטטוס: ${analysis.frequencyStatus.icon} ${analysis.frequencyStatus.label} (${analysis.frequency.display}, יעד: 1:${analysis.thresholds.frequency.ideal}+)`);
+        lines.push(`מופעים: ${analysis.totalOccurrences} | מילים: ${analysis.totalWords}`);
+        lines.push('');
+        
+        // Collect all issues
+        const allIssues = [];
+        
+        // Paragraph issues
+        analysis.paragraphAnalysis.issues.forEach(issue => {
+            allIssues.push(`• ${issue.message} - לתקן`);
+        });
+        
+        // Position issues
+        if (!analysis.positionAnalysis.inFirstParagraph) {
+            allIssues.push('• חסר מופע בפסקה הראשונה - להוסיף');
+        }
+        if (!analysis.positionAnalysis.inConclusion) {
+            allIssues.push('• חסר מופע בסיום - להוסיף');
+        }
+        
+        // H2 issues
+        analysis.h2Analysis.issues.forEach(issue => {
+            allIssues.push(`• ${issue.message}`);
+        });
+        
+        // Distribution issues
+        analysis.distributionAnalysis.issues.forEach(issue => {
+            allIssues.push(`• ${issue.message}`);
+        });
+        
+        if (allIssues.length > 0) {
+            lines.push('בעיות שזוהו:');
+            allIssues.forEach(issue => lines.push(issue));
+            lines.push('');
+        } else {
+            lines.push('✅ לא נמצאו בעיות');
+            lines.push('');
+        }
+        
+        lines.push('משפחת מילים שנספרו:');
+        lines.push(analysis.variations.slice(0, 10).join(', '));
+        
+        return lines.join('\n');
+    }
+    
+    /**
+     * Advanced analysis with new frequency-based system
+     */
+    analyzeAdvanced() {
+        const densityResult = this.calculateWeightedDensity();
+        const totalWords = densityResult.totalWords;
+        const totalOccurrences = densityResult.totalOccurrences;
+        
+        // Get dynamic thresholds
+        const thresholds = this.getDynamicThreshold(totalWords);
+        
+        // Calculate frequency
+        const frequency = this.calculateFrequency(totalWords, totalOccurrences);
+        
+        // Get frequency-based status
+        const frequencyStatus = this.getFrequencyStatus(frequency.ratio, totalWords);
+        
+        // Paragraph analysis
+        const paragraphAnalysis = this.analyzeParagraphs();
+        
+        // Position analysis
+        const positionAnalysis = this.analyzePosition();
+        
+        // Distribution analysis
+        const distributionAnalysis = this.analyzeDistribution();
+        
+        // H2 combined analysis
+        const h2Analysis = this.analyzeH2Combined();
+        
+        // Generate recommendations
+        const recommendations = [];
+        
+        paragraphAnalysis.issues.forEach(issue => {
+            recommendations.push(issue.message);
+        });
+        
+        if (!positionAnalysis.inFirstParagraph) {
+            recommendations.push('להוסיף מופע בפסקה הראשונה');
+        }
+        if (!positionAnalysis.inConclusion) {
+            recommendations.push('להוסיף מופע בסיום');
+        }
+        
+        h2Analysis.issues.forEach(issue => {
+            recommendations.push(issue.message);
+        });
+        
+        distributionAnalysis.issues.forEach(issue => {
+            recommendations.push(issue.message);
+        });
+        
+        return {
+            keyword: this.keyword,
+            variations: this.getKeywordVariations(this.keyword),
+            totalWords,
+            totalOccurrences,
+            frequency,
+            frequencyStatus,
+            thresholds,
+            paragraphAnalysis,
+            positionAnalysis,
+            distributionAnalysis,
+            h2Analysis,
+            recommendations,
+            // Legacy fields for backward compatibility
+            weightedDensity: densityResult.weightedDensity,
+            simpleDensity: densityResult.simpleDensity,
+            zones: densityResult.zones,
+            timestamp: new Date().toISOString()
+        };
+    }
+    
+    /**
      * Main analysis function
      */
     analyze() {
@@ -493,6 +904,9 @@ class KeywordDensityAnalyzer {
         const score = this.calculateScore(densityResult.weightedDensity);
         const status = this.getStatus(densityResult.weightedDensity);
         const suggestions = this.generateSuggestions(densityResult);
+        
+        // Add advanced analysis
+        const advanced = this.analyzeAdvanced();
         
         this._analysisResult = {
             keyword: this.keyword,
@@ -506,7 +920,17 @@ class KeywordDensityAnalyzer {
             breakdown: densityResult.zones,
             suggestions,
             optimalRange: this.options.optimalRange,
-            timestamp: new Date().toISOString()
+            timestamp: new Date().toISOString(),
+            // New advanced analysis fields
+            frequency: advanced.frequency,
+            frequencyStatus: advanced.frequencyStatus,
+            thresholds: advanced.thresholds,
+            paragraphAnalysis: advanced.paragraphAnalysis,
+            positionAnalysis: advanced.positionAnalysis,
+            distributionAnalysis: advanced.distributionAnalysis,
+            h2Analysis: advanced.h2Analysis,
+            recommendations: advanced.recommendations,
+            aiSummary: this.generateAISummary()
         };
         
         return this._analysisResult;
