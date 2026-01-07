@@ -12868,7 +12868,7 @@ ${content}
                 oldFrame.onload = () => setupSyncScroll();
                 const oldDoc = oldFrame.contentDocument || oldFrame.contentWindow.document;
                 oldDoc.open();
-                oldDoc.write(`<!DOCTYPE html><html dir="rtl"><head><meta charset="UTF-8"><style>body{font-family:Arial,sans-serif;padding:20px;margin:0;}</style></head><body>${uploadState.backupContent}</body></html>`);
+                oldDoc.write(`<!DOCTYPE html><html dir="rtl"><head><meta charset="UTF-8"><base target="_blank"><style>body{font-family:Arial,sans-serif;padding:20px;margin:0;} a{color:#2563eb;text-decoration:underline;cursor:pointer;} a:hover{color:#1d4ed8;background:rgba(37,99,235,0.1);}</style></head><body>${uploadState.backupContent}</body></html>`);
                 oldDoc.close();
             } else {
                 oldContentEl.innerHTML = '<div class="empty-state">אין גיבוי זמין</div>';
@@ -12882,7 +12882,7 @@ ${content}
                 newFrame.onload = () => setupSyncScroll();
                 const newDoc = newFrame.contentDocument || newFrame.contentWindow.document;
                 newDoc.open();
-                newDoc.write(`<!DOCTYPE html><html dir="rtl"><head><meta charset="UTF-8"><style>body{font-family:Arial,sans-serif;padding:20px;margin:0;}</style></head><body>${uploadState.newContent}</body></html>`);
+                newDoc.write(`<!DOCTYPE html><html dir="rtl"><head><meta charset="UTF-8"><base target="_blank"><style>body{font-family:Arial,sans-serif;padding:20px;margin:0;} a{color:#2563eb;text-decoration:underline;cursor:pointer;} a:hover{color:#1d4ed8;background:rgba(37,99,235,0.1);}</style></head><body>${uploadState.newContent}</body></html>`);
                 newDoc.close();
             } else {
                 newContentEl.innerHTML = '<div class="empty-state">אין תוכן חדש</div>';
@@ -12917,7 +12917,7 @@ ${content}
                     };
                     const newDoc = newFrame.contentDocument || newFrame.contentWindow.document;
                     newDoc.open();
-                    newDoc.write(`<!DOCTYPE html><html dir="rtl"><head><meta charset="UTF-8"><style>body{font-family:Arial,sans-serif;padding:20px;margin:0;}</style></head><body>${uploadState.newContent}</body></html>`);
+                    newDoc.write(`<!DOCTYPE html><html dir="rtl"><head><meta charset="UTF-8"><base target="_blank"><style>body{font-family:Arial,sans-serif;padding:20px;margin:0;} a{color:#2563eb;text-decoration:underline;cursor:pointer;} a:hover{color:#1d4ed8;background:rgba(37,99,235,0.1);}</style></head><body>${uploadState.newContent}</body></html>`);
                     newDoc.close();
                 }
             } catch (error) {
@@ -12963,7 +12963,7 @@ ${content}
                         };
                         const newDoc = newFrame.contentDocument || newFrame.contentWindow.document;
                         newDoc.open();
-                        newDoc.write(`<!DOCTYPE html><html dir="rtl"><head><meta charset="UTF-8"><style>body{font-family:Arial,sans-serif;padding:20px;margin:0;}</style></head><body>${uploadState.newContent}</body></html>`);
+                        newDoc.write(`<!DOCTYPE html><html dir="rtl"><head><meta charset="UTF-8"><base target="_blank"><style>body{font-family:Arial,sans-serif;padding:20px;margin:0;} a{color:#2563eb;text-decoration:underline;cursor:pointer;} a:hover{color:#1d4ed8;background:rgba(37,99,235,0.1);}</style></head><body>${uploadState.newContent}</body></html>`);
                         newDoc.close();
                     }
                     
@@ -14607,7 +14607,7 @@ ${ann.note ? `**💬 הוראות נוספות:** ${ann.note}` : ''}
                         };
                         const newDoc = newFrame.contentDocument || newFrame.contentWindow.document;
                         newDoc.open();
-                        newDoc.write(`<!DOCTYPE html><html dir="rtl"><head><meta charset="UTF-8"><style>body{font-family:Arial,sans-serif;padding:20px;margin:0;}</style></head><body>${uploadState.newContent}</body></html>`);
+                        newDoc.write(`<!DOCTYPE html><html dir="rtl"><head><meta charset="UTF-8"><base target="_blank"><style>body{font-family:Arial,sans-serif;padding:20px;margin:0;} a{color:#2563eb;text-decoration:underline;cursor:pointer;} a:hover{color:#1d4ed8;background:rgba(37,99,235,0.1);}</style></head><body>${uploadState.newContent}</body></html>`);
                         newDoc.close();
                         
                         showToast('תוכן רוענן!', 'success');
