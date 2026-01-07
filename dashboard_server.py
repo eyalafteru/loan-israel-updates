@@ -1060,17 +1060,20 @@ def simulate_wpautop(content):
     if not content:
         return content
     
-    # Skip wpautop for special pages that start with <script> (complex pages with JS)
+    # Skip wpautop for special pages that start with viewport script
     # These pages have their own formatting and wpautop breaks them
     content_stripped = content.strip()
-    if content_stripped.startswith('<script') or content_stripped.startswith('//') or content_stripped.startswith('/*'):
-        # This is a special page with JavaScript - return as-is
-        return content
     
-    # Also skip if page has lots of script tags (indicates complex page)
-    script_count = content.lower().count('<script')
-    if script_count >= 3:
-        # Complex page with multiple scripts - return as-is
+    # Check for special pages: starts with <script> containing viewport pattern
+    is_special = False
+    if content_stripped.startswith('<script'):
+        if 'viewport' in content_stripped[:500] or 'meta[name=' in content_stripped[:500]:
+            is_special = True
+    elif content_stripped.startswith('//') or content_stripped.startswith('/*'):
+        is_special = True
+    
+    if is_special:
+        # This is a special page with JavaScript - return as-is
         return content
     
     # Normalize line breaks
@@ -8731,14 +8734,18 @@ def upload_to_wp():
             is_special_page = False
             content_check = clean_content.strip()
             
-            # Criteria for special pages:
-            # 1. Starts with <script> tag
+            # Criteria for special pages (pages with complex JS that WordPress breaks):
+            # 1. Starts with <script> tag that contains viewport meta tag injection
             # 2. Starts with JS comments (// or /*)
-            # 3. Has 3+ <script> tags (complex page)
-            if content_check.startswith('<script') or content_check.startswith('//') or content_check.startswith('/*'):
+            # These pages have interactive JS that WordPress wpautop would break
+            if content_check.startswith('<script'):
+                # Check if it's the viewport script pattern (special pages)
+                if 'viewport' in content_check[:500] or 'meta[name=' in content_check[:500]:
+                    is_special_page = True
+                    print(f"🔍 Detected special page: starts with viewport script")
+            elif content_check.startswith('//') or content_check.startswith('/*'):
                 is_special_page = True
-            elif clean_content.lower().count('<script') >= 3:
-                is_special_page = True
+                print(f"🔍 Detected special page: starts with JS comment")
             
             if is_special_page:
                 # Special page - wrap in wp:html to prevent WordPress wpautop from breaking it
