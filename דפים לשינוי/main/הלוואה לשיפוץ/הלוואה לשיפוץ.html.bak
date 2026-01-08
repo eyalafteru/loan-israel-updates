@@ -1,1714 +1,1994 @@
 <!-- wp:html -->
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700&display=swap');
-
-#shiputz24-wrapper {
-    --lp-primary: #1e5490;
-    --lp-primary-dark: #2a5fa0;
-    --lp-secondary: #ff3b3b;
-    --lp-success: #25D366;
-    --lp-warning: #FF9800;
-    --lp-text-dark: #333333;
-    --lp-text-light: #666666;
-    --lp-text-muted: #777777;
-    --lp-background: #ffffff;
-    --lp-gray-light: #f8f8f8;
-    --lp-gray-medium: #e0e0e0;
-    --lp-shadow-soft: 0 3px 10px rgba(0,0,0,0.06);
-    --lp-shadow-medium: 0 10px 30px rgba(0,0,0,0.12);
-    --lp-shadow-hover: 0 10px 40px rgba(0,0,0,0.15);
+    @import url('https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700&display=swap');
     
-    font-family: 'Assistant', 'Segoe UI', Tahoma, Arial, sans-serif;
-    direction: rtl;
-    text-align: right;
-    color: var(--lp-text-dark);
-    line-height: 1.6;
-    margin: 0;
-    padding: 0;
-}
-
-/* Hero Section */
-#shiputz24-wrapper .shiputz24-hero {
-    position: relative;
-    min-height: 700px;
-    background: linear-gradient(135deg, var(--lp-primary-dark) 0%, var(--lp-primary) 100%);
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-    padding: 40px 0;
-}
-
-#shiputz24-wrapper .shiputz24-hero__animation {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0.1;
-}
-
-#shiputz24-wrapper .shiputz24-hero__house {
-    position: absolute;
-    right: 10%;
-    top: 20%;
-    width: 150px;
-    height: 150px;
-    opacity: 0.15;
-}
-
-#shiputz24-wrapper .shiputz24-hero__content {
-    position: relative;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 40px 20px;
-    z-index: 2;
-}
-
-#shiputz24-wrapper .shiputz24-hero__title {
-    font-family: 'Assistant', sans-serif;
-    font-size: 3em;
-    font-weight: 700;
-    color: white;
-    margin-bottom: 15px;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-    animation: shiputz24-fadeInDown 1s ease-out;
-    text-align: center;
-}
-
-#shiputz24-wrapper .shiputz24-hero__subtitle {
-    font-size: 1.2em;
-    color: rgba(255,255,255,0.9);
-    margin-bottom: 30px;
-    animation: shiputz24-fadeInUp 1s ease-out 0.3s both;
-    text-align: center;
-}
-
-/* Hero Calculator */
-#shiputz24-wrapper .shiputz24-hero-calculator {
-    background: rgba(255,255,255,0.95) !important;
-    backdrop-filter: blur(10px) !important;
-    padding: 30px !important;
-    border-radius: 25px !important;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.3) !important;
-    margin: 30px auto !important;
-    max-width: 900px !important;
-    border: 2px solid rgba(255,255,255,0.3) !important;
-    animation: shiputz24-fadeIn 1s ease-out 0.6s both !important;
-}
-
-/* Hero Calculator Overrides */
-#shiputz24-wrapper .shiputz24-hero-calculator .shiputz24-calc-options {
-    display: grid !important;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)) !important;
-    gap: 12px !important;
-    margin-bottom: 25px !important;
-}
-
-#shiputz24-wrapper .shiputz24-hero-calculator .shiputz24-calc-option {
-    background: white !important;
-    border: 2px solid var(--lp-gray-medium) !important;
-    border-radius: 12px !important;
-    padding: 15px !important;
-    text-align: center !important;
-    cursor: pointer !important;
-    transition: all 0.3s ease !important;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.1) !important;
-}
-
-#shiputz24-wrapper .shiputz24-hero-calculator .shiputz24-calc-option:hover {
-    border-color: var(--lp-primary) !important;
-    transform: translateY(-2px) !important;
-    box-shadow: 0 8px 25px rgba(30, 84, 144, 0.2) !important;
-}
-
-#shiputz24-wrapper .shiputz24-hero-calculator .shiputz24-calc-option.selected {
-    background: linear-gradient(135deg, var(--lp-primary) 0%, var(--lp-primary-dark) 100%) !important;
-    border-color: var(--lp-primary) !important;
-    color: white !important;
-    transform: translateY(-2px) !important;
-    box-shadow: 0 8px 25px rgba(30, 84, 144, 0.4) !important;
-}
-
-#shiputz24-wrapper .shiputz24-hero-calculator .shiputz24-calc-checkboxes {
-    display: grid !important;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)) !important;
-    gap: 12px !important;
-    margin-bottom: 25px !important;
-}
-
-#shiputz24-wrapper .shiputz24-hero-calculator .shiputz24-calc-checkbox {
-    background: white !important;
-    border: 2px solid var(--lp-gray-medium) !important;
-    border-radius: 12px !important;
-    padding: 12px !important;
-    text-align: center !important;
-    cursor: pointer !important;
-    transition: all 0.3s ease !important;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.1) !important;
-}
-
-#shiputz24-wrapper .shiputz24-hero-calculator .shiputz24-calc-checkbox:hover {
-    border-color: var(--lp-success) !important;
-    transform: translateY(-2px) !important;
-    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.2) !important;
-}
-
-#shiputz24-wrapper .shiputz24-hero-calculator .shiputz24-calc-checkbox.selected {
-    background: linear-gradient(135deg, var(--lp-success) 0%, #128C7E 100%) !important;
-    border-color: var(--lp-success) !important;
-    color: white !important;
-    transform: translateY(-2px) !important;
-    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4) !important;
-}
-
-#shiputz24-wrapper .shiputz24-hero-calculator .shiputz24-calc-result {
-    background: white !important;
-    border: 3px solid var(--lp-primary) !important;
-    border-radius: 20px !important;
-    padding: 25px !important;
-    margin-top: 25px !important;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2) !important;
-}
-
-#shiputz24-wrapper .shiputz24-hero-calculator .shiputz24-calc-btn {
-    background: linear-gradient(135deg, var(--lp-secondary) 0%, #ff6b6b 100%) !important;
-    color: white !important;
-    border: none !important;
-    padding: 14px 35px !important;
-    border-radius: 50px !important;
-    font-size: 1.1em !important;
-    font-weight: 700 !important;
-    cursor: pointer !important;
-    transition: all 0.3s ease !important;
-    display: block !important;
-    margin: 20px auto !important;
-    box-shadow: 0 8px 25px rgba(255, 59, 59, 0.4) !important;
-    animation: shiputz24-pulse 2s infinite !important;
-}
-
-#shiputz24-wrapper .shiputz24-hero-calculator .shiputz24-calc-progress {
-    display: flex !important;
-    justify-content: center !important;
-    gap: 12px !important;
-    margin-bottom: 20px !important;
-}
-
-#shiputz24-wrapper .shiputz24-hero-calculator .shiputz24-calc-progress__dot {
-    width: 14px !important;
-    height: 14px !important;
-    border-radius: 50% !important;
-    background: var(--lp-gray-medium) !important;
-    transition: all 0.3s ease !important;
-}
-
-#shiputz24-wrapper .shiputz24-hero-calculator .shiputz24-calc-progress__dot.active {
-    background: var(--lp-primary) !important;
-    transform: scale(1.3) !important;
-    box-shadow: 0 0 0 3px rgba(30, 84, 144, 0.3) !important;
-}
-
-#shiputz24-wrapper .shiputz24-hero-calculator .shiputz24-calc-progress__dot.completed {
-    background: var(--lp-success) !important;
-    box-shadow: 0 0 0 2px rgba(37, 211, 102, 0.3) !important;
-}
-
-/* Container */
-#shiputz24-wrapper .shiputz24-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-/* Sections */
-#shiputz24-wrapper .shiputz24-section {
-    padding: 60px 0;
-    position: relative;
-}
-
-#shiputz24-wrapper .shiputz24-section:nth-child(even) {
-    background: var(--lp-gray-light);
-}
-
-#shiputz24-wrapper .shiputz24-section__title {
-    font-family: 'Assistant', sans-serif;
-    font-size: 2.5em;
-    font-weight: 600;
-    color: var(--lp-primary);
-    margin-bottom: 30px;
-    position: relative;
-    padding-right: 25px;
-}
-
-#shiputz24-wrapper .shiputz24-section__title::before {
-    content: '';
-    position: absolute;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    width: 4px;
-    background: linear-gradient(to bottom, var(--lp-secondary), var(--lp-warning));
-    border-radius: 2px;
-}
-
-/* Lead paragraph */
-#shiputz24-wrapper .shiputz24-lead {
-    font-size: 1.3em;
-    line-height: 1.8;
-    color: var(--lp-text-light);
-    margin-bottom: 40px;
-}
-
-/* Widget Container */
-#shiputz24-wrapper .shiputz24-widget-container {
-      width: 100vw;
-    max-width: 100vw;
-    position: relative;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
-    box-sizing: border-box;
-}
-
-/* Button Primary */
-#shiputz24-wrapper .shiputz24-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    padding: 16px 32px;
-    border-radius: 50px;
-    font-family: 'Assistant', sans-serif;
-    font-weight: 600;
-    font-size: 1.1em;
-    text-decoration: none;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    overflow: hidden;
-    border: none;
-    cursor: pointer;
-}
-
-#shiputz24-wrapper .shiputz24-btn--primary {
-    background: linear-gradient(135deg, var(--lp-primary) 0%, var(--lp-primary-dark) 100%);
-    color: white;
-    box-shadow: 0 5px 20px rgba(30, 84, 144, 0.3);
-}
-
-#shiputz24-wrapper .shiputz24-btn--primary:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 30px rgba(30, 84, 144, 0.4);
-}
-
-/* Benefits Grid */
-#shiputz24-wrapper .shiputz24-benefits {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    margin: 50px 0;
-}
-
-#shiputz24-wrapper .shiputz24-benefit-card {
-    background: white;
-    padding: 30px;
-    border-radius: 20px;
-    box-shadow: var(--lp-shadow-soft);
-    transition: all 0.3s ease;
-    border-top: 4px solid var(--lp-primary);
-    position: relative;
-    overflow: hidden;
-}
-
-#shiputz24-wrapper .shiputz24-benefit-card::before {
-    content: '';
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
-    background: linear-gradient(135deg, var(--lp-primary) 0%, var(--lp-secondary) 100%);
-    border-radius: 22px;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    z-index: -1;
-}
-
-#shiputz24-wrapper .shiputz24-benefit-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--lp-shadow-hover);
-}
-
-#shiputz24-wrapper .shiputz24-benefit-card:hover::before {
-    opacity: 1;
-}
-
-#shiputz24-wrapper .shiputz24-benefit-card__icon {
-    width: 60px;
-    height: 60px;
-    background: linear-gradient(135deg, var(--lp-primary) 0%, var(--lp-secondary) 100%);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
-}
-
-#shiputz24-wrapper .shiputz24-benefit-card__title {
-    font-size: 1.4em;
-    font-weight: 600;
-    color: var(--lp-primary);
-    margin-bottom: 15px;
-}
-
-/* Feature List */
-#shiputz24-wrapper .shiputz24-feature-list {
-    list-style: none;
-    padding: 0;
-    margin: 30px 0;
-}
-
-#shiputz24-wrapper .shiputz24-feature-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 15px;
-    padding: 15px 0;
-    border-bottom: 1px solid rgba(0,0,0,0.05);
-    transition: all 0.3s ease;
-}
-
-#shiputz24-wrapper .shiputz24-feature-item:hover {
-    background: var(--lp-gray-light);
-    padding-right: 15px;
-    border-radius: 10px;
-}
-
-#shiputz24-wrapper .shiputz24-feature-icon {
-    flex-shrink: 0;
-    width: 24px;
-    height: 24px;
-    background: var(--lp-success);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-weight: bold;
-    font-size: 0.9em;
-}
-
-/* WhatsApp Section */
-#shiputz24-wrapper .shiputz24-whatsapp-section {
-    margin: 60px 0;
-    padding: 40px;
-    background: linear-gradient(135deg, var(--lp-success) 0%, #128C7E 100%);
-    border-radius: 20px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-}
-
-#shiputz24-wrapper .shiputz24-whatsapp-section::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-    animation: shiputz24-rotate 20s linear infinite;
-}
-
-#shiputz24-wrapper .shiputz24-whatsapp-cta__title {
-    color: white;
-    font-size: 2em;
-    font-weight: 700;
-    margin-bottom: 10px;
-    position: relative;
-    z-index: 2;
-}
-
-#shiputz24-wrapper .shiputz24-whatsapp-cta__text {
-    color: rgba(255,255,255,0.9);
-    font-size: 1.2em;
-    margin-bottom: 25px;
-    position: relative;
-    z-index: 2;
-}
-
-#shiputz24-wrapper .shiputz24-whatsapp-cta__btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    background: white;
-    color: var(--lp-success);
-    padding: 16px 32px;
-    border-radius: 50px;
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 1.1em;
-    transition: all 0.3s ease;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-    position: relative;
-    z-index: 2;
-}
-
-#shiputz24-wrapper .shiputz24-whatsapp-cta__btn:hover {
-    transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 8px 30px rgba(0,0,0,0.3);
-}
-
-/* Process Steps */
-#shiputz24-wrapper .shiputz24-process {
-    margin: 60px 0;
-}
-
-#shiputz24-wrapper .shiputz24-process__grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
-    margin-top: 40px;
-}
-
-#shiputz24-wrapper .shiputz24-process-step {
-    text-align: center;
-    padding: 30px 20px;
-    position: relative;
-}
-
-#shiputz24-wrapper .shiputz24-process-step__number {
-    width: 80px;
-    height: 80px;
-    background: linear-gradient(135deg, var(--lp-primary) 0%, var(--lp-secondary) 100%);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2em;
-    font-weight: bold;
-    color: white;
-    margin: 0 auto 20px;
-    box-shadow: 0 10px 30px rgba(30, 84, 144, 0.3);
-}
-
-#shiputz24-wrapper .shiputz24-process-step__title {
-    font-size: 1.3em;
-    font-weight: 600;
-    color: var(--lp-primary);
-    margin-bottom: 15px;
-}
-
-/* Calculator */
-#shiputz24-wrapper .shiputz24-calculator {
-    background: white;
-    padding: 40px;
-    border-radius: 20px;
-    box-shadow: var(--lp-shadow-medium);
-    margin: 40px 0;
-    border: 2px solid var(--lp-primary);
-}
-
-#shiputz24-wrapper .shiputz24-calculator__title {
-    font-size: 1.8em;
-    font-weight: 600;
-    color: var(--lp-primary);
-    margin-bottom: 30px;
-    text-align: center;
-}
-
-/* Calculator Navigation */
-#shiputz24-wrapper .shiputz24-calc-nav {
-    margin-bottom: 15px !important;
-    text-align: left !important;
-}
-
-#shiputz24-wrapper .shiputz24-calc-back-btn {
-    background: var(--lp-gray-medium) !important;
-    color: var(--lp-text-dark) !important;
-    border: none !important;
-    padding: 8px 16px !important;
-    border-radius: 25px !important;
-    font-size: 0.9em !important;
-    font-weight: 600 !important;
-    cursor: pointer !important;
-    transition: all 0.3s ease !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    gap: 5px !important;
-}
-
-#shiputz24-wrapper .shiputz24-calc-back-btn:hover {
-    background: var(--lp-primary) !important;
-    color: white !important;
-    transform: translateX(-3px) !important;
-}
-
-#shiputz24-wrapper .shiputz24-calc-edit-btn {
-    background: var(--lp-warning) !important;
-    color: white !important;
-    border: none !important;
-    padding: 10px 20px !important;
-    border-radius: 25px !important;
-    font-size: 0.9em !important;
-    font-weight: 600 !important;
-    cursor: pointer !important;
-    transition: all 0.3s ease !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    gap: 8px !important;
-    margin-bottom: 15px !important;
-}
-
-#shiputz24-wrapper .shiputz24-calc-edit-btn:hover {
-    background: #e68900 !important;
-    transform: translateY(-2px) !important;
-    box-shadow: 0 5px 15px rgba(255, 152, 0, 0.3) !important;
-}
-
-/* Calculator Summary */
-#shiputz24-wrapper .shiputz24-calc-result__summary {
-    background: rgba(30, 84, 144, 0.05) !important;
-    border-radius: 15px !important;
-    padding: 20px !important;
-    margin: 20px 0 !important;
-    border: 1px solid rgba(30, 84, 144, 0.1) !important;
-}
-
-#shiputz24-wrapper .shiputz24-calc-summary__item {
-    display: flex !important;
-    justify-content: space-between !important;
-    align-items: center !important;
-    padding: 8px 0 !important;
-    border-bottom: 1px solid rgba(30, 84, 144, 0.1) !important;
-}
-
-#shiputz24-wrapper .shiputz24-calc-summary__item:last-child {
-    border-bottom: none !important;
-}
-
-#shiputz24-wrapper .shiputz24-calc-summary__label {
-    color: var(--lp-text-light) !important;
-    font-weight: 600 !important;
-}
-
-#shiputz24-wrapper .shiputz24-calc-restart {
-    text-align: center !important;
-    margin-top: 15px !important;
-}
-
-#shiputz24-wrapper .shiputz24-calc-restart-btn {
-    background: transparent !important;
-    color: var(--lp-text-light) !important;
-    border: 1px solid var(--lp-gray-medium) !important;
-    padding: 8px 16px !important;
-    border-radius: 20px !important;
-    font-size: 0.9em !important;
-    cursor: pointer !important;
-    transition: all 0.3s ease !important;
-}
-
-#shiputz24-wrapper .shiputz24-calc-restart-btn:hover {
-    border-color: var(--lp-secondary) !important;
-    color: var(--lp-secondary) !important;
-    background: rgba(255, 59, 59, 0.05) !important;
-}
-#shiputz24-wrapper .shiputz24-calc-steps {
-    max-width: 100%;
-}
-
-#shiputz24-wrapper .shiputz24-calc-step {
-    display: none;
-    opacity: 0;
-    transform: translateX(20px);
-    transition: all 0.5s ease;
-}
-
-#shiputz24-wrapper .shiputz24-calc-step.active {
-    display: block !important;
-    opacity: 1 !important;
-    transform: translateX(0) !important;
-}
-
-#shiputz24-wrapper .shiputz24-calc-step__title {
-    font-size: 1.4em;
-    font-weight: 600;
-    color: var(--lp-primary);
-    margin-bottom: 25px;
-    text-align: center;
-}
-
-/* Calculator Options */
-#shiputz24-wrapper .shiputz24-calc-options {
-    display: grid !important;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
-    gap: 15px !important;
-    margin-bottom: 30px !important;
-}
-
-#shiputz24-wrapper .shiputz24-calc-option {
-    background: var(--lp-gray-light) !important;
-    border: 2px solid var(--lp-gray-medium) !important;
-    border-radius: 15px !important;
-    padding: 20px !important;
-    text-align: center !important;
-    cursor: pointer !important;
-    transition: all 0.3s ease !important;
-    position: relative !important;
-    overflow: hidden !important;
-    display: block !important;
-}
-
-#shiputz24-wrapper .shiputz24-calc-option:hover {
-    border-color: var(--lp-primary) !important;
-    transform: translateY(-3px) !important;
-    box-shadow: var(--lp-shadow-hover) !important;
-}
-
-#shiputz24-wrapper .shiputz24-calc-option.selected {
-    background: linear-gradient(135deg, var(--lp-primary) 0%, var(--lp-primary-dark) 100%) !important;
-    border-color: var(--lp-primary) !important;
-    color: white !important;
-}
-
-#shiputz24-wrapper .shiputz24-calc-option.selected .shiputz24-calc-option__price,
-#shiputz24-wrapper .shiputz24-calc-option.selected .shiputz24-calc-option__subtitle {
-    color: rgba(255,255,255,0.9) !important;
-}
-
-#shiputz24-wrapper .shiputz24-calc-option__icon {
-    font-size: 2.5em !important;
-    margin-bottom: 10px !important;
-    display: block !important;
-}
-
-#shiputz24-wrapper .shiputz24-calc-option__text {
-    font-size: 1.2em !important;
-    font-weight: 600 !important;
-    margin-bottom: 5px !important;
-}
-
-#shiputz24-wrapper .shiputz24-calc-option__subtitle {
-    font-size: 0.9em !important;
-    color: var(--lp-text-light) !important;
-    margin-bottom: 8px !important;
-}
-
-#shiputz24-wrapper .shiputz24-calc-option__price {
-    font-size: 1.1em !important;
-    font-weight: bold !important;
-    color: var(--lp-secondary) !important;
-}
-
-/* Calculator Checkboxes */
-#shiputz24-wrapper .shiputz24-calc-checkboxes {
-    display: grid !important;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
-    gap: 15px !important;
-    margin-bottom: 30px !important;
-}
-
-#shiputz24-wrapper .shiputz24-calc-checkbox {
-    background: var(--lp-gray-light) !important;
-    border: 2px solid var(--lp-gray-medium) !important;
-    border-radius: 15px !important;
-    padding: 15px !important;
-    text-align: center !important;
-    cursor: pointer !important;
-    transition: all 0.3s ease !important;
-    position: relative !important;
-    display: block !important;
-}
-
-#shiputz24-wrapper .shiputz24-calc-checkbox:hover {
-    border-color: var(--lp-success) !important;
-    transform: translateY(-2px) !important;
-}
-
-#shiputz24-wrapper .shiputz24-calc-checkbox.selected {
-    background: linear-gradient(135deg, var(--lp-success) 0%, #128C7E 100%) !important;
-    border-color: var(--lp-success) !important;
-    color: white !important;
-}
-
-#shiputz24-wrapper .shiputz24-calc-checkbox.selected .shiputz24-calc-checkbox__price {
-    color: rgba(255,255,255,0.9) !important;
-}
-
-#shiputz24-wrapper .shiputz24-calc-checkbox.selected::after {
-    content: '✓' !important;
-    position: absolute !important;
-    top: 5px !important;
-    left: 5px !important;
-    background: white !important;
-    color: var(--lp-success) !important;
-    width: 25px !important;
-    height: 25px !important;
-    border-radius: 50% !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    font-weight: bold !important;
-    font-size: 0.9em !important;
-}
-
-#shiputz24-wrapper .shiputz24-calc-checkbox__icon {
-    font-size: 1.8em !important;
-    margin-bottom: 8px !important;
-    display: block !important;
-}
-
-#shiputz24-wrapper .shiputz24-calc-checkbox__text {
-    font-weight: 600 !important;
-    margin-bottom: 5px !important;
-}
-
-#shiputz24-wrapper .shiputz24-calc-checkbox__price {
-    font-size: 0.9em !important;
-    font-weight: bold !important;
-    color: var(--lp-secondary) !important;
-}
-
-/* Calculator Button */
-#shiputz24-wrapper .shiputz24-calc-btn {
-    background: linear-gradient(135deg, var(--lp-secondary) 0%, #ff6b6b 100%) !important;
-    color: white !important;
-    border: none !important;
-    padding: 16px 40px !important;
-    border-radius: 50px !important;
-    font-size: 1.2em !important;
-    font-weight: 700 !important;
-    cursor: pointer !important;
-    transition: all 0.3s ease !important;
-    display: block !important;
-    margin: 20px auto !important;
-    box-shadow: 0 5px 20px rgba(255, 59, 59, 0.3) !important;
-    animation: shiputz24-pulse 2s infinite !important;
-}
-
-#shiputz24-wrapper .shiputz24-calc-btn:hover {
-    transform: translateY(-3px) scale(1.05) !important;
-    box-shadow: 0 8px 30px rgba(255, 59, 59, 0.4) !important;
-}
-
-/* Calculator Result */
-#shiputz24-wrapper .shiputz24-calc-result {
-    background: linear-gradient(135deg, var(--lp-gray-light) 0%, white 100%) !important;
-    border: 3px solid var(--lp-primary) !important;
-    border-radius: 20px !important;
-    padding: 30px !important;
-    margin-top: 30px !important;
-    text-align: center !important;
-    animation: shiputz24-fadeInUp 0.8s ease !important;
-}
-
-#shiputz24-wrapper .shiputz24-calc-result__header h4 {
-    color: var(--lp-primary) !important;
-    font-size: 1.5em !important;
-    margin-bottom: 15px !important;
-}
-
-#shiputz24-wrapper .shiputz24-calc-result__price {
-    font-size: 3em !important;
-    font-weight: bold !important;
-    color: var(--lp-secondary) !important;
-    margin-bottom: 20px !important;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.1) !important;
-}
-
-#shiputz24-wrapper .shiputz24-calc-breakdown {
-    display: flex !important;
-    justify-content: space-around !important;
-    margin: 20px 0 !important;
-    padding: 20px !important;
-    background: white !important;
-    border-radius: 15px !important;
-    box-shadow: var(--lp-shadow-soft) !important;
-}
-
-#shiputz24-wrapper .shiputz24-calc-breakdown__item {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 5px !important;
-}
-
-#shiputz24-wrapper .shiputz24-calc-breakdown__item span:first-child {
-    color: var(--lp-text-light) !important;
-    font-size: 0.9em !important;
-}
-
-#shiputz24-wrapper .shiputz24-calc-breakdown__item span:last-child {
-    color: var(--lp-primary) !important;
-    font-weight: bold !important;
-    font-size: 1.2em !important;
-}
-
-#shiputz24-wrapper .shiputz24-calc-result__cta {
-    margin-top: 25px !important;
-    padding: 20px !important;
-    background: linear-gradient(135deg, rgba(30, 84, 144, 0.1) 0%, rgba(255, 59, 59, 0.1) 100%) !important;
-    border-radius: 15px !important;
-}
-
-#shiputz24-wrapper .shiputz24-calc-result__cta p {
-    margin-bottom: 15px !important;
-}
-
-#shiputz24-wrapper .shiputz24-calc-result__cta p:first-child {
-    font-size: 1.2em !important;
-    color: var(--lp-primary) !important;
-}
-
-#shiputz24-wrapper .shiputz24-calc-result__cta p:last-of-type {
-    color: var(--lp-text-light) !important;
-    margin-bottom: 20px !important;
-}
-
-/* Download Link */
-#shiputz24-wrapper .shiputz24-download-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    background: var(--lp-warning);
-    color: white;
-    padding: 15px 25px;
-    border-radius: 50px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    box-shadow: 0 5px 15px rgba(255, 152, 0, 0.3);
-}
-
-#shiputz24-wrapper .shiputz24-download-link:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(255, 152, 0, 0.4);
-}
-
-/* Image with link */
-#shiputz24-wrapper .shiputz24-image-link {
-    display: block;
-    margin: 40px 0;
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: var(--lp-shadow-medium);
-    transition: all 0.3s ease;
-}
-
-#shiputz24-wrapper .shiputz24-image-link:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--lp-shadow-hover);
-}
-
-#shiputz24-wrapper .shiputz24-image-link img {
-    width: 100%;
-    height: auto;
-    display: block;
-    transition: transform 0.3s ease;
-}
-
-#shiputz24-wrapper .shiputz24-image-link:hover img {
-    transform: scale(1.02);
-}
-
-/* Final CTA */
-#shiputz24-wrapper .shiputz24-final-cta {
-    background: linear-gradient(135deg, var(--lp-primary-dark) 0%, var(--lp-primary) 100%);
-    padding: 60px 40px;
-    text-align: center;
-    color: white;
-    border-radius: 20px;
-    margin: 60px 0;
-    position: relative;
-    overflow: hidden;
-}
-
-#shiputz24-wrapper .shiputz24-final-cta::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(circle at 30% 70%, rgba(255,255,255,0.1) 0%, transparent 50%);
-    pointer-events: none;
-}
-
-#shiputz24-wrapper .shiputz24-final-cta__title {
-    font-size: 2.5em;
-    font-weight: 700;
-    margin-bottom: 20px;
-    position: relative;
-    z-index: 2;
-}
-
-#shiputz24-wrapper .shiputz24-final-cta__text {
-    font-size: 1.3em;
-    margin-bottom: 30px;
-    opacity: 0.9;
-    position: relative;
-    z-index: 2;
-}
-
-/* Animations */
-@keyframes shiputz24-fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-@keyframes shiputz24-fadeInDown {
-    from {
-        opacity: 0;
-        transform: translateY(-30px);
+    #shiputz24-wrapper {
+        --lp-primary: #1e5490;
+        --lp-primary-dark: #2a5fa0;
+        --lp-secondary: #ff3b3b;
+        --lp-success: #25D366;
+        --lp-warning: #FF9800;
+        --lp-text-dark: #333333;
+        --lp-text-light: #666666;
+        --lp-text-muted: #777777;
+        --lp-background: #ffffff;
+        --lp-gray-light: #f8f8f8;
+        --lp-gray-medium: #e0e0e0;
+        --lp-shadow-soft: 0 3px 10px rgba(0,0,0,0.06);
+        --lp-shadow-medium: 0 10px 30px rgba(0,0,0,0.12);
+        --lp-shadow-hover: 0 10px 40px rgba(0,0,0,0.15);
+        
+        font-family: 'Assistant', 'Segoe UI', Tahoma, Arial, sans-serif;
+        direction: rtl;
+        text-align: right;
+        color: var(--lp-text-dark);
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
     }
-    to {
-        opacity: 1;
-        transform: translateY(0);
+    
+    /* Hero Section */
+    #shiputz24-wrapper .shiputz24-hero {
+        position: relative;
+        min-height: auto;
+        background: linear-gradient(135deg, var(--lp-primary-dark) 0%, var(--lp-primary) 100%);
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+        padding: 30px 0;
     }
-}
-
-@keyframes shiputz24-fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
+    
+    #shiputz24-wrapper .shiputz24-hero__animation {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.1;
     }
-    to {
-        opacity: 1;
-        transform: translateY(0);
+    
+    #shiputz24-wrapper .shiputz24-hero__house {
+        position: absolute;
+        right: 10%;
+        top: 20%;
+        width: 150px;
+        height: 150px;
+        opacity: 0.15;
     }
-}
-
-@keyframes shiputz24-rotate {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
-
-@keyframes shiputz24-pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-}
-
-/* Responsive */
-@media (max-width: 768px) {
+    
+    #shiputz24-wrapper .shiputz24-hero__content {
+        position: relative;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 40px 20px;
+        z-index: 2;
+    }
+    
     #shiputz24-wrapper .shiputz24-hero__title {
-        font-size: 2.2em;
+        font-family: 'Assistant', sans-serif;
+        font-size: 3em;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 15px;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        animation: shiputz24-fadeInDown 1s ease-out;
+        text-align: center;
     }
     
     #shiputz24-wrapper .shiputz24-hero__subtitle {
-        font-size: 1.1em;
+        font-size: 1.2em;
+        color: rgba(255,255,255,0.9);
+        margin-bottom: 30px;
+        animation: shiputz24-fadeInUp 1s ease-out 0.3s both;
+        text-align: center;
     }
     
+    /* Hero Calculator */
     #shiputz24-wrapper .shiputz24-hero-calculator {
-        margin: 20px 10px !important;
-        padding: 20px !important;
+        background: rgba(255,255,255,0.95) !important;
+        backdrop-filter: blur(10px) !important;
+        padding: 30px !important;
+        border-radius: 25px !important;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.3) !important;
+        margin: 30px auto !important;
+        max-width: 900px !important;
+        border: 2px solid rgba(255,255,255,0.3) !important;
+        animation: shiputz24-fadeIn 1s ease-out 0.6s both !important;
     }
     
-    #shiputz24-wrapper .shiputz24-hero-calculator__title {
-        font-size: 1.4em !important;
-    }
-    
+    /* Hero Calculator Overrides */
     #shiputz24-wrapper .shiputz24-hero-calculator .shiputz24-calc-options {
-        grid-template-columns: 1fr 1fr !important;
-        gap: 8px !important;
-    }
-    
-    #shiputz24-wrapper .shiputz24-hero-calculator .shiputz24-calc-checkboxes {
-        grid-template-columns: 1fr !important;
-        gap: 8px !important;
+        display: grid !important;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)) !important;
+        gap: 12px !important;
+        margin-bottom: 25px !important;
     }
     
     #shiputz24-wrapper .shiputz24-hero-calculator .shiputz24-calc-option {
-        padding: 12px 8px !important;
+        background: white !important;
+        border: 2px solid var(--lp-gray-medium) !important;
+        border-radius: 12px !important;
+        padding: 15px !important;
+        text-align: center !important;
+        cursor: pointer !important;
+        transition: all 0.3s ease !important;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.1) !important;
     }
     
-    #shiputz24-wrapper .shiputz24-hero-calculator .shiputz24-calc-option__icon {
-        font-size: 2em !important;
+    #shiputz24-wrapper .shiputz24-hero-calculator .shiputz24-calc-option:hover {
+        border-color: var(--lp-primary) !important;
+        transform: translateY(-2px) !important;
+        box-shadow: 0 8px 25px rgba(30, 84, 144, 0.2) !important;
     }
     
-    #shiputz24-wrapper .shiputz24-hero-calculator .shiputz24-calc-option__text {
-        font-size: 1em !important;
+    #shiputz24-wrapper .shiputz24-hero-calculator .shiputz24-calc-option.selected {
+        background: linear-gradient(135deg, var(--lp-primary) 0%, var(--lp-primary-dark) 100%) !important;
+        border-color: var(--lp-primary) !important;
+        color: white !important;
+        transform: translateY(-2px) !important;
+        box-shadow: 0 8px 25px rgba(30, 84, 144, 0.4) !important;
+    }
+    
+    #shiputz24-wrapper .shiputz24-hero-calculator .shiputz24-calc-checkboxes {
+        display: grid !important;
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)) !important;
+        gap: 12px !important;
+        margin-bottom: 25px !important;
+    }
+    
+    #shiputz24-wrapper .shiputz24-hero-calculator .shiputz24-calc-checkbox {
+        background: white !important;
+        border: 2px solid var(--lp-gray-medium) !important;
+        border-radius: 12px !important;
+        padding: 12px !important;
+        text-align: center !important;
+        cursor: pointer !important;
+        transition: all 0.3s ease !important;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.1) !important;
+    }
+    
+    #shiputz24-wrapper .shiputz24-hero-calculator .shiputz24-calc-checkbox:hover {
+        border-color: var(--lp-success) !important;
+        transform: translateY(-2px) !important;
+        box-shadow: 0 8px 25px rgba(37, 211, 102, 0.2) !important;
+    }
+    
+    #shiputz24-wrapper .shiputz24-hero-calculator .shiputz24-calc-checkbox.selected {
+        background: linear-gradient(135deg, var(--lp-success) 0%, #128C7E 100%) !important;
+        border-color: var(--lp-success) !important;
+        color: white !important;
+        transform: translateY(-2px) !important;
+        box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4) !important;
+    }
+    
+    #shiputz24-wrapper .shiputz24-hero-calculator .shiputz24-calc-result {
+        background: white !important;
+        border: 3px solid var(--lp-primary) !important;
+        border-radius: 20px !important;
+        padding: 25px !important;
+        margin-top: 25px !important;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2) !important;
+    }
+    
+    #shiputz24-wrapper .shiputz24-hero-calculator .shiputz24-calc-btn {
+        background: linear-gradient(135deg, var(--lp-secondary) 0%, #ff6b6b 100%) !important;
+        color: white !important;
+        border: none !important;
+        padding: 14px 35px !important;
+        border-radius: 50px !important;
+        font-size: 1.1em !important;
+        font-weight: 700 !important;
+        cursor: pointer !important;
+        transition: all 0.3s ease !important;
+        display: block !important;
+        margin: 20px auto !important;
+        box-shadow: 0 8px 25px rgba(255, 59, 59, 0.4) !important;
+        animation: shiputz24-pulse 2s infinite !important;
+    }
+    
+    #shiputz24-wrapper .shiputz24-hero-calculator .shiputz24-calc-progress {
+        display: flex !important;
+        justify-content: center !important;
+        gap: 12px !important;
+        margin-bottom: 20px !important;
+    }
+    
+    #shiputz24-wrapper .shiputz24-hero-calculator .shiputz24-calc-progress__dot {
+        width: 14px !important;
+        height: 14px !important;
+        border-radius: 50% !important;
+        background: var(--lp-gray-medium) !important;
+        transition: all 0.3s ease !important;
+    }
+    
+    #shiputz24-wrapper .shiputz24-hero-calculator .shiputz24-calc-progress__dot.active {
+        background: var(--lp-primary) !important;
+        transform: scale(1.3) !important;
+        box-shadow: 0 0 0 3px rgba(30, 84, 144, 0.3) !important;
+    }
+    
+    #shiputz24-wrapper .shiputz24-hero-calculator .shiputz24-calc-progress__dot.completed {
+        background: var(--lp-success) !important;
+        box-shadow: 0 0 0 2px rgba(37, 211, 102, 0.3) !important;
+    }
+    
+    /* Container */
+    #shiputz24-wrapper .shiputz24-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+    
+    /* Sections */
+    #shiputz24-wrapper .shiputz24-section {
+        padding: 60px 0;
+        position: relative;
+    }
+    
+    #shiputz24-wrapper .shiputz24-section:nth-child(even) {
+        background: var(--lp-gray-light);
     }
     
     #shiputz24-wrapper .shiputz24-section__title {
-        font-size: 2em;
+        font-family: 'Assistant', sans-serif;
+        font-size: 2.5em;
+        font-weight: 600;
+        color: var(--lp-primary);
+        margin-bottom: 30px;
+        position: relative;
+        padding-right: 25px;
     }
     
+    #shiputz24-wrapper .shiputz24-section__title::before {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        width: 4px;
+        background: linear-gradient(to bottom, var(--lp-secondary), var(--lp-warning));
+        border-radius: 2px;
+    }
+    
+    /* Lead paragraph */
+    #shiputz24-wrapper .shiputz24-lead {
+        font-size: 1.3em;
+        line-height: 1.8;
+        color: var(--lp-text-light);
+        margin-bottom: 40px;
+    }
+    
+    /* Widget Container */
+    #shiputz24-wrapper .shiputz24-widget-container {
+          width: 100vw;
+        max-width: 100vw;
+        position: relative;
+        left: 50%;
+        right: 50%;
+        margin-left: -50vw;
+        margin-right: -50vw;
+        box-sizing: border-box;
+    }
+    
+    /* Button Primary */
+    #shiputz24-wrapper .shiputz24-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        padding: 16px 32px;
+        border-radius: 50px;
+        font-family: 'Assistant', sans-serif;
+        font-weight: 600;
+        font-size: 1.1em;
+        text-decoration: none;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+        border: none;
+        cursor: pointer;
+    }
+    
+    #shiputz24-wrapper .shiputz24-btn--primary {
+        background: linear-gradient(135deg, var(--lp-primary) 0%, var(--lp-primary-dark) 100%);
+        color: white;
+        box-shadow: 0 5px 20px rgba(30, 84, 144, 0.3);
+    }
+    
+    #shiputz24-wrapper .shiputz24-btn--primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 30px rgba(30, 84, 144, 0.4);
+    }
+    
+    /* Benefits Grid */
     #shiputz24-wrapper .shiputz24-benefits {
-        grid-template-columns: 1fr;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        margin: 50px 0;
     }
     
-    #shiputz24-wrapper .shiputz24-calc-options {
-        grid-template-columns: 1fr;
+    #shiputz24-wrapper .shiputz24-benefit-card {
+        background: white;
+        padding: 30px;
+        border-radius: 20px;
+        box-shadow: var(--lp-shadow-soft);
+        border-top: 4px solid var(--lp-primary);
+        position: relative;
+        overflow: hidden;
     }
     
-    #shiputz24-wrapper .shiputz24-calc-checkboxes {
-        grid-template-columns: repeat(2, 1fr) !important;
+    #shiputz24-wrapper .shiputz24-benefit-card__icon {
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, var(--lp-primary) 0%, var(--lp-secondary) 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
     }
     
-    #shiputz24-wrapper .shiputz24-calc-breakdown {
-        flex-direction: column !important;
-        gap: 15px !important;
+    #shiputz24-wrapper .shiputz24-benefit-card__title {
+        font-size: 1.4em;
+        font-weight: 600;
+        color: var(--lp-primary);
+        margin-bottom: 15px;
     }
     
-    #shiputz24-wrapper .shiputz24-calc-nav {
-        text-align: center !important;
+    /* Feature List */
+    #shiputz24-wrapper .shiputz24-feature-list {
+        list-style: none;
+        padding: 0;
+        margin: 30px 0;
     }
     
-    #shiputz24-wrapper .shiputz24-calc-back-btn,
-    #shiputz24-wrapper .shiputz24-calc-edit-btn {
-        font-size: 0.8em !important;
-        padding: 6px 12px !important;
+    #shiputz24-wrapper .shiputz24-feature-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 15px;
+        padding: 15px 0;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+        transition: all 0.3s ease;
+    }
+    
+    #shiputz24-wrapper .shiputz24-feature-item:hover {
+        background: var(--lp-gray-light);
+        padding-right: 15px;
+        border-radius: 10px;
+    }
+    
+    #shiputz24-wrapper .shiputz24-feature-icon {
+        flex-shrink: 0;
+        width: 24px;
+        height: 24px;
+        background: var(--lp-success);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+        font-size: 0.9em;
+    }
+    
+    /* WhatsApp Section */
+    #shiputz24-wrapper .shiputz24-whatsapp-section {
+        margin: 60px 0;
+        padding: 40px;
+        background: linear-gradient(135deg, var(--lp-success) 0%, #128C7E 100%);
+        border-radius: 20px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    #shiputz24-wrapper .shiputz24-whatsapp-section::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+        animation: shiputz24-rotate 20s linear infinite;
+    }
+    
+    #shiputz24-wrapper .shiputz24-whatsapp-cta__title {
+        color: white;
+        font-size: 2em;
+        font-weight: 700;
+        margin-bottom: 10px;
+        position: relative;
+        z-index: 2;
+    }
+    
+    #shiputz24-wrapper .shiputz24-whatsapp-cta__text {
+        color: rgba(255,255,255,0.9);
+        font-size: 1.2em;
+        margin-bottom: 25px;
+        position: relative;
+        z-index: 2;
+    }
+    
+    #shiputz24-wrapper .shiputz24-whatsapp-cta__btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        background: white;
+        color: var(--lp-success);
+        padding: 16px 32px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 1.1em;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        position: relative;
+        z-index: 2;
+    }
+    
+    #shiputz24-wrapper .shiputz24-whatsapp-cta__btn:hover {
+        transform: translateY(-3px) scale(1.05);
+        box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+    }
+    
+    /* Process Steps */
+    #shiputz24-wrapper .shiputz24-process {
+        margin: 60px 0;
     }
     
     #shiputz24-wrapper .shiputz24-process__grid {
-        grid-template-columns: 1fr !important;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+        margin-top: 40px;
     }
-}
-
-/* Utility Classes */
-#shiputz24-wrapper .shiputz24-text-center {
-    text-align: center;
-}
-
-#shiputz24-wrapper .shiputz24-mb-30 {
-    margin-bottom: 30px;
-}
-
-#shiputz24-wrapper .shiputz24-highlight {
-    background: linear-gradient(120deg, var(--lp-warning) 0%, var(--lp-secondary) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-weight: 700;
-}
-</style>
-
-<div id="shiputz24-wrapper" class="shiputz24-page">
     
-    <!-- Hero Section with Calculator -->
-    <div class="shiputz24-hero">
-        <div class="shiputz24-hero__animation">
-            <svg class="shiputz24-hero__house" viewBox="0 0 200 200" fill="none">
-                <rect x="50" y="100" width="100" height="80" fill="currentColor"/>
-                <polygon points="50,100 100,50 150,100" fill="currentColor"/>
-                <rect x="70" y="120" width="20" height="30" fill="white"/>
-                <rect x="110" y="120" width="20" height="20" fill="white"/>
-            </svg>
-        </div>
-        <div class="shiputz24-hero__content">
-            <h1 class="shiputz24-hero__title">הפכו את הבית לחלום שלכם</h1>
-            <div class="shiputz24-hero__subtitle">
-                הלוואות לשיפוץ בתנאים המשתלמים ביותר - קבלו אישור מיידי ותתחילו לשפץ עוד היום
+    #shiputz24-wrapper .shiputz24-process-step {
+        text-align: center;
+        padding: 30px 20px;
+        position: relative;
+    }
+    
+    #shiputz24-wrapper .shiputz24-process-step__number {
+        width: 80px;
+        height: 80px;
+        background: linear-gradient(135deg, var(--lp-primary) 0%, var(--lp-secondary) 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2em;
+        font-weight: bold;
+        color: white;
+        margin: 0 auto 20px;
+        box-shadow: 0 10px 30px rgba(30, 84, 144, 0.3);
+    }
+    
+    #shiputz24-wrapper .shiputz24-process-step__title {
+        font-size: 1.3em;
+        font-weight: 600;
+        color: var(--lp-primary);
+        margin-bottom: 15px;
+    }
+    
+    /* Calculator */
+    #shiputz24-wrapper .shiputz24-calculator {
+        background: white;
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: var(--lp-shadow-medium);
+        margin: 40px 0;
+        border: 2px solid var(--lp-primary);
+    }
+    
+    #shiputz24-wrapper .shiputz24-calculator__title {
+        font-size: 1.8em;
+        font-weight: 600;
+        color: var(--lp-primary);
+        margin-bottom: 30px;
+        text-align: center;
+    }
+    
+    /* Calculator Navigation */
+    #shiputz24-wrapper .shiputz24-calc-nav {
+        margin-bottom: 15px !important;
+        text-align: left !important;
+    }
+    
+    #shiputz24-wrapper .shiputz24-calc-back-btn {
+        background: var(--lp-gray-medium) !important;
+        color: var(--lp-text-dark) !important;
+        border: none !important;
+        padding: 8px 16px !important;
+        border-radius: 25px !important;
+        font-size: 0.9em !important;
+        font-weight: 600 !important;
+        cursor: pointer !important;
+        transition: all 0.3s ease !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 5px !important;
+    }
+    
+    #shiputz24-wrapper .shiputz24-calc-back-btn:hover {
+        background: var(--lp-primary) !important;
+        color: white !important;
+        transform: translateX(-3px) !important;
+    }
+    
+    #shiputz24-wrapper .shiputz24-calc-edit-btn {
+        background: var(--lp-warning) !important;
+        color: white !important;
+        border: none !important;
+        padding: 10px 20px !important;
+        border-radius: 25px !important;
+        font-size: 0.9em !important;
+        font-weight: 600 !important;
+        cursor: pointer !important;
+        transition: all 0.3s ease !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 8px !important;
+        margin-bottom: 15px !important;
+    }
+    
+    #shiputz24-wrapper .shiputz24-calc-edit-btn:hover {
+        background: #e68900 !important;
+        transform: translateY(-2px) !important;
+        box-shadow: 0 5px 15px rgba(255, 152, 0, 0.3) !important;
+    }
+    
+    /* Calculator Summary */
+    #shiputz24-wrapper .shiputz24-calc-result__summary {
+        background: rgba(30, 84, 144, 0.05) !important;
+        border-radius: 15px !important;
+        padding: 20px !important;
+        margin: 20px 0 !important;
+        border: 1px solid rgba(30, 84, 144, 0.1) !important;
+    }
+    
+    #shiputz24-wrapper .shiputz24-calc-summary__item {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        padding: 8px 0 !important;
+        border-bottom: 1px solid rgba(30, 84, 144, 0.1) !important;
+    }
+    
+    #shiputz24-wrapper .shiputz24-calc-summary__item:last-child {
+        border-bottom: none !important;
+    }
+    
+    #shiputz24-wrapper .shiputz24-calc-summary__label {
+        color: var(--lp-text-light) !important;
+        font-weight: 600 !important;
+    }
+    
+    #shiputz24-wrapper .shiputz24-calc-restart {
+        text-align: center !important;
+        margin-top: 15px !important;
+    }
+    
+    #shiputz24-wrapper .shiputz24-calc-restart-btn {
+        background: transparent !important;
+        color: var(--lp-text-light) !important;
+        border: 1px solid var(--lp-gray-medium) !important;
+        padding: 8px 16px !important;
+        border-radius: 20px !important;
+        font-size: 0.9em !important;
+        cursor: pointer !important;
+        transition: all 0.3s ease !important;
+    }
+    
+    #shiputz24-wrapper .shiputz24-calc-restart-btn:hover {
+        border-color: var(--lp-secondary) !important;
+        color: var(--lp-secondary) !important;
+        background: rgba(255, 59, 59, 0.05) !important;
+    }
+    #shiputz24-wrapper .shiputz24-calc-steps {
+        max-width: 100%;
+    }
+    
+    #shiputz24-wrapper .shiputz24-calc-step {
+        display: none;
+        opacity: 0;
+        transform: translateX(20px);
+        transition: all 0.5s ease;
+    }
+    
+    #shiputz24-wrapper .shiputz24-calc-step.active {
+        display: block !important;
+        opacity: 1 !important;
+        transform: translateX(0) !important;
+    }
+    
+    #shiputz24-wrapper .shiputz24-calc-step__title {
+        font-size: 1.4em;
+        font-weight: 600;
+        color: var(--lp-primary);
+        margin-bottom: 25px;
+        text-align: center;
+    }
+    
+    /* Calculator Options */
+    #shiputz24-wrapper .shiputz24-calc-options {
+        display: grid !important;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
+        gap: 15px !important;
+        margin-bottom: 30px !important;
+    }
+    
+    #shiputz24-wrapper .shiputz24-calc-option {
+        background: var(--lp-gray-light) !important;
+        border: 2px solid var(--lp-gray-medium) !important;
+        border-radius: 15px !important;
+        padding: 20px !important;
+        text-align: center !important;
+        cursor: pointer !important;
+        transition: all 0.3s ease !important;
+        position: relative !important;
+        overflow: hidden !important;
+        display: block !important;
+    }
+    
+    #shiputz24-wrapper .shiputz24-calc-option:hover {
+        border-color: var(--lp-primary) !important;
+        transform: translateY(-3px) !important;
+        box-shadow: var(--lp-shadow-hover) !important;
+    }
+    
+    #shiputz24-wrapper .shiputz24-calc-option.selected {
+        background: linear-gradient(135deg, var(--lp-primary) 0%, var(--lp-primary-dark) 100%) !important;
+        border-color: var(--lp-primary) !important;
+        color: white !important;
+    }
+    
+    #shiputz24-wrapper .shiputz24-calc-option.selected .shiputz24-calc-option__price,
+    #shiputz24-wrapper .shiputz24-calc-option.selected .shiputz24-calc-option__subtitle {
+        color: rgba(255,255,255,0.9) !important;
+    }
+    
+    #shiputz24-wrapper .shiputz24-calc-option__icon {
+        font-size: 2.5em !important;
+        margin-bottom: 10px !important;
+        display: block !important;
+    }
+    
+    #shiputz24-wrapper .shiputz24-calc-option__text {
+        font-size: 1.2em !important;
+        font-weight: 600 !important;
+        margin-bottom: 5px !important;
+    }
+    
+    #shiputz24-wrapper .shiputz24-calc-option__subtitle {
+        font-size: 0.9em !important;
+        color: var(--lp-text-light) !important;
+        margin-bottom: 8px !important;
+    }
+    
+    #shiputz24-wrapper .shiputz24-calc-option__price {
+        font-size: 1.1em !important;
+        font-weight: bold !important;
+        color: var(--lp-secondary) !important;
+    }
+    
+    /* Calculator Checkboxes */
+    #shiputz24-wrapper .shiputz24-calc-checkboxes {
+        display: grid !important;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
+        gap: 15px !important;
+        margin-bottom: 30px !important;
+    }
+    
+    #shiputz24-wrapper .shiputz24-calc-checkbox {
+        background: var(--lp-gray-light) !important;
+        border: 2px solid var(--lp-gray-medium) !important;
+        border-radius: 15px !important;
+        padding: 15px !important;
+        text-align: center !important;
+        cursor: pointer !important;
+        transition: all 0.3s ease !important;
+        position: relative !important;
+        display: block !important;
+    }
+    
+    #shiputz24-wrapper .shiputz24-calc-checkbox:hover {
+        border-color: var(--lp-success) !important;
+        transform: translateY(-2px) !important;
+    }
+    
+    #shiputz24-wrapper .shiputz24-calc-checkbox.selected {
+        background: linear-gradient(135deg, var(--lp-success) 0%, #128C7E 100%) !important;
+        border-color: var(--lp-success) !important;
+        color: white !important;
+    }
+    
+    #shiputz24-wrapper .shiputz24-calc-checkbox.selected .shiputz24-calc-checkbox__price {
+        color: rgba(255,255,255,0.9) !important;
+    }
+    
+    #shiputz24-wrapper .shiputz24-calc-checkbox.selected::after {
+        content: '✓' !important;
+        position: absolute !important;
+        top: 5px !important;
+        left: 5px !important;
+        background: white !important;
+        color: var(--lp-success) !important;
+        width: 25px !important;
+        height: 25px !important;
+        border-radius: 50% !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        font-weight: bold !important;
+        font-size: 0.9em !important;
+    }
+    
+    #shiputz24-wrapper .shiputz24-calc-checkbox__icon {
+        font-size: 1.8em !important;
+        margin-bottom: 8px !important;
+        display: block !important;
+    }
+    
+    #shiputz24-wrapper .shiputz24-calc-checkbox__text {
+        font-weight: 600 !important;
+        margin-bottom: 5px !important;
+    }
+    
+    #shiputz24-wrapper .shiputz24-calc-checkbox__price {
+        font-size: 0.9em !important;
+        font-weight: bold !important;
+        color: var(--lp-secondary) !important;
+    }
+    
+    /* Calculator Button */
+    #shiputz24-wrapper .shiputz24-calc-btn {
+        background: linear-gradient(135deg, var(--lp-secondary) 0%, #ff6b6b 100%) !important;
+        color: white !important;
+        border: none !important;
+        padding: 16px 40px !important;
+        border-radius: 50px !important;
+        font-size: 1.2em !important;
+        font-weight: 700 !important;
+        cursor: pointer !important;
+        transition: all 0.3s ease !important;
+        display: block !important;
+        margin: 20px auto !important;
+        box-shadow: 0 5px 20px rgba(255, 59, 59, 0.3) !important;
+        animation: shiputz24-pulse 2s infinite !important;
+    }
+    
+    #shiputz24-wrapper .shiputz24-calc-btn:hover {
+        transform: translateY(-3px) scale(1.05) !important;
+        box-shadow: 0 8px 30px rgba(255, 59, 59, 0.4) !important;
+    }
+    
+    /* Calculator Result */
+    #shiputz24-wrapper .shiputz24-calc-result {
+        background: linear-gradient(135deg, var(--lp-gray-light) 0%, white 100%) !important;
+        border: 3px solid var(--lp-primary) !important;
+        border-radius: 20px !important;
+        padding: 30px !important;
+        margin-top: 30px !important;
+        text-align: center !important;
+        animation: shiputz24-fadeInUp 0.8s ease !important;
+    }
+    
+    #shiputz24-wrapper .shiputz24-calc-result__header h4 {
+        color: var(--lp-primary) !important;
+        font-size: 1.5em !important;
+        margin-bottom: 15px !important;
+    }
+    
+    #shiputz24-wrapper .shiputz24-calc-result__price {
+        font-size: 3em !important;
+        font-weight: bold !important;
+        color: var(--lp-secondary) !important;
+        margin-bottom: 20px !important;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.1) !important;
+    }
+    
+    #shiputz24-wrapper .shiputz24-calc-breakdown {
+        display: flex !important;
+        justify-content: space-around !important;
+        margin: 20px 0 !important;
+        padding: 20px !important;
+        background: white !important;
+        border-radius: 15px !important;
+        box-shadow: var(--lp-shadow-soft) !important;
+    }
+    
+    #shiputz24-wrapper .shiputz24-calc-breakdown__item {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 5px !important;
+    }
+    
+    #shiputz24-wrapper .shiputz24-calc-breakdown__item span:first-child {
+        color: var(--lp-text-light) !important;
+        font-size: 0.9em !important;
+    }
+    
+    #shiputz24-wrapper .shiputz24-calc-breakdown__item span:last-child {
+        color: var(--lp-primary) !important;
+        font-weight: bold !important;
+        font-size: 1.2em !important;
+    }
+    
+    #shiputz24-wrapper .shiputz24-calc-result__cta {
+        margin-top: 25px !important;
+        padding: 20px !important;
+        background: linear-gradient(135deg, rgba(30, 84, 144, 0.1) 0%, rgba(255, 59, 59, 0.1) 100%) !important;
+        border-radius: 15px !important;
+    }
+    
+    #shiputz24-wrapper .shiputz24-calc-result__cta p {
+        margin-bottom: 15px !important;
+    }
+    
+    #shiputz24-wrapper .shiputz24-calc-result__cta p:first-child {
+        font-size: 1.2em !important;
+        color: var(--lp-primary) !important;
+    }
+    
+    #shiputz24-wrapper .shiputz24-calc-result__cta p:last-of-type {
+        color: var(--lp-text-light) !important;
+        margin-bottom: 20px !important;
+    }
+    
+    /* Download Link */
+    #shiputz24-wrapper .shiputz24-download-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: var(--lp-warning);
+        color: white;
+        padding: 15px 25px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(255, 152, 0, 0.3);
+    }
+    
+    #shiputz24-wrapper .shiputz24-download-link:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(255, 152, 0, 0.4);
+    }
+    
+    /* Image with link */
+    #shiputz24-wrapper .shiputz24-image-link {
+        display: block;
+        margin: 40px 0;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: var(--lp-shadow-medium);
+        transition: all 0.3s ease;
+    }
+    
+    #shiputz24-wrapper .shiputz24-image-link:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--lp-shadow-hover);
+    }
+    
+    #shiputz24-wrapper .shiputz24-image-link img {
+        width: 100%;
+        height: auto;
+        display: block;
+        transition: transform 0.3s ease;
+    }
+    
+    #shiputz24-wrapper .shiputz24-image-link:hover img {
+        transform: scale(1.02);
+    }
+    
+    /* Final CTA */
+    #shiputz24-wrapper .shiputz24-final-cta {
+        background: linear-gradient(135deg, var(--lp-primary-dark) 0%, var(--lp-primary) 100%);
+        padding: 60px 40px;
+        text-align: center;
+        color: white;
+        border-radius: 20px;
+        margin: 60px 0;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    #shiputz24-wrapper .shiputz24-final-cta::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(circle at 30% 70%, rgba(255,255,255,0.1) 0%, transparent 50%);
+        pointer-events: none;
+    }
+    
+    #shiputz24-wrapper .shiputz24-final-cta__title {
+        font-size: 2.5em;
+        font-weight: 700;
+        margin-bottom: 20px;
+        position: relative;
+        z-index: 2;
+    }
+    
+    #shiputz24-wrapper .shiputz24-final-cta__text {
+        font-size: 1.3em;
+        margin-bottom: 30px;
+        opacity: 0.9;
+        position: relative;
+        z-index: 2;
+    }
+    
+    /* Animations */
+    @keyframes shiputz24-fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    
+    @keyframes shiputz24-fadeInDown {
+        from {
+            opacity: 0;
+            transform: translateY(-30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    @keyframes shiputz24-fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    @keyframes shiputz24-rotate {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
+    
+    @keyframes shiputz24-pulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+        #shiputz24-wrapper .shiputz24-hero__title {
+            font-size: 2.2em;
+        }
+        
+        #shiputz24-wrapper .shiputz24-hero__subtitle {
+            font-size: 1.1em;
+        }
+        
+        #shiputz24-wrapper .shiputz24-hero-calculator {
+            margin: 20px 10px !important;
+            padding: 20px !important;
+        }
+        
+        #shiputz24-wrapper .shiputz24-hero-calculator__title {
+            font-size: 1.4em !important;
+        }
+        
+        #shiputz24-wrapper .shiputz24-hero-calculator .shiputz24-calc-options {
+            grid-template-columns: 1fr 1fr !important;
+            gap: 8px !important;
+        }
+        
+        #shiputz24-wrapper .shiputz24-hero-calculator .shiputz24-calc-checkboxes {
+            grid-template-columns: 1fr !important;
+            gap: 8px !important;
+        }
+        
+        #shiputz24-wrapper .shiputz24-hero-calculator .shiputz24-calc-option {
+            padding: 12px 8px !important;
+        }
+        
+        #shiputz24-wrapper .shiputz24-hero-calculator .shiputz24-calc-option__icon {
+            font-size: 2em !important;
+        }
+        
+        #shiputz24-wrapper .shiputz24-hero-calculator .shiputz24-calc-option__text {
+            font-size: 1em !important;
+        }
+        
+        #shiputz24-wrapper .shiputz24-section__title {
+            font-size: 2em;
+        }
+        
+        #shiputz24-wrapper .shiputz24-benefits {
+            grid-template-columns: 1fr;
+        }
+        
+        #shiputz24-wrapper .shiputz24-calc-options {
+            grid-template-columns: 1fr;
+        }
+        
+        #shiputz24-wrapper .shiputz24-calc-checkboxes {
+            grid-template-columns: repeat(2, 1fr) !important;
+        }
+        
+        #shiputz24-wrapper .shiputz24-calc-breakdown {
+            flex-direction: column !important;
+            gap: 15px !important;
+        }
+        
+        #shiputz24-wrapper .shiputz24-calc-nav {
+            text-align: center !important;
+        }
+        
+        #shiputz24-wrapper .shiputz24-calc-back-btn,
+        #shiputz24-wrapper .shiputz24-calc-edit-btn {
+            font-size: 0.8em !important;
+            padding: 6px 12px !important;
+        }
+        
+        #shiputz24-wrapper .shiputz24-process__grid {
+            grid-template-columns: 1fr !important;
+        }
+    }
+    
+    /* Utility Classes */
+    #shiputz24-wrapper .shiputz24-text-center {
+        text-align: center;
+    }
+    
+    #shiputz24-wrapper .shiputz24-mb-30 {
+        margin-bottom: 30px;
+    }
+    
+    #shiputz24-wrapper .shiputz24-highlight {
+        background: linear-gradient(120deg, var(--lp-warning) 0%, var(--lp-secondary) 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-weight: 700;
+    }
+    </style>
+    
+    <div id="shiputz24-wrapper" class="shiputz24-page">
+        
+        <!-- Hero Section with Calculator -->
+        <div class="shiputz24-hero">
+            <div class="shiputz24-hero__animation">
+                <svg class="shiputz24-hero__house" viewBox="0 0 200 200" fill="none">
+                    <rect x="50" y="100" width="100" height="80" fill="currentColor"/>
+                    <polygon points="50,100 100,50 150,100" fill="currentColor"/>
+                    <rect x="70" y="120" width="20" height="30" fill="white"/>
+                    <rect x="110" y="120" width="20" height="20" fill="white"/>
+                </svg>
             </div>
-            
-            <!-- Interactive Renovation Calculator in Hero -->
-            <div class="shiputz24-hero-calculator">
-                <h3 class="shiputz24-hero-calculator__title">🏠 מחשבון שיפוץ חכם - גלו כמה יעלה לכם השיפוץ</h3>
-                
-                <!-- Progress Indicator -->
-                <div class="shiputz24-calc-progress">
-                    <div class="shiputz24-calc-progress__dot active" data-progress="1"></div>
-                    <div class="shiputz24-calc-progress__dot" data-progress="2"></div>
-                    <div class="shiputz24-calc-progress__dot" data-progress="3"></div>
+            <div class="shiputz24-hero__content">
+                <h1 class="shiputz24-hero__title">הפכו את הבית לחלום שלכם</h1>
+
+                <!-- Last Updated & Interest Info -->
+                <div style="text-align: center; color: rgba(255,255,255,0.8); font-size: 0.9em; margin-bottom: 20px;">
+                    <p style="margin-bottom: 5px;">עודכן לאחרונה: [current_date format="F Y" hebrew="true"]</p>
+                    <p>💡 הריביות בתוכן מעודכנות לפי ריבית פריים 5.5% (ריבית בנק ישראל 4%, נכון לינואר 2026)</p>
                 </div>
                 
-                <div class="shiputz24-calc-steps">
-                    <!-- Step 1: Apartment Size -->
-                    <div class="shiputz24-calc-step active" data-step="1">
-                        <h4 class="shiputz24-calc-step__title">🏠 גודל הדירה</h4>
-                        <div class="shiputz24-calc-options">
-                            <div class="shiputz24-calc-option" data-value="50">
-                                <div class="shiputz24-calc-option__icon">🏡</div>
-                                <div class="shiputz24-calc-option__text">עד 50 מ״ר</div>
-                                <div class="shiputz24-calc-option__price">מ-80,000 ₪</div>
-                            </div>
-                            <div class="shiputz24-calc-option" data-value="75">
-                                <div class="shiputz24-calc-option__icon">🏠</div>
-                                <div class="shiputz24-calc-option__text">50-75 מ״ר</div>
-                                <div class="shiputz24-calc-option__price">מ-120,000 ₪</div>
-                            </div>
-                            <div class="shiputz24-calc-option" data-value="100">
-                                <div class="shiputz24-calc-option__icon">🏘️</div>
-                                <div class="shiputz24-calc-option__text">75-100 מ״ר</div>
-                                <div class="shiputz24-calc-option__price">מ-160,000 ₪</div>
-                            </div>
-                            <div class="shiputz24-calc-option" data-value="120">
-                                <div class="shiputz24-calc-option__icon">🏰</div>
-                                <div class="shiputz24-calc-option__text">100+ מ״ר</div>
-                                <div class="shiputz24-calc-option__price">מ-220,000 ₪</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Step 2: Renovation Type -->
-                    <div class="shiputz24-calc-step" data-step="2">
-                        <div class="shiputz24-calc-nav">
-                            <button class="shiputz24-calc-back-btn" onclick="goBackToStep(1)">← חזור לגודל דירה</button>
-                        </div>
-                        <h4 class="shiputz24-calc-step__title">🎨 סוג השיפוץ</h4>
-                        <div class="shiputz24-calc-options">
-                            <div class="shiputz24-calc-option" data-value="1">
-                                <div class="shiputz24-calc-option__icon">🎨</div>
-                                <div class="shiputz24-calc-option__text">קוסמטי</div>
-                                <div class="shiputz24-calc-option__subtitle">צביעה וחידוש</div>
-                            </div>
-                            <div class="shiputz24-calc-option" data-value="1.5">
-                                <div class="shiputz24-calc-option__icon">🔨</div>
-                                <div class="shiputz24-calc-option__text">חלקי</div>
-                                <div class="shiputz24-calc-option__subtitle">מטבח + אמבטיה</div>
-                            </div>
-                            <div class="shiputz24-calc-option" data-value="2.2">
-                                <div class="shiputz24-calc-option__icon">🏗️</div>
-                                <div class="shiputz24-calc-option__text">מקיף</div>
-                                <div class="shiputz24-calc-option__subtitle">כל הדירה</div>
-                            </div>
-                            <div class="shiputz24-calc-option" data-value="3">
-                                <div class="shiputz24-calc-option__icon">⚡</div>
-                                <div class="shiputz24-calc-option__text">יוקרתי</div>
-                                <div class="shiputz24-calc-option__subtitle">רמה גבוהה</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Step 3: Special Features -->
-                    <div class="shiputz24-calc-step" data-step="3">
-                        <div class="shiputz24-calc-nav">
-                            <button class="shiputz24-calc-back-btn" onclick="goBackToStep(2)">← חזור לסוג שיפוץ</button>
-                        </div>
-                        <h4 class="shiputz24-calc-step__title">⚡ תוספות מיוחדות</h4>
-                        <div class="shiputz24-calc-checkboxes">
-                            <div class="shiputz24-calc-checkbox" data-value="15000">
-                                <div class="shiputz24-calc-checkbox__icon">⚡</div>
-                                <div class="shiputz24-calc-checkbox__text">שדרוג חשמל</div>
-                                <div class="shiputz24-calc-checkbox__price">+15,000 ₪</div>
-                            </div>
-                            <div class="shiputz24-calc-checkbox" data-value="20000">
-                                <div class="shiputz24-calc-checkbox__icon">🚿</div>
-                                <div class="shiputz24-calc-checkbox__text">שדרוג צנרת</div>
-                                <div class="shiputz24-calc-checkbox__price">+20,000 ₪</div>
-                            </div>
-                            <div class="shiputz24-calc-checkbox" data-value="8000">
-                                <div class="shiputz24-calc-checkbox__icon">❄️</div>
-                                <div class="shiputz24-calc-checkbox__text">מיזוג אוויר</div>
-                                <div class="shiputz24-calc-checkbox__price">+8,000 ₪</div>
-                            </div>
-                            <div class="shiputz24-calc-checkbox" data-value="12000">
-                                <div class="shiputz24-calc-checkbox__icon">🌿</div>
-                                <div class="shiputz24-calc-checkbox__text">עיצוב מרפסת</div>
-                                <div class="shiputz24-calc-checkbox__price">+12,000 ₪</div>
-                            </div>
-                        </div>
-                        <button class="shiputz24-calc-btn" onclick="calculateRenovation()">חשב עלות שיפוץ 🔍</button>
-                        
-                        <div class="shiputz24-calc-restart">
-                            <button class="shiputz24-calc-restart-btn" onclick="restartCalculation()">🔄 התחל מחדש</button>
-                        </div>
-                    </div>
+                <div style="text-align: center; color: white; margin-bottom: 30px;">
+                    <h2 style="font-size: 1.8em; margin-bottom: 15px; font-weight: 700; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">שבת בבוקר, פתחת את הברז והמים חומים. שוב.</h2>
+                    <p style="font-size: 1.3em; line-height: 1.5; opacity: 0.95; max-width: 800px; margin: 0 auto;">זה לא באשמתך שלא ידעת כמה באמת יעלה השיפוץ - עכשיו יש לך פתרון.</p>
                 </div>
 
-                <!-- Result Section -->
-                <div class="shiputz24-calc-result" id="calcResult" style="display: none;">
-                    <div class="shiputz24-calc-result__header">
-                        <div class="shiputz24-calc-nav">
-                            <button class="shiputz24-calc-edit-btn" onclick="editCalculation()">✏️ ערוך חישוב</button>
-                        </div>
-                        <h4>💰 עלות השיפוץ המשוערת</h4>
-                        <div class="shiputz24-calc-result__price" id="totalPrice">₪0</div>
-                    </div>
-                    <div class="shiputz24-calc-result__summary">
-                        <div class="shiputz24-calc-summary__item">
-                            <span class="shiputz24-calc-summary__label">גודל דירה:</span>
-                            <span class="shiputz24-calc-summary__value" id="summarySize">-</span>
-                        </div>
-                        <div class="shiputz24-calc-summary__item">
-                            <span class="shiputz24-calc-summary__label">סוג שיפוץ:</span>
-                            <span class="shiputz24-calc-summary__value" id="summaryType">-</span>
-                        </div>
-                        <div class="shiputz24-calc-summary__item">
-                            <span class="shiputz24-calc-summary__label">תוספות:</span>
-                            <span class="shiputz24-calc-summary__value" id="summaryAddons">-</span>
-                        </div>
-                    </div>
-                    <div class="shiputz24-calc-result__breakdown">
-                        <div class="shiputz24-calc-breakdown__item">
-                            <span>עלות בסיסית:</span>
-                            <span id="basePrice">₪0</span>
-                        </div>
-                        <div class="shiputz24-calc-breakdown__item">
-                            <span>תוספות:</span>
-                            <span id="addonsPrice">₪0</span>
-                        </div>
-                    </div>
-                    <div class="shiputz24-calc-result__cta">
-                        <p><strong>רוצים להפוך את החישוב למציאות?</strong></p>
-                        <p>קבלו הצעות מימון מותאמות לשיפוץ שלכם</p>
-                        <a href="#leadform" class="shiputz24-btn shiputz24-btn--primary">
-                            <span>קבלו הצעת מימון עכשיו</span>
-                            <span>💸</span>
-                        </a>
-                    </div>
+                <!-- Hero CTA Button -->
+                <div style="text-align: center;">
+                    <a href="#leadform" class="shiputz24-btn" style="background: linear-gradient(135deg, var(--lp-secondary) 0%, #ff6b6b 100%); color: white; border: none; padding: 15px 40px; font-size: 1.2em; box-shadow: 0 5px 15px rgba(0,0,0,0.3); animation: shiputz24-pulse 2s infinite;">
+                        קבלו הצעה למימון עכשיו ⬅
+                    </a>
                 </div>
             </div>
         </div>
-    </div>
+    
+        <!-- Intro Section -->
+        <div class="shiputz24-section">
+            <div class="shiputz24-container">
+                <div class="shiputz24-lead">
+                    שבת בבוקר, פתחת את הברז והמים חומים. שוב. כבר שבוע שאין מים קרים במקלחת. את/ה יודע/ת שצריך לטפל בזה, אבל הלב לא נותן לך מנוחה מהמחשבה כמה זה יעלה.
+                    <br><br>
+                    וגם אם יש לך את הכסף - מי אומר שזה מספיק? קבלנים תמיד חורגים, נכון? הם אומרים 150,000 ₪, ובסוף זה 200,000. ואז מה? תיתקע באמצע עם מטבח פרוק?
+                    <br><br>
+                    בוא נדבר תכל'ס. צריך מימון שיפוצים - אבל לא סתם מימון. צריך הלוואה שמכסה את כל התמונה, כולל הכרית הביטחון שאף אחד לא מספר לך עליה. ולמזלך, אתה יכול לקבל את זה בלי לרוץ לבנק או <a href="https://loan-israel.co.il/%D7%94%D7%9C%D7%95%D7%95%D7%90%D7%95%D7%AA-%D7%9C%D7%94%D7%9C%D7%99%D7%9A-%D7%A8%D7%A4%D7%95%D7%90%D7%99/">לממן טיפול רפואי יקר</a> במקביל.
+                </div>
 
-    <!-- Intro Section -->
-    <div class="shiputz24-section">
-        <div class="shiputz24-container">
-            <div class="shiputz24-lead">
-                הצנרת ישנה, החשמל בבית עושה בעיות, הקירות זקוקים לצביעה והמשפחה התרחבה בילד קטן וחמוד. אין ספק שנדרשים כאן שיפוצים עכשיו ומיד. אך מה עושים כשדווקא עבור מטרה זו, כה חשובה ומתאימה, אין את הסכום הרצוי בחשבון הבנק? הפתרון הוא אחד - הלוואות שיפוצים! כן, זה נכון. לא רק כדי לקנות רכב או ל<a href="https://loan-israel.co.il/%D7%94%D7%9C%D7%95%D7%95%D7%90%D7%95%D7%AA-%D7%9C%D7%94%D7%9C%D7%99%D7%9A-%D7%A8%D7%A4%D7%95%D7%90%D7%99/">ממן טיפול שיניים</a> יקר מבקשים סיוע מהבנק או מגורם אחר. גם כדי להפוך את הבית למרווח יותר, יפה יותר ובטח חדש יותר, אפשר לקבל מימון.
-            </div>
-            
-            <!-- Widget Container - First time -->
-            <div class="shiputz24-widget-container" id="leadform">
-                [awg postid="32400"]
+                <!-- Section 1: Types of Funding -->
+                <div class="shiputz24-mb-30">
+                    <h2 class="shiputz24-section__title">סוגי מימון לשיפוצים - איזו אפשרות מתאימה לך?</h2>
+                    <p>לא כל שיפוץ זקוק לאותו סוג מימון. מתכנן לצבוע ולהחליף ריצוף? יש פתרון. רוצה לפרק את כל הבית ולהתחיל מחדש? יש פתרון אחר. בוא נראה מה מתאים לך.</p>
+                    
+                    <h3>משכנתא לשיפוץ הדירה</h3>
+                    <p>זה לשיפוצים מקיפים עם סכומים גדולים. הריבית נמוכה כי זה כנגד שעבוד הנכס, אבל הבנק שולח שמאי ודורש מסמכים. מתאים אם מתכנן שיפוץ של 200,000 ₪ ומעלה. ראו גם: <a href="https://loan-israel.co.il/%d7%94%d7%9c%d7%95%d7%95%d7%90%d7%95%d7%aa-%d7%92%d7%93%d7%95%d7%9c%d7%95%d7%aa/">משכנתא לכל מטרה</a>.</p>
+                    
+                    <h3>הלוואה לכל מטרה מהבנק</h3>
+                    <p>פחות ביורוקרטיה, אישור מהיר יותר. הריבית קצת יותר גבוהה, אבל לא צריך שעבוד נכס. טוב לשיפוצים קטנים עד בינוניים (עד 150,000 ₪).</p>
+                    
+                    <h3>הלוואה מבנק לאומי ובנק הפועלים</h3>
+                    <p>בנקים כמו בנק לאומי ובנק הפועלים מציעים מסלולי משכנתא לשיפוץ עם תנאים מועדפים ללקוחות ותיקים. כדאי לבדוק אם יש לך וותק בבנק - לפעמים זה שווה אלפי שקלים. כדאי לבצע <a href="https://loan-israel.co.il/%d7%91%d7%93%d7%99%d7%a7%d7%aa-%d7%93%d7%99%d7%a8%d7%95%d7%92-%d7%90%d7%a9%d7%a8%d7%90%d7%99-%d7%90%d7%99%d7%a9%d7%99/">בדיקת דירוג אשראי</a> לפני הפנייה.</p>
+                    
+                    <h3>מימון ממשרד הבינוי</h3>
+                    <p>שיפוץ במסגרת תמ"א 38 או חיזוק מבנה? משרד הבינוי מציע מסלולי מימון מיוחדים לחיזוק מבנים. זה בעיקר לפרויקטים גדולים ברמת בניין.</p>
+
+                    <h3 class="shiputz24-mt-30" style="margin-top: 30px;">השוואה מהירה</h3>
+                    <div style="overflow-x: auto;">
+                        <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+                            <thead>
+                                <tr style="background: var(--lp-primary); color: white;">
+                                    <th style="padding: 10px; border: 1px solid #ddd;">סוג המימון</th>
+                                    <th style="padding: 10px; border: 1px solid #ddd;">סכום</th>
+                                    <th style="padding: 10px; border: 1px solid #ddd;">ריבית</th>
+                                    <th style="padding: 10px; border: 1px solid #ddd;">תקופה</th>
+                                    <th style="padding: 10px; border: 1px solid #ddd;">מתאים ל...</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="padding: 10px; border: 1px solid #ddd;">משכנתא לשיפוץ</td>
+                                    <td style="padding: 10px; border: 1px solid #ddd;">100K-500K+</td>
+                                    <td style="padding: 10px; border: 1px solid #ddd;">נמוכה</td>
+                                    <td style="padding: 10px; border: 1px solid #ddd;">עד 30 שנה</td>
+                                    <td style="padding: 10px; border: 1px solid #ddd;">שיפוץ מקיף</td>
+                                </tr>
+                                <tr style="background: #f9f9f9;">
+                                    <td style="padding: 10px; border: 1px solid #ddd;">הלוואה לכל מטרה</td>
+                                    <td style="padding: 10px; border: 1px solid #ddd;">20K-150K</td>
+                                    <td style="padding: 10px; border: 1px solid #ddd;">בינונית</td>
+                                    <td style="padding: 10px; border: 1px solid #ddd;">1-7 שנים</td>
+                                    <td style="padding: 10px; border: 1px solid #ddd;">שיפוץ חלקי</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 10px; border: 1px solid #ddd;">בנק לאומי/הפועלים</td>
+                                    <td style="padding: 10px; border: 1px solid #ddd;">משתנה</td>
+                                    <td style="padding: 10px; border: 1px solid #ddd;">מועדף</td>
+                                    <td style="padding: 10px; border: 1px solid #ddd;">משתנה</td>
+                                    <td style="padding: 10px; border: 1px solid #ddd;">לקוחות ותיקים</td>
+                                </tr>
+                                <tr style="background: #f9f9f9;">
+                                    <td style="padding: 10px; border: 1px solid #ddd;">משרד הבינוי</td>
+                                    <td style="padding: 10px; border: 1px solid #ddd;">גדול</td>
+                                    <td style="padding: 10px; border: 1px solid #ddd;">מסובסד</td>
+                                    <td style="padding: 10px; border: 1px solid #ddd;">ארוכה</td>
+                                    <td style="padding: 10px; border: 1px solid #ddd;">תמ"א 38</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3 class="shiputz24-mt-30" style="margin-top: 30px;">מסלולי מימון נבחרים מהבנקים (עדכון 2026)</h3>
+                    <div style="overflow-x: auto;">
+                        <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+                            <thead>
+                                <tr style="background: var(--lp-primary); color: white;">
+                                    <th style="padding: 10px; border: 1px solid #ddd;">בנק / מסלול</th>
+                                    <th style="padding: 10px; border: 1px solid #ddd;">סכום מקסימלי</th>
+                                    <th style="padding: 10px; border: 1px solid #ddd;">תקופה</th>
+                                    <th style="padding: 10px; border: 1px solid #ddd;">תנאים מיוחדים</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="padding: 10px; border: 1px solid #ddd;"><strong>מזרחי-טפחות</strong><br>הלוואה ללא ריבית / לשיפוץ</td>
+                                    <td style="padding: 10px; border: 1px solid #ddd;">עד 40,000 ₪ (ללא ריבית)<br>סכומים גבוהים יותר במסלול רגיל</td>
+                                    <td style="padding: 10px; border: 1px solid #ddd;">עד 24 חודשים (ללא ריבית)</td>
+                                    <td style="padding: 10px; border: 1px solid #ddd;">הטבה ייחודית של פטור מריבית לסכום נמוך</td>
+                                </tr>
+                                <tr style="background: #f9f9f9;">
+                                    <td style="padding: 10px; border: 1px solid #ddd;"><strong>הבינלאומי</strong><br>הלוואה לשדרוג הבית</td>
+                                    <td style="padding: 10px; border: 1px solid #ddd;">עד 200,000 ₪</td>
+                                    <td style="padding: 10px; border: 1px solid #ddd;">פריסה גמישה</td>
+                                    <td style="padding: 10px; border: 1px solid #ddd;">מותאם במיוחד למשפצי דירות</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 10px; border: 1px solid #ddd;"><strong>בנק יהב</strong><br>הלוואת ג'מבו לשכירים</td>
+                                    <td style="padding: 10px; border: 1px solid #ddd;">עד 150,000 ₪</td>
+                                    <td style="padding: 10px; border: 1px solid #ddd;">עד 15 שנים</td>
+                                    <td style="padding: 10px; border: 1px solid #ddd;">פריסה ארוכה במיוחד, מתאים לעובדי מדינה/שכירים</td>
+                                </tr>
+                                <tr style="background: #f9f9f9;">
+                                    <td style="padding: 10px; border: 1px solid #ddd;"><strong>בנק הפועלים</strong><br>הלוואה דיגיטלית</td>
+                                    <td style="padding: 10px; border: 1px solid #ddd;">עד 250,000 ₪</td>
+                                    <td style="padding: 10px; border: 1px solid #ddd;">גמיש</td>
+                                    <td style="padding: 10px; border: 1px solid #ddd;">אישור מהיר בדיגיטל (בכפוף לדירוג אשראי)</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 10px; border: 1px solid #ddd;"><strong>בנק דיסקונט</strong><br>הלוואה לכל מטרה</td>
+                                    <td style="padding: 10px; border: 1px solid #ddd;">עד 100,000 ₪</td>
+                                    <td style="padding: 10px; border: 1px solid #ddd;">עד 72 תשלומים</td>
+                                    <td style="padding: 10px; border: 1px solid #ddd;">פתרון מהיר לשיפוצים קטנים-בינוניים</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p>מניסיוננו, רוב האנשים לא יודעים שיש את כל האפשרויות האלה. הם הולכים לבנק שלהם, מקבלים "לא" או תנאים לא טובים, ועוצרים שם. אל תעשה את הטעות הזו. חפש, השווה, בדוק מה מתאים לך.</p>
+                </div>
+                
+                <!-- Widget Container - First time -->
+                <div id="leadform" style="text-align: center;">
+                    [awg postid="32400"]
+                </div>
+
+                <!-- YMYL Disclaimer -->
+                <div class="disclaimer-box" style="background: #ffffff; padding: 18px 24px; margin: 24px 0; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.06); border: 1px solid #e8e8e8;">
+                  <p style="margin: 0; color: #555; font-size: 14px; line-height: 1.7;">
+                    <strong style="color: #333;">חשוב לדעת:</strong> רק תבקש הוא פורטל אגריגטור - אנחנו מחברים אותך למגוון גופים מלווים (בנקים וחברות מימון מורשות). התנאים, הריבית ותקופת ההחזר נקבעים ע"י הגוף המלווה עצמו לפי הפרופיל האישי שלך. העלויות המוזכרות במחשבון הן הערכה כללית - העלות הסופית תלויה בהיקף השיפוץ בפועל.
+                  </p>
+                </div>
             </div>
         </div>
-    </div>
-
-    <!-- Benefits Section -->
-    <div class="shiputz24-section">
-        <div class="shiputz24-container">
-            <h2 class="shiputz24-section__title">גם אתה יכול לקבל הלוואות לשיפוץ הבית בתנאים נוחים</h2>
-            <p>כל אחד יכול ללכת לבנק ולבקש <a href="https://loan-israel.co.il/">הלוואה לכל דבר</a>. אך לא כל אחד מסוגל להבטיח את קבלת האישור המיוחל על הבקשה, ועוד יותר מכך, את ההטבה של מסלול הלוואתי משתלם שיבטיח תפיסת שתי ציפורים במכה אחת: המשך בשגרת החיים ורמת ההוצאות הנורמלית, תוך הנאה מבית משופץ, או כל מטרה לצורך העניין. רוצים להיות אלו שיהנו מכל זה? הגידו שלוש מילים: פורטל רק תבקש! וראו כמה זה קל להגיש בקשה להלוואה ולזכות בתנאים אטרקטיביים.</p>
-            
+    
+        <!-- Benefits Section -->
+        <div class="shiputz24-section">
+            <div class="shiputz24-container">
+                <h2 class="shiputz24-section__title">גם אתה יכול לקבל הלוואות לשיפוץ הבית בתנאים נוחים</h2>
+                <p>כל אחד יכול ללכת לבנק ולבקש הלוואה לכל דבר. אך לא כל אחד מסוגל להבטיח את קבלת האישור המיוחל על הבקשה, ועוד יותר מכך, את ההטבה של מסלול הלוואתי משתלם שיבטיח תפיסת שתי ציפורים במכה אחת: המשך בשגרת החיים ורמת ההוצאות הנורמלית, תוך הנאה מבית משופץ, או כל מטרה לצורך העניין. רוצים להיות אלו שיהנו מכל זה? הגידו שלוש מילים: פורטל רק תבקש! וראו כמה זה קל להגיש בקשה להלוואה ולזכות בתנאים אטרקטיביים.</p>
+                
+            </div>
         </div>
-    </div>
+    
+        <!-- Dream Section -->
+        <div class="shiputz24-section">
+            <div class="shiputz24-container">
+                <h2 class="shiputz24-section__title">חלום השיפוץ שלך במרחק נגיעה - הלוואות לשיפוצים בתנאים מיוחדים</h2>
+                <p>רק תבקש הוא פורטל פיננסי מוביל שהופך את היוצרות בכל מה שהכרתם עד היום בבקשת <a href="https://loan-israel.co.il">הלוואות</a>. צוות הפורטל עובד עם מוסדות המימון לעסקים ולפרטיים הגדולים והידועים במדינה, ביניהם הבנקים וחברות פרטיות מוכרות, על מנת לאפשר לכם למלא ללא התחייבות את טופס הבקשה להלוואה באתר, ולהנות מהשוואת מחירים של מגוון מסלולים נוחים שלא ידעתם שקיימים ומחכים רק לכם. נצלו את שירותי פורטל רק תבקש הפיננסיים המקצועיים.</p>
+                
+                <!-- Download Guide -->
+                <div class="shiputz24-text-center shiputz24-mb-30">
+                    <p><strong><span style="color: #ff0000">רגע! לא מתחילים לשפץ לפני שקוראים את המדריך שלנו לשיפוץ מוצלח</span></strong></p>
+                    <a href="https://loan-israel.co.il/wp-content/uploads/2023/03/טיפים-לשיפוץ-דירה.docx" class="shiputz24-download-link">
+                        <span>📋</span>
+                        <span>טיפים לשיפוץ דירה</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Planning Section -->
+        <div class="shiputz24-section">
+            <div class="shiputz24-container">
+                <h2 class="shiputz24-section__title">מתכנן לשפץ את הדירה? כך תיקח מימון לשיפוץ בלחיצת כפתור!</h2>
+                <p>כיום אין צורך לצאת מהבית או לקחת יום חופש ממקום העבודה על מנת לקחת הלוואה לשיפוץ הדירה. אפשר למלא טופס בקשה מקוון ובלחיצת כפתור מקבלים הצעות להלוואות אטרקטיביות ובהתאמה אישית לצרכים הייחודיים שלך.</p>
+                
+                <p>אם ברצונך לשפץ את הבית או הדירה כל שעליך לעשות הוא לסמן את סכום ההלוואה הנחוצה לשיפוץ הנכס ויש ללחוץ על הלחצן "המשך" ולעקוב אחר ההנחיות המופיעות בחלונית ההסבר. כיום אפשר לקחת <a href="https://loan-israel.co.il/%d7%94%d7%9c%d7%95%d7%95%d7%90%d7%94-%d7%9e%d7%99%d7%99%d7%93%d7%99%d7%aa-%d7%90%d7%95%d7%a0%d7%9c%d7%99%d7%99%d7%9f/">הלוואה דיגיטלית</a> לשיפוץ הבית בקלות ובמהירות, ללא ביורוקרטיה מתישה ומייגעת ובלי לצאת מהבית.</p>
+                
+                <!-- Process Steps -->
+                <div class="shiputz24-process">
+                    <div class="shiputz24-process__grid">
+                        <div class="shiputz24-process-step">
+                            <div class="shiputz24-process-step__number">1</div>
+                            <h3 class="shiputz24-process-step__title">מלאו טופס</h3>
+                            <p>פשוט וקל - רק פרטים בסיסיים</p>
+                        </div>
+                        <div class="shiputz24-process-step">
+                            <div class="shiputz24-process-step__number">2</div>
+                            <h3 class="shiputz24-process-step__title">קבלו הצעות</h3>
+                            <p>המומחים שלנו יחזרו אליכם עם הצעות מותאמות</p>
+                        </div>
+                        <div class="shiputz24-process-step">
+                            <div class="shiputz24-process-step__number">3</div>
+                            <h3 class="shiputz24-process-step__title">בחרו ואשרו</h3>
+                            <p>בוחרים את ההצעה הטובה ביותר ומקבלים אישור</p>
+                        </div>
+                        <div class="shiputz24-process-step">
+                            <div class="shiputz24-process-step__number">4</div>
+                            <h3 class="shiputz24-process-step__title">תתחילו לשפץ</h3>
+                            <p>הכסף בחשבון והחלום הופך למציאות</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Mortgage Benefits Section -->
+        
+        <!-- Section 2: What to know before -->
+        <div class="shiputz24-section">
+            <div class="shiputz24-container">
+                <h2 class="shiputz24-section__title">מה כדאי לדעת לפני שלוקחים מימון לשיפוץ?</h2>
+                <p>חשבת שסיימת? עוד לא. לפני שאתה חותם על כל דבר, יש כמה דברים שכדאי לדעת מראש. אלה הדברים שאף אחד לא מספר לך.</p>
+                
+                <h3>תכנון תקציב - למה קבלנים תמיד חורגים?</h3>
+                <p>מניסיוננו, שיפוצים חורגים בממוצע 15-20% מהתקציב המקורי. זה לא כי הקבלן רוצה לרמות אותך (לפעמים כן, אבל לא תמיד). זה כי תמיד יש הפתעות: קיר שצריך לחזק, צינור שנמצא במקום לא נכון, גילית שאתה רוצה משהו יותר טוב באמצע.</p>
+                <p>אז מה עושים? <strong>לוקחים 15% כרית ביטחון</strong>. הקבלן אמר 150,000 ₪? תקח מימון של 180,000 ₪. ככה לא תיתקע באמצע. ניתן להיעזר ב<a href="https://loan-israel.co.il/%d7%9e%d7%97%d7%a9%d7%91%d7%95%d7%9f-%d7%94%d7%9c%d7%95%d7%95%d7%90%d7%95%d7%aa-%d7%9e%d7%aa%d7%a7%d7%93%d7%9d/">מחשבון הלוואות</a> כדי לבדוק את המשמעות על ההחזר החודשי.</p>
+                
+                <h3>התחשבות במשך הזמן - מימון ביניים או מימון מלא?</h3>
+                <p>שיפוץ לוקח זמן. לפעמים הקבלן מקבל את הכסף בשלבים: 30% בהתחלה, 40% באמצע, 30% בסיום. הבנק צריך לדעת את זה כי זה משפיע על איך הוא משחרר את הכסף. יש בנקים שנותנים את הכל מראש. יש שנותנים בשלבים. תבדוק מה מתאים לך ולקבלן.</p>
+                
+                <h3>דרישות הבנקים - מה צריך להביא?</h3>
+                <p>הבנק לא סומך עליך ככה סתם. הוא רוצה לראות:</p>
+                <ul class="shiputz24-feature-list">
+                    <li class="shiputz24-feature-item"><span class="shiputz24-feature-icon">✓</span> <strong>הצעת מחיר מקבלן</strong> - עם פירוט מלא של מה עושים</li>
+                    <li class="shiputz24-feature-item"><span class="shiputz24-feature-icon">✓</span> <strong>אישור עובד זר</strong> (אם יש)</li>
+                    <li class="shiputz24-feature-item"><span class="shiputz24-feature-icon">✓</span> <strong>תכנית שיפוץ</strong> לשיפוצים גדולים</li>
+                    <li class="shiputz24-feature-item"><span class="shiputz24-feature-icon">✓</span> <strong>ביטוח עבודות</strong> לפעמים</li>
+                </ul>
+                <p>הכינו את זה מראש. ככה התהליך יהיה יותר מהיר.</p>
+                
+                <div style="background: #f0f7ff; padding: 25px; border-radius: 15px; border-right: 4px solid var(--lp-primary); margin: 30px 0;">
+                    <h3 style="color: var(--lp-primary); margin-top: 0;">סיפור מהשטח: משפחת כהן</h3>
+                    <p>משפחת כהן רצתה לשפץ דירת 80 מ״ר. הקבלן הציע 150,000 ₪. הם לקחו את העצה שלנו ולקחו מימון של 180,000 ₪ (20% כרית ביטחון).</p>
+                    <p>בסוף השיפוץ עלה בדיוק 175,000 ₪ - 25,000 ₪ יותר מההצעה המקורית. למדנו ש<strong>כרית הביטחון הצילה אותם</strong>. בלי זה, הם היו צריכים לקחת עוד <a href="https://loan-israel.co.il/%d7%94%d7%9c%d7%95%d7%95%d7%90%d7%95%d7%aa-%d7%a7%d7%98%d7%a0%d7%95%d7%aa/">הלוואה קטנה</a> בתנאים גרועים, או לוותר על דברים שרצו.</p>
+                    <p>זה לא סיפור יוצא דופן. זה קורה ברוב השיפוצים.</p>
+                </div>
 
-    <!-- Dream Section -->
-    <div class="shiputz24-section">
-        <div class="shiputz24-container">
-            <h2 class="shiputz24-section__title">חלום השיפוץ שלך במרחק נגיעה - הלוואות לשיפוצים בתנאים מיוחדים</h2>
-            <p>רק תבקש הוא פורטל פיננסי מוביל שהופך את היוצרות בכל מה שהכרתם עד היום בבקשת <a href="https://loan-israel.co.il">הלוואות</a>. צוות הפורטל עובד עם מוסדות המימון לעסקים ולפרטיים הגדולים והידועים במדינה, ביניהם הבנקים וחברות פרטיות מוכרות, על מנת לאפשר לכם למלא ללא התחייבות את טופס הבקשה להלוואה באתר, ולהנות מהשוואת מחירים של מגוון מסלולים נוחים שלא ידעתם שקיימים ומחכים רק לכם. נצלו את שירותי פורטל רק תבקש הפיננסיים המקצועיים.</p>
-            
-            <!-- Download Guide -->
-            <div class="shiputz24-text-center shiputz24-mb-30">
-                <p><strong><span style="color: #ff0000">רגע! לא מתחילים לשפץ לפני שקוראים את המדריך שלנו לשיפוץ מוצלח</span></strong></p>
-                <a href="https://loan-israel.co.il/wp-content/uploads/2023/03/טיפים-לשיפוץ-דירה.docx" class="shiputz24-download-link">
-                    <span>📋</span>
-                    <span>טיפים לשיפוץ דירה</span>
+                <h3>משפט מהלב (מניסיון)</h3>
+                <p>ראינו מאות מקרים שבהם לקוחות לקחו מימון קטן מדי כי "לא רצו להיות בחובות". ואז הם נתקעו באמצע, נאלצו לקחת עוד הלוואה בתנאים גרועים, ובסוף שילמו הרבה יותר. לרוב, ההבדל בין משכנתא לשיפוץ הבית להלוואה רגילה יכול להגיע ל-30,000 ₪ על 5 שנים. זה לא מעט כסף. כדאי לעשות את זה נכון מההתחלה.</p>
+            </div>
+        </div>
+
+        <div class="shiputz24-section">
+            <div class="shiputz24-container">
+                <h2 class="shiputz24-section__title">מה אני מרוויח מלקיחת הלוואת משכנתא לשיפוץ הבית?</h2>
+                <p>באופן כללי, הבנקים מציעים שני מסלולי מימון לשיפוץ הדירה. אפשר לקחת הלוואה לכל מטרה או הלוואת משכנתא לשיפוץ הבית. הלוואת משכנתא מתאימה למי שמתכנן שיפוץ מקיף בכל הבית (רמונט כללי), והתנאים דומים יחסית לתנאים הנוחים של המשכנתאות. היתרונות בלקיחת הלוואת משכנתא לשיפוץ הנכס הם:</p>
+                
+                <ul class="shiputz24-feature-list">
+                    <li class="shiputz24-feature-item">
+                        <span class="shiputz24-feature-icon">✓</span>
+                        <span>תנאים מועדפים מבחינת ריבית, פריסת תשלומים וסכום ההלוואה, כמעט כמו במשכנתא רגילה.</span>
+                    </li>
+                    <li class="shiputz24-feature-item">
+                        <span class="shiputz24-feature-icon">✓</span>
+                        <span>אפשר לקחת סכום גדול למימון השיפוץ בבית.</span>
+                    </li>
+                    <li class="shiputz24-feature-item">
+                        <span class="shiputz24-feature-icon">✓</span>
+                        <span>פריסת תשלומים ארוכה.</span>
+                    </li>
+                    <li class="shiputz24-feature-item">
+                        <span class="shiputz24-feature-icon">✓</span>
+                        <span>הלוואה בריבית נוחה כנגד שעבוד הנכס.</span>
+                    </li>
+                    <li class="shiputz24-feature-item">
+                        <span class="shiputz24-feature-icon">✓</span>
+                        <span>מגוון מסלולים לבחירה (מסלולים בריבית קבועה או משתנה, עם או ללא הצמדה).</span>
+                    </li>
+                </ul>
+                
+                <!-- Image with WhatsApp Link -->
+                <a href="https://api.whatsapp.com/send/?phone=%2B972534288957&text=%D7%90%D7%A0%D7%99+%D7%9E%D7%A2%D7%95%D7%A0%D7%99%D7%99%D7%9F+%D7%9C%D7%94%D7%AA%D7%97%D7%99%D7%9C+%D7%91%D7%93%D7%99%D7%A7%D7%AA+%D7%96%D7%9B%D7%90%D7%95%D7%AA+%D7%9C%D7%94%D7%9C%D7%95%D7%95%D7%90%D7%94&type=phone_number&app_absent=0" class="shiputz24-image-link">
+                    <img src="https://loan-israel.co.il/wp-content/uploads/2016/09/הלוואות-לשיפוץ-דירה-1.webp" alt="באנר הלוואות לשיפוץ דירה בראש שקט" width="760" height="300" />
                 </a>
             </div>
         </div>
-    </div>
-
-    <!-- Planning Section -->
-    <div class="shiputz24-section">
-        <div class="shiputz24-container">
-            <h2 class="shiputz24-section__title">מתכנן לשפץ את הדירה? כך תיקח מימון לשיפוץ בלחיצת כפתור!</h2>
-            <p>כיום אין צורך לצאת מהבית או לקחת יום חופש ממקום העבודה על מנת לקחת הלוואה לשיפוץ הדירה. אפשר למלא טופס בקשה מקוון ובלחיצת כפתור מקבלים הצעות להלוואות אטרקטיביות ובהתאמה אישית לצרכים הייחודיים שלך.</p>
-            
-            <p>אם ברצונך לשפץ את הבית או הדירה כל שעליך לעשות הוא לסמן את סכום ההלוואה הנחוצה לשיפוץ הנכס ויש ללחוץ על הלחצן "המשך" ולעקוב אחר ההנחיות המופיעות בחלונית ההסבר. כיום אפשר לקחת <a href="https://loan-israel.co.il/%d7%94%d7%9c%d7%95%d7%95%d7%90%d7%94-%d7%9e%d7%99%d7%99%d7%93%d7%99%d7%aa-%d7%90%d7%95%d7%a0%d7%9c%d7%99%d7%99%d7%9f/">הלוואה דיגיטלית</a> לשיפוץ הבית בקלות ובמהירות, ללא ביורוקרטיה מתישה ומייגעת ובלי לצאת מהבית.</p>
-            
-            <!-- Process Steps -->
-            <div class="shiputz24-process">
-                <div class="shiputz24-process__grid">
-                    <div class="shiputz24-process-step">
-                        <div class="shiputz24-process-step__number">1</div>
-                        <h3 class="shiputz24-process-step__title">מלאו טופס</h3>
-                        <p>פשוט וקל - רק פרטים בסיסיים</p>
+    
+        <!-- Financing Percentage Section -->
+        <div class="shiputz24-section">
+            <div class="shiputz24-container">
+                <h2 class="shiputz24-section__title">מהו אחוז המימון המרבי במשכנתא לשיפוץ הבית?</h2>
+                <p>ברוב המקרים ניתן לקבל מימון מרבי בשיעור של עד 50% מערך הדירה או הבית. אחוזי המימון ישתנו אם יש משכנתא פעילה על הנכס. בעזרת יועצי משכנתא מיומנים ובעלי קשרים ניתן במקרים מסוימים לקבל משכנתא לשיפוץ באחוזי מימון גבוהים יותר, עד 75%.</p>
+                
+                <!-- Benefits Grid -->
+                <div class="shiputz24-benefits">
+                    <div class="shiputz24-benefit-card">
+                        <div class="shiputz24-benefit-card__icon">
+                            <svg width="30" height="30" viewBox="0 0 24 24" fill="white">
+                                <path d="M12 2L2 7V10C2 16 6 20.9 12 22C18 20.9 22 16 22 10V7L12 2Z"/>
+                            </svg>
+                        </div>
+                        <h3 class="shiputz24-benefit-card__title">מימון עד 75%</h3>
+                        <p>בתנאים מסוימים ניתן לקבל מימון גבוה במיוחד מערך הנכס</p>
                     </div>
-                    <div class="shiputz24-process-step">
-                        <div class="shiputz24-process-step__number">2</div>
-                        <h3 class="shiputz24-process-step__title">קבלו הצעות</h3>
-                        <p>המומחים שלנו יחזרו אליכם עם הצעות מותאמות</p>
+                    <div class="shiputz24-benefit-card">
+                        <div class="shiputz24-benefit-card__icon">
+                            <svg width="30" height="30" viewBox="0 0 24 24" fill="white">
+                                <path d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7L12 2L3 7V9C3 11.55 3.84 13.74 9 16.5V22H15V16.5C20.16 13.74 21 11.55 21 9Z"/>
+                            </svg>
+                        </div>
+                        <h3 class="shiputz24-benefit-card__title">יועצים מקצועיים</h3>
+                        <p>צוות מומחים עם קשרים בבנקים יעזור לכם לקבל את התנאים הטובים ביותר</p>
                     </div>
-                    <div class="shiputz24-process-step">
-                        <div class="shiputz24-process-step__number">3</div>
-                        <h3 class="shiputz24-process-step__title">בחרו ואשרו</h3>
-                        <p>בוחרים את ההצעה הטובה ביותר ומקבלים אישור</p>
-                    </div>
-                    <div class="shiputz24-process-step">
-                        <div class="shiputz24-process-step__number">4</div>
-                        <h3 class="shiputz24-process-step__title">תתחילו לשפץ</h3>
-                        <p>הכסף בחשבון והחלום הופך למציאות</p>
+                    <div class="shiputz24-benefit-card">
+                        <div class="shiputz24-benefit-card__icon">
+                            <svg width="30" height="30" viewBox="0 0 24 24" fill="white">
+                                <path d="M12 2C6.48 2 2 6.48 2 12S6.48 22 12 22 22 17.52 22 12 17.52 2 12 2ZM13 17H11V15H13V17ZM13 13H11V7H13V13Z"/>
+                            </svg>
+                        </div>
+                        <h3 class="shiputz24-benefit-card__title">שירות אישי</h3>
+                        <p>התאמה מלאה לצרכים האישיים ומצב הנכס הספציפי שלכם</p>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-
-    <!-- Mortgage Benefits Section -->
-    <div class="shiputz24-section">
-        <div class="shiputz24-container">
-            <h2 class="shiputz24-section__title">מה אני מרוויח מלקיחת הלוואת משכנתא לשיפוץ הבית?</h2>
-            <p>באופן כללי, הבנקים מציעים שני מסלולי מימון לשיפוץ הדירה. אפשר לקחת <a href="https://loan-israel.co.il/">הלוואה לכל מטרה</a> או הלוואת משכנתא לשיפוץ הבית. הלוואת משכנתא מתאימה למי שמתכנן שיפוץ מקיף בכל הבית (רמונט כללי), והתנאים דומים יחסית לתנאים הנוחים של המשכנתאות. היתרונות בלקיחת הלוואת משכנתא לשיפוץ הנכס הם:</p>
-            
-            <ul class="shiputz24-feature-list">
-                <li class="shiputz24-feature-item">
-                    <span class="shiputz24-feature-icon">✓</span>
-                    <span>תנאים מועדפים מבחינת ריבית, פריסת תשלומים וסכום ההלוואה, כמעט כמו במשכנתא רגילה.</span>
-                </li>
-                <li class="shiputz24-feature-item">
-                    <span class="shiputz24-feature-icon">✓</span>
-                    <span>אפשר לקחת סכום גדול למימון השיפוץ בבית.</span>
-                </li>
-                <li class="shiputz24-feature-item">
-                    <span class="shiputz24-feature-icon">✓</span>
-                    <span>פריסת תשלומים ארוכה.</span>
-                </li>
-                <li class="shiputz24-feature-item">
-                    <span class="shiputz24-feature-icon">✓</span>
-                    <span>הלוואה בריבית נוחה כנגד שעבוד הנכס.</span>
-                </li>
-                <li class="shiputz24-feature-item">
-                    <span class="shiputz24-feature-icon">✓</span>
-                    <span>מגוון מסלולים לבחירה (מסלולים בריבית קבועה או משתנה, עם או ללא הצמדה).</span>
-                </li>
-            </ul>
-            
-            <!-- Image with WhatsApp Link -->
-            <a href="https://api.whatsapp.com/send/?phone=%2B972534288957&text=%D7%90%D7%A0%D7%99+%D7%9E%D7%A2%D7%95%D7%A0%D7%99%D7%99%D7%9F+%D7%9C%D7%94%D7%AA%D7%97%D7%99%D7%9C+%D7%91%D7%93%D7%99%D7%A7%D7%AA+%D7%96%D7%9B%D7%90%D7%95%D7%AA+%D7%9C%D7%94%D7%9C%D7%95%D7%95%D7%90%D7%94&type=phone_number&app_absent=0" class="shiputz24-image-link">
-                <img src="https://loan-israel.co.il/wp-content/uploads/2016/09/הלוואות-לשיפוץ-דירה-1.webp" alt="באנר הלוואות לשיפוץ דירה בראש שקט" width="760" height="300" />
-            </a>
+    
+        <!-- Bank Calculation Section -->
+        <div class="shiputz24-section">
+            <div class="shiputz24-container">
+                <h2 class="shiputz24-section__title">איך הבנק מחשב את אחוזי המימון למשכנתא לשיפוץ הבית על סמך הערכת השמאי?</h2>
+                <p>בדומה לתהליך לקיחת משכנתא רגילה לרכישת דירת מגורים או להשקעה, גם כאשר לוקחים משכנתא לשיפוץ הנכס הבנק שולח שמאי מקרקעין מטעמו לבצע הערכת שווי כבסיס לאישור המימון הנקבע להלוואת המשכנתא. לכן, סכום <a href="https://loan-israel.co.il/%d7%94%d7%9c%d7%95%d7%95%d7%90%d7%95%d7%aa-%d7%92%d7%93%d7%95%d7%9c%d7%95%d7%aa/">הלוואת המשכנתא</a> לשיפוץ הדירה יהיה לפי הערכת שווי הנכס שקבע שמאי מקרקעין. כמו כן, הבנקים דורשים מהלווים להביא הצעת מחיר לשיפוץ הנכס.</p>
+                
+                <h3><strong>אפשרויות נוספות לקבלת הלוואות באתר</strong></h3>
+                <p><a href="https://loan-israel.co.il/checks-loans/">הלוואה בהחזר צ'קים</a></p>
+            </div>
         </div>
-    </div>
+    
+        <!-- Calculator Section -->
+        <div class="shiputz24-section">
+            <div class="shiputz24-container">
+                <h2 class="shiputz24-section__title">רוצה לדעת מה ההחזר החודשי הצפוי לך? בדוק אצלנו במחשבון הלוואה לשיפוץ</h2>
+                <p>אם החלטת לשפץ את הבית או הדירה ועליך לקחת הלוואה לשיפוץ הנכס כדאי לבדוק את ההחזר החודשי בעזרת <a href="#renovation-calculator">מחשבון הלוואה לשיפוץ</a> כאן באתר. עליך לציין את סכום ההלוואה ותקופת ההחזר המתאימה לך, ובקליק מהיר המחשבון יציג בפניך את גובה ההחזר החודשי הצפוי.</p>
+                
+                <p>המומחים המנוסים שלנו ברק תבקש הלוואות ממליצים עוד בטרם השימוש במחשבון לבקש מספר הצעות מחיר מקבלני שיפוצים שונים. הצעות המחיר מאפשרות לך לבצע הערכה של עלות השיפוץ בדירה, אך במחשבון כדאי להוסיף לפחות 10% מעל הצעת הקבלן, מאחר שברוב המקרים חורגים מהסכום הראשוני.</p>
+                
+                <p>מחשבון הלוואה לשיפוץ הוא כלי עזר שנועד לסייע לך ולאחרים, המחשבון מציג את גובה ההחזרים החודשיים הצפויים לאורך תקופת ההלוואה, וההחזר החודשי מסייע לך לתכנן טוב יותר את ההלוואה הדרושה עבורך לשיפוץ הנכס.</p>
+            </div>
+        </div>
+    
+        <!-- Section 5: How to save money -->
+        <div class="shiputz24-section">
+            <div class="shiputz24-container">
+                <h2 class="shiputz24-section__title">כיצד לחסוך כסף במימון לשיפוצים?</h2>
+                <p>כולם רוצים לחסוך כסף. בוא נראה איך אפשר לעשות את זה חכם.</p>
+                
+                <h3>השוואת הצעות מימון</h3>
+                <p>אל תסתפק בהצעה אחת. קח 3 הצעות לפחות. גוף אחד אמר ריבית 4.5%, אחר אמר 3.8%. זה ההבדל בין לשלם 180,000 ₪ ל-165,000 ₪ על אותה הלוואה. מניסיוננו, <strong>רוב האנשים לא משווים</strong>. הם הולכים לבנק שלהם, מקבלים הצעה, וחותמים. זה כסף שזורקים לפח.</p>
+                
+                <h3>תזמון נכון - תקופות מבצעים</h3>
+                <p>יש תקופות בשנה שבנקים וגופי מימון נותנים תנאים יותר טובים. בדרך כלל זה סוף רבעון (מרץ, יוני, ספטמבר, דצמבר) כי הם רוצים לסגור יעדים. אם אתה לא ממהר - תחכה לתקופה הנכונה.</p>
+                
+                <h3>איחוד עם הלוואות קיימות</h3>
+                <p>יש לך כבר הלוואה אחרת? לפעמים כדאי לבצע <a href="https://loan-israel.co.il/%d7%90%d7%99%d7%9a-%d7%9c%d7%94%d7%a7%d7%98%d7%99%d7%9f-%d7%94%d7%97%d7%96%d7%a8-%d7%91%d7%90%d7%99%d7%97%d7%95%d7%93-%d7%94%d7%9c%d7%95%d7%95%d7%90%d7%95%d7%aa/">איחוד הלוואות</a> להלוואה אחת גדולה יותר בריבית נמוכה יותר. זה לא תמיד משתלם, אבל כדאי לבדוק.</p>
+                
+                <h3>שימוש נכון במסלולים - משתנה vs קבוע</h3>
+                <p>מסלול קבוע: הריבית לא משתנה. יציב, אבל בדרך כלל יותר יקר בהתחלה.<br>
+                מסלול משתנה: הריבית משתנה לפי השוק. יכול להיות זול יותר, אבל יש סיכון.</p>
+                <p>תקופות ההחזר בדרך כלל נעות בין 24 חודשים ל-<strong>72 תשלומים</strong>, תלוי בגוף המלווה ובסכום. <strong>ככל שהתקופה יותר ארוכה, ההחזר החודשי יותר נמוך - אבל הסכום הכולל יותר גבוה.</strong></p>
+                <p>בחר לפי מה שנוח לך. אם אתה לא אוהב הפתעות - קבוע. אם אתה מוכן לקחת סיכון כדי לחסוך - משתנה.</p>
+            </div>
+        </div>
 
-    <!-- Financing Percentage Section -->
-    <div class="shiputz24-section">
-        <div class="shiputz24-container">
-            <h2 class="shiputz24-section__title">מהו אחוז המימון המרבי במשכנתא לשיפוץ הבית?</h2>
-            <p>ברוב המקרים ניתן לקבל מימון מרבי בשיעור של עד 50% מערך הדירה או הבית. אחוזי המימון ישתנו אם יש משכנתא פעילה על הנכס. בעזרת יועצי משכנתא מיומנים ובעלי קשרים ניתן במקרים מסוימים לקבל משכנתא לשיפוץ באחוזי מימון גבוהים יותר, עד 75%.</p>
-            
-            <!-- Benefits Grid -->
-            <div class="shiputz24-benefits">
-                <div class="shiputz24-benefit-card">
-                    <div class="shiputz24-benefit-card__icon">
-                        <svg width="30" height="30" viewBox="0 0 24 24" fill="white">
-                            <path d="M12 2L2 7V10C2 16 6 20.9 12 22C18 20.9 22 16 22 10V7L12 2Z"/>
-                        </svg>
-                    </div>
-                    <h3 class="shiputz24-benefit-card__title">מימון עד 75%</h3>
-                    <p>בתנאים מסוימים ניתן לקבל מימון גבוה במיוחד מערך הנכס</p>
+        <!-- FAQ Section -->
+        <div class="shiputz24-section">
+            <div class="shiputz24-container">
+                <h2 class="shiputz24-section__title">המומחים שלנו עונים על השאלות שלכם בנוגע להלוואה לשיפוץ</h2>
+                
+                <!-- Expanded FAQ Content -->
+                <div class="shiputz24-faq-list" style="margin-bottom: 30px;">
+                    <details style="background: white; border-radius: 10px; padding: 15px; margin-bottom: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                        <summary style="font-weight: 700; cursor: pointer; color: var(--lp-primary); outline: none;">קיבלתי הצעת מחיר מקבלן - האם הבנק יאשר את הסכום?</summary>
+                        <p style="margin-top: 10px; color: #555;">לא בהכרח. הבנק שולח שמאי לבדוק אם המחיר הגיוני. מניסיוננו, לפעמים השמאי אומר שההצעה מנופחת ב-20%. הבנק אז מאשר רק את מה שהשמאי אמר. למה זה טוב? כי זה מגן עליך מקבלנים שמנסים להרוויח יותר מדי. אבל זה גם אומר שכדאי לקבל כמה הצעות מחיר ולבחור סבירה. תראה, זה לא באשמתך אם לא ידעת את זה. הקבלנים לא מספרים לך שהבנק עוד יבדוק. אבל עכשיו אתה יודע - וזה נותן לך יותר כוח במשא ומתן.</p>
+                    </details>
+                    
+                    <details style="background: white; border-radius: 10px; padding: 15px; margin-bottom: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                        <summary style="font-weight: 700; cursor: pointer; color: var(--lp-primary); outline: none;">אפשר לקחת מימון לשיפוץ דירה ללא בטחונות?</summary>
+                        <p style="margin-top: 10px; color: #555;">תלוי בסכום. לשיפוצים קטנים - כן. לשיפוצים גדולים - קשה. יש גופים שנותנים הלוואות לשיפוצים קטנים (עד 100,000 ₪) <a href="https://loan-israel.co.il/%d7%94%d7%9c%d7%95%d7%95%d7%90%d7%95%d7%aa-%d7%9c%d7%9c%d7%90-%d7%a2%d7%a8%d7%91%d7%99%d7%9d/">ללא ערבים</a> ובטחונות, בתנאי שיש לך הכנסה קבועה ואשראי תקין. מעל 100,000 ₪, רוב הגופים ידרשו שעבוד הנכס או ערבויות. אם אתה לא רוצה לשעבד את הבית - יש אפשרות. הריבית תהיה גבוהה יותר, אבל זה אפשרי. אף אחד לא מדבר על זה, אבל יש אנשים שלא רוצים לשעבד את הבית גם אם הם יכולים. זה לגיטימי. יש דרכים אחרות.</p>
+                    </details>
+                    
+                    <details style="background: white; border-radius: 10px; padding: 15px; margin-bottom: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                        <summary style="font-weight: 700; cursor: pointer; color: var(--lp-primary); outline: none;">כמה זמן לוקח לקבל אישור למימון שיפוצים?</summary>
+                        <p style="margin-top: 10px; color: #555;">בין שבוע לחודש, תלוי בסוג ההלוואה. הלוואה לכל מטרה - בדרך כלל שבוע-שבועיים. משכנתא לשיפוץ - יכול לקחת 3-4 שבועות כי צריך שמאי, בדיקות, אישורים. כדאי להתחיל את התהליך לפני שהקבלן מוכן להתחיל. ככה לא תאבד זמן. זה מתסכל, אנחנו יודעים. אתה רוצה להתחיל מחר והבנק אומר לך "עוד 3 שבועות". אבל ככה זה עובד. תכנן מראש.</p>
+                    </details>
+                    
+                    <details style="background: white; border-radius: 10px; padding: 15px; margin-bottom: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                        <summary style="font-weight: 700; cursor: pointer; color: var(--lp-primary); outline: none;">מה ההבדל בין משכנתא לשיפוץ הבית להלוואה רגילה?</summary>
+                        <p style="margin-top: 10px; color: #555;">הריבית והתקופה. משכנתא לשיפוץ: ריבית נמוכה (בערך כמו משכנתא רגילה), פריסה ארוכה (עד 30 שנה), צריך שעבוד נכס. הלוואה רגילה: ריבית גבוהה יותר, פריסה קצרה (1-7 שנים), בלי שעבוד. לשיפוצים גדולים - משכנתא חוסכת המון כסף. לשיפוצים קטנים - הלוואה רגילה יותר מהירה ופחות ביורוקרטיה. הבנקאים לא תמיד מסבירים לך שיש 2 אופציות. הם נותנים לך מה שנוח להם. אבל עכשיו אתה יודע - תבדוק את שני המסלולים.</p>
+                    </details>
                 </div>
-                <div class="shiputz24-benefit-card">
-                    <div class="shiputz24-benefit-card__icon">
-                        <svg width="30" height="30" viewBox="0 0 24 24" fill="white">
-                            <path d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7L12 2L3 7V9C3 11.55 3.84 13.74 9 16.5V22H15V16.5C20.16 13.74 21 11.55 21 9Z"/>
-                        </svg>
-                    </div>
-                    <h3 class="shiputz24-benefit-card__title">יועצים מקצועיים</h3>
-                    <p>צוות מומחים עם קשרים בבנקים יעזור לכם לקבל את התנאים הטובים ביותר</p>
-                </div>
-                <div class="shiputz24-benefit-card">
-                    <div class="shiputz24-benefit-card__icon">
-                        <svg width="30" height="30" viewBox="0 0 24 24" fill="white">
-                            <path d="M12 2C6.48 2 2 6.48 2 12S6.48 22 12 22 22 17.52 22 12 17.52 2 12 2ZM13 17H11V15H13V17ZM13 13H11V7H13V13Z"/>
-                        </svg>
-                    </div>
-                    <h3 class="shiputz24-benefit-card__title">שירות אישי</h3>
-                    <p>התאמה מלאה לצרכים האישיים ומצב הנכס הספציפי שלכם</p>
+                
+                <div class="entry-content">
+    
+                <strong>רוצים לקחת הלוואות לשיפוץ דירה בתנאים המשתלמים ביותר? <a href="#leadform">מלאו את סכום ההלוואה</a> והמומחים שלנו ברק תבקש יחזרו אליכם עם הצעה אטרקטיבית בהתאמה אישית מלאה ליכולת ההחזר שלכם!</strong>
+    
                 </div>
             </div>
         </div>
-    </div>
-
-    <!-- Bank Calculation Section -->
-    <div class="shiputz24-section">
-        <div class="shiputz24-container">
-            <h2 class="shiputz24-section__title">איך הבנק מחשב את אחוזי המימון למשכנתא לשיפוץ הבית על סמך הערכת השמאי?</h2>
-            <p>בדומה לתהליך לקיחת משכנתא רגילה לרכישת דירת מגורים או להשקעה, גם כאשר לוקחים משכנתא לשיפוץ הנכס הבנק שולח שמאי מקרקעין מטעמו לבצע הערכת שווי כבסיס לאישור המימון הנקבע להלוואת המשכנתא. לכן, סכום <a href="https://loan-israel.co.il/%d7%94%d7%9c%d7%95%d7%95%d7%90%d7%95%d7%aa-%d7%92%d7%93%d7%95%d7%9c%d7%95%d7%aa/">הלוואת המשכנתא</a> לשיפוץ הדירה יהיה לפי הערכת שווי הנכס שקבע שמאי מקרקעין. כמו כן, הבנקים דורשים מהלווים להביא הצעת מחיר לשיפוץ הנכס.</p>
-            
-            <h3><strong>אפשרויות נוספות לקבלת הלוואות באתר</strong></h3>
-            <p><a href="https://loan-israel.co.il/checks-loans/">הלוואה בהחזר צ'קים</a></p>
-        </div>
-    </div>
-
-    <!-- Calculator Section -->
-    <div class="shiputz24-section">
-        <div class="shiputz24-container">
-            <h2 class="shiputz24-section__title">רוצה לדעת מה ההחזר החודשי הצפוי לך? בדוק אצלנו במחשבון הלוואה לשיפוץ</h2>
-            <p>אם החלטת לשפץ את הבית או הדירה ועליך לקחת הלוואה לשיפוץ הנכס כדאי לבדוק את ההחזר החודשי בעזרת מחשבון הלוואה לשיפוץ כאן באתר. עליך לציין את סכום ההלוואה ותקופת ההחזר המתאימה לך, ובקליק מהיר המחשבון יציג בפניך את גובה ההחזר החודשי הצפוי.</p>
-            
-            <p>המומחים המנוסים שלנו ברק תבקש הלוואות ממליצים עוד בטרם השימוש במחשבון לבקש מספר הצעות מחיר מקבלני שיפוצים שונים. הצעות המחיר מאפשרות לך לבצע הערכה של עלות השיפוץ בדירה, אך במחשבון כדאי להוסיף לפחות 10% מעל הצעת הקבלן, מאחר שברוב המקרים חורגים מהסכום הראשוני.</p>
-            
-            <p>מחשבון הלוואה לשיפוץ הוא כלי עזר שנועד לסייע לך ולאחרים, המחשבון מציג את גובה ההחזרים החודשיים הצפויים לאורך תקופת ההלוואה, וההחזר החודשי מסייע לך לתכנן טוב יותר את ההלוואה הדרושה עבורך לשיפוץ הנכס.</p>
-        </div>
-    </div>
-
-    <!-- FAQ Section -->
-    <div class="shiputz24-section">
-        <div class="shiputz24-container">
-            <h2 class="shiputz24-section__title">המומחים שלנו עונים על השאלות שלכם בנוגע להלוואה לשיפוץ</h2>
-            
-            [wp-faq-schema accordion=1]
-            <div class="entry-content">
-
-            <strong>רוצים לקחת הלוואות לשיפוץ דירה בתנאים המשתלמים ביותר? <a href="#leadform">מלאו את סכום ההלוואה</a> והמומחים שלנו ברק תבקש יחזרו אליכם עם הצעה אטרקטיבית בהתאמה אישית מלאה ליכולת ההחזר שלכם!</strong>
-
+    
+        <!-- Section 4: Common Mistakes -->
+        <div class="shiputz24-section">
+            <div class="shiputz24-container">
+                <h2 class="shiputz24-section__title">טעויות נפוצות בלקיחת מימון לשיפוצים</h2>
+                <p>בוא נדבר על הטעויות שרוב האנשים עושים. אולי תזהה את עצמך באחת מהן.</p>
+                
+                <h3>טעות 1: לא לקחת "כרית ביטחון" של 10-15%</h3>
+                <p>הקבלן אמר 120,000 ₪ ולקחת בדיוק 120,000 ₪. ואז גילו קיר לא תקין, או שהחלטת שאתה רוצה ארונות יותר טובים, ופתאום חסר לך 20,000 ₪. <strong>מה עושים?</strong> תמיד לקחת 10-15% מעל ההצעה. הכסף שנשאר אפשר להחזיר או לשמור לריהוט.</p>
+                
+                <h3>טעות 2: להתחיל שיפוץ לפני אישור המימון</h3>
+                <p>"הקבלן מוכן להתחיל מחר, אז התחלנו. חשבנו שההלוואה תאושר." ואז ההלוואה לא אושרה, או אושרה בסכום נמוך יותר, והקבלן כבר פירק חצי בית. <strong>מה עושים?</strong> אישור תחילה, שיפוץ אחר כך. תמיד.</p>
+                
+                <h3>טעות 3: לא לבדוק חלופות (רק הבנק שלי)</h3>
+                <p>"הלכתי לבנק שלי, הם אמרו לי תנאים. חתמתי." ואז גילית שהיה גוף אחר שהיה נותן לך ריבית נמוכה יותר ב-1%. <strong>מה עושים?</strong> השווה לפחות 3 הצעות. זה יכול לחסוך לך אלפי שקלים. בדוק גם אפשרויות של <a href="https://loan-israel.co.il/non-bank-loan/">הלוואה חוץ בנקאית</a>.</p>
+                
+                <h3>טעות 4: להזניח את עלות הריהוט והמוצרים</h3>
+                <p>תיקנת את הבית, אבל שכחת תקציב למקרר חדש, תנור, ארונות למרפסת. ופתאום צריך עוד 30,000 ₪ שאין לך. <strong>מה עושים?</strong> כשמחשבים תקציב - כולל הכל. שיפוץ + ריהוט + מוצרי חשמל + "הפתעות".</p>
+                
+                <div style="background: #fff3cd; padding: 20px; border-radius: 10px; margin-top: 30px; border: 1px solid #ffeeba;">
+                    <h3 style="color: #856404; margin-top: 0;">תקרת זכוכית (Glass Ceiling)</h3>
+                    <p style="color: #856404;">תראה, זה לא באשמתך שלא ידעת לתכנן נכון. <strong>אף אחד לא מלמד איך לקחת מימון לשיפוצים.</strong> הקבלנים לא מדברים על כרית הביטחון. הבנקים לא מסבירים את כל האפשרויות. הם מניחים שאתה יודע. אבל עכשיו אתה יודע. ויש לך אפשרות לעשות את זה נכון מההתחלה. וזה בדיוק מה שאנחנו פה בשבילו - לעזור לך לעשות את זה חכם.</p>
+                </div>
             </div>
         </div>
-    </div>
 
-    <!-- Final CTA Section -->
-    <div class="shiputz24-final-cta">
-        <div class="shiputz24-container">
-            <h2 class="shiputz24-final-cta__title">רוצים לקחת הלוואות לשיפוץ דירה בתנאים המשתלמים ביותר?</h2>
-            <p class="shiputz24-final-cta__text"><a href="#leadform">מלאו את סכום ההלוואה</a> והמומחים שלנו ברק תבקש יחזרו אליכם עם הצעה אטרקטיבית בהתאמה אישית מלאה ליכולת ההחזר שלכם!</p>
-            <a href="#leadform" class="shiputz24-btn shiputz24-btn--primary">
-                <span>קבלו הצעה מותאמת אישית</span>
-                <span>→</span>
-            </a>
+        <!-- Renovation Calculator Section (Moved from Hero) -->
+        <div class="shiputz24-section">
+            <div class="shiputz24-container">
+                <h2 class="shiputz24-section__title">רוצה לדעת מה ההחזר החודשי הצפוי לך? בדוק אצלנו במחשבון הלוואה לשיפוץ</h2>
+                
+                <div id="renovation-calculator" class="shiputz24-calculator">
+                    <h3 class="shiputz24-calculator__title" style="text-align: center; color: var(--lp-primary); margin-bottom: 20px;">🏠 מחשבון שיפוץ חכם - גלו כמה יעלה לכם השיפוץ</h3>
+                    
+                    <!-- Progress Indicator -->
+                    <div class="shiputz24-calc-progress">
+                        <div class="shiputz24-calc-progress__dot active" data-progress="1"></div>
+                        <div class="shiputz24-calc-progress__dot" data-progress="2"></div>
+                        <div class="shiputz24-calc-progress__dot" data-progress="3"></div>
+                    </div>
+                    
+                    <div class="shiputz24-calc-steps">
+                        <!-- Step 1: Apartment Size -->
+                        <div class="shiputz24-calc-step active" data-step="1">
+                            <h4 class="shiputz24-calc-step__title">🏠 גודל הדירה</h4>
+                            <div class="shiputz24-calc-options">
+                                <div class="shiputz24-calc-option" data-value="50">
+                                    <div class="shiputz24-calc-option__icon">🏡</div>
+                                    <div class="shiputz24-calc-option__text">עד 50 מ״ר</div>
+                                    <div class="shiputz24-calc-option__price">מ-80,000 ₪</div>
+                                </div>
+                                <div class="shiputz24-calc-option" data-value="75">
+                                    <div class="shiputz24-calc-option__icon">🏠</div>
+                                    <div class="shiputz24-calc-option__text">50-75 מ״ר</div>
+                                    <div class="shiputz24-calc-option__price">מ-120,000 ₪</div>
+                                </div>
+                                <div class="shiputz24-calc-option" data-value="100">
+                                    <div class="shiputz24-calc-option__icon">🏘️</div>
+                                    <div class="shiputz24-calc-option__text">75-100 מ״ר</div>
+                                    <div class="shiputz24-calc-option__price">מ-160,000 ₪</div>
+                                </div>
+                                <div class="shiputz24-calc-option" data-value="120">
+                                    <div class="shiputz24-calc-option__icon">🏰</div>
+                                    <div class="shiputz24-calc-option__text">100+ מ״ר</div>
+                                    <div class="shiputz24-calc-option__price">מ-220,000 ₪</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 2: Renovation Type -->
+                        <div class="shiputz24-calc-step" data-step="2">
+                            <div class="shiputz24-calc-nav">
+                                <button class="shiputz24-calc-back-btn" onclick="goBackToStep(1)">← חזור לגודל דירה</button>
+                            </div>
+                            <h4 class="shiputz24-calc-step__title">🎨 סוג השיפוץ</h4>
+                            <div class="shiputz24-calc-options">
+                                <div class="shiputz24-calc-option" data-value="1">
+                                    <div class="shiputz24-calc-option__icon">🎨</div>
+                                    <div class="shiputz24-calc-option__text">קוסמטי</div>
+                                    <div class="shiputz24-calc-option__subtitle">צביעה וחידוש</div>
+                                </div>
+                                <div class="shiputz24-calc-option" data-value="1.5">
+                                    <div class="shiputz24-calc-option__icon">🔨</div>
+                                    <div class="shiputz24-calc-option__text">חלקי</div>
+                                    <div class="shiputz24-calc-option__subtitle">מטבח + אמבטיה</div>
+                                </div>
+                                <div class="shiputz24-calc-option" data-value="2.2">
+                                    <div class="shiputz24-calc-option__icon">🏗️</div>
+                                    <div class="shiputz24-calc-option__text">מקיף</div>
+                                    <div class="shiputz24-calc-option__subtitle">כל הדירה</div>
+                                </div>
+                                <div class="shiputz24-calc-option" data-value="3">
+                                    <div class="shiputz24-calc-option__icon">⚡</div>
+                                    <div class="shiputz24-calc-option__text">יוקרתי</div>
+                                    <div class="shiputz24-calc-option__subtitle">רמה גבוהה</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 3: Special Features -->
+                        <div class="shiputz24-calc-step" data-step="3">
+                            <div class="shiputz24-calc-nav">
+                                <button class="shiputz24-calc-back-btn" onclick="goBackToStep(2)">← חזור לסוג שיפוץ</button>
+                            </div>
+                            <h4 class="shiputz24-calc-step__title">⚡ תוספות מיוחדות</h4>
+                            <div class="shiputz24-calc-checkboxes">
+                                <div class="shiputz24-calc-checkbox" data-value="15000">
+                                    <div class="shiputz24-calc-checkbox__icon">⚡</div>
+                                    <div class="shiputz24-calc-checkbox__text">שדרוג חשמל</div>
+                                    <div class="shiputz24-calc-checkbox__price">+15,000 ₪</div>
+                                </div>
+                                <div class="shiputz24-calc-checkbox" data-value="20000">
+                                    <div class="shiputz24-calc-checkbox__icon">🚿</div>
+                                    <div class="shiputz24-calc-checkbox__text">שדרוג צנרת</div>
+                                    <div class="shiputz24-calc-checkbox__price">+20,000 ₪</div>
+                                </div>
+                                <div class="shiputz24-calc-checkbox" data-value="8000">
+                                    <div class="shiputz24-calc-checkbox__icon">❄️</div>
+                                    <div class="shiputz24-calc-checkbox__text">מיזוג אוויר</div>
+                                    <div class="shiputz24-calc-checkbox__price">+8,000 ₪</div>
+                                </div>
+                                <div class="shiputz24-calc-checkbox" data-value="12000">
+                                    <div class="shiputz24-calc-checkbox__icon">🌿</div>
+                                    <div class="shiputz24-calc-checkbox__text">עיצוב מרפסת</div>
+                                    <div class="shiputz24-calc-checkbox__price">+12,000 ₪</div>
+                                </div>
+                            </div>
+                            <button class="shiputz24-calc-btn" onclick="calculateRenovation()">חשב עלות שיפוץ 🔍</button>
+                            
+                            <div class="shiputz24-calc-restart">
+                                <button class="shiputz24-calc-restart-btn" onclick="restartCalculation()">🔄 התחל מחדש</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Result Section -->
+                    <div class="shiputz24-calc-result" id="calcResult" style="display: none;">
+                        <div class="shiputz24-calc-result__header">
+                            <div class="shiputz24-calc-nav">
+                                <button class="shiputz24-calc-edit-btn" onclick="editCalculation()">✏️ ערוך חישוב</button>
+                            </div>
+                            <h4>💰 עלות השיפוץ המשוערת</h4>
+                            <div class="shiputz24-calc-result__price" id="totalPrice">₪0</div>
+                        </div>
+                        <div class="shiputz24-calc-result__summary">
+                            <div class="shiputz24-calc-summary__item">
+                                <span class="shiputz24-calc-summary__label">גודל דירה:</span>
+                                <span class="shiputz24-calc-summary__value" id="summarySize">-</span>
+                            </div>
+                            <div class="shiputz24-calc-summary__item">
+                                <span class="shiputz24-calc-summary__label">סוג שיפוץ:</span>
+                                <span class="shiputz24-calc-summary__value" id="summaryType">-</span>
+                            </div>
+                            <div class="shiputz24-calc-summary__item">
+                                <span class="shiputz24-calc-summary__label">תוספות:</span>
+                                <span class="shiputz24-calc-summary__value" id="summaryAddons">-</span>
+                            </div>
+                        </div>
+                        <div class="shiputz24-calc-result__breakdown">
+                            <div class="shiputz24-calc-breakdown__item">
+                                <span>עלות בסיסית:</span>
+                                <span id="basePrice">₪0</span>
+                            </div>
+                            <div class="shiputz24-calc-breakdown__item">
+                                <span>תוספות:</span>
+                                <span id="addonsPrice">₪0</span>
+                            </div>
+                        </div>
+                        <div class="shiputz24-calc-result__cta">
+                            <p><strong>רוצים להפוך את החישוב למציאות?</strong></p>
+                            <p>קבלו הצעות מימון מותאמות לשיפוץ שלכם</p>
+                            <a href="#leadform" class="shiputz24-btn shiputz24-btn--primary">
+                                <span>קבלו הצעת מימון עכשיו</span>
+                                <span>💸</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+
+        <!-- Final CTA Section Removed -->
+    
     </div>
-
-</div>
-
-<script>
-(function() {
-    'use strict';
     
-    const wrapper = document.getElementById('shiputz24-wrapper');
-    if (!wrapper) return;
-    
-    // Renovation Calculator Variables
-    let selectedSize = 0;
-    let selectedType = 1;
-    let selectedAddons = [];
-    let selectedSizeText = '';
-    let selectedTypeText = '';
-    
-    // Back Navigation Functions
-    window.goBackToStep = function(stepNumber) {
-        showStep(stepNumber);
+    <script>
+    (function() {
+        'use strict';
         
-        // Hide result if going back
-        const resultDiv = document.getElementById('calcResult');
-        if (resultDiv) {
-            resultDiv.style.display = 'none';
-        }
-    };
-    
-    window.editCalculation = function() {
-        // Go back to first step and reset
-        showStep(1);
+        const wrapper = document.getElementById('shiputz24-wrapper');
+        if (!wrapper) return;
         
-        // Hide result
-        const resultDiv = document.getElementById('calcResult');
-        if (resultDiv) {
-            resultDiv.style.display = 'none';
-        }
+        // Renovation Calculator Variables
+        let selectedSize = 0;
+        let selectedType = 1;
+        let selectedAddons = [];
+        let selectedSizeText = '';
+        let selectedTypeText = '';
         
-        // Keep the selections but allow re-editing
-        // Don't reset the values so user can see their previous choices
-    };
-    
-    window.restartCalculation = function() {
-        // Reset all values
-        selectedSize = 0;
-        selectedType = 1;
-        selectedAddons = [];
-        selectedSizeText = '';
-        selectedTypeText = '';
-        
-        // Remove all selections
-        wrapper.querySelectorAll('.shiputz24-hero-calculator .shiputz24-calc-option.selected').forEach(option => {
-            option.classList.remove('selected');
-        });
-        wrapper.querySelectorAll('.shiputz24-hero-calculator .shiputz24-calc-checkbox.selected').forEach(checkbox => {
-            checkbox.classList.remove('selected');
-        });
-        
-        // Reset progress indicators
-        wrapper.querySelectorAll('.shiputz24-hero-calculator .shiputz24-calc-progress__dot').forEach((dot, index) => {
-            dot.classList.remove('active', 'completed');
-            if (index === 0) dot.classList.add('active');
-        });
-        
-        // Go back to first step
-        showStep(1);
-        
-        // Hide result
-        const resultDiv = document.getElementById('calcResult');
-        if (resultDiv) {
-            resultDiv.style.display = 'none';
-        }
-    };
-    
-    // Calculator Functions
-    window.calculateRenovation = function() {
-        const basePrice = selectedSize * selectedType * 1000;
-        const addonsTotal = selectedAddons.reduce((sum, addon) => sum + addon, 0);
-        const totalPrice = basePrice + addonsTotal;
-        
-        // Update result display
-        const resultDiv = document.getElementById('calcResult');
-        const totalPriceEl = document.getElementById('totalPrice');
-        const basePriceEl = document.getElementById('basePrice');
-        const addonsPriceEl = document.getElementById('addonsPrice');
-        
-        // Update summary
-        const summarySizeEl = document.getElementById('summarySize');
-        const summaryTypeEl = document.getElementById('summaryType');
-        const summaryAddonsEl = document.getElementById('summaryAddons');
-        
-        if (totalPriceEl && basePriceEl && addonsPriceEl) {
-            totalPriceEl.textContent = `₪${totalPrice.toLocaleString()}`;
-            basePriceEl.textContent = `₪${basePrice.toLocaleString()}`;
-            addonsPriceEl.textContent = `₪${addonsTotal.toLocaleString()}`;
+        // Back Navigation Functions
+        window.goBackToStep = function(stepNumber) {
+            showStep(stepNumber);
             
-            if (summarySizeEl && summaryTypeEl && summaryAddonsEl) {
-                summarySizeEl.textContent = selectedSizeText;
-                summaryTypeEl.textContent = selectedTypeText;
-                summaryAddonsEl.textContent = selectedAddons.length > 0 ? `${selectedAddons.length} תוספות` : 'ללא תוספות';
-            }
-            
+            // Hide result if going back
+            const resultDiv = document.getElementById('calcResult');
             if (resultDiv) {
-                resultDiv.style.display = 'block';
-                resultDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                resultDiv.style.display = 'none';
             }
-        }
-    };
-    
-    // Calculator Step Navigation
-    function initCalculator() {
-        // Handle size selection
-        wrapper.querySelectorAll('.shiputz24-hero-calculator [data-step="1"] .shiputz24-calc-option').forEach(option => {
-            option.addEventListener('click', function() {
-                // Remove previous selection
-                wrapper.querySelectorAll('.shiputz24-hero-calculator [data-step="1"] .shiputz24-calc-option').forEach(opt => {
-                    opt.classList.remove('selected');
-                });
-                // Add selection
-                this.classList.add('selected');
-                selectedSize = parseInt(this.dataset.value);
-                selectedSizeText = this.querySelector('.shiputz24-calc-option__text').textContent;
-                
-                // Move to next step
-                setTimeout(() => {
-                    showStep(2);
-                }, 300);
-            });
-        });
+        };
         
-        // Handle type selection
-        wrapper.querySelectorAll('.shiputz24-hero-calculator [data-step="2"] .shiputz24-calc-option').forEach(option => {
-            option.addEventListener('click', function() {
-                // Remove previous selection
-                wrapper.querySelectorAll('.shiputz24-hero-calculator [data-step="2"] .shiputz24-calc-option').forEach(opt => {
-                    opt.classList.remove('selected');
-                });
-                // Add selection
-                this.classList.add('selected');
-                selectedType = parseFloat(this.dataset.value);
-                selectedTypeText = this.querySelector('.shiputz24-calc-option__text').textContent;
-                
-                // Move to next step
-                setTimeout(() => {
-                    showStep(3);
-                }, 300);
-            });
-        });
+        window.editCalculation = function() {
+            // Go back to first step and reset
+            showStep(1);
+            
+            // Hide result
+            const resultDiv = document.getElementById('calcResult');
+            if (resultDiv) {
+                resultDiv.style.display = 'none';
+            }
+            
+            // Keep the selections but allow re-editing
+            // Don't reset the values so user can see their previous choices
+        };
         
-        // Handle addon selection
-        wrapper.querySelectorAll('.shiputz24-hero-calculator [data-step="3"] .shiputz24-calc-checkbox').forEach(checkbox => {
-            checkbox.addEventListener('click', function() {
-                const value = parseInt(this.dataset.value);
+        window.restartCalculation = function() {
+            // Reset all values
+            selectedSize = 0;
+            selectedType = 1;
+            selectedAddons = [];
+            selectedSizeText = '';
+            selectedTypeText = '';
+            
+            // Remove all selections
+            wrapper.querySelectorAll('.shiputz24-calculator .shiputz24-calc-option.selected').forEach(option => {
+                option.classList.remove('selected');
+            });
+            wrapper.querySelectorAll('.shiputz24-calculator .shiputz24-calc-checkbox.selected').forEach(checkbox => {
+                checkbox.classList.remove('selected');
+            });
+            
+            // Reset progress indicators
+            wrapper.querySelectorAll('.shiputz24-calculator .shiputz24-calc-progress__dot').forEach((dot, index) => {
+                dot.classList.remove('active', 'completed');
+                if (index === 0) dot.classList.add('active');
+            });
+            
+            // Go back to first step
+            showStep(1);
+            
+            // Hide result
+            const resultDiv = document.getElementById('calcResult');
+            if (resultDiv) {
+                resultDiv.style.display = 'none';
+            }
+        };
+        
+        // Calculator Functions
+        window.calculateRenovation = function() {
+            const basePrice = selectedSize * selectedType * 1000;
+            const addonsTotal = selectedAddons.reduce((sum, addon) => sum + addon, 0);
+            const totalPrice = basePrice + addonsTotal;
+            
+            // Update result display
+            const resultDiv = document.getElementById('calcResult');
+            const totalPriceEl = document.getElementById('totalPrice');
+            const basePriceEl = document.getElementById('basePrice');
+            const addonsPriceEl = document.getElementById('addonsPrice');
+            
+            // Update summary
+            const summarySizeEl = document.getElementById('summarySize');
+            const summaryTypeEl = document.getElementById('summaryType');
+            const summaryAddonsEl = document.getElementById('summaryAddons');
+            
+            if (totalPriceEl && basePriceEl && addonsPriceEl) {
+                totalPriceEl.textContent = `₪${totalPrice.toLocaleString()}`;
+                basePriceEl.textContent = `₪${basePrice.toLocaleString()}`;
+                addonsPriceEl.textContent = `₪${addonsTotal.toLocaleString()}`;
                 
-                if (this.classList.contains('selected')) {
-                    // Remove selection
-                    this.classList.remove('selected');
-                    selectedAddons = selectedAddons.filter(addon => addon !== value);
-                } else {
+                if (summarySizeEl && summaryTypeEl && summaryAddonsEl) {
+                    summarySizeEl.textContent = selectedSizeText;
+                    summaryTypeEl.textContent = selectedTypeText;
+                    summaryAddonsEl.textContent = selectedAddons.length > 0 ? `${selectedAddons.length} תוספות` : 'ללא תוספות';
+                }
+                
+                if (resultDiv) {
+                    resultDiv.style.display = 'block';
+                    resultDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }
+        };
+        
+        // Calculator Step Navigation
+        function initCalculator() {
+            // Handle size selection
+            wrapper.querySelectorAll('.shiputz24-calculator [data-step="1"] .shiputz24-calc-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    // Remove previous selection
+                    wrapper.querySelectorAll('.shiputz24-calculator [data-step="1"] .shiputz24-calc-option').forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
                     // Add selection
                     this.classList.add('selected');
-                    selectedAddons.push(value);
+                    selectedSize = parseInt(this.dataset.value);
+                    selectedSizeText = this.querySelector('.shiputz24-calc-option__text').textContent;
+                    
+                    // Move to next step
+                    setTimeout(() => {
+                        showStep(2);
+                    }, 300);
+                });
+            });
+            
+            // Handle type selection
+            wrapper.querySelectorAll('.shiputz24-calculator [data-step="2"] .shiputz24-calc-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    // Remove previous selection
+                    wrapper.querySelectorAll('.shiputz24-calculator [data-step="2"] .shiputz24-calc-option').forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+                    // Add selection
+                    this.classList.add('selected');
+                    selectedType = parseFloat(this.dataset.value);
+                    selectedTypeText = this.querySelector('.shiputz24-calc-option__text').textContent;
+                    
+                    // Move to next step
+                    setTimeout(() => {
+                        showStep(3);
+                    }, 300);
+                });
+            });
+            
+            // Handle addon selection
+            wrapper.querySelectorAll('.shiputz24-calculator [data-step="3"] .shiputz24-calc-checkbox').forEach(checkbox => {
+                checkbox.addEventListener('click', function() {
+                    const value = parseInt(this.dataset.value);
+                    
+                    if (this.classList.contains('selected')) {
+                        // Remove selection
+                        this.classList.remove('selected');
+                        selectedAddons = selectedAddons.filter(addon => addon !== value);
+                    } else {
+                        // Add selection
+                        this.classList.add('selected');
+                        selectedAddons.push(value);
+                    }
+                });
+            });
+        }
+        
+        function showStep(stepNumber) {
+            wrapper.querySelectorAll('.shiputz24-calculator .shiputz24-calc-step').forEach(step => {
+                step.classList.remove('active');
+            });
+            
+            // Update progress indicators
+            wrapper.querySelectorAll('.shiputz24-calculator .shiputz24-calc-progress__dot').forEach((dot, index) => {
+                dot.classList.remove('active', 'completed');
+                if (index + 1 < stepNumber) {
+                    dot.classList.add('completed');
+                } else if (index + 1 === stepNumber) {
+                    dot.classList.add('active');
+                }
+            });
+            
+            const targetStep = wrapper.querySelector(`.shiputz24-calculator [data-step="${stepNumber}"]`);
+            if (targetStep) {
+                setTimeout(() => {
+                    targetStep.classList.add('active');
+                    
+                    // Restore previous selections when going back
+                    if (stepNumber === 1 && selectedSize > 0) {
+                        const selectedOption = targetStep.querySelector(`[data-value="${selectedSize}"]`);
+                        if (selectedOption) selectedOption.classList.add('selected');
+                    }
+                    
+                    if (stepNumber === 2 && selectedType > 0) {
+                        const selectedOption = targetStep.querySelector(`[data-value="${selectedType}"]`);
+                        if (selectedOption) selectedOption.classList.add('selected');
+                    }
+                    
+                    if (stepNumber === 3 && selectedAddons.length > 0) {
+                        selectedAddons.forEach(addonValue => {
+                            const selectedAddon = targetStep.querySelector(`[data-value="${addonValue}"]`);
+                            if (selectedAddon) selectedAddon.classList.add('selected');
+                        });
+                    }
+                }, 100);
+            }
+        }
+        
+        // Initialize calculator when page loads
+        setTimeout(() => {
+            initCalculator();
+        }, 500);
+        
+        // Smooth scrolling for anchor links
+        wrapper.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
                 }
             });
         });
-    }
-    
-    function showStep(stepNumber) {
-        wrapper.querySelectorAll('.shiputz24-hero-calculator .shiputz24-calc-step').forEach(step => {
-            step.classList.remove('active');
-        });
         
-        // Update progress indicators
-        wrapper.querySelectorAll('.shiputz24-hero-calculator .shiputz24-calc-progress__dot').forEach((dot, index) => {
-            dot.classList.remove('active', 'completed');
-            if (index + 1 < stepNumber) {
-                dot.classList.add('completed');
-            } else if (index + 1 === stepNumber) {
-                dot.classList.add('active');
-            }
-        });
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
         
-        const targetStep = wrapper.querySelector(`.shiputz24-hero-calculator [data-step="${stepNumber}"]`);
-        if (targetStep) {
-            setTimeout(() => {
-                targetStep.classList.add('active');
-                
-                // Restore previous selections when going back
-                if (stepNumber === 1 && selectedSize > 0) {
-                    const selectedOption = targetStep.querySelector(`[data-value="${selectedSize}"]`);
-                    if (selectedOption) selectedOption.classList.add('selected');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
                 }
-                
-                if (stepNumber === 2 && selectedType > 0) {
-                    const selectedOption = targetStep.querySelector(`[data-value="${selectedType}"]`);
-                    if (selectedOption) selectedOption.classList.add('selected');
-                }
-                
-                if (stepNumber === 3 && selectedAddons.length > 0) {
-                    selectedAddons.forEach(addonValue => {
-                        const selectedAddon = targetStep.querySelector(`[data-value="${addonValue}"]`);
-                        if (selectedAddon) selectedAddon.classList.add('selected');
-                    });
-                }
-            }, 100);
-        }
-    }
-    
-    // Initialize calculator when page loads
-    setTimeout(() => {
-        initCalculator();
-    }, 500);
-    
-    // Smooth scrolling for anchor links
-    wrapper.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
+            });
+        }, observerOptions);
+        
+        // Observe sections for animation
+        wrapper.querySelectorAll('.shiputz24-section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'all 0.8s ease-out';
+            observer.observe(section);
         });
-    });
+    })();
     
-    // Intersection Observer for animations
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
+    // Widget initialization
+    document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(function() {
+            if (typeof initAWGWidget === 'function') {
+                initAWGWidget();
             }
-        });
-    }, observerOptions);
-    
-    // Observe sections for animation
-    wrapper.querySelectorAll('.shiputz24-section').forEach(section => {
-        section.style.opacity = '0';
-        section.style.transform = 'translateY(30px)';
-        section.style.transition = 'all 0.8s ease-out';
-        observer.observe(section);
+            jQuery(document).trigger('awg:widget:loaded');
+        }, 1000);
     });
-})();
+    </script>
 
-// Widget initialization
-document.addEventListener('DOMContentLoaded', function() {
-    setTimeout(function() {
-        if (typeof initAWGWidget === 'function') {
-            initAWGWidget();
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "קיבלתי הצעת מחיר מקבלן - האם הבנק יאשר את הסכום?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "לא בהכרח. הבנק שולח שמאי לבדוק אם המחיר הגיוני. מניסיוננו, לפעמים השמאי אומר שההצעה מנופחת ב-20%. הבנק אז מאשר רק את מה שהשמאי אמר. למה זה טוב? כי זה מגן עליך מקבלנים שמנסים להרוויח יותר מדי."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "אפשר לקחת מימון לשיפוץ דירה ללא בטחונות?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "תלוי בסכום. לשיפוצים קטנים - כן. לשיפוצים גדולים - קשה. יש גופים שנותנים הלוואות לשיפוצים קטנים (עד 100,000 ₪) ללא בטחונות, בתנאי שיש לך הכנסה קבועה ואשראי תקין."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "כמה זמן לוקח לקבל אישור למימון שיפוצים?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "בין שבוע לחודש, תלוי בסוג ההלוואה. הלוואה לכל מטרה - בדרך כלל שבוע-שבועיים. משכנתא לשיפוץ - יכול לקחת 3-4 שבועות כי צריך שמאי, בדיקות, אישורים."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "מה ההבדל בין משכנתא לשיפוץ הבית להלוואה רגילה?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "הריבית והתקופה. משכנתא לשיפוץ: ריבית נמוכה (בערך כמו משכנתא רגילה), פריסה ארוכה (עד 30 שנה), צריך שעבוד נכס. הלוואה רגילה: ריבית גבוהה יותר, פריסה קצרה (1-7 שנים), בלי שעבוד."
+          }
         }
-        jQuery(document).trigger('awg:widget:loaded');
-    }, 1000);
-});
+      ]
+    },
+    {
+      "@type": "FinancialProduct",
+      "name": "הלוואה לשיפוץ הבית",
+      "description": "מימון לשיפוץ דירה בתנאים מועדפים, כולל אפשרות למשכנתא לשיפוץ או הלוואה לכל מטרה.",
+      "brand": {
+        "@type": "Brand",
+        "name": "רק תבקש"
+      },
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "ILS",
+        "price": "0"
+      },
+      "annualPercentageRate": {
+        "@type": "QuantitativeValue",
+        "minValue": "3.5",
+        "maxValue": "12.0",
+        "unitText": "PERCENT"
+      }
+    }
+  ]
+}
 </script>
-<!-- /wp:html -->
-
-<!-- wp:paragraph -->
-<p></p>
-<!-- /wp:paragraph -->
+    <!-- /wp:html -->
+    
+    <!-- wp:paragraph -->
+    <p></p>
+    <!-- /wp:paragraph -->
