@@ -18,48 +18,6 @@
         "variants": []
       },
       {
-        "primary": "מינהל סחר חוץ דרושים",
-        "source": "related",
-        "type": "unique",
-        "unique_part": "מינהל סחר חוץ דרושים",
-        "variants": []
-      },
-      {
-        "primary": "מנכל משרד הכלכלה",
-        "source": "related",
-        "type": "unique",
-        "unique_part": "מנכל משרד הכלכלה",
-        "variants": []
-      },
-      {
-        "primary": "נספח כלכלי",
-        "source": "related",
-        "type": "unique",
-        "unique_part": "נספח כלכלי",
-        "variants": []
-      },
-      {
-        "primary": "משרד הכלכלה אשקלון",
-        "source": "related",
-        "type": "unique",
-        "unique_part": "משרד הכלכלה אשקלון",
-        "variants": []
-      },
-      {
-        "primary": "שר הכלכלה הנוכחי",
-        "source": "related",
-        "type": "unique",
-        "unique_part": "שר הכלכלה הנוכחי",
-        "variants": []
-      },
-      {
-        "primary": "מה זה משרד התמ ת",
-        "source": "related",
-        "type": "unique",
-        "unique_part": "מה זה משרד התמ ת",
-        "variants": []
-      },
-      {
         "primary": "הסוכנות לעסקים קטנים ובינוניים",
         "source": "related",
         "type": "unique",
@@ -69,12 +27,6 @@
     ],
     "final_keywords": [
       "סיוע לעסקים חרבות ברזל",
-      "מינהל סחר חוץ דרושים",
-      "מנכל משרד הכלכלה",
-      "נספח כלכלי",
-      "משרד הכלכלה אשקלון",
-      "שר הכלכלה הנוכחי",
-      "מה זה משרד התמ ת",
       "הסוכנות לעסקים קטנים ובינוניים"
     ],
     "unique_topics": [

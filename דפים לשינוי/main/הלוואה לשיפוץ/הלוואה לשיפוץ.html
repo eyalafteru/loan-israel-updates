@@ -1,3 +1,4 @@
+<!-- wp:html -->
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700&display=swap');
 
@@ -29,12 +30,12 @@
 /* Hero Section */
 #shiputz24-wrapper .shiputz24-hero {
     position: relative;
-    min-height: 700px;
+    min-height: 300px;
     background: linear-gradient(135deg, var(--lp-primary-dark) 0%, var(--lp-primary) 100%);
     display: flex;
     align-items: center;
     overflow: hidden;
-    padding: 40px 0;
+    padding: 30px 0;
 }
 
 #shiputz24-wrapper .shiputz24-hero__animation {
@@ -259,7 +260,7 @@
 
 /* Widget Container */
 #shiputz24-wrapper .shiputz24-widget-container {
-      width: 100vw;
+    width: 100vw;
     max-width: 100vw;
     position: relative;
     left: 50%;
@@ -267,6 +268,10 @@
     margin-left: -50vw;
     margin-right: -50vw;
     box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
 }
 
 /* Button Primary */
@@ -331,14 +336,15 @@
     z-index: -1;
 }
 
-#shiputz24-wrapper .shiputz24-benefit-card:hover {
+/* Hover disabled as per user request */
+/* #shiputz24-wrapper .shiputz24-benefit-card:hover {
     transform: translateY(-5px);
     box-shadow: var(--lp-shadow-hover);
 }
 
 #shiputz24-wrapper .shiputz24-benefit-card:hover::before {
     opacity: 1;
-}
+} */
 
 #shiputz24-wrapper .shiputz24-benefit-card__icon {
     width: 60px;
@@ -985,6 +991,11 @@
 
 /* Responsive */
 @media (max-width: 768px) {
+    #shiputz24-wrapper .shiputz24-hero {
+        min-height: 250px;
+        padding: 25px 0;
+    }
+    
     #shiputz24-wrapper .shiputz24-hero__title {
         font-size: 2.2em;
     }
@@ -1075,383 +1086,883 @@
     -webkit-text-fill-color: transparent;
     font-weight: 700;
 }
+
+/* ========================================
+   FAQ Accordion Styles (from visual.html)
+   ======================================== */
+.wpc-accordion-demo-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.wpc-accordion-demo-item {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+
+.wpc-accordion-demo-header {
+    background: #f8f9fa;
+    padding: 20px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1.1em;
+    position: relative;
+    transition: all 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    border: 2px solid transparent;
+}
+
+.wpc-accordion-demo-header:hover {
+    background: #f0f0f0;
+    border-color: #1e5490;
+}
+
+.wpc-accordion-demo-header.active {
+    background: #1e5490;
+    color: white;
+    border-color: #1e5490;
+}
+
+.wpc-accordion-demo-header:active {
+    transform: scale(0.99);
+}
+
+.wpc-accordion-demo-header::after {
+    content: '←';
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2em;
+    transition: transform 0.3s ease;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.1);
+}
+
+.wpc-accordion-demo-header.active::after {
+    transform: translateY(-50%) rotate(90deg);
+    background: rgba(255,255,255,0.2);
+}
+
+.wpc-accordion-demo-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.wpc-accordion-demo-content.active {
+    max-height: 500px;
+    padding: 20px;
+    background: white;
+}
+
+/* Mobile Responsive for FAQ Accordion */
+@media (max-width: 768px) {
+    .wpc-accordion-demo-container {
+        padding: 30px 15px;
+    }
+    
+    .wpc-accordion-demo-header {
+        padding: 16px 20px;
+        font-size: 1rem;
+    }
+    
+    .wpc-accordion-demo-header::after {
+        width: 20px;
+        height: 20px;
+        font-size: 1em;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    
+    .wpc-accordion-demo-content.active {
+        padding: 16px 20px;
+    }
+    
+    .wpc-accordion-demo-header.active::after {
+        transform: translateY(-50%) rotate(90deg);
+    }
+}
+
+@media (max-width: 480px) {
+    .wpc-accordion-demo-container {
+        width: 100% !important;
+        max-width: 100vw !important;
+        overflow-x: hidden !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+        box-sizing: border-box !important;
+    }
+}
 </style>
 
-<div id="shiputz24-wrapper" class="shiputz24-page">
+<div id="shiputz24-wrapper" class="shiputz24-page edit-hoverable">
     
     <!-- Hero Section with Calculator -->
-    <div class="shiputz24-hero">
-        <div class="shiputz24-hero__animation">
+    <div class="shiputz24-hero edit-hoverable">
+        <div class="shiputz24-hero__animation edit-hoverable">
             <svg class="shiputz24-hero__house" viewBox="0 0 200 200" fill="none">
-                <rect x="50" y="100" width="100" height="80" fill="currentColor"/>
-                <polygon points="50,100 100,50 150,100" fill="currentColor"/>
-                <rect x="70" y="120" width="20" height="30" fill="white"/>
-                <rect x="110" y="120" width="20" height="20" fill="white"/>
+                <rect x="50" y="100" width="100" height="80" fill="currentColor"></rect>
+                <polygon points="50,100 100,50 150,100" fill="currentColor"></polygon>
+                <rect x="70" y="120" width="20" height="30" fill="white"></rect>
+                <rect x="110" y="120" width="20" height="20" fill="white"></rect>
             </svg>
         </div>
-        <div class="shiputz24-hero__content">
-            <h1 class="shiputz24-hero__title">הפכו את הבית לחלום שלכם</h1>
-            <div class="shiputz24-hero__subtitle">
+        <div class="shiputz24-hero__content edit-hoverable">
+            <h1 class="shiputz24-hero__title edit-hoverable">הלוואה לשיפוץ להגשמת החלומות</h1>
+            
+            <!-- Last Updated Info -->
+            <div style="text-align: center; margin: 15px 0; color: rgba(255,255,255,0.85); font-size: 0.95em;" class="edit-hoverable">
+                <div style="margin-bottom: 8px;">עודכן לאחרונה: [current_date format="F Y" hebrew="true"]</div>
+                <div style="font-size: 0.9em;">💡 הריביות בתוכן מעודכנות לפי ריבית פריים 5.5% (ריבית בנק ישראל 4%, נכון לינואר 2026)</div>
+            </div>
+            
+            <div class="shiputz24-hero__subtitle edit-hoverable">
                 הלוואות לשיפוץ בתנאים המשתלמים ביותר - קבלו אישור מיידי ותתחילו לשפץ עוד היום
             </div>
-            
-            <div class="shiputz24-hero__date" style="text-align: center; color: rgba(255,255,255,0.8); margin-bottom: 20px;">
-                <strong>עודכן לאחרונה:</strong> [current_date format="F Y" hebrew="true"]
+        </div>
+    </div>
+
+    <!-- Intro Section -->
+    <div class="shiputz24-section edit-hoverable" style="opacity: 1; transform: translateY(0px); transition: 0.8s ease-out;">
+        <div class="shiputz24-container edit-hoverable">
+            <div class="shiputz24-lead edit-hoverable">
+                שבת בבוקר, פתחת את הברז והמים חומים. שוב. כבר שבוע שאין מים קרים במקלחת. את/ה יודע/ת שצריך לטפל בזה, אבל הלב לא נותן לך מנוחה מהמחשבה כמה זה יעלה.
             </div>
-            <p class="shiputz24-rate-info" style="font-size: 0.95em; color: rgba(255,255,255,0.9); text-align: center; margin-top: -10px; margin-bottom: 30px;">
-                💡 הריביות בתוכן מעודכנות לפי ריבית פריים 5.75% (ריבית בנק ישראל 4.25%, נכון לנובמבר 2025)
-            </p>
             
-            <!-- Interactive Renovation Calculator in Hero -->
-            <div class="shiputz24-hero-calculator">
-                <h3 class="shiputz24-hero-calculator__title">🏠 מחשבון שיפוץ חכם - גלו כמה יעלה לכם השיפוץ</h3>
-                
-                <!-- Progress Indicator -->
-                <div class="shiputz24-calc-progress">
-                    <div class="shiputz24-calc-progress__dot active" data-progress="1"></div>
-                    <div class="shiputz24-calc-progress__dot" data-progress="2"></div>
-                    <div class="shiputz24-calc-progress__dot" data-progress="3"></div>
-                </div>
-                
-                <div class="shiputz24-calc-steps">
-                    <!-- Step 1: Apartment Size -->
-                    <div class="shiputz24-calc-step active" data-step="1">
-                        <h4 class="shiputz24-calc-step__title">🏠 גודל הדירה</h4>
-                        <div class="shiputz24-calc-options">
-                            <div class="shiputz24-calc-option" data-value="50">
-                                <div class="shiputz24-calc-option__icon">🏡</div>
-                                <div class="shiputz24-calc-option__text">עד 50 מ״ר</div>
-                                <div class="shiputz24-calc-option__price">מ-80,000 ₪</div>
+            <p class="edit-hoverable">וגם אם יש לך את הכסף - מי אומר שזה מספיק? קבלנים תמיד חורגים, נכון? הם אומרים 150,000 ₪, ובסוף זה 200,000. ואז מה? תיתקע באמצע עם מטבח פרוק?</p>
+            
+            <p class="edit-hoverable">בוא נדבר תכל'ס. צריך מימון שיפוצים - אבל לא סתם מימון. צריך הלוואה שמכסה את כל התמונה, כולל הכרית הביטחון שאף אחד לא מספר לך עליה. ולמזלך, אתה יכול לקבל את זה בלי לרוץ לבנק או ל<a href="https://loan-israel.co.il/%D7%94%D7%9C%D7%95%D7%95%D7%90%D7%95%D7%AA-%D7%9C%D7%94%D7%9C%D7%99%D7%9A-%D7%A8%D7%A4%D7%95%D7%90%D7%99/" class="edit-hoverable">ממן טיפול רפואי יקר</a> במקביל.</p>
+        </div>
+    </div>
+
+    <!-- New Section: Types of Renovation Financing -->
+    <div class="shiputz24-section edit-hoverable">
+        <div class="shiputz24-container edit-hoverable">
+            <h2 class="shiputz24-section__title edit-hoverable">סוגי מימון לשיפוצים - איזו אפשרות מתאימה לך?</h2>
+            
+            <p class="edit-hoverable">לא כל שיפוץ זקוק לאותו סוג מימון. מתכנן לצבוע ולהחליף ריצוף? יש פתרון. רוצה לפרק את כל הבית ולהתחיל מחדש? יש פתרון אחר. בוא נראה מה מתאים לך.</p>
+            
+            <h3 class="edit-hoverable"><strong class="edit-hoverable">משכנתא לשיפוץ הדירה</strong></h3>
+            <p class="edit-hoverable">זה לשיפוצים מקיפים עם סכומים גדולים. הריבית נמוכה כי זה כנגד שעבוד הנכס, אבל הבנק שולח שמאי ודורש מסמכים. מתאים אם מתכנן שיפוץ של 200,000 ₪ ומעלה.</p>
+            
+            <h3 class="edit-hoverable"><strong class="edit-hoverable">הלוואה לכל מטרה מהבנק</strong></h3>
+            <p class="edit-hoverable">פחות ביורוקרטיה, אישור מהיר יותר. הריבית קצת יותר גבוהה, אבל לא צריך שעבוד נכס. טוב לשיפוצים קטנים עד בינוניים (עד 150,000 ₪).</p>
+            
+            <h3 class="edit-hoverable"><strong class="edit-hoverable">הלוואה מבנק לאומי ובנק הפועלים</strong></h3>
+            <p class="edit-hoverable">בנקים כמו בנק לאומי ובנק הפועלים מציעים מסלולי משכנתא לשיפוץ עם תנאים מועדפים ללקוחות ותיקים. כדאי לבדוק אם יש לך וותק בבנק - לפעמים זה שווה אלפי שקלים.</p>
+            
+            <!-- Comparison Table -->
+            <div style="overflow-x: auto; margin: 30px 0;" class="edit-hoverable">
                             </div>
-                            <div class="shiputz24-calc-option" data-value="75">
-                                <div class="shiputz24-calc-option__icon">🏠</div>
-                                <div class="shiputz24-calc-option__text">50-75 מ״ר</div>
-                                <div class="shiputz24-calc-option__price">מ-120,000 ₪</div>
+                            <div class="shiputz24-calc-option edit-hoverable" data-value="75">
+                                <div class="shiputz24-calc-option__icon edit-hoverable">🏠</div>
+                                <div class="shiputz24-calc-option__text edit-hoverable">50-75 מ״ר</div>
+                                <div class="shiputz24-calc-option__price edit-hoverable">מ-120,000 ₪</div>
                             </div>
-                            <div class="shiputz24-calc-option" data-value="100">
-                                <div class="shiputz24-calc-option__icon">🏘️</div>
-                                <div class="shiputz24-calc-option__text">75-100 מ״ר</div>
-                                <div class="shiputz24-calc-option__price">מ-160,000 ₪</div>
+                            <div class="shiputz24-calc-option edit-hoverable" data-value="100">
+                                <div class="shiputz24-calc-option__icon edit-hoverable">🏘️</div>
+                                <div class="shiputz24-calc-option__text edit-hoverable">75-100 מ״ר</div>
+                                <div class="shiputz24-calc-option__price edit-hoverable">מ-160,000 ₪</div>
                             </div>
-                            <div class="shiputz24-calc-option" data-value="120">
-                                <div class="shiputz24-calc-option__icon">🏰</div>
-                                <div class="shiputz24-calc-option__text">100+ מ״ר</div>
-                                <div class="shiputz24-calc-option__price">מ-220,000 ₪</div>
+                            <div class="shiputz24-calc-option edit-hoverable" data-value="120">
+                                <div class="shiputz24-calc-option__icon edit-hoverable">🏰</div>
+                                <div class="shiputz24-calc-option__text edit-hoverable">100+ מ״ר</div>
+                                <div class="shiputz24-calc-option__price edit-hoverable">מ-220,000 ₪</div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Step 2: Renovation Type -->
-                    <div class="shiputz24-calc-step" data-step="2">
-                        <div class="shiputz24-calc-nav">
+                    <div class="shiputz24-calc-step edit-hoverable" data-step="2">
+                        <div class="shiputz24-calc-nav edit-hoverable">
                             <button class="shiputz24-calc-back-btn" onclick="goBackToStep(1)">← חזור לגודל דירה</button>
                         </div>
-                        <h4 class="shiputz24-calc-step__title">🎨 סוג השיפוץ</h4>
-                        <div class="shiputz24-calc-options">
-                            <div class="shiputz24-calc-option" data-value="1">
-                                <div class="shiputz24-calc-option__icon">🎨</div>
-                                <div class="shiputz24-calc-option__text">קוסמטי</div>
-                                <div class="shiputz24-calc-option__subtitle">צביעה וחידוש</div>
+                        <h4 class="shiputz24-calc-step__title edit-hoverable">🎨 סוג השיפוץ</h4>
+                        <div class="shiputz24-calc-options edit-hoverable">
+                            <div class="shiputz24-calc-option edit-hoverable" data-value="1">
+                                <div class="shiputz24-calc-option__icon edit-hoverable">🎨</div>
+                                <div class="shiputz24-calc-option__text edit-hoverable">קוסמטי</div>
+                                <div class="shiputz24-calc-option__subtitle edit-hoverable">צביעה וחידוש</div>
                             </div>
-                            <div class="shiputz24-calc-option" data-value="1.5">
-                                <div class="shiputz24-calc-option__icon">🔨</div>
-                                <div class="shiputz24-calc-option__text">חלקי</div>
-                                <div class="shiputz24-calc-option__subtitle">מטבח + אמבטיה</div>
+                            <div class="shiputz24-calc-option edit-hoverable" data-value="1.5">
+                                <div class="shiputz24-calc-option__icon edit-hoverable">🔨</div>
+                                <div class="shiputz24-calc-option__text edit-hoverable">חלקי</div>
+                                <div class="shiputz24-calc-option__subtitle edit-hoverable">מטבח + אמבטיה</div>
                             </div>
-                            <div class="shiputz24-calc-option" data-value="2.2">
-                                <div class="shiputz24-calc-option__icon">🏗️</div>
-                                <div class="shiputz24-calc-option__text">מקיף</div>
-                                <div class="shiputz24-calc-option__subtitle">כל הדירה</div>
+                            <div class="shiputz24-calc-option edit-hoverable" data-value="2.2">
+                                <div class="shiputz24-calc-option__icon edit-hoverable">🏗️</div>
+                                <div class="shiputz24-calc-option__text edit-hoverable">מקיף</div>
+                                <div class="shiputz24-calc-option__subtitle edit-hoverable">כל הדירה</div>
                             </div>
-                            <div class="shiputz24-calc-option" data-value="3">
-                                <div class="shiputz24-calc-option__icon">⚡</div>
-                                <div class="shiputz24-calc-option__text">יוקרתי</div>
-                                <div class="shiputz24-calc-option__subtitle">רמה גבוהה</div>
+                            <div class="shiputz24-calc-option edit-hoverable" data-value="3">
+                                <div class="shiputz24-calc-option__icon edit-hoverable">⚡</div>
+                                <div class="shiputz24-calc-option__text edit-hoverable">יוקרתי</div>
+                                <div class="shiputz24-calc-option__subtitle edit-hoverable">רמה גבוהה</div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Step 3: Special Features -->
-                    <div class="shiputz24-calc-step" data-step="3">
-                        <div class="shiputz24-calc-nav">
+                    <div class="shiputz24-calc-step edit-hoverable" data-step="3">
+                        <div class="shiputz24-calc-nav edit-hoverable">
                             <button class="shiputz24-calc-back-btn" onclick="goBackToStep(2)">← חזור לסוג שיפוץ</button>
                         </div>
-                        <h4 class="shiputz24-calc-step__title">⚡ תוספות מיוחדות</h4>
-                        <div class="shiputz24-calc-checkboxes">
-                            <div class="shiputz24-calc-checkbox" data-value="15000">
-                                <div class="shiputz24-calc-checkbox__icon">⚡</div>
-                                <div class="shiputz24-calc-checkbox__text">שדרוג חשמל</div>
-                                <div class="shiputz24-calc-checkbox__price">+15,000 ₪</div>
+                        <h4 class="shiputz24-calc-step__title edit-hoverable">⚡ תוספות מיוחדות</h4>
+                        <div class="shiputz24-calc-checkboxes edit-hoverable">
+                            <div class="shiputz24-calc-checkbox edit-hoverable" data-value="15000">
+                                <div class="shiputz24-calc-checkbox__icon edit-hoverable">⚡</div>
+                                <div class="shiputz24-calc-checkbox__text edit-hoverable">שדרוג חשמל</div>
+                                <div class="shiputz24-calc-checkbox__price edit-hoverable">+15,000 ₪</div>
                             </div>
-                            <div class="shiputz24-calc-checkbox" data-value="20000">
-                                <div class="shiputz24-calc-checkbox__icon">🚿</div>
-                                <div class="shiputz24-calc-checkbox__text">שדרוג צנרת</div>
-                                <div class="shiputz24-calc-checkbox__price">+20,000 ₪</div>
+                            <div class="shiputz24-calc-checkbox edit-hoverable" data-value="20000">
+                                <div class="shiputz24-calc-checkbox__icon edit-hoverable">🚿</div>
+                                <div class="shiputz24-calc-checkbox__text edit-hoverable">שדרוג צנרת</div>
+                                <div class="shiputz24-calc-checkbox__price edit-hoverable">+20,000 ₪</div>
                             </div>
-                            <div class="shiputz24-calc-checkbox" data-value="8000">
-                                <div class="shiputz24-calc-checkbox__icon">❄️</div>
-                                <div class="shiputz24-calc-checkbox__text">מיזוג אוויר</div>
-                                <div class="shiputz24-calc-checkbox__price">+8,000 ₪</div>
+                            <div class="shiputz24-calc-checkbox edit-hoverable" data-value="8000">
+                                <div class="shiputz24-calc-checkbox__icon edit-hoverable">❄️</div>
+                                <div class="shiputz24-calc-checkbox__text edit-hoverable">מיזוג אוויר</div>
+                                <div class="shiputz24-calc-checkbox__price edit-hoverable">+8,000 ₪</div>
                             </div>
-                            <div class="shiputz24-calc-checkbox" data-value="12000">
-                                <div class="shiputz24-calc-checkbox__icon">🌿</div>
-                                <div class="shiputz24-calc-checkbox__text">עיצוב מרפסת</div>
-                                <div class="shiputz24-calc-checkbox__price">+12,000 ₪</div>
+                            <div class="shiputz24-calc-checkbox edit-hoverable" data-value="12000">
+                                <div class="shiputz24-calc-checkbox__icon edit-hoverable">🌿</div>
+                                <div class="shiputz24-calc-checkbox__text edit-hoverable">עיצוב מרפסת</div>
+                                <div class="shiputz24-calc-checkbox__price edit-hoverable">+12,000 ₪</div>
                             </div>
                         </div>
                         <button class="shiputz24-calc-btn" onclick="calculateRenovation()">חשב עלות שיפוץ 🔍</button>
                         
-                        <div class="shiputz24-calc-restart">
+                        <div class="shiputz24-calc-restart edit-hoverable">
                             <button class="shiputz24-calc-restart-btn" onclick="restartCalculation()">🔄 התחל מחדש</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Result Section -->
-                <div class="shiputz24-calc-result" id="calcResult" style="display: none;">
-                    <div class="shiputz24-calc-result__header">
-                        <div class="shiputz24-calc-nav">
+                <div class="shiputz24-calc-result edit-hoverable" id="calcResult" style="display: none;">
+                    <div class="shiputz24-calc-result__header edit-hoverable">
+                        <div class="shiputz24-calc-nav edit-hoverable">
                             <button class="shiputz24-calc-edit-btn" onclick="editCalculation()">✏️ ערוך חישוב</button>
                         </div>
-                        <h4>💰 עלות השיפוץ המשוערת</h4>
-                        <div class="shiputz24-calc-result__price" id="totalPrice">₪0</div>
+                        <h4 class="edit-hoverable">💰 עלות השיפוץ המשוערת</h4>
+                        <div class="shiputz24-calc-result__price edit-hoverable" id="totalPrice">₪0</div>
                     </div>
-                    <div class="shiputz24-calc-result__summary">
-                        <div class="shiputz24-calc-summary__item">
-                            <span class="shiputz24-calc-summary__label">גודל דירה:</span>
-                            <span class="shiputz24-calc-summary__value" id="summarySize">-</span>
+                    <div class="shiputz24-calc-result__summary edit-hoverable">
+                        <div class="shiputz24-calc-summary__item edit-hoverable">
+                            <span class="shiputz24-calc-summary__label edit-hoverable">גודל דירה:</span>
+                            <span class="shiputz24-calc-summary__value edit-hoverable" id="summarySize">-</span>
                         </div>
-                        <div class="shiputz24-calc-summary__item">
-                            <span class="shiputz24-calc-summary__label">סוג שיפוץ:</span>
-                            <span class="shiputz24-calc-summary__value" id="summaryType">-</span>
+                        <div class="shiputz24-calc-summary__item edit-hoverable">
+                            <span class="shiputz24-calc-summary__label edit-hoverable">סוג שיפוץ:</span>
+                            <span class="shiputz24-calc-summary__value edit-hoverable" id="summaryType">-</span>
                         </div>
-                        <div class="shiputz24-calc-summary__item">
-                            <span class="shiputz24-calc-summary__label">תוספות:</span>
-                            <span class="shiputz24-calc-summary__value" id="summaryAddons">-</span>
-                        </div>
-                    </div>
-                    <div class="shiputz24-calc-result__breakdown">
-                        <div class="shiputz24-calc-breakdown__item">
-                            <span>עלות בסיסית:</span>
-                            <span id="basePrice">₪0</span>
-                        </div>
-                        <div class="shiputz24-calc-breakdown__item">
-                            <span>תוספות:</span>
-                            <span id="addonsPrice">₪0</span>
+                        <div class="shiputz24-calc-summary__item edit-hoverable">
+                            <span class="shiputz24-calc-summary__label edit-hoverable">תוספות:</span>
+                            <span class="shiputz24-calc-summary__value edit-hoverable" id="summaryAddons">-</span>
                         </div>
                     </div>
-                    <div class="shiputz24-calc-result__cta">
-                        <p><strong>רוצים להפוך את החישוב למציאות?</strong></p>
-                        <p>קבלו הצעות מימון מותאמות לשיפוץ שלכם</p>
-                        <a href="#leadform" class="shiputz24-btn shiputz24-btn--primary">
-                            <span>קבלו הצעת מימון עכשיו</span>
-                            <span>💸</span>
+                    <div class="shiputz24-calc-result__breakdown edit-hoverable">
+                        <div class="shiputz24-calc-breakdown__item edit-hoverable">
+                            <span class="edit-hoverable">עלות בסיסית:</span>
+                            <span id="basePrice" class="edit-hoverable">₪0</span>
+                        </div>
+                        <div class="shiputz24-calc-breakdown__item edit-hoverable">
+                            <span class="edit-hoverable">תוספות:</span>
+                            <span id="addonsPrice" class="edit-hoverable">₪0</span>
+                        </div>
+                    </div>
+                    <div class="shiputz24-calc-result__cta edit-hoverable">
+                        <p class="edit-hoverable"><strong class="edit-hoverable">רוצים להפוך את החישוב למציאות?</strong></p>
+                        <p class="edit-hoverable">קבלו הצעות מימון מותאמות לשיפוץ שלכם</p>
+                        <a href="#leadform" class="shiputz24-btn shiputz24-btn--primary edit-hoverable">
+                            <span class="edit-hoverable">קבלו הצעת מימון עכשיו</span>
+                            <span class="edit-hoverable">💸</span>
                         </a>
                     </div>
                 </div>
             </div>
+    </div>
+    <!-- End of hidden calculator from hero - moved to dedicated section below -->
+
+    <!-- Intro Section -->
+    <div class="shiputz24-section edit-hoverable" style="opacity: 1; transform: translateY(0px); transition: 0.8s ease-out;">
+        <div class="shiputz24-container edit-hoverable">
+            <div class="shiputz24-lead edit-hoverable">
+                שבת בבוקר, פתחת את הברז והמים חומים. שוב. כבר שבוע שאין מים קרים במקלחת. את/ה יודע/ת שצריך לטפל בזה, אבל הלב לא נותן לך מנוחה מהמחשבה כמה זה יעלה.
+            </div>
+            
+            <p class="edit-hoverable">וגם אם יש לך את הכסף - מי אומר שזה מספיק? קבלנים תמיד חורגים, נכון? הם אומרים 150,000 ₪, ובסוף זה 200,000. ואז מה? תיתקע באמצע עם מטבח פרוק?</p>
+            
+            <p class="edit-hoverable">בוא נדבר תכל'ס. צריך מימון שיפוצים - אבל לא סתם מימון. צריך הלוואה שמכסה את כל התמונה, כולל הכרית הביטחון שאף אחד לא מספר לך עליה. ולמזלך, אתה יכול לקבל את זה בלי לרוץ לבנק או ל<a href="https://loan-israel.co.il/%D7%94%D7%9C%D7%95%D7%95%D7%90%D7%95%D7%AA-%D7%9C%D7%94%D7%9C%D7%99%D7%9A-%D7%A8%D7%A4%D7%95%D7%90%D7%99/" class="edit-hoverable">ממן טיפול רפואי יקר</a> במקביל.</p>
         </div>
     </div>
 
-    <!-- Intro Section -->
-    <div class="shiputz24-section">
-        <div class="shiputz24-container">
-            <div class="shiputz24-lead">
-                הצנרת ישנה, החשמל בבית עושה בעיות, הקירות זקוקים לצביעה והמשפחה התרחבה בילד קטן וחמוד. אין ספק שנדרשים כאן שיפוצים עכשיו ומיד. אך מה עושים כשדווקא עבור מטרה זו, כה חשובה ומתאימה, אין את הסכום הרצוי בחשבון הבנק? הפתרון הוא אחד - הלוואות שיפוצים! כן, זה נכון. לא רק כדי לקנות רכב או ל<a href="https://loan-israel.co.il/%D7%94%D7%9C%D7%95%D7%95%D7%90%D7%95%D7%AA-%D7%9C%D7%94%D7%9C%D7%99%D7%9A-%D7%A8%D7%A4%D7%95%D7%90%D7%99/">ממן טיפול שיניים</a> יקר מבקשים סיוע מהבנק או מגורם אחר. גם כדי להפוך את הבית למרווח יותר, יפה יותר ובטח חדש יותר, אפשר לקבל מימון.
+    <!-- New Section: Types of Renovation Financing -->
+    <div class="shiputz24-section edit-hoverable">
+        <div class="shiputz24-container edit-hoverable">
+            <h2 class="shiputz24-section__title edit-hoverable">סוגי מימון לשיפוצים - איזו אפשרות מתאימה לך?</h2>
+            
+            <p class="edit-hoverable">לא כל שיפוץ זקוק לאותו סוג מימון. מתכנן לצבוע ולהחליף ריצוף? יש פתרון. רוצה לפרק את כל הבית ולהתחיל מחדש? יש פתרון אחר. בוא נראה מה מתאים לך.</p>
+            
+            <h3 class="edit-hoverable"><strong class="edit-hoverable">משכנתא לשיפוץ הדירה</strong></h3>
+            <p class="edit-hoverable">זה לשיפוצים מקיפים עם סכומים גדולים. הריבית נמוכה כי זה כנגד שעבוד הנכס, אבל הבנק שולח שמאי ודורש מסמכים. מתאים אם מתכנן שיפוץ של 200,000 ₪ ומעלה.</p>
+            
+            <h3 class="edit-hoverable"><strong class="edit-hoverable">הלוואה לכל מטרה מהבנק</strong></h3>
+            <p class="edit-hoverable">פחות ביורוקרטיה, אישור מהיר יותר. הריבית קצת יותר גבוהה, אבל לא צריך שעבוד נכס. טוב לשיפוצים קטנים עד בינוניים (עד 150,000 ₪).</p>
+            
+            <h3 class="edit-hoverable"><strong class="edit-hoverable">הלוואה מבנק לאומי ובנק הפועלים</strong></h3>
+            <p class="edit-hoverable">בנקים כמו בנק לאומי ובנק הפועלים מציעים מסלולי משכנתא לשיפוץ עם תנאים מועדפים ללקוחות ותיקים. כדאי לבדוק אם יש לך וותק בבנק - לפעמים זה שווה אלפי שקלים.</p>
+            
+            <!-- Comparison Table -->
+            <div style="overflow-x: auto; margin: 30px 0;" class="edit-hoverable">
+                <table style="width: 100%; border-collapse: collapse; background: white; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border-radius: 12px; overflow: hidden;" class="edit-hoverable">
+                    <thead>
+                        <tr style="background: linear-gradient(135deg, #1e5490 0%, #2a5fa0 100%); color: white;">
+                            <th style="padding: 15px; text-align: right; border-bottom: 2px solid #ddd;">סוג המימון</th>
+                            <th style="padding: 15px; text-align: right; border-bottom: 2px solid #ddd;">סכום</th>
+                            <th style="padding: 15px; text-align: right; border-bottom: 2px solid #ddd;">ריבית</th>
+                            <th style="padding: 15px; text-align: right; border-bottom: 2px solid #ddd;">תקופה</th>
+                            <th style="padding: 15px; text-align: right; border-bottom: 2px solid #ddd;">מתאים ל...</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="background: #f8f8f8;">
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #e0e0e0;"><strong>משכנתא לשיפוץ</strong></td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #e0e0e0;">100K-500K+</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #e0e0e0;">נמוכה</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #e0e0e0;">עד 30 שנה</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #e0e0e0;">שיפוץ מקיף</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #e0e0e0;"><strong>הלוואה לכל מטרה</strong></td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #e0e0e0;">20K-150K</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #e0e0e0;">בינונית</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #e0e0e0;">1-7 שנים</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #e0e0e0;">שיפוץ חלקי</td>
+                        </tr>
+                        <tr style="background: #f8f8f8;">
+                            <td style="padding: 12px 15px;"><strong>בנק לאומי/הפועלים</strong></td>
+                            <td style="padding: 12px 15px;">משתנה</td>
+                            <td style="padding: 12px 15px;">מועדף</td>
+                            <td style="padding: 12px 15px;">משתנה</td>
+                            <td style="padding: 12px 15px;">לקוחות ותיקים</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
             
-            <!-- Widget Container - First time -->
-            <div class="shiputz24-widget-container" id="leadform">
-                [awg postid="32400"]
-            </div>
+            <p class="edit-hoverable">מניסיוננו, רוב האנשים לא יודעים שיש את כל האפשרויות האלה. הם הולכים לבנק שלהם, מקבלים "לא" או תנאים לא טובים, ועוצרים שם. אל תעשה את הטעות הזו. חפש, השווה, בדוק מה מתאים לך.</p>
         </div>
     </div>
 
     <!-- Benefits Section -->
-    <div class="shiputz24-section">
-        <div class="shiputz24-container">
-            <h2 class="shiputz24-section__title">גם אתה יכול לקבל הלוואות לשיפוץ הבית בתנאים נוחים</h2>
-            <p>כל אחד יכול ללכת לבנק ולבקש <a href="https://loan-israel.co.il/">הלוואה לכל דבר</a>. אך לא כל אחד מסוגל להבטיח את קבלת האישור המיוחל על הבקשה, ועוד יותר מכך, את ההטבה של מסלול הלוואתי משתלם שיבטיח תפיסת שתי ציפורים במכה אחת: המשך בשגרת החיים ורמת ההוצאות הנורמלית, תוך הנאה מבית משופץ, או כל מטרה לצורך העניין. רוצים להיות אלו שיהנו מכל זה? הגידו שלוש מילים: פורטל רק תבקש! וראו כמה זה קל להגיש בקשה להלוואה ולזכות בתנאים אטרקטיביים.</p>
+    <div class="shiputz24-section edit-hoverable" style="opacity: 1; transform: translateY(0px); transition: 0.8s ease-out;">
+        <div class="shiputz24-container edit-hoverable">
+            <h2 class="shiputz24-section__title edit-hoverable">גם אתה יכול לקבל הלוואות לשיפוץ הבית בתנאים נוחים</h2>
+            <p class="edit-hoverable">כל אחד יכול ללכת לבנק ולבקש <a href="https://loan-israel.co.il/" class="edit-hoverable">הלוואה לכל דבר</a>. אך לא כל אחד מסוגל להבטיח את קבלת האישור המיוחל על הבקשה, ועוד יותר מכך, את ההטבה של מסלול הלוואתי משתלם שיבטיח תפיסת שתי ציפורים במכה אחת: המשך בשגרת החיים ורמת ההוצאות הנורמלית, תוך הנאה מבית משופץ, או כל מטרה לצורך העניין. רוצים להיות אלו שיהנו מכל זה? הגידו שלוש מילים: פורטל רק תבקש! וראו כמה זה קל להגיש בקשה להלוואה ולזכות בתנאים אטרקטיביים.</p>
             
         </div>
     </div>
 
     <!-- Dream Section -->
-    <div class="shiputz24-section">
-        <div class="shiputz24-container">
-            <h2 class="shiputz24-section__title">חלום השיפוץ שלך במרחק נגיעה - הלוואות לשיפוצים בתנאים מיוחדים</h2>
-            <p>רק תבקש הוא פורטל פיננסי מוביל שהופך את היוצרות בכל מה שהכרתם עד היום בבקשת <a href="https://loan-israel.co.il">הלוואות</a>. צוות הפורטל עובד עם מוסדות המימון לעסקים ולפרטיים הגדולים והידועים במדינה, ביניהם הבנקים וחברות פרטיות מוכרות, על מנת לאפשר לכם למלא ללא התחייבות את טופס הבקשה להלוואה באתר, ולהנות מהשוואת מחירים של מגוון מסלולים נוחים שלא ידעתם שקיימים ומחכים רק לכם. נצלו את שירותי פורטל רק תבקש הפיננסיים המקצועיים.</p>
+    <div class="shiputz24-section edit-hoverable" style="opacity: 1; transform: translateY(0px); transition: 0.8s ease-out;">
+        <div class="shiputz24-container edit-hoverable">
+            <h2 class="shiputz24-section__title edit-hoverable">חלום השיפוץ שלך במרחק נגיעה - הלוואות לשיפוצים בתנאים מיוחדים</h2>
+            <p class="edit-hoverable">רק תבקש הוא פורטל פיננסי מוביל שהופך את היוצרות בכל מה שהכרתם עד היום בבקשת <a href="https://loan-israel.co.il" class="edit-hoverable">הלוואות</a>. צוות הפורטל עובד עם מוסדות המימון לעסקים ולפרטיים הגדולים והידועים במדינה, ביניהם הבנקים וחברות פרטיות מוכרות, על מנת לאפשר לכם למלא ללא התחייבות את טופס הבקשה להלוואה באתר, ולהנות מהשוואת מחירים של מגוון מסלולים נוחים שלא ידעתם שקיימים ומחכים רק לכם. נצלו את שירותי פורטל רק תבקש הפיננסיים המקצועיים.</p>
             
             <!-- Download Guide -->
-            <div class="shiputz24-text-center shiputz24-mb-30">
-                <p><strong><span style="color: #ff0000">רגע! לא מתחילים לשפץ לפני שקוראים את המדריך שלנו לשיפוץ מוצלח</span></strong></p>
-                <a href="https://loan-israel.co.il/wp-content/uploads/2023/03/טיפים-לשיפוץ-דירה.docx" class="shiputz24-download-link">
-                    <span>📋</span>
-                    <span>טיפים לשיפוץ דירה</span>
+            <div class="shiputz24-text-center shiputz24-mb-30 edit-hoverable">
+                <p class="edit-hoverable"><strong class="edit-hoverable"><span style="color: #ff0000" class="edit-hoverable">רגע! לא מתחילים לשפץ לפני שקוראים את המדריך שלנו לשיפוץ מוצלח</span></strong></p>
+                <a href="https://loan-israel.co.il/wp-content/uploads/2023/03/טיפים-לשיפוץ-דירה.docx" class="shiputz24-download-link edit-hoverable">
+                    <span class="edit-hoverable">📋</span>
+                    <span class="edit-hoverable">טיפים לשיפוץ דירה</span>
                 </a>
             </div>
         </div>
     </div>
 
     <!-- Planning Section -->
-    <div class="shiputz24-section">
-        <div class="shiputz24-container">
-            <h2 class="shiputz24-section__title">מתכנן לשפץ את הדירה? כך תיקח מימון לשיפוץ בלחיצת כפתור!</h2>
-            <p>כיום אין צורך לצאת מהבית או לקחת יום חופש ממקום העבודה על מנת לקחת הלוואה לשיפוץ הדירה. אפשר למלא טופס בקשה מקוון ובלחיצת כפתור מקבלים הצעות להלוואות אטרקטיביות ובהתאמה אישית לצרכים הייחודיים שלך.</p>
+    <div class="shiputz24-section edit-hoverable" style="opacity: 1; transform: translateY(0px); transition: 0.8s ease-out;">
+        <div class="shiputz24-container edit-hoverable">
+            <h2 class="shiputz24-section__title edit-hoverable">מתכנן לשפץ את הדירה? כך תיקח מימון לשיפוץ בלחיצת כפתור!</h2>
+            <p class="edit-hoverable">כיום אין צורך לצאת מהבית או לקחת יום חופש ממקום העבודה על מנת לקחת הלוואה לשיפוץ הדירה. אפשר למלא טופס בקשה מקוון ובלחיצת כפתור מקבלים הצעות להלוואות אטרקטיביות ובהתאמה אישית לצרכים הייחודיים שלך.</p>
             
-            <p>אם ברצונך לשפץ את הבית או הדירה כל שעליך לעשות הוא לסמן את סכום ההלוואה הנחוצה לשיפוץ הנכס ויש ללחוץ על הלחצן "המשך" ולעקוב אחר ההנחיות המופיעות בחלונית ההסבר. כיום אפשר לקחת <a href="https://loan-israel.co.il/%d7%94%d7%9c%d7%95%d7%95%d7%90%d7%94-%d7%9e%d7%99%d7%99%d7%93%d7%99%d7%aa-%d7%90%d7%95%d7%a0%d7%9c%d7%99%d7%99%d7%9f/">הלוואה דיגיטלית</a> לשיפוץ הבית בקלות ובמהירות, ללא ביורוקרטיה מתישה ומייגעת ובלי לצאת מהבית.</p>
+            <p class="edit-hoverable">אם ברצונך לשפץ את הבית או הדירה כל שעליך לעשות הוא לסמן את סכום ההלוואה הנחוצה לשיפוץ הנכס ויש ללחוץ על הלחצן "המשך" ולעקוב אחר ההנחיות המופיעות בחלונית ההסבר. כיום אפשר לקחת <a href="https://loan-israel.co.il/%d7%94%d7%9c%d7%95%d7%95%d7%90%d7%94-%d7%9e%d7%99%d7%99%d7%93%d7%99%d7%aa-%d7%90%d7%95%d7%a0%d7%9c%d7%99%d7%99%d7%9f/" class="edit-hoverable">הלוואה דיגיטלית</a> לשיפוץ הבית בקלות ובמהירות, ללא ביורוקרטיה מתישה ומייגעת ובלי לצאת מהבית.</p>
             
             <!-- Process Steps -->
-            <div class="shiputz24-process">
-                <div class="shiputz24-process__grid">
-                    <div class="shiputz24-process-step">
-                        <div class="shiputz24-process-step__number">1</div>
-                        <h3 class="shiputz24-process-step__title">מלאו טופס</h3>
-                        <p>פשוט וקל - רק פרטים בסיסיים</p>
+            <div class="shiputz24-process edit-hoverable">
+                <div class="shiputz24-process__grid edit-hoverable">
+                    <div class="shiputz24-process-step edit-hoverable">
+                        <div class="shiputz24-process-step__number edit-hoverable">1</div>
+                        <h3 class="shiputz24-process-step__title edit-hoverable">מלאו טופס</h3>
+                        <p class="edit-hoverable">פשוט וקל - רק פרטים בסיסיים</p>
                     </div>
-                    <div class="shiputz24-process-step">
-                        <div class="shiputz24-process-step__number">2</div>
-                        <h3 class="shiputz24-process-step__title">קבלו הצעות</h3>
-                        <p>המומחים שלנו יחזרו אליכם עם הצעות מותאמות</p>
+                    <div class="shiputz24-process-step edit-hoverable">
+                        <div class="shiputz24-process-step__number edit-hoverable">2</div>
+                        <h3 class="shiputz24-process-step__title edit-hoverable">קבלו הצעות</h3>
+                        <p class="edit-hoverable">המומחים שלנו יחזרו אליכם עם הצעות מותאמות</p>
                     </div>
-                    <div class="shiputz24-process-step">
-                        <div class="shiputz24-process-step__number">3</div>
-                        <h3 class="shiputz24-process-step__title">בחרו ואשרו</h3>
-                        <p>בוחרים את ההצעה הטובה ביותר ומקבלים אישור</p>
+                    <div class="shiputz24-process-step edit-hoverable">
+                        <div class="shiputz24-process-step__number edit-hoverable">3</div>
+                        <h3 class="shiputz24-process-step__title edit-hoverable">בחרו ואשרו</h3>
+                        <p class="edit-hoverable">בוחרים את ההצעה הטובה ביותר ומקבלים אישור</p>
                     </div>
-                    <div class="shiputz24-process-step">
-                        <div class="shiputz24-process-step__number">4</div>
-                        <h3 class="shiputz24-process-step__title">תתחילו לשפץ</h3>
-                        <p>הכסף בחשבון והחלום הופך למציאות</p>
+                    <div class="shiputz24-process-step edit-hoverable">
+                        <div class="shiputz24-process-step__number edit-hoverable">4</div>
+                        <h3 class="shiputz24-process-step__title edit-hoverable">תתחילו לשפץ</h3>
+                        <p class="edit-hoverable">הכסף בחשבון והחלום הופך למציאות</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Mortgage Benefits Section -->
-    <div class="shiputz24-section">
-        <div class="shiputz24-container">
-            <h2 class="shiputz24-section__title">מה אני מרוויח מלקיחת הלוואת משכנתא לשיפוץ הבית?</h2>
-            <p>באופן כללי, הבנקים מציעים שני מסלולי מימון לשיפוץ הדירה. אפשר לקחת <a href="https://loan-israel.co.il/">הלוואה לכל מטרה</a> או הלוואת משכנתא לשיפוץ הבית. הלוואת משכנתא מתאימה למי שמתכנן שיפוץ מקיף בכל הבית (רמונט כללי), והתנאים דומים יחסית לתנאים הנוחים של המשכנתאות. היתרונות בלקיחת הלוואת משכנתא לשיפוץ הנכס הם:</p>
+    <!-- New Section: What to Know Before Taking Renovation Financing -->
+    <div class="shiputz24-section edit-hoverable">
+        <div class="shiputz24-container edit-hoverable">
+            <h2 class="shiputz24-section__title edit-hoverable">מה כדאי לדעת לפני שלוקחים מימון לשיפוצים</h2>
             
-            <ul class="shiputz24-feature-list">
-                <li class="shiputz24-feature-item">
-                    <span class="shiputz24-feature-icon">✓</span>
-                    <span>תנאים מועדפים מבחינת ריבית, פריסת תשלומים וסכום ההלוואה, כמעט כמו במשכנתא רגילה.</span>
+            <p class="edit-hoverable">חשבת שסיימת? עוד לא. לפני שאתה חותם על כל דבר, יש כמה דברים שכדאי לדעת מראש. אלה הדברים שאף אחד לא מספר לך.</p>
+            
+            <h3 class="edit-hoverable"><strong class="edit-hoverable">תכנון תקציב - למה קבלנים תמיד חורגים?</strong></h3>
+            
+            <p class="edit-hoverable">מניסיוננו, שיפוצים חורגים בממוצע 15-20% מהתקציב המקורי. זה לא כי הקבלן רוצה לרמות אותך (לפעמים כן, אבל לא תמיד). זה כי תמיד יש הפתעות: קיר שצריך לחזק, צינור שנמצא במקום לא נכון, גילית שאתה רוצה משהו יותר טוב באמצע.</p>
+            
+            <p class="edit-hoverable">אז מה עושים? <strong class="edit-hoverable">לוקחים 15% כרית ביטחון</strong>. הקבלן אמר 150,000 ₪? תקח מימון של 180,000 ₪. ככה לא תיתקע באמצע.</p>
+            
+            <!-- Case Study Box -->
+            <div style="background: #f0f7ff; padding: 20px 25px; margin: 25px 0; border-radius: 12px; border-right: 4px solid #1e5490;" class="edit-hoverable">
+                <h4 style="color: #1e5490; margin-top: 0;"><strong>דוגמה מהשטח: משפחת כהן</strong></h4>
+                <p style="margin-bottom: 0;">משפחת כהן רצתה לשפץ דירת 80 מ״ר. הקבלן הציע 150,000 ₪. הם לקחו את העצה שלנו ולקחו מימון של 180,000 ₪ (20% כרית ביטחון). בסוף השיפוץ עלה בדיוק 175,000 ₪ - 25,000 ₪ יותר מההצעה המקורית. למדנו ש<strong>כרית הביטחון הצילה אותם</strong>. בלי זה, הם היו צריכים לקחת עוד הלוואה קטנה בתנאים גרועים, או לוותר על דברים שרצו. זה לא סיפור יוצא דופן. זה קורה ברוב השיפוצים.</p>
+            </div>
+            
+            <h3 class="edit-hoverable"><strong class="edit-hoverable">התחשבות במשך הזמן - מימון ביניים או מימון מלא?</strong></h3>
+            
+            <p class="edit-hoverable">שיפוץ לוקח זמן. לפעמים הקבלן מקבל את הכסף בשלבים: 30% בהתחלה, 40% באמצע, 30% בסיום. הבנק צריך לדעת את זה כי זה משפיע על איך הוא משחרר את הכסף. יש בנקים שנותנים את הכל מראש. יש שנותנים בשלבים. תבדוק מה מתאים לך ולקבלן.</p>
+            
+            <h3 class="edit-hoverable"><strong class="edit-hoverable">דרישות הבנקים - מה צריך להביא?</strong></h3>
+            
+            <p class="edit-hoverable">הבנק לא סומך עליך ככה סתם. הוא רוצה לראות:</p>
+            
+            <ul class="shiputz24-feature-list edit-hoverable">
+                <li class="shiputz24-feature-item edit-hoverable">
+                    <span class="shiputz24-feature-icon edit-hoverable">✓</span>
+                    <span class="edit-hoverable"><strong class="edit-hoverable">הצעת מחיר מקבלן</strong> - עם פירוט מלא של מה עושים</span>
                 </li>
-                <li class="shiputz24-feature-item">
-                    <span class="shiputz24-feature-icon">✓</span>
-                    <span>אפשר לקחת סכום גדול למימון השיפוץ בבית.</span>
+                <li class="shiputz24-feature-item edit-hoverable">
+                    <span class="shiputz24-feature-icon edit-hoverable">✓</span>
+                    <span class="edit-hoverable"><strong class="edit-hoverable">אישור עובד זר</strong> (אם יש)</span>
                 </li>
-                <li class="shiputz24-feature-item">
-                    <span class="shiputz24-feature-icon">✓</span>
-                    <span>פריסת תשלומים ארוכה.</span>
+                <li class="shiputz24-feature-item edit-hoverable">
+                    <span class="shiputz24-feature-icon edit-hoverable">✓</span>
+                    <span class="edit-hoverable"><strong class="edit-hoverable">תכנית שיפוץ</strong> לשיפוצים גדולים</span>
                 </li>
-                <li class="shiputz24-feature-item">
-                    <span class="shiputz24-feature-icon">✓</span>
-                    <span>הלוואה בריבית נוחה כנגד שעבוד הנכס.</span>
+                <li class="shiputz24-feature-item edit-hoverable">
+                    <span class="shiputz24-feature-icon edit-hoverable">✓</span>
+                    <span class="edit-hoverable"><strong class="edit-hoverable">ביטוח עבודות</strong> לפעמים</span>
                 </li>
-                <li class="shiputz24-feature-item">
-                    <span class="shiputz24-feature-icon">✓</span>
-                    <span>מגוון מסלולים לבחירה (מסלולים בריבית קבועה או משתנה, עם או ללא הצמדה).</span>
+            </ul>
+            
+            <p class="edit-hoverable">הכינו את זה מראש. ככה התהליך יהיה יותר מהיר.</p>
+            
+            <h3 class="edit-hoverable"><strong class="edit-hoverable">משפט מהלב (מניסיון)</strong></h3>
+            
+            <p class="edit-hoverable">ראינו מאות מקרים שבהם לקוחות לקחו מימון קטן מדי כי "לא רצו להיות בחובות". ואז הם נתקעו באמצע, נאלצו לקחת עוד הלוואה בתנאים גרועים, ובסוף שילמו הרבה יותר. לרוב, ההבדל בין משכנתא לשיפוץ הבית להלוואה רגילה יכול להגיע ל-30,000 ₪ על 5 שנים. זה לא מעט כסף. כדאי לעשות את זה נכון מההתחלה.</p>
+        </div>
+    </div>
+
+    <!-- Mortgage Benefits Section -->
+    <div class="shiputz24-section edit-hoverable" style="opacity: 1; transform: translateY(0px); transition: 0.8s ease-out;">
+        <div class="shiputz24-container edit-hoverable">
+            <h2 class="shiputz24-section__title edit-hoverable">מה אני מרוויח מלקיחת הלוואת משכנתא לשיפוץ הבית?</h2>
+            <p class="edit-hoverable">באופן כללי, הבנקים מציעים שני מסלולי מימון לשיפוץ הדירה. אפשר לקחת <a href="https://loan-israel.co.il/" class="edit-hoverable">הלוואה לכל מטרה</a> או הלוואת משכנתא לשיפוץ הבית. הלוואת משכנתא מתאימה למי שמתכנן שיפוץ מקיף בכל הבית (רמונט כללי), והתנאים דומים יחסית לתנאים הנוחים של המשכנתאות. היתרונות בלקיחת הלוואת משכנתא לשיפוץ הנכס הם:</p>
+            
+            <ul class="shiputz24-feature-list edit-hoverable">
+                <li class="shiputz24-feature-item edit-hoverable">
+                    <span class="shiputz24-feature-icon edit-hoverable">✓</span>
+                    <span class="edit-hoverable">תנאים מועדפים מבחינת ריבית, פריסת תשלומים וסכום ההלוואה, כמעט כמו במשכנתא רגילה.</span>
+                </li>
+                <li class="shiputz24-feature-item edit-hoverable">
+                    <span class="shiputz24-feature-icon edit-hoverable">✓</span>
+                    <span class="edit-hoverable">אפשר לקחת סכום גדול למימון השיפוץ בבית.</span>
+                </li>
+                <li class="shiputz24-feature-item edit-hoverable">
+                    <span class="shiputz24-feature-icon edit-hoverable">✓</span>
+                    <span class="edit-hoverable">פריסת תשלומים ארוכה.</span>
+                </li>
+                <li class="shiputz24-feature-item edit-hoverable">
+                    <span class="shiputz24-feature-icon edit-hoverable">✓</span>
+                    <span class="edit-hoverable">הלוואה בריבית נוחה כנגד שעבוד הנכס.</span>
+                </li>
+                <li class="shiputz24-feature-item edit-hoverable">
+                    <span class="shiputz24-feature-icon edit-hoverable">✓</span>
+                    <span class="edit-hoverable">מגוון מסלולים לבחירה (מסלולים בריבית קבועה או משתנה, עם או ללא הצמדה).</span>
                 </li>
             </ul>
             
             <!-- Image with WhatsApp Link -->
-            <a href="https://api.whatsapp.com/send/?phone=%2B972534288957&text=%D7%90%D7%A0%D7%99+%D7%9E%D7%A2%D7%95%D7%A0%D7%99%D7%99%D7%9F+%D7%9C%D7%94%D7%AA%D7%97%D7%99%D7%9C+%D7%91%D7%93%D7%99%D7%A7%D7%AA+%D7%96%D7%9B%D7%90%D7%95%D7%AA+%D7%9C%D7%94%D7%9C%D7%95%D7%95%D7%90%D7%94&type=phone_number&app_absent=0" class="shiputz24-image-link">
-                <img src="https://loan-israel.co.il/wp-content/uploads/2016/09/הלוואות-לשיפוץ-דירה-1.webp" alt="באנר הלוואות לשיפוץ דירה בראש שקט" width="760" height="300" />
+            <a href="https://api.whatsapp.com/send/?phone=%2B972534288957&amp;text=%D7%90%D7%A0%D7%99+%D7%9E%D7%A2%D7%95%D7%A0%D7%99%D7%99%D7%9F+%D7%9C%D7%94%D7%AA%D7%97%D7%99%D7%9C+%D7%91%D7%93%D7%99%D7%A7%D7%AA+%D7%96%D7%9B%D7%90%D7%95%D7%AA+%D7%9C%D7%94%D7%9C%D7%95%D7%95%D7%90%D7%94&amp;type=phone_number&amp;app_absent=0" class="shiputz24-image-link edit-hoverable">
+                <img src="https://loan-israel.co.il/wp-content/uploads/2016/09/הלוואות-לשיפוץ-דירה-1.webp" alt="באנר הלוואות לשיפוץ דירה בראש שקט" width="760" height="300">
             </a>
         </div>
     </div>
 
     <!-- Financing Percentage Section -->
-    <div class="shiputz24-section">
-        <div class="shiputz24-container">
-            <h2 class="shiputz24-section__title">מהו אחוז המימון המרבי במשכנתא לשיפוץ הבית?</h2>
-            <p>ברוב המקרים ניתן לקבל מימון מרבי בשיעור של עד 50% מערך הדירה או הבית. אחוזי המימון ישתנו אם יש משכנתא פעילה על הנכס. בעזרת יועצי משכנתא מיומנים ובעלי קשרים ניתן במקרים מסוימים לקבל משכנתא לשיפוץ באחוזי מימון גבוהים יותר, עד 75%.</p>
+    <div class="shiputz24-section edit-hoverable" style="opacity: 1; transform: translateY(0px); transition: 0.8s ease-out;">
+        <div class="shiputz24-container edit-hoverable">
+            <h2 class="shiputz24-section__title edit-hoverable">מהו אחוז המימון המרבי במשכנתא לשיפוץ הבית?</h2>
+            <p class="edit-hoverable">ברוב המקרים ניתן לקבל מימון מרבי בשיעור של עד 50% מערך הדירה או הבית. אחוזי המימון ישתנו אם יש משכנתא פעילה על הנכס. בעזרת יועצי משכנתא מיומנים ובעלי קשרים ניתן במקרים מסוימים לקבל משכנתא לשיפוץ באחוזי מימון גבוהים יותר, עד 75%.</p>
             
             <!-- Benefits Grid -->
-            <div class="shiputz24-benefits">
-                <div class="shiputz24-benefit-card">
-                    <div class="shiputz24-benefit-card__icon">
+            <div class="shiputz24-benefits edit-hoverable">
+                <div class="shiputz24-benefit-card edit-hoverable">
+                    <div class="shiputz24-benefit-card__icon edit-hoverable">
                         <svg width="30" height="30" viewBox="0 0 24 24" fill="white">
-                            <path d="M12 2L2 7V10C2 16 6 20.9 12 22C18 20.9 22 16 22 10V7L12 2Z"/>
+                            <path d="M12 2L2 7V10C2 16 6 20.9 12 22C18 20.9 22 16 22 10V7L12 2Z"></path>
                         </svg>
                     </div>
-                    <h3 class="shiputz24-benefit-card__title">מימון עד 75%</h3>
-                    <p>בתנאים מסוימים ניתן לקבל מימון גבוה במיוחד מערך הנכס</p>
+                    <h3 class="shiputz24-benefit-card__title edit-hoverable">מימון עד 75%</h3>
+                    <p class="edit-hoverable">בתנאים מסוימים ניתן לקבל מימון גבוה במיוחד מערך הנכס</p>
                 </div>
-                <div class="shiputz24-benefit-card">
-                    <div class="shiputz24-benefit-card__icon">
+                <div class="shiputz24-benefit-card edit-hoverable">
+                    <div class="shiputz24-benefit-card__icon edit-hoverable">
                         <svg width="30" height="30" viewBox="0 0 24 24" fill="white">
-                            <path d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7L12 2L3 7V9C3 11.55 3.84 13.74 9 16.5V22H15V16.5C20.16 13.74 21 11.55 21 9Z"/>
+                            <path d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7L12 2L3 7V9C3 11.55 3.84 13.74 9 16.5V22H15V16.5C20.16 13.74 21 11.55 21 9Z"></path>
                         </svg>
                     </div>
-                    <h3 class="shiputz24-benefit-card__title">יועצים מקצועיים</h3>
-                    <p>צוות מומחים עם קשרים בבנקים יעזור לכם לקבל את התנאים הטובים ביותר</p>
+                    <h3 class="shiputz24-benefit-card__title edit-hoverable">יועצים מקצועיים</h3>
+                    <p class="edit-hoverable">צוות מומחים עם קשרים בבנקים יעזור לכם לקבל את התנאים הטובים ביותר</p>
                 </div>
-                <div class="shiputz24-benefit-card">
-                    <div class="shiputz24-benefit-card__icon">
+                <div class="shiputz24-benefit-card edit-hoverable">
+                    <div class="shiputz24-benefit-card__icon edit-hoverable">
                         <svg width="30" height="30" viewBox="0 0 24 24" fill="white">
-                            <path d="M12 2C6.48 2 2 6.48 2 12S6.48 22 12 22 22 17.52 22 12 17.52 2 12 2ZM13 17H11V15H13V17ZM13 13H11V7H13V13Z"/>
+                            <path d="M12 2C6.48 2 2 6.48 2 12S6.48 22 12 22 22 17.52 22 12 17.52 2 12 2ZM13 17H11V15H13V17ZM13 13H11V7H13V13Z"></path>
                         </svg>
                     </div>
-                    <h3 class="shiputz24-benefit-card__title">שירות אישי</h3>
-                    <p>התאמה מלאה לצרכים האישיים ומצב הנכס הספציפי שלכם</p>
+                    <h3 class="shiputz24-benefit-card__title edit-hoverable">שירות אישי</h3>
+                    <p class="edit-hoverable">התאמה מלאה לצרכים האישיים ומצב הנכס הספציפי שלכם</p>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Bank Calculation Section -->
-    <div class="shiputz24-section">
-        <div class="shiputz24-container">
-            <h2 class="shiputz24-section__title">איך הבנק מחשב את אחוזי המימון למשכנתא לשיפוץ הבית על סמך הערכת השמאי?</h2>
-            <p>בדומה לתהליך לקיחת משכנתא רגילה לרכישת דירת מגורים או להשקעה, גם כאשר לוקחים משכנתא לשיפוץ הנכס הבנק שולח שמאי מקרקעין מטעמו לבצע הערכת שווי כבסיס לאישור המימון הנקבע להלוואת המשכנתא. לכן, סכום <a href="https://loan-israel.co.il/%d7%94%d7%9c%d7%95%d7%95%d7%90%d7%95%d7%aa-%d7%92%d7%93%d7%95%d7%9c%d7%95%d7%aa/">הלוואת המשכנתא</a> לשיפוץ הדירה יהיה לפי הערכת שווי הנכס שקבע שמאי מקרקעין. כמו כן, הבנקים דורשים מהלווים להביא הצעת מחיר לשיפוץ הנכס.</p>
+    <div class="shiputz24-section edit-hoverable" style="opacity: 1; transform: translateY(0px); transition: 0.8s ease-out;">
+        <div class="shiputz24-container edit-hoverable">
+            <h2 class="shiputz24-section__title edit-hoverable">איך הבנק מחשב את אחוזי המימון למשכנתא לשיפוץ הבית על סמך הערכת השמאי?</h2>
+            <p class="edit-hoverable">בדומה לתהליך לקיחת משכנתא רגילה לרכישת דירת מגורים או להשקעה, גם כאשר לוקחים משכנתא לשיפוץ הנכס הבנק שולח שמאי מקרקעין מטעמו לבצע הערכת שווי כבסיס לאישור המימון הנקבע להלוואת המשכנתא. לכן, סכום <a href="https://loan-israel.co.il/%d7%94%d7%9c%d7%95%d7%95%d7%90%d7%95%d7%aa-%d7%92%d7%93%d7%95%d7%9c%d7%95%d7%aa/" class="edit-hoverable">הלוואת המשכנתא</a> לשיפוץ הדירה יהיה לפי הערכת שווי הנכס שקבע שמאי מקרקעין. כמו כן, הבנקים דורשים מהלווים להביא הצעת מחיר לשיפוץ הנכס.</p>
             
-            <h3><strong>אפשרויות נוספות לקבלת הלוואות באתר</strong></h3>
-            <p><a href="https://loan-israel.co.il/checks-loans/">הלוואה בהחזר צ'קים</a></p>
+            <h3 class="edit-hoverable"><strong class="edit-hoverable">אפשרויות נוספות לקבלת הלוואות באתר</strong></h3>
+            <p class="edit-hoverable"><a href="https://loan-israel.co.il/checks-loans/" class="edit-hoverable">הלוואה בהחזר צ'קים</a></p>
+        </div>
+    </div>
+
+    <!-- New Section: How to Save Money -->
+    <div class="shiputz24-section edit-hoverable">
+        <div class="shiputz24-container edit-hoverable">
+            <h2 class="shiputz24-section__title edit-hoverable">כיצד לחסוך כסף במימון לשיפוצים</h2>
+            
+            <p class="edit-hoverable">כולם רוצים לחסוך כסף. בוא נראה איך.</p>
+            
+            <h3 class="edit-hoverable"><strong class="edit-hoverable">השוואת הצעות מימון</strong></h3>
+            
+            <p class="edit-hoverable">אל תסתפק בהצעה אחת. קח 3 הצעות לפחות. גוף אחד אמר ריבית 4.5%, אחר אמר 3.8%. זה ההבדל בין לשלם 180,000 ₪ ל-165,000 ₪ על אותה הלוואה. מניסיוננו, <strong class="edit-hoverable">רוב האנשים לא משווים</strong>. הם הולכים לבנק שלהם, מקבלים הצעה, וחותמים. זה כסף שזורקים לפח.</p>
+            
+            <h3 class="edit-hoverable"><strong class="edit-hoverable">תזמון נכון - תקופות מבצעים</strong></h3>
+            
+            <p class="edit-hoverable">יש תקופות בשנה שבנקים וגופי מימון נותנים תנאים יותר טובים. בדרך כלל זה סוף רבעון (מרץ, יוני, ספטמבר, דצמבר) כי הם רוצים לסגור יעדים. אם אתה לא ממהר - תחכה לתקופה הנכונה.</p>
+            
+            <h3 class="edit-hoverable"><strong class="edit-hoverable">איחוד עם הלוואות קיימות</strong></h3>
+            
+            <p class="edit-hoverable">יש לך כבר <a href="https://loan-israel.co.il" class="edit-hoverable">הלוואה</a> אחרת? לפעמים כדאי לאחד את שתי ההלוואות להלוואה אחת גדולה יותר בריבית נמוכה יותר. זה לא תמיד משתלם, אבל כדאי לבדוק.</p>
+            
+            <h3 class="edit-hoverable"><strong class="edit-hoverable">שימוש נכון במסלולים - משתנה vs קבוע</strong></h3>
+            
+            <p class="edit-hoverable">מסלול קבוע: הריבית לא משתנה. יציב, אבל בדרך כלל יותר יקר בהתחלה. מסלול משתנה: הריבית משתנה לפי השוק. יכול להיות זול יותר, אבל יש סיכון.</p>
+            
+            <p class="edit-hoverable">תקופות ההחזר בדרך כלל נעות בין 24 חודשים ל-72 תשלומים, תלוי בגוף המלווה ובסכום. <strong class="edit-hoverable">ככל שהתקופה יותר ארוכה, ההחזר החודשי יותר נמוך - אבל הסכום הכולל יותר גבוה.</strong> בחר לפי מה שנוח לך. אם אתה לא אוהב הפתעות - קבוע. אם אתה מוכן לקחת סיכון כדי לחסוך - משתנה.</p>
+        </div>
+    </div>
+
+    <!-- New Section: Common Mistakes -->
+    <div class="shiputz24-section edit-hoverable">
+        <div class="shiputz24-container edit-hoverable">
+            <h2 class="shiputz24-section__title edit-hoverable">טעויות נפוצות בלקיחת מימון לשיפוצים</h2>
+            
+            <p class="edit-hoverable">בוא נדבר על הטעויות שרוב האנשים עושים. אולי תזהה את עצמך באחת מהן.</p>
+            
+            <div class="shiputz24-benefits edit-hoverable">
+                <div class="shiputz24-benefit-card edit-hoverable">
+                    <div class="shiputz24-benefit-card__icon edit-hoverable">
+                        <span style="font-size: 2em;">⚠️</span>
+                    </div>
+                    <h3 class="shiputz24-benefit-card__title edit-hoverable">טעות 1: לא לקחת כרית ביטחון</h3>
+                    <p class="edit-hoverable">הקבלן אמר 120,000 ₪ ולקחת בדיוק 120,000 ₪. ואז גילו קיר לא תקין, או שהחלטת שאתה רוצה ארונות יותר טובים, ופתאום חסר לך 20,000 ₪. <strong>מה עושים?</strong> תמיד לקחת 10-15% מעל ההצעה.</p>
+                </div>
+                
+                <div class="shiputz24-benefit-card edit-hoverable">
+                    <div class="shiputz24-benefit-card__icon edit-hoverable">
+                        <span style="font-size: 2em;">🛑</span>
+                    </div>
+                    <h3 class="shiputz24-benefit-card__title edit-hoverable">טעות 2: להתחיל לפני אישור</h3>
+                    <p class="edit-hoverable">"הקבלן מוכן להתחיל מחר, אז התחלנו. חשבנו שההלוואה תאושר." ואז ההלוואה לא אושרה, או אושרה בסכום נמוך יותר. <strong>מה עושים?</strong> אישור תחילה, שיפוץ אחר כך. תמיד.</p>
+                </div>
+                
+                <div class="shiputz24-benefit-card edit-hoverable">
+                    <div class="shiputz24-benefit-card__icon edit-hoverable">
+                        <span style="font-size: 2em;">❌</span>
+                    </div>
+                    <h3 class="shiputz24-benefit-card__title edit-hoverable">טעות 3: לא לבדוק חלופות</h3>
+                    <p class="edit-hoverable">"הלכתי לבנק שלי, הם אמרו לי תנאים. חתמתי." ואז גילית שהיה גוף אחר שהיה נותן לך ריבית נמוכה יותר ב-1%. <strong>מה עושים?</strong> השווה לפחות 3 הצעות. זה יכול לחסוך לך אלפי שקלים.</p>
+                </div>
+                
+                <div class="shiputz24-benefit-card edit-hoverable">
+                    <div class="shiputz24-benefit-card__icon edit-hoverable">
+                        <span style="font-size: 2em;">🏠</span>
+                    </div>
+                    <h3 class="shiputz24-benefit-card__title edit-hoverable">טעות 4: להזניח הריהוט</h3>
+                    <p class="edit-hoverable">תיקנת את הבית, אבל שכחת תקציב למקרר חדש, תנור, ארונות למרפסת. ופתאום צריך עוד 30,000 ₪ שאין לך. <strong>מה עושים?</strong> כשמחשבים תקציב - כולל הכל. שיפוץ + ריהוט + מוצרי חשמל + "הפתעות".</p>
+                </div>
+            </div>
+            
+            <!-- Glass Ceiling Box -->
+            <div style="background: #fff4e6; padding: 25px 30px; margin: 30px 0; border-radius: 12px; border-right: 4px solid #FF9800;" class="edit-hoverable">
+                <h3 style="color: #FF9800; margin-top: 0;"><strong>💡 תקרת זכוכית - זה לא באשמתך</strong></h3>
+                <p style="margin-bottom: 0;">תראה, זה לא באשמתך שלא ידעת לתכנן נכון. <strong>אף אחד לא מלמד איך לקחת מימון לשיפוצים.</strong> הקבלנים לא מדברים על כרית הביטחון. הבנקים לא מסבירים את כל האפשרויות. הם מניחים שאתה יודע. אבל עכשיו אתה יודע. ויש לך אפשרות לעשות את זה נכון מההתחלה. וזה בדיוק מה שאנחנו פה בשבילו - לעזור לך לעשות את זה חכם.</p>
+            </div>
         </div>
     </div>
 
     <!-- Calculator Section -->
-    <div class="shiputz24-section">
-        <div class="shiputz24-container">
-            <h2 class="shiputz24-section__title">רוצה לדעת מה ההחזר החודשי הצפוי לך? בדוק אצלנו במחשבון הלוואה לשיפוץ</h2>
-            <p>אם החלטת לשפץ את הבית או הדירה ועליך לקחת הלוואה לשיפוץ הנכס כדאי לבדוק את ההחזר החודשי בעזרת מחשבון הלוואה לשיפוץ כאן באתר. עליך לציין את סכום ההלוואה ותקופת ההחזר המתאימה לך, ובקליק מהיר המחשבון יציג בפניך את גובה ההחזר החודשי הצפוי.</p>
+    <div id="calculator-section" class="shiputz24-section edit-hoverable" style="opacity: 1; transform: translateY(0px); transition: 0.8s ease-out;">
+        <div class="shiputz24-container edit-hoverable">
+            <h2 class="shiputz24-section__title edit-hoverable">רוצה לדעת מה ההחזר החודשי הצפוי לך? בדוק אצלנו במחשבון הלוואה לשיפוץ</h2>
+            <p class="edit-hoverable">אם החלטת לשפץ את הבית או הדירה ועליך לקחת הלוואה לשיפוץ הנכס כדאי לבדוק את ההחזר החודשי בעזרת מחשבון הלוואה לשיפוץ כאן באתר. עליך לציין את סכום ההלוואה ותקופת ההחזר המתאימה לך, ובקליק מהיר המחשבון יציג בפניך את גובה ההחזר החודשי הצפוי.</p>
             
-            <p>המומחים המנוסים שלנו ברק תבקש הלוואות ממליצים עוד בטרם השימוש במחשבון לבקש מספר הצעות מחיר מקבלני שיפוצים שונים. הצעות המחיר מאפשרות לך לבצע הערכה של עלות השיפוץ בדירה, אך במחשבון כדאי להוסיף לפחות 10% מעל הצעת הקבלן, מאחר שברוב המקרים חורגים מהסכום הראשוני.</p>
+            <p class="edit-hoverable">המומחים המנוסים שלנו ברק תבקש הלוואות ממליצים עוד בטרם השימוש במחשבון לבקש מספר הצעות מחיר מקבלני שיפוצים שונים. הצעות המחיר מאפשרות לך לבצע הערכה של עלות השיפוץ בדירה, אך במחשבון כדאי להוסיף לפחות 10% מעל הצעת הקבלן, מאחר שברוב המקרים חורגים מהסכום הראשוני.</p>
             
-            <p>מחשבון הלוואה לשיפוץ הוא כלי עזר שנועד לסייע לך ולאחרים, המחשבון מציג את גובה ההחזרים החודשיים הצפויים לאורך תקופת ההלוואה, וההחזר החודשי מסייע לך לתכנן טוב יותר את ההלוואה הדרושה עבורך לשיפוץ הנכס.</p>
+            <p class="edit-hoverable">מחשבון הלוואה לשיפוץ הוא כלי עזר שנועד לסייע לך ולאחרים, המחשבון מציג את גובה ההחזרים החודשיים הצפויים לאורך תקופת ההלוואה, וההחזר החודשי מסייע לך לתכנן טוב יותר את ההלוואה הדרושה עבורך לשיפוץ הנכס.</p>
+            
+            <!-- AWG Widget Integration -->
+            <div style="text-align: center; margin: 40px 0;" id="leadform">
+                [awg postid="32400"]
+            </div>
+            
+            <!-- Disclaimer -->
+            <div class="disclaimer-box" style="background: #ffffff; padding: 18px 24px; margin: 24px 0; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.06); border: 1px solid #e8e8e8;">
+                <p style="margin: 0; color: #555; font-size: 14px; line-height: 1.7;">
+                    <strong style="color: #333;">חשוב לדעת:</strong> רק תבקש הוא פורטל אגריגטור - אנחנו מחברים אותך למגוון גופים מלווים (בנקים וחברות מימון מורשות). התנאים, הריבית ותקופת ההחזר נקבעים ע"י הגוף המלווה עצמו לפי הפרופיל האישי שלך. העלויות המוזכרות במחשבון הן הערכה כללית - העלות הסופית תלויה בהיקף השיפוץ בפועל.
+                </p>
+            </div>
         </div>
     </div>
 
     <!-- FAQ Section -->
-    <div class="shiputz24-section">
-        <div class="shiputz24-container">
-            <h2 class="shiputz24-section__title">המומחים שלנו עונים על השאלות שלכם בנוגע להלוואה לשיפוץ</h2>
+    <div class="shiputz24-section edit-hoverable" style="opacity: 1; transform: translateY(0px); transition: 0.8s ease-out;">
+        <div class="shiputz24-container edit-hoverable">
+            <h2 class="shiputz24-section__title edit-hoverable">המומחים שלנו עונים על השאלות שלכם בנוגע למימון שיפוצים</h2>
             
-            [wp-faq-schema accordion=1]
-            <div class="entry-content">
+            <!-- FAQ Accordion -->
+            <div class="wpc-accordion-demo-container">
+                <div class="wpc-accordion-demo-item">
+                    <div class="wpc-accordion-demo-header" onclick="toggleAccordion(this)">
+                        קיבלתי הצעת מחיר מקבלן - האם הבנק יאשר את הסכום?
+                    </div>
+                    <div class="wpc-accordion-demo-content">
+                        <p>לא בהכרח. הבנק שולח שמאי לבדוק אם המחיר הגיוני. מניסיוננו, לפעמים השמאי אומר שההצעה מנופחת ב-20%. הבנק אז מאשר רק את מה שהשמאי אמר.</p>
+                        <p>למה זה טוב? כי זה מגן עליך מקבלנים שמנסים להרוויח יותר מדי. אבל זה גם אומר שכדאי לקבל כמה הצעות מחיר ולבחור סבירה.</p>
+                        <p><em>תראה, זה לא באשמתך אם לא ידעת את זה. הקבלנים לא מספרים לך שהבנק עוד יבדוק. אבל עכשיו אתה יודע - וזה נותן לך יותר כוח במשא ומתן.</em></p>
+                    </div>
+                </div>
+                
+                <div class="wpc-accordion-demo-item">
+                    <div class="wpc-accordion-demo-header" onclick="toggleAccordion(this)">
+                        אפשר לקחת מימון לשיפוץ דירה ללא בטחונות?
+                    </div>
+                    <div class="wpc-accordion-demo-content">
+                        <p>תלוי בסכום. לשיפוצים קטנים - כן. לשיפוצים גדולים - קשה. יש גופים שנותנים הלוואות לשיפוצים קטנים (עד 100,000 ₪) ללא בטחונות, בתנאי שיש לך הכנסה קבועה ואשראי תקין. מעל 100,000 ₪, רוב הגופים ידרשו שעבוד הנכס או ערבויות.</p>
+                        <p>אם אתה לא רוצה לשעבד את הבית - יש אפשרות. הריבית תהיה גבוהה יותר, אבל זה אפשרי.</p>
+                        <p><em>אף אחד לא מדבר על זה, אבל יש אנשים שלא רוצים לשעבד את הבית גם אם הם יכולים. זה לגיטימי. יש דרכים אחרות.</em></p>
+                    </div>
+                </div>
+                
+                <div class="wpc-accordion-demo-item">
+                    <div class="wpc-accordion-demo-header" onclick="toggleAccordion(this)">
+                        כמה זמן לוקח לקבל אישור למימון שיפוצים?
+                    </div>
+                    <div class="wpc-accordion-demo-content">
+                        <p>בין שבוע לחודש, תלוי בסוג ההלוואה. הלוואה לכל מטרה - בדרך כלל שבוע-שבועיים. משכנתא לשיפוץ - יכול לקחת 3-4 שבועות כי צריך שמאי, בדיקות, אישורים.</p>
+                        <p>כדאי להתחיל את התהליך לפני שהקבלן מוכן להתחיל. ככה לא תאבד זמן.</p>
+                        <p><em>זה מתסכל, אנחנו יודעים. אתה רוצה להתחיל מחר והבנק אומר לך "עוד 3 שבועות". אבל ככה זה עובד. תכנן מראש.</em></p>
+                    </div>
+                </div>
+                
+                <div class="wpc-accordion-demo-item">
+                    <div class="wpc-accordion-demo-header" onclick="toggleAccordion(this)">
+                        מה ההבדל בין משכנתא לשיפוץ הבית להלוואה רגילה?
+                    </div>
+                    <div class="wpc-accordion-demo-content">
+                        <p>הריבית והתקופה. משכנתא לשיפוץ: ריבית נמוכה (בערך כמו <a href="https://loan-israel.co.il">משכנתא</a> רגילה), פריסה ארוכה (עד 30 שנה), צריך שעבוד נכס. הלוואה רגילה: ריבית גבוהה יותר, פריסה קצרה (1-7 שנים), בלי שעבוד.</p>
+                        <p>לשיפוצים גדולים - משכנתא חוסכת המון כסף. לשיפוצים קטנים - הלוואה רגילה יותר מהירה ופחות ביורוקרטיה.</p>
+                        <p><em>הבנקאים לא תמיד מסבירים לך שיש 2 אופציות. הם נותנים לך מה שנוח להם. אבל עכשיו אתה יודע - תבדוק את שני המסלולים.</em></p>
+                    </div>
+                </div>
+                
+                <!-- New FAQ Items -->
+                <div class="wpc-accordion-demo-item">
+                    <div class="wpc-accordion-demo-header" onclick="toggleAccordion(this)">
+                        האם אפשר לקבל הלוואה לשיפוץ גם עם היסטוריה אשראית לא מושלמת?
+                    </div>
+                    <div class="wpc-accordion-demo-content">
+                        <p>כן, אבל זה תלוי בחומרת המצב. אם יש לך פיגורים קלים מלפני שנה-שנתיים - יש סיכוי טוב. אם יש הלוואות בפיגור פעיל או תביעות משפטיות - זה הרבה יותר קשה.</p>
+                        <p>למה זה חשוב? כי גופי מימון שונים מתייחסים לזה אחרת. בנקים מסורתיים יותר נוקשים. גופים פרטיים יותר גמישים אבל בריבית גבוהה יותר.</p>
+                        <p><em>אל תוותר מבלי לנסות. ראינו מקרים שבהם לקוחות עם היסטוריה לא מושלמת קיבלו מימון טוב דרך הפורטל שלנו. המפתח הוא לדעת לאן לפנות.</em></p>
+                    </div>
+                </div>
+                
+                <div class="wpc-accordion-demo-item">
+                    <div class="wpc-accordion-demo-header" onclick="toggleAccordion(this)">
+                        האם כדאי לקחת הלוואה בדולר או בשקל לשיפוץ?
+                    </div>
+                    <div class="wpc-accordion-demo-content">
+                        <p>תשובה קצרה: בשקל. למה? כי ההוצאות שלך על השיפוץ הן בשקל. הקבלן לא לוקח דולרים.</p>
+                        <p>אם תיקח הלוואה בדולר והדולר יתחזק - תשלם יותר בשקלים כל חודש. זה סיכון מיותר. הריבית בדולר אולי נמוכה יותר, אבל חשיפה למטבע היא הימור.</p>
+                        <p><em>יש אנשים שחושבים שהם חכמים ולוקחים הלוואה בדולר כי "הריבית נמוכה". אבל בשיפוץ, בניגוד למשכנתא רגילה, אין לך נכס שמתחזק עם הדולר. תישאר עם הלוואה שעולה וחדר שכבר גמור.</em></p>
+                    </div>
+                </div>
+                
+                <div class="wpc-accordion-demo-item">
+                    <div class="wpc-accordion-demo-header" onclick="toggleAccordion(this)">
+                        איך מטפלים במצב שבו הקבלן נטש את השיפוץ באמצע והכסף נגמר?
+                    </div>
+                    <div class="wpc-accordion-demo-content">
+                        <p>זה הסיוט של כל אחד. ראשית, בדוק אם יש לך ביטוח אשראי או ביטוח משכנתא שמכסה את זה. לפעמים יש.</p>
+                        <p>שנית, תבדוק אם אפשר לקחת הלוואה נוספת קטנה (הלוואה גישור) כדי לסיים את העבודה. גופי מימון פרטיים יכולים לעזור במצבים כאלה.</p>
+                        <p><em>זה לא בושה להיתקע. זה קורה. המשפט המשפטי עם הקבלן יקח שנים. צריך לפתור עכשיו. פנה אלינו - עזרנו ללקוחות במצבים כאלה ויש פתרונות.</em></p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="entry-content edit-hoverable">
 
-            <strong>רוצים לקחת הלוואות לשיפוץ דירה בתנאים המשתלמים ביותר? <a href="#leadform">מלאו את סכום ההלוואה</a> והמומחים שלנו ברק תבקש יחזרו אליכם עם הצעה אטרקטיבית בהתאמה אישית מלאה ליכולת ההחזר שלכם!</strong>
+            <strong class="edit-hoverable">רוצים לקחת הלוואות לשיפוץ דירה בתנאים המשתלמים ביותר? <a href="#leadform" class="edit-hoverable">מלאו את סכום ההלוואה</a> והמומחים שלנו ברק תבקש יחזרו אליכם עם הצעה אטרקטיבית בהתאמה אישית מלאה ליכולת ההחזר שלכם!</strong>
 
             </div>
         </div>
     </div>
 
     <!-- Final CTA Section -->
-    <div class="shiputz24-final-cta">
-        <div class="shiputz24-container">
-            <h2 class="shiputz24-final-cta__title">רוצים לקחת הלוואות לשיפוץ דירה בתנאים המשתלמים ביותר?</h2>
-            <p class="shiputz24-final-cta__text"><a href="#leadform">מלאו את סכום ההלוואה</a> והמומחים שלנו ברק תבקש יחזרו אליכם עם הצעה אטרקטיבית בהתאמה אישית מלאה ליכולת ההחזר שלכם!</p>
-            <a href="#leadform" class="shiputz24-btn shiputz24-btn--primary">
-                <span>קבלו הצעה מותאמת אישית</span>
-                <span>→</span>
+    <div class="shiputz24-final-cta edit-hoverable">
+        <div class="shiputz24-container edit-hoverable">
+            <h2 class="shiputz24-final-cta__title edit-hoverable">רוצים לקחת הלוואות לשיפוץ דירה בתנאים המשתלמים ביותר?</h2>
+            <p class="shiputz24-final-cta__text edit-hoverable"><a href="#leadform" class="edit-hoverable">מלאו את סכום ההלוואה</a> והמומחים שלנו ברק תבקש יחזרו אליכם עם הצעה אטרקטיבית בהתאמה אישית מלאה ליכולת ההחזר שלכם!</p>
+            <a href="#leadform" class="shiputz24-btn shiputz24-btn--primary edit-hoverable">
+                <span class="edit-hoverable">קבלו הצעה מותאמת אישית</span>
+                <span class="edit-hoverable">→</span>
             </a>
         </div>
     </div>
+
+    <!-- FAQ Schema Markup -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "קיבלתי הצעת מחיר מקבלן - האם הבנק יאשר את הסכום?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "לא בהכרח. הבנק שולח שמאי לבדוק אם המחיר הגיוני. מניסיוננו, לפעמים השמאי אומר שההצעה מנופחת ב-20%. הבנק אז מאשר רק את מה שהשמאי אמר. למה זה טוב? כי זה מגן עליך מקבלנים שמנסים להרוויח יותר מדי. אבל זה גם אומר שכדאי לקבל כמה הצעות מחיר ולבחור סבירה."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "אפשר לקחת מימון לשיפוץ דירה ללא בטחונות?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "תלוי בסכום. לשיפוצים קטנים - כן. לשיפוצים גדולים - קשה. יש גופים שנותנים הלוואות לשיפוצים קטנים (עד 100,000 ₪) ללא בטחונות, בתנאי שיש לך הכנסה קבועה ואשראי תקין. מעל 100,000 ₪, רוב הגופים ידרשו שעבוד הנכס או ערבויות. אם אתה לא רוצה לשעבד את הבית - יש אפשרות. הריבית תהיה גבוהה יותר, אבל זה אפשרי."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "כמה זמן לוקח לקבל אישור למימון שיפוצים?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "בין שבוע לחודש, תלוי בסוג ההלוואה. הלוואה לכל מטרה - בדרך כלל שבוע-שבועיים. משכנתא לשיפוץ - יכול לקחת 3-4 שבועות כי צריך שמאי, בדיקות, אישורים. כדאי להתחיל את התהליך לפני שהקבלן מוכן להתחיל. ככה לא תאבד זמן."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "מה ההבדל בין משכנתא לשיפוץ הבית להלוואה רגילה?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "הריבית והתקופה. משכנתא לשיפוץ: ריבית נמוכה (בערך כמו משכנתא רגילה), פריסה ארוכה (עד 30 שנה), צריך שעבוד נכס. הלוואה רגילה: ריבית גבוהה יותר, פריסה קצרה (1-7 שנים), בלי שעבוד. לשיפוצים גדולים - משכנתא חוסכת המון כסף. לשיפוצים קטנים - הלוואה רגילה יותר מהירה ופחות ביורוקרטיה."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "האם אפשר לקבל הלוואה לשיפוץ גם עם היסטוריה אשראית לא מושלמת?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "כן, אבל זה תלוי בחומרת המצב. אם יש לך פיגורים קלים מלפני שנה-שנתיים - יש סיכוי טוב. אם יש הלוואות בפיגור פעיל או תביעות משפטיות - זה הרבה יותר קשה. למה זה חשוב? כי גופי מימון שונים מתייחסים לזה אחרת. בנקים מסורתיים יותר נוקשים. גופים פרטיים יותר גמישים אבל בריבית גבוהה יותר."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "האם כדאי לקחת הלוואה בדולר או בשקל לשיפוץ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "תשובה קצרה: בשקל. למה? כי ההוצאות שלך על השיפוץ הן בשקל. הקבלן לא לוקח דולרים. אם תיקח הלוואה בדולר והדולר יתחזק - תשלם יותר בשקלים כל חודש. זה סיכון מיותר. הריבית בדולר אולי נמוכה יותר, אבל חשיפה למטבע היא הימור."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "איך מטפלים במצב שבו הקבלן נטש את השיפוץ באמצע והכסף נגמר?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "זה הסיוט של כל אחד. ראשית, בדוק אם יש לך ביטוח אשראי או ביטוח משכנתא שמכסה את זה. לפעמים יש. שנית, תבדוק אם אפשר לקחת הלוואה נוספת קטנה (הלוואה גישור) כדי לסיים את העבודה. גופי מימון פרטיים יכולים לעזור במצבים כאלה."
+          }
+        }
+      ]
+    }
+    </script>
+
+    <!-- Organization Schema Markup -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "רק תבקש - פורטל הלוואות",
+      "url": "https://loan-israel.co.il",
+      "logo": "https://loan-israel.co.il/wp-content/uploads/2024/logo.png",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+972-53-428-8957",
+        "contactType": "Customer Service",
+        "areaServed": "IL",
+        "availableLanguage": "Hebrew"
+      },
+      "sameAs": [
+        "https://www.facebook.com/loanisrael",
+        "https://www.linkedin.com/company/loan-israel"
+      ]
+    }
+    </script>
 
 </div>
 
@@ -1712,4 +2223,78 @@ document.addEventListener('DOMContentLoaded', function() {
         jQuery(document).trigger('awg:widget:loaded');
     }, 1000);
 });
+
+// ========================================
+// FAQ Accordion Functionality (from visual.html)
+// ========================================
+function toggleAccordion(header) {
+    const item = header.parentElement;
+    const content = item.querySelector('.wpc-accordion-demo-content');
+    const isActive = header.classList.contains('active');
+    
+    // Close all other accordions with animation
+    document.querySelectorAll('.wpc-accordion-demo-header').forEach(h => {
+        if (h !== header) {
+            h.classList.remove('active');
+            const otherContent = h.parentElement.querySelector('.wpc-accordion-demo-content');
+            otherContent.style.maxHeight = '0px';
+            otherContent.classList.remove('active');
+            
+            // Update ARIA
+            h.setAttribute('aria-expanded', 'false');
+            otherContent.setAttribute('aria-hidden', 'true');
+        }
+    });
+    
+    // Toggle current accordion with smooth animation
+    if (!isActive) {
+        header.classList.add('active');
+        content.classList.add('active');
+        
+        // Smooth height animation
+        content.style.maxHeight = content.scrollHeight + 'px';
+        
+        // Update ARIA
+        header.setAttribute('aria-expanded', 'true');
+        content.setAttribute('aria-hidden', 'false');
+    } else {
+        header.classList.remove('active');
+        content.style.maxHeight = '0px';
+        content.classList.remove('active');
+        
+        // Update ARIA
+        header.setAttribute('aria-expanded', 'false');
+        content.setAttribute('aria-hidden', 'true');
+    }
+}
+
+// Initialize FAQ Accordion
+if (typeof jQuery !== 'undefined') {
+    jQuery(document).ready(function() {
+        // Add ARIA attributes and keyboard support
+        document.querySelectorAll('.wpc-accordion-demo-header').forEach(header => {
+            // Add ARIA attributes
+            header.setAttribute('role', 'button');
+            header.setAttribute('aria-expanded', 'false');
+            header.setAttribute('tabindex', '0');
+            
+            const content = header.parentElement.querySelector('.wpc-accordion-demo-content');
+            content.setAttribute('aria-hidden', 'true');
+            content.style.maxHeight = '0px';
+            
+            // Keyboard support
+            header.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    toggleAccordion(this);
+                }
+            });
+        });
+    });
+}
 </script>
+<!-- /wp:html -->
+
+<!-- wp:paragraph -->
+<p class="edit-hoverable"></p>
+<!-- /wp:paragraph -->
