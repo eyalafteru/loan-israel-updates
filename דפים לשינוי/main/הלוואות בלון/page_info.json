@@ -1,5 +1,5 @@
 {
-  "page_name": "הלוואות בלון באישור מיידי בריבית הנמוכה בשוק - ✔️ רק תבקש",
+  "page_name": "הלוואות בלון",
   "keyword": "הלוואות בלון",
   "url": "https://loan-israel.co.il/balloon-loans/",
   "post_id": "791",
@@ -308,5 +308,6 @@
       }
     ]
   },
-  "is_special": true
+  "is_special": true,
+  "wp_post_title": "הלוואות בלון"
 }

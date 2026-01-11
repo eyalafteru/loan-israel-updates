@@ -1,6 +1,23 @@
+
+
 <!-- wp:html -->
+<p> </p>
+<!-- 📍 אזור 0: Viewport Fix Script - חובה מוחלטת -->
+<p><script>
 
+    // בדיקה והוספת viewport meta tag אם חסר
 
+    if (!document.querySelector('meta[name="viewport"]')) {
+
+      const viewport = document.createElement('meta');
+
+      viewport.name = 'viewport';
+
+      viewport.content = 'width=device-width, initial-scale=1.0, user-scalable=yes';
+
+      document.head.appendChild(viewport);
+
+    }
 
 <!-- התחלת התוכן שלנו עם wrapper מוגן -->
 <div class="wpc-instant-loans-k7m2-wrapper"><style>
