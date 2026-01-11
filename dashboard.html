@@ -549,6 +549,17 @@
             border-color: var(--accent);
         }
         
+        .btn-delete {
+            background: #dc2626 !important;
+            border-color: #dc2626 !important;
+            color: white !important;
+        }
+        
+        .btn-delete:hover {
+            background: #b91c1c !important;
+            border-color: #b91c1c !important;
+        }
+        
         .btn-mini.btn-reset {
             color: var(--warning);
         }
@@ -3897,6 +3908,44 @@
             border-color: var(--primary);
         }
         
+        /* Custom date range filter */
+        #customDateRange {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            padding: 0.4rem;
+            background: var(--bg-tertiary);
+            border-bottom: 1px solid var(--border);
+            flex-wrap: wrap;
+        }
+        
+        #customDateRange label {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+        
+        #customDateRange input[type="date"] {
+            background: var(--bg-secondary);
+            color: var(--text);
+            border: 1px solid var(--border);
+            padding: 0.3rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            cursor: pointer;
+        }
+        
+        #customDateRange input[type="date"]:hover {
+            border-color: var(--primary);
+        }
+        
+        #customDateRange input[type="date"]::-webkit-calendar-picker-indicator {
+            filter: invert(0.8);
+            cursor: pointer;
+        }
+        
         /* Agent filter */
         .agent-filter-bar {
             display: flex;
@@ -5778,6 +5827,7 @@
         <h1>🚀 מערכת ניהול אתרים - After You</h1>
         <div class="header-controls">
             <div class="tabs">
+                <button class="tab" data-tab="archive">📦 ארכיון</button>
                 <button class="tab" data-tab="duplicates">📋 כפילויות</button>
                 <button class="tab" data-tab="agents">🤖 סוכנים</button>
                 <button class="tab active" data-tab="edit">📁 עמודים</button>
@@ -5839,6 +5889,18 @@
                     <option value="special">⭐ מיוחדים</option>
                     <option value="regular">📄 רגילים</option>
                 </select>
+                <select id="uploadDateFilter" onchange="renderPageList()">
+                    <option value="all">📅 כל התאריכים</option>
+                    <option value="not_uploaded">❌ לא עלו לוורדפרס</option>
+                    <option value="today">🕐 היום</option>
+                    <option value="this_week">📆 השבוע</option>
+                    <option value="this_month">📊 החודש</option>
+                    <option value="custom">🗓️ טווח מותאם אישית</option>
+                </select>
+            </div>
+            <div id="customDateRange" style="display: none; margin-top: 0.5rem;">
+                <label>מתאריך: <input type="date" id="uploadDateFrom" onchange="renderPageList()"></label>
+                <label>עד תאריך: <input type="date" id="uploadDateTo" onchange="renderPageList()"></label>
             </div>
             <div class="batch-selection-bar" id="batchSelectionBar" style="display:none;">
                 <span class="batch-count" id="batchCount">0 עמודים נבחרו</span>
@@ -6876,9 +6938,16 @@
                 </div>
             </div>
             <div class="modal-footer" style="flex-direction: column; gap: 15px;">
+                <!-- Save locally row (NEW!) -->
+                <div style="display: flex; flex-wrap: wrap; gap: 10px; width: 100%; justify-content: flex-end; background: rgba(59, 130, 246, 0.1); padding: 10px; border-radius: 8px;">
+                    <span style="color: #3b82f6; font-weight: bold; margin-left: auto;">💾 שמור לוקלית (ללא העלאה):</span>
+                    <button class="btn btn-primary" onclick="saveMetaLocally()" id="saveMetaLocallyBtn" title="שמור Title ו-Description לקובץ page_info.json">
+                        💾 שמור מטא-תגיות
+                    </button>
+                </div>
                 <!-- Upload new content row -->
                 <div style="display: flex; flex-wrap: wrap; gap: 10px; width: 100%; justify-content: flex-end;">
-                    <span style="color: #4ade80; font-weight: bold; margin-left: auto;">📤 העלה חדש:</span>
+                    <span style="color: #4ade80; font-weight: bold; margin-left: auto;">📤 העלה ל-WordPress:</span>
                     <button class="btn btn-info" onclick="uploadToWP('title')" id="uploadTitleBtn" disabled title="עדכן רק את ה-Title">
                         📝 Title
                     </button>
@@ -8700,9 +8769,22 @@ console.log('🚀 KeywordDensityAnalyzer, SpamAnalyzer, HeaderQualityScorer & In
             // Store pagePath on container for later use
             container.dataset.pagePath = pagePath || '';
             
+            // If no clusters but we have keywords, create simple clusters from keywords
+            let displayClusters = clusters;
+            if (clusters.length === 0 && keywords.length > 0) {
+                console.log('[displayPageKeywords] No clusters found, creating from keywords list');
+                displayClusters = keywords.map(kw => ({
+                    primary: kw,
+                    source: 'autocomplete',  // Default source
+                    type: 'unique',
+                    unique_part: '',
+                    variants: []
+                }));
+            }
+            
             // Count by source
-            const autocompleteCount = clusters.filter(c => c.source === 'autocomplete').length;
-            const relatedCount = clusters.filter(c => c.source === 'related').length;
+            const autocompleteCount = displayClusters.filter(c => c.source === 'autocomplete').length;
+            const relatedCount = displayClusters.filter(c => c.source === 'related').length;
             
             // Rank is now shown in page title, not in keywords panel
             
@@ -8728,7 +8810,7 @@ console.log('🚀 KeywordDensityAnalyzer, SpamAnalyzer, HeaderQualityScorer & In
                 <div class="keywords-list">
             `;
             
-            clusters.forEach((cluster, idx) => {
+            displayClusters.forEach((cluster, idx) => {
                 const isCluster = cluster.variants && cluster.variants.length > 0;
                 const escapedPrimary = cluster.primary.replace(/'/g, "\\'").replace(/"/g, '&quot;');
                 const sourceClass = cluster.source === 'related' ? 'from-related' : 'from-autocomplete';
@@ -9728,6 +9810,7 @@ console.log('🚀 KeywordDensityAnalyzer, SpamAnalyzer, HeaderQualityScorer & In
             const sortFilter = document.getElementById('sortFilter')?.value || 'name';
             const agentCompletionFilter = document.getElementById('agentCompletionFilter')?.value || 'all';
             const specialFilter = document.getElementById('specialFilter')?.value || 'all';
+            const uploadDateFilter = document.getElementById('uploadDateFilter')?.value || 'all';
             
             // Filter out backup files and apply site filter
             const filteredPages = pages.filter(page => {
@@ -9764,6 +9847,49 @@ console.log('🚀 KeywordDensityAnalyzer, SpamAnalyzer, HeaderQualityScorer & In
                         
                         if (status === 'done' && !isCompleted) return false;
                         if (status === 'not' && isCompleted) return false;
+                    }
+                }
+                
+                // Apply upload date filter
+                if (uploadDateFilter !== 'all') {
+                    const pageInfo = pageInfoCache[page.path];
+                    const lastUpload = pageInfo?.last_upload || page.last_upload;
+                    
+                    if (uploadDateFilter === 'not_uploaded') {
+                        // Show only pages that have NOT been uploaded
+                        if (lastUpload) return false;
+                    } else {
+                        // For all other filters, skip pages without upload date
+                        if (!lastUpload) return false;
+                        
+                        const uploadDate = new Date(lastUpload);
+                        const now = new Date();
+                        
+                        if (uploadDateFilter === 'today') {
+                            const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+                            if (uploadDate < today) return false;
+                        } else if (uploadDateFilter === 'this_week') {
+                            const weekAgo = new Date(now);
+                            weekAgo.setDate(now.getDate() - 7);
+                            if (uploadDate < weekAgo) return false;
+                        } else if (uploadDateFilter === 'this_month') {
+                            const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
+                            if (uploadDate < monthStart) return false;
+                        } else if (uploadDateFilter === 'custom') {
+                            const fromDate = document.getElementById('uploadDateFrom')?.value;
+                            const toDate = document.getElementById('uploadDateTo')?.value;
+                            
+                            if (fromDate) {
+                                const from = new Date(fromDate);
+                                from.setHours(0, 0, 0, 0);
+                                if (uploadDate < from) return false;
+                            }
+                            if (toDate) {
+                                const to = new Date(toDate);
+                                to.setHours(23, 59, 59, 999);
+                                if (uploadDate > to) return false;
+                            }
+                        }
                     }
                 }
                 
@@ -9952,6 +10078,7 @@ console.log('🚀 KeywordDensityAnalyzer, SpamAnalyzer, HeaderQualityScorer & In
                         <button class="btn-mini ${keywordsBtnClass}" onclick="event.stopPropagation(); togglePageKeywords('${page.path.replace(/'/g, "\\'").replace(/\\/g, "\\\\")}')" title="${keywordsBtnTitle}">${keywordsBtnIcon}</button>
                         <button class="btn-mini btn-seo" onclick="event.stopPropagation(); openSeoReportDirect(${originalIndex})" title="דוח SEO (מושך גיבוי אוטומטי)">📊</button>
                         <button class="btn-mini btn-reset" data-reset-path="${page.path.replace(/"/g, '&quot;')}" onclick="event.stopPropagation(); resetPage(this.dataset.resetPath)" title="איפוס עמוד - מחיקת דוחות סוכנים ושחזור מגיבוי">🔄</button>
+                        <button class="btn-mini btn-delete" onclick="event.stopPropagation(); confirmDeletePage('${page.path.replace(/\\/g, '/').replace(/'/g, "\\'")}')" title="מחיקת עמוד מהמערכת ומ-WordPress">🗑️</button>
                     </div>
                     <div class="page-keywords-panel" id="keywords-${originalIndex}" style="display: none;">
                         <div class="keywords-loading" style="display: none;">⏳ סורק...</div>
@@ -12702,6 +12829,52 @@ ${content}
             } catch (error) {
                 console.error('Error saving page info:', error);
                 showToast('שגיאה בשמירה', 'error');
+            }
+        }
+
+        // Save Title & Description locally to page_info.json
+        async function saveMetaLocally() {
+            if (!selectedPage || !selectedPage.path) {
+                showToast('שגיאה: לא נבחר עמוד', 'error');
+                return;
+            }
+
+            const title = document.getElementById('uploadTitle').value.trim();
+            const description = document.getElementById('uploadDescription').value.trim();
+            
+            if (!title && !description) {
+                showToast('אין שינויים לשמור', 'warning');
+                return;
+            }
+
+            try {
+                showToast('שומר מטא-תגיות...', 'info');
+                
+                const pageFolder = getPageFolder(selectedPage.path);
+                const response = await fetch('/api/page/update-meta-tags', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        page_folder: pageFolder,
+                        title: title,
+                        description: description
+                    })
+                });
+                
+                const result = await response.json();
+                if (result.success) {
+                    // Update local state
+                    if (uploadState.pageInfo) {
+                        uploadState.pageInfo.title = title;
+                        uploadState.pageInfo.description = description;
+                    }
+                    showToast('✅ מטא-תגיות נשמרו בהצלחה ל-page_info.json', 'success');
+                } else {
+                    showToast('שגיאה בשמירה: ' + (result.error || 'לא ידוע'), 'error');
+                }
+            } catch (error) {
+                console.error('Error saving meta tags:', error);
+                showToast('שגיאה בשמירת מטא-תגיות: ' + error.message, 'error');
             }
         }
 
@@ -21123,6 +21296,19 @@ ${additionalInstructions}
             await populateSiteFilter();
             await populateWpSiteSelect();
             
+            // Setup upload date filter toggle
+            const uploadDateFilter = document.getElementById('uploadDateFilter');
+            if (uploadDateFilter) {
+                uploadDateFilter.addEventListener('change', function() {
+                    const customDateRange = document.getElementById('customDateRange');
+                    if (this.value === 'custom') {
+                        customDateRange.style.display = 'flex';
+                    } else {
+                        customDateRange.style.display = 'none';
+                    }
+                });
+            }
+            
             // Load pages and agents
             loadPages();
             loadAgents();
@@ -24177,6 +24363,367 @@ ${s.text}
                         pageItem.click();
                     }
                 }, 300);
+            }
+        }
+    </script>
+    
+    <!-- Delete Page Modal -->
+    <div id="deletePageModal" class="modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); z-index:10000; align-items:center; justify-content:center;">
+        <div class="modal-content" style="background:var(--bg-secondary); padding:2rem; border-radius:12px; max-width:500px; width:90%; border:1px solid var(--border); max-height:90vh; overflow-y:auto;">
+            <h2 style="margin-bottom:1rem; color:var(--text-primary);">🗑️ מחיקת עמוד</h2>
+            <p style="margin-bottom:1.5rem; color:var(--text-secondary);">
+                האם אתה בטוח שברצונך למחוק את העמוד <strong id="deletePageName" style="color:var(--accent);"></strong>?
+            </p>
+            <p style="margin-bottom:1.5rem; font-size:0.85rem; color:var(--text-secondary);">
+                ⚠️ העמוד יימחק מ-WordPress והקבצים יועברו לארכיון
+            </p>
+            
+            <div class="delete-options" style="margin-bottom:1.5rem; display:flex; flex-direction:column; gap:0.75rem;">
+                <label style="display:flex; align-items:center; gap:0.5rem; cursor:pointer; padding:0.5rem; border-radius:6px; border:1px solid var(--border); background:var(--bg-tertiary);">
+                    <input type="radio" name="redirectType" value="301" checked style="cursor:pointer;">
+                    <span style="color:var(--text-primary);">301 Redirect - הפניה קבועה (מומלץ לשמירת SEO)</span>
+                </label>
+                <label style="display:flex; align-items:center; gap:0.5rem; cursor:pointer; padding:0.5rem; border-radius:6px; border:1px solid var(--border); background:var(--bg-tertiary);">
+                    <input type="radio" name="redirectType" value="410" style="cursor:pointer;">
+                    <span style="color:var(--text-primary);">410 Gone - העמוד לא קיים יותר</span>
+                </label>
+                <label style="display:flex; align-items:center; gap:0.5rem; cursor:pointer; padding:0.5rem; border-radius:6px; border:1px solid var(--border); background:var(--bg-tertiary);">
+                    <input type="radio" name="redirectType" value="none" style="cursor:pointer;">
+                    <span style="color:var(--text-primary);">ללא הפניה (404 Not Found)</span>
+                </label>
+            </div>
+            
+            <div id="redirectTargetDiv" style="margin-bottom:1.5rem;">
+                <label style="display:block; margin-bottom:0.5rem; color:var(--text-primary);">הפנה ל:</label>
+                
+                <!-- בחירת עמוד מהרשימה -->
+                <div style="margin-bottom:0.75rem;">
+                    <select id="redirectPageSelect" onchange="selectPageForRedirect()" style="width:100%; padding:0.5rem; border-radius:6px; border:1px solid var(--border); background:var(--bg-tertiary); color:var(--text-primary);">
+                        <option value="">📄 בחר עמוד מהאתר...</option>
+                        <!-- Populated dynamically -->
+                    </select>
+                    <div style="font-size:0.75rem; color:var(--text-secondary); margin-top:0.25rem;">
+                        💡 בחר עמוד קיים או הזן כתובת ידנית למטה
+                    </div>
+                </div>
+                
+                <!-- או הזנה ידנית -->
+                <div style="display:flex; gap:0.5rem;">
+                    <input type="text" id="redirectTarget" placeholder="https://loan-israel.co.il/" style="flex:1; padding:0.5rem; border-radius:6px; border:1px solid var(--border); background:var(--bg-tertiary); color:var(--text-primary);" />
+                    <button onclick="suggestRedirectTarget()" class="btn btn-secondary" style="white-space:nowrap;">📍 דף הבית</button>
+                </div>
+            </div>
+            
+            <div class="modal-actions" style="display:flex; gap:0.75rem; justify-content:flex-end;">
+                <button class="btn btn-danger" onclick="executeDelete()">🗑️ מחק עמוד</button>
+                <button class="btn btn-secondary" onclick="closeDeleteModal()">ביטול</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Delete Page Functionality
+        let pageToDelete = null;
+        
+        // Show/hide redirect target based on redirect type
+        document.addEventListener('change', function(e) {
+            if (e.target && e.target.name === 'redirectType') {
+                const redirectTargetDiv = document.getElementById('redirectTargetDiv');
+                const redirectType = e.target.value;
+                redirectTargetDiv.style.display = (redirectType === '301' || redirectType === '302') ? 'block' : 'none';
+            }
+        });
+        
+        function confirmDeletePage(pagePath) {
+            pageToDelete = pagePath;
+            const page = pages.find(p => p.path === pagePath || p.path.replace(/\\/g, '/') === pagePath);
+            
+            if (!page) {
+                showToast('לא נמצא עמוד', 'error');
+                return;
+            }
+            
+            document.getElementById('deletePageName').textContent = page.name;
+            const modal = document.getElementById('deletePageModal');
+            modal.style.display = 'flex';
+            
+            // Populate pages dropdown for redirect
+            populateRedirectPagesDropdown(page.site || 'main', pagePath);
+            
+            // Set default redirect to homepage
+            const site = page.site || 'main';
+            const siteConfig = config?.wordpress?.sites?.[site];
+            const siteUrl = siteConfig ? siteConfig.site_url : 'https://loan-israel.co.il';
+            document.getElementById('redirectTarget').value = siteUrl;
+            
+            // Reset to 301 default
+            document.querySelector('input[name="redirectType"][value="301"]').checked = true;
+            document.getElementById('redirectTargetDiv').style.display = 'block';
+        }
+        
+        function populateRedirectPagesDropdown(site, currentPagePath) {
+            const select = document.getElementById('redirectPageSelect');
+            select.innerHTML = '<option value="">📄 בחר עמוד מהאתר...</option>';
+            
+            // Filter pages from the same site, excluding the current page
+            const sameSitePages = pages.filter(p => {
+                const pageSite = p.site || 'main';
+                const normalizedPath = p.path.replace(/\\/g, '/');
+                const normalizedCurrentPath = currentPagePath.replace(/\\/g, '/');
+                
+                return pageSite === site && 
+                       normalizedPath !== normalizedCurrentPath &&
+                       !p.name.toLowerCase().includes('_backup') &&
+                       !p.path.toLowerCase().includes('_backup');
+            });
+            
+            // Sort alphabetically
+            sameSitePages.sort((a, b) => a.name.localeCompare(b.name, 'he'));
+            
+            // Add pages to dropdown
+            sameSitePages.forEach(p => {
+                const pageInfo = pageInfoCache[p.path];
+                const url = pageInfo?.url || '';
+                
+                if (url) {
+                    const option = document.createElement('option');
+                    option.value = url;
+                    option.textContent = `${p.name.replace('.html', '')}`;
+                    select.appendChild(option);
+                }
+            });
+            
+            // Add count to placeholder
+            if (sameSitePages.length > 0) {
+                select.options[0].textContent = `📄 בחר עמוד מהאתר (${sameSitePages.length} עמודים)`;
+            } else {
+                select.options[0].textContent = '📄 אין עמודים זמינים באתר זה';
+            }
+        }
+        
+        function selectPageForRedirect() {
+            const select = document.getElementById('redirectPageSelect');
+            const selectedUrl = select.value;
+            
+            if (selectedUrl) {
+                document.getElementById('redirectTarget').value = selectedUrl;
+            }
+        }
+        
+        function closeDeleteModal() {
+            document.getElementById('deletePageModal').style.display = 'none';
+            pageToDelete = null;
+        }
+        
+        async function executeDelete() {
+            if (!pageToDelete) return;
+            
+            const redirectType = document.querySelector('input[name="redirectType"]:checked').value;
+            const redirectTarget = document.getElementById('redirectTarget').value;
+            
+            const page = pages.find(p => p.path === pageToDelete || p.path.replace(/\\/g, '/') === pageToDelete);
+            
+            if (!page) {
+                showToast('לא נמצא עמוד', 'error');
+                return;
+            }
+            
+            const pageInfo = pageInfoCache[page.path];
+            
+            if (!pageInfo || !pageInfo.wordpress_id) {
+                showToast('❌ לא נמצא מזהה WordPress לעמוד. וודא שהעמוד פורסם ב-WordPress.', 'error');
+                return;
+            }
+            
+            // Validate redirect target if needed
+            if ((redirectType === '301' || redirectType === '302') && !redirectTarget) {
+                showToast('❌ יש להזין כתובת יעד להפניה', 'error');
+                return;
+            }
+            
+            showToast('🗑️ מוחק עמוד...', 'info');
+            
+            try {
+                const result = await apiCall('/api/wordpress/delete-page', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        post_id: pageInfo.wordpress_id,
+                        url: pageInfo.url,
+                        page_path: page.path,
+                        redirect_type: redirectType,
+                        redirect_target: redirectType === '301' || redirectType === '302' ? redirectTarget : null
+                    })
+                });
+                
+                if (result.success) {
+                    showToast('✅ העמוד נמחק בהצלחה! הקבצים נשמרו בארכיון.', 'success');
+                    closeDeleteModal();
+                    
+                    // Reload pages list
+                    await loadPages();
+                } else {
+                    showToast('❌ שגיאה במחיקה: ' + (result.error || 'שגיאה לא ידועה'), 'error');
+                }
+            } catch (error) {
+                showToast('❌ שגיאה במחיקה: ' + error.message, 'error');
+            }
+        }
+        
+        // Auto-suggest redirect target (homepage by default)
+        function suggestRedirectTarget() {
+            if (!pageToDelete) return;
+            
+            const page = pages.find(p => p.path === pageToDelete || p.path.replace(/\\/g, '/') === pageToDelete);
+            if (!page) return;
+            
+            const site = page.site || 'main';
+            const siteConfig = config?.wordpress?.sites?.[site];
+            const siteUrl = siteConfig ? siteConfig.site_url : 'https://loan-israel.co.il';
+            document.getElementById('redirectTarget').value = siteUrl;
+        }
+        
+        // Close modal on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && document.getElementById('deletePageModal').style.display === 'flex') {
+                closeDeleteModal();
+            }
+        });
+        
+        // Close modal on background click
+        document.getElementById('deletePageModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeDeleteModal();
+            }
+        });
+        
+        // ============ Archive Tab Functionality ============
+        
+        // Handle archive tab click
+        document.querySelector('.tab[data-tab="archive"]').addEventListener('click', function() {
+            showArchiveModal();
+        });
+        
+        async function showArchiveModal() {
+            showToast('📦 טוען ארכיון...', 'info');
+            
+            const result = await apiCall('/api/pages/archived');
+            
+            if (!result.success) {
+                showToast('❌ שגיאה בטעינת ארכיון: ' + result.error, 'error');
+                return;
+            }
+            
+            const archivedPages = result.pages || [];
+            
+            // Create modal HTML
+            let modalHtml = `
+                <div id="archiveModal" class="modal" style="display:flex; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); z-index:10000; align-items:center; justify-content:center;">
+                    <div class="modal-content" style="background:var(--bg-secondary); padding:2rem; border-radius:12px; max-width:800px; width:90%; max-height:80vh; overflow-y:auto; border:1px solid var(--border);">
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;">
+                            <h2 style="margin:0; color:var(--text-primary);">📦 עמודים בארכיון</h2>
+                            <button onclick="closeArchiveModal()" class="btn btn-secondary">✕</button>
+                        </div>
+                        
+                        ${archivedPages.length === 0 ? '<p style="text-align:center; color:var(--text-secondary);">אין עמודים בארכיון</p>' : ''}
+                        
+                        <div style="display:flex; flex-direction:column; gap:1rem;">
+            `;
+            
+            archivedPages.forEach(page => {
+                const archivedDate = page.archived_at ? new Date(page.archived_at).toLocaleString('he-IL') : 'לא ידוע';
+                const metadata = page.metadata || {};
+                const redirectInfo = metadata.redirect_type ? `(Redirect: ${metadata.redirect_type})` : '';
+                
+                modalHtml += `
+                    <div style="background:var(--bg-tertiary); padding:1rem; border-radius:8px; border:1px solid var(--border);">
+                        <div style="display:flex; justify-content:space-between; align-items:start; margin-bottom:0.5rem;">
+                            <div style="flex:1;">
+                                <div style="font-weight:bold; color:var(--text-primary); margin-bottom:0.25rem;">
+                                    ${page.html_file || page.folder_name}
+                                </div>
+                                <div style="font-size:0.85rem; color:var(--text-secondary);">
+                                    📅 נמחק: ${archivedDate}
+                                </div>
+                                <div style="font-size:0.85rem; color:var(--text-secondary);">
+                                    📁 ${page.folder_name}
+                                </div>
+                                ${metadata.url ? `<div style="font-size:0.75rem; color:var(--info); margin-top:0.25rem;">🔗 ${metadata.url} ${redirectInfo}</div>` : ''}
+                            </div>
+                            <div style="display:flex; gap:0.5rem;">
+                                <button onclick="restorePage('${page.folder_path.replace(/\\/g, '\\\\').replace(/'/g, "\\'")}', '${page.html_file || ''}')" class="btn btn-success btn-small">
+                                    ♻️ שחזר
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            modalHtml += `
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Add modal to page
+            const existingModal = document.getElementById('archiveModal');
+            if (existingModal) {
+                existingModal.remove();
+            }
+            
+            document.body.insertAdjacentHTML('beforeend', modalHtml);
+            
+            // Close on escape
+            document.addEventListener('keydown', function escHandler(e) {
+                if (e.key === 'Escape') {
+                    closeArchiveModal();
+                    document.removeEventListener('keydown', escHandler);
+                }
+            });
+            
+            // Close on background click
+            document.getElementById('archiveModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeArchiveModal();
+                }
+            });
+        }
+        
+        function closeArchiveModal() {
+            const modal = document.getElementById('archiveModal');
+            if (modal) {
+                modal.remove();
+            }
+        }
+        
+        async function restorePage(archivePath, htmlFile) {
+            if (!confirm(`האם אתה בטוח שברצונך לשחזר עמוד זה?\n\nהקבצים יוחזרו לתיקיית העמודים, וה-redirect יימחק (אם קיים).`)) {
+                return;
+            }
+            
+            showToast('♻️ משחזר עמוד...', 'info');
+            
+            try {
+                const result = await apiCall('/api/page/restore', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        archive_path: archivePath,
+                        restore_to_wordpress: false,
+                        delete_redirect: true
+                    })
+                });
+                
+                if (result.success) {
+                    showToast('✅ העמוד שוחזר בהצלחה! ' + result.message, 'success');
+                    closeArchiveModal();
+                    
+                    // Reload pages list
+                    await loadPages();
+                } else {
+                    showToast('❌ שגיאה בשחזור: ' + (result.error || 'שגיאה לא ידועה'), 'error');
+                }
+            } catch (error) {
+                showToast('❌ שגיאה בשחזור: ' + error.message, 'error');
             }
         }
     </script>

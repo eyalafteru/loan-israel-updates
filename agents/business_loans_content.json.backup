@@ -1,0 +1,141 @@
+{
+  "chain": {
+    "enabled": false,
+    "next_agent": null
+  },
+  "created": "2026-01-03T12:00:00.000000",
+  "description": "אופטימיזציית תוכן לעמודי הלוואות לעסקים - ניתוח, כתיבה, SEO, QA, ויזואליזציה ו-QA ויזואלי",
+  "folder_name": "הלוואות לעסקים",
+  "id": "business_loans_content",
+  "model": {
+    "provider": "claude",
+    "name": "claude-opus-4-5",
+    "temperature": 0.7
+  },
+  "name": "עסקים שיפור תוכן",
+  "sites": [
+    "business"
+  ],
+  "status": "active",
+  "steps": [
+    {
+      "id": "step1",
+      "name": "ניתוח ואפיון",
+      "order": 1,
+      "output": {
+        "path": "דוח ניתוח.md",
+        "shortcode_name": "STEP1_REPORT"
+      },
+      "prompt_file": "פרומטים/הלוואות לעסקים/שלב 1.md",
+      "prompt_template": "קרא את קובץ ההוראות {{STEP1_PROMPT_FILE}} ובצע ניתוח על העמוד {{PAGE_HTML_PATH}}.\n\n## נתוני עמוד:\n- **מילת מפתח ראשית:** {{PAGE_KEYWORD}}\n- **מיקום נוכחי ב-SERP:** {{OUR_SERP_RANK}}\n - כמות מילים קיימת בעמוד כיום {{PAGE_WORD_COUNT}}\n\n## מילות מפתח נלוות לשילוב:\n{{KEYWORDS_AUTOCOMPLETE}}\n\n## מידע ממתחרים מדורגים:\n{{SERP_ORGANIC}}\n\n## תוצאות AI Overview של גוגל:\n{{SERP_AI_OVERVIEW}}\n\n## מאגרי מידע:\n- מאגר כללי: {{KNOWLEDGE_BASE_GENERAL}}\n- מאגר מסלולים: {{KNOWLEDGE_BASE_TRACKS}}\n - חודש נוכחי {{CURRENT_MONTH}}\n- ריבית הפריים העדכנית  {{BOI_INTEREST_RATE}}\n\n## דומיינים מאושרים למידע פיננסי:\n{{APPROVED_DOMAINS}}\n\n**חובה לשמור את הדוח בנתיב:** {{OUTPUT_PATH}} זה שם הקובץ {{STEP1_REPORT}}",
+      "shortcodes": [
+        "PAGE_HTML",
+        "PAGE_KEYWORD",
+        "KEYWORDS_AUTOCOMPLETE",
+        "SERP_ORGANIC",
+        "SERP_AI_OVERVIEW",
+        "OUR_SERP_RANK",
+        "APPROVED_DOMAINS"
+      ],
+      "model": "claude-opus-4-5"
+    },
+    {
+      "id": "step2",
+      "name": "כתיבה/שכתוב תוכן",
+      "order": 2,
+      "output": {
+        "path": "דוח תוכן.md",
+        "shortcode_name": "STEP2_REPORT"
+      },
+      "prompt_file": "פרומטים/הלוואות לעסקים/שלב 2.md",
+      "prompt_template": "קרא את קובץ ההוראות {{STEP2_PROMPT_FILE}}.\n\n## דוח הניתוח משלב 1:\n{{STEP1_REPORT}}\n\n## העמוד לעריכה:\n{{PAGE_HTML_PATH}}\n\n## נתוני עמוד:\n- **מילת מפתח ראשית:** {{PAGE_KEYWORD}}\n\n## מילות מפתח לשילוב:\n{{KEYWORDS_AUTOCOMPLETE}}\n\n**רשימת שימור:** המילים הבאות חייבות להופיע בתוכן:\n{{KEYWORDS_AUTOCOMPLETE_LIST}}\n\n## מאגרי מידע:\n- מאגר כללי: {{KNOWLEDGE_BASE_GENERAL}}\n- מאגר מסלולים: {{KNOWLEDGE_BASE_TRACKS}}\n\n## דומיינים מאושרים למידע פיננסי:\n{{APPROVED_DOMAINS}}\n\n**חובה לשמור את הדוח בנתיב:** {{OUTPUT_PATH}} זה שם הקובץ {{STEP2_REPORT}}",
+      "shortcodes": [
+        "STEP1_REPORT",
+        "PAGE_HTML",
+        "PAGE_KEYWORD",
+        "KEYWORDS_AUTOCOMPLETE",
+        "APPROVED_DOMAINS"
+      ],
+      "model": "claude-sonnet-4-5"
+    },
+    {
+      "id": "step3",
+      "name": "SEO והטמעה טכנית",
+      "order": 3,
+      "output": {
+        "path": "דוח SEO.md",
+        "shortcode_name": "STEP3_REPORT"
+      },
+      "prompt_file": "פרומטים/הלוואות לעסקים/שלב 3.md",
+      "prompt_template": "קרא את קובץ ההוראות {{STEP3_PROMPT_FILE}}.\n\n## דוח התוכן משלב 2:\n{{STEP2_REPORT}}\n\n## העמוד לעריכה:\n{{PAGE_HTML_PATH}}\n\n## נתוני עמוד:\n- **מילת מפתח ראשית:** {{PAGE_KEYWORD}}\n\n## מאגר מידע כללי (לפרטי Schema):\n{{KNOWLEDGE_BASE_GENERAL}}\n\n**חובה לשמור את הדוח בנתיב:** {{OUTPUT_PATH}} זה שם הקובץ {{STEP3_REPORT}}",
+      "shortcodes": [
+        "STEP2_REPORT",
+        "PAGE_HTML",
+        "PAGE_KEYWORD"
+      ],
+      "model": "claude-sonnet-4-5"
+    },
+    {
+      "id": "step4",
+      "name": "QA ודיבאג",
+      "order": 4,
+      "output": {
+        "path": "דוח QA תוכן.md",
+        "shortcode_name": "STEP4_REPORT"
+      },
+      "prompt_file": "פרומטים/הלוואות לעסקים/שלב 4.md",
+      "prompt_template": "קרא את קובץ ההוראות {{STEP4_PROMPT_FILE}}.\n\n## דוח SEO משלב 3:\n{{STEP3_REPORT}}\n\n## העמוד לבדיקה:\n{{PAGE_HTML_PATH}}\n\n## נתוני עמוד:\n- **מילת מפתח ראשית:** {{PAGE_KEYWORD}}\n\n## מילות מפתח שחייבות להופיע:\n{{KEYWORDS_AUTOCOMPLETE_LIST}}\n\n**חובה לשמור את הדוח בנתיב:** {{OUTPUT_PATH}} זה שם הקובץ {{STEP4_REPORT}}",
+      "shortcodes": [
+        "STEP3_REPORT",
+        "PAGE_HTML",
+        "PAGE_KEYWORD",
+        "KEYWORDS_AUTOCOMPLETE"
+      ],
+      "model": "claude-haiku-4-5"
+    },
+    {
+      "id": "step5",
+      "name": "ויזואליזציה",
+      "order": 5,
+      "output": {
+        "path": "דוח ויזואליזציה.md",
+        "shortcode_name": "STEP5_REPORT"
+      },
+      "prompt_file": "פרומטים/הלוואות לעסקים/שלב 5.md",
+      "prompt_template": "קרא את קובץ ההוראות {{STEP5_PROMPT_FILE}}.\n\n## דוח QA משלב 4:\n{{STEP4_REPORT}}\n\n## העמוד לעריכה:\n{{PAGE_HTML_PATH}}\n\n## נתוני עמוד:\n- **מילת מפתח ראשית:** {{PAGE_KEYWORD}}\n\n## מקורות עיצוב:\n- קובץ עיצוב: מאגרי מידע/visual.html\n- כללי WordPress: מאגרי מידע/wordpress-ruls.html\n\n**חובה לשמור את הדוח בנתיב:** {{OUTPUT_PATH}} זה שם הקובץ {{STEP5_REPORT}}",
+      "shortcodes": [
+        "STEP4_REPORT",
+        "PAGE_HTML",
+        "PAGE_KEYWORD"
+      ],
+      "model": "claude-sonnet-4-5"
+    },
+    {
+      "id": "step6",
+      "name": "QA ויזואליזציה",
+      "order": 6,
+      "output": {
+        "path": "דוח סופי.md",
+        "shortcode_name": "STEP6_REPORT"
+      },
+      "prompt_file": "פרומטים/הלוואות לעסקים/שלב 6.md",
+      "prompt_template": "קרא את קובץ ההוראות {{STEP6_PROMPT_FILE}}.\n\n## דוח ויזואליזציה משלב 5:\n{{STEP5_REPORT}}\n\n## העמוד לבדיקה:\n{{PAGE_HTML_PATH}}\n\n## נתוני עמוד:\n- **מילת מפתח ראשית:** {{PAGE_KEYWORD}}\n\n## מקורות עיצוב לאימות:\n- קובץ עיצוב: מאגרי מידע/visual.html\n- כללי WordPress: מאגרי מידע/wordpress-ruls.html\n\n**חובה לשמור את הדוח בנתיב:** {{OUTPUT_PATH}} זה שם הקובץ {{STEP6_REPORT}}",
+      "shortcodes": [
+        "STEP5_REPORT",
+        "PAGE_HTML",
+        "PAGE_KEYWORD"
+      ],
+      "model": "claude-haiku-4-5"
+    }
+  ],
+  "supports_full_auto": true,
+  "type": "update",
+  "updated": "2026-01-06T11:38:52.823832",
+  "wordpress": {
+    "action": "update",
+    "site": "main",
+    "update_fields": [
+      "content"
+    ]
+  }
+}

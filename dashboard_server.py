@@ -7770,15 +7770,16 @@ def reset_page():
             with open(page_info_file, 'r', encoding='utf-8') as f:
                 page_info = json.load(f)
             
-            # Keep only essential fields
+            # Keep only essential fields - INCLUDING is_special and fetched_keywords
             essential_fields = ['page_name', 'keyword', 'url', 'post_id', 'title', 'description', 
-                              'title_options', 'description_options']
+                              'title_options', 'description_options', 'is_special', 'fetched_keywords', 
+                              'site', 'wordpress_id']
             cleaned_info = {k: v for k, v in page_info.items() if k in essential_fields}
             
             with open(page_info_file, 'w', encoding='utf-8') as f:
                 json.dump(cleaned_info, f, ensure_ascii=False, indent=2)
-            deleted_items.append(f"🔄 אופס page_info.json")
-            print(f"[Reset] Reset page_info.json")
+            deleted_items.append(f"🔄 אופס page_info.json (שמר is_special ומילות מפתח)")
+            print(f"[Reset] Reset page_info.json (kept is_special={cleaned_info.get('is_special')}, keywords={bool(cleaned_info.get('fetched_keywords'))})")
         
         # 6. Clear from running pages if present
         if page_path in running_pages:
@@ -8326,6 +8327,448 @@ def update_wp_page():
                 "error": f"Failed to update: {response.text}"
             }), response.status_code
     except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+# ============ Helper Functions - Page Deletion & Restore ============
+
+def create_yoast_redirect(site_id, origin_url, target_url, redirect_type="301"):
+    """Create redirect using Yoast SEO Premium API"""
+    try:
+        site = config["wordpress"]["sites"][site_id]
+        token = jwt_tokens.get(site_id)
+        
+        if not token:
+            # Get fresh token
+            password = site.get("password") or os.getenv(f"WP_{site_id.upper()}_PASSWORD")
+            username = site.get("username") or os.getenv(f"WP_{site_id.upper()}_USERNAME")
+            
+            if not username or not password:
+                return {"success": False, "error": "Missing credentials"}
+            
+            token_url = site["site_url"] + site["token_endpoint"]
+            token_response = requests.post(token_url, json={
+                "username": username,
+                "password": password
+            }, timeout=10)
+            
+            if token_response.status_code != 200:
+                return {"success": False, "error": "Failed to authenticate"}
+            
+            token = token_response.json().get("token")
+            jwt_tokens[site_id] = token
+        
+        # Extract the path from the origin URL
+        from urllib.parse import urlparse
+        origin_path = urlparse(origin_url).path
+        
+        # Ensure path ends with /
+        if not origin_path.endswith('/'):
+            origin_path += '/'
+        
+        # Yoast API endpoint
+        redirect_url = f"{site['site_url']}/wp-json/yoast/v1/redirects"
+        
+        # Payload for Yoast
+        payload = {
+            "origin": origin_path,
+            "target": target_url,
+            "type": int(redirect_type),  # 301, 302, 307, 410
+            "format": "plain"
+        }
+        
+        print(f"[Yoast Redirect] Creating redirect from {origin_path} to {target_url} (type: {redirect_type})")
+        
+        response = requests.post(
+            redirect_url,
+            json=payload,
+            headers={"Authorization": f"Bearer {token}"},
+            timeout=30
+        )
+        
+        if response.status_code in [200, 201]:
+            result = response.json()
+            print(f"[Yoast Redirect] ✓ Redirect created successfully (ID: {result.get('id', 'unknown')})")
+            return {"success": True, "redirect_id": result.get("id")}
+        else:
+            error_msg = response.text
+            print(f"[Yoast Redirect] ✗ Failed: {error_msg}")
+            return {"success": False, "error": error_msg}
+            
+    except Exception as e:
+        print(f"[Yoast Redirect] ✗ Exception: {str(e)}")
+        return {"success": False, "error": str(e)}
+
+
+def delete_yoast_redirect(site_id, redirect_id):
+    """Delete redirect from Yoast SEO Premium"""
+    try:
+        site = config["wordpress"]["sites"][site_id]
+        token = jwt_tokens.get(site_id)
+        
+        if not token:
+            return {"success": False, "error": "Not authenticated"}
+        
+        redirect_url = f"{site['site_url']}/wp-json/yoast/v1/redirects/{redirect_id}"
+        
+        print(f"[Yoast Redirect] Deleting redirect ID: {redirect_id}")
+        
+        response = requests.delete(
+            redirect_url,
+            headers={"Authorization": f"Bearer {token}"},
+            timeout=30
+        )
+        
+        if response.status_code in [200, 204]:
+            print(f"[Yoast Redirect] ✓ Redirect deleted successfully")
+            return {"success": True}
+        else:
+            error_msg = response.text
+            print(f"[Yoast Redirect] ✗ Failed to delete: {error_msg}")
+            return {"success": False, "error": error_msg}
+            
+    except Exception as e:
+        print(f"[Yoast Redirect] ✗ Exception: {str(e)}")
+        return {"success": False, "error": str(e)}
+
+
+def delete_wordpress_page(site_id, post_id):
+    """Delete page from WordPress"""
+    try:
+        site = config["wordpress"]["sites"][site_id]
+        token = jwt_tokens.get(site_id)
+        
+        if not token:
+            # Get fresh token
+            password = site.get("password") or os.getenv(f"WP_{site_id.upper()}_PASSWORD")
+            username = site.get("username") or os.getenv(f"WP_{site_id.upper()}_USERNAME")
+            
+            if not username or not password:
+                return {"success": False, "error": "Missing credentials"}
+            
+            token_url = site["site_url"] + site["token_endpoint"]
+            token_response = requests.post(token_url, json={
+                "username": username,
+                "password": password
+            }, timeout=10)
+            
+            if token_response.status_code != 200:
+                return {"success": False, "error": "Failed to authenticate"}
+            
+            token = token_response.json().get("token")
+            jwt_tokens[site_id] = token
+        
+        # Delete post (force=true to bypass trash)
+        delete_url = f"{site['site_url']}{site['api_base']}/posts/{post_id}?force=true"
+        
+        print(f"[WP Delete] Deleting post ID: {post_id}")
+        
+        response = requests.delete(
+            delete_url,
+            headers={"Authorization": f"Bearer {token}"},
+            timeout=30
+        )
+        
+        if response.status_code in [200, 204]:
+            print(f"[WP Delete] ✓ Post deleted successfully")
+            return {"success": True}
+        else:
+            error_msg = response.text
+            print(f"[WP Delete] ✗ Failed: {error_msg}")
+            return {"success": False, "error": error_msg}
+            
+    except Exception as e:
+        print(f"[WP Delete] ✗ Exception: {str(e)}")
+        return {"success": False, "error": str(e)}
+
+
+def archive_page_files(page_path, reason="deleted", metadata=None):
+    """Move page folder to archive with timestamp and metadata"""
+    try:
+        import shutil
+        from datetime import datetime
+        
+        # Get folder path
+        folder = os.path.dirname(page_path)
+        if not os.path.exists(folder):
+            return {"success": False, "error": "Page folder not found"}
+        
+        folder_name = os.path.basename(folder)
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        
+        # Create archive folder if not exists
+        archive_base = config.get("paths", {}).get("archive", "ארכיון")
+        if not os.path.exists(archive_base):
+            os.makedirs(archive_base)
+        
+        # Archive path with timestamp
+        archive_path = os.path.join(archive_base, f"{folder_name}_{timestamp}")
+        
+        print(f"[Archive] Moving {folder} to {archive_path}")
+        
+        # Move folder
+        shutil.move(folder, archive_path)
+        
+        # Save metadata
+        meta_file = os.path.join(archive_path, "_archive_meta.json")
+        archive_meta = {
+            "archived_at": datetime.now().isoformat(),
+            "reason": reason,
+            "original_path": page_path,
+            "metadata": metadata or {}
+        }
+        
+        with open(meta_file, 'w', encoding='utf-8') as f:
+            json.dump(archive_meta, f, ensure_ascii=False, indent=2)
+        
+        print(f"[Archive] ✓ Archived successfully to {archive_path}")
+        
+        return {"success": True, "archive_path": archive_path}
+            
+    except Exception as e:
+        print(f"[Archive] ✗ Exception: {str(e)}")
+        return {"success": False, "error": str(e)}
+
+
+def restore_page_from_archive(archive_path, target_site="main"):
+    """Restore page from archive back to pages folder"""
+    try:
+        import shutil
+        
+        if not os.path.exists(archive_path):
+            return {"success": False, "error": "Archive folder not found"}
+        
+        # Read archive metadata
+        meta_file = os.path.join(archive_path, "_archive_meta.json")
+        if os.path.exists(meta_file):
+            with open(meta_file, 'r', encoding='utf-8') as f:
+                archive_meta = json.load(f)
+                original_path = archive_meta.get("original_path", "")
+        else:
+            return {"success": False, "error": "Archive metadata not found"}
+        
+        # Determine restore path
+        folder_name = os.path.basename(archive_path).rsplit('_', 2)[0]  # Remove timestamp
+        pages_base = config.get("paths", {}).get("editable_pages", {}).get(target_site, "דפים לשינוי/main")
+        restore_path = os.path.join(pages_base, folder_name)
+        
+        # Check if folder already exists
+        if os.path.exists(restore_path):
+            return {"success": False, "error": "Page folder already exists. Delete it first."}
+        
+        print(f"[Restore] Moving {archive_path} to {restore_path}")
+        
+        # Move folder back
+        shutil.move(archive_path, restore_path)
+        
+        # Remove archive metadata file
+        restored_meta_file = os.path.join(restore_path, "_archive_meta.json")
+        if os.path.exists(restored_meta_file):
+            os.remove(restored_meta_file)
+        
+        print(f"[Restore] ✓ Restored successfully to {restore_path}")
+        
+        # Find the HTML file
+        html_file = None
+        for file in os.listdir(restore_path):
+            if file.endswith('.html') and not file.endswith('_backup.html'):
+                html_file = os.path.join(restore_path, file)
+                break
+        
+        return {
+            "success": True, 
+            "restore_path": restore_path,
+            "html_file": html_file,
+            "metadata": archive_meta
+        }
+            
+    except Exception as e:
+        print(f"[Restore] ✗ Exception: {str(e)}")
+        return {"success": False, "error": str(e)}
+
+# ============ API Routes - WordPress Delete & Restore ============
+
+@app.route('/api/wordpress/delete-page', methods=['POST'])
+def delete_wp_page_endpoint():
+    """Delete page from WordPress, create redirect, and archive files"""
+    try:
+        if not REQUESTS_AVAILABLE:
+            return jsonify({"success": False, "error": "requests library not installed"}), 500
+        
+        data = request.json
+        post_id = data.get("post_id")
+        url = data.get("url", "")
+        page_path = data.get("page_path")
+        redirect_type = data.get("redirect_type", "301")
+        redirect_target = data.get("redirect_target")
+        
+        if not post_id or not page_path:
+            return jsonify({"success": False, "error": "Missing post_id or page_path"}), 400
+        
+        # Determine which site to use
+        site_id, site = get_wordpress_site(url)
+        
+        print(f"[Delete Page] Starting deletion process for post {post_id}")
+        print(f"[Delete Page] Site: {site_id}, Redirect: {redirect_type}, Target: {redirect_target}")
+        
+        # Step 1: Delete from WordPress
+        delete_result = delete_wordpress_page(site_id, post_id)
+        if not delete_result["success"]:
+            return jsonify({
+                "success": False,
+                "error": f"Failed to delete from WordPress: {delete_result['error']}"
+            }), 500
+        
+        # Step 2: Create redirect (if needed)
+        redirect_id = None
+        if redirect_type in ["301", "302", "307", "410"] and redirect_target:
+            redirect_result = create_yoast_redirect(site_id, url, redirect_target, redirect_type)
+            if redirect_result["success"]:
+                redirect_id = redirect_result.get("redirect_id")
+                print(f"[Delete Page] ✓ Redirect created (ID: {redirect_id})")
+            else:
+                # Don't fail the whole operation if redirect fails
+                print(f"[Delete Page] ⚠ Redirect creation failed: {redirect_result.get('error')}")
+        
+        # Step 3: Archive local files
+        archive_metadata = {
+            "wordpress_id": post_id,
+            "url": url,
+            "site": site_id,
+            "redirect_type": redirect_type,
+            "redirect_target": redirect_target,
+            "redirect_id": redirect_id
+        }
+        
+        archive_result = archive_page_files(page_path, reason="deleted", metadata=archive_metadata)
+        if not archive_result["success"]:
+            return jsonify({
+                "success": False,
+                "error": f"Failed to archive files: {archive_result['error']}"
+            }), 500
+        
+        print(f"[Delete Page] ✓ Page deleted successfully")
+        print(f"[Delete Page] ✓ Files archived to: {archive_result['archive_path']}")
+        
+        return jsonify({
+            "success": True,
+            "message": "Page deleted successfully",
+            "archive_path": archive_result["archive_path"],
+            "redirect_id": redirect_id
+        })
+        
+    except Exception as e:
+        print(f"[Delete Page] ✗ Exception: {str(e)}")
+        return jsonify({"success": False, "error": str(e)}), 500
+
+
+@app.route('/api/pages/archived', methods=['GET'])
+def get_archived_pages():
+    """Get list of archived pages"""
+    try:
+        archive_base = config.get("paths", {}).get("archive", "ארכיון")
+        
+        if not os.path.exists(archive_base):
+            return jsonify({"success": True, "pages": []})
+        
+        archived_pages = []
+        
+        for folder_name in os.listdir(archive_base):
+            folder_path = os.path.join(archive_base, folder_name)
+            
+            if not os.path.isdir(folder_path):
+                continue
+            
+            # Read metadata
+            meta_file = os.path.join(folder_path, "_archive_meta.json")
+            if os.path.exists(meta_file):
+                with open(meta_file, 'r', encoding='utf-8') as f:
+                    metadata = json.load(f)
+            else:
+                metadata = {}
+            
+            # Find HTML file
+            html_file = None
+            for file in os.listdir(folder_path):
+                if file.endswith('.html') and not file.endswith('_backup.html'):
+                    html_file = file
+                    break
+            
+            archived_pages.append({
+                "folder_name": folder_name,
+                "folder_path": folder_path,
+                "html_file": html_file,
+                "archived_at": metadata.get("archived_at", ""),
+                "reason": metadata.get("reason", ""),
+                "original_path": metadata.get("original_path", ""),
+                "metadata": metadata.get("metadata", {})
+            })
+        
+        # Sort by archived_at (newest first)
+        archived_pages.sort(key=lambda x: x.get("archived_at", ""), reverse=True)
+        
+        return jsonify({"success": True, "pages": archived_pages})
+        
+    except Exception as e:
+        print(f"[Archived Pages] ✗ Exception: {str(e)}")
+        return jsonify({"success": False, "error": str(e)}), 500
+
+
+@app.route('/api/page/restore', methods=['POST'])
+def restore_page_endpoint():
+    """Restore page from archive"""
+    try:
+        data = request.json
+        archive_path = data.get("archive_path")
+        restore_to_wordpress = data.get("restore_to_wordpress", True)
+        delete_redirect = data.get("delete_redirect", True)
+        
+        if not archive_path:
+            return jsonify({"success": False, "error": "Missing archive_path"}), 400
+        
+        print(f"[Restore Page] Starting restore from: {archive_path}")
+        
+        # Read archive metadata
+        meta_file = os.path.join(archive_path, "_archive_meta.json")
+        if os.path.exists(meta_file):
+            with open(meta_file, 'r', encoding='utf-8') as f:
+                archive_meta = json.load(f)
+                metadata = archive_meta.get("metadata", {})
+                site_id = metadata.get("site", "main")
+                redirect_id = metadata.get("redirect_id")
+        else:
+            return jsonify({"success": False, "error": "Archive metadata not found"}), 404
+        
+        # Step 1: Restore files locally
+        restore_result = restore_page_from_archive(archive_path, site_id)
+        if not restore_result["success"]:
+            return jsonify({
+                "success": False,
+                "error": f"Failed to restore files: {restore_result['error']}"
+            }), 500
+        
+        print(f"[Restore Page] ✓ Files restored to: {restore_result['restore_path']}")
+        
+        # Step 2: Delete redirect (if exists and requested)
+        if delete_redirect and redirect_id:
+            delete_redirect_result = delete_yoast_redirect(site_id, redirect_id)
+            if delete_redirect_result["success"]:
+                print(f"[Restore Page] ✓ Redirect deleted")
+            else:
+                print(f"[Restore Page] ⚠ Failed to delete redirect: {delete_redirect_result.get('error')}")
+        
+        # Step 3: Restore to WordPress (if requested)
+        # Note: This requires re-creating the page with the HTML content
+        # For now, we'll leave this for manual upload via the existing upload functionality
+        
+        return jsonify({
+            "success": True,
+            "message": "Page restored successfully. Use the upload button to publish to WordPress.",
+            "restore_path": restore_result["restore_path"],
+            "html_file": restore_result["html_file"]
+        })
+        
+    except Exception as e:
+        print(f"[Restore Page] ✗ Exception: {str(e)}")
         return jsonify({"success": False, "error": str(e)}), 500
 
 # ============ API Routes - WordPress Fetch ============
@@ -9064,6 +9507,53 @@ def update_page_info():
             "info": info
         })
     except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+@app.route('/api/page/update-meta-tags', methods=['POST'])
+def update_meta_tags():
+    """Update Title & Description in page_info.json (local save only, no WordPress upload)"""
+    try:
+        data = request.json
+        page_folder = data.get('page_folder')
+        title = data.get('title', '').strip()
+        description = data.get('description', '').strip()
+        
+        if not page_folder:
+            return jsonify({"success": False, "error": "Missing page_folder"}), 400
+        
+        info_path = BASE_DIR / page_folder / "page_info.json"
+        
+        # Load existing or create new
+        if info_path.exists():
+            with open(info_path, 'r', encoding='utf-8') as f:
+                info = json.load(f)
+        else:
+            info = {"page_name": Path(page_folder).name}
+        
+        # Update title and description
+        if title:
+            info['title'] = title
+        if description:
+            info['description'] = description
+        
+        # Save
+        with open(info_path, 'w', encoding='utf-8') as f:
+            json.dump(info, f, ensure_ascii=False, indent=2)
+        
+        print(f"✅ Updated meta tags in page_info.json:")
+        print(f"   📄 Folder: {page_folder}")
+        if title:
+            print(f"   📝 Title: {title[:60]}{'...' if len(title) > 60 else ''}")
+        if description:
+            print(f"   📄 Description: {description[:80]}{'...' if len(description) > 80 else ''}")
+        
+        return jsonify({
+            "success": True,
+            "message": "Meta tags saved successfully",
+            "info": info
+        })
+    except Exception as e:
+        print(f"❌ Error updating meta tags: {e}")
         return jsonify({"success": False, "error": str(e)}), 500
 
 @app.route('/api/edit-heading', methods=['POST'])
@@ -10538,9 +11028,12 @@ def save_keywords():
         page_path = data.get('page_path')
         keywords_data = data.get('keywords_data')
         
-        print(f"[Keywords Save] ========================================")
-        print(f"[Keywords Save] Received request for: {page_path}")
+        print(f"\n{'='*80}")
+        print(f"[Keywords Save] SAVE REQUEST RECEIVED")
+        print(f"[Keywords Save] page_path: {page_path}")
         print(f"[Keywords Save] Keywords count: {len(keywords_data.get('final_keywords', [])) if keywords_data else 0}")
+        print(f"[Keywords Save] Keywords list: {keywords_data.get('final_keywords', []) if keywords_data else []}")
+        print(f"{'='*80}\n")
         
         if not page_path or not keywords_data:
             print(f"[Keywords Save] ❌ Missing data: page_path={bool(page_path)}, keywords_data={bool(keywords_data)}")
@@ -10550,35 +11043,62 @@ def save_keywords():
         page_folder = get_page_folder(page_path)
         page_info_path = BASE_DIR / page_folder / 'page_info.json'
         
+        print(f"[Keywords Save] BASE_DIR: {BASE_DIR}")
         print(f"[Keywords Save] page_folder: {page_folder}")
         print(f"[Keywords Save] Full path: {page_info_path}")
-        print(f"[Keywords Save] Path exists: {page_info_path.parent.exists()}")
+        print(f"[Keywords Save] Path exists: {page_info_path.exists()}")
+        print(f"[Keywords Save] Parent exists: {page_info_path.parent.exists()}")
         
         # Load existing page_info or create new
         page_info = {}
         if page_info_path.exists():
+            print(f"[Keywords Save] Loading existing page_info.json...")
             with open(page_info_path, 'r', encoding='utf-8') as f:
                 page_info = json.load(f)
+            print(f"[Keywords Save] Existing keys: {list(page_info.keys())}")
+        else:
+            print(f"[Keywords Save] ⚠️ page_info.json does not exist, will create new")
         
         # Add keywords data
         page_info['fetched_keywords'] = keywords_data
+        print(f"[Keywords Save] Added fetched_keywords to page_info")
         
         # Ensure directory exists
         page_info_path.parent.mkdir(parents=True, exist_ok=True)
+        print(f"[Keywords Save] Directory ready: {page_info_path.parent}")
         
         # Save back
+        print(f"[Keywords Save] Writing to file...")
         with open(page_info_path, 'w', encoding='utf-8') as f:
             json.dump(page_info, f, ensure_ascii=False, indent=2)
         
-        print(f"[Keywords Save] ✅ SUCCESS! Saved {len(keywords_data.get('final_keywords', []))} keywords for {page_path}")
-        print(f"[Keywords Save] ========================================")
+        # Verify the save
+        if page_info_path.exists():
+            file_size = page_info_path.stat().st_size
+            print(f"[Keywords Save] ✅ File written successfully! Size: {file_size} bytes")
+            
+            # Double-check by reading back
+            with open(page_info_path, 'r', encoding='utf-8') as f:
+                saved_data = json.load(f)
+                has_keywords = 'fetched_keywords' in saved_data
+                kw_count = len(saved_data.get('fetched_keywords', {}).get('final_keywords', []))
+                print(f"[Keywords Save] ✅ Verification: has_fetched_keywords={has_keywords}, keyword_count={kw_count}")
+        else:
+            print(f"[Keywords Save] ⚠️ WARNING: File does not exist after write!")
+        
+        print(f"[Keywords Save] ✅ SUCCESS! Saved {len(keywords_data.get('final_keywords', []))} keywords")
+        print(f"{'='*80}\n")
         
         return jsonify({"success": True})
         
     except Exception as e:
-        print(f"[Keywords Save] ❌ ERROR: {e}")
+        print(f"\n{'='*80}")
+        print(f"[Keywords Save] ❌ EXCEPTION OCCURRED")
+        print(f"[Keywords Save] Error: {e}")
+        print(f"[Keywords Save] Error type: {type(e).__name__}")
         import traceback
         traceback.print_exc()
+        print(f"{'='*80}\n")
         return jsonify({"success": False, "error": str(e)}), 500
 
 

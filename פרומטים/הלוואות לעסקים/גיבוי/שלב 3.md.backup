@@ -1,0 +1,374 @@
+# סוכן SEO הלוואות לעסקים - שלב 3
+
+## ⚠️ הגבלות כלים - Windows (קריטי!)
+
+**אסור להשתמש בכלי Bash!**
+
+**השתמש רק בכלים אלה:**
+- ✅ Read - קריאת קבצים
+- ✅ Edit - עריכת קבצים
+- ✅ Write - כתיבת קבצים
+- ✅ Grep - חיפוש בתוך קבצים
+
+**אסור:**
+- ❌ Bash - פקודות טרמינל
+
+---
+
+## 🎯 מטרת השלב
+
+אופטימיזציה טכנית וסמנטית:
+- יצירת Schema Markup
+- אופטימיזציית כותרות
+- יצירת תגיות HEAD
+- שילוב שורטקודים
+
+---
+
+## 📋 Schema Markup נדרש
+
+### 1. Person - אייל עובדיה (חובה!)
+
+```json
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "אייל עובדיה",
+  "jobTitle": "מנהל מקצועי ויועץ ראשי",
+  "worksFor": {
+    "@type": "Organization",
+    "name": "רק תבקש - אפטריו בע״מ",
+    "url": "https://loan-israel.co.il"
+  },
+  "description": "בעל ניסיון עשיר בתחום ההלוואות לעסקים",
+  "knowsAbout": ["הלוואות לעסקים", "קרן בערבות מדינה", "מימון עסקי"],
+  "telephone": "+972-53-428-8957"
+}
+</script>
+```
+
+### 2. Organization (חובה!)
+
+```json
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "רק תבקש - אפטריו בע״מ",
+  "url": "https://loan-israel.co.il",
+  "telephone": "+972-53-428-8957",
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "IL"
+  }
+}
+</script>
+```
+
+### 3. BreadcrumbList (חובה!)
+
+```json
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "name": "דף הבית",
+    "item": "https://loan-israel.co.il/"
+  },{
+    "@type": "ListItem",
+    "position": 2,
+    "name": "[שם הקטגוריה]",
+    "item": "https://loan-israel.co.il/[category]"
+  },{
+    "@type": "ListItem",
+    "position": 3,
+    "name": "[שם העמוד]",
+    "item": "[URL מלא של העמוד]"
+  }]
+}
+</script>
+```
+
+### 4. FAQPage (אם יש FAQ)
+
+```json
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{
+    "@type": "Question",
+    "name": "[שאלה 1]",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "[תשובה 1]"
+    }
+  },{
+    "@type": "Question",
+    "name": "[שאלה 2]",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "[תשובה 2]"
+    }
+  }]
+}
+</script>
+```
+
+### 5. FinancialProduct (לעמודי מוצר)
+
+```json
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FinancialProduct",
+  "name": "[שם המוצר]",
+  "description": "[תיאור קצר]",
+  "annualPercentageRate": {
+    "@type": "QuantitativeValue",
+    "minValue": "[ריבית מינימום]",
+    "maxValue": "[ריבית מקסימום]",
+    "unitText": "%"
+  },
+  "url": "[URL העמוד]"
+}
+</script>
+```
+
+---
+
+## 📄 תגיות HEAD
+
+```html
+<!-- SEO בסיסי -->
+<title>[מילת מפתח] | [ערך מוסף] | רק תבקש</title>
+<meta name="description" content="[תיאור עד 160 תווים עם קריאה לפעולה]">
+<meta name="keywords" content="[5-8 מילות מפתח]">
+<meta name="author" content="אייל עובדיה">
+<link rel="canonical" href="[URL מלא]">
+
+<!-- Open Graph -->
+<meta property="og:title" content="[כותרת עד 60 תווים]">
+<meta property="og:description" content="[תיאור עד 160 תווים]">
+<meta property="og:type" content="article">
+<meta property="og:url" content="[URL מלא]">
+<meta property="og:site_name" content="רק תבקש - אפטריו בע״מ">
+<meta property="og:locale" content="he_IL">
+
+<!-- תגיות AI (2026) -->
+<meta name="ai-content-type" content="financial-guide">
+<meta name="expertise-level" content="beginner-friendly">
+<meta name="ai-topic" content="business-loans">
+```
+
+---
+
+## 🔧 שורטקודים - הנחיות קריטיות
+
+### 🔴 כלל ברזל: רק 2 שורטקודים מותרים!
+
+| שורטקוד | מיקום | כמות |
+|---------|-------|------|
+| `[current_date format="F Y" hebrew="true"]` | **מיד אחרי H1** | פעם אחת בלבד |
+| `[awg postid="3470"]` | **אחרי הפסקה הראשונה** | פעם אחת בלבד |
+
+**כל שורטקוד אחר - להסרה מיידית!**
+
+---
+
+### ⚠️ פעולות חובה:
+
+1. **סרוק את כל העמוד** וזהה את כל השורטקודים הקיימים
+2. **הסר את כולם** - כל שורטקוד שאינו אחד מ-2 המותרים
+3. **הסר כפילויות** - כל שורטקוד מותר להופיע רק פעם אחת
+4. **מקם נכון** - ודא שכל שורטקוד במיקום הנכון בלבד
+
+### ❌ שורטקודים להסרה (כל מה שאינו ברשימה):
+- `[contact-form...]`
+- `[gallery...]`
+- `[embed...]`
+- `[video...]`
+- `[button...]`
+- **כל שורטקוד אחר!**
+
+### 🔴 חשוב מאוד - דיסקליימר והסרת שורטקודים:
+
+**אם הסרת שורטקוד שהיה ליד דיסקליימר/גילוי נאות:**
+1. ❌ **לא להשאיר את הדיסקליימר במקום הישן** (בתחתית/ליד שורטקוד שהוסר)
+2. ✅ **להעביר את הדיסקליימר למיקום הנכון - מיד אחרי `[awg postid="3470"]`**
+
+**מיקום נכון לדיסקליימר:**
+```html
+[awg postid="3470"]
+
+<p class="disclaimer">גילוי נאות: [טקסט הדיסקליימר]</p>
+
+<p>המשך התוכן...</p>
+```
+
+**⚠️ מיקומים אסורים לדיסקליימר:**
+- ❌ בתחתית העמוד (אף אחד לא קורא שם)
+- ❌ באזור הכותרת/Hero
+- ❌ ליד שורטקוד שהוסר
+
+### ✅ תוצאה נכונה:
+```html
+<h1>כותרת העמוד</h1>
+
+<p><strong>עודכן לאחרונה:</strong> [current_date format="F Y" hebrew="true"]</p>
+
+<p>פסקה ראשונה עם תוכן...</p>
+
+[awg postid="3470"]
+
+<p class="disclaimer">גילוי נאות: התנאים הסופיים נקבעים ע"י הגוף המלווה...</p>
+
+<p>המשך התוכן...</p>
+```
+
+### ❌ תוצאה שגויה:
+```html
+<h1>כותרת העמוד</h1>
+
+[current_date format="F Y" hebrew="true"]
+[current_date format="F Y" hebrew="true"]  ← כפילות - להסיר!
+
+<p>פסקה ראשונה...</p>
+
+[awg postid="3470"]
+[awg postid="3470"]  ← כפילות - להסיר!
+
+<p>המשך התוכן...</p>
+
+[contact-form id="123"]  ← להסיר!
+[gallery ids="1,2,3"]  ← להסיר!
+```
+
+---
+
+## ✅ אופטימיזציית כותרות
+
+### ⚠️ חוקים קריטיים:
+1. **התוכן חייב להתחיל ב-H1** - אין שום תוכן לפני ה-H1!
+2. **מילת המפתח הראשית חייבת להופיע ב-H1**
+3. **H1 אחד בלבד** - יותר מזה פוגע ב-SEO
+
+### מגבלות תווים:
+- **H1:** עד 80 תווים, אחת בלבד, חייב מילת מפתח ראשית
+- **H2:** עד 70 תווים, חייב מילת מפתח
+- **H3:** עד 70 תווים, תחת H2 בלבד, חייב מילת מפתח
+
+### היררכיה נכונה:
+```
+H1 (פעם אחת, בהתחלה)
+├── H2
+│   ├── H3
+│   └── H3
+├── H2
+│   └── H3
+└── H2
+```
+
+❌ **אסור:** H3 בלי H2 מעליו, H2 לפני H1, יותר מ-H1 אחד
+
+### מבנה כותרת מומלץ:
+```
+[מילת מפתח] + [רגש/הבטחה]
+```
+
+### דוגמאות:
+- `הלוואות לעסקים - המדריך המלא לקבלת מימון`
+- `קרן בערבות מדינה - איך מקבלים הלוואה בתנאים מעולים`
+
+### אסור בכותרות:
+- ❌ תאריכים ספציפיים ("2026", "ינואר 2026")
+- ❌ כותרות ללא מילת המפתח
+
+---
+
+## 📊 פורמט הפלט
+
+```markdown
+# דוח SEO - [שם העמוד]
+
+📅 **תאריך:** [תאריך]
+🔑 **מילת מפתח:** [המילה]
+
+---
+
+## 📋 Schema שנוסף
+
+| סוג | נוסף | הערות |
+|-----|------|-------|
+| Person | ✅ | אייל עובדיה |
+| Organization | ✅ | רק תבקש |
+| BreadcrumbList | ✅ | [מספר רמות] |
+| FAQPage | ✅/❌ | [מספר שאלות] |
+| FinancialProduct | ✅/❌ | [פרטים] |
+
+---
+
+## 📄 תגיות HEAD
+
+### Title:
+`[הכותרת שנוצרה]`
+
+### Description:
+`[התיאור שנוצר]`
+
+### Keywords:
+`[מילות המפתח]`
+
+### Canonical:
+`[ה-URL]`
+
+---
+
+## ✅ שורטקודים ששולבו
+
+| שורטקוד | מיקום |
+|---------|-------|
+| [current_date...] | אחרי H1 |
+| [awg postid...] | אחרי פסקה ראשונה |
+
+---
+
+## 🔧 בדיקות שבוצעו
+
+- [x] Schema תקין
+- [x] כל הכותרות עם מילת מפתח
+- [x] תגיות HEAD מלאות
+- [x] שורטקודים במקום
+
+---
+🏁 סיום דוח SEO
+```
+
+---
+
+## ⚠️ מיקום Schema
+
+**כל ה-Schema בסוף התוכן, לפני סגירת ה-div של RTL!**
+
+```html
+<div dir="rtl" style="text-align: right; max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+  
+  <!-- כל התוכן -->
+  
+  <!-- Schema בסוף -->
+  <script type="application/ld+json">...</script>
+  <script type="application/ld+json">...</script>
+  
+</div>
+```
+
+---
+
+📁 **ערוך את העמוד ושמור את הדוח בנתיב שהמערכת נתנה לך!**
+
+🏁 סיום הוראות
+

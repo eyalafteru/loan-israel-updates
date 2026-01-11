@@ -1,5 +1,0 @@
-=== פרומפט שנשלח לקלוד - step1 ===
-זמן: 2026-01-04 09:18:35
-============================================================
-
-קרא את קובץ ההוראות C:\Users\eyal\loan-israel-updaets\loan-israel-updates\פרומטים\SEO\שלב 1.md ואת קובץ ה-HTML: C:\Users\eyal\loan-israel-updaets\loan-israel-updates\דפים לשינוי\main\הלוואה בצ_יקים\הלוואה בצ_יקים.html. בצע את ההוראות. בסוף שמור את הדוח בנתיב: C:\Users\eyal\loan-israel-updaets\loan-israel-updates\דפים לשינוי\main\הלוואה בצ_יקים\SEO\דוח שלב 1.md

@@ -4,7 +4,7 @@
     "next_agent": null
   },
   "created": "2026-01-03T12:00:00.000000",
-  "description": "אופטימיזציית תוכן לעמודי הלוואות לעסקים - ניתוח, כתיבה, SEO, QA, ויזואליזציה ו-QA ויזואלי",
+  "description": "אופטימיזציית תוכן לעמודי הלוואות לעסקים - ניתוח + כתיבה, SEO + QA, ויזואליזציה + QA ויזואלי (3 שלבים ממוזגים)",
   "folder_name": "הלוואות לעסקים",
   "id": "business_loans_content",
   "model": {
@@ -20,117 +20,73 @@
   "steps": [
     {
       "id": "step1",
-      "name": "ניתוח ואפיון",
+      "name": "ניתוח וכתיבה",
       "order": 1,
       "output": {
-        "path": "דוח ניתוח.md",
+        "path": "דוח ניתוח וכתיבה.md",
         "shortcode_name": "STEP1_REPORT"
       },
       "prompt_file": "פרומטים/הלוואות לעסקים/שלב 1.md",
-      "prompt_template": "קרא את קובץ ההוראות {{STEP1_PROMPT_FILE}} ובצע ניתוח על העמוד {{PAGE_HTML_PATH}}.\n\n## נתוני עמוד:\n- **מילת מפתח ראשית:** {{PAGE_KEYWORD}}\n- **מיקום נוכחי ב-SERP:** {{OUR_SERP_RANK}}\n - כמות מילים קיימת בעמוד כיום {{PAGE_WORD_COUNT}}\n\n## מילות מפתח נלוות לשילוב:\n{{KEYWORDS_AUTOCOMPLETE}}\n\n## מידע ממתחרים מדורגים:\n{{SERP_ORGANIC}}\n\n## תוצאות AI Overview של גוגל:\n{{SERP_AI_OVERVIEW}}\n\n## מאגרי מידע:\n- מאגר כללי: {{KNOWLEDGE_BASE_GENERAL}}\n- מאגר מסלולים: {{KNOWLEDGE_BASE_TRACKS}}\n - חודש נוכחי {{CURRENT_MONTH}}\n- ריבית הפריים העדכנית  {{BOI_INTEREST_RATE}}\n\n## דומיינים מאושרים למידע פיננסי:\n{{APPROVED_DOMAINS}}\n\n**חובה לשמור את הדוח בנתיב:** {{OUTPUT_PATH}} זה שם הקובץ {{STEP1_REPORT}}",
+      "prompt_template": "קרא את קובץ ההוראות {{STEP1_PROMPT_FILE}} ובצע ניתוח וכתיבה על העמוד {{PAGE_HTML_PATH}}.\n\nהשלב משלב שני תת-שלבים:\n- **חלק א: ניתוח העמוד** - ניתוח מקיף של מצב קיים\n- **חלק ב: כתיבת תוכן חדש** - יישום הניתוח וכתיבה\n\n## נתוני עמוד:\n- **מילת מפתח ראשית:** {{PAGE_KEYWORD}}\n- **מיקום נוכחי ב-SERP:** {{OUR_SERP_RANK}}\n- **כמות מילים קיימת בעמוד כיום:** {{PAGE_WORD_COUNT}}\n\n## מילות מפתח נלוות לשילוב:\n{{KEYWORDS_AUTOCOMPLETE}}\n\n**רשימת שימור:** המילים הבאות חייבות להופיע בתוכן:\n{{KEYWORDS_AUTOCOMPLETE_LIST}}\n\n## מידע ממתחרים מדורגים:\n{{SERP_ORGANIC}}\n\n## תוצאות AI Overview של גוגל:\n{{SERP_AI_OVERVIEW}}\n\n## מאגרי מידע:\n- מאגר כללי: {{KNOWLEDGE_BASE_GENERAL}}\n- מאגר מסלולים: {{KNOWLEDGE_BASE_TRACKS}}\n- חודש נוכחי: {{CURRENT_MONTH}}\n- ריבית הפריים העדכנית: {{BOI_INTEREST_RATE}}\n\n## דומיינים מאושרים למידע פיננסי:\n{{APPROVED_DOMAINS}}\n\n**חובה לשמור:**\n- דוח משולב (ניתוח + כתיבה): {{OUTPUT_PATH}}\n- שם הקובץ: {{STEP1_REPORT}}\n- העמוד המעודכן: {{PAGE_HTML_PATH}} (עריכה במקום)",
       "shortcodes": [
         "PAGE_HTML",
         "PAGE_KEYWORD",
+        "PAGE_WORD_COUNT",
+        "OUR_SERP_RANK",
         "KEYWORDS_AUTOCOMPLETE",
+        "KEYWORDS_AUTOCOMPLETE_LIST",
         "SERP_ORGANIC",
         "SERP_AI_OVERVIEW",
-        "OUR_SERP_RANK",
+        "KNOWLEDGE_BASE_GENERAL",
+        "KNOWLEDGE_BASE_TRACKS",
+        "CURRENT_MONTH",
+        "BOI_INTEREST_RATE",
         "APPROVED_DOMAINS"
       ],
       "model": "claude-opus-4-5"
     },
     {
       "id": "step2",
-      "name": "כתיבה/שכתוב תוכן",
+      "name": "SEO + QA תוכן",
       "order": 2,
       "output": {
-        "path": "דוח תוכן.md",
+        "path": "דוח SEO וQA.md",
         "shortcode_name": "STEP2_REPORT"
       },
       "prompt_file": "פרומטים/הלוואות לעסקים/שלב 2.md",
-      "prompt_template": "קרא את קובץ ההוראות {{STEP2_PROMPT_FILE}}.\n\n## דוח הניתוח משלב 1:\n{{STEP1_REPORT}}\n\n## העמוד לעריכה:\n{{PAGE_HTML_PATH}}\n\n## נתוני עמוד:\n- **מילת מפתח ראשית:** {{PAGE_KEYWORD}}\n\n## מילות מפתח לשילוב:\n{{KEYWORDS_AUTOCOMPLETE}}\n\n**רשימת שימור:** המילים הבאות חייבות להופיע בתוכן:\n{{KEYWORDS_AUTOCOMPLETE_LIST}}\n\n## מאגרי מידע:\n- מאגר כללי: {{KNOWLEDGE_BASE_GENERAL}}\n- מאגר מסלולים: {{KNOWLEDGE_BASE_TRACKS}}\n\n## דומיינים מאושרים למידע פיננסי:\n{{APPROVED_DOMAINS}}\n\n**חובה לשמור את הדוח בנתיב:** {{OUTPUT_PATH}} זה שם הקובץ {{STEP2_REPORT}}",
+      "prompt_template": "קרא את קובץ ההוראות {{STEP2_PROMPT_FILE}} ובצע SEO ו-QA על העמוד {{PAGE_HTML_PATH}}.\n\nהשלב משלב שני תת-שלבים:\n- **חלק א: SEO והטמעה טכנית** - Schema, תגיות HEAD, שורטקודים\n- **חלק ב: QA ודיבאג** - בדיקות איכות מקיפות\n\n## דוח משלב קודם:\n{{STEP1_REPORT}}\n\n## נתוני עמוד:\n- **מילת מפתח ראשית:** {{PAGE_KEYWORD}}\n- **כמות מילים:** {{PAGE_WORD_COUNT}}\n\n## מילות מפתח שחייבות להופיע:\n{{KEYWORDS_AUTOCOMPLETE_LIST}}\n\n## מאגר מידע כללי (לפרטי Schema):\n{{KNOWLEDGE_BASE_GENERAL}}\n\n**חובה לשמור:**\n- דוח SEO + QA: {{OUTPUT_PATH}}\n- שם הקובץ: {{STEP2_REPORT}}\n- העמוד המעודכן: {{PAGE_HTML_PATH}} (עריכה במקום)",
       "shortcodes": [
         "STEP1_REPORT",
         "PAGE_HTML",
         "PAGE_KEYWORD",
-        "KEYWORDS_AUTOCOMPLETE",
-        "APPROVED_DOMAINS"
+        "PAGE_WORD_COUNT",
+        "KEYWORDS_AUTOCOMPLETE_LIST",
+        "KNOWLEDGE_BASE_GENERAL"
       ],
       "model": "claude-sonnet-4-5"
     },
     {
       "id": "step3",
-      "name": "SEO והטמעה טכנית",
+      "name": "ויזואליזציה + QA ויזואלי",
       "order": 3,
       "output": {
-        "path": "דוח SEO.md",
+        "path": "דוח ויזואליזציה וQA.md",
         "shortcode_name": "STEP3_REPORT"
       },
       "prompt_file": "פרומטים/הלוואות לעסקים/שלב 3.md",
-      "prompt_template": "קרא את קובץ ההוראות {{STEP3_PROMPT_FILE}}.\n\n## דוח התוכן משלב 2:\n{{STEP2_REPORT}}\n\n## העמוד לעריכה:\n{{PAGE_HTML_PATH}}\n\n## נתוני עמוד:\n- **מילת מפתח ראשית:** {{PAGE_KEYWORD}}\n\n## מאגר מידע כללי (לפרטי Schema):\n{{KNOWLEDGE_BASE_GENERAL}}\n\n**חובה לשמור את הדוח בנתיב:** {{OUTPUT_PATH}} זה שם הקובץ {{STEP3_REPORT}}",
+      "prompt_template": "קרא את קובץ ההוראות {{STEP3_PROMPT_FILE}} והוסף ויזואליזציות ו-QA על העמוד {{PAGE_HTML_PATH}}.\n\nהשלב משלב שני תת-שלבים:\n- **חלק א: הוספת אלמנטים ויזואליים** - עיצוב והעשרה גרפית\n- **חלק ב: QA ויזואליזציה** - בדיקות איכות ותקינות\n\n## דוח משלב קודם:\n{{STEP2_REPORT}}\n\n## נתוני עמוד:\n- **מילת מפתח ראשית:** {{PAGE_KEYWORD}}\n- **כמות מילים:** {{PAGE_WORD_COUNT}}\n\n## מקורות עיצוב:\n- קובץ עיצוב: מאגרי מידע/visual.html\n- כללי WordPress: מאגרי מידע/wordpress-ruls.html\n\n**חובה לשמור:**\n- דוח ויזואליזציה + QA: {{OUTPUT_PATH}}\n- שם הקובץ: {{STEP3_REPORT}}\n- העמוד הסופי: {{PAGE_HTML_PATH}} (עריכה במקום)",
       "shortcodes": [
         "STEP2_REPORT",
         "PAGE_HTML",
-        "PAGE_KEYWORD"
-      ],
-      "model": "claude-sonnet-4-5"
-    },
-    {
-      "id": "step4",
-      "name": "QA ודיבאג",
-      "order": 4,
-      "output": {
-        "path": "דוח QA תוכן.md",
-        "shortcode_name": "STEP4_REPORT"
-      },
-      "prompt_file": "פרומטים/הלוואות לעסקים/שלב 4.md",
-      "prompt_template": "קרא את קובץ ההוראות {{STEP4_PROMPT_FILE}}.\n\n## דוח SEO משלב 3:\n{{STEP3_REPORT}}\n\n## העמוד לבדיקה:\n{{PAGE_HTML_PATH}}\n\n## נתוני עמוד:\n- **מילת מפתח ראשית:** {{PAGE_KEYWORD}}\n\n## מילות מפתח שחייבות להופיע:\n{{KEYWORDS_AUTOCOMPLETE_LIST}}\n\n**חובה לשמור את הדוח בנתיב:** {{OUTPUT_PATH}} זה שם הקובץ {{STEP4_REPORT}}",
-      "shortcodes": [
-        "STEP3_REPORT",
-        "PAGE_HTML",
         "PAGE_KEYWORD",
-        "KEYWORDS_AUTOCOMPLETE"
-      ],
-      "model": "claude-haiku-4-5"
-    },
-    {
-      "id": "step5",
-      "name": "ויזואליזציה",
-      "order": 5,
-      "output": {
-        "path": "דוח ויזואליזציה.md",
-        "shortcode_name": "STEP5_REPORT"
-      },
-      "prompt_file": "פרומטים/הלוואות לעסקים/שלב 5.md",
-      "prompt_template": "קרא את קובץ ההוראות {{STEP5_PROMPT_FILE}}.\n\n## דוח QA משלב 4:\n{{STEP4_REPORT}}\n\n## העמוד לעריכה:\n{{PAGE_HTML_PATH}}\n\n## נתוני עמוד:\n- **מילת מפתח ראשית:** {{PAGE_KEYWORD}}\n\n## מקורות עיצוב:\n- קובץ עיצוב: מאגרי מידע/visual.html\n- כללי WordPress: מאגרי מידע/wordpress-ruls.html\n\n**חובה לשמור את הדוח בנתיב:** {{OUTPUT_PATH}} זה שם הקובץ {{STEP5_REPORT}}",
-      "shortcodes": [
-        "STEP4_REPORT",
-        "PAGE_HTML",
-        "PAGE_KEYWORD"
+        "PAGE_WORD_COUNT"
       ],
       "model": "claude-sonnet-4-5"
-    },
-    {
-      "id": "step6",
-      "name": "QA ויזואליזציה",
-      "order": 6,
-      "output": {
-        "path": "דוח סופי.md",
-        "shortcode_name": "STEP6_REPORT"
-      },
-      "prompt_file": "פרומטים/הלוואות לעסקים/שלב 6.md",
-      "prompt_template": "קרא את קובץ ההוראות {{STEP6_PROMPT_FILE}}.\n\n## דוח ויזואליזציה משלב 5:\n{{STEP5_REPORT}}\n\n## העמוד לבדיקה:\n{{PAGE_HTML_PATH}}\n\n## נתוני עמוד:\n- **מילת מפתח ראשית:** {{PAGE_KEYWORD}}\n\n## מקורות עיצוב לאימות:\n- קובץ עיצוב: מאגרי מידע/visual.html\n- כללי WordPress: מאגרי מידע/wordpress-ruls.html\n\n**חובה לשמור את הדוח בנתיב:** {{OUTPUT_PATH}} זה שם הקובץ {{STEP6_REPORT}}",
-      "shortcodes": [
-        "STEP5_REPORT",
-        "PAGE_HTML",
-        "PAGE_KEYWORD"
-      ],
-      "model": "claude-haiku-4-5"
     }
   ],
   "supports_full_auto": true,
   "type": "update",
-  "updated": "2026-01-06T11:38:52.823832",
+  "updated": "2026-01-07T10:50:00.000000",
   "wordpress": {
     "action": "update",
     "site": "main",
