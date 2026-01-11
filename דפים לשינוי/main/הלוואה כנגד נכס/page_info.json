@@ -1,8 +1,114 @@
 {
-  "page_name": "הלוואה כנגד נכס באישור מיידי בריבית הנמוכה בשוק - ✔️ רק תבקש",
+  "page_name": "הלוואה כנגד נכס",
   "keyword": "הלוואה כנגד נכס",
   "url": "https://loan-israel.co.il/property-loans/",
   "post_id": "1870",
   "word_count": 1825,
-  "is_special": true
+  "is_special": true,
+  "wp_post_title": "הלוואה כנגד נכס",
+  "fetched_keywords": {
+    "timestamp": "2026-01-09T12:36:44.344Z",
+    "main_keyword": "הלוואה כנגד נכס",
+    "clusters": [
+      {
+        "primary": "הלוואה כנגד נכס",
+        "source": "autocomplete",
+        "type": "unique",
+        "unique_part": "",
+        "variants": []
+      },
+      {
+        "primary": "הלוואה כנגד נכס בנק הפועלים",
+        "source": "autocomplete",
+        "type": "unique",
+        "unique_part": "בנק הפועלים",
+        "variants": []
+      },
+      {
+        "primary": "הלוואה כנגד נכס למסורבים",
+        "source": "autocomplete",
+        "type": "unique",
+        "unique_part": "למסורבים",
+        "variants": []
+      },
+      {
+        "primary": "הלוואה כנגד נכס קיים",
+        "source": "autocomplete",
+        "type": "unique",
+        "unique_part": "קיים",
+        "variants": []
+      },
+      {
+        "primary": "הלוואה כנגד נכס ריבית",
+        "source": "autocomplete",
+        "type": "unique",
+        "unique_part": "ריבית",
+        "variants": []
+      },
+      {
+        "primary": "הלוואה כנגד נכס בנק לאומי",
+        "source": "autocomplete",
+        "type": "unique",
+        "unique_part": "בנק לאומי",
+        "variants": []
+      },
+      {
+        "primary": "הלוואה כנגד נכס חברת ביטוח",
+        "source": "autocomplete",
+        "type": "unique",
+        "unique_part": "חברת ביטוח",
+        "variants": []
+      },
+      {
+        "primary": "הלוואה כנגד נכס בנק ישראל",
+        "source": "autocomplete",
+        "type": "unique",
+        "unique_part": "בנק ישראל",
+        "variants": []
+      },
+      {
+        "primary": "הלוואה כנגד נכס תנאים",
+        "source": "autocomplete",
+        "type": "unique",
+        "unique_part": "תנאים",
+        "variants": []
+      },
+      {
+        "primary": "הלוואה כנגד נכס בנק ירושלים",
+        "source": "autocomplete",
+        "type": "unique",
+        "unique_part": "בנק ירושלים",
+        "variants": []
+      }
+    ],
+    "final_keywords": [
+      "הלוואה כנגד נכס",
+      "הלוואה כנגד נכס בנק הפועלים",
+      "הלוואה כנגד נכס למסורבים",
+      "הלוואה כנגד נכס קיים",
+      "הלוואה כנגד נכס ריבית",
+      "הלוואה כנגד נכס בנק לאומי",
+      "הלוואה כנגד נכס חברת ביטוח",
+      "הלוואה כנגד נכס בנק ישראל",
+      "הלוואה כנגד נכס תנאים",
+      "הלוואה כנגד נכס בנק ירושלים"
+    ],
+    "unique_topics": [
+      "בנק הפועלים",
+      "למסורבים",
+      "קיים",
+      "ריבית",
+      "בנק לאומי",
+      "חברת ביטוח",
+      "בנק ישראל",
+      "תנאים",
+      "בנק ירושלים"
+    ],
+    "rank_position": null,
+    "rank_checked_url": "https://loan-israel.co.il/property-loans/",
+    "organic_results": [],
+    "ai_mode_results": [],
+    "ai_rank_position": null,
+    "competitor_data": []
+  }
 }

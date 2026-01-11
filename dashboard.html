@@ -457,6 +457,56 @@
             color: var(--text-muted);
         }
         
+        /* Toggle Switch */
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 26px;
+            cursor: pointer;
+        }
+        
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--bg-secondary);
+            transition: 0.3s;
+            border-radius: 26px;
+            border: 1px solid var(--border);
+        }
+        
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: #888;
+            transition: 0.3s;
+            border-radius: 50%;
+        }
+        
+        .toggle-switch input:checked + .toggle-slider {
+            background-color: rgba(74, 222, 128, 0.2);
+            border-color: #4ade80;
+        }
+        
+        .toggle-switch input:checked + .toggle-slider:before {
+            transform: translateX(24px);
+            background-color: #4ade80;
+        }
+        
         .site-config-row {
             display: flex;
             gap: 1rem;
@@ -560,6 +610,45 @@
             border-color: #b91c1c !important;
         }
         
+        /* Removed modal-centered class as we use direct positioning on modal-content */
+        
+        /* System Modal base styles - Fixed viewport centering using absolute positioning method */
+        .system-modal {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            background: rgba(0,0,0,0.7) !important;
+            z-index: 2147483647 !important; /* Max z-index */
+            margin: 0 !important;
+            padding: 0 !important;
+            display: none; /* Hidden by default */
+            /* Reset any transforms or flex that might be inherited */
+            transform: none !important;
+        }
+        
+        .system-modal[style*="display: flex"],
+        .system-modal[style*="display: block"] {
+            display: block !important; /* Force block to allow child positioning */
+        }
+        
+        .system-modal .modal-content {
+            position: fixed !important;
+            top: 50% !important;
+            left: 50% !important;
+            transform: translate(-50%, -50%) !important;
+            background: var(--bg-secondary) !important;
+            padding: 2rem !important;
+            border-radius: 12px !important;
+            max-width: 500px !important;
+            width: 90% !important;
+            border: 1px solid var(--border) !important;
+            max-height: 90vh !important;
+            overflow-y: auto !important;
+            margin: 0 !important; /* Reset margin */
+        }
+        
         .btn-mini.btn-reset {
             color: var(--warning);
         }
@@ -567,6 +656,17 @@
         .btn-mini.btn-reset:hover {
             background: rgba(251, 191, 36, 0.2);
             border-color: var(--warning);
+        }
+        
+        .btn-mini.btn-wp {
+            color: #22c55e;
+            background: rgba(34, 197, 94, 0.1);
+            border-color: rgba(34, 197, 94, 0.3);
+        }
+        
+        .btn-mini.btn-wp:hover {
+            background: rgba(34, 197, 94, 0.25);
+            border-color: #22c55e;
         }
         
         .btn-seo {
@@ -2804,6 +2904,20 @@
             flex: 1;
         }
         
+        /* Title Suffix Badge */
+        .title-suffix-badge {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(139, 92, 246, 0.2);
+            color: #a78bfa;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            border: 1px dashed rgba(139, 92, 246, 0.4);
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        
         .meta-edit-btn {
             padding: 0.5rem !important;
             min-width: 40px;
@@ -4691,6 +4805,285 @@
             color: var(--accent);
         }
         
+        /* ============ Reports Tab Styles ============ */
+        
+        .reports-section {
+            display: none;
+            position: fixed;
+            top: 60px;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--bg-primary);
+            z-index: 100;
+            overflow-y: auto;
+            padding: 2rem;
+        }
+        
+        .reports-section.active {
+            display: block;
+        }
+        
+        .reports-container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        .reports-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .reports-header h2 {
+            margin: 0;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+        }
+        
+        .reports-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .reports-tabs .report-type-tab {
+            padding: 0.75rem 1.5rem;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.95rem;
+        }
+        
+        .reports-tabs .report-type-tab:hover {
+            border-color: var(--accent);
+            color: var(--text-primary);
+        }
+        
+        .reports-tabs .report-type-tab.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: white;
+        }
+        
+        .report-content {
+            display: none;
+        }
+        
+        .report-content.active {
+            display: block;
+        }
+        
+        .report-stats {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .report-stat-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1rem 1.5rem;
+            min-width: 150px;
+        }
+        
+        .report-stat-card .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--accent);
+        }
+        
+        .report-stat-card .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+        
+        .report-stat-card.success .stat-value {
+            color: var(--success);
+        }
+        
+        .report-stat-card.warning .stat-value {
+            color: var(--warning);
+        }
+        
+        .report-table-container {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .report-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .report-table th,
+        .report-table td {
+            padding: 0.75rem 1rem;
+            text-align: right;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .report-table th {
+            background: var(--bg-tertiary);
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .report-table tr:hover {
+            background: rgba(233, 69, 96, 0.1);
+        }
+        
+        .report-table .page-name {
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+        
+        .report-table .site-badge {
+            display: inline-block;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+        }
+        
+        .report-table .context-text {
+            font-family: monospace;
+            font-size: 0.85rem;
+            background: var(--bg-primary);
+            padding: 0.5rem;
+            border-radius: 4px;
+            max-width: 400px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        
+        .report-table .context-text .highlight {
+            background: var(--warning);
+            color: #000;
+            padding: 0 2px;
+            border-radius: 2px;
+        }
+        
+        .report-table .action-buttons {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .report-table .btn-action {
+            padding: 0.4rem 0.8rem;
+            font-size: 0.8rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .report-table .btn-action.btn-upload {
+            background: var(--success);
+            color: white;
+        }
+        
+        .report-table .btn-action.btn-remove {
+            background: var(--accent);
+            color: white;
+        }
+        
+        .report-table .btn-action.btn-edit {
+            background: var(--info);
+            color: white;
+        }
+        
+        .report-table .btn-action.btn-replace {
+            background: var(--warning);
+            color: #000;
+        }
+        
+        .report-table .btn-action:hover {
+            opacity: 0.8;
+            transform: translateY(-1px);
+        }
+        
+        .report-config {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .report-config label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .report-config input[type="text"] {
+            width: 100%;
+            padding: 0.75rem;
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+        }
+        
+        .report-config input[type="text"]:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+        
+        .report-loading {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-secondary);
+        }
+        
+        .report-loading .spinner {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--border);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        .anchor-text {
+            max-width: 200px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            color: var(--info);
+        }
+        
+        .whatsapp-link {
+            font-family: monospace;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            max-width: 250px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        
         /* ============ Duplicates Tab Styles ============ */
         
         .duplicates-section {
@@ -5827,6 +6220,7 @@
         <h1>🚀 מערכת ניהול אתרים - After You</h1>
         <div class="header-controls">
             <div class="tabs">
+                <button class="tab" data-tab="reports">📊 דוחות</button>
                 <button class="tab" data-tab="archive">📦 ארכיון</button>
                 <button class="tab" data-tab="duplicates">📋 כפילויות</button>
                 <button class="tab" data-tab="agents">🤖 סוכנים</button>
@@ -5864,6 +6258,7 @@
             <div class="sidebar-header">
                 <h2>📁 עמודים</h2>
                 <div style="display: flex; gap: 0.3rem;">
+                    <button class="btn btn-small" style="background: #22c55e; color: white; font-size: 11px;" onclick="uploadToWordPress()" title="העלה לוורדפרס">📤 העלה ל-WP</button>
                     <button class="btn btn-small btn-secondary" onclick="loadPages()" title="רענן">🔄</button>
                     <button class="btn btn-small btn-secondary" onclick="clearAllStatus()" title="נקה סטטוסים">🧹</button>
                     <button class="btn btn-small btn-secondary" onclick="toggleBatchSelectionMode()" title="בחירה מרובה">☑️</button>
@@ -5901,6 +6296,9 @@
             <div id="customDateRange" style="display: none; margin-top: 0.5rem;">
                 <label>מתאריך: <input type="date" id="uploadDateFrom" onchange="renderPageList()"></label>
                 <label>עד תאריך: <input type="date" id="uploadDateTo" onchange="renderPageList()"></label>
+            </div>
+            <div id="pageFilterCount" style="padding: 5px 10px; font-size: 12px; color: #888; text-align: center; border-bottom: 1px solid #333;">
+                <!-- Populated by renderPageList() -->
             </div>
             <div class="batch-selection-bar" id="batchSelectionBar" style="display:none;">
                 <span class="batch-count" id="batchCount">0 עמודים נבחרו</span>
@@ -5963,8 +6361,16 @@
                 <div class="panel" id="previewPanel">
                     <div class="panel-header">
                         <span>👁️ תצוגה מקדימה</span>
-                        <div style="display: flex; gap: 0.5rem;">
-                            <a href="#" id="viewOnSiteBtn" class="btn btn-small" target="_blank" title="צפה באתר" style="display: none; text-decoration: none;">
+                        <div style="display: flex; gap: 0.5rem; align-items: center;">
+                            <!-- Preview source tabs -->
+                            <div class="preview-tabs" style="display: flex; gap: 2px; margin-right: 10px;">
+                                <button class="preview-tab active" id="previewTabCurrent" onclick="switchPreviewTab('current')" style="padding: 3px 8px; font-size: 11px; border: 1px solid #444; background: #3b82f6; color: white; border-radius: 4px 0 0 4px; cursor: pointer;">📄 נוכחי</button>
+                                <button class="preview-tab" id="previewTabBackup" onclick="switchPreviewTab('backup')" style="padding: 3px 8px; font-size: 11px; border: 1px solid #444; background: #333; color: #888; border-radius: 0 4px 4px 0; cursor: pointer;">💾 גיבוי</button>
+                            </div>
+                            <button id="viewLocalBtn" class="btn btn-small" onclick="copyLocalPath()" title="העתק נתיב מקומי" style="display: none;">
+                                🖥️ מקומי
+                            </button>
+                            <a href="#" id="viewOnSiteBtn" class="btn btn-small" target="_blank" title="צפה באתר" style="display: none; text-decoration: none; color: #fff !important;">
                                 🔗 צפה באתר
                             </a>
                             <button class="btn btn-small" onclick="loadPreview()" title="רענן תצוגה">
@@ -6256,6 +6662,157 @@
 
                         <!-- מאגרי מידע הועברו לסיידבר הימני -->
                     </aside>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reports Section -->
+    <section class="reports-section" id="reportsSection">
+        <div class="reports-container">
+            <!-- Header -->
+            <div class="reports-header">
+                <h2>📊 דוחות מערכת</h2>
+                <div style="display: flex; gap: 0.5rem;">
+                    <button class="btn btn-secondary" onclick="refreshCurrentReport()">🔄 רענן</button>
+                </div>
+            </div>
+            
+            <!-- Report Type Tabs -->
+            <div class="reports-tabs">
+                <button class="report-type-tab active" data-report="interest-rate" onclick="switchReportType('interest-rate')">💰 עדכוני ריבית</button>
+                <button class="report-type-tab" data-report="whatsapp" onclick="switchReportType('whatsapp')">📱 קישורי WhatsApp</button>
+                <button class="report-type-tab" data-report="year-update" onclick="switchReportType('year-update')">📅 עדכון שנה</button>
+            </div>
+            
+            <!-- Interest Rate Report -->
+            <div class="report-content active" id="reportInterestRate">
+                <div class="report-config">
+                    <label>המשפט המעודכן הנוכחי:</label>
+                    <input type="text" id="currentInterestSentence" value="💡 הריביות בתוכן מעודכנות לפי ריבית פריים 5.5% (ריבית בנק ישראל 4%, נכון לינואר 2026)" />
+                    <div style="margin-top: 0.5rem; display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
+                        <button class="btn btn-secondary" onclick="scanInterestRate()">🔍 סרוק עמודים</button>
+                        <div style="display: flex; gap: 0.5rem; align-items: center;">
+                            <label style="font-size: 0.9rem;">סטטוס:</label>
+                            <select id="interestRateFilter" onchange="filterInterestRateTable()" style="padding: 0.4rem; border-radius: 4px; background: var(--bg-tertiary); color: var(--text); border: 1px solid var(--border);">
+                                <option value="all">הכל</option>
+                                <option value="updated_uploaded">✅ עודכן + עלה</option>
+                                <option value="updated_not_uploaded">⚠️ עודכן, לא עלה</option>
+                                <option value="outdated">❌ לא מעודכן</option>
+                                <option value="not_found">➖ אין משפט ריבית</option>
+                                <option value="special">⭐ עמודים מיוחדים</option>
+                            </select>
+                        </div>
+                        <div style="display: flex; gap: 0.5rem; align-items: center;">
+                            <label style="font-size: 0.9rem;">אתרים:</label>
+                            <label style="display: flex; align-items: center; gap: 0.2rem; cursor: pointer;">
+                                <input type="checkbox" id="interestRateSiteMain" checked onchange="filterInterestRateTable()" style="cursor: pointer;">
+                                <span style="font-size: 0.85rem;">ראשי</span>
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 0.2rem; cursor: pointer;">
+                                <input type="checkbox" id="interestRateSiteBusiness" checked onchange="filterInterestRateTable()" style="cursor: pointer;">
+                                <span style="font-size: 0.85rem;">עסקים</span>
+                            </label>
+                        </div>
+                        <span id="interestRateFilterInfo" style="font-size: 0.85rem; color: var(--text-secondary);"></span>
+                    </div>
+                </div>
+                
+                <div class="report-stats" id="interestRateStats">
+                    <!-- Stats populated by JS -->
+                </div>
+                
+                <div class="report-table-container">
+                    <table class="report-table">
+                        <thead>
+                            <tr>
+                                <th>עמוד</th>
+                                <th>אתר</th>
+                                <th>סטטוס</th>
+                                <th>עלה לוורדפרס</th>
+                                <th>פעולות</th>
+                            </tr>
+                        </thead>
+                        <tbody id="interestRateTableBody">
+                            <tr><td colspan="5" class="report-loading"><div class="spinner"></div><br>לחץ על "סרוק עמודים" להתחלה</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- WhatsApp Links Report -->
+            <div class="report-content" id="reportWhatsApp">
+                <div class="report-config">
+                    <label>סינון לפי אתר:</label>
+                    <select id="whatsappSiteFilter" onchange="scanWhatsAppLinks()">
+                        <option value="all">הכל</option>
+                        <option value="main">אתר ראשי</option>
+                        <option value="business">עסקים</option>
+                    </select>
+                    <button class="btn btn-secondary" style="margin-right: 1rem;" onclick="scanWhatsAppLinks()">🔍 סרוק קישורים</button>
+                </div>
+                
+                <div class="report-stats" id="whatsappStats">
+                    <!-- Stats populated by JS -->
+                </div>
+                
+                <div class="report-table-container">
+                    <table class="report-table">
+                        <thead>
+                            <tr>
+                                <th>עמוד</th>
+                                <th>אתר</th>
+                                <th>שורה</th>
+                                <th>קישור</th>
+                                <th>אנקור</th>
+                                <th>פעולות</th>
+                            </tr>
+                        </thead>
+                        <tbody id="whatsappTableBody">
+                            <tr><td colspan="6" class="report-loading"><div class="spinner"></div><br>לחץ על "סרוק קישורים" להתחלה</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Year Update Report -->
+            <div class="report-content" id="reportYearUpdate">
+                <div class="report-config">
+                    <label>החלף שנה:</label>
+                    <div style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;">
+                        <input type="text" id="yearFrom" value="2025" style="width: 80px; text-align: center;" />
+                        <span style="color: var(--text-secondary);">→</span>
+                        <input type="text" id="yearTo" value="2026" style="width: 80px; text-align: center;" />
+                        <button class="btn btn-secondary" onclick="scanYearOccurrences()">🔍 סרוק</button>
+                        <div style="display: flex; gap: 0.5rem; align-items: center; margin-right: 1rem;">
+                            <label style="display: flex; align-items: center; gap: 0.3rem; cursor: pointer; font-size: 0.9rem;">
+                                <input type="checkbox" id="yearHideLinks" checked onchange="filterYearUpdateTable()" style="cursor: pointer;">
+                                <span>🖼️ הסתר קישורי קבצים</span>
+                            </label>
+                        </div>
+                        <span id="yearFilterInfo" style="font-size: 0.85rem; color: var(--text-secondary);"></span>
+                    </div>
+                </div>
+                
+                <div class="report-stats" id="yearUpdateStats">
+                    <!-- Stats populated by JS -->
+                </div>
+                
+                <div class="report-table-container">
+                    <table class="report-table">
+                        <thead>
+                            <tr>
+                                <th>עמוד</th>
+                                <th>אתר</th>
+                                <th>שורה</th>
+                                <th>הקשר</th>
+                                <th>פעולות</th>
+                            </tr>
+                        </thead>
+                        <tbody id="yearUpdateTableBody">
+                            <tr><td colspan="5" class="report-loading"><div class="spinner"></div><br>לחץ על "סרוק" להתחלה</td></tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -6635,7 +7192,14 @@
                 <div id="settingsSites">
                     <div class="sites-management">
                         
-                        <!-- Main Site Card -->
+                        <!-- Sync WordPress Titles Button -->
+                        <div style="margin-bottom: 1rem; padding: 0.75rem; background: var(--bg-secondary); border-radius: 8px; display: flex; align-items: center; gap: 1rem;">
+                            <span style="flex: 1;">🔄 סנכרן כותרות עמודים מוורדפרס לכל הדפים</span>
+                            <button class="btn btn-info" onclick="syncWpTitles()" id="syncWpTitlesBtn">
+                                📥 סנכרן כותרות
+                            </button>
+                        </div>
+                        
                         <!-- Site Config Cards - Populated dynamically by renderSiteConfigCards() -->
                         <div id="siteConfigContainer">
                             <!-- Dynamic site cards will be rendered here -->
@@ -6895,16 +7459,33 @@
                         </div>
                     </div>
 
+                    <!-- WordPress Post Title (separate from Yoast) -->
+                    <div class="upload-section">
+                        <h3>📝 כותרת עמוד (WordPress Post Title)</h3>
+                        <div class="form-group">
+                            <label>כותרת העמוד בוורדפרס - חדש:</label>
+                            <div class="meta-input-wrapper">
+                                <input type="text" id="uploadWpTitle" placeholder="כותרת העמוד בוורדפרס" maxlength="100">
+                            </div>
+                            <small><span style="color: #4ade80;">חדש:</span> <span id="uploadWpTitleCount">0</span>/100 תווים</small>
+                            <div class="backup-value-display" id="backupWpTitleDisplay" style="display: none;">
+                                <span class="backup-label">📋 ישן (<span id="backupWpTitleCount">0</span>/100):</span>
+                                <span class="backup-text" id="backupWpTitleText">-</span>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Metadata Editor -->
                     <div class="upload-section">
                         <h3>✏️ עריכת מטא-תגיות (Yoast SEO)</h3>
                         <div class="form-group">
-                            <label>כותרת (Title) - חדש:</label>
-                            <div class="meta-input-wrapper">
-                                <input type="text" id="uploadTitle" placeholder="כותרת העמוד" maxlength="70">
+                            <label>כותרת SEO (Title) - חדש:</label>
+                            <div class="meta-input-wrapper" style="position: relative;">
+                                <input type="text" id="uploadTitle" placeholder="כותרת SEO (בלי סיומת)" maxlength="70" oninput="updateTitleCharCountWithSuffix()">
+                                <span id="titleSuffixPreview" class="title-suffix-badge" style="display: none;"></span>
                                 <button class="btn btn-small meta-edit-btn" onclick="showMetaEditPopup('title')" title="שכתוב עם AI">✨</button>
                             </div>
-                            <small><span style="color: #4ade80;">חדש:</span> <span id="uploadTitleCount">0</span>/70 תווים</small>
+                            <small><span style="color: #4ade80;">חדש:</span> <span id="uploadTitleCount">0</span><span id="titleSuffixCount"></span>/70 תווים</small>
                             <div class="backup-value-display" id="backupTitleDisplay" style="display: none;">
                                 <span class="backup-label">📋 ישן (<span id="backupTitleCount">0</span>/70):</span>
                                 <span class="backup-text" id="backupTitleText">-</span>
@@ -6948,8 +7529,11 @@
                 <!-- Upload new content row -->
                 <div style="display: flex; flex-wrap: wrap; gap: 10px; width: 100%; justify-content: flex-end;">
                     <span style="color: #4ade80; font-weight: bold; margin-left: auto;">📤 העלה ל-WordPress:</span>
-                    <button class="btn btn-info" onclick="uploadToWP('title')" id="uploadTitleBtn" disabled title="עדכן רק את ה-Title">
-                        📝 Title
+                    <button class="btn btn-secondary" onclick="uploadWpPostTitle()" id="uploadWpTitleBtn" disabled title="עדכן רק את כותרת העמוד (לא Yoast)">
+                        📝 WP Title
+                    </button>
+                    <button class="btn btn-info" onclick="uploadToWP('title')" id="uploadTitleBtn" disabled title="עדכן רק את ה-Yoast Title">
+                        📝 SEO Title
                     </button>
                     <button class="btn btn-info" onclick="uploadToWP('description')" id="uploadDescBtn" disabled title="עדכן רק את ה-Description">
                         📝 Description
@@ -9214,7 +9798,9 @@ console.log('🚀 KeywordDensityAnalyzer, SpamAnalyzer, HeaderQualityScorer & In
         let multiAgentStatusMap = {};  // Track status for ALL agents per page
         let openKeywordsPanels = new Set();  // Track which keywords panels are open
         let siteConfigCache = {};  // Cache site configuration for dynamic UI
+        let wpSitesConfig = {};  // WordPress sites configuration (including title suffix)
         let preferredAgentOrder = [];  // Preferred order for agent dropdown (from config)
+        let baseDir = '';  // Base directory path from server
         
         // Load UI configuration from server
         async function loadUIConfig() {
@@ -9222,7 +9808,12 @@ console.log('🚀 KeywordDensityAnalyzer, SpamAnalyzer, HeaderQualityScorer & In
                 const result = await apiCall('/api/config');
                 if (result.success && result.config) {
                     preferredAgentOrder = result.config.ui?.preferred_agent_order || [];
-                    console.log('⚙️ UI config loaded, preferred order:', preferredAgentOrder);
+                    baseDir = result.config.base_dir || '';
+                    // Store WordPress sites config globally for title suffix feature
+                    if (result.config.wordpress?.sites) {
+                        wpSitesConfig = result.config.wordpress.sites;
+                    }
+                    console.log('⚙️ UI config loaded, base_dir:', baseDir, ', wpSites:', Object.keys(wpSitesConfig));
                 }
             } catch (e) {
                 console.error('Error loading UI config:', e);
@@ -9380,6 +9971,28 @@ console.log('🚀 KeywordDensityAnalyzer, SpamAnalyzer, HeaderQualityScorer & In
                                 </div>
                                 <button class="btn btn-secondary" onclick="testWpConnection('${siteId}')">🔌 בדוק</button>
                             </div>
+                        </div>
+                        
+                        <div class="site-config-section">
+                            <h4>🏷️ סיומת כותרת (Title Suffix)</h4>
+                            <div class="site-config-row">
+                                <div class="form-group" style="flex:2">
+                                    <label>טקסט הסיומת</label>
+                                    <input type="text" data-field="title_suffix" value="${wpSite.title_suffix || ''}" placeholder=" - ✔️ רק תבקש">
+                                </div>
+                                <div class="form-group">
+                                    <label>פעיל</label>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" data-field="title_suffix_enabled" ${wpSite.title_suffix_enabled ? 'checked' : ''}>
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </div>
+                                <div class="suffix-preview" style="display: flex; align-items: center; gap: 5px;">
+                                    <span style="color: #888; font-size: 0.85rem;">אורך:</span>
+                                    <span class="suffix-length-badge" style="background: rgba(74, 222, 128, 0.2); color: #4ade80; padding: 2px 8px; border-radius: 4px; font-size: 0.85rem;">${(wpSite.title_suffix || '').length} תווים</span>
+                                </div>
+                            </div>
+                            <small style="color: #888; display: block; margin-top: 5px;">הסיומת תתווסף אוטומטית לכותרות ע"י תבנית וורדפרס. הסוכן ייצר כותרות בלעדיה.</small>
                         </div>
                     </div>
                 `;
@@ -9923,6 +10536,26 @@ console.log('🚀 KeywordDensityAnalyzer, SpamAnalyzer, HeaderQualityScorer & In
                 sortedPages.sort((a, b) => a.name.localeCompare(b.name, 'he'));
             }
             
+            // Update filtered page count display
+            const totalCount = pages.filter(p => 
+                !p.name.toLowerCase().includes('_backup') && 
+                !p.path.toLowerCase().includes('_backup') &&
+                !p.name.toLowerCase().includes('backup_meta') &&
+                !p.path.toLowerCase().includes('backup_meta')
+            ).length;
+            const filteredCount = sortedPages.length;
+            
+            const countEl = document.getElementById('pageFilterCount');
+            if (countEl) {
+                if (filteredCount < totalCount) {
+                    countEl.textContent = `מציג ${filteredCount} מתוך ${totalCount} עמודים`;
+                    countEl.style.color = '#f59e0b';  // Orange when filtered
+                } else {
+                    countEl.textContent = `${totalCount} עמודים`;
+                    countEl.style.color = '#888';  // Gray when showing all
+                }
+            }
+            
             // Separate calculator pages from regular pages
             const calculatorPages = sortedPages.filter(page => page.name.includes('מחשבון'));
             const regularPages = sortedPages.filter(page => !page.name.includes('מחשבון'));
@@ -10079,6 +10712,7 @@ console.log('🚀 KeywordDensityAnalyzer, SpamAnalyzer, HeaderQualityScorer & In
                         <button class="btn-mini btn-seo" onclick="event.stopPropagation(); openSeoReportDirect(${originalIndex})" title="דוח SEO (מושך גיבוי אוטומטי)">📊</button>
                         <button class="btn-mini btn-reset" data-reset-path="${page.path.replace(/"/g, '&quot;')}" onclick="event.stopPropagation(); resetPage(this.dataset.resetPath)" title="איפוס עמוד - מחיקת דוחות סוכנים ושחזור מגיבוי">🔄</button>
                         <button class="btn-mini btn-delete" onclick="event.stopPropagation(); confirmDeletePage('${page.path.replace(/\\/g, '/').replace(/'/g, "\\'")}')" title="מחיקת עמוד מהמערכת ומ-WordPress">🗑️</button>
+                        <button class="btn-mini btn-wp" onclick="event.stopPropagation(); openUploadModalForPage(${originalIndex})" title="העלה ל-WordPress">📤</button>
                     </div>
                     <div class="page-keywords-panel" id="keywords-${originalIndex}" style="display: none;">
                         <div class="keywords-loading" style="display: none;">⏳ סורק...</div>
@@ -10252,14 +10886,87 @@ console.log('🚀 KeywordDensityAnalyzer, SpamAnalyzer, HeaderQualityScorer & In
             }
         }
 
-        async function loadPreview() {
+        // Track current preview source
+        let currentPreviewSource = 'current';
+        
+        async function loadPreview(source = null) {
             if (!selectedPage) return;
             const previewContent = document.getElementById('previewContent');
             const encodedPath = encodeURIComponent(selectedPage.path);
-            previewContent.innerHTML = `<iframe src="/api/preview/${encodedPath}" id="previewFrame" onload="onPreviewLoad()"></iframe>`;
+            
+            // Use provided source or current source
+            const previewSource = source || currentPreviewSource;
+            currentPreviewSource = previewSource;
+            
+            if (previewSource === 'backup') {
+                // Load backup file instead
+                const backupPath = selectedPage.path.replace(/\.html$/i, '_backup.html');
+                const encodedBackupPath = encodeURIComponent(backupPath);
+                previewContent.innerHTML = `<iframe src="/api/preview/${encodedBackupPath}" id="previewFrame" onload="onPreviewLoad()"></iframe>`;
+            } else {
+                // Load current file
+                previewContent.innerHTML = `<iframe src="/api/preview/${encodedPath}" id="previewFrame" onload="onPreviewLoad()"></iframe>`;
+            }
             
             // Load metadata from page_info and backup
             await loadPreviewMetadata();
+        }
+        
+        function switchPreviewTab(source) {
+            currentPreviewSource = source;
+            
+            // Update tab styles
+            const currentTab = document.getElementById('previewTabCurrent');
+            const backupTab = document.getElementById('previewTabBackup');
+            
+            if (source === 'current') {
+                currentTab.style.background = '#3b82f6';
+                currentTab.style.color = 'white';
+                backupTab.style.background = '#333';
+                backupTab.style.color = '#888';
+            } else {
+                currentTab.style.background = '#333';
+                currentTab.style.color = '#888';
+                backupTab.style.background = '#f59e0b';
+                backupTab.style.color = 'white';
+            }
+            
+            // Reload preview with new source
+            loadPreview(source);
+        }
+        
+        function copyLocalPath() {
+            if (!selectedPage?.path) {
+                showToast('לא נבחר עמוד', 'error');
+                return;
+            }
+            
+            // Construct full path by joining base_dir with relative path
+            let fullPath = selectedPage.path;
+            if (baseDir) {
+                // Normalize path separators and join
+                const baseDirNorm = baseDir.replace(/\//g, '\\');
+                const relPath = selectedPage.path.replace(/\//g, '\\');
+                // Check if relPath already starts with baseDir
+                if (!relPath.startsWith(baseDirNorm)) {
+                    fullPath = baseDirNorm + '\\' + relPath;
+                } else {
+                    fullPath = relPath;
+                }
+            }
+            
+            navigator.clipboard.writeText(fullPath).then(() => {
+                showToast(`📋 הנתיב הועתק`, 'success');
+            }).catch(err => {
+                // Fallback for older browsers
+                const textarea = document.createElement('textarea');
+                textarea.value = fullPath;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                showToast(`📋 הנתיב הועתק`, 'success');
+            });
         }
         
         function onPreviewLoad() {
@@ -10321,6 +11028,12 @@ console.log('🚀 KeywordDensityAnalyzer, SpamAnalyzer, HeaderQualityScorer & In
                     } else {
                         viewOnSiteBtn.style.display = 'none';
                     }
+                }
+                
+                // Update "View Local" button (copies path to clipboard)
+                const viewLocalBtn = document.getElementById('viewLocalBtn');
+                if (viewLocalBtn && selectedPage?.path) {
+                    viewLocalBtn.style.display = 'inline-flex';
                 }
                 
                 // Get backup metadata (for title/description)
@@ -12616,6 +13329,14 @@ ${content}
             url: null
         };
 
+        // Open upload modal for a specific page from sidebar
+        async function openUploadModalForPage(pageIndex) {
+            // First select the page
+            await selectPage(pageIndex);
+            // Then open upload modal
+            uploadToWordPress();
+        }
+        
         async function uploadToWordPress() {
             if (!selectedPage) {
                 showToast('בחר עמוד קודם', 'error');
@@ -12628,6 +13349,7 @@ ${content}
             document.getElementById('uploadContent').style.display = 'none';
             // Disable all upload buttons
             document.getElementById('confirmUploadBtn').disabled = true;
+            document.getElementById('uploadWpTitleBtn').disabled = true;
             document.getElementById('uploadTitleBtn').disabled = true;
             document.getElementById('uploadDescBtn').disabled = true;
             document.getElementById('uploadContentBtn').disabled = true;
@@ -12690,6 +13412,7 @@ ${content}
                 document.getElementById('uploadContent').style.display = 'block';
                 // Enable all upload buttons
                 document.getElementById('confirmUploadBtn').disabled = false;
+                document.getElementById('uploadWpTitleBtn').disabled = false;
                 document.getElementById('uploadTitleBtn').disabled = false;
                 document.getElementById('uploadDescBtn').disabled = false;
                 document.getElementById('uploadContentBtn').disabled = false;
@@ -12764,6 +13487,22 @@ ${content}
                 backupDescDisplay.style.display = 'none';
             }
 
+            // WordPress Post Title (separate from Yoast)
+            const wpTitleInput = document.getElementById('uploadWpTitle');
+            const currentWpTitle = uploadState.pageInfo?.wp_post_title || uploadState.pageInfo?.page_name || uploadState.backupMeta?.wp_post_title || '';
+            wpTitleInput.value = currentWpTitle;
+            
+            // Show backup WP Title if available
+            const backupWpTitleDisplay = document.getElementById('backupWpTitleDisplay');
+            if (uploadState.backupMeta?.wp_post_title) {
+                const backupWpTitle = uploadState.backupMeta.wp_post_title;
+                document.getElementById('backupWpTitleText').textContent = backupWpTitle;
+                document.getElementById('backupWpTitleCount').textContent = backupWpTitle.length;
+                backupWpTitleDisplay.style.display = 'block';
+            } else {
+                backupWpTitleDisplay.style.display = 'none';
+            }
+            
             // Metadata editor - use page_info.json values (if updated after upload) 
             // Fall back to backup meta if no current value
             const titleInput = document.getElementById('uploadTitle');
@@ -12776,12 +13515,65 @@ ${content}
             titleInput.value = currentTitle;
             descInput.value = currentDesc;
             
-            updateCharCount('uploadTitle', 'uploadTitleCount', 70);
+            // Setup suffix preview if enabled (must be before char count update)
+            setupSuffixPreview();
+            
+            // Update character counts (after suffix is set up)
+            updateCharCount('uploadWpTitle', 'uploadWpTitleCount', 100);
+            updateTitleCharCountWithSuffix();
             updateCharCount('uploadDescription', 'uploadDescCount', 160);
 
             // Add event listeners for char count
-            titleInput.oninput = () => updateCharCount('uploadTitle', 'uploadTitleCount', 70);
+            wpTitleInput.oninput = () => updateCharCount('uploadWpTitle', 'uploadWpTitleCount', 100);
+            titleInput.oninput = () => updateTitleCharCountWithSuffix();
             descInput.oninput = () => updateCharCount('uploadDescription', 'uploadDescCount', 160);
+        }
+        
+        function getSiteSuffix(siteId) {
+            // Get suffix from wpSitesConfig (loaded via loadUIConfig)
+            const site = wpSitesConfig?.[siteId || 'main'];
+            if (site?.title_suffix_enabled && site?.title_suffix) {
+                return site.title_suffix;
+            }
+            return '';
+        }
+        
+        function setupSuffixPreview() {
+            const site = selectedPage?.site || 'main';
+            const suffix = getSiteSuffix(site);
+            const suffixPreview = document.getElementById('titleSuffixPreview');
+            const suffixCountSpan = document.getElementById('titleSuffixCount');
+            
+            if (suffix && suffix.length > 0) {
+                suffixPreview.textContent = suffix;
+                suffixPreview.style.display = 'inline-flex';
+                suffixCountSpan.textContent = ` + ${suffix.length}`;
+            } else {
+                suffixPreview.style.display = 'none';
+                suffixCountSpan.textContent = '';
+            }
+        }
+        
+        function updateTitleCharCountWithSuffix() {
+            const input = document.getElementById('uploadTitle');
+            const count = document.getElementById('uploadTitleCount');
+            const suffixCountSpan = document.getElementById('titleSuffixCount');
+            const site = selectedPage?.site || 'main';
+            const suffix = getSiteSuffix(site);
+            const suffixLen = suffix ? suffix.length : 0;
+            const titleLen = input.value.length;
+            const total = titleLen + suffixLen;
+            const maxLength = 70;
+            
+            if (suffixLen > 0) {
+                count.textContent = `${titleLen}`;
+                suffixCountSpan.textContent = ` + ${suffixLen} = ${total}`;
+            } else {
+                count.textContent = `${titleLen}/${maxLength} תווים`;
+                suffixCountSpan.textContent = '';
+            }
+            
+            count.style.color = total > maxLength ? 'var(--accent)' : 'var(--text-secondary)';
         }
 
         function updateCharCount(inputId, countId, maxLength) {
@@ -14271,7 +15063,7 @@ ${content}
         function applyMetaOption(target, text) {
             if (target === 'title') {
                 document.getElementById('uploadTitle').value = text;
-                document.getElementById('uploadTitleCount').textContent = `${text.length}/70 תווים`;
+                updateTitleCharCountWithSuffix();
             } else {
                 document.getElementById('uploadDescription').value = text;
                 document.getElementById('uploadDescCount').textContent = `${text.length}/160 תווים`;
@@ -14444,7 +15236,7 @@ ${content}
             
             if (target === 'title') {
                 document.getElementById('uploadTitle').value = text;
-                document.getElementById('uploadTitleCount').textContent = `${text.length}/70 תווים`;
+                updateTitleCharCountWithSuffix();
                 showToast('✅ Title נבחר!', 'success');
             } else {
                 document.getElementById('uploadDescription').value = text;
@@ -20048,14 +20840,34 @@ ${additionalInstructions}
 
             showToast('מפעיל סוכן טייטלים מנצחים...', 'info');
 
+            // Get suffix info from config
+            const site = selectedPage.site || 'main';
+            const suffix = getSiteSuffix(site);
+            const suffixLen = suffix ? suffix.length : 0;
+            const maxTitleLen = 70 - suffixLen; // Leave room for suffix
+            const hasSuffix = suffix && suffix.length > 0;
+
             // Build the prompt for the agent
             const agentPath = 'פרומטים/כללי/טייטלים ודסקריפשנים.md';
+
+            // Build suffix info section
+            const suffixSection = hasSuffix ? `
+## 🏷️ הגדרות סיומת (SITE SUFFIX)
+- **SITE_SUFFIX:** \`${suffix}\`
+- **SITE_SUFFIX_LENGTH:** ${suffixLen} תווים
+- **MAX_TITLE_LENGTH:** ${maxTitleLen} תווים (ללא הסיומת!)
+- **🚨 חשוב מאוד:** הסיומת מתווספת אוטומטית ע"י תבנית וורדפרס!
+- **❌ אל תכלול את הסיומת בכותרות שאתה יוצר!**
+` : `
+## 🏷️ הגדרות סיומת
+- **אין סיומת קשיחה** - האורך המקסימלי הוא 60 תווים
+`;
 
             const promptContent = `# משימה: יצירת טייטל ודסקריפשן מנצחים
 
 ## הוראות
 @${agentPath}
-
+${suffixSection}
 ## פרטי העמוד
 - **שם העמוד:** ${selectedPage.name}
 - **מילת מפתח ראשית:** ${keyword}
@@ -20067,7 +20879,7 @@ ${additionalInstructions}
 **חובה לעדכן את:** ${pageInfoPath}
 
 הקובץ הזה מכיל את המטא-דאטה של העמוד. עדכן אותו עם השדות הבאים:
-- \`title\` - האפשרות המומלצת
+- \`title\` - האפשרות המומלצת (ללא סיומת!)
 - \`description\` - האפשרות המומלצת  
 - \`title_options\` - מערך של 3 אפשרויות עם הסברים
 - \`description_options\` - מערך של 3 אפשרויות עם הסברים
@@ -20080,7 +20892,8 @@ ${additionalInstructions}
 
 ⚠️ **כללים קריטיים:**
 - 🚨 מילת המפתח "${keyword}" חייבת להופיע בכל Title ובכל Description!
-- אורך Title: עד 60 תווים (כולל "| רק תבקש")
+- 🚨 אורך Title: עד ${maxTitleLen} תווים (${hasSuffix ? 'הסיומת מתווספת אוטומטית!' : 'אין סיומת קשיחה'})
+- ❌ ${hasSuffix ? 'לא לכלול את הסיומת "' + suffix + '" בכותרות!' : ''}
 - אורך Description: עד 160 תווים
 - לא להבטיח הבטחות שלא ניתן לקיים (כמו "כסף תוך 24 שעות")
 
@@ -20260,7 +21073,7 @@ ${additionalInstructions}
         
         function selectTitleOption(text) {
             document.getElementById('uploadTitle').value = text;
-            document.getElementById('uploadTitleCount').textContent = `${text.length}/70 תווים`;
+            updateTitleCharCountWithSuffix();
             showToast('✅ Title נבחר!', 'success');
         }
         
@@ -20268,6 +21081,49 @@ ${additionalInstructions}
             document.getElementById('uploadDescription').value = text;
             document.getElementById('uploadDescCount').textContent = `${text.length}/160 תווים`;
             showToast('✅ Description נבחר!', 'success');
+        }
+        
+        // Upload WordPress Post Title (separate from Yoast SEO Title)
+        async function uploadWpPostTitle() {
+            if (!uploadState.postId) {
+                showToast('חסר Post ID', 'error');
+                return;
+            }
+            
+            const wpTitle = document.getElementById('uploadWpTitle').value.trim();
+            if (!wpTitle) {
+                showToast('כותרת עמוד ריקה', 'error');
+                return;
+            }
+            
+            showToast('מעדכן כותרת עמוד...', 'info');
+            
+            try {
+                const pageFolder = getPageFolder(selectedPage.path);
+                const result = await apiCall('/api/wordpress/update-wp-title', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        site: selectedPage.site || 'main',
+                        post_id: uploadState.postId,
+                        wp_post_title: wpTitle,
+                        page_folder: pageFolder
+                    })
+                });
+                
+                if (result.success) {
+                    showToast('✅ כותרת עמוד עודכנה בהצלחה!', 'success');
+                    // Update local state
+                    if (uploadState.pageInfo) {
+                        uploadState.pageInfo.wp_post_title = wpTitle;
+                        uploadState.pageInfo.page_name = wpTitle;
+                    }
+                } else {
+                    showToast(`❌ שגיאה: ${result.error}`, 'error');
+                }
+            } catch (error) {
+                console.error('Upload WP title error:', error);
+                showToast('שגיאה בעדכון כותרת עמוד', 'error');
+            }
         }
 
         async function uploadToWP(type) {
@@ -20307,9 +21163,11 @@ ${additionalInstructions}
             showToast(`מעלה ${typeLabels[type]} ל-WordPress...`, 'info');
 
             // Build payload based on type
+            const pageFolder = selectedPage?.path?.replace(/[\/\\][^\/\\]+\.html$/i, '') || '';
             const payload = {
                 post_id: uploadState.postId,
-                url: uploadState.url
+                url: uploadState.url,
+                page_folder: pageFolder
             };
             
             if (type === 'title' || type === 'all') {
@@ -20424,7 +21282,7 @@ ${additionalInstructions}
                             // Update the input fields to show new values
                             if (type === 'title' || type === 'all') {
                                 document.getElementById('uploadTitle').value = payload.title;
-                                updateCharCount('uploadTitle', 'uploadTitleCount', 70);
+                                updateTitleCharCountWithSuffix();
                             }
                             if (type === 'description' || type === 'all') {
                                 document.getElementById('uploadDescription').value = payload.meta_description;
@@ -20479,9 +21337,11 @@ ${additionalInstructions}
             showToast(`משחזר ${typeLabels[type]} מהגיבוי...`, 'info');
 
             // Build payload from backup data
+            const pageFolder = selectedPage?.path?.replace(/[\/\\][^\/\\]+\.html$/i, '') || '';
             const payload = {
                 post_id: uploadState.postId,
-                url: uploadState.url
+                url: uploadState.url,
+                page_folder: pageFolder
             };
             
             const backupMeta = uploadState.backupMeta || {};
@@ -20685,13 +21545,48 @@ ${additionalInstructions}
                     const urlInput = card.querySelector('[data-field="wp_url"]');
                     const userInput = card.querySelector('[data-field="wp_user"]');
                     const statusSpan = card.querySelector(`[data-wp-status="${siteId}"]`);
+                    const suffixInput = card.querySelector('[data-field="title_suffix"]');
+                    const suffixEnabledInput = card.querySelector('[data-field="title_suffix_enabled"]');
                     
                     if (urlInput) urlInput.value = site.site_url || '';
                     if (userInput) userInput.value = site.username || '';
                     if (statusSpan && site.has_password) {
                         statusSpan.textContent = '🔑 יש סיסמה';
                     }
+                    // Load suffix settings
+                    if (suffixInput) suffixInput.value = site.title_suffix || '';
+                    if (suffixEnabledInput) suffixEnabledInput.checked = site.title_suffix_enabled || false;
                 }
+            }
+        }
+
+        async function syncWpTitles() {
+            const btn = document.getElementById('syncWpTitlesBtn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '⏳ מסנכרן...';
+            btn.disabled = true;
+            
+            try {
+                const result = await apiCall('/api/wordpress/sync-wp-titles', {
+                    method: 'POST',
+                    body: JSON.stringify({})
+                });
+                
+                if (result.success) {
+                    showToast(`✅ סונכרנו ${result.updated} כותרות מתוך ${result.total}`, 'success');
+                    if (result.errors && result.errors.length > 0) {
+                        console.warn('Sync errors:', result.errors);
+                    }
+                    // Reload page list to show updated titles
+                    await loadPages();
+                } else {
+                    showToast(`❌ שגיאה: ${result.error}`, 'error');
+                }
+            } catch (e) {
+                showToast(`❌ שגיאה: ${e.message}`, 'error');
+            } finally {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
             }
         }
 
@@ -20707,7 +21602,9 @@ ${additionalInstructions}
                         site_id: siteId,
                         username: card.querySelector('[data-field="wp_user"]')?.value || '',
                         password: card.querySelector('[data-field="wp_pass"]')?.value || '',
-                        site_url: card.querySelector('[data-field="wp_url"]')?.value || ''
+                        site_url: card.querySelector('[data-field="wp_url"]')?.value || '',
+                        title_suffix: card.querySelector('[data-field="title_suffix"]')?.value || '',
+                        title_suffix_enabled: card.querySelector('[data-field="title_suffix_enabled"]')?.checked || false
                     })
                 });
             }
@@ -20826,22 +21723,32 @@ ${additionalInstructions}
                 const mainEl = document.querySelector('main.main');
                 const agentsSection = document.getElementById('agentsSection');
                 const duplicatesSection = document.getElementById('duplicatesSection');
+                const reportsSection = document.getElementById('reportsSection');
                 
                 if (tabName === 'agents') {
                     mainEl.style.display = 'none';
                     agentsSection.classList.add('active');
                     duplicatesSection.classList.remove('active');
+                    reportsSection.classList.remove('active');
                     loadAgentBuilderList();
                     loadDataSources();  // Load custom data sources for shortcode sidebar
                 } else if (tabName === 'duplicates') {
                     mainEl.style.display = 'none';
                     agentsSection.classList.remove('active');
                     duplicatesSection.classList.add('active');
+                    reportsSection.classList.remove('active');
                     initDuplicatesTab();  // Initialize duplicates tab
+                } else if (tabName === 'reports') {
+                    mainEl.style.display = 'none';
+                    agentsSection.classList.remove('active');
+                    duplicatesSection.classList.remove('active');
+                    reportsSection.classList.add('active');
+                    initReportsTab();  // Initialize reports tab
                 } else {
                     mainEl.style.display = 'flex';
                     agentsSection.classList.remove('active');
                     duplicatesSection.classList.remove('active');
+                    reportsSection.classList.remove('active');
                 }
             });
         });
@@ -23061,6 +23968,606 @@ ${additionalInstructions}
             openPromptModal(pagePath, step, agentType, agentId);
         }
 
+        // ============ Reports System ============
+        
+        // Global state for reports
+        let currentReportType = 'interest-rate';
+        let interestRateData = null;
+        let whatsappData = null;
+        let yearUpdateData = null;
+        
+        function initReportsTab() {
+            console.log('📊 Initializing reports tab');
+            // Auto-scan the current report type
+            refreshCurrentReport();
+        }
+        
+        function switchReportType(reportType) {
+            currentReportType = reportType;
+            
+            // Update tab buttons
+            document.querySelectorAll('.report-type-tab').forEach(tab => {
+                tab.classList.remove('active');
+                if (tab.dataset.report === reportType) {
+                    tab.classList.add('active');
+                }
+            });
+            
+            // Show/hide report content
+            document.querySelectorAll('.report-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            if (reportType === 'interest-rate') {
+                document.getElementById('reportInterestRate').classList.add('active');
+            } else if (reportType === 'whatsapp') {
+                document.getElementById('reportWhatsApp').classList.add('active');
+            } else if (reportType === 'year-update') {
+                document.getElementById('reportYearUpdate').classList.add('active');
+            }
+        }
+        
+        function refreshCurrentReport() {
+            if (currentReportType === 'interest-rate') {
+                scanInterestRate();
+            } else if (currentReportType === 'whatsapp') {
+                scanWhatsAppLinks();
+            } else if (currentReportType === 'year-update') {
+                scanYearOccurrences();
+            }
+        }
+        
+        // ============ Interest Rate Report ============
+        
+        async function scanInterestRate() {
+            const sentence = document.getElementById('currentInterestSentence').value;
+            const tbody = document.getElementById('interestRateTableBody');
+            const statsContainer = document.getElementById('interestRateStats');
+            
+            tbody.innerHTML = '<tr><td colspan="5" class="report-loading"><div class="spinner"></div><br>סורק עמודים...</td></tr>';
+            
+            try {
+                const result = await apiCall('/api/reports/interest-rate?sentence=' + encodeURIComponent(sentence));
+                
+                if (result.success) {
+                    interestRateData = result.data;
+                    renderInterestRateStats(result.data, statsContainer);
+                    renderInterestRateTable(result.data, tbody);
+                } else {
+                    tbody.innerHTML = `<tr><td colspan="5" style="color: var(--accent);">שגיאה: ${result.error}</td></tr>`;
+                }
+            } catch (error) {
+                tbody.innerHTML = `<tr><td colspan="5" style="color: var(--accent);">שגיאה: ${error.message}</td></tr>`;
+            }
+        }
+        
+        function renderInterestRateStats(data, container) {
+            const total = data.updated.length + data.outdated.length + data.not_found.length;
+            const updated = data.updated.length;
+            const needUpload = data.need_upload.length;
+            const outdated = data.outdated.length;
+            
+            container.innerHTML = `
+                <div class="report-stat-card success">
+                    <div class="stat-value">${updated}</div>
+                    <div class="stat-label">עמודים מעודכנים</div>
+                </div>
+                <div class="report-stat-card warning">
+                    <div class="stat-value">${needUpload}</div>
+                    <div class="stat-label">צריך העלאה לוורדפרס</div>
+                </div>
+                <div class="report-stat-card">
+                    <div class="stat-value">${outdated}</div>
+                    <div class="stat-label">לא מעודכנים</div>
+                </div>
+                <div class="report-stat-card">
+                    <div class="stat-value">${total}</div>
+                    <div class="stat-label">סה"כ עמודים</div>
+                </div>
+            `;
+        }
+        
+        function renderInterestRateTable(data, tbody) {
+            let html = '';
+            
+            // Pages that need upload (updated but not uploaded)
+            data.need_upload.forEach(page => {
+                const specialAttr = page.is_special ? 'data-special="true"' : '';
+                const specialIcon = page.is_special ? '⭐ ' : '';
+                html += `
+                    <tr data-status="updated_not_uploaded" data-site="${page.site}" ${specialAttr}>
+                        <td class="page-name">${specialIcon}${page.name}</td>
+                        <td><span class="site-badge">${page.site}</span></td>
+                        <td style="color: var(--success);">✅ מעודכן</td>
+                        <td style="color: var(--warning);">⚠️ לא עלה</td>
+                        <td class="action-buttons">
+                            <button class="btn-action btn-upload" onclick="uploadPageToWP('${page.path.replace(/\\/g, '\\\\').replace(/'/g, "\\'")}')">📤 העלה לוורדפרס</button>
+                        </td>
+                    </tr>
+                `;
+            });
+            
+            // Updated pages (already uploaded)
+            data.updated.filter(p => !data.need_upload.find(n => n.path === p.path)).forEach(page => {
+                const specialAttr = page.is_special ? 'data-special="true"' : '';
+                const specialIcon = page.is_special ? '⭐ ' : '';
+                html += `
+                    <tr data-status="updated_uploaded" data-site="${page.site}" ${specialAttr}>
+                        <td class="page-name">${specialIcon}${page.name}</td>
+                        <td><span class="site-badge">${page.site}</span></td>
+                        <td style="color: var(--success);">✅ מעודכן</td>
+                        <td style="color: var(--success);">✅ עלה</td>
+                        <td>-</td>
+                    </tr>
+                `;
+            });
+            
+            // Outdated pages
+            data.outdated.forEach(page => {
+                const specialAttr = page.is_special ? 'data-special="true"' : '';
+                const specialIcon = page.is_special ? '⭐ ' : '';
+                html += `
+                    <tr data-status="outdated" data-site="${page.site}" ${specialAttr}>
+                        <td class="page-name">${specialIcon}${page.name}</td>
+                        <td><span class="site-badge">${page.site}</span></td>
+                        <td style="color: var(--accent);">❌ לא מעודכן</td>
+                        <td>-</td>
+                        <td class="action-buttons">
+                            <button class="btn-action btn-edit" onclick="openPageInEditor('${page.path.replace(/\\/g, '\\\\').replace(/'/g, "\\'")}')">📝 פתח לעריכה</button>
+                        </td>
+                    </tr>
+                `;
+            });
+            
+            // Pages without any interest rate sentence
+            data.not_found.forEach(page => {
+                const specialAttr = page.is_special ? 'data-special="true"' : '';
+                const specialIcon = page.is_special ? '⭐ ' : '';
+                html += `
+                    <tr data-status="not_found" data-site="${page.site}" ${specialAttr}>
+                        <td class="page-name">${specialIcon}${page.name}</td>
+                        <td><span class="site-badge">${page.site}</span></td>
+                        <td style="color: var(--text-secondary);">➖ אין משפט ריבית</td>
+                        <td>-</td>
+                        <td class="action-buttons">
+                            <button class="btn-action btn-edit" onclick="openPageInEditor('${page.path.replace(/\\/g, '\\\\').replace(/'/g, "\\'")}')">📝 פתח לעריכה</button>
+                        </td>
+                    </tr>
+                `;
+            });
+            
+            if (!html) {
+                html = '<tr><td colspan="5" style="text-align: center; color: var(--text-secondary);">לא נמצאו עמודים</td></tr>';
+            }
+            
+            tbody.innerHTML = html;
+            
+            // Apply current filter
+            filterInterestRateTable();
+        }
+        
+        function filterInterestRateTable() {
+            const statusFilter = document.getElementById('interestRateFilter').value;
+            const showMain = document.getElementById('interestRateSiteMain').checked;
+            const showBusiness = document.getElementById('interestRateSiteBusiness').checked;
+            const rows = document.querySelectorAll('#interestRateTableBody tr[data-status]');
+            let visibleCount = 0;
+            
+            rows.forEach(row => {
+                const status = row.getAttribute('data-status');
+                const site = row.getAttribute('data-site');
+                const isSpecial = row.getAttribute('data-special') === 'true';
+                
+                // Check site filter
+                let siteMatch = false;
+                if (site === 'main' && showMain) siteMatch = true;
+                if (site === 'business' && showBusiness) siteMatch = true;
+                
+                // Check status filter
+                let statusMatch = false;
+                if (statusFilter === 'all') {
+                    statusMatch = true;
+                } else if (statusFilter === 'special') {
+                    statusMatch = isSpecial;
+                } else if (statusFilter === status) {
+                    statusMatch = true;
+                }
+                
+                const show = siteMatch && statusMatch;
+                row.style.display = show ? '' : 'none';
+                if (show) visibleCount++;
+            });
+            
+            // Update visible count display
+            const filterInfo = document.getElementById('interestRateFilterInfo');
+            if (filterInfo) {
+                filterInfo.textContent = `מציג ${visibleCount} עמודים`;
+            }
+        }
+        
+        async function uploadPageToWP(pagePath) {
+            showToast('מעלה לוורדפרס...', 'info');
+            try {
+                const result = await apiCall('/api/wordpress/update', {
+                    method: 'POST',
+                    body: JSON.stringify({ page_path: pagePath })
+                });
+                
+                if (result.success) {
+                    showToast('הועלה בהצלחה!', 'success');
+                    scanInterestRate(); // Refresh
+                } else {
+                    showToast('שגיאה: ' + result.error, 'error');
+                }
+            } catch (error) {
+                showToast('שגיאה: ' + error.message, 'error');
+            }
+        }
+        
+        function openPageInEditor(pagePath) {
+            // Switch to edit tab and select the page
+            const editTab = document.querySelector('[data-tab="edit"]');
+            if (editTab) {
+                editTab.click();
+            }
+            
+            // Find and select the page
+            setTimeout(() => {
+                const normalizedPath = pagePath.replace(/\\\\/g, '\\');
+                const pageItem = document.querySelector(`.page-item[data-path="${normalizedPath}"]`);
+                if (pageItem) {
+                    pageItem.click();
+                    pageItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }, 100);
+        }
+        
+        // ============ WhatsApp Links Report ============
+        
+        async function scanWhatsAppLinks() {
+            const siteFilter = document.getElementById('whatsappSiteFilter').value;
+            const tbody = document.getElementById('whatsappTableBody');
+            const statsContainer = document.getElementById('whatsappStats');
+            
+            tbody.innerHTML = '<tr><td colspan="6" class="report-loading"><div class="spinner"></div><br>סורק קישורים...</td></tr>';
+            
+            try {
+                const result = await apiCall('/api/reports/whatsapp-links?site=' + siteFilter);
+                
+                if (result.success) {
+                    whatsappData = result.data;
+                    renderWhatsAppStats(result.data, statsContainer);
+                    renderWhatsAppTable(result.data, tbody);
+                } else {
+                    tbody.innerHTML = `<tr><td colspan="6" style="color: var(--accent);">שגיאה: ${result.error}</td></tr>`;
+                }
+            } catch (error) {
+                tbody.innerHTML = `<tr><td colspan="6" style="color: var(--accent);">שגיאה: ${error.message}</td></tr>`;
+            }
+        }
+        
+        function renderWhatsAppStats(data, container) {
+            const totalPages = new Set(data.links.map(l => l.page_path)).size;
+            const totalLinks = data.links.length;
+            
+            container.innerHTML = `
+                <div class="report-stat-card">
+                    <div class="stat-value">${totalPages}</div>
+                    <div class="stat-label">עמודים עם קישורים</div>
+                </div>
+                <div class="report-stat-card warning">
+                    <div class="stat-value">${totalLinks}</div>
+                    <div class="stat-label">סה"כ קישורי WhatsApp</div>
+                </div>
+            `;
+        }
+        
+        function renderWhatsAppTable(data, tbody) {
+            let html = '';
+            
+            data.links.forEach((link, index) => {
+                const escapedPath = link.page_path.replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+                const escapedAnchor = (link.anchor || '').replace(/'/g, "\\'").replace(/"/g, '&quot;');
+                
+                html += `
+                    <tr>
+                        <td class="page-name">${link.page_name}</td>
+                        <td><span class="site-badge">${link.site}</span></td>
+                        <td>${link.line_number}</td>
+                        <td class="whatsapp-link" title="${link.url}">${link.url.substring(0, 40)}...</td>
+                        <td class="anchor-text" title="${escapedAnchor}">${link.anchor || '(ללא טקסט)'}</td>
+                        <td class="action-buttons">
+                            <button class="btn-action btn-remove" onclick="removeWhatsAppLink('${escapedPath}', ${link.line_number}, ${index})">🗑️ הסר</button>
+                            <button class="btn-action btn-edit" onclick="editWhatsAppAnchor('${escapedPath}', ${link.line_number}, '${escapedAnchor}', ${index})">✏️ ערוך</button>
+                            <button class="btn-action btn-upload" onclick="uploadPageToWP('${escapedPath}')">📤 העלה</button>
+                        </td>
+                    </tr>
+                `;
+            });
+            
+            if (!html) {
+                html = '<tr><td colspan="6" style="text-align: center; color: var(--text-secondary);">לא נמצאו קישורי WhatsApp</td></tr>';
+            }
+            
+            tbody.innerHTML = html;
+        }
+        
+        async function removeWhatsAppLink(pagePath, lineNumber, linkIndex) {
+            if (!confirm('להסיר את קישור ה-WhatsApp ולהפנות ל-AWG?')) return;
+            
+            showToast('מסיר קישור...', 'info');
+            try {
+                const result = await apiCall('/api/reports/remove-whatsapp-link', {
+                    method: 'POST',
+                    body: JSON.stringify({ 
+                        page_path: pagePath, 
+                        line_number: lineNumber,
+                        link_index: linkIndex
+                    })
+                });
+                
+                if (result.success) {
+                    showToast('הקישור הוסר והופנה ל-AWG!', 'success');
+                    scanWhatsAppLinks(); // Refresh
+                } else {
+                    showToast('שגיאה: ' + result.error, 'error');
+                }
+            } catch (error) {
+                showToast('שגיאה: ' + error.message, 'error');
+            }
+        }
+        
+        async function editWhatsAppAnchor(pagePath, lineNumber, currentAnchor, linkIndex) {
+            const newAnchor = prompt('ערוך את טקסט האנקור:', currentAnchor);
+            if (newAnchor === null || newAnchor === currentAnchor) return;
+            
+            showToast('מעדכן אנקור...', 'info');
+            try {
+                const result = await apiCall('/api/reports/update-anchor', {
+                    method: 'POST',
+                    body: JSON.stringify({ 
+                        page_path: pagePath, 
+                        line_number: lineNumber,
+                        new_anchor: newAnchor,
+                        link_index: linkIndex
+                    })
+                });
+                
+                if (result.success) {
+                    showToast('האנקור עודכן!', 'success');
+                    scanWhatsAppLinks(); // Refresh
+                } else {
+                    showToast('שגיאה: ' + result.error, 'error');
+                }
+            } catch (error) {
+                showToast('שגיאה: ' + error.message, 'error');
+            }
+        }
+        
+        // ============ Year Update Report ============
+        
+        async function scanYearOccurrences() {
+            const yearFrom = document.getElementById('yearFrom').value;
+            const yearTo = document.getElementById('yearTo').value;
+            const tbody = document.getElementById('yearUpdateTableBody');
+            const statsContainer = document.getElementById('yearUpdateStats');
+            
+            tbody.innerHTML = '<tr><td colspan="5" class="report-loading"><div class="spinner"></div><br>סורק...</td></tr>';
+            
+            try {
+                const result = await apiCall('/api/reports/year-scan?year=' + yearFrom);
+                
+                if (result.success) {
+                    yearUpdateData = result.data;
+                    yearUpdateData.yearTo = yearTo;
+                    renderYearUpdateStats(result.data, statsContainer);
+                    renderYearUpdateTable(result.data, tbody, yearFrom, yearTo);
+                } else {
+                    tbody.innerHTML = `<tr><td colspan="5" style="color: var(--accent);">שגיאה: ${result.error}</td></tr>`;
+                }
+            } catch (error) {
+                tbody.innerHTML = `<tr><td colspan="5" style="color: var(--accent);">שגיאה: ${error.message}</td></tr>`;
+            }
+        }
+        
+        function renderYearUpdateStats(data, container) {
+            const totalPages = new Set(data.occurrences.map(o => o.page_path)).size;
+            const totalOccurrences = data.occurrences.length;
+            
+            container.innerHTML = `
+                <div class="report-stat-card warning">
+                    <div class="stat-value">${totalPages}</div>
+                    <div class="stat-label">עמודים עם ${data.year || '2025'}</div>
+                </div>
+                <div class="report-stat-card">
+                    <div class="stat-value">${totalOccurrences}</div>
+                    <div class="stat-label">סה"כ מופעים</div>
+                </div>
+            `;
+        }
+        
+        function renderYearUpdateTable(data, tbody, yearFrom, yearTo) {
+            let html = '';
+            
+            // Patterns that indicate file/link paths (not content text)
+            const linkPatterns = [
+                /wp-content\/uploads/i,
+                /\.webp|\.jpg|\.jpeg|\.png|\.gif|\.svg|\.pdf|\.mp4|\.mp3/i,
+                /src=|href=|url\(/i,
+                /\/\d{4}\/\d{2}\//  // URL date pattern like /2025/07/
+            ];
+            
+            function isLinkContext(context) {
+                return linkPatterns.some(pattern => pattern.test(context));
+            }
+            
+            // Group by page
+            const pageGroups = {};
+            data.occurrences.forEach(occ => {
+                if (!pageGroups[occ.page_path]) {
+                    pageGroups[occ.page_path] = {
+                        page_name: occ.page_name,
+                        site: occ.site,
+                        occurrences: []
+                    };
+                }
+                pageGroups[occ.page_path].occurrences.push(occ);
+            });
+            
+            Object.entries(pageGroups).forEach(([pagePath, pageData]) => {
+                const escapedPath = pagePath.replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+                const occCount = pageData.occurrences.length;
+                
+                // Show first occurrence with page info
+                pageData.occurrences.forEach((occ, idx) => {
+                    const contextHtml = occ.context.replace(new RegExp(yearFrom, 'g'), `<span class="highlight">${yearFrom}</span>`);
+                    const isLink = isLinkContext(occ.context);
+                    
+                    html += `
+                        <tr data-is-link="${isLink}">
+                            ${idx === 0 ? `
+                                <td class="page-name" rowspan="${occCount}">
+                                    ${pageData.page_name}
+                                    <a href="/api/preview/${encodeURIComponent(pagePath)}" target="_blank" title="פתח לצפייה בחלון חדש" style="margin-right: 0.5rem; text-decoration: none;">🔗</a>
+                                </td>
+                                <td rowspan="${occCount}"><span class="site-badge">${pageData.site}</span></td>
+                            ` : ''}
+                            <td>${occ.line_number}${isLink ? ' 🖼️' : ''}</td>
+                            <td class="context-text">${contextHtml}</td>
+                            <td class="action-buttons">
+                                ${idx === 0 ? `
+                                    <button class="btn-action btn-replace" onclick="replaceYearInPage('${escapedPath}', '${yearFrom}', '${yearTo}', true)">🔄 החלף הכל (${occCount})</button>
+                                    <button class="btn-action btn-upload" onclick="replaceAndUpload('${escapedPath}', '${yearFrom}', '${yearTo}')">📤 החלף + העלה</button>
+                                ` : `
+                                    <button class="btn-action btn-replace" onclick="replaceYearSingle('${escapedPath}', ${occ.line_number}, '${yearFrom}', '${yearTo}')">🔄 החלף</button>
+                                `}
+                            </td>
+                        </tr>
+                    `;
+                });
+            });
+            
+            if (!html) {
+                html = `<tr><td colspan="5" style="text-align: center; color: var(--text-secondary);">לא נמצאו מופעים של ${yearFrom}</td></tr>`;
+            }
+            
+            tbody.innerHTML = html;
+            
+            // Apply filter
+            filterYearUpdateTable();
+        }
+        
+        function filterYearUpdateTable() {
+            const hideLinks = document.getElementById('yearHideLinks').checked;
+            const rows = document.querySelectorAll('#yearUpdateTableBody tr[data-is-link]');
+            let visibleCount = 0;
+            let hiddenCount = 0;
+            
+            rows.forEach(row => {
+                const isLink = row.getAttribute('data-is-link') === 'true';
+                const show = !(hideLinks && isLink);
+                
+                row.style.display = show ? '' : 'none';
+                if (show) visibleCount++;
+                if (isLink) hiddenCount++;
+            });
+            
+            // Update info
+            const filterInfo = document.getElementById('yearFilterInfo');
+            if (filterInfo) {
+                if (hideLinks && hiddenCount > 0) {
+                    filterInfo.textContent = `מציג ${visibleCount} שורות (הוסתרו ${hiddenCount} קישורי קבצים)`;
+                } else {
+                    filterInfo.textContent = `מציג ${rows.length} שורות`;
+                }
+            }
+        }
+        
+        async function replaceYearInPage(pagePath, yearFrom, yearTo, replaceAll = true) {
+            showToast('מחליף שנים...', 'info');
+            try {
+                const result = await apiCall('/api/reports/replace-year', {
+                    method: 'POST',
+                    body: JSON.stringify({ 
+                        page_path: pagePath, 
+                        year_from: yearFrom,
+                        year_to: yearTo,
+                        replace_all: replaceAll
+                    })
+                });
+                
+                if (result.success) {
+                    showToast(`הוחלפו ${result.replaced_count} מופעים!`, 'success');
+                    scanYearOccurrences(); // Refresh
+                } else {
+                    showToast('שגיאה: ' + result.error, 'error');
+                }
+            } catch (error) {
+                showToast('שגיאה: ' + error.message, 'error');
+            }
+        }
+        
+        async function replaceYearSingle(pagePath, lineNumber, yearFrom, yearTo) {
+            showToast('מחליף שנה...', 'info');
+            try {
+                const result = await apiCall('/api/reports/replace-year', {
+                    method: 'POST',
+                    body: JSON.stringify({ 
+                        page_path: pagePath, 
+                        year_from: yearFrom,
+                        year_to: yearTo,
+                        line_number: lineNumber,
+                        replace_all: false
+                    })
+                });
+                
+                if (result.success) {
+                    showToast('השנה הוחלפה!', 'success');
+                    scanYearOccurrences(); // Refresh
+                } else {
+                    showToast('שגיאה: ' + result.error, 'error');
+                }
+            } catch (error) {
+                showToast('שגיאה: ' + error.message, 'error');
+            }
+        }
+        
+        async function replaceAndUpload(pagePath, yearFrom, yearTo) {
+            showToast('מחליף ומעלה...', 'info');
+            try {
+                // First replace
+                const replaceResult = await apiCall('/api/reports/replace-year', {
+                    method: 'POST',
+                    body: JSON.stringify({ 
+                        page_path: pagePath, 
+                        year_from: yearFrom,
+                        year_to: yearTo,
+                        replace_all: true
+                    })
+                });
+                
+                if (!replaceResult.success) {
+                    showToast('שגיאה בהחלפה: ' + replaceResult.error, 'error');
+                    return;
+                }
+                
+                // Then upload
+                const uploadResult = await apiCall('/api/wordpress/update', {
+                    method: 'POST',
+                    body: JSON.stringify({ page_path: pagePath })
+                });
+                
+                if (uploadResult.success) {
+                    showToast(`הוחלפו ${replaceResult.replaced_count} מופעים והועלה לוורדפרס!`, 'success');
+                    scanYearOccurrences(); // Refresh
+                } else {
+                    showToast('שגיאה בהעלאה: ' + uploadResult.error, 'error');
+                }
+            } catch (error) {
+                showToast('שגיאה: ' + error.message, 'error');
+            }
+        }
+
         // ============ Duplicates Detection System ============
         
         // Global state for duplicates
@@ -24368,8 +25875,8 @@ ${s.text}
     </script>
     
     <!-- Delete Page Modal -->
-    <div id="deletePageModal" class="modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); z-index:10000; align-items:center; justify-content:center;">
-        <div class="modal-content" style="background:var(--bg-secondary); padding:2rem; border-radius:12px; max-width:500px; width:90%; border:1px solid var(--border); max-height:90vh; overflow-y:auto;">
+    <div id="deletePageModal" class="system-modal" style="display:none;">
+        <div class="modal-content">
             <h2 style="margin-bottom:1rem; color:var(--text-primary);">🗑️ מחיקת עמוד</h2>
             <p style="margin-bottom:1.5rem; color:var(--text-secondary);">
                 האם אתה בטוח שברצונך למחוק את העמוד <strong id="deletePageName" style="color:var(--accent);"></strong>?
@@ -24445,14 +25952,14 @@ ${s.text}
             
             document.getElementById('deletePageName').textContent = page.name;
             const modal = document.getElementById('deletePageModal');
-            modal.style.display = 'flex';
+            modal.style.display = 'block'; // Block is enough because children are fixed positioned
             
             // Populate pages dropdown for redirect
             populateRedirectPagesDropdown(page.site || 'main', pagePath);
             
             // Set default redirect to homepage
             const site = page.site || 'main';
-            const siteConfig = config?.wordpress?.sites?.[site];
+            const siteConfig = wpSitesConfig?.[site];
             const siteUrl = siteConfig ? siteConfig.site_url : 'https://loan-israel.co.il';
             document.getElementById('redirectTarget').value = siteUrl;
             
@@ -24511,7 +26018,8 @@ ${s.text}
         }
         
         function closeDeleteModal() {
-            document.getElementById('deletePageModal').style.display = 'none';
+            const modal = document.getElementById('deletePageModal');
+            modal.style.display = 'none';
             pageToDelete = null;
         }
         
@@ -24577,10 +26085,20 @@ ${s.text}
             if (!page) return;
             
             const site = page.site || 'main';
-            const siteConfig = config?.wordpress?.sites?.[site];
+            const siteConfig = wpSitesConfig?.[site];
             const siteUrl = siteConfig ? siteConfig.site_url : 'https://loan-israel.co.il';
             document.getElementById('redirectTarget').value = siteUrl;
         }
+        
+        // Move system modals to body to ensure fixed positioning works relative to viewport
+        document.addEventListener('DOMContentLoaded', () => {
+            const modals = document.querySelectorAll('.system-modal');
+            modals.forEach(modal => {
+                if (modal.parentElement !== document.body) {
+                    document.body.appendChild(modal);
+                }
+            });
+        });
         
         // Close modal on escape key
         document.addEventListener('keydown', function(e) {
@@ -24617,8 +26135,8 @@ ${s.text}
             
             // Create modal HTML
             let modalHtml = `
-                <div id="archiveModal" class="modal" style="display:flex; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); z-index:10000; align-items:center; justify-content:center;">
-                    <div class="modal-content" style="background:var(--bg-secondary); padding:2rem; border-radius:12px; max-width:800px; width:90%; max-height:80vh; overflow-y:auto; border:1px solid var(--border);">
+                <div id="archiveModal" class="system-modal" style="display:block;">
+                    <div class="modal-content">
                         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;">
                             <h2 style="margin:0; color:var(--text-primary);">📦 עמודים בארכיון</h2>
                             <button onclick="closeArchiveModal()" class="btn btn-secondary">✕</button>
@@ -24665,7 +26183,7 @@ ${s.text}
                 </div>
             `;
             
-            // Add modal to page
+            // Add modal to body (outside of any other container)
             const existingModal = document.getElementById('archiveModal');
             if (existingModal) {
                 existingModal.remove();

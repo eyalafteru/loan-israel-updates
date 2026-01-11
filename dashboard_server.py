@@ -8,9 +8,11 @@ import os
 import sys
 import json
 import csv
+import re
 import subprocess
 import shutil
 import time
+import traceback
 from datetime import datetime
 from pathlib import Path
 
@@ -1163,17 +1165,24 @@ def preview_page(page_path):
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        body {{
+        html, body {{
             direction: rtl;
             text-align: right;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
             line-height: 1.6;
-            padding: 20px;
+            padding: 0;
             margin: 0;
             background: #fff;
         }}
         p {{
             margin: 0 0 1em 0;
+        }}
+        /* Hide invalid meta/link tags that appear in body */
+        body > meta, body > link {{
+            display: none !important;
+            height: 0 !important;
+            margin: 0 !important;
+            padding: 0 !important;
         }}
     </style>
 </head>
@@ -7741,6 +7750,7 @@ def reset_page():
                 
                 # Also save meta backup
                 meta_backup = {
+                    "wp_post_title": post_data.get("title", {}).get("rendered", ""),  # WordPress post title
                     "title": post_data.get("yoast_head_json", {}).get("title", post_data.get("title", {}).get("rendered", "")),
                     "description": post_data.get("yoast_head_json", {}).get("description", ""),
                     "slug": post_data.get("slug", ""),
@@ -8086,7 +8096,9 @@ def get_wp_settings():
                 "name": site_config["name"],
                 "site_url": site_config["site_url"],
                 "username": site_config["username"],
-                "has_password": bool(site_config.get("password") or os.getenv(f"WP_{site_id.upper()}_PASSWORD"))
+                "has_password": bool(site_config.get("password") or os.getenv(f"WP_{site_id.upper()}_PASSWORD")),
+                "title_suffix": site_config.get("title_suffix", ""),
+                "title_suffix_enabled": site_config.get("title_suffix_enabled", False)
             }
         
         return jsonify({
@@ -8115,6 +8127,11 @@ def save_wp_settings():
             site["password"] = data["password"]
         if "site_url" in data:
             site["site_url"] = data["site_url"]
+        # Save title suffix settings
+        if "title_suffix" in data:
+            site["title_suffix"] = data["title_suffix"]
+        if "title_suffix_enabled" in data:
+            site["title_suffix_enabled"] = data["title_suffix_enabled"]
         
         save_config(config)
         
@@ -8859,8 +8876,10 @@ def fetch_wp_page():
         print(f"=" * 60)
         
         # Extract relevant data
+        wp_post_title = post_data.get("title", {}).get("rendered", "")
         result = {
-            "title": post_data.get("title", {}).get("rendered", ""),
+            "title": wp_post_title,  # Legacy field for compatibility
+            "wp_post_title": wp_post_title,  # NEW: WordPress post title (separate from Yoast)
             "slug": post_data.get("slug", ""),
             "content_raw": post_data.get("content", {}).get("raw", ""),
             "content_rendered": post_data.get("content", {}).get("rendered", ""),
@@ -8871,7 +8890,7 @@ def fetch_wp_page():
         
         # Extract SEO metadata from yoast
         yoast = result.get("yoast_head_json", {})
-        result["meta_title"] = yoast.get("title", result["title"])
+        result["meta_title"] = yoast.get("title", wp_post_title)
         result["meta_description"] = yoast.get("description", "")
         result["og_title"] = yoast.get("og_title", "")
         result["og_description"] = yoast.get("og_description", "")
@@ -8883,7 +8902,8 @@ def fetch_wp_page():
             
             # Save metadata backup
             meta_backup = {
-                "title": result["meta_title"],
+                "wp_post_title": result["wp_post_title"],  # WordPress post title
+                "title": result["meta_title"],  # Yoast SEO title
                 "description": result["meta_description"],
                 "slug": result["slug"],
                 "og_title": result["og_title"],
@@ -8897,6 +8917,24 @@ def fetch_wp_page():
             meta_path = folder_path / f"{page_name}_backup_meta.json"
             with open(meta_path, 'w', encoding='utf-8') as f:
                 json.dump(meta_backup, f, ensure_ascii=False, indent=2)
+            
+            # Also update page_info.json with wp_post_title
+            page_info_path = folder_path / "page_info.json"
+            if page_info_path.exists():
+                try:
+                    with open(page_info_path, 'r', encoding='utf-8') as f:
+                        page_info = json.load(f)
+                    
+                    # Update with WordPress data
+                    page_info["wp_post_title"] = result["wp_post_title"]
+                    page_info["page_name"] = result["wp_post_title"]  # Also update page_name for display
+                    
+                    with open(page_info_path, 'w', encoding='utf-8') as f:
+                        json.dump(page_info, f, ensure_ascii=False, indent=2)
+                    
+                    print(f"✅ Updated page_info.json with wp_post_title: {result['wp_post_title']}")
+                except Exception as e:
+                    print(f"⚠️ Could not update page_info.json: {e}")
             
             # Save content backup as HTML
             # WordPress strips <script> and <style> from rendered content
@@ -9162,12 +9200,76 @@ def upload_to_wp():
             token = token_response.json().get("token")
             jwt_tokens[site_id] = token
         
+        # BEFORE uploading - backup current WordPress content
+        page_folder = data.get("page_folder")
+        if page_folder and content:
+            try:
+                # Try posts endpoint first
+                fetch_url = f"{site['site_url']}{site['api_base']}/posts/{post_id}?context=edit"
+                fetch_response = requests.get(
+                    fetch_url,
+                    headers={"Authorization": f"Bearer {token}"},
+                    timeout=30
+                )
+                
+                # If post not found, try pages endpoint
+                if fetch_response.status_code == 404:
+                    fetch_url = f"{site['site_url']}{site['api_base']}/pages/{post_id}?context=edit"
+                    fetch_response = requests.get(
+                        fetch_url,
+                        headers={"Authorization": f"Bearer {token}"},
+                        timeout=30
+                    )
+                
+                if fetch_response.status_code == 200:
+                    wp_data = fetch_response.json()
+                    current_content = wp_data.get("content", {}).get("raw", "")
+                    
+                    folder = Path(page_folder)
+                    page_name = folder.name
+                    backup_path = folder / f"{page_name}_backup.html"
+                    meta_path = folder / f"{page_name}_backup_meta.json"
+                    
+                    with open(backup_path, 'w', encoding='utf-8') as f:
+                        f.write(current_content)
+                    
+                    meta_backup = {
+                        "wp_post_title": wp_data.get("title", {}).get("rendered", ""),  # WordPress post title
+                        "title": wp_data.get("yoast_head_json", {}).get("title", wp_data.get("title", {}).get("rendered", "")),
+                        "description": wp_data.get("yoast_head_json", {}).get("description", ""),
+                        "slug": wp_data.get("slug", ""),
+                        "fetched_at": datetime.now().isoformat()
+                    }
+                    with open(meta_path, 'w', encoding='utf-8') as f:
+                        json.dump(meta_backup, f, ensure_ascii=False, indent=2)
+                        
+                    print(f"[Pre-Upload Backup] Saved backup from WordPress to {backup_path}")
+                else:
+                    print(f"[Pre-Upload Backup] Warning: Could not fetch from WordPress (status {fetch_response.status_code})")
+            except Exception as e:
+                print(f"[Pre-Upload Backup] Warning: Could not backup: {e}")
+                # Continue with upload even if backup fails
+        
         # Build update payload
         update_data = {}
         if content:
             import re
             
-            # Remove any existing wp:html markers first
+            # Check if page is marked as special in page_info.json (star toggle in dashboard)
+            is_special_from_info = False
+            page_folder = data.get("page_folder")
+            if page_folder:
+                page_info_path = Path(page_folder) / "page_info.json"
+                if page_info_path.exists():
+                    try:
+                        with open(page_info_path, 'r', encoding='utf-8') as f:
+                            page_info_data = json.load(f)
+                        is_special_from_info = page_info_data.get("is_special", False)
+                    except:
+                        pass
+            
+            # Remove any existing wp:html markers first - BUT remember if they existed
+            had_wp_html_wrapper = bool(re.search(r'<!--\s*wp:html\s*-->', content))
             clean_content = re.sub(r'<!--\s*wp:html\s*-->', '', content)
             clean_content = re.sub(r'<!--\s*/wp:html\s*-->', '', clean_content)
             clean_content = clean_content.strip()
@@ -9177,18 +9279,35 @@ def upload_to_wp():
             is_special_page = False
             content_check = clean_content.strip()
             
-            # Criteria for special pages (pages with complex JS that WordPress breaks):
-            # 1. Starts with <script> tag that contains viewport meta tag injection
-            # 2. Starts with JS comments (// or /*)
-            # These pages have interactive JS that WordPress wpautop would break
-            if content_check.startswith('<script'):
+            # Skip leading HTML comments for detection
+            content_for_check = re.sub(r'^<!--.*?-->\s*', '', content_check, flags=re.DOTALL).strip()
+            
+            # Criteria for special pages (in priority order):
+            # 1. is_special: true in page_info.json (manual star toggle)
+            # 2. HAD wp:html wrapper in source file (preserve it)
+            # 3. Starts with <script> tag with viewport
+            # 4. Starts with JS comments (// or /*)
+            # 5. Starts with <style> or <div...><style> (CSS-heavy pages)
+            if is_special_from_info:
+                is_special_page = True
+                print(f"🔍 Detected special page: is_special=true in page_info.json (star)")
+            elif had_wp_html_wrapper:
+                is_special_page = True
+                print(f"🔍 Detected special page: had existing wp:html wrapper")
+            elif content_for_check.startswith('<script'):
                 # Check if it's the viewport script pattern (special pages)
-                if 'viewport' in content_check[:500] or 'meta[name=' in content_check[:500]:
+                if 'viewport' in content_for_check[:500] or 'meta[name=' in content_for_check[:500]:
                     is_special_page = True
                     print(f"🔍 Detected special page: starts with viewport script")
-            elif content_check.startswith('//') or content_check.startswith('/*'):
+            elif content_for_check.startswith('//') or content_for_check.startswith('/*'):
                 is_special_page = True
                 print(f"🔍 Detected special page: starts with JS comment")
+            elif content_for_check.startswith('<style') or '<style>' in content_for_check[:200]:
+                is_special_page = True
+                print(f"🔍 Detected special page: starts with or contains early <style>")
+            elif re.match(r'^<div[^>]*>\s*<style', content_for_check):
+                is_special_page = True
+                print(f"🔍 Detected special page: div wrapper with style")
             
             if is_special_page:
                 # Special page - wrap in wp:html to prevent WordPress wpautop from breaking it
@@ -9202,11 +9321,10 @@ def upload_to_wp():
                 cleanup_info = {"special_page": False, "wrapped": False, "original_length": len(content), "final_length": len(clean_content)}
             
             update_data["content"] = final_content
-        if title:
-            update_data["title"] = title
+        # Note: title is NOT added to update_data - it only updates Yoast SEO title, not WordPress post title
         
         # Check if we have anything to update
-        if not update_data and not meta_description:
+        if not update_data and not meta_description and not title:
             print(f"⚠️ Warning: Nothing to update! No content, title, or description provided.")
             return jsonify({
                 "success": False,
@@ -9224,8 +9342,6 @@ def upload_to_wp():
             print(f"   URL: {update_url}")
             print(f"   Post ID: {post_id}")
             print(f"   Payload keys: {list(update_data.keys())}")
-            if title:
-                print(f"   Title: {title[:50]}...")
             if update_data.get('content'):
                 print(f"   Content length: {len(update_data.get('content', ''))} chars")
             print(f"   Token: {token[:20] if token else 'MISSING'}...")
@@ -9245,8 +9361,8 @@ def upload_to_wp():
             
             post_update_success = response.status_code == 200
         else:
-            # Only meta_description update - skip post update
-            print(f"ℹ️ No content/title - only updating Yoast meta fields")
+            # Only title/meta_description update - skip post update, will update via Yoast meta only
+            print(f"ℹ️ No content - only updating Yoast SEO meta fields (title/description)")
             post_update_success = True  # Consider success since we're only updating meta
         
         if post_update_success:
@@ -9268,8 +9384,12 @@ def upload_to_wp():
             yoast_desc_updated = False
             yoast_errors = []
             
-            # Try to update Yoast fields via post meta
+            # Try to update Yoast fields via post meta (title goes ONLY to Yoast, not WP post title)
             if title or meta_description:
+                if title:
+                    print(f"📝 Yoast SEO Title (only): {title[:50]}...")
+                if meta_description:
+                    print(f"📄 Yoast Meta Description: {meta_description[:50]}...")
                 try:
                     # Method 1: Try via meta field in same post update
                     meta_update = {"meta": {}}
@@ -9358,7 +9478,6 @@ def upload_to_wp():
                 "success": True,
                 "message": "Page uploaded successfully",
                 "site": site["name"],
-                "post_title_updated": bool(title and "title" in update_data),
                 "content_updated": bool(content),
                 "yoast_title_updated": yoast_title_updated,
                 "yoast_desc_updated": yoast_desc_updated
@@ -9366,7 +9485,7 @@ def upload_to_wp():
             
             # Add warnings if Yoast update failed
             if (title or meta_description) and not (yoast_title_updated or yoast_desc_updated):
-                result["warning"] = "Title/Description שונו בפוסט אבל ייתכן ש-Yoast SEO לא התעדכן. יש לבדוק ידנית או להפעיל תוסף שחושף את ה-meta fields."
+                result["warning"] = "Title/Description לא התעדכנו ב-Yoast SEO. יש לבדוק ידנית או להפעיל תוסף שחושף את ה-meta fields."
                 if yoast_errors:
                     result["yoast_errors"] = yoast_errors
             
@@ -9387,6 +9506,219 @@ def upload_to_wp():
             }), response.status_code
     except requests.exceptions.Timeout:
         return jsonify({"success": False, "error": "Connection timed out"}), 500
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+@app.route('/api/wordpress/update-wp-title', methods=['POST'])
+def update_wp_post_title():
+    """Update WordPress post title (NOT Yoast SEO title - the actual WP post title)"""
+    try:
+        if not REQUESTS_AVAILABLE:
+            return jsonify({"success": False, "error": "requests library not installed"}), 500
+        
+        data = request.json
+        site_id = data.get('site', 'main')
+        post_id = data.get('post_id')
+        wp_post_title = data.get('wp_post_title')
+        page_folder = data.get('page_folder')
+        
+        if not post_id or not wp_post_title:
+            return jsonify({"success": False, "error": "Missing post_id or wp_post_title"}), 400
+        
+        # Get site config
+        if site_id not in config["wordpress"]["sites"]:
+            return jsonify({"success": False, "error": f"Site '{site_id}' not found"}), 404
+        
+        site = config["wordpress"]["sites"][site_id]
+        
+        # Get auth token
+        token = jwt_tokens.get(site_id)
+        if not token:
+            password = site.get("password") or os.getenv(f"WP_{site_id.upper()}_PASSWORD")
+            if not password:
+                return jsonify({"success": False, "error": "No password configured"}), 400
+            
+            token_url = f"{site['site_url']}{site['token_endpoint']}"
+            token_response = requests.post(
+                token_url,
+                json={"username": site["username"], "password": password},
+                timeout=15
+            )
+            
+            if token_response.status_code != 200:
+                return jsonify({"success": False, "error": "Authentication failed"}), 401
+            
+            token = token_response.json().get("token")
+            jwt_tokens[site_id] = token
+        
+        # Update WordPress post title
+        update_url = f"{site['site_url']}{site['api_base']}/posts/{post_id}"
+        update_data = {"title": wp_post_title}
+        
+        print(f"📝 Updating WP Post Title...")
+        print(f"   Post ID: {post_id}")
+        print(f"   New Title: {wp_post_title}")
+        
+        response = requests.post(
+            update_url,
+            headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json"},
+            json=update_data,
+            timeout=30
+        )
+        
+        if response.status_code == 200:
+            # Also update page_info.json if page_folder provided
+            if page_folder:
+                try:
+                    folder_path = BASE_DIR / page_folder
+                    info_path = folder_path / "page_info.json"
+                    
+                    if info_path.exists():
+                        with open(info_path, 'r', encoding='utf-8') as f:
+                            info = json.load(f)
+                        
+                        info['wp_post_title'] = wp_post_title
+                        info['page_name'] = wp_post_title  # Also update page_name for display
+                        info['uploaded_wp_title'] = wp_post_title
+                        info['uploaded_wp_title_at'] = datetime.now().isoformat()
+                        
+                        with open(info_path, 'w', encoding='utf-8') as f:
+                            json.dump(info, f, ensure_ascii=False, indent=2)
+                        
+                        print(f"✅ Updated page_info.json with new WP title")
+                except Exception as e:
+                    print(f"⚠️ Could not update page_info.json: {e}")
+            
+            return jsonify({
+                "success": True,
+                "message": "WordPress post title updated successfully",
+                "wp_post_title": wp_post_title
+            })
+        elif response.status_code == 403:
+            jwt_tokens[site_id] = None
+            return jsonify({"success": False, "error": "Authentication expired. Please reconnect."}), 403
+        else:
+            return jsonify({"success": False, "error": f"Failed to update: {response.text}"}), response.status_code
+    
+    except requests.exceptions.Timeout:
+        return jsonify({"success": False, "error": "Connection timed out"}), 500
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+@app.route('/api/wordpress/sync-wp-titles', methods=['POST'])
+def sync_wp_post_titles():
+    """Batch-sync WordPress Post Titles for all pages with post_id"""
+    try:
+        if not REQUESTS_AVAILABLE:
+            return jsonify({"success": False, "error": "requests library not installed"}), 500
+        
+        data = request.json or {}
+        site_filter = data.get('site')  # Optional: filter by site
+        
+        # Get all page folders
+        editable = config["paths"]["editable_pages"]
+        updated_count = 0
+        errors = []
+        
+        # Collect all pages with post_id
+        pages_to_sync = []
+        
+        if isinstance(editable, dict):
+            for site_id, base_path in editable.items():
+                if site_filter and site_id != site_filter:
+                    continue
+                    
+                pages_path = BASE_DIR / base_path
+                if pages_path.exists():
+                    for page_folder in pages_path.iterdir():
+                        if page_folder.is_dir():
+                            page_info_path = page_folder / "page_info.json"
+                            if page_info_path.exists():
+                                try:
+                                    with open(page_info_path, 'r', encoding='utf-8') as f:
+                                        page_info = json.load(f)
+                                    
+                                    post_id = page_info.get('post_id')
+                                    if post_id:
+                                        pages_to_sync.append({
+                                            "site_id": site_id,
+                                            "post_id": post_id,
+                                            "folder": str(page_folder),
+                                            "page_info_path": str(page_info_path),
+                                            "current_title": page_info.get('wp_post_title') or page_info.get('page_name', '')
+                                        })
+                                except Exception as e:
+                                    errors.append(f"Error reading {page_info_path}: {e}")
+        
+        print(f"📋 Found {len(pages_to_sync)} pages to sync")
+        
+        # Sync each page
+        for page in pages_to_sync:
+            site_id = page["site_id"]
+            post_id = page["post_id"]
+            
+            try:
+                # Get site config
+                if site_id not in config["wordpress"]["sites"]:
+                    errors.append(f"Site '{site_id}' not found for post {post_id}")
+                    continue
+                
+                site = config["wordpress"]["sites"][site_id]
+                
+                # Get auth token
+                if site_id not in jwt_tokens or not jwt_tokens.get(site_id):
+                    # Try to authenticate
+                    token_url = f"{site['site_url']}{site['token_endpoint']}"
+                    auth_data = {"username": site["username"], "password": site["password"]}
+                    token_response = requests.post(token_url, json=auth_data, timeout=10)
+                    
+                    if token_response.status_code != 200:
+                        errors.append(f"Auth failed for site {site_id}")
+                        continue
+                    
+                    jwt_tokens[site_id] = token_response.json().get("token")
+                
+                token = jwt_tokens.get(site_id)
+                
+                # Fetch post title from WordPress
+                api_url = f"{site['site_url']}{site['api_base']}/posts/{post_id}"
+                response = requests.get(
+                    api_url,
+                    headers={"Authorization": f"Bearer {token}"},
+                    params={"_fields": "title"},
+                    timeout=10
+                )
+                
+                if response.status_code == 200:
+                    post_data = response.json()
+                    wp_title = post_data.get("title", {}).get("rendered", "")
+                    
+                    if wp_title:
+                        # Update page_info.json
+                        with open(page["page_info_path"], 'r', encoding='utf-8') as f:
+                            page_info = json.load(f)
+                        
+                        page_info["wp_post_title"] = wp_title
+                        page_info["page_name"] = wp_title
+                        
+                        with open(page["page_info_path"], 'w', encoding='utf-8') as f:
+                            json.dump(page_info, f, ensure_ascii=False, indent=2)
+                        
+                        updated_count += 1
+                        print(f"✅ Synced: {wp_title}")
+                else:
+                    errors.append(f"Failed to fetch post {post_id}: HTTP {response.status_code}")
+                    
+            except Exception as e:
+                errors.append(f"Error syncing post {post_id}: {e}")
+        
+        return jsonify({
+            "success": True,
+            "updated": updated_count,
+            "total": len(pages_to_sync),
+            "errors": errors[:10] if errors else []  # Limit error messages
+        })
+        
     except Exception as e:
         return jsonify({"success": False, "error": str(e)}), 500
 
@@ -13283,7 +13615,8 @@ def get_config():
             "ui": config.get("ui", {}),
             "paths": {
                 "editable_pages": config.get("paths", {}).get("editable_pages", {})
-            }
+            },
+            "base_dir": str(BASE_DIR)
         }
         return jsonify({"success": True, "config": public_config})
     except Exception as e:
@@ -13334,6 +13667,445 @@ def save_global_value():
         return jsonify({"success": True, "message": f"Saved {key} = {value}"})
     except Exception as e:
         return jsonify({"success": False, "error": str(e)}), 500
+
+# ============ Reports System ============
+
+@app.route('/api/reports/interest-rate', methods=['GET'])
+def report_interest_rate():
+    """Scan all pages for interest rate sentence and check upload status"""
+    try:
+        sentence = request.args.get('sentence', '')
+        if not sentence:
+            return jsonify({"success": False, "error": "Missing sentence parameter"}), 400
+        
+        pages_dir = BASE_DIR / "דפים לשינוי"
+        
+        updated = []
+        outdated = []
+        not_found = []
+        need_upload = []
+        
+        # Scan all HTML files in pages directory
+        for site_dir in pages_dir.iterdir():
+            if not site_dir.is_dir():
+                continue
+            site_name = site_dir.name  # 'main' or 'business'
+            
+            for page_dir in site_dir.iterdir():
+                if not page_dir.is_dir():
+                    continue
+                
+                # Find the main HTML file
+                html_files = list(page_dir.glob("*.html"))
+                html_files = [f for f in html_files if '_backup' not in f.name and '.bak' not in f.name]
+                
+                if not html_files:
+                    continue
+                
+                html_file = html_files[0]
+                page_name = page_dir.name
+                
+                try:
+                    with open(html_file, 'r', encoding='utf-8-sig') as f:
+                        content = f.read()
+                    
+                    page_info = {
+                        "name": page_name,
+                        "path": str(html_file),
+                        "site": site_name
+                    }
+                    
+                    # Check if updated sentence exists (with or without emoji prefix)
+                    # Remove emoji prefix if exists for flexible matching
+                    sentence_core = sentence.lstrip('💡').strip()
+                    sentence_found = sentence in content or sentence_core in content
+                    
+                    if sentence_found:
+                        updated.append(page_info)
+                        
+                        # Check if uploaded to WordPress (via page_info.json)
+                        page_info_path = page_dir / "page_info.json"
+                        uploaded = False
+                        upload_date = ''
+                        is_special = False
+                        if page_info_path.exists():
+                            try:
+                                with open(page_info_path, 'r', encoding='utf-8-sig') as f:
+                                    pi = json.load(f)
+                                last_upload = pi.get('last_upload', '')
+                                is_special = pi.get('is_special', False)
+                                if last_upload:
+                                    # If there's any last_upload date, consider it uploaded
+                                    uploaded = True
+                                    upload_date = last_upload
+                            except Exception as e:
+                                print(f"Error reading page_info for {page_name}: {e}")
+                        
+                        page_info['upload_date'] = upload_date
+                        page_info['is_special'] = is_special
+                        
+                        if not uploaded:
+                            need_upload.append(page_info)
+                    else:
+                        # Check if page is special
+                        page_info_path = page_dir / "page_info.json"
+                        if page_info_path.exists():
+                            try:
+                                with open(page_info_path, 'r', encoding='utf-8-sig') as f:
+                                    pi = json.load(f)
+                                page_info['is_special'] = pi.get('is_special', False)
+                            except:
+                                page_info['is_special'] = False
+                        else:
+                            page_info['is_special'] = False
+                        
+                        # Check if any interest rate sentence exists (outdated)
+                        if 'הריביות בתוכן מעודכנות' in content:
+                            outdated.append(page_info)
+                        else:
+                            not_found.append(page_info)
+                            
+                except Exception as e:
+                    print(f"Error reading {html_file}: {e}")
+                    continue
+        
+        return jsonify({
+            "success": True,
+            "data": {
+                "updated": updated,
+                "outdated": outdated,
+                "not_found": not_found,
+                "need_upload": need_upload
+            }
+        })
+        
+    except Exception as e:
+        traceback.print_exc()
+        return jsonify({"success": False, "error": str(e)}), 500
+
+
+@app.route('/api/reports/whatsapp-links', methods=['GET'])
+def report_whatsapp_links():
+    """Scan all pages for WhatsApp links with anchor text"""
+    try:
+        site_filter = request.args.get('site', 'all')
+        pages_dir = BASE_DIR / "דפים לשינוי"
+        
+        links = []
+        
+        # Regex patterns for WhatsApp links
+        # Pattern to find href with WhatsApp URLs
+        whatsapp_pattern = re.compile(
+            r'<a[^>]*href=["\']([^"\']*(?:wa\.me|api\.whatsapp\.com|whatsapp\.com)[^"\']*)["\'][^>]*>(.*?)</a>',
+            re.IGNORECASE | re.DOTALL
+        )
+        
+        # Also find window.open patterns
+        window_open_pattern = re.compile(
+            r"window\.open\(['\"]([^'\"]*(?:wa\.me|api\.whatsapp\.com)[^'\"]*)['\"]",
+            re.IGNORECASE
+        )
+        
+        # Scan all HTML files
+        for site_dir in pages_dir.iterdir():
+            if not site_dir.is_dir():
+                continue
+            site_name = site_dir.name
+            
+            if site_filter != 'all' and site_name != site_filter:
+                continue
+            
+            for page_dir in site_dir.iterdir():
+                if not page_dir.is_dir():
+                    continue
+                
+                html_files = list(page_dir.glob("*.html"))
+                html_files = [f for f in html_files if '_backup' not in f.name and '.bak' not in f.name]
+                
+                if not html_files:
+                    continue
+                
+                html_file = html_files[0]
+                page_name = page_dir.name
+                
+                try:
+                    with open(html_file, 'r', encoding='utf-8-sig') as f:
+                        content = f.read()
+                    
+                    lines = content.split('\n')
+                    
+                    for line_num, line in enumerate(lines, 1):
+                        # Find <a> tags with WhatsApp links
+                        for match in whatsapp_pattern.finditer(line):
+                            url = match.group(1)
+                            anchor = match.group(2)
+                            # Clean up anchor text (remove HTML tags)
+                            anchor_clean = re.sub(r'<[^>]+>', '', anchor).strip()
+                            
+                            links.append({
+                                "page_name": page_name,
+                                "page_path": str(html_file),
+                                "site": site_name,
+                                "line_number": line_num,
+                                "url": url,
+                                "anchor": anchor_clean,
+                                "type": "link"
+                            })
+                        
+                        # Find window.open patterns
+                        for match in window_open_pattern.finditer(line):
+                            url = match.group(1)
+                            links.append({
+                                "page_name": page_name,
+                                "page_path": str(html_file),
+                                "site": site_name,
+                                "line_number": line_num,
+                                "url": url,
+                                "anchor": "(JavaScript)",
+                                "type": "js"
+                            })
+                            
+                except Exception as e:
+                    print(f"Error reading {html_file}: {e}")
+                    continue
+        
+        return jsonify({
+            "success": True,
+            "data": {
+                "links": links
+            }
+        })
+        
+    except Exception as e:
+        traceback.print_exc()
+        return jsonify({"success": False, "error": str(e)}), 500
+
+
+@app.route('/api/reports/remove-whatsapp-link', methods=['POST'])
+def remove_whatsapp_link():
+    """Remove WhatsApp link and replace with AWG shortcode reference"""
+    try:
+        data = request.get_json()
+        page_path = data.get('page_path')
+        line_number = data.get('line_number')
+        
+        if not page_path or not line_number:
+            return jsonify({"success": False, "error": "Missing parameters"}), 400
+        
+        # Read file
+        with open(page_path, 'r', encoding='utf-8-sig') as f:
+            lines = f.readlines()
+        
+        if line_number > len(lines):
+            return jsonify({"success": False, "error": "Line number out of range"}), 400
+        
+        line = lines[line_number - 1]
+        
+        # Find AWG shortcode in the file
+        full_content = ''.join(lines)
+        awg_match = re.search(r'\[awg\s+postid=["\']?(\d+)["\']?\]', full_content, re.IGNORECASE)
+        
+        if awg_match:
+            # Replace WhatsApp link with text pointing to AWG form
+            # Pattern for <a> tags with WhatsApp
+            link_pattern = re.compile(
+                r'<a[^>]*href=["\'][^"\']*(?:wa\.me|api\.whatsapp\.com|whatsapp\.com)[^"\']*["\'][^>]*>.*?</a>',
+                re.IGNORECASE | re.DOTALL
+            )
+            new_line = link_pattern.sub('השאירו פרטים בטופס למטה ונחזור אליכם', line)
+            
+            # Also handle window.open patterns if in same line
+            window_pattern = re.compile(
+                r"window\.open\(['\"][^'\"]*(?:wa\.me|api\.whatsapp\.com)[^'\"]*['\"][^)]*\);?",
+                re.IGNORECASE
+            )
+            new_line = window_pattern.sub('// Removed WhatsApp link - use form instead', new_line)
+        else:
+            # No AWG found, just remove the link but keep anchor text
+            link_pattern = re.compile(
+                r'<a[^>]*href=["\'][^"\']*(?:wa\.me|api\.whatsapp\.com|whatsapp\.com)[^"\']*["\'][^>]*>(.*?)</a>',
+                re.IGNORECASE | re.DOTALL
+            )
+            new_line = link_pattern.sub(r'\1', line)
+        
+        lines[line_number - 1] = new_line
+        
+        # Write back
+        with open(page_path, 'w', encoding='utf-8') as f:
+            f.writelines(lines)
+        
+        return jsonify({"success": True, "message": "Link removed"})
+        
+    except Exception as e:
+        traceback.print_exc()
+        return jsonify({"success": False, "error": str(e)}), 500
+
+
+@app.route('/api/reports/update-anchor', methods=['POST'])
+def update_whatsapp_anchor():
+    """Update anchor text of a WhatsApp link"""
+    try:
+        data = request.get_json()
+        page_path = data.get('page_path')
+        line_number = data.get('line_number')
+        new_anchor = data.get('new_anchor')
+        
+        if not page_path or not line_number or new_anchor is None:
+            return jsonify({"success": False, "error": "Missing parameters"}), 400
+        
+        # Read file
+        with open(page_path, 'r', encoding='utf-8-sig') as f:
+            lines = f.readlines()
+        
+        if line_number > len(lines):
+            return jsonify({"success": False, "error": "Line number out of range"}), 400
+        
+        line = lines[line_number - 1]
+        
+        # Replace anchor text in WhatsApp links
+        link_pattern = re.compile(
+            r'(<a[^>]*href=["\'][^"\']*(?:wa\.me|api\.whatsapp\.com|whatsapp\.com)[^"\']*["\'][^>]*>).*?(</a>)',
+            re.IGNORECASE | re.DOTALL
+        )
+        
+        new_line = link_pattern.sub(rf'\1{new_anchor}\2', line)
+        lines[line_number - 1] = new_line
+        
+        # Write back
+        with open(page_path, 'w', encoding='utf-8') as f:
+            f.writelines(lines)
+        
+        return jsonify({"success": True, "message": "Anchor updated"})
+        
+    except Exception as e:
+        traceback.print_exc()
+        return jsonify({"success": False, "error": str(e)}), 500
+
+
+@app.route('/api/reports/year-scan', methods=['GET'])
+def report_year_scan():
+    """Scan all pages for year occurrences"""
+    try:
+        year = request.args.get('year', '2025')
+        pages_dir = BASE_DIR / "דפים לשינוי"
+        
+        occurrences = []
+        
+        # Scan all HTML files
+        for site_dir in pages_dir.iterdir():
+            if not site_dir.is_dir():
+                continue
+            site_name = site_dir.name
+            
+            for page_dir in site_dir.iterdir():
+                if not page_dir.is_dir():
+                    continue
+                
+                html_files = list(page_dir.glob("*.html"))
+                html_files = [f for f in html_files if '_backup' not in f.name and '.bak' not in f.name]
+                
+                if not html_files:
+                    continue
+                
+                html_file = html_files[0]
+                page_name = page_dir.name
+                
+                try:
+                    with open(html_file, 'r', encoding='utf-8-sig') as f:
+                        content = f.read()
+                    
+                    lines = content.split('\n')
+                    
+                    for line_num, line in enumerate(lines, 1):
+                        # Find year occurrences
+                        for match in re.finditer(year, line):
+                            # Get context (50 chars before and after)
+                            start = max(0, match.start() - 50)
+                            end = min(len(line), match.end() + 50)
+                            context = line[start:end].strip()
+                            
+                            # Skip if in script tags or comments (likely not content)
+                            lower_line = line.lower()
+                            if '<script' in lower_line or '<!--' in lower_line:
+                                continue
+                            
+                            occurrences.append({
+                                "page_name": page_name,
+                                "page_path": str(html_file),
+                                "site": site_name,
+                                "line_number": line_num,
+                                "context": context,
+                                "position": match.start()
+                            })
+                            
+                except Exception as e:
+                    print(f"Error reading {html_file}: {e}")
+                    continue
+        
+        return jsonify({
+            "success": True,
+            "data": {
+                "year": year,
+                "occurrences": occurrences
+            }
+        })
+        
+    except Exception as e:
+        traceback.print_exc()
+        return jsonify({"success": False, "error": str(e)}), 500
+
+
+@app.route('/api/reports/replace-year', methods=['POST'])
+def replace_year():
+    """Replace year occurrences in a page"""
+    try:
+        data = request.get_json()
+        page_path = data.get('page_path')
+        year_from = data.get('year_from', '2025')
+        year_to = data.get('year_to', '2026')
+        replace_all = data.get('replace_all', True)
+        line_number = data.get('line_number')  # Optional, for single replacement
+        
+        if not page_path:
+            return jsonify({"success": False, "error": "Missing page_path"}), 400
+        
+        # Read file
+        with open(page_path, 'r', encoding='utf-8-sig') as f:
+            content = f.read()
+        
+        replaced_count = 0
+        
+        if replace_all:
+            # Replace all occurrences
+            new_content = content.replace(year_from, year_to)
+            replaced_count = content.count(year_from)
+        else:
+            # Replace only on specific line
+            lines = content.split('\n')
+            if line_number and line_number <= len(lines):
+                line = lines[line_number - 1]
+                new_line = line.replace(year_from, year_to, 1)  # Replace first occurrence only
+                if new_line != line:
+                    replaced_count = 1
+                lines[line_number - 1] = new_line
+                new_content = '\n'.join(lines)
+            else:
+                new_content = content
+        
+        # Write back
+        with open(page_path, 'w', encoding='utf-8') as f:
+            f.write(new_content)
+        
+        return jsonify({
+            "success": True, 
+            "message": f"Replaced {replaced_count} occurrences",
+            "replaced_count": replaced_count
+        })
+        
+    except Exception as e:
+        traceback.print_exc()
+        return jsonify({"success": False, "error": str(e)}), 500
+
 
 # ============ Main ============
 

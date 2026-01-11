@@ -1,5 +1,5 @@
 {
-  "page_name": "הלוואה חוץ בנקאית מיידית בריבית הנמוכה בשוק",
+  "page_name": "הלוואה חוץ בנקאית",
   "keyword": "הלוואה חוץ בנקאית",
   "url": "https://loan-israel.co.il/non-bank-loan/",
   "post_id": "98",
@@ -33,7 +33,6 @@
       "reason": "מילת מפתח בהתחלה, מספרים קונקרטיים, מדגיש העצמה (אתה בוחר) - 133 תווים"
     }
   ],
-  "word_count": 2028,
   "fetched_keywords": {
     "timestamp": "2026-01-03T20:48:10.179Z",
     "main_keyword": "הלוואה חוץ בנקאית",
@@ -381,5 +380,6 @@
       }
     ]
   },
-  "is_special": true
+  "is_special": true,
+  "word_count": 2028
 }
