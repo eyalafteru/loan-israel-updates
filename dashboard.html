@@ -1509,6 +1509,78 @@
             border-radius: 8px;
         }
         
+        /* WYSIWYG Editor Styles */
+        #editorContainer {
+            height: calc(100% - 10px);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        #editorContainer .tox-tinymce {
+            flex: 1;
+            border: none !important;
+            border-radius: 8px !important;
+        }
+        
+        /* TinyMCE Light Mode (White Background) */
+        #editorContainer .tox .tox-edit-area__iframe {
+            background: #ffffff !important;
+        }
+        
+        #editorContainer .tox:not(.tox-tinymce-inline) .tox-editor-header {
+            background: #f8fafc !important;
+            border-bottom: 1px solid #e2e8f0 !important;
+        }
+        
+        #editorContainer .tox .tox-toolbar,
+        #editorContainer .tox .tox-toolbar__overflow,
+        #editorContainer .tox .tox-toolbar__primary {
+            background: #f8fafc !important;
+        }
+        
+        #editorContainer .tox .tox-tbtn {
+            color: #334155 !important;
+        }
+        
+        #editorContainer .tox .tox-tbtn:hover {
+            background: #e2e8f0 !important;
+        }
+        
+        #editorContainer .tox .tox-tbtn--enabled,
+        #editorContainer .tox .tox-tbtn--enabled:hover {
+            background: #3b82f6 !important;
+            color: white !important;
+        }
+        
+        #editorContainer .tox .tox-statusbar {
+            background: #f8fafc !important;
+            border-top: 1px solid #e2e8f0 !important;
+            color: #64748b !important;
+        }
+        
+        #editorContainer .tox-tinymce {
+            border: 1px solid #e2e8f0 !important;
+        }
+        
+        /* Editor Save Button */
+        #editorSaveBtn {
+            display: none;
+        }
+        
+        #editorSaveBtn.visible {
+            display: inline-flex;
+        }
+        
+        /* Special Page Notice */
+        #specialPageNotice {
+            height: 100%;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 1rem;
+            color: var(--text-secondary);
+        }
+        
         /* Empty State */
         .empty-state {
             display: flex;
@@ -6116,20 +6188,41 @@
             transform: translateY(-1px);
         }
         
-        /* Snippet Location Modal */
+        /* Snippet Location Modal - White Background Theme */
         .snippet-location-modal {
             max-width: 1000px !important;
+            background: #ffffff !important;
+            color: #1a1a1a !important;
+        }
+        
+        .snippet-location-modal .modal-header {
+            background: #f8fafc !important;
+            border-bottom: 1px solid #e2e8f0 !important;
+        }
+        
+        .snippet-location-modal .modal-header h2 {
+            color: #1e293b !important;
+        }
+        
+        .snippet-location-modal .modal-body {
+            background: #ffffff !important;
+        }
+        
+        .snippet-location-modal .modal-footer {
+            background: #f8fafc !important;
+            border-top: 1px solid #e2e8f0 !important;
         }
         
         .snippet-location-info {
             padding: 0.75rem;
-            background: var(--bg-tertiary);
+            background: #f1f5f9;
             border-radius: 6px;
             margin-bottom: 1rem;
+            color: #334155;
         }
         
         .snippet-location-info strong {
-            color: var(--accent);
+            color: #2563eb;
         }
         
         .snippet-location-search {
@@ -6138,59 +6231,62 @@
         
         .snippet-highlight-preview {
             padding: 0.75rem;
-            background: rgba(239, 68, 68, 0.2);
+            background: #fef2f2;
             border: 1px solid #ef4444;
             border-radius: 6px;
             font-family: monospace;
             font-size: 0.85rem;
             margin-top: 0.5rem;
-            color: var(--text-primary);
+            color: #991b1b;
         }
         
         .snippet-location-content {
-            background: var(--bg-tertiary);
+            background: #f8fafc;
             border-radius: 8px;
             padding: 1rem;
             max-height: 50vh;
             overflow-y: auto;
+            border: 1px solid #e2e8f0;
         }
         
         .snippet-context {
             line-height: 1.8;
             font-size: 0.95rem;
+            color: #334155;
         }
         
         .context-ellipsis {
-            color: var(--text-muted);
+            color: #94a3b8;
             font-style: italic;
         }
         
         .context-before,
         .context-after {
-            color: var(--text-secondary);
+            color: #475569;
         }
         
         .snippet-highlight {
-            background: rgba(239, 68, 68, 0.3);
+            background: #fef2f2;
             border: 2px solid #ef4444;
             padding: 0.25rem 0.5rem;
             border-radius: 4px;
             font-weight: 600;
-            color: var(--text-primary);
+            color: #991b1b;
             display: inline;
         }
         
         .full-content-toggle {
             margin-top: 1rem;
             padding-top: 1rem;
-            border-top: 1px solid var(--border);
+            border-top: 1px solid #e2e8f0;
         }
         
         .full-content {
             margin-top: 1rem;
-            background: rgba(0, 0, 0, 0.3);
+            background: #f1f5f9;
             border-radius: 6px;
             padding: 1rem;
+            border: 1px solid #e2e8f0;
         }
         
         .full-content pre {
@@ -6201,18 +6297,77 @@
             margin: 0;
             max-height: 400px;
             overflow-y: auto;
+            color: #334155;
         }
         
         .snippet-not-found {
             padding: 1rem;
-            background: rgba(245, 158, 11, 0.2);
+            background: #fffbeb;
             border: 1px solid #f59e0b;
             border-radius: 6px;
-            color: #fbbf24;
+            color: #92400e;
             margin-bottom: 1rem;
         }
         
+        /* Inline Editor in Snippet Modal */
+        .snippet-inline-editor {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #ffffff;
+            border: 2px solid #3b82f6;
+            border-radius: 8px;
+        }
+        
+        .snippet-inline-editor textarea {
+            width: 100%;
+            min-height: 150px;
+            padding: 0.75rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            resize: vertical;
+            color: #1e293b;
+            background: #ffffff;
+        }
+        
+        .snippet-inline-editor textarea:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+        }
+        
+        .snippet-editor-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.75rem;
+            justify-content: flex-end;
+        }
+        
+        .snippet-location-modal .btn-secondary {
+            background: #e2e8f0 !important;
+            color: #475569 !important;
+            border: 1px solid #cbd5e1 !important;
+        }
+        
+        .snippet-location-modal .btn-secondary:hover {
+            background: #cbd5e1 !important;
+        }
+        
+        .snippet-location-modal .btn-primary {
+            background: #3b82f6 !important;
+            color: white !important;
+        }
+        
+        .snippet-location-modal .btn-success {
+            background: #22c55e !important;
+            color: white !important;
+        }
+        
     </style>
+    <!-- TinyMCE WYSIWYG Editor (jsDelivr CDN - no API key required, includes all themes) -->
+    <script src="https://cdn.jsdelivr.net/npm/tinymce@6.8.2/tinymce.min.js" referrerpolicy="origin"></script>
 </head>
 <body>
     <!-- Header -->
@@ -6362,10 +6517,11 @@
                     <div class="panel-header">
                         <span>👁️ תצוגה מקדימה</span>
                         <div style="display: flex; gap: 0.5rem; align-items: center;">
-                            <!-- Preview source tabs -->
+                            <!-- Preview/Edit mode tabs -->
                             <div class="preview-tabs" style="display: flex; gap: 2px; margin-right: 10px;">
-                                <button class="preview-tab active" id="previewTabCurrent" onclick="switchPreviewTab('current')" style="padding: 3px 8px; font-size: 11px; border: 1px solid #444; background: #3b82f6; color: white; border-radius: 4px 0 0 4px; cursor: pointer;">📄 נוכחי</button>
-                                <button class="preview-tab" id="previewTabBackup" onclick="switchPreviewTab('backup')" style="padding: 3px 8px; font-size: 11px; border: 1px solid #444; background: #333; color: #888; border-radius: 0 4px 4px 0; cursor: pointer;">💾 גיבוי</button>
+                                <button class="preview-tab active" id="previewTabCurrent" onclick="switchPreviewTab('current')" style="padding: 3px 8px; font-size: 11px; border: 1px solid #444; background: #3b82f6; color: white; border-radius: 4px 0 0 0; cursor: pointer;">📄 נוכחי</button>
+                                <button class="preview-tab" id="previewTabBackup" onclick="switchPreviewTab('backup')" style="padding: 3px 8px; font-size: 11px; border: 1px solid #444; background: #333; color: #888; cursor: pointer;">💾 גיבוי</button>
+                                <button class="preview-tab" id="previewTabEdit" onclick="switchPreviewTab('edit')" style="padding: 3px 8px; font-size: 11px; border: 1px solid #444; background: #333; color: #888; border-radius: 0 4px 4px 0; cursor: pointer;">✏️ עריכה</button>
                             </div>
                             <button id="viewLocalBtn" class="btn btn-small" onclick="copyLocalPath()" title="העתק נתיב מקומי" style="display: none;">
                                 🖥️ מקומי
@@ -6378,6 +6534,9 @@
                             </button>
                             <button class="btn btn-small btn-success" id="uploadBtn" onclick="uploadToWordPress()">
                                 🌐 העלה ל-WordPress
+                            </button>
+                            <button class="btn btn-small btn-success" id="editorSaveBtn" onclick="saveWysiwygEditor()" style="display: none;">
+                                💾 שמור
                             </button>
                         </div>
                     </div>
@@ -6400,6 +6559,17 @@
                             <div class="empty-state-icon">👁️</div>
                             <p>בחר עמוד לתצוגה מקדימה</p>
                         </div>
+                    </div>
+                    <!-- WYSIWYG Editor Container (for regular pages) -->
+                    <div id="editorContainer" style="display: none; height: 100%; padding: 0;">
+                        <textarea id="tinymceEditor"></textarea>
+                    </div>
+                    <!-- Special Page Notice (for is_special pages) -->
+                    <div id="specialPageNotice" style="display: none;">
+                        <div style="font-size: 3rem;">⭐</div>
+                        <div style="font-size: 1.2rem; font-weight: bold;">עמוד מיוחד</div>
+                        <div style="text-align: center;">לעריכה מתקדמת השתמש בכפתור<br><strong>"השוואת תוכן"</strong> למעלה</div>
+                        <button class="btn btn-primary" onclick="openCompareModal()" style="margin-top: 1rem;">📊 פתח השוואת תוכן</button>
                     </div>
                 </div>
             </div>
@@ -10808,7 +10978,17 @@ console.log('🚀 KeywordDensityAnalyzer, SpamAnalyzer, HeaderQualityScorer & In
             // Refresh running status before rendering
             await loadRunningStatus();
             renderPageList();
-            await loadPreview(); // Wait for page info to load
+            
+            // If in edit mode, reload editor; otherwise load preview
+            if (currentPreviewMode === 'edit') {
+                // Re-apply the edit mode to load new page content into editor
+                switchPreviewTab('edit');
+                // Also load metadata (Title, Description, etc.)
+                await loadPreviewMetadata();
+            } else {
+                await loadPreview(); // This also loads metadata
+            }
+            
             loadReports(); // Load report and update workflow buttons
             
             // Check if this page is running - now using COMPOSITE KEY (page_path:agent_id)
@@ -10912,27 +11092,335 @@ console.log('🚀 KeywordDensityAnalyzer, SpamAnalyzer, HeaderQualityScorer & In
             await loadPreviewMetadata();
         }
         
+        // ============ WYSIWYG Editor State ============
+        let wysiwygEditorInitialized = false;
+        let currentPreviewMode = 'current'; // 'current', 'backup', 'edit'
+        
         function switchPreviewTab(source) {
-            currentPreviewSource = source;
+            currentPreviewMode = source;
+            currentPreviewSource = source === 'edit' ? 'current' : source;
             
             // Update tab styles
             const currentTab = document.getElementById('previewTabCurrent');
             const backupTab = document.getElementById('previewTabBackup');
+            const editTab = document.getElementById('previewTabEdit');
             
-            if (source === 'current') {
+            // Reset all tabs
+            [currentTab, backupTab, editTab].forEach(tab => {
+                if (tab) {
+                    tab.style.background = '#333';
+                    tab.style.color = '#888';
+                }
+            });
+            
+            // Highlight active tab
+            if (source === 'current' && currentTab) {
                 currentTab.style.background = '#3b82f6';
                 currentTab.style.color = 'white';
-                backupTab.style.background = '#333';
-                backupTab.style.color = '#888';
-            } else {
-                currentTab.style.background = '#333';
-                currentTab.style.color = '#888';
+            } else if (source === 'backup' && backupTab) {
                 backupTab.style.background = '#f59e0b';
                 backupTab.style.color = 'white';
+            } else if (source === 'edit' && editTab) {
+                editTab.style.background = '#10b981';
+                editTab.style.color = 'white';
             }
             
-            // Reload preview with new source
-            loadPreview(source);
+            // Show/hide containers based on mode
+            const previewContent = document.getElementById('previewContent');
+            const editorContainer = document.getElementById('editorContainer');
+            const specialNotice = document.getElementById('specialPageNotice');
+            const saveBtn = document.getElementById('editorSaveBtn');
+            const uploadBtn = document.getElementById('uploadBtn');
+            
+            if (source === 'edit') {
+                // Check if page is special
+                if (isCurrentPageSpecial()) {
+                    // Special page - show notice to use Compare Modal
+                    previewContent.style.display = 'none';
+                    editorContainer.style.display = 'none';
+                    specialNotice.style.display = 'flex';
+                    saveBtn.style.display = 'none';
+                    uploadBtn.style.display = 'inline-flex';
+                } else {
+                    // Regular page - show WYSIWYG editor
+                    previewContent.style.display = 'none';
+                    specialNotice.style.display = 'none';
+                    editorContainer.style.display = 'flex';
+                    saveBtn.style.display = 'inline-flex';
+                    uploadBtn.style.display = 'none';
+                    loadWysiwygEditor();
+                }
+            } else {
+                // View mode (current or backup)
+                previewContent.style.display = 'block';
+                editorContainer.style.display = 'none';
+                specialNotice.style.display = 'none';
+                saveBtn.style.display = 'none';
+                uploadBtn.style.display = 'inline-flex';
+                loadPreview(source);
+            }
+        }
+        
+        // Check if current page is marked as special
+        function isCurrentPageSpecial() {
+            if (!selectedPage) return false;
+            // Check both the page object and the cache
+            return selectedPage.is_special === true || 
+                   pageInfoCache[selectedPage.path]?.is_special === true;
+        }
+        
+        // Initialize TinyMCE WYSIWYG Editor
+        function initWysiwygEditor() {
+            if (wysiwygEditorInitialized) return;
+            
+            if (typeof tinymce === 'undefined') {
+                console.error('TinyMCE not loaded');
+                showToast('עורך לא זמין - TinyMCE לא נטען', 'error');
+                return;
+            }
+            
+            tinymce.init({
+                selector: '#tinymceEditor',
+                language: 'he_IL',
+                directionality: 'rtl',
+                height: '100%',
+                menubar: false,
+                plugins: 'link lists table code searchreplace',
+                toolbar: 'undo redo | bold italic underline | link | bullist numlist | table | code | searchreplace',
+                content_style: `
+                    body { 
+                        font-family: 'Segoe UI', Tahoma, sans-serif; 
+                        font-size: 14px; 
+                        direction: rtl; 
+                        background: #ffffff; 
+                        color: #1a1a1a; 
+                        padding: 15px;
+                        line-height: 1.6;
+                    }
+                    a { color: #2563eb; }
+                    h1, h2, h3, h4, h5, h6 { color: #1e40af; margin-top: 1em; margin-bottom: 0.5em; }
+                    table { border-collapse: collapse; width: 100%; }
+                    th, td { border: 1px solid #d1d5db; padding: 8px; }
+                    th { background: #f3f4f6; }
+                    ul, ol { margin: 0.5em 0; padding-right: 1.5em; }
+                    p { margin: 0.5em 0; }
+                `,
+                skin_url: 'https://cdn.jsdelivr.net/npm/tinymce@6.8.2/skins/ui/oxide',
+                content_css: 'https://cdn.jsdelivr.net/npm/tinymce@6.8.2/skins/content/default/content.min.css',
+                icons_url: 'https://cdn.jsdelivr.net/npm/tinymce@6.8.2/icons/default/icons.min.js',
+                theme_url: 'https://cdn.jsdelivr.net/npm/tinymce@6.8.2/themes/silver/theme.min.js',
+                base_url: 'https://cdn.jsdelivr.net/npm/tinymce@6.8.2',
+                suffix: '.min',
+                setup: function(editor) {
+                    // Track if content was changed
+                    let hasUnsavedChanges = false;
+                    
+                    editor.on('change', function() {
+                        hasUnsavedChanges = true;
+                        // Mark as having unsaved changes
+                        const saveBtn = document.getElementById('editorSaveBtn');
+                        if (saveBtn) {
+                            saveBtn.classList.add('pulse-green');
+                        }
+                    });
+                    
+                    // Auto-save when editor loses focus (blur)
+                    editor.on('blur', function() {
+                        if (hasUnsavedChanges) {
+                            console.log('Editor blur - auto-saving...');
+                            saveWysiwygEditor().then(() => {
+                                hasUnsavedChanges = false;
+                            });
+                        }
+                    });
+                }
+            }).then(() => {
+                wysiwygEditorInitialized = true;
+                console.log('TinyMCE initialized');
+            });
+        }
+        
+        // Load content into WYSIWYG editor
+        // Note: We load the raw HTML and let TinyMCE handle formatting.
+        // The preview applies wpautop to simulate WordPress display.
+        async function loadWysiwygEditor() {
+            if (!selectedPage?.path) {
+                showToast('לא נבחר עמוד', 'error');
+                return;
+            }
+            
+            // Initialize editor if not done yet
+            if (!wysiwygEditorInitialized) {
+                initWysiwygEditor();
+                // Wait for init
+                await new Promise(resolve => setTimeout(resolve, 500));
+            }
+            
+            try {
+                const result = await apiCall(`/api/page/${encodeURIComponent(selectedPage.path)}`);
+                if (result.success && result.content) {
+                    // Store raw content for saving later
+                    window.currentPageRawContent = result.content;
+                    
+                    // Now get the wpautop'd version from preview API (same as what preview shows)
+                    try {
+                        const previewResponse = await fetch(`/api/preview/${encodeURIComponent(selectedPage.path)}`);
+                        if (previewResponse.ok) {
+                            const previewHtml = await previewResponse.text();
+                            
+                            // Extract body content from the full HTML document
+                            const parser = new DOMParser();
+                            const doc = parser.parseFromString(previewHtml, 'text/html');
+                            const bodyContent = doc.body.innerHTML;
+                            
+                            const editor = tinymce.get('tinymceEditor');
+                            if (editor) {
+                                editor.setContent(bodyContent);
+                                console.log('Content loaded into WYSIWYG editor (from preview API)');
+                            }
+                        } else {
+                            // Fallback to raw content with JS wpautop
+                            const editor = tinymce.get('tinymceEditor');
+                            if (editor) {
+                                editor.setContent(applyWpautopForEditor(result.content));
+                            }
+                        }
+                    } catch (previewErr) {
+                        console.error('Error loading preview:', previewErr);
+                        const editor = tinymce.get('tinymceEditor');
+                        if (editor) {
+                            editor.setContent(applyWpautopForEditor(result.content));
+                        }
+                    }
+                } else {
+                    showToast('שגיאה בטעינת התוכן', 'error');
+                }
+            } catch (err) {
+                console.error('Error loading content:', err);
+                showToast('שגיאה בטעינת התוכן', 'error');
+            }
+        }
+        
+        // Apply wpautop-like transformation for editor display
+        // This matches how WordPress renders content
+        function applyWpautopForEditor(content) {
+            if (!content) return '';
+            
+            // Normalize line endings
+            content = content.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+            
+            // List of block-level elements that should not be wrapped
+            const blockElements = 'table|thead|tbody|tfoot|tr|td|th|caption|colgroup|col|div|p|h[1-6]|ul|ol|li|dl|dt|dd|blockquote|pre|form|fieldset|legend|section|article|aside|header|footer|nav|figure|figcaption|address|hr|iframe|script|style';
+            
+            // Preserve content inside these tags (don't modify)
+            const preserveRegex = new RegExp(`(<(${blockElements})[^>]*>[\\s\\S]*?<\\/\\2>)`, 'gi');
+            const preserved = [];
+            let preserveIndex = 0;
+            
+            content = content.replace(preserveRegex, (match) => {
+                const placeholder = `<!--PRESERVE_${preserveIndex}-->`;
+                preserved.push(match);
+                preserveIndex++;
+                return placeholder;
+            });
+            
+            // Convert double newlines to paragraph breaks
+            const paragraphs = content.split(/\n\n+/);
+            content = paragraphs.map(para => {
+                para = para.trim();
+                if (!para) return '';
+                if (para.startsWith('<!--PRESERVE_')) return para;
+                // Convert single newlines to <br>
+                para = para.replace(/\n/g, '<br>\n');
+                return '<p>' + para + '</p>';
+            }).filter(p => p).join('\n');
+            
+            // Restore preserved content
+            preserved.forEach((original, index) => {
+                content = content.replace(`<!--PRESERVE_${index}-->`, original);
+            });
+            
+            // Clean up empty paragraphs
+            content = content.replace(/<p>\s*<\/p>/gi, '');
+            
+            // Clean up <p> tags around block elements
+            content = content.replace(/<p>\s*(<(?:table|div|ul|ol|h[1-6]|blockquote|pre|section|article)[^>]*>)/gi, '$1');
+            content = content.replace(/(<\/(?:table|div|ul|ol|h[1-6]|blockquote|pre|section|article)>)\s*<\/p>/gi, '$1');
+            
+            return content;
+        }
+        
+        // Reverse wpautop: convert editor HTML back to raw format for saving
+        function reverseWpautopForSave(html) {
+            if (!html) return '';
+            
+            // Replace </p><p> with double newlines
+            html = html.replace(/<\/p>\s*<p[^>]*>/gi, '\n\n');
+            
+            // Remove opening <p> tags
+            html = html.replace(/<p[^>]*>/gi, '');
+            
+            // Replace closing </p> with double newlines
+            html = html.replace(/<\/p>/gi, '\n\n');
+            
+            // Replace <br> with single newlines
+            html = html.replace(/<br\s*\/?>\s*/gi, '\n');
+            
+            // Clean up excessive newlines
+            html = html.replace(/\n{3,}/g, '\n\n');
+            
+            // Trim each line
+            html = html.split('\n').map(line => line.trimEnd()).join('\n');
+            
+            // Final trim
+            html = html.trim();
+            
+            return html;
+        }
+        
+        // Save WYSIWYG editor content
+        async function saveWysiwygEditor() {
+            if (!selectedPage?.path) {
+                showToast('לא נבחר עמוד', 'error');
+                return;
+            }
+            
+            const editor = tinymce.get('tinymceEditor');
+            if (!editor) {
+                showToast('העורך לא זמין', 'error');
+                return;
+            }
+            
+            // Get content and reverse wpautop to save in original format
+            let content = editor.getContent();
+            content = reverseWpautopForSave(content);
+            
+            showToast('שומר...', 'info');
+            
+            try {
+                const result = await apiCall('/api/page/content', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        path: selectedPage.path,
+                        content: content
+                    })
+                });
+                
+                if (result.success) {
+                    showToast('✅ נשמר בהצלחה!', 'success');
+                    const saveBtn = document.getElementById('editorSaveBtn');
+                    if (saveBtn) {
+                        saveBtn.classList.remove('pulse-green');
+                    }
+                    // Refresh preview to show saved changes
+                    loadPreview('current');
+                } else {
+                    showToast('שגיאה בשמירה: ' + (result.error || 'לא ידוע'), 'error');
+                }
+            } catch (err) {
+                console.error('Save error:', err);
+                showToast('שגיאה בשמירה', 'error');
+            }
         }
         
         function copyLocalPath() {
@@ -25740,10 +26228,23 @@ ${s.text}
                                 <div id="snippet-location-text" class="snippet-highlight-preview"></div>
                             </div>
                             <div class="snippet-location-content" id="snippet-location-content"></div>
+                            
+                            <!-- Inline Editor Section -->
+                            <div class="snippet-inline-editor" id="snippet-inline-editor" style="display: none;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                                    <strong style="color: #1e293b;">✏️ עריכה ישירה:</strong>
+                                    <button class="btn btn-small btn-secondary" onclick="cancelInlineEdit()">ביטול</button>
+                                </div>
+                                <textarea id="snippet-edit-textarea" dir="rtl"></textarea>
+                                <div class="snippet-editor-actions">
+                                    <button class="btn btn-success" onclick="saveInlineEdit()">💾 שמור שינויים</button>
+                                </div>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button class="btn btn-secondary" onclick="closeSnippetLocationModal()">סגור</button>
-                            <button class="btn btn-primary" onclick="goToEditTab()">✏️ עבור לעריכה</button>
+                            <button class="btn btn-primary" id="snippet-edit-btn" onclick="enableInlineEdit()">✏️ ערוך כאן</button>
+                            <button class="btn btn-secondary" onclick="goToEditTab()">📁 עבור לעמוד מלא</button>
                         </div>
                     </div>
                 `;
@@ -25762,8 +26263,14 @@ ${s.text}
             const highlightedContent = highlightSnippetInContent(content, snippetText);
             contentEl.innerHTML = highlightedContent;
             
-            // Store current page path for navigation
+            // Store current page path and content for editing
             window.currentSnippetPagePath = pagePath;
+            window.currentSnippetFullContent = content;
+            window.currentSnippetText = snippetText;
+            
+            // Reset editor state
+            document.getElementById('snippet-inline-editor').style.display = 'none';
+            document.getElementById('snippet-edit-btn').style.display = 'inline-block';
             
             // Show modal
             modal.classList.add('active');
@@ -25775,6 +26282,83 @@ ${s.text}
                     firstHighlight.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 }
             }, 100);
+        }
+        
+        function enableInlineEdit() {
+            const editor = document.getElementById('snippet-inline-editor');
+            const textarea = document.getElementById('snippet-edit-textarea');
+            const editBtn = document.getElementById('snippet-edit-btn');
+            
+            // Show editor with full content
+            editor.style.display = 'block';
+            editBtn.style.display = 'none';
+            
+            // Parse HTML to get editable text
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = window.currentSnippetFullContent || '';
+            tempDiv.querySelectorAll('script, style').forEach(el => el.remove());
+            const textContent = tempDiv.innerHTML;
+            
+            textarea.value = textContent;
+            textarea.focus();
+            
+            // Try to scroll to and select the snippet
+            const snippetText = window.currentSnippetText || '';
+            const snippetStart = snippetText.substring(0, 50);
+            const position = textarea.value.indexOf(snippetStart);
+            if (position !== -1) {
+                textarea.setSelectionRange(position, position + snippetText.length);
+                // Scroll textarea to show selection
+                textarea.blur();
+                textarea.focus();
+            }
+        }
+        
+        function cancelInlineEdit() {
+            document.getElementById('snippet-inline-editor').style.display = 'none';
+            document.getElementById('snippet-edit-btn').style.display = 'inline-block';
+        }
+        
+        async function saveInlineEdit() {
+            const textarea = document.getElementById('snippet-edit-textarea');
+            const newContent = textarea.value;
+            const pagePath = window.currentSnippetPagePath;
+            
+            if (!pagePath) {
+                showToast('שגיאה: לא נמצא נתיב עמוד', 'error');
+                return;
+            }
+            
+            showToast('💾 שומר שינויים...', 'info');
+            
+            try {
+                const result = await apiCall('/api/page/content', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        path: pagePath,
+                        content: newContent
+                    })
+                });
+                
+                if (result.success) {
+                    showToast('✅ השינויים נשמרו בהצלחה!', 'success');
+                    
+                    // Update stored content
+                    window.currentSnippetFullContent = newContent;
+                    
+                    // Refresh the highlighted view
+                    const contentEl = document.getElementById('snippet-location-content');
+                    const highlightedContent = highlightSnippetInContent(newContent, window.currentSnippetText);
+                    contentEl.innerHTML = highlightedContent;
+                    
+                    // Hide editor
+                    cancelInlineEdit();
+                } else {
+                    showToast('❌ שגיאה בשמירה: ' + (result.error || 'שגיאה לא ידועה'), 'error');
+                }
+            } catch (error) {
+                showToast('❌ שגיאה בשמירה: ' + error.message, 'error');
+            }
         }
         
         function highlightSnippetInContent(htmlContent, snippetText) {

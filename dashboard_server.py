@@ -1049,6 +1049,40 @@ def get_page_content(page_path):
     except Exception as e:
         return jsonify({"success": False, "error": str(e)}), 500
 
+@app.route('/api/page/content', methods=['POST'])
+def save_page_content():
+    """Save content to a specific page file"""
+    try:
+        data = request.json
+        page_path = data.get('path')
+        content = data.get('content')
+        
+        if not page_path:
+            return jsonify({"success": False, "error": "Missing page path"}), 400
+        
+        if content is None:
+            return jsonify({"success": False, "error": "Missing content"}), 400
+        
+        file_path = BASE_DIR / page_path
+        
+        if not file_path.exists():
+            return jsonify({"success": False, "error": "File not found"}), 404
+        
+        # Create backup before saving
+        backup_path = file_path.with_suffix('.html.bak')
+        try:
+            shutil.copy2(file_path, backup_path)
+        except Exception as backup_err:
+            print(f"[Save] Warning: Could not create backup: {backup_err}")
+        
+        # Save content
+        with open(file_path, 'w', encoding='utf-8') as f:
+            f.write(content)
+        
+        return jsonify({"success": True, "message": "Content saved successfully"})
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
 def simulate_wpautop(content):
     """
     Simulate WordPress wpautop function.
