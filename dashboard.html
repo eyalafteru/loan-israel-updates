@@ -14313,6 +14313,27 @@ ${content}
                 saveBtn.classList.remove('pulse-green');
             }
             
+            // Load content if not already loaded
+            if (!uploadState.backupContent || !uploadState.newContent) {
+                console.log('Loading content for compare view...');
+                try {
+                    // Load backup from local file
+                    const backupResult = await apiCall(`/api/page/backup?path=${encodeURIComponent(selectedPage.path)}`);
+                    if (backupResult.success && backupResult.content) {
+                        uploadState.backupMeta = backupResult.meta;
+                        uploadState.backupContent = cleanupInvalidHtml(backupResult.content);
+                    }
+                    
+                    // Load new content
+                    const htmlResult = await apiCall(`/api/page/html-content?path=${encodeURIComponent(selectedPage.path)}`);
+                    if (htmlResult.success && htmlResult.content) {
+                        uploadState.newContent = cleanupInvalidHtml(htmlResult.content);
+                    }
+                } catch (err) {
+                    console.error('Error loading compare content:', err);
+                }
+            }
+            
             // Old content (from backup)
             const oldContentEl = document.getElementById('compareOldContent');
             if (uploadState.backupContent) {
