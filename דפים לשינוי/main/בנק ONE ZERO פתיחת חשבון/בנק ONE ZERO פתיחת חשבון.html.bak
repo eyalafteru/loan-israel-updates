@@ -1,0 +1,232 @@
+<div data-test-render-count="7">
+<div class="mb-1 mt-1">
+<div class="group relative inline-flex gap-2 bg-gradient-to-b from-bg-300 from-50% to-bg-400 rounded-xl ml-px pl-2.5 py-2.5 break-words text-text-200 transition-all max-w-[75ch] flex-col shadow-[0_2px_16px_rgba(0,0,0,0.025)] min-w-[16ch] pr-6">
+<div class="absolute -bottom-0 -right-1.5">
+<div class="border-0.5 border-border-300 flex items-center translate-y-1/2 rounded-lg shadow-sm transition scale-95 opacity-0 group-hover:scale-100 group-hover:opacity-100 bg-bg-300 p-0.5">
+<div class="text-text-400 flex items-stretch justify-between gap-0.5">
+<h2 class="flex gap-0.5">בנק ONE ZERO מדריך שלם לפתיחת חשבון</h2>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div data-test-render-count="6">
+<div class="group relative pt-3.5 pb-[1.125rem] px-4 relative rounded-2xl -tracking-[0.015em] bg-[linear-gradient(to_bottom,_hsla(var(--bg-000)/0.75)_0%,_hsla(var(--bg-000)_/_0)_90%)] before:absolute before:inset-0 before:bg-[radial-gradient(ellipse_at_left_top,_hsla(var(--bg-000)/0.5)_0%,_hsla(var(--bg-000)/0.3)_60%)] before:rounded-2xl before:border-[0.5px] before:border-[hsla(var(--border-100)/0.15)] before:shadow-[0_4px_24px_rgba(0,0,0,0.015)] before:[transition:opacity_150ms_ease-out,_transform_250ms_cubic-bezier(0.695,0.555,0.655,1.650)] before:z-0 before:data-[is-streaming=&quot;true&quot;]:opacity-0 before:data-[is-streaming=&quot;true&quot;]:scale-[0.995] before:data-[is-streaming=&quot;false&quot;]:pointer-events-none" data-is-streaming="false">
+<div class="font-claude-message pr-4 md:pr-9 relative leading-[1.65rem] [&amp;_pre&gt;div]:bg-bg-300 [&amp;_pre]:-mr-4 md:[&amp;_pre]:-mr-9">
+<div class="grid-col-1 grid gap-2.5 [&amp;_&gt;_*]:min-w-0">
+<p class="whitespace-pre-wrap break-words">בנק וואן זירו (One Zero) הוא בנק דיגיטלי חדשני שהוקם בישראל בשנת 2019. הבנק מציע שירותים בנקאיים מתקדמים באמצעות פלטפורמה דיגיטלית, ללא סניפים פיזיים. מטרתו העיקרית היא לספק חוויה בנקאית פשוטה, נוחה ומותאמת אישית ללקוחותיו, תוך שימוש בטכנולוגיות מתקדמות ומודל עסקי יעיל. בנק וואן זירו מתמקד בהורדת עלויות תפעול ומעביר את החיסכון ללקוחותיו בצורת עמלות נמוכות ותנאים אטרקטיביים.</p>
+
+<h2><strong>הטבות מרכזיות של הבנק</strong></h2>
+<ul>
+ 	<li class="whitespace-normal break-words"><strong>פטור מעמלות ניהול חשבון לשנה הראשונה.</strong></li>
+ 	<li class="whitespace-normal break-words"><strong>כרטיס אשראי ללא דמי כרטיס לשנתיים.</strong></li>
+ 	<li class="whitespace-normal break-words"><strong>מתנת הצטרפות בשווי 100 ₪ לחשבון החדש.</strong></li>
+ 	<li class="whitespace-normal break-words"><strong>ריבית מוגדלת ב-0.5% על פיקדון ראשון.</strong></li>
+ 	<li class="whitespace-normal break-words"><strong>שירות ייעוץ פיננסי אישי חינם לשלושה חודשים.</strong></li>
+ 	<li class="whitespace-normal break-words"><strong>פטור מעמלות העברה בין-בנקאית לחצי שנה.</strong></li>
+ 	<li class="whitespace-normal break-words"><strong>אפשרות למשיכת מזומנים ללא עמלה בכל הכספומטים בארץ לשנה.</strong></li>
+ 	<li class="whitespace-normal break-words"><strong>חבילת הטבות לעסקים חדשים, כולל הנחות על שירותי סליקה.</strong></li>
+ 	<li class="whitespace-normal break-words"><strong>גישה מוקדמת למוצרים ושירותים חדשים של הבנק.</strong></li>
+</ul>
+<h2 class="font-600 text-xl font-bold"><strong>למה בכלל הבנק נוצר?</strong></h2>
+<p class="whitespace-pre-wrap break-words">בנק וואן זירו נולד מתוך חזון לשנות את עולם הבנקאות בישראל. הבנק הוקם על ידי צוות של יזמים ומומחים בתחום הפיננסים והטכנולוגיה, שזיהו את הצורך בפתרון בנקאי חדשני שיענה על הצרכים המשתנים של הלקוחות בעידן הדיגיטלי. לאחר תהליך ארוך של תכנון, פיתוח וקבלת רישיונות מבנק ישראל, וואן זירו השיק את פעילותו המסחרית בשנת 2021, ומאז הוא ממשיך לצבור פופולריות בקרב לקוחות המחפשים אלטרנטיבה לבנקאות המסורתית.</p>
+<img class="aligncenter wp-image-135128 size-full" src="https://loan-israel.co.il/wp-content/uploads/2024/09/Screenshot_1-1.webp" alt="וואן זירו" width="890" height="554" />
+<h2 class="font-600 text-xl font-bold"><strong>שירותים עיקריים של ONE ZERO</strong></h2>
+<p class="whitespace-pre-wrap break-words">בנק וואן זירו מציע מגוון רחב של שירותים בנקאיים, כולם נגישים דרך האפליקציה והאתר של הבנק. השירותים כוללים:</p>
+<p class="whitespace-pre-wrap break-words">חשבון עו"ש: חשבון בנק דיגיטלי ללא עמלות ניהול, המאפשר ביצוע העברות, הוראות קבע, ותשלומים שונים.</p>
+<p class="whitespace-pre-wrap break-words">כרטיסי אשראי: כרטיסי אשראי חכמים עם אפשרויות ניהול מתקדמות, כולל קביעת מגבלות הוצאה והתראות בזמן אמת.</p>
+<p class="whitespace-pre-wrap break-words">חיסכון ופיקדונות: מגוון אפשרויות חיסכון ופיקדונות בתנאים אטרקטיביים, כולל פיקדונות לטווח קצר וארוך.</p>
+<p class="whitespace-pre-wrap break-words">הלוואות: הלוואות אישיות ועסקיות בתהליך מהיר ופשוט, עם ריביות תחרותיות.</p>
+<p class="whitespace-pre-wrap break-words">שירותי מטבע חוץ: המרת מטבעות וניהול חשבונות במטבע חוץ בתנאים נוחים.</p>
+
+<h2 class="font-600 text-xl font-bold"><strong>טכנולוגיה וחדשנות בבנק וואן זירו</strong></h2>
+<p class="whitespace-pre-wrap break-words">בנק וואן זירו מתגאה בשימוש בטכנולוגיות מתקדמות ביותר כדי לספק חוויה בנקאית חלקה ויעילה. הבנק משתמש בבינה מלאכותית ולמידת מכונה כדי לשפר את השירות ללקוח, לזהות דפוסי הוצאות, ולהציע המלצות פיננסיות מותאמות אישית. מערכות אבטחה מתקדמות מגנות על המידע והכספים של הלקוחות, תוך שימוש בטכנולוגיות כמו זיהוי ביומטרי ואימות דו-שלבי.</p>
+
+<h2 class="font-600 text-xl font-bold"><strong>אפליקציית ONE ZERO</strong></h2>
+<p class="whitespace-pre-wrap break-words">אפליקציית וואן זירו היא הממשק העיקרי שבאמצעותו הלקוחות מנהלים את חשבונם. האפליקציה מציעה ממשק משתמש אינטואיטיבי וידידותי, המאפשר ללקוחות לבצע את כל הפעולות הבנקאיות בקלות ובמהירות. ניתן להוריד את האפליקציה מחנות האפליקציות של אפל (App Store) עבור מכשירי iOS, ומחנות Google Play עבור מכשירי אנדרואיד. קישור להורדת האפליקציה ניתן למצוא <a href="https://www.onezerobank.com/">באתר הרשמי של הבנק</a>.</p>
+
+<h2 class="font-600 text-xl font-bold"><strong>פתיחת חשבון בבנק וואן זירו</strong></h2>
+<p class="whitespace-pre-wrap break-words">תהליך פתיחת החשבון בבנק וואן זירו מתבצע כולו באופן דיגיטלי, ללא צורך בהגעה לסניף. התהליך כולל מספר שלבים פשוטים:</p>
+<p class="whitespace-pre-wrap break-words">הורדת האפליקציה והרשמה ראשונית. אימות זהות באמצעות צילום תעודת זהות ותמונת סלפי. מילוי פרטים אישיים ופיננסיים בסיסיים. בחירת סוג החשבון והשירותים הרצויים. אישור תנאי השימוש וחתימה דיגיטלית.</p>
+<p class="whitespace-pre-wrap break-words">לאחר השלמת התהליך, החשבון מופעל בדרך כלל תוך מספר שעות, והלקוח יכול להתחיל להשתמש בשירותי הבנק.</p>
+
+<h2 class="font-600 text-xl font-bold"><strong>ניהול כספים וחסכון</strong></h2>
+<p class="whitespace-pre-wrap break-words">בנק וואן זירו מציע כלים מתקדמים לניהול כספים וחיסכון. האפליקציה מאפשרת ללקוחות לעקוב אחר ההוצאות שלהם בזמן אמת, לקבוע יעדי חיסכון, ולקבל תובנות לגבי הרגלי ההוצאה שלהם. הבנק מציע גם אפשרויות חיסכון אוטומטיות, כמו עיגול עסקאות לשקל הקרוב והעברת ההפרש לחשבון חיסכון.</p>
+<p class="whitespace-pre-wrap break-words">בתחום הפיקדונות, וואן זירו מציע מגוון אפשרויות עם ריביות אטרקטיביות. הלקוחות יכולים לבחור בין פיקדונות לטווח קצר, בינוני וארוך, עם אפשרויות שבירה גמישות. הבנק מעודד חיסכון על ידי הצעת תנאים משופרים ללקוחות שמפקידים סכומים גבוהים יותר או לתקופות ארוכות יותר.</p>
+
+<h2 class="font-600 text-xl font-bold"><strong>שירותי אשראי והלוואות בבנק וואן זירו</strong></h2>
+<p class="whitespace-pre-wrap break-words">בנק וואן זירו מציע מגוון פתרונות אשראי והלוואות, הן ללקוחות פרטיים והן לעסקים קטנים ובינוניים. תהליך בקשת ההלוואה הוא פשוט ומהיר, ומתבצע כולו דרך האפליקציה. הבנק משתמש במודלים מתקדמים להערכת סיכוני אשראי, המאפשרים לו להציע ריביות תחרותיות ותנאים מותאמים אישית לכל לקוח.</p>
+<p class="whitespace-pre-wrap break-words">עבור לקוחות פרטיים, הבנק מציע הלוואות לכל מטרה, הלוואות לרכב, והלוואות לשיפוץ הבית. עבור עסקים, ישנן אפשרויות למימון הון חוזר, הלוואות לרכישת ציוד, ומסגרות אשראי גמישות.</p>
+<p class="whitespace-pre-wrap break-words">הבנק מקפיד על שקיפות מלאה בתנאי ההלוואות, ומציג ללקוחות את כל העלויות והתנאים באופן ברור לפני חתימה על הסכם ההלוואה.</p>
+
+<h2 class="font-600 text-xl font-bold"><strong>שירות לקוחות וממשק משתמש</strong></h2>
+<p class="whitespace-pre-wrap break-words">למרות היותו בנק דיגיטלי ללא סניפים פיזיים, וואן זירו מקפיד על מתן שירות לקוחות איכותי ונגיש. הבנק מציע תמיכה באמצעות צ'אט בזמן אמת, שיחות טלפון, ודואר אלקטרוני. בנוסף, האתר והאפליקציה כוללים מרכז תמיכה מקיף עם מדריכים ושאלות נפוצות, המאפשרים ללקוחות למצוא מענה לרוב השאלות באופן עצמאי.</p>
+<p class="whitespace-pre-wrap break-words">הממשק המשתמש של האפליקציה והאתר תוכנן להיות פשוט וידידותי, עם דגש על נגישות ושימושיות. הלקוחות יכולים לנווט בקלות בין השירותים השונים, לבצע פעולות במספר קליקים, ולקבל תמונה ברורה של מצבם הפיננסי בכל רגע נתון.</p>
+
+<h2 class="font-600 text-xl font-bold"><strong>החזון של וואן זירו</strong></h2>
+<p class="whitespace-pre-wrap break-words">בנק וואן זירו רואה את עצמו כחלוץ בעולם הבנקאות הדיגיטלית בישראל, ומתכנן להמשיך ולהרחיב את השירותים והיכולות שלו. הבנק עובד על פיתוח שירותים חדשניים נוספים, כמו ניהול השקעות אוטומטי, שילוב קריפטו-מטבעות, ושירותי בנקאות פתוחה שיאפשרו אינטגרציה עם אפליקציות ושירותים פיננסיים אחרים.</p>
+<p class="whitespace-pre-wrap break-words">הבנק שואף להוביל את המהפכה הדיגיטלית בענף הבנקאות, ולהציע ללקוחותיו חוויה בנקאית מתקדמת, יעילה וחסכונית.</p>
+
+<table class="bg-bg-100 min-w-full border-separate border-spacing-0 text-sm leading-[1.88888]">
+<thead class="border-b-border-100/50 border-b-[0.5px] text-left">
+<tr class="[tbody&gt;&amp;]:odd:bg-bg-500/10">
+<th class="text-text-000 [&amp;:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] font-400 px-2 [&amp;:not(:first-child)]:border-l-[0.5px]">
+<h3><strong>סוג החשבון</strong></h3>
+</th>
+<th class="text-text-000 [&amp;:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] font-400 px-2 [&amp;:not(:first-child)]:border-l-[0.5px]">
+<h3><strong>תיאור</strong></h3>
+</th>
+<th class="text-text-000 [&amp;:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] font-400 px-2 [&amp;:not(:first-child)]:border-l-[0.5px]">
+<h3><strong>יתרונות עיקריים</strong></h3>
+</th>
+<th class="text-text-000 [&amp;:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] font-400 px-2 [&amp;:not(:first-child)]:border-l-[0.5px]">
+<h3><strong>עלות חודשית</strong></h3>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr class="[tbody&gt;&amp;]:odd:bg-bg-500/10">
+<td class="border-t-border-100/50 [&amp;:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&amp;:not(:first-child)]:border-l-[0.5px]">חשבון בסיסי</td>
+<td class="border-t-border-100/50 [&amp;:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&amp;:not(:first-child)]:border-l-[0.5px]">חשבון עו"ש דיגיטלי</td>
+<td class="border-t-border-100/50 [&amp;:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&amp;:not(:first-child)]:border-l-[0.5px]">ללא עמלות ניהול</td>
+<td class="border-t-border-100/50 [&amp;:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&amp;:not(:first-child)]:border-l-[0.5px]">0 ₪</td>
+</tr>
+<tr class="[tbody&gt;&amp;]:odd:bg-bg-500/10">
+<td class="border-t-border-100/50 [&amp;:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&amp;:not(:first-child)]:border-l-[0.5px]">חשבון פרימיום</td>
+<td class="border-t-border-100/50 [&amp;:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&amp;:not(:first-child)]:border-l-[0.5px]">חשבון עם הטבות נוספות</td>
+<td class="border-t-border-100/50 [&amp;:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&amp;:not(:first-child)]:border-l-[0.5px]">כרטיס אשראי זהב, ייעוץ פיננסי</td>
+<td class="border-t-border-100/50 [&amp;:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&amp;:not(:first-child)]:border-l-[0.5px]">19.90 ₪</td>
+</tr>
+<tr class="[tbody&gt;&amp;]:odd:bg-bg-500/10">
+<td class="border-t-border-100/50 [&amp;:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&amp;:not(:first-child)]:border-l-[0.5px]">חשבון עסקי קטן</td>
+<td class="border-t-border-100/50 [&amp;:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&amp;:not(:first-child)]:border-l-[0.5px]">לעסקים עם מחזור עד 5 מיליון ₪</td>
+<td class="border-t-border-100/50 [&amp;:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&amp;:not(:first-child)]:border-l-[0.5px]">כלים לניהול תזרים מזומנים</td>
+<td class="border-t-border-100/50 [&amp;:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&amp;:not(:first-child)]:border-l-[0.5px]">39.90 ₪</td>
+</tr>
+<tr class="[tbody&gt;&amp;]:odd:bg-bg-500/10">
+<td class="border-t-border-100/50 [&amp;:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&amp;:not(:first-child)]:border-l-[0.5px]">חשבון עסקי בינוני</td>
+<td class="border-t-border-100/50 [&amp;:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&amp;:not(:first-child)]:border-l-[0.5px]">לעסקים עם מחזור עד 20 מיליון ₪</td>
+<td class="border-t-border-100/50 [&amp;:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&amp;:not(:first-child)]:border-l-[0.5px]">שירותי סחר חוץ, ליווי עסקי</td>
+<td class="border-t-border-100/50 [&amp;:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&amp;:not(:first-child)]:border-l-[0.5px]">79.90 ₪</td>
+</tr>
+<tr class="[tbody&gt;&amp;]:odd:bg-bg-500/10">
+<td class="border-t-border-100/50 [&amp;:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&amp;:not(:first-child)]:border-l-[0.5px]">חשבון סטודנט</td>
+<td class="border-t-border-100/50 [&amp;:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&amp;:not(:first-child)]:border-l-[0.5px]">לסטודנטים עד גיל 30</td>
+<td class="border-t-border-100/50 [&amp;:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&amp;:not(:first-child)]:border-l-[0.5px]">הלוואות בתנאים מועדפים</td>
+<td class="border-t-border-100/50 [&amp;:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&amp;:not(:first-child)]:border-l-[0.5px]">0 ₪</td>
+</tr>
+<tr class="[tbody&gt;&amp;]:odd:bg-bg-500/10">
+<td class="border-t-border-100/50 [&amp;:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&amp;:not(:first-child)]:border-l-[0.5px]">חשבון חיילים</td>
+<td class="border-t-border-100/50 [&amp;:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&amp;:not(:first-child)]:border-l-[0.5px]">לחיילים בשירות חובה וקבע</td>
+<td class="border-t-border-100/50 [&amp;:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&amp;:not(:first-child)]:border-l-[0.5px]">פטור מעמלות, הטבות ייחודיות</td>
+<td class="border-t-border-100/50 [&amp;:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&amp;:not(:first-child)]:border-l-[0.5px]">0 ₪</td>
+</tr>
+<tr class="[tbody&gt;&amp;]:odd:bg-bg-500/10">
+<td class="border-t-border-100/50 [&amp;:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&amp;:not(:first-child)]:border-l-[0.5px]">חשבון +60</td>
+<td class="border-t-border-100/50 [&amp;:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&amp;:not(:first-child)]:border-l-[0.5px]">לגמלאים ובני 60 ומעלה</td>
+<td class="border-t-border-100/50 [&amp;:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&amp;:not(:first-child)]:border-l-[0.5px]">שירות תמיכה מועדף, ריבית מוגדלת</td>
+<td class="border-t-border-100/50 [&amp;:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&amp;:not(:first-child)]:border-l-[0.5px]">9.90 ₪</td>
+</tr>
+<tr class="[tbody&gt;&amp;]:odd:bg-bg-500/10">
+<td class="border-t-border-100/50 [&amp;:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&amp;:not(:first-child)]:border-l-[0.5px]">חשבון משפחתי</td>
+<td class="border-t-border-100/50 [&amp;:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&amp;:not(:first-child)]:border-l-[0.5px]">חשבון משותף לבני משפחה</td>
+<td class="border-t-border-100/50 [&amp;:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&amp;:not(:first-child)]:border-l-[0.5px]">כלים לניהול תקציב משפחתי</td>
+<td class="border-t-border-100/50 [&amp;:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&amp;:not(:first-child)]:border-l-[0.5px]">24.90 ₪</td>
+</tr>
+<tr class="[tbody&gt;&amp;]:odd:bg-bg-500/10">
+<td class="border-t-border-100/50 [&amp;:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&amp;:not(:first-child)]:border-l-[0.5px]">חשבון חיסכון</td>
+<td class="border-t-border-100/50 [&amp;:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&amp;:not(:first-child)]:border-l-[0.5px]">חשבון ייעודי לחיסכון</td>
+<td class="border-t-border-100/50 [&amp;:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&amp;:not(:first-child)]:border-l-[0.5px]">ריבית גבוהה, אפשרויות חיסכון גמישות</td>
+<td class="border-t-border-100/50 [&amp;:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&amp;:not(:first-child)]:border-l-[0.5px]">0 ₪</td>
+</tr>
+<tr class="[tbody&gt;&amp;]:odd:bg-bg-500/10">
+<td class="border-t-border-100/50 [&amp;:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&amp;:not(:first-child)]:border-l-[0.5px]">חשבון מט"ח</td>
+<td class="border-t-border-100/50 [&amp;:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&amp;:not(:first-child)]:border-l-[0.5px]">לניהול כספים במטבע חוץ</td>
+<td class="border-t-border-100/50 [&amp;:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&amp;:not(:first-child)]:border-l-[0.5px]">המרות מט"ח בשערים מועדפים</td>
+<td class="border-t-border-100/50 [&amp;:not(:first-child)]:-x-[hsla(var(--border-100) / 0.5)] border-t-[0.5px] px-2 [&amp;:not(:first-child)]:border-l-[0.5px]">14.90 ₪</td>
+</tr>
+</tbody>
+</table>
+<h2 class="font-600 text-xl font-bold"><strong>פתרונות מימון לפרטיים ולעסקים</strong></h2>
+<p class="whitespace-pre-wrap break-words">בנק וואן זירו מציע מגוון רחב של פתרונות הלוואה ומימון המותאמים לצרכים שונים, הן ללקוחות פרטיים והן לעסקים. התהליך כולו מתבצע באופן דיגיטלי, מהגשת הבקשה ועד לקבלת הכספים, ומתאפיין במהירות ויעילות.</p>
+<p class="whitespace-pre-wrap break-words"><strong>עבור לקוחות פרטיים, וואן זירו מציע:</strong></p>
+<p class="whitespace-pre-wrap break-words">הלוואות אישיות: הלוואות לכל מטרה בסכומים של עד 150,000 ₪, עם תקופות החזר גמישות של עד 84 חודשים. הריביות תחרותיות ומותאמות לפרופיל הפיננסי של הלקוח.</p>
+<p class="whitespace-pre-wrap break-words">הלוואות לרכב: מימון לרכישת רכב חדש או יד שנייה, עם אפשרות למימון של עד 100% מערך הרכב. תנאי ההלוואה מותאמים לסוג הרכב וליכולת ההחזר של הלקוח.</p>
+<p class="whitespace-pre-wrap break-words">הלוואות לשיפוץ: הלוואות ייעודיות לשיפוץ או שדרוג הבית, עם אפשרות לפריסת תשלומים נוחה ותנאים אטרקטיביים.</p>
+<p class="whitespace-pre-wrap break-words">מחזור הלוואות: אפשרות למחזר הלוואות קיימות מבנקים אחרים בתנאים משופרים, כדי להקל על נטל ההחזרים החודשיים.</p>
+<p class="whitespace-pre-wrap break-words">עבור לקוחות עסקיים, הבנק מציע:</p>
+<p class="whitespace-pre-wrap break-words">הלוואות להון חוזר: מימון גמיש לצרכי תזרים של העסק, עם אפשרות להתאמת ההחזרים לעונתיות בפעילות העסקית.</p>
+<p class="whitespace-pre-wrap break-words">הלוואות לרכישת ציוד: מימון לרכישת ציוד ומכונות לעסק, עם אפשרות לפריסת תשלומים ארוכת טווח.</p>
+<p class="whitespace-pre-wrap break-words">מסגרות אשראי: קווי אשראי גמישים המאפשרים לעסק לנצל את הכסף לפי הצורך ולשלם ריבית רק על הסכום שנוצל בפועל.</p>
+<p class="whitespace-pre-wrap break-words">הלוואות לפיתוח עסקי: מימון להרחבת העסק, פתיחת סניפים חדשים או כניסה לתחומי פעילות נוספים.</p>
+<p class="whitespace-pre-wrap break-words"><strong>תהליך בקשת ההלוואה בוואן זירו הוא פשוט ומהיר:</strong></p>
+
+<ol class="-mt-1 list-decimal space-y-2 pl-8">
+ 	<li class="whitespace-normal break-words">הגשת בקשה דרך האפליקציה או אתר הבנק.</li>
+ 	<li class="whitespace-normal break-words">העלאת מסמכים נדרשים באופן דיגיטלי.</li>
+ 	<li class="whitespace-normal break-words">בחינה מהירה של הבקשה על ידי מערכת הערכת סיכונים אוטומטית.</li>
+ 	<li class="whitespace-normal break-words">קבלת הצעה מותאמת אישית תוך זמן קצר.</li>
+ 	<li class="whitespace-normal break-words">חתימה דיגיטלית על הסכם ההלוואה.</li>
+ 	<li class="whitespace-normal break-words">העברת הכספים לחשבון הלקוח, לרוב תוך יום עסקים אחד.</li>
+</ol>
+<p class="whitespace-pre-wrap break-words">הבנק מקפיד על שקיפות מלאה בתהליך, ומציג ללקוח את כל העלויות והתנאים באופן ברור לפני החתימה על ההסכם. בנוסף, וואן זירו מציע כלים דיגיטליים לניהול ההלוואה, כולל אפשרות לביצוע תשלומים מוקדמים, שינוי מועדי פירעון, וקבלת תזכורות לתשלומים.</p>
+<span data-sheets-root="1">[wscreens ws_id="7936"]</span>
+<h2><strong>שאלות מרכזיות בקצרה</strong></h2>
+<h3 id="toc_18" class="ui-accordion-header ui-corner-top ui-state-default ui-accordion-header-active ui-state-active ui-accordion-icons ui-state-hover ui-state-focus" tabindex="0" role="tab" aria-controls="ui-id-1" aria-selected="true" aria-expanded="true">כיצד מתבצע תהליך פתיחת החשבון בבנק וואן זירו?</h3>
+<p class="ui-accordion-header ui-corner-top ui-state-default ui-accordion-header-active ui-state-active ui-accordion-icons ui-state-hover ui-state-focus" tabindex="0" role="tab" aria-controls="ui-id-1" aria-selected="true" aria-expanded="true"><img class="emoji" role="img" draggable="false" src="https://s.w.org/images/core/emoji/16.0.1/svg/1f4a1.svg" alt="💡" /> תהליך פתיחת החשבון מתבצע באופן מלא דרך האפליקציה או אתר הבנק. יש להוריד את האפליקציה, למלא את הפרטים האישיים, לצלם תעודת זהות ותמונת סלפי לאימות זהות, ולאשר את תנאי השימוש. התהליך כולו לוקח בדרך כלל פחות מ-10 דקות.</p>
+
+</div>
+<h3 id="toc_19" class="ui-accordion-header ui-corner-top ui-state-default ui-accordion-icons ui-state-focus ui-accordion-header-active ui-state-active" tabindex="0" role="tab" aria-controls="ui-id-2" aria-selected="true" aria-expanded="true">האם ניתן להפקיד מזומן בחשבון וואן זירו?</h3>
+<p class="ui-accordion-header ui-corner-top ui-state-default ui-accordion-icons ui-state-focus ui-accordion-header-active ui-state-active" tabindex="0" role="tab" aria-controls="ui-id-2" aria-selected="true" aria-expanded="true"><img class="emoji" role="img" draggable="false" src="https://s.w.org/images/core/emoji/16.0.1/svg/1f4a1.svg" alt="💡" /> למרות שוואן זירו הוא בנק דיגיטלי ללא סניפים פיזיים, ניתן להפקיד מזומן באמצעות שירותי הפקדה בנקודות שירות שונות ברחבי הארץ, כגון חנויות נוחות וסניפי דואר. פרטים מלאים על נקודות ההפקדה ניתן למצוא באפליקציה ובאתר הבנק.</p>
+
+<h3 class="ui-accordion-header ui-corner-top ui-state-default ui-accordion-icons ui-state-focus ui-accordion-header-active ui-state-active" tabindex="0" role="tab" aria-controls="ui-id-2" aria-selected="true" aria-expanded="true">מהם היתרונות העיקריים של בנק וואן זירו לעומת בנקים מסורתיים?</h3>
+<div role="tabpanel" aria-labelledby="toc_20" aria-hidden="false">
+<div id="ui-id-2" class="not_first ui-accordion-content ui-corner-bottom ui-helper-reset ui-widget-content ui-accordion-content-active" role="tabpanel" aria-labelledby="toc_20" aria-hidden="false"><p><img class="emoji" role="img" draggable="false" src="https://s.w.org/images/core/emoji/16.0.1/svg/1f4a1.svg" alt="💡" /> היתרונות העיקריים כוללים עמלות נמוכות יותר או אפס עמלות על רוב הפעולות, שירות 24/7 דרך האפליקציה, תהליכים מהירים ופשוטים לביצוע פעולות בנקאיות, כלים מתקדמים לניהול פיננסי, וחדשנות טכנולוגית המאפשרת שירותים מתקדמים כמו ניתוח הוצאות בזמן אמת ויעדי חיסכון אוטומטיים.</div>
+</p></div>
+<h3 role="tabpanel" aria-labelledby="toc_20" aria-hidden="false"> האם הכספים בבנק וואן זירו מוגנים כמו בבנקים אחרים?</h3>
+<div role="tabpanel" aria-labelledby="toc_19" aria-hidden="false">
+<div id="ui-id-4" class="not_first ui-accordion-content ui-corner-bottom ui-helper-reset ui-widget-content ui-accordion-content-active" role="tabpanel" aria-labelledby="toc_21" aria-hidden="false">
+<div id="ui-id-4" class="not_first ui-accordion-content ui-corner-bottom ui-helper-reset ui-widget-content ui-accordion-content-active" role="tabpanel" aria-labelledby="toc_21" aria-hidden="false">
+
+<img class="emoji" role="img" draggable="false" src="https://s.w.org/images/core/emoji/16.0.1/svg/1f4a1.svg" alt="💡" /> כן, הכספים בבנק וואן זירו מוגנים באותה מידה כמו בכל בנק אחר בישראל. הבנק מפוקח על ידי בנק ישראל ומבוטח על ידי תאגיד הביטוח לפיקדונות בנקאיים. בנוסף, הבנק משתמש במערכות אבטחה מתקדמות להגנה על המידע והכספים של הלקוחות.
+<h3 id="toc_22" class="ui-accordion-header ui-corner-top ui-state-default ui-accordion-icons ui-state-focus ui-accordion-header-active ui-state-active ui-state-hover" tabindex="0" role="tab" aria-controls="ui-id-5" aria-selected="true" aria-expanded="true">איך ניתן ליצור קשר עם שירות הלקוחות של בנק וואן זירו?</h3>
+<div id="ui-id-2" class="not_first ui-accordion-content ui-corner-bottom ui-helper-reset ui-widget-content ui-accordion-content-active" role="tabpanel" aria-labelledby="toc_22" aria-hidden="false">
+<div class="content_wrapper"><article id="post-135118" class="post-135118 post type-post status-publish format-standard has-post-thumbnail hentry category-87">
+<div class="main_content_wrapper">
+<div class="main_content">
+<div id="wtr-content" data-bg="#FFFFFF" data-fg="#336699" data-width="10" data-mute="" data-fgopacity="1.00" data-mutedopacity="1.00" data-placement="top" data-placement-offset="0" data-content-offset="0" data-placement-touch="top" data-placement-offset-touch="0" data-transparent="" data-shadow="1" data-touch="1" data-non-touch="1" data-comments="0" data-commentsbg="#ffcece" data-location="page" data-mutedfg="#336699" data-endfg="#67bce9" data-rtl="1">
+<div dir="rtl">
+<div>
+<div>
+<div>
+<div>
+<div class="">
+<div class="" role="tablist">
+<div id="ui-id-5" class="" role="tabpanel" aria-labelledby="toc_22" aria-hidden="false">
+
+<img class="emoji" role="img" draggable="false" src="https://s.w.org/images/core/emoji/16.0.1/svg/1f4a1.svg" alt="💡" /> ניתן ליצור קשר עם שירות הלקוחות של וואן זירו במספר דרכים: דרך הצ'אט באפליקציה או באתר הבנק, באמצעות שיחת טלפון למוקד השירות במספר 074-7350350, או דרך פנייה בדואר אלקטרוני לכתובת support@onezerobank.com. שירות הלקוחות זמין 24 שעות ביממה, 7 ימים בשבוע.
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</article></div>
+<section id="wpcAuthorBoxSection" class="wpc-author-box-section">
+<div class="wpc-author-box-container">
+<div class="wpc-author-box-card"></div>
+</div>
+</section></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
