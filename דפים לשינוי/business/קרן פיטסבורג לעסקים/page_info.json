@@ -6,7 +6,40 @@
   "title": "קרן פיטסבורג לעסקים - הלוואות בערבות המדינה ובנקים באישור מיידי",
   "description": "שמעתם על קרן פיטסבורג לעסקים באזור כרמיאל-משגב? כעת זה הזמן להשיג לכם הלוואה משתלמת לעסק, מקרן זו או אחרות, מהבנקים או מכל מוסד גדול! פורטל רק תבקש זו הכתובת",
   "imported_at": "2026-01-03T13:58:21.706086",
-  "fetched_keywords": {},
+  "fetched_keywords": {
+    "timestamp": "2026-01-12T09:05:20.399Z",
+    "main_keyword": "קרן פיטסבורג לעסקים",
+    "clusters": [
+      {
+        "primary": "קרן פיטסבורג לעסקים קטנים",
+        "source": "autocomplete",
+        "type": "unique",
+        "unique_part": "קטנים",
+        "variants": []
+      },
+      {
+        "primary": "קרן פיטסבורג לעסקים בע\"מ",
+        "source": "autocomplete",
+        "type": "unique",
+        "unique_part": "בע\"מ",
+        "variants": []
+      }
+    ],
+    "final_keywords": [
+      "קרן פיטסבורג לעסקים קטנים",
+      "קרן פיטסבורג לעסקים בע\"מ"
+    ],
+    "unique_topics": [
+      "קטנים",
+      "בע\"מ"
+    ],
+    "rank_position": null,
+    "rank_checked_url": "https://loan-israel.co.il/Business/%d7%a7%d7%a8%d7%9f-%d7%a4%d7%99%d7%98%d7%a1%d7%91%d7%95%d7%a8%d7%92-%d7%9c%d7%a2%d7%a1%d7%a7%d7%99%d7%9d/",
+    "organic_results": [],
+    "ai_mode_results": [],
+    "ai_rank_position": null,
+    "competitor_data": []
+  },
   "word_count": 182,
   "wp_post_title": "קרן פיטסבורג לעסקים",
   "page_name": "קרן פיטסבורג לעסקים"

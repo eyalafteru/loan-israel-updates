@@ -1,4 +1,4 @@
-{
+﻿{
   "chain": {
     "enabled": false,
     "next_agent": null
@@ -13,13 +13,12 @@
     "temperature": 0.7
   },
   "name": "עסקים שיפור תוכן",
-  "sites": [
-    "business"
-  ],
+  "sites": ["business"],
   "status": "active",
   "steps": [
     {
       "id": "step1",
+      "model": "claude-opus-4-5",
       "name": "ניתוח וכתיבה",
       "order": 1,
       "output": {
@@ -42,11 +41,11 @@
         "CURRENT_MONTH",
         "BOI_INTEREST_RATE",
         "APPROVED_DOMAINS"
-      ],
-      "model": "claude-opus-4-5"
+      ]
     },
     {
       "id": "step2",
+      "model": "claude-sonnet-4-5",
       "name": "SEO + QA תוכן",
       "order": 2,
       "output": {
@@ -62,11 +61,11 @@
         "PAGE_WORD_COUNT",
         "KEYWORDS_AUTOCOMPLETE_LIST",
         "KNOWLEDGE_BASE_GENERAL"
-      ],
-      "model": "claude-sonnet-4-5"
+      ]
     },
     {
       "id": "step3",
+      "model": "claude-sonnet-4-5",
       "name": "ויזואליזציה + QA ויזואלי",
       "order": 3,
       "output": {
@@ -80,13 +79,12 @@
         "PAGE_HTML",
         "PAGE_KEYWORD",
         "PAGE_WORD_COUNT"
-      ],
-      "model": "claude-sonnet-4-5"
+      ]
     }
   ],
   "supports_full_auto": true,
   "type": "update",
-  "updated": "2026-01-07T10:50:00.000000",
+  "updated": "2026-01-12T12:18:40.666778",
   "wordpress": {
     "action": "update",
     "site": "main",

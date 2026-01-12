@@ -26629,7 +26629,10 @@ ${s.text}
         }
         
         async function executeDelete() {
-            if (!pageToDelete) return;
+            if (!pageToDelete) {
+                console.error('[Delete] No page to delete');
+                return;
+            }
             
             const redirectType = document.querySelector('input[name="redirectType"]:checked').value;
             const redirectTarget = document.getElementById('redirectTarget').value;
@@ -26638,15 +26641,42 @@ ${s.text}
             
             if (!page) {
                 showToast('לא נמצא עמוד', 'error');
+                console.error('[Delete] Page not found in pages array:', pageToDelete);
                 return;
             }
             
-            const pageInfo = pageInfoCache[page.path];
+            console.log('[Delete] Page found:', page);
+            console.log('[Delete] pageInfoCache keys:', Object.keys(pageInfoCache));
             
-            if (!pageInfo || !pageInfo.wordpress_id) {
+            // Try multiple path formats
+            let pageInfo = pageInfoCache[page.path] || pageInfoCache[page.path.replace(/\\/g, '/')] || pageInfoCache[page.path.replace(/\//g, '\\')];
+            
+            // If still not found, try to fetch it
+            if (!pageInfo || (!pageInfo.wordpress_id && !pageInfo.post_id)) {
+                console.log('[Delete] Trying to fetch page info from server...');
+                try {
+                    const result = await apiCall(`/api/page/info?path=${encodeURIComponent(page.path)}`);
+                    if (result.success && result.info && (result.info.wordpress_id || result.info.post_id)) {
+                        pageInfo = result.info;
+                        console.log('[Delete] Got page info from server:', pageInfo);
+                    } else {
+                        console.log('[Delete] API response:', result);
+                    }
+                } catch (e) {
+                    console.error('[Delete] Failed to fetch page info:', e);
+                }
+            }
+            
+            // Support both wordpress_id and post_id field names
+            const wpPostId = pageInfo?.wordpress_id || pageInfo?.post_id;
+            
+            if (!pageInfo || !wpPostId) {
+                console.error('[Delete] No wordpress_id/post_id found. pageInfo:', pageInfo);
                 showToast('❌ לא נמצא מזהה WordPress לעמוד. וודא שהעמוד פורסם ב-WordPress.', 'error');
                 return;
             }
+            
+            console.log('[Delete] Using post ID:', wpPostId);
             
             // Validate redirect target if needed
             if ((redirectType === '301' || redirectType === '302') && !redirectTarget) {
@@ -26654,13 +26684,21 @@ ${s.text}
                 return;
             }
             
-            showToast('🗑️ מוחק עמוד...', 'info');
+            // Show loading state
+            const deleteBtn = document.querySelector('#deletePageModal .btn-danger');
+            const originalBtnText = deleteBtn?.innerHTML;
+            if (deleteBtn) {
+                deleteBtn.innerHTML = '⏳ מוחק...';
+                deleteBtn.disabled = true;
+            }
+            
+            showToast('🗑️ מוחק עמוד והגדרת הפניה...', 'info');
             
             try {
                 const result = await apiCall('/api/wordpress/delete-page', {
                     method: 'POST',
                     body: JSON.stringify({
-                        post_id: pageInfo.wordpress_id,
+                        post_id: wpPostId,
                         url: pageInfo.url,
                         page_path: page.path,
                         redirect_type: redirectType,
@@ -26669,7 +26707,8 @@ ${s.text}
                 });
                 
                 if (result.success) {
-                    showToast('✅ העמוד נמחק בהצלחה! הקבצים נשמרו בארכיון.', 'success');
+                    const redirectMsg = result.redirect_created ? ' + הפניה נוצרה!' : '';
+                    showToast(`✅ העמוד נמחק בהצלחה${redirectMsg} הקבצים נשמרו בארכיון.`, 'success');
                     closeDeleteModal();
                     
                     // Reload pages list
@@ -26679,6 +26718,12 @@ ${s.text}
                 }
             } catch (error) {
                 showToast('❌ שגיאה במחיקה: ' + error.message, 'error');
+            } finally {
+                // Reset button state
+                if (deleteBtn) {
+                    deleteBtn.innerHTML = originalBtnText || '🗑️ מחק עמוד';
+                    deleteBtn.disabled = false;
+                }
             }
         }
         
@@ -26820,24 +26865,25 @@ ${s.text}
         }
         
         async function restorePage(archivePath, htmlFile) {
-            if (!confirm(`האם אתה בטוח שברצונך לשחזר עמוד זה?\n\nהקבצים יוחזרו לתיקיית העמודים, וה-redirect יימחק (אם קיים).`)) {
+            if (!confirm(`האם אתה בטוח שברצונך לשחזר עמוד זה?\n\nהקבצים יוחזרו לתיקיית העמודים, העמוד ייווצר מחדש בוורדפרס, וה-redirect יימחק (אם קיים).`)) {
                 return;
             }
             
-            showToast('♻️ משחזר עמוד...', 'info');
+            showToast('♻️ משחזר עמוד ומעלה לוורדפרס...', 'info');
             
             try {
                 const result = await apiCall('/api/page/restore', {
                     method: 'POST',
                     body: JSON.stringify({
                         archive_path: archivePath,
-                        restore_to_wordpress: false,
+                        restore_to_wordpress: true,
                         delete_redirect: true
                     })
                 });
                 
                 if (result.success) {
-                    showToast('✅ העמוד שוחזר בהצלחה! ' + result.message, 'success');
+                    const wpMsg = result.wp_restored ? ` (פורסם בוורדפרס, ID: ${result.new_post_id})` : '';
+                    showToast(`✅ העמוד שוחזר בהצלחה!${wpMsg}`, 'success');
                     closeArchiveModal();
                     
                     // Reload pages list

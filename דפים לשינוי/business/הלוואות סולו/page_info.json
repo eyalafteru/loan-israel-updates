@@ -15,18 +15,10 @@
         "type": "unique",
         "unique_part": "לעסקים",
         "variants": []
-      },
-      {
-        "primary": "הלוואות סולושנס",
-        "source": "autocomplete",
-        "type": "unique",
-        "unique_part": "סולושנס",
-        "variants": []
       }
     ],
     "final_keywords": [
-      "הלוואות סולו לעסקים",
-      "הלוואות סולושנס"
+      "הלוואות סולו לעסקים"
     ],
     "unique_topics": [
       "לעסקים",

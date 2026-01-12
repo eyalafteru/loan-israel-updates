@@ -8383,9 +8383,12 @@ def update_wp_page():
 # ============ Helper Functions - Page Deletion & Restore ============
 
 def create_yoast_redirect(site_id, origin_url, target_url, redirect_type="301"):
-    """Create redirect using Yoast SEO Premium API"""
+    """Create redirect using Yoast SEO Premium API on specific site"""
     try:
+        # Use the specific site ID passed to function
         site = config["wordpress"]["sites"][site_id]
+        
+        # Get token for the specific site
         token = jwt_tokens.get(site_id)
         
         if not token:
@@ -8394,29 +8397,35 @@ def create_yoast_redirect(site_id, origin_url, target_url, redirect_type="301"):
             username = site.get("username") or os.getenv(f"WP_{site_id.upper()}_USERNAME")
             
             if not username or not password:
-                return {"success": False, "error": "Missing credentials"}
+                return {"success": False, "error": f"Missing credentials for {site_id}"}
             
-            token_url = site["site_url"] + site["token_endpoint"]
+            token_url = site["site_url"] + site.get("token_endpoint", "/wp-json/jwt-auth/v1/token")
             token_response = requests.post(token_url, json={
                 "username": username,
                 "password": password
             }, timeout=10)
             
             if token_response.status_code != 200:
-                return {"success": False, "error": "Failed to authenticate"}
+                return {"success": False, "error": f"Failed to authenticate with {site_id}: {token_response.text}"}
             
             token = token_response.json().get("token")
             jwt_tokens[site_id] = token
         
-        # Extract the path from the origin URL
+        # Calculate relative path for origin
         from urllib.parse import urlparse
         origin_path = urlparse(origin_url).path
+        site_path = urlparse(site["site_url"]).path
         
-        # Ensure path ends with /
-        if not origin_path.endswith('/'):
-            origin_path += '/'
+        # Remove site path from origin if it exists (e.g. /Business/foo -> /foo)
+        if site_path and site_path != '/' and origin_path.startswith(site_path):
+            origin_path = origin_path[len(site_path):]
         
-        # Yoast API endpoint
+        # Ensure path ends with / if needed (Yoast is usually flexible but consistent is better)
+        # Note: Yoast normalizes paths, but let's stick to what we extract
+        if not origin_path.startswith('/'):
+            origin_path = '/' + origin_path
+            
+        # Yoast API endpoint - On the specific site
         redirect_url = f"{site['site_url']}/wp-json/yoast/v1/redirects"
         
         # Payload for Yoast
@@ -8427,7 +8436,11 @@ def create_yoast_redirect(site_id, origin_url, target_url, redirect_type="301"):
             "format": "plain"
         }
         
-        print(f"[Yoast Redirect] Creating redirect from {origin_path} to {target_url} (type: {redirect_type})")
+        print(f"[Yoast Redirect] Creating redirect on {site['name']} ({site_id}):")
+        print(f"  Origin: {origin_path}")
+        print(f"  Target: {target_url}")
+        print(f"  Type: {redirect_type}")
+        print(f"  API URL: {redirect_url}")
         
         response = requests.post(
             redirect_url,
@@ -8451,17 +8464,39 @@ def create_yoast_redirect(site_id, origin_url, target_url, redirect_type="301"):
 
 
 def delete_yoast_redirect(site_id, redirect_id):
-    """Delete redirect from Yoast SEO Premium"""
+    """Delete redirect from Yoast SEO Premium on specific site"""
     try:
+        # Use the specific site ID passed to function
         site = config["wordpress"]["sites"][site_id]
+        
+        # Get token for the specific site
         token = jwt_tokens.get(site_id)
         
         if not token:
-            return {"success": False, "error": "Not authenticated"}
+            # Get fresh token
+            password = site.get("password") or os.getenv(f"WP_{site_id.upper()}_PASSWORD")
+            username = site.get("username") or os.getenv(f"WP_{site_id.upper()}_USERNAME")
+            
+            if not username or not password:
+                return {"success": False, "error": f"Missing credentials for {site_id}"}
+            
+            token_url = site["site_url"] + site.get("token_endpoint", "/wp-json/jwt-auth/v1/token")
+            token_response = requests.post(token_url, json={
+                "username": username,
+                "password": password
+            }, timeout=10)
+            
+            if token_response.status_code != 200:
+                return {"success": False, "error": f"Failed to authenticate with {site_id}: {token_response.text}"}
+            
+            token = token_response.json().get("token")
+            jwt_tokens[site_id] = token
         
+        # Yoast API endpoint - On the specific site
         redirect_url = f"{site['site_url']}/wp-json/yoast/v1/redirects/{redirect_id}"
         
-        print(f"[Yoast Redirect] Deleting redirect ID: {redirect_id}")
+        print(f"[Yoast Redirect] Deleting redirect ID: {redirect_id} on {site['name']}")
+        print(f"[Yoast Redirect] API URL: {redirect_url}")
         
         response = requests.delete(
             redirect_url,
@@ -8483,7 +8518,7 @@ def delete_yoast_redirect(site_id, redirect_id):
 
 
 def delete_wordpress_page(site_id, post_id):
-    """Delete page from WordPress"""
+    """Archive page by setting status to draft (preserves Post ID for restore)"""
     try:
         site = config["wordpress"]["sites"][site_id]
         token = jwt_tokens.get(site_id)
@@ -8508,27 +8543,28 @@ def delete_wordpress_page(site_id, post_id):
             token = token_response.json().get("token")
             jwt_tokens[site_id] = token
         
-        # Delete post (force=true to bypass trash)
-        delete_url = f"{site['site_url']}{site['api_base']}/posts/{post_id}?force=true"
+        # Set post status to draft (instead of deleting - preserves Post ID)
+        update_url = f"{site['site_url']}{site['api_base']}/posts/{post_id}"
         
-        print(f"[WP Delete] Deleting post ID: {post_id}")
+        print(f"[WP Archive] Setting post {post_id} to draft status")
         
-        response = requests.delete(
-            delete_url,
+        response = requests.post(
+            update_url,
+            json={"status": "draft"},
             headers={"Authorization": f"Bearer {token}"},
             timeout=30
         )
         
-        if response.status_code in [200, 204]:
-            print(f"[WP Delete] ✓ Post deleted successfully")
-            return {"success": True}
+        if response.status_code == 200:
+            print(f"[WP Archive] ✓ Post set to draft successfully (ID preserved: {post_id})")
+            return {"success": True, "preserved_id": post_id}
         else:
             error_msg = response.text
-            print(f"[WP Delete] ✗ Failed: {error_msg}")
+            print(f"[WP Archive] ✗ Failed: {error_msg}")
             return {"success": False, "error": error_msg}
             
     except Exception as e:
-        print(f"[WP Delete] ✗ Exception: {str(e)}")
+        print(f"[WP Archive] ✗ Exception: {str(e)}")
         return {"success": False, "error": str(e)}
 
 
@@ -8539,7 +8575,11 @@ def archive_page_files(page_path, reason="deleted", metadata=None):
         from datetime import datetime
         
         # Get folder path
-        folder = os.path.dirname(page_path)
+        if os.path.isfile(page_path):
+            folder = os.path.dirname(page_path)
+        else:
+            folder = page_path
+            
         if not os.path.exists(folder):
             return {"success": False, "error": "Page folder not found"}
         
@@ -8685,26 +8725,29 @@ def delete_wp_page_endpoint():
             "wordpress_id": post_id,
             "url": url,
             "site": site_id,
+            "original_status": "publish",  # Status before archiving - needed for restore
             "redirect_type": redirect_type,
             "redirect_target": redirect_target,
             "redirect_id": redirect_id
         }
         
-        archive_result = archive_page_files(page_path, reason="deleted", metadata=archive_metadata)
+        archive_result = archive_page_files(page_path, reason="archived", metadata=archive_metadata)
         if not archive_result["success"]:
             return jsonify({
                 "success": False,
                 "error": f"Failed to archive files: {archive_result['error']}"
             }), 500
         
-        print(f"[Delete Page] ✓ Page deleted successfully")
-        print(f"[Delete Page] ✓ Files archived to: {archive_result['archive_path']}")
+        print(f"[Archive Page] ✓ Page archived successfully (Post ID {post_id} set to draft)")
+        print(f"[Archive Page] ✓ Files archived to: {archive_result['archive_path']}")
         
         return jsonify({
             "success": True,
-            "message": "Page deleted successfully",
+            "message": "Page archived successfully (can be restored with same Post ID)",
             "archive_path": archive_result["archive_path"],
-            "redirect_id": redirect_id
+            "redirect_id": redirect_id,
+            "redirect_created": redirect_id is not None,
+            "preserved_post_id": post_id
         })
         
     except Exception as e:
@@ -8786,6 +8829,8 @@ def restore_page_endpoint():
                 metadata = archive_meta.get("metadata", {})
                 site_id = metadata.get("site", "main")
                 redirect_id = metadata.get("redirect_id")
+                original_url = metadata.get("url", "")
+                original_post_id = metadata.get("wordpress_id")
         else:
             return jsonify({"success": False, "error": "Archive metadata not found"}), 404
         
@@ -8800,22 +8845,159 @@ def restore_page_endpoint():
         print(f"[Restore Page] ✓ Files restored to: {restore_result['restore_path']}")
         
         # Step 2: Delete redirect (if exists and requested)
+        redirect_deleted = False
         if delete_redirect and redirect_id:
             delete_redirect_result = delete_yoast_redirect(site_id, redirect_id)
             if delete_redirect_result["success"]:
                 print(f"[Restore Page] ✓ Redirect deleted")
+                redirect_deleted = True
             else:
                 print(f"[Restore Page] ⚠ Failed to delete redirect: {delete_redirect_result.get('error')}")
         
         # Step 3: Restore to WordPress (if requested)
-        # Note: This requires re-creating the page with the HTML content
-        # For now, we'll leave this for manual upload via the existing upload functionality
+        wp_restored = False
+        restored_post_id = None
+        if restore_to_wordpress:
+            try:
+                # Get site configuration
+                site_config = config["wordpress"]["sites"].get(site_id)
+                if not site_config:
+                    print(f"[Restore Page] ⚠ Site config not found for {site_id}")
+                else:
+                    # Get JWT token
+                    token = ensure_jwt_token(site_id)
+                    if not token:
+                        print(f"[Restore Page] ⚠ No JWT token for site {site_id}")
+                    else:
+                        headers = {
+                            "Authorization": f"Bearer {token}",
+                            "Content-Type": "application/json"
+                        }
+                        
+                        # Check if we have original post ID (new archive system with draft)
+                        if original_post_id:
+                            # RESTORE: Just change status back to publish (preserves Post ID!)
+                            restore_url = f"{site_config['site_url']}{site_config['api_base']}/posts/{original_post_id}"
+                            
+                            print(f"[Restore Page] Restoring original post ID: {original_post_id}")
+                            print(f"[Restore Page] Setting status back to publish")
+                            
+                            response = requests.post(
+                                restore_url,
+                                json={"status": "publish"},
+                                headers=headers,
+                                timeout=30
+                            )
+                            
+                            if response.status_code == 200:
+                                post_result = response.json()
+                                restored_post_id = post_result.get("id")
+                                restored_url = post_result.get("link", original_url)
+                                
+                                print(f"[Restore Page] ✓ Post restored to publish (ID: {restored_post_id})")
+                                wp_restored = True
+                                
+                                # Update page_info.json
+                                restore_path = restore_result["restore_path"]
+                                page_info_path = os.path.join(restore_path, "page_info.json")
+                                if os.path.exists(page_info_path):
+                                    with open(page_info_path, 'r', encoding='utf-8-sig') as f:
+                                        page_info = json.load(f)
+                                    
+                                    page_info["last_upload"] = datetime.now().isoformat()
+                                    page_info["last_upload_type"] = "restore"
+                                    
+                                    with open(page_info_path, 'w', encoding='utf-8') as f:
+                                        json.dump(page_info, f, ensure_ascii=False, indent=2)
+                            else:
+                                print(f"[Restore Page] ⚠ Failed to restore post: {response.text}")
+                                # Fallback to creating new post
+                                original_post_id = None
+                        
+                        # FALLBACK: Create new post (for old archives without post ID)
+                        if not original_post_id and restore_result.get("html_file"):
+                            html_file_path = restore_result["html_file"]
+                            with open(html_file_path, 'r', encoding='utf-8-sig') as f:
+                                html_content = f.read()
+                            
+                            # Read page_info.json for title and slug
+                            restore_path = restore_result["restore_path"]
+                            page_info_path = os.path.join(restore_path, "page_info.json")
+                            title = ""
+                            slug = ""
+                            
+                            if os.path.exists(page_info_path):
+                                with open(page_info_path, 'r', encoding='utf-8-sig') as f:
+                                    page_info = json.load(f)
+                                    title = page_info.get("title") or page_info.get("keyword") or page_info.get("page_name", "")
+                                    # Extract slug from URL
+                                    if original_url:
+                                        from urllib.parse import urlparse
+                                        path_parts = urlparse(original_url).path.strip('/').split('/')
+                                        slug = path_parts[-1] if path_parts else ""
+                            
+                            if not title:
+                                title = os.path.basename(restore_path)
+                            
+                            # Create new post
+                            create_url = f"{site_config['site_url']}{site_config['api_base']}/posts"
+                            post_data = {
+                                "title": title,
+                                "content": html_content,
+                                "status": "publish",
+                                "slug": slug
+                            }
+                            
+                            print(f"[Restore Page] Creating new WordPress post: {title}")
+                            print(f"[Restore Page] Slug: {slug}")
+                            
+                            response = requests.post(create_url, headers=headers, json=post_data, timeout=60)
+                            
+                            if response.status_code in [200, 201]:
+                                post_result = response.json()
+                                restored_post_id = post_result.get("id")
+                                new_url = post_result.get("link", "")
+                                
+                                print(f"[Restore Page] ✓ New post created (ID: {restored_post_id})")
+                                
+                                # Update page_info.json with new post_id
+                                if os.path.exists(page_info_path):
+                                    with open(page_info_path, 'r', encoding='utf-8-sig') as f:
+                                        page_info = json.load(f)
+                                    
+                                    page_info["post_id"] = str(restored_post_id)
+                                    page_info["wordpress_id"] = str(restored_post_id)
+                                    page_info["url"] = new_url
+                                    page_info["last_upload"] = datetime.now().isoformat()
+                                    page_info["last_upload_type"] = "restore"
+                                    
+                                    with open(page_info_path, 'w', encoding='utf-8') as f:
+                                        json.dump(page_info, f, ensure_ascii=False, indent=2)
+                                
+                                wp_restored = True
+                            else:
+                                print(f"[Restore Page] ⚠ Failed to create new post: {response.text}")
+                    
+            except Exception as wp_error:
+                print(f"[Restore Page] ⚠ WordPress restore error: {str(wp_error)}")
+        
+        message = "Page restored successfully."
+        if wp_restored:
+            message += f" Published to WordPress (ID: {restored_post_id})."
+        else:
+            message += " Use the upload button to publish to WordPress."
+        
+        if redirect_deleted:
+            message += " Redirect removed."
         
         return jsonify({
             "success": True,
-            "message": "Page restored successfully. Use the upload button to publish to WordPress.",
+            "message": message,
             "restore_path": restore_result["restore_path"],
-            "html_file": restore_result["html_file"]
+            "html_file": restore_result["html_file"],
+            "wp_restored": wp_restored,
+            "restored_post_id": restored_post_id,
+            "new_post_id": restored_post_id  # For backward compatibility
         })
         
     except Exception as e:

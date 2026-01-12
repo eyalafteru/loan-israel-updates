@@ -1,6 +1,6 @@
 <!-- wp:html -->
-<p class="edit-hoverable">&nbsp;</p>
-<script>
+<p>&nbsp;</p>
+<p><script>
     // בדיקה והוספת viewport meta tag אם חסר
     if (!document.querySelector('meta[name="viewport"]')) {
       const viewport = document.createElement('meta');
@@ -27,9 +27,9 @@
       font.rel = 'stylesheet';
       document.head.appendChild(font);
     }
-    </script>
+    </script></p>
 <!-- 🚨 CSS Variables - COPY EXACT מvisual.txt שורות 390-450 -->
-<style>
+<p><style>
     /* CSS Variables מועתק מדויק מvisual.txt שורות 390-450 */
     :root {
       --primary: #1e5490;
@@ -411,45 +411,45 @@
         width: 2px !important;
       }
     }
-    </style>
-<div class="wpc-loans-nonbank-h7k2-wrapper edit-hoverable"><!-- אזור 1: Hero Section ראשי - ✅ עוצב והושלם --><!-- עיצוב מועתק מvisual.txt שורה 637: wpc-hero-demo-section -->
-<section class="wpc-loans-nonbank-h7k2-hero-section edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-hero-container edit-hoverable">
-<h1 class="wpc-loans-nonbank-h7k2-hero-title diff-element-new edit-hoverable">הלוואה חוץ בנקאית - כשהבנק אמר לא, יש מי שיגיד כן</h1>
+    </style></p>
+<div class="wpc-loans-nonbank-h7k2-wrapper"><!-- אזור 1: Hero Section ראשי - ✅ עוצב והושלם --><!-- עיצוב מועתק מvisual.txt שורה 637: wpc-hero-demo-section -->
+<section class="wpc-loans-nonbank-h7k2-hero-section">
+<div class="wpc-loans-nonbank-h7k2-hero-container">
+<h1 class="wpc-loans-nonbank-h7k2-hero-title">הלוואה חוץ בנקאית - כשהבנק אמר לא, יש מי שיגיד כן</h1>
 <!-- אזור 1.5: תאריך עדכון - ✅ עוצב והושלם -->
-<div class="wpc-loans-nonbank-h7k2-date-update edit-hoverable"><strong class="edit-hoverable">עודכן לאחרונה:</strong> [current_date format="F Y" hebrew="true"]</div>
-<p class="wpc-loans-nonbank-h7k2-rate-info diff-element-changed edit-hoverable" style="font-size: 0.95em; color: rgba(255,255,255,0.9); margin-top: 10px;">💡 הריביות בתוכן מעודכנות לפי ריבית פריים 5.5% (ריבית בנק ישראל 4%, נכון לינואר 2026)</p>
-<p class="wpc-loans-nonbank-h7k2-hero-subtitle diff-element-changed edit-hoverable">הלוואות מהירות עד 500,000 ₪ בריביות תחרותיות של 5.75%-19.75%, גם למסורבי בנק ובעלי BDI שלילי. אישור תוך 24-48 שעות ללא השפעה על האובליגו הבנקאי.</p>
-<div class="wpc-loans-nonbank-h7k2-hero-ctas edit-hoverable"><a class="wpc-loans-nonbank-h7k2-cta-primary edit-hoverable" href="#awg-section"> בדוק זכאות עכשיו </a></div>
+<div class="wpc-loans-nonbank-h7k2-date-update"><strong>עודכן לאחרונה:</strong> [current_date format="F Y" hebrew="true"]</div>
+<p class="wpc-loans-nonbank-h7k2-rate-info" style="font-size: 0.95em; color: rgba(255,255,255,0.9); margin-top: 10px;">💡 הריביות בתוכן מעודכנות לפי ריבית פריים 5.5% (ריבית בנק ישראל 4%, נכון לינואר 2026)</p>
+<p class="wpc-loans-nonbank-h7k2-hero-subtitle">הלוואות מהירות עד 500,000 ₪ בריביות תחרותיות של 5.75%-19.75%, גם למסורבי בנק ובעלי BDI שלילי. אישור תוך 24-48 שעות ללא השפעה על האובליגו הבנקאי.</p>
+<div class="wpc-loans-nonbank-h7k2-hero-ctas"><a class="wpc-loans-nonbank-h7k2-cta-primary" href="#awg-section"> בדוק זכאות עכשיו </a></div>
 </div>
 </section>
 <!-- אזור 2: טופס AWG מעוצב - ✅ עוצב והושלם --><!-- עיצוב מועתק מvisual.txt שורה 6470: wpc-awg-demo-section -->
-<section id="awg-section" class="wpc-loans-nonbank-h7k2-awg-section edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-awg-container edit-hoverable"><!-- AWG Shortcode יוכנס כאן --> [awg postid="32400"]</div>
+<section id="awg-section" class="wpc-loans-nonbank-h7k2-awg-section">
+<div class="wpc-loans-nonbank-h7k2-awg-container"><!-- AWG Shortcode יוכנס כאן --> [awg postid="32400"]</div>
 
-<div class="disclaimer-box edit-hoverable" style="background: #ffffff; padding: 18px 24px; margin: 24px auto; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.06); border: 1px solid #e8e8e8; max-width: 1200px; direction: rtl;">
-  <p style="margin: 0; color: #555; font-size: 14px; line-height: 1.7;" class="diff-element-new edit-hoverable">
-    <strong style="color: #333;" class="edit-hoverable">חשוב לדעת:</strong> "רק תבקש" הוא אגריגטור הלוואות - אנחנו מחברים אותך למגוון גופים מלווים מורשים (חברות כרטיסי אשראי, חברות ביטוח ובתי השקעות). התנאים הסופיים - ריבית, סכום ותקופת ההחזר - נקבעים ע"י הגוף המלווה שתבחר לאחר השוואת ההצעות. הזמנים המצוינים (24-48 שעות) הם ממוצע ותלויים בגוף המלווה ובמורכבות הבקשה. השירות שלנו חינמי, ההלוואה עצמה כוללת ריבית ועמלות כפי שמפורט בהצעת הגוף המלווה.
+<div class="disclaimer-box" style="background: #ffffff; padding: 18px 24px; margin: 24px auto; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.06); border: 1px solid #e8e8e8; max-width: 1200px; direction: rtl;">
+  <p style="margin: 0; color: #555; font-size: 14px; line-height: 1.7;">
+    <strong style="color: #333;">חשוב לדעת:</strong> "רק תבקש" הוא אגריגטור הלוואות - אנחנו מחברים אותך למגוון גופים מלווים מורשים (חברות כרטיסי אשראי, חברות ביטוח ובתי השקעות). התנאים הסופיים - ריבית, סכום ותקופת ההחזר - נקבעים ע"י הגוף המלווה שתבחר לאחר השוואת ההצעות. הזמנים המצוינים (24-48 שעות) הם ממוצע ותלויים בגוף המלווה ובמורכבות הבקשה. השירות שלנו חינמי, ההלוואה עצמה כוללת ריבית ועמלות כפי שמפורט בהצעת הגוף המלווה.
   </p>
 </div>
 </section>
 <!-- אזור 4: פסקת פתיחה - ✅ עוצב והושלם -->
-<section class="wpc-loans-nonbank-h7k2-section edit-hoverable">
-<h2 class="wpc-loans-nonbank-h7k2-section-title diff-element-new edit-hoverable">הלוואה חוץ בנקאית מומלצת - למי זה מתאים?</h2>
-<div class="wpc-loans-nonbank-h7k2-section-content edit-hoverable">
-<p class="diff-element-new edit-hoverable">נכנסת לבנק בתקווה, יצאת עם "לא". הרגשת שחסמו לך את הדרך, אבל האמת היא שזו רק דרך אחת מתוך כמה - הלוואה חוץ בנקאית יכולה להיות הפתרון שחיפשת.</p>
+<section class="wpc-loans-nonbank-h7k2-section">
+<h2 class="wpc-loans-nonbank-h7k2-section-title">הלוואה חוץ בנקאית מומלצת - למי זה מתאים?</h2>
+<div class="wpc-loans-nonbank-h7k2-section-content">
+<p>נכנסת לבנק בתקווה, יצאת עם "לא". הרגשת שחסמו לך את הדרך, אבל האמת היא שזו רק דרך אחת מתוך כמה - הלוואה חוץ בנקאית יכולה להיות הפתרון שחיפשת.</p>
 
-<p class="edit-hoverable">הלוואה חוץ בנקאית זה בדיוק מה שהשם אומר - מימון מגופים מורשים שלא הבנק שלך. חברות כרטיסי אשראי כמו <strong class="diff-element-new edit-hoverable">מקס, כאל וישראכרט</strong>, חברות ביטוח ובתי השקעות. הם עובדים לפי קריטריונים שונים, ולרוב - יותר גמישים.</p>
-<p class="edit-hoverable">היתרון הגדול? <strong class="diff-element-new edit-hoverable">ההלוואה לא "אוכלת" מהאובליגו שלך בבנק</strong>. אתה שומר על המסגרת הבנקאית לעתיד, ומקבל את הכסף שאתה צריך עכשיו. זה מתאים במיוחד אם המסגרת שלך בבנק תפוסה, או אם אתה זקוק לפתרון מיידי ללא הבירוקרטיה הבנקאית.</p>
-<p class="edit-hoverable">לדוגמה, נכון לדצמבר 2025, ניתן לקבל מימון של עד 200,000 ₪ (ובמקרים מסוימים עד 500,000 ₪) בריביות תחרותיות, עם פריסה נוחה של עד 84 תשלומים.</p>
+<p>הלוואה חוץ בנקאית זה בדיוק מה שהשם אומר - מימון מגופים מורשים שלא הבנק שלך. חברות כרטיסי אשראי כמו <strong>מקס, כאל וישראכרט</strong>, חברות ביטוח ובתי השקעות. הם עובדים לפי קריטריונים שונים, ולרוב - יותר גמישים.</p>
+<p>היתרון הגדול? <strong>ההלוואה לא "אוכלת" מהאובליגו שלך בבנק</strong>. אתה שומר על המסגרת הבנקאית לעתיד, ומקבל את הכסף שאתה צריך עכשיו. זה מתאים במיוחד אם המסגרת שלך בבנק תפוסה, או אם אתה זקוק לפתרון מיידי ללא הבירוקרטיה הבנקאית.</p>
+<p>לדוגמה, נכון לדצמבר 2025, ניתן לקבל מימון של עד 200,000 ₪ (ובמקרים מסוימים עד 500,000 ₪) בריביות תחרותיות, עם פריסה נוחה של עד 84 תשלומים.</p>
 </div>
 <!-- Quick Navigation (TOC) -->
-<div class="wpc-loans-nonbank-h7k2-section-content edit-hoverable" style="background: var(--bg-light); padding: 20px; border-radius: 8px; text-align: center !important;"><strong class="edit-hoverable">ניווט מהיר:</strong>
-<ul style="margin: 10px auto 0 auto !important; padding: 0 !important; width: fit-content !important; text-align: center !important; display: flex; flex-wrap: wrap; gap: 15px; justify-content: center !important;" class="edit-hoverable">
-<li style="border: none !important; padding: 0 !important; background: none !important; width: auto !important;" class="edit-hoverable"><a style="text-decoration: none; color: var(--primary); font-weight: bold;" href="#comparison-table" class="edit-hoverable">📊 טבלת השוואה</a></li>
-<li style="border: none !important; padding: 0 !important; background: none !important; width: auto !important;" class="edit-hoverable"><a style="text-decoration: none; color: var(--primary); font-weight: bold;" href="#calc-section" class="edit-hoverable">🧮 מחשבון דחיפות</a></li>
-<li style="border: none !important; padding: 0 !important; background: none !important; width: auto !important;" class="edit-hoverable"><a style="text-decoration: none; color: var(--primary); font-weight: bold;" href="#interest-rates" class="edit-hoverable">📉 השוואת ריביות</a></li>
-<li style="border: none !important; padding: 0 !important; background: none !important; width: auto !important;" class="edit-hoverable"><a style="text-decoration: none; color: var(--primary); font-weight: bold;" href="#faq" class="edit-hoverable">❓ שאלות נפוצות</a></li>
+<div class="wpc-loans-nonbank-h7k2-section-content" style="background: var(--bg-light); padding: 20px; border-radius: 8px; text-align: center !important;"><strong>ניווט מהיר:</strong>
+<ul style="margin: 10px auto 0 auto !important; padding: 0 !important; width: fit-content !important; text-align: center !important; display: flex; flex-wrap: wrap; gap: 15px; justify-content: center !important;">
+<li style="border: none !important; padding: 0 !important; background: none !important; width: auto !important;"><a style="text-decoration: none; color: var(--primary); font-weight: bold;" href="#comparison-table">📊 טבלת השוואה</a></li>
+<li style="border: none !important; padding: 0 !important; background: none !important; width: auto !important;"><a style="text-decoration: none; color: var(--primary); font-weight: bold;" href="#calc-section">🧮 מחשבון דחיפות</a></li>
+<li style="border: none !important; padding: 0 !important; background: none !important; width: auto !important;"><a style="text-decoration: none; color: var(--primary); font-weight: bold;" href="#interest-rates">📉 השוואת ריביות</a></li>
+<li style="border: none !important; padding: 0 !important; background: none !important; width: auto !important;"><a style="text-decoration: none; color: var(--primary); font-weight: bold;" href="#faq">❓ שאלות נפוצות</a></li>
 </ul>
 </div>
 </section>
@@ -518,89 +518,91 @@
         
     })();
     </script> <!-- אזור 3: מחשבון עלות דחיפות מול המתנה - ✅ עוצב והושלם --><!-- עיצוב מועתק מvisual.txt שורה 1882: wpc-calc-tabs-demo + שורה 2479: wpc-slider-demo -->
-<section id="calc-section" class="wpc-loans-nonbank-h7k2-calc-section edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-calc-container edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-calc-header edit-hoverable">
-<h2 class="wpc-loans-nonbank-h7k2-calc-title edit-hoverable">מחשבון עלות דחיפות - כמה כסף אתה מפסיד כל יום שמחכה?</h2>
-<p class="wpc-loans-nonbank-h7k2-calc-subtitle edit-hoverable">השוואת עלות הזמן בין פתרון מיידי לבנקאי</p>
+<section id="calc-section" class="wpc-loans-nonbank-h7k2-calc-section">
+<div class="wpc-loans-nonbank-h7k2-calc-container">
+<div class="wpc-loans-nonbank-h7k2-calc-header">
+<h2 class="wpc-loans-nonbank-h7k2-calc-title">מחשבון עלות דחיפות - כמה כסף אתה מפסיד כל יום שמחכה?</h2>
+<p class="wpc-loans-nonbank-h7k2-calc-subtitle">השוואת עלות הזמן בין פתרון מיידי לבנקאי</p>
 </div>
-<div class="wpc-loans-nonbank-h7k2-calc-wrapper edit-hoverable"><!-- Calculator Tabs Navigation -->
-<div class="wpc-loans-nonbank-h7k2-calc-nav edit-hoverable">
-<button class="wpc-loans-nonbank-h7k2-calc-tab active" data-tab="waiting-cost">⏰ עלות ההמתנה</button>
-<button class="wpc-loans-nonbank-h7k2-calc-tab" data-tab="speed-comparison">⚡ השוואת מהירות</button></div>
+<div class="wpc-loans-nonbank-h7k2-calc-wrapper"><!-- Calculator Tabs Navigation -->
+<div class="wpc-loans-nonbank-h7k2-calc-nav">
+<div class="wpc-loans-nonbank-h7k2-calc-tab-icon">⏰</div>
+<button class="wpc-loans-nonbank-h7k2-calc-tab active" data-tab="waiting-cost">עלות ההמתנה </button>
+<div class="wpc-loans-nonbank-h7k2-calc-tab-icon">⚡</div>
+<button class="wpc-loans-nonbank-h7k2-calc-tab" data-tab="speed-comparison">השוואת מהירות </button></div>
 <!-- Tab Content 1: עלות ההמתנה -->
-<div id="waiting-cost" class="wpc-loans-nonbank-h7k2-calc-content active edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-calc-inputs edit-hoverable"><!-- סכום הלוואה -->
-<div class="wpc-loans-nonbank-h7k2-input-group edit-hoverable"><label for="loan-amount">סכום הלוואה נדרש:</label>
-<div class="wpc-loans-nonbank-h7k2-slider-wrapper edit-hoverable"><input id="loan-amount" class="wpc-loans-nonbank-h7k2-slider" max="500000" min="5000" step="5000" type="range" value="150000">
-<div id="amount-display" class="wpc-loans-nonbank-h7k2-slider-value edit-hoverable">₪150,000</div>
+<div id="waiting-cost" class="wpc-loans-nonbank-h7k2-calc-content active">
+<div class="wpc-loans-nonbank-h7k2-calc-inputs"><!-- סכום הלוואה -->
+<div class="wpc-loans-nonbank-h7k2-input-group"><label for="loan-amount">סכום הלוואה נדרש:</label>
+<div class="wpc-loans-nonbank-h7k2-slider-wrapper"><input id="loan-amount" class="wpc-loans-nonbank-h7k2-slider" max="500000" min="5000" step="5000" type="range" value="150000" />
+<div id="amount-display" class="wpc-loans-nonbank-h7k2-slider-value">₪150,000</div>
 </div>
 </div>
 <!-- מטרת הדחיפות -->
-<div class="wpc-loans-nonbank-h7k2-input-group edit-hoverable"><label for="urgency-type">מטרת הדחיפות:</label><select id="urgency-type" class="wpc-loans-nonbank-h7k2-select">
+<div class="wpc-loans-nonbank-h7k2-input-group"><label for="urgency-type">מטרת הדחיפות:</label><select id="urgency-type" class="wpc-loans-nonbank-h7k2-select">
 <option value="medical">חירום רפואי דחוף</option>
 <option value="legal">מניעת הוצאה לפועל</option>
 <option value="business">הזדמנות עסקית</option>
 <option value="general">צרכים כלליים</option>
 </select></div>
 <!-- זמן קריטי -->
-<div class="wpc-loans-nonbank-h7k2-input-group edit-hoverable"><label for="critical-time">תוך כמה ימים צריך פתרון:</label>
-<div class="wpc-loans-nonbank-h7k2-slider-wrapper edit-hoverable"><input id="critical-time" class="wpc-loans-nonbank-h7k2-slider" max="7" min="1" step="1" type="range" value="3">
-<div id="time-display" class="wpc-loans-nonbank-h7k2-slider-value edit-hoverable">3 ימים</div>
+<div class="wpc-loans-nonbank-h7k2-input-group"><label for="critical-time">תוך כמה ימים צריך פתרון:</label>
+<div class="wpc-loans-nonbank-h7k2-slider-wrapper"><input id="critical-time" class="wpc-loans-nonbank-h7k2-slider" max="7" min="1" step="1" type="range" value="3" />
+<div id="time-display" class="wpc-loans-nonbank-h7k2-slider-value">3 ימים</div>
 </div>
 </div>
 <button class="wpc-loans-nonbank-h7k2-calc-button" data-action="calculate-waiting-cost"> 🧮 חשב עלות המתנה </button></div>
 <!-- תוצאות -->
-<div id="results-waiting" class="wpc-loans-nonbank-h7k2-calc-results edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-result-card danger edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-result-icon edit-hoverable">💸</div>
-<div class="wpc-loans-nonbank-h7k2-result-content edit-hoverable">
-<h3 class="edit-hoverable">עלות המתנה ליום</h3>
-<div id="daily-cost" class="wpc-loans-nonbank-h7k2-result-value edit-hoverable">₪0</div>
-<p class="edit-hoverable">כל יום שמחכים עולה לכם כסף!</p>
+<div id="results-waiting" class="wpc-loans-nonbank-h7k2-calc-results">
+<div class="wpc-loans-nonbank-h7k2-result-card danger">
+<div class="wpc-loans-nonbank-h7k2-result-icon">💸</div>
+<div class="wpc-loans-nonbank-h7k2-result-content">
+<h3>עלות המתנה ליום</h3>
+<div id="daily-cost" class="wpc-loans-nonbank-h7k2-result-value">₪0</div>
+<p>כל יום שמחכים עולה לכם כסף!</p>
 </div>
 </div>
-<div class="wpc-loans-nonbank-h7k2-result-card warning edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-result-icon edit-hoverable">⏳</div>
-<div class="wpc-loans-nonbank-h7k2-result-content edit-hoverable">
-<h3 class="edit-hoverable">הפרש זמן</h3>
-<div id="time-diff" class="wpc-loans-nonbank-h7k2-result-value edit-hoverable">-</div>
-<p class="edit-hoverable">חוץ בנקאי vs בנק רגיל</p>
+<div class="wpc-loans-nonbank-h7k2-result-card warning">
+<div class="wpc-loans-nonbank-h7k2-result-icon">⏳</div>
+<div class="wpc-loans-nonbank-h7k2-result-content">
+<h3>הפרש זמן</h3>
+<div id="time-diff" class="wpc-loans-nonbank-h7k2-result-value">-</div>
+<p>חוץ בנקאי vs בנק רגיל</p>
 </div>
 </div>
-<div id="urgency-card" class="wpc-loans-nonbank-h7k2-result-card edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-result-icon edit-hoverable">🚨</div>
-<div class="wpc-loans-nonbank-h7k2-result-content edit-hoverable">
-<h3 class="edit-hoverable">רמת דחיפות</h3>
-<div id="urgency-level" class="wpc-loans-nonbank-h7k2-result-value edit-hoverable">-</div>
-<p id="urgency-recommendation" class="edit-hoverable">-</p>
+<div id="urgency-card" class="wpc-loans-nonbank-h7k2-result-card">
+<div class="wpc-loans-nonbank-h7k2-result-icon">🚨</div>
+<div class="wpc-loans-nonbank-h7k2-result-content">
+<h3>רמת דחיפות</h3>
+<div id="urgency-level" class="wpc-loans-nonbank-h7k2-result-value">-</div>
+<p id="urgency-recommendation">-</p>
 </div>
 </div>
 </div>
 </div>
 <!-- Tab Content 2: השוואת מהירות -->
-<div id="speed-comparison" class="wpc-loans-nonbank-h7k2-calc-content edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-comparison-visual edit-hoverable">
-<h3 class="edit-hoverable">השוואה ויזואלית - מי מהיר יותר?</h3>
-<div class="wpc-loans-nonbank-h7k2-comparison-numbers edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-number-track edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-track-header edit-hoverable"><span class="wpc-loans-nonbank-h7k2-track-title edit-hoverable">💨 חוץ בנקאי מהיר</span> <span class="wpc-loans-nonbank-h7k2-track-time edit-hoverable">24-48 שעות</span></div>
-<div id="nonbank-progress" class="wpc-loans-nonbank-h7k2-progress-number fast edit-hoverable"><span class="wpc-loans-nonbank-h7k2-percentage edit-hoverable">0%</span> <span class="wpc-loans-nonbank-h7k2-status edit-hoverable">ממתין להתחלה</span></div>
+<div id="speed-comparison" class="wpc-loans-nonbank-h7k2-calc-content">
+<div class="wpc-loans-nonbank-h7k2-comparison-visual">
+<h3>השוואה ויזואלית - מי מהיר יותר?</h3>
+<div class="wpc-loans-nonbank-h7k2-comparison-numbers">
+<div class="wpc-loans-nonbank-h7k2-number-track">
+<div class="wpc-loans-nonbank-h7k2-track-header"><span class="wpc-loans-nonbank-h7k2-track-title">💨 חוץ בנקאי מהיר</span> <span class="wpc-loans-nonbank-h7k2-track-time">24-48 שעות</span></div>
+<div id="nonbank-progress" class="wpc-loans-nonbank-h7k2-progress-number fast"><span class="wpc-loans-nonbank-h7k2-percentage">0%</span> <span class="wpc-loans-nonbank-h7k2-status">ממתין להתחלה</span></div>
 </div>
-<div class="wpc-loans-nonbank-h7k2-number-track edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-track-header edit-hoverable"><span class="wpc-loans-nonbank-h7k2-track-title edit-hoverable">🐌 בנק רגיל</span> <span class="wpc-loans-nonbank-h7k2-track-time edit-hoverable">2-4 שבועות</span></div>
-<div id="bank-progress" class="wpc-loans-nonbank-h7k2-progress-number slow edit-hoverable"><span class="wpc-loans-nonbank-h7k2-percentage edit-hoverable">0%</span> <span class="wpc-loans-nonbank-h7k2-status edit-hoverable">ממתין להתחלה</span></div>
+<div class="wpc-loans-nonbank-h7k2-number-track">
+<div class="wpc-loans-nonbank-h7k2-track-header"><span class="wpc-loans-nonbank-h7k2-track-title">🐌 בנק רגיל</span> <span class="wpc-loans-nonbank-h7k2-track-time">2-4 שבועות</span></div>
+<div id="bank-progress" class="wpc-loans-nonbank-h7k2-progress-number slow"><span class="wpc-loans-nonbank-h7k2-percentage">0%</span> <span class="wpc-loans-nonbank-h7k2-status">ממתין להתחלה</span></div>
 </div>
 </div>
-<div id="comparison-summary" class="wpc-loans-nonbank-h7k2-comparison-summary edit-hoverable">
-<p class="edit-hoverable">בזמן שהבנק עדיין בוחן, אתה כבר מקבל את הכסף ופותר את הבעיה!</p>
+<div id="comparison-summary" class="wpc-loans-nonbank-h7k2-comparison-summary">
+<p>בזמן שהבנק עדיין בוחן, אתה כבר מקבל את הכסף ופותר את הבעיה!</p>
 </div>
 <button class="wpc-loans-nonbank-h7k2-calc-button" data-action="start-speed-animation"> 🏃‍♂️ הראה השוואה </button></div>
 </div>
 <!-- CTA Section -->
-<div class="wpc-loans-nonbank-h7k2-calc-cta edit-hoverable">
-<p class="edit-hoverable"><strong class="edit-hoverable">מצאת שזה דחוף?</strong> בדוק זכאות עכשיו ותקבל תשובה תוך 24 שעות!</p>
-<a class="wpc-loans-nonbank-h7k2-cta-calc edit-hoverable" href="#awg-section">🚀 בדוק זכאות מיידית</a></div>
+<div class="wpc-loans-nonbank-h7k2-calc-cta">
+<p><strong>מצאת שזה דחוף?</strong> בדוק זכאות עכשיו ותקבל תשובה תוך 24 שעות!</p>
+<a class="wpc-loans-nonbank-h7k2-cta-calc" href="#awg-section">🚀 בדוק זכאות מיידית</a></div>
 </div>
 </div>
 </section>
@@ -744,7 +746,6 @@
       border-radius: 5px !important;
       background: var(--bg-light) !important;
       outline: none !important;
-      box-shadow: inset 0 1px 3px rgba(0,0,0,0.1) !important;
       -webkit-appearance: none !important;
       cursor: pointer !important;
     }
@@ -1464,255 +1465,255 @@
     
     })();
     </script> <!-- אזור 7: טבלת השוואה אינטראקטיבית - גופים מלווים - ✅ עוצב והושלם --><!-- עיצוב מועתק מvisual.txt שורה 1111: wpc-table-demo -->
-<section id="comparison-table" class="wpc-loans-nonbank-h7k2-table-section edit-hoverable">
-<h2 class="wpc-loans-nonbank-h7k2-section-title edit-hoverable">השוואת מסלולי הלוואה מומלצים</h2>
-<p class="wpc-loans-nonbank-h7k2-section-content edit-hoverable">בחירת הגוף הנכון משפיעה על עשרות אלפי שקלים. הנה השוואה מפורטת לפי גופים מובילים:</p>
-<div class="wpc-loans-nonbank-h7k2-table-container edit-hoverable">
+<section id="comparison-table" class="wpc-loans-nonbank-h7k2-table-section">
+<h2 class="wpc-loans-nonbank-h7k2-section-title">השוואת מסלולי הלוואה מומלצים</h2>
+<p class="wpc-loans-nonbank-h7k2-section-content">בחירת הגוף הנכון משפיעה על עשרות אלפי שקלים. הנה השוואה מפורטת לפי גופים מובילים:</p>
+<div class="wpc-loans-nonbank-h7k2-table-container">
 <table id="lenders-comparison-table" class="wpc-loans-nonbank-h7k2-table">
 <thead>
 <tr>
-<th data-sort="text" class="edit-hoverable">גוף מלווה</th>
-<th data-sort="text" class="edit-hoverable">מסלול</th>
-<th data-sort="number" class="edit-hoverable">סכום מקסימלי</th>
-<th data-sort="text" class="edit-hoverable">תנאים וריבית</th>
+<th data-sort="text">גוף מלווה</th>
+<th data-sort="text">מסלול</th>
+<th data-sort="number">סכום מקסימלי</th>
+<th data-sort="text">תנאים וריבית</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-lender-cell edit-hoverable"><strong class="edit-hoverable">ישראכרט</strong> <small>אשראי חוץ בנקאי</small></div>
+<td>
+<div class="wpc-loans-nonbank-h7k2-lender-cell"><strong>ישראכרט</strong> <small>אשראי חוץ בנקאי</small></div>
 </td>
-<td class="edit-hoverable">הלוואה מהירה לעסקים</td>
-<td data-value="500000" class="edit-hoverable">עד 500,000 ₪</td>
-<td class="edit-hoverable">עד 60 תשלומים, אישור מיידי ללקוחות סליקה</td>
+<td>הלוואה מהירה לעסקים</td>
+<td data-value="500000">עד 500,000 ₪</td>
+<td>עד 60 תשלומים, אישור מיידי ללקוחות סליקה</td>
 </tr>
 <tr>
-<td class="edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-lender-cell edit-hoverable"><strong class="edit-hoverable">כאל (Cal)</strong> <small>הלוואה חוץ בנקאית כאל</small></div>
+<td>
+<div class="wpc-loans-nonbank-h7k2-lender-cell"><strong>כאל (Cal)</strong> <small>הלוואה חוץ בנקאית כאל</small></div>
 </td>
-<td class="edit-hoverable">הלוואה מיידית לכל מטרה</td>
-<td data-value="200000" class="edit-hoverable">עד 200,000 ₪</td>
-<td class="edit-hoverable">ריבית החל מ-פריים+3%, פריסה ל-84 תשלומים</td>
+<td>הלוואה מיידית לכל מטרה</td>
+<td data-value="200000">עד 200,000 ₪</td>
+<td>ריבית החל מ-פריים+3%, פריסה ל-84 תשלומים</td>
 </tr>
 <tr>
-<td class="edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-lender-cell edit-hoverable"><strong class="edit-hoverable">מקס (Max)</strong> <small>הלוואה חוץ בנקאית מקס</small></div>
+<td>
+<div class="wpc-loans-nonbank-h7k2-lender-cell"><strong>מקס (Max)</strong> <small>הלוואה חוץ בנקאית מקס</small></div>
 </td>
-<td class="edit-hoverable">אשראי לכל מטרה</td>
-<td data-value="100000" class="edit-hoverable">עד 100,000 ₪</td>
-<td class="edit-hoverable">ללא ערבים, אישור דיגיטלי מהיר</td>
+<td>אשראי לכל מטרה</td>
+<td data-value="100000">עד 100,000 ₪</td>
+<td>ללא ערבים, אישור דיגיטלי מהיר</td>
 </tr>
 <tr>
-<td class="edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-lender-cell edit-hoverable"><strong class="edit-hoverable">בלנדר (Blender)</strong> <small>P2P</small></div>
+<td>
+<div class="wpc-loans-nonbank-h7k2-lender-cell"><strong>בלנדר (Blender)</strong> <small>P2P</small></div>
 </td>
-<td class="edit-hoverable">הלוואות בין אנשים</td>
-<td data-value="50000" class="edit-hoverable">עד 50,000 ₪</td>
-<td class="edit-hoverable">ללא בטחונות, הליך דיגיטלי מלא</td>
+<td>הלוואות בין אנשים</td>
+<td data-value="50000">עד 50,000 ₪</td>
+<td>ללא בטחונות, הליך דיגיטלי מלא</td>
 </tr>
 <tr>
-<td class="edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-lender-cell edit-hoverable"><strong class="edit-hoverable">טריא (Tarya)</strong> <small>P2P לעסקים</small></div>
+<td>
+<div class="wpc-loans-nonbank-h7k2-lender-cell"><strong>טריא (Tarya)</strong> <small>P2P לעסקים</small></div>
 </td>
-<td class="edit-hoverable">הלוואה לעסקים/שכירים</td>
-<td data-value="1000000" class="edit-hoverable">עד 1,000,000 ₪</td>
-<td class="edit-hoverable">מותאם אישית, עד 30 שנה (משכנתא)</td>
+<td>הלוואה לעסקים/שכירים</td>
+<td data-value="1000000">עד 1,000,000 ₪</td>
+<td>מותאם אישית, עד 30 שנה (משכנתא)</td>
 </tr>
 <tr>
-<td class="edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-lender-cell edit-hoverable"><strong class="edit-hoverable">כלל ביטוח</strong> <small>מימון מוסדי</small></div>
+<td>
+<div class="wpc-loans-nonbank-h7k2-lender-cell"><strong>כלל ביטוח</strong> <small>מימון מוסדי</small></div>
 </td>
-<td class="edit-hoverable">הלוואה מקרן פנסיה/גמל</td>
-<td data-value="0" class="edit-hoverable">לפי צבירה</td>
-<td class="edit-hoverable">עד 7 שנים, ריבית אטרקטיבית (פריים-0.5%)</td>
+<td>הלוואה מקרן פנסיה/גמל</td>
+<td data-value="0">לפי צבירה</td>
+<td>עד 7 שנים, ריבית אטרקטיבית (פריים-0.5%)</td>
 </tr>
 <tr>
-<td class="edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-lender-cell edit-hoverable"><strong class="edit-hoverable"><a href="https://loan-israel.co.il/האגודה-הישראלית-להלוואות-ללא-ריבית/" class="edit-hoverable">עוגן</a></strong> <small>ללא מטרות רווח</small></div>
+<td>
+<div class="wpc-loans-nonbank-h7k2-lender-cell"><strong><a href="https://loan-israel.co.il/האגודה-הישראלית-להלוואות-ללא-ריבית/">עוגן</a></strong> <small>ללא מטרות רווח</small></div>
 </td>
-<td class="edit-hoverable">מסלול "חרבות ברזל"</td>
-<td data-value="60000" class="edit-hoverable">עד 60,000 ₪</td>
-<td class="edit-hoverable"><strong class="edit-hoverable">ללא ריבית</strong>, פריסה ל-5 שנים</td>
+<td>מסלול "חרבות ברזל"</td>
+<td data-value="60000">עד 60,000 ₪</td>
+<td><strong>ללא ריבית</strong>, פריסה ל-5 שנים</td>
 </tr>
 <tr>
-<td class="edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-lender-cell edit-hoverable"><strong class="edit-hoverable">מימון ישיר</strong> <small>מימון לרכב</small></div>
+<td>
+<div class="wpc-loans-nonbank-h7k2-lender-cell"><strong>מימון ישיר</strong> <small>מימון לרכב</small></div>
 </td>
-<td class="edit-hoverable">הלוואה לרכב חדש/משומש</td>
-<td data-value="0" class="edit-hoverable">עד 100% מימון</td>
-<td class="edit-hoverable">עד 100 תשלומים, שיעבוד הרכב</td>
+<td>הלוואה לרכב חדש/משומש</td>
+<td data-value="0">עד 100% מימון</td>
+<td>עד 100 תשלומים, שיעבוד הרכב</td>
 </tr>
 <tr>
-<td class="edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-lender-cell edit-hoverable"><strong class="edit-hoverable">הפניקס</strong> <small>חברת ביטוח</small></div>
+<td>
+<div class="wpc-loans-nonbank-h7k2-lender-cell"><strong>הפניקס</strong> <small>חברת ביטוח</small></div>
 </td>
-<td class="edit-hoverable">הלוואה חופשית</td>
-<td data-value="150000" class="edit-hoverable">עד 150,000 ₪</td>
-<td class="edit-hoverable">ללא ערבים, תהליך דיגיטלי</td>
+<td>הלוואה חופשית</td>
+<td data-value="150000">עד 150,000 ₪</td>
+<td>ללא ערבים, תהליך דיגיטלי</td>
 </tr>
 <tr>
-<td class="edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-lender-cell edit-hoverable"><strong class="edit-hoverable">נאוי גרופ</strong> <small>אשראי עסקי/נדל"ן</small></div>
+<td>
+<div class="wpc-loans-nonbank-h7k2-lender-cell"><strong>נאוי גרופ</strong> <small>אשראי עסקי/נדל"ן</small></div>
 </td>
-<td class="edit-hoverable">הלוואה כנגד שעבודים</td>
-<td data-value="1000000" class="edit-hoverable">מותאם אישית</td>
-<td class="edit-hoverable">נדרשים בטחונות/ערבות</td>
+<td>הלוואה כנגד שעבודים</td>
+<td data-value="1000000">מותאם אישית</td>
+<td>נדרשים בטחונות/ערבות</td>
 </tr>
 <tr>
-<td class="edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-lender-cell edit-hoverable"><strong class="edit-hoverable">מגדל</strong> <small>ביטוח ופיננסים</small></div>
+<td>
+<div class="wpc-loans-nonbank-h7k2-lender-cell"><strong>מגדל</strong> <small>ביטוח ופיננסים</small></div>
 </td>
-<td class="edit-hoverable">הלוואה מקרן השתלמות</td>
-<td data-value="0" class="edit-hoverable">עד 80% מהחיסכון</td>
-<td class="edit-hoverable">עד 7 שנים, ריבית נמוכה</td>
+<td>הלוואה מקרן השתלמות</td>
+<td data-value="0">עד 80% מהחיסכון</td>
+<td>עד 7 שנים, ריבית נמוכה</td>
 </tr>
 </tbody>
 </table>
 </div>
 <!-- כרטיסיות במובייל - מוסתר בדסקטופ -->
-<div class="wpc-loans-nonbank-h7k2-mobile-cards edit-hoverable"><!-- Card 1 -->
-<div class="wpc-loans-nonbank-h7k2-mobile-card edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-mobile-card-company edit-hoverable">ישראכרט</div>
-<div class="wpc-loans-nonbank-h7k2-mobile-card-detail edit-hoverable"><span class="wpc-loans-nonbank-h7k2-mobile-card-label edit-hoverable">מסלול:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value edit-hoverable">הלוואה מהירה לעסקים</span></div>
-<div class="wpc-loans-nonbank-h7k2-mobile-card-detail edit-hoverable"><span class="wpc-loans-nonbank-h7k2-mobile-card-label edit-hoverable">סכום:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value amount edit-hoverable">עד 500,000 ₪</span></div>
-<div class="wpc-loans-nonbank-h7k2-mobile-card-detail edit-hoverable"><span class="wpc-loans-nonbank-h7k2-mobile-card-label edit-hoverable">תנאים:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value edit-hoverable">עד 60 תשלומים, אישור מיידי</span></div>
+<div class="wpc-loans-nonbank-h7k2-mobile-cards"><!-- Card 1 -->
+<div class="wpc-loans-nonbank-h7k2-mobile-card">
+<div class="wpc-loans-nonbank-h7k2-mobile-card-company">ישראכרט</div>
+<div class="wpc-loans-nonbank-h7k2-mobile-card-detail"><span class="wpc-loans-nonbank-h7k2-mobile-card-label">מסלול:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value">הלוואה מהירה לעסקים</span></div>
+<div class="wpc-loans-nonbank-h7k2-mobile-card-detail"><span class="wpc-loans-nonbank-h7k2-mobile-card-label">סכום:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value amount">עד 500,000 ₪</span></div>
+<div class="wpc-loans-nonbank-h7k2-mobile-card-detail"><span class="wpc-loans-nonbank-h7k2-mobile-card-label">תנאים:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value">עד 60 תשלומים, אישור מיידי</span></div>
 </div>
 <!-- Card 2 -->
-<div class="wpc-loans-nonbank-h7k2-mobile-card edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-mobile-card-company edit-hoverable">כאל (Cal)</div>
-<div class="wpc-loans-nonbank-h7k2-mobile-card-detail edit-hoverable"><span class="wpc-loans-nonbank-h7k2-mobile-card-label edit-hoverable">מסלול:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value edit-hoverable">הלוואה מיידית</span></div>
-<div class="wpc-loans-nonbank-h7k2-mobile-card-detail edit-hoverable"><span class="wpc-loans-nonbank-h7k2-mobile-card-label edit-hoverable">סכום:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value amount edit-hoverable">עד 200,000 ₪</span></div>
-<div class="wpc-loans-nonbank-h7k2-mobile-card-detail edit-hoverable"><span class="wpc-loans-nonbank-h7k2-mobile-card-label edit-hoverable">ריבית:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value interest edit-hoverable">החל מ-פריים+3%</span></div>
+<div class="wpc-loans-nonbank-h7k2-mobile-card">
+<div class="wpc-loans-nonbank-h7k2-mobile-card-company">כאל (Cal)</div>
+<div class="wpc-loans-nonbank-h7k2-mobile-card-detail"><span class="wpc-loans-nonbank-h7k2-mobile-card-label">מסלול:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value">הלוואה מיידית</span></div>
+<div class="wpc-loans-nonbank-h7k2-mobile-card-detail"><span class="wpc-loans-nonbank-h7k2-mobile-card-label">סכום:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value amount">עד 200,000 ₪</span></div>
+<div class="wpc-loans-nonbank-h7k2-mobile-card-detail"><span class="wpc-loans-nonbank-h7k2-mobile-card-label">ריבית:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value interest">החל מ-פריים+3%</span></div>
 </div>
 <!-- Card 3 -->
-<div class="wpc-loans-nonbank-h7k2-mobile-card edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-mobile-card-company edit-hoverable">מקס (Max)</div>
-<div class="wpc-loans-nonbank-h7k2-mobile-card-detail edit-hoverable"><span class="wpc-loans-nonbank-h7k2-mobile-card-label edit-hoverable">מסלול:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value edit-hoverable">אשראי לכל מטרה</span></div>
-<div class="wpc-loans-nonbank-h7k2-mobile-card-detail edit-hoverable"><span class="wpc-loans-nonbank-h7k2-mobile-card-label edit-hoverable">סכום:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value amount edit-hoverable">עד 100,000 ₪</span></div>
-<div class="wpc-loans-nonbank-h7k2-mobile-card-detail edit-hoverable"><span class="wpc-loans-nonbank-h7k2-mobile-card-label edit-hoverable">תנאים:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value edit-hoverable">ללא ערבים, דיגיטלי</span></div>
+<div class="wpc-loans-nonbank-h7k2-mobile-card">
+<div class="wpc-loans-nonbank-h7k2-mobile-card-company">מקס (Max)</div>
+<div class="wpc-loans-nonbank-h7k2-mobile-card-detail"><span class="wpc-loans-nonbank-h7k2-mobile-card-label">מסלול:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value">אשראי לכל מטרה</span></div>
+<div class="wpc-loans-nonbank-h7k2-mobile-card-detail"><span class="wpc-loans-nonbank-h7k2-mobile-card-label">סכום:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value amount">עד 100,000 ₪</span></div>
+<div class="wpc-loans-nonbank-h7k2-mobile-card-detail"><span class="wpc-loans-nonbank-h7k2-mobile-card-label">תנאים:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value">ללא ערבים, דיגיטלי</span></div>
 </div>
 <!-- Card 4 -->
-<div class="wpc-loans-nonbank-h7k2-mobile-card edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-mobile-card-company edit-hoverable">בלנדר</div>
-<div class="wpc-loans-nonbank-h7k2-mobile-card-detail edit-hoverable"><span class="wpc-loans-nonbank-h7k2-mobile-card-label edit-hoverable">מסלול:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value edit-hoverable">P2P בין אנשים</span></div>
-<div class="wpc-loans-nonbank-h7k2-mobile-card-detail edit-hoverable"><span class="wpc-loans-nonbank-h7k2-mobile-card-label edit-hoverable">סכום:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value amount edit-hoverable">עד 50,000 ₪</span></div>
-<div class="wpc-loans-nonbank-h7k2-mobile-card-detail edit-hoverable"><span class="wpc-loans-nonbank-h7k2-mobile-card-label edit-hoverable">תנאים:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value edit-hoverable">ללא בטחונות</span></div>
+<div class="wpc-loans-nonbank-h7k2-mobile-card">
+<div class="wpc-loans-nonbank-h7k2-mobile-card-company">בלנדר</div>
+<div class="wpc-loans-nonbank-h7k2-mobile-card-detail"><span class="wpc-loans-nonbank-h7k2-mobile-card-label">מסלול:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value">P2P בין אנשים</span></div>
+<div class="wpc-loans-nonbank-h7k2-mobile-card-detail"><span class="wpc-loans-nonbank-h7k2-mobile-card-label">סכום:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value amount">עד 50,000 ₪</span></div>
+<div class="wpc-loans-nonbank-h7k2-mobile-card-detail"><span class="wpc-loans-nonbank-h7k2-mobile-card-label">תנאים:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value">ללא בטחונות</span></div>
 </div>
 <!-- Card 5 -->
-<div class="wpc-loans-nonbank-h7k2-mobile-card edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-mobile-card-company edit-hoverable"><a href="https://loan-israel.co.il/האגודה-הישראלית-להלוואות-ללא-ריבית/" class="edit-hoverable">עוגן</a></div>
-<div class="wpc-loans-nonbank-h7k2-mobile-card-detail edit-hoverable"><span class="wpc-loans-nonbank-h7k2-mobile-card-label edit-hoverable">מסלול:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value edit-hoverable">חרבות ברזל</span></div>
-<div class="wpc-loans-nonbank-h7k2-mobile-card-detail edit-hoverable"><span class="wpc-loans-nonbank-h7k2-mobile-card-label edit-hoverable">ריבית:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value interest edit-hoverable">ללא ריבית (0%)</span></div>
-<div class="wpc-loans-nonbank-h7k2-mobile-card-detail edit-hoverable"><span class="wpc-loans-nonbank-h7k2-mobile-card-label edit-hoverable">סכום:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value amount edit-hoverable">עד 60,000 ₪</span></div>
+<div class="wpc-loans-nonbank-h7k2-mobile-card">
+<div class="wpc-loans-nonbank-h7k2-mobile-card-company"><a href="https://loan-israel.co.il/האגודה-הישראלית-להלוואות-ללא-ריבית/">עוגן</a></div>
+<div class="wpc-loans-nonbank-h7k2-mobile-card-detail"><span class="wpc-loans-nonbank-h7k2-mobile-card-label">מסלול:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value">חרבות ברזל</span></div>
+<div class="wpc-loans-nonbank-h7k2-mobile-card-detail"><span class="wpc-loans-nonbank-h7k2-mobile-card-label">ריבית:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value interest">ללא ריבית (0%)</span></div>
+<div class="wpc-loans-nonbank-h7k2-mobile-card-detail"><span class="wpc-loans-nonbank-h7k2-mobile-card-label">סכום:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value amount">עד 60,000 ₪</span></div>
 </div>
 <!-- Card 6 -->
-<div class="wpc-loans-nonbank-h7k2-mobile-card edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-mobile-card-company edit-hoverable">מימון ישיר</div>
-<div class="wpc-loans-nonbank-h7k2-mobile-card-detail edit-hoverable"><span class="wpc-loans-nonbank-h7k2-mobile-card-label edit-hoverable">מסלול:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value edit-hoverable">הלוואה לרכב</span></div>
-<div class="wpc-loans-nonbank-h7k2-mobile-card-detail edit-hoverable"><span class="wpc-loans-nonbank-h7k2-mobile-card-label edit-hoverable">מימון:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value amount edit-hoverable">עד 100%</span></div>
-<div class="wpc-loans-nonbank-h7k2-mobile-card-detail edit-hoverable"><span class="wpc-loans-nonbank-h7k2-mobile-card-label edit-hoverable">תנאים:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value edit-hoverable">עד 100 תשלומים</span></div>
+<div class="wpc-loans-nonbank-h7k2-mobile-card">
+<div class="wpc-loans-nonbank-h7k2-mobile-card-company">מימון ישיר</div>
+<div class="wpc-loans-nonbank-h7k2-mobile-card-detail"><span class="wpc-loans-nonbank-h7k2-mobile-card-label">מסלול:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value">הלוואה לרכב</span></div>
+<div class="wpc-loans-nonbank-h7k2-mobile-card-detail"><span class="wpc-loans-nonbank-h7k2-mobile-card-label">מימון:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value amount">עד 100%</span></div>
+<div class="wpc-loans-nonbank-h7k2-mobile-card-detail"><span class="wpc-loans-nonbank-h7k2-mobile-card-label">תנאים:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value">עד 100 תשלומים</span></div>
 </div>
 <!-- Card 7 -->
-<div class="wpc-loans-nonbank-h7k2-mobile-card edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-mobile-card-company edit-hoverable">נאוי גרופ</div>
-<div class="wpc-loans-nonbank-h7k2-mobile-card-detail edit-hoverable"><span class="wpc-loans-nonbank-h7k2-mobile-card-label edit-hoverable">מסלול:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value edit-hoverable">כנגד שעבודים</span></div>
-<div class="wpc-loans-nonbank-h7k2-mobile-card-detail edit-hoverable"><span class="wpc-loans-nonbank-h7k2-mobile-card-label edit-hoverable">סכום:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value amount edit-hoverable">מותאם אישית</span></div>
-<div class="wpc-loans-nonbank-h7k2-mobile-card-detail edit-hoverable"><span class="wpc-loans-nonbank-h7k2-mobile-card-label edit-hoverable">תנאים:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value edit-hoverable">בכפוף לבטחונות</span></div>
+<div class="wpc-loans-nonbank-h7k2-mobile-card">
+<div class="wpc-loans-nonbank-h7k2-mobile-card-company">נאוי גרופ</div>
+<div class="wpc-loans-nonbank-h7k2-mobile-card-detail"><span class="wpc-loans-nonbank-h7k2-mobile-card-label">מסלול:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value">כנגד שעבודים</span></div>
+<div class="wpc-loans-nonbank-h7k2-mobile-card-detail"><span class="wpc-loans-nonbank-h7k2-mobile-card-label">סכום:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value amount">מותאם אישית</span></div>
+<div class="wpc-loans-nonbank-h7k2-mobile-card-detail"><span class="wpc-loans-nonbank-h7k2-mobile-card-label">תנאים:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value">בכפוף לבטחונות</span></div>
 </div>
 <!-- Card 8 -->
-<div class="wpc-loans-nonbank-h7k2-mobile-card edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-mobile-card-company edit-hoverable">מגדל</div>
-<div class="wpc-loans-nonbank-h7k2-mobile-card-detail edit-hoverable"><span class="wpc-loans-nonbank-h7k2-mobile-card-label edit-hoverable">מסלול:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value edit-hoverable">קרן השתלמות</span></div>
-<div class="wpc-loans-nonbank-h7k2-mobile-card-detail edit-hoverable"><span class="wpc-loans-nonbank-h7k2-mobile-card-label edit-hoverable">סכום:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value amount edit-hoverable">עד 80% מהיתרה</span></div>
-<div class="wpc-loans-nonbank-h7k2-mobile-card-detail edit-hoverable"><span class="wpc-loans-nonbank-h7k2-mobile-card-label edit-hoverable">תנאים:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value edit-hoverable">ריבית אטרקטיבית</span></div>
+<div class="wpc-loans-nonbank-h7k2-mobile-card">
+<div class="wpc-loans-nonbank-h7k2-mobile-card-company">מגדל</div>
+<div class="wpc-loans-nonbank-h7k2-mobile-card-detail"><span class="wpc-loans-nonbank-h7k2-mobile-card-label">מסלול:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value">קרן השתלמות</span></div>
+<div class="wpc-loans-nonbank-h7k2-mobile-card-detail"><span class="wpc-loans-nonbank-h7k2-mobile-card-label">סכום:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value amount">עד 80% מהיתרה</span></div>
+<div class="wpc-loans-nonbank-h7k2-mobile-card-detail"><span class="wpc-loans-nonbank-h7k2-mobile-card-label">תנאים:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value">ריבית אטרקטיבית</span></div>
 </div>
 </div>
-<div class="wpc-loans-nonbank-h7k2-table-cta edit-hoverable">
-<p class="edit-hoverable"><strong class="edit-hoverable">ראית את ההבדלים?</strong> בדוק איזו הלוואה מתאימה לך</p>
-<a class="wpc-loans-nonbank-h7k2-cta-table edit-hoverable" href="#calc-section">🧮 עבור למחשבון</a></div>
+<div class="wpc-loans-nonbank-h7k2-table-cta">
+<p><strong>ראית את ההבדלים?</strong> בדוק איזו הלוואה מתאימה לך</p>
+<a class="wpc-loans-nonbank-h7k2-cta-table" href="#calc-section">🧮 עבור למחשבון</a></div>
 </section>
 <!-- אזור 8: טבלת התפלגות השוק - ✅ עוצב והושלם --><!-- עיצוב מועתק מvisual.txt שורה 1075: wpc-stats-demo -->
-<section id="market-distribution" class="wpc-loans-nonbank-h7k2-stats-section edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-container edit-hoverable">
-<h3 class="wpc-loans-nonbank-h7k2-section-title edit-hoverable">התפלגות השוק - איפה הכסף?</h3>
-<p class="wpc-loans-nonbank-h7k2-section-content edit-hoverable">לפי נתוני בנק ישראל ל-2025, כך מתחלק היקף האשראי הצרכני בשוק הישראלי:</p>
-<div class="wpc-loans-nonbank-h7k2-stats-container edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-stat-item edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-stat-number edit-hoverable">76%</div>
-<div class="wpc-loans-nonbank-h7k2-stat-label edit-hoverable">בנקים (ללא דיור)</div>
-<div class="wpc-loans-nonbank-h7k2-stat-amount edit-hoverable">220 מיליארד ₪</div>
-<div class="wpc-loans-nonbank-h7k2-stat-bar edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-stat-fill edit-hoverable" style="width: 76%; background: var(--primary);">&nbsp;</div>
+<section id="market-distribution" class="wpc-loans-nonbank-h7k2-stats-section">
+<div class="wpc-loans-nonbank-h7k2-container">
+<h3 class="wpc-loans-nonbank-h7k2-section-title">התפלגות השוק - איפה הכסף?</h3>
+<p class="wpc-loans-nonbank-h7k2-section-content">לפי נתוני בנק ישראל ל-2025, כך מתחלק היקף האשראי הצרכני בשוק הישראלי:</p>
+<div class="wpc-loans-nonbank-h7k2-stats-container">
+<div class="wpc-loans-nonbank-h7k2-stat-item">
+<div class="wpc-loans-nonbank-h7k2-stat-number">76%</div>
+<div class="wpc-loans-nonbank-h7k2-stat-label">בנקים (ללא דיור)</div>
+<div class="wpc-loans-nonbank-h7k2-stat-amount">220 מיליארד ₪</div>
+<div class="wpc-loans-nonbank-h7k2-stat-bar">
+<div class="wpc-loans-nonbank-h7k2-stat-fill" style="width: 76%; background: var(--primary);"> </div>
 </div>
 </div>
-<div class="wpc-loans-nonbank-h7k2-stat-item edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-stat-number edit-hoverable">12%</div>
-<div class="wpc-loans-nonbank-h7k2-stat-label edit-hoverable">מוסדיים (ביטוח וקרנות)</div>
-<div class="wpc-loans-nonbank-h7k2-stat-amount edit-hoverable">35 מיליארד ₪</div>
-<div class="wpc-loans-nonbank-h7k2-stat-bar edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-stat-fill edit-hoverable" style="width: 12%; background: var(--success);">&nbsp;</div>
+<div class="wpc-loans-nonbank-h7k2-stat-item">
+<div class="wpc-loans-nonbank-h7k2-stat-number">12%</div>
+<div class="wpc-loans-nonbank-h7k2-stat-label">מוסדיים (ביטוח וקרנות)</div>
+<div class="wpc-loans-nonbank-h7k2-stat-amount">35 מיליארד ₪</div>
+<div class="wpc-loans-nonbank-h7k2-stat-bar">
+<div class="wpc-loans-nonbank-h7k2-stat-fill" style="width: 12%; background: var(--success);"> </div>
 </div>
 </div>
-<div class="wpc-loans-nonbank-h7k2-stat-item edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-stat-number edit-hoverable">10%</div>
-<div class="wpc-loans-nonbank-h7k2-stat-label edit-hoverable">חברות כרטיסי אשראי</div>
-<div class="wpc-loans-nonbank-h7k2-stat-amount edit-hoverable">28 מיליארד ₪</div>
-<div class="wpc-loans-nonbank-h7k2-stat-bar edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-stat-fill edit-hoverable" style="width: 10%; background: var(--warning);">&nbsp;</div>
+<div class="wpc-loans-nonbank-h7k2-stat-item">
+<div class="wpc-loans-nonbank-h7k2-stat-number">10%</div>
+<div class="wpc-loans-nonbank-h7k2-stat-label">חברות כרטיסי אשראי</div>
+<div class="wpc-loans-nonbank-h7k2-stat-amount">28 מיליארד ₪</div>
+<div class="wpc-loans-nonbank-h7k2-stat-bar">
+<div class="wpc-loans-nonbank-h7k2-stat-fill" style="width: 10%; background: var(--warning);"> </div>
 </div>
 </div>
-<div class="wpc-loans-nonbank-h7k2-stat-item edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-stat-number edit-hoverable">2%</div>
-<div class="wpc-loans-nonbank-h7k2-stat-label edit-hoverable">חברות מימון פרטיות</div>
-<div class="wpc-loans-nonbank-h7k2-stat-amount edit-hoverable">5.8 מיליארד ₪</div>
-<div class="wpc-loans-nonbank-h7k2-stat-bar edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-stat-fill edit-hoverable" style="width: 2%; background: var(--danger);">&nbsp;</div>
+<div class="wpc-loans-nonbank-h7k2-stat-item">
+<div class="wpc-loans-nonbank-h7k2-stat-number">2%</div>
+<div class="wpc-loans-nonbank-h7k2-stat-label">חברות מימון פרטיות</div>
+<div class="wpc-loans-nonbank-h7k2-stat-amount">5.8 מיליארד ₪</div>
+<div class="wpc-loans-nonbank-h7k2-stat-bar">
+<div class="wpc-loans-nonbank-h7k2-stat-fill" style="width: 2%; background: var(--danger);"> </div>
 </div>
 </div>
 </div>
-<div class="wpc-loans-nonbank-h7k2-market-conclusion edit-hoverable">
-<p class="diff-element-new edit-hoverable"><strong class="edit-hoverable">המסקנה:</strong> השוק החוץ בנקאי צומח מהר ומציע חלופות אמיתיות לבנקים, במיוחד לאוכלוסיות שהבנקים מתקשים לשרת. למשל, גם אם קיבלתם סירוב מבנק לאומי או מבנקים אחרים, הגופים החוץ בנקאיים בוחנים כל מקרה לגופו ויכולים לאשר את הבקשה על בסיס קריטריונים שונים.</p>
+<div class="wpc-loans-nonbank-h7k2-market-conclusion">
+<p><strong>המסקנה:</strong> השוק החוץ בנקאי צומח מהר ומציע חלופות אמיתיות לבנקים, במיוחד לאוכלוסיות שהבנקים מתקשים לשרת. למשל, גם אם קיבלתם סירוב מבנק לאומי או מבנקים אחרים, הגופים החוץ בנקאיים בוחנים כל מקרה לגופו ויכולים לאשר את הבקשה על בסיס קריטריונים שונים.</p>
 </div>
 </div>
 </section>
 <!-- אזור 10: הלוואה למסורבי בנק ובעלי BDI שלילי - ✅ עוצב והושלם -->
-<section class="wpc-loans-nonbank-h7k2-section edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-container edit-hoverable">
-<h2 class="wpc-loans-nonbank-h7k2-section-title edit-hoverable">הלוואה למסורבי בנק ובעלי BDI שלילי</h2>
-<div class="wpc-loans-nonbank-h7k2-section-content edit-hoverable">
-<p class="edit-hoverable"><strong class="edit-hoverable">מה זה BDI?</strong> דירוג האשראי האישי שלכם בטווח 300-850. ציון מתחת ל-720 נחשב בעייתי, ומתחת ל-600 - שלילי. למידע נוסף על פתרונות מימון ל<a href="https://loan-israel.co.il/הלוואות-לבעלי-bdi-שלילי/" class="edit-hoverable">בעלי BDI שלילי</a>.</p>
-<p class="edit-hoverable">הבנקים בוחנים את ה-BDI במאגר נתוני האשראי ודוחים מועמדים עם דירוג נמוך. <em class="edit-hoverable">הפתרון</em>: חברות מימון חוץ בנקאיות המתמחות ב<a href="https://loan-israel.co.il/rejected-loans/" class="edit-hoverable">הלוואות למסורבי בנק</a> שפועלות לפי קריטריונים גמישים יותר.</p>
-<h3 class="edit-hoverable">למה הבנק מסרב לכם?</h3>
-<ul class="edit-hoverable">
-<li class="edit-hoverable"><strong class="edit-hoverable">חוסר יכולת החזר</strong> - הכנסה נמוכה או חובות גבוהים</li>
-<li class="edit-hoverable"><strong class="edit-hoverable">היסטוריית אשראי גרועה</strong> - כשלי פירעון בעבר</li>
-<li class="edit-hoverable"><strong class="edit-hoverable">חוסר ביטחונות</strong> - אין נכסים או ערבים</li>
-<li class="edit-hoverable"><strong class="edit-hoverable">גיל מבוגר</strong> - מגביל יכולת החזר עתידית</li>
-<li class="edit-hoverable"><strong class="edit-hoverable">מצב אישי קשה</strong> - מחלה או אבטלה</li>
-<li class="edit-hoverable"><strong class="edit-hoverable">סכום גבוה מדי</strong> - ביחס להכנסה</li>
-<li class="edit-hoverable"><strong class="edit-hoverable">חוסר היסטוריה</strong> - לקוח חדש בבנק</li>
+<section class="wpc-loans-nonbank-h7k2-section">
+<div class="wpc-loans-nonbank-h7k2-container">
+<h2 class="wpc-loans-nonbank-h7k2-section-title">הלוואה למסורבי בנק ובעלי BDI שלילי</h2>
+<div class="wpc-loans-nonbank-h7k2-section-content">
+<p><strong>מה זה BDI?</strong> דירוג האשראי האישי שלכם בטווח 300-850. ציון מתחת ל-720 נחשב בעייתי, ומתחת ל-600 - שלילי. למידע נוסף על פתרונות מימון ל<a href="https://loan-israel.co.il/הלוואות-לבעלי-bdi-שלילי/">בעלי BDI שלילי</a>.</p>
+<p>הבנקים בוחנים את ה-BDI במאגר נתוני האשראי ודוחים מועמדים עם דירוג נמוך. <em>הפתרון</em>: חברות מימון חוץ בנקאיות המתמחות ב<a href="https://loan-israel.co.il/rejected-loans/">הלוואות למסורבי בנק</a> שפועלות לפי קריטריונים גמישים יותר.</p>
+<h3>למה הבנק מסרב לכם?</h3>
+<ul>
+<li><strong>חוסר יכולת החזר</strong> - הכנסה נמוכה או חובות גבוהים</li>
+<li><strong>היסטוריית אשראי גרועה</strong> - כשלי פירעון בעבר</li>
+<li><strong>חוסר ביטחונות</strong> - אין נכסים או ערבים</li>
+<li><strong>גיל מבוגר</strong> - מגביל יכולת החזר עתידית</li>
+<li><strong>מצב אישי קשה</strong> - מחלה או אבטלה</li>
+<li><strong>סכום גבוה מדי</strong> - ביחס להכנסה</li>
+<li><strong>חוסר היסטוריה</strong> - לקוח חדש בבנק</li>
 </ul>
 
-<h3 class="wpc-loans-nonbank-h7k2-section-title diff-element-new edit-hoverable">למה הבנק דחה אותך? (וזה לא באשמתך)</h3>
+<h3 class="wpc-loans-nonbank-h7k2-section-title">למה הבנק דחה אותך? (וזה לא באשמתך)</h3>
 
-<p class="diff-element-new edit-hoverable">הבנקים עובדים עם אלגוריתמים נוקשים. אם המשכורת שלך לא עוברת רף מסוים, אם יש לך הוצאה לפועל משנה שעברה, או אם אתה עצמאי עם הכנסה משתנה - המערכת פשוט אומרת "לא". זה לא ש"אתה לא טוב מספיק", זה שהמערכת לא יודעת לראות את התמונה המלאה.</p>
+<p>הבנקים עובדים עם אלגוריתמים נוקשים. אם המשכורת שלך לא עוברת רף מסוים, אם יש לך הוצאה לפועל משנה שעברה, או אם אתה עצמאי עם הכנסה משתנה - המערכת פשוט אומרת "לא". זה לא ש"אתה לא טוב מספיק", זה שהמערכת לא יודעת לראות את התמונה המלאה.</p>
 
-<p class="diff-element-new edit-hoverable">הגופים החוץ בנקאיים? הם בני אדם. הם מסתכלים על המצב שלך היום, לא רק על מה שקרה בעבר. יש לך הכנסה קבועה עכשיו? אתה מחזיק מהלך תזרים סדיר? זה מה שמעניין אותם.</p>
+<p>הגופים החוץ בנקאיים? הם בני אדם. הם מסתכלים על המצב שלך היום, לא רק על מה שקרה בעבר. יש לך הכנסה קבועה עכשיו? אתה מחזיק מהלך תזרים סדיר? זה מה שמעניין אותם.</p>
 
-<p class="edit-hoverable"><strong class="diff-element-new edit-hoverable">זה לא "הלוואה של נואשים"</strong> - זה סתם דרך אחרת לקבל מימון, כזו שיותר הוגנת כלפי מי שהמערכת הבנקאית לא יודעת לטפל בהם.</p>
+<p><strong>זה לא "הלוואה של נואשים"</strong> - זה סתם דרך אחרת לקבל מימון, כזו שיותר הוגנת כלפי מי שהמערכת הבנקאית לא יודעת לטפל בהם.</p>
 
-<h3 class="diff-element-new edit-hoverable">הלוואה חוץ בנקאית ללא היסטוריית אשראי</h3>
+<h3>הלוואה חוץ בנקאית ללא היסטוריית אשראי</h3>
 
-<p class="diff-element-new edit-hoverable">אין לכם היסטוריית אשראי בכלל? אתם צעירים שרק מתחילים, או עולים חדשים? הבנקים דוחים אתכם בדיוק מהסיבה הזו - אין להם "מידע" עליכם.</p>
+<p>אין לכם היסטוריית אשראי בכלל? אתם צעירים שרק מתחילים, או עולים חדשים? הבנקים דוחים אתכם בדיוק מהסיבה הזו - אין להם "מידע" עליכם.</p>
 
-<p class="diff-element-new edit-hoverable">הגופים החוץ בנקאיים יכולים לעבוד גם עם מועמדים ללא היסטוריית אשראי. הם מסתכלים על הכנסה נוכחית, יציבות תעסוקתית, ותזרים בחשבון הבנק. אם אתם שכירים קבועים עם משכורת סדירה - יש סיכוי טוב לקבל אישור, גם בלי עבר אשראי.</p>
+<p>הגופים החוץ בנקאיים יכולים לעבוד גם עם מועמדים ללא היסטוריית אשראי. הם מסתכלים על הכנסה נוכחית, יציבות תעסוקתית, ותזרים בחשבון הבנק. אם אתם שכירים קבועים עם משכורת סדירה - יש סיכוי טוב לקבל אישור, גם בלי עבר אשראי.</p>
 </div>
 </div>
 </section>
 <!-- אזור 11: תמונת באנר ראשונה - ✅ עוצב והושלם -->
-<section class="wpc-loans-nonbank-h7k2-image-section edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-container edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-image-wrapper edit-hoverable"><img class="wpc-loans-nonbank-h7k2-responsive-image" src="https://loan-israel.co.il/wp-content/uploads/2022/08/הלוואה-חוץ-בנקאית-4.webp" alt="תהליך קבלת הלוואה חוץ בנקאית מהיר ופשוט"></div>
+<section class="wpc-loans-nonbank-h7k2-image-section">
+<div class="wpc-loans-nonbank-h7k2-container">
+<div class="wpc-loans-nonbank-h7k2-image-wrapper"><img class="wpc-loans-nonbank-h7k2-responsive-image" src="https://loan-israel.co.il/wp-content/uploads/2022/08/הלוואה-חוץ-בנקאית-4.webp" alt="תהליך קבלת הלוואה חוץ בנקאית מהיר ופשוט" /></div>
 </div>
 </section>
 <style>
@@ -2308,134 +2309,134 @@
         
     })();
     </script> <!-- אזור 12: בוחן דחיפות פיננסית ומיקום בזמן - ✅ עוצב והושלם --><!-- עיצוב מבוסס על wpc-calc-tabs-demo עם התאמות לבוחן -->
-<section id="urgency-quiz" class="wpc-loans-nonbank-h7k2-quiz-section edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-container edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-quiz-header edit-hoverable">
-<h2 class="wpc-loans-nonbank-h7k2-quiz-title wpc-loans-nonbank-h7k2-section-title edit-hoverable">בדוק איזו הלוואה מתאימה לך?</h2>
-<p class="wpc-loans-nonbank-h7k2-quiz-subtitle wpc-loans-nonbank-h7k2-section-content edit-hoverable">4 שאלות חכמות ותדע איזה פתרון יתאים לזמן שיש לך</p>
+<section id="urgency-quiz" class="wpc-loans-nonbank-h7k2-quiz-section">
+<div class="wpc-loans-nonbank-h7k2-container">
+<div class="wpc-loans-nonbank-h7k2-quiz-header">
+<h2 class="wpc-loans-nonbank-h7k2-quiz-title wpc-loans-nonbank-h7k2-section-title">בדוק איזו הלוואה מתאימה לך?</h2>
+<p class="wpc-loans-nonbank-h7k2-quiz-subtitle wpc-loans-nonbank-h7k2-section-content">4 שאלות חכמות ותדע איזה פתרון יתאים לזמן שיש לך</p>
 </div>
-<div class="wpc-loans-nonbank-h7k2-quiz-wrapper edit-hoverable"><!-- Progress Bar -->
-<div class="wpc-loans-nonbank-h7k2-quiz-progress edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-progress-bar edit-hoverable">
-<div id="quiz-progress" class="wpc-loans-nonbank-h7k2-progress-fill edit-hoverable" style="width: 25%; transition: width 0.3s;">&nbsp;</div>
+<div class="wpc-loans-nonbank-h7k2-quiz-wrapper"><!-- Progress Bar -->
+<div class="wpc-loans-nonbank-h7k2-quiz-progress">
+<div class="wpc-loans-nonbank-h7k2-progress-bar">
+<div id="quiz-progress" class="wpc-loans-nonbank-h7k2-progress-fill"> </div>
 </div>
-<div class="wpc-loans-nonbank-h7k2-progress-text edit-hoverable"><span id="current-question" class="edit-hoverable">1</span> מתוך <span id="total-questions" class="edit-hoverable">4</span></div>
+<div class="wpc-loans-nonbank-h7k2-progress-text"><span id="current-question">1</span> מתוך <span id="total-questions">4</span></div>
 </div>
 <!-- Quiz Container -->
-<div id="quiz-container" class="wpc-loans-nonbank-h7k2-quiz-container edit-hoverable"><!-- Question 1: למה אתה צריך את הכסף? -->
-<div class="wpc-loans-nonbank-h7k2-question active edit-hoverable" data-question="1">
-<h3 class="wpc-loans-nonbank-h7k2-question-title edit-hoverable"><span class="wpc-loans-nonbank-h7k2-question-number edit-hoverable">1.</span> למה אתה צריך את הכסף?</h3>
-<div class="wpc-loans-nonbank-h7k2-answers-grid edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-answer-card edit-hoverable" data-value="medical" data-weight="40">
-<div class="wpc-loans-nonbank-h7k2-answer-icon edit-hoverable">🏥</div>
-<div class="wpc-loans-nonbank-h7k2-answer-title edit-hoverable">חירום רפואי דחוף</div>
-<div class="wpc-loans-nonbank-h7k2-answer-subtitle edit-hoverable">טיפול רפואי שדרוש מיידית</div>
+<div id="quiz-container" class="wpc-loans-nonbank-h7k2-quiz-container"><!-- Question 1: למה אתה צריך את הכסף? -->
+<div class="wpc-loans-nonbank-h7k2-question active" data-question="1">
+<h3 class="wpc-loans-nonbank-h7k2-question-title"><span class="wpc-loans-nonbank-h7k2-question-number">1.</span> למה אתה צריך את הכסף?</h3>
+<div class="wpc-loans-nonbank-h7k2-answers-grid">
+<div class="wpc-loans-nonbank-h7k2-answer-card" data-value="medical" data-weight="40">
+<div class="wpc-loans-nonbank-h7k2-answer-icon">🏥</div>
+<div class="wpc-loans-nonbank-h7k2-answer-title">חירום רפואי דחוף</div>
+<div class="wpc-loans-nonbank-h7k2-answer-subtitle">טיפול רפואי שדרוש מיידית</div>
 </div>
-<div class="wpc-loans-nonbank-h7k2-answer-card edit-hoverable" data-value="legal" data-weight="35">
-<div class="wpc-loans-nonbank-h7k2-answer-icon edit-hoverable">⚖️</div>
-<div class="wpc-loans-nonbank-h7k2-answer-title edit-hoverable">מניעת הוצאה לפועל</div>
-<div class="wpc-loans-nonbank-h7k2-answer-subtitle edit-hoverable">סגירת חובות לפני הליכים</div>
+<div class="wpc-loans-nonbank-h7k2-answer-card" data-value="legal" data-weight="35">
+<div class="wpc-loans-nonbank-h7k2-answer-icon">⚖️</div>
+<div class="wpc-loans-nonbank-h7k2-answer-title">מניעת הוצאה לפועל</div>
+<div class="wpc-loans-nonbank-h7k2-answer-subtitle">סגירת חובות לפני הליכים</div>
 </div>
-<div class="wpc-loans-nonbank-h7k2-answer-card edit-hoverable" data-value="business" data-weight="25">
-<div class="wpc-loans-nonbank-h7k2-answer-icon edit-hoverable">💼</div>
-<div class="wpc-loans-nonbank-h7k2-answer-title edit-hoverable">הזדמנות עסקית</div>
-<div class="wpc-loans-nonbank-h7k2-answer-subtitle edit-hoverable">השקעה מהירה בעסק</div>
+<div class="wpc-loans-nonbank-h7k2-answer-card" data-value="business" data-weight="25">
+<div class="wpc-loans-nonbank-h7k2-answer-icon">💼</div>
+<div class="wpc-loans-nonbank-h7k2-answer-title">הזדמנות עסקית</div>
+<div class="wpc-loans-nonbank-h7k2-answer-subtitle">השקעה מהירה בעסק</div>
 </div>
-<div class="wpc-loans-nonbank-h7k2-answer-card edit-hoverable" data-value="general" data-weight="10">
-<div class="wpc-loans-nonbank-h7k2-answer-icon edit-hoverable">🏠</div>
-<div class="wpc-loans-nonbank-h7k2-answer-title edit-hoverable">צרכים כלליים</div>
-<div class="wpc-loans-nonbank-h7k2-answer-subtitle edit-hoverable">שיפוצים, אירועים</div>
+<div class="wpc-loans-nonbank-h7k2-answer-card" data-value="general" data-weight="10">
+<div class="wpc-loans-nonbank-h7k2-answer-icon">🏠</div>
+<div class="wpc-loans-nonbank-h7k2-answer-title">צרכים כלליים</div>
+<div class="wpc-loans-nonbank-h7k2-answer-subtitle">שיפוצים, אירועים</div>
 </div>
 </div>
 </div>
 <!-- Question 2: תוך כמה זמן אתה חייב לקבל את הכסף? -->
-<div class="wpc-loans-nonbank-h7k2-question edit-hoverable" data-question="2">
-<h3 class="wpc-loans-nonbank-h7k2-question-title edit-hoverable"><span class="wpc-loans-nonbank-h7k2-question-number edit-hoverable">2.</span> תוך כמה זמן אתה חייב לקבל את הכסף?</h3>
-<div class="wpc-loans-nonbank-h7k2-answers-grid edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-answer-card edit-hoverable" data-value="24h" data-weight="30">
-<div class="wpc-loans-nonbank-h7k2-answer-icon edit-hoverable">⚡</div>
-<div class="wpc-loans-nonbank-h7k2-answer-title edit-hoverable">תוך 24 שעות</div>
-<div class="wpc-loans-nonbank-h7k2-answer-subtitle edit-hoverable">דחוף מאוד - עד מחר</div>
+<div class="wpc-loans-nonbank-h7k2-question" data-question="2">
+<h3 class="wpc-loans-nonbank-h7k2-question-title"><span class="wpc-loans-nonbank-h7k2-question-number">2.</span> תוך כמה זמן אתה חייב לקבל את הכסף?</h3>
+<div class="wpc-loans-nonbank-h7k2-answers-grid">
+<div class="wpc-loans-nonbank-h7k2-answer-card" data-value="24h" data-weight="30">
+<div class="wpc-loans-nonbank-h7k2-answer-icon">⚡</div>
+<div class="wpc-loans-nonbank-h7k2-answer-title">תוך 24 שעות</div>
+<div class="wpc-loans-nonbank-h7k2-answer-subtitle">דחוף מאוד - עד מחר</div>
 </div>
-<div class="wpc-loans-nonbank-h7k2-answer-card edit-hoverable" data-value="48h" data-weight="25">
-<div class="wpc-loans-nonbank-h7k2-answer-icon edit-hoverable">⏰</div>
-<div class="wpc-loans-nonbank-h7k2-answer-title edit-hoverable">תוך 48 שעות</div>
-<div class="wpc-loans-nonbank-h7k2-answer-subtitle edit-hoverable">דחוף - עד יומיים</div>
+<div class="wpc-loans-nonbank-h7k2-answer-card" data-value="48h" data-weight="25">
+<div class="wpc-loans-nonbank-h7k2-answer-icon">⏰</div>
+<div class="wpc-loans-nonbank-h7k2-answer-title">תוך 48 שעות</div>
+<div class="wpc-loans-nonbank-h7k2-answer-subtitle">דחוף - עד יומיים</div>
 </div>
-<div class="wpc-loans-nonbank-h7k2-answer-card edit-hoverable" data-value="week" data-weight="15">
-<div class="wpc-loans-nonbank-h7k2-answer-icon edit-hoverable">📅</div>
-<div class="wpc-loans-nonbank-h7k2-answer-title edit-hoverable">תוך שבוע</div>
-<div class="wpc-loans-nonbank-h7k2-answer-subtitle edit-hoverable">יש זמן - עד 7 ימים</div>
+<div class="wpc-loans-nonbank-h7k2-answer-card" data-value="week" data-weight="15">
+<div class="wpc-loans-nonbank-h7k2-answer-icon">📅</div>
+<div class="wpc-loans-nonbank-h7k2-answer-title">תוך שבוע</div>
+<div class="wpc-loans-nonbank-h7k2-answer-subtitle">יש זמן - עד 7 ימים</div>
 </div>
-<div class="wpc-loans-nonbank-h7k2-answer-card edit-hoverable" data-value="month" data-weight="5">
-<div class="wpc-loans-nonbank-h7k2-answer-icon edit-hoverable">🗓️</div>
-<div class="wpc-loans-nonbank-h7k2-answer-title edit-hoverable">אין דחיפות</div>
-<div class="wpc-loans-nonbank-h7k2-answer-subtitle edit-hoverable">יכול לחכות חודש</div>
+<div class="wpc-loans-nonbank-h7k2-answer-card" data-value="month" data-weight="5">
+<div class="wpc-loans-nonbank-h7k2-answer-icon">🗓️</div>
+<div class="wpc-loans-nonbank-h7k2-answer-title">אין דחיפות</div>
+<div class="wpc-loans-nonbank-h7k2-answer-subtitle">יכול לחכות חודש</div>
 </div>
 </div>
 </div>
 <!-- Question 3: מה המצב הכספי שלך? -->
-<div class="wpc-loans-nonbank-h7k2-question edit-hoverable" data-question="3">
-<h3 class="wpc-loans-nonbank-h7k2-question-title edit-hoverable"><span class="wpc-loans-nonbank-h7k2-question-number edit-hoverable">3.</span> מה המצב הכספי שלך?</h3>
-<div class="wpc-loans-nonbank-h7k2-answers-grid edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-answer-card edit-hoverable" data-value="good" data-weight="20">
-<div class="wpc-loans-nonbank-h7k2-answer-icon edit-hoverable">✅</div>
-<div class="wpc-loans-nonbank-h7k2-answer-title edit-hoverable">הכנסה קבועה, BDI טוב</div>
-<div class="wpc-loans-nonbank-h7k2-answer-subtitle edit-hoverable">מתאים לכל הגופים</div>
+<div class="wpc-loans-nonbank-h7k2-question" data-question="3">
+<h3 class="wpc-loans-nonbank-h7k2-question-title"><span class="wpc-loans-nonbank-h7k2-question-number">3.</span> מה המצב הכספי שלך?</h3>
+<div class="wpc-loans-nonbank-h7k2-answers-grid">
+<div class="wpc-loans-nonbank-h7k2-answer-card" data-value="good" data-weight="20">
+<div class="wpc-loans-nonbank-h7k2-answer-icon">✅</div>
+<div class="wpc-loans-nonbank-h7k2-answer-title">הכנסה קבועה, BDI טוב</div>
+<div class="wpc-loans-nonbank-h7k2-answer-subtitle">מתאים לכל הגופים</div>
 </div>
-<div class="wpc-loans-nonbank-h7k2-answer-card edit-hoverable" data-value="problematic" data-weight="15">
-<div class="wpc-loans-nonbank-h7k2-answer-icon edit-hoverable">⚠️</div>
-<div class="wpc-loans-nonbank-h7k2-answer-title edit-hoverable">הכנסה קבועה, BDI בעייתי</div>
-<div class="wpc-loans-nonbank-h7k2-answer-subtitle edit-hoverable">חוץ בנקאיים בלבד</div>
+<div class="wpc-loans-nonbank-h7k2-answer-card" data-value="problematic" data-weight="15">
+<div class="wpc-loans-nonbank-h7k2-answer-icon">⚠️</div>
+<div class="wpc-loans-nonbank-h7k2-answer-title">הכנסה קבועה, BDI בעייתי</div>
+<div class="wpc-loans-nonbank-h7k2-answer-subtitle">חוץ בנקאיים בלבד</div>
 </div>
-<div class="wpc-loans-nonbank-h7k2-answer-card edit-hoverable" data-value="irregular" data-weight="10">
-<div class="wpc-loans-nonbank-h7k2-answer-icon edit-hoverable">📊</div>
-<div class="wpc-loans-nonbank-h7k2-answer-title edit-hoverable">הכנסה לא קבועה</div>
-<div class="wpc-loans-nonbank-h7k2-answer-subtitle edit-hoverable">עצמאים - פתרונות מיוחדים</div>
+<div class="wpc-loans-nonbank-h7k2-answer-card" data-value="irregular" data-weight="10">
+<div class="wpc-loans-nonbank-h7k2-answer-icon">📊</div>
+<div class="wpc-loans-nonbank-h7k2-answer-title">הכנסה לא קבועה</div>
+<div class="wpc-loans-nonbank-h7k2-answer-subtitle">עצמאים - פתרונות מיוחדים</div>
 </div>
-<div class="wpc-loans-nonbank-h7k2-answer-card edit-hoverable" data-value="poor" data-weight="5">
-<div class="wpc-loans-nonbank-h7k2-answer-icon edit-hoverable">❌</div>
-<div class="wpc-loans-nonbank-h7k2-answer-title edit-hoverable">מצב כספי קשה</div>
-<div class="wpc-loans-nonbank-h7k2-answer-subtitle edit-hoverable">חברות מימון מיוחדות</div>
+<div class="wpc-loans-nonbank-h7k2-answer-card" data-value="poor" data-weight="5">
+<div class="wpc-loans-nonbank-h7k2-answer-icon">❌</div>
+<div class="wpc-loans-nonbank-h7k2-answer-title">מצב כספי קשה</div>
+<div class="wpc-loans-nonbank-h7k2-answer-subtitle">חברות מימון מיוחדות</div>
 </div>
 </div>
 </div>
 <!-- Question 4: איזה סכום אתה צריך? -->
-<div class="wpc-loans-nonbank-h7k2-question edit-hoverable" data-question="4">
-<h3 class="wpc-loans-nonbank-h7k2-question-title edit-hoverable"><span class="wpc-loans-nonbank-h7k2-question-number edit-hoverable">4.</span> איזה סכום אתה צריך?</h3>
-<div class="wpc-loans-nonbank-h7k2-answers-grid edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-answer-card edit-hoverable" data-value="small" data-weight="10">
-<div class="wpc-loans-nonbank-h7k2-answer-icon edit-hoverable">💰</div>
-<div class="wpc-loans-nonbank-h7k2-answer-title edit-hoverable">עד 50,000₪</div>
-<div class="wpc-loans-nonbank-h7k2-answer-subtitle edit-hoverable">כל הגופים מתאימים</div>
+<div class="wpc-loans-nonbank-h7k2-question" data-question="4">
+<h3 class="wpc-loans-nonbank-h7k2-question-title"><span class="wpc-loans-nonbank-h7k2-question-number">4.</span> איזה סכום אתה צריך?</h3>
+<div class="wpc-loans-nonbank-h7k2-answers-grid">
+<div class="wpc-loans-nonbank-h7k2-answer-card" data-value="small" data-weight="10">
+<div class="wpc-loans-nonbank-h7k2-answer-icon">💰</div>
+<div class="wpc-loans-nonbank-h7k2-answer-title">עד 50,000₪</div>
+<div class="wpc-loans-nonbank-h7k2-answer-subtitle">כל הגופים מתאימים</div>
 </div>
-<div class="wpc-loans-nonbank-h7k2-answer-card edit-hoverable" data-value="medium" data-weight="7">
-<div class="wpc-loans-nonbank-h7k2-answer-icon edit-hoverable">💎</div>
-<div class="wpc-loans-nonbank-h7k2-answer-title edit-hoverable">50,000-200,000₪</div>
-<div class="wpc-loans-nonbank-h7k2-answer-subtitle edit-hoverable">מוסדיים וקרנות</div>
+<div class="wpc-loans-nonbank-h7k2-answer-card" data-value="medium" data-weight="7">
+<div class="wpc-loans-nonbank-h7k2-answer-icon">💎</div>
+<div class="wpc-loans-nonbank-h7k2-answer-title">50,000-200,000₪</div>
+<div class="wpc-loans-nonbank-h7k2-answer-subtitle">מוסדיים וקרנות</div>
 </div>
-<div class="wpc-loans-nonbank-h7k2-answer-card edit-hoverable" data-value="large" data-weight="3">
-<div class="wpc-loans-nonbank-h7k2-answer-icon edit-hoverable">🏆</div>
-<div class="wpc-loans-nonbank-h7k2-answer-title edit-hoverable">מעל 200,000₪</div>
-<div class="wpc-loans-nonbank-h7k2-answer-subtitle edit-hoverable">קרנות השקעה בלבד</div>
+<div class="wpc-loans-nonbank-h7k2-answer-card" data-value="large" data-weight="3">
+<div class="wpc-loans-nonbank-h7k2-answer-icon">🏆</div>
+<div class="wpc-loans-nonbank-h7k2-answer-title">מעל 200,000₪</div>
+<div class="wpc-loans-nonbank-h7k2-answer-subtitle">קרנות השקעה בלבד</div>
 </div>
-<div class="wpc-loans-nonbank-h7k2-answer-card edit-hoverable" data-value="tiny" data-weight="8">
-<div class="wpc-loans-nonbank-h7k2-answer-icon edit-hoverable">🪙</div>
-<div class="wpc-loans-nonbank-h7k2-answer-title edit-hoverable">עד 20,000₪</div>
-<div class="wpc-loans-nonbank-h7k2-answer-subtitle edit-hoverable">גם גמ"ח אפשרי</div>
+<div class="wpc-loans-nonbank-h7k2-answer-card" data-value="tiny" data-weight="8">
+<div class="wpc-loans-nonbank-h7k2-answer-icon">🪙</div>
+<div class="wpc-loans-nonbank-h7k2-answer-title">עד 20,000₪</div>
+<div class="wpc-loans-nonbank-h7k2-answer-subtitle">גם גמ"ח אפשרי</div>
 </div>
 </div>
 </div>
 <!-- Results Screen -->
-<div id="quiz-results" class="wpc-loans-nonbank-h7k2-quiz-results edit-hoverable" style="display: none;">
-<div class="wpc-loans-nonbank-h7k2-results-header edit-hoverable">
-<h3 class="edit-hoverable">🎯 התוצאות שלך מוכנות!</h3>
-<p class="edit-hoverable">מצאנו את הפתרונות הכי מתאימים למצב שלך</p>
+<div id="quiz-results" class="wpc-loans-nonbank-h7k2-quiz-results" style="display: none;">
+<div class="wpc-loans-nonbank-h7k2-results-header">
+<h3>🎯 התוצאות שלך מוכנות!</h3>
+<p>מצאנו את הפתרונות הכי מתאימים למצב שלך</p>
 </div>
-<div id="recommendations-container" class="wpc-loans-nonbank-h7k2-recommendations edit-hoverable"><!-- Recommendations will be dynamically populated --></div>
-<div class="wpc-loans-nonbank-h7k2-quiz-cta edit-hoverable">
-<p class="edit-hoverable"><strong class="edit-hoverable">מוכן לקחת פעולה?</strong> בדוק זכאות עכשיו בפתרון הכי מתאים!</p>
-<a class="wpc-loans-nonbank-h7k2-cta-quiz edit-hoverable" href="#awg-section">🚀 בדוק זכאות מיידית</a> <button class="wpc-loans-nonbank-h7k2-quiz-restart">🔄 מלא שוב את הבוחן</button></div>
+<div id="recommendations-container" class="wpc-loans-nonbank-h7k2-recommendations"><!-- Recommendations will be dynamically populated --></div>
+<div class="wpc-loans-nonbank-h7k2-quiz-cta">
+<p><strong>מוכן לקחת פעולה?</strong> בדוק זכאות עכשיו בפתרון הכי מתאים!</p>
+<a class="wpc-loans-nonbank-h7k2-cta-quiz" href="#awg-section">🚀 בדוק זכאות מיידית</a> <button class="wpc-loans-nonbank-h7k2-quiz-restart">🔄 מלא שוב את הבוחן</button></div>
 </div>
 </div>
 </div>
@@ -3223,295 +3224,295 @@
         
     })();
     </script> <!-- אזור 13: 4 דרכים מוכחות לקבלת הלוואה - ✅ עוצב והושלם --><!-- עיצוב מבוסס על wpc-calc-tabs-demo עם התאמות לכרטיסי צעדים -->
-<section id="proven-ways" class="wpc-loans-nonbank-h7k2-steps-section edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-container edit-hoverable">
-<h2 class="wpc-loans-nonbank-h7k2-section-title edit-hoverable">4 דרכים מוכחות לקבלת הלוואה למסורבים</h2>
-<p class="wpc-loans-nonbank-h7k2-section-content edit-hoverable">למסורבי הבנקים יש כיום מספר אפשרויות מעולות לקבלת מימון בתנאים סבירים:</p>
-<div class="wpc-loans-nonbank-h7k2-steps-grid edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-step-card edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-step-number edit-hoverable">1</div>
-<div class="wpc-loans-nonbank-h7k2-step-content edit-hoverable"><span class="wpc-loans-nonbank-h7k2-step-title edit-hoverable"><a href="https://loan-israel.co.il/property-loans/" class="edit-hoverable">הלוואה כנגד נכס</a></span>
-<p class="edit-hoverable">דירה, בית, מגרש, חנות. הריבית נמוכה יותר בגלל הביטחון</p>
+<section id="proven-ways" class="wpc-loans-nonbank-h7k2-steps-section">
+<div class="wpc-loans-nonbank-h7k2-container">
+<h2 class="wpc-loans-nonbank-h7k2-section-title">4 דרכים מוכחות לקבלת הלוואה למסורבים</h2>
+<p class="wpc-loans-nonbank-h7k2-section-content">למסורבי הבנקים יש כיום מספר אפשרויות מעולות לקבלת מימון בתנאים סבירים:</p>
+<div class="wpc-loans-nonbank-h7k2-steps-grid">
+<div class="wpc-loans-nonbank-h7k2-step-card">
+<div class="wpc-loans-nonbank-h7k2-step-number">1</div>
+<div class="wpc-loans-nonbank-h7k2-step-content"><span class="wpc-loans-nonbank-h7k2-step-title"><a href="https://loan-israel.co.il/property-loans/">הלוואה כנגד נכס</a></span>
+<p>דירה, בית, מגרש, חנות. הריבית נמוכה יותר בגלל הביטחון</p>
 </div>
 </div>
-<div class="wpc-loans-nonbank-h7k2-step-card edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-step-number edit-hoverable">2</div>
-<div class="wpc-loans-nonbank-h7k2-step-content edit-hoverable"><span class="wpc-loans-nonbank-h7k2-step-title edit-hoverable"><a href="https://loan-israel.co.il/הלוואות-על-חשבון-הפנסיה/" class="edit-hoverable">הלוואה כנגד קרן פנסיה</a></span>
-<p class="diff-element-changed edit-hoverable">ריבית של 0.75%-4.75% בלבד, ללא בדיקות אשראי</p>
+<div class="wpc-loans-nonbank-h7k2-step-card">
+<div class="wpc-loans-nonbank-h7k2-step-number">2</div>
+<div class="wpc-loans-nonbank-h7k2-step-content"><span class="wpc-loans-nonbank-h7k2-step-title"><a href="https://loan-israel.co.il/הלוואות-על-חשבון-הפנסיה/">הלוואה כנגד קרן פנסיה</a></span>
+<p>ריבית של 0.75%-4.75% בלבד, ללא בדיקות אשראי</p>
 </div>
 </div>
-<div class="wpc-loans-nonbank-h7k2-step-card edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-step-number edit-hoverable">3</div>
-<div class="wpc-loans-nonbank-h7k2-step-content edit-hoverable"><span class="wpc-loans-nonbank-h7k2-step-title edit-hoverable">חברות מימון מורשות</span>
-<p class="edit-hoverable">פועלות בהיתר ממשרד האוצר, בטוחות ומסודרות</p>
+<div class="wpc-loans-nonbank-h7k2-step-card">
+<div class="wpc-loans-nonbank-h7k2-step-number">3</div>
+<div class="wpc-loans-nonbank-h7k2-step-content"><span class="wpc-loans-nonbank-h7k2-step-title">חברות מימון מורשות</span>
+<p>פועלות בהיתר ממשרד האוצר, בטוחות ומסודרות</p>
 </div>
 </div>
-<div class="wpc-loans-nonbank-h7k2-step-card edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-step-number edit-hoverable">4</div>
-<div class="wpc-loans-nonbank-h7k2-step-content edit-hoverable"><span class="wpc-loans-nonbank-h7k2-step-title edit-hoverable"><a href="https://loan-israel.co.il/הלוואות-חברתיות/" class="edit-hoverable">הלוואה חברתית/גמ"ח</a></span>
-<p class="edit-hoverable">לסכומים קטנים, תנאים מועדפים</p>
+<div class="wpc-loans-nonbank-h7k2-step-card">
+<div class="wpc-loans-nonbank-h7k2-step-number">4</div>
+<div class="wpc-loans-nonbank-h7k2-step-content"><span class="wpc-loans-nonbank-h7k2-step-title"><a href="https://loan-israel.co.il/הלוואות-חברתיות/">הלוואה חברתית/גמ"ח</a></span>
+<p>לסכומים קטנים, תנאים מועדפים</p>
 </div>
 </div>
 </div>
-<div class="wpc-loans-nonbank-h7k2-steps-cta edit-hoverable">
-<p class="edit-hoverable"><strong class="diff-element-new edit-hoverable">רוב הלקוחות שלנו מקבלים אישור בתנאים מתאימים</strong> - בואו נמצא את הפתרון שמתאים לכם!</p>
-<a class="wpc-loans-nonbank-h7k2-cta-steps edit-hoverable" href="#urgency-quiz">🎯 בדוק איזה פתרון מתאים לך</a></div>
+<div class="wpc-loans-nonbank-h7k2-steps-cta">
+<p><strong>רוב הלקוחות שלנו מקבלים אישור בתנאים מתאימים</strong> - בואו נמצא את הפתרון שמתאים לכם!</p>
+<a class="wpc-loans-nonbank-h7k2-cta-steps" href="#urgency-quiz">🎯 בדוק איזה פתרון מתאים לך</a></div>
 </div>
 </section>
 <!-- אזור 14: יתרונות הלוואה מחוץ למסגרת הבנק - ✅ עוצב והושלם -->
-<section class="wpc-loans-nonbank-h7k2-section edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-container edit-hoverable">
-<h2 class="wpc-loans-nonbank-h7k2-section-title diff-element-new edit-hoverable">אז למה לבחור בפתרון חוץ בנקאי 6 יתרונות משמעותיים</h2>
-<div class="wpc-loans-nonbank-h7k2-section-content edit-hoverable">
-<p class="edit-hoverable">ההלוואה החוץ בנקאית לא משפיעה על האובליגו הבנקאי שלכם ומציעה יתרונות ייחודיים:</p>
-<div class="wpc-loans-nonbank-h7k2-benefits-grid edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-benefit-item edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-benefit-icon edit-hoverable">⚡</div>
-<h3 class="edit-hoverable">אישור מהיר</h3>
-<p class="edit-hoverable">תוך 24-48 שעות במקום שבועות בבנק</p>
+<section class="wpc-loans-nonbank-h7k2-section">
+<div class="wpc-loans-nonbank-h7k2-container">
+<h2 class="wpc-loans-nonbank-h7k2-section-title">למה לבחור הלוואה חוץ בנקאית? 6 יתרונות משמעותיים</h2>
+<div class="wpc-loans-nonbank-h7k2-section-content">
+<p>ההלוואה החוץ בנקאית לא משפיעה על האובליגו הבנקאי שלכם ומציעה יתרונות ייחודיים:</p>
+<div class="wpc-loans-nonbank-h7k2-benefits-grid">
+<div class="wpc-loans-nonbank-h7k2-benefit-item">
+<div class="wpc-loans-nonbank-h7k2-benefit-icon">⚡</div>
+<h3>אישור מהיר</h3>
+<p>תוך 24-48 שעות במקום שבועות בבנק</p>
 </div>
-<div class="wpc-loans-nonbank-h7k2-benefit-item edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-benefit-icon edit-hoverable">🔓</div>
-<h3 class="edit-hoverable">ללא פגיעה באובליגו</h3>
-<p class="edit-hoverable">שומר על מסגרת האשראי הבנקאית שלכם</p>
+<div class="wpc-loans-nonbank-h7k2-benefit-item">
+<div class="wpc-loans-nonbank-h7k2-benefit-icon">🔓</div>
+<h3>ללא פגיעה באובליגו</h3>
+<p>שומר על מסגרת האשראי הבנקאית שלכם</p>
 </div>
-<div class="wpc-loans-nonbank-h7k2-benefit-item edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-benefit-icon edit-hoverable">📋</div>
-<h3 class="edit-hoverable">קריטריונים גמישים</h3>
-<p class="edit-hoverable">גם למסורבי בנק ובעלי BDI נמוך</p>
+<div class="wpc-loans-nonbank-h7k2-benefit-item">
+<div class="wpc-loans-nonbank-h7k2-benefit-icon">📋</div>
+<h3>קריטריונים גמישים</h3>
+<p>גם למסורבי בנק ובעלי BDI נמוך</p>
 </div>
-<div class="wpc-loans-nonbank-h7k2-benefit-item edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-benefit-icon edit-hoverable">💰</div>
-<h3 class="edit-hoverable">לכל מטרה</h3>
-<p class="edit-hoverable">שיפוצים, חתונות, רכב, סגירת חובות</p>
+<div class="wpc-loans-nonbank-h7k2-benefit-item">
+<div class="wpc-loans-nonbank-h7k2-benefit-icon">💰</div>
+<h3>לכל מטרה</h3>
+<p>שיפוצים, חתונות, רכב, סגירת חובות</p>
 </div>
-<div class="wpc-loans-nonbank-h7k2-benefit-item edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-benefit-icon edit-hoverable">🎯</div>
-<h3 class="edit-hoverable">תנאים תחרותיים</h3>
-<p class="diff-element-changed edit-hoverable">ריביות של 5.75%-19.75% לפי פרופיל הסיכון</p>
+<div class="wpc-loans-nonbank-h7k2-benefit-item">
+<div class="wpc-loans-nonbank-h7k2-benefit-icon">🎯</div>
+<h3>תנאים תחרותיים</h3>
+<p>ריביות של 5.75%-19.75% לפי פרופיל הסיכון</p>
 </div>
-<div class="wpc-loans-nonbank-h7k2-benefit-item edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-benefit-icon edit-hoverable">🏢</div>
-<h3 class="edit-hoverable">גופים מוסדיים</h3>
-<p class="edit-hoverable">חברות ביטוח, כרטיסי אשראי וקרנות השקעה</p>
+<div class="wpc-loans-nonbank-h7k2-benefit-item">
+<div class="wpc-loans-nonbank-h7k2-benefit-icon">🏢</div>
+<h3>גופים מוסדיים</h3>
+<p>חברות ביטוח, כרטיסי אשראי וקרנות השקעה</p>
 </div>
 </div>
 </div>
 </div>
 </section>
 <!-- אזור 15: מטרות ההלוואה - ✅ עוצב והושלם --><!-- כרטיסים אינטראקטיביים עם flip effect -->
-<section id="loan-purposes" class="wpc-loans-nonbank-h7k2-purposes-section edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-container edit-hoverable">
-<h2 class="wpc-loans-nonbank-h7k2-section-title edit-hoverable">מטרות ההלוואה הפופולריות</h2>
-<p class="wpc-loans-nonbank-h7k2-section-content edit-hoverable">לחץ על כל כרטיס כדי לראות פרטים נוספים:</p>
-<div class="wpc-loans-nonbank-h7k2-purposes-grid edit-hoverable"><!-- שיפוץ דירה -->
-<div class="wpc-loans-nonbank-h7k2-purpose-card edit-hoverable" data-purpose="renovation">
-<div class="wpc-loans-nonbank-h7k2-card-inner edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-card-front edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-purpose-icon edit-hoverable">🏠</div>
-<span class="wpc-loans-nonbank-h7k2-card-title edit-hoverable"><a href="https://loan-israel.co.il/renovation-loans/" class="edit-hoverable">שיפוץ דירה</a></span>
-<p class="edit-hoverable">20,000 - 300,000 ₪</p>
+<section id="loan-purposes" class="wpc-loans-nonbank-h7k2-purposes-section">
+<div class="wpc-loans-nonbank-h7k2-container">
+<h2 class="wpc-loans-nonbank-h7k2-section-title">מטרות ההלוואה הפופולריות</h2>
+<p class="wpc-loans-nonbank-h7k2-section-content">לחץ על כל כרטיס כדי לראות פרטים נוספים:</p>
+<div class="wpc-loans-nonbank-h7k2-purposes-grid"><!-- שיפוץ דירה -->
+<div class="wpc-loans-nonbank-h7k2-purpose-card" data-purpose="renovation">
+<div class="wpc-loans-nonbank-h7k2-card-inner">
+<div class="wpc-loans-nonbank-h7k2-card-front">
+<div class="wpc-loans-nonbank-h7k2-purpose-icon">🏠</div>
+<span class="wpc-loans-nonbank-h7k2-card-title"><a href="https://loan-israel.co.il/renovation-loans/">שיפוץ דירה</a></span>
+<p>20,000 - 300,000 ₪</p>
 </div>
-<div class="wpc-loans-nonbank-h7k2-card-back edit-hoverable"><span class="wpc-loans-nonbank-h7k2-card-title-back edit-hoverable"><a href="https://loan-israel.co.il/renovation-loans/" class="edit-hoverable">שיפוץ דירה</a></span>
-<ul class="edit-hoverable">
-<li class="edit-hoverable">אישור מהיר תוך 48 שעות</li>
-<li class="edit-hoverable">ללא פיקוח על השימוש בכספים</li>
-<li class="edit-hoverable">תנאים טובים עם בטחונות</li>
-<li class="edit-hoverable">משתלם אם מעלה שווי הנכס</li>
+<div class="wpc-loans-nonbank-h7k2-card-back"><span class="wpc-loans-nonbank-h7k2-card-title-back"><a href="https://loan-israel.co.il/renovation-loans/">שיפוץ דירה</a></span>
+<ul>
+<li>אישור מהיר תוך 48 שעות</li>
+<li>ללא פיקוח על השימוש בכספים</li>
+<li>תנאים טובים עם בטחונות</li>
+<li>משתלם אם מעלה שווי הנכס</li>
 </ul>
 </div>
 </div>
 </div>
 <!-- רכישת רכב -->
-<div class="wpc-loans-nonbank-h7k2-purpose-card edit-hoverable" data-purpose="vehicle">
-<div class="wpc-loans-nonbank-h7k2-card-inner edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-card-front edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-purpose-icon edit-hoverable">🚗</div>
-<span class="wpc-loans-nonbank-h7k2-card-title edit-hoverable"><a href="https://loan-israel.co.il/מימון-לרכב-חדש/" class="edit-hoverable">רכישת רכב</a></span>
-<p class="edit-hoverable">50,000 - 200,000 ₪</p>
+<div class="wpc-loans-nonbank-h7k2-purpose-card" data-purpose="vehicle">
+<div class="wpc-loans-nonbank-h7k2-card-inner">
+<div class="wpc-loans-nonbank-h7k2-card-front">
+<div class="wpc-loans-nonbank-h7k2-purpose-icon">🚗</div>
+<span class="wpc-loans-nonbank-h7k2-card-title"><a href="https://loan-israel.co.il/מימון-לרכב-חדש/">רכישת רכב</a></span>
+<p>50,000 - 200,000 ₪</p>
 </div>
-<div class="wpc-loans-nonbank-h7k2-card-back edit-hoverable"><span class="wpc-loans-nonbank-h7k2-card-title-back edit-hoverable"><a href="https://loan-israel.co.il/מימון-לרכב-חדש/" class="edit-hoverable">רכישת רכב</a></span>
-<ul class="edit-hoverable">
-<li class="edit-hoverable">מימון עד 80% משווי הרכב</li>
-<li class="edit-hoverable">פריסה עד 5 שנים</li>
-<li class="edit-hoverable">ללא השפעה על מסגרות הבנק</li>
-<li class="edit-hoverable">אפשרות לריבית קבועה</li>
+<div class="wpc-loans-nonbank-h7k2-card-back"><span class="wpc-loans-nonbank-h7k2-card-title-back"><a href="https://loan-israel.co.il/מימון-לרכב-חדש/">רכישת רכב</a></span>
+<ul>
+<li>מימון עד 80% משווי הרכב</li>
+<li>פריסה עד 5 שנים</li>
+<li>ללא השפעה על מסגרות הבנק</li>
+<li>אפשרות לריבית קבועה</li>
 </ul>
 </div>
 </div>
 </div>
 <!-- חתונות ואירועים -->
-<div class="wpc-loans-nonbank-h7k2-purpose-card edit-hoverable" data-purpose="events">
-<div class="wpc-loans-nonbank-h7k2-card-inner edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-card-front edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-purpose-icon edit-hoverable">💍</div>
-<span class="wpc-loans-nonbank-h7k2-card-title edit-hoverable"><a href="https://loan-israel.co.il/הלוואה-לחתונה/" class="edit-hoverable">חתונות ואירועים</a></span>
-<p class="edit-hoverable">30,000 - 150,000 ₪</p>
+<div class="wpc-loans-nonbank-h7k2-purpose-card" data-purpose="events">
+<div class="wpc-loans-nonbank-h7k2-card-inner">
+<div class="wpc-loans-nonbank-h7k2-card-front">
+<div class="wpc-loans-nonbank-h7k2-purpose-icon">💍</div>
+<span class="wpc-loans-nonbank-h7k2-card-title"><a href="https://loan-israel.co.il/הלוואה-לחתונה/">חתונות ואירועים</a></span>
+<p>30,000 - 150,000 ₪</p>
 </div>
-<div class="wpc-loans-nonbank-h7k2-card-back edit-hoverable"><span class="wpc-loans-nonbank-h7k2-card-title-back edit-hoverable"><a href="https://loan-israel.co.il/הלוואה-לחתונה/" class="edit-hoverable">חתונות ואירועים</a></span>
-<ul class="edit-hoverable">
-<li class="edit-hoverable">תכנון מראש עם ודאות כספית</li>
-<li class="edit-hoverable">תנאי החזר נוחים</li>
-<li class="edit-hoverable">אפשרות לדחיית תשלום ראשון</li>
-<li class="edit-hoverable">ללא צורך בהסברים מפורטים</li>
+<div class="wpc-loans-nonbank-h7k2-card-back"><span class="wpc-loans-nonbank-h7k2-card-title-back"><a href="https://loan-israel.co.il/הלוואה-לחתונה/">חתונות ואירועים</a></span>
+<ul>
+<li>תכנון מראש עם ודאות כספית</li>
+<li>תנאי החזר נוחים</li>
+<li>אפשרות לדחיית תשלום ראשון</li>
+<li>ללא צורך בהסברים מפורטים</li>
 </ul>
 </div>
 </div>
 </div>
 <!-- סגירת חובות -->
-<div class="wpc-loans-nonbank-h7k2-purpose-card edit-hoverable" data-purpose="debt-consolidation">
-<div class="wpc-loans-nonbank-h7k2-card-inner edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-card-front edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-purpose-icon edit-hoverable">📊</div>
-<span class="wpc-loans-nonbank-h7k2-card-title edit-hoverable"><a href="https://loan-israel.co.il/הלוואות-לסגירת-חובות/" class="edit-hoverable">סגירת חובות</a></span>
-<p class="edit-hoverable">25,000 - 400,000 ₪</p>
+<div class="wpc-loans-nonbank-h7k2-purpose-card" data-purpose="debt-consolidation">
+<div class="wpc-loans-nonbank-h7k2-card-inner">
+<div class="wpc-loans-nonbank-h7k2-card-front">
+<div class="wpc-loans-nonbank-h7k2-purpose-icon">📊</div>
+<span class="wpc-loans-nonbank-h7k2-card-title"><a href="https://loan-israel.co.il/הלוואות-לסגירת-חובות/">סגירת חובות</a></span>
+<p>25,000 - 400,000 ₪</p>
 </div>
-<div class="wpc-loans-nonbank-h7k2-card-back edit-hoverable"><span class="wpc-loans-nonbank-h7k2-card-title-back edit-hoverable"><a href="https://loan-israel.co.il/הלוואות-לסגירת-חובות/" class="edit-hoverable">סגירת חובות</a></span>
-<ul class="edit-hoverable">
-<li class="edit-hoverable">איחוד חובות לתשלום אחד</li>
-<li class="edit-hoverable">הפחתת ריבית כוללת</li>
-<li class="edit-hoverable">שיפור מצב האשראי</li>
-<li class="edit-hoverable">הקלה מיידית בתזרים</li>
+<div class="wpc-loans-nonbank-h7k2-card-back"><span class="wpc-loans-nonbank-h7k2-card-title-back"><a href="https://loan-israel.co.il/הלוואות-לסגירת-חובות/">סגירת חובות</a></span>
+<ul>
+<li>איחוד חובות לתשלום אחד</li>
+<li>הפחתת ריבית כוללת</li>
+<li>שיפור מצב האשראי</li>
+<li>הקלה מיידית בתזרים</li>
 </ul>
 </div>
 </div>
 </div>
 <!-- השקעות עסקיות -->
-<div class="wpc-loans-nonbank-h7k2-purpose-card edit-hoverable" data-purpose="business">
-<div class="wpc-loans-nonbank-h7k2-card-inner edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-card-front edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-purpose-icon edit-hoverable">💼</div>
-<span class="wpc-loans-nonbank-h7k2-card-title edit-hoverable"><a href="https://loan-israel.co.il/Business/" class="edit-hoverable">השקעות עסקיות</a></span>
-<p class="edit-hoverable">100,000 - 500,000 ₪</p>
+<div class="wpc-loans-nonbank-h7k2-purpose-card" data-purpose="business">
+<div class="wpc-loans-nonbank-h7k2-card-inner">
+<div class="wpc-loans-nonbank-h7k2-card-front">
+<div class="wpc-loans-nonbank-h7k2-purpose-icon">💼</div>
+<span class="wpc-loans-nonbank-h7k2-card-title"><a href="https://loan-israel.co.il/Business/">השקעות עסקיות</a></span>
+<p>100,000 - 500,000 ₪</p>
 </div>
-<div class="wpc-loans-nonbank-h7k2-card-back edit-hoverable"><span class="wpc-loans-nonbank-h7k2-card-title-back edit-hoverable"><a href="https://loan-israel.co.il/Business/" class="edit-hoverable">השקעות עסקיות</a></span>
-<ul class="edit-hoverable">
-<li class="edit-hoverable">מימון מהיר להזדמנויות</li>
-<li class="edit-hoverable">תנאים גמישים לעצמאים</li>
-<li class="edit-hoverable">ללא משכנתה על נכס פרטי</li>
-<li class="edit-hoverable">החזר לפי תזרים העסק</li>
+<div class="wpc-loans-nonbank-h7k2-card-back"><span class="wpc-loans-nonbank-h7k2-card-title-back"><a href="https://loan-israel.co.il/Business/">השקעות עסקיות</a></span>
+<ul>
+<li>מימון מהיר להזדמנויות</li>
+<li>תנאים גמישים לעצמאים</li>
+<li>ללא משכנתה על נכס פרטי</li>
+<li>החזר לפי תזרים העסק</li>
 </ul>
 </div>
 </div>
 </div>
 <!-- צרכים רפואיים -->
-<div class="wpc-loans-nonbank-h7k2-purpose-card edit-hoverable" data-purpose="medical">
-<div class="wpc-loans-nonbank-h7k2-card-inner edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-card-front edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-purpose-icon edit-hoverable">🏥</div>
-<span class="wpc-loans-nonbank-h7k2-card-title edit-hoverable"><a href="https://loan-israel.co.il/הלוואות-להליך-רפואי/" class="edit-hoverable">צרכים רפואיים</a></span>
-<p class="edit-hoverable">15,000 - 200,000 ₪</p>
+<div class="wpc-loans-nonbank-h7k2-purpose-card" data-purpose="medical">
+<div class="wpc-loans-nonbank-h7k2-card-inner">
+<div class="wpc-loans-nonbank-h7k2-card-front">
+<div class="wpc-loans-nonbank-h7k2-purpose-icon">🏥</div>
+<span class="wpc-loans-nonbank-h7k2-card-title"><a href="https://loan-israel.co.il/הלוואות-להליך-רפואי/">צרכים רפואיים</a></span>
+<p>15,000 - 200,000 ₪</p>
 </div>
-<div class="wpc-loans-nonbank-h7k2-card-back edit-hoverable"><span class="wpc-loans-nonbank-h7k2-card-title-back edit-hoverable"><a href="https://loan-israel.co.il/הלוואות-להליך-רפואי/" class="edit-hoverable">צרכים רפואיים</a></span>
-<ul class="edit-hoverable">
-<li class="edit-hoverable">אישור מיידי לטיפולים דחופים</li>
-<li class="edit-hoverable">תנאים מועדפים למקרי חירום</li>
-<li class="edit-hoverable">גמישות בהוכחות הכנסה</li>
-<li class="edit-hoverable">אפשרות לערבויות משפחתיות</li>
+<div class="wpc-loans-nonbank-h7k2-card-back"><span class="wpc-loans-nonbank-h7k2-card-title-back"><a href="https://loan-israel.co.il/הלוואות-להליך-רפואי/">צרכים רפואיים</a></span>
+<ul>
+<li>אישור מיידי לטיפולים דחופים</li>
+<li>תנאים מועדפים למקרי חירום</li>
+<li>גמישות בהוכחות הכנסה</li>
+<li>אפשרות לערבויות משפחתיות</li>
 </ul>
 </div>
 </div>
 </div>
 </div>
-<div class="wpc-loans-nonbank-h7k2-purposes-cta edit-hoverable">
-<p class="edit-hoverable"><strong class="edit-hoverable">מצאת את המטרה שלך?</strong> קבל הצעת מחיר מותאמת אישית!</p>
-<a class="wpc-loans-nonbank-h7k2-cta-purposes edit-hoverable" href="#awg-section">💡 קבל הצעת מחיר</a></div>
+<div class="wpc-loans-nonbank-h7k2-purposes-cta">
+<p><strong>מצאת את המטרה שלך?</strong> קבל הצעת מחיר מותאמת אישית!</p>
+<a class="wpc-loans-nonbank-h7k2-cta-purposes" href="#awg-section">💡 קבל הצעת מחיר</a></div>
 </div>
 </section>
 <!-- אזור 16: השוואת ריביות וחיסכון - ✅ עוצב והושלם -->
-<section id="interest-rates" class="wpc-loans-nonbank-h7k2-rates-section edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-container edit-hoverable">
-<h2 class="wpc-loans-nonbank-h7k2-section-title edit-hoverable">השוואת ריביות - כמה אפשר לחסוך?</h2>
-<div class="wpc-loans-nonbank-h7k2-table-container edit-hoverable">
+<section id="interest-rates" class="wpc-loans-nonbank-h7k2-rates-section">
+<div class="wpc-loans-nonbank-h7k2-container">
+<h2 class="wpc-loans-nonbank-h7k2-section-title">השוואת ריביות - כמה אפשר לחסוך?</h2>
+<div class="wpc-loans-nonbank-h7k2-table-container">
 <table id="rates-comparison-table" class="wpc-loans-nonbank-h7k2-table">
 <thead>
 <tr>
-<th data-sort="text" class="edit-hoverable">גוף מלווה</th>
-<th data-sort="text" class="edit-hoverable">טווח ריבית</th>
-<th data-sort="text" class="edit-hoverable">המלצה</th>
+<th data-sort="text">גוף מלווה</th>
+<th data-sort="text">טווח ריבית</th>
+<th data-sort="text">המלצה</th>
 </tr>
 </thead>
 <tbody>
 <tr class="wpc-loans-nonbank-h7k2-rate-best">
-<td class="edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-lender-cell edit-hoverable"><strong class="edit-hoverable">בנק (לזכאים)</strong> <small>אופציה מועדפת</small></div>
+<td>
+<div class="wpc-loans-nonbank-h7k2-lender-cell"><strong>בנק (לזכאים)</strong> <small>אופציה מועדפת</small></div>
 </td>
-<td class="edit-hoverable">פריים + 0.5%-3%</td>
-<td class="edit-hoverable">✅ הזול ביותר</td>
+<td>פריים + 0.5%-3%</td>
+<td>✅ הזול ביותר</td>
 </tr>
 <tr class="wpc-loans-nonbank-h7k2-rate-recommended">
-<td class="edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-lender-cell edit-hoverable"><strong class="edit-hoverable">חברות ביטוח/פנסיה</strong> <small>כלל, הפניקס, הראל</small></div>
+<td>
+<div class="wpc-loans-nonbank-h7k2-lender-cell"><strong>חברות ביטוח/פנסיה</strong> <small>כלל, הפניקס, הראל</small></div>
 </td>
-<td class="edit-hoverable">פריים + 1%-4%</td>
-<td class="edit-hoverable">✅ מומלץ מאוד</td>
+<td>פריים + 1%-4%</td>
+<td>✅ מומלץ מאוד</td>
 </tr>
 <tr>
-<td class="edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-lender-cell edit-hoverable"><strong class="edit-hoverable">חברות אשראי</strong> <small>כאל, מקס, ישראכרט</small></div>
+<td>
+<div class="wpc-loans-nonbank-h7k2-lender-cell"><strong>חברות אשראי</strong> <small>כאל, מקס, ישראכרט</small></div>
 </td>
-<td class="edit-hoverable">פריים + 3%-12%</td>
-<td class="edit-hoverable">⚡ אישור מהיר</td>
+<td>פריים + 3%-12%</td>
+<td>⚡ אישור מהיר</td>
 </tr>
 <tr class="wpc-loans-nonbank-h7k2-rate-recommended">
-<td class="edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-lender-cell edit-hoverable"><strong class="edit-hoverable">גמ"ח / עוגן</strong> <small>לזכאים ומסורבים</small></div>
+<td>
+<div class="wpc-loans-nonbank-h7k2-lender-cell"><strong>גמ"ח / עוגן</strong> <small>לזכאים ומסורבים</small></div>
 </td>
-<td class="edit-hoverable">0% (ללא ריבית)</td>
-<td class="edit-hoverable">✅ לסכומים קטנים</td>
+<td>0% (ללא ריבית)</td>
+<td>✅ לסכומים קטנים</td>
 </tr>
 <tr>
-<td class="edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-lender-cell edit-hoverable"><strong class="edit-hoverable">P2P / מימון פרטי</strong> <small>בלנדר, טריא</small></div>
+<td>
+<div class="wpc-loans-nonbank-h7k2-lender-cell"><strong>P2P / מימון פרטי</strong> <small>בלנדר, טריא</small></div>
 </td>
-<td class="edit-hoverable">פריים + 2%-10%</td>
-<td class="edit-hoverable">👍 גמיש ודיגיטלי</td>
+<td>פריים + 2%-10%</td>
+<td>👍 גמיש ודיגיטלי</td>
 </tr>
 </tbody>
 </table>
 </div>
 <!-- כרטיסיות במובייל - מוסתר בדסקטופ -->
-<div class="wpc-loans-nonbank-h7k2-mobile-cards edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-mobile-card edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-mobile-card-company edit-hoverable">בנק (לזכאים)</div>
-<div class="wpc-loans-nonbank-h7k2-mobile-card-detail edit-hoverable"><span class="wpc-loans-nonbank-h7k2-mobile-card-label edit-hoverable">סוג:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value edit-hoverable">אופציה מועדפת</span></div>
-<div class="wpc-loans-nonbank-h7k2-mobile-card-detail edit-hoverable"><span class="wpc-loans-nonbank-h7k2-mobile-card-label edit-hoverable">טווח ריבית:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value interest edit-hoverable">פריים + 0.5%-3%</span></div>
-<div class="wpc-loans-nonbank-h7k2-mobile-card-detail edit-hoverable"><span class="wpc-loans-nonbank-h7k2-mobile-card-label edit-hoverable">המלצה:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value edit-hoverable">✅ הזול ביותר</span></div>
+<div class="wpc-loans-nonbank-h7k2-mobile-cards">
+<div class="wpc-loans-nonbank-h7k2-mobile-card">
+<div class="wpc-loans-nonbank-h7k2-mobile-card-company">בנק (לזכאים)</div>
+<div class="wpc-loans-nonbank-h7k2-mobile-card-detail"><span class="wpc-loans-nonbank-h7k2-mobile-card-label">סוג:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value">אופציה מועדפת</span></div>
+<div class="wpc-loans-nonbank-h7k2-mobile-card-detail"><span class="wpc-loans-nonbank-h7k2-mobile-card-label">טווח ריבית:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value interest">פריים + 0.5%-3%</span></div>
+<div class="wpc-loans-nonbank-h7k2-mobile-card-detail"><span class="wpc-loans-nonbank-h7k2-mobile-card-label">המלצה:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value">✅ הזול ביותר</span></div>
 </div>
-<div class="wpc-loans-nonbank-h7k2-mobile-card edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-mobile-card-company edit-hoverable">חברות ביטוח/פנסיה</div>
-<div class="wpc-loans-nonbank-h7k2-mobile-card-detail edit-hoverable"><span class="wpc-loans-nonbank-h7k2-mobile-card-label edit-hoverable">סוג:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value edit-hoverable">כלל, הפניקס, הראל</span></div>
-<div class="wpc-loans-nonbank-h7k2-mobile-card-detail edit-hoverable"><span class="wpc-loans-nonbank-h7k2-mobile-card-label edit-hoverable">טווח ריבית:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value interest edit-hoverable">פריים + 1%-4%</span></div>
-<div class="wpc-loans-nonbank-h7k2-mobile-card-detail edit-hoverable"><span class="wpc-loans-nonbank-h7k2-mobile-card-label edit-hoverable">המלצה:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value edit-hoverable">✅ מומלץ מאוד</span></div>
+<div class="wpc-loans-nonbank-h7k2-mobile-card">
+<div class="wpc-loans-nonbank-h7k2-mobile-card-company">חברות ביטוח/פנסיה</div>
+<div class="wpc-loans-nonbank-h7k2-mobile-card-detail"><span class="wpc-loans-nonbank-h7k2-mobile-card-label">סוג:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value">כלל, הפניקס, הראל</span></div>
+<div class="wpc-loans-nonbank-h7k2-mobile-card-detail"><span class="wpc-loans-nonbank-h7k2-mobile-card-label">טווח ריבית:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value interest">פריים + 1%-4%</span></div>
+<div class="wpc-loans-nonbank-h7k2-mobile-card-detail"><span class="wpc-loans-nonbank-h7k2-mobile-card-label">המלצה:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value">✅ מומלץ מאוד</span></div>
 </div>
-<div class="wpc-loans-nonbank-h7k2-mobile-card edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-mobile-card-company edit-hoverable">חברות אשראי</div>
-<div class="wpc-loans-nonbank-h7k2-mobile-card-detail edit-hoverable"><span class="wpc-loans-nonbank-h7k2-mobile-card-label edit-hoverable">סוג:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value edit-hoverable">כאל, מקס, ישראכרט</span></div>
-<div class="wpc-loans-nonbank-h7k2-mobile-card-detail edit-hoverable"><span class="wpc-loans-nonbank-h7k2-mobile-card-label edit-hoverable">טווח ריבית:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value interest edit-hoverable">פריים + 3%-12%</span></div>
-<div class="wpc-loans-nonbank-h7k2-mobile-card-detail edit-hoverable"><span class="wpc-loans-nonbank-h7k2-mobile-card-label edit-hoverable">המלצה:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value edit-hoverable">⚡ אישור מהיר</span></div>
+<div class="wpc-loans-nonbank-h7k2-mobile-card">
+<div class="wpc-loans-nonbank-h7k2-mobile-card-company">חברות אשראי</div>
+<div class="wpc-loans-nonbank-h7k2-mobile-card-detail"><span class="wpc-loans-nonbank-h7k2-mobile-card-label">סוג:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value">כאל, מקס, ישראכרט</span></div>
+<div class="wpc-loans-nonbank-h7k2-mobile-card-detail"><span class="wpc-loans-nonbank-h7k2-mobile-card-label">טווח ריבית:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value interest">פריים + 3%-12%</span></div>
+<div class="wpc-loans-nonbank-h7k2-mobile-card-detail"><span class="wpc-loans-nonbank-h7k2-mobile-card-label">המלצה:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value">⚡ אישור מהיר</span></div>
 </div>
-<div class="wpc-loans-nonbank-h7k2-mobile-card edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-mobile-card-company edit-hoverable">גמ"ח / עוגן</div>
-<div class="wpc-loans-nonbank-h7k2-mobile-card-detail edit-hoverable"><span class="wpc-loans-nonbank-h7k2-mobile-card-label edit-hoverable">סוג:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value edit-hoverable">לזכאים ומסורבים</span></div>
-<div class="wpc-loans-nonbank-h7k2-mobile-card-detail edit-hoverable"><span class="wpc-loans-nonbank-h7k2-mobile-card-label edit-hoverable">טווח ריבית:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value interest edit-hoverable">0% (ללא ריבית)</span></div>
-<div class="wpc-loans-nonbank-h7k2-mobile-card-detail edit-hoverable"><span class="wpc-loans-nonbank-h7k2-mobile-card-label edit-hoverable">המלצה:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value edit-hoverable">✅ לסכומים קטנים</span></div>
+<div class="wpc-loans-nonbank-h7k2-mobile-card">
+<div class="wpc-loans-nonbank-h7k2-mobile-card-company">גמ"ח / עוגן</div>
+<div class="wpc-loans-nonbank-h7k2-mobile-card-detail"><span class="wpc-loans-nonbank-h7k2-mobile-card-label">סוג:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value">לזכאים ומסורבים</span></div>
+<div class="wpc-loans-nonbank-h7k2-mobile-card-detail"><span class="wpc-loans-nonbank-h7k2-mobile-card-label">טווח ריבית:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value interest">0% (ללא ריבית)</span></div>
+<div class="wpc-loans-nonbank-h7k2-mobile-card-detail"><span class="wpc-loans-nonbank-h7k2-mobile-card-label">המלצה:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value">✅ לסכומים קטנים</span></div>
 </div>
-<div class="wpc-loans-nonbank-h7k2-mobile-card edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-mobile-card-company edit-hoverable">P2P / מימון פרטי</div>
-<div class="wpc-loans-nonbank-h7k2-mobile-card-detail edit-hoverable"><span class="wpc-loans-nonbank-h7k2-mobile-card-label edit-hoverable">סוג:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value edit-hoverable">בלנדר, טריא</span></div>
-<div class="wpc-loans-nonbank-h7k2-mobile-card-detail edit-hoverable"><span class="wpc-loans-nonbank-h7k2-mobile-card-label edit-hoverable">טווח ריבית:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value interest edit-hoverable">פריים + 2%-10%</span></div>
-<div class="wpc-loans-nonbank-h7k2-mobile-card-detail edit-hoverable"><span class="wpc-loans-nonbank-h7k2-mobile-card-label edit-hoverable">המלצה:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value edit-hoverable">👍 גמיש ודיגיטלי</span></div>
+<div class="wpc-loans-nonbank-h7k2-mobile-card">
+<div class="wpc-loans-nonbank-h7k2-mobile-card-company">P2P / מימון פרטי</div>
+<div class="wpc-loans-nonbank-h7k2-mobile-card-detail"><span class="wpc-loans-nonbank-h7k2-mobile-card-label">סוג:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value">בלנדר, טריא</span></div>
+<div class="wpc-loans-nonbank-h7k2-mobile-card-detail"><span class="wpc-loans-nonbank-h7k2-mobile-card-label">טווח ריבית:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value interest">פריים + 2%-10%</span></div>
+<div class="wpc-loans-nonbank-h7k2-mobile-card-detail"><span class="wpc-loans-nonbank-h7k2-mobile-card-label">המלצה:</span> <span class="wpc-loans-nonbank-h7k2-mobile-card-value">👍 גמיש ודיגיטלי</span></div>
 </div>
 </div>
-<div class="wpc-loans-nonbank-h7k2-savings-calculator edit-hoverable">
-<h3 class="edit-hoverable">💰 טיפ לחיסכון</h3>
-<div class="wpc-loans-nonbank-h7k2-savings-example edit-hoverable">
-<p class="edit-hoverable"><strong class="edit-hoverable">דוגמה לחיסכון:</strong></p>
-<p class="edit-hoverable">השוו תמיד בין 3 הצעות לפחות!</p>
-<div class="wpc-loans-nonbank-h7k2-savings-breakdown edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-savings-item edit-hoverable"><span class="wpc-loans-nonbank-h7k2-savings-label edit-hoverable">הלוואה:</span> <span class="wpc-loans-nonbank-h7k2-savings-value edit-hoverable">100,000 ₪</span></div>
-<div class="wpc-loans-nonbank-h7k2-savings-item edit-hoverable"><span class="wpc-loans-nonbank-h7k2-savings-label edit-hoverable">תקופה:</span> <span class="wpc-loans-nonbank-h7k2-savings-value edit-hoverable">5 שנים</span></div>
-<div class="wpc-loans-nonbank-h7k2-savings-item edit-hoverable"><span class="wpc-loans-nonbank-h7k2-savings-label edit-hoverable">הבדל 2% בריבית:</span> <span class="wpc-loans-nonbank-h7k2-savings-value highlight edit-hoverable">חיסכון של 5,200 ₪!</span></div>
+<div class="wpc-loans-nonbank-h7k2-savings-calculator">
+<h3>💰 טיפ לחיסכון</h3>
+<div class="wpc-loans-nonbank-h7k2-savings-example">
+<p><strong>דוגמה לחיסכון:</strong></p>
+<p>השוו תמיד בין 3 הצעות לפחות!</p>
+<div class="wpc-loans-nonbank-h7k2-savings-breakdown">
+<div class="wpc-loans-nonbank-h7k2-savings-item"><span class="wpc-loans-nonbank-h7k2-savings-label">הלוואה:</span> <span class="wpc-loans-nonbank-h7k2-savings-value">100,000 ₪</span></div>
+<div class="wpc-loans-nonbank-h7k2-savings-item"><span class="wpc-loans-nonbank-h7k2-savings-label">תקופה:</span> <span class="wpc-loans-nonbank-h7k2-savings-value">5 שנים</span></div>
+<div class="wpc-loans-nonbank-h7k2-savings-item"><span class="wpc-loans-nonbank-h7k2-savings-label">הבדל 2% בריבית:</span> <span class="wpc-loans-nonbank-h7k2-savings-value highlight">חיסכון של 5,200 ₪!</span></div>
 </div>
 </div>
 </div>
@@ -3519,50 +3520,50 @@
 </section>
 </div>
 <!-- אזור 17: הלוואות לשכירים ועצמאים - ✅ עוצב והושלם -->
-<section id="employees-vs-freelancers" class="wpc-loans-nonbank-h7k2-employees-section edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-container edit-hoverable">
-<h2 class="wpc-loans-nonbank-h7k2-section-title edit-hoverable">התנאים המתאימים&nbsp; לשכירים ועצמאים</h2>
-<div class="wpc-loans-nonbank-h7k2-section-content edit-hoverable">
-<p class="edit-hoverable">שכירים ועצמאים מהווים את רוב נוטלי ההלוואות החוץ בנקאיות, עם התאמות ספציפיות לכל קבוצה:</p>
+<section id="employees-vs-freelancers" class="wpc-loans-nonbank-h7k2-employees-section">
+<div class="wpc-loans-nonbank-h7k2-container">
+<h2 class="wpc-loans-nonbank-h7k2-section-title">התנאים המתאימים לקבלת הלוואות לשכירים ועצמאים</h2>
+<div class="wpc-loans-nonbank-h7k2-section-content">
+<p>שכירים ועצמאים מהווים את רוב נוטלי ההלוואות החוץ בנקאיות, עם התאמות ספציפיות לכל קבוצה:</p>
 </div>
-<div class="wpc-loans-nonbank-h7k2-employment-grid edit-hoverable"><!-- יתרונות השכירים -->
-<div class="wpc-loans-nonbank-h7k2-employment-card employees edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-employment-header edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-employment-icon edit-hoverable">👔</div>
-<h3 class="edit-hoverable">יתרונות השכירים</h3>
+<div class="wpc-loans-nonbank-h7k2-employment-grid"><!-- יתרונות השכירים -->
+<div class="wpc-loans-nonbank-h7k2-employment-card employees">
+<div class="wpc-loans-nonbank-h7k2-employment-header">
+<div class="wpc-loans-nonbank-h7k2-employment-icon">👔</div>
+<h3>יתרונות השכירים</h3>
 </div>
-<div class="wpc-loans-nonbank-h7k2-employment-content edit-hoverable">
-<ul class="edit-hoverable">
-<li class="edit-hoverable"><strong class="edit-hoverable">שכר קבוע ומתועד</strong> - מקל משמעותית על אישור ההלוואה</li>
-<li class="edit-hoverable"><strong class="edit-hoverable">תלושי שכר כהוכחת הכנסה</strong> - תהליך פשוט ומהיר</li>
-<li class="edit-hoverable"><strong class="edit-hoverable">יציבות תעסוקתית</strong> - מוריד את הסיכון עבור המלווה</li>
-<li class="edit-hoverable"><strong class="edit-hoverable">הוראות קבע נוחות</strong> - החזר אוטומטי ללא דאגות</li>
+<div class="wpc-loans-nonbank-h7k2-employment-content">
+<ul>
+<li><strong>שכר קבוע ומתועד</strong> - מקל משמעותית על אישור ההלוואה</li>
+<li><strong>תלושי שכר כהוכחת הכנסה</strong> - תהליך פשוט ומהיר</li>
+<li><strong>יציבות תעסוקתית</strong> - מוריד את הסיכון עבור המלווה</li>
+<li><strong>הוראות קבע נוחות</strong> - החזר אוטומטי ללא דאגות</li>
 </ul>
 </div>
 </div>
 <!-- אפשרויות לעצמאים -->
-<div class="wpc-loans-nonbank-h7k2-employment-card freelancers edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-employment-header edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-employment-icon edit-hoverable">💼</div>
-<h3 class="edit-hoverable">אפשרויות מיוחדות לעצמאים</h3>
+<div class="wpc-loans-nonbank-h7k2-employment-card freelancers">
+<div class="wpc-loans-nonbank-h7k2-employment-header">
+<div class="wpc-loans-nonbank-h7k2-employment-icon">💼</div>
+<h3>אפשרויות מיוחדות לעצמאים</h3>
 </div>
-<div class="wpc-loans-nonbank-h7k2-employment-content edit-hoverable">
-<ul class="edit-hoverable">
-<li class="edit-hoverable"><strong class="edit-hoverable">הלוואות על בסיס מחזור עסקי</strong> - ללא צורך בתלושי שכר</li>
-<li class="edit-hoverable"><strong class="edit-hoverable">גמישות בהוכחת הכנסה</strong> - דוחות כספיים או חשבונות בנק</li>
-<li class="edit-hoverable"><strong class="edit-hoverable">הלוואות כנגד נכסים עסקיים</strong> - ציוד, מלאי או נדל"ן עסקי</li>
-<li class="edit-hoverable"><strong class="edit-hoverable">תקופות החזר מותאמות</strong> - לעונתיות ולתזרים העסקי</li>
+<div class="wpc-loans-nonbank-h7k2-employment-content">
+<ul>
+<li><strong>הלוואות על בסיס מחזור עסקי</strong> - ללא צורך בתלושי שכר</li>
+<li><strong>גמישות בהוכחת הכנסה</strong> - דוחות כספיים או חשבונות בנק</li>
+<li><strong>הלוואות כנגד נכסים עסקיים</strong> - ציוד, מלאי או נדל"ן עסקי</li>
+<li><strong>תקופות החזר מותאמות</strong> - לעונתיות ולתזרים העסקי</li>
 </ul>
 </div>
 </div>
 </div>
-<div class="wpc-loans-nonbank-h7k2-strategy-tip edit-hoverable">
-<h3 class="edit-hoverable">💡 אסטרטגיית מימון חכמה</h3>
-<p class="edit-hoverable">מומלץ לגוון מקורות מימון - מסגרת בנקאית לצרכים גדולים וארוכי טווח, הלוואות חוץ בנקאיות לצרכים מיידיים וספציפיים.</p>
+<div class="wpc-loans-nonbank-h7k2-strategy-tip">
+<h3>💡 אסטרטגיית מימון חכמה</h3>
+<p>מומלץ לגוון מקורות מימון - מסגרת בנקאית לצרכים גדולים וארוכי טווח, הלוואות חוץ בנקאיות לצרכים מיידיים וספציפיים.</p>
 </div>
 </div>
 </section>
-<style>
+<p><style>
     /* Steps Section Styles - מבוסס על wpc-calc-tabs-demo */
     
     .wpc-loans-nonbank-h7k2-steps-section {
@@ -4187,194 +4188,194 @@
         font-size: 0.9rem !important;
       }
     }
-    </style>
-<h2 class="wpc-loans-nonbank-h7k2-section-title edit-hoverable">אשראי חוץ בנקאי</h2>
-<div class="wpc-loans-nonbank-h7k2-section-content edit-hoverable">
-<p class="diff-element-changed edit-hoverable">אשראי חוץ בנקאי מציע פתרונות מימון גמישים עם ריבית החל מ-2.75% ועד סכומים של מיליון שקל. גלו איך לקבל מימון מהיר מחוץ לבנק בתנאים מעולים ללא בירוקרטיה מיותרת.</p>
-<p class="edit-hoverable">אשראי חוץ בנקאי הוא הלוואה מגוף פיננסי שאינו בנק – חברות ביטוח, קרנות פנסיה, חברות אשראי מוכרות וגופים מוסדיים אמינים. בשנים האחרונות חלו שינויים משמעותיים בשוק ההלוואות בישראל, והיום יש יותר גופים שמציעים תנאים נוחים וריבית אטרקטיבית. הגופים החוץ בנקאיים פועלים בהיתר מהמדינה ונתונים לפיקוח – אלו לא חברות בשוק האפור. בין הגופים הפעילים תמצאו חברות כרטיסי אשראי, מוסדות פיננסיים, גמ"חים ועמותות למימון הפועלות כחלק מהמערכת הפיננסית המוכרת.</p>
-<div class="wpc-loans-nonbank-h7k2-section-content edit-hoverable"><!-- אזור 18: הלוואות חוץ בנקאיות לשיפוץ דירה - ✅ עוצב והושלם -->
-<section class="wpc-loans-nonbank-h7k2-section edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-container edit-hoverable">
-<h2 class="wpc-loans-nonbank-h7k2-section-title edit-hoverable">הלוואות חוץ בנקאיות לשיפוץ דירה</h2>
-<div class="wpc-loans-nonbank-h7k2-section-content edit-hoverable">
-<p class="edit-hoverable">שיפוץ הבית הוא אחד הצרכים הנפוצים להלוואה ויש לו מספר יתרונות:</p>
-<ul class="edit-hoverable">
-<li class="edit-hoverable"><strong class="edit-hoverable">אישור מהיר</strong> - לא מחכים לתהליכים בנקאיים ארוכים</li>
-<li class="edit-hoverable"><strong class="edit-hoverable">גמישות בסכומים</strong> - מ-20,000 ₪ ועד 300,000 ₪</li>
-<li class="edit-hoverable"><strong class="edit-hoverable">ללא פיקוח בנקאי</strong> - על השימוש בכספים</li>
-<li class="edit-hoverable"><strong class="edit-hoverable">תנאים טובים</strong> - במיוחד אם יש בטחונות</li>
+    </style></p>
+<h2 class="wpc-loans-nonbank-h7k2-section-title">אשראי חוץ בנקאי</h2>
+<div class="wpc-loans-nonbank-h7k2-section-content">
+<p>אשראי חוץ בנקאי מציע פתרונות מימון גמישים עם ריבית החל מ-2.75% ועד סכומים של מיליון שקל. גלו איך לקבל מימון מהיר מחוץ לבנק בתנאים מעולים ללא בירוקרטיה מיותרת.</p>
+<p>אשראי חוץ בנקאי הוא הלוואה מגוף פיננסי שאינו בנק – חברות ביטוח, קרנות פנסיה, חברות אשראי מוכרות וגופים מוסדיים אמינים. בשנים האחרונות חלו שינויים משמעותיים בשוק ההלוואות בישראל, והיום יש יותר גופים שמציעים תנאים נוחים וריבית אטרקטיבית. הגופים החוץ בנקאיים פועלים בהיתר מהמדינה ונתונים לפיקוח – אלו לא חברות בשוק האפור. בין הגופים הפעילים תמצאו חברות כרטיסי אשראי, מוסדות פיננסיים, גמ"חים ועמותות למימון הפועלות כחלק מהמערכת הפיננסית המוכרת.</p>
+<div class="wpc-loans-nonbank-h7k2-section-content"><!-- אזור 18: הלוואות חוץ בנקאיות לשיפוץ דירה - ✅ עוצב והושלם -->
+<section class="wpc-loans-nonbank-h7k2-section">
+<div class="wpc-loans-nonbank-h7k2-container">
+<h2 class="wpc-loans-nonbank-h7k2-section-title">הלוואות חוץ בנקאיות לשיפוץ דירה</h2>
+<div class="wpc-loans-nonbank-h7k2-section-content">
+<p>שיפוץ הבית הוא אחד הצרכים הנפוצים להלוואה ויש לו מספר יתרונות:</p>
+<ul>
+<li><strong>אישור מהיר</strong> - לא מחכים לתהליכים בנקאיים ארוכים</li>
+<li><strong>גמישות בסכומים</strong> - מ-20,000 ₪ ועד 300,000 ₪</li>
+<li><strong>ללא פיקוח בנקאי</strong> - על השימוש בכספים</li>
+<li><strong>תנאים טובים</strong> - במיוחד אם יש בטחונות</li>
 </ul>
-<p class="edit-hoverable">הלוואות שיפוץ יכולות להיות משתלמות אם השיפוץ מעלה את שווי הנכס יותר מעלות הריבית.</p>
+<p>הלוואות שיפוץ יכולות להיות משתלמות אם השיפוץ מעלה את שווי הנכס יותר מעלות הריבית.</p>
 </div>
 </div>
 </section>
 <!-- אזור 19: תמונת באנר שנייה - ✅ עוצב והושלם -->
-<section class="wpc-loans-nonbank-h7k2-image-section edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-container edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-image-wrapper edit-hoverable"><img class="wpc-loans-nonbank-h7k2-responsive-image" src="https://loan-israel.co.il/wp-content/uploads/2022/08/הלוואה-חוץ-בנקאית1-1.webp" alt="שלבי נטילת הלוואה חוץ בנקאית"></div>
+<section class="wpc-loans-nonbank-h7k2-image-section">
+<div class="wpc-loans-nonbank-h7k2-container">
+<div class="wpc-loans-nonbank-h7k2-image-wrapper"><img class="wpc-loans-nonbank-h7k2-responsive-image" src="https://loan-israel.co.il/wp-content/uploads/2022/08/הלוואה-חוץ-בנקאית1-1.webp" alt="שלבי נטילת הלוואה חוץ בנקאית" /></div>
 </div>
 </section>
 <!-- אזור 20: איך להגדיל את הסיכויים לאישור - ✅ עוצב והושלם -->
-<section id="approval-tips" class="wpc-loans-nonbank-h7k2-tips-section edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-container edit-hoverable">
-<h2 class="wpc-loans-nonbank-h7k2-section-title diff-element-new edit-hoverable">איך לקבל אישור להלוואה גם עם BDI נמוך</h2>
-<p class="wpc-loans-nonbank-h7k2-section-content edit-hoverable">כמה טיפים מעשיים להגדלת הסיכויים לקבלת הלוואה:</p>
-<div class="wpc-loans-nonbank-h7k2-tips-grid edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-tip-item edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-tip-number edit-hoverable">1</div>
-<div class="wpc-loans-nonbank-h7k2-tip-content edit-hoverable">
-<h3 class="edit-hoverable">הכינו מראש את המסמכים</h3>
-<p class="edit-hoverable">תלושי שכר אחרונים, דפי בנק, ת.ז., הוכחת הכנסה נוספת</p>
+<section id="approval-tips" class="wpc-loans-nonbank-h7k2-tips-section">
+<div class="wpc-loans-nonbank-h7k2-container">
+<h2 class="wpc-loans-nonbank-h7k2-section-title">איך לקבל אישור להלוואה חוץ בנקאית גם עם BDI נמוך</h2>
+<p class="wpc-loans-nonbank-h7k2-section-content">כמה טיפים מעשיים להגדלת הסיכויים לקבלת הלוואה:</p>
+<div class="wpc-loans-nonbank-h7k2-tips-grid">
+<div class="wpc-loans-nonbank-h7k2-tip-item">
+<div class="wpc-loans-nonbank-h7k2-tip-number">1</div>
+<div class="wpc-loans-nonbank-h7k2-tip-content">
+<h3>הכינו מראש את המסמכים</h3>
+<p>תלושי שכר אחרונים, דפי בנק, ת.ז., הוכחת הכנסה נוספת</p>
 </div>
 </div>
-<div class="wpc-loans-nonbank-h7k2-tip-item edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-tip-number edit-hoverable">2</div>
-<div class="wpc-loans-nonbank-h7k2-tip-content edit-hoverable">
-<h3 class="edit-hoverable">בדקו את ה-BDI שלכם</h3>
-<p class="edit-hoverable">דעו מה המלווה רואה ותכינו הסבר להיסטוריית אשראי בעייתית</p>
+<div class="wpc-loans-nonbank-h7k2-tip-item">
+<div class="wpc-loans-nonbank-h7k2-tip-number">2</div>
+<div class="wpc-loans-nonbank-h7k2-tip-content">
+<h3>בדקו את ה-BDI שלכם</h3>
+<p>דעו מה המלווה רואה ותכינו הסבר להיסטוריית אשראי בעייתית</p>
 </div>
 </div>
-<div class="wpc-loans-nonbank-h7k2-tip-item edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-tip-number edit-hoverable">3</div>
-<div class="wpc-loans-nonbank-h7k2-tip-content edit-hoverable">
-<h3 class="edit-hoverable">הציגו הכנסות נוספות</h3>
-<p class="edit-hoverable">משכירות, עבודה נוספת, קצבאות - כל הכנסה קבועה עוזרת</p>
+<div class="wpc-loans-nonbank-h7k2-tip-item">
+<div class="wpc-loans-nonbank-h7k2-tip-number">3</div>
+<div class="wpc-loans-nonbank-h7k2-tip-content">
+<h3>הציגו הכנסות נוספות</h3>
+<p>משכירות, עבודה נוספת, קצבאות - כל הכנסה קבועה עוזרת</p>
 </div>
 </div>
-<div class="wpc-loans-nonbank-h7k2-tip-item edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-tip-number edit-hoverable">4</div>
-<div class="wpc-loans-nonbank-h7k2-tip-content edit-hoverable">
-<h3 class="edit-hoverable">הציעו ביטחונות</h3>
-<p class="edit-hoverable">ערב, שעבוד נכס או ביטחון נוסף - מוריד ריבית ומעלה סיכויים</p>
+<div class="wpc-loans-nonbank-h7k2-tip-item">
+<div class="wpc-loans-nonbank-h7k2-tip-number">4</div>
+<div class="wpc-loans-nonbank-h7k2-tip-content">
+<h3>הציעו ביטחונות</h3>
+<p>ערב, שעבוד נכס או ביטחון נוסף - מוריד ריבית ומעלה סיכויים</p>
 </div>
 </div>
-<div class="wpc-loans-nonbank-h7k2-tip-item edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-tip-number edit-hoverable">5</div>
-<div class="wpc-loans-nonbank-h7k2-tip-content edit-hoverable">
-<h3 class="edit-hoverable">התחילו בסכום קטן</h3>
-<p class="edit-hoverable">בנו אמינות עם החברה ובהמשך תוכלו לקבל סכומים גבוהים יותר</p>
+<div class="wpc-loans-nonbank-h7k2-tip-item">
+<div class="wpc-loans-nonbank-h7k2-tip-number">5</div>
+<div class="wpc-loans-nonbank-h7k2-tip-content">
+<h3>התחילו בסכום קטן</h3>
+<p>בנו אמינות עם החברה ובהמשך תוכלו לקבל סכומים גבוהים יותר</p>
 </div>
 </div>
 </div>
-<div class="wpc-loans-nonbank-h7k2-tips-highlight edit-hoverable">
-<p class="edit-hoverable"><strong class="diff-element-new edit-hoverable">רוב הלקוחות שלנו מקבלים אישור להלוואה בתנאים מתאימים</strong> - אנחנו כאן כדי לעזור לכם למצוא את הפתרון הטוב ביותר!</p>
+<div class="wpc-loans-nonbank-h7k2-tips-highlight">
+<p><strong>רוב הלקוחות שלנו מקבלים אישור להלוואה בתנאים מתאימים</strong> - אנחנו כאן כדי לעזור לכם למצוא את הפתרון הטוב ביותר!</p>
 </div>
 </div>
 </section>
 <!-- אזור 21: FAQ אינטראקטיבי - ✅ עוצב והושלם -->
-<section id="faq" class="wpc-loans-nonbank-h7k2-faq-section edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-container edit-hoverable">
-<h2 class="wpc-loans-nonbank-h7k2-section-title edit-hoverable">שאלות נפוצות&nbsp;</h2>
-<p class="wpc-loans-nonbank-h7k2-section-content edit-hoverable">כל התשובות לשאלות שרצית לשאול</p>
-<div class="wpc-loans-nonbank-h7k2-faq-container edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-faq-item edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-faq-question edit-hoverable" tabindex="0" role="button" aria-expanded="false">
-<h3 class="edit-hoverable">האם הלוואה חוץ בנקאית משפיעה על האובליגו בבנק?</h3>
-<span class="wpc-loans-nonbank-h7k2-faq-icon edit-hoverable">+</span></div>
-<div class="wpc-loans-nonbank-h7k2-faq-answer edit-hoverable">
-<div class="edit-hoverable">
-<p class="diff-element-new edit-hoverable">לא. זה היתרון שהכי מפתיע אנשים - ההלוואה לא "נספרת" במסגרת שלך בבנק.</p>
+<section id="faq" class="wpc-loans-nonbank-h7k2-faq-section">
+<div class="wpc-loans-nonbank-h7k2-container">
+<h2 class="wpc-loans-nonbank-h7k2-section-title">שאלות נפוצות על הלוואות חוץ בנקאיות</h2>
+<p class="wpc-loans-nonbank-h7k2-section-content">כל התשובות לשאלות שרצית לשאול</p>
+<div class="wpc-loans-nonbank-h7k2-faq-container">
+<div class="wpc-loans-nonbank-h7k2-faq-item">
+<div class="wpc-loans-nonbank-h7k2-faq-question" tabindex="0" role="button" aria-expanded="false">
+<h3>האם הלוואה חוץ בנקאית משפיעה על האובליגו בבנק?</h3>
+<span class="wpc-loans-nonbank-h7k2-faq-icon">+</span></div>
+<div class="wpc-loans-nonbank-h7k2-faq-answer">
+<div>
+<p>לא. זה היתרון שהכי מפתיע אנשים - ההלוואה לא "נספרת" במסגרת שלך בבנק.</p>
 
-<p class="diff-element-new edit-hoverable">מניסיוננו, זה מועיל במיוחד לאנשים שמתכננים לקחת משכנתא בעתיד הקרוב. הבנק יבדוק את יכולת ההחזר שלך, כן, אבל ההלוואה החוץ בנקאית לא תופיע כ"חוב בנקאי" שמקטין את האובליגו.</p>
+<p>מניסיוננו, זה מועיל במיוחד לאנשים שמתכננים לקחת משכנתא בעתיד הקרוב. הבנק יבדוק את יכולת ההחזר שלך, כן, אבל ההלוואה החוץ בנקאית לא תופיע כ"חוב בנקאי" שמקטין את האובליגו.</p>
 
-<p class="edit-hoverable">זה נכון בעיקר עם גופים כמו <strong class="diff-element-new edit-hoverable">מקס, כאל וישראכרט</strong> - הם לא בנקים, אז ההלוואה מהם לא משפיעה על מסגרת האשראי הבנקאית שלך.</p>
+<p>זה נכון בעיקר עם גופים כמו <strong>מקס, כאל וישראכרט</strong> - הם לא בנקים, אז ההלוואה מהם לא משפיעה על מסגרת האשראי הבנקאית שלך.</p>
 
-<p class="diff-element-new edit-hoverable">חשוב: הבנק עדיין <em class="edit-hoverable">רואה</em> את התשלום החודשי כשהוא בודק הכנסה מול הוצאות - אז זה כן משפיע על יכולת ההחזר הכוללת שלך, אבל לא על האובליגו הפורמלי.</p>
+<p>חשוב: הבנק עדיין <em>רואה</em> את התשלום החודשי כשהוא בודק הכנסה מול הוצאות - אז זה כן משפיע על יכולת ההחזר הכוללת שלך, אבל לא על האובליגו הפורמלי.</p>
 </div>
 </div>
 </div>
-<div class="wpc-loans-nonbank-h7k2-faq-item edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-faq-question edit-hoverable" tabindex="0" role="button" aria-expanded="false">
-<h3 class="edit-hoverable">כמה זמן לוקח לקבל אישור והעברת כספים?</h3>
-<span class="wpc-loans-nonbank-h7k2-faq-icon edit-hoverable">+</span></div>
-<div class="wpc-loans-nonbank-h7k2-faq-answer edit-hoverable">
-<div class="edit-hoverable">
-<p class="edit-hoverable">אישור ראשוני - תוך 24-48 שעות. העברת כספים - תוך 3-5 ימי עסקים מרגע אישור סופי. במקרים דחופים ניתן לזרז את התהליך.</p>
+<div class="wpc-loans-nonbank-h7k2-faq-item">
+<div class="wpc-loans-nonbank-h7k2-faq-question" tabindex="0" role="button" aria-expanded="false">
+<h3>כמה זמן לוקח לקבל אישור והעברת כספים?</h3>
+<span class="wpc-loans-nonbank-h7k2-faq-icon">+</span></div>
+<div class="wpc-loans-nonbank-h7k2-faq-answer">
+<div>
+<p>אישור ראשוני - תוך 24-48 שעות. העברת כספים - תוך 3-5 ימי עסקים מרגע אישור סופי. במקרים דחופים ניתן לזרז את התהליך.</p>
 </div>
 </div>
 </div>
-<div class="wpc-loans-nonbank-h7k2-faq-item edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-faq-question edit-hoverable" tabindex="0" role="button" aria-expanded="false">
-<h3 class="edit-hoverable">איזה מסמכים נדרשים?</h3>
-<span class="wpc-loans-nonbank-h7k2-faq-icon edit-hoverable">+</span></div>
-<div class="wpc-loans-nonbank-h7k2-faq-answer edit-hoverable">
-<div class="edit-hoverable">
-<p class="edit-hoverable">תעודת זהות, 3 תלושי שכר אחרונים, תדפיס בנק של 3 חודשים אחרונים, ולעיתים אישור מעסיק. לעצמאים - דוחות כספיים.</p>
+<div class="wpc-loans-nonbank-h7k2-faq-item">
+<div class="wpc-loans-nonbank-h7k2-faq-question" tabindex="0" role="button" aria-expanded="false">
+<h3>איזה מסמכים נדרשים?</h3>
+<span class="wpc-loans-nonbank-h7k2-faq-icon">+</span></div>
+<div class="wpc-loans-nonbank-h7k2-faq-answer">
+<div>
+<p>תעודת זהות, 3 תלושי שכר אחרונים, תדפיס בנק של 3 חודשים אחרונים, ולעיתים אישור מעסיק. לעצמאים - דוחות כספיים.</p>
 </div>
 </div>
 </div>
-<div class="wpc-loans-nonbank-h7k2-faq-item edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-faq-question edit-hoverable" tabindex="0" role="button" aria-expanded="false">
-<h3 class="edit-hoverable">האם ניתן לקבל הלוואה עם BDI שלילי?</h3>
-<span class="wpc-loans-nonbank-h7k2-faq-icon edit-hoverable">+</span></div>
-<div class="wpc-loans-nonbank-h7k2-faq-answer edit-hoverable">
-<div class="edit-hoverable">
-<p class="diff-element-new edit-hoverable">כן, אבל בואו נהיה כנים - זה תלוי כמה שלילי.</p>
+<div class="wpc-loans-nonbank-h7k2-faq-item">
+<div class="wpc-loans-nonbank-h7k2-faq-question" tabindex="0" role="button" aria-expanded="false">
+<h3>האם ניתן לקבל הלוואה עם BDI שלילי?</h3>
+<span class="wpc-loans-nonbank-h7k2-faq-icon">+</span></div>
+<div class="wpc-loans-nonbank-h7k2-faq-answer">
+<div>
+<p>כן, אבל בואו נהיה כנים - זה תלוי כמה שלילי.</p>
 
-<p class="diff-element-new edit-hoverable">מניסיוננו, אם ה-BDI שלך בטווח 550-650, יש די הרבה גופים שיסתכלו על הבקשה. אם זה מתחת ל-500, האופציות מצומצמות יותר, אבל עדיין לא אפס.</p>
+<p>מניסיוננו, אם ה-BDI שלך בטווח 550-650, יש די הרבה גופים שיסתכלו על הבקשה. אם זה מתחת ל-500, האופציות מצומצמות יותר, אבל עדיין לא אפס.</p>
 
-<p class="edit-hoverable">מה עוזר? <strong class="diff-element-changed edit-hoverable">הכנסה קבועה ותזרים חיובי</strong>. אם יש לך 3 תלושים אחרונים תקינים וחשבון הבנק לא "רוקד" באדום כל חודש - זה מראה שאתה יכול להחזיר. זה מה שמעניין את הגופים החוץ בנקאיים.</p>
+<p>מה עוזר? <strong>הכנסה קבועה ותזרים חיובי</strong>. אם יש לך 3 תלושים אחרונים תקינים וחשבון הבנק לא "רוקד" באדום כל חודש - זה מראה שאתה יכול להחזיר. זה מה שמעניין את הגופים החוץ בנקאיים.</p>
 
-<p class="diff-element-new edit-hoverable">כן, הריבית תהיה גבוהה יותר - בטווח של 11.75%-17.75% במקום 5.75%-9.75%. זה המחיר של הגמישות. אבל לפעמים זו הדרך היחידה לצאת מהמעגל, ואחרי שנה-שנתיים של תשלומים סדירים - ה-BDI עולה, ואז אפשר למחזר בתנאים טובים יותר.</p>
+<p>כן, הריבית תהיה גבוהה יותר - בטווח של 11.75%-17.75% במקום 5.75%-9.75%. זה המחיר של הגמישות. אבל לפעמים זו הדרך היחידה לצאת מהמעגל, ואחרי שנה-שנתיים של תשלומים סדירים - ה-BDI עולה, ואז אפשר למחזר בתנאים טובים יותר.</p>
 
-<p class="edit-hoverable"><strong class="diff-element-new edit-hoverable">זה לא "עונש" על העבר</strong> - BDI שלילי זה לא תו קלון. זה קרה להמון אנשים בקורונה, במלחמה, בשינוי מקצוע. הגופים האלה מבינים את זה, והם מחפשים לראות שאתה <em class="edit-hoverable">היום</em> במצב טוב יותר.</p>
+<p><strong>זה לא "עונש" על העבר</strong> - BDI שלילי זה לא תו קלון. זה קרה להמון אנשים בקורונה, במלחמה, בשינוי מקצוע. הגופים האלה מבינים את זה, והם מחפשים לראות שאתה <em>היום</em> במצב טוב יותר.</p>
 </div>
 </div>
 </div>
-<div class="wpc-loans-nonbank-h7k2-faq-item edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-faq-question edit-hoverable" tabindex="0" role="button" aria-expanded="false">
-<h3 class="edit-hoverable">מה ההבדל בין הלוואה חוץ בנקאית לבנקאית?</h3>
-<span class="wpc-loans-nonbank-h7k2-faq-icon edit-hoverable">+</span></div>
-<div class="wpc-loans-nonbank-h7k2-faq-answer edit-hoverable">
-<div class="edit-hoverable">
-<p class="edit-hoverable">הלוואה בנקאית: ריבית נמוכה יותר, תהליך ארוך, קריטריונים נוקשים. הלוואה חוץ בנקאית: אישור מהיר, קריטריונים גמישים, ריבית גבוהה יותר.</p>
+<div class="wpc-loans-nonbank-h7k2-faq-item">
+<div class="wpc-loans-nonbank-h7k2-faq-question" tabindex="0" role="button" aria-expanded="false">
+<h3>מה ההבדל בין הלוואה חוץ בנקאית לבנקאית?</h3>
+<span class="wpc-loans-nonbank-h7k2-faq-icon">+</span></div>
+<div class="wpc-loans-nonbank-h7k2-faq-answer">
+<div>
+<p>הלוואה בנקאית: ריבית נמוכה יותר, תהליך ארוך, קריטריונים נוקשים. הלוואה חוץ בנקאית: אישור מהיר, קריטריונים גמישים, ריבית גבוהה יותר.</p>
 </div>
 </div>
 </div>
-<div class="wpc-loans-nonbank-h7k2-faq-item edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-faq-question edit-hoverable" tabindex="0" role="button" aria-expanded="false">
-<h3 class="edit-hoverable">איזה סכום מקסימלי ניתן לקבל בהלוואה חוץ בנקאית?</h3>
-<span class="wpc-loans-nonbank-h7k2-faq-icon edit-hoverable">+</span></div>
-<div class="wpc-loans-nonbank-h7k2-faq-answer edit-hoverable">
-<div class="edit-hoverable">
-<p class="edit-hoverable">תלוי בגוף המלווה ובמצבך הפיננסי: חברות אשראי עד 500,000 ₪, חברות ביטוח עד 300,000 ₪, קרנות השקעה עד 2,000,000 ₪. העיקר - לוודא יכולת החזר בטוחה.</p>
+<div class="wpc-loans-nonbank-h7k2-faq-item">
+<div class="wpc-loans-nonbank-h7k2-faq-question" tabindex="0" role="button" aria-expanded="false">
+<h3>איזה סכום מקסימלי ניתן לקבל בהלוואה חוץ בנקאית?</h3>
+<span class="wpc-loans-nonbank-h7k2-faq-icon">+</span></div>
+<div class="wpc-loans-nonbank-h7k2-faq-answer">
+<div>
+<p>תלוי בגוף המלווה ובמצבך הפיננסי: חברות אשראי עד 500,000 ₪, חברות ביטוח עד 300,000 ₪, קרנות השקעה עד 2,000,000 ₪. העיקר - לוודא יכולת החזר בטוחה.</p>
 </div>
 </div>
 </div>
-<div class="wpc-loans-nonbank-h7k2-faq-item edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-faq-question edit-hoverable" tabindex="0" role="button" aria-expanded="false">
-<h3 class="edit-hoverable">האם ניתן לפרוע מוקדם ללא קנסות?</h3>
-<span class="wpc-loans-nonbank-h7k2-faq-icon edit-hoverable">+</span></div>
-<div class="wpc-loans-nonbank-h7k2-faq-answer edit-hoverable">
-<div class="edit-hoverable">
-<p class="edit-hoverable">רוב החברות מאפשרות פירעון מוקדם עם קנס של 1%-3% מהיתרה. חשוב לבדוק את התנאים לפני החתימה.</p>
+<div class="wpc-loans-nonbank-h7k2-faq-item">
+<div class="wpc-loans-nonbank-h7k2-faq-question" tabindex="0" role="button" aria-expanded="false">
+<h3>האם ניתן לפרוע מוקדם ללא קנסות?</h3>
+<span class="wpc-loans-nonbank-h7k2-faq-icon">+</span></div>
+<div class="wpc-loans-nonbank-h7k2-faq-answer">
+<div>
+<p>רוב החברות מאפשרות פירעון מוקדם עם קנס של 1%-3% מהיתרה. חשוב לבדוק את התנאים לפני החתימה.</p>
 </div>
 </div>
 </div>
-<div class="wpc-loans-nonbank-h7k2-faq-item edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-faq-question edit-hoverable" tabindex="0" role="button" aria-expanded="false">
-<h3 class="edit-hoverable">איך בוחרים חברת מימון אמינה?</h3>
-<span class="wpc-loans-nonbank-h7k2-faq-icon edit-hoverable">+</span></div>
-<div class="wpc-loans-nonbank-h7k2-faq-answer edit-hoverable">
-<div class="edit-hoverable">
-<p class="edit-hoverable">בדקו שהחברה פועלת בהיתר משרד האוצר, קראו המלצות ברשת, השוו תנאים מכמה חברות, וודאו שקיימת שקיפות מלאה בתנאים.</p>
+<div class="wpc-loans-nonbank-h7k2-faq-item">
+<div class="wpc-loans-nonbank-h7k2-faq-question" tabindex="0" role="button" aria-expanded="false">
+<h3>איך בוחרים חברת מימון אמינה?</h3>
+<span class="wpc-loans-nonbank-h7k2-faq-icon">+</span></div>
+<div class="wpc-loans-nonbank-h7k2-faq-answer">
+<div>
+<p>בדקו שהחברה פועלת בהיתר משרד האוצר, קראו המלצות ברשת, השוו תנאים מכמה חברות, וודאו שקיימת שקיפות מלאה בתנאים.</p>
 </div>
 </div>
 </div>
-<div class="wpc-loans-nonbank-h7k2-faq-item edit-hoverable">
-<div class="wpc-loans-nonbank-h7k2-faq-question edit-hoverable" tabindex="0" role="button" aria-expanded="false">
-<h3 class="diff-element-new edit-hoverable">האם ניתן להגיש בקשה להלוואה חוץ בנקאית אונליין?</h3>
-<span class="wpc-loans-nonbank-h7k2-faq-icon edit-hoverable">+</span></div>
-<div class="wpc-loans-nonbank-h7k2-faq-answer edit-hoverable">
-<div class="edit-hoverable">
-<p class="diff-element-new edit-hoverable">כן, את רוב התהליך ניתן לבצע אונליין. מילוי הטופס, העלאת מסמכים, וקבלת אישור ראשוני - הכול נעשה דיגיטלית מהנייד או מהמחשב. במקרים מסוימים תידרש פגישה קצרה לחתימה על ההסכם, אבל גם זה נעשה פשוט ומהיר.</p>
+<div class="wpc-loans-nonbank-h7k2-faq-item">
+<div class="wpc-loans-nonbank-h7k2-faq-question" tabindex="0" role="button" aria-expanded="false">
+<h3>האם ניתן להגיש בקשה להלוואה חוץ בנקאית אונליין?</h3>
+<span class="wpc-loans-nonbank-h7k2-faq-icon">+</span></div>
+<div class="wpc-loans-nonbank-h7k2-faq-answer">
+<div>
+<p>כן, את רוב התהליך ניתן לבצע אונליין. מילוי הטופס, העלאת מסמכים, וקבלת אישור ראשוני - הכול נעשה דיגיטלית מהנייד או מהמחשב. במקרים מסוימים תידרש פגישה קצרה לחתימה על ההסכם, אבל גם זה נעשה פשוט ומהיר.</p>
 </div>
 </div>
 </div>
 </div>
-<div class="wpc-loans-nonbank-h7k2-faq-cta edit-hoverable">
-<p class="edit-hoverable"><strong class="edit-hoverable">לא מצאת תשובה?</strong> נשמח לעזור לך!</p>
-<a class="wpc-loans-nonbank-h7k2-cta-whatsapp edit-hoverable" href="#awg-section">📝 בדוק זכאות עכשיו</a></div>
+<div class="wpc-loans-nonbank-h7k2-faq-cta">
+<p><strong>לא מצאת תשובה?</strong> נשמח לעזור בוואטסאפ!</p>
+<a class="wpc-loans-nonbank-h7k2-cta-whatsapp" href="https://wa.me/972501234567" target="_blank" rel="noopener">💬 שאל בוואטסאפ</a></div>
 </div>
 </section>
 <!-- אזור 23: Schema Markup JSON-LD - ✅ מושלם והוכנס --> <script type="application/ld+json">
@@ -4926,5 +4927,5 @@
 <!-- /wp:html -->
 
 <!-- wp:paragraph -->
-<p class="edit-hoverable"></p>
+<p></p>
 <!-- /wp:paragraph -->
