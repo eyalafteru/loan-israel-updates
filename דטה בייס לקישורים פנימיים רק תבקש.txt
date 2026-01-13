@@ -17,7 +17,6 @@
 מימון נכסים מניבים	מימון נכסים מניבים	https://loan-israel.co.il/Business/financing-rental-properties/	1287
 מימון נכס מסחרי	מימון נכס מסחרי	https://loan-israel.co.il/Business/commercial-property-financing/	1304
 מימון להקמה והרחבה של פרויקטים בתחום התיירות	מימון להקמה והרחבה של פרויקטים בתחום התיירות	https://loan-israel.co.il/Business/funding-for-the-construction-and-expansion-of-tourism-projects/	1494
-הלוואות סולו לעסקים	הלוואות סולו לעסקים	https://loan-israel.co.il/Business/solo-loans-to-businesses/	1557
 הלוואת גישור לעסקים	הלוואת גישור לעסקים	https://loan-israel.co.il/Business/business-bridging-loan/	1577
 קרן סיוע לחקלאים	קרן סיוע לחקלאים	https://loan-israel.co.il/Business/farmers-assistance-fund/	1590
 קרנות סיוע למפעלים במצוקה	קרנות סיוע למפעלים במצוקה	https://loan-israel.co.il/Business/distressed-enterprises-assistance-funds/	1594

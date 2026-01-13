@@ -13,8 +13,11 @@ import subprocess
 import shutil
 import time
 import traceback
+import threading
+import uuid
 from datetime import datetime
 from pathlib import Path
+from concurrent.futures import ThreadPoolExecutor
 
 def get_python_command():
     """Get the correct Python command for this system"""
@@ -113,6 +116,10 @@ config = load_config()
 
 # JWT tokens cache - dynamically populated for all sites
 jwt_tokens = {}
+
+# Keywords fetch jobs status - {job_id: {status, progress, message, result, started_at, page_path}}
+keywords_jobs = {}
+keywords_jobs_lock = threading.Lock()
 
 def get_jwt_token(site_id):
     """Get JWT token for a site"""
@@ -249,6 +256,547 @@ def delete_agent_file(agent_id):
         return True
     return False
 
+# ============ InternalLinksManager ============
+
+class InternalLinksManager:
+    """Manager for dynamic internal links generation per domain"""
+    
+    _instance = None
+    _lock = threading.Lock()
+    
+    def __new__(cls):
+        """Singleton pattern"""
+        if cls._instance is None:
+            with cls._lock:
+                if cls._instance is None:
+                    cls._instance = super().__new__(cls)
+                    cls._instance._initialized = False
+        return cls._instance
+    
+    def __init__(self):
+        if self._initialized:
+            return
+        self._initialized = True
+        self._cache = {}  # domain -> links data
+        self._last_scan = {}  # domain -> timestamp
+        self._generated_data_dir = BASE_DIR / "generated_data"
+        self._generated_data_dir.mkdir(exist_ok=True)
+        print("[InternalLinks] Manager initialized")
+    
+    def get_domain_for_site(self, site_id):
+        """Get the domain for a site from config"""
+        sites = config.get("wordpress", {}).get("sites", {})
+        site_config = sites.get(site_id, {})
+        
+        # Use domain field if exists, otherwise extract from site_url
+        domain = site_config.get("domain")
+        if not domain:
+            site_url = site_config.get("site_url", "")
+            # Extract domain from URL
+            if site_url:
+                domain = site_url.replace("https://", "").replace("http://", "").split("/")[0]
+        
+        return domain or "unknown"
+    
+    def get_site_folders(self):
+        """Get all site folders from config"""
+        editable_pages = config.get("paths", {}).get("editable_pages", {})
+        return editable_pages
+    
+    def scan_pages_for_site(self, site_id, folder_path):
+        """Scan all pages in a site folder and extract link data"""
+        links = []
+        site_folder = BASE_DIR / folder_path
+        
+        if not site_folder.exists():
+            print(f"[InternalLinks] Folder not found: {site_folder}")
+            return links
+        
+        for page_folder in site_folder.iterdir():
+            if not page_folder.is_dir():
+                continue
+            
+            page_info_path = page_folder / "page_info.json"
+            if not page_info_path.exists():
+                continue
+            
+            try:
+                with open(page_info_path, 'r', encoding='utf-8') as f:
+                    page_info = json.load(f)
+                
+                # Extract link data
+                url = page_info.get("url", "")
+                if not url:
+                    continue
+                
+                link_data = {
+                    "title": page_info.get("title", page_info.get("page_name", "")),
+                    "anchor": page_info.get("keyword", page_info.get("page_name", "")),
+                    "url": url,
+                    "keyword": page_info.get("keyword", ""),
+                    "post_id": str(page_info.get("post_id", "")),
+                    "site": site_id,
+                    "folder_name": page_folder.name
+                }
+                links.append(link_data)
+                
+            except Exception as e:
+                print(f"[InternalLinks] Error reading {page_info_path}: {e}")
+        
+        return links
+    
+    def generate_links_for_domain(self, domain, force=False):
+        """Generate internal links JSON for a specific domain"""
+        # Find all sites with this domain
+        sites = config.get("wordpress", {}).get("sites", {})
+        editable_pages = config.get("paths", {}).get("editable_pages", {})
+        
+        all_links = []
+        sites_included = []
+        
+        for site_id, site_config in sites.items():
+            site_domain = self.get_domain_for_site(site_id)
+            if site_domain == domain:
+                folder_path = editable_pages.get(site_id)
+                if folder_path:
+                    links = self.scan_pages_for_site(site_id, folder_path)
+                    all_links.extend(links)
+                    sites_included.append(site_id)
+        
+        # Sort by title for consistency
+        all_links.sort(key=lambda x: x.get("title", ""))
+        
+        # Create output structure
+        output = {
+            "domain": domain,
+            "generated_at": datetime.now().isoformat(),
+            "total_links": len(all_links),
+            "sites_included": sites_included,
+            "links": all_links
+        }
+        
+        # Save to file
+        output_file = self._generated_data_dir / f"internal_links_{domain.replace('.', '_')}.json"
+        try:
+            with open(output_file, 'w', encoding='utf-8') as f:
+                json.dump(output, f, ensure_ascii=False, indent=2)
+            print(f"[InternalLinks] Generated {len(all_links)} links for {domain} -> {output_file.name}")
+        except Exception as e:
+            print(f"[InternalLinks] Error saving {output_file}: {e}")
+        
+        # Update cache
+        self._cache[domain] = output
+        self._last_scan[domain] = datetime.now().isoformat()
+        
+        return output
+    
+    def regenerate_all(self):
+        """Regenerate links for all domains"""
+        # Find unique domains
+        sites = config.get("wordpress", {}).get("sites", {})
+        domains = set()
+        for site_id in sites:
+            domain = self.get_domain_for_site(site_id)
+            if domain and domain != "unknown":
+                domains.add(domain)
+        
+        results = {}
+        for domain in domains:
+            results[domain] = self.generate_links_for_domain(domain, force=True)
+        
+        return results
+    
+    def get_links_for_site(self, site_id):
+        """Get internal links for a specific site (returns content as string for shortcode)"""
+        domain = self.get_domain_for_site(site_id)
+        
+        # Check cache first
+        if domain in self._cache:
+            links_data = self._cache[domain]
+        else:
+            # Try to load from file
+            output_file = self._generated_data_dir / f"internal_links_{domain.replace('.', '_')}.json"
+            if output_file.exists():
+                try:
+                    with open(output_file, 'r', encoding='utf-8') as f:
+                        links_data = json.load(f)
+                    self._cache[domain] = links_data
+                except Exception as e:
+                    print(f"[InternalLinks] Error loading {output_file}: {e}")
+                    # Generate if not exists
+                    links_data = self.generate_links_for_domain(domain)
+            else:
+                # Generate if not exists
+                links_data = self.generate_links_for_domain(domain)
+        
+        # Format as text for shortcode (similar to old format)
+        lines = []
+        for link in links_data.get("links", []):
+            # Format: Title\tAnchor\tURL\tPostID
+            line = f"{link.get('title', '')}\t{link.get('anchor', '')}\t{link.get('url', '')}\t{link.get('post_id', '')}"
+            lines.append(line)
+        
+        return "\n".join(lines)
+    
+    def get_links_json_for_site(self, site_id):
+        """Get internal links for a site as JSON object"""
+        domain = self.get_domain_for_site(site_id)
+        
+        # Check cache first
+        if domain in self._cache:
+            return self._cache[domain]
+        
+        # Try to load from file
+        output_file = self._generated_data_dir / f"internal_links_{domain.replace('.', '_')}.json"
+        if output_file.exists():
+            try:
+                with open(output_file, 'r', encoding='utf-8') as f:
+                    links_data = json.load(f)
+                self._cache[domain] = links_data
+                return links_data
+            except Exception as e:
+                print(f"[InternalLinks] Error loading {output_file}: {e}")
+        
+        # Generate if not exists
+        return self.generate_links_for_domain(domain)
+    
+    def get_status(self):
+        """Get status of all generated link files"""
+        status = {
+            "domains": {},
+            "total_domains": 0,
+            "total_links": 0
+        }
+        
+        for json_file in self._generated_data_dir.glob("internal_links_*.json"):
+            try:
+                with open(json_file, 'r', encoding='utf-8') as f:
+                    data = json.load(f)
+                domain = data.get("domain", json_file.stem)
+                status["domains"][domain] = {
+                    "file": json_file.name,
+                    "generated_at": data.get("generated_at"),
+                    "total_links": data.get("total_links", 0),
+                    "sites_included": data.get("sites_included", [])
+                }
+                status["total_links"] += data.get("total_links", 0)
+            except Exception as e:
+                print(f"[InternalLinks] Error reading status from {json_file}: {e}")
+        
+        status["total_domains"] = len(status["domains"])
+        return status
+    
+    def invalidate_cache(self, site_id=None):
+        """Invalidate cache for a site or all sites"""
+        if site_id:
+            domain = self.get_domain_for_site(site_id)
+            if domain in self._cache:
+                del self._cache[domain]
+                print(f"[InternalLinks] Cache invalidated for domain: {domain}")
+        else:
+            self._cache.clear()
+            print("[InternalLinks] All cache invalidated")
+
+
+# Global instance
+internal_links_manager = InternalLinksManager()
+
+# ============ WordCountCache ============
+
+class WordCountCache:
+    """Cache manager for word counts - loads all at once, updates only changed pages"""
+    
+    _instance = None
+    _lock = threading.Lock()
+    
+    def __new__(cls):
+        """Singleton pattern"""
+        if cls._instance is None:
+            with cls._lock:
+                if cls._instance is None:
+                    cls._instance = super().__new__(cls)
+                    cls._instance._initialized = False
+        return cls._instance
+    
+    def __init__(self):
+        if self._initialized:
+            return
+        self._initialized = True
+        self._cache = None
+        self._cache_file = BASE_DIR / "generated_data" / "word_counts_cache.json"
+        self._cache_file.parent.mkdir(exist_ok=True)
+        print("[WordCountCache] Manager initialized")
+    
+    def _get_html_file(self, page_folder_path):
+        """Find the main HTML file in a page folder"""
+        folder = Path(page_folder_path)
+        if not folder.exists():
+            return None
+        
+        html_files = list(folder.glob("*.html"))
+        for hf in html_files:
+            if '_backup' not in hf.name.lower():
+                return hf
+        return None
+
+    def _resolve_target(self, page_path):
+        """Resolve a page path (folder OR .html file, relative or absolute) to (folder, html_file, cache_key)."""
+        if not page_path:
+            return None, None, None
+
+        raw = Path(str(page_path))
+        full = raw if raw.is_absolute() else (BASE_DIR / raw)
+
+        html_file = None
+        folder = None
+
+        try:
+            if full.exists() and full.is_file() and full.suffix.lower() == ".html":
+                html_file = full
+                folder = full.parent
+            else:
+                folder = full
+                html_file = self._get_html_file(folder)
+        except Exception:
+            return None, None, None
+
+        if not html_file or not html_file.exists():
+            return folder, None, None
+
+        # Cache key should match frontend `page.path` (HTML file path relative to BASE_DIR)
+        try:
+            rel = html_file.relative_to(BASE_DIR)
+        except Exception:
+            rel = html_file
+        cache_key = str(rel).replace("\\", "/")
+
+        return folder, html_file, cache_key
+    
+    def _calculate_word_count(self, html_content):
+        """Calculate word count from HTML content"""
+        from bs4 import BeautifulSoup
+        import re
+        
+        if not html_content:
+            return 0
+        
+        try:
+            soup = BeautifulSoup(html_content, 'html.parser')
+            
+            # Remove script and style elements
+            for script in soup(["script", "style", "noscript"]):
+                script.decompose()
+            
+            # Get text
+            text = soup.get_text()
+            
+            # Clean up whitespace
+            text = re.sub(r'\s+', ' ', text).strip()
+            
+            # Count words (split by whitespace)
+            words = [w for w in text.split() if len(w) > 0]
+            return len(words)
+        except Exception as e:
+            print(f"[WordCountCache] Error calculating word count: {e}")
+            return 0
+    
+    def _load_cache(self):
+        """Load cache from file"""
+        if self._cache_file.exists():
+            try:
+                with open(self._cache_file, 'r', encoding='utf-8') as f:
+                    self._cache = json.load(f)
+                # Migrate old cache keys (folder paths) to new keys (html file paths)
+                try:
+                    pages = self._cache.get("pages", {})
+                    if isinstance(pages, dict) and pages:
+                        migrated = {}
+                        changed = False
+                        for k, v in pages.items():
+                            # New format keys end with .html
+                            if isinstance(k, str) and k.lower().endswith(".html"):
+                                migrated[k] = v
+                                continue
+                            # Old format: folder path -> resolve to html file key
+                            _, html_file, new_key = self._resolve_target(k)
+                            if new_key:
+                                migrated[new_key] = v
+                                changed = True
+                            else:
+                                migrated[k] = v
+                        if changed:
+                            self._cache["pages"] = migrated
+                            self._save_cache()
+                            print("[WordCountCache] Migrated cache keys to .html paths")
+                except Exception as mig_e:
+                    print(f"[WordCountCache] Warning: cache migration failed: {mig_e}")
+                return True
+            except Exception as e:
+                print(f"[WordCountCache] Error loading cache: {e}")
+        self._cache = {"generated_at": None, "total_pages": 0, "pages": {}}
+        return False
+    
+    def _save_cache(self):
+        """Save cache to file"""
+        if self._cache is None:
+            return
+        
+        self._cache["generated_at"] = datetime.now().isoformat()
+        self._cache["total_pages"] = len(self._cache.get("pages", {}))
+        
+        try:
+            with open(self._cache_file, 'w', encoding='utf-8') as f:
+                json.dump(self._cache, f, ensure_ascii=False, indent=2)
+        except Exception as e:
+            print(f"[WordCountCache] Error saving cache: {e}")
+    
+    def get_all(self, force_refresh=False):
+        """Get all word counts, updating stale entries"""
+        # Load cache if not loaded
+        if self._cache is None or force_refresh:
+            self._load_cache()
+        
+        # Get all page folders
+        editable_pages = config.get("paths", {}).get("editable_pages", {})
+        updated = 0
+        
+        for site_id, folder_rel in editable_pages.items():
+            site_folder = BASE_DIR / folder_rel
+            if not site_folder.exists():
+                continue
+            
+            for page_folder in site_folder.iterdir():
+                if not page_folder.is_dir():
+                    continue
+
+                html_file = self._get_html_file(page_folder)
+                
+                if not html_file or not html_file.exists():
+                    continue
+
+                # Cache key should be the HTML file path (matches frontend page.path)
+                try:
+                    page_path = str(html_file.relative_to(BASE_DIR)).replace("\\", "/")
+                except Exception:
+                    page_path = str(html_file).replace("\\", "/")
+                
+                # Get current HTML mtime
+                html_mtime = html_file.stat().st_mtime
+                
+                # Check if we need to recalculate
+                cached_entry = self._cache.get("pages", {}).get(page_path)
+                needs_update = force_refresh or cached_entry is None
+                
+                if cached_entry and not force_refresh:
+                    cached_mtime = cached_entry.get("html_mtime", 0)
+                    if html_mtime > cached_mtime:
+                        needs_update = True
+                
+                if needs_update:
+                    try:
+                        with open(html_file, 'r', encoding='utf-8') as f:
+                            html_content = f.read()
+                        word_count = self._calculate_word_count(html_content)
+                        
+                        if "pages" not in self._cache:
+                            self._cache["pages"] = {}
+                        
+                        self._cache["pages"][page_path] = {
+                            "word_count": word_count,
+                            "html_mtime": html_mtime,
+                            "calculated_at": datetime.now().isoformat(),
+                            "site": site_id
+                        }
+                        updated += 1
+                    except Exception as e:
+                        print(f"[WordCountCache] Error processing {page_path}: {e}")
+        
+        # Save if anything was updated
+        if updated > 0:
+            self._save_cache()
+            print(f"[WordCountCache] Updated {updated} word counts")
+        
+        return self._cache
+    
+    def invalidate(self, page_path):
+        """Mark a specific page as needing recalculation on next get_all"""
+        if self._cache is None:
+            self._load_cache()
+
+        _, _, cache_key = self._resolve_target(page_path)
+        if not cache_key:
+            return
+
+        if "pages" in self._cache and cache_key in self._cache["pages"]:
+            # Set mtime to 0 to force recalculation
+            self._cache["pages"][cache_key]["html_mtime"] = 0
+            self._save_cache()
+            print(f"[WordCountCache] Invalidated: {cache_key}")
+    
+    def update_single(self, page_path):
+        """Immediately update word count for a single page"""
+        if self._cache is None:
+            self._load_cache()
+
+        page_folder, html_file, cache_key = self._resolve_target(page_path)
+        if not html_file or not cache_key:
+            return None
+        
+        try:
+            with open(html_file, 'r', encoding='utf-8') as f:
+                html_content = f.read()
+            word_count = self._calculate_word_count(html_content)
+            
+            html_mtime = html_file.stat().st_mtime
+            
+            # Get site_id from page_info or infer from path
+            site_id = "unknown"
+            page_info_path = page_folder / "page_info.json" if page_folder else None
+            if page_info_path and page_info_path.exists():
+                try:
+                    with open(page_info_path, 'r', encoding='utf-8') as f:
+                        page_info = json.load(f)
+                    site_id = page_info.get("site", "unknown")
+                except:
+                    pass
+            
+            if "pages" not in self._cache:
+                self._cache["pages"] = {}
+            
+            self._cache["pages"][cache_key] = {
+                "word_count": word_count,
+                "html_mtime": html_mtime,
+                "calculated_at": datetime.now().isoformat(),
+                "site": site_id
+            }
+            
+            self._save_cache()
+            print(f"[WordCountCache] Updated single: {cache_key} = {word_count} words")
+            return word_count
+        except Exception as e:
+            print(f"[WordCountCache] Error updating {page_path}: {e}")
+            return None
+    
+    def regenerate_all(self):
+        """Full rebuild of the cache"""
+        self._cache = {"generated_at": None, "total_pages": 0, "pages": {}}
+        return self.get_all(force_refresh=True)
+    
+    def get_status(self):
+        """Get cache status"""
+        if self._cache is None:
+            self._load_cache()
+        
+        return {
+            "generated_at": self._cache.get("generated_at"),
+            "total_pages": len(self._cache.get("pages", {})),
+            "cache_file": str(self._cache_file)
+        }
+
+
+# Global instance
+word_count_cache = WordCountCache()
+
 # ============ ShortcodeEngine ============
 
 class ShortcodeEngine:
@@ -264,6 +812,7 @@ class ShortcodeEngine:
         "PAGE_WORD_COUNT": "מספר מילים בעמוד",
         "KEYWORDS_AUTOCOMPLETE": "מילות מפתח מהשלמות אוטומטיות",
         "KEYWORDS_RELATED": "מילות מפתח מחיפושים קשורים",
+        "KEYWORDS_MANUAL": "מילות מפתח שנוספו ידנית",
         "SERP_ORGANIC": "תוצאות חיפוש אורגניות",
         "SERP_AI_OVERVIEW": "תוצאות AI Overview של גוגל",
         "OUR_SERP_RANK": "המיקום שלנו בתוצאות"
@@ -404,6 +953,12 @@ class ShortcodeEngine:
     
     def get_shortcode_value(self, shortcode_name):
         """Get the value for a specific shortcode"""
+        # 0. Handle dynamic internal links (takes priority over static file)
+        if shortcode_name == "INTERNAL_LINKS_DB":
+            page_info = self.get_page_info()
+            site_id = page_info.get("site", "main")
+            return internal_links_manager.get_links_for_site(site_id)
+        
         # 1. Check step reports first
         if shortcode_name in self.step_reports:
             return self.step_reports[shortcode_name]
@@ -542,6 +1097,9 @@ class ShortcodeEngine:
         # APPROVED_DOMAINS is now loaded from custom_data_sources (config.json)
         # No hardcoded handler needed - it's read from the file
         
+        # INTERNAL_LINKS_DB is now handled at the top of get_shortcode_value()
+        # to take priority over static file in custom_sources
+        
         elif shortcode_name == "KEYWORDS_AUTOCOMPLETE":
             kw_list = fetched_kw.get("final_keywords", [])
             if kw_list:
@@ -562,6 +1120,21 @@ class ShortcodeEngine:
 ## חיפושים קשורים
 
 **רשימה:** {', '.join(related)}
+"""
+            return ""
+        
+        elif shortcode_name == "KEYWORDS_MANUAL":
+            # Get only manually added keywords
+            clusters = fetched_kw.get("clusters", [])
+            manual_keywords = [c.get("primary", "") for c in clusters if c.get("source") == "manual"]
+            if manual_keywords:
+                return f"""
+## מילות מפתח ידניות
+
+**רשימה:** {', '.join(manual_keywords)}
+
+### הערה:
+מילות המפתח הבאות נוספו ידנית ויש לשלב אותן בתוכן: {', '.join(manual_keywords)}
 """
             return ""
         
@@ -973,10 +1546,26 @@ def get_html_files():
                                     page_info = json.load(f)
                             except Exception:
                                 pass
+
+                        # Add lightweight keywords summary (avoid huge SERP payloads in /api/pages)
+                        fetched_kw_summary = {}
+                        try:
+                            fk = page_info.get("fetched_keywords") or {}
+                            if isinstance(fk, dict) and fk:
+                                fetched_kw_summary = {
+                                    "timestamp": fk.get("timestamp"),
+                                    "main_keyword": fk.get("main_keyword") or page_info.get("keyword") or name,
+                                    "final_keywords": fk.get("final_keywords", []) if isinstance(fk.get("final_keywords", []), list) else [],
+                                    "rank_position": fk.get("rank_position"),
+                                    "ai_rank_position": fk.get("ai_rank_position")
+                                }
+                        except Exception:
+                            fetched_kw_summary = {}
                         
                         files.append({
                             "name": name,
-                            "path": str(file.relative_to(BASE_DIR)),
+                            # Normalize to forward slashes for consistent frontend cache keys
+                            "path": str(file.relative_to(BASE_DIR)).replace("\\", "/"),
                             "folder": folder,
                             "site": site_id,
                             "post_id": page_info.get("post_id", csv_info.get("post_id", "")),
@@ -984,6 +1573,8 @@ def get_html_files():
                             "keywords": csv_info.get("keywords", ""),
                             "word_count": page_info.get("word_count", 0),
                             "is_special": page_info.get("is_special", False),
+                            # lightweight keywords cache for sidebar/badges (full details fetched lazily per page)
+                            "fetched_keywords": fetched_kw_summary,
                             "last_upload": page_info.get("last_upload", ""),
                             "last_upload_type": page_info.get("last_upload_type", ""),
                             "modified": datetime.fromtimestamp(file.stat().st_mtime).isoformat()
@@ -2155,6 +2746,103 @@ def update_data_source(source_id):
     except Exception as e:
         return jsonify({"success": False, "error": str(e)}), 500
 
+# ============ API Routes - Internal Links ============
+
+@app.route('/api/internal-links', methods=['GET'])
+def get_internal_links():
+    """Get all generated internal links data"""
+    try:
+        site_id = request.args.get('site')
+        
+        if site_id:
+            # Get links for specific site
+            links_data = internal_links_manager.get_links_json_for_site(site_id)
+            return jsonify({"success": True, "data": links_data})
+        else:
+            # Get status of all domains
+            status = internal_links_manager.get_status()
+            return jsonify({"success": True, "status": status})
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+@app.route('/api/internal-links/regenerate', methods=['POST'])
+def regenerate_internal_links():
+    """Force regeneration of internal links"""
+    try:
+        data = request.json or {}
+        site_id = data.get('site')
+        
+        if site_id:
+            # Regenerate for specific site's domain
+            domain = internal_links_manager.get_domain_for_site(site_id)
+            result = internal_links_manager.generate_links_for_domain(domain, force=True)
+            return jsonify({
+                "success": True, 
+                "message": f"Regenerated links for domain: {domain}",
+                "total_links": result.get("total_links", 0)
+            })
+        else:
+            # Regenerate all
+            results = internal_links_manager.regenerate_all()
+            total = sum(r.get("total_links", 0) for r in results.values())
+            return jsonify({
+                "success": True,
+                "message": f"Regenerated links for {len(results)} domains",
+                "domains": list(results.keys()),
+                "total_links": total
+            })
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+@app.route('/api/internal-links/status', methods=['GET'])
+def get_internal_links_status():
+    """Get status of internal links generation"""
+    try:
+        status = internal_links_manager.get_status()
+        return jsonify({"success": True, "status": status})
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+# ============ API Routes - Word Count Cache ============
+
+@app.route('/api/word-counts', methods=['GET'])
+def get_word_counts():
+    """Get all word counts in one request - much faster than individual page_info calls"""
+    try:
+        force = request.args.get('force', 'false').lower() == 'true'
+        cache_data = word_count_cache.get_all(force_refresh=force)
+        
+        return jsonify({
+            "success": True,
+            "generated_at": cache_data.get("generated_at"),
+            "total_pages": len(cache_data.get("pages", {})),
+            "pages": cache_data.get("pages", {})
+        })
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+@app.route('/api/word-counts/regenerate', methods=['POST'])
+def regenerate_word_counts():
+    """Force full regeneration of word count cache"""
+    try:
+        cache_data = word_count_cache.regenerate_all()
+        return jsonify({
+            "success": True,
+            "message": f"Regenerated word counts for {len(cache_data.get('pages', {}))} pages",
+            "total_pages": len(cache_data.get("pages", {}))
+        })
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+@app.route('/api/word-counts/status', methods=['GET'])
+def get_word_counts_status():
+    """Get word count cache status"""
+    try:
+        status = word_count_cache.get_status()
+        return jsonify({"success": True, "status": status})
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
 # ============ API Routes - Agent Execution (New System) ============
 
 @app.route('/api/agents/<agent_id>/run', methods=['POST'])
@@ -2435,6 +3123,21 @@ def create_page_folder():
         if not html_path.exists():
             with open(html_path, 'w', encoding='utf-8') as f:
                 f.write(f"<!-- עמוד חדש: {page_name} -->\n")
+        
+        # Invalidate internal links cache (new page created)
+        try:
+            internal_links_manager.invalidate_cache(site_id)
+            print(f"[CreateFolder] Internal links cache invalidated for site: {site_id}")
+        except Exception as cache_err:
+            print(f"[CreateFolder] Warning: Could not invalidate internal links cache: {cache_err}")
+        
+        # Invalidate word count cache (new page created)
+        try:
+            page_path_for_cache = str(page_folder.relative_to(BASE_DIR)).replace("\\", "/")
+            word_count_cache.invalidate(page_path_for_cache)
+            print(f"[CreateFolder] Word count cache invalidated for: {page_path_for_cache}")
+        except Exception as cache_err:
+            print(f"[CreateFolder] Warning: Could not invalidate word count cache: {cache_err}")
         
         return jsonify({
             "success": True,
@@ -6431,7 +7134,8 @@ def get_pages_status():
                     if not main_html:
                         continue
                     
-                    page_path = str(main_html[0].relative_to(BASE_DIR))
+                    # Normalize to forward slashes for consistent frontend keys
+                    page_path = str(main_html[0].relative_to(BASE_DIR)).replace("\\", "/")
                     agent_folder = page_folder / agent_folder_name
                     
                     # DYNAMIC: Check files in agent folder for all steps
@@ -6537,7 +7241,8 @@ def get_multi_agent_status():
                     if not main_html:
                         continue
                     
-                    page_path = str(main_html[0].relative_to(BASE_DIR))
+                    # Normalize to forward slashes for consistent frontend keys
+                    page_path = str(main_html[0].relative_to(BASE_DIR)).replace("\\", "/")
                     page_status = {}
                     
                     # Check status for each agent DYNAMICALLY
@@ -8613,6 +9318,30 @@ def archive_page_files(page_path, reason="deleted", metadata=None):
         
         print(f"[Archive] ✓ Archived successfully to {archive_path}")
         
+        # Invalidate internal links cache (page was removed)
+        try:
+            internal_links_manager.invalidate_cache()
+            print("[Archive] Internal links cache invalidated")
+        except Exception as cache_err:
+            print(f"[Archive] Warning: Could not invalidate internal links cache: {cache_err}")
+        
+        # Invalidate word count cache (page was archived)
+        try:
+            # NOTE: `folder` might be relative (common) or absolute; normalize to the cache key format
+            folder_path = Path(folder)
+            if folder_path.is_absolute():
+                try:
+                    folder_rel = folder_path.relative_to(BASE_DIR)
+                except Exception:
+                    folder_rel = folder_path
+            else:
+                folder_rel = folder_path
+            page_path_for_cache = str(folder_rel).replace("\\", "/")
+            word_count_cache.invalidate(page_path_for_cache)
+            print(f"[Archive] Word count cache invalidated for: {page_path_for_cache}")
+        except Exception as cache_err:
+            print(f"[Archive] Warning: Could not invalidate word count cache: {cache_err}")
+        
         return {"success": True, "archive_path": archive_path}
             
     except Exception as e:
@@ -8664,6 +9393,29 @@ def restore_page_from_archive(archive_path, target_site="main"):
             if file.endswith('.html') and not file.endswith('_backup.html'):
                 html_file = os.path.join(restore_path, file)
                 break
+        
+        # Invalidate internal links cache (page was restored)
+        try:
+            internal_links_manager.invalidate_cache()
+            print("[Restore] Internal links cache invalidated")
+        except Exception as cache_err:
+            print(f"[Restore] Warning: Could not invalidate internal links cache: {cache_err}")
+        
+        # Update word count cache (page was restored)
+        try:
+            restore_path_obj = Path(restore_path)
+            if restore_path_obj.is_absolute():
+                try:
+                    restore_rel = restore_path_obj.relative_to(BASE_DIR)
+                except Exception:
+                    restore_rel = restore_path_obj
+            else:
+                restore_rel = restore_path_obj
+            page_path_for_cache = str(restore_rel).replace("\\", "/")
+            word_count_cache.update_single(page_path_for_cache)
+            print(f"[Restore] Word count cache updated for: {page_path_for_cache}")
+        except Exception as cache_err:
+            print(f"[Restore] Warning: Could not update word count cache: {cache_err}")
         
         return {
             "success": True, 
@@ -9387,6 +10139,7 @@ def upload_to_wp():
         content = data.get("content")  # HTML content
         title = data.get("title")  # Optional: update title
         meta_description = data.get("meta_description")  # Optional: update Yoast description
+        template = data.get("template")  # Optional: update template (e.g. 'Clean')
         skip_cleanup = data.get("skip_cleanup", False)  # Skip HTML cleanup for restore
         
         if not post_id:
@@ -9416,26 +10169,49 @@ def upload_to_wp():
             token = token_response.json().get("token")
             jwt_tokens[site_id] = token
         
+        # Determine endpoint type (posts vs pages)
+        # Default to posts, but try to detect based on ID
+        endpoint_type = "posts" 
+        
+        # Try to detect if it's a page or post
+        try:
+            # Check if it's a page first (pages are more common for this system)
+            check_page_url = f"{site['site_url']}{site['api_base']}/pages/{post_id}?context=edit"
+            page_res = requests.get(
+                check_page_url,
+                headers={"Authorization": f"Bearer {token}"},
+                timeout=10
+            )
+            if page_res.status_code == 200:
+                endpoint_type = "pages"
+                print(f"ℹ️ Identified ID {post_id} as PAGE")
+            else:
+                # If not a page, verify it's a post
+                check_post_url = f"{site['site_url']}{site['api_base']}/posts/{post_id}?context=edit"
+                post_res = requests.get(
+                    check_post_url,
+                    headers={"Authorization": f"Bearer {token}"},
+                    timeout=10
+                )
+                if post_res.status_code == 200:
+                    endpoint_type = "posts"
+                    print(f"ℹ️ Identified ID {post_id} as POST")
+                else:
+                    print(f"⚠️ Could not identify ID {post_id} as Post or Page (Page: {page_res.status_code}, Post: {post_res.status_code}). Defaulting to 'posts'.")
+        except Exception as e:
+            print(f"⚠️ Error checking post type: {e}")
+
         # BEFORE uploading - backup current WordPress content
         page_folder = data.get("page_folder")
         if page_folder and content:
             try:
-                # Try posts endpoint first
-                fetch_url = f"{site['site_url']}{site['api_base']}/posts/{post_id}?context=edit"
+                # Use the identified endpoint
+                fetch_url = f"{site['site_url']}{site['api_base']}/{endpoint_type}/{post_id}?context=edit"
                 fetch_response = requests.get(
                     fetch_url,
                     headers={"Authorization": f"Bearer {token}"},
                     timeout=30
                 )
-                
-                # If post not found, try pages endpoint
-                if fetch_response.status_code == 404:
-                    fetch_url = f"{site['site_url']}{site['api_base']}/pages/{post_id}?context=edit"
-                    fetch_response = requests.get(
-                        fetch_url,
-                        headers={"Authorization": f"Bearer {token}"},
-                        timeout=30
-                    )
                 
                 if fetch_response.status_code == 200:
                     wp_data = fetch_response.json()
@@ -9537,6 +10313,12 @@ def upload_to_wp():
                 cleanup_info = {"special_page": False, "wrapped": False, "original_length": len(content), "final_length": len(clean_content)}
             
             update_data["content"] = final_content
+        
+        # Add template to update_data if provided
+        if template:
+            update_data["template"] = template
+            print(f"📄 Setting WordPress Template: {template}")
+
         # Note: title is NOT added to update_data - it only updates Yoast SEO title, not WordPress post title
         
         # Check if we have anything to update
@@ -9548,7 +10330,8 @@ def upload_to_wp():
             }), 400
         
         # Update post (only if we have content or title)
-        update_url = f"{site['site_url']}{site['api_base']}/posts/{post_id}"
+        # Use the identified endpoint_type
+        update_url = f"{site['site_url']}{site['api_base']}/{endpoint_type}/{post_id}"
         post_update_success = False
         
         if update_data:
@@ -9689,6 +10472,16 @@ def upload_to_wp():
                     changes=changes,
                     triggered_by=data.get('triggered_by', 'manual')
                 )
+                
+                # Invalidate word count cache (content may have changed)
+                if content:
+                    try:
+                        page_folder_for_cache = data.get("page_folder")
+                        if page_folder_for_cache:
+                            word_count_cache.update_single(page_folder_for_cache)
+                            print(f"[Upload] Word count cache updated for: {page_folder_for_cache}")
+                    except Exception as cache_err:
+                        print(f"[Upload] Warning: Could not update word count cache: {cache_err}")
             
             result = {
                 "success": True,
@@ -10042,6 +10835,8 @@ def update_page_info():
             info['keyword'] = data['keyword']
         if 'url' in data:
             info['url'] = data['url']
+        if 'template' in data:
+            info['template'] = data['template']
         
         # Save
         with open(info_path, 'w', encoding='utf-8') as f:
@@ -10620,6 +11415,23 @@ def save_file_content():
         
         with open(full_path, 'w', encoding='utf-8') as f:
             f.write(content)
+
+        # Update word count cache for the page (if this is a main HTML file save)
+        try:
+            if file_path.endswith('.html') and not file_path.endswith('_backup.html'):
+                page_folder_for_cache = full_path.parent
+                if page_folder_for_cache.is_absolute():
+                    try:
+                        page_folder_rel = page_folder_for_cache.relative_to(BASE_DIR)
+                    except Exception:
+                        page_folder_rel = page_folder_for_cache
+                else:
+                    page_folder_rel = page_folder_for_cache
+                page_folder_key = str(page_folder_rel).replace("\\", "/")
+                word_count_cache.update_single(page_folder_key)
+                print(f"[SaveContent] Word count cache updated for: {page_folder_key}")
+        except Exception as cache_err:
+            print(f"[SaveContent] Warning: Could not update word count cache: {cache_err}")
         
         return jsonify({
             "success": True,
@@ -11035,8 +11847,15 @@ def save_wordpress_update_to_history(page_path, update_type, changes, triggered_
         traceback.print_exc()
 
 
-def get_serp_related_searches(keyword, token, our_url=None):
-    """Helper: Fetch related searches from SERP API and check ranking position"""
+def get_serp_related_searches(keyword, token, our_url=None, status_callback=None):
+    """Helper: Fetch related searches from SERP API and check ranking position.
+    
+    Args:
+        keyword: The search keyword
+        token: Apify API token
+        our_url: Optional URL to check ranking position for
+        status_callback: Optional callback function(poll_number, total_polls) for progress updates
+    """
     apify_config = config.get('apify', {})
     actor = apify_config.get('serp_actor', 'nFJndFXA5zjCTuudP')
     
@@ -11074,15 +11893,26 @@ def get_serp_related_searches(keyword, token, our_url=None):
     if not run_id:
         return empty_result
     
-    # Poll for completion
+    # Poll for completion - 5 seconds interval, up to 36 polls (3 minutes max)
     poll_url = f"https://api.apify.com/v2/actor-runs/{run_id}?token={token}"
     dataset_id = None
+    total_polls = 36
     
-    for i in range(30):
-        time.sleep(2)
+    for i in range(total_polls):
+        time.sleep(5)
+        
+        # Call status callback if provided
+        if status_callback:
+            try:
+                status_callback(i + 1, total_polls)
+            except Exception as cb_err:
+                print(f"[SERP] Status callback error: {cb_err}")
+        
         poll_response = requests.get(poll_url, headers=headers, timeout=10)
         poll_data = poll_response.json()
         status = poll_data.get('data', {}).get('status')
+        
+        print(f"[SERP] Poll {i+1}/{total_polls}: {status}")
         
         if status == 'SUCCEEDED':
             dataset_id = poll_data.get('data', {}).get('defaultDatasetId')
@@ -11417,6 +12247,267 @@ def fetch_keywords():
         return jsonify({"success": False, "error": str(e)}), 500
 
 
+def fetch_keywords_background(job_id, keyword, page_url, page_path, token):
+    """Background worker for async keyword fetching with parallel execution"""
+    global keywords_jobs
+    
+    try:
+        with keywords_jobs_lock:
+            keywords_jobs[job_id]['status'] = 'fetching'
+            keywords_jobs[job_id]['progress'] = 10
+            keywords_jobs[job_id]['message'] = 'מתחיל שליפת מילות מפתח...'
+        
+        print(f"[Keywords Async] Job {job_id}: Starting parallel fetch for '{keyword}'")
+        
+        # Define status callback for SERP polling
+        def update_serp_status(poll_num, total_polls):
+            with keywords_jobs_lock:
+                if job_id in keywords_jobs:
+                    # Progress: 40% at start of SERP, 90% at end of SERP polling
+                    progress = 40 + int((poll_num / total_polls) * 50)
+                    keywords_jobs[job_id]['progress'] = progress
+                    keywords_jobs[job_id]['message'] = f'סורק תוצאות חיפוש ({poll_num}/{total_polls})...'
+        
+        # Initialize results
+        autocomplete = []
+        serp_result = {}
+        
+        # Run autocomplete and SERP in parallel, but update as soon as autocomplete is ready
+        with ThreadPoolExecutor(max_workers=2) as executor:
+            with keywords_jobs_lock:
+                keywords_jobs[job_id]['message'] = 'מביא השלמות אוטומטיות...'
+            
+            autocomplete_future = executor.submit(get_autocomplete_suggestions, keyword, token)
+            serp_future = executor.submit(get_serp_related_searches, keyword, token, page_url, update_serp_status)
+            
+            # Wait for autocomplete first (usually fast)
+            try:
+                autocomplete = autocomplete_future.result(timeout=30)
+                print(f"[Keywords Async] Job {job_id}: Autocomplete ready: {len(autocomplete)} keywords")
+                
+                # Store partial results immediately
+                with keywords_jobs_lock:
+                    keywords_jobs[job_id]['status'] = 'partial'
+                    keywords_jobs[job_id]['progress'] = 35
+                    keywords_jobs[job_id]['message'] = f'נמצאו {len(autocomplete)} השלמות, ממתין לתוצאות SERP...'
+                    keywords_jobs[job_id]['partial_result'] = {
+                        "success": True,
+                        "keyword": keyword,
+                        "autocomplete": autocomplete,
+                        "related": [],
+                        "combined": autocomplete,
+                        "rank_position": None,
+                        "organic_results": [],
+                        "ai_mode_results": [],
+                        "ai_rank_position": None,
+                        "competitor_data": []
+                    }
+            except Exception as e:
+                print(f"[Keywords Async] Job {job_id}: Autocomplete error: {e}")
+                autocomplete = []
+            
+            # Now wait for SERP (slow)
+            try:
+                serp_result = serp_future.result(timeout=180)
+            except Exception as e:
+                print(f"[Keywords Async] Job {job_id}: SERP error: {e}")
+                serp_result = {}
+        
+        print(f"[Keywords Async] Job {job_id}: All fetches completed")
+        
+        # Extract SERP data
+        related = serp_result.get('related', [])
+        rank_position = serp_result.get('rank_position')
+        organic_results = serp_result.get('organic_results', [])
+        ai_mode_results = serp_result.get('ai_mode_results', [])
+        ai_rank_position = serp_result.get('ai_rank_position')
+        competitor_data = serp_result.get('competitor_data', [])
+        
+        with keywords_jobs_lock:
+            keywords_jobs[job_id]['progress'] = 85
+            keywords_jobs[job_id]['message'] = 'מעבד תוצאות...'
+        
+        # Save rank to history if we have position and page_path
+        if page_path and rank_position is not None:
+            save_rank_to_history(page_path, keyword, rank_position, page_url)
+        
+        # Combine and deduplicate
+        all_keywords = []
+        seen = set()
+        for kw in autocomplete + related:
+            kw_lower = kw.strip().lower()
+            if kw_lower and kw_lower not in seen:
+                seen.add(kw_lower)
+                all_keywords.append(kw.strip())
+        
+        print(f"[Keywords Async] Job {job_id}: Found {len(autocomplete)} autocomplete, {len(related)} related, {len(all_keywords)} unique")
+        
+        # Store result
+        result_data = {
+            "success": True,
+            "keyword": keyword,
+            "autocomplete": autocomplete,
+            "related": related,
+            "combined": all_keywords,
+            "rank_position": rank_position,
+            "organic_results": organic_results,
+            "ai_mode_results": ai_mode_results,
+            "ai_rank_position": ai_rank_position,
+            "competitor_data": competitor_data
+        }
+        
+        with keywords_jobs_lock:
+            keywords_jobs[job_id]['status'] = 'completed'
+            keywords_jobs[job_id]['progress'] = 100
+            keywords_jobs[job_id]['message'] = 'הושלם בהצלחה!'
+            keywords_jobs[job_id]['result'] = result_data
+        
+        print(f"[Keywords Async] Job {job_id}: Completed successfully")
+        
+    except Exception as e:
+        print(f"[Keywords Async] Job {job_id}: Error - {e}")
+        import traceback
+        traceback.print_exc()
+        
+        with keywords_jobs_lock:
+            keywords_jobs[job_id]['status'] = 'failed'
+            keywords_jobs[job_id]['progress'] = 0
+            keywords_jobs[job_id]['message'] = f'שגיאה: {str(e)}'
+            keywords_jobs[job_id]['error'] = str(e)
+
+
+@app.route('/api/keywords/fetch-async', methods=['POST'])
+def fetch_keywords_async():
+    """Start async keyword fetch - returns immediately with job_id"""
+    global keywords_jobs
+    
+    try:
+        data = request.json
+        keyword = data.get('keyword')
+        page_url = data.get('page_url', '')
+        page_path = data.get('page_path', '')
+        
+        if not keyword:
+            return jsonify({"success": False, "error": "Missing keyword"}), 400
+        
+        apify_config = config.get('apify', {})
+        token = apify_config.get('token')
+        
+        if not token:
+            return jsonify({"success": False, "error": "Apify token not configured"}), 400
+        
+        # Check if there's already a running job for this page
+        with keywords_jobs_lock:
+            for jid, job in keywords_jobs.items():
+                if job.get('page_path') == page_path and job.get('status') in ['pending', 'fetching']:
+                    print(f"[Keywords Async] Job already running for {page_path}: {jid}")
+                    return jsonify({
+                        "success": True,
+                        "job_id": jid,
+                        "status": job.get('status'),
+                        "message": "עבודה קיימת נמצאה"
+                    })
+        
+        # Generate unique job ID
+        job_id = str(uuid.uuid4())
+        
+        # Initialize job status
+        with keywords_jobs_lock:
+            keywords_jobs[job_id] = {
+                'status': 'pending',
+                'progress': 0,
+                'message': 'מאתחל...',
+                'started_at': datetime.now().isoformat(),
+                'page_path': page_path,
+                'keyword': keyword,
+                'result': None,
+                'error': None
+            }
+        
+        print(f"[Keywords Async] Created job {job_id} for '{keyword}' (page: {page_path})")
+        
+        # Start background thread
+        thread = threading.Thread(
+            target=fetch_keywords_background,
+            args=(job_id, keyword, page_url, page_path, token),
+            daemon=True
+        )
+        thread.start()
+        
+        return jsonify({
+            "success": True,
+            "job_id": job_id,
+            "status": "pending",
+            "message": "עבודה נוצרה בהצלחה"
+        })
+        
+    except Exception as e:
+        print(f"[Keywords Async] Error creating job: {e}")
+        import traceback
+        traceback.print_exc()
+        return jsonify({"success": False, "error": str(e)}), 500
+
+
+@app.route('/api/keywords/status/<job_id>', methods=['GET'])
+def get_keywords_status(job_id):
+    """Get status of async keyword fetch job"""
+    global keywords_jobs
+    
+    # Clean up old jobs (older than 10 minutes)
+    try:
+        now = datetime.now()
+        with keywords_jobs_lock:
+            expired_jobs = []
+            for jid, job in keywords_jobs.items():
+                try:
+                    started = datetime.fromisoformat(job.get('started_at', now.isoformat()))
+                    age_seconds = (now - started).total_seconds()
+                    if age_seconds > 600 and job.get('status') in ['completed', 'failed']:
+                        expired_jobs.append(jid)
+                except:
+                    pass
+            
+            for jid in expired_jobs:
+                del keywords_jobs[jid]
+                print(f"[Keywords Status] Cleaned up expired job: {jid}")
+    except Exception as e:
+        print(f"[Keywords Status] Cleanup error: {e}")
+    
+    # Get job status
+    with keywords_jobs_lock:
+        if job_id not in keywords_jobs:
+            return jsonify({
+                "success": False,
+                "error": "Job not found",
+                "status": "not_found"
+            }), 404
+        
+        job = keywords_jobs[job_id]
+        response = {
+            "success": True,
+            "job_id": job_id,
+            "status": job.get('status', 'unknown'),
+            "progress": job.get('progress', 0),
+            "message": job.get('message', ''),
+            "started_at": job.get('started_at'),
+            "keyword": job.get('keyword')
+        }
+        
+        # Include result data if completed
+        if job.get('status') == 'completed' and job.get('result'):
+            response['data'] = job['result']
+        
+        # Include partial results if available (autocomplete done, waiting for SERP)
+        if job.get('status') == 'partial' and job.get('partial_result'):
+            response['partial_data'] = job['partial_result']
+        
+        # Include error if failed
+        if job.get('status') == 'failed' and job.get('error'):
+            response['error'] = job['error']
+        
+        return jsonify(response)
+
+
 @app.route('/api/keywords/process', methods=['POST'])
 def process_keywords():
     """
@@ -11446,8 +12537,24 @@ def process_keywords():
             for kw in keywords:
                 keywords_with_source.append({'keyword': kw, 'source': 'unknown'})
         
+        # If no keywords from scan, return empty success (not error)
+        # This allows save to still happen and preserve manual keywords
         if not keywords_with_source:
-            return jsonify({"success": False, "error": "No keywords provided"}), 400
+            print("[Keywords Process] No keywords from scan - returning empty success")
+            return jsonify({
+                "success": True,
+                "clusters": [],
+                "final_keywords": [],
+                "unique_topics": [],
+                "stats": {
+                    "input_count": 0,
+                    "output_count": 0,
+                    "plural_merged": 0,
+                    "semantic_merged": 0,
+                    "from_autocomplete": 0,
+                    "from_related": 0
+                }
+            })
         
         # Hebrew plural/singular suffixes
         plural_suffixes = ['ות', 'ים', 'יות', 'אות']
@@ -11607,6 +12714,33 @@ def save_keywords():
         else:
             print(f"[Keywords Save] ⚠️ page_info.json does not exist, will create new")
         
+        # PRESERVE MANUAL KEYWORDS: Before overwriting, extract and re-add manual keywords
+        existing_kw = page_info.get('fetched_keywords', {})
+        existing_clusters = existing_kw.get('clusters', [])
+        
+        # Extract manual clusters and keywords
+        manual_clusters = [c for c in existing_clusters if c.get('source') == 'manual']
+        manual_keywords = [c['primary'] for c in manual_clusters]
+        
+        if manual_clusters:
+            print(f"[Keywords Save] Preserving {len(manual_clusters)} manual keywords: {manual_keywords}")
+            
+            # Add manual items to new data (avoiding duplicates)
+            new_final = keywords_data.get('final_keywords', [])
+            new_clusters = keywords_data.get('clusters', [])
+            
+            for kw in manual_keywords:
+                if kw not in new_final:
+                    new_final.append(kw)
+            
+            for cluster in manual_clusters:
+                if not any(c.get('primary') == cluster['primary'] for c in new_clusters):
+                    new_clusters.append(cluster)
+            
+            keywords_data['final_keywords'] = new_final
+            keywords_data['clusters'] = new_clusters
+            print(f"[Keywords Save] After merge: {len(new_final)} total keywords")
+        
         # Add keywords data
         page_info['fetched_keywords'] = keywords_data
         print(f"[Keywords Save] Added fetched_keywords to page_info")
@@ -11697,6 +12831,103 @@ def delete_keyword():
         
     except Exception as e:
         print(f"[Keywords Delete] Error: {e}")
+        import traceback
+        traceback.print_exc()
+        return jsonify({"success": False, "error": str(e)}), 500
+
+
+@app.route('/api/keywords/add-manual', methods=['POST'])
+def add_manual_keywords():
+    """Add manually entered keywords to a page's fetched_keywords"""
+    try:
+        data = request.json
+        page_path = data.get('page_path')
+        keywords = data.get('keywords', [])  # List of keyword strings
+        mode = data.get('mode', 'append')  # 'append' or 'replace'
+        
+        print(f"[Keywords AddManual] page_path={page_path}, keywords={keywords}, mode={mode}")
+        
+        if not page_path:
+            return jsonify({"success": False, "error": "Missing page_path"}), 400
+        
+        if not keywords or len(keywords) == 0:
+            return jsonify({"success": False, "error": "No keywords provided"}), 400
+        
+        # Use the same path calculation as other functions
+        page_folder = get_page_folder(page_path)
+        page_info_path = BASE_DIR / page_folder / 'page_info.json'
+        
+        print(f"[Keywords AddManual] Loading: {page_info_path}")
+        
+        # Load existing page_info or create new
+        page_info = {}
+        if page_info_path.exists():
+            with open(page_info_path, 'r', encoding='utf-8') as f:
+                page_info = json.load(f)
+        
+        # Get or create fetched_keywords structure
+        fetched_kw = page_info.get('fetched_keywords', {})
+        final_keywords = fetched_kw.get('final_keywords', [])
+        clusters = fetched_kw.get('clusters', [])
+        
+        # If mode is 'replace', remove existing manual keywords first
+        if mode == 'replace':
+            print(f"[Keywords AddManual] Replace mode - removing existing manual keywords")
+            final_keywords = [kw for kw in final_keywords 
+                             if not any(c.get('primary') == kw and c.get('source') == 'manual' for c in clusters)]
+            clusters = [c for c in clusters if c.get('source') != 'manual']
+        
+        # Add new keywords (avoiding duplicates)
+        added_count = 0
+        for kw in keywords:
+            kw_stripped = kw.strip()
+            if not kw_stripped:
+                continue
+            
+            # Check if already exists in final_keywords
+            if kw_stripped in final_keywords:
+                print(f"[Keywords AddManual] Skipping duplicate: {kw_stripped}")
+                continue
+            
+            # Add to final_keywords
+            final_keywords.append(kw_stripped)
+            
+            # Add to clusters with source: 'manual'
+            clusters.append({
+                'primary': kw_stripped,
+                'variants': [],
+                'type': 'unique',
+                'unique_part': kw_stripped,
+                'source': 'manual'
+            })
+            added_count += 1
+            print(f"[Keywords AddManual] Added: {kw_stripped}")
+        
+        # Update fetched_keywords
+        fetched_kw['final_keywords'] = final_keywords
+        fetched_kw['clusters'] = clusters
+        fetched_kw['timestamp'] = datetime.now().isoformat()
+        page_info['fetched_keywords'] = fetched_kw
+        
+        # Ensure directory exists
+        page_info_path.parent.mkdir(parents=True, exist_ok=True)
+        
+        # Save back
+        with open(page_info_path, 'w', encoding='utf-8') as f:
+            json.dump(page_info, f, ensure_ascii=False, indent=2)
+        
+        print(f"[Keywords AddManual] ✅ Added {added_count} keywords, total: {len(final_keywords)}")
+        
+        return jsonify({
+            "success": True,
+            "added_count": added_count,
+            "total_count": len(final_keywords),
+            "final_keywords": final_keywords,
+            "clusters": clusters
+        })
+        
+    except Exception as e:
+        print(f"[Keywords AddManual] Error: {e}")
         import traceback
         traceback.print_exc()
         return jsonify({"success": False, "error": str(e)}), 500
@@ -13018,6 +14249,24 @@ def save_file():
         # Save new content
         with open(full_path, 'w', encoding='utf-8') as f:
             f.write(new_content)
+
+        # Update word count cache for the page (if this is a main HTML file edit)
+        try:
+            full_path_str = str(full_path).lower()
+            if full_path_str.endswith('.html') and not full_path_str.endswith('_backup.html'):
+                page_folder_for_cache = full_path.parent
+                if page_folder_for_cache.is_absolute():
+                    try:
+                        page_folder_rel = page_folder_for_cache.relative_to(BASE_DIR)
+                    except Exception:
+                        page_folder_rel = page_folder_for_cache
+                else:
+                    page_folder_rel = page_folder_for_cache
+                page_folder_key = str(page_folder_rel).replace("\\", "/")
+                word_count_cache.update_single(page_folder_key)
+                print(f"[File Save] Word count cache updated for: {page_folder_key}")
+        except Exception as cache_err:
+            print(f"[File Save] Warning: Could not update word count cache: {cache_err}")
         
         return jsonify({
             "success": True,
@@ -13890,9 +15139,59 @@ def save_global_value():
 def report_interest_rate():
     """Scan all pages for interest rate sentence and check upload status"""
     try:
+        import re
         sentence = request.args.get('sentence', '')
         if not sentence:
             return jsonify({"success": False, "error": "Missing sentence parameter"}), 400
+
+        def _escape_text_fragment(fragment: str) -> str:
+            """Escape literal text but allow flexible whitespace."""
+            return re.escape(fragment).replace(r'\ ', r'\s+')
+
+        def _number_percent_pattern(num_str: str) -> str:
+            """Build a flexible pattern for a specific numeric percent value.
+            Examples:
+              '4'   -> 4% or 4.0% or 4,00%
+              '5.5' -> 5.5% or 5.50% or 5,5%
+            """
+            s = num_str.replace(',', '.')
+            if '.' in s:
+                int_part, dec_part = s.split('.', 1)
+                # Require the provided decimal digits, allow trailing zeros, allow comma or dot
+                return rf"{re.escape(int_part)}[.,]{re.escape(dec_part)}0*\s*%"
+            # Integer: allow optional .0 / ,0 suffixes
+            return rf"{re.escape(s)}(?:[.,]0+)?\s*%"
+
+        def _build_flexible_sentence_regex(sentence_text: str) -> re.Pattern:
+            # Remove leading emoji for core pattern; we will allow optional emoji anyway
+            core = sentence_text.lstrip('💡').strip()
+            # Normalize internal whitespace in the template
+            core = re.sub(r'\s+', ' ', core)
+
+            parts = []
+            last = 0
+            # Find numeric values that are followed by a percent sign in the template
+            for m in re.finditer(r'\d+(?:[.,]\d+)?(?=\s*%)', core):
+                # Add preceding literal fragment
+                if m.start() > last:
+                    parts.append(_escape_text_fragment(core[last:m.start()]))
+                parts.append(_number_percent_pattern(m.group(0)))
+                # Skip the numeric and the following percent sign (and any spaces before it)
+                # We'll advance last to the position right after the first '%' that follows this number.
+                pct_match = re.search(r'\s*%', core[m.end():])
+                if pct_match:
+                    # pct_match is relative to core[m.end():]
+                    last = m.end() + pct_match.end()
+                else:
+                    last = m.end()
+
+            # Trailing literal fragment
+            if last < len(core):
+                parts.append(_escape_text_fragment(core[last:]))
+
+            # Allow optional leading emoji and flexible whitespace
+            full = r'(?:💡\s*)?' + ''.join(parts)
+            return re.compile(full, re.IGNORECASE)
         
         pages_dir = BASE_DIR / "דפים לשינוי"
         
@@ -13931,10 +15230,20 @@ def report_interest_rate():
                         "site": site_name
                     }
                     
-                    # Check if updated sentence exists (with or without emoji prefix)
-                    # Remove emoji prefix if exists for flexible matching
+                    # Check if updated sentence exists (with flexible matching)
+                    # - exact match
+                    # - core match (without leading emoji)
+                    # - regex match that tolerates whitespace + percent formatting (e.g. 4% vs 4.0%)
                     sentence_core = sentence.lstrip('💡').strip()
-                    sentence_found = sentence in content or sentence_core in content
+                    content_norm = re.sub(r'\s+', ' ', content)
+                    sentence_norm = re.sub(r'\s+', ' ', sentence)
+                    sentence_core_norm = re.sub(r'\s+', ' ', sentence_core)
+                    flexible_re = _build_flexible_sentence_regex(sentence)
+                    sentence_found = (
+                        sentence_norm in content_norm
+                        or sentence_core_norm in content_norm
+                        or bool(flexible_re.search(content_norm))
+                    )
                     
                     if sentence_found:
                         updated.append(page_info)
@@ -13995,6 +15304,113 @@ def report_interest_rate():
             }
         })
         
+    except Exception as e:
+        traceback.print_exc()
+        return jsonify({"success": False, "error": str(e)}), 500
+
+
+@app.route('/api/reports/updated-recently-shortcode', methods=['GET'])
+def report_updated_recently_shortcode():
+    """Scan all pages for the 'עודכן לאחרונה' + [current_date ...] shortcode line."""
+    try:
+        import re
+        phrase = request.args.get('phrase', '').strip()
+        if not phrase:
+            phrase = 'עודכן לאחרונה: [current_date format="F Y" hebrew="true"]'
+
+        pages_dir = BASE_DIR / "דפים לשינוי"
+
+        found = []
+        shortcode_only = []
+        label_only = []
+        not_found = []
+
+        # Regex: allow HTML tags around label, flexible whitespace, and tolerate minor quoting differences in shortcode
+        # We intentionally keep it permissive because pages contain <strong> and <br>.
+        label_re = re.compile(r'עודכן\s+לאחרונה\s*:', re.IGNORECASE)
+        shortcode_re = re.compile(
+            r'\[current_date\s+format\s*=\s*["\']F\s+Y["\']\s+hebrew\s*=\s*["\']true["\']\s*\]',
+            re.IGNORECASE
+        )
+
+        for site_dir in pages_dir.iterdir():
+            if not site_dir.is_dir():
+                continue
+            site_name = site_dir.name
+
+            for page_dir in site_dir.iterdir():
+                if not page_dir.is_dir():
+                    continue
+
+                html_files = list(page_dir.glob("*.html"))
+                html_files = [f for f in html_files if '_backup' not in f.name and '.bak' not in f.name]
+                if not html_files:
+                    continue
+
+                html_file = html_files[0]
+                page_name = page_dir.name
+
+                try:
+                    with open(html_file, 'r', encoding='utf-8-sig') as f:
+                        content = f.read()
+
+                    # Normalize whitespace to make matching robust
+                    content_norm = re.sub(r'\s+', ' ', content)
+                    has_label = bool(label_re.search(content_norm))
+                    has_shortcode = bool(shortcode_re.search(content_norm))
+
+                    page_info = {
+                        "name": page_name,
+                        "path": str(html_file),
+                        "site": site_name
+                    }
+
+                    # Upload + special info
+                    page_info_path = page_dir / "page_info.json"
+                    uploaded = False
+                    upload_date = ''
+                    is_special = False
+                    if page_info_path.exists():
+                        try:
+                            with open(page_info_path, 'r', encoding='utf-8-sig') as f:
+                                pi = json.load(f)
+                            last_upload = pi.get('last_upload', '')
+                            is_special = pi.get('is_special', False)
+                            if last_upload:
+                                uploaded = True
+                                upload_date = last_upload
+                        except Exception:
+                            pass
+
+                    page_info["upload_date"] = upload_date
+                    page_info["is_special"] = is_special
+                    page_info["uploaded"] = uploaded
+
+                    # Determine bucket
+                    if has_label and has_shortcode:
+                        found.append(page_info)
+                    elif has_shortcode and not has_label:
+                        shortcode_only.append(page_info)
+                    elif has_label and not has_shortcode:
+                        label_only.append(page_info)
+                    else:
+                        not_found.append(page_info)
+
+                except Exception as e:
+                    print(f"[UpdatedRecently] Error reading {html_file}: {e}")
+                    continue
+
+        return jsonify({
+            "success": True,
+            "data": {
+                "phrase": phrase,
+                "found": found,
+                "shortcode_only": shortcode_only,
+                "label_only": label_only,
+                "not_found": not_found
+            }
+        })
+
     except Exception as e:
         traceback.print_exc()
         return jsonify({"success": False, "error": str(e)}), 500

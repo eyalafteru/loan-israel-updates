@@ -702,6 +702,17 @@
             border-color: #10b981;
         }
         
+        .btn-add-kw-main {
+            background: rgba(16, 185, 129, 0.1);
+            border-color: rgba(16, 185, 129, 0.3);
+            color: #10b981;
+        }
+        
+        .btn-add-kw-main:hover {
+            background: rgba(16, 185, 129, 0.2);
+            border-color: #10b981;
+        }
+        
         .page-keywords-panel {
             background: var(--bg-tertiary);
             border-top: 1px solid var(--border);
@@ -769,6 +780,17 @@
             color: #a5b4fc;
         }
         
+        /* Manual keywords - green */
+        .page-keywords-panel .keyword-tag.from-manual {
+            background: rgba(16, 185, 129, 0.15);
+            color: #10b981;
+            border-right: 2px solid #10b981;
+        }
+        
+        .page-keywords-panel .keyword-tag.from-manual:hover {
+            background: rgba(16, 185, 129, 0.25);
+        }
+        
         .page-keywords-panel .keyword-delete {
             cursor: pointer;
             color: #ef4444;
@@ -807,6 +829,36 @@
         
         .page-keywords-panel .legend-dot.related {
             background: #fbbf24;
+        }
+        
+        .page-keywords-panel .legend-dot.manual {
+            background: #10b981;
+        }
+        
+        /* Keywords Progress Bar */
+        .keywords-progress-container {
+            padding: 10px;
+        }
+        
+        .keywords-progress-bar {
+            height: 6px;
+            background: var(--bg-secondary);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 8px;
+        }
+        
+        .keywords-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+        
+        .keywords-progress-text {
+            font-size: 12px;
+            color: var(--text-secondary);
+            text-align: center;
         }
         
         .page-item.is-running {
@@ -5743,6 +5795,25 @@
             color: var(--text-secondary);
         }
         
+        .loading-spinner-small {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border: 2px solid rgba(59, 130, 246, 0.3);
+            border-top-color: var(--accent-blue);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        
+        .serp-loading-indicator {
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+        
         /* Heatmap */
         .heatmap-modal {
             max-width: 1200px !important;
@@ -6657,6 +6728,7 @@
                                 <div class="shortcode-item" onclick="copyShortcode('PAGE_WORD_COUNT')" ondblclick="insertShortcode('PAGE_WORD_COUNT')" title="מספר מילים בעמוד">📝 {{PAGE_WORD_COUNT}}</div>
                                 <div class="shortcode-item" onclick="copyShortcode('KEYWORDS_AUTOCOMPLETE')" ondblclick="insertShortcode('KEYWORDS_AUTOCOMPLETE')" title="מילות מפתח">📄 {{KEYWORDS_AUTOCOMPLETE}}</div>
                                 <div class="shortcode-item" onclick="copyShortcode('KEYWORDS_RELATED')" ondblclick="insertShortcode('KEYWORDS_RELATED')" title="חיפושים קשורים">📄 {{KEYWORDS_RELATED}}</div>
+                                <div class="shortcode-item" onclick="copyShortcode('KEYWORDS_MANUAL')" ondblclick="insertShortcode('KEYWORDS_MANUAL')" title="מילות מפתח ידניות">✏️ {{KEYWORDS_MANUAL}}</div>
                                 <div class="shortcode-item" onclick="copyShortcode('SERP_ORGANIC')" ondblclick="insertShortcode('SERP_ORGANIC')" title="תוצאות">📄 {{SERP_ORGANIC}}</div>
                                 <div class="shortcode-item" onclick="copyShortcode('SERP_AI_OVERVIEW')" ondblclick="insertShortcode('SERP_AI_OVERVIEW')" title="AI">📄 {{SERP_AI_OVERVIEW}}</div>
                                 <div class="shortcode-item" onclick="copyShortcode('DENSITY_ANALYSIS')" ondblclick="insertShortcode('DENSITY_ANALYSIS')" title="ניתוח צפיפות מילות מפתח">📊 {{DENSITY_ANALYSIS}}</div>
@@ -6851,6 +6923,7 @@
             <!-- Report Type Tabs -->
             <div class="reports-tabs">
                 <button class="report-type-tab active" data-report="interest-rate" onclick="switchReportType('interest-rate')">💰 עדכוני ריבית</button>
+                <button class="report-type-tab" data-report="updated-recently" onclick="switchReportType('updated-recently')">🕒 עודכן לאחרונה</button>
                 <button class="report-type-tab" data-report="whatsapp" onclick="switchReportType('whatsapp')">📱 קישורי WhatsApp</button>
                 <button class="report-type-tab" data-report="year-update" onclick="switchReportType('year-update')">📅 עדכון שנה</button>
             </div>
@@ -6904,6 +6977,50 @@
                             </tr>
                         </thead>
                         <tbody id="interestRateTableBody">
+                            <tr><td colspan="5" class="report-loading"><div class="spinner"></div><br>לחץ על "סרוק עמודים" להתחלה</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Updated Recently Shortcode Report -->
+            <div class="report-content" id="reportUpdatedRecently">
+                <div class="report-config">
+                    <label>הביטוי לאיתור:</label>
+                    <input type="text" id="updatedRecentlyPhrase" value="עודכן לאחרונה: [current_date format=&quot;F Y&quot; hebrew=&quot;true&quot;]" />
+                    <div style="margin-top: 0.5rem; display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
+                        <button class="btn btn-secondary" onclick="scanUpdatedRecentlyShortcode()">🔍 סרוק עמודים</button>
+                        <div style="display: flex; gap: 0.5rem; align-items: center;">
+                            <label style="font-size: 0.9rem;">סטטוס:</label>
+                            <select id="updatedRecentlyFilter" onchange="filterUpdatedRecentlyTable()" style="padding: 0.4rem; border-radius: 4px; background: var(--bg-tertiary); color: var(--text); border: 1px solid var(--border);">
+                                <option value="all">הכל</option>
+                                <option value="found">✅ נמצא (label+shortcode)</option>
+                                <option value="shortcode_only">🧩 רק shortcode</option>
+                                <option value="label_only">🏷️ רק label</option>
+                                <option value="not_found">➖ לא נמצא</option>
+                                <option value="special">⭐ עמודים מיוחדים</option>
+                            </select>
+                        </div>
+                        <span id="updatedRecentlyFilterInfo" style="font-size: 0.85rem; color: var(--text-secondary);"></span>
+                    </div>
+                </div>
+                
+                <div class="report-stats" id="updatedRecentlyStats">
+                    <!-- Stats populated by JS -->
+                </div>
+                
+                <div class="report-table-container">
+                    <table class="report-table">
+                        <thead>
+                            <tr>
+                                <th>עמוד</th>
+                                <th>אתר</th>
+                                <th>סטטוס</th>
+                                <th>עלה לוורדפרס</th>
+                                <th>פעולות</th>
+                            </tr>
+                        </thead>
+                        <tbody id="updatedRecentlyTableBody">
                             <tr><td colspan="5" class="report-loading"><div class="spinner"></div><br>לחץ על "סרוק עמודים" להתחלה</td></tr>
                         </tbody>
                     </table>
@@ -7602,6 +7719,14 @@
                             <div class="info-item" style="display: flex; align-items: center; gap: 10px;">
                                 <label>מילת מפתח:</label>
                                 <input type="text" id="uploadKeywordInput" style="width: 150px; padding: 5px 8px; border: 1px solid #444; border-radius: 5px; background: #2a2a2a; color: #fff; font-size: 14px;" />
+                            </div>
+                            <div class="info-item" style="display: flex; align-items: center; gap: 10px;">
+                                <label>Template:</label>
+                                <select id="uploadTemplateInput" style="width: 180px; padding: 5px 8px; border: 1px solid #444; border-radius: 5px; background: #2a2a2a; color: #fff; font-size: 14px;">
+                                    <option value="">Default Template</option>
+                                    <option value="template-clean.php" selected>Clean</option>
+                                    <option value="template-single-eyal.php">Eyal Custom Post</option>
+                                </select>
                             </div>
                             <div class="info-item">
                                 <label>URL:</label>
@@ -9386,121 +9511,254 @@ console.log('🚀 KeywordDensityAnalyzer, SpamAnalyzer, HeaderQualityScorer & In
                         return;
                     }
                     
-                    // Fetch keywords
+                    // Fetch keywords using async flow
                     loadingEl.style.display = 'block';
-                    contentEl.innerHTML = '';
+                    showKeywordsProgress(contentEl);
                     
                     // Get page URL for rank tracking
                     const pageUrl = pageInfoCache[pagePath]?.url || page?.url || '';
                     
-                    console.log('🔍 [Keywords Fetch] Starting...', 'keyword:', keyword, 'pageUrl:', pageUrl, 'pagePath:', pagePath);
+                    console.log('🔍 [Keywords Fetch Async] Starting...', 'keyword:', keyword, 'pageUrl:', pageUrl, 'pagePath:', pagePath);
+                    
+                    // Save existing manual keywords BEFORE starting scan
+                    const existingKwBeforeScan = pageInfoCache[pagePath]?.fetched_keywords || {};
+                    const existingClustersBeforeScan = existingKwBeforeScan.clusters || [];
+                    const manualClustersBeforeScan = existingClustersBeforeScan.filter(c => c.source === 'manual');
+                    console.log('🔍 [Keywords Fetch] Preserving manual keywords:', manualClustersBeforeScan.map(c => c.primary));
                     
                     try {
-                        // Fetch from API with rank tracking
-                        const fetchResult = await apiCall('/api/keywords/fetch', {
+                        // Start async fetch
+                        const startResult = await apiCall('/api/keywords/fetch-async', {
                             method: 'POST',
                             body: JSON.stringify({ 
                                 keyword: keyword,
-                                page_url: pageUrl,  // For rank checking
-                                page_path: pagePath  // For saving rank history
+                                page_url: pageUrl,
+                                page_path: pagePath
                             })
                         });
                         
-                        console.log('📊 [Keywords Fetch] Result:', 
-                            'success:', fetchResult.success,
-                            'autocomplete:', fetchResult.autocomplete?.length,
-                            'related:', fetchResult.related?.length,
-                            'rank_position:', fetchResult.rank_position,
-                            'full result:', JSON.stringify(fetchResult, null, 2));
-                        
-                        if (!fetchResult.success) {
-                            throw new Error(fetchResult.error || 'שגיאה בשליפה');
+                        if (!startResult.success) {
+                            throw new Error(startResult.error || 'שגיאה בהתחלת סריקה');
                         }
                         
-                        // Process keywords - send sources separately for color coding
-                        const processResult = await apiCall('/api/keywords/process', {
-                            method: 'POST',
-                            body: JSON.stringify({
-                                autocomplete: fetchResult.autocomplete || [],
-                                related: fetchResult.related || [],
-                                main_keyword: keyword
-                            })
-                        });
+                        const jobId = startResult.job_id;
+                        console.log('🔍 [Keywords Fetch Async] Job started:', jobId);
                         
-                        if (!processResult.success) {
-                            throw new Error(processResult.error || 'שגיאה בעיבוד');
-                        }
-                        
-                        // Save to page_info (include rank position, AI results, competitor data)
-                        console.log('💾 [Keywords Save] Saving keywords for:', pagePath);
-                        const saveResult = await apiCall('/api/keywords/save', {
-                            method: 'POST',
-                            body: JSON.stringify({
-                                page_path: pagePath,
-                                keywords_data: {
-                                    timestamp: new Date().toISOString(),
-                                    main_keyword: keyword,
-                                    clusters: processResult.clusters,
-                                    final_keywords: processResult.final_keywords,
-                                    unique_topics: processResult.unique_topics,
-                                    rank_position: fetchResult.rank_position || null,
-                                    rank_checked_url: pageUrl,
-                                    organic_results: fetchResult.organic_results || [],
-                                    ai_mode_results: fetchResult.ai_mode_results || [],
-                                    ai_rank_position: fetchResult.ai_rank_position || null,
-                                    competitor_data: fetchResult.competitor_data || []
+                        // Start polling for completion
+                        startKeywordsPolling(jobId, contentEl, 
+                            // onComplete callback
+                            async (fetchResult) => {
+                                loadingEl.style.display = 'none';
+                                console.log('📊 [Keywords Fetch Async] Completed:', fetchResult);
+                                
+                                try {
+                                    // Process keywords
+                                    const processResult = await apiCall('/api/keywords/process', {
+                                        method: 'POST',
+                                        body: JSON.stringify({
+                                            autocomplete: fetchResult.autocomplete || [],
+                                            related: fetchResult.related || [],
+                                            main_keyword: keyword
+                                        })
+                                    });
+                                    
+                                    if (!processResult.success) {
+                                        throw new Error(processResult.error || 'שגיאה בעיבוד');
+                                    }
+                                    
+                                    // Merge manual keywords with new results (avoid duplicates)
+                                    let mergedFinal = [...processResult.final_keywords];
+                                    let mergedClusters = [...processResult.clusters];
+                                    
+                                    for (const manualCluster of manualClustersBeforeScan) {
+                                        if (!mergedFinal.includes(manualCluster.primary)) {
+                                            mergedFinal.push(manualCluster.primary);
+                                            mergedClusters.push(manualCluster);
+                                        }
+                                    }
+                                    console.log('📊 [Keywords Fetch] Merged:', processResult.final_keywords.length, 'scanned +', manualClustersBeforeScan.length, 'manual =', mergedFinal.length, 'total');
+                                    
+                                    // Save to page_info (with merged data)
+                                    console.log('💾 [Keywords Save] Saving keywords for:', pagePath);
+                                    const saveResult = await apiCall('/api/keywords/save', {
+                                        method: 'POST',
+                                        body: JSON.stringify({
+                                            page_path: pagePath,
+                                            keywords_data: {
+                                                timestamp: new Date().toISOString(),
+                                                main_keyword: keyword,
+                                                clusters: mergedClusters,
+                                                final_keywords: mergedFinal,
+                                                unique_topics: processResult.unique_topics,
+                                                rank_position: fetchResult.rank_position || null,
+                                                rank_checked_url: pageUrl,
+                                                organic_results: fetchResult.organic_results || [],
+                                                ai_mode_results: fetchResult.ai_mode_results || [],
+                                                ai_rank_position: fetchResult.ai_rank_position || null,
+                                                competitor_data: fetchResult.competitor_data || []
+                                            }
+                                        })
+                                    });
+                                    
+                                    if (!saveResult.success) {
+                                        console.error('❌ [Keywords Save] Failed:', saveResult.error);
+                                        showToast('מילות מפתח נטענו אבל לא נשמרו! ' + (saveResult.error || ''), 'warning');
+                                    }
+                                    
+                                    // Update cache with merged results
+                                    if (!pageInfoCache[pagePath]) pageInfoCache[pagePath] = {};
+                                    pageInfoCache[pagePath].fetched_keywords = {
+                                        final_keywords: mergedFinal,
+                                        clusters: mergedClusters,
+                                        organic_results: fetchResult.organic_results || [],
+                                        rank_position: fetchResult.rank_position,
+                                        ai_mode_results: fetchResult.ai_mode_results || [],
+                                        ai_rank_position: fetchResult.ai_rank_position || null,
+                                        competitor_data: fetchResult.competitor_data || []
+                                    };
+                                    
+                                    // Display merged results
+                                    const displayData = {
+                                        final_keywords: mergedFinal,
+                                        clusters: mergedClusters,
+                                        organic_results: fetchResult.organic_results || [],
+                                        rank_position: fetchResult.rank_position,
+                                        ai_mode_results: fetchResult.ai_mode_results || [],
+                                        ai_rank_position: fetchResult.ai_rank_position || null
+                                    };
+                                    displayPageKeywords(contentEl, displayData, pagePath, fetchResult.rank_position);
+                                    
+                                    // Update button icon
+                                    const btn = pageItem.querySelector('.btn-keywords');
+                                    if (btn) {
+                                        btn.classList.add('has-keywords');
+                                        btn.innerHTML = '🔑';
+                                        btn.title = `${mergedFinal.length} מילות מפתח`;
+                                    }
+                                    
+                                    // Show success toast
+                                    const rankMsg = fetchResult.rank_position 
+                                        ? ` | מיקום בגוגל: #${fetchResult.rank_position}` 
+                                        : '';
+                                    const newCount = processResult.final_keywords.length;
+                                    showToast(`נמצאו ${newCount} מילות מפתח חדשות (סה"כ ${mergedFinal.length})${rankMsg}`, 'success');
+                                    
+                                } catch (processError) {
+                                    console.error('Keywords process error:', processError);
+                                    contentEl.innerHTML = `<div style="color: var(--danger);">❌ ${processError.message}</div>`;
                                 }
-                            })
-                        });
-                        
-                        if (!saveResult.success) {
-                            console.error('❌ [Keywords Save] Failed:', saveResult.error);
-                            showToast('מילות מפתח נטענו אבל לא נשמרו! ' + (saveResult.error || ''), 'warning');
-                        } else {
-                            console.log('✅ [Keywords Save] Saved successfully!');
-                        }
-                        
-                        // Update cache
-                        if (!pageInfoCache[pagePath]) pageInfoCache[pagePath] = {};
-                        pageInfoCache[pagePath].fetched_keywords = {
-                            final_keywords: processResult.final_keywords,
-                            clusters: processResult.clusters,
-                            organic_results: fetchResult.organic_results || [],
-                            rank_position: fetchResult.rank_position,
-                            ai_mode_results: fetchResult.ai_mode_results || [],
-                            ai_rank_position: fetchResult.ai_rank_position || null,
-                            competitor_data: fetchResult.competitor_data || []
-                        };
-                        
-                        // Display with rank position - add organic_results and AI data
-                        const displayData = {
-                            ...processResult,
-                            organic_results: fetchResult.organic_results || [],
-                            rank_position: fetchResult.rank_position,
-                            ai_mode_results: fetchResult.ai_mode_results || [],
-                            ai_rank_position: fetchResult.ai_rank_position || null
-                        };
-                        displayPageKeywords(contentEl, displayData, pagePath, fetchResult.rank_position);
-                        
-                        // Update button icon
-                        const btn = pageItem.querySelector('.btn-keywords');
-                        if (btn) {
-                            btn.classList.add('has-keywords');
-                            btn.innerHTML = '🔑';
-                            btn.title = `${processResult.final_keywords.length} מילות מפתח`;
-                        }
-                        
-                        // Show rank in toast if found
-                        const rankMsg = fetchResult.rank_position 
-                            ? ` | מיקום בגוגל: #${fetchResult.rank_position}` 
-                            : '';
-                        showToast(`נמצאו ${processResult.final_keywords.length} מילות מפתח${rankMsg}`, 'success');
+                            },
+                            // onError callback
+                            (errorMsg) => {
+                                loadingEl.style.display = 'none';
+                                console.error('Keywords fetch error:', errorMsg);
+                                contentEl.innerHTML = `<div style="color: var(--danger);">❌ ${errorMsg}</div>`;
+                            },
+                            // onPartial callback - process and save autocomplete results immediately
+                            async (partialResult) => {
+                                console.log('📊 [Keywords Fetch Async] Partial results:', partialResult);
+                                loadingEl.style.display = 'none';
+                                try {
+                                    // Get existing manual keywords from cache BEFORE processing
+                                    const existingKw = pageInfoCache[pagePath]?.fetched_keywords || {};
+                                    const existingClusters = existingKw.clusters || [];
+                                    const manualClusters = existingClusters.filter(c => c.source === 'manual');
+                                    const manualKeywords = manualClusters.map(c => c.primary);
+                                    console.log('📊 [Keywords Partial] Existing manual keywords:', manualKeywords);
+                                    
+                                    const processResult = await apiCall('/api/keywords/process', {
+                                        method: 'POST',
+                                        body: JSON.stringify({
+                                            autocomplete: partialResult.autocomplete || [],
+                                            related: [],
+                                            main_keyword: keyword
+                                        })
+                                    });
+                                    
+                                    if (processResult.success) {
+                                        // Merge manual keywords with new results (avoid duplicates)
+                                        let mergedFinal = [...processResult.final_keywords];
+                                        let mergedClusters = [...processResult.clusters];
+                                        
+                                        for (const manualCluster of manualClusters) {
+                                            if (!mergedFinal.includes(manualCluster.primary)) {
+                                                mergedFinal.push(manualCluster.primary);
+                                                mergedClusters.push(manualCluster);
+                                            }
+                                        }
+                                        
+                                        // Save merged results
+                                        await apiCall('/api/keywords/save', {
+                                            method: 'POST',
+                                            body: JSON.stringify({
+                                                page_path: pagePath,
+                                                keywords_data: {
+                                                    timestamp: new Date().toISOString(),
+                                                    main_keyword: keyword,
+                                                    clusters: mergedClusters,
+                                                    final_keywords: mergedFinal,
+                                                    unique_topics: processResult.unique_topics,
+                                                    rank_position: null,
+                                                    rank_checked_url: pageUrl,
+                                                    organic_results: [],
+                                                    ai_mode_results: [],
+                                                    ai_rank_position: null,
+                                                    competitor_data: []
+                                                }
+                                            })
+                                        });
+                                        
+                                        // Update cache with merged results
+                                        if (!pageInfoCache[pagePath]) pageInfoCache[pagePath] = {};
+                                        pageInfoCache[pagePath].fetched_keywords = {
+                                            final_keywords: mergedFinal,
+                                            clusters: mergedClusters,
+                                            organic_results: [],
+                                            rank_position: null
+                                        };
+                                        
+                                        // DISPLAY merged results immediately!
+                                        const partialDisplayData = {
+                                            final_keywords: mergedFinal,
+                                            clusters: mergedClusters,
+                                            organic_results: [],
+                                            rank_position: null,
+                                            ai_mode_results: [],
+                                            ai_rank_position: null
+                                        };
+                                        displayPageKeywords(contentEl, partialDisplayData, pagePath, null);
+                                        
+                                        // Add loading indicator for SERP
+                                        const serpLoadingHtml = `
+                                            <div class="serp-loading-indicator" style="margin-top: 0.5rem; padding: 0.5rem; background: rgba(59, 130, 246, 0.1); border-radius: 6px; display: flex; align-items: center; gap: 0.5rem;">
+                                                <span class="loading-spinner-small"></span>
+                                                <span style="color: var(--accent-blue); font-size: 0.8rem;">סורק תוצאות SERP ומתחרים...</span>
+                                            </div>
+                                        `;
+                                        contentEl.insertAdjacentHTML('beforeend', serpLoadingHtml);
+                                        
+                                        // Update button icon
+                                        const btn = pageItem.querySelector('.btn-keywords');
+                                        if (btn) {
+                                            btn.classList.add('has-keywords');
+                                            btn.innerHTML = '🔑';
+                                            btn.title = `${mergedFinal.length} מילות מפתח (ממתין ל-SERP)`;
+                                        }
+                                        
+                                        const newCount = processResult.final_keywords.length;
+                                        const totalCount = mergedFinal.length;
+                                        showToast(`נמצאו ${newCount} השלמות (סה"כ ${totalCount}), ממתין לתוצאות SERP...`, 'info');
+                                    }
+                                } catch (e) {
+                                    console.error('[Keywords Partial] Error:', e);
+                                }
+                            }
+                        );
                         
                     } catch (error) {
                         console.error('Keywords fetch error:', error);
-                        contentEl.innerHTML = `<div style="color: var(--danger);">❌ ${error.message}</div>`;
-                    } finally {
                         loadingEl.style.display = 'none';
+                        contentEl.innerHTML = `<div style="color: var(--danger);">❌ ${error.message}</div>`;
                     }
                 }
             } else {
@@ -9515,8 +9773,29 @@ console.log('🚀 KeywordDensityAnalyzer, SpamAnalyzer, HeaderQualityScorer & In
             // Use passed rankPosition or get from data
             const rank = rankPosition ?? data.rank_position ?? null;
             
+            // Escape pagePath for use in onclick handlers
+            const escapedPagePath = (pagePath || '').replace(/'/g, "\\'").replace(/\\/g, "\\\\");
+            
             if (keywords.length === 0) {
-                container.innerHTML = '<div style="color: var(--text-secondary);">לא נמצאו מילות מפתח</div>';
+                // Show empty state with + button for manual keywords and rescan button
+                // Show SERP button if we have scan timestamp OR organic/AI results (full data may be lazy-loaded on click)
+                const emptyOrganic = data.organic_results || [];
+                const emptyAi = data.ai_mode_results || [];
+                const hasSerpScan = !!data.timestamp || data.rank_position !== null || data.ai_rank_position !== null;
+                const emptySerpBtn = (hasSerpScan || emptyOrganic.length > 0 || emptyAi.length > 0) ? 
+                    `<button class="btn-mini btn-serp" onclick="event.stopPropagation(); showSerpResults('${escapedPagePath}')" title="הצג תוצאות SERP">🔍</button>` : '';
+                
+                container.innerHTML = `
+                    <div class="keywords-header">
+                        <span class="keywords-title" style="color: var(--text-secondary);">אין מילות מפתח</span>
+                        <div class="keywords-actions">
+                            ${emptySerpBtn}
+                            <button class="btn-mini btn-add-kw" onclick="event.stopPropagation(); showAddKeywordsModal('${escapedPagePath}')" title="הוסף מילות מפתח ידנית">➕</button>
+                            <button class="btn-mini btn-rescan" onclick="event.stopPropagation(); rescanKeywords(this, '${escapedPagePath}')" title="סרוק מילות מפתח">🔄</button>
+                        </div>
+                    </div>
+                    <div style="color: var(--text-secondary); font-size: 0.75rem; margin-top: 0.25rem;">לחץ ➕ להוספה ידנית או 🔄 לסריקה</div>
+                `;
                 return;
             }
             
@@ -9539,13 +9818,27 @@ console.log('🚀 KeywordDensityAnalyzer, SpamAnalyzer, HeaderQualityScorer & In
             // Count by source
             const autocompleteCount = displayClusters.filter(c => c.source === 'autocomplete').length;
             const relatedCount = displayClusters.filter(c => c.source === 'related').length;
+            const manualCount = displayClusters.filter(c => c.source === 'manual').length;
+            
+            // Build legend HTML - only show sources that have keywords
+            let legendHtml = '';
+            if (autocompleteCount > 0) {
+                legendHtml += `<span class="legend-item"><span class="legend-dot autocomplete"></span> השלמות (${autocompleteCount})</span>`;
+            }
+            if (relatedCount > 0) {
+                legendHtml += `<span class="legend-item"><span class="legend-dot related"></span> חיפושים קשורים (${relatedCount})</span>`;
+            }
+            if (manualCount > 0) {
+                legendHtml += `<span class="legend-item"><span class="legend-dot manual"></span> ידני (${manualCount})</span>`;
+            }
             
             // Rank is now shown in page title, not in keywords panel
             
             // Check if we have organic results OR AI results
             const organicResults = data.organic_results || [];
             const aiResults = data.ai_mode_results || [];
-            const showSerpBtn = (organicResults.length > 0 || aiResults.length > 0) ? 
+            const hasSerpScan = !!data.timestamp || data.rank_position !== null || data.ai_rank_position !== null;
+            const showSerpBtn = (hasSerpScan || organicResults.length > 0 || aiResults.length > 0) ? 
                 `<button class="btn-mini btn-serp" onclick="event.stopPropagation(); showSerpResults('${(pagePath || '').replace(/'/g, "\\'").replace(/\\/g, "\\\\")}')" title="הצג תוצאות SERP">🔍</button>` : '';
             
             let html = `
@@ -9554,12 +9847,12 @@ console.log('🚀 KeywordDensityAnalyzer, SpamAnalyzer, HeaderQualityScorer & In
                     <div class="keywords-actions">
                         ${showSerpBtn}
                         <button class="btn-mini" onclick="event.stopPropagation(); copyPageKeywords(this)" title="העתק">📋</button>
+                        <button class="btn-mini btn-add-kw" onclick="event.stopPropagation(); showAddKeywordsModal('${(pagePath || '').replace(/'/g, "\\'").replace(/\\/g, "\\\\")}')" title="הוסף מילות מפתח ידנית">➕</button>
                         <button class="btn-mini btn-rescan" onclick="event.stopPropagation(); rescanKeywords(this, '${(pagePath || '').replace(/'/g, "\\'").replace(/\\/g, "\\\\")}')" title="סרוק מחדש">🔄</button>
                     </div>
                 </div>
                 <div class="keywords-legend">
-                    <span class="legend-item"><span class="legend-dot autocomplete"></span> השלמות (${autocompleteCount})</span>
-                    <span class="legend-item"><span class="legend-dot related"></span> חיפושים קשורים (${relatedCount})</span>
+                    ${legendHtml}
                 </div>
                 <div class="keywords-list">
             `;
@@ -9567,9 +9860,12 @@ console.log('🚀 KeywordDensityAnalyzer, SpamAnalyzer, HeaderQualityScorer & In
             displayClusters.forEach((cluster, idx) => {
                 const isCluster = cluster.variants && cluster.variants.length > 0;
                 const escapedPrimary = cluster.primary.replace(/'/g, "\\'").replace(/"/g, '&quot;');
-                const sourceClass = cluster.source === 'related' ? 'from-related' : 'from-autocomplete';
+                const sourceClass = cluster.source === 'related' ? 'from-related' : 
+                                   cluster.source === 'manual' ? 'from-manual' : 'from-autocomplete';
+                const sourceTitle = cluster.source === 'related' ? 'מחיפושים קשורים' : 
+                                   cluster.source === 'manual' ? 'הוזן ידנית' : 'מהשלמות';
                 html += `
-                    <span class="keyword-tag ${isCluster ? 'cluster' : ''} ${sourceClass}" title="${isCluster ? 'כולל: ' + cluster.variants.join(', ') : (cluster.source === 'related' ? 'מחיפושים קשורים' : 'מהשלמות')}">
+                    <span class="keyword-tag ${isCluster ? 'cluster' : ''} ${sourceClass}" title="${isCluster ? 'כולל: ' + cluster.variants.join(', ') : sourceTitle}">
                         ${cluster.primary}
                         <span class="keyword-delete" onclick="event.stopPropagation(); deleteKeyword(this, '${escapedPrimary}')" title="מחק">✕</span>
                     </span>`;
@@ -9644,10 +9940,18 @@ console.log('🚀 KeywordDensityAnalyzer, SpamAnalyzer, HeaderQualityScorer & In
                 if (legendEl) {
                     const autocompleteCount = panel.querySelectorAll('.keyword-tag.from-autocomplete').length;
                     const relatedCount = panel.querySelectorAll('.keyword-tag.from-related').length;
-                    legendEl.innerHTML = `
-                        <span class="legend-item"><span class="legend-dot autocomplete"></span> השלמות (${autocompleteCount})</span>
-                        <span class="legend-item"><span class="legend-dot related"></span> חיפושים קשורים (${relatedCount})</span>
-                    `;
+                    const manualCount = panel.querySelectorAll('.keyword-tag.from-manual').length;
+                    let legendHtml = '';
+                    if (autocompleteCount > 0) {
+                        legendHtml += `<span class="legend-item"><span class="legend-dot autocomplete"></span> השלמות (${autocompleteCount})</span>`;
+                    }
+                    if (relatedCount > 0) {
+                        legendHtml += `<span class="legend-item"><span class="legend-dot related"></span> חיפושים קשורים (${relatedCount})</span>`;
+                    }
+                    if (manualCount > 0) {
+                        legendHtml += `<span class="legend-item"><span class="legend-dot manual"></span> ידני (${manualCount})</span>`;
+                    }
+                    legendEl.innerHTML = legendHtml;
                 }
                 
                 // Update button if no keywords left
@@ -9676,8 +9980,122 @@ console.log('🚀 KeywordDensityAnalyzer, SpamAnalyzer, HeaderQualityScorer & In
             }
         }
         
+        // Manual Keywords Modal State
+        let addKeywordsModalPagePath = null;
+        
+        function showAddKeywordsModal(pagePath) {
+            addKeywordsModalPagePath = pagePath;
+            const modal = document.getElementById('addKeywordsModal');
+            const textarea = document.getElementById('manualKeywordsInput');
+            
+            // Clear previous input
+            textarea.value = '';
+            document.querySelector('input[name="addKeywordsMode"][value="append"]').checked = true;
+            
+            // Show modal
+            modal.style.display = 'flex';
+            textarea.focus();
+        }
+        
+        function closeAddKeywordsModal(event) {
+            // If event is provided, only close if clicking the overlay
+            if (event && event.target !== event.currentTarget) return;
+            
+            const modal = document.getElementById('addKeywordsModal');
+            modal.style.display = 'none';
+            addKeywordsModalPagePath = null;
+        }
+        
+        async function submitManualKeywords() {
+            const textarea = document.getElementById('manualKeywordsInput');
+            const mode = document.querySelector('input[name="addKeywordsMode"]:checked').value;
+            const rawInput = textarea.value.trim();
+            
+            if (!rawInput) {
+                showToast('יש להזין מילות מפתח', 'warning');
+                return;
+            }
+            
+            if (!addKeywordsModalPagePath) {
+                showToast('שגיאה: לא נמצא עמוד', 'error');
+                closeAddKeywordsModal();
+                return;
+            }
+            
+            // Parse keywords - split by newlines or commas
+            const keywords = rawInput
+                .split(/[\n,]+/)
+                .map(kw => kw.trim())
+                .filter(kw => kw.length > 0);
+            
+            if (keywords.length === 0) {
+                showToast('לא נמצאו מילות מפתח תקינות', 'warning');
+                return;
+            }
+            
+            console.log('[AddManualKeywords] Submitting:', keywords, 'mode:', mode, 'page:', addKeywordsModalPagePath);
+            
+            try {
+                const result = await apiCall('/api/keywords/add-manual', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        page_path: addKeywordsModalPagePath,
+                        keywords: keywords,
+                        mode: mode
+                    })
+                });
+                
+                if (!result.success) {
+                    throw new Error(result.error || 'שגיאה בהוספת מילות מפתח');
+                }
+                
+                console.log('[AddManualKeywords] Result:', result);
+                
+                // Update cache
+                if (!pageInfoCache[addKeywordsModalPagePath]) {
+                    pageInfoCache[addKeywordsModalPagePath] = {};
+                }
+                pageInfoCache[addKeywordsModalPagePath].fetched_keywords = {
+                    final_keywords: result.final_keywords,
+                    clusters: result.clusters
+                };
+                
+                // Re-render keywords panel
+                const pageItem = document.querySelector(`.page-item[data-path="${addKeywordsModalPagePath.replace(/\\/g, '\\\\')}"]`);
+                if (pageItem) {
+                    const panel = pageItem.querySelector('.page-keywords-panel');
+                    if (panel) {
+                        const contentEl = panel.querySelector('.keywords-content');
+                        if (contentEl) {
+                            displayPageKeywords(contentEl, {
+                                final_keywords: result.final_keywords,
+                                clusters: result.clusters
+                            }, addKeywordsModalPagePath);
+                        }
+                    }
+                    
+                    // Update button
+                    const btn = pageItem.querySelector('.btn-keywords');
+                    if (btn && result.total_count > 0) {
+                        btn.classList.add('has-keywords');
+                        btn.innerHTML = '🔑';
+                        btn.title = `${result.total_count} מילות מפתח`;
+                    }
+                }
+                
+                showToast(`נוספו ${result.added_count} מילות מפתח`, 'success');
+                closeAddKeywordsModal();
+                
+            } catch (error) {
+                console.error('[AddManualKeywords] Error:', error);
+                showToast(error.message, 'error');
+            }
+        }
+        
         function showSerpResults(pagePath) {
-            const cachedInfo = pageInfoCache[pagePath];
+            const normPath = (p) => (p || '').replace(/\\/g, '/');
+            const key = normPath(pagePath);
+            let cachedInfo = pageInfoCache[key] || pageInfoCache[pagePath];
             console.log('🔍 [showSerpResults] pagePath:', pagePath);
             console.log('🔍 [showSerpResults] cachedInfo:', cachedInfo);
             console.log('🔍 [showSerpResults] fetched_keywords:', cachedInfo?.fetched_keywords);
@@ -9693,8 +10111,22 @@ console.log('🚀 KeywordDensityAnalyzer, SpamAnalyzer, HeaderQualityScorer & In
             console.log('🔍 [showSerpResults] aiModeResults data:', aiModeResults);
             console.log('🔍 [showSerpResults] ourRank:', ourRank, 'aiRank:', aiRank);
             
+            // If we only have a lightweight keywords summary (no SERP arrays), lazy-load full page_info then retry
             if (organicResults.length === 0 && aiModeResults.length === 0) {
-                showToast('אין תוצאות SERP זמינות - סרוק מחדש', 'warning');
+                (async () => {
+                    try {
+                        const infoResult = await apiCall(`/api/page/info?path=${encodeURIComponent(pagePath)}`);
+                        if (infoResult.success && infoResult.has_info && infoResult.info) {
+                            if (!pageInfoCache[key]) pageInfoCache[key] = {};
+                            Object.assign(pageInfoCache[key], infoResult.info);
+                            showSerpResults(pagePath); // retry with full data
+                            return;
+                        }
+                    } catch (e) {
+                        // fall through to toast
+                    }
+                    showToast('אין תוצאות SERP זמינות - סרוק מחדש', 'warning');
+                })();
                 return;
             }
             
@@ -9832,19 +10264,25 @@ console.log('🚀 KeywordDensityAnalyzer, SpamAnalyzer, HeaderQualityScorer & In
                 return;
             }
             
-            // Show loading
+            // Show loading with progress bar
             const originalContent = contentEl.innerHTML;
-            contentEl.innerHTML = '<div style="color: var(--text-secondary);">🔄 סורק מחדש...</div>';
+            showKeywordsProgress(contentEl);
             btn.disabled = true;
             
             // Get page URL for rank tracking
             const pageUrl = pageInfoCache[pagePath]?.url || '';
             
-            console.log('🔄 [Rescan Keywords] Starting...', 'keyword:', keyword, 'pageUrl:', pageUrl, 'pagePath:', pagePath);
+            console.log('🔄 [Rescan Keywords Async] Starting...', 'keyword:', keyword, 'pageUrl:', pageUrl, 'pagePath:', pagePath);
+            
+            // Save existing manual keywords BEFORE starting scan
+            const existingKwBeforeScan = pageInfoCache[pagePath]?.fetched_keywords || {};
+            const existingClustersBeforeScan = existingKwBeforeScan.clusters || [];
+            const manualClustersBeforeScan = existingClustersBeforeScan.filter(c => c.source === 'manual');
+            console.log('🔄 [Rescan] Preserving manual keywords:', manualClustersBeforeScan.map(c => c.primary));
             
             try {
-                // Fetch fresh keywords with rank tracking
-                const fetchResult = await apiCall('/api/keywords/fetch', {
+                // Start async fetch
+                const startResult = await apiCall('/api/keywords/fetch-async', {
                     method: 'POST',
                     body: JSON.stringify({ 
                         keyword: keyword,
@@ -9853,100 +10291,222 @@ console.log('🚀 KeywordDensityAnalyzer, SpamAnalyzer, HeaderQualityScorer & In
                     })
                 });
                 
-                console.log('📊 [Rescan Keywords] Result:', fetchResult);
-                console.log('📊 [Rescan] success:', fetchResult.success);
-                console.log('📊 [Rescan] autocomplete count:', fetchResult.autocomplete?.length);
-                console.log('📊 [Rescan] related count:', fetchResult.related?.length);
-                console.log('📊 [Rescan] related data:', fetchResult.related);
-                console.log('📊 [Rescan] organic_results count:', fetchResult.organic_results?.length);
-                console.log('📊 [Rescan] ai_mode_results count:', fetchResult.ai_mode_results?.length);
-                console.log('📊 [Rescan] ai_mode_results data:', fetchResult.ai_mode_results);
-                console.log('📊 [Rescan] rank_position:', fetchResult.rank_position);
-                console.log('📊 [Rescan] ai_rank_position:', fetchResult.ai_rank_position);
-                
-                if (!fetchResult.success) {
-                    throw new Error(fetchResult.error || 'שגיאה בשליפה');
+                if (!startResult.success) {
+                    throw new Error(startResult.error || 'שגיאה בהתחלת סריקה');
                 }
                 
-                // Process keywords
-                const processResult = await apiCall('/api/keywords/process', {
-                    method: 'POST',
-                    body: JSON.stringify({
-                        autocomplete: fetchResult.autocomplete || [],
-                        related: fetchResult.related || [],
-                        main_keyword: keyword
-                    })
-                });
+                const jobId = startResult.job_id;
+                console.log('🔄 [Rescan Keywords Async] Job started:', jobId);
                 
-                if (!processResult.success) {
-                    throw new Error(processResult.error || 'שגיאה בעיבוד');
-                }
-                
-                // Save to page_info.json (include rank, AI results, competitor data)
-                console.log('💾 [Keywords Refresh] Saving keywords for:', pagePath);
-                const saveResult = await apiCall('/api/keywords/save', {
-                    method: 'POST',
-                    body: JSON.stringify({
-                        page_path: pagePath,
-                        keywords_data: {
-                            timestamp: new Date().toISOString(),
-                            main_keyword: keyword,
-                            clusters: processResult.clusters,
-                            final_keywords: processResult.final_keywords,
-                            unique_topics: processResult.unique_topics,
-                            rank_position: fetchResult.rank_position || null,
-                            rank_checked_url: pageUrl,
-                            organic_results: fetchResult.organic_results || [],
-                            ai_mode_results: fetchResult.ai_mode_results || [],
-                            ai_rank_position: fetchResult.ai_rank_position || null,
-                            competitor_data: fetchResult.competitor_data || []
+                // Start polling for completion
+                startKeywordsPolling(jobId, contentEl,
+                    // onComplete callback
+                    async (fetchResult) => {
+                        console.log('📊 [Rescan Keywords Async] Completed:', fetchResult);
+                        
+                        try {
+                            // Process keywords
+                            const processResult = await apiCall('/api/keywords/process', {
+                                method: 'POST',
+                                body: JSON.stringify({
+                                    autocomplete: fetchResult.autocomplete || [],
+                                    related: fetchResult.related || [],
+                                    main_keyword: keyword
+                                })
+                            });
+                            
+                            if (!processResult.success) {
+                                throw new Error(processResult.error || 'שגיאה בעיבוד');
+                            }
+                            
+                            // Merge manual keywords with new results (avoid duplicates)
+                            let mergedFinal = [...processResult.final_keywords];
+                            let mergedClusters = [...processResult.clusters];
+                            
+                            for (const manualCluster of manualClustersBeforeScan) {
+                                if (!mergedFinal.includes(manualCluster.primary)) {
+                                    mergedFinal.push(manualCluster.primary);
+                                    mergedClusters.push(manualCluster);
+                                }
+                            }
+                            console.log('📊 [Rescan] Merged:', processResult.final_keywords.length, 'scanned +', manualClustersBeforeScan.length, 'manual =', mergedFinal.length, 'total');
+                            
+                            // Save to page_info.json (with merged data)
+                            console.log('💾 [Keywords Refresh] Saving keywords for:', pagePath);
+                            const saveResult = await apiCall('/api/keywords/save', {
+                                method: 'POST',
+                                body: JSON.stringify({
+                                    page_path: pagePath,
+                                    keywords_data: {
+                                        timestamp: new Date().toISOString(),
+                                        main_keyword: keyword,
+                                        clusters: mergedClusters,
+                                        final_keywords: mergedFinal,
+                                        unique_topics: processResult.unique_topics,
+                                        rank_position: fetchResult.rank_position || null,
+                                        rank_checked_url: pageUrl,
+                                        organic_results: fetchResult.organic_results || [],
+                                        ai_mode_results: fetchResult.ai_mode_results || [],
+                                        ai_rank_position: fetchResult.ai_rank_position || null,
+                                        competitor_data: fetchResult.competitor_data || []
+                                    }
+                                })
+                            });
+                            
+                            if (!saveResult.success) {
+                                console.error('❌ [Keywords Refresh] Save failed:', saveResult.error);
+                                showToast('מילות מפתח נטענו אבל לא נשמרו! ' + (saveResult.error || ''), 'warning');
+                            }
+                            
+                            // Update cache with merged results
+                            if (!pageInfoCache[pagePath]) pageInfoCache[pagePath] = {};
+                            pageInfoCache[pagePath].fetched_keywords = {
+                                final_keywords: mergedFinal,
+                                clusters: mergedClusters,
+                                organic_results: fetchResult.organic_results || [],
+                                rank_position: fetchResult.rank_position,
+                                ai_mode_results: fetchResult.ai_mode_results || [],
+                                ai_rank_position: fetchResult.ai_rank_position || null,
+                                competitor_data: fetchResult.competitor_data || []
+                            };
+                            
+                            // Display merged keywords
+                            const displayData = {
+                                final_keywords: mergedFinal,
+                                clusters: mergedClusters,
+                                organic_results: fetchResult.organic_results || [],
+                                rank_position: fetchResult.rank_position,
+                                ai_mode_results: fetchResult.ai_mode_results || [],
+                                ai_rank_position: fetchResult.ai_rank_position || null
+                            };
+                            displayPageKeywords(contentEl, displayData, pagePath, fetchResult.rank_position);
+                            
+                            // Show success toast
+                            let rankMsg = fetchResult.rank_position 
+                                ? ` | מיקום בגוגל: #${fetchResult.rank_position}` 
+                                : '';
+                            if (fetchResult.ai_rank_position) {
+                                rankMsg += ` | AI: #${fetchResult.ai_rank_position}`;
+                            }
+                            const newCount = processResult.final_keywords.length;
+                            showToast(`נסרקו ${newCount} מילות מפתח חדשות (סה"כ ${mergedFinal.length})${rankMsg}`, 'success');
+                            
+                        } catch (processError) {
+                            console.error('Rescan process error:', processError);
+                            contentEl.innerHTML = originalContent;
+                            showToast(processError.message, 'error');
+                        } finally {
+                            btn.disabled = false;
                         }
-                    })
-                });
-                
-                if (!saveResult.success) {
-                    console.error('❌ [Keywords Refresh] Save failed:', saveResult.error);
-                    showToast('מילות מפתח נטענו אבל לא נשמרו! ' + (saveResult.error || ''), 'warning');
-                } else {
-                    console.log('✅ [Keywords Refresh] Saved successfully!');
-                }
-                
-                // Update cache
-                if (!pageInfoCache[pagePath]) pageInfoCache[pagePath] = {};
-                pageInfoCache[pagePath].fetched_keywords = {
-                    final_keywords: processResult.final_keywords,
-                    clusters: processResult.clusters,
-                    organic_results: fetchResult.organic_results || [],
-                    rank_position: fetchResult.rank_position,
-                    ai_mode_results: fetchResult.ai_mode_results || [],
-                    ai_rank_position: fetchResult.ai_rank_position || null,
-                    competitor_data: fetchResult.competitor_data || []
-                };
-                
-                // Display updated keywords - add organic_results and AI data
-                const displayData = {
-                    ...processResult,
-                    organic_results: fetchResult.organic_results || [],
-                    rank_position: fetchResult.rank_position,
-                    ai_mode_results: fetchResult.ai_mode_results || [],
-                    ai_rank_position: fetchResult.ai_rank_position || null
-                };
-                displayPageKeywords(contentEl, displayData, pagePath, fetchResult.rank_position);
-                
-                // Show rank in toast if found (include AI rank)
-                let rankMsg = fetchResult.rank_position 
-                    ? ` | מיקום בגוגל: #${fetchResult.rank_position}` 
-                    : '';
-                if (fetchResult.ai_rank_position) {
-                    rankMsg += ` | AI: #${fetchResult.ai_rank_position}`;
-                }
-                showToast(`נסרקו ${processResult.final_keywords.length} מילות מפתח חדשות${rankMsg}`, 'success');
+                    },
+                    // onError callback
+                    (errorMsg) => {
+                        console.error('Rescan keywords error:', errorMsg);
+                        contentEl.innerHTML = originalContent;
+                        showToast(errorMsg, 'error');
+                        btn.disabled = false;
+                    },
+                    // onPartial callback - process and save autocomplete results immediately
+                    async (partialResult) => {
+                        console.log('📊 [Rescan Keywords Async] Partial results:', partialResult);
+                        try {
+                            // Get existing manual keywords from cache BEFORE processing
+                            const existingKw = pageInfoCache[pagePath]?.fetched_keywords || {};
+                            const existingClusters = existingKw.clusters || [];
+                            const manualClusters = existingClusters.filter(c => c.source === 'manual');
+                            const manualKeywords = manualClusters.map(c => c.primary);
+                            console.log('📊 [Keywords Partial] Existing manual keywords:', manualKeywords);
+                            
+                            // Process only autocomplete keywords
+                            const processResult = await apiCall('/api/keywords/process', {
+                                method: 'POST',
+                                body: JSON.stringify({
+                                    autocomplete: partialResult.autocomplete || [],
+                                    related: [],
+                                    main_keyword: keyword
+                                })
+                            });
+                            
+                            if (processResult.success) {
+                                // Merge manual keywords with new results (avoid duplicates)
+                                let mergedFinal = [...processResult.final_keywords];
+                                let mergedClusters = [...processResult.clusters];
+                                
+                                for (const manualCluster of manualClusters) {
+                                    if (!mergedFinal.includes(manualCluster.primary)) {
+                                        mergedFinal.push(manualCluster.primary);
+                                        mergedClusters.push(manualCluster);
+                                    }
+                                }
+                                
+                                // Save partial results (backend also preserves manual, but we already merged)
+                                console.log('💾 [Keywords Partial] Saving autocomplete + manual for:', pagePath);
+                                await apiCall('/api/keywords/save', {
+                                    method: 'POST',
+                                    body: JSON.stringify({
+                                        page_path: pagePath,
+                                        keywords_data: {
+                                            timestamp: new Date().toISOString(),
+                                            main_keyword: keyword,
+                                            clusters: mergedClusters,
+                                            final_keywords: mergedFinal,
+                                            unique_topics: processResult.unique_topics,
+                                            rank_position: null,
+                                            rank_checked_url: pageUrl,
+                                            organic_results: [],
+                                            ai_mode_results: [],
+                                            ai_rank_position: null,
+                                            competitor_data: []
+                                        }
+                                    })
+                                });
+                                
+                                // Update cache with merged results
+                                if (!pageInfoCache[pagePath]) pageInfoCache[pagePath] = {};
+                                pageInfoCache[pagePath].fetched_keywords = {
+                                    final_keywords: mergedFinal,
+                                    clusters: mergedClusters,
+                                    organic_results: [],
+                                    rank_position: null,
+                                    ai_mode_results: [],
+                                    ai_rank_position: null,
+                                    competitor_data: []
+                                };
+                                
+                                // DISPLAY merged results immediately!
+                                const partialDisplayData = {
+                                    final_keywords: mergedFinal,
+                                    clusters: mergedClusters,
+                                    organic_results: [],
+                                    rank_position: null,
+                                    ai_mode_results: [],
+                                    ai_rank_position: null
+                                };
+                                displayPageKeywords(contentEl, partialDisplayData, pagePath, null);
+                                
+                                // Add loading indicator for SERP
+                                const serpLoadingHtml = `
+                                    <div class="serp-loading-indicator" style="margin-top: 0.5rem; padding: 0.5rem; background: rgba(59, 130, 246, 0.1); border-radius: 6px; display: flex; align-items: center; gap: 0.5rem;">
+                                        <span class="loading-spinner-small"></span>
+                                        <span style="color: var(--accent-blue); font-size: 0.8rem;">סורק תוצאות SERP ומתחרים...</span>
+                                    </div>
+                                `;
+                                contentEl.insertAdjacentHTML('beforeend', serpLoadingHtml);
+                                
+                                const newCount = processResult.final_keywords.length;
+                                const totalCount = mergedFinal.length;
+                                showToast(`נמצאו ${newCount} השלמות (סה"כ ${totalCount}), ממתין לתוצאות SERP...`, 'info');
+                            }
+                        } catch (e) {
+                            console.error('[Keywords Partial] Error:', e);
+                        }
+                    }
+                );
                 
             } catch (error) {
                 console.error('Rescan keywords error:', error);
                 contentEl.innerHTML = originalContent;
                 showToast(error.message, 'error');
-            } finally {
                 btn.disabled = false;
             }
         }
@@ -10173,6 +10733,22 @@ console.log('🚀 KeywordDensityAnalyzer, SpamAnalyzer, HeaderQualityScorer & In
             const result = await apiCall('/api/pages');
             if (result.success) {
                 pages = result.pages;
+                // Prime pageInfoCache with lightweight metadata from /api/pages (incl. fetched_keywords summary)
+                const normPath = (p) => (p || '').replace(/\\/g, '/');
+                for (const p of pages) {
+                    const key = normPath(p.path);
+                    if (!pageInfoCache[key]) pageInfoCache[key] = {};
+                    // Keep existing cache fields, but fill missing from server list
+                    if (p.is_special !== undefined) pageInfoCache[key].is_special = p.is_special;
+                    if (p.last_upload !== undefined) pageInfoCache[key].last_upload = p.last_upload;
+                    if (p.last_upload_type !== undefined) pageInfoCache[key].last_upload_type = p.last_upload_type;
+                    if (p.post_id !== undefined) pageInfoCache[key].post_id = p.post_id;
+                    if (p.url !== undefined) pageInfoCache[key].url = p.url;
+                    if (p.site !== undefined) pageInfoCache[key].site = p.site;
+                    if (p.fetched_keywords && Object.keys(p.fetched_keywords).length > 0) {
+                        pageInfoCache[key].fetched_keywords = p.fetched_keywords;
+                    }
+                }
                 // Also load running status and page status
                 await loadRunningStatus();
                 await loadPageStatus();
@@ -10197,40 +10773,79 @@ console.log('🚀 KeywordDensityAnalyzer, SpamAnalyzer, HeaderQualityScorer & In
         }
         
         // Load page info for all pages (for word count display)
+        // Uses single API call to word-counts cache for much better performance
         async function loadAllPageInfo() {
-            console.log('📊 Loading page info for word counts...');
-            // Load page info in parallel batches of 5
-            const batchSize = 5;
-            let updated = false;
+            console.log('📊 Loading word counts from cache...');
+            const startTime = Date.now();
+            
+            try {
+                // Single API call instead of 200+ individual calls
+                const result = await apiCall('/api/word-counts');
+                
+                if (result.success && result.pages) {
+                    const wordCountsData = result.pages;
+                    let loadedCount = 0;
+                    const normPath = (p) => (p || '').replace(/\\/g, '/');
+                    
+                    // Merge word counts into pageInfoCache
+                    for (const [pagePath, data] of Object.entries(wordCountsData)) {
+                        const key = normPath(pagePath);
+                        // Initialize cache entry if not exists
+                        if (!pageInfoCache[key]) {
+                            pageInfoCache[key] = {};
+                        }
+                        // Update word_count from cache
+                        pageInfoCache[key].word_count = data.word_count;
+                        pageInfoCache[key].site = data.site;
+                        loadedCount++;
+                    }
+                    
+                    // Render page list with word counts
+                    lastRenderFilters = null; // Invalidate cache to force re-render
+                    renderPageList();
+                    
+                    const duration = Date.now() - startTime;
+                    console.log(`📊 Loaded ${loadedCount} word counts in ${duration}ms (single API call)`);
+                } else {
+                    console.log('📊 No word count data available');
+                }
+            } catch (e) {
+                console.error('📊 Error loading word counts:', e);
+                // Fallback: load individually (slower but works)
+                await loadAllPageInfoFallback();
+            }
+        }
+        
+        // Fallback: Load page info individually (slower, for backward compatibility)
+        async function loadAllPageInfoFallback() {
+            console.log('📊 Fallback: Loading page info individually...');
+            const batchSize = 10;
             let loadedCount = 0;
+            const normPath = (p) => (p || '').replace(/\\/g, '/');
             
             for (let i = 0; i < pages.length; i += batchSize) {
                 const batch = pages.slice(i, i + batchSize);
                 
                 await Promise.all(batch.map(async (page) => {
-                    if (pageInfoCache[page.path]) return; // Skip if already cached
+                    const key = normPath(page.path);
+                    if (pageInfoCache[key]?.word_count || pageInfoCache[page.path]?.word_count) return; // Skip if already has word_count
                     
                     try {
                         const result = await apiCall(`/api/page/info?path=${encodeURIComponent(page.path)}`);
                         if (result.success && result.has_info && result.info) {
-                            // Server now calculates and saves word_count automatically
-                            pageInfoCache[page.path] = result.info;
+                            if (!pageInfoCache[key]) pageInfoCache[key] = {};
+                            Object.assign(pageInfoCache[key], result.info);
                             loadedCount++;
-                            console.log(`📝 Loaded: ${page.name} - ${result.info.word_count || 'no count'} words`);
-                            updated = true;
                         }
                     } catch (e) {
                         // Silently skip pages without info
                     }
                 }));
-                
-                // Re-render after each batch to show progress
-                if (updated) {
-                    renderPageList();
-                    updated = false;
-                }
             }
-            console.log(`📊 Loaded ${loadedCount} pages with word counts`);
+            
+            lastRenderFilters = null;
+            renderPageList();
+            console.log(`📊 Fallback loaded ${loadedCount} pages`);
         }
         
         // Open SEO report directly - fetches backup automatically
@@ -10496,7 +11111,13 @@ console.log('🚀 KeywordDensityAnalyzer, SpamAnalyzer, HeaderQualityScorer & In
             const agentId = selectedAgent?.id || '';
             const result = await apiCall(`/api/status/pages?agent=${encodeURIComponent(agentId)}`);
             if (result.success) {
-                pageStatusMap = result.status || {};
+                // Normalize keys to forward slashes (Windows compatibility)
+                const raw = result.status || {};
+                const normalized = {};
+                for (const [k, v] of Object.entries(raw)) {
+                    normalized[(k || '').replace(/\\/g, '/')] = v;
+                }
+                pageStatusMap = normalized;
                 console.log('Page status loaded:', Object.keys(pageStatusMap).length, 'pages with status');
             }
         }
@@ -10505,7 +11126,13 @@ console.log('🚀 KeywordDensityAnalyzer, SpamAnalyzer, HeaderQualityScorer & In
             // Get status for ALL agents per page
             const result = await apiCall('/api/status/multi-agent');
             if (result.success) {
-                multiAgentStatusMap = result.status || {};
+                // Normalize keys to forward slashes (Windows compatibility)
+                const raw = result.status || {};
+                const normalized = {};
+                for (const [k, v] of Object.entries(raw)) {
+                    normalized[(k || '').replace(/\\/g, '/')] = v;
+                }
+                multiAgentStatusMap = normalized;
                 console.log('Multi-agent status loaded:', Object.keys(multiAgentStatusMap).length, 'pages');
             }
         }
@@ -10585,7 +11212,22 @@ console.log('🚀 KeywordDensityAnalyzer, SpamAnalyzer, HeaderQualityScorer & In
 
         let calculatorsCollapsed = true; // Start collapsed
         
+        // Debounce helper for performance
+        let renderPageListTimeout = null;
+        let lastRenderFilters = null;
+        
         function renderPageList() {
+            // Debounce: wait 50ms before rendering to batch rapid filter changes
+            if (renderPageListTimeout) {
+                clearTimeout(renderPageListTimeout);
+            }
+            renderPageListTimeout = setTimeout(() => {
+                renderPageListImmediate();
+            }, 50);
+        }
+        
+        function renderPageListImmediate() {
+            const startTime = performance.now();
             const list = document.getElementById('pageList');
             
             // Get filter values
@@ -10594,6 +11236,16 @@ console.log('🚀 KeywordDensityAnalyzer, SpamAnalyzer, HeaderQualityScorer & In
             const agentCompletionFilter = document.getElementById('agentCompletionFilter')?.value || 'all';
             const specialFilter = document.getElementById('specialFilter')?.value || 'all';
             const uploadDateFilter = document.getElementById('uploadDateFilter')?.value || 'all';
+            
+            // Create filter key for caching
+            const currentFilters = `${siteFilter}|${sortFilter}|${agentCompletionFilter}|${specialFilter}|${uploadDateFilter}|${pages.length}`;
+            
+            // Check if filters changed - if not and list has content, skip render
+            if (lastRenderFilters === currentFilters && list.children.length > 0) {
+                console.log('⚡ Skipping render - filters unchanged');
+                return;
+            }
+            lastRenderFilters = currentFilters;
             
             // Filter out backup files and apply site filter
             const filteredPages = pages.filter(page => {
@@ -10684,8 +11336,9 @@ console.log('🚀 KeywordDensityAnalyzer, SpamAnalyzer, HeaderQualityScorer & In
             if (sortFilter === 'last_upload') {
                 // Sort by last WordPress upload date (newest first)
                 sortedPages.sort((a, b) => {
-                    const dateA = pageInfoCache[a.path]?.last_upload || '';
-                    const dateB = pageInfoCache[b.path]?.last_upload || '';
+                    const normPath = (p) => (p || '').replace(/\\/g, '/');
+                    const dateA = pageInfoCache[normPath(a.path)]?.last_upload || pageInfoCache[a.path]?.last_upload || '';
+                    const dateB = pageInfoCache[normPath(b.path)]?.last_upload || pageInfoCache[b.path]?.last_upload || '';
                     // Empty dates go to the end
                     if (!dateA && !dateB) return a.name.localeCompare(b.name, 'he');
                     if (!dateA) return 1;
@@ -10695,8 +11348,9 @@ console.log('🚀 KeywordDensityAnalyzer, SpamAnalyzer, HeaderQualityScorer & In
                 });
             } else if (sortFilter === 'words_asc' || sortFilter === 'words_desc') {
                 sortedPages.sort((a, b) => {
-                    const wordCountA = pageInfoCache[a.path]?.word_count || 0;
-                    const wordCountB = pageInfoCache[b.path]?.word_count || 0;
+                    const normPath = (p) => (p || '').replace(/\\/g, '/');
+                    const wordCountA = pageInfoCache[normPath(a.path)]?.word_count || pageInfoCache[a.path]?.word_count || 0;
+                    const wordCountB = pageInfoCache[normPath(b.path)]?.word_count || pageInfoCache[b.path]?.word_count || 0;
                     return sortFilter === 'words_asc' 
                         ? wordCountA - wordCountB 
                         : wordCountB - wordCountA;
@@ -10804,7 +11458,8 @@ console.log('🚀 KeywordDensityAnalyzer, SpamAnalyzer, HeaderQualityScorer & In
                 const multiAgentProgress = renderMultiAgentProgress(page.path, page.site || 'main');
                 
                 // Get word count if available in pageInfoCache
-                const cachedInfo = pageInfoCache[page.path] || {};
+                const normPath = (p) => (p || '').replace(/\\/g, '/');
+                const cachedInfo = pageInfoCache[normPath(page.path)] || pageInfoCache[page.path] || {};
                 const wordCountDisplay = cachedInfo.word_count 
                     ? `<span class="word-count-badge" title="מילים בעמוד">📝 ${cachedInfo.word_count.toLocaleString()}</span>` 
                     : '';
@@ -10879,6 +11534,7 @@ console.log('🚀 KeywordDensityAnalyzer, SpamAnalyzer, HeaderQualityScorer & In
                     <div class="page-item-actions">
                         <button class="btn-mini btn-special ${isSpecial ? 'is-active' : ''}" onclick="event.stopPropagation(); toggleSpecialPage('${page.path.replace(/\\/g, '/').replace(/'/g, "\\'")}')" title="${isSpecial ? 'הסר סימון מיוחד' : 'סמן כעמוד מיוחד'}">${isSpecial ? '⭐' : '☆'}</button>
                         <button class="btn-mini ${keywordsBtnClass}" onclick="event.stopPropagation(); togglePageKeywords('${page.path.replace(/'/g, "\\'").replace(/\\/g, "\\\\")}')" title="${keywordsBtnTitle}">${keywordsBtnIcon}</button>
+                        <button class="btn-mini btn-add-kw-main" onclick="event.stopPropagation(); showAddKeywordsModal('${page.path.replace(/'/g, "\\'").replace(/\\/g, "\\\\")}')" title="הוסף מילות מפתח ידנית">➕</button>
                         <button class="btn-mini btn-seo" onclick="event.stopPropagation(); openSeoReportDirect(${originalIndex})" title="דוח SEO (מושך גיבוי אוטומטי)">📊</button>
                         <button class="btn-mini btn-reset" data-reset-path="${page.path.replace(/"/g, '&quot;')}" onclick="event.stopPropagation(); resetPage(this.dataset.resetPath)" title="איפוס עמוד - מחיקת דוחות סוכנים ושחזור מגיבוי">🔄</button>
                         <button class="btn-mini btn-delete" onclick="event.stopPropagation(); confirmDeletePage('${page.path.replace(/\\/g, '/').replace(/'/g, "\\'")}')" title="מחיקת עמוד מהמערכת ומ-WordPress">🗑️</button>
@@ -10932,23 +11588,29 @@ console.log('🚀 KeywordDensityAnalyzer, SpamAnalyzer, HeaderQualityScorer & In
                 });
             });
             
-            // Restore open keywords panels
-            openKeywordsPanels.forEach(pagePath => {
-                const escapedPath = pagePath.replace(/\\/g, '\\\\');
-                const pageItem = list.querySelector(`.page-item[data-path="${escapedPath}"]`);
-                if (pageItem) {
-                    const panel = pageItem.querySelector('.page-keywords-panel');
-                    if (panel) {
-                        panel.style.display = 'block';
-                        // Reload keywords content if cached
-                        const contentEl = panel.querySelector('.keywords-content');
-                        const cachedInfo = pageInfoCache[pagePath];
-                        if (cachedInfo?.fetched_keywords?.final_keywords?.length > 0 && contentEl) {
-                            displayPageKeywords(contentEl, cachedInfo.fetched_keywords, pagePath);
+            // Restore open keywords panels (defer to avoid blocking)
+            if (openKeywordsPanels.size > 0) {
+                requestAnimationFrame(() => {
+                    openKeywordsPanels.forEach(pagePath => {
+                        const escapedPath = pagePath.replace(/\\/g, '\\\\');
+                        const pageItem = list.querySelector(`.page-item[data-path="${escapedPath}"]`);
+                        if (pageItem) {
+                            const panel = pageItem.querySelector('.page-keywords-panel');
+                            if (panel) {
+                                panel.style.display = 'block';
+                                const contentEl = panel.querySelector('.keywords-content');
+                                const cachedInfo = pageInfoCache[pagePath];
+                                if (cachedInfo?.fetched_keywords?.final_keywords?.length > 0 && contentEl) {
+                                    displayPageKeywords(contentEl, cachedInfo.fetched_keywords, pagePath);
+                                }
+                            }
                         }
-                    }
-                }
-            });
+                    });
+                });
+            }
+            
+            const endTime = performance.now();
+            console.log(`⚡ renderPageList completed in ${(endTime - startTime).toFixed(1)}ms (${sortedPages.length} pages)`);
         }
 
         function toggleCalculatorsGroup() {
@@ -13150,6 +13812,80 @@ console.log('🚀 KeywordDensityAnalyzer, SpamAnalyzer, HeaderQualityScorer & In
             }
         }
 
+        // ============ Keywords Async Polling ============
+        let keywordsPollInterval = null;
+        let currentKeywordsJobId = null;
+        
+        function startKeywordsPolling(jobId, contentEl, onComplete, onError, onPartial = null) {
+            currentKeywordsJobId = jobId;
+            if (keywordsPollInterval) clearInterval(keywordsPollInterval);
+            
+            let partialProcessed = false;  // Track if we already processed partial results
+            
+            keywordsPollInterval = setInterval(async () => {
+                try {
+                    const result = await apiCall(`/api/keywords/status/${jobId}`);
+                    
+                    if (!result.success) {
+                        stopKeywordsPolling();
+                        onError(result.error || 'שגיאה בשליפת סטטוס');
+                        return;
+                    }
+                    
+                    // Update progress UI
+                    updateKeywordsProgress(contentEl, result.progress, result.message);
+                    
+                    // Handle partial results (autocomplete ready, SERP still loading)
+                    if (result.status === 'partial' && result.partial_data && !partialProcessed) {
+                        partialProcessed = true;
+                        console.log('📊 [Keywords Poll] Partial results ready:', result.partial_data.autocomplete?.length || 0, 'autocomplete keywords');
+                        if (onPartial) {
+                            onPartial(result.partial_data);
+                        }
+                        // Continue polling for full results
+                    }
+                    
+                    if (result.status === 'completed') {
+                        stopKeywordsPolling();
+                        onComplete(result.data);
+                    } else if (result.status === 'failed') {
+                        stopKeywordsPolling();
+                        onError(result.error || 'שגיאה בסריקה');
+                    }
+                } catch (err) {
+                    console.error('[Keywords Poll] Error:', err);
+                    stopKeywordsPolling();
+                    onError(err.message || 'שגיאת תקשורת');
+                }
+            }, 3000); // Poll every 3 seconds
+        }
+        
+        function stopKeywordsPolling() {
+            if (keywordsPollInterval) {
+                clearInterval(keywordsPollInterval);
+                keywordsPollInterval = null;
+            }
+            currentKeywordsJobId = null;
+        }
+        
+        function showKeywordsProgress(container) {
+            container.innerHTML = `
+                <div class="keywords-progress-container">
+                    <div class="keywords-progress-bar">
+                        <div class="keywords-progress-fill" style="width: 0%"></div>
+                    </div>
+                    <div class="keywords-progress-text">מתחיל סריקה...</div>
+                </div>
+            `;
+        }
+        
+        function updateKeywordsProgress(container, percent, message) {
+            const fill = container.querySelector('.keywords-progress-fill');
+            const text = container.querySelector('.keywords-progress-text');
+            if (fill) fill.style.width = `${percent}%`;
+            if (text) text.textContent = message || 'מעבד...';
+        }
+
         // ============ Work Status Panel ============
         let workLogPollInterval = null;
         let workStatusMinimized = false;
@@ -13917,6 +14653,7 @@ ${content}
             document.getElementById('uploadPageName').textContent = uploadState.pageInfo?.page_name || selectedPage?.name || '-';
             document.getElementById('uploadPostIdInput').value = uploadState.postId || '';
             document.getElementById('uploadKeywordInput').value = uploadState.pageInfo?.keyword || uploadState.keyword || '';
+            document.getElementById('uploadTemplateInput').value = uploadState.pageInfo?.template || 'Clean';
             
             const urlEl = document.getElementById('uploadPageUrl');
             if (uploadState.url) {
@@ -14075,6 +14812,7 @@ ${content}
         async function savePageInfo() {
             const newPostId = document.getElementById('uploadPostIdInput').value.trim();
             const newKeyword = document.getElementById('uploadKeywordInput').value.trim();
+            const newTemplate = document.getElementById('uploadTemplateInput').value.trim();
             
             if (!newPostId) {
                 showToast('Post ID לא יכול להיות ריק', 'error');
@@ -14089,7 +14827,8 @@ ${content}
                     body: JSON.stringify({
                         page_folder: pageFolder,
                         post_id: newPostId,
-                        keyword: newKeyword
+                        keyword: newKeyword,
+                        template: newTemplate
                     })
                 });
                 
@@ -14101,6 +14840,7 @@ ${content}
                     if (uploadState.pageInfo) {
                         uploadState.pageInfo.post_id = newPostId;
                         uploadState.pageInfo.keyword = newKeyword;
+                        uploadState.pageInfo.template = newTemplate;
                     }
                     showToast('✅ page_info.json עודכן בהצלחה', 'success');
                 } else {
@@ -21643,6 +22383,7 @@ ${suffixSection}
 
             const title = document.getElementById('uploadTitle').value;
             const description = document.getElementById('uploadDescription').value;
+            const template = document.getElementById('uploadTemplateInput').value.trim();
             
             // Validate based on type
             if (type === 'title' && !title) {
@@ -21676,7 +22417,8 @@ ${suffixSection}
             const payload = {
                 post_id: uploadState.postId,
                 url: uploadState.url,
-                page_folder: pageFolder
+                page_folder: pageFolder,
+                template: template
             };
             
             if (type === 'title' || type === 'all') {
@@ -21760,6 +22502,9 @@ ${suffixSection}
                                 pageInfo.uploaded_description = payload.meta_description;
                                 pageInfo.uploaded_description_at = new Date().toISOString();
                             }
+                            if (template) {
+                                pageInfo.template = template;
+                            }
                             pageInfo.last_upload = new Date().toISOString();
                             pageInfo.last_upload_type = type;
                             
@@ -21780,6 +22525,9 @@ ${suffixSection}
                                 }
                                 if (type === 'description' || type === 'all') {
                                     uploadState.pageInfo.description = payload.meta_description;
+                                }
+                                if (template) {
+                                    uploadState.pageInfo.template = template;
                                 }
                             }
                             
@@ -24321,6 +25069,34 @@ ${suffixSection}
         </div>
     </div>
     
+    <!-- Add Keywords Modal -->
+    <div id="addKeywordsModal" class="modal-overlay" style="display:none;" onclick="closeAddKeywordsModal(event)">
+        <div class="modal" onclick="event.stopPropagation()" style="max-width: 500px;">
+            <div class="modal-header">
+                <h2>➕ הוספת מילות מפתח ידנית</h2>
+                <button class="modal-close" onclick="closeAddKeywordsModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <label style="display: block; margin-bottom: 0.5rem; color: var(--text-secondary);">הזן מילות מפתח (מופרדות בשורות או פסיקים):</label>
+                <textarea id="manualKeywordsInput" rows="6" style="width: 100%; padding: 0.75rem; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-secondary); color: var(--text-primary); font-size: 0.9rem; resize: vertical;" placeholder="הלוואה לעסק&#10;מימון לעסקים&#10;אשראי עסקי"></textarea>
+                <div style="margin-top: 1rem; display: flex; gap: 1.5rem;">
+                    <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                        <input type="radio" name="addKeywordsMode" value="append" checked>
+                        <span>הוסף לקיימות</span>
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                        <input type="radio" name="addKeywordsMode" value="replace">
+                        <span>החלף ידניות קיימות</span>
+                    </label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeAddKeywordsModal()">ביטול</button>
+                <button class="btn btn-primary" onclick="submitManualKeywords()">הוסף מילים</button>
+            </div>
+        </div>
+    </div>
+    
     <script>
         // Prompt Modal Functions
         function openPromptModal(pagePath, step, agentType, agentId = null) {
@@ -24482,6 +25258,7 @@ ${suffixSection}
         // Global state for reports
         let currentReportType = 'interest-rate';
         let interestRateData = null;
+        let updatedRecentlyData = null;
         let whatsappData = null;
         let yearUpdateData = null;
         
@@ -24509,6 +25286,8 @@ ${suffixSection}
             
             if (reportType === 'interest-rate') {
                 document.getElementById('reportInterestRate').classList.add('active');
+            } else if (reportType === 'updated-recently') {
+                document.getElementById('reportUpdatedRecently').classList.add('active');
             } else if (reportType === 'whatsapp') {
                 document.getElementById('reportWhatsApp').classList.add('active');
             } else if (reportType === 'year-update') {
@@ -24519,6 +25298,8 @@ ${suffixSection}
         function refreshCurrentReport() {
             if (currentReportType === 'interest-rate') {
                 scanInterestRate();
+            } else if (currentReportType === 'updated-recently') {
+                scanUpdatedRecentlyShortcode();
             } else if (currentReportType === 'whatsapp') {
                 scanWhatsAppLinks();
             } else if (currentReportType === 'year-update') {
@@ -24691,6 +25472,125 @@ ${suffixSection}
             const filterInfo = document.getElementById('interestRateFilterInfo');
             if (filterInfo) {
                 filterInfo.textContent = `מציג ${visibleCount} עמודים`;
+            }
+        }
+
+        // ============ Updated Recently Shortcode Report ============
+
+        async function scanUpdatedRecentlyShortcode() {
+            const phrase = document.getElementById('updatedRecentlyPhrase')?.value || '';
+            const tbody = document.getElementById('updatedRecentlyTableBody');
+            const statsContainer = document.getElementById('updatedRecentlyStats');
+            
+            if (!tbody || !statsContainer) return;
+            
+            tbody.innerHTML = '<tr><td colspan="5" class="report-loading"><div class="spinner"></div><br>סורק עמודים...</td></tr>';
+            
+            try {
+                const result = await apiCall('/api/reports/updated-recently-shortcode?phrase=' + encodeURIComponent(phrase));
+                
+                if (result.success) {
+                    updatedRecentlyData = result.data;
+                    renderUpdatedRecentlyStats(result.data, statsContainer);
+                    renderUpdatedRecentlyTable(result.data, tbody);
+                } else {
+                    tbody.innerHTML = `<tr><td colspan="5" style="color: var(--accent);">שגיאה: ${result.error}</td></tr>`;
+                }
+            } catch (error) {
+                tbody.innerHTML = `<tr><td colspan="5" style="color: var(--accent);">שגיאה: ${error.message}</td></tr>`;
+            }
+        }
+        
+        function renderUpdatedRecentlyStats(data, container) {
+            const found = data.found?.length || 0;
+            const shortcodeOnly = data.shortcode_only?.length || 0;
+            const labelOnly = data.label_only?.length || 0;
+            const notFound = data.not_found?.length || 0;
+            const total = found + shortcodeOnly + labelOnly + notFound;
+            
+            container.innerHTML = `
+                <div class="report-stat-card success">
+                    <div class="stat-value">${found}</div>
+                    <div class="stat-label">✅ נמצא</div>
+                </div>
+                <div class="report-stat-card warning">
+                    <div class="stat-value">${shortcodeOnly}</div>
+                    <div class="stat-label">🧩 רק shortcode</div>
+                </div>
+                <div class="report-stat-card warning">
+                    <div class="stat-value">${labelOnly}</div>
+                    <div class="stat-label">🏷️ רק label</div>
+                </div>
+                <div class="report-stat-card">
+                    <div class="stat-value">${total}</div>
+                    <div class="stat-label">סה"כ עמודים</div>
+                </div>
+            `;
+        }
+        
+        function renderUpdatedRecentlyTable(data, tbody) {
+            let html = '';
+            
+            const renderRows = (rows, statusKey, statusText, statusColor) => {
+                (rows || []).forEach(page => {
+                    const specialAttr = page.is_special ? 'data-special="true"' : '';
+                    const specialIcon = page.is_special ? '⭐ ' : '';
+                    const uploadedText = page.uploaded ? '✅ עלה' : '⚠️ לא עלה';
+                    const uploadedColor = page.uploaded ? 'var(--success)' : 'var(--warning)';
+                    const actions = page.uploaded
+                        ? `<button class="btn-action btn-edit" onclick="openPageInEditor('${(page.path || '').replace(/\\/g, '\\\\').replace(/'/g, "\\'")}')">📝 פתח לעריכה</button>`
+                        : `<button class="btn-action btn-upload" onclick="uploadPageToWP('${(page.path || '').replace(/\\/g, '\\\\').replace(/'/g, "\\'")}')">📤 העלה לוורדפרס</button>`;
+                    
+                    html += `
+                        <tr data-status="${statusKey}" data-site="${page.site}" ${specialAttr}>
+                            <td class="page-name">${specialIcon}${page.name}</td>
+                            <td><span class="site-badge">${page.site}</span></td>
+                            <td style="color: ${statusColor};">${statusText}</td>
+                            <td style="color: ${uploadedColor};">${uploadedText}</td>
+                            <td class="action-buttons">${actions}</td>
+                        </tr>
+                    `;
+                });
+            };
+            
+            renderRows(data.found, 'found', '✅ נמצא (label+shortcode)', 'var(--success)');
+            renderRows(data.shortcode_only, 'shortcode_only', '🧩 רק shortcode', 'var(--warning)');
+            renderRows(data.label_only, 'label_only', '🏷️ רק label', 'var(--warning)');
+            renderRows(data.not_found, 'not_found', '➖ לא נמצא', 'var(--text-secondary)');
+            
+            if (!html) {
+                html = '<tr><td colspan="5" style="text-align: center; color: var(--text-secondary);">לא נמצאו עמודים</td></tr>';
+            }
+            
+            tbody.innerHTML = html;
+            filterUpdatedRecentlyTable();
+        }
+        
+        function filterUpdatedRecentlyTable() {
+            const statusFilter = document.getElementById('updatedRecentlyFilter')?.value || 'all';
+            const rows = document.querySelectorAll('#updatedRecentlyTableBody tr[data-status]');
+            let visibleCount = 0;
+            
+            rows.forEach(row => {
+                const status = row.getAttribute('data-status');
+                const isSpecial = row.getAttribute('data-special') === 'true';
+                
+                let statusMatch = false;
+                if (statusFilter === 'all') {
+                    statusMatch = true;
+                } else if (statusFilter === 'special') {
+                    statusMatch = isSpecial;
+                } else if (statusFilter === status) {
+                    statusMatch = true;
+                }
+                
+                row.style.display = statusMatch ? '' : 'none';
+                if (statusMatch) visibleCount++;
+            });
+            
+            const infoEl = document.getElementById('updatedRecentlyFilterInfo');
+            if (infoEl) {
+                infoEl.textContent = `מציג ${visibleCount} תוצאות`;
             }
         }
         
@@ -26815,7 +27715,8 @@ ${s.text}
                                 <div style="font-size:0.85rem; color:var(--text-secondary);">
                                     📁 ${page.folder_name}
                                 </div>
-                                ${metadata.url ? `<div style="font-size:0.75rem; color:var(--info); margin-top:0.25rem;">🔗 ${metadata.url} ${redirectInfo}</div>` : ''}
+                                ${metadata.url ? `<div style="font-size:0.75rem; color:var(--info); margin-top:0.25rem;">🔗 <a href="${metadata.url}" target="_blank" rel="noopener" style="color:var(--info); text-decoration:underline; word-break:break-all;">${metadata.url}</a> ${redirectInfo}</div>` : ''}
+                                ${metadata.redirect_target ? `<div style="font-size:0.75rem; color:var(--success); margin-top:0.25rem;">↪️ הופנה ל: <a href="${metadata.redirect_target}" target="_blank" rel="noopener" style="color:var(--success); text-decoration:underline; word-break:break-all;">${metadata.redirect_target}</a></div>` : ''}
                             </div>
                             <div style="display:flex; gap:0.5rem;">
                                 <button onclick="restorePage('${page.folder_path.replace(/\\/g, '\\\\').replace(/'/g, "\\'")}', '${page.html_file || ''}')" class="btn btn-success btn-small">

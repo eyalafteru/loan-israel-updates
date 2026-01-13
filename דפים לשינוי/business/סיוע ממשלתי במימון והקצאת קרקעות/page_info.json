@@ -6,7 +6,29 @@
   "title": "סיוע ממשלתי במימון והקצאת קרקעות - הלוואות בערבות המדינה ובנקים באישור מיידי",
   "description": "מדינת ישראל מחזיקה בקרקעות רבות ולעיתים יש לה אינטרס לתת משאב זה למטרות חשובות. קראו באתר רק תבקש הלוואות לעסקים על סיוע ממשלתי במימון והקצאת קרקעות.",
   "imported_at": "2026-01-03T13:59:15.809663",
-  "fetched_keywords": {},
+  "fetched_keywords": {
+    "timestamp": "2026-01-13T14:48:20.411Z",
+    "main_keyword": "סיוע ממשלתי במימון והקצאת קרקעות",
+    "clusters": [
+      {
+        "primary": "סיוע ממשלתי במימון",
+        "source": "manual",
+        "type": "unique",
+        "unique_part": "סיוע ממשלתי במימון",
+        "variants": []
+      }
+    ],
+    "final_keywords": [
+      "סיוע ממשלתי במימון"
+    ],
+    "unique_topics": [],
+    "rank_position": null,
+    "rank_checked_url": "https://loan-israel.co.il/Business/state-aid-funding-and-allocation-of-land/",
+    "organic_results": [],
+    "ai_mode_results": [],
+    "ai_rank_position": null,
+    "competitor_data": []
+  },
   "word_count": 221,
   "wp_post_title": "סיוע ממשלתי במימון והקצאת קרקעות",
   "page_name": "סיוע ממשלתי במימון והקצאת קרקעות"

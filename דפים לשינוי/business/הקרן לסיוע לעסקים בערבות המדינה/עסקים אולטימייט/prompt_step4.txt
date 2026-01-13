@@ -1,0 +1,19 @@
+=== פרומפט שנשלח לקלוד - step4 ===
+זמן: 2026-01-13 17:03:00
+============================================================
+
+קרא את קובץ ההוראות C:\Users\eyal\loan-israel-updaets\loan-israel-updates\פרומטים\עסקים אולטימייט\שלב 4.md והוסף עיצובים ויזואליים לעמוד C:\Users\eyal\loan-israel-updaets\loan-israel-updates\דפים לשינוי\business\הקרן לסיוע לעסקים בערבות המדינה\הקרן לסיוע לעסקים בערבות המדינה.html.
+
+## מטרת השלב:
+הוספת FAQ Accordion, Stats, Timeline, Callouts.
+
+## דוח SEO משלב 3:
+C:\Users\eyal\loan-israel-updaets\loan-israel-updates\דפים לשינוי\business\הקרן לסיוע לעסקים בערבות המדינה\עסקים אולטימייט\דוח SEO.md
+
+## מקורות עיצוב:
+- קובץ עיצוב: מאגרי מידע/visual.html
+
+**חובה לשמור:**
+- העמוד המעודכן: C:\Users\eyal\loan-israel-updaets\loan-israel-updates\דפים לשינוי\business\הקרן לסיוע לעסקים בערבות המדינה\הקרן לסיוע לעסקים בערבות המדינה.html
+- דוח ויזואל: C:\Users\eyal\loan-israel-updaets\loan-israel-updates\דפים לשינוי\business\הקרן לסיוע לעסקים בערבות המדינה\עסקים אולטימייט\דוח ויזואל.md
+- שם הדוח: 

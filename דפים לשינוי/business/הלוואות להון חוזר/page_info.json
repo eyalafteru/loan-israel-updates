@@ -6,8 +6,302 @@
   "title": "הלוואות להון חוזר - הלוואות בערבות המדינה ובנקים באישור מיידי",
   "description": "האם אתה בעל עסק קיים שמחפש אופציות של אשראי לצורך מימון הון חוזר? קרא באתר רק תבקש הלוואות לעסקים על אפיקים של מימון הלוואות להון חוזר.",
   "imported_at": "2026-01-03T13:59:24.454220",
-  "fetched_keywords": {},
+  "fetched_keywords": {
+    "timestamp": "2026-01-13T14:34:31.109Z",
+    "main_keyword": "הלוואות להון חוזר",
+    "clusters": [
+      {
+        "primary": "הלוואה לעסק",
+        "source": "related",
+        "type": "unique",
+        "unique_part": "הלוואה לעסק",
+        "variants": []
+      },
+      {
+        "primary": "הלוואה בערבות המדינה gov",
+        "source": "related",
+        "type": "unique",
+        "unique_part": "הלוואה בערבות המדינה gov",
+        "variants": []
+      },
+      {
+        "primary": "הלוואה לעסקים קטנים",
+        "source": "related",
+        "type": "unique",
+        "unique_part": "הלוואה לעסקים קטנים",
+        "variants": []
+      },
+      {
+        "primary": "הלוואות הון חוזר לעסקים",
+        "source": "manual",
+        "type": "unique",
+        "unique_part": "הלוואות הון חוזר לעסקים",
+        "variants": []
+      },
+      {
+        "primary": "הלוואות בערבות מדינה מסלול הון חוזר",
+        "source": "manual",
+        "type": "unique",
+        "unique_part": "הלוואות בערבות מדינה מסלול הון חוזר",
+        "variants": []
+      }
+    ],
+    "final_keywords": [
+      "הלוואה לעסק",
+      "הלוואה בערבות המדינה gov",
+      "הלוואה לעסקים קטנים",
+      "הלוואות הון חוזר לעסקים",
+      "הלוואות בערבות מדינה מסלול הון חוזר"
+    ],
+    "unique_topics": [
+      "הלוואה לעסק",
+      "הלוואה בערבות המדינה gov",
+      "הלוואה בערבות המדינה חרבות ברזל",
+      "הלוואה לעסקים קטנים",
+      "הלוואת חרבות ברזל",
+      "בערבות מדינה מילואים",
+      "הון באנגלית",
+      "מסלול הלוואה"
+    ],
+    "rank_position": 2,
+    "rank_checked_url": "https://loan-israel.co.il/Business/working-capital-loans/",
+    "organic_results": [
+      {
+        "description": "מסלול הון חוזר לטווח הקצר מיועד לעסקים קטנים ובינוניים העומדים בתנאי הסף של הקרן ומבקשים לקבל מימון לטובת צרכי הון חוזר וגישור על פערי תזרים מזומנים לטווח קצר.",
+        "displayedUrl": "https://govextra.gov.il › mof-gloans › capital-track",
+        "position": 1,
+        "title": "מסלול הון חוזר לטווח קצר - govextra",
+        "url": "https://govextra.gov.il/mof-gloans/capital-track/"
+      },
+      {
+        "description": "סכום ההלוואה שניתן יכול להגיע עד עשרה אחוז מהמחזור השנתי של העסק, אף לא יעלה על 2.8 מיליון ₪. הריבית שנגבית עבור אשראי למימון הון חוזר היא פריים פלוס 0.9% ...",
+        "displayedUrl": "https://loan-israel.co.il › עמוד הבית › סוגי מימון לעסקים",
+        "position": 2,
+        "title": "הלוואות להון חוזר - הלוואות בערבות המדינה ובנקים באישור מיידי",
+        "url": "https://loan-israel.co.il/Business/working-capital-loans/"
+      },
+      {
+        "description": "הלוואות הון חוזר לטווח קצר - הלוואות לתקופה, קווי אשראי, כרטיסי אשראי עסקיים והלוואות מגובות על-ידי הממשלה; משכורת מצטברת - כספים שחייבים לעובדים, כגון ...",
+        "displayedUrl": "https://www.sap.com › israel › what-is-working-capital",
+        "position": 3,
+        "title": "מה זה הון חוזר ולמה זה משנה?",
+        "url": "https://www.sap.com/israel/resources/what-is-working-capital"
+      },
+      {
+        "description": "סכום ההלוואה: עסקים חדשים או עסקים עם מחזור שנתי של עד 6.25 מיליון ₪ - עד 500,000 ₪ · תקופת ההלוואה: עד 5 שנים עם אפשרות לחצי שנה גרייס על הקרן · ריבית: שיעור ...",
+        "displayedUrl": "https://www.mizrahi-tefahot.co.il › businessloanslib › s...",
+        "position": 4,
+        "title": "הלוואה בערבות מדינה לעסקים פרטיים ובינוניים",
+        "url": "https://www.mizrahi-tefahot.co.il/loans/businessloanslib/small-business-financing/"
+      },
+      {
+        "description": "מימון הון חוזר - ניכיון חשבוניות יצוא קבלת תשלום במזומן של חלק מסכום החשבוניות בקיזוז ריבית ועמלות. המימון הינו לזמן קצר - עד שנה. המימון מגובה בחלקו על ידי ...",
+        "displayedUrl": "https://www.discountbank.co.il › funding-foreignttradet",
+        "position": 5,
+        "title": "ענף מימון סחר חוץ מורכב וערבויות בינלאומיות",
+        "url": "https://www.discountbank.co.il/business/business-services/foreigntrade/funding-foreignttradet/"
+      },
+      {
+        "description": "מטרת התכנית היא סיוע למפעלים באיזורי פיתוח ויתר איזורי הארץ. במסגרת התכנית תאושר הטבת מס על ידי מס חברות מופחת. מפעל בר תחרות הינו מפעל בעל כושר ייצוא של ...",
+        "displayedUrl": "https://industry.org.il › ...",
+        "position": 6,
+        "title": "קרן הלוואות לשדרוג טכנולוגי או להון חוזר",
+        "url": "https://industry.org.il/index.php?dir=site&page=grants&op=show&cs=9&cs_main_filter=10&print=1"
+      },
+      {
+        "description": "תקופת ההלוואה: עד חמש שנים, מתוך זה עד 6 חודשי גרייס. ריבית: ריבית מקובלת במערכת הבנקאית להלוואות מסוג זה, עפ\"י שיקול דעתו של הבנק ובאישור ועדת האשראי. בטחונות ...",
+        "displayedUrl": "https://minufim-group.co.il › הלוואות-בערבות-מדינה-מסלול-הו...",
+        "position": 7,
+        "title": "הלוואות בערבות מדינה מסלול הון חוזר - חברת מינופים",
+        "url": "https://minufim-group.co.il/%D7%94%D7%9C%D7%95%D7%95%D7%90%D7%95%D7%AA-%D7%91%D7%A2%D7%A8%D7%91%D7%95%D7%AA-%D7%9E%D7%93%D7%99%D7%A0%D7%94-%D7%9E%D7%A1%D7%9C%D7%95%D7%9C-%D7%94%D7%95%D7%9F-%D7%97%D7%95%D7%96%D7%A8/"
+      },
+      {
+        "description": "7 ביולי 2025 — אחד היתרונות העיקריים של מימון חובות הוא מהירות. בהתאם לספק ולסוג הפתרון, עסקים יכולים לעתים קרובות לקבל גישה לכספים תוך 24 עד 48 שעות לאחר ...",
+        "displayedUrl": "https://www.emagia.com › glossary › receivables-funding",
+        "position": 8,
+        "title": "שחרור הון חוזר: המדריך שלך למימון וניהול חובות",
+        "url": "https://www.emagia.com/iw/resources/glossary/receivables-funding/"
+      },
+      {
+        "description": "11 בינו׳ 2023 — נפתח מסלול חדש – \"הון חוזר לטווח קצר\" מסלול הון חוזר לטווח הקצר מיועד לעסקים המבקשים לקבל מימון לטובת צרכי הון חוזר וגישור על פערי תזרים מזומנים ...",
+        "displayedUrl": "https://keren.bdsk.co.il › מסלול-הון-החזר",
+        "position": 9,
+        "title": "קרן ההלוואות בערבות המדינה – מסלול הון החזר",
+        "url": "https://keren.bdsk.co.il/%D7%9E%D7%A1%D7%9C%D7%95%D7%9C-%D7%94%D7%95%D7%9F-%D7%94%D7%97%D7%96%D7%A8/"
+      },
+      {
+        "description": "מימון הון חוזר מסייע בהמשכיות של התנהלות עסקית תקינה באמצעות מימון פערי התשלומים ועמידה בדרישת ההון החוזר של בית העסק. כלומר, בעלי עסקים קטנים וצומחים המסתמכים ...",
+        "displayedUrl": "https://capital360.co.il › מימון-הון-חוזר-מה-זה",
+        "position": 10,
+        "title": "מימון הון חוזר: מה זה? - capital360",
+        "url": "https://capital360.co.il/%D7%9E%D7%99%D7%9E%D7%95%D7%9F-%D7%94%D7%95%D7%9F-%D7%97%D7%95%D7%96%D7%A8-%D7%9E%D7%94-%D7%96%D7%94/"
+      }
+    ],
+    "ai_mode_results": [
+      {
+        "description": "הלוואות להון חוזר נועדו לגשר על פערי תזרים מזומנים, מימון מלאי או תשלום משכורות. נכון לינואר 2026, קיימות מספר אפשרויות מרכזיות למימון זה בישראל: 1. הלוואות בערבות מדינה זהו אחד המסלולים הפופולריים ביותר לעסקים קטנים ובינוניים (SME): מסלול הון חוזר לטווח קצר: מיועד לעסקים עם צורך במימון שוטף וגישור על פערי תזרים.תנאי המימון: ניתן לקבל הלוואה בסכום של עד 500,000 ש\"ח או עד 8% ממחזור המכירות השנתי (לפי הגבוה מביניהם).ערבויות: המדינה מעמידה ערבות של כ-70% מסכום ההלוואה, מה שמקל על דרישות הביטחונות מהעסק.מסלולים מיוחדים: קיימים מסלולים ייעודיים לשיקום עסקים (כמו אלו שנפגעו ממלחמה) ולעסקים בצפון, עם הקצאות ערבות מיוחדות שאושרו במהלך 2025. 2. אפיקי מימון בנקאיים וחוץ-בנקאיים בנקים: בנקים מסחריים (כמו לאומי, מזרחי-טפחות ודיסקונט) מציעים קווי אשראי והלוואות ייעודיות להון חוזר. חשוב לציין כי החל מ-1 בינואר 2026, חלק מההקלות המיוחדות של תקופת המלחמה הסתיימו, מה שעלול להוביל לעלייה בריביות לעומת השנה הקודמת.מימון מבוסס הכנסות (Revenue-Based Financing): חברות פינטק מציעות הלוואות שבהן ההחזר מותאם להכנסות היומיות של העסק – פתרון גמיש לעסקים עם תזרים משתנה.מימון חשבוניות (Factoring): פתרון המאפשר לקבל מזומן מיידי תמורת חשבוניות שטרם שולמו על ידי לקוחות (מימון חייבים). 3. קרנות וסיוע ייעודי קרנות מגזריות: קיימות קרנות ספציפיות כמו הקרן ההדדית של התאחדות התעשיינים, המעניקה הלוואות להון חוזר לחבריה.קרנות חירום: קרנות כמו \"Israel Emergency Loan Fund\" של הפדרציות היהודיות מספקות אשראי לעסקים שחוו פגיעה משמעותית בהכנסות עקב המצב הביטחוני. טיפים להגשת בקשה: יש להכין תוכנית עסקית או דוחות תזרים המראים את הצורך המדויק בהון החוזר.ניתן להיעזר בפורטל הממשלתי לעסקים קטנים לבדיקת זכאות למסלולי ערבות מדינה עדכניים ל-2026. אילו ביטחונות נדרשים להלוואות בערבות מדינה?השוואת תנאי הלוואות הון חוזר בבנקים שוניםהאם ניתן לשלב מימון ממקורות שונים?",
+        "is_summary": true,
+        "position": 0,
+        "title": "AI Overview Summary",
+        "url": ""
+      },
+      {
+        "description": "מסלול הון חוזר לטווח הקצר מיועד לעסקים קטנים ובינוניים העומדים בתנאי הסף של הקרן ומבקשים לקבל מימון לטובת צרכי הון חוזר וגישור על ...",
+        "position": 1,
+        "title": "מסלול הון חוזר לטווח קצר - govextra",
+        "url": "https://govextra.gov.il/mof-gloans/capital-track/"
+      },
+      {
+        "description": "הלוואות הון חוזר לטווח קצר - הלוואות לתקופה, קווי אשראי, כרטיסי אשראי עסקיים והלוואות מגובות על-ידי הממשלה; משכורת מצטברת - כספים ...",
+        "position": 2,
+        "title": "מה זה הון חוזר ולמה זה משנה? - SAP",
+        "url": "https://www.sap.com/israel/resources/what-is-working-capital"
+      },
+      {
+        "description": "Jan 6, 2026 — January 7, 2026. January 7, 2026. The best working capital loan programs for businesses are those that provide fast access to capi...",
+        "position": 3,
+        "title": "Best Working Capital Loan Programs for Businesses in 2026",
+        "url": "https://www.onrampfunds.com/guides/best-working-capital-loan-programs-for-businesses-in-2026#:~:text=January%207%2C%202026,instead%20of%20fixed%20monthly%20payments."
+      },
+      {
+        "description": "אתר זה הינו האתר הרשמי של הקרן, המופעל על ידי אגף החשב הכללי במשרד האוצר. באתר זה תוכלו לקבל מידע נרחב אודות קרן ההלוואות לעסקים ק...",
+        "position": 4,
+        "title": "קרן ההלוואות לעסקים קטנים ובינוניים בערבות מדינה - govextra",
+        "url": "https://govextra.gov.il/mof-gloans/homepage/"
+      },
+      {
+        "description": "הלוואות הקרן ההדדית- קרן הלוואות לשדרוג טכנולוגי או להון חוזר. פרטי המענק. שם המענק. הלוואות הקרן ההדדית- קרן הלוואות לשדרוג טכנול...",
+        "position": 5,
+        "title": "קרן הלוואות לשדרוג טכנולוגי או להון חוזר",
+        "url": "https://industry.org.il/index.php?dir=site&page=grants&op=show&cs=9&cs_main_filter=10&print=1"
+      },
+      {
+        "description": "Jul 6, 2025 — גלו את מימון החייבים כפתרון רב עוצמה לתזרים מזומנים מיידי. למדו על מימון חייבים, מימון חשבונות חייבים, פקטורינג וכיצד לממן חייבים ...",
+        "position": 6,
+        "title": "שחרור הון חוזר: המדריך שלך למימון וניהול חובות - Emagia",
+        "url": "https://www.emagia.com/iw/resources/glossary/receivables-funding/#:~:text=%D7%92%D7%9C%D7%95%20%D7%90%D7%AA%20%D7%9E%D7%99%D7%9E%D7%95%D7%9F%20%D7%94%D7%97%D7%99%D7%99%D7%91%D7%99%D7%9D%20%D7%9B%D7%A4%D7%AA%D7%A8%D7%95%D7%9F%20%D7%A8%D7%91%20%D7%A2%D7%95%D7%A6%D7%9E%D7%94,%D7%9C%D7%94%D7%92%D7%91%D7%99%D7%A8%20%D7%90%D7%AA%20%D7%94%D7%A0%D7%96%D7%99%D7%9C%D7%95%D7%AA%20%D7%95%D7%94%D7%A6%D7%9E%D7%99%D7%97%D7%94%20%D7%A9%D7%9C%20%D7%94%D7%A2%D7%A1%D7%A7%20%D7%A9%D7%9C%D7%9B%D7%9D."
+      },
+      {
+        "description": "עוד באתר * סניפים * נציבות פניות הציבור",
+        "position": 7,
+        "title": "ענף מימון סחר חוץ מורכב וערבויות בינלאומיות - דיסקונט",
+        "url": "https://www.discountbank.co.il/business/business-services/foreigntrade/funding-foreignttradet/#:~:text=%D7%A2%D7%95%D7%93%20%D7%91%D7%90%D7%AA%D7%A8%20*%20%D7%A1%D7%A0%D7%99%D7%A4%D7%99%D7%9D%20*%20%D7%A0%D7%A6%D7%99%D7%91%D7%95%D7%AA%20%D7%A4%D7%A0%D7%99%D7%95%D7%AA%20%D7%94%D7%A6%D7%99%D7%91%D7%95%D7%A8"
+      },
+      {
+        "description": "Mar 18, 2024 — Federations Create Israel Emergency Loan Fund to Aid Small Businesses. Jewish Federations of North America announced Tuesday that ...",
+        "position": 8,
+        "title": "Federations Create Israel Emergency Loan Fund to Aid Small ...",
+        "url": "https://www.jewishfederations.org/blog/all/federations-create-israel-emergency-loan-fund-to-aid-small-businesses-462326#:~:text=Blog-,Federations%20Create%20Israel%20Emergency%20Loan%20Fund%20to%20Aid%20Small%20Businesses,at%20this%20time%20of%20need."
+      },
+      {
+        "description": "הלוואה בערבות מדינה לעסקים פרטיים ובינוניים | בנק מזרחי-טפחות",
+        "position": 9,
+        "title": "הלוואה בערבות מדינה לעסקים פרטיים ובינוניים | בנק מזרחי-טפחות",
+        "url": "https://www.mizrahi-tefahot.co.il/loans/businessloanslib/small-business-financing/#:~:text=%D7%94%D7%9C%D7%95%D7%95%D7%90%D7%94%20%D7%91%D7%A2%D7%A8%D7%91%D7%95%D7%AA%20%D7%9E%D7%93%D7%99%D7%A0%D7%94%20%D7%9C%D7%A2%D7%A1%D7%A7%D7%99%D7%9D%20%D7%A4%D7%A8%D7%98%D7%99%D7%99%D7%9D%20%D7%95%D7%91%D7%99%D7%A0%D7%95%D7%A0%D7%99%D7%99%D7%9D%20%7C%20%D7%91%D7%A0%D7%A7%20%D7%9E%D7%96%D7%A8%D7%97%D7%99%2D%D7%98%D7%A4%D7%97%D7%95%D7%AA"
+      },
+      {
+        "description": "המסלול מיועד לעסקים קטנים ובינוניים העומדים בתנאי הסף של הקרן ומבקשים לקבל אשראי לטובת אחת מהמטרות הבאות: הון חוזר וגישור על פערי ...",
+        "position": 10,
+        "title": "מסלול כללי - govextra",
+        "url": "https://govextra.gov.il/mof-gloans/general-track/"
+      },
+      {
+        "description": "Mar 10, 2009 — The loan is granted for any purpose, including working capital, investments, export promotion, etc. Loans of up to 20% of revenues...",
+        "position": 11,
+        "title": "Government launches support for small businesses",
+        "url": "https://www.jpost.com/business/business-features/article-135567#:~:text=The%20loan%20is%20granted%20for,is%20an%20international%20tax%20specialist."
+      },
+      {
+        "description": "May 4, 2025 — ... לאור האתגרים שצוינו לעיל. בהתאם, ההלוואות יינתנו במטרה לסייע לעסקים אלו להתמודד עם קשיי תזרים מזומנים וצרכי הון חוזר אשר עלולי...",
+        "position": 12,
+        "title": "ועדת הכספים אישרה הקצאת ערבות מדינה בהיקף של 200 מיליון ...",
+        "url": "https://main.knesset.gov.il/News/PressReleases/pages/press05052025c.aspx"
+      },
+      {
+        "description": "Oct 22, 2025 — אסטרטגיית מימון עסקית חייבת להתמקד בנזילות החברה, רציפות תפעולית וצמיחה בריאה. חשוב להבין כי רווחיות בלבד אינה מבטיחה זאת. חברות ר...",
+        "position": 13,
+        "title": "מימון הון חוזר -האסטרטגיה הפיננסית להבטחת יציבות וצמיחה - יעל קרן",
+        "url": "https://yaelkeren.com/%D7%9E%D7%99%D7%9E%D7%95%D7%9F-%D7%94%D7%95%D7%9F-%D7%97%D7%95%D7%96%D7%A8-%D7%94%D7%90%D7%A1%D7%98%D7%A8%D7%98%D7%92%D7%99%D7%94-%D7%94%D7%A4%D7%99%D7%A0%D7%A0%D7%A1%D7%99%D7%AA-%D7%9C%D7%94%D7%91/"
+      },
+      {
+        "description": "Nov 29, 2025 — Even while the cannons are still thundering in the North and Gaza amid fragile ceasefires, the credit market is already preparing ...",
+        "position": 14,
+        "title": "Banks continue to profit as loan relief set to expire",
+        "url": "https://www.jpost.com/opinion/article-876608#:~:text=Even%20while%20the%20cannons%20are,the%20end%20of%20this%20year."
+      },
+      {
+        "description": "Some of these grants, loans and schemes have only been operating on a temporary basis but can help a business than needs additiona...",
+        "position": 15,
+        "title": "Business Finance - Financing Your Business In Israel & Abroad",
+        "url": "https://www.angelinvestmentnetwork.co.il/business-finance#:~:text=Some%20of%20these%20grants%2C%20loans,time%20to%20help%20your%20business."
+      }
+    ],
+    "ai_rank_position": null,
+    "competitor_data": [
+      {
+        "description": "מסלול הון חוזר לטווח הקצר מיועד לעסקים קטנים ובינוניים העומדים בתנאי הסף של הקרן ומבקשים לקבל מימון לטובת צרכי הון חוזר וגישור על פערי תזרים מזומנים לטווח קצר.",
+        "position": 1,
+        "title": "מסלול הון חוזר לטווח קצר - govextra",
+        "url": "https://govextra.gov.il/mof-gloans/capital-track/"
+      },
+      {
+        "description": "סכום ההלוואה שניתן יכול להגיע עד עשרה אחוז מהמחזור השנתי של העסק, אף לא יעלה על 2.8 מיליון ₪. הריבית שנגבית עבור אשראי למימון הון חוזר היא פריים פלוס 0.9% ...",
+        "position": 2,
+        "title": "הלוואות להון חוזר - הלוואות בערבות המדינה ובנקים באישור מיידי",
+        "url": "https://loan-israel.co.il/Business/working-capital-loans/"
+      },
+      {
+        "description": "הלוואות הון חוזר לטווח קצר - הלוואות לתקופה, קווי אשראי, כרטיסי אשראי עסקיים והלוואות מגובות על-ידי הממשלה; משכורת מצטברת - כספים שחייבים לעובדים, כגון ...",
+        "position": 3,
+        "title": "מה זה הון חוזר ולמה זה משנה?",
+        "url": "https://www.sap.com/israel/resources/what-is-working-capital"
+      },
+      {
+        "description": "סכום ההלוואה: עסקים חדשים או עסקים עם מחזור שנתי של עד 6.25 מיליון ₪ - עד 500,000 ₪ · תקופת ההלוואה: עד 5 שנים עם אפשרות לחצי שנה גרייס על הקרן · ריבית: שיעור ...",
+        "position": 4,
+        "title": "הלוואה בערבות מדינה לעסקים פרטיים ובינוניים",
+        "url": "https://www.mizrahi-tefahot.co.il/loans/businessloanslib/small-business-financing/"
+      },
+      {
+        "description": "מימון הון חוזר - ניכיון חשבוניות יצוא קבלת תשלום במזומן של חלק מסכום החשבוניות בקיזוז ריבית ועמלות. המימון הינו לזמן קצר - עד שנה. המימון מגובה בחלקו על ידי ...",
+        "position": 5,
+        "title": "ענף מימון סחר חוץ מורכב וערבויות בינלאומיות",
+        "url": "https://www.discountbank.co.il/business/business-services/foreigntrade/funding-foreignttradet/"
+      },
+      {
+        "description": "מטרת התכנית היא סיוע למפעלים באיזורי פיתוח ויתר איזורי הארץ. במסגרת התכנית תאושר הטבת מס על ידי מס חברות מופחת. מפעל בר תחרות הינו מפעל בעל כושר ייצוא של ...",
+        "position": 6,
+        "title": "קרן הלוואות לשדרוג טכנולוגי או להון חוזר",
+        "url": "https://industry.org.il/index.php?dir=site&page=grants&op=show&cs=9&cs_main_filter=10&print=1"
+      },
+      {
+        "description": "תקופת ההלוואה: עד חמש שנים, מתוך זה עד 6 חודשי גרייס. ריבית: ריבית מקובלת במערכת הבנקאית להלוואות מסוג זה, עפ\"י שיקול דעתו של הבנק ובאישור ועדת האשראי. בטחונות ...",
+        "position": 7,
+        "title": "הלוואות בערבות מדינה מסלול הון חוזר - חברת מינופים",
+        "url": "https://minufim-group.co.il/%D7%94%D7%9C%D7%95%D7%95%D7%90%D7%95%D7%AA-%D7%91%D7%A2%D7%A8%D7%91%D7%95%D7%AA-%D7%9E%D7%93%D7%99%D7%A0%D7%94-%D7%9E%D7%A1%D7%9C%D7%95%D7%9C-%D7%94%D7%95%D7%9F-%D7%97%D7%95%D7%96%D7%A8/"
+      },
+      {
+        "description": "7 ביולי 2025 — אחד היתרונות העיקריים של מימון חובות הוא מהירות. בהתאם לספק ולסוג הפתרון, עסקים יכולים לעתים קרובות לקבל גישה לכספים תוך 24 עד 48 שעות לאחר ...",
+        "position": 8,
+        "title": "שחרור הון חוזר: המדריך שלך למימון וניהול חובות",
+        "url": "https://www.emagia.com/iw/resources/glossary/receivables-funding/"
+      },
+      {
+        "description": "11 בינו׳ 2023 — נפתח מסלול חדש – \"הון חוזר לטווח קצר\" מסלול הון חוזר לטווח הקצר מיועד לעסקים המבקשים לקבל מימון לטובת צרכי הון חוזר וגישור על פערי תזרים מזומנים ...",
+        "position": 9,
+        "title": "קרן ההלוואות בערבות המדינה – מסלול הון החזר",
+        "url": "https://keren.bdsk.co.il/%D7%9E%D7%A1%D7%9C%D7%95%D7%9C-%D7%94%D7%95%D7%9F-%D7%94%D7%97%D7%96%D7%A8/"
+      },
+      {
+        "description": "מימון הון חוזר מסייע בהמשכיות של התנהלות עסקית תקינה באמצעות מימון פערי התשלומים ועמידה בדרישת ההון החוזר של בית העסק. כלומר, בעלי עסקים קטנים וצומחים המסתמכים ...",
+        "position": 10,
+        "title": "מימון הון חוזר: מה זה? - capital360",
+        "url": "https://capital360.co.il/%D7%9E%D7%99%D7%9E%D7%95%D7%9F-%D7%94%D7%95%D7%9F-%D7%97%D7%95%D7%96%D7%A8-%D7%9E%D7%94-%D7%96%D7%94/"
+      }
+    ]
+  },
   "word_count": 392,
   "wp_post_title": "הלוואות להון חוזר",
-  "page_name": "הלוואות להון חוזר"
+  "page_name": "הלוואות להון חוזר",
+  "is_special": true
 }

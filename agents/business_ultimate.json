@@ -1,7 +1,7 @@
 {
   "id": "business_ultimate",
   "name": "עסקים אולטימייט",
-  "description": "סוכן אולטימייט לשכתוב עמודי הלוואות לעסקים עם תוכן דל - כתיבה מחדש מלאה עם אטומיק, SEO, ויזואליזציה ו-QA (4 שלבים)",
+  "description": "סוכן אולטימייט - 5 שלבים מופרדים: אסטרטגיה > כתיבה > SEO > ויזואל > QA",
   "folder_name": "עסקים אולטימייט",
   "model": {
     "provider": "claude",
@@ -12,7 +12,7 @@
   "supports_full_auto": true,
   "status": "active",
   "created": "2026-01-12T12:00:00.000000",
-  "updated": "2026-01-12T12:24:24.810777",
+  "updated": "2026-01-12T16:00:00.000000",
   "wordpress": {
     "action": "update",
     "site": "main",
@@ -24,12 +24,12 @@
     {
       "id": "step1",
       "order": 1,
-      "name": "ניתוח + שימור + כתיבה אטומית",
+      "name": "האסטרטג (ניתוח ואסטרטגיה)",
       "model": "claude-opus-4-5",
       "prompt_file": "פרומטים/עסקים אולטימייט/שלב 1.md",
-      "prompt_template": "קרא את קובץ ההוראות {{STEP1_PROMPT_FILE}} ובצע ניתוח, שימור תוכן טוב וכתיבה אטומית מחדש על העמוד {{PAGE_HTML_PATH}}.\n\n## מטרת השלב:\nשכתוב מלא של עמוד עם תוכן דל - כתיבה מחדש תוך שימור תוכן קיים טוב.\n\n## נתוני עמוד:\n- **מילת מפתח ראשית:** {{PAGE_KEYWORD}}\n- **מיקום נוכחי ב-SERP:** {{OUR_SERP_RANK}}\n- **כמות מילים קיימת בעמוד כיום:** {{PAGE_WORD_COUNT}}\n\n## מילות מפתח נלוות לשילוב:\n{{KEYWORDS_AUTOCOMPLETE}}\n\n**רשימת שימור:** המילים הבאות חייבות להופיע בתוכן:\n{{KEYWORDS_AUTOCOMPLETE_LIST}}\n\n## מידע ממתחרים מדורגים:\n{{SERP_ORGANIC}}\n\n## תוצאות AI Overview של גוגל:\n{{SERP_AI_OVERVIEW}}\n\n## מאגרי מידע:\n- מאגר כללי: {{KNOWLEDGE_BASE_GENERAL}}\n- מאגר מסלולים: {{KNOWLEDGE_BASE_TRACKS}}\n- חודש נוכחי: {{CURRENT_MONTH}}\n- ריבית הפריים העדכנית: {{BOI_INTEREST_RATE}}\n\n## דומיינים מאושרים לקישורים חיצוניים:\n{{APPROVED_DOMAINS}}\n\n## מאגר קישורים פנימיים:\n{{INTERNAL_LINKS_DB}}\n\n**חובה לשמור:**\n- דוח משולב (ניתוח + שימור + כתיבה): {{OUTPUT_PATH}}\n- שם הקובץ: {{STEP1_REPORT}}\n- העמוד המעודכן: {{PAGE_HTML_PATH}} (כתיבה מחדש)",
+      "prompt_template": "קרא את קובץ ההוראות {{STEP1_PROMPT_FILE}} ובצע ניתוח מעמיק ובניית אסטרטגיה לעמוד {{PAGE_HTML_PATH}}.\n\n## מטרת השלב:\nיצירת דוח אסטרטגיה (\"בלופרינט\") מקיף לפני הכתיבה.\n\n## נתוני עמוד:\n- **מילת מפתח ראשית:** {{PAGE_KEYWORD}}\n- **מיקום נוכחי ב-SERP:** {{OUR_SERP_RANK}}\n- **כמות מילים קיימת:** {{PAGE_WORD_COUNT}}\n\n## מילות מפתח נלוות:\n{{KEYWORDS_AUTOCOMPLETE}}\n\n## מידע ממתחרים:\n{{SERP_ORGANIC}}\n\n## תוצאות AI Overview:\n{{SERP_AI_OVERVIEW}}\n\n## מאגרי מידע:\n- מאגר כללי: {{KNOWLEDGE_BASE_GENERAL}}\n- מאגר מסלולים: {{KNOWLEDGE_BASE_TRACKS}}\n- חודש נוכחי: {{CURRENT_MONTH}}\n- ריבית הפריים: {{BOI_INTEREST_RATE}}\n\n## קישורים פנימיים לשימור:\n{{INTERNAL_LINKS_DB}}\n\n**חובה לשמור:**\n- דוח אסטרטגיה: {{OUTPUT_PATH}}\n- שם הקובץ: {{STEP1_REPORT}}",
       "output": {
-        "path": "דוח ניתוח וכתיבה.md",
+        "path": "דוח אסטרטגיה.md",
         "shortcode_name": "STEP1_REPORT"
       },
       "shortcodes": [
@@ -38,77 +38,89 @@
         "PAGE_WORD_COUNT",
         "OUR_SERP_RANK",
         "KEYWORDS_AUTOCOMPLETE",
-        "KEYWORDS_AUTOCOMPLETE_LIST",
         "SERP_ORGANIC",
         "SERP_AI_OVERVIEW",
         "KNOWLEDGE_BASE_GENERAL",
         "KNOWLEDGE_BASE_TRACKS",
         "CURRENT_MONTH",
         "BOI_INTEREST_RATE",
-        "APPROVED_DOMAINS",
         "INTERNAL_LINKS_DB"
       ]
     },
     {
       "id": "step2",
       "order": 2,
-      "name": "SEO + QA תוכן",
-      "model": "claude-sonnet-4-5",
+      "name": "הקופירייטר (כתיבה אטומית)",
+      "model": "claude-opus-4-5",
       "prompt_file": "פרומטים/עסקים אולטימייט/שלב 2.md",
-      "prompt_template": "קרא את קובץ ההוראות {{STEP2_PROMPT_FILE}} ובצע SEO טכני ו-QA תוכן על העמוד {{PAGE_HTML_PATH}}.\n\n## מטרת השלב:\nהטמעת Schema Markup, תגיות HEAD, שורטקודים ובדיקות איכות תוכן.\n\n## דוח משלב קודם:\n{{STEP1_REPORT}}\n\n## נתוני עמוד:\n- **מילת מפתח ראשית:** {{PAGE_KEYWORD}}\n- **כמות מילים:** {{PAGE_WORD_COUNT}}\n\n## מילות מפתח שחייבות להופיע:\n{{KEYWORDS_AUTOCOMPLETE_LIST}}\n\n## מאגר מידע כללי (לפרטי Schema):\n{{KNOWLEDGE_BASE_GENERAL}}\n\n## ריבית פריים עדכנית:\n{{BOI_INTEREST_RATE}}\n\n**חובה לשמור:**\n- דוח SEO + QA: {{OUTPUT_PATH}}\n- שם הקובץ: {{STEP2_REPORT}}\n- העמוד המעודכן: {{PAGE_HTML_PATH}} (עריכה במקום)",
+      "prompt_template": "קרא את קובץ ההוראות {{STEP2_PROMPT_FILE}} וכתוב את העמוד {{PAGE_HTML_PATH}} בהתבסס על האסטרטגיה.\n\n## מטרת השלב:\nכתיבת HTML מלאה בסגנון \"שיווק אטומי\" על פי דוח האסטרטגיה.\n\n## דוח אסטרטגיה משלב 1:\n{{STEP1_REPORT}}\n\n## נתוני עמוד:\n- **מילת מפתח ראשית:** {{PAGE_KEYWORD}}\n- **ריבית פריים:** {{BOI_INTEREST_RATE}}\n\n## מאגר ידע:\n{{KNOWLEDGE_BASE_GENERAL}}\n\n**חובה לשמור:**\n- העמוד החדש: {{PAGE_HTML_PATH}}\n- דוח כתיבה: {{OUTPUT_PATH}}\n- שם הדוח: {{STEP2_REPORT}}",
       "output": {
-        "path": "דוח SEO וQA.md",
+        "path": "דוח כתיבה.md",
         "shortcode_name": "STEP2_REPORT"
       },
       "shortcodes": [
         "STEP1_REPORT",
         "PAGE_HTML",
         "PAGE_KEYWORD",
-        "PAGE_WORD_COUNT",
-        "KEYWORDS_AUTOCOMPLETE_LIST",
-        "KNOWLEDGE_BASE_GENERAL",
-        "BOI_INTEREST_RATE"
+        "BOI_INTEREST_RATE",
+        "CURRENT_MONTH",
+        "KNOWLEDGE_BASE_GENERAL"
       ]
     },
     {
       "id": "step3",
       "order": 3,
-      "name": "ויזואליזציה + QA ויזואלי",
+      "name": "מומחה SEO (אופטימיזציה)",
       "model": "claude-sonnet-4-5",
       "prompt_file": "פרומטים/עסקים אולטימייט/שלב 3.md",
-      "prompt_template": "קרא את קובץ ההוראות {{STEP3_PROMPT_FILE}} והוסף ויזואליזציות ובצע QA ויזואלי על העמוד {{PAGE_HTML_PATH}}.\n\n## מטרת השלב:\nהוספת אלמנטים ויזואליים (Stats, Timeline, FAQ, Callouts) ובדיקת איכות.\n\n## דוח משלב קודם:\n{{STEP2_REPORT}}\n\n## נתוני עמוד:\n- **מילת מפתח ראשית:** {{PAGE_KEYWORD}}\n- **כמות מילים:** {{PAGE_WORD_COUNT}}\n\n## מקורות עיצוב:\n- קובץ עיצוב: מאגרי מידע/visual.html\n- כללי WordPress: מאגרי מידע/wordpress-ruls.html\n\n**חובה לשמור:**\n- דוח ויזואליזציה + QA: {{OUTPUT_PATH}}\n- שם הקובץ: {{STEP3_REPORT}}\n- העמוד המעודכן: {{PAGE_HTML_PATH}} (עריכה במקום)",
+      "prompt_template": "קרא את קובץ ההוראות {{STEP3_PROMPT_FILE}} ובצע אופטימיזציית SEO על העמוד {{PAGE_HTML_PATH}}.\n\n## מטרת השלב:\nהוספת Schema, Meta Tags, וקישורים.\n\n## דוח כתיבה משלב 2:\n{{STEP2_REPORT}}\n\n## נתונים:\n- **מילת מפתח:** {{PAGE_KEYWORD}}\n- **דומיינים מאושרים:** {{APPROVED_DOMAINS}}\n- **קישורים פנימיים:** {{INTERNAL_LINKS_DB}}\n- **מאגר ידע (לסכמה):** {{KNOWLEDGE_BASE_GENERAL}}\n\n**חובה לשמור:**\n- העמוד המעודכן: {{PAGE_HTML_PATH}}\n- דוח SEO: {{OUTPUT_PATH}}\n- שם הדוח: {{STEP3_REPORT}}",
       "output": {
-        "path": "דוח ויזואליזציה וQA.md",
+        "path": "דוח SEO.md",
         "shortcode_name": "STEP3_REPORT"
       },
       "shortcodes": [
         "STEP2_REPORT",
         "PAGE_HTML",
         "PAGE_KEYWORD",
-        "PAGE_WORD_COUNT"
+        "APPROVED_DOMAINS",
+        "INTERNAL_LINKS_DB",
+        "KNOWLEDGE_BASE_GENERAL"
       ]
     },
     {
       "id": "step4",
       "order": 4,
-      "name": "בדיקה סופית",
+      "name": "המעצב (ויזואליזציה)",
       "model": "claude-sonnet-4-5",
       "prompt_file": "פרומטים/עסקים אולטימייט/שלב 4.md",
-      "prompt_template": "קרא את קובץ ההוראות {{STEP4_PROMPT_FILE}} ובצע בדיקה סופית מקיפה על העמוד {{PAGE_HTML_PATH}}.\n\n## מטרת השלב:\nבקרת איכות סופית מקיפה לפני פרסום - אימות תוכן, טכני, מבנה והפקת דוח סופי.\n\n## דוחות משלבים קודמים:\n- שלב 1: {{STEP1_REPORT}}\n- שלב 2: {{STEP2_REPORT}}\n- שלב 3: {{STEP3_REPORT}}\n\n## נתוני עמוד:\n- **מילת מפתח ראשית:** {{PAGE_KEYWORD}}\n- **כמות מילים:** {{PAGE_WORD_COUNT}}\n\n## מילות מפתח שחייבות להופיע:\n{{KEYWORDS_AUTOCOMPLETE_LIST}}\n\n## ריבית פריים עדכנית:\n{{BOI_INTEREST_RATE}}\n\n## דומיינים מאושרים:\n{{APPROVED_DOMAINS}}\n\n**חובה לשמור:**\n- דוח QA סופי: {{OUTPUT_PATH}}\n- שם הקובץ: {{STEP4_REPORT}}\n- העמוד הסופי: {{PAGE_HTML_PATH}} (תיקונים אחרונים אם נדרש)",
+      "prompt_template": "קרא את קובץ ההוראות {{STEP4_PROMPT_FILE}} והוסף עיצובים ויזואליים לעמוד {{PAGE_HTML_PATH}}.\n\n## מטרת השלב:\nהוספת FAQ Accordion, Stats, Timeline, Callouts.\n\n## דוח SEO משלב 3:\n{{STEP3_REPORT}}\n\n## מקורות עיצוב:\n- קובץ עיצוב: מאגרי מידע/visual.html\n\n**חובה לשמור:**\n- העמוד המעודכן: {{PAGE_HTML_PATH}}\n- דוח ויזואל: {{OUTPUT_PATH}}\n- שם הדוח: {{STEP4_REPORT}}",
       "output": {
-        "path": "דוח QA סופי.md",
+        "path": "דוח ויזואל.md",
         "shortcode_name": "STEP4_REPORT"
+      },
+      "shortcodes": [
+        "STEP3_REPORT",
+        "PAGE_HTML"
+      ]
+    },
+    {
+      "id": "step5",
+      "order": 5,
+      "name": "המבקר (QA סופי)",
+      "model": "claude-sonnet-4-5",
+      "prompt_file": "פרומטים/עסקים אולטימייט/שלב 5.md",
+      "prompt_template": "קרא את קובץ ההוראות {{STEP5_PROMPT_FILE}} ובצע QA סופי על העמוד {{PAGE_HTML_PATH}}.\n\n## מטרת השלב:\nבדיקה סופית ואישור לפני פרסום.\n\n## דוחות קודמים:\n- אסטרטגיה: {{STEP1_REPORT}}\n- כתיבה: {{STEP2_REPORT}}\n- SEO: {{STEP3_REPORT}}\n- ויזואל: {{STEP4_REPORT}}\n\n## נתונים לבדיקה:\n- **מילות מפתח:** {{KEYWORDS_AUTOCOMPLETE_LIST}}\n\n**חובה לשמור:**\n- דוח סופי: {{OUTPUT_PATH}}\n- שם הדוח: {{STEP5_REPORT}}\n- העמוד הסופי: {{PAGE_HTML_PATH}}",
+      "output": {
+        "path": "דוח סופי.md",
+        "shortcode_name": "STEP5_REPORT"
       },
       "shortcodes": [
         "STEP1_REPORT",
         "STEP2_REPORT",
         "STEP3_REPORT",
+        "STEP4_REPORT",
         "PAGE_HTML",
-        "PAGE_KEYWORD",
-        "PAGE_WORD_COUNT",
-        "KEYWORDS_AUTOCOMPLETE_LIST",
-        "BOI_INTEREST_RATE",
-        "APPROVED_DOMAINS"
+        "KEYWORDS_AUTOCOMPLETE_LIST"
       ]
     }
   ],

@@ -8,13 +8,14 @@
 
 מערכת זו היא **Dashboard לניהול ועדכון תוכן** לאתרי WordPress עבור loan-israel.co.il.
 המערכת מאפשרת הפעלת **סוכני AI (Claude)** על עמודי HTML, ביצוע אופטימיזציית SEO, ועדכון אוטומטי לוורדפרס.
+כמו כן, המערכת כוללת מנגנוני ניהול מתקדמים לארכיון, שחזור עמודים וניהול הפניות 301.
 
 ### טכנולוגיות עיקריות
-- **Backend:** Python Flask (dashboard_server.py)
-- **Frontend:** HTML/CSS/JS בקובץ אחד (dashboard.html)
-- **AI:** Claude Code (CLI) + Anthropic API
-- **CMS:** WordPress עם JWT Authentication
-- **APIs חיצוניות:** Apify (SERP, Autocomplete)
+- **Backend:** Python Flask (dashboard_server.py) - כ-12,000 שורות קוד.
+- **Frontend:** HTML/CSS/JS בקובץ אחד (dashboard.html) - כ-26,000 שורות קוד.
+- **AI:** Claude Code (CLI) + Anthropic API.
+- **CMS:** WordPress עם JWT Authentication ו-Yoast SEO Premium.
+- **APIs חיצוניות:** Apify (SERP, Autocomplete).
 
 ---
 
@@ -22,374 +23,245 @@
 
 ```
 📁 loan-israel-updates/
-├── 📄 dashboard_server.py    # ← השרת הראשי (Flask) ~12,000 שורות
-├── 📄 dashboard.html         # ← הממשק הגרפי (HTML/JS/CSS) ~20,000 שורות
+├── 📄 dashboard_server.py    # ← השרת הראשי (Flask) - מטפל בכל הלוגיקה
+├── 📄 dashboard.html         # ← הממשק הגרפי (HTML/JS/CSS)
 ├── 📄 config.json           # ← הגדרות מערכת, אתרים, נתיבים
-├── 📁 agents/               # ← הגדרות סוכנים (JSON)
+├── 📁 agents/               # ← הגדרות סוכנים (Dynamic JSON Loading)
 │   ├── seo.json
 │   ├── atomic_marketing.json
-│   └── business_loans_content.json
+│   ├── business_loans_content.json
+│   └── business_ultimate.json
 ├── 📁 פרומטים/              # ← קבצי הוראות לסוכנים (Markdown)
 │   ├── SEO/שלב 1-6.md
 │   ├── אטומי/שלב 1-4.md
-│   └── הלוואות לעסקים/
+│   └── עסקים אולטימייט/
 ├── 📁 דפים לשינוי/          # ← העמודים לעריכה
 │   ├── main/               # אתר ראשי
 │   └── business/           # אתר עסקים
+├── 📁 ארכיון/               # ← ארכיון עמודים שנמחקו (עם מטא-דאטה לשחזור)
 ├── 📁 מאגרי מידע/           # ← מקורות מידע לשורטקודים
 ├── 📄 requirements.txt
 └── 📄 start_dashboard.bat   # ← הרצת המערכת
 ```
 
-> ⚠️ **אל תתייחס לתיקיית `v2/`** - זו גרסה חדשה בפיתוח
+> ⚠️ **הערה חשובה:** תיקיית `agents/` היא המקור הבלעדי להגדרת סוכנים. סוכנים המוגדרים ב-`config.json` הישן נטענים כתמיכה לאחור אך הסוכנים בתיקייה מקבלים קדימות.
 
 ---
 
 ## 🚀 הרצת המערכת
 
 ```bash
-# הרצה רגילה (לוקח פורט 5000)
+# הרצה רגילה (לוקח פורט 8080 ברירת מחדל או 5000)
 python dashboard_server.py
 
 # או דרך הבאטץ'
 start_dashboard.bat
 ```
 
-**גישה:** `http://localhost:5000`
+**גישה:** `http://localhost:8080` (או הפורט שנבחר)
 
 ---
 
-## 🏗️ ארכיטקטורה
+## 🏗️ ארכיטקטורה ורכיבים מרכזיים (Backend Reference)
 
-### 1. Backend - dashboard_server.py
+שרת ה-Flask (`dashboard_server.py`) מכיל כ-150 Endpoints. להלן המיפוי המלא:
 
-שרת Flask עם ~120 endpoints. החלוקה העיקרית:
+### 1. ניהול עמודים (Pages)
+| Endpoint | Method | תפקיד |
+|----------|--------|-------|
+| `/api/pages` | GET | רשימת כל העמודים (עם סינון וחיפוש) |
+| `/api/page/<path>` | GET | קבלת תוכן עמוד ספציפי |
+| `/api/page/content` | POST | שמירת תוכן HTML לעמוד |
+| `/api/page/info` | GET/POST | קריאה/עדכון של מטא-דאטה (`page_info.json`) |
+| `/api/pages/create-folder` | POST | יצירת תיקייה חדשה |
+| `/api/csv/*` | GET/POST | ייבוא וייצוא עמודים דרך CSV |
 
-| קבוצה | Endpoints | תפקיד |
-|-------|-----------|--------|
-| `/api/pages` | GET/POST | ניהול עמודים |
-| `/api/agents` | CRUD | ניהול סוכנים |
-| `/api/workflow/step<N>` | POST | הרצת שלבי סוכנים |
-| `/api/wordpress/*` | GET/POST | אינטגרציה עם WP |
-| `/api/seo/*` | POST | כלי SEO (SERP, מתחרים) |
-| `/api/git/*` | GET/POST | סנכרון Git |
+### 2. סוכנים וזרימת עבודה (Agents & Workflow)
+| Endpoint | Method | תפקיד |
+|----------|--------|-------|
+| `/api/agents` | GET/POST | קבלת רשימת סוכנים / יצירת סוכן חדש |
+| `/api/agents/<id>` | GET/PUT/DELETE | ניהול סוכן ספציפי |
+| `/api/workflow/step<N>` | POST | הרצת שלב ספציפי (1-6) |
+| `/api/workflow/single` | POST | הרצה אוטומטית מלאה (Full Auto) |
+| `/api/workflow/status` | GET | סטטוס עבודות רצות |
+| `/api/workflow/stop` | POST | עצירת עבודה רצה |
+| `/api/prompt-file` | GET/POST | עריכת קבצי הפרומטים (.md) |
 
-### 2. Frontend - dashboard.html
+### 3. אינטגרציה עם WordPress
+| Endpoint | Method | תפקיד |
+|----------|--------|-------|
+| `/api/wordpress/fetch` | POST | משיכת עמוד מ-WP ללוקאלי |
+| `/api/wordpress/update` | POST | עדכון עמוד ב-WP (תוכן + מטא) |
+| `/api/wordpress/upload` | POST | העלאת עמוד חדש ל-WP |
+| `/api/wordpress/delete-page` | POST | מחיקה (Soft Delete) + הפנייה + ארכיון |
+| `/api/wordpress/sync-wp-titles` | POST | סנכרון כותרות מ-WP ללוקאלי |
+| `/api/wordpress/settings` | GET/POST | הגדרות חיבור (משתמש, סיסמה, URL) |
 
-קובץ אחד ענק עם:
-- **CSS:** משתני עיצוב ב-`:root`, עיצוב כהה (dark mode)
-- **HTML:** תבניות לטאבים שונים (עמודים, סוכנים, הגדרות)
-- **JavaScript:** פונקציות API, ניהול מצב, אירועים
+### 4. SEO ומחקר מתחרים
+| Endpoint | Method | תפקיד |
+|----------|--------|-------|
+| `/api/seo/serp` | POST | בדיקת מיקומים בגוגל (Apify) |
+| `/api/seo/scrape-competitors` | POST | סריקת תוכן מתחרים |
+| `/api/seo/analyze-gaps` | POST | ניתוח פערים מול מתחרים (Gap Analysis) |
+| `/api/keywords/*` | POST | ניהול מאגר מילות מפתח |
+| `/api/ai-detection` | POST | בדיקת זיהוי AI בתוכן |
 
-**טאבים עיקריים:**
-1. ניהול עמודים - בחירה והפעלת סוכנים
-2. בונה סוכנים - יצירה/עריכת סוכנים
-3. הגדרות - WordPress, Git, מקורות מידע
+### 5. ארכיון וניהול קבצים
+| Endpoint | Method | תפקיד |
+|----------|--------|-------|
+| `/api/archive` | GET | רשימת עמודים בארכיון |
+| `/api/page/restore` | POST | שחזור עמוד מארכיון (כולל ביטול הפנייה) |
+| `/api/duplicates/*` | GET/POST | זיהוי וניהול תוכן כפול (Duplicate Content) |
+| `/api/files` | GET | סייר קבצים בסיסי |
+
+### 6. ניהול מערכת ו-Git
+| Endpoint | Method | תפקיד |
+|----------|--------|-------|
+| `/api/git/status` | GET | סטטוס Git הנוכחי |
+| `/api/git/sync` | POST | סנכרון מלא (Pull + Push) |
+| `/api/server/restart` | POST | איתחול השרת |
+| `/api/reports/*` | GET/POST | דוחות מערכת (ריבית, וואטסאפ, שנים) |
 
 ---
 
-## 🤖 מערכת הסוכנים
+## ⚙️ מאחורי הקלעים: מנוע הסוכנים (The Agent Engine)
 
-### מהו סוכן?
+זהו הלב של המערכת, המקשר בין הממשק, קבצי ההגדרות וה-AI.
 
-סוכן = סט של **שלבים** שמופעלים ברצף על עמוד.
-כל שלב מריץ **Claude Code** עם פרומפט ספציפי.
+### 1. ShortcodeEngine
+מחלקה ב-Python האחראית על "הרכבת" הפרומפט הסופי לפני השליחה.
+היא לוקחת את תבנית הפרומפט (Markdown) ומחליפה את ה-Placeholders במידע אמיתי:
+*   `{{PAGE_HTML}}` ← קוראת את תוכן הקובץ הלוקאלי.
+*   `{{SERP_ORGANIC}}` ← שולפת מידע מ-Cache או מ-API.
+*   `{{INTERNAL_LINKS}}` ← טוענת מקובץ דאטה-בייס חיצוני.
 
-### מבנה סוכן (JSON)
+### 2. תהליך הרצת סוכן (Workflow Execution)
+כאשר לוחצים על "הפעל סוכן":
+1.  השרת טוען את קובץ ה-JSON של הסוכן מתיקיית `agents/`.
+2.  הוא מזהה את השלב הנוכחי ואת קובץ ה-MD המתאים מתיקיית `פרומטים/`.
+3.  **ShortcodeEngine** מעבד את הפרומפט ומייצר טקסט מלא להרצה.
+4.  השרת מפעיל תהליך חיצוני (Subprocess) שמריץ את הפקודה `claude`.
+5.  הפלט מ-Claude נשמר לקובץ דוח (Markdown) ולוג בזמן אמת נשלח ל-Frontend.
+
+### 3. סוכנים דינאמיים
+המערכת סורקת את תיקיית `agents/` בכל בקשת API.
+זה אומר שניתן ליצור, לערוך או למחוק סוכנים (קבצי JSON) תוך כדי שהמערכת רצה, והשינויים ישתקפו מיד בממשק.
+
+---
+
+## 🛠️ מדריך: איך ליצור סוכן חדש (Step-by-Step)
+
+תהליך יצירת סוכן הוא פשוט ואינו דורש כתיבת קוד Python, רק הגדרות ופרומפטים.
+
+### שלב 1: יצירת מבנה התיקיות
+לך לתיקיית `פרומטים/` וצור תיקייה חדשה עבור הסוכן שלך.
+*   דוגמה: `פרומטים/סוכן_מיוחד/`
+
+### שלב 2: כתיבת קבצי ההנחיות (Prompts)
+בתוך התיקייה שיצרת, צור קובץ Markdown (`.md`) לכל שלב שתרצה שהסוכן יבצע.
+השתמש בשורטקודים כדי "להזריק" מידע דינאמי לפרומפט.
+
+**דוגמה לקובץ `שלב 1.md`:**
+```markdown
+אתה מומחה תוכן. המשימה שלך היא לשכתב את העמוד הבא:
+{{PAGE_HTML}}
+
+אנא השתמש במילת המפתח: {{PAGE_KEYWORD}}
+והתייחס למתחרים הבאים:
+{{SERP_ORGANIC}}
+
+שמור את התוצאה בקובץ: {{OUTPUT_PATH}}
+```
+
+### שלב 3: הגדרת קובץ הקונפיגורציה (JSON)
+צור קובץ חדש בתיקיית `agents/` עם שם ייחודי (למשל: `my_special_agent.json`).
+העתק את המבנה הבא והתאם אותו:
 
 ```json
 {
-  "id": "seo",
-  "name": "SEO Audit",
-  "type": "update",           // update / analyze / create
-  "status": "active",         // active / test / disabled
-  "folder_name": "SEO",       // תיקייה לשמירת דוחות
+  "id": "my_special_agent",
+  "name": "הסוכן המיוחד שלי",
+  "description": "תיאור קצר של מה הסוכן עושה",
+  "sites": [], // השאר ריק כדי שיופיע בכל האתרים, או ["business"] להגבלה
   "model": {
     "provider": "claude",
-    "name": "claude-sonnet-4"
+    "name": "claude-sonnet-4-5"
   },
   "steps": [
     {
       "id": "step1",
-      "name": "בדיקת תוכן",
-      "order": 1,
-      "prompt_file": "פרומטים/SEO/שלב 1.md",
-      "prompt_template": "...",
-      "shortcodes": ["PAGE_HTML", "PAGE_KEYWORD"],
+      "name": "ניתוח ראשוני",
+      "prompt_file": "פרומטים/סוכן_מיוחד/שלב 1.md",
       "output": {
-        "path": "דוח שלב 1.md",
+        "path": "דוח ניתוח.md",
         "shortcode_name": "STEP1_REPORT"
-      }
+      },
+      "shortcodes": [
+        "PAGE_HTML",
+        "PAGE_KEYWORD",
+        "SERP_ORGANIC"
+      ]
+    },
+    {
+      "id": "step2",
+      "name": "יישום תיקונים",
+      "prompt_file": "פרומטים/סוכן_מיוחד/שלב 2.md",
+      "shortcodes": [
+        "STEP1_REPORT", // שימוש בפלט של השלב הקודם!
+        "PAGE_HTML"
+      ]
     }
-  ],
-  "wordpress": {
-    "action": "update",
-    "site": "main"
-  }
+  ]
 }
 ```
 
-### סוכנים קיימים
+### שלב 4: בדיקה
+1.  רענן את דף ה-Dashboard.
+2.  הסוכן החדש יופיע ברשימת הסוכנים.
+3.  בחר עמוד ובדוק את הסוכן.
 
-| סוכן | שלבים | תפקיד |
-|------|-------|--------|
-| `seo` | 6 | בדיקת SEO, תיקון מבנה, הסרת AI |
-| `atomic_marketing` | 4 | שיווק אטומי: דוח → QA → תיקון → דיבאג |
-| `business_loans_content` | 6 | תוכן לאתר עסקים |
-
----
-
-## 🏷️ מערכת השורטקודים
-
-שורטקודים = **placeholders דינמיים** שמוחלפים בערכים אמיתיים לפני שליחה לקלוד.
-
-### שורטקודים לעמוד
-| שורטקוד | תיאור |
-|----------|---------|
-| `{{PAGE_HTML}}` | תוכן ה-HTML של העמוד |
-| `{{PAGE_PATH}}` | נתיב מלא לקובץ |
-| `{{PAGE_KEYWORD}}` | מילת מפתח ראשית |
-| `{{PAGE_URL}}` | כתובת העמוד |
-
-### שורטקודים גלובליים
-| שורטקוד | תיאור |
-|----------|---------|
-| `{{TODAY_DATE}}` | תאריך נוכחי |
-| `{{BOI_INTEREST_RATE}}` | ריבית בנק ישראל |
-| `{{INTERNAL_LINKS_DB}}` | מאגר קישורים פנימיים |
-
-### שורטקודים לשלבים
-| שורטקוד | תיאור |
-|----------|---------|
-| `{{STEP1_REPORT}}` | דוח משלב 1 (לשימוש בשלבים הבאים) |
-| `{{STEP1_PROMPT_FILE}}` | נתיב לקובץ הוראות של שלב 1 |
-| `{{OUTPUT_PATH}}` | נתיב לשמירת הפלט |
-
-### הגדרת מקורות מידע חדשים
-
-ב-`config.json` תחת `custom_data_sources`:
-
-```json
-{
-  "id": "internal_links",
-  "name": "קישורים פנימיים",
-  "shortcode": "INTERNAL_LINKS_DB",
-  "path": "דטה בייס לקישורים פנימיים.txt",
-  "type": "text"
-}
-```
+> 💡 **טיפ:** הקפד לשמור את קובץ ה-JSON בקידוד **UTF-8** (ללא BOM) כדי למנוע שגיאות טעינה.
 
 ---
 
-## 📁 מבנה עמוד
+## 📊 דוחות מערכת (System Reports)
 
-כל עמוד נמצא בתיקייה נפרדת עם:
+אזור ייעודי ב-Dashboard (`#reportsSection`) לביצוע פעולות רוחביות:
 
-```
-📁 הלוואה דיגיטלית/
-├── 📄 הלוואה דיגיטלית.html     # העמוד עצמו
-├── 📄 page_info.json           # מטא-דאטה
-├── 📄 *_backup.html            # גיבוי לפני עריכה
-├── 📁 SEO/                     # דוחות סוכן SEO
-│   ├── דוח שלב 1.md
-│   └── דוח שלב 2.md
-└── 📁 שיווק אטומי/             # דוחות סוכן אטומי
-```
+1.  **עדכוני ריבית (Interest Updates):** `/api/reports/interest-rate`
+    *   סורק את כל העמודים למציאת משפט הריבית.
+    *   מאפשר עדכון גורף והעלאה ל-WordPress.
 
-### page_info.json
+2.  **קישורי WhatsApp:** `/api/reports/whatsapp-links`
+    *   זיהוי קישורים שבורים או ישנים.
 
-```json
-{
-  "keyword": "הלוואה דיגיטלית",
-  "url": "https://loan-israel.co.il/הלוואה-דיגיטלית/",
-  "wordpress_id": 1234,
-  "site": "main",
-  "fetched_keywords": {
-    "autocomplete": ["הלוואה דיגיטלית מהירה", ...],
-    "related": [...],
-    "serp": {...}
-  }
-}
-```
+3.  **עדכון שנה (Year Scan):** `/api/reports/year-scan`
+    *   איתור ועדכון אזכורי שנים (למשל 2024 -> 2026).
 
 ---
 
-## 🔌 WordPress Integration
+## 🔌 WordPress Integration (Multi-Site)
 
-### אתרים מוגדרים
+המערכת תומכת בניהול מספר אתרים במקביל:
 
-| מזהה | שם | כתובת |
-|------|-----|--------|
-| `main` | אתר ראשי | loan-israel.co.il |
-| `business` | עסקים | loan-israel.co.il/Business |
+| מזהה | שם | כתובת | משתמש API |
+|------|-----|--------|-----------|
+| `main` | אתר ראשי | loan-israel.co.il | admin |
+| `business` | עסקים | loan-israel.co.il/Business | eyal10_Business |
 
-### אותנטיקציה
-- **סוג:** JWT (JSON Web Token)
-- **Endpoint:** `/wp-json/jwt-auth/v1/token`
-- הטוקנים נשמרים בזיכרון (`jwt_tokens` dict)
-
-### פעולות נתמכות
-- `fetch` - משיכת עמוד מ-WP (שמירה כ-HTML)
-- `update` - עדכון תוכן עמוד קיים
-- `create` - יצירת עמוד חדש
+**תהליך המחיקה והארכיון:**
+1.  **מחיקה:** העמוד ב-WP עובר ל-Draft + נוצרת הפניית 301.
+2.  **ארכיון:** הקבצים עוברים לתיקיית `ארכיון/`.
+3.  **שחזור:** העמוד חוזר לתיקייה המקורית + WP Publish + מחיקת ההפנייה.
 
 ---
 
-## 🔧 APIs חשובות (לפיתוח)
+## 💡 טיפים לפיתוח ודיבאג
 
-### הרצת סוכן
-
-```javascript
-// הרצת שלב בודד
-POST /api/workflow/step/1
-{
-  "page_path": "דפים לשינוי/main/הלוואה/הלוואה.html",
-  "agent_id": "seo",
-  "model": "claude-sonnet-4"
-}
-
-// הרצה אוטומטית (כל השלבים)
-POST /api/workflow/single
-{
-  "page_path": "...",
-  "agent_id": "seo",
-  "full_auto": true
-}
-```
-
-### ניהול סוכנים
-
-```javascript
-GET  /api/agents                    // רשימת סוכנים
-GET  /api/agents/<agent_id>         // סוכן ספציפי
-POST /api/agents                    // יצירת סוכן
-PUT  /api/agents/<agent_id>         // עדכון סוכן
-DELETE /api/agents/<agent_id>       // מחיקת סוכן
-```
-
-### פעולות WordPress
-
-```javascript
-POST /api/wordpress/fetch
-{ "url": "https://...", "site": "main" }
-
-POST /api/wordpress/update
-{ "page_path": "...", "site": "main" }
-```
+### Debugging
+*   **לוגים:** כל פעולה נרשמת בטרמינל.
+*   **קבצי Debug:** חפש קבצים כמו `request_debug.log` או `webhook_debug.log` בשורש הפרויקט במקרה של תקלות API.
 
 ---
 
-## 💡 טיפים לפיתוח
-
-### 1. הוספת Endpoint חדש
-
-ב-`dashboard_server.py`:
-
-```python
-@app.route('/api/my-endpoint', methods=['POST'])
-def my_endpoint():
-    data = request.get_json()
-    # לוגיקה
-    return jsonify({"success": True, "result": ...})
-```
-
-### 2. הוספת פונקציונליות ב-Frontend
-
-ב-`dashboard.html`, פונקציות JavaScript:
-
-```javascript
-async function myFunction() {
-    const result = await apiCall('/api/my-endpoint', {
-        method: 'POST',
-        body: JSON.stringify({ key: value })
-    });
-    
-    if (result.success) {
-        showToast('הצלחה!', 'success');
-    }
-}
-```
-
-### 3. יצירת סוכן חדש
-
-1. צור קובץ `agents/my_agent.json`
-2. צור תיקייה `פרומטים/my_agent/` עם קבצי `.md` לכל שלב
-3. הסוכן יופיע אוטומטית בממשק
-
-### 4. הוספת שורטקוד
-
-ב-`dashboard_server.py`, בתוך `ShortcodeEngine`:
-
-```python
-# בתוך get_shortcode_value()
-elif shortcode_name == "MY_SHORTCODE":
-    return "הערך שלי"
-```
-
----
-
-## 🔄 זרימת עבודה טיפוסית
-
-```
-1. בחירת עמוד מהרשימה
-       ↓
-2. בחירת סוכן (SEO / אטומי / אחר)
-       ↓
-3. הרצת שלב 1 (ניתוח / דוח)
-       ↓
-4. הרצת שלבים 2-N (תיקונים)
-       ↓
-5. בדיקת תוצאות (Preview)
-       ↓
-6. עדכון ל-WordPress
-```
-
----
-
-## ⚙️ קבצי הגדרות
-
-| קובץ | תפקיד |
-|------|--------|
-| `config.json` | הגדרות מערכת, אתרים, נתיבים |
-| `api_config.env` | מפתחות API (Anthropic, Apify) |
-| `full_auto_jobs.json` | עבודות אוטומציה מתוזמנות |
-| `running_jobs.json` | עבודות רצות כרגע |
-
----
-
-## 🐛 Debugging
-
-### Logs
-- טרמינל - כל הפעולות מודפסות עם `[Prefix]`
-- `logs/` - קבצי לוג (אם קיימים)
-- `*_debug.log` - קבצי דיבאג ספציפיים
-
-### בדיקת Claude
-```bash
-# בדיקה שקלוד זמין
-where claude
-
-# הרצה ידנית
-claude --model sonnet --print "test"
-```
-
----
-
-## 📝 הערות חשובות
-
-1. **הקבצים גדולים** - השרת ~12K שורות, הפרונט ~20K שורות
-2. **עברית** - שמות קבצים ותיקיות בעברית, זה תקין
-3. **Encoding** - תמיד UTF-8 עם BOM (`utf-8-sig` לקריאה)
-4. **Windows** - הפרויקט רץ על Windows, נתיבים עם `\`
-
----
-
-## 🔗 קישורים שימושיים
-
-- **Claude Code CLI:** https://docs.anthropic.com/en/docs/claude-code
-- **Flask Docs:** https://flask.palletsprojects.com/
-- **WordPress REST API:** https://developer.wordpress.org/rest-api/
-
----
-
-*עודכן לאחרונה: ינואר 2026*
+*עודכן לאחרונה: ינואר 2026 - מיפוי מלא + הסבר על מנוע הסוכנים + מדריך יצירת סוכן*
