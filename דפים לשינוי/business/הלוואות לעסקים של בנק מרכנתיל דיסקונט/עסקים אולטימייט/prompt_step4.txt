@@ -1,0 +1,19 @@
+=== פרומפט שנשלח לקלוד - step4 ===
+זמן: 2026-01-13 22:48:35
+============================================================
+
+קרא את קובץ ההוראות C:\Users\eyal\loan-israel-updaets\loan-israel-updates\פרומטים\עסקים אולטימייט\שלב 4.md והוסף עיצובים ויזואליים לעמוד C:\Users\eyal\loan-israel-updaets\loan-israel-updates\דפים לשינוי\business\הלוואות לעסקים של בנק מרכנתיל דיסקונט\הלוואות לעסקים של בנק מרכנתיל דיסקונט.html.
+
+## מטרת השלב:
+הוספת FAQ Accordion, Stats, Timeline, Callouts.
+
+## דוח SEO משלב 3:
+C:\Users\eyal\loan-israel-updaets\loan-israel-updates\דפים לשינוי\business\הלוואות לעסקים של בנק מרכנתיל דיסקונט\עסקים אולטימייט\דוח SEO.md
+
+## מקורות עיצוב:
+- קובץ עיצוב: מאגרי מידע/visual.html
+
+**חובה לשמור:**
+- העמוד המעודכן: C:\Users\eyal\loan-israel-updaets\loan-israel-updates\דפים לשינוי\business\הלוואות לעסקים של בנק מרכנתיל דיסקונט\הלוואות לעסקים של בנק מרכנתיל דיסקונט.html
+- דוח ויזואל: C:\Users\eyal\loan-israel-updaets\loan-israel-updates\דפים לשינוי\business\הלוואות לעסקים של בנק מרכנתיל דיסקונט\עסקים אולטימייט\דוח ויזואל.md
+- שם הדוח: 

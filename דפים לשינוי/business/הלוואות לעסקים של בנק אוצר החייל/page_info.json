@@ -9,74 +9,8 @@
   "fetched_keywords": {
     "timestamp": "2026-01-13T14:52:57.643Z",
     "main_keyword": "הלוואות לעסקים של בנק אוצר החייל",
-    "clusters": [
-      {
-        "primary": "אוצר החייל טלפון",
-        "source": "related",
-        "type": "unique",
-        "unique_part": "טלפון",
-        "variants": []
-      },
-      {
-        "primary": "בנק אוצר החייל כניסה לחשבון",
-        "source": "related",
-        "type": "unique",
-        "unique_part": "כניסה לחשבון",
-        "variants": []
-      },
-      {
-        "primary": "אוצר החייל סניפים",
-        "source": "related",
-        "type": "unique",
-        "unique_part": "סניפים",
-        "variants": []
-      },
-      {
-        "primary": "בנק אוצר החייל שעות פתיחה",
-        "source": "related",
-        "type": "unique",
-        "unique_part": "שעות פתיחה",
-        "variants": []
-      },
-      {
-        "primary": "אוצר החייל שירות לקוחות וואטסאפ",
-        "source": "related",
-        "type": "unique",
-        "unique_part": "שירות לקוחות וואטסאפ",
-        "variants": []
-      },
-      {
-        "primary": "בנק אוצר החייל באנגלית",
-        "source": "related",
-        "type": "unique",
-        "unique_part": "באנגלית",
-        "variants": []
-      },
-      {
-        "primary": "אוצר החייל מספר בנק",
-        "source": "related",
-        "type": "unique",
-        "unique_part": "מספר",
-        "variants": []
-      },
-      {
-        "primary": "אוצר החייל אשדוד",
-        "source": "related",
-        "type": "unique",
-        "unique_part": "אשדוד",
-        "variants": []
-      }
-    ],
-    "final_keywords": [
-      "אוצר החייל טלפון",
-      "בנק אוצר החייל כניסה לחשבון",
-      "אוצר החייל סניפים",
-      "בנק אוצר החייל שעות פתיחה",
-      "אוצר החייל שירות לקוחות וואטסאפ",
-      "בנק אוצר החייל באנגלית",
-      "אוצר החייל מספר בנק",
-      "אוצר החייל אשדוד"
-    ],
+    "clusters": [],
+    "final_keywords": [],
     "unique_topics": [
       "טלפון",
       "כניסה לחשבון",
