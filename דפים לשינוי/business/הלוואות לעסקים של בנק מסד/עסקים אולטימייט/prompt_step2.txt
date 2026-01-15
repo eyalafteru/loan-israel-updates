@@ -1,0 +1,23 @@
+=== פרומפט שנשלח לקלוד - step2 ===
+זמן: 2026-01-13 16:55:08
+============================================================
+
+קרא את קובץ ההוראות C:\Users\eyal\loan-israel-updaets\loan-israel-updates\פרומטים\עסקים אולטימייט\שלב 2.md וכתוב את העמוד C:\Users\eyal\loan-israel-updaets\loan-israel-updates\דפים לשינוי\business\הלוואות לעסקים של בנק מסד\הלוואות לעסקים של בנק מסד.html בהתבסס על האסטרטגיה.
+
+## מטרת השלב:
+כתיבת HTML מלאה בסגנון "שיווק אטומי" על פי דוח האסטרטגיה.
+
+## דוח אסטרטגיה משלב 1:
+C:\Users\eyal\loan-israel-updaets\loan-israel-updates\דפים לשינוי\business\הלוואות לעסקים של בנק מסד\עסקים אולטימייט\דוח אסטרטגיה.md
+
+## נתוני עמוד:
+- **מילת מפתח ראשית:** הלוואות לעסקים של בנק מסד
+- **ריבית פריים:** 5.5%
+
+## מאגר ידע:
+C:\Users\eyal\loan-israel-updaets\loan-israel-updates\מאגרי מידע\תחום הלוואות לעסקים.md
+
+**חובה לשמור:**
+- העמוד החדש: C:\Users\eyal\loan-israel-updaets\loan-israel-updates\דפים לשינוי\business\הלוואות לעסקים של בנק מסד\הלוואות לעסקים של בנק מסד.html
+- דוח כתיבה: C:\Users\eyal\loan-israel-updaets\loan-israel-updates\דפים לשינוי\business\הלוואות לעסקים של בנק מסד\עסקים אולטימייט\דוח כתיבה.md
+- שם הדוח: 

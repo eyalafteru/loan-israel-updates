@@ -6,8 +6,289 @@
   "title": "הלוואות וגיוס אשראי לקבוצות רכישה - הלוואות בערבות המדינה ובנקים באישור מיידי",
   "description": "קבוצות רכישה נחשבות לבעלות סיכון רב יותר מבחינת הבנק לאי החזר אשראי. המומחים של אתר רק תבקש לעסקים יסייעו לך לקבל את תנאי האשראי הטובים ביותר ויסבירו איך מקבלים הלוואות ומגייסים אשראי לקבוצות רכישה.",
   "imported_at": "2026-01-03T13:59:04.947535",
-  "fetched_keywords": {},
+  "fetched_keywords": {
+    "timestamp": "2026-01-13T08:13:13.562Z",
+    "main_keyword": "הלוואות לקבוצות רכישה",
+    "clusters": [
+      {
+        "primary": "הלוואות להשקעה",
+        "source": "related",
+        "type": "unique",
+        "unique_part": "להשקעה",
+        "variants": []
+      },
+      {
+        "primary": "P2p",
+        "source": "related",
+        "type": "unique",
+        "unique_part": "p2p",
+        "variants": []
+      },
+      {
+        "primary": "טריה ישראל",
+        "source": "related",
+        "type": "unique",
+        "unique_part": "טריה ישראל",
+        "variants": []
+      }
+    ],
+    "final_keywords": [
+      "הלוואות להשקעה",
+      "P2p",
+      "טריה ישראל"
+    ],
+    "unique_topics": [
+      "להשקעה",
+      "טריא חדשות",
+      "p2p",
+      "טריה ישראל",
+      "טאירה"
+    ],
+    "rank_position": null,
+    "rank_checked_url": "https://loan-israel.co.il/Business/loans-and-credit-recruitment-purchasing-groups/",
+    "organic_results": [
+      {
+        "description": "טריא היא אחד הגופים הגדולים בארץ בתחום קבוצות הרכישה, עם תהליך חיתום מהיר ושירות יעיל שיביאו את הקבוצה לקו הסיום בזמן הקצר ביותר. לחצו לקבלת פרטים נוספים.",
+        "displayedUrl": "https://www.tarya.co.il › purchase-groups",
+        "position": 1,
+        "title": "מימון קבוצות רכישה - טריא Tarya - השקעות P2P ופתרונות משכנתא",
+        "url": "https://www.tarya.co.il/purchase-groups/"
+      },
+      {
+        "description": "ליווי קבוצת רכישה -ברקת הגוף המוביל בישראל למימון יזמי נדל\"ן, מימון קבוצת רכישה. מעטפת מימון ליזמי נדל\"ן מלאה - מהיר וגמיש!",
+        "displayedUrl": "https://bareketc.com › כללי",
+        "position": 2,
+        "title": "ליווי קבוצת רכישה - מעטפת מימון מלאה - BAREKET בית למימון נדל\"ן",
+        "url": "https://bareketc.com/%D7%9C%D7%99%D7%95%D7%95%D7%99-%D7%A7%D7%91%D7%95%D7%A6%D7%AA-%D7%A8%D7%9B%D7%99%D7%A9%D7%94-%D7%90%D7%AA%D7%92%D7%A8%D7%99%D7%9D-%D7%95%D7%94%D7%96%D7%93%D7%9E%D7%A0%D7%95%D7%99%D7%95%D7%AA-%D7%A2/"
+      },
+      {
+        "description": "ליווי קבוצות רכישה בהיקף של עד 70 יחידות דיור; העמדת מימון להשלמת רכישת זכויות לרכישת קרקע במסגרת מכרזי רמ\"י ובשוק הפרטי. המומחים של טפחות זמינים עבורכם, חוסכים ...",
+        "displayedUrl": "https://www.mizrahi-tefahot.co.il › mortgages › adviser",
+        "position": 3,
+        "title": "ליווי פיננסי של קבוצות רכישה ויזמות | בנק מזרחי-טפחות",
+        "url": "https://www.mizrahi-tefahot.co.il/mortgages/adviser/purchasing-group-funding/"
+      },
+      {
+        "description": "1 בדצמ׳ 2025 — מיטב מימון מעניקה \"ליווי סגור\", שפירושו העמדת קו אשראי נפרד לכל אחד מחברי קבוצת הרכישה, ללא תלות ביכולת הכלכלית של שאר חברי הקבוצה. התהליך דומה ...",
+        "displayedUrl": "https://www.building.org.il › nadlannews",
+        "position": 4,
+        "title": "מימון לקבוצות רכישה: כל מה שחשוב לדעת",
+        "url": "https://www.building.org.il/articles/nadlannews/%D7%9E%D7%99%D7%9E%D7%95%D7%9F-%D7%9C%D7%A7%D7%91%D7%95%D7%A6%D7%95%D7%AA-%D7%A8%D7%9B%D7%99%D7%A9%D7%94-%D7%9B%D7%9C-%D7%9E%D7%94-%D7%A9%D7%97%D7%A9%D7%95%D7%91-%D7%9C%D7%93%D7%A2%D7%AA/"
+      },
+      {
+        "description": "שיתוף פעולה עם קבוצות רכישה בתהליך הליווי הבנקאי. פריים עורכת שיתופי פעולה רבים עם גופים שונים מתחומי הנדל\"ן, הפיננסים והביטוח, אשר מקדמים את האינטרס המשותף ...",
+        "displayedUrl": "https://primeinv.co.il › מאמרים מקצועיים",
+        "position": 5,
+        "title": "קבוצות רכישה - אנחנו מפגישים בין משקיעים",
+        "url": "https://primeinv.co.il/%D7%A7%D7%91%D7%95%D7%A6%D7%95%D7%AA-%D7%A8%D7%9B%D7%99%D7%A9%D7%94/"
+      },
+      {
+        "description": "בקרדיטו נעניק לכם הלוואות בשעבוד ראשון כנגד נכס נדל\"ן בתנאים נוחים במיוחד, עם אפשרות לשלם על עלות הריבית בלבד. כל זאת למשך שנה עד שנתיים עם אפשרות להאריך את ...",
+        "displayedUrl": "https://credito.co.il › הלוואות-גישור",
+        "position": 6,
+        "title": "הלוואות גישור לקבוצות רכישה – הלוואות בסכומים גבוהים",
+        "url": "https://credito.co.il/%D7%94%D7%9C%D7%95%D7%95%D7%90%D7%95%D7%AA-%D7%92%D7%99%D7%A9%D7%95%D7%A8/"
+      },
+      {
+        "description": "מימון לקבוצות רכישה: מיטב מימון מלווה את קבוצות הרכישה החל משלב רכישת הקרקע, דרך קבלת היתר הבנייה ועד לקבלת תעודת גמר. למיטב מימון ניסיון רב בליווי פרויקטים ...",
+        "displayedUrl": "https://www.meitav.co.il › loans",
+        "position": 7,
+        "title": "מיטב מימון",
+        "url": "https://www.meitav.co.il/loans/"
+      },
+      {
+        "description": "11 בפבר׳ 2025 — השלב הראשון בפרויקט קבוצת רכישה הוא רכישת הקרקע. לצורך כך, קבוצות רכישה נדרשות לגייס מימון ראשוני. מימון זה נעשה לרוב באמצעות הלוואות מגופים ...",
+        "displayedUrl": "https://www.erfo.co.il › post › מימון-של-קבוצות-רכישה-כל-...",
+        "position": 8,
+        "title": "מימון של קבוצות רכישה: כל מה שצריך לדעת",
+        "url": "https://www.erfo.co.il/post/%D7%9E%D7%99%D7%9E%D7%95%D7%9F-%D7%A9%D7%9C-%D7%A7%D7%91%D7%95%D7%A6%D7%95%D7%AA-%D7%A8%D7%9B%D7%99%D7%A9%D7%94-%D7%9B%D7%9C-%D7%9E%D7%94-%D7%A9%D7%A6%D7%A8%D7%99%D7%9A-%D7%9C%D7%93%D7%A2%D7%AA"
+      },
+      {
+        "description": "פתיחת חשבון נאמנות: כספי הרוכשים מופקדים במקום בטוח ואמין על מנת לשמור על זכויות החברים בקבוצה. אשראי והלוואות: תכנון וניהול של מסגרות אשראי המתאימות למימון ...",
+        "displayedUrl": "https://www.cpa.co.il › המחלקה הכלכלית",
+        "position": 9,
+        "title": "ניהול כספי קבוצות רכישה | ייעוץ כלכלי",
+        "url": "https://www.cpa.co.il/financial/buying-group-financial/"
+      },
+      {
+        "description": "חברת קפיטל פקטור מלווה קבוצות רכישה החל מהשלב הראשוני של הארגון, בחינה כלכלית של הפרויקטים, ניהול וארגון, הגשת בקשת המימון לגוף הפיננסי אישור חברי הקבוצה, ליווי ...",
+        "displayedUrl": "https://www.capitalfactor.co.il › purchase-group",
+        "position": 10,
+        "title": "מימון קבוצות רכישה | בדיקת מיחזור משכנתא - קפיטל פקטור ייעוץ ...",
+        "url": "https://www.capitalfactor.co.il/purchase-group/"
+      }
+    ],
+    "ai_mode_results": [
+      {
+        "description": "הלוואות לקבוצות רכישה בשנת 2026 הן מוצר פיננסי מורכב, הניתן על ידי בנקים וגופים חוץ-בנקאיים, ומיועד למימון רכישת קרקע ובנייה עצמית של פרויקט מגורים. נכון לינואר 2026, להלן המאפיינים והשינויים המרכזיים בתחום: סוגי המימון הקיימים ליווי בנקאי: בנקים (כמו מזרחי-טפחות) מציעים ליווי פיננסי מלא לקבוצה. עם זאת, בנקים רבים הקשיחו את התנאים עקב הסיכון הגבוה ואי-הוודאות במועדי האכלוס.גופים חוץ-בנקאיים: חברות כמו \"טריא\" (Tarya), \"ברקת\" (Bareket) ו\"טופ קפיטל\" מהוות אלטרנטיבה משמעותית למימון, לעיתים עם תהליך חיתום מהיר יותר.הלוואות גישור: הלוואות לטווח קצר (החל מ-10 מיליון ש\"ח) המיועדות ליזמים וחברי קבוצה לגישור על פערים תזרימיים בין רכישת הקרקע לבנייה. תנאים ומגבלות בשנת 2026 ריביות ועלויות: עם סיום מתווה הקלות המלחמה (\"חרבות ברזל\") ב-1 בינואר 2026, הריביות על הלוואות המובטחות בשעבוד נכס צפויות לעלות משמעותית (מטווח של 5.5%–6% לשיעורים של 8%–11% במקרים מסוימים).יחס מימון (LTV): המגבלות הרגולטוריות של בנק ישראל עומדות על עד 75% מימון לדירה יחידה ו-50% לדירה להשקעה.מיסוי: מדרגות מס הרכישה הוקפאו לשנים 2025 ו-2026. רכישה במסגרת קבוצה מאפשרת בתנאים מסוימים מיסוי לפי מדרגות דירה יחידה גם אם הבנייה התעכבה.הגבלות בנק ישראל: קיימות הגבלות על הלוואות \"בלון\" ותשלומים נדחים המוצעים על ידי קבלנים ויזמים עד סוף 2026, במטרה לצמצם את סיכון הלווים. נקודות חשובות לבחינה הון עצמי: חברי קבוצה נדרשים לעיתים להון עצמי גבוה יותר מרוכשי דירה מקבלן, במיוחד אם הבנק מעריך את הפרויקט כסיכון גבוה.חברות ניהול: מומלץ להיעזר בחברות המתמחות בהשגת מימון לקבוצות רכישה כדי להגדיל את הסיכויים לקבלת משכנתא אישית לכל חבר בקבוצה. What documentation do purchasing groups need to present to get a loan?Are there tax breaks for purchasing groups in Israel in 2026?Tell me more about the pros and cons of joining a purchasing group",
+        "is_summary": true,
+        "position": 0,
+        "title": "AI Overview Summary",
+        "url": ""
+      },
+      {
+        "description": "גיבוש קבוצת רכישה הוא אתגר לא קטן ומורכב. חשוב למצוא את הגוף המממן שיודע לקחת אחריות על התהליך, ולשאול את השאלות הנכונות. עם Tarya...",
+        "position": 1,
+        "title": "מימון קבוצות רכישה - טריא Tarya - השקעות P2P ופתרונות משכנתא",
+        "url": "https://www.tarya.co.il/purchase-groups/#:~:text=%D7%92%D7%99%D7%91%D7%95%D7%A9%20%D7%A7%D7%91%D7%95%D7%A6%D7%AA%20%D7%A8%D7%9B%D7%99%D7%A9%D7%94%20%D7%94%D7%95%D7%90%20%D7%90%D7%AA%D7%92%D7%A8%20%D7%9C%D7%90%20%D7%A7%D7%98%D7%9F,%D7%A2%D7%9C%20%D7%97%D7%91%D7%A8%D7%99%20%D7%94%D7%A7%D7%91%D7%95%D7%A6%D7%94%20%D7%91%D7%93%D7%A8%D7%9A%20%D7%90%D7%9C%20%D7%94%D7%91%D7%99%D7%AA%20%D7%94%D7%9E%D7%99%D7%95%D7%97%D7%9C."
+      },
+      {
+        "description": "ליווי פיננסי של קבוצות רכישה ויזמות | בנק מזרחי-טפחות",
+        "position": 2,
+        "title": "ליווי פיננסי של קבוצות רכישה ויזמות | בנק מזרחי-טפחות",
+        "url": "https://www.mizrahi-tefahot.co.il/mortgages/adviser/purchasing-group-funding/#:~:text=%D7%9C%D7%99%D7%95%D7%95%D7%99%20%D7%A4%D7%99%D7%A0%D7%A0%D7%A1%D7%99%20%D7%A9%D7%9C%20%D7%A7%D7%91%D7%95%D7%A6%D7%95%D7%AA%20%D7%A8%D7%9B%D7%99%D7%A9%D7%94%20%D7%95%D7%99%D7%96%D7%9E%D7%95%D7%AA%20%7C%20%D7%91%D7%A0%D7%A7%20%D7%9E%D7%96%D7%A8%D7%97%D7%99%2D%D7%98%D7%A4%D7%97%D7%95%D7%AA"
+      },
+      {
+        "description": "ליווי קבוצת רכישה: אתגרים והזדמנויות עבור חברות מימון נדל\"ן בשנים האחרונות, קבוצות רכישה הפכו לאופציה פופולרית עבור רוכשי דירות בי...",
+        "position": 3,
+        "title": "ליווי קבוצת רכישה - מעטפת מימון מלאה - BAREKET בית למימון נדל\"ן",
+        "url": "https://bareketc.com/%D7%9C%D7%99%D7%95%D7%95%D7%99-%D7%A7%D7%91%D7%95%D7%A6%D7%AA-%D7%A8%D7%9B%D7%99%D7%A9%D7%94-%D7%90%D7%AA%D7%92%D7%A8%D7%99%D7%9D-%D7%95%D7%94%D7%96%D7%93%D7%9E%D7%A0%D7%95%D7%99%D7%95%D7%AA-%D7%A2/#:~:text=%D7%9E%D7%99%D7%9E%D7%95%D7%9F%20%D7%A0%D7%93%D7%9C%22%D7%9F-,%D7%9C%D7%99%D7%95%D7%95%D7%99%20%D7%A7%D7%91%D7%95%D7%A6%D7%AA%20%D7%A8%D7%9B%D7%99%D7%A9%D7%94:%20%D7%90%D7%AA%D7%92%D7%A8%D7%99%D7%9D%20%D7%95%D7%94%D7%96%D7%93%D7%9E%D7%A0%D7%95%D7%99%D7%95%D7%AA%20%D7%A2%D7%91%D7%95%D7%A8%20%D7%97%D7%91%D7%A8%D7%95%D7%AA%20%D7%9E%D7%99%D7%9E%D7%95%D7%9F%20%D7%A0%D7%93%D7%9C%22%D7%9F,%D7%99%D7%99%D7%97%D7%95%D7%93%D7%99%D7%99%D7%9D%20%D7%9C%D7%A6%D7%93%20%D7%94%D7%96%D7%93%D7%9E%D7%A0%D7%95%D7%99%D7%95%D7%AA%20%D7%A2%D7%A1%D7%A7%D7%99%D7%95%D7%AA%20%D7%90%D7%99%D7%9B%D7%95%D7%AA%D7%99%D7%95%D7%AA."
+      },
+      {
+        "description": "מימון קבוצות רכישה בבנקים הפך להיות הליך מורכב, זאת עקב התדמית הבעייתית שנוצרה בתחום זה. הבנקים לא ששים לתת מימון לקבוצות רכישה. ו...",
+        "position": 4,
+        "title": "מימון קבוצות רכישה | בדיקת מיחזור משכנתא - קפיטל פקטור ייעוץ ...",
+        "url": "https://www.capitalfactor.co.il/purchase-group/#:~:text=%D7%9E%D7%99%D7%9E%D7%95%D7%9F%20%D7%A7%D7%91%D7%95%D7%A6%D7%95%D7%AA%20%D7%A8%D7%9B%D7%99%D7%A9%D7%94%20%D7%91%D7%91%D7%A0%D7%A7%D7%99%D7%9D%20%D7%94%D7%A4%D7%9A%20%D7%9C%D7%94%D7%99%D7%95%D7%AA%20%D7%94%D7%9C%D7%99%D7%9A,%D7%9E%D7%94%D7%A7%D7%91%D7%95%D7%A6%D7%95%D7%AA%20%D7%94%D7%A4%D7%95%D7%A0%D7%95%D7%AA%20%D7%9C%D7%91%D7%A0%D7%A7%20%D7%9C%D7%A9%D7%9D%20%D7%9E%D7%99%D7%9E%D7%95%D7%9F%20%D7%A0%D7%A2%D7%A0%D7%95%D7%AA%20%D7%91%D7%A9%D7%9C%D7%99%D7%9C%D7%94."
+      },
+      {
+        "description": "קבוצת רכישה הינה קבוצה המתאגדת לצורך מיזם נדלנ\"י שמטרתו רכישת קרקע ובניית יחידות דיור, מתוך מטרה להוזיל עלויות. בד\"כ קבוצת רכישה מ...",
+        "position": 5,
+        "title": "מימון קבוצות רכישה | בדיקת מיחזור משכנתא - קפיטל פקטור ייעוץ ...",
+        "url": "https://www.capitalfactor.co.il/purchase-group/#:~:text=%D7%A7%D7%91%D7%95%D7%A6%D7%AA%20%D7%A8%D7%9B%D7%99%D7%A9%D7%94%20%D7%94%D7%99%D7%A0%D7%94%20%D7%A7%D7%91%D7%95%D7%A6%D7%94%20%D7%94%D7%9E%D7%AA%D7%90%D7%92%D7%93%D7%AA%20%D7%9C%D7%A6%D7%95%D7%A8%D7%9A%20%D7%9E%D7%99%D7%96%D7%9D,%D7%94%D7%9E%D7%99%D7%9E%D7%95%D7%9F%20%D7%94%D7%93%D7%A8%D7%95%D7%A9%20%D7%95%D7%9B%D7%9C%D7%94%20%D7%91%D7%91%D7%A0%D7%99%D7%99%D7%94%20%D7%A2%D7%9C%20%D7%9B%D7%9C%20%D7%A9%D7%9C%D7%91%D7%99%D7%94."
+      },
+      {
+        "description": "טריא היא אחד הגופים הגדולים בארץ בתחום קבוצות הרכישה, עם תהליך חיתום מהיר ושירות יעיל שיביאו את הקבוצה לקו הסיום בזמן הקצר ביותר. ...",
+        "position": 6,
+        "title": "מימון קבוצות רכישה - טריא Tarya - השקעות P2P ופתרונות משכנתא",
+        "url": "https://www.tarya.co.il/purchase-groups/#:~:text=%D7%98%D7%A8%D7%99%D7%90%20%D7%94%D7%99%D7%90%20%D7%90%D7%97%D7%93%20%D7%94%D7%92%D7%95%D7%A4%D7%99%D7%9D%20%D7%94%D7%92%D7%93%D7%95%D7%9C%D7%99%D7%9D%20%D7%91%D7%90%D7%A8%D7%A5%20%D7%91%D7%AA%D7%97%D7%95%D7%9D,%D7%91%D7%96%D7%9E%D7%9F%20%D7%94%D7%A7%D7%A6%D7%A8%20%D7%91%D7%99%D7%95%D7%AA%D7%A8.%20%D7%9C%D7%97%D7%A6%D7%95%20%D7%9C%D7%A7%D7%91%D7%9C%D7%AA%20%D7%A4%D7%A8%D7%98%D7%99%D7%9D%20%D7%A0%D7%95%D7%A1%D7%A4%D7%99%D7%9D."
+      },
+      {
+        "description": "ניווט מהיר * ראשי * ליווי קבוצת רכישה אודותינו",
+        "position": 7,
+        "title": "ליווי קבוצת רכישה - מעטפת מימון מלאה - BAREKET בית למימון נדל\"ן",
+        "url": "https://bareketc.com/%D7%9C%D7%99%D7%95%D7%95%D7%99-%D7%A7%D7%91%D7%95%D7%A6%D7%AA-%D7%A8%D7%9B%D7%99%D7%A9%D7%94-%D7%90%D7%AA%D7%92%D7%A8%D7%99%D7%9D-%D7%95%D7%94%D7%96%D7%93%D7%9E%D7%A0%D7%95%D7%99%D7%95%D7%AA-%D7%A2/#:~:text=%D7%A0%D7%99%D7%95%D7%95%D7%98%20%D7%9E%D7%94%D7%99%D7%A8%20*%20%D7%A8%D7%90%D7%A9%D7%99%20*%20%D7%9C%D7%99%D7%95%D7%95%D7%99%20%D7%A7%D7%91%D7%95%D7%A6%D7%AA%20%D7%A8%D7%9B%D7%99%D7%A9%D7%94%20%D7%90%D7%95%D7%93%D7%95%D7%AA%D7%99%D7%A0%D7%95"
+      },
+      {
+        "description": "Feb 5, 2025 — מימון הפרויקט – לעיתים, קבוצות רכישה מתקשות לקבל מימון מלא מהבנקים בשל הסיכון הגבוה יחסית שהן מציבות. במקרה כזה, המשתתפים עשויים ל...",
+        "position": 8,
+        "title": "קבוצת רכישה - מדריך מקיף לשנת 2025 - חברת עורכי דין פדר",
+        "url": "https://federlaw.co.il/%D7%A2%D7%95%D7%A8%D7%9A-%D7%93%D7%99%D7%9F-%D7%A0%D7%93%D7%9C%D7%9F/%D7%A7%D7%91%D7%95%D7%A6%D7%AA-%D7%A8%D7%9B%D7%99%D7%A9%D7%94/#:~:text=%D7%9E%D7%99%D7%9E%D7%95%D7%9F%20%D7%94%D7%A4%D7%A8%D7%95%D7%99%D7%A7%D7%98%20%E2%80%93%20%D7%9C%D7%A2%D7%99%D7%AA%D7%99%D7%9D%2C%20%D7%A7%D7%91%D7%95%D7%A6%D7%95%D7%AA%20%D7%A8%D7%9B%D7%99%D7%A9%D7%94%20%D7%9E%D7%AA%D7%A7%D7%A9%D7%95%D7%AA,%D7%91%D7%95%20%D7%94%D7%A4%D7%A8%D7%95%D7%99%D7%A7%D7%98%20%D7%99%D7%99%D7%92%D7%9E%D7%A8%20%D7%9C%D7%9B%D7%9F%20%D7%A7%D7%99%D7%99%D7%9E%D7%AA%20%D7%90%D7%99%20%D7%95%D7%95%D7%93%D7%90%D7%95%D7%AA"
+      },
+      {
+        "description": "הלוואות גישור. הלוואות גישור לקבוצות רכישה – הלוואות בסכומים גבוהים (החל מ-10 מיליון) ליזמים, אנשי עסקים. הלוואות מהירות וגמישות ל...",
+        "position": 9,
+        "title": "הלוואות גישור לקבוצות רכישה – הלוואות בסכומים גבוהים - קרדיטו",
+        "url": "https://credito.co.il/%D7%94%D7%9C%D7%95%D7%95%D7%90%D7%95%D7%AA-%D7%92%D7%99%D7%A9%D7%95%D7%A8/"
+      },
+      {
+        "description": "Jan 6, 2026 — Purchase through a purchasing group: The Real Estate Taxation Law allows purchasers of a right to an apartment in a purchasing gro...",
+        "position": 10,
+        "title": "2025 Year-End Review: Israeli Real Estate Taxation | JD Supra",
+        "url": "https://www.jdsupra.com/legalnews/2025-year-end-review-israeli-real-3633532/#:~:text=Purchase%20through%20a%20purchasing%20group,right%20in%20the%20purchasing%20group."
+      },
+      {
+        "description": "... קבוצות רכישה שונות (גאיה, NG GROUP ועוד) אשר במסגרתם אנו מנהלים את תהליך השגת הליווי הבנקאי לקבוצה ומוצאים עבור חברי הקבוצה פת...",
+        "position": 11,
+        "title": "קבוצות רכישה - אנחנו מפגישים בין משקיעים - פריים משכנתאות",
+        "url": "https://primeinv.co.il/%D7%A7%D7%91%D7%95%D7%A6%D7%95%D7%AA-%D7%A8%D7%9B%D7%99%D7%A9%D7%94/#:~:text=%D7%A7%D7%91%D7%95%D7%A6%D7%95%D7%AA%20%D7%A8%D7%9B%D7%99%D7%A9%D7%94%20%D7%A9%D7%95%D7%A0%D7%95%D7%AA%20(%D7%92%D7%90%D7%99%D7%94%2C%20NG%20GROUP%20%D7%95%D7%A2%D7%95%D7%93),%D7%95%D7%98%D7%95%D7%91%D7%94%20%D7%9C%D7%93%D7%A8%D7%9A%20%D7%94%D7%9E%D7%A1%D7%95%D7%A8%D7%AA%D7%99%D7%AA%20%D7%A9%D7%9C%20%D7%A8%D7%9B%D7%99%D7%A9%D7%94%20%D7%93%D7%A8%D7%9A%20%D7%A7%D7%91%D7%9C%D7%A0%D7%99%D7%9D."
+      },
+      {
+        "description": "Feb 24, 2025 — What are the main characteristics of the Israeli mortgage market? The Bank of Israel regulates the Israeli financial sector closel...",
+        "position": 12,
+        "title": "Credit FAQ: Israel's Public RMBS Market Takes Off - S&P Global",
+        "url": "https://www.spglobal.com/ratings/en/regulatory/article/250225-credit-faq-israel-s-public-rmbs-market-takes-off-s13392565#:~:text=What%20are%20the%20main%20characteristics,despite%20the%20volatile%20geopolitical%20environment."
+      },
+      {
+        "description": "Mar 22, 2025 — Fearing an increased level of borrowing risk for buyers of unfinished new homes, Israel's central bank said Sunday it would impose...",
+        "position": 13,
+        "title": "Central bank moves to limit financing offers on new homes",
+        "url": "https://www.timesofisrael.com/central-bank-moves-to-limit-financing-offers-on-new-homes/#:~:text=Fearing%20an%20increased%20level%20of,unable%20to%20complete%2C%20it%20explained."
+      },
+      {
+        "description": "Jan 5, 2026 — FX-linked loans (tied to USD/EUR) can match foreign income, but they add currency swings to the story. This is where Israel's mort...",
+        "position": 14,
+        "title": "Israel Mortgage Rules 2026: Essential Guide With Fees",
+        "url": "https://semerenkogroup.com/the-ultimate-guide-to-getting-a-mortgage-in-israel/#:~:text=FX%2Dlinked%20loans%20(tied%20to,one%2Dthird%20is%20fixed)."
+      },
+      {
+        "description": "Jan 2, 2026 — Israel has frozen real estate purchase tax brackets for 2025 and 2026, while prices and inflation keep moving. Investors still pay...",
+        "position": 15,
+        "title": "Israel Purchase Tax 2025 2026 Freeze: What It Really Means ...",
+        "url": "https://semerenkogroup.com/israel-purchase-tax-2025-2026-freeze-what-it-really-means-for-buyers-and-investors/#:~:text=Israel%20has%20frozen%20real%20estate,mechanism%20is%20largely%20on%20hold."
+      },
+      {
+        "description": "Nov 29, 2025 — Even while the cannons are still thundering in the North and Gaza amid fragile ceasefires, the credit market is already preparing ...",
+        "position": 16,
+        "title": "Banks continue to profit as loan relief set to expire",
+        "url": "https://www.jpost.com/opinion/article-876608#:~:text=Even%20while%20the%20cannons%20are,700%2C000%20shekels%20at%207.5%25%20interest."
+      }
+    ],
+    "ai_rank_position": null,
+    "competitor_data": [
+      {
+        "description": "טריא היא אחד הגופים הגדולים בארץ בתחום קבוצות הרכישה, עם תהליך חיתום מהיר ושירות יעיל שיביאו את הקבוצה לקו הסיום בזמן הקצר ביותר. לחצו לקבלת פרטים נוספים.",
+        "position": 1,
+        "title": "מימון קבוצות רכישה - טריא Tarya - השקעות P2P ופתרונות משכנתא",
+        "url": "https://www.tarya.co.il/purchase-groups/"
+      },
+      {
+        "description": "ליווי קבוצת רכישה -ברקת הגוף המוביל בישראל למימון יזמי נדל\"ן, מימון קבוצת רכישה. מעטפת מימון ליזמי נדל\"ן מלאה - מהיר וגמיש!",
+        "position": 2,
+        "title": "ליווי קבוצת רכישה - מעטפת מימון מלאה - BAREKET בית למימון נדל\"ן",
+        "url": "https://bareketc.com/%D7%9C%D7%99%D7%95%D7%95%D7%99-%D7%A7%D7%91%D7%95%D7%A6%D7%AA-%D7%A8%D7%9B%D7%99%D7%A9%D7%94-%D7%90%D7%AA%D7%92%D7%A8%D7%99%D7%9D-%D7%95%D7%94%D7%96%D7%93%D7%9E%D7%A0%D7%95%D7%99%D7%95%D7%AA-%D7%A2/"
+      },
+      {
+        "description": "ליווי קבוצות רכישה בהיקף של עד 70 יחידות דיור; העמדת מימון להשלמת רכישת זכויות לרכישת קרקע במסגרת מכרזי רמ\"י ובשוק הפרטי. המומחים של טפחות זמינים עבורכם, חוסכים ...",
+        "position": 3,
+        "title": "ליווי פיננסי של קבוצות רכישה ויזמות | בנק מזרחי-טפחות",
+        "url": "https://www.mizrahi-tefahot.co.il/mortgages/adviser/purchasing-group-funding/"
+      },
+      {
+        "description": "1 בדצמ׳ 2025 — מיטב מימון מעניקה \"ליווי סגור\", שפירושו העמדת קו אשראי נפרד לכל אחד מחברי קבוצת הרכישה, ללא תלות ביכולת הכלכלית של שאר חברי הקבוצה. התהליך דומה ...",
+        "position": 4,
+        "title": "מימון לקבוצות רכישה: כל מה שחשוב לדעת",
+        "url": "https://www.building.org.il/articles/nadlannews/%D7%9E%D7%99%D7%9E%D7%95%D7%9F-%D7%9C%D7%A7%D7%91%D7%95%D7%A6%D7%95%D7%AA-%D7%A8%D7%9B%D7%99%D7%A9%D7%94-%D7%9B%D7%9C-%D7%9E%D7%94-%D7%A9%D7%97%D7%A9%D7%95%D7%91-%D7%9C%D7%93%D7%A2%D7%AA/"
+      },
+      {
+        "description": "שיתוף פעולה עם קבוצות רכישה בתהליך הליווי הבנקאי. פריים עורכת שיתופי פעולה רבים עם גופים שונים מתחומי הנדל\"ן, הפיננסים והביטוח, אשר מקדמים את האינטרס המשותף ...",
+        "position": 5,
+        "title": "קבוצות רכישה - אנחנו מפגישים בין משקיעים",
+        "url": "https://primeinv.co.il/%D7%A7%D7%91%D7%95%D7%A6%D7%95%D7%AA-%D7%A8%D7%9B%D7%99%D7%A9%D7%94/"
+      },
+      {
+        "description": "בקרדיטו נעניק לכם הלוואות בשעבוד ראשון כנגד נכס נדל\"ן בתנאים נוחים במיוחד, עם אפשרות לשלם על עלות הריבית בלבד. כל זאת למשך שנה עד שנתיים עם אפשרות להאריך את ...",
+        "position": 6,
+        "title": "הלוואות גישור לקבוצות רכישה – הלוואות בסכומים גבוהים",
+        "url": "https://credito.co.il/%D7%94%D7%9C%D7%95%D7%95%D7%90%D7%95%D7%AA-%D7%92%D7%99%D7%A9%D7%95%D7%A8/"
+      },
+      {
+        "description": "מימון לקבוצות רכישה: מיטב מימון מלווה את קבוצות הרכישה החל משלב רכישת הקרקע, דרך קבלת היתר הבנייה ועד לקבלת תעודת גמר. למיטב מימון ניסיון רב בליווי פרויקטים ...",
+        "position": 7,
+        "title": "מיטב מימון",
+        "url": "https://www.meitav.co.il/loans/"
+      },
+      {
+        "description": "11 בפבר׳ 2025 — השלב הראשון בפרויקט קבוצת רכישה הוא רכישת הקרקע. לצורך כך, קבוצות רכישה נדרשות לגייס מימון ראשוני. מימון זה נעשה לרוב באמצעות הלוואות מגופים ...",
+        "position": 8,
+        "title": "מימון של קבוצות רכישה: כל מה שצריך לדעת",
+        "url": "https://www.erfo.co.il/post/%D7%9E%D7%99%D7%9E%D7%95%D7%9F-%D7%A9%D7%9C-%D7%A7%D7%91%D7%95%D7%A6%D7%95%D7%AA-%D7%A8%D7%9B%D7%99%D7%A9%D7%94-%D7%9B%D7%9C-%D7%9E%D7%94-%D7%A9%D7%A6%D7%A8%D7%99%D7%9A-%D7%9C%D7%93%D7%A2%D7%AA"
+      },
+      {
+        "description": "פתיחת חשבון נאמנות: כספי הרוכשים מופקדים במקום בטוח ואמין על מנת לשמור על זכויות החברים בקבוצה. אשראי והלוואות: תכנון וניהול של מסגרות אשראי המתאימות למימון ...",
+        "position": 9,
+        "title": "ניהול כספי קבוצות רכישה | ייעוץ כלכלי",
+        "url": "https://www.cpa.co.il/financial/buying-group-financial/"
+      },
+      {
+        "description": "חברת קפיטל פקטור מלווה קבוצות רכישה החל מהשלב הראשוני של הארגון, בחינה כלכלית של הפרויקטים, ניהול וארגון, הגשת בקשת המימון לגוף הפיננסי אישור חברי הקבוצה, ליווי ...",
+        "position": 10,
+        "title": "מימון קבוצות רכישה | בדיקת מיחזור משכנתא - קפיטל פקטור ייעוץ ...",
+        "url": "https://www.capitalfactor.co.il/purchase-group/"
+      }
+    ]
+  },
   "word_count": 538,
   "wp_post_title": "הלוואות וגיוס אשראי לקבוצות רכישה",
-  "page_name": "הלוואות וגיוס אשראי לקבוצות רכישה"
+  "page_name": "הלוואות וגיוס אשראי לקבוצות רכישה",
+  "is_special": true
 }

@@ -6,5 +6,29 @@
   "description": "אם אתם לקראת ביצוע עסקת נדל\"ן ואתם זקוקים לפתרון מימון, פנו כבר עכשיו לפורטל רק תבקש, אשר מומחה בתחום הרחב של גיוס אשראי לעסקאות נדלן ואיתור הלוואות משתלמות",
   "word_count": 308,
   "wp_post_title": "גיוס אשראי לעסקאות נדלן",
-  "page_name": "גיוס אשראי לעסקאות נדלן"
+  "page_name": "גיוס אשראי לעסקאות נדלן",
+  "fetched_keywords": {
+    "timestamp": "2026-01-13T15:18:34.181Z",
+    "main_keyword": "גיוס אשראי לעסקאות נדלן",
+    "clusters": [
+      {
+        "primary": "מימון עסקאות נדל\"ן",
+        "source": "manual",
+        "type": "unique",
+        "unique_part": "מימון עסקאות נדל\"ן",
+        "variants": []
+      }
+    ],
+    "final_keywords": [
+      "מימון עסקאות נדל\"ן"
+    ],
+    "unique_topics": [],
+    "rank_position": null,
+    "rank_checked_url": "https://loan-israel.co.il/Business/credit-recruitment-for-real-estate/",
+    "organic_results": [],
+    "ai_mode_results": [],
+    "ai_rank_position": null,
+    "competitor_data": []
+  },
+  "is_special": true
 }

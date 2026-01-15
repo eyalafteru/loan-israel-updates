@@ -44,27 +44,6 @@
         "type": "unique",
         "unique_part": "uja israel",
         "variants": []
-      },
-      {
-        "primary": "פדרציית ניו יורק דרושים",
-        "source": "related",
-        "type": "unique",
-        "unique_part": "ניו יורק דרושים",
-        "variants": []
-      },
-      {
-        "primary": "הפדרציה היהודית דרושים",
-        "source": "related",
-        "type": "unique",
-        "unique_part": "הפדרציה היהודית דרושים",
-        "variants": []
-      },
-      {
-        "primary": "Cjp",
-        "source": "related",
-        "type": "unique",
-        "unique_part": "cjp",
-        "variants": []
       }
     ],
     "final_keywords": [
@@ -72,10 +51,7 @@
       "הפדרציה היהודית של ניו יורק בישראל",
       "UJA",
       "UJA-Federation",
-      "UJA Israel",
-      "פדרציית ניו יורק דרושים",
-      "הפדרציה היהודית דרושים",
-      "Cjp"
+      "UJA Israel"
     ],
     "unique_topics": [
       "ניו יורק",
@@ -296,5 +272,6 @@
   },
   "word_count": 179,
   "wp_post_title": "קרן פדרציית ניו-יורק לישראל",
-  "page_name": "קרן פדרציית ניו-יורק לישראל"
+  "page_name": "קרן פדרציית ניו-יורק לישראל",
+  "is_special": true
 }

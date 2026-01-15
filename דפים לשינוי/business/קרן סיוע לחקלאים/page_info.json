@@ -6,8 +6,31 @@
   "title": "קרן סיוע לחקלאים - הלוואות בערבות המדינה ובנקים באישור מיידי",
   "description": "החקלאות הישראלית נקלעה בזמן האחרון למשבר מתמשך בגלל הקטנת הביקוש לתוצרת שלה מאירופה. קרא באתר רק תבקש על דרכי התמודדות עם המשבר וקרן הסיוע לחקלאים.",
   "imported_at": "2026-01-03T13:58:48.748597",
-  "fetched_keywords": {},
+  "fetched_keywords": {
+    "timestamp": "2026-01-13T14:49:34.319Z",
+    "main_keyword": "קרן סיוע לחקלאים",
+    "clusters": [
+      {
+        "primary": "קרן סיוע לחקלאים",
+        "source": "autocomplete",
+        "type": "unique",
+        "unique_part": "",
+        "variants": []
+      }
+    ],
+    "final_keywords": [
+      "קרן סיוע לחקלאים"
+    ],
+    "unique_topics": [],
+    "rank_position": null,
+    "rank_checked_url": "https://loan-israel.co.il/Business/farmers-assistance-fund/",
+    "organic_results": [],
+    "ai_mode_results": [],
+    "ai_rank_position": null,
+    "competitor_data": []
+  },
   "word_count": 411,
   "wp_post_title": "קרן סיוע לחקלאים",
-  "page_name": "קרן סיוע לחקלאים"
+  "page_name": "קרן סיוע לחקלאים",
+  "is_special": true
 }

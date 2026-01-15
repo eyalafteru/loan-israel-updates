@@ -1,0 +1,131 @@
+{
+  "id": "business_ultimate",
+  "name": "עסקים אולטימייט",
+  "description": "סוכן אולטימייט - 5 שלבים מופרדים: אסטרטגיה > כתיבה > SEO > ויזואל > QA",
+  "folder_name": "עסקים אולטימייט",
+  "model": {
+    "provider": "claude",
+    "name": "claude-sonnet-4-5",
+    "temperature": 0.7
+  },
+  "sites": [],
+  "supports_full_auto": true,
+  "status": "active",
+  "created": "2026-01-12T12:00:00.000000",
+  "updated": "2026-01-12T16:00:00.000000",
+  "wordpress": {
+    "action": "update",
+    "site": "main",
+    "update_fields": [
+      "content"
+    ]
+  },
+  "steps": [
+    {
+      "id": "step1",
+      "order": 1,
+      "name": "האסטרטג (ניתוח ואסטרטגיה)",
+      "model": "claude-opus-4-5",
+      "prompt_file": "פרומטים/עסקים אולטימייט/שלב 1.md",
+      "prompt_template": "קרא את קובץ ההוראות {{STEP1_PROMPT_FILE}} ובצע ניתוח מעמיק ובניית אסטרטגיה לעמוד {{PAGE_HTML_PATH}}.\n\n## מטרת השלב:\nיצירת דוח אסטרטגיה (\"בלופרינט\") מקיף לפני הכתיבה.\n\n## נתוני עמוד:\n- **מילת מפתח ראשית:** {{PAGE_KEYWORD}}\n- **מיקום נוכחי ב-SERP:** {{OUR_SERP_RANK}}\n- **כמות מילים קיימת:** {{PAGE_WORD_COUNT}}\n\n## מילות מפתח נלוות:\n{{KEYWORDS_AUTOCOMPLETE}}\n\n## מידע ממתחרים:\n{{SERP_ORGANIC}}\n\n## תוצאות AI Overview:\n{{SERP_AI_OVERVIEW}}\n\n## מאגרי מידע:\n- מאגר כללי: {{KNOWLEDGE_BASE_GENERAL}}\n- מאגר מסלולים: {{KNOWLEDGE_BASE_TRACKS}}\n- חודש נוכחי: {{CURRENT_MONTH}}\n- ריבית הפריים: {{BOI_INTEREST_RATE}}\n\n## קישורים פנימיים לשימור:\n{{INTERNAL_LINKS_DB}}\n\n**חובה לשמור:**\n- דוח אסטרטגיה: {{OUTPUT_PATH}}\n- שם הקובץ: {{STEP1_REPORT}}",
+      "output": {
+        "path": "דוח אסטרטגיה.md",
+        "shortcode_name": "STEP1_REPORT"
+      },
+      "shortcodes": [
+        "PAGE_HTML",
+        "PAGE_KEYWORD",
+        "PAGE_WORD_COUNT",
+        "OUR_SERP_RANK",
+        "KEYWORDS_AUTOCOMPLETE",
+        "SERP_ORGANIC",
+        "SERP_AI_OVERVIEW",
+        "KNOWLEDGE_BASE_GENERAL",
+        "KNOWLEDGE_BASE_TRACKS",
+        "CURRENT_MONTH",
+        "BOI_INTEREST_RATE",
+        "INTERNAL_LINKS_DB"
+      ]
+    },
+    {
+      "id": "step2",
+      "order": 2,
+      "name": "הקופירייטר (כתיבה אטומית)",
+      "model": "claude-opus-4-5",
+      "prompt_file": "פרומטים/עסקים אולטימייט/שלב 2.md",
+      "prompt_template": "קרא את קובץ ההוראות {{STEP2_PROMPT_FILE}} וכתוב את העמוד {{PAGE_HTML_PATH}} בהתבסס על האסטרטגיה.\n\n## מטרת השלב:\nכתיבת HTML מלאה בסגנון \"שיווק אטומי\" על פי דוח האסטרטגיה.\n\n## דוח אסטרטגיה משלב 1:\n{{STEP1_REPORT}}\n\n## נתוני עמוד:\n- **מילת מפתח ראשית:** {{PAGE_KEYWORD}}\n- **ריבית פריים:** {{BOI_INTEREST_RATE}}\n\n## מאגר ידע:\n{{KNOWLEDGE_BASE_GENERAL}}\n\n**חובה לשמור:**\n- העמוד החדש: {{PAGE_HTML_PATH}}\n- דוח כתיבה: {{OUTPUT_PATH}}\n- שם הדוח: {{STEP2_REPORT}}",
+      "output": {
+        "path": "דוח כתיבה.md",
+        "shortcode_name": "STEP2_REPORT"
+      },
+      "shortcodes": [
+        "STEP1_REPORT",
+        "PAGE_HTML",
+        "PAGE_KEYWORD",
+        "BOI_INTEREST_RATE",
+        "CURRENT_MONTH",
+        "KNOWLEDGE_BASE_GENERAL"
+      ]
+    },
+    {
+      "id": "step3",
+      "order": 3,
+      "name": "מומחה SEO (אופטימיזציה)",
+      "model": "claude-sonnet-4-5",
+      "prompt_file": "פרומטים/עסקים אולטימייט/שלב 3.md",
+      "prompt_template": "קרא את קובץ ההוראות {{STEP3_PROMPT_FILE}} ובצע אופטימיזציית SEO על העמוד {{PAGE_HTML_PATH}}.\n\n## מטרת השלב:\nהוספת Schema, Meta Tags, וקישורים.\n\n## דוח כתיבה משלב 2:\n{{STEP2_REPORT}}\n\n## נתונים:\n- **מילת מפתח:** {{PAGE_KEYWORD}}\n- **דומיינים מאושרים:** {{APPROVED_DOMAINS}}\n- **קישורים פנימיים:** {{INTERNAL_LINKS_DB}}\n- **מאגר ידע (לסכמה):** {{KNOWLEDGE_BASE_GENERAL}}\n\n**חובה לשמור:**\n- העמוד המעודכן: {{PAGE_HTML_PATH}}\n- דוח SEO: {{OUTPUT_PATH}}\n- שם הדוח: {{STEP3_REPORT}}",
+      "output": {
+        "path": "דוח SEO.md",
+        "shortcode_name": "STEP3_REPORT"
+      },
+      "shortcodes": [
+        "STEP2_REPORT",
+        "PAGE_HTML",
+        "PAGE_KEYWORD",
+        "APPROVED_DOMAINS",
+        "INTERNAL_LINKS_DB",
+        "KNOWLEDGE_BASE_GENERAL"
+      ]
+    },
+    {
+      "id": "step4",
+      "order": 4,
+      "name": "המעצב (ויזואליזציה)",
+      "model": "claude-sonnet-4-5",
+      "prompt_file": "פרומטים/עסקים אולטימייט/שלב 4.md",
+      "prompt_template": "קרא את קובץ ההוראות {{STEP4_PROMPT_FILE}} והוסף עיצובים ויזואליים לעמוד {{PAGE_HTML_PATH}}.\n\n## מטרת השלב:\nהוספת FAQ Accordion, Stats, Timeline, Callouts.\n\n## דוח SEO משלב 3:\n{{STEP3_REPORT}}\n\n## מקורות עיצוב:\n- קובץ עיצוב: מאגרי מידע/visual.html\n\n**חובה לשמור:**\n- העמוד המעודכן: {{PAGE_HTML_PATH}}\n- דוח ויזואל: {{OUTPUT_PATH}}\n- שם הדוח: {{STEP4_REPORT}}",
+      "output": {
+        "path": "דוח ויזואל.md",
+        "shortcode_name": "STEP4_REPORT"
+      },
+      "shortcodes": [
+        "STEP3_REPORT",
+        "PAGE_HTML"
+      ]
+    },
+    {
+      "id": "step5",
+      "order": 5,
+      "name": "המבקר (QA סופי)",
+      "model": "claude-sonnet-4-5",
+      "prompt_file": "פרומטים/עסקים אולטימייט/שלב 5.md",
+      "prompt_template": "קרא את קובץ ההוראות {{STEP5_PROMPT_FILE}} ובצע QA סופי על העמוד {{PAGE_HTML_PATH}}.\n\n## מטרת השלב:\nבדיקה סופית ואישור לפני פרסום.\n\n## דוחות קודמים:\n- אסטרטגיה: {{STEP1_REPORT}}\n- כתיבה: {{STEP2_REPORT}}\n- SEO: {{STEP3_REPORT}}\n- ויזואל: {{STEP4_REPORT}}\n\n## נתונים לבדיקה:\n- **מילות מפתח:** {{KEYWORDS_AUTOCOMPLETE_LIST}}\n\n**חובה לשמור:**\n- דוח סופי: {{OUTPUT_PATH}}\n- שם הדוח: {{STEP5_REPORT}}\n- העמוד הסופי: {{PAGE_HTML_PATH}}",
+      "output": {
+        "path": "דוח סופי.md",
+        "shortcode_name": "STEP5_REPORT"
+      },
+      "shortcodes": [
+        "STEP1_REPORT",
+        "STEP2_REPORT",
+        "STEP3_REPORT",
+        "STEP4_REPORT",
+        "PAGE_HTML",
+        "KEYWORDS_AUTOCOMPLETE_LIST"
+      ]
+    }
+  ],
+  "chain": {
+    "enabled": false,
+    "next_agent": null
+  }
+}

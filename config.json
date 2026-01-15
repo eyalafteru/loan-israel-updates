@@ -95,11 +95,11 @@
   "custom_data_sources": [
     {
       "id": "internal_links",
-      "name": "קישורים פנימיים",
-      "shortcode": "INTERNAL_LINKS_DB",
+      "name": "קישורים פנימיים (Legacy)",
+      "shortcode": "INTERNAL_LINKS_DB_LEGACY",
       "path": "דטה בייס לקישורים פנימיים רק תבקש.txt",
       "type": "text",
-      "description": "מאגר קישורים פנימיים לאתר"
+      "description": "מאגר קישורים פנימיים סטטי - משמש כגיבוי. INTERNAL_LINKS_DB נטען דינאמית מ-generated_data/"
     },
     {
       "id": "financial_data",
@@ -139,6 +139,7 @@
       "main": {
         "name": "אתר ראשי",
         "icon": "🏠",
+        "domain": "loan-israel.co.il",
         "site_url": "https://loan-israel.co.il",
         "api_base": "/wp-json/wp/v2",
         "token_endpoint": "/wp-json/jwt-auth/v1/token",
@@ -150,6 +151,7 @@
       "business": {
         "name": "עסקים",
         "icon": "💼",
+        "domain": "loan-israel.co.il",
         "site_url": "https://loan-israel.co.il/Business",
         "api_base": "/wp-json/wp/v2",
         "token_endpoint": "/wp-json/jwt-auth/v1/token",

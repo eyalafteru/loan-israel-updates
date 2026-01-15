@@ -18,31 +18,10 @@
         "variants": []
       },
       {
-        "primary": "קרן הגליל קולנוע",
-        "source": "autocomplete",
-        "type": "unique",
-        "unique_part": "קולנוע",
-        "variants": []
-      },
-      {
         "primary": "קרן הגליל הלוואות",
         "source": "autocomplete",
         "type": "unique",
         "unique_part": "הלוואות",
-        "variants": []
-      },
-      {
-        "primary": "קרן הקולנוע הגלילית",
-        "source": "autocomplete",
-        "type": "unique",
-        "unique_part": "הקולנוע הגלילית",
-        "variants": []
-      },
-      {
-        "primary": "קרן אוצרות הגליל",
-        "source": "autocomplete",
-        "type": "unique",
-        "unique_part": "אוצרות",
         "variants": []
       },
       {
@@ -76,10 +55,7 @@
     ],
     "final_keywords": [
       "קרן הגליל",
-      "קרן הגליל קולנוע",
       "קרן הגליל הלוואות",
-      "קרן הקולנוע הגלילית",
-      "קרן אוצרות הגליל",
       "קרן הקולנוע הגלילי",
       "קרן אור הגליל",
       "קרן פטל מרום הגליל",
@@ -104,5 +80,6 @@
   },
   "word_count": 228,
   "wp_post_title": "קרן הגליל",
-  "page_name": "קרן הגליל"
+  "page_name": "קרן הגליל",
+  "is_special": true
 }
