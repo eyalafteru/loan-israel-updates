@@ -3,7 +3,7 @@
   "url": "https://loan-israel.co.il/Business/business-assistance-fund-state-guarantee/",
   "post_id": "2178",
   "site": "business",
-  "title": "הקרן לסיוע לעסקים בערבות המדינה - הלוואות בערבות המדינה ובנקים באישור מיידי",
+  "title": "הקרן לסיוע לעסקים בערבות המדינה",
   "description": "פורטל רק תבקש הלוואות לעסקים מתמחה בגיוס הלוואות מקרנות ממשלתיות בתנאים משתלמים. כנס ובחר מבין מסלולים אטרקטיביים בסיוע מומחים.",
   "imported_at": "2026-01-03T14:00:00.870362",
   "fetched_keywords": {
@@ -277,5 +277,12 @@
   "word_count": 393,
   "wp_post_title": "הקרן לסיוע לעסקים בערבות המדינה",
   "page_name": "הקרן לסיוע לעסקים בערבות המדינה",
-  "is_special": true
+  "is_special": true,
+  "uploaded_title": "הקרן לסיוע לעסקים בערבות המדינה",
+  "uploaded_title_at": "2026-01-15T11:58:38.496Z",
+  "uploaded_description": "פורטל רק תבקש הלוואות לעסקים מתמחה בגיוס הלוואות מקרנות ממשלתיות בתנאים משתלמים. כנס ובחר מבין מסלולים אטרקטיביים בסיוע מומחים.",
+  "uploaded_description_at": "2026-01-15T11:58:38.496Z",
+  "last_upload": "2026-01-15T12:00:02.184Z",
+  "last_upload_type": "content",
+  "template": "template-clean.php"
 }
