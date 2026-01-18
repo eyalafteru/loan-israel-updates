@@ -1,0 +1,717 @@
+{
+  "version": "1.0",
+  "last_updated": "2026-01-17T19:41:02.954488",
+  "sources": {
+    "2e0cffc6ae4f": {
+      "id": "2e0cffc6ae4f",
+      "url": "https://www.bank-yahav.co.il/loans/insurance-agent/",
+      "description": "יהב סוכני ביטוח",
+      "added_at": "2026-01-16T11:12:53.062787",
+      "last_scraped": "2026-01-16T11:47:15.874416",
+      "scraping_status": "scraped",
+      "linked_pages": [],
+      "last_error": "Apify API returned 201",
+      "ai_summary": {
+        "lender": {
+          "name": "בנק יהב",
+          "type": "בנק",
+          "license": "לא צוין"
+        },
+        "product": {
+          "name": "הלוואות לסוכני ביטוח עצמאים",
+          "type": "הלוואה עסקית",
+          "purpose": "לכל מטרה",
+          "description": "הלוואות משתלמות במיוחד עבור סוכני ביטוח עצמאים ובעלי סוכנויות."
+        },
+        "rates": {
+          "interest_rate": "לא צוין",
+          "interest_type": "לא צוין",
+          "prime_plus": "לא צוין",
+          "effective_rate": "לא צוין",
+          "range": "לא צוין"
+        },
+        "amounts": {
+          "min_amount": "עד 200,000 ש\"ח",
+          "max_amount": "לא צוין",
+          "typical_amount": "לא צוין"
+        },
+        "periods": {
+          "min_period": "לא צוין",
+          "max_period": "עד 12 שנים",
+          "grace_period": "לא צוין"
+        },
+        "monthly_payments": {
+          "example_payment": "לא צוין",
+          "calculation_example": "לא צוין",
+          "payment_method": "לא צוין"
+        },
+        "eligibility": [
+          "סוכני ביטוח עצמאים ובעלי סוכנויות",
+          "העברת פעילות עסקית בכפוף להלוואה"
+        ],
+        "requirements": [
+          "העברת פעילות עסקית"
+        ],
+        "collateral": {
+          "type": "לא צוין",
+          "details": "לא צוין"
+        },
+        "benefits": [
+          "פרעון ההלוואה עד 12 שנים",
+          "כרטיסי אשראי יוקרתיים עם מגוון הטבות",
+          "הלוואה לרכישת משרד כנגד שיעבוד"
+        ],
+        "fees": [],
+        "process": [
+          "לא צוין"
+        ],
+        "timing": {
+          "approval_time": "לא צוין",
+          "funding_time": "לא צוין"
+        },
+        "warnings": [
+          "אי עמידה בפירעון ההלוואה עלול לגרור חיוב בריבית פיגורים והליכי הוצאה לפועל."
+        ],
+        "special_offers": [],
+        "contact": {
+          "phone": "לא צוין",
+          "website": "לא צוין",
+          "branches": "איתור סניפים"
+        },
+        "key_points": [
+          "הלוואות לסוכני ביטוח עצמאים עד 200,000 ש\"ח לכל מטרה.",
+          "פרעון ההלוואה עד 12 שנים בכפוף להעברת פעילות עסקית.",
+          "כרטיסי אשראי יוקרתיים המעניקות מגוון הטבות."
+        ],
+        "last_updated": "לא צוין"
+      },
+      "ai_summary_date": "2026-01-16T15:20:21.139283"
+    },
+    "e11627325109": {
+      "id": "e11627325109",
+      "url": "https://business.isracard.co.il/credit_solutions/Loans/",
+      "description": "ישראכרט עסקים",
+      "added_at": "2026-01-16T11:12:53.064346",
+      "last_scraped": null,
+      "scraping_status": "error",
+      "linked_pages": [],
+      "last_error": "Apify API returned 201"
+    },
+    "1422660b1fcc": {
+      "id": "1422660b1fcc",
+      "url": "https://www.mizrahi-tefahot.co.il/loans/privateloanslib/happy-event-loan/",
+      "description": "מזרחי חתונה",
+      "added_at": "2026-01-16T11:12:53.065442",
+      "last_scraped": "2026-01-16T11:47:26.074018",
+      "scraping_status": "scraped",
+      "linked_pages": [
+        "דפים לשינוי/main/הלוואה לחתונה/הלוואה לחתונה.html"
+      ],
+      "last_error": "Apify API returned 201",
+      "ai_summary": {
+        "key_points": [
+          "הלוואה לשמחות עד 100,000 ₪",
+          "פריסת תשלומים של עד 7 שנים"
+        ],
+        "rates": {},
+        "terms": {
+          "min_amount": "100,000",
+          "max_amount": "100,000",
+          "min_period": " ",
+          "max_period": "7"
+        },
+        "requirements": [
+          "לקוחות קיימים ולמצטרפים חדשים",
+          "פתיחת חשבון Priority, חשבון מנהלים, חשבון שכירים או חשבון שכירים מועדפים"
+        ],
+        "warnings": [
+          "אי-עמידה בפירעון ההלוואה עלולה לגרור חיוב בריבית פיגורים והליכי הוצאה לפועל",
+          "מתן ההלוואה בכפוף לשיקול דעת הבנק ולבדיקה מקדמית של העסק שהגיש בקשה להלוואה",
+          "האמור לעיל הינו בבחינת מידע בלבד ואינו מהווה כלל וכלל הצעה למתן ההלוואה"
+        ]
+      },
+      "ai_summary_date": "2026-01-16T14:51:00.693634"
+    },
+    "d647c9c455ca": {
+      "id": "d647c9c455ca",
+      "url": "https://www.mizrahi-tefahot.co.il/loans/privateloanslib/electric-car-loan/",
+      "description": "מזרחי רכב חשמלי",
+      "added_at": "2026-01-16T11:12:53.066426",
+      "last_scraped": "2026-01-17T19:39:47.607255",
+      "scraping_status": "scraped",
+      "linked_pages": [],
+      "last_error": "",
+      "ai_summary": {
+        "lender": {
+          "name": "מזרחי טפחות",
+          "type": "בנק",
+          "license": "לא צוין"
+        },
+        "product": {
+          "name": "הלוואה לרכב חשמלי",
+          "type": "הלוואה אישית",
+          "purpose": "רכישת רכב חשמלי",
+          "description": "הלוואה לרכב חשמלי בתנאים אטרקטיביים"
+        },
+        "rates": {
+          "interest_rate": "לא צוין",
+          "interest_type": "לא צוין",
+          "prime_plus": "לא צוין",
+          "effective_rate": "לא צוין",
+          "range": "לא צוין"
+        },
+        "amounts": {
+          "min_amount": "לא צוין",
+          "max_amount": "עד 60 חודש",
+          "typical_amount": "לא צוין"
+        },
+        "periods": {
+          "min_period": "לא צוין",
+          "max_period": "עד 60 חודשים",
+          "grace_period": "לא צוין"
+        },
+        "monthly_payments": {
+          "example_payment": "לא צוין",
+          "calculation_example": "לא צוין",
+          "payment_method": "לא צוין"
+        },
+        "eligibility": [
+          "לא צוין"
+        ],
+        "requirements": [
+          "לא צוין"
+        ],
+        "collateral": {
+          "type": "לא צוין",
+          "details": "לא צוין"
+        },
+        "benefits": [
+          "הלוואה בתנאים אטרקטיביים",
+          "לשדרג לרכב חשמלי"
+        ],
+        "fees": [
+          {
+            "name": "לא צוין",
+            "amount": "לא צוין",
+            "notes": "לא צוין"
+          }
+        ],
+        "process": [
+          "לא צוין"
+        ],
+        "timing": {
+          "approval_time": "לא צוין",
+          "funding_time": "לא צוין"
+        },
+        "warnings": [
+          "הבהרות אי-עמידה בפירעון ההלוואה עלולה לגרור חיוב בריבית פיגורים והליכי הוצאה לפועל"
+        ],
+        "special_offers": [
+          "לא צוין"
+        ],
+        "contact": {
+          "phone": "לא צוין",
+          "website": "לא צוין",
+          "branches": "לא צוין"
+        },
+        "key_points": [
+          "הלוואה לרכב חשמלי בתנאים אטרקטיביים",
+          "לשדרג לרכב חשמלי עם מזרחי טפחות"
+        ],
+        "last_updated": "לא צוין"
+      },
+      "ai_summary_date": "2026-01-17T19:41:02.954066",
+      "ai_model": "gemma2:9b"
+    },
+    "b0ff85456eda": {
+      "id": "b0ff85456eda",
+      "url": "https://www.mizrahi-tefahot.co.il/loans/privateloanslib/interest-free-loan/",
+      "description": "מזרחי 40K",
+      "added_at": "2026-01-16T11:12:53.067328",
+      "last_scraped": "2026-01-17T19:12:14.915076",
+      "scraping_status": "scraped",
+      "linked_pages": [],
+      "last_error": ""
+    },
+    "0b399268b3bf": {
+      "id": "0b399268b3bf",
+      "url": "https://www.fibi.co.il/private/loansandmortgages/loans/carloan/",
+      "description": "בינלאומי רכב",
+      "added_at": "2026-01-16T11:12:53.068309",
+      "last_scraped": "2026-01-16T14:40:09.852050",
+      "scraping_status": "scraped",
+      "linked_pages": [],
+      "last_error": "",
+      "ai_summary": {
+        "lender": {
+          "name": "לא צוין",
+          "type": "בנק",
+          "license": "לא צוין"
+        },
+        "product": {
+          "name": "מימון לרכב חדש",
+          "type": "הלוואה אישית",
+          "purpose": "רכישת רכב חדש",
+          "description": "הלוואות לרכב חדש בתנאים מעולים"
+        },
+        "rates": {
+          "interest_rate": "פריים + 0.2%",
+          "interest_type": "קבועה",
+          "prime_plus": "פריים + 0.2%",
+          "effective_rate": "5.851% נכון ל 9.1.2026",
+          "range": "לא צוין"
+        },
+        "amounts": {
+          "min_amount": "לא צוין",
+          "max_amount": "לא צוין",
+          "typical_amount": "לא צוין"
+        },
+        "periods": {
+          "min_period": "לא צוין",
+          "max_period": "60 חודשים",
+          "grace_period": "לא צוין"
+        },
+        "monthly_payments": {
+          "example_payment": "לא צוין",
+          "calculation_example": "לא צוין",
+          "payment_method": "לא צוין"
+        },
+        "eligibility": [
+          "רוכשים רכב חדש",
+          "לא צוין"
+        ],
+        "requirements": [
+          "לבטח את הרכב בביטוח מקיף עם סעיף שיעבוד לטובת הבנק",
+          "לא צוין"
+        ],
+        "collateral": {
+          "type": "שעבוד",
+          "details": "הרכב ישועבד לטובת הבנק"
+        },
+        "benefits": [
+          "ריבית החל מפריים + 0.2%",
+          "טבות לפותחים חשבון - הלוואה ללא ריבית עד 30 אלף שקלים"
+        ],
+        "fees": [
+          {
+            "name": "לא צוין",
+            "amount": "לא צוין",
+            "notes": "לא צוין"
+          }
+        ],
+        "process": [
+          "לבקשת הלוואה למימון רכב ניתן להשאיר פרטים בטופס מטה ונציג הבנק יחזור אליך",
+          "לא צוין"
+        ],
+        "timing": {
+          "approval_time": "לא צוין",
+          "funding_time": "לא צוין"
+        },
+        "warnings": [
+          "הפרסום אינו מהווה הצעה או התחייבות למתן הלוואה, אשר תוענק בכפוף לתאי ושיקול דעת הבנק. אי עמידה בפירעון ההלוואה עלולה לגרור חיוב בריבית פיגורים והליכי הוצאה לפועל.",
+          "על הרוכש לבטח את הרכב בביטוח מקיף עם סעיף שיעבוד לטובת הבנק."
+        ],
+        "special_offers": [
+          "הלוואה ללא ריבית עד 30 אלף שקלים",
+          "לא צוין"
+        ],
+        "contact": {
+          "phone": "03-5130003",
+          "website": "לא צוין",
+          "branches": "לא צוין"
+        },
+        "key_points": [
+          "מימון לרכב חדש עם ריבית החל מפריים + 0.2%",
+          "תקופה של עד 60 חודשים",
+          "טבות לפותחים חשבון - הלוואה ללא ריבית עד 30 אלף שקלים"
+        ],
+        "last_updated": "לא צוין"
+      },
+      "ai_summary_date": "2026-01-16T15:22:11.219797"
+    },
+    "d12497602c25": {
+      "id": "d12497602c25",
+      "url": "https://www.5555.co.il/%D7%9E%D7%99%D7%9E%D7%95%D7%9F-%D7%9C%D7%9B%D7%9C-%D7%9E%D7%98%D7%A8%D7%94-%D7%9B%D7%A0%D7%92%D7%93-%D7%A9%D7%99%D7%A2%D7%91%D7%95%D7%93-%D7%A8%D7%9B%D7%91",
+      "description": "מימון ישיר לכל מטרה כנגד שיעבוד רכב",
+      "added_at": "2026-01-16T11:12:53.069343",
+      "last_scraped": null,
+      "scraping_status": "pending",
+      "linked_pages": []
+    },
+    "5fd597635cf3": {
+      "id": "5fd597635cf3",
+      "url": "https://www.5555.co.il/%D7%9E%D7%99%D7%9E%D7%95%D7%9F-%D7%9C%D7%A7%D7%A0%D7%99%D7%99%D7%AA-%D7%A8%D7%9B%D7%91",
+      "description": "מימון ישיר קניית רכב",
+      "added_at": "2026-01-16T11:12:53.070066",
+      "last_scraped": "2026-01-16T12:52:34.289004",
+      "scraping_status": "scraped",
+      "linked_pages": [],
+      "last_error": "",
+      "ai_summary": {
+        "key_points": [
+          "מימון ישיר מציעה הלוואות לרכישת רכב חדש או משומש.",
+          "תהליך ההלוואה פשוט ומהיר, עם אישור עקרוני תוך זמן קצר."
+        ],
+        "rates": {},
+        "terms": {},
+        "requirements": [
+          "זכאות הלוואה תלויה ביכולת החזר ויציבות פיננסית.",
+          "הרכב עצמו משמש כבטוחה להלוואה."
+        ],
+        "warnings": [
+          "יש צורך בשעבוד הרכב על שם מימון ישיר."
+        ]
+      },
+      "ai_summary_date": "2026-01-16T14:51:37.514473"
+    },
+    "e39f23bd93d8": {
+      "id": "e39f23bd93d8",
+      "url": "https://www.tarya.co.il/employer-loans/",
+      "description": "טריא פרטי",
+      "added_at": "2026-01-16T11:12:53.070762",
+      "last_scraped": "2026-01-16T14:26:34.985650",
+      "scraping_status": "scraped",
+      "linked_pages": [],
+      "last_error": ""
+    },
+    "0a293b41f6e2": {
+      "id": "0a293b41f6e2",
+      "url": "https://www.tarya.co.il/biz/",
+      "description": "טריא עסקי",
+      "added_at": "2026-01-16T11:12:53.071491",
+      "last_scraped": "2026-01-16T14:26:34.854244",
+      "scraping_status": "scraped",
+      "linked_pages": [],
+      "last_error": ""
+    },
+    "2c08dcd3a1f9": {
+      "id": "2c08dcd3a1f9",
+      "url": "https://my.migdal.co.il/pensionary-savings/advanced-study-funds/articles/dont-give-up-on-it#:~:text=%D7%A7%D7%A8%D7%9F%20%D7%94%D7%A9%D7%AA%D7%9C%D7%9E%D7%95%D7%AA%20,%D7%94%D7%98%D7%91%D7%95%D7%AA%20%D7%9E%D7%A1",
+      "description": "מגדל הלוואה כנגד קרן השתלמות",
+      "added_at": "2026-01-16T11:12:53.072233",
+      "last_scraped": "2026-01-17T19:40:14.810404",
+      "scraping_status": "scraped",
+      "linked_pages": [],
+      "last_error": ""
+    },
+    "193fcb1633b6": {
+      "id": "193fcb1633b6",
+      "url": "https://www.clalbit.co.il/loansandmortgage/financialsavingsloans/",
+      "description": "כלל כל מטרה",
+      "added_at": "2026-01-16T11:12:53.072944",
+      "last_scraped": null,
+      "scraping_status": "error",
+      "linked_pages": [],
+      "last_error": "No content extracted from page"
+    },
+    "2b82212b14c2": {
+      "id": "2b82212b14c2",
+      "url": "https://www.bankjerusalem.co.il/loans/all-purpose-loans",
+      "description": "ירושלים כל מטרה",
+      "added_at": "2026-01-16T11:12:53.073701",
+      "last_scraped": null,
+      "scraping_status": "error",
+      "linked_pages": [],
+      "last_error": "No content extracted from page - האתר עשוי לחסום scrapers או דורש JavaScript"
+    },
+    "975b104193bc": {
+      "id": "975b104193bc",
+      "url": "https://www.clalbit.co.il/loansandmortgage/reversemortgage/",
+      "description": "כלל משכנתא הפוכה",
+      "added_at": "2026-01-16T11:12:53.074416",
+      "last_scraped": null,
+      "scraping_status": "pending",
+      "linked_pages": []
+    },
+    "560e04c31fb0": {
+      "id": "560e04c31fb0",
+      "url": "https://credit24.co.il/q2",
+      "description": "קרדיט 24",
+      "added_at": "2026-01-16T11:12:53.075170",
+      "last_scraped": null,
+      "scraping_status": "error",
+      "linked_pages": [],
+      "last_error": "Apify API returned 400"
+    },
+    "c5b328e706ad": {
+      "id": "c5b328e706ad",
+      "url": "https://www.fnx.co.il/loans/loans-from-savings/",
+      "description": "פניקס טווח ארוך",
+      "added_at": "2026-01-16T11:12:53.075901",
+      "last_scraped": null,
+      "scraping_status": "error",
+      "linked_pages": [],
+      "last_error": "No content extracted from page - האתר עשוי לחסום scrapers או דורש JavaScript"
+    },
+    "84bb935e20cd": {
+      "id": "84bb935e20cd",
+      "url": "https://www.clalbit.co.il/loansandmortgage/gemelloans/",
+      "description": "כלל גמל",
+      "added_at": "2026-01-16T11:12:53.076741",
+      "last_scraped": null,
+      "scraping_status": "pending",
+      "linked_pages": []
+    },
+    "c713308da52f": {
+      "id": "c713308da52f",
+      "url": "https://www.fnx.co.il/loans/",
+      "description": "פניקס אונליין",
+      "added_at": "2026-01-16T11:12:53.077779",
+      "last_scraped": null,
+      "scraping_status": "pending",
+      "linked_pages": []
+    },
+    "249c8c409a1e": {
+      "id": "249c8c409a1e",
+      "url": "https://www.clalbit.co.il/loansandmortgage/pensionloans/",
+      "description": "כלל פנסיה",
+      "added_at": "2026-01-16T11:12:53.078918",
+      "last_scraped": null,
+      "scraping_status": "pending",
+      "linked_pages": []
+    },
+    "664a80aec5a7": {
+      "id": "664a80aec5a7",
+      "url": "https://www.bankjerusalem.co.il/loans/business-loans-state-guaranteed",
+      "description": "ירושלים ערבות מדינה",
+      "added_at": "2026-01-16T11:12:53.079685",
+      "last_scraped": null,
+      "scraping_status": "pending",
+      "linked_pages": []
+    },
+    "215bc4560dd8": {
+      "id": "215bc4560dd8",
+      "url": "https://www.bank-yahav.co.il/loans/wage-erner/",
+      "description": "יהב שכירים",
+      "added_at": "2026-01-16T11:12:53.080689",
+      "last_scraped": null,
+      "scraping_status": "pending",
+      "linked_pages": []
+    },
+    "072b1e8bf4b5": {
+      "id": "072b1e8bf4b5",
+      "url": "https://www.max.co.il/loans/calc?RefId=menu&sourceGA=TopMenu",
+      "description": "מקס הלוואות",
+      "added_at": "2026-01-16T11:12:53.081841",
+      "last_scraped": null,
+      "scraping_status": "pending",
+      "linked_pages": []
+    },
+    "ebec1320cd78": {
+      "id": "ebec1320cd78",
+      "url": "https://www.bank-yahav.co.il/loans/gov-employees/",
+      "description": "יהב עובדי מדינה",
+      "added_at": "2026-01-16T11:12:53.082954",
+      "last_scraped": null,
+      "scraping_status": "pending",
+      "linked_pages": []
+    },
+    "3c0401a70b7c": {
+      "id": "3c0401a70b7c",
+      "url": "https://www.bank-yahav.co.il/loans/doctors/",
+      "description": "יהב רופאים",
+      "added_at": "2026-01-16T11:12:53.083977",
+      "last_scraped": null,
+      "scraping_status": "pending",
+      "linked_pages": []
+    },
+    "9d888610928e": {
+      "id": "9d888610928e",
+      "url": "https://www.bank-yahav.co.il/loans/family-loans/",
+      "description": "יהב משפחה",
+      "added_at": "2026-01-16T11:12:53.085025",
+      "last_scraped": null,
+      "scraping_status": "pending",
+      "linked_pages": []
+    },
+    "51b9dff721aa": {
+      "id": "51b9dff721aa",
+      "url": "https://www.bank-yahav.co.il/loans/self-employed/",
+      "description": "יהב עצמיים",
+      "added_at": "2026-01-16T11:12:53.085776",
+      "last_scraped": null,
+      "scraping_status": "pending",
+      "linked_pages": []
+    },
+    "6b3e29a03024": {
+      "id": "6b3e29a03024",
+      "url": "https://www.bank-yahav.co.il/loans/all-purpose-loans/",
+      "description": "יהב כל מטרה",
+      "added_at": "2026-01-16T11:12:53.086419",
+      "last_scraped": null,
+      "scraping_status": "pending",
+      "linked_pages": []
+    },
+    "51c9cd179301": {
+      "id": "51c9cd179301",
+      "url": "https://www.bank-yahav.co.il/loans/car-loans/",
+      "description": "יהב רכב",
+      "added_at": "2026-01-16T11:12:53.087213",
+      "last_scraped": null,
+      "scraping_status": "pending",
+      "linked_pages": []
+    },
+    "c099ea2c7116": {
+      "id": "c099ea2c7116",
+      "url": "https://www.discountbank.co.il/private/loans/car-loans/",
+      "description": "דיסקונט רכב",
+      "added_at": "2026-01-16T11:12:53.087901",
+      "last_scraped": null,
+      "scraping_status": "pending",
+      "linked_pages": []
+    },
+    "6bab92b6ffe7": {
+      "id": "6bab92b6ffe7",
+      "url": "https://www.discountbank.co.il/private/loans/loans-students/",
+      "description": "דיסקונט סטודנטים",
+      "added_at": "2026-01-16T11:12:53.088635",
+      "last_scraped": null,
+      "scraping_status": "pending",
+      "linked_pages": []
+    },
+    "599145273fe9": {
+      "id": "599145273fe9",
+      "url": "https://lp.ogen.org/loans-for-individuals-and-families-2/",
+      "description": "עוגן פרטיים",
+      "added_at": "2026-01-16T11:12:53.089312",
+      "last_scraped": null,
+      "scraping_status": "pending",
+      "linked_pages": []
+    },
+    "cc7f930e6219": {
+      "id": "cc7f930e6219",
+      "url": "https://www.mizrahi-tefahot.co.il/loans/privateloanslib/express-loan/",
+      "description": "מזרחי ברגע",
+      "added_at": "2026-01-16T11:12:53.089937",
+      "last_scraped": null,
+      "scraping_status": "pending",
+      "linked_pages": []
+    },
+    "54ebffa7dd46": {
+      "id": "54ebffa7dd46",
+      "url": "https://www.bankhapoalim.co.il/he/loans/car-loan-calculator",
+      "description": "פועלים רכב",
+      "added_at": "2026-01-16T11:12:53.090618",
+      "last_scraped": null,
+      "scraping_status": "pending",
+      "linked_pages": []
+    },
+    "1c76268e2595": {
+      "id": "1c76268e2595",
+      "url": "https://www.fibi.co.il/private/loansandmortgages/loans/studentsloan/",
+      "description": "הבינלאומי סטונדטים",
+      "added_at": "2026-01-16T11:12:53.091257",
+      "last_scraped": null,
+      "scraping_status": "pending",
+      "linked_pages": []
+    },
+    "0c24c73a695e": {
+      "id": "0c24c73a695e",
+      "url": "https://www.bankhapoalim.co.il/he/loans/digital-loan-with-calculator",
+      "description": "פועלים כל מטרה",
+      "added_at": "2026-01-16T11:12:53.091933",
+      "last_scraped": null,
+      "scraping_status": "pending",
+      "linked_pages": []
+    },
+    "a45fb65345e6": {
+      "id": "a45fb65345e6",
+      "url": "https://www.mizrahi-tefahot.co.il/loans/privateloanslib/financing-solar-installations-loan/",
+      "description": "מזרחי קולטים סולארים",
+      "added_at": "2026-01-16T11:12:53.092586",
+      "last_scraped": null,
+      "scraping_status": "pending",
+      "linked_pages": []
+    },
+    "58c95d436a46": {
+      "id": "58c95d436a46",
+      "url": "https://www.fibi.co.il/private/loansandmortgages/loans/familyloan/",
+      "description": "הבינלאומי שיפוץ",
+      "added_at": "2026-01-16T11:12:53.094009",
+      "last_scraped": null,
+      "scraping_status": "pending",
+      "linked_pages": []
+    },
+    "8746632de677": {
+      "id": "8746632de677",
+      "url": "https://www.mizrahi-tefahot.co.il/loans/privateloanslib/all-purpose-loan/",
+      "description": "מזרחי כל מטרה",
+      "added_at": "2026-01-16T11:12:53.094913",
+      "last_scraped": null,
+      "scraping_status": "pending",
+      "linked_pages": []
+    },
+    "70d9ac508ebb": {
+      "id": "70d9ac508ebb",
+      "url": "https://www.discountbank.co.il/private/loans/flexible-loan/",
+      "description": "דיסקונט כל מטרה",
+      "added_at": "2026-01-16T11:12:53.095811",
+      "last_scraped": null,
+      "scraping_status": "pending",
+      "linked_pages": []
+    },
+    "4bdc33e28895": {
+      "id": "4bdc33e28895",
+      "url": "https://www.leumi.co.il/he/credit/loans",
+      "description": "לאומי הכול",
+      "added_at": "2026-01-16T11:12:53.096711",
+      "last_scraped": null,
+      "scraping_status": "pending",
+      "linked_pages": []
+    },
+    "95ba06cbbc6e": {
+      "id": "95ba06cbbc6e",
+      "url": "https://www.bankhapoalim.co.il/he/loans/student-loan-with-calculator",
+      "description": "פועלים סטודנטים",
+      "added_at": "2026-01-16T11:12:53.097837",
+      "last_scraped": null,
+      "scraping_status": "pending",
+      "linked_pages": []
+    },
+    "dd69f7213529": {
+      "id": "dd69f7213529",
+      "url": "https://www.mizrahi-tefahot.co.il/loans/privateloanslib/buff-loan/",
+      "description": "מזרחי שיפוץ",
+      "added_at": "2026-01-16T11:12:53.098707",
+      "last_scraped": null,
+      "scraping_status": "pending",
+      "linked_pages": []
+    },
+    "b4c2c2de2f46": {
+      "id": "b4c2c2de2f46",
+      "url": "https://www.bankhapoalim.co.il/he/loans/business-loan",
+      "description": "בנק הפועלים עסקים",
+      "added_at": "2026-01-16T11:12:53.099508",
+      "last_scraped": null,
+      "scraping_status": "pending",
+      "linked_pages": []
+    },
+    "60b3dc0f1486": {
+      "id": "60b3dc0f1486",
+      "url": "https://loans.blender.co.il/",
+      "description": "בלנדר פרטי",
+      "added_at": "2026-01-16T11:12:53.100373",
+      "last_scraped": null,
+      "scraping_status": "pending",
+      "linked_pages": []
+    },
+    "de754b3fee55": {
+      "id": "de754b3fee55",
+      "url": "https://www.ayalon-ins.co.il/savings/reverse_mortgage/about/",
+      "description": "איילון משכנתא הפוכה",
+      "added_at": "2026-01-16T11:12:53.101131",
+      "last_scraped": null,
+      "scraping_status": "pending",
+      "linked_pages": []
+    },
+    "1dfa73d9cca6": {
+      "id": "1dfa73d9cca6",
+      "url": "https://www.ayalon-ins.co.il/savings/business-loans",
+      "description": "איילון הלוואות לעסקים",
+      "added_at": "2026-01-16T11:12:53.101959",
+      "last_scraped": null,
+      "scraping_status": "pending",
+      "linked_pages": []
+    }
+  }
+}

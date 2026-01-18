@@ -1,0 +1,42 @@
+{
+  "id": "data_verification",
+  "name": "אימות ועדכון נתונים",
+  "description": "סורק מקורות חיצוניים ומאמת נתונים עובדתיים",
+  "sites": [],
+  "status": "active",
+  "model": {
+    "provider": "claude",
+    "name": "claude-sonnet-4-5"
+  },
+  "steps": [
+    {
+      "id": "step1",
+      "name": "ניתוח והשוואת נתונים",
+      "order": 1,
+      "prompt_file": "פרומטים/אימות_נתונים/שלב 1 - ניתוח.md",
+      "shortcodes": [
+        "PAGE_HTML",
+        "DATA_SOURCES_CONTENT",
+        "PAGE_KEYWORD"
+      ],
+      "output": {
+        "path": "דוח_אימות_נתונים.md",
+        "shortcode_name": "VERIFICATION_REPORT"
+      }
+    },
+    {
+      "id": "step2",
+      "name": "עדכון נתונים בעמוד",
+      "order": 2,
+      "prompt_file": "פרומטים/אימות_נתונים/שלב 2 - עדכון.md",
+      "shortcodes": [
+        "PAGE_HTML",
+        "VERIFICATION_REPORT"
+      ]
+    }
+  ],
+  "supports_full_auto": true,
+  "type": "update",
+  "created": "2026-01-15T12:00:00.000000",
+  "updated": "2026-01-15T12:00:00.000000"
+}

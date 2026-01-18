@@ -1,0 +1,231 @@
+{
+  "version": "1.0",
+  "last_updated": "2026-01-17T19:41:38.117144",
+  "sources": {
+    "2e0cffc6": {
+      "id": "2e0cffc6",
+      "url": "https://www.bank-yahav.co.il/loans/insurance-agent/",
+      "domain": "bank-yahav_co_il",
+      "title": "הלוואות לסוכני ביטוח",
+      "first_scraped": "2026-01-16T11:42:54.489358",
+      "last_scraped": "2026-01-16T11:46:58.602483",
+      "scrape_count": 3,
+      "file_path": "sources/2e0cffc6_bank-yahav_co_il.json",
+      "used_by_pages": [],
+      "metadata": {
+        "content_length": 7515,
+        "word_count": 236
+      }
+    },
+    "d647c9c4": {
+      "id": "d647c9c4",
+      "url": "https://www.mizrahi-tefahot.co.il/loans/privateloanslib/electric-car-loan/",
+      "domain": "mizrahi-tefahot_co_il",
+      "title": "הלוואה לרכב חשמלי: מגוון מסלולי מימון לרכישת רכב | בנק מזרחי-טפחות",
+      "first_scraped": "2026-01-16T11:43:34.488793",
+      "last_scraped": "2026-01-17T19:39:39.231752",
+      "scrape_count": 4,
+      "file_path": "sources/d647c9c4_mizrahi-tefahot_co_il.json",
+      "used_by_pages": [],
+      "metadata": {
+        "content_length": 5023,
+        "word_count": 205
+      }
+    },
+    "0b399268": {
+      "id": "0b399268",
+      "url": "https://www.fibi.co.il/private/loansandmortgages/loans/carloan/",
+      "domain": "fibi_co_il",
+      "title": "מימון לרכב - הלוואה לרכישת רכב בתנאים נוחים - הבנק הבינלאומי",
+      "first_scraped": "2026-01-16T11:43:47.605422",
+      "last_scraped": "2026-01-16T14:39:45.607097",
+      "scrape_count": 3,
+      "file_path": "sources/0b399268_fibi_co_il.json",
+      "used_by_pages": [],
+      "metadata": {
+        "content_length": 2559,
+        "word_count": 209
+      }
+    },
+    "1422660b": {
+      "id": "1422660b",
+      "url": "https://www.mizrahi-tefahot.co.il/loans/privateloanslib/happy-event-loan/",
+      "domain": "mizrahi-tefahot_co_il",
+      "title": "הלוואה לשמחות | בנק מזרחי-טפחות",
+      "first_scraped": "2026-01-16T11:47:25.964902",
+      "last_scraped": "2026-01-16T11:47:25.964902",
+      "scrape_count": 1,
+      "file_path": "sources/1422660b_mizrahi-tefahot_co_il.json",
+      "used_by_pages": [],
+      "metadata": {
+        "content_length": 3299,
+        "word_count": 222
+      }
+    },
+    "e1162732": {
+      "id": "e1162732",
+      "url": "https://business.isracard.co.il/credit_solutions/Loans/",
+      "domain": "business_isracard_co_il",
+      "title": "הלוואות לעסקים: הלוואות לעסקים קטנים וגדולים",
+      "first_scraped": "2026-01-16T11:51:04.652124",
+      "last_scraped": "2026-01-16T11:51:04.652124",
+      "scrape_count": 1,
+      "file_path": "sources/e1162732_business_isracard_co_il.json",
+      "used_by_pages": [],
+      "metadata": {
+        "content_length": 14309,
+        "word_count": 530
+      }
+    },
+    "d1249760": {
+      "id": "d1249760",
+      "url": "https://www.5555.co.il/%D7%9E%D7%99%D7%9E%D7%95%D7%9F-%D7%9C%D7%9B%D7%9C-%D7%9E%D7%98%D7%A8%D7%94-%D7%9B%D7%A0%D7%92%D7%93-%D7%A9%D7%99%D7%A2%D7%91%D7%95%D7%93-%D7%A8%D7%9B%D7%91",
+      "domain": "5555_co_il",
+      "title": "הלוואה לכל מטרה עד 250,000 ₪ כנגד שיעבוד רכב - מימון ישיר",
+      "first_scraped": "2026-01-16T11:51:56.166301",
+      "last_scraped": "2026-01-17T19:41:38.116402",
+      "scrape_count": 3,
+      "file_path": "sources/d1249760_5555_co_il.json",
+      "used_by_pages": [],
+      "metadata": {
+        "content_length": 4563,
+        "word_count": 712
+      }
+    },
+    "b0ff8545": {
+      "id": "b0ff8545",
+      "url": "https://www.mizrahi-tefahot.co.il/loans/privateloanslib/interest-free-loan/",
+      "domain": "mizrahi-tefahot_co_il",
+      "title": "הטבת הצטרפות - הלוואה עד 40 אלף ₪ ללא ריבית והצמדה | בנק מזרחי-טפחות",
+      "first_scraped": "2026-01-16T11:52:02.664883",
+      "last_scraped": "2026-01-17T19:12:05.157154",
+      "scrape_count": 2,
+      "file_path": "sources/b0ff8545_mizrahi-tefahot_co_il.json",
+      "used_by_pages": [],
+      "metadata": {
+        "content_length": 4828,
+        "word_count": 244
+      }
+    },
+    "5fd59763": {
+      "id": "5fd59763",
+      "url": "https://www.5555.co.il/%D7%9E%D7%99%D7%9E%D7%95%D7%9F-%D7%9C%D7%A7%D7%A0%D7%99%D7%99%D7%AA-%D7%A8%D7%9B%D7%91",
+      "domain": "5555_co_il",
+      "title": "הלוואה לקניית רכב חדש או יד שניה עד 100% מימון לרכב – מימון ישיר",
+      "first_scraped": "2026-01-16T11:54:49.002200",
+      "last_scraped": "2026-01-16T11:54:49.002200",
+      "scrape_count": 1,
+      "file_path": "sources/5fd59763_5555_co_il.json",
+      "used_by_pages": [],
+      "metadata": {
+        "content_length": 4466,
+        "word_count": 700
+      }
+    },
+    "0a293b41": {
+      "id": "0a293b41",
+      "url": "https://www.tarya.co.il/biz/",
+      "domain": "tarya_co_il",
+      "title": "Bot Verification",
+      "first_scraped": "2026-01-16T14:26:19.907797",
+      "last_scraped": "2026-01-16T14:26:19.907797",
+      "scrape_count": 1,
+      "file_path": "sources/0a293b41_tarya_co_il.json",
+      "used_by_pages": [],
+      "metadata": {
+        "content_length": 37,
+        "word_count": 7
+      }
+    },
+    "e39f23bd": {
+      "id": "e39f23bd",
+      "url": "https://www.tarya.co.il/employer-loans/",
+      "domain": "tarya_co_il",
+      "title": "Bot Verification",
+      "first_scraped": "2026-01-16T14:26:22.885929",
+      "last_scraped": "2026-01-16T14:26:22.885929",
+      "scrape_count": 1,
+      "file_path": "sources/e39f23bd_tarya_co_il.json",
+      "used_by_pages": [],
+      "metadata": {
+        "content_length": 37,
+        "word_count": 7
+      }
+    },
+    "2b82212b": {
+      "id": "2b82212b",
+      "url": "https://www.bankjerusalem.co.il/loans/all-purpose-loans",
+      "domain": "bankjerusalem_co_il",
+      "title": "הלוואה לכל מטרה אונליין - עד 200,000 ₪ - בנק ירושלים",
+      "first_scraped": "2026-01-16T14:26:44.797376",
+      "last_scraped": "2026-01-16T15:13:39.052772",
+      "scrape_count": 4,
+      "file_path": "sources/2b82212b_bankjerusalem_co_il.json",
+      "used_by_pages": [],
+      "metadata": {
+        "content_length": 9055,
+        "word_count": 775
+      }
+    },
+    "2c08dcd3": {
+      "id": "2c08dcd3",
+      "url": "https://my.migdal.co.il/pensionary-savings/advanced-study-funds/articles/dont-give-up-on-it#:~:text=%D7%A7%D7%A8%D7%9F%20%D7%94%D7%A9%D7%AA%D7%9C%D7%9E%D7%95%D7%AA%20,%D7%94%D7%98%D7%91%D7%95%D7%AA%20%D7%9E%D7%A1",
+      "domain": "my_migdal_co_il",
+      "title": "קרן השתלמות - מדוע לא כדאי לכם לוותר עליה? - מגדל",
+      "first_scraped": "2026-01-16T14:26:47.664071",
+      "last_scraped": "2026-01-17T19:40:14.765147",
+      "scrape_count": 6,
+      "file_path": "sources/2c08dcd3_my_migdal_co_il.json",
+      "used_by_pages": [],
+      "metadata": {
+        "content_length": 5915,
+        "word_count": 636
+      }
+    },
+    "560e04c3": {
+      "id": "560e04c3",
+      "url": "https://credit24.co.il/q2",
+      "domain": "credit24_co_il",
+      "title": "הלוואה עד - ₪100,000 לכל מטרה!",
+      "first_scraped": "2026-01-16T14:33:17.157388",
+      "last_scraped": "2026-01-16T15:30:48.720324",
+      "scrape_count": 2,
+      "file_path": "sources/560e04c3_credit24_co_il.json",
+      "used_by_pages": [],
+      "metadata": {
+        "content_length": 1541,
+        "word_count": 224
+      }
+    },
+    "193fcb16": {
+      "id": "193fcb16",
+      "url": "https://www.clalbit.co.il/loansandmortgage/financialsavingsloans/",
+      "domain": "clalbit_co_il",
+      "title": "הלוואות ביטוח ופיננסים",
+      "first_scraped": "2026-01-16T14:33:28.221175",
+      "last_scraped": "2026-01-16T15:10:36.772367",
+      "scrape_count": 3,
+      "file_path": "sources/193fcb16_clalbit_co_il.json",
+      "used_by_pages": [],
+      "metadata": {
+        "content_length": 14861,
+        "word_count": 1120
+      }
+    },
+    "975b1041": {
+      "id": "975b1041",
+      "url": "https://www.clalbit.co.il/loansandmortgage/reversemortgage/",
+      "domain": "clalbit_co_il",
+      "title": "משכנתא הפוכה - כלל ביטוח",
+      "first_scraped": "2026-01-16T15:11:24.799706",
+      "last_scraped": "2026-01-16T15:31:31.864831",
+      "scrape_count": 2,
+      "file_path": "sources/975b1041_clalbit_co_il.json",
+      "used_by_pages": [],
+      "metadata": {
+        "content_length": 31507,
+        "word_count": 1660
+      }
+    }
+  }
+}

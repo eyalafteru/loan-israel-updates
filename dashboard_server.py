@@ -80,6 +80,15 @@ try:
 except ImportError:
     AI_DETECTION_AVAILABLE = False
 
+# Import RAG service for semantic search
+try:
+    from rag_service import get_rag_manager, RAGIndexManager
+    RAG_AVAILABLE = True
+    print("[System] RAG service loaded")
+except ImportError as e:
+    RAG_AVAILABLE = False
+    print(f"[System] RAG service not available: {e}")
+
 # Load environment variables from multiple sources
 load_dotenv()  # Load .env if exists
 load_dotenv(Path(__file__).parent / "api_config.env")  # Load api_config.env
@@ -95,6 +104,887 @@ running_claude_process = None
 
 # Step completion events for SSE (webhook-based step tracking)
 step_events = {}
+
+# ============ Data Source Scraper ============
+
+class DataSourceScraper:
+    """
+    Scraper for external data sources
+    נסה קודם Chrome מקומי, אם נכשל - Apify כגיבוי
+    """
+    def __init__(self, apify_token):
+        self.apify_token = apify_token
+        self.storage = SourceStorageManager()  # Use persistent storage
+    
+    def scrape(self, url, force_refresh=False, page_path=None):
+        """Scrape a single URL - try local Chrome first, fallback to Apify"""
+        
+        # Check if we have cached data (unless force_refresh)
+        if not force_refresh:
+            cached = self.storage.get_cached_source(url)
+            if cached:
+                print(f"[DataScraper] Using cached source for {url}")
+                return {
+                    'success': True,
+                    'content': cached['content'],
+                    'title': cached['title'],
+                    'url': url,
+                    'method': 'cached',
+                    'scraped_at': cached['scraped_at']
+                }
+        
+        # Step 1: Try local Chrome scraper first (faster, free)
+        local_result = self._scrape_with_local_chrome(url, page_path)
+        if local_result.get('success'):
+            return local_result
+        
+        # Step 2: If local failed, fallback to Apify
+        print(f"[DataScraper] Local scrape failed, falling back to Apify...")
+        return self._scrape_with_apify(url, page_path)
+    
+    def _scrape_with_local_chrome(self, url, page_path=None):
+        """Try to scrape with local Playwright/Chrome"""
+        try:
+            from local_scraper import PlaywrightScraper
+            
+            print(f"[DataScraper] Trying local Chrome for {url}...")
+            scraper = PlaywrightScraper()
+            result = scraper.scrape(url, headless=False)  # Visible mode
+            
+            if result.get('success') and result.get('content'):
+                # Save to persistent storage
+                self.storage.save_source(
+                    url=url,
+                    title=result.get('title', ''),
+                    content=result['content'],
+                    page_path=page_path
+                )
+                
+                print(f"[DataScraper] Local Chrome success: {len(result['content'])} chars")
+                return {
+                    'success': True,
+                    'content': result['content'],
+                    'title': result.get('title', ''),
+                    'url': url,
+                    'method': 'local_chrome',
+                    'timestamp': datetime.now().isoformat()
+                }
+            else:
+                error = result.get('error', 'Unknown error')
+                print(f"[DataScraper] Local Chrome failed: {error}")
+                return {'success': False, 'error': error, 'method': 'local_chrome'}
+                
+        except ImportError as e:
+            print(f"[DataScraper] Playwright not installed: {e}")
+            return {'success': False, 'error': 'Playwright not installed', 'method': 'local_chrome'}
+        except Exception as e:
+            print(f"[DataScraper] Local Chrome error: {e}")
+            return {'success': False, 'error': str(e), 'method': 'local_chrome'}
+    
+    def _scrape_with_apify(self, url, page_path=None):
+        """Fallback: Scrape with Apify Web Scraper API"""
+        try:
+            print(f"[DataScraper] Scraping {url}...")
+            response = requests.post(
+                'https://api.apify.com/v2/acts/apify~web-scraper/run-sync-get-dataset-items',
+                params={'token': self.apify_token},
+                json={
+                    'startUrls': [{'url': url, 'method': 'GET'}],
+                    'pageFunction': '''
+                        async function pageFunction(context) {
+                            const $ = context.jQuery;
+                            const request = context.request;
+                            
+                            // Wait a bit for dynamic content
+                            await new Promise(r => setTimeout(r, 1500));
+                            
+                            // Remove unwanted elements
+                            $('script, style, nav, header, footer, aside, noscript, .cookie-banner, .popup, .advertisement, .ads, [hidden]').remove();
+                            
+                            // Try to get main content first
+                            let bodyText = '';
+                            const mainSelectors = ['main', 'article', '.content', '.main-content', '#content', '#main', '.page-content'];
+                            for (const sel of mainSelectors) {
+                                const el = $(sel);
+                                if (el.length && el.text().trim().length > 100) {
+                                    bodyText = el.text().trim();
+                                    break;
+                                }
+                            }
+                            
+                            // Fallback to body
+                            if (!bodyText || bodyText.length < 100) {
+                                bodyText = $('body').text().trim();
+                            }
+                            
+                            // Clean up whitespace
+                            bodyText = bodyText.replace(/\\s+/g, ' ').trim();
+                            
+                            return {
+                                url: request.url,
+                                title: $('title').text().trim(),
+                                body: bodyText
+                            };
+                        }
+                    ''',
+                    'maxRequestsPerCrawl': 1,
+                    'maxConcurrency': 1
+                },
+                timeout=600  # 10 minutes for Apify
+            )
+            
+            # Accept 200, 201, and other 2xx status codes as potential success
+            print(f"[DataScraper] Apify response status: {response.status_code}")
+            print(f"[DataScraper] Response headers: {dict(response.headers)}")
+            
+            if response.status_code >= 200 and response.status_code < 300:
+                try:
+                    response_text = response.text
+                    print(f"[DataScraper] Raw response length: {len(response_text)}")
+                    print(f"[DataScraper] Raw response preview: {response_text[:1000]}")
+                    
+                    if not response_text.strip():
+                        return {'success': False, 'error': 'Empty response from Apify'}
+                    
+                    data = response.json()
+                    print(f"[DataScraper] Response data type: {type(data)}")
+                    if isinstance(data, list):
+                        print(f"[DataScraper] Array with {len(data)} items")
+                        if len(data) > 0:
+                            print(f"[DataScraper] First item keys: {list(data[0].keys()) if isinstance(data[0], dict) else 'not a dict'}")
+                            print(f"[DataScraper] First item preview: {str(data[0])[:500]}")
+                    else:
+                        print(f"[DataScraper] Response content: {str(data)[:500]}")
+                    
+                    # Handle different response formats
+                    if isinstance(data, list) and len(data) > 0:
+                        title = data[0].get('title', '')
+                        content = data[0].get('body', '')
+                    elif isinstance(data, dict):
+                        # Maybe it's wrapped differently
+                        if 'items' in data:
+                            items = data['items']
+                            if items and len(items) > 0:
+                                title = items[0].get('title', '')
+                                content = items[0].get('body', '')
+                            else:
+                                return {'success': False, 'error': 'No items in Apify response'}
+                        else:
+                            title = data.get('title', '')
+                            content = data.get('body', '')
+                    else:
+                        return {'success': False, 'error': f'Unexpected response format: {type(data).__name__}'}
+                    
+                    print(f"[DataScraper] Extracted - Title: {title[:50] if title else 'None'}, Content length: {len(content) if content else 0}")
+                    
+                    if not content or len(content.strip()) < 50:
+                        error_detail = 'No content extracted from page'
+                        if title:
+                            error_detail += f' (title found: {title[:30]}...)'
+                        error_detail += ' - האתר עשוי לחסום scrapers או דורש JavaScript'
+                        return {'success': False, 'error': error_detail}
+                    
+                    # Save to persistent storage
+                    self.storage.save_source(
+                        url=url,
+                        title=title,
+                        content=content,
+                        page_path=page_path
+                    )
+                    
+                    result = {
+                        'success': True,
+                        'content': content,
+                        'title': title,
+                        'url': url,
+                        'method': 'apify',
+                        'timestamp': datetime.now().isoformat()
+                    }
+                    print(f"[DataScraper] Success: {len(result['content'])} chars, saved to storage")
+                    return result
+                    
+                except Exception as json_error:
+                    print(f"[DataScraper] JSON parse error: {json_error}")
+                    print(f"[DataScraper] Raw response: {response.text[:1000]}")
+                    return {'success': False, 'error': f'Failed to parse response: {str(json_error)}'}
+            else:
+                error_msg = f'Apify API returned {response.status_code}'
+                print(f"[DataScraper] Error: {error_msg}")
+                print(f"[DataScraper] Response body: {response.text[:500]}")
+                return {'success': False, 'error': error_msg}
+        
+        except Exception as e:
+            error_msg = f'Exception: {str(e)}'
+            print(f"[DataScraper] Error: {error_msg}")
+            return {'success': False, 'error': error_msg}
+    
+    def scrape_multiple(self, urls):
+        """Scrape multiple URLs sequentially"""
+        results = []
+        for url in urls:
+            result = self.scrape(url)
+            results.append(result)
+        return results
+
+# ============ Source Storage Manager ============
+
+import hashlib
+
+class SourceStorageManager:
+    """
+    מנהל אחסון קבוע של מקורות סרוקים
+    שומר את כל המקורות ב-generated_data/scraped_sources/
+    """
+    def __init__(self, base_path="generated_data/scraped_sources"):
+        self.base_path = Path(base_path)
+        self.sources_path = self.base_path / "sources"
+        self.index_path = self.base_path / "index.json"
+        self._ensure_structure()
+    
+    def _ensure_structure(self):
+        """יצירת תיקיות אם לא קיימות"""
+        self.sources_path.mkdir(parents=True, exist_ok=True)
+        if not self.index_path.exists():
+            self._save_index({
+                "version": "1.0",
+                "last_updated": datetime.now().isoformat(),
+                "sources": {}
+            })
+    
+    def _load_index(self):
+        """טעינת קובץ index.json"""
+        try:
+            with open(self.index_path, 'r', encoding='utf-8') as f:
+                return json.load(f)
+        except Exception as e:
+            print(f"[Storage] Error loading index: {e}")
+            return {"version": "1.0", "sources": {}}
+    
+    def _save_index(self, index):
+        """שמירת קובץ index.json"""
+        index["last_updated"] = datetime.now().isoformat()
+        with open(self.index_path, 'w', encoding='utf-8') as f:
+            json.dump(index, f, ensure_ascii=False, indent=2)
+    
+    def get_source_id(self, url):
+        """יצירת ID ייחודי מ-URL (hash)"""
+        return hashlib.md5(url.encode('utf-8')).hexdigest()[:8]
+    
+    def get_domain_from_url(self, url):
+        """חילוץ דומיין מ-URL"""
+        from urllib.parse import urlparse
+        try:
+            parsed = urlparse(url)
+            domain = parsed.netloc.replace('www.', '')
+            # Clean domain for filename
+            domain = domain.replace('.', '_')
+            return domain
+        except:
+            return "unknown"
+    
+    def get_cached_source(self, url):
+        """קבלת מקור שמור אם קיים"""
+        source_id = self.get_source_id(url)
+        index = self._load_index()
+        
+        if source_id in index["sources"]:
+            source_info = index["sources"][source_id]
+            file_path = self.base_path / source_info["file_path"]
+            
+            if file_path.exists():
+                try:
+                    with open(file_path, 'r', encoding='utf-8') as f:
+                        data = json.load(f)
+                        print(f"[Storage] Loaded cached source: {url}")
+                        return data
+                except Exception as e:
+                    print(f"[Storage] Error loading source file: {e}")
+        
+        return None
+    
+    def save_source(self, url, title, content, page_path=None):
+        """שמירת מקור חדש או עדכון קיים"""
+        source_id = self.get_source_id(url)
+        domain = self.get_domain_from_url(url)
+        timestamp = datetime.now().isoformat()
+        
+        # Create source data
+        source_data = {
+            "id": source_id,
+            "url": url,
+            "domain": domain,
+            "title": title,
+            "content": content,
+            "scraped_at": timestamp,
+            "scraper_metadata": {
+                "method": "apify",
+                "status": "success"
+            }
+        }
+        
+        # Save source file
+        filename = f"{source_id}_{domain}.json"
+        file_path = self.sources_path / filename
+        
+        with open(file_path, 'w', encoding='utf-8') as f:
+            json.dump(source_data, f, ensure_ascii=False, indent=2)
+        
+        print(f"[Storage] Saved source: {file_path}")
+        
+        # Update index
+        index = self._load_index()
+        
+        if source_id in index["sources"]:
+            # Update existing entry
+            index["sources"][source_id]["last_scraped"] = timestamp
+            index["sources"][source_id]["scrape_count"] = index["sources"][source_id].get("scrape_count", 1) + 1
+            
+            # Update used_by_pages
+            if page_path and page_path not in index["sources"][source_id].get("used_by_pages", []):
+                index["sources"][source_id].setdefault("used_by_pages", []).append(page_path)
+        else:
+            # Create new entry
+            index["sources"][source_id] = {
+                "id": source_id,
+                "url": url,
+                "domain": domain,
+                "title": title,
+                "first_scraped": timestamp,
+                "last_scraped": timestamp,
+                "scrape_count": 1,
+                "file_path": f"sources/{filename}",
+                "used_by_pages": [page_path] if page_path else [],
+                "metadata": {
+                    "content_length": len(content),
+                    "word_count": len(content.split())
+                }
+            }
+        
+        self._save_index(index)
+        print(f"[Storage] Updated index for source: {source_id}")
+        
+        # Add to RAG index for semantic search
+        if RAG_AVAILABLE:
+            try:
+                rag_manager = get_rag_manager()
+                chunks = rag_manager.add_source(source_id, content, url, title)
+                source_data['chunks'] = chunks
+                source_data['total_chunks'] = len(chunks)
+                print(f"[Storage] Added {len(chunks)} chunks to RAG index")
+            except Exception as e:
+                print(f"[Storage] Warning: Could not add to RAG index: {e}")
+        
+        return source_data
+    
+    # ============ History Support Methods ============
+    
+    def _get_source_dir(self, source_id):
+        """קבלת תיקיית המקור (יצירה אם לא קיימת)"""
+        source_dir = self.sources_path / source_id
+        source_dir.mkdir(parents=True, exist_ok=True)
+        return source_dir
+    
+    def _get_history_dir(self, source_id):
+        """קבלת תיקיית היסטוריה למקור"""
+        history_dir = self._get_source_dir(source_id) / "history"
+        history_dir.mkdir(parents=True, exist_ok=True)
+        return history_dir
+    
+    def _get_summaries_dir(self, source_id):
+        """קבלת תיקיית סיכומים למקור"""
+        summaries_dir = self._get_source_dir(source_id) / "summaries"
+        summaries_dir.mkdir(parents=True, exist_ok=True)
+        return summaries_dir
+    
+    def save_to_history(self, source_id, url, title, content, content_hash=None):
+        """שמירת סריקה להיסטוריה עם תאריך"""
+        history_dir = self._get_history_dir(source_id)
+        date_str = datetime.now().strftime("%Y-%m-%d")
+        
+        history_data = {
+            "source_id": source_id,
+            "url": url,
+            "title": title,
+            "content": content,
+            "content_hash": content_hash or hashlib.sha256(content.encode()).hexdigest()[:16],
+            "scraped_at": datetime.now().isoformat(),
+            "word_count": len(content.split())
+        }
+        
+        history_file = history_dir / f"{date_str}.json"
+        with open(history_file, 'w', encoding='utf-8') as f:
+            json.dump(history_data, f, ensure_ascii=False, indent=2)
+        
+        print(f"[Storage] Saved to history: {history_file}")
+        return str(history_file)
+    
+    def get_previous_version(self, source_id):
+        """קבלת הגרסה האחרונה מההיסטוריה"""
+        history_dir = self._get_history_dir(source_id)
+        
+        if not history_dir.exists():
+            return None
+        
+        # Get all history files sorted by date (newest first)
+        history_files = sorted(history_dir.glob("*.json"), reverse=True)
+        
+        if not history_files:
+            return None
+        
+        # Get the most recent one
+        try:
+            with open(history_files[0], 'r', encoding='utf-8') as f:
+                return json.load(f)
+        except Exception as e:
+            print(f"[Storage] Error loading previous version: {e}")
+            return None
+    
+    def get_history(self, source_id, limit=52):
+        """קבלת היסטוריה (עד 52 שבועות = שנה)"""
+        history_dir = self._get_history_dir(source_id)
+        
+        if not history_dir.exists():
+            return []
+        
+        history_files = sorted(history_dir.glob("*.json"), reverse=True)[:limit]
+        history = []
+        
+        for f in history_files:
+            try:
+                with open(f, 'r', encoding='utf-8') as file:
+                    data = json.load(file)
+                    data['file_name'] = f.name
+                    history.append(data)
+            except Exception as e:
+                print(f"[Storage] Error loading history file {f}: {e}")
+        
+        return history
+    
+    def save_ai_summary(self, source_id, summary_data, model="gemma2:9b"):
+        """שמירת סיכום AI"""
+        summaries_dir = self._get_summaries_dir(source_id)
+        date_str = datetime.now().strftime("%Y-%m-%d")
+        
+        full_summary = {
+            "source_id": source_id,
+            "summarized_at": datetime.now().isoformat(),
+            "model": model,
+            **summary_data
+        }
+        
+        summary_file = summaries_dir / f"{date_str}.json"
+        with open(summary_file, 'w', encoding='utf-8') as f:
+            json.dump(full_summary, f, ensure_ascii=False, indent=2)
+        
+        print(f"[Storage] Saved AI summary: {summary_file}")
+        return str(summary_file)
+    
+    def get_latest_summary(self, source_id):
+        """קבלת הסיכום האחרון"""
+        summaries_dir = self._get_summaries_dir(source_id)
+        
+        if not summaries_dir.exists():
+            return None
+        
+        summary_files = sorted(summaries_dir.glob("*.json"), reverse=True)
+        
+        if not summary_files:
+            return None
+        
+        try:
+            with open(summary_files[0], 'r', encoding='utf-8') as f:
+                return json.load(f)
+        except Exception as e:
+            print(f"[Storage] Error loading summary: {e}")
+            return None
+    
+    def cleanup_old_files(self, source_id, max_age_days=365):
+        """מחיקת קבצים ישנים מעל שנה"""
+        from datetime import timedelta
+        cutoff_date = datetime.now() - timedelta(days=max_age_days)
+        deleted_count = 0
+        
+        # Cleanup history
+        history_dir = self._get_history_dir(source_id)
+        if history_dir.exists():
+            for f in history_dir.glob("*.json"):
+                try:
+                    date_str = f.stem  # e.g., "2025-01-15"
+                    file_date = datetime.strptime(date_str, "%Y-%m-%d")
+                    if file_date < cutoff_date:
+                        f.unlink()
+                        deleted_count += 1
+                except Exception as e:
+                    print(f"[Storage] Error cleaning up {f}: {e}")
+        
+        # Cleanup summaries
+        summaries_dir = self._get_summaries_dir(source_id)
+        if summaries_dir.exists():
+            for f in summaries_dir.glob("*.json"):
+                try:
+                    date_str = f.stem
+                    file_date = datetime.strptime(date_str, "%Y-%m-%d")
+                    if file_date < cutoff_date:
+                        f.unlink()
+                        deleted_count += 1
+                except Exception as e:
+                    print(f"[Storage] Error cleaning up {f}: {e}")
+        
+        if deleted_count > 0:
+            print(f"[Storage] Cleaned up {deleted_count} old files for source {source_id}")
+        
+        return deleted_count
+    
+    def get_all_source_ids(self):
+        """קבלת כל ה-source IDs"""
+        index = self._load_index()
+        return list(index.get("sources", {}).keys())
+    
+    def get_weekly_reports_dir(self):
+        """קבלת תיקיית דוחות שבועיים"""
+        reports_dir = self.base_path / "weekly_reports"
+        reports_dir.mkdir(parents=True, exist_ok=True)
+        return reports_dir
+    
+    def save_weekly_report(self, report_data):
+        """שמירת דוח שבועי"""
+        reports_dir = self.get_weekly_reports_dir()
+        date_str = datetime.now().strftime("%Y-%m-%d")
+        
+        report_file = reports_dir / f"{date_str}_report.json"
+        with open(report_file, 'w', encoding='utf-8') as f:
+            json.dump(report_data, f, ensure_ascii=False, indent=2)
+        
+        print(f"[Storage] Saved weekly report: {report_file}")
+        return str(report_file)
+    
+    def list_weekly_reports(self):
+        """רשימת כל הדוחות השבועיים"""
+        reports_dir = self.get_weekly_reports_dir()
+        reports = []
+        
+        for f in sorted(reports_dir.glob("*_report.json"), reverse=True):
+            try:
+                with open(f, 'r', encoding='utf-8') as file:
+                    data = json.load(file)
+                    reports.append({
+                        "file_name": f.name,
+                        "date": f.stem.replace("_report", ""),
+                        "sources_scanned": data.get("stats", {}).get("sources_scanned", 0),
+                        "changes_detected": data.get("stats", {}).get("changes_detected", 0)
+                    })
+            except Exception as e:
+                print(f"[Storage] Error reading report {f}: {e}")
+        
+        return reports
+    
+    def get_weekly_report(self, report_date):
+        """קבלת דוח שבועי ספציפי"""
+        reports_dir = self.get_weekly_reports_dir()
+        report_file = reports_dir / f"{report_date}_report.json"
+        
+        if not report_file.exists():
+            return None
+        
+        try:
+            with open(report_file, 'r', encoding='utf-8') as f:
+                return json.load(f)
+        except Exception as e:
+            print(f"[Storage] Error loading report: {e}")
+            return None
+
+
+# ============ Sources Registry (Central) ============
+
+class SourcesRegistry:
+    """
+    מאגר מרכזי של מקורות מידע
+    מאפשר שיוך מקור למספר עמודים
+    """
+    def __init__(self, base_path="generated_data"):
+        self.base_path = Path(base_path)
+        self.registry_path = self.base_path / "sources_registry.json"
+        self._ensure_registry()
+    
+    def _ensure_registry(self):
+        """יצירת קובץ רישום אם לא קיים"""
+        self.base_path.mkdir(parents=True, exist_ok=True)
+        if not self.registry_path.exists():
+            self._save_registry({
+                "version": "1.0",
+                "last_updated": datetime.now().isoformat(),
+                "sources": {}
+            })
+    
+    def _load_registry(self):
+        """טעינת רישום המקורות"""
+        try:
+            with open(self.registry_path, 'r', encoding='utf-8') as f:
+                return json.load(f)
+        except Exception as e:
+            print(f"[Registry] Error loading registry: {e}")
+            return {"version": "1.0", "sources": {}}
+    
+    def _save_registry(self, registry):
+        """שמירת רישום המקורות"""
+        registry["last_updated"] = datetime.now().isoformat()
+        with open(self.registry_path, 'w', encoding='utf-8') as f:
+            json.dump(registry, f, ensure_ascii=False, indent=2)
+    
+    def _generate_id(self, url):
+        """יצירת ID ייחודי מ-URL"""
+        return hashlib.md5(url.encode('utf-8')).hexdigest()[:12]
+    
+    def add_source(self, url, description="", linked_pages=None):
+        """הוספת מקור חדש"""
+        if linked_pages is None:
+            linked_pages = []
+        
+        registry = self._load_registry()
+        source_id = self._generate_id(url)
+        
+        # Check if already exists
+        if source_id in registry["sources"]:
+            print(f"[Registry] Source already exists: {url}")
+            return registry["sources"][source_id]
+        
+        new_source = {
+            "id": source_id,
+            "url": url,
+            "description": description,
+            "added_at": datetime.now().isoformat(),
+            "last_scraped": None,
+            "scraping_status": "pending",  # pending, scraped, error
+            "linked_pages": linked_pages
+        }
+        
+        registry["sources"][source_id] = new_source
+        self._save_registry(registry)
+        
+        print(f"[Registry] Added source: {url} (ID: {source_id})")
+        return new_source
+    
+    def update_source(self, source_id, updates):
+        """עדכון מקור קיים"""
+        registry = self._load_registry()
+        
+        if source_id not in registry["sources"]:
+            print(f"[Registry] Source not found: {source_id}")
+            return None
+        
+        # Don't allow changing id or url
+        updates.pop('id', None)
+        updates.pop('url', None)
+        
+        registry["sources"][source_id].update(updates)
+        self._save_registry(registry)
+        
+        print(f"[Registry] Updated source: {source_id}")
+        return registry["sources"][source_id]
+    
+    def remove_source(self, source_id):
+        """הסרת מקור"""
+        registry = self._load_registry()
+        
+        if source_id not in registry["sources"]:
+            return False
+        
+        del registry["sources"][source_id]
+        self._save_registry(registry)
+        
+        print(f"[Registry] Removed source: {source_id}")
+        return True
+    
+    def get_source(self, source_id):
+        """קבלת מקור לפי ID"""
+        registry = self._load_registry()
+        return registry["sources"].get(source_id)
+    
+    def get_source_by_url(self, url):
+        """קבלת מקור לפי URL"""
+        source_id = self._generate_id(url)
+        return self.get_source(source_id)
+    
+    def get_all_sources(self):
+        """קבלת כל המקורות"""
+        registry = self._load_registry()
+        return list(registry["sources"].values())
+    
+    def get_sources_for_page(self, page_path):
+        """קבלת מקורות משויכים לעמוד"""
+        all_sources = self.get_all_sources()
+        return [s for s in all_sources if page_path in s.get("linked_pages", [])]
+    
+    def get_unlinked_sources(self):
+        """קבלת מקורות ללא שיוך"""
+        all_sources = self.get_all_sources()
+        return [s for s in all_sources if not s.get("linked_pages")]
+    
+    def get_unscanned_sources(self):
+        """קבלת מקורות שטרם נסרקו"""
+        all_sources = self.get_all_sources()
+        return [s for s in all_sources if s.get("scraping_status") == "pending"]
+    
+    def link_to_pages(self, source_id, page_paths):
+        """שיוך מקור לעמודים"""
+        registry = self._load_registry()
+        
+        if source_id not in registry["sources"]:
+            return None
+        
+        source = registry["sources"][source_id]
+        current_pages = set(source.get("linked_pages", []))
+        current_pages.update(page_paths)
+        source["linked_pages"] = list(current_pages)
+        
+        self._save_registry(registry)
+        print(f"[Registry] Linked source {source_id} to pages: {page_paths}")
+        return source
+    
+    def unlink_from_page(self, source_id, page_path):
+        """הסרת שיוך מעמוד"""
+        registry = self._load_registry()
+        
+        if source_id not in registry["sources"]:
+            return None
+        
+        source = registry["sources"][source_id]
+        linked = source.get("linked_pages", [])
+        if page_path in linked:
+            linked.remove(page_path)
+        source["linked_pages"] = linked
+        
+        self._save_registry(registry)
+        print(f"[Registry] Unlinked source {source_id} from page: {page_path}")
+        return source
+    
+    def set_linked_pages(self, source_id, page_paths):
+        """הגדרת רשימת עמודים משויכים (החלפה מלאה)"""
+        registry = self._load_registry()
+        
+        if source_id not in registry["sources"]:
+            return None
+        
+        registry["sources"][source_id]["linked_pages"] = page_paths
+        self._save_registry(registry)
+        
+        print(f"[Registry] Set linked pages for {source_id}: {page_paths}")
+        return registry["sources"][source_id]
+    
+    def mark_as_scraped(self, source_id):
+        """סימון מקור כנסרק"""
+        return self.update_source(source_id, {
+            "last_scraped": datetime.now().isoformat(),
+            "scraping_status": "scraped",
+            "last_error": ""  # Clear any previous error
+        })
+    
+    def save_ai_summary(self, source_id, ai_summary, model=None):
+        """שמירת סיכום AI למקור כולל המודל שהשתמשו בו"""
+        update_data = {
+            "ai_summary": ai_summary,
+            "ai_summary_date": datetime.now().isoformat()
+        }
+        if model:
+            update_data["ai_model"] = model
+        return self.update_source(source_id, update_data)
+    
+    def get_ai_summary(self, source_id):
+        """קבלת סיכום AI שמור"""
+        source = self.get_source(source_id)
+        if source:
+            return source.get("ai_summary")
+        return None
+    
+    def mark_as_error(self, source_id, error_message=""):
+        """סימון מקור כשגיאה"""
+        return self.update_source(source_id, {
+            "scraping_status": "error",
+            "last_error": error_message
+        })
+    
+    def get_stats(self):
+        """סטטיסטיקות על המקורות"""
+        all_sources = self.get_all_sources()
+        return {
+            "total": len(all_sources),
+            "scraped": len([s for s in all_sources if s.get("scraping_status") == "scraped"]),
+            "pending": len([s for s in all_sources if s.get("scraping_status") == "pending"]),
+            "error": len([s for s in all_sources if s.get("scraping_status") == "error"]),
+            "linked": len([s for s in all_sources if s.get("linked_pages")]),
+            "unlinked": len([s for s in all_sources if not s.get("linked_pages")])
+        }
+    
+    def migrate_from_pages(self, pages_dir="דפים לשינוי"):
+        """
+        מיגרציה חד-פעמית של מקורות מ-page_info.json של כל עמוד
+        למאגר המרכזי
+        """
+        pages_path = self.base_path.parent / pages_dir
+        migrated = 0
+        errors = []
+        
+        if not pages_path.exists():
+            print(f"[Registry] Pages directory not found: {pages_path}")
+            return {"migrated": 0, "errors": ["Pages directory not found"]}
+        
+        # Find all page_info.json files
+        for page_info_file in pages_path.rglob("page_info.json"):
+            try:
+                with open(page_info_file, 'r', encoding='utf-8') as f:
+                    info = json.load(f)
+                
+                data_sources = info.get('data_sources', [])
+                if not data_sources:
+                    continue
+                
+                # Get page path relative to pages_dir
+                page_folder = page_info_file.parent
+                page_path = str(page_folder.relative_to(pages_path))
+                
+                for source in data_sources:
+                    url = source.get('url')
+                    if not url:
+                        continue
+                    
+                    # Check if already exists
+                    existing = self.get_source_by_url(url)
+                    if existing:
+                        # Just add this page to linked_pages
+                        if page_path not in existing.get('linked_pages', []):
+                            self.link_to_pages(existing['id'], [page_path])
+                    else:
+                        # Add new source
+                        new_source = self.add_source(
+                            url=url,
+                            description=source.get('description', ''),
+                            linked_pages=[page_path]
+                        )
+                        
+                        # Copy scraping status
+                        if source.get('last_scraped'):
+                            self.update_source(new_source['id'], {
+                                'last_scraped': source.get('last_scraped'),
+                                'scraping_status': 'scraped'
+                            })
+                        
+                        migrated += 1
+                        
+            except Exception as e:
+                errors.append(f"{page_info_file}: {str(e)}")
+                print(f"[Registry] Error migrating from {page_info_file}: {e}")
+        
+        print(f"[Registry] Migration complete: {migrated} sources migrated, {len(errors)} errors")
+        return {
+            "migrated": migrated,
+            "errors": errors,
+            "total_in_registry": len(self.get_all_sources())
+        }
+
+
+# Global registry instance
+sources_registry = SourcesRegistry()
+
 
 # ============ Configuration ============
 
@@ -951,6 +1841,111 @@ class ShortcodeEngine:
         
         return {}
     
+    def _process_data_sources_content(self):
+        """Process all data sources and return formatted content for agent"""
+        if not self.page_folder:
+            return "אין עמוד נבחר"
+        
+        page_info = self.get_page_info()
+        sources = page_info.get('data_sources', [])
+        
+        if not sources:
+            return "אין מקורות מידע מוגדרים לעמוד זה"
+        
+        # Scrape all sources
+        apify_token = config.get('apify', {}).get('token')
+        if not apify_token:
+            return "שגיאה: טוקן Apify לא מוגדר במערכת"
+        
+        scraper = DataSourceScraper(apify_token)
+        
+        # Get page path for storage tracking
+        page_path = str(self.page_folder)
+        
+        content_parts = []
+        for idx, source in enumerate(sources, 1):
+            print(f"[Shortcode] Scraping data source {idx}/{len(sources)}: {source['url']}")
+            result = scraper.scrape(source['url'], force_refresh=False, page_path=page_path)
+            
+            if result['success']:
+                # Show if using cached data
+                source_type = "נתונים שמורים" if result.get('method') == 'cached' else "סריקה חדשה"
+                scraped_date = result.get('scraped_at', result.get('timestamp', 'לא ידוע'))
+                
+                # Limit content to avoid token overflow (5000 chars per source)
+                content = result['content'][:5000]
+                if len(result['content']) > 5000:
+                    content += "\n\n[...התוכן קוצר לצורך חיסכון בטוקנים...]"
+                
+                content_parts.append(f"""
+## מקור {idx}: {source.get('description', 'ללא תיאור')}
+**URL:** {source['url']}
+**סוג:** {source.get('type', 'כללי')}
+**כותרת:** {result.get('title', 'אין כותרת')}
+**מקור הנתונים:** {source_type}
+**נסרק בתאריך:** {scraped_date}
+
+### תוכן:
+{content}
+
+---
+""")
+            else:
+                content_parts.append(f"""
+## מקור {idx}: {source.get('description', 'ללא תיאור')}
+**URL:** {source['url']}
+**סטטוס:** ❌ שגיאה בסריקה
+**שגיאה:** {result.get('error', 'Unknown error')}
+
+---
+""")
+        
+        return '\n\n'.join(content_parts)
+    
+    def _process_rag_context(self, query=None):
+        """
+        חיפוש semantic במאגר המקורות והחזרת קטעים רלוונטיים
+        משתמש ב-RAG לחיפוש לפי מילת המפתח של העמוד
+        """
+        if not RAG_AVAILABLE:
+            return "שירות RAG לא זמין. יש להתקין sentence-transformers."
+        
+        # Get query from page keyword if not provided
+        if not query:
+            page_info = self.get_page_info()
+            query = page_info.get('keyword', '')
+        
+        if not query:
+            return "אין מילת מפתח לחיפוש. הגדר מילת מפתח לעמוד."
+        
+        try:
+            rag_manager = get_rag_manager()
+            results = rag_manager.search(query, top_k=5)
+            
+            if not results:
+                return f"לא נמצאו מקורות רלוונטיים עבור: {query}"
+            
+            context_parts = []
+            context_parts.append(f"# מידע ממקורות חיצוניים (חיפוש: {query})\n")
+            
+            for i, r in enumerate(results, 1):
+                score_percent = int(r['score'] * 100)
+                context_parts.append(f"""
+## מקור {i} (רלוונטיות: {score_percent}%)
+**מקור:** {r.get('title', 'ללא כותרת')}
+**URL:** {r.get('url', 'לא זמין')}
+
+{r.get('text', '')}
+
+---
+""")
+            
+            return '\n'.join(context_parts)
+        
+        except Exception as e:
+            print(f"[RAG] Error in _process_rag_context: {e}")
+            return f"שגיאה בחיפוש RAG: {str(e)}"
+
     def get_shortcode_value(self, shortcode_name):
         """Get the value for a specific shortcode"""
         # 0. Handle dynamic internal links (takes priority over static file)
@@ -958,6 +1953,14 @@ class ShortcodeEngine:
             page_info = self.get_page_info()
             site_id = page_info.get("site", "main")
             return internal_links_manager.get_links_for_site(site_id)
+        
+        # 0.5 Handle DATA_SOURCES_CONTENT - NEW!
+        if shortcode_name == "DATA_SOURCES_CONTENT":
+            return self._process_data_sources_content()
+        
+        # 0.6 Handle RAG_CONTEXT - Semantic search in all sources
+        if shortcode_name == "RAG_CONTEXT":
+            return self._process_rag_context()
         
         # 1. Check step reports first
         if shortcode_name in self.step_reports:
@@ -3452,7 +4455,7 @@ def run_claude_code():
             capture_output=True,
             text=True,
             cwd=str(BASE_DIR),
-            timeout=300,  # 5 minute timeout
+            timeout=600,  # 10 minute timeout
             shell=True  # Needed for .cmd files on Windows
         )
         
@@ -4171,6 +5174,9 @@ def run_step2():
         for i in range(1, 10):
             if f"step{i}" in agent:
                 step_count = max(step_count, i)
+        
+        # Valid agent types that support multi-step workflows
+        valid_types = ['seo', 'marketing', 'content', 'qa', 'fixer', 'multi_step']
         
         if agent.get("type") not in valid_types and step_count < 2:
             # For non-multi-step agents, call the old step2 logic (now step3)
@@ -6298,7 +7304,7 @@ def run_single_step():
                 capture_output=True,
                 text=True,
                 cwd=str(BASE_DIR),
-                timeout=300
+                timeout=600  # 10 minutes for Apify
             )
             
             return jsonify({
@@ -6996,7 +8002,7 @@ def is_process_running(pid, page_path=None, agent_id=None):
     # Second check: PID (as backup)
     if pid:
         try:
-            import psutil
+            import psutil  # type: ignore
             exists = psutil.pid_exists(pid)
             print(f"[Check] PID {pid} exists: {exists}")
             return exists
@@ -10809,6 +11815,1266 @@ def get_page_info():
     except Exception as e:
         return jsonify({"success": False, "error": str(e)}), 500
 
+@app.route('/api/page/data-sources', methods=['GET', 'POST'])
+def manage_data_sources():
+    """Manage data sources for a page"""
+    try:
+        page_path = request.args.get('path') if request.method == 'GET' else request.json.get('page_path')
+        
+        if not page_path:
+            return jsonify({"success": False, "error": "Missing page_path"}), 400
+        
+        page_folder = get_page_folder(page_path)
+        page_info_path = BASE_DIR / page_folder / "page_info.json"
+        
+        if request.method == 'GET':
+            # Return current data sources
+            if page_info_path.exists():
+                with open(page_info_path, 'r', encoding='utf-8') as f:
+                    info = json.load(f)
+                    return jsonify({
+                        "success": True,
+                        "data_sources": info.get('data_sources', [])
+                    })
+            return jsonify({"success": True, "data_sources": []})
+        
+        elif request.method == 'POST':
+            # Add or update data sources
+            data = request.json
+            action = data.get('action')  # 'add', 'remove', 'update'
+            
+            info = {}
+            if page_info_path.exists():
+                with open(page_info_path, 'r', encoding='utf-8') as f:
+                    info = json.load(f)
+            
+            if 'data_sources' not in info:
+                info['data_sources'] = []
+            
+            if action == 'add':
+                new_source = {
+                    'id': str(uuid.uuid4()),
+                    'url': data.get('url'),
+                    'description': data.get('description', ''),
+                    'type': data.get('type', 'general'),
+                    'added_at': datetime.now().isoformat(),
+                    'last_scraped': None,
+                    'scraping_status': 'pending'
+                }
+                info['data_sources'].append(new_source)
+            
+            elif action == 'remove':
+                source_id = data.get('source_id')
+                info['data_sources'] = [s for s in info['data_sources'] if s['id'] != source_id]
+            
+            elif action == 'update':
+                source_id = data.get('source_id')
+                for source in info['data_sources']:
+                    if source['id'] == source_id:
+                        source.update(data.get('updates', {}))
+                        break
+            
+            # Save updated info
+            with open(page_info_path, 'w', encoding='utf-8') as f:
+                json.dump(info, f, ensure_ascii=False, indent=2)
+            
+            return jsonify({"success": True, "data_sources": info['data_sources']})
+    
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+
+@app.route('/api/scraping/fetch', methods=['POST'])
+def scrape_data_source():
+    """Scrape a single URL with optional force refresh"""
+    try:
+        data = request.json
+        url = data.get('url')
+        page_path = data.get('page_path')
+        force_refresh = data.get('force_refresh', False)
+        
+        if not url:
+            return jsonify({"success": False, "error": "Missing URL"}), 400
+        
+        apify_token = config.get('apify', {}).get('token')
+        if not apify_token:
+            return jsonify({"success": False, "error": "Apify token not configured"}), 500
+        
+        scraper = DataSourceScraper(apify_token)
+        result = scraper.scrape(url, force_refresh=force_refresh, page_path=page_path)
+        
+        return jsonify(result)
+    
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+
+@app.route('/api/scraping/refresh-source', methods=['POST'])
+def refresh_single_source():
+    """Force refresh a single source URL"""
+    try:
+        data = request.json
+        url = data.get('url')
+        page_path = data.get('page_path')
+        
+        if not url:
+            return jsonify({"success": False, "error": "Missing URL"}), 400
+        
+        apify_token = config.get('apify', {}).get('token')
+        if not apify_token:
+            return jsonify({"success": False, "error": "Apify token not configured"}), 500
+        
+        scraper = DataSourceScraper(apify_token)
+        result = scraper.scrape(url, force_refresh=True, page_path=page_path)
+        
+        # Update page_info.json if page_path provided
+        if page_path and result.get('success'):
+            try:
+                page_folder = get_page_folder(page_path)
+                page_info_path = BASE_DIR / page_folder / "page_info.json"
+                if page_info_path.exists():
+                    with open(page_info_path, 'r', encoding='utf-8') as f:
+                        info = json.load(f)
+                    
+                    # Update the matching source
+                    for source in info.get('data_sources', []):
+                        if source.get('url') == url:
+                            source['last_scraped'] = datetime.now().isoformat()
+                            source['scraping_status'] = 'success'
+                            break
+                    
+                    with open(page_info_path, 'w', encoding='utf-8') as f:
+                        json.dump(info, f, ensure_ascii=False, indent=2)
+            except Exception as e:
+                print(f"[RefreshSource] Error updating page_info: {e}")
+        
+        return jsonify(result)
+    
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+
+@app.route('/api/scraping/refresh-all', methods=['POST'])
+def refresh_all_sources():
+    """Force refresh all sources for a page"""
+    try:
+        data = request.json
+        page_path = data.get('page_path')
+        
+        if not page_path:
+            return jsonify({"success": False, "error": "Missing page_path"}), 400
+        
+        # Load data sources from page_info.json
+        page_folder = get_page_folder(page_path)
+        page_info_path = BASE_DIR / page_folder / "page_info.json"
+        if not page_info_path.exists():
+            return jsonify({"success": False, "error": "page_info.json not found"}), 404
+        
+        with open(page_info_path, 'r', encoding='utf-8') as f:
+            info = json.load(f)
+        
+        sources = info.get('data_sources', [])
+        if not sources:
+            return jsonify({"success": True, "message": "No data sources to refresh", "results": []})
+        
+        # Scrape all sources with force_refresh=True
+        apify_token = config.get('apify', {}).get('token')
+        if not apify_token:
+            return jsonify({"success": False, "error": "Apify token not configured"}), 500
+        
+        scraper = DataSourceScraper(apify_token)
+        
+        results = []
+        for source in sources:
+            result = scraper.scrape(source['url'], force_refresh=True, page_path=page_path)
+            result['source_id'] = source.get('id', '')
+            result['description'] = source.get('description', '')
+            results.append(result)
+            
+            # Update source status
+            source['last_scraped'] = datetime.now().isoformat()
+            source['scraping_status'] = 'success' if result.get('success') else 'failed'
+        
+        # Update page_info.json
+        info['last_full_refresh'] = datetime.now().isoformat()
+        with open(page_info_path, 'w', encoding='utf-8') as f:
+            json.dump(info, f, ensure_ascii=False, indent=2)
+        
+        success_count = sum(1 for r in results if r.get('success'))
+        return jsonify({
+            "success": True, 
+            "results": results,
+            "summary": f"{success_count}/{len(results)} sources refreshed"
+        })
+    
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+
+@app.route('/api/sources/history', methods=['GET'])
+def get_source_history():
+    """Get stored data for a source URL"""
+    try:
+        url = request.args.get('url')
+        
+        if not url:
+            return jsonify({"success": False, "error": "Missing URL parameter"}), 400
+        
+        storage = SourceStorageManager()
+        cached = storage.get_cached_source(url)
+        
+        if cached:
+            # Return metadata without the full content (to keep response small)
+            return jsonify({
+                "success": True,
+                "found": True,
+                "data": {
+                    "id": cached.get('id'),
+                    "url": cached.get('url'),
+                    "domain": cached.get('domain'),
+                    "title": cached.get('title'),
+                    "scraped_at": cached.get('scraped_at'),
+                    "content_length": len(cached.get('content', '')),
+                    "content_preview": cached.get('content', '')[:500] + '...' if len(cached.get('content', '')) > 500 else cached.get('content', '')
+                }
+            })
+        
+        return jsonify({
+            "success": True,
+            "found": False,
+            "message": "Source not found in storage"
+        })
+    
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+
+@app.route('/api/sources/index', methods=['GET'])
+def get_sources_index():
+    """Get the full sources index"""
+    try:
+        storage = SourceStorageManager()
+        index = storage._load_index()
+        
+        return jsonify({
+            "success": True,
+            "index": index
+        })
+    
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+
+# ============ Central Sources Registry Endpoints ============
+
+@app.route('/api/sources/registry', methods=['GET'])
+def get_sources_registry():
+    """קבלת כל המקורות מהמאגר המרכזי"""
+    try:
+        sources = sources_registry.get_all_sources()
+        stats = sources_registry.get_stats()
+        
+        return jsonify({
+            "success": True,
+            "sources": sources,
+            "stats": stats
+        })
+    
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+
+@app.route('/api/sources/registry', methods=['POST'])
+def manage_sources_registry():
+    """ניהול מקורות במאגר המרכזי (add/update/remove)"""
+    try:
+        data = request.json
+        action = data.get('action')  # add, update, remove
+        
+        if action == 'add':
+            url = data.get('url')
+            description = data.get('description', '')
+            linked_pages = data.get('linked_pages', [])
+            
+            if not url:
+                return jsonify({"success": False, "error": "Missing URL"}), 400
+            
+            source = sources_registry.add_source(url, description, linked_pages)
+            return jsonify({"success": True, "source": source})
+        
+        elif action == 'update':
+            source_id = data.get('source_id')
+            updates = data.get('updates', {})
+            
+            if not source_id:
+                return jsonify({"success": False, "error": "Missing source_id"}), 400
+            
+            source = sources_registry.update_source(source_id, updates)
+            if source:
+                return jsonify({"success": True, "source": source})
+            return jsonify({"success": False, "error": "Source not found"}), 404
+        
+        elif action == 'remove':
+            source_id = data.get('source_id')
+            
+            if not source_id:
+                return jsonify({"success": False, "error": "Missing source_id"}), 400
+            
+            if sources_registry.remove_source(source_id):
+                return jsonify({"success": True})
+            return jsonify({"success": False, "error": "Source not found"}), 404
+        
+        else:
+            return jsonify({"success": False, "error": "Invalid action. Use: add, update, remove"}), 400
+    
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+
+@app.route('/api/sources/registry/bulk', methods=['POST'])
+def bulk_add_sources():
+    """הוספת מקורות מרובים"""
+    try:
+        data = request.json
+        sources_data = data.get('sources', [])
+        
+        if not sources_data:
+            return jsonify({"success": False, "error": "No sources provided"}), 400
+        
+        added = []
+        for source_data in sources_data:
+            url = source_data.get('url')
+            description = source_data.get('description', source_data.get('name', ''))
+            
+            if url:
+                source = sources_registry.add_source(url, description)
+                added.append(source)
+        
+        return jsonify({
+            "success": True,
+            "added": len(added),
+            "sources": added
+        })
+    
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+
+@app.route('/api/sources/link', methods=['POST'])
+def manage_source_links():
+    """ניהול שיוך מקורות לעמודים"""
+    try:
+        data = request.json
+        source_id = data.get('source_id')
+        action = data.get('action')  # link, unlink, set
+        
+        if not source_id:
+            return jsonify({"success": False, "error": "Missing source_id"}), 400
+        
+        if action == 'link':
+            page_paths = data.get('page_paths', [])
+            source = sources_registry.link_to_pages(source_id, page_paths)
+            
+        elif action == 'unlink':
+            page_path = data.get('page_path')
+            source = sources_registry.unlink_from_page(source_id, page_path)
+            
+        elif action == 'set':
+            page_paths = data.get('page_paths', [])
+            source = sources_registry.set_linked_pages(source_id, page_paths)
+            
+        else:
+            return jsonify({"success": False, "error": "Invalid action. Use: link, unlink, set"}), 400
+        
+        if source:
+            return jsonify({"success": True, "source": source})
+        return jsonify({"success": False, "error": "Source not found"}), 404
+    
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+
+@app.route('/api/sources/registry/<source_id>', methods=['GET'])
+def get_registry_source(source_id):
+    """קבלת מקור ספציפי מהמאגר"""
+    try:
+        source = sources_registry.get_source(source_id)
+        
+        if source:
+            return jsonify({"success": True, "source": source})
+        return jsonify({"success": False, "error": "Source not found"}), 404
+    
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+
+@app.route('/api/sources/registry/scan', methods=['POST'])
+def scan_registry_source():
+    """סריקת מקור מהמאגר"""
+    try:
+        data = request.json
+        source_id = data.get('source_id')
+        scan_all = data.get('scan_all', False)
+        
+        # Get Apify token from config
+        apify_config = config.get('apify', {})
+        apify_token = apify_config.get('token', '')
+        if not apify_token:
+            return jsonify({"success": False, "error": "Apify token not configured in config.json"}), 400
+        
+        scraper = DataSourceScraper(apify_token)
+        storage = SourceStorageManager()
+        results = []
+        
+        if scan_all:
+            # Scan all unscanned sources
+            sources = sources_registry.get_unscanned_sources()
+        elif source_id:
+            source = sources_registry.get_source(source_id)
+            sources = [source] if source else []
+        else:
+            return jsonify({"success": False, "error": "Provide source_id or scan_all=true"}), 400
+        
+        for source in sources:
+            try:
+                url = source['url']
+                result = scraper.scrape(url, force_refresh=True)
+                
+                if result.get('success'):
+                    sources_registry.mark_as_scraped(source['id'])
+                    results.append({
+                        "source_id": source['id'],
+                        "url": url,
+                        "success": True
+                    })
+                else:
+                    sources_registry.mark_as_error(source['id'], result.get('error', 'Unknown error'))
+                    results.append({
+                        "source_id": source['id'],
+                        "url": url,
+                        "success": False,
+                        "error": result.get('error')
+                    })
+            except Exception as e:
+                sources_registry.mark_as_error(source['id'], str(e))
+                results.append({
+                    "source_id": source['id'],
+                    "url": source.get('url'),
+                    "success": False,
+                    "error": str(e)
+                })
+        
+        return jsonify({
+            "success": True,
+            "scanned": len(results),
+            "results": results
+        })
+    
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+
+@app.route('/api/sources/registry/stats', methods=['GET'])
+def get_registry_stats():
+    """סטטיסטיקות מאגר המקורות"""
+    try:
+        stats = sources_registry.get_stats()
+        return jsonify({"success": True, "stats": stats})
+    
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+
+@app.route('/api/sources/registry/migrate', methods=['POST'])
+def migrate_sources_to_registry():
+    """מיגרציה של מקורות מעמודים למאגר המרכזי"""
+    try:
+        result = sources_registry.migrate_from_pages()
+        
+        return jsonify({
+            "success": True,
+            "migrated": result.get("migrated", 0),
+            "errors": result.get("errors", []),
+            "total_in_registry": result.get("total_in_registry", 0)
+        })
+    
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+
+@app.route('/api/sources/registry/reset-errors', methods=['POST'])
+def reset_registry_errors():
+    """איפוס כל המקורות עם שגיאות לסטטוס pending"""
+    try:
+        registry = sources_registry._load_registry()
+        reset_count = 0
+        
+        for source_id, source in registry["sources"].items():
+            if source.get("scraping_status") == "error" or source.get("last_error"):
+                source["scraping_status"] = "pending"
+                source["last_error"] = ""
+                reset_count += 1
+        
+        sources_registry._save_registry(registry)
+        
+        return jsonify({
+            "success": True,
+            "reset_count": reset_count
+        })
+    
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+
+@app.route('/api/sources/auto-assign', methods=['POST'])
+def auto_assign_sources():
+    """שיוך אוטומטי של מקורות לעמודים באמצעות AI"""
+    try:
+        data = request.json
+        source_ids = data.get('source_ids', [])
+        
+        # Get sources
+        if source_ids:
+            sources = [sources_registry.get_source(sid) for sid in source_ids]
+            sources = [s for s in sources if s]
+        else:
+            sources = sources_registry.get_unlinked_sources()
+        
+        if not sources:
+            return jsonify({"success": True, "suggestions": []})
+        
+        # Get all pages summary
+        pages_summary = []
+        pages_dir = BASE_DIR / "דפים לשינוי"
+        
+        for page_info_file in pages_dir.rglob("page_info.json"):
+            try:
+                with open(page_info_file, 'r', encoding='utf-8') as f:
+                    info = json.load(f)
+                
+                page_folder = page_info_file.parent
+                page_path = str(page_folder.relative_to(pages_dir))
+                
+                pages_summary.append({
+                    "path": page_path,
+                    "name": info.get('page_name', page_path.split('/')[-1]),
+                    "keywords": info.get('keywords', [])[:5]
+                })
+            except:
+                pass
+        
+        # Try to use AI for matching
+        try:
+            from ai_summarizer import get_summarizer
+            summarizer = get_summarizer()
+            
+            if not summarizer.is_available():
+                # Fallback to simple keyword matching
+                return auto_assign_fallback(sources, pages_summary)
+            
+            suggestions = []
+            storage = SourceStorageManager()
+            
+            for source in sources:
+                # Get scraped content for this source
+                source_content = ""
+                cached = storage.get_cached_source(source['url'])
+                if cached:
+                    source_content = cached.get('text_content', '')[:1500]
+                
+                # Build prompt for AI
+                pages_list = "\n".join([
+                    f"- {p['name']} (path: {p['path']}, keywords: {', '.join(p.get('keywords', []))})"
+                    for p in pages_summary[:50]
+                ])
+                
+                prompt = f"""Analyze this data source and find the most relevant pages to link it to.
+
+Source URL: {source['url']}
+Source Description: {source.get('description', '')}
+Source Content (preview):
+{source_content}
+
+Available Pages:
+{pages_list}
+
+Return JSON with the top 5 most relevant pages:
+{{
+  "matches": [
+    {{"page_name": "exact page name from list", "page_path": "exact path from list", "relevance": "high/medium/low", "reason": "brief reason"}}
+  ]
+}}
+
+Only include pages that are truly relevant. If no pages match, return empty matches array."""
+
+                result = summarizer._generate(prompt, json_mode=True)
+                
+                if result:
+                    try:
+                        parsed = json.loads(result) if isinstance(result, str) else result
+                        matches = parsed.get('matches', [])
+                        suggestions.append({
+                            'source_id': source['id'],
+                            'suggested_pages': matches
+                        })
+                    except:
+                        suggestions.append({
+                            'source_id': source['id'],
+                            'suggested_pages': []
+                        })
+                else:
+                    suggestions.append({
+                        'source_id': source['id'],
+                        'suggested_pages': []
+                    })
+            
+            return jsonify({
+                "success": True,
+                "suggestions": suggestions,
+                "method": "ai"
+            })
+            
+        except ImportError:
+            return auto_assign_fallback(sources, pages_summary)
+    
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        return jsonify({"success": False, "error": str(e)}), 500
+
+
+def auto_assign_fallback(sources, pages_summary):
+    """Fallback matching using simple keyword overlap"""
+    suggestions = []
+    storage = SourceStorageManager()
+    
+    for source in sources:
+        source_text = source.get('description', '').lower() + ' ' + source.get('url', '').lower()
+        
+        # Get cached content
+        cached = storage.get_cached_source(source['url'])
+        if cached:
+            source_text += ' ' + cached.get('text_content', '')[:500].lower()
+        
+        matches = []
+        for page in pages_summary:
+            score = 0
+            page_text = page['name'].lower() + ' ' + ' '.join(page.get('keywords', []))
+            
+            # Simple word overlap scoring
+            page_words = set(page_text.split())
+            source_words = set(source_text.split())
+            overlap = page_words & source_words
+            
+            if overlap:
+                score = len(overlap)
+                if score >= 3:
+                    matches.append({
+                        'page_name': page['name'],
+                        'page_path': page['path'],
+                        'relevance': 'high' if score >= 5 else 'medium' if score >= 3 else 'low',
+                        'reason': f'{score} common words'
+                    })
+        
+        # Sort by relevance and take top 5
+        matches.sort(key=lambda x: {'high': 3, 'medium': 2, 'low': 1}.get(x['relevance'], 0), reverse=True)
+        
+        suggestions.append({
+            'source_id': source['id'],
+            'suggested_pages': matches[:5]
+        })
+    
+    return jsonify({
+        "success": True,
+        "suggestions": suggestions,
+        "method": "fallback"
+    })
+
+
+# ============ RAG Search Endpoints ============
+
+@app.route('/api/rag/search', methods=['POST'])
+def rag_search():
+    """חיפוש semantic במקורות באמצעות RAG"""
+    try:
+        if not RAG_AVAILABLE:
+            return jsonify({
+                "success": False,
+                "error": "RAG service not available. Make sure sentence-transformers is installed."
+            }), 500
+        
+        data = request.json
+        query = data.get('query')
+        top_k = data.get('top_k', 5)
+        
+        if not query:
+            return jsonify({"success": False, "error": "Missing query"}), 400
+        
+        rag_manager = get_rag_manager()
+        results = rag_manager.search(query, top_k=top_k)
+        
+        return jsonify({
+            "success": True,
+            "query": query,
+            "results": results
+        })
+    
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+
+@app.route('/api/rag/stats', methods=['GET'])
+def rag_stats():
+    """קבלת סטטיסטיקות על אינדקס ה-RAG"""
+    try:
+        if not RAG_AVAILABLE:
+            return jsonify({
+                "success": False,
+                "error": "RAG service not available"
+            }), 500
+        
+        rag_manager = get_rag_manager()
+        stats = rag_manager.get_stats()
+        
+        return jsonify({
+            "success": True,
+            "stats": stats
+        })
+    
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+
+@app.route('/api/rag/reindex', methods=['POST'])
+def rag_reindex():
+    """אינדוקס מחדש של כל המקורות השמורים"""
+    try:
+        if not RAG_AVAILABLE:
+            return jsonify({
+                "success": False,
+                "error": "RAG service not available"
+            }), 500
+        
+        from rag_service import reset_rag_manager
+        
+        # Reset the RAG manager to clear existing index
+        reset_rag_manager()
+        rag_manager = get_rag_manager()
+        
+        # Load all stored sources and reindex
+        storage = SourceStorageManager()
+        index = storage._load_index()
+        
+        reindexed = 0
+        for source_id, source_info in index.get("sources", {}).items():
+            try:
+                source_file = storage.base_path / source_info.get("file_path", "")
+                if source_file.exists():
+                    with open(source_file, 'r', encoding='utf-8') as f:
+                        source_data = json.load(f)
+                    
+                    rag_manager.add_source(
+                        source_id=source_id,
+                        content=source_data.get("content", ""),
+                        url=source_data.get("url", ""),
+                        title=source_data.get("title", "")
+                    )
+                    reindexed += 1
+            except Exception as e:
+                print(f"[RAG] Error reindexing {source_id}: {e}")
+        
+        return jsonify({
+            "success": True,
+            "message": f"Reindexed {reindexed} sources",
+            "stats": rag_manager.get_stats()
+        })
+    
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+
+@app.route('/api/sources/summary/<source_id>', methods=['GET'])
+def get_source_summary(source_id):
+    """קבלת סיכום של מקור - חילוץ מספרים, אחוזים, תנאים + סיכום AI"""
+    try:
+        storage = SourceStorageManager()
+        source_data = None
+        
+        # First try to find in registry and get URL
+        registry_source = sources_registry.get_source(source_id)
+        if registry_source:
+            url = registry_source.get('url')
+            # Get from storage by URL
+            source_data = storage.get_cached_source(url)
+        
+        if not source_data:
+            # Fallback: try to find source by ID directly in storage
+            index = storage._load_index()
+            source_info = index.get("sources", {}).get(source_id)
+            
+            if source_info:
+                source_file = storage.base_path / source_info.get("file_path", "")
+                if source_file.exists():
+                    with open(source_file, 'r', encoding='utf-8') as f:
+                        source_data = json.load(f)
+        
+        if not source_data:
+            return jsonify({"success": False, "error": "Source not found - try scanning it first"}), 404
+        
+        content = source_data.get('content', '')
+        
+        # Get extractive summary (regex-based)
+        from rag_service import ContentSummarizer
+        text_summarizer = ContentSummarizer()
+        extractive_summary = text_summarizer.extract_summary(content)
+        
+        # Try AI summary if available
+        ai_summary = None
+        ai_summary_date = None
+        ai_model_used = None
+        use_ai = request.args.get('use_ai', 'false').lower() == 'true'
+        force_new = request.args.get('force_new', 'false').lower() == 'true'
+        selected_model = request.args.get('model', None)  # User-selected model
+        
+        # First check if we have a saved AI summary (unless force_new)
+        if registry_source and not force_new:
+            saved_summary = registry_source.get('ai_summary')
+            if saved_summary:
+                ai_summary = saved_summary
+                ai_summary_date = registry_source.get('ai_summary_date')
+                ai_model_used = registry_source.get('ai_model')
+                print(f"[Summary] Using saved AI summary from {ai_summary_date}")
+        
+        # If use_ai requested and no saved summary (or force_new), generate new one
+        if use_ai and (not ai_summary or force_new):
+            print(f"[Summary] Starting AI summary for {source_id}, model={selected_model}, force_new={force_new}")
+            try:
+                from ai_summarizer import get_summarizer, check_ollama_status
+                status = check_ollama_status(selected_model)
+                print(f"[Summary] Ollama status: available={status.get('ollama_available')}, model={status.get('model')}")
+                if status.get('ollama_available'):
+                    if force_new:
+                        print(f"[Summary] Force regenerating AI summary for {source_id} with model {selected_model or 'default'}...")
+                    else:
+                        print(f"[Summary] Generating new AI summary for {source_id} with model {selected_model or 'default'}...")
+                    ai_summarizer = get_summarizer(selected_model)
+                    print(f"[Summary] Calling summarize with {len(content)} chars of content...")
+                    ai_result = ai_summarizer.summarize(content, source_data.get('url', ''))
+                    print(f"[Summary] AI result: success={ai_result.get('success')}, has_summary={bool(ai_result.get('summary'))}")
+                    if ai_result.get('success'):
+                        ai_summary = ai_result.get('summary')
+                        ai_model_used = ai_result.get('model', ai_summarizer.model)
+                        # Save the AI summary for future use (with model info)
+                        sources_registry.save_ai_summary(source_id, ai_summary, model=ai_model_used)
+                        ai_summary_date = datetime.now().isoformat()
+                        print(f"[Summary] AI summary saved for {source_id} (model: {ai_model_used})")
+                    else:
+                        print(f"[Summary] AI failed: {ai_result.get('error')}")
+                else:
+                    print(f"[Summary] Ollama not available: {status.get('message')}")
+            except Exception as ai_err:
+                import traceback
+                print(f"[Summary] AI summarization failed: {ai_err}")
+                traceback.print_exc()
+        else:
+            if ai_summary:
+                print(f"[Summary] Using cached AI summary for {source_id}")
+            elif not use_ai:
+                print(f"[Summary] AI not requested for {source_id}")
+        
+        return jsonify({
+            "success": True,
+            "source_id": source_id,
+            "url": source_data.get('url', ''),
+            "title": source_data.get('title', ''),
+            "scraped_at": source_data.get('scraped_at', ''),
+            "word_count": len(content.split()),
+            "summary": extractive_summary,
+            "ai_summary": ai_summary,
+            "ai_summary_date": ai_summary_date,
+            "ai_model": ai_model_used
+        })
+    
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        return jsonify({"success": False, "error": str(e)}), 500
+
+
+@app.route('/api/sources/content/<source_id>', methods=['GET'])
+def get_source_full_content(source_id):
+    """קבלת התוכן המלא של מקור"""
+    try:
+        storage = SourceStorageManager()
+        source_data = None
+        
+        # First try to find in registry and get URL
+        registry_source = sources_registry.get_source(source_id)
+        if registry_source:
+            url = registry_source.get('url')
+            # Get from storage by URL
+            source_data = storage.get_cached_source(url)
+        
+        if not source_data:
+            return jsonify({"success": False, "error": "Source not found - try scanning it first"}), 404
+        
+        content = source_data.get('content', '')
+        
+        return jsonify({
+            "success": True,
+            "source_id": source_id,
+            "url": source_data.get('url', ''),
+            "title": source_data.get('title', ''),
+            "scraped_at": source_data.get('scraped_at', ''),
+            "word_count": len(content.split()),
+            "content": content
+        })
+    
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        return jsonify({"success": False, "error": str(e)}), 500
+
+
+@app.route('/api/sources/summary-by-url', methods=['POST'])
+def get_source_summary_by_url():
+    """קבלת סיכום של מקור לפי URL"""
+    try:
+        data = request.json
+        url = data.get('url')
+        
+        if not url:
+            return jsonify({"success": False, "error": "Missing URL"}), 400
+        
+        storage = SourceStorageManager()
+        source_data = storage.get_cached_source(url)
+        
+        if not source_data:
+            return jsonify({"success": False, "error": "Source not found in cache. Please refresh it first."}), 404
+        
+        # Get summary
+        from rag_service import ContentSummarizer
+        summarizer = ContentSummarizer()
+        summary = summarizer.extract_summary(source_data.get('content', ''))
+        
+        return jsonify({
+            "success": True,
+            "url": url,
+            "title": source_data.get('title', ''),
+            "scraped_at": source_data.get('scraped_at', ''),
+            "word_count": len(source_data.get('content', '').split()),
+            "summary": summary
+        })
+    
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+
+# ============ Weekly Scanner & Reports Endpoints ============
+
+# Scanner status tracking
+scanner_status = {
+    "running": False,
+    "started_at": None,
+    "progress": 0,
+    "message": "",
+    "last_report": None
+}
+
+@app.route('/api/scanner/status', methods=['GET'])
+def get_scanner_status():
+    """קבלת סטטוס הסורק"""
+    try:
+        # Check Ollama status
+        try:
+            from ai_summarizer import check_ollama_status
+            ollama_status = check_ollama_status()
+        except:
+            ollama_status = {"ollama_available": False}
+        
+        return jsonify({
+            "success": True,
+            "scanner": scanner_status,
+            "ollama": ollama_status
+        })
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+
+@app.route('/api/scanner/run', methods=['POST'])
+def run_weekly_scan():
+    """הפעלת סריקה שבועית (ברקע)"""
+    global scanner_status
+    
+    try:
+        if scanner_status["running"]:
+            return jsonify({
+                "success": False,
+                "error": "Scanner is already running",
+                "status": scanner_status
+            }), 400
+        
+        data = request.json or {}
+        use_ai = data.get("use_ai", True)
+        
+        def run_scan():
+            global scanner_status
+            try:
+                scanner_status["running"] = True
+                scanner_status["started_at"] = datetime.now().isoformat()
+                scanner_status["progress"] = 0
+                scanner_status["message"] = "Starting scan..."
+                
+                from weekly_scanner import WeeklySourceScanner
+                scanner = WeeklySourceScanner(use_ai=use_ai)
+                
+                scanner_status["message"] = "Scanning sources..."
+                report = scanner.run_full_scan()
+                
+                scanner_status["last_report"] = report.get("report_date")
+                scanner_status["progress"] = 100
+                scanner_status["message"] = f"Complete! {report['stats']['changes_detected']} changes found."
+                
+            except Exception as e:
+                scanner_status["message"] = f"Error: {str(e)}"
+            finally:
+                scanner_status["running"] = False
+        
+        # Run in background thread
+        import threading
+        thread = threading.Thread(target=run_scan)
+        thread.daemon = True
+        thread.start()
+        
+        return jsonify({
+            "success": True,
+            "message": "Scan started in background",
+            "status": scanner_status
+        })
+        
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+
+@app.route('/api/reports/list', methods=['GET'])
+def list_weekly_reports():
+    """רשימת כל הדוחות השבועיים"""
+    try:
+        storage = SourceStorageManager()
+        reports = storage.list_weekly_reports()
+        
+        return jsonify({
+            "success": True,
+            "reports": reports,
+            "count": len(reports)
+        })
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+
+@app.route('/api/reports/<report_date>', methods=['GET'])
+def get_weekly_report(report_date):
+    """קבלת דוח שבועי ספציפי"""
+    try:
+        storage = SourceStorageManager()
+        report = storage.get_weekly_report(report_date)
+        
+        if not report:
+            return jsonify({"success": False, "error": "Report not found"}), 404
+        
+        return jsonify({
+            "success": True,
+            "report": report
+        })
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+
+@app.route('/api/source/<source_id>/history', methods=['GET'])
+def get_source_history_by_id(source_id):
+    """קבלת היסטוריית סריקות של מקור"""
+    try:
+        limit = request.args.get('limit', 52, type=int)
+        
+        storage = SourceStorageManager()
+        history = storage.get_history(source_id, limit=limit)
+        
+        return jsonify({
+            "success": True,
+            "source_id": source_id,
+            "history": history,
+            "count": len(history)
+        })
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+
+@app.route('/api/suggest-update', methods=['POST'])
+def suggest_page_update():
+    """יצירת הצעות לעדכון עמוד עם AI"""
+    try:
+        data = request.json
+        page_path = data.get('page_path')
+        changes = data.get('changes', [])
+        
+        if not page_path:
+            return jsonify({"success": False, "error": "Missing page_path"}), 400
+        
+        # Load page content
+        page_folder = get_page_folder(page_path)
+        page_info_path = BASE_DIR / page_folder / "page_info.json"
+        
+        if not page_info_path.exists():
+            return jsonify({"success": False, "error": "Page not found"}), 404
+        
+        with open(page_info_path, 'r', encoding='utf-8') as f:
+            page_info = json.load(f)
+        
+        # Load HTML content
+        page_title = page_info.get("name", "")
+        html_files = list((BASE_DIR / page_folder).glob("*.html"))
+        page_content = ""
+        
+        if html_files:
+            with open(html_files[0], 'r', encoding='utf-8') as f:
+                page_content = f.read()
+        
+        # Use AI to suggest updates
+        try:
+            from ai_summarizer import get_summarizer
+            summarizer = get_summarizer()
+            
+            if not summarizer.is_available():
+                return jsonify({
+                    "success": False,
+                    "error": "AI service (Ollama) not available. Run: ollama serve"
+                }), 503
+            
+            result = summarizer.suggest_updates(changes, page_content, page_title)
+            
+            return jsonify({
+                "success": True,
+                "page_path": page_path,
+                "page_title": page_title,
+                **result
+            })
+            
+        except ImportError:
+            return jsonify({
+                "success": False,
+                "error": "AI summarizer not available"
+            }), 503
+        
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+
+@app.route('/api/ai/status', methods=['GET'])
+def get_ai_status():
+    """בדיקת סטטוס שירות AI (Ollama)"""
+    try:
+        from ai_summarizer import check_ollama_status
+        status = check_ollama_status()
+        
+        return jsonify({
+            "success": True,
+            **status
+        })
+    except ImportError:
+        return jsonify({
+            "success": False,
+            "ollama_available": False,
+            "message": "AI summarizer module not found"
+        })
+    except Exception as e:
+        return jsonify({
+            "success": False,
+            "ollama_available": False,
+            "error": str(e)
+        })
+
+
+@app.route('/api/ai/models', methods=['GET'])
+def get_ai_models():
+    """קבלת רשימת מודלי AI זמינים"""
+    try:
+        from ai_summarizer import get_available_models, DEFAULT_MODEL
+        
+        models = get_available_models()
+        installed = [m for m in models if m.get('installed')]
+        
+        return jsonify({
+            "success": True,
+            "models": models,
+            "installed_count": len(installed),
+            "default_model": DEFAULT_MODEL
+        })
+    except ImportError:
+        return jsonify({
+            "success": False,
+            "models": [],
+            "error": "AI summarizer module not found"
+        })
+    except Exception as e:
+        return jsonify({
+            "success": False,
+            "models": [],
+            "error": str(e)
+        })
+
+
+@app.route('/api/scraping/batch', methods=['POST'])
+def scrape_multiple_sources():
+    """Scrape multiple URLs for a page (uses cached data if available)"""
+    try:
+        data = request.json
+        page_path = data.get('page_path')
+        force_refresh = data.get('force_refresh', False)
+        
+        if not page_path:
+            return jsonify({"success": False, "error": "Missing page_path"}), 400
+        
+        # Load data sources from page_info.json
+        page_folder = get_page_folder(page_path)
+        page_info_path = BASE_DIR / page_folder / "page_info.json"
+        if not page_info_path.exists():
+            return jsonify({"success": False, "error": "page_info.json not found"}), 404
+        
+        with open(page_info_path, 'r', encoding='utf-8') as f:
+            info = json.load(f)
+        
+        sources = info.get('data_sources', [])
+        if not sources:
+            return jsonify({"success": True, "message": "No data sources to scrape", "results": []})
+        
+        # Scrape all sources (uses cache unless force_refresh)
+        apify_token = config.get('apify', {}).get('token')
+        if not apify_token:
+            return jsonify({"success": False, "error": "Apify token not configured"}), 500
+        
+        scraper = DataSourceScraper(apify_token)
+        
+        results = []
+        for source in sources:
+            result = scraper.scrape(source['url'], force_refresh=force_refresh, page_path=page_path)
+            result['source_id'] = source.get('id', '')
+            result['description'] = source.get('description', '')
+            results.append(result)
+            
+            # Update source status
+            source['last_scraped'] = result.get('scraped_at') or result.get('timestamp') or datetime.now().isoformat()
+            source['scraping_status'] = 'success' if result.get('success') else 'failed'
+        
+        # Update page_info.json
+        info['last_verification'] = datetime.now().isoformat()
+        with open(page_info_path, 'w', encoding='utf-8') as f:
+            json.dump(info, f, ensure_ascii=False, indent=2)
+        
+        return jsonify({"success": True, "results": results})
+    
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
 @app.route('/api/page/update-info', methods=['POST'])
 def update_page_info():
     """Update page_info.json with new post_id and keyword"""
@@ -13230,7 +15496,7 @@ def seo_scrape_competitors():
         }
         
         print(f"[Scrape] Calling Apify Web Scraper for {len(start_urls)} URLs...")
-        response = requests.post(scraper_url, headers=headers, json=payload, timeout=300)  # 5 min timeout for batch
+        response = requests.post(scraper_url, headers=headers, json=payload, timeout=600)  # 10 min timeout for batch
         
         if response.status_code not in [200, 201]:
             print(f"[Scrape] Apify error {response.status_code}: {response.text[:500]}")

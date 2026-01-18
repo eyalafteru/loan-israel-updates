@@ -1,0 +1,12 @@
+{
+  "id": "0a293b41",
+  "url": "https://www.tarya.co.il/biz/",
+  "domain": "tarya_co_il",
+  "title": "Bot Verification",
+  "content": "Verifying that you are not a robot...",
+  "scraped_at": "2026-01-16T14:26:19.907797",
+  "scraper_metadata": {
+    "method": "apify",
+    "status": "success"
+  }
+}
