@@ -1078,27 +1078,27 @@ html {
 
 
 
-<div class="wpc-property-loan-k9x7-container" id="wpc-property-loan-k9x7-main">
+<div class="wpc-property-loan-k9x7-container edit-hoverable" id="wpc-property-loan-k9x7-main">
   <!-- אזור 1: Hero Section עם כותרת H1 -->
-  <section class="wpc-property-loan-k9x7-hero">
-    <div class="wpc-property-loan-k9x7-hero-container">
-      <h1 class="wpc-property-loan-k9x7-hero-title">הלוואה כנגד נכס - הכסף שנצבר בקירות שלך, סוף סוף עובד בשבילך</h1>
+  <section class="wpc-property-loan-k9x7-hero edit-hoverable">
+    <div class="wpc-property-loan-k9x7-hero-container edit-hoverable">
+      <h1 class="wpc-property-loan-k9x7-hero-title diff-element-new edit-hoverable">הלוואה כנגד נכס - הכוח שלך בליקחת הלוואה</h1>
       
       <!-- אזור 1.5: תאריך עדכון -->
-      <div class="wpc-property-loan-k9x7-date">
-        <strong>עודכן לאחרונה:</strong> [current_date format="F Y" hebrew="true"]
+      <div class="wpc-property-loan-k9x7-date edit-hoverable">
+        <strong class="edit-hoverable">עודכן לאחרונה:</strong> [current_date format="F Y" hebrew="true"]
       </div>
       
-      <p class="wpc-property-loan-k9x7-rate-info" style="font-size: 0.95em; color: rgba(255,255,255,0.9); text-align: center; margin-top: -10px; margin-bottom: 20px;">
+      <p class="wpc-property-loan-k9x7-rate-info diff-element-changed edit-hoverable" style="font-size: 0.95em; color: rgba(255,255,255,0.9); text-align: center; margin-top: -10px; margin-bottom: 20px;">
         💡 הריביות בתוכן מעודכנות לפי ריבית פריים 5.5% (ריבית בנק ישראל 4%, נכון לינואר 2026)
       </p>
       
-      <p class="wpc-property-loan-k9x7-hero-subtitle">יש לך דירה? אז למה אתה מתרוצץ בין בנקים ומבזבז זמן על טפסים? הדירה שלך היא הערבות הכי טובה שיש - ואיתה, הבנקים ירוצו אחריך ולא להפך. ריבית של 6%-9.5%, סכומים גדולים, ותקופות ארוכות. בלי לבקש שוב ושוב.</p>
+      <p class="wpc-property-loan-k9x7-hero-subtitle diff-element-new edit-hoverable">יש לך דירה? אז למה אתה מתרוצץ בין בנקים ומבזבז זמן על טפסים? הדירה שלך היא הערבות הכי טובה שיש - ואיתה, הבנקים ירוצו אחריך ולא להפך. ריבית של 6%-9.5%, סכומים גדולים, ותקופות ארוכות. בלי לבקש שוב ושוב.</p>
       
-      <div class="wpc-property-loan-k9x7-hero-cta">
+      <div class="wpc-property-loan-k9x7-hero-cta edit-hoverable">
         <button class="wpc-property-loan-k9x7-hero-btn wpc-property-loan-k9x7-hero-btn-primary" onclick="WPC_PropertyLoan_K9X7.scrollToForm()">
-          <span>בדיקת זכאות מהירה - גלה כמה תוכל לקבל</span>
-          <span>←</span>
+          <span class="diff-element-new edit-hoverable">בדיקת זכאות מהירה - גלה כמה תוכל לקבל</span>
+          <span class="edit-hoverable">←</span>
         </button>
 
       </div>
@@ -1106,36 +1106,35 @@ html {
   </section>
 
   <!-- אזור 2: טופס AWG ראשוני -->
-  <section class="wpc-property-loan-k9x7-awg-container">
-    <div class="wpc-property-loan-k9x7-awg-box">
-      <div style="padding: 20px; font-style: italic; color: var(--text-light);">
+  <section class="wpc-property-loan-k9x7-awg-container edit-hoverable">
+    <div class="wpc-property-loan-k9x7-awg-box edit-hoverable">
+      <div style="padding: 20px; font-style: italic; color: var(--text-light);" class="edit-hoverable">
         [awg postid="32400"]
       </div>
-      <div class="disclaimer-box" style="background: #ffffff; padding: 18px 24px; margin: 24px 0; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.06); border: 1px solid #e8e8e8;">
-        <p style="margin: 0; color: #555; font-size: 14px; line-height: 1.7;">
-          <strong style="color: #333;">חשוב לדעת:</strong> אנחנו מחברים אותך לגופים מלווים שונים - בנקים וחברות מימון מורשות. הסכום והריבית שתקבל תלויים בהערכת שווי הנכס (ע"י שמאי מוסמך) ובפרופיל האישי שלך. התנאים נקבעים ע"י הגוף המלווה, לא על ידינו. השירות שלנו חינמי - אתה משלם רק לגוף שנותן לך את ההלוואה.
+      <div class="disclaimer-box edit-hoverable" style="background: #ffffff; padding: 18px 24px; margin: 24px 0; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.06); border: 1px solid #e8e8e8;">
+        <p style="margin: 0; color: #555; font-size: 14px; line-height: 1.7;" class="diff-element-new edit-hoverable">
+          <strong style="color: #333;" class="edit-hoverable">חשוב לדעת:</strong> אנחנו מחברים אותך לגופים מלווים שונים - בנקים וחברות מימון מורשות. הסכום והריבית שתקבל תלויים בהערכת שווי הנכס (ע"י שמאי מוסמך) ובפרופיל האישי שלך. התנאים נקבעים ע"י הגוף המלווה, לא על ידינו. השירות שלנו חינמי - אתה משלם רק לגוף שנותן לך את ההלוואה.
         </p>
       </div>
     </div>
   </section>
 
   <!-- אזור 3: ויגט מחשבון מותאם -->
-  <section class="wpc-form-demo-container" id="property-calculator">
-    <div class="wpc-form-demo-wrapper">
-      <h2 class="wpc-property-loan-k9x7-calc-title">מחשבון - כמה תוכלו לקבל על הנכס שלכם?</h2>
-      <p class="wpc-property-loan-k9x7-calc-subtitle">גלו כמה כסף תוכלו לקבל על הנכס שלכם תוך 30 שניות</p>
+  <section class="wpc-form-demo-container edit-hoverable" id="property-calculator">
+    <div class="wpc-form-demo-wrapper edit-hoverable">
+      <h2 class="wpc-property-loan-k9x7-calc-title diff-element-new edit-hoverable">מחשבון - כמה תוכלו לקבל על הנכס שלכם?</h2>
+      <p class="wpc-property-loan-k9x7-calc-subtitle edit-hoverable">גלו כמה כסף תוכלו לקבל על הנכס שלכם תוך 30 שניות</p>
       
-      <div class="wpc-property-loan-k9x7-calc-form">
-        <div class="wpc-form-demo-group">
+      <div class="wpc-property-loan-k9x7-calc-form edit-hoverable">
+        <div class="wpc-form-demo-group edit-hoverable">
           <label class="wpc-form-demo-label" for="propertyValue">שווי הנכס (₪)</label>
-          <div class="wpc-slider-demo-wrapper">
-            <input type="range" id="propertyValue" class="wpc-slider-demo" 
-                   min="500000" max="10000000" step="50000" value="1500000">
-            <div class="wpc-slider-demo-value" id="propertyValueDisplay">₪1,500,000</div>
+          <div class="wpc-slider-demo-wrapper edit-hoverable">
+            <input type="range" id="propertyValue" class="wpc-slider-demo" min="500000" max="10000000" step="50000" value="1500000">
+            <div class="wpc-slider-demo-value edit-hoverable" id="propertyValueDisplay">₪1,500,000</div>
           </div>
         </div>
         
-        <div class="wpc-form-demo-group">
+        <div class="wpc-form-demo-group edit-hoverable">
           <label class="wpc-form-demo-label" for="loanType">סוג ההלוואה</label>
           <select id="loanType" class="wpc-property-loan-k9x7-calc-select">
             <option value="bank">בנקאית (עד 70%)</option>
@@ -1143,17 +1142,16 @@ html {
           </select>
         </div>
         
-        <div class="wpc-form-demo-group">
+        <div class="wpc-form-demo-group edit-hoverable">
           <label class="wpc-form-demo-label" for="existingMortgage">משכנתא קיימת (₪)</label>
-          <div class="wpc-slider-demo-wrapper">
-            <input type="range" id="existingMortgage" class="wpc-slider-demo" 
-                   min="0" max="5000000" step="10000" value="0">
-            <div class="wpc-slider-demo-value" id="existingMortgageDisplay">₪0</div>
+          <div class="wpc-slider-demo-wrapper edit-hoverable">
+            <input type="range" id="existingMortgage" class="wpc-slider-demo" min="0" max="5000000" step="10000" value="0">
+            <div class="wpc-slider-demo-value edit-hoverable" id="existingMortgageDisplay">₪0</div>
           </div>
         </div>
       </div>
       
-      <div class="wpc-property-loan-k9x7-calc-buttons">
+      <div class="wpc-property-loan-k9x7-calc-buttons edit-hoverable">
         <button class="wpc-property-loan-k9x7-calc-btn wpc-property-loan-k9x7-calc-btn-primary" onclick="WPC_PropertyLoan_K9X7.calculateLoan()">
           חשב עכשיו
         </button>
@@ -1162,21 +1160,21 @@ html {
         </button>
       </div>
       
-      <div class="wpc-property-loan-k9x7-calc-results" id="calcResults">
-        <div class="wpc-property-loan-k9x7-calc-result-item">
-          <span class="wpc-property-loan-k9x7-calc-result-label">הסכום המקסימלי שתוכלו לקבל:</span>
-          <span class="wpc-property-loan-k9x7-calc-result-value highlight" id="maxLoanAmount">₪0</span>
+      <div class="wpc-property-loan-k9x7-calc-results edit-hoverable" id="calcResults">
+        <div class="wpc-property-loan-k9x7-calc-result-item edit-hoverable">
+          <span class="wpc-property-loan-k9x7-calc-result-label edit-hoverable">הסכום המקסימלי שתוכלו לקבל:</span>
+          <span class="wpc-property-loan-k9x7-calc-result-value highlight edit-hoverable" id="maxLoanAmount">₪0</span>
         </div>
-        <div class="wpc-property-loan-k9x7-calc-result-item">
-          <span class="wpc-property-loan-k9x7-calc-result-label">החזר חודשי משוער (10 שנים):</span>
-          <span class="wpc-property-loan-k9x7-calc-result-value" id="monthly10">₪0</span>
+        <div class="wpc-property-loan-k9x7-calc-result-item edit-hoverable">
+          <span class="wpc-property-loan-k9x7-calc-result-label edit-hoverable">החזר חודשי משוער (10 שנים):</span>
+          <span class="wpc-property-loan-k9x7-calc-result-value edit-hoverable" id="monthly10">₪0</span>
         </div>
-        <div class="wpc-property-loan-k9x7-calc-result-item">
-          <span class="wpc-property-loan-k9x7-calc-result-label">החזר חודשי משוער (20 שנים):</span>
-          <span class="wpc-property-loan-k9x7-calc-result-value" id="monthly20">₪0</span>
+        <div class="wpc-property-loan-k9x7-calc-result-item edit-hoverable">
+          <span class="wpc-property-loan-k9x7-calc-result-label edit-hoverable">החזר חודשי משוער (20 שנים):</span>
+          <span class="wpc-property-loan-k9x7-calc-result-value edit-hoverable" id="monthly20">₪0</span>
         </div>
         
-        <div class="wpc-property-loan-k9x7-calc-cta">
+        <div class="wpc-property-loan-k9x7-calc-cta edit-hoverable">
           <button class="wpc-property-loan-k9x7-calc-cta-btn" onclick="WPC_PropertyLoan_K9X7.scrollToForm()">
             מעניין אותך הסכום הזה? בדוק זכאות עכשיו!
           </button>
@@ -1186,101 +1184,100 @@ html {
   </section>
 
   <!-- אזור 4: הסבר מה זו הלוואה כנגד נכס -->
-  <section class="wpc-property-loan-k9x7-content">
-    <div class="wpc-property-loan-k9x7-section-header">
-      <h2 class="wpc-property-loan-k9x7-section-title">הלוואה כנגד נכס - איך הדירה שלך הופכת למקור מימון?</h2>
-      <p class="wpc-property-loan-k9x7-section-subtitle">הבנת היסודות להחלטה נכונה</p>
+  <section class="wpc-property-loan-k9x7-content edit-hoverable">
+    <div class="wpc-property-loan-k9x7-section-header edit-hoverable">
+      <h2 class="wpc-property-loan-k9x7-section-title diff-element-new edit-hoverable">הלוואה כנגד נכס - איך הדירה שלך הופכת למקור מימון?</h2>
+      <p class="wpc-property-loan-k9x7-section-subtitle edit-hoverable">הבנת היסודות להחלטה נכונה</p>
     </div>
     
-    <div class="wpc-property-loan-k9x7-text">
-      יש לך דירה? אז כבר יש לך יתרון שרוב האנשים יכולים רק לחלום עליו. הבנקים אוהבים נכסים - זה הביטחון שלהם. ועם נכס כבטוחה, פתאום הם מתחילים להתייחס אליך אחרת: ריבית נמוכה יותר, סכומים גבוהים יותר, ופחות שאלות מיותרות. מימון כנגד נכס מאפשר לקבל עד 70% משווי הנכס, בריבית נמוכה משמעותית מ<a href="https://loan-israel.co.il/non-bank-loan/">הלוואות חוץ בנקאיות</a> רגילות.
+    <div class="wpc-property-loan-k9x7-text edit-hoverable">
+      יש לך דירה? אז כבר יש לך יתרון שרוב האנשים יכולים רק לחלום עליו. הבנקים אוהבים נכסים - זה הביטחון שלהם. ועם נכס כבטוחה, פתאום הם מתחילים להתייחס אליך אחרת: ריבית נמוכה יותר, סכומים גבוהים יותר, ופחות שאלות מיותרות. מימון כנגד נכס מאפשר לקבל עד 70% משווי הנכס, בריבית נמוכה משמעותית מ<a href="https://loan-israel.co.il/non-bank-loan/" class="diff-element-new edit-hoverable">הלוואות חוץ בנקאיות</a> רגילות.
     </div>
     
-    <div class="wpc-property-loan-k9x7-text">
-      הלוואה כנגד נכס הייתה פופולרית מאוד בשנים האחרונות בעיקר בקרב משפרי דיור ורוכשי דירה חדשה. עם זאת, באוקטובר 2021 הודיע המפקח על הבנקים על איסור לתת מימון כנגד שעבוד נכס קיים על מנת לרכוש דירה נוספת, ולמעשה כיום ניתן לקבל מימון כנגד נכס קיים רק למטרות אחרות.
+    <div class="wpc-property-loan-k9x7-text diff-element-new edit-hoverable">
+      הלוואות כנגד נכס הפכו פופולרית מאוד בשנים האחרונות בעיקר בקרב משפרי דיור ורוכשי דירה חדשה. עם זאת, באוקטובר 2021 הודיע המפקח על הבנקים על איסור לתת מימון כנגד שעבוד נכס קיים על מנת לרכוש דירה נוספת, ולמעשה כיום ניתן לקבל מימון כנגד נכס קיים רק למטרות אחרות.
     </div>
     
-    <div class="wpc-property-loan-k9x7-text">
-      באופן כללי, כל אדם המחזיק דירה בבעלותו יכול לפנות אל אחד מהבנקים המסחריים כדי לקחת הלוואה נוחה עם ריבית אטרקטיבית בתמורה לשעבוד הנכס בבעלותו. הלווה חייב לשעבד את הנכס כנגד ההלוואה מהבנק, ומאחר וההלוואה אינה נחשבת כמסוכנת בעיני הבנק ניתן לקבל סכום גדול וליהנות מריביות נמוכות ומפריסת תשלומים ארוכה, עם תשלום חודשי נמוך יחסית.
+    <div class="wpc-property-loan-k9x7-text edit-hoverable">
+      באופן כללי, כל אדם המחזיק דירה בבעלותו יכול לפנות אל אחד מהבנקים המסחריים כדי לקחת הלוואה נוחה עם ריבית אטרקטיבית בתמורה לשעבוד הנדל"ן שבבעלותו. בדומה למשכנתא גם כאן&nbsp; הלווה חייב לשעבד את הנכס כנגד ההלוואה מהבנק, ולכן נקראת בבנק - משכנתא לכל מטרה. ומאחר וההלוואה אינה נחשבת כמסוכנת בעיני הבנק ניתן לקבל סכום גדול וליהנות מריביות נמוכות ומפריסת תשלומים ארוכה, עם תשלום חודשי נמוך יחסית.
     </div>
 
-    <div class="wpc-property-loan-k9x7-text">
-      <strong>למה עד עכשיו הרגשת תקוע?</strong> הבנקים רגילים להתנהג כאילו הם עושים לך טובה. מבקשים ממך להוכיח את עצמך שוב ושוב - תלושים, ערבים, בטחונות. אבל רגע - יש לך נכס! דירה ששווה כסף אמיתי. וכשיש נכס, המשחק משתנה לגמרי. הבנק יודע שיש לו ביטחון. הוא לא צריך "לסמוך" עליך - הוא סומך על הדירה שלך. ולכן הריבית יורדת, הסכומים עולים, והתנאים משתפרים. בניגוד ל<a href="https://loan-israel.co.il/%d7%94%d7%9c%d7%95%d7%95%d7%90%d7%95%d7%aa-%d7%9c%d7%9c%d7%90-%d7%a2%d7%a8%d7%91%d7%99%d7%9d/">הלוואות ללא ערבים</a> רגילות, כאן הנכס הוא הערבות.
+    <div class="wpc-property-loan-k9x7-text edit-hoverable">
+      <strong class="diff-element-new edit-hoverable">למה עד עכשיו הרגשת תקוע?</strong> הבנקים רגילים להתנהג כאילו הם עושים לך טובה. מבקשים ממך להוכיח את עצמך שוב ושוב - תלושים, ערבים, בטחונות. אבל רגע - יש לך נכס! דירה ששווה כסף אמיתי. וכשיש נדל"ן, המשחק משתנה לגמרי. הבנק יודע שיש לו ביטחון. הוא לא צריך "לסמוך" עליך - הוא סומך על הדירה שלך. ולכן הריבית יורדת, הסכומים עולים, והתנאים משתפרים. בניגוד ל<a href="https://loan-israel.co.il/%d7%94%d7%9c%d7%95%d7%95%d7%90%d7%95%d7%aa-%d7%9c%d7%9c%d7%90-%d7%a2%d7%a8%d7%91%d7%99%d7%9d/" class="diff-element-new edit-hoverable">הלוואות ללא ערבים</a> רגילות, כאן הנכס הוא הערבות.
     </div>
   </section>
 
   <!-- אזור 5: ויגט השוואת ריביות דינמי -->
-  <section class="wpc-form-demo-container" id="interest-comparison">
-    <div class="wpc-form-demo-wrapper">
+  <section class="wpc-form-demo-container edit-hoverable" id="interest-comparison">
+    <div class="wpc-form-demo-wrapper edit-hoverable">
    
-      <h2 class="wpc-property-loan-k9x7-calc-title">השוואת ריביות - בנקאי מול חוץ בנקאי</h2>
-      <p class="wpc-property-loan-k9x7-calc-subtitle">ראו בדיוק כמה תוכלו לחסוך עם הבחירה הנכונה</p>
+      <h2 class="wpc-property-loan-k9x7-calc-title edit-hoverable">השוואת ריביות - בנקאי מול חוץ בנקאי</h2>
+      <p class="wpc-property-loan-k9x7-calc-subtitle edit-hoverable">ראו בדיוק כמה תוכלו לחסוך עם הבחירה הנכונה</p>
       
-      <div class="wpc-property-loan-k9x7-comparison-form">
-        <div class="wpc-form-demo-group">
+      <div class="wpc-property-loan-k9x7-comparison-form edit-hoverable">
+        <div class="wpc-form-demo-group edit-hoverable">
           <label class="wpc-form-demo-label" for="compLoanAmount">סכום ההלוואה (₪)</label>
-          <div class="wpc-slider-demo-wrapper">
-            <input type="range" id="compLoanAmount" class="wpc-slider-demo" 
-                   min="50000" max="2000000" step="10000" value="500000">
-            <div class="wpc-slider-demo-value" id="compLoanAmountDisplay">₪500,000</div>
+          <div class="wpc-slider-demo-wrapper edit-hoverable">
+            <input type="range" id="compLoanAmount" class="wpc-slider-demo" min="50000" max="2000000" step="10000" value="500000">
+            <div class="wpc-slider-demo-value edit-hoverable" id="compLoanAmountDisplay">₪500,000</div>
           </div>
         </div>
         
-        <div class="wpc-form-demo-group">
+        <div class="wpc-form-demo-group edit-hoverable">
           <label class="wpc-form-demo-label" for="compPeriod">תקופת החזר (שנים)</label>
           <select id="compPeriod" class="wpc-property-loan-k9x7-calc-select">
             <option value="5">5 שנים</option>
             <option value="10">10 שנים</option>
-            <option value="15" selected>15 שנים</option>
+            <option value="15" selected="">15 שנים</option>
             <option value="20">20 שנים</option>
             <option value="25">25 שנים</option>
           </select>
         </div>
         
-        <div style="grid-column: 1 / -1; text-align: center;">
+        <div style="grid-column: 1 / -1; text-align: center;" class="edit-hoverable">
           <button class="wpc-property-loan-k9x7-calc-btn wpc-property-loan-k9x7-calc-btn-primary" onclick="WPC_PropertyLoan_K9X7.compareRates()">
             השווה ריביות
           </button>
         </div>
       </div>
       
-      <div class="wpc-property-loan-k9x7-comparison-results" id="comparisonResults">
+      <div class="wpc-property-loan-k9x7-comparison-results edit-hoverable" id="comparisonResults">
         <table class="wpc-property-loan-k9x7-comparison-table">
           <thead>
             <tr>
-              <th>סוג הלוואה</th>
-              <th>ריבית</th>
-              <th>החזר חודשי</th>
-              <th>סך הכל לתשלום</th>
+              <th class="edit-hoverable">סוג הלוואה</th>
+              <th class="edit-hoverable">ריבית</th>
+              <th class="edit-hoverable">החזר חודשי</th>
+              <th class="edit-hoverable">סך הכל לתשלום</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td class="bank">בנקאי</td>
-              <td>6%</td>
-              <td class="amount" id="bankMonthly">₪0</td>
-              <td class="amount" id="bankTotal">₪0</td>
+            <tr class="diff-element-changed">
+              <td class="bank edit-hoverable">בנקאי</td>
+              <td class="edit-hoverable">6%</td>
+              <td class="amount edit-hoverable" id="bankMonthly">₪0</td>
+              <td class="amount edit-hoverable" id="bankTotal">₪0</td>
             </tr>
             <tr>
-              <td class="bank">חוץ בנקאי</td>
-              <td>11.5%</td>
-              <td class="amount" id="nonBankMonthly">₪0</td>
-              <td class="amount" id="nonBankTotal">₪0</td>
+              <td class="bank edit-hoverable">חוץ בנקאי</td>
+              <td class="edit-hoverable">11.5%</td>
+              <td class="amount edit-hoverable" id="nonBankMonthly">₪0</td>
+              <td class="amount edit-hoverable" id="nonBankTotal">₪0</td>
             </tr>
           </tbody>
         </table>
         
-        <div style="text-align: center; margin-top: 20px; padding: 20px; background: var(--bg-light); border-radius: var(--radius-md);">
-          <div style="font-size: 1.2em; font-weight: 600; color: var(--success); margin-bottom: 10px;">
+        <div style="text-align: center; margin-top: 20px; padding: 20px; background: var(--bg-light); border-radius: var(--radius-md);" class="edit-hoverable">
+          <div style="font-size: 1.2em; font-weight: 600; color: var(--success); margin-bottom: 10px;" class="edit-hoverable">
             💰 החיסכון שלכם:
           </div>
-          <div style="font-size: 1.1em; color: var(--text-dark);">
-            <strong>חיסכון חודשי:</strong> <span class="savings" id="monthlySavings">₪0</span><br>
-            <strong>חיסכון כולל:</strong> <span class="savings" id="totalSavings">₪0</span>
+          <div style="font-size: 1.1em; color: var(--text-dark);" class="edit-hoverable">
+            <strong class="edit-hoverable">חיסכון חודשי:</strong> <span class="savings edit-hoverable" id="monthlySavings">₪0</span><br>
+            <strong class="edit-hoverable">חיסכון כולל:</strong> <span class="savings edit-hoverable" id="totalSavings">₪0</span>
           </div>
         </div>
         
-        <div class="wpc-property-loan-k9x7-calc-cta">
+        <div class="wpc-property-loan-k9x7-calc-cta edit-hoverable">
           <button class="wpc-property-loan-k9x7-calc-cta-btn" onclick="WPC_PropertyLoan_K9X7.scrollToForm()">
             רוצה לחסוך? בדוק זכאות עכשיו!
           </button>
@@ -1290,131 +1287,130 @@ html {
   </section>
 
   <!-- אזור 6: למי מתאים + שימושים -->
-  <section class="wpc-property-loan-k9x7-content">
-    <div class="wpc-property-loan-k9x7-section-header">
-      <h2 class="wpc-property-loan-k9x7-section-title">למי מתאימה הלוואה בגיבוי נדל"ן?</h2>
-      <p class="wpc-property-loan-k9x7-section-subtitle">זיהוי המקרים המתאימים ביותר</p>
+  <section class="wpc-property-loan-k9x7-content edit-hoverable">
+    <div class="wpc-property-loan-k9x7-section-header edit-hoverable">
+      <h2 class="wpc-property-loan-k9x7-section-title diff-element-changed edit-hoverable">למי מתאימה הלוואה כנגד נדל"ן?</h2>
+      <p class="wpc-property-loan-k9x7-section-subtitle edit-hoverable">זיהוי המקרים המתאימים ביותר</p>
     </div>
     
-    <div class="wpc-property-loan-k9x7-text">
-      בין אם אתה רוצה <a href="https://loan-israel.co.il/renovation-loans/">לשפץ</a>, <a href="https://loan-israel.co.il/%d7%94%d7%9c%d7%95%d7%95%d7%90%d7%95%d7%aa-%d7%9c%d7%a1%d7%92%d7%99%d7%a8%d7%aa-%d7%97%d7%95%d7%91%d7%95%d7%aa/">לסגור חובות</a>, או להשקיע בעסק - הדירה שלך יכולה להיות המפתח. הלוואה כנגד נכס מיועדת ללקוחות פרטיים או עסקיים, לכל מטרה שהיא - חוץ מרכישת דירה נוספת (זה אסור מבחינת הרגולציה).
+    <div class="wpc-property-loan-k9x7-text edit-hoverable">
+      בין אם אתה רוצה <a href="https://loan-israel.co.il/renovation-loans/" class="edit-hoverable">לשפץ</a>, <a href="https://loan-israel.co.il/%d7%94%d7%9c%d7%95%d7%95%d7%90%d7%95%d7%aa-%d7%9c%d7%a1%d7%92%d7%99%d7%a8%d7%aa-%d7%97%d7%95%d7%91%d7%95%d7%aa/" class="diff-element-changed edit-hoverable">לסגור חובות</a>, או להשקיע בעסק - הדירה שלך יכולה להיות המפתח. הלוואה כנגד שעבוד נכס מיועדת ללקוחות פרטיים או עסקיים, לכל מטרה שהיא - חוץ מרכישת דירה נוספת (זה אסור מבחינת הרגולציה).
     </div>
     
-    <div class="wpc-property-loan-k9x7-section-header">
-      <h3 class="wpc-property-loan-k9x7-section-title">שימושים עיקריים להלוואה כנגד נכס:</h3>
-    </div>
+    <div class="wpc-property-loan-k9x7-section-header edit-hoverable">
+      <h3 class="wpc-property-loan-k9x7-section-title edit-hoverable">מה אפשר לעשות עם כספי ההלוואה?</h3></div>
     
-    <div class="wpc-property-loan-k9x7-flip-cards-container">
+    <div class="wpc-property-loan-k9x7-flip-cards-container edit-hoverable">
       
-      <div class="wpc-property-loan-k9x7-flip-card">
-        <div class="wpc-property-loan-k9x7-flip-card-inner">
-          <div class="wpc-property-loan-k9x7-flip-card-front">
-            <div class="wpc-property-loan-k9x7-flip-card-icon">🏠</div>
-            <h4>שיפוץ מקיף</h4>
-            <p>לחץ לפרטים נוספים</p>
+      <div class="wpc-property-loan-k9x7-flip-card edit-hoverable">
+        <div class="wpc-property-loan-k9x7-flip-card-inner edit-hoverable">
+          <div class="wpc-property-loan-k9x7-flip-card-front edit-hoverable">
+            <div class="wpc-property-loan-k9x7-flip-card-icon edit-hoverable">🏠</div>
+            <h4 class="edit-hoverable">שיפוץ מקיף</h4>
+            <p class="edit-hoverable">לחץ לפרטים נוספים</p>
           </div>
-          <div class="wpc-property-loan-k9x7-flip-card-back">
-            <h4>שיפוץ בבית או בדירה</h4>
-            <ul>
-              <li>שיפוץ מטבח ושירותים</li>
-              <li>תוספות בנייה</li>
-              <li>החלפת חלונות ודלתות</li>
-              <li>שדרוג מערכות</li>
+          <div class="wpc-property-loan-k9x7-flip-card-back edit-hoverable">
+            <h4 class="edit-hoverable">שיפוץ בבית או בדירה</h4>
+            <ul class="edit-hoverable">
+              <li class="edit-hoverable">שיפוץ מטבח ושירותים</li>
+              <li class="edit-hoverable">תוספות בנייה</li>
+              <li class="edit-hoverable">החלפת חלונות ודלתות</li>
+              <li class="edit-hoverable">שדרוג מערכות</li>
             </ul>
           </div>
         </div>
       </div>
 
-      <div class="wpc-property-loan-k9x7-flip-card">
-        <div class="wpc-property-loan-k9x7-flip-card-inner">
-          <div class="wpc-property-loan-k9x7-flip-card-front">
-            <div class="wpc-property-loan-k9x7-flip-card-icon">💳</div>
-            <h4>סגירת חובות</h4>
-            <p>לחץ לפרטים נוספים</p>
+      <div class="wpc-property-loan-k9x7-flip-card edit-hoverable">
+        <div class="wpc-property-loan-k9x7-flip-card-inner edit-hoverable">
+          <div class="wpc-property-loan-k9x7-flip-card-front edit-hoverable">
+            <div class="wpc-property-loan-k9x7-flip-card-icon edit-hoverable">💳</div>
+            <h4 class="edit-hoverable">סגירת חובות</h4>
+            <p class="edit-hoverable">לחץ לפרטים נוספים</p>
           </div>
-          <div class="wpc-property-loan-k9x7-flip-card-back">
-            <h4>איחוד הלוואות וחובות</h4>
-            <ul>
-              <li>איחוד כל החובות בריבית אחת נמוכה</li>
-              <li>תשלום חודשי אחד במקום כמה</li>
-              <li>חיסכון של אלפי שקלים בשנה</li>
-              <li>שיפור מצב האשראי</li>
+          <div class="wpc-property-loan-k9x7-flip-card-back edit-hoverable">
+            <h4 class="edit-hoverable">איחוד הלוואות וחובות</h4>
+            <ul class="edit-hoverable">
+              <li class="edit-hoverable">איחוד כל החובות בריבית אחת נמוכה</li>
+              <li class="edit-hoverable">תשלום חודשי אחד במקום כמה</li>
+              <li class="edit-hoverable">חיסכון של אלפי שקלים בשנה</li>
+              <li class="edit-hoverable">שיפור מצב האשראי</li>
             </ul>
           </div>
         </div>
       </div>
 
-      <div class="wpc-property-loan-k9x7-flip-card">
-        <div class="wpc-property-loan-k9x7-flip-card-inner">
-          <div class="wpc-property-loan-k9x7-flip-card-front">
-            <div class="wpc-property-loan-k9x7-flip-card-icon">📉</div>
-            <h4>פירעון הלוואות</h4>
-            <p>לחץ לפרטים נוספים</p>
+      <div class="wpc-property-loan-k9x7-flip-card edit-hoverable">
+        <div class="wpc-property-loan-k9x7-flip-card-inner edit-hoverable">
+          <div class="wpc-property-loan-k9x7-flip-card-front edit-hoverable">
+            <div class="wpc-property-loan-k9x7-flip-card-icon edit-hoverable">📉</div>
+            <h4 class="edit-hoverable">פירעון הלוואות</h4>
+            <p class="edit-hoverable">לחץ לפרטים נוספים</p>
           </div>
-          <div class="wpc-property-loan-k9x7-flip-card-back">
-            <h4>פירעון הלוואות בריבית גבוהה</h4>
-            <ul>
-              <li>החלפת הלוואות של 12%-18%</li>
-              <li>בהלוואה בריבית של 6%-9.5%</li>
-              <li>חיסכון משמעותי בריביות</li>
-              <li>שיפור תזרים המזומנים</li>
+          <div class="wpc-property-loan-k9x7-flip-card-back edit-hoverable">
+            <h4 class="edit-hoverable">פירעון הלוואות בריבית גבוהה</h4>
+            <ul class="edit-hoverable">
+              <li class="edit-hoverable">החלפת הלוואות של 12%-18%</li>
+              <li class="diff-element-changed edit-hoverable">בהלוואה בריבית של 6%-9.5%</li>
+              <li class="edit-hoverable">חיסכון משמעותי בריביות</li>
+              <li class="edit-hoverable">שיפור תזרים המזומנים</li>
             </ul>
           </div>
         </div>
       </div>
 
-      <div class="wpc-property-loan-k9x7-flip-card">
-        <div class="wpc-property-loan-k9x7-flip-card-inner">
-          <div class="wpc-property-loan-k9x7-flip-card-front">
-            <div class="wpc-property-loan-k9x7-flip-card-icon">🎉</div>
-            <h4>אירועים משפחתיים</h4>
-            <p>לחץ לפרטים נוספים</p>
+      <div class="wpc-property-loan-k9x7-flip-card edit-hoverable">
+        <div class="wpc-property-loan-k9x7-flip-card-inner edit-hoverable">
+          <div class="wpc-property-loan-k9x7-flip-card-front edit-hoverable">
+            <div class="wpc-property-loan-k9x7-flip-card-icon edit-hoverable">🎉</div>
+            <h4 class="edit-hoverable">אירועים משפחתיים</h4>
+            <p class="edit-hoverable">לחץ לפרטים נוספים</p>
           </div>
-          <div class="wpc-property-loan-k9x7-flip-card-back">
-            <h4>מימון חתונות ואירועים</h4>
-            <ul>
-              <li>חתונות ואירועי חינה</li>
-              <li>בר/בת מצווה</li>
-              <li>אירועי משפחה גדולים</li>
-              <li>תשלום מפוזר לאורך שנים</li>
+          <div class="wpc-property-loan-k9x7-flip-card-back edit-hoverable">
+            <h4 class="edit-hoverable">מימון חתונות ואירועים</h4>
+            <ul class="edit-hoverable">
+              <li class="edit-hoverable">חתונות ואירועי חינה</li>
+              <li class="edit-hoverable">בר/בת מצווה</li>
+              <li class="edit-hoverable">אירועי משפחה גדולים</li>
+              <li class="edit-hoverable">תשלום מפוזר לאורך שנים</li>
             </ul>
           </div>
         </div>
       </div>
 
-      <div class="wpc-property-loan-k9x7-flip-card">
-        <div class="wpc-property-loan-k9x7-flip-card-inner">
-          <div class="wpc-property-loan-k9x7-flip-card-front">
-            <div class="wpc-property-loan-k9x7-flip-card-icon">💼</div>
-            <h4>השקעה בעסק</h4>
-            <p>לחץ לפרטים נוספים</p>
+      <div class="wpc-property-loan-k9x7-flip-card edit-hoverable">
+        <div class="wpc-property-loan-k9x7-flip-card-inner edit-hoverable">
+          <div class="wpc-property-loan-k9x7-flip-card-front edit-hoverable">
+            <div class="wpc-property-loan-k9x7-flip-card-icon edit-hoverable">💼</div>
+            <h4 class="edit-hoverable">השקעה בעסק</h4>
+            <p class="edit-hoverable">לחץ לפרטים נוספים</p>
           </div>
-          <div class="wpc-property-loan-k9x7-flip-card-back">
-            <h4>פתיחת עסק או השקעה</h4>
-            <ul>
-              <li>הון עצמי לפתיחת עסק</li>
-              <li>רכישת ציוד ומכונות</li>
-              <li>השקעה במניות ונדל"ן</li>
-              <li>הרחבת עסק קיים</li>
+          <div class="wpc-property-loan-k9x7-flip-card-back edit-hoverable">
+            <h4 class="edit-hoverable">פתיחת עסק או השקעה</h4>
+            <ul class="edit-hoverable">
+              <li class="edit-hoverable">הון עצמי לפתיחת עסק</li>
+              <li class="edit-hoverable">רכישת ציוד ומכונות</li>
+              <li class="edit-hoverable">השקעה במניות ונדל"ן</li>
+              <li class="edit-hoverable">הרחבת עסק קיים</li>
             </ul>
           </div>
         </div>
       </div>
 
-      <div class="wpc-property-loan-k9x7-flip-card">
-        <div class="wpc-property-loan-k9x7-flip-card-inner">
-          <div class="wpc-property-loan-k9x7-flip-card-front">
-            <div class="wpc-property-loan-k9x7-flip-card-icon">🎓</div>
-            <h4>לימודים וטיפולים</h4>
-            <p>לחץ לפרטים נוספים</p>
+      <div class="wpc-property-loan-k9x7-flip-card edit-hoverable">
+        <div class="wpc-property-loan-k9x7-flip-card-inner edit-hoverable">
+          <div class="wpc-property-loan-k9x7-flip-card-front edit-hoverable">
+            <div class="wpc-property-loan-k9x7-flip-card-icon edit-hoverable">🎓</div>
+            <h4 class="edit-hoverable">לימודים וטיפולים</h4>
+            <p class="edit-hoverable">לחץ לפרטים נוספים</p>
           </div>
-          <div class="wpc-property-loan-k9x7-flip-card-back">
-            <h4>מימון לימודים וטיפולים</h4>
-            <ul>
-              <li>לימודים אקדמיים בארץ ובחו"ל</li>
-              <li>קורסים מקצועיים ותעודות</li>
-              <li>טיפולים רפואיים יקרים</li>
-              <li>ניתוחים פרטיים</li>
+          <div class="wpc-property-loan-k9x7-flip-card-back edit-hoverable">
+            <h4 class="edit-hoverable">מימון לימודים וטיפולים</h4>
+            <ul class="edit-hoverable">
+              <li class="edit-hoverable">לימודים אקדמיים בארץ ובחו"ל</li>
+              <li class="edit-hoverable">קורסים מקצועיים ותעודות</li>
+              <li class="edit-hoverable">טיפולים רפואיים יקרים</li>
+              <li class="edit-hoverable">ניתוחים פרטיים</li>
             </ul>
           </div>
         </div>
@@ -1422,143 +1418,142 @@ html {
 
     </div>
     
-    <div class="wpc-property-loan-k9x7-text">
-      כדאי לדעת כי הלוואה כנגד נכס יכולה להתאים גם לבעלי נכסים החווים בעיות אשראי קשות, לדוגמה <a href="https://loan-israel.co.il/%d7%94%d7%9c%d7%95%d7%95%d7%90%d7%95%d7%aa-%d7%9c%d7%91%d7%a2%d7%9c%d7%99-bdi-%d7%a9%d7%9c%d7%99%d7%9c%d7%99/">BDI שלילי</a>, שיקים חוזרים, תיק בהוצאה לפועל, פיגור בהחזרי הלוואה או משכנתא. במקרים אלה, הבנק או הגוף הפיננסי המלווה יבצע בדיקה מעמיקה הן של הלקוח ויכולת ההחזר שלו והן של טיב הנכס.
+    <div class="wpc-property-loan-k9x7-text edit-hoverable">
+      כדאי לדעת כי הלוואה לבעלי נכסים יכולה להתאים גם לאלו החווים בעיות אשראי קשות, לדוגמה <a href="https://loan-israel.co.il/%d7%94%d7%9c%d7%95%d7%95%d7%90%d7%95%d7%aa-%d7%9c%d7%91%d7%a2%d7%9c%d7%99-bdi-%d7%a9%d7%9c%d7%99%d7%9c%d7%99/" class="edit-hoverable">BDI שלילי</a>, שיקים חוזרים, תיק בהוצאה לפועל, פיגור בהחזרי הלוואה או משכנתא. במקרים אלה, הבנק או הגוף הפיננסי המלווה יבצע בדיקה מעמיקה הן של הלקוח ויכולת ההחזר שלו והן של טיב הנכס.
     </div>
   </section>
 
   <!-- אזור 7: הסדר חובות + מחשבון חיסכון -->
-  <section class="wpc-property-loan-k9x7-content">
-    <div class="wpc-property-loan-k9x7-section-header">
-      <h2 class="wpc-property-loan-k9x7-section-title">הלוואה כנגד נכס לסגירת חובות - המוצא מהבלאגן?</h2>
-      <p class="wpc-property-loan-k9x7-section-subtitle">פתרון יעיל לבעיות כלכליות</p>
+  <section class="wpc-property-loan-k9x7-content edit-hoverable">
+    <div class="wpc-property-loan-k9x7-section-header edit-hoverable">
+      <h2 class="wpc-property-loan-k9x7-section-title diff-element-new edit-hoverable">הלוואה כנגד נכס לסגירת חובות - המוצא מהבלאגן?</h2>
+      <p class="wpc-property-loan-k9x7-section-subtitle edit-hoverable">פתרון יעיל לבעיות כלכליות</p>
     </div>
     
-    <div class="wpc-property-loan-k9x7-text">
-      בהחלט כן. עם העלייה ביוקר המחיה ב-2025, רבים ממשקי הבית נקלעו לקשיים כלכליים. מימון כנגד נכס מהווה פתרון מצוין ל<a href="https://loan-israel.co.il/%d7%90%d7%99%d7%9a-%d7%9c%d7%94%d7%a7%d7%98%d7%99%d7%9f-%d7%94%d7%97%d7%96%d7%a8-%d7%91%d7%90%d7%99%d7%97%d7%95%d7%93-%d7%94%d7%9c%d7%95%d7%95%d7%90%d7%95%d7%aa/">איחוד חובות</a> וחיסכון משמעותי בריביות.
+    <div class="wpc-property-loan-k9x7-text edit-hoverable">
+      בהחלט כן. עם העלייה ביוקר המחיה ב-2025, רבים ממשקי הבית נקלעו לקשיים כלכליים. מימון כנגד דירה מהווה פתרון מצוין ל<a href="https://loan-israel.co.il/%d7%90%d7%99%d7%9a-%d7%9c%d7%94%d7%a7%d7%98%d7%99%d7%9f-%d7%94%d7%97%d7%96%d7%a8-%d7%91%d7%90%d7%99%d7%97%d7%95%d7%93-%d7%94%d7%9c%d7%95%d7%95%d7%90%d7%95%d7%aa/" class="edit-hoverable">איחוד חובות</a> וחיסכון משמעותי בריביות.
     </div>
     
-    <div class="wpc-property-loan-k9x7-section-header">
-      <h3 class="wpc-property-loan-k9x7-section-title">מקרים בהם הלוואה כנגד נכס מומלצת להסדר חובות:</h3>
+    <div class="wpc-property-loan-k9x7-section-header edit-hoverable">
+      <h3 class="wpc-property-loan-k9x7-section-title edit-hoverable">מקרים בהם ההלוואה מומלצת להסדר חובות:</h3>
     </div>
     
-    <div class="wpc-property-loan-k9x7-text">
-      <strong>תיקים פתוחים בהוצאה לפועל:</strong> אם יש לכם תיק או כמה תיקים פתוחים בהוצאה לפועל, מימון כנגד נכס יאפשר לכם לסגור את כל החובות בבת אחת ולחסוך אלפי שקלים בריביות וקנסות. ניתן לקחת הלוואה זו גם אם אתם מוגבלים בחשבון הבנק.
+    <div class="wpc-property-loan-k9x7-text edit-hoverable">
+      <strong class="edit-hoverable">תיקים פתוחים בהוצאה לפועל:</strong> אם יש לכם תיק או כמה תיקים פתוחים בהוצאה לפועל, מימון כזה יאפשר לכם לסגור את כל החובות בבת אחת ולחסוך אלפי שקלים בריביות וקנסות. ניתן לקחת הלוואה זו גם אם אתם מוגבלים בחשבון הבנק.
     </div>
     
-    <div class="wpc-property-loan-k9x7-text">
-      <strong>סגירת הלוואות פתוחות:</strong> אם יש לכם מספר <a href="https://loan-israel.co.il/%d7%94%d7%9c%d7%95%d7%95%d7%90%d7%94-%d7%91%d7%a8%d7%99%d7%91%d7%99%d7%aa-%d7%a0%d7%9e%d7%95%d7%9b%d7%94/">הלוואות בריביות גבוהות</a> (12%-18%), תוכלו לקחת הלוואה אחת כנגד הנכס בריבית של 6%-9.5% ולחסוך אלפי שקלים בחודש.
+    <div class="wpc-property-loan-k9x7-text edit-hoverable">
+      <strong class="edit-hoverable">סגירת הלוואות פתוחות:</strong> אם יש לכם מספר <a href="https://loan-israel.co.il/%d7%94%d7%9c%d7%95%d7%95%d7%90%d7%94-%d7%91%d7%a8%d7%99%d7%91%d7%99%d7%aa-%d7%a0%d7%9e%d7%95%d7%9b%d7%94/" class="diff-element-new edit-hoverable">הלוואות בריביות גבוהות</a> (12%-18%), תוכלו לקחת הלוואה אחת מול הנכס הקיים בריבית של 6%-9.5% ולחסוך אלפי שקלים בחודש.
     </div>
     
-    <div class="wpc-property-loan-k9x7-text">
-      <strong>סגירת חובות והסרת עיקולים:</strong> חובות לרשויות או עיקולים שונים? הלוואה כנגד הנכס תאפשר לכם להסיר עיקולים ולהתחיל דף חדש עם תשלום חודשי אחד נמוך.
+    <div class="wpc-property-loan-k9x7-text edit-hoverable">
+      <strong class="edit-hoverable">סגירת חובות והסרת עיקולים:</strong> חובות לרשויות או עיקולים שונים? הלוואה לעלי נכסים תאפשר לכם להסיר עיקולים ולהתחיל דף חדש עם תשלום חודשי אחד נמוך.
     </div>
   </section>
 
   <!-- אזור 8: ויגט בוחן התאמה אישי -->
-  <section class="wpc-property-loan-k9x7-calc-container" id="eligibility-quiz">
-    <div class="wpc-property-loan-k9x7-calc-wrapper">
-      <div class="wpc-property-loan-k9x7-calc-header">
-        <h2 class="wpc-property-loan-k9x7-calc-title">בוחן התאמה מהיר</h2>
-        <p class="wpc-property-loan-k9x7-calc-subtitle">4 שאלות פשוטות שיקבעו את רמת ההתאמה שלך</p>
+  <section class="wpc-property-loan-k9x7-calc-container edit-hoverable" id="eligibility-quiz">
+    <div class="wpc-property-loan-k9x7-calc-wrapper edit-hoverable">
+      <div class="wpc-property-loan-k9x7-calc-header edit-hoverable">
+        <h2 class="wpc-property-loan-k9x7-calc-title diff-element-new edit-hoverable">בוחן התאמה מהיר</h2>
+        <p class="wpc-property-loan-k9x7-calc-subtitle edit-hoverable">4 שאלות פשוטות שיקבעו את רמת ההתאמה שלך</p>
       </div>
       
-      <div class="wpc-property-loan-k9x7-quiz-wrapper" id="quizWrapper">
+      <div class="wpc-property-loan-k9x7-quiz-wrapper edit-hoverable" id="quizWrapper">
         <!-- Progress Bar -->
-        <div class="wpc-property-loan-k9x7-quiz-progress">
-          <div class="wpc-property-loan-k9x7-quiz-progress-bar" id="quizProgress" style="width: 0%;">
-            <span id="progressText">התחל בדיקה</span>
+        <div class="wpc-property-loan-k9x7-quiz-progress edit-hoverable">
+          <div class="wpc-property-loan-k9x7-quiz-progress-bar edit-hoverable" id="quizProgress" style="width: 0%;">
+            <span id="progressText" class="edit-hoverable">התחל בדיקה</span>
           </div>
         </div>
         
         <!-- Question 1 -->
-        <div class="wpc-property-loan-k9x7-quiz-question active" id="question1">
-          <h3 class="wpc-property-loan-k9x7-quiz-question-title">יש לך נכס בבעלותך?</h3>
-          <div class="wpc-property-loan-k9x7-quiz-options">
+        <div class="wpc-property-loan-k9x7-quiz-question active edit-hoverable" id="question1">
+          <h3 class="wpc-property-loan-k9x7-quiz-question-title edit-hoverable">יש לך נכס בבעלותך?</h3>
+          <div class="wpc-property-loan-k9x7-quiz-options edit-hoverable">
             <button class="wpc-property-loan-k9x7-quiz-option" data-value="100" onclick="WPC_PropertyLoan_K9X7.selectAnswer(this, 1)">
-              <span class="wpc-property-loan-k9x7-quiz-icon">🏠</span>
-              <span>כן, בבעלות מלאה</span>
+              <span class="wpc-property-loan-k9x7-quiz-icon edit-hoverable">🏠</span>
+              <span class="edit-hoverable">כן, בבעלות מלאה</span>
             </button>
             <button class="wpc-property-loan-k9x7-quiz-option" data-value="70" onclick="WPC_PropertyLoan_K9X7.selectAnswer(this, 1)">
-              <span class="wpc-property-loan-k9x7-quiz-icon">🏡</span>
-              <span>כן, בבעלות חלקית</span>
+              <span class="wpc-property-loan-k9x7-quiz-icon edit-hoverable">🏡</span>
+              <span class="edit-hoverable">כן, בבעלות חלקית</span>
             </button>
             <button class="wpc-property-loan-k9x7-quiz-option" data-value="0" onclick="WPC_PropertyLoan_K9X7.selectAnswer(this, 1)">
-              <span class="wpc-property-loan-k9x7-quiz-icon">❌</span>
-              <span>לא</span>
+              <span class="wpc-property-loan-k9x7-quiz-icon edit-hoverable">❌</span>
+              <span class="edit-hoverable">לא</span>
             </button>
           </div>
         </div>
         
         <!-- Question 2 -->
-        <div class="wpc-property-loan-k9x7-quiz-question" id="question2">
-          <h3 class="wpc-property-loan-k9x7-quiz-question-title">מה סטטוס האשראי שלך?</h3>
-          <div class="wpc-property-loan-k9x7-quiz-options">
+        <div class="wpc-property-loan-k9x7-quiz-question edit-hoverable" id="question2">
+          <h3 class="wpc-property-loan-k9x7-quiz-question-title edit-hoverable">מה סטטוס האשראי שלך?</h3>
+          <div class="wpc-property-loan-k9x7-quiz-options edit-hoverable">
             <button class="wpc-property-loan-k9x7-quiz-option" data-value="100" onclick="WPC_PropertyLoan_K9X7.selectAnswer(this, 2)">
-              <span class="wpc-property-loan-k9x7-quiz-icon">⭐</span>
-              <span>מצוין (אין בעיות)</span>
+              <span class="wpc-property-loan-k9x7-quiz-icon edit-hoverable">⭐</span>
+              <span class="edit-hoverable">מצוין (אין בעיות)</span>
             </button>
             <button class="wpc-property-loan-k9x7-quiz-option" data-value="70" onclick="WPC_PropertyLoan_K9X7.selectAnswer(this, 2)">
-              <span class="wpc-property-loan-k9x7-quiz-icon">👍</span>
-              <span>טוב (עיכובים קלים)</span>
+              <span class="wpc-property-loan-k9x7-quiz-icon edit-hoverable">👍</span>
+              <span class="edit-hoverable">טוב (עיכובים קלים)</span>
             </button>
             <button class="wpc-property-loan-k9x7-quiz-option" data-value="40" onclick="WPC_PropertyLoan_K9X7.selectAnswer(this, 2)">
-              <span class="wpc-property-loan-k9x7-quiz-icon">⚠️</span>
-              <span>בעייתי (BDI/הוצאה לפועל)</span>
+              <span class="wpc-property-loan-k9x7-quiz-icon edit-hoverable">⚠️</span>
+              <span class="edit-hoverable">בעייתי (BDI/הוצאה לפועל)</span>
             </button>
           </div>
         </div>
         
         <!-- Question 3 -->
-        <div class="wpc-property-loan-k9x7-quiz-question" id="question3">
-          <h3 class="wpc-property-loan-k9x7-quiz-question-title">לאיזה מטרה אתה צריך את הכסף?</h3>
-          <div class="wpc-property-loan-k9x7-quiz-options">
+        <div class="wpc-property-loan-k9x7-quiz-question edit-hoverable" id="question3">
+          <h3 class="wpc-property-loan-k9x7-quiz-question-title edit-hoverable">לאיזה מטרה אתה צריך את הכסף?</h3>
+          <div class="wpc-property-loan-k9x7-quiz-options edit-hoverable">
             <button class="wpc-property-loan-k9x7-quiz-option" data-value="90" onclick="WPC_PropertyLoan_K9X7.selectAnswer(this, 3)">
-              <span class="wpc-property-loan-k9x7-quiz-icon">💳</span>
-              <span>איחוד חובות</span>
+              <span class="wpc-property-loan-k9x7-quiz-icon edit-hoverable">💳</span>
+              <span class="edit-hoverable">איחוד חובות</span>
             </button>
             <button class="wpc-property-loan-k9x7-quiz-option" data-value="80" onclick="WPC_PropertyLoan_K9X7.selectAnswer(this, 3)">
-              <span class="wpc-property-loan-k9x7-quiz-icon">🔨</span>
-              <span>שיפוץ/השקעה</span>
+              <span class="wpc-property-loan-k9x7-quiz-icon edit-hoverable">🔨</span>
+              <span class="edit-hoverable">שיפוץ/השקעה</span>
             </button>
             <button class="wpc-property-loan-k9x7-quiz-option" data-value="0" onclick="WPC_PropertyLoan_K9X7.selectAnswer(this, 3)">
-              <span class="wpc-property-loan-k9x7-quiz-icon">🏘️</span>
-              <span>רכישת דירה נוספת</span>
+              <span class="wpc-property-loan-k9x7-quiz-icon edit-hoverable">🏘️</span>
+              <span class="edit-hoverable">רכישת דירה נוספת</span>
             </button>
           </div>
         </div>
         
         <!-- Question 4 -->
-        <div class="wpc-property-loan-k9x7-quiz-question" id="question4">
-          <h3 class="wpc-property-loan-k9x7-quiz-question-title">איזה סכום אתה צריך?</h3>
-          <div class="wpc-property-loan-k9x7-quiz-options">
+        <div class="wpc-property-loan-k9x7-quiz-question edit-hoverable" id="question4">
+          <h3 class="wpc-property-loan-k9x7-quiz-question-title edit-hoverable">איזה סכום אתה צריך?</h3>
+          <div class="wpc-property-loan-k9x7-quiz-options edit-hoverable">
             <button class="wpc-property-loan-k9x7-quiz-option" data-value="100" onclick="WPC_PropertyLoan_K9X7.selectAnswer(this, 4)">
-              <span class="wpc-property-loan-k9x7-quiz-icon">💰</span>
-              <span>מעל 500,000 ₪</span>
+              <span class="wpc-property-loan-k9x7-quiz-icon edit-hoverable">💰</span>
+              <span class="edit-hoverable">מעל 500,000 ₪</span>
             </button>
             <button class="wpc-property-loan-k9x7-quiz-option" data-value="80" onclick="WPC_PropertyLoan_K9X7.selectAnswer(this, 4)">
-              <span class="wpc-property-loan-k9x7-quiz-icon">💵</span>
-              <span>200,000-500,000 ₪</span>
+              <span class="wpc-property-loan-k9x7-quiz-icon edit-hoverable">💵</span>
+              <span class="edit-hoverable">200,000-500,000 ₪</span>
             </button>
             <button class="wpc-property-loan-k9x7-quiz-option" data-value="50" onclick="WPC_PropertyLoan_K9X7.selectAnswer(this, 4)">
-              <span class="wpc-property-loan-k9x7-quiz-icon">💴</span>
-              <span>פחות מ-200,000 ₪</span>
+              <span class="wpc-property-loan-k9x7-quiz-icon edit-hoverable">💴</span>
+              <span class="edit-hoverable">פחות מ-200,000 ₪</span>
             </button>
           </div>
         </div>
         
         <!-- Results -->
-        <div class="wpc-property-loan-k9x7-quiz-results" id="quizResults">
-          <div class="wpc-property-loan-k9x7-quiz-result-card" id="resultCard">
+        <div class="wpc-property-loan-k9x7-quiz-results edit-hoverable" id="quizResults">
+          <div class="wpc-property-loan-k9x7-quiz-result-card edit-hoverable" id="resultCard">
             <!-- התוצאה תוצג כאן -->
           </div>
           
-          <div class="wpc-property-loan-k9x7-calc-cta">
+          <div class="wpc-property-loan-k9x7-calc-cta edit-hoverable">
             <button class="wpc-property-loan-k9x7-calc-cta-btn" onclick="WPC_PropertyLoan_K9X7.scrollToForm()">
               התוצאה מתאימה לך? בדוק זכאות עכשיו!
             </button>
-            <button class="wpc-property-loan-k9x7-calc-btn wpc-property-loan-k9x7-calc-btn-secondary" 
-                    onclick="WPC_PropertyLoan_K9X7.restartQuiz()" style="margin-top: 10px;">
+            <button class="wpc-property-loan-k9x7-calc-btn wpc-property-loan-k9x7-calc-btn-secondary" onclick="WPC_PropertyLoan_K9X7.restartQuiz()" style="margin-top: 10px;">
               התחל מחדש
             </button>
           </div>
@@ -1568,119 +1563,118 @@ html {
   </section>
 
   <!-- אזור 9: יתרונות וחסרונות -->
-  <section class="wpc-property-loan-k9x7-content">
-    <div class="wpc-property-loan-k9x7-section-header">
-      <h2 class="wpc-property-loan-k9x7-section-title">הלוואה כנגד נכס - היתרונות והמחיר (בואו נדבר תכל'ס)</h2>
-      <p class="wpc-property-loan-k9x7-section-subtitle">התמונה המלאה לקבלת החלטה נכונה</p>
+  <section class="wpc-property-loan-k9x7-content edit-hoverable">
+    <div class="wpc-property-loan-k9x7-section-header edit-hoverable"><h2 class="wpc-property-loan-k9x7-section-title diff-element-new edit-hoverable">היתרונות והמחיר (בואו נדבר תכל'ס)</h2>
+      <p class="wpc-property-loan-k9x7-section-subtitle edit-hoverable">התמונה המלאה לקבלת החלטה נכונה</p>
     </div>
     
     <!-- 🆕 עיצוב מפורט עם כרטיסים אינטראקטיביים לפי visual.txt -->
-    <div class="wpc-property-loan-k9x7-pros-cons-container">
+    <div class="wpc-property-loan-k9x7-pros-cons-container edit-hoverable">
       
       <!-- יתרונות - כרטיס ירוק -->
-      <div class="wpc-property-loan-k9x7-pros-card">
-        <div class="wpc-property-loan-k9x7-pros-header">
-          <div class="wpc-property-loan-k9x7-pros-icon">✅</div>
-          <h3 class="wpc-property-loan-k9x7-pros-title">יתרונות</h3>
-          <div class="wpc-property-loan-k9x7-pros-badge">5 יתרונות מובילים</div>
+      <div class="wpc-property-loan-k9x7-pros-card edit-hoverable">
+        <div class="wpc-property-loan-k9x7-pros-header edit-hoverable">
+          <div class="wpc-property-loan-k9x7-pros-icon edit-hoverable">✅</div>
+          <h3 class="wpc-property-loan-k9x7-pros-title edit-hoverable">יתרונות</h3>
+          <div class="wpc-property-loan-k9x7-pros-badge edit-hoverable">5 יתרונות מובילים</div>
         </div>
         
-        <div class="wpc-property-loan-k9x7-pros-list">
-          <div class="wpc-property-loan-k9x7-pros-item">
-            <div class="wpc-property-loan-k9x7-pros-item-icon">💰</div>
-            <div class="wpc-property-loan-k9x7-pros-item-content">
-              <h4>ריבית נמוכה</h4>
-              <p>6%-9.5% לעומת 12%-18% בהלוואות רגילות</p>
+        <div class="wpc-property-loan-k9x7-pros-list edit-hoverable">
+          <div class="wpc-property-loan-k9x7-pros-item edit-hoverable">
+            <div class="wpc-property-loan-k9x7-pros-item-icon edit-hoverable">💰</div>
+            <div class="wpc-property-loan-k9x7-pros-item-content edit-hoverable">
+              <h4 class="edit-hoverable">ריבית נמוכה</h4>
+              <p class="diff-element-changed edit-hoverable">6%-9.5% לעומת 12%-18% בהלוואות רגילות</p>
             </div>
           </div>
           
-          <div class="wpc-property-loan-k9x7-pros-item">
-            <div class="wpc-property-loan-k9x7-pros-item-icon">📈</div>
-            <div class="wpc-property-loan-k9x7-pros-item-content">
-              <h4>סכומים גבוהים</h4>
-              <p>עד 70% משווי הנכס - סכומים של מאות אלפי שקלים</p>
+          <div class="wpc-property-loan-k9x7-pros-item edit-hoverable">
+            <div class="wpc-property-loan-k9x7-pros-item-icon edit-hoverable">📈</div>
+            <div class="wpc-property-loan-k9x7-pros-item-content edit-hoverable">
+              <h4 class="edit-hoverable">סכומים גבוהים</h4>
+              <p class="edit-hoverable">עד 70% משווי הנכס - סכומים של מאות אלפי שקלים</p>
             </div>
           </div>
           
-          <div class="wpc-property-loan-k9x7-pros-item">
-            <div class="wpc-property-loan-k9x7-pros-item-icon">⏰</div>
-            <div class="wpc-property-loan-k9x7-pros-item-content">
-              <h4>תקופות החזר ארוכות</h4>
-              <p>עד 30 שנה - תשלום חודשי נמוך יחסית</p>
+          <div class="wpc-property-loan-k9x7-pros-item edit-hoverable">
+            <div class="wpc-property-loan-k9x7-pros-item-icon edit-hoverable">⏰</div>
+            <div class="wpc-property-loan-k9x7-pros-item-content edit-hoverable">
+              <h4 class="edit-hoverable">תקופות החזר ארוכות</h4>
+              <p class="edit-hoverable">עד 30 שנה - תשלום חודשי נמוך יחסית</p>
             </div>
           </div>
           
-          <div class="wpc-property-loan-k9x7-pros-item">
-            <div class="wpc-property-loan-k9x7-pros-item-icon">🏦</div>
-            <div class="wpc-property-loan-k9x7-pros-item-content">
-              <h4>אפשרות לבעלי BDI שלילי</h4>
-              <p>הנכס מהווה ביטחון חזק עבור הבנק</p>
+          <div class="wpc-property-loan-k9x7-pros-item edit-hoverable">
+            <div class="wpc-property-loan-k9x7-pros-item-icon edit-hoverable">🏦</div>
+            <div class="wpc-property-loan-k9x7-pros-item-content edit-hoverable">
+              <h4 class="edit-hoverable">אפשרות לבעלי BDI שלילי</h4>
+              <p class="edit-hoverable">הנכס מהווה ביטחון חזק עבור הבנק</p>
             </div>
           </div>
           
-          <div class="wpc-property-loan-k9x7-pros-item">
-            <div class="wpc-property-loan-k9x7-pros-item-icon">🔄</div>
-            <div class="wpc-property-loan-k9x7-pros-item-content">
-              <h4>גמישות בשימוש</h4>
-              <p>ניתן להשתמש בכסף לכל מטרה חוקית</p>
+          <div class="wpc-property-loan-k9x7-pros-item edit-hoverable">
+            <div class="wpc-property-loan-k9x7-pros-item-icon edit-hoverable">🔄</div>
+            <div class="wpc-property-loan-k9x7-pros-item-content edit-hoverable">
+              <h4 class="edit-hoverable">גמישות בשימוש</h4>
+              <p class="edit-hoverable">ניתן להשתמש בכסף לכל מטרה חוקית</p>
             </div>
           </div>
         </div>
         
-        <div class="wpc-property-loan-k9x7-pros-footer">
-          <div class="wpc-property-loan-k9x7-pros-rating">
-            <span class="wpc-property-loan-k9x7-rating-stars">⭐⭐⭐⭐⭐</span>
-            <span class="wpc-property-loan-k9x7-rating-text">דירוג גבוה</span>
+        <div class="wpc-property-loan-k9x7-pros-footer edit-hoverable">
+          <div class="wpc-property-loan-k9x7-pros-rating edit-hoverable">
+            <span class="wpc-property-loan-k9x7-rating-stars edit-hoverable">⭐⭐⭐⭐⭐</span>
+            <span class="wpc-property-loan-k9x7-rating-text edit-hoverable">דירוג גבוה</span>
           </div>
         </div>
       </div>
       
       <!-- חסרונות - כרטיס אדום -->
-      <div class="wpc-property-loan-k9x7-cons-card">
-        <div class="wpc-property-loan-k9x7-cons-header">
-          <div class="wpc-property-loan-k9x7-cons-icon">❌</div>
-          <h3 class="wpc-property-loan-k9x7-cons-title">חסרונות</h3>
-          <div class="wpc-property-loan-k9x7-cons-badge">4 נקודות לשקול</div>
+      <div class="wpc-property-loan-k9x7-cons-card edit-hoverable">
+        <div class="wpc-property-loan-k9x7-cons-header edit-hoverable">
+          <div class="wpc-property-loan-k9x7-cons-icon edit-hoverable">❌</div>
+          <h3 class="wpc-property-loan-k9x7-cons-title edit-hoverable">חסרונות</h3>
+          <div class="wpc-property-loan-k9x7-cons-badge edit-hoverable">4 נקודות לשקול</div>
         </div>
         
-        <div class="wpc-property-loan-k9x7-cons-list">
-          <div class="wpc-property-loan-k9x7-cons-item">
-            <div class="wpc-property-loan-k9x7-cons-item-icon">🏠</div>
-            <div class="wpc-property-loan-k9x7-cons-item-content">
-              <h4>סיכון לנכס</h4>
-              <p>במקרה של אי פירעון, הבנק יכול לממש את הנכס</p>
+        <div class="wpc-property-loan-k9x7-cons-list edit-hoverable">
+          <div class="wpc-property-loan-k9x7-cons-item edit-hoverable">
+            <div class="wpc-property-loan-k9x7-cons-item-icon edit-hoverable">🏠</div>
+            <div class="wpc-property-loan-k9x7-cons-item-content edit-hoverable">
+              <h4 class="edit-hoverable">סיכון לנכס</h4>
+              <p class="edit-hoverable">במקרה של אי פירעון, הבנק יכול לממש את הנכס</p>
             </div>
           </div>
           
-          <div class="wpc-property-loan-k9x7-cons-item">
-            <div class="wpc-property-loan-k9x7-cons-item-icon">💸</div>
-            <div class="wpc-property-loan-k9x7-cons-item-content">
-              <h4>עלויות נלוות</h4>
-              <p>שמאות, רישום משכון, עו"ד - עלויות של כ-5,000 ש"ח</p>
+          <div class="wpc-property-loan-k9x7-cons-item edit-hoverable">
+            <div class="wpc-property-loan-k9x7-cons-item-icon edit-hoverable">💸</div>
+            <div class="wpc-property-loan-k9x7-cons-item-content edit-hoverable">
+              <h4 class="edit-hoverable">עלויות נלוות</h4>
+              <p class="edit-hoverable">שמאות, רישום משכון, עו"ד - עלויות של כ-5,000 ש"ח</p>
             </div>
           </div>
           
-          <div class="wpc-property-loan-k9x7-cons-item">
-            <div class="wpc-property-loan-k9x7-cons-item-icon">🔒</div>
-            <div class="wpc-property-loan-k9x7-cons-item-content">
-              <h4>הגבלות על הנכס</h4>
-              <p>לא ניתן למכור או לשעבד שוב ללא אישור הבנק</p>
+          <div class="wpc-property-loan-k9x7-cons-item edit-hoverable">
+            <div class="wpc-property-loan-k9x7-cons-item-icon edit-hoverable">🔒</div>
+            <div class="wpc-property-loan-k9x7-cons-item-content edit-hoverable">
+              <h4 class="edit-hoverable">הגבלות על הנכס</h4>
+              <p class="edit-hoverable">לא ניתן למכור או לשעבד שוב ללא אישור הבנק</p>
             </div>
           </div>
           
-          <div class="wpc-property-loan-k9x7-cons-item">
-            <div class="wpc-property-loan-k9x7-cons-item-icon">⏳</div>
-            <div class="wpc-property-loan-k9x7-cons-item-content">
-              <h4>תהליך ארוך יותר</h4>
-              <p>2-3 שבועות לעומת שבוע בהלוואה רגילה</p>
+          <div class="wpc-property-loan-k9x7-cons-item edit-hoverable">
+            <div class="wpc-property-loan-k9x7-cons-item-icon edit-hoverable">⏳</div>
+            <div class="wpc-property-loan-k9x7-cons-item-content edit-hoverable">
+              <h4 class="edit-hoverable">תהליך ארוך יותר</h4>
+              <p class="edit-hoverable">2-3 שבועות לעומת שבוע בהלוואה רגילה</p>
             </div>
           </div>
         </div>
         
-        <div class="wpc-property-loan-k9x7-cons-footer">
-          <div class="wpc-property-loan-k9x7-cons-warning">
-            <span class="wpc-property-loan-k9x7-warning-icon">⚠️</span>
-            <span class="wpc-property-loan-k9x7-warning-text">שקלו בזהירות</span>
+        <div class="wpc-property-loan-k9x7-cons-footer edit-hoverable">
+          <div class="wpc-property-loan-k9x7-cons-warning edit-hoverable">
+            <span class="wpc-property-loan-k9x7-warning-icon edit-hoverable">⚠️</span>
+            <span class="wpc-property-loan-k9x7-warning-text edit-hoverable">שקלו בזהירות</span>
           </div>
         </div>
       </div>
@@ -1688,32 +1682,32 @@ html {
     </div>
     
     <!-- סיכום ויזואלי -->
-    <div class="wpc-property-loan-k9x7-summary-comparison">
-      <div class="wpc-property-loan-k9x7-summary-title">
-        <h4>מסקנה: האם הלוואה כנגד נכס מתאימה לכם?</h4>
+    <div class="wpc-property-loan-k9x7-summary-comparison edit-hoverable">
+      <div class="wpc-property-loan-k9x7-summary-title edit-hoverable">
+        <h4 class="edit-hoverable">מסקנה: האם זאת ההלוואה שמתאימה לכם?</h4>
       </div>
       
-      <div class="wpc-property-loan-k9x7-recommendation-cards">
-        <div class="wpc-property-loan-k9x7-recommendation-card good">
-          <div class="wpc-property-loan-k9x7-rec-icon">👍</div>
-          <div class="wpc-property-loan-k9x7-rec-content">
-            <h5>מתאים אם:</h5>
-            <ul>
-              <li>יש לכם נכס עם הון עצמי</li>
-              <li>צריכים סכום גדול</li>
-              <li>יכולת החזר יציבה</li>
+      <div class="wpc-property-loan-k9x7-recommendation-cards edit-hoverable">
+        <div class="wpc-property-loan-k9x7-recommendation-card good edit-hoverable">
+          <div class="wpc-property-loan-k9x7-rec-icon edit-hoverable">👍</div>
+          <div class="wpc-property-loan-k9x7-rec-content edit-hoverable">
+            <h5 class="edit-hoverable">מתאים אם:</h5>
+            <ul class="edit-hoverable">
+              <li class="edit-hoverable">יש לכם נכס עם הון עצמי</li>
+              <li class="edit-hoverable">צריכים סכום גדול</li>
+              <li class="edit-hoverable">יכולת החזר יציבה</li>
             </ul>
           </div>
         </div>
         
-        <div class="wpc-property-loan-k9x7-recommendation-card bad">
-          <div class="wpc-property-loan-k9x7-rec-icon">👎</div>
-          <div class="wpc-property-loan-k9x7-rec-content">
-            <h5>לא מתאים אם:</h5>
-            <ul>
-              <li>אין וודאות בהכנסות</li>
-              <li>הנכס הוא הבית היחיד</li>
-              <li>צריכים כסף דחוף</li>
+        <div class="wpc-property-loan-k9x7-recommendation-card bad edit-hoverable">
+          <div class="wpc-property-loan-k9x7-rec-icon edit-hoverable">👎</div>
+          <div class="wpc-property-loan-k9x7-rec-content edit-hoverable">
+            <h5 class="edit-hoverable">לא מתאים אם:</h5>
+            <ul class="edit-hoverable">
+              <li class="edit-hoverable">אין וודאות בהכנסות</li>
+              <li class="edit-hoverable">הנכס הוא הבית היחיד</li>
+              <li class="edit-hoverable">צריכים כסף דחוף</li>
             </ul>
           </div>
         </div>
@@ -1722,122 +1716,139 @@ html {
   </section>
 
   <!-- אזור 10: Timeline תהליך קבלת הלוואה -->
-  <section class="wpc-property-loan-k9x7-content">
-    <div class="wpc-property-loan-k9x7-section-header">
-      <h2 class="wpc-property-loan-k9x7-section-title">תהליך קבלת המימון - שלב אחר שלב</h2>
-      <p class="wpc-property-loan-k9x7-section-subtitle">הכנה מלאה לתהליך</p>
+  <section class="wpc-property-loan-k9x7-content edit-hoverable">
+    <div class="wpc-property-loan-k9x7-section-header edit-hoverable">
+      <h2 class="wpc-property-loan-k9x7-section-title diff-element-changed edit-hoverable">תהליך קבלת המימון - שלב אחר שלב</h2>
+      <p class="wpc-property-loan-k9x7-section-subtitle edit-hoverable">הכנה מלאה לתהליך</p>
     </div>
     
-    <div class="wpc-property-loan-k9x7-timeline">
-      <div class="wpc-property-loan-k9x7-timeline-item">
-        <div class="wpc-property-loan-k9x7-timeline-number">1</div>
-        <div class="wpc-property-loan-k9x7-timeline-content">
-          <h4>בדיקת זכאות ראשונית</h4>
-          <p>האם יש לכם נכס בבעלות מלאה או חלקית?</p>
-          <span class="wpc-property-loan-k9x7-timeline-time">מיידי</span>
+    <div class="wpc-property-loan-k9x7-timeline edit-hoverable">
+      <div class="wpc-property-loan-k9x7-timeline-item edit-hoverable">
+        <div class="wpc-property-loan-k9x7-timeline-number edit-hoverable">1</div>
+        <div class="wpc-property-loan-k9x7-timeline-content edit-hoverable">
+          <h4 class="edit-hoverable">בדיקת זכאות ראשונית</h4>
+          <p class="edit-hoverable">האם יש לכם נכס בבעלות מלאה או חלקית?</p>
+          <span class="wpc-property-loan-k9x7-timeline-time edit-hoverable">מיידי</span>
         </div>
       </div>
       
-      <div class="wpc-property-loan-k9x7-timeline-item">
-        <div class="wpc-property-loan-k9x7-timeline-number">2</div>
-        <div class="wpc-property-loan-k9x7-timeline-content">
-          <h4>הערכת שווי הנכס</h4>
-          <p>שמאי מוסמך יעריך את שווי הנכס הנוכחי</p>
-          <span class="wpc-property-loan-k9x7-timeline-time">2-3 ימים</span>
+      <div class="wpc-property-loan-k9x7-timeline-item edit-hoverable">
+        <div class="wpc-property-loan-k9x7-timeline-number edit-hoverable">2</div>
+        <div class="wpc-property-loan-k9x7-timeline-content edit-hoverable">
+          <h4 class="edit-hoverable">הערכת שווי הנכס</h4>
+          <p class="edit-hoverable">שמאי מוסמך יעריך את שווי הנכס הנוכחי</p>
+          <span class="wpc-property-loan-k9x7-timeline-time edit-hoverable">2-3 ימים</span>
         </div>
       </div>
       
-      <div class="wpc-property-loan-k9x7-timeline-item">
-        <div class="wpc-property-loan-k9x7-timeline-number">3</div>
-        <div class="wpc-property-loan-k9x7-timeline-content">
-          <h4>חישוב LTV</h4>
-          <p>היחס בין סכום ההלוואה לשווי הנכס (עד 70%)</p>
-          <span class="wpc-property-loan-k9x7-timeline-time">מיידי</span>
+      <div class="wpc-property-loan-k9x7-timeline-item edit-hoverable">
+        <div class="wpc-property-loan-k9x7-timeline-number edit-hoverable">3</div>
+        <div class="wpc-property-loan-k9x7-timeline-content edit-hoverable">
+          <h4 class="edit-hoverable">חישוב LTV</h4>
+          <p class="edit-hoverable">היחס בין סכום ההלוואה לשווי הנכס (עד 70%)</p>
+          <span class="wpc-property-loan-k9x7-timeline-time edit-hoverable">מיידי</span>
         </div>
       </div>
       
-      <div class="wpc-property-loan-k9x7-timeline-item">
-        <div class="wpc-property-loan-k9x7-timeline-number">4</div>
-        <div class="wpc-property-loan-k9x7-timeline-content">
-          <h4>הגשת בקשה</h4>
-          <p>כולל מסמכים: טאבו, תלושי שכר, דוחות בנק</p>
-          <span class="wpc-property-loan-k9x7-timeline-time">1 יום</span>
+      <div class="wpc-property-loan-k9x7-timeline-item edit-hoverable">
+        <div class="wpc-property-loan-k9x7-timeline-number edit-hoverable">4</div>
+        <div class="wpc-property-loan-k9x7-timeline-content edit-hoverable">
+          <h4 class="edit-hoverable">הגשת בקשה</h4>
+          <p class="edit-hoverable">כולל מסמכים: טאבו, תלושי שכר, דוחות בנק</p>
+          <span class="wpc-property-loan-k9x7-timeline-time edit-hoverable">1 יום</span>
         </div>
       </div>
       
-      <div class="wpc-property-loan-k9x7-timeline-item">
-        <div class="wpc-property-loan-k9x7-timeline-number">5</div>
-        <div class="wpc-property-loan-k9x7-timeline-content">
-          <h4>אישור עקרוני</h4>
-          <p>קבלת אישור עקרוני מהבנק או חברת המימון</p>
-          <span class="wpc-property-loan-k9x7-timeline-time">3-7 ימים</span>
+      <div class="wpc-property-loan-k9x7-timeline-item edit-hoverable">
+        <div class="wpc-property-loan-k9x7-timeline-number edit-hoverable">5</div>
+        <div class="wpc-property-loan-k9x7-timeline-content edit-hoverable">
+          <h4 class="edit-hoverable">אישור עקרוני</h4>
+          <p class="edit-hoverable">קבלת אישור עקרוני מהבנק או חברת המימון</p>
+          <span class="wpc-property-loan-k9x7-timeline-time edit-hoverable">3-7 ימים</span>
         </div>
       </div>
       
-      <div class="wpc-property-loan-k9x7-timeline-item">
-        <div class="wpc-property-loan-k9x7-timeline-number">6</div>
-        <div class="wpc-property-loan-k9x7-timeline-content">
-          <h4>חתימה על מסמכים</h4>
-          <p>חתימה אצל עורך דין על כל המסמכים הנדרשים</p>
-          <span class="wpc-property-loan-k9x7-timeline-time">1-2 ימים</span>
+      <div class="wpc-property-loan-k9x7-timeline-item edit-hoverable">
+        <div class="wpc-property-loan-k9x7-timeline-number edit-hoverable">6</div>
+        <div class="wpc-property-loan-k9x7-timeline-content edit-hoverable">
+          <h4 class="edit-hoverable">חתימה על מסמכים</h4>
+          <p class="edit-hoverable">חתימה אצל עורך דין על כל המסמכים הנדרשים</p>
+          <span class="wpc-property-loan-k9x7-timeline-time edit-hoverable">1-2 ימים</span>
         </div>
       </div>
       
-      <div class="wpc-property-loan-k9x7-timeline-item">
-        <div class="wpc-property-loan-k9x7-timeline-number">7</div>
-        <div class="wpc-property-loan-k9x7-timeline-content">
-          <h4>רישום שעבוד</h4>
-          <p>רישום השעבוד בלשכת רישום המקרקעין</p>
-          <span class="wpc-property-loan-k9x7-timeline-time">3-5 ימים</span>
+      <div class="wpc-property-loan-k9x7-timeline-item edit-hoverable">
+        <div class="wpc-property-loan-k9x7-timeline-number edit-hoverable">7</div>
+        <div class="wpc-property-loan-k9x7-timeline-content edit-hoverable">
+          <h4 class="edit-hoverable">רישום שעבוד</h4>
+          <p class="edit-hoverable">רישום השעבוד בלשכת רישום המקרקעין</p>
+          <span class="wpc-property-loan-k9x7-timeline-time edit-hoverable">3-5 ימים</span>
         </div>
       </div>
       
-      <div class="wpc-property-loan-k9x7-timeline-item">
-        <div class="wpc-property-loan-k9x7-timeline-number">8</div>
-        <div class="wpc-property-loan-k9x7-timeline-content">
-          <h4>קבלת הכסף</h4>
-          <p>העברת סכום ההלוואה לחשבון הבנק שלכם</p>
-          <span class="wpc-property-loan-k9x7-timeline-time">1-3 ימים</span>
+      <div class="wpc-property-loan-k9x7-timeline-item edit-hoverable">
+        <div class="wpc-property-loan-k9x7-timeline-number edit-hoverable">8</div>
+        <div class="wpc-property-loan-k9x7-timeline-content edit-hoverable">
+          <h4 class="edit-hoverable">קבלת הכסף</h4>
+          <p class="edit-hoverable">העברת סכום ההלוואה לחשבון הבנק שלכם</p>
+          <span class="wpc-property-loan-k9x7-timeline-time edit-hoverable">1-3 ימים</span>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- אזור חישוב ריבית -->
+  <section class="wpc-property-loan-k9x7-content edit-hoverable">
+    <div class="wpc-property-loan-k9x7-section-header edit-hoverable">
+      <h2 class="wpc-property-loan-k9x7-section-title edit-hoverable">איך מחושבת הריבית בהלוואה כנגד נכס ב-2026?</h2>
+    </div>
+
+    <div class="wpc-property-loan-k9x7-text edit-hoverable">
+      הריבית על הלוואות בשעבוד נכס מורכבת מריבית הפריים, שעומדת נכון לינואר 2026 על 5.5% (ריבית בנק ישראל 4.0% + מרווח של 1.5%). אל ריבית הבסיס הזו מתווסף "מרווח סיכון" אישי, שנקבע על פי הפרמטרים הבאים:
+    </div>
+
+    <ul class="wpc-property-loan-k9x7-list edit-hoverable">
+      <li class="edit-hoverable"><strong class="edit-hoverable">טיב הנכס:</strong> מיקום הדירה והערכת השמאי העדכנית.</li>
+      <li class="edit-hoverable"><strong class="edit-hoverable">פרופיל הלווה:</strong> יציבות תעסוקתית ודירוג האשראי האישי (BDI).</li>
+      <li class="edit-hoverable"><strong class="edit-hoverable">אחוז המימון (LTV):</strong> ככל שאחוז ההלוואה נמוך יותר ביחס לשווי הנכס, כך הריבית תהיה אטרקטיבית יותר.</li>
+    </ul>
+  </section>
+
   <!-- אזור 11: ריבית עדכנית + טבלה -->
-  <section class="wpc-property-loan-k9x7-content">
-    <div class="wpc-property-loan-k9x7-section-header">
-      <h2 class="wpc-property-loan-k9x7-section-title">ריבית עדכנית על הלוואה כנגד נכס - 2025</h2>
-      <p class="wpc-property-loan-k9x7-section-subtitle">ריביות מעודכנות לפי סוג ההלוואה ואיכות הלקוח</p>
+  <section class="wpc-property-loan-k9x7-content edit-hoverable">
+    <div class="wpc-property-loan-k9x7-section-header edit-hoverable">
+      <h2 class="wpc-property-loan-k9x7-section-title edit-hoverable">ריבית עדכנית להלוואה 2026</h2>
+      <p class="wpc-property-loan-k9x7-section-subtitle edit-hoverable">ריביות מעודכנות לפי סוג ההלוואה ואיכות הלקוח</p>
     </div>
     
-    <div class="wpc-property-loan-k9x7-text">
-      ריבית על הלוואות כנגד נכס מושפעת מהבטוחה ומאיכות הלקוח, כמו גם מנתוני האשראי שלו. נכון ל-2025, הריביות נעות בטווחים הבאים:
+    <div class="wpc-property-loan-k9x7-text edit-hoverable">
+      ריבית על הלוואות כנגד נכס מושפעת מהבטוחה ומאיכות הלקוח, כמו גם מנתוני האשראי שלו. נכון ל-2026, הריביות נעות בטווחים הבאים:
     </div>
     
-    <div class="wpc-property-loan-k9x7-table-container">
+    <div class="wpc-property-loan-k9x7-table-container edit-hoverable">
       <table class="wpc-property-loan-k9x7-table">
         <thead>
           <tr>
-            <th>סוג ההלוואה</th>
-            <th>ריבית ממוצעת</th>
-            <th>הערות</th>
+            <th class="edit-hoverable">סוג ההלוואה</th>
+            <th class="edit-hoverable">ריבית ממוצעת</th>
+            <th class="edit-hoverable">הערות</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td data-label="סוג ההלוואה">הלוואה כנגד נכס בבנק</td>
-            <td data-label="ריבית ממוצעת">פריים + 0.5%-4.5%<br>(6%-10%)</td>
-            <td data-label="הערות">תלוי ב-LTV ואיכות לקוח</td>
+            <td data-label="סוג ההלוואה" class="edit-hoverable">הלוואה כנגד נכס בבנק (משכנתא לכל מטרה)</td>
+            <td data-label="ריבית ממוצעת" class="diff-element-changed edit-hoverable">פריים + 0.5%-4.5%<br>(6%-10%)</td>
+            <td data-label="הערות" class="edit-hoverable">תלוי ב-LTV ואיכות לקוח</td>
           </tr>
           <tr>
-            <td data-label="סוג ההלוואה">הלוואה חוץ בנקאית כנגד נכס</td>
-            <td data-label="ריבית ממוצעת">8%-15%</td>
-            <td data-label="הערות">גמישות רבה יותר בתנאים</td>
+            <td data-label="סוג ההלוואה" class="edit-hoverable">הלוואה חוץ בנקאית כנגד נכס</td>
+            <td data-label="ריבית ממוצעת" class="edit-hoverable">8%-15%</td>
+            <td data-label="הערות" class="edit-hoverable">גמישות רבה יותר בתנאים</td>
           </tr>
           <tr>
-            <td data-label="סוג ההלוואה">הלוואת גישור למשפרי דיור</td>
-            <td data-label="ריבית ממוצעת">פריים + 1%-3%<br>(6.5%-8.5%)</td>
-            <td data-label="הערות">עד 50% משווי הנכס</td>
+            <td data-label="סוג ההלוואה" class="edit-hoverable">הלוואת גישור למשפרי דיור</td>
+            <td data-label="ריבית ממוצעת" class="diff-element-changed edit-hoverable">פריים + 1%-3%<br>(6.5%-8.5%)</td>
+            <td data-label="הערות" class="edit-hoverable">עד 50% משווי הנכס</td>
           </tr>
         </tbody>
       </table>
@@ -1847,56 +1858,56 @@ html {
   </section>
 
   <!-- אזור 12: טבלת השוואת בנקים אינטראקטיבית -->
-  <section class="wpc-property-loan-k9x7-content">
-    <div class="wpc-property-loan-k9x7-section-header">
-      <h2 class="wpc-property-loan-k9x7-section-title">השוואת תנאים בבנקים המובילים</h2>
-      <p class="wpc-property-loan-k9x7-section-subtitle">השוואה מפורטת של התנאים בכל בנק</p>
+  <section class="wpc-property-loan-k9x7-content edit-hoverable">
+    <div class="wpc-property-loan-k9x7-section-header edit-hoverable">
+      <h2 class="wpc-property-loan-k9x7-section-title diff-element-changed edit-hoverable">השוואת תנאים בבנקים המובילים</h2>
+      <p class="wpc-property-loan-k9x7-section-subtitle edit-hoverable">משכנתא לכל מטרה בבנקים המובילים</p>
     </div>
     
-    <div class="wpc-property-loan-k9x7-banks-comparison">
-      <div class="wpc-property-loan-k9x7-bank-card">
-        <div class="wpc-property-loan-k9x7-bank-header">
-          <h3>בנק הפועלים</h3>
-          <div class="wpc-property-loan-k9x7-bank-stars">⭐⭐⭐⭐⭐</div>
+    <div class="wpc-property-loan-k9x7-banks-comparison edit-hoverable">
+      <div class="wpc-property-loan-k9x7-bank-card edit-hoverable">
+        <div class="wpc-property-loan-k9x7-bank-header edit-hoverable">
+          <h3 class="edit-hoverable">בנק הפועלים</h3>
+          <div class="wpc-property-loan-k9x7-bank-stars edit-hoverable">⭐⭐⭐⭐⭐</div>
         </div>
-        <div class="wpc-property-loan-k9x7-bank-rate">פריים + 0.5%</div>
-        <div class="wpc-property-loan-k9x7-bank-features">
-          <div class="wpc-property-loan-k9x7-bank-feature good">ריבית אטרקטיבית ללקוחות קיימים</div>
-          <div class="wpc-property-loan-k9x7-bank-feature good">אפשרות דיגיטלית מלאה</div>
-          <div class="wpc-property-loan-k9x7-bank-feature good">אישור תוך 48 שעות</div>
-        </div>
-        <button class="wpc-property-loan-k9x7-bank-btn" onclick="WPC_PropertyLoan_K9X7.scrollToForm()">
-          קבל הצעה טובה יותר
-        </button>
-      </div>
-      
-      <div class="wpc-property-loan-k9x7-bank-card featured">
-        <div class="wpc-property-loan-k9x7-bank-header">
-          <h3>בנק לאומי</h3>
-          <div class="wpc-property-loan-k9x7-bank-stars">⭐⭐⭐⭐⭐</div>
-          <div class="wpc-property-loan-k9x7-bank-badge">הטוב ביותר</div>
-        </div>
-        <div class="wpc-property-loan-k9x7-bank-rate">פריים + 0.3%</div>
-        <div class="wpc-property-loan-k9x7-bank-features">
-          <div class="wpc-property-loan-k9x7-bank-feature good">מסלולים גמישים</div>
-          <div class="wpc-property-loan-k9x7-bank-feature good">תקופת גרייס עד 6 חודשים</div>
-          <div class="wpc-property-loan-k9x7-bank-feature good">ליווי אישי מלא</div>
+        <div class="wpc-property-loan-k9x7-bank-rate edit-hoverable">פריים + 0.8%- 2.5%</div>
+        <div class="wpc-property-loan-k9x7-bank-features edit-hoverable">
+          <div class="wpc-property-loan-k9x7-bank-feature good edit-hoverable">ריבית אטרקטיבית ללקוחות קיימים</div>
+          <div class="wpc-property-loan-k9x7-bank-feature good edit-hoverable">אפשרות דיגיטלית מלאה</div>
+          <div class="wpc-property-loan-k9x7-bank-feature good edit-hoverable">אישור תוך 48 שעות</div>
         </div>
         <button class="wpc-property-loan-k9x7-bank-btn" onclick="WPC_PropertyLoan_K9X7.scrollToForm()">
           קבל הצעה טובה יותר
         </button>
       </div>
       
-      <div class="wpc-property-loan-k9x7-bank-card">
-        <div class="wpc-property-loan-k9x7-bank-header">
-          <h3>בנק דיסקונט</h3>
-          <div class="wpc-property-loan-k9x7-bank-stars">⭐⭐⭐⭐</div>
+      <div class="wpc-property-loan-k9x7-bank-card featured edit-hoverable">
+        <div class="wpc-property-loan-k9x7-bank-header edit-hoverable">
+          <h3 class="edit-hoverable">בנק לאומי</h3>
+          <div class="wpc-property-loan-k9x7-bank-stars edit-hoverable">⭐⭐⭐⭐⭐</div>
+          <div class="wpc-property-loan-k9x7-bank-badge edit-hoverable">הטוב ביותר</div>
         </div>
-        <div class="wpc-property-loan-k9x7-bank-rate">פריים + 0.8%</div>
-        <div class="wpc-property-loan-k9x7-bank-features">
-          <div class="wpc-property-loan-k9x7-bank-feature good">מתמחה בהלוואות עסקיות</div>
-          <div class="wpc-property-loan-k9x7-bank-feature good">נכסים מסחריים</div>
-          <div class="wpc-property-loan-k9x7-bank-feature good">תנאים מיוחדים למשפרי דיור</div>
+        <div class="wpc-property-loan-k9x7-bank-rate edit-hoverable">פריים + 0.4%-2%</div>
+        <div class="wpc-property-loan-k9x7-bank-features edit-hoverable">
+          <div class="wpc-property-loan-k9x7-bank-feature good edit-hoverable">מסלולים גמישים</div>
+          <div class="wpc-property-loan-k9x7-bank-feature good edit-hoverable">תקופת גרייס עד 6 חודשים</div>
+          <div class="wpc-property-loan-k9x7-bank-feature good edit-hoverable">ליווי אישי מלא</div>
+        </div>
+        <button class="wpc-property-loan-k9x7-bank-btn" onclick="WPC_PropertyLoan_K9X7.scrollToForm()">
+          קבל הצעה טובה יותר
+        </button>
+      </div>
+      
+      <div class="wpc-property-loan-k9x7-bank-card edit-hoverable">
+        <div class="wpc-property-loan-k9x7-bank-header edit-hoverable">
+          <h3 class="edit-hoverable">בנק דיסקונט</h3>
+          <div class="wpc-property-loan-k9x7-bank-stars edit-hoverable">⭐⭐⭐⭐</div>
+        </div>
+        <div class="wpc-property-loan-k9x7-bank-rate edit-hoverable">פריים + 0.5%- 2%</div>
+        <div class="wpc-property-loan-k9x7-bank-features edit-hoverable">
+          <div class="wpc-property-loan-k9x7-bank-feature good edit-hoverable">מתמחה בהלוואות עסקיות</div>
+          <div class="wpc-property-loan-k9x7-bank-feature good edit-hoverable">נכסים מסחריים</div>
+          <div class="wpc-property-loan-k9x7-bank-feature good edit-hoverable">תנאים מיוחדים למשפרי דיור</div>
         </div>
         <button class="wpc-property-loan-k9x7-bank-btn" onclick="WPC_PropertyLoan_K9X7.scrollToForm()">
           קבל הצעה טובה יותר
@@ -1906,99 +1917,99 @@ html {
   </section>
 
   <!-- אזור 13: הלוואה חוץ בנקאית -->
-  <section class="wpc-property-loan-k9x7-content">
-    <div class="wpc-property-loan-k9x7-section-header">
-      <h2 class="wpc-property-loan-k9x7-section-title">האפשרות החוץ בנקאית - למי מתאימה?</h2>
-      <p class="wpc-property-loan-k9x7-section-subtitle">חלופה גמישה עם יתרונות משמעותיים</p>
+  <section class="wpc-property-loan-k9x7-content edit-hoverable">
+    <div class="wpc-property-loan-k9x7-section-header edit-hoverable">
+      <h2 class="wpc-property-loan-k9x7-section-title diff-element-new edit-hoverable">האפשרות החוץ בנקאית - למי מתאימה?</h2>
+      <p class="wpc-property-loan-k9x7-section-subtitle edit-hoverable">חלופה גמישה עם יתרונות משמעותיים</p>
     </div>
     
-    <div class="wpc-property-loan-k9x7-text">
+    <div class="wpc-property-loan-k9x7-text edit-hoverable">
       בעזרת המומחים של רק תבקש ניתן לקחת הלוואה חוץ בנקאית כנגד נכס קיים. למרות שהריבית עשויה להיות גבוהה במעט (8%-15%), ישנם יתרונות משמעותיים:
     </div>
     
-    <div class="wpc-property-loan-k9x7-hover-cards-container">
+    <div class="wpc-property-loan-k9x7-hover-cards-container edit-hoverable">
       
-      <div class="wpc-property-loan-k9x7-hover-card">
-        <div class="wpc-property-loan-k9x7-hover-card-content">
-          <div class="wpc-property-loan-k9x7-hover-card-icon">🔧</div>
-          <h4>גמישות בתנאים</h4>
-          <p>מעבר עם העכבר לפרטים</p>
+      <div class="wpc-property-loan-k9x7-hover-card edit-hoverable">
+        <div class="wpc-property-loan-k9x7-hover-card-content edit-hoverable">
+          <div class="wpc-property-loan-k9x7-hover-card-icon edit-hoverable">🔧</div>
+          <h4 class="edit-hoverable">גמישות בתנאים</h4>
+          <p class="edit-hoverable">מעבר עם העכבר לפרטים</p>
         </div>
-        <div class="wpc-property-loan-k9x7-hover-card-overlay">
-          <h4>התאמה אישית מלאה</h4>
-          <ul>
-            <li>תנאי תשלום מותאמים אישית</li>
-            <li>אפשרות לשינוי מסלול בתהליך</li>
-            <li>התחשבות במצב הפיננסי הייחודי</li>
-            <li>פתרונות יצירתיים למקרים מורכבים</li>
+        <div class="wpc-property-loan-k9x7-hover-card-overlay edit-hoverable">
+          <h4 class="edit-hoverable">התאמה אישית מלאה</h4>
+          <ul class="edit-hoverable">
+            <li class="edit-hoverable">תנאי תשלום מותאמים אישית</li>
+            <li class="edit-hoverable">אפשרות לשינוי מסלול בתהליך</li>
+            <li class="edit-hoverable">התחשבות במצב הפיננסי הייחודי</li>
+            <li class="edit-hoverable">פתרונות יצירתיים למקרים מורכבים</li>
           </ul>
         </div>
       </div>
 
-      <div class="wpc-property-loan-k9x7-hover-card">
-        <div class="wpc-property-loan-k9x7-hover-card-content">
-          <div class="wpc-property-loan-k9x7-hover-card-icon">⚡</div>
-          <h4>אישור מהיר</h4>
-          <p>מעבר עם העכבר לפרטים</p>
+      <div class="wpc-property-loan-k9x7-hover-card edit-hoverable">
+        <div class="wpc-property-loan-k9x7-hover-card-content edit-hoverable">
+          <div class="wpc-property-loan-k9x7-hover-card-icon edit-hoverable">⚡</div>
+          <h4 class="edit-hoverable">אישור מהיר</h4>
+          <p class="edit-hoverable">מעבר עם העכבר לפרטים</p>
         </div>
-        <div class="wpc-property-loan-k9x7-hover-card-overlay">
-          <h4>תוך 24-48 שעות</h4>
-          <ul>
-            <li>בדיקת זכאות ראשונית תוך שעות</li>
-            <li>אישור עקרוני מהיר</li>
-            <li>תהליך דיגיטלי מואץ</li>
-            <li>פחות מסמכים ובירוקרטיה</li>
+        <div class="wpc-property-loan-k9x7-hover-card-overlay edit-hoverable">
+          <h4 class="edit-hoverable">תוך 24-48 שעות</h4>
+          <ul class="edit-hoverable">
+            <li class="edit-hoverable">בדיקת זכאות ראשונית תוך שעות</li>
+            <li class="edit-hoverable">אישור עקרוני מהיר</li>
+            <li class="edit-hoverable">תהליך דיגיטלי מואץ</li>
+            <li class="edit-hoverable">פחות מסמכים ובירוקרטיה</li>
           </ul>
         </div>
       </div>
 
-      <div class="wpc-property-loan-k9x7-hover-card">
-        <div class="wpc-property-loan-k9x7-hover-card-content">
-          <div class="wpc-property-loan-k9x7-hover-card-icon">📋</div>
-          <h4>פחות בירוקרטיה</h4>
-          <p>מעבר עם העכבר לפרטים</p>
+      <div class="wpc-property-loan-k9x7-hover-card edit-hoverable">
+        <div class="wpc-property-loan-k9x7-hover-card-content edit-hoverable">
+          <div class="wpc-property-loan-k9x7-hover-card-icon edit-hoverable">📋</div>
+          <h4 class="edit-hoverable">פחות בירוקרטיה</h4>
+          <p class="edit-hoverable">מעבר עם העכבר לפרטים</p>
         </div>
-        <div class="wpc-property-loan-k9x7-hover-card-overlay">
-          <h4>תהליך פשוט יותר</h4>
-          <ul>
-            <li>פחות מסמכים נדרשים</li>
-            <li>הליך אישור מקוצר</li>
-            <li>ללא וועדות אשראי ארוכות</li>
-            <li>שירות אישי וגמיש</li>
+        <div class="wpc-property-loan-k9x7-hover-card-overlay edit-hoverable">
+          <h4 class="edit-hoverable">תהליך פשוט יותר</h4>
+          <ul class="edit-hoverable">
+            <li class="edit-hoverable">פחות מסמכים נדרשים</li>
+            <li class="edit-hoverable">הליך אישור מקוצר</li>
+            <li class="edit-hoverable">ללא וועדות אשראי ארוכות</li>
+            <li class="edit-hoverable">שירות אישי וגמיש</li>
           </ul>
         </div>
       </div>
 
-      <div class="wpc-property-loan-k9x7-hover-card">
-        <div class="wpc-property-loan-k9x7-hover-card-content">
-          <div class="wpc-property-loan-k9x7-hover-card-icon">🎯</div>
-          <h4>אפשרות למוגבלים</h4>
-          <p>מעבר עם העכבר לפרטים</p>
+      <div class="wpc-property-loan-k9x7-hover-card edit-hoverable">
+        <div class="wpc-property-loan-k9x7-hover-card-content edit-hoverable">
+          <div class="wpc-property-loan-k9x7-hover-card-icon edit-hoverable">🎯</div>
+          <h4 class="edit-hoverable">אפשרות למוגבלים</h4>
+          <p class="edit-hoverable">מעבר עם העכבר לפרטים</p>
         </div>
-        <div class="wpc-property-loan-k9x7-hover-card-overlay">
-          <h4>גם עם BDI שלילי</h4>
-          <ul>
-            <li>פתרונות לבעלי BDI שלילי</li>
-            <li>התעלמות מהיסטוריה אשראי</li>
-            <li>דגש על הבטחות ולא על עבר</li>
-            <li>הזדמנות שנייה למוגבלים</li>
+        <div class="wpc-property-loan-k9x7-hover-card-overlay edit-hoverable">
+          <h4 class="edit-hoverable">גם עם BDI שלילי</h4>
+          <ul class="edit-hoverable">
+            <li class="edit-hoverable">פתרונות לבעלי BDI שלילי</li>
+            <li class="edit-hoverable">התעלמות מהיסטוריה אשראי</li>
+            <li class="edit-hoverable">דגש על הבטחות ולא על עבר</li>
+            <li class="edit-hoverable">הזדמנות שנייה למוגבלים</li>
           </ul>
         </div>
       </div>
 
-      <div class="wpc-property-loan-k9x7-hover-card">
-        <div class="wpc-property-loan-k9x7-hover-card-content">
-          <div class="wpc-property-loan-k9x7-hover-card-icon">📈</div>
-          <h4>LTV גבוה יותר</h4>
-          <p>מעבר עם העכבר לפרטים</p>
+      <div class="wpc-property-loan-k9x7-hover-card edit-hoverable">
+        <div class="wpc-property-loan-k9x7-hover-card-content edit-hoverable">
+          <div class="wpc-property-loan-k9x7-hover-card-icon edit-hoverable">📈</div>
+          <h4 class="edit-hoverable">LTV גבוה יותר</h4>
+          <p class="edit-hoverable">מעבר עם העכבר לפרטים</p>
         </div>
-        <div class="wpc-property-loan-k9x7-hover-card-overlay">
-          <h4>עד 80% במקרים מסוימים</h4>
-          <ul>
-            <li>יחס הלוואה לשווי גבוה יותר</li>
-            <li>יותר כסף על אותו נכס</li>
-            <li>פחות הון עצמי נדרש</li>
-            <li>מקסימום הנזילות מהנכס</li>
+        <div class="wpc-property-loan-k9x7-hover-card-overlay edit-hoverable">
+          <h4 class="edit-hoverable">עד 80% במקרים מסוימים</h4>
+          <ul class="edit-hoverable">
+            <li class="edit-hoverable">יחס הלוואה לשווי גבוה יותר</li>
+            <li class="edit-hoverable">יותר כסף על אותו נכס</li>
+            <li class="edit-hoverable">פחות הון עצמי נדרש</li>
+            <li class="edit-hoverable">מקסימום הנזילות מהנכס</li>
           </ul>
         </div>
       </div>
@@ -2009,95 +2020,95 @@ html {
 
 
   <!-- אזור 14.5: טיפים חשובים -->
-  <section class="wpc-property-loan-k9x7-content">
-    <div class="wpc-property-loan-k9x7-section-header">
-      <h2 class="wpc-property-loan-k9x7-section-title">5 טיפים שיחסכו לכם אלפי שקלים</h2>
-      <p class="wpc-property-loan-k9x7-section-subtitle">המלצות חשובות לקבלת התנאים הטובים ביותר</p>
+  <section class="wpc-property-loan-k9x7-content edit-hoverable">
+    <div class="wpc-property-loan-k9x7-section-header edit-hoverable">
+      <h2 class="wpc-property-loan-k9x7-section-title diff-element-new edit-hoverable">5 טיפים שיחסכו לכם אלפי שקלים</h2>
+      <p class="wpc-property-loan-k9x7-section-subtitle edit-hoverable">המלצות חשובות לקבלת התנאים הטובים ביותר</p>
     </div>
     
-    <div class="wpc-property-loan-k9x7-hover-cards-container">
+    <div class="wpc-property-loan-k9x7-hover-cards-container edit-hoverable">
       
-      <div class="wpc-property-loan-k9x7-hover-card">
-        <div class="wpc-property-loan-k9x7-hover-card-content">
-          <div class="wpc-property-loan-k9x7-hover-card-icon">🔍</div>
-          <h4>השוו הצעות</h4>
-          <p>מעבר עם העכבר לפרטים</p>
+      <div class="wpc-property-loan-k9x7-hover-card edit-hoverable">
+        <div class="wpc-property-loan-k9x7-hover-card-content edit-hoverable">
+          <div class="wpc-property-loan-k9x7-hover-card-icon edit-hoverable">🔍</div>
+          <h4 class="edit-hoverable">השוו הצעות</h4>
+          <p class="edit-hoverable">מעבר עם העכבר לפרטים</p>
         </div>
-        <div class="wpc-property-loan-k9x7-hover-card-overlay">
-          <h4>פנו לפחות ל-3 גופים מממנים</h4>
-          <ul>
-            <li>השוואת ריביות ותנאים</li>
-            <li>בדיקת עמלות והוצאות נלוות</li>
-            <li>מידע על מסלולי החזר שונים</li>
-            <li>מו"מ על התנאים הטובים ביותר</li>
+        <div class="wpc-property-loan-k9x7-hover-card-overlay edit-hoverable">
+          <h4 class="edit-hoverable">פנו לפחות ל-3 גופים מממנים</h4>
+          <ul class="edit-hoverable">
+            <li class="edit-hoverable">השוואת ריביות ותנאים</li>
+            <li class="edit-hoverable">בדיקת עמלות והוצאות נלוות</li>
+            <li class="edit-hoverable">מידע על מסלולי החזר שונים</li>
+            <li class="edit-hoverable">מו"מ על התנאים הטובים ביותר</li>
           </ul>
         </div>
       </div>
 
-      <div class="wpc-property-loan-k9x7-hover-card">
-        <div class="wpc-property-loan-k9x7-hover-card-content">
-          <div class="wpc-property-loan-k9x7-hover-card-icon">💰</div>
-          <h4>בדקו עמלות נסתרות</h4>
-          <p>מעבר עם העכבר לפרטים</p>
+      <div class="wpc-property-loan-k9x7-hover-card edit-hoverable">
+        <div class="wpc-property-loan-k9x7-hover-card-content edit-hoverable">
+          <div class="wpc-property-loan-k9x7-hover-card-icon edit-hoverable">💰</div>
+          <h4 class="edit-hoverable">בדקו עמלות נסתרות</h4>
+          <p class="edit-hoverable">מעבר עם העכבר לפרטים</p>
         </div>
-        <div class="wpc-property-loan-k9x7-hover-card-overlay">
-          <h4>עמלות שכדאי לבדוק</h4>
-          <ul>
-            <li>עמלת פתיחת תיק ועיבוד בקשה</li>
-            <li>עמלת פירעון מוקדם</li>
-            <li>דמי ניהול חשבון חודשיים</li>
-            <li>עלויות שמאות ועו"ד</li>
+        <div class="wpc-property-loan-k9x7-hover-card-overlay edit-hoverable">
+          <h4 class="edit-hoverable">עמלות שכדאי לבדוק</h4>
+          <ul class="edit-hoverable">
+            <li class="edit-hoverable">עמלת פתיחת תיק ועיבוד בקשה</li>
+            <li class="edit-hoverable">עמלת פירעון מוקדם</li>
+            <li class="edit-hoverable">דמי ניהול חשבון חודשיים</li>
+            <li class="edit-hoverable">עלויות שמאות ועו"ד</li>
           </ul>
         </div>
       </div>
 
-      <div class="wpc-property-loan-k9x7-hover-card">
-        <div class="wpc-property-loan-k9x7-hover-card-content">
-          <div class="wpc-property-loan-k9x7-hover-card-icon">🔮</div>
-          <h4>חשבו על העתיד</h4>
-          <p>מעבר עם העכבר לפרטים</p>
+      <div class="wpc-property-loan-k9x7-hover-card edit-hoverable">
+        <div class="wpc-property-loan-k9x7-hover-card-content edit-hoverable">
+          <div class="wpc-property-loan-k9x7-hover-card-icon edit-hoverable">🔮</div>
+          <h4 class="edit-hoverable">חשבו על העתיד</h4>
+          <p class="edit-hoverable">מעבר עם העכבר לפרטים</p>
         </div>
-        <div class="wpc-property-loan-k9x7-hover-card-overlay">
-          <h4>תכנון פיננסי לטווח ארוך</h4>
-          <ul>
-            <li>חישוב יכולת החזר גם בעליית ריבית</li>
-            <li>תכנון לשינויים בהכנסה</li>
-            <li>שמירת רזרבה לחירום</li>
-            <li>בחינת השפעה על משפחה</li>
+        <div class="wpc-property-loan-k9x7-hover-card-overlay edit-hoverable">
+          <h4 class="edit-hoverable">תכנון פיננסי לטווח ארוך</h4>
+          <ul class="edit-hoverable">
+            <li class="edit-hoverable">חישוב יכולת החזר גם בעליית ריבית</li>
+            <li class="edit-hoverable">תכנון לשינויים בהכנסה</li>
+            <li class="edit-hoverable">שמירת רזרבה לחירום</li>
+            <li class="edit-hoverable">בחינת השפעה על משפחה</li>
           </ul>
         </div>
       </div>
 
-      <div class="wpc-property-loan-k9x7-hover-card">
-        <div class="wpc-property-loan-k9x7-hover-card-content">
-          <div class="wpc-property-loan-k9x7-hover-card-icon">🛡️</div>
-          <h4>שקלו ביטוח</h4>
-          <p>מעבר עם העכבר לפרטים</p>
+      <div class="wpc-property-loan-k9x7-hover-card edit-hoverable">
+        <div class="wpc-property-loan-k9x7-hover-card-content edit-hoverable">
+          <div class="wpc-property-loan-k9x7-hover-card-icon edit-hoverable">🛡️</div>
+          <h4 class="edit-hoverable">שקלו ביטוח</h4>
+          <p class="edit-hoverable">מעבר עם העכבר לפרטים</p>
         </div>
-        <div class="wpc-property-loan-k9x7-hover-card-overlay">
-          <h4>הגנה על הנכס והמשפחה</h4>
-          <ul>
-            <li>ביטוח אבדן כושר עבודה</li>
-            <li>ביטוח חיים לכיסוי ההלוואה</li>
-            <li>ביטוח אובדן עבודה</li>
-            <li>ביטוח הנכס עצמו</li>
+        <div class="wpc-property-loan-k9x7-hover-card-overlay edit-hoverable">
+          <h4 class="edit-hoverable">הגנה על הנכס והמשפחה</h4>
+          <ul class="edit-hoverable">
+            <li class="edit-hoverable">ביטוח אבדן כושר עבודה</li>
+            <li class="edit-hoverable">ביטוח חיים לכיסוי ההלוואה</li>
+            <li class="edit-hoverable">ביטוח אובדן עבודה</li>
+            <li class="edit-hoverable">ביטוח הנכס עצמו</li>
           </ul>
         </div>
       </div>
 
-      <div class="wpc-property-loan-k9x7-hover-card">
-        <div class="wpc-property-loan-k9x7-hover-card-content">
-          <div class="wpc-property-loan-k9x7-hover-card-icon">⚖️</div>
-          <h4>ייעוץ משפטי</h4>
-          <p>מעבר עם העכבר לפרטים</p>
+      <div class="wpc-property-loan-k9x7-hover-card edit-hoverable">
+        <div class="wpc-property-loan-k9x7-hover-card-content edit-hoverable">
+          <div class="wpc-property-loan-k9x7-hover-card-icon edit-hoverable">⚖️</div>
+          <h4 class="edit-hoverable">ייעוץ משפטי</h4>
+          <p class="edit-hoverable">מעבר עם העכבר לפרטים</p>
         </div>
-        <div class="wpc-property-loan-k9x7-hover-card-overlay">
-          <h4>התייעצות עם מומחים</h4>
-          <ul>
-            <li>עריכת הסכם ההלוואה</li>
-            <li>בדיקת תנאי השעבוד</li>
-            <li>הבנת הזכויות והחובות</li>
-            <li>ייעוץ לפני חתימה סופית</li>
+        <div class="wpc-property-loan-k9x7-hover-card-overlay edit-hoverable">
+          <h4 class="edit-hoverable">התייעצות עם מומחים</h4>
+          <ul class="edit-hoverable">
+            <li class="edit-hoverable">עריכת הסכם ההלוואה</li>
+            <li class="edit-hoverable">בדיקת תנאי השעבוד</li>
+            <li class="edit-hoverable">הבנת הזכויות והחובות</li>
+            <li class="edit-hoverable">ייעוץ לפני חתימה סופית</li>
           </ul>
         </div>
       </div>
@@ -2106,20 +2117,20 @@ html {
   </section>
 
   <!-- אזור 15: סיכום -->
-  <section class="wpc-property-loan-k9x7-content">
-    <div class="wpc-property-loan-k9x7-section-header">
-      <h2 class="wpc-property-loan-k9x7-section-title">מה עכשיו? הצעד הבא שלכם</h2>
-      <p class="wpc-property-loan-k9x7-section-subtitle">הפתרון האידיאלי למי שזקוק לסכום גדול בתנאים נוחים</p>
+  <section class="wpc-property-loan-k9x7-content edit-hoverable">
+    <div class="wpc-property-loan-k9x7-section-header edit-hoverable">
+      <h2 class="wpc-property-loan-k9x7-section-title diff-element-new edit-hoverable">מה עכשיו? הצעד הבא שלכם</h2>
+      <p class="wpc-property-loan-k9x7-section-subtitle edit-hoverable">הפתרון האידיאלי למי שזקוק לסכום גדול בתנאים נוחים</p>
     </div>
     
-    <div class="wpc-property-loan-k9x7-text">
-      בסוף, זה די פשוט: יש לך נכס? אתה יכול לקבל תנאים שמי שאין לו יכול רק לחלום עליהם. עם ריביות של 6%-9.5% וטווחי החזר ארוכים, זוהי אחת האפשרויות הטובות בשוק. השאלה היחידה היא - כמה אתה צריך, ולמה.
+    <div class="wpc-property-loan-k9x7-text diff-element-new edit-hoverable">
+      בסוף, זה די פשוט: יש לך בית, דירה או נכס מסחרי? אתה יכול לקבל תנאים שמי שאין לו יכול רק לחלום עליהם. עם ריביות של 6%-9.5% וטווחי החזר ארוכים, זוהי אחת האפשרויות הטובות בשוק. השאלה היחידה היא - כמה אתה צריך, ולמה.
     </div>
     
-    <div class="wpc-property-loan-k9x7-summary-cta">
-      <div class="wpc-property-loan-k9x7-summary-box">
-        <h3>המומחים של רק תבקש כאן לעזור!</h3>
-        <p>אנו עובדים מול כל הבנקים וחברות המימון המובילות בישראל. נדאג להשיג עבורכם את התנאים הטובים ביותר להלוואה כנגד הנכס שלכם.</p>
+    <div class="wpc-property-loan-k9x7-summary-cta edit-hoverable">
+      <div class="wpc-property-loan-k9x7-summary-box edit-hoverable">
+        <h3 class="edit-hoverable">המומחים של רק תבקש כאן לעזור!</h3>
+        <p class="edit-hoverable">אנו עובדים מול כל הבנקים וחברות המימון המובילות בישראל. נדאג להשיג עבורכם את התנאים הטובים ביותר להלוואה כנגד הנכס שלכם.</p>
         <button class="wpc-property-loan-k9x7-summary-btn" onclick="WPC_PropertyLoan_K9X7.scrollToForm()">
           השאירו פרטים לקבלת הצעה מותאמת
         </button>
@@ -2128,118 +2139,116 @@ html {
   </section>
 
   <!-- אזור 16: FAQ אינטראקטיבי -->
-  <section class="wpc-property-loan-k9x7-content" id="faq-section">
-    <div class="wpc-property-loan-k9x7-section-header">
-      <h2 class="wpc-property-loan-k9x7-section-title">שאלות ותשובות</h2>
-      <p class="wpc-property-loan-k9x7-section-subtitle">כל התשובות לשאלות שחשובות לכם</p>
+  <section class="wpc-property-loan-k9x7-content edit-hoverable" id="faq-section">
+    <div class="wpc-property-loan-k9x7-section-header edit-hoverable">
+      <h2 class="wpc-property-loan-k9x7-section-title diff-element-new edit-hoverable">שאלות ותשובות</h2>
+      <p class="wpc-property-loan-k9x7-section-subtitle edit-hoverable">כל התשובות לשאלות שחשובות לכם</p>
     </div>
     
-    <div class="wpc-property-loan-k9x7-faq-container" itemscope itemtype="https://schema.org/FAQPage">
+    <div class="wpc-property-loan-k9x7-faq-container edit-hoverable" itemscope="" itemtype="https://schema.org/FAQPage">
       
-      <div class="wpc-property-loan-k9x7-faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-        <div class="wpc-property-loan-k9x7-faq-question" itemprop="name" onclick="WPC_PropertyLoan_K9X7.toggleFAQ(this)">
+      <div class="wpc-property-loan-k9x7-faq-item edit-hoverable" itemscope="" itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <div class="wpc-property-loan-k9x7-faq-question diff-element-new edit-hoverable" itemprop="name" onclick="WPC_PropertyLoan_K9X7.toggleFAQ(this)">
           הלוואה כנגד נכס - זו משכנתא או משהו אחר?
-          <span class="wpc-property-loan-k9x7-faq-arrow">←</span>
+          <span class="wpc-property-loan-k9x7-faq-arrow edit-hoverable" style="transform: rotate(0deg);">←</span>
         </div>
-        <div class="wpc-property-loan-k9x7-faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-          <div itemprop="text">
-            <p>זה לא <a href="https://loan-israel.co.il/%d7%94%d7%9c%d7%95%d7%95%d7%90%d7%95%d7%aa-%d7%92%d7%93%d7%95%d7%9c%d7%95%d7%aa/">משכנתא רגילה</a> - זו הלוואה לכל מטרה שהנכס שלך מבטיח. מניסיוננו, הרבה לקוחות מבולבלים. משכנתא זה לרכישת דירה. הלוואה כנגד נכס זה כשיש לך כבר דירה ואתה רוצה כסף למשהו אחר. היתרון? ריבית נמוכה כמו משכנתא, אבל גמישות של <a href="https://loan-israel.co.il/">הלוואה לכל מטרה</a> רגילה. הבנקים לא תמיד מסבירים את ההבדל - הם מעדיפים שתיקח הלוואה רגילה בריבית גבוהה.</p>
+        <div class="wpc-property-loan-k9x7-faq-answer edit-hoverable" itemscope="" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer" style="max-height: 0px;">
+          <div itemprop="text" class="edit-hoverable">
+            <p class="edit-hoverable">זה לא <a href="https://loan-israel.co.il/%d7%94%d7%9c%d7%95%d7%95%d7%90%d7%95%d7%aa-%d7%92%d7%93%d7%95%d7%9c%d7%95%d7%aa/" class="diff-element-new edit-hoverable">משכנתא רגילה</a> - זו הלוואה לכל מטרה שהנכס שלך מבטיח. מניסיוננו, הרבה לקוחות מבולבלים. משכנתא זה לרכישת דירה. הלוואה כנגד נכס זה כשיש לך כבר דירה ואתה רוצה כסף למשהו אחר. היתרון? ריבית נמוכה כמו משכנתא, אבל גמישות של <a href="https://loan-israel.co.il/" class="diff-element-new edit-hoverable">הלוואה לכל מטרה</a> רגילה. הבנקים לא תמיד מסבירים את ההבדל - הם מעדיפים שתיקח הלוואה רגילה בריבית גבוהה.</p>
           </div>
         </div>
       </div>
 
-      <div class="wpc-property-loan-k9x7-faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-        <div class="wpc-property-loan-k9x7-faq-question" itemprop="name" onclick="WPC_PropertyLoan_K9X7.toggleFAQ(this)">
-          כמה אפשר לקבל בהלוואה כנגד נכס?
-          <span class="wpc-property-loan-k9x7-faq-arrow">←</span>
+      <div class="wpc-property-loan-k9x7-faq-item edit-hoverable" itemscope="" itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <div class="wpc-property-loan-k9x7-faq-question edit-hoverable" itemprop="name" onclick="WPC_PropertyLoan_K9X7.toggleFAQ(this)">
+          כמה אפשר לקבל בהלוואה כזו?<span class="wpc-property-loan-k9x7-faq-arrow edit-hoverable" style="transform: rotate(0deg);">←</span>
         </div>
-        <div class="wpc-property-loan-k9x7-faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-          <div itemprop="text">
-            <p>בדרך כלל עד 70% משווי הנכס בבנקים, ועד 80% בחברות חוץ בנקאיות. אם שווי הדירה מיליון ש"ח, תוכלו לקבל עד 700,000 ש"ח.</p>
+        <div class="wpc-property-loan-k9x7-faq-answer edit-hoverable" itemscope="" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer" style="max-height: 0px;">
+          <div itemprop="text" class="edit-hoverable">
+            <p class="edit-hoverable">בדרך כלל עד 70% משווי הנכס בבנקים, ועד 80% בחברות חוץ בנקאיות. אם שווי הדירה מיליון ש"ח, תוכלו לקבל עד 700,000 ש"ח.</p>
           </div>
         </div>
       </div>
 
-      <div class="wpc-property-loan-k9x7-faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-        <div class="wpc-property-loan-k9x7-faq-question" itemprop="name" onclick="WPC_PropertyLoan_K9X7.toggleFAQ(this)">
+      <div class="wpc-property-loan-k9x7-faq-item edit-hoverable" itemscope="" itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <div class="wpc-property-loan-k9x7-faq-question edit-hoverable" itemprop="name" onclick="WPC_PropertyLoan_K9X7.toggleFAQ(this)">
           האם אפשר לקחת הלוואה כנגד נכס עם משכנתא קיימת?
-          <span class="wpc-property-loan-k9x7-faq-arrow">←</span>
+          <span class="wpc-property-loan-k9x7-faq-arrow edit-hoverable" style="transform: rotate(0deg);">←</span>
         </div>
-        <div class="wpc-property-loan-k9x7-faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-          <div itemprop="text">
-            <p>כן, אבל סכום ההלוואה יהיה נמוך יותר. אם יש משכנתא של 300,000 ש"ח על דירה ששווה מיליון, תוכלו לקבל הלוואה נוספת של עד 400,000 ש"ח.</p>
+        <div class="wpc-property-loan-k9x7-faq-answer edit-hoverable" itemscope="" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer" style="max-height: 0px;">
+          <div itemprop="text" class="edit-hoverable">
+            <p class="edit-hoverable">כן, אבל סכום ההלוואה יהיה נמוך יותר. אם יש משכנתא של 300,000 ש"ח על דירה ששווה מיליון, תוכלו לקבל הלוואה נוספת של עד 400,000 ש"ח.</p>
           </div>
         </div>
       </div>
 
-      <div class="wpc-property-loan-k9x7-faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-        <div class="wpc-property-loan-k9x7-faq-question" itemprop="name" onclick="WPC_PropertyLoan_K9X7.toggleFAQ(this)">
+      <div class="wpc-property-loan-k9x7-faq-item edit-hoverable" itemscope="" itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <div class="wpc-property-loan-k9x7-faq-question diff-element-new edit-hoverable" itemprop="name" onclick="WPC_PropertyLoan_K9X7.toggleFAQ(this)">
           מפחד לסכן את הדירה? מה באמת קורה אם לא מחזירים?
-          <span class="wpc-property-loan-k9x7-faq-arrow">←</span>
+          <span class="wpc-property-loan-k9x7-faq-arrow edit-hoverable" style="transform: rotate(0deg);">←</span>
         </div>
-        <div class="wpc-property-loan-k9x7-faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-          <div itemprop="text">
-            <p>כן, יש סיכון - אבל הוא לא כזה גדול אם לוקחים סכום נכון. מניסיוננו, הבעיות מתחילות רק כשלוקחים יותר ממה שאפשר להחזיר. הפתרון? לקחת רק מה שאתה באמת יכול להחזיר. אנחנו עוזרים לך לחשב את זה. הפחד מ"איבוד הדירה" גורם לאנשים לקחת הלוואות רגילות בריבית גבוהה - וזה דווקא מסוכן יותר לתזרים שלהם.</p>
+        <div class="wpc-property-loan-k9x7-faq-answer edit-hoverable" itemscope="" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer" style="max-height: 0px;">
+          <div itemprop="text" class="edit-hoverable">
+            <p class="diff-element-new edit-hoverable">כן, יש סיכון - אבל הוא לא כזה גדול אם לוקחים סכום נכון. מניסיוננו, הבעיות מתחילות רק כשלוקחים יותר ממה שאפשר להחזיר. הפתרון? לקחת רק מה שאתה באמת יכול להחזיר. אנחנו עוזרים לך לחשב את זה. הפחד מ"איבוד הדירה" גורם לאנשים לקחת הלוואות רגילות בריבית גבוהה - וזה דווקא מסוכן יותר לתזרים שלהם.</p>
           </div>
         </div>
       </div>
 
-      <div class="wpc-property-loan-k9x7-faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-        <div class="wpc-property-loan-k9x7-faq-question" itemprop="name" onclick="WPC_PropertyLoan_K9X7.toggleFAQ(this)">
-          כמה זמן לוקח לקבל הלוואה כנגד נכס?
-          <span class="wpc-property-loan-k9x7-faq-arrow">←</span>
+      <div class="wpc-property-loan-k9x7-faq-item edit-hoverable" itemscope="" itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <div class="wpc-property-loan-k9x7-faq-question edit-hoverable" itemprop="name" onclick="WPC_PropertyLoan_K9X7.toggleFAQ(this)">
+          כמה זמן לוקח לקבל הלוואה לבעלי נכסים?
+          <span class="wpc-property-loan-k9x7-faq-arrow edit-hoverable" style="transform: rotate(0deg);">←</span>
         </div>
-        <div class="wpc-property-loan-k9x7-faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-          <div itemprop="text">
-            <p>בבנקים: 7-14 ימי עסקים. בחברות חוץ בנקאיות: 3-7 ימי עסקים. התהליך כולל הערכת שמאי, אישור אשראי ורישום שעבוד. אם אתם צריכים כסף מהר יותר, ניתן לשקול <a href="https://loan-israel.co.il/instant-loan/">הלוואה מיידית</a>.</p>
+        <div class="wpc-property-loan-k9x7-faq-answer edit-hoverable" itemscope="" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer" style="max-height: 0px;">
+          <div itemprop="text" class="edit-hoverable">
+            <p class="edit-hoverable">בבנקים: 7-14 ימי עסקים. בחברות חוץ בנקאיות: 3-7 ימי עסקים. התהליך כולל הערכת שמאי, אישור אשראי ורישום שעבוד. אם אתם צריכים כסף מהר יותר, ניתן לשקול <a href="https://loan-israel.co.il/instant-loan/" class="diff-element-new edit-hoverable">הלוואה מיידית</a>.</p>
           </div>
         </div>
       </div>
 
-      <div class="wpc-property-loan-k9x7-faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-        <div class="wpc-property-loan-k9x7-faq-question" itemprop="name" onclick="WPC_PropertyLoan_K9X7.toggleFAQ(this)">
-          מהן העלויות הנלוות להלוואה כנגד נכס?
-          <span class="wpc-property-loan-k9x7-faq-arrow">←</span>
+      <div class="wpc-property-loan-k9x7-faq-item edit-hoverable" itemscope="" itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <div class="wpc-property-loan-k9x7-faq-question edit-hoverable" itemprop="name" onclick="WPC_PropertyLoan_K9X7.toggleFAQ(this)">
+          מהן העלויות הנלוות למימון כנגד נדל"ן?
+          <span class="wpc-property-loan-k9x7-faq-arrow edit-hoverable" style="transform: rotate(0deg);">←</span>
         </div>
-        <div class="wpc-property-loan-k9x7-faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-          <div itemprop="text">
-            <p>שמאות: 500-1,500 ש"ח, עורך דין: 2,000-5,000 ש"ח, רישום משכון: כ-500 ש"ח, עמלת פתיחת תיק: 0.5%-1% מסכום ההלוואה.</p>
+        <div class="wpc-property-loan-k9x7-faq-answer edit-hoverable" itemscope="" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer" style="max-height: 0px;">
+          <div itemprop="text" class="edit-hoverable">
+            <p class="edit-hoverable">שמאות: 500-1,500 ש"ח, עורך דין: 2,000-5,000 ש"ח, רישום משכון: כ-500 ש"ח, עמלת פתיחת תיק: 0.5%-1% מסכום ההלוואה.</p>
           </div>
         </div>
       </div>
 
-      <div class="wpc-property-loan-k9x7-faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-        <div class="wpc-property-loan-k9x7-faq-question" itemprop="name" onclick="WPC_PropertyLoan_K9X7.toggleFAQ(this)">
-          האם אפשר לפרוע הלוואה כנגד נכס מוקדם?
-          <span class="wpc-property-loan-k9x7-faq-arrow">←</span>
+      <div class="wpc-property-loan-k9x7-faq-item edit-hoverable" itemscope="" itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <div class="wpc-property-loan-k9x7-faq-question edit-hoverable" itemprop="name" onclick="WPC_PropertyLoan_K9X7.toggleFAQ(this)">
+          האם אפשר לפרוע הלוואות כאלו מוקדם?
+          <span class="wpc-property-loan-k9x7-faq-arrow edit-hoverable" style="transform: rotate(0deg);">←</span>
         </div>
-        <div class="wpc-property-loan-k9x7-faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-          <div itemprop="text">
-            <p>כן, אבל יש לבדוק עמלות פירעון מוקדם. בדרך כלל 0.5%-1.5% מהיתרה, תלוי במסלול ובתקופה שנותרה.</p>
+        <div class="wpc-property-loan-k9x7-faq-answer edit-hoverable" itemscope="" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer" style="max-height: 0px;">
+          <div itemprop="text" class="edit-hoverable">
+            <p class="edit-hoverable">כן, אבל יש לבדוק עמלות פירעון מוקדם. בדרך כלל 0.5%-1.5% מהיתרה, תלוי במסלול ובתקופה שנותרה.</p>
           </div>
         </div>
       </div>
 
-      <div class="wpc-property-loan-k9x7-faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-        <div class="wpc-property-loan-k9x7-faq-question" itemprop="name" onclick="WPC_PropertyLoan_K9X7.toggleFAQ(this)">
-          למי כדאי לקחת הלוואה כנגד נכס?
-          <span class="wpc-property-loan-k9x7-faq-arrow">←</span>
+      <div class="wpc-property-loan-k9x7-faq-item edit-hoverable active" itemscope="" itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <div class="wpc-property-loan-k9x7-faq-question edit-hoverable" itemprop="name" onclick="WPC_PropertyLoan_K9X7.toggleFAQ(this)">
+          למי זה כדאי?<span class="wpc-property-loan-k9x7-faq-arrow edit-hoverable" style="transform: rotate(90deg);">←</span>
         </div>
-        <div class="wpc-property-loan-k9x7-faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-          <div itemprop="text">
-            <p>לבעלי נכס שצריכים <a href="https://loan-israel.co.il/%d7%94%d7%9c%d7%95%d7%95%d7%90%d7%95%d7%aa-%d7%92%d7%93%d7%95%d7%9c%d7%95%d7%aa-2/">סכום גדול</a> (מעל 100,000 ש"ח), רוצים ריבית נמוכה וטווח החזר ארוך, או צריכים לאחד חובות יקרים.</p>
+        <div class="wpc-property-loan-k9x7-faq-answer edit-hoverable" itemscope="" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer" style="max-height: 100px;">
+          <div itemprop="text" class="edit-hoverable">
+            <p class="edit-hoverable">לבעלי נכס שצריכים <a href="https://loan-israel.co.il/%d7%94%d7%9c%d7%95%d7%95%d7%90%d7%95%d7%aa-%d7%92%d7%93%d7%95%d7%9c%d7%95%d7%aa-2/" class="edit-hoverable">סכום גדול</a> (מעל 100,000 ש"ח), רוצים ריבית נמוכה וטווח החזר ארוך, או צריכים לאחד חובות יקרים.</p>
           </div>
         </div>
       </div>
 
-      <div class="wpc-property-loan-k9x7-faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-        <div class="wpc-property-loan-k9x7-faq-question" itemprop="name" onclick="WPC_PropertyLoan_K9X7.toggleFAQ(this)">
+      <div class="wpc-property-loan-k9x7-faq-item edit-hoverable" itemscope="" itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <div class="wpc-property-loan-k9x7-faq-question diff-element-new edit-hoverable" itemprop="name" onclick="WPC_PropertyLoan_K9X7.toggleFAQ(this)">
           נדחיתי בבנק - יש לי סיכוי לקבל הלוואה כנגד נכס?
-          <span class="wpc-property-loan-k9x7-faq-arrow">←</span>
+          <span class="wpc-property-loan-k9x7-faq-arrow edit-hoverable" style="transform: rotate(0deg);">←</span>
         </div>
-        <div class="wpc-property-loan-k9x7-faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-          <div itemprop="text">
-            <p>כן. דחייה בבנק אחד לא אומרת שנגמרו האפשרויות. ראינו מאות מקרים של אנשים שנדחו בבנק אחד וקיבלו אישור בבנק אחר או בגוף חוץ בנקאי. כל גוף בודק אחרת. אנחנו מחברים אותך לכמה גופים במקביל - הסיכוי שלך גדל משמעותית. למידע נוסף על <a href="https://loan-israel.co.il/rejected-loans/">הלוואות למסורבים</a>, הבנקים לא אומרים לך שיש אלטרנטיבות. הם פשוט אומרים "לא" ושולחים אותך הביתה.</p>
+        <div class="wpc-property-loan-k9x7-faq-answer edit-hoverable" itemscope="" itemprop="acceptedAnswer" itemtype="https://schema.org/Answer" style="max-height: 0px;">
+          <div itemprop="text" class="edit-hoverable">
+            <p class="edit-hoverable">כן. דחייה בבנק אחד לא אומרת שנגמרו האפשרויות. ראינו מאות מקרים של אנשים שנדחו בבנק אחד וקיבלו אישור בבנק אחר או בגוף חוץ בנקאי. כל גוף בודק אחרת. אנחנו מחברים אותך לכמה גופים במקביל - הסיכוי שלך גדל משמעותית. למידע נוסף על <a href="https://loan-israel.co.il/rejected-loans/" class="diff-element-new edit-hoverable">הלוואות למסורבים</a>, הבנקים לא אומרים לך שיש אלטרנטיבות. הם פשוט אומרים "לא" ושולחים אותך הביתה.</p>
           </div>
         </div>
       </div>
@@ -4495,3 +4504,4 @@ document.addEventListener('DOMContentLoaded', function() {
   </script>
 <!-- /wp:html -->
 
+</div>

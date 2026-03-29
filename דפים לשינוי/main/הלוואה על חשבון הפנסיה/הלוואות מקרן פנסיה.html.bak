@@ -1,5 +1,3 @@
-<!-- wp:html -->
-<!-- wp:html -->
 <p class="edit-hoverable">&nbsp;</p>
 <p class="edit-hoverable">&nbsp;</p>
 <script>
@@ -4505,7 +4503,7 @@ body {
 <div class="wpc-pension-loans-m8k4-section-header edit-hoverable"><h2 class="wpc-pension-loans-m8k4-section-title edit-hoverable diff-element-new diff-element-changed">&nbsp;איך זה עובד בפועל?</h2>
 </div>
 <div class="wpc-pension-loans-m8k4-content edit-hoverable">
-<p class="edit-hoverable">הלוואה כנגד חיסכון היא <strong class="edit-hoverable"><a href="https://loan-israel.co.il/" class="edit-hoverable">הלוואה ייעודית לכל מטרה</a></strong> הנלקחת כנגד כספים שנצברו לזכותכם בקרן פנסיה, <a href="https://loan-israel.co.il/%d7%94%d7%9c%d7%95%d7%95%d7%90%d7%95%d7%aa-%d7%9e%d7%a7%d7%95%d7%a4%d7%aa-%d7%92%d7%9e%d7%9c/" class="edit-hoverable diff-element-new">קופת גמל</a> או קרן השתלמות. החיסכון שלכם משמש כערובה להלוואה, מה שמאפשר לחברת הביטוח להציע ריבית נמוכה משמעותית.</p>
+<p class="edit-hoverable">הלוואה כנגד חיסכון היא <strong class="edit-hoverable"><a href="https://loan-israel.co.il/" class="edit-hoverable">הלוואה ייעודית לכל מטרה</a></strong> הנלקחת כנגד כספים שנצברו לזכותכם בקרן פנסיה, <span style="text-decoration: none; color: inherit; cursor: auto;">קופת גמל</span> או קרן השתלמות. החיסכון שלכם משמש כערובה להלוואה, מה שמאפשר לחברת הביטוח להציע ריבית נמוכה משמעותית.</p>
 <p class="edit-hoverable">רוב החברות מגבילות את סכום ההלוואה ל<em class="edit-hoverable">עד 30% מכספי התגמולים הנצברים</em>. בפועל, אם יש לכם 400,000 ש"ח בקרן הפנסיה - תוכלו לקבל עד <a href="https://loan-israel.co.il/%d7%94%d7%9c%d7%95%d7%95%d7%90%d7%94-%d7%a2%d7%93-100-%d7%90%d7%9c%d7%a3-%d7%a9%d7%97/" class="edit-hoverable diff-element-new">120,000 ש"ח</a> בריבית נמוכה של 5.5% במקום ריבית בנקאית של 12%-15%.</p>
 </div>
 
@@ -6681,7 +6679,7 @@ body {
 </div>
 <!-- כרטיסי השוואה: שכירים VS עצמאיים -->
 <div class="wpc-comparison-cards wpc-pension-loans-m8k4-comparison-cards edit-hoverable"><!-- כרטיס שכירים -->
-<div class="wpc-comparison-card wpc-pension-loans-m8k4-card employees edit-hoverable" style="opacity: 1; transform: translateY(0px) scale(1); transition: 0.6s;">
+<div class="wpc-comparison-card wpc-pension-loans-m8k4-card employees edit-hoverable" style="opacity: 0; transform: translateY(30px); transition: 0.6s;">
 <div class="wpc-card-header wpc-pension-loans-m8k4-card-header edit-hoverable">
 <div class="wpc-card-icon wpc-pension-loans-m8k4-icon edit-hoverable">👔</div>
 <h3 class="wpc-card-title edit-hoverable">שכירים</h3>
@@ -6702,7 +6700,7 @@ body {
 </div>
 </div>
 <!-- כרטיס עצמאיים -->
-<div class="wpc-comparison-card wpc-pension-loans-m8k4-card freelancers edit-hoverable" style="opacity: 1; transform: translateY(0px); transition: 0.6s;">
+<div class="wpc-comparison-card wpc-pension-loans-m8k4-card freelancers edit-hoverable" style="opacity: 0; transform: translateY(30px); transition: 0.6s;">
 <div class="wpc-card-header wpc-pension-loans-m8k4-card-header edit-hoverable">
 <div class="wpc-card-icon wpc-pension-loans-m8k4-icon edit-hoverable">💼</div>
 <h3 class="wpc-card-title edit-hoverable">עצמאיים</h3>
@@ -6735,22 +6733,22 @@ body {
 <div class="wpc-key-points wpc-pension-loans-m8k4-key-points edit-hoverable">
 <h3 class="edit-hoverable">נקודות מפתח לכל סוגי העמיתים:</h3>
 <div class="wpc-points-grid edit-hoverable">
-<div class="wpc-point-card edit-hoverable" style="opacity: 1; transform: translateY(0px); transition: 0.6s;">
+<div class="wpc-point-card edit-hoverable" style="opacity: 0; transform: translateY(30px); transition: 0.6s;">
 <div class="wpc-point-icon edit-hoverable">🏦</div>
 <h4 class="edit-hoverable">ותק בקרן</h4>
 <p class="edit-hoverable">לפחות 1-3 שנים בקרן הנוכחית</p>
 </div>
-<div class="wpc-point-card edit-hoverable" style="opacity: 1; transform: translateY(0px); transition: 0.6s;">
+<div class="wpc-point-card edit-hoverable" style="opacity: 0; transform: translateY(30px); transition: 0.6s;">
 <div class="wpc-point-icon edit-hoverable">💰</div>
 <h4 class="edit-hoverable">יתרה צבורה</h4>
 <p class="edit-hoverable">מינימום 10,000-15,000 ₪</p>
 </div>
-<div class="wpc-point-card edit-hoverable" style="opacity: 1; transform: translateY(0px); transition: 0.6s;">
+<div class="wpc-point-card edit-hoverable" style="opacity: 0; transform: translateY(30px); transition: 0.6s;">
 <div class="wpc-point-icon edit-hoverable">📈</div>
 <h4 class="edit-hoverable">יכולת החזר</h4>
 <p class="edit-hoverable">הכנסה קבועה ויציבה</p>
 </div>
-<div class="wpc-point-card edit-hoverable" style="opacity: 1; transform: translateY(0px); transition: 0.6s;">
+<div class="wpc-point-card edit-hoverable" style="opacity: 0; transform: translateY(30px); transition: 0.6s;">
 <div class="wpc-point-icon edit-hoverable">📋</div>
 <h4 class="edit-hoverable">מעמד תעסוקתי</h4>
 <p class="edit-hoverable">משני בחשיבות לגורמים האחרים</p>
@@ -7371,19 +7369,19 @@ body {
 <h3 class="wpc-quiz-question-title edit-hoverable">מה גובה היתרה בקרן הפנסיה שלך?</h3>
 <p class="wpc-quiz-question-subtitle edit-hoverable">משקל 30% מהחישוב הסופי</p>
 <div class="wpc-quiz-demo-options edit-hoverable">
-<div class="wpc-quiz-option edit-hoverable" data-value="low" data-points="20" style="opacity: 1; transform: translateY(0px); transition: 0.5s;">
+<div class="wpc-quiz-option edit-hoverable" data-value="low" data-points="20" style="opacity: 0; transform: translateY(20px); transition: 0.5s;">
 <div class="wpc-option-content edit-hoverable">
 <div class="wpc-option-icon edit-hoverable">💰</div>
 <div class="wpc-option-text edit-hoverable"><strong class="edit-hoverable">עד 50,000₪</strong>מתאים למנורה, הפניקס (דרישות נמוכות)</div>
 </div>
 </div>
-<div class="wpc-quiz-option edit-hoverable" data-value="medium" data-points="60" style="opacity: 1; transform: translateY(0px); transition: 0.5s;">
+<div class="wpc-quiz-option edit-hoverable" data-value="medium" data-points="60" style="opacity: 0; transform: translateY(20px); transition: 0.5s;">
 <div class="wpc-option-content edit-hoverable">
 <div class="wpc-option-icon edit-hoverable">💎</div>
 <div class="wpc-option-text edit-hoverable"><strong class="edit-hoverable">50,000-200,000₪</strong>כל החברות מתאימות - טווח אידיאלי</div>
 </div>
 </div>
-<div class="wpc-quiz-option edit-hoverable" data-value="high" data-points="100" style="opacity: 1; transform: translateY(0px); transition: 0.5s;">
+<div class="wpc-quiz-option edit-hoverable" data-value="high" data-points="100" style="opacity: 0; transform: translateY(20px); transition: 0.5s;">
 <div class="wpc-option-content edit-hoverable">
 <div class="wpc-option-icon edit-hoverable">🏆</div>
 <div class="wpc-option-text edit-hoverable"><strong class="edit-hoverable">מעל 200,000₪</strong>תנאים מועדפים - הפניקס עד 35%</div>
@@ -11577,5 +11575,3 @@ window.toggleFAQ = toggleFAQ;
   ]
 }
 </script>
-<!-- /wp:html -->
-<!-- /wp:html -->

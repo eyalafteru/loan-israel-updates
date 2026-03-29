@@ -1,10 +1,9 @@
-<!-- wp:html -->
 <div id="govloan-wrapper" class="govloan-page govloan-enhanced edit-hoverable">
     
     <!-- Hero Section -->
     <div class="govloan-hero edit-hoverable">
         <div class="govloan-hero__background edit-hoverable">
-            <div class="govloan-hero__animation edit-hoverable" style="transform: translateY(-3569px) rotate(356.9deg);"></div>
+            <!-- Animation removed -->
             <div class="govloan-hero__overlay edit-hoverable"></div>
         </div>
         <div class="govloan-hero__content edit-hoverable">
@@ -171,7 +170,7 @@
                     </div>
                 </div>
 
-                <div class="govloan-loan-card edit-hoverable">
+                <div class="govloan-loan-card edit-hoverable" style="transform: translateY(0px) scale(1);">
                     <div class="govloan-loan-card__header edit-hoverable">
                         <div class="govloan-loan-card__icon edit-hoverable">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -205,7 +204,7 @@
                     </div>
                 </div>
 
-                <div class="govloan-loan-card edit-hoverable">
+                <div class="govloan-loan-card edit-hoverable" style="transform: translateY(0px) scale(1);">
                     <div class="govloan-loan-card__header edit-hoverable">
                         <div class="govloan-loan-card__icon edit-hoverable">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -260,20 +259,20 @@
         </div>
     </div>
 
-    <!-- WhatsApp CTA 1 -->
+    <!-- CTA 1 - Form -->
     <div class="govloan-whatsapp-section edit-hoverable">
         <div class="govloan-whatsapp-cta edit-hoverable">
             <div class="govloan-whatsapp-cta__content edit-hoverable">
-                <h3 class="govloan-whatsapp-cta__title edit-hoverable">יש שאלות על סוגי ההלוואות?</h3>
-                <p class="govloan-whatsapp-cta__text edit-hoverable">המומחים שלנו יעזרו לך לבחור את האפשרות המתאימה</p>
+                <h3 class="govloan-whatsapp-cta__title edit-hoverable">רוצה לבדוק מה מגיע לך?</h3>
+                <p class="govloan-whatsapp-cta__text edit-hoverable">מלא את הפרטים ונחזור אליך עם הצעה מותאמת אישית</p>
             </div>
-            <a href="https://api.whatsapp.com/send/?phone=%2B972534288957&amp;text=%D7%90%D7%A0%D7%99+%D7%9E%D7%A2%D7%95%D7%A0%D7%99%D7%99%D7%9F+%D7%9C%D7%94%D7%AA%D7%97%D7%99%D7%9C+%D7%91%D7%93%D7%99%D7%A7%D7%AA+%D7%96%D7%9B%D7%90%D7%95%D7%AA+%D7%9C%D7%94%D7%9C%D7%95%D7%95%D7%90%D7%94&amp;type=phone_number&amp;app_absent=0" class="govloan-whatsapp-cta__btn edit-hoverable" target="_blank" rel="noopener">
+            <a href="#govloan-form" class="govloan-whatsapp-cta__btn edit-hoverable">
                 <span class="govloan-whatsapp-cta__icon edit-hoverable">
                     <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.893 3.688"></path>
+                        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"></path>
                     </svg>
                 </span>
-                <span class="govloan-whatsapp-cta__btn-text edit-hoverable">שלח הודעה</span>
+                <span class="govloan-whatsapp-cta__btn-text edit-hoverable">בדיקת זכאות חינם</span>
             </a>
         </div>
     </div>
@@ -340,7 +339,7 @@
                     </div>
                 </div>
 
-                <div class="govloan-bank-card edit-hoverable">
+                <div class="govloan-bank-card edit-hoverable" style="transform: translateY(0px) scale(1);">
                     <div class="govloan-bank-card__header edit-hoverable">
                         <div class="govloan-bank-card__logo edit-hoverable">
                             <span class="govloan-bank-name edit-hoverable">בנק לאומי</span>
@@ -366,7 +365,7 @@
                     </div>
                 </div>
 
-                <div class="govloan-bank-card edit-hoverable">
+                <div class="govloan-bank-card edit-hoverable" style="transform: translateY(0px) scale(1);">
                     <div class="govloan-bank-card__header edit-hoverable">
                         <div class="govloan-bank-card__logo edit-hoverable">
                             <span class="govloan-bank-name edit-hoverable">בנק דיסקונט</span>
@@ -500,7 +499,7 @@
                     </div>
                 </div>
                 <div class="govloan-interest__text edit-hoverable">
-                    <p class="edit-hoverable">ניתן לקבל הלוואות לעובדי מדינה בריבית חשכ"ל או לקחת <a href="https://loan-israel.co.il/%d7%94%d7%9c%d7%95%d7%95%d7%90%d7%94-%d7%9e%d7%94%d7%91%d7%a0%d7%a7-%d7%90%d7%95-%d7%94%d7%9c%d7%95%d7%95%d7%90%d7%94-%d7%97%d7%95%d7%a5-%d7%91%d7%a0%d7%a7%d7%90%d7%99%d7%aa-%d7%90%d7%99%d7%9a-%d7%aa%d7%91%d7%97%d7%a8%d7%95-%d7%a0%d7%9b%d7%95%d7%9f/" class="edit-hoverable diff-element-new">הלוואה חוץ בנקאית</a> בה הריבית נקבעת לפי נתוני האשראי ומדיניות הגוף הפיננסי.</p>
+                    <p class="edit-hoverable">ניתן לקבל הלוואות לעובדי מדינה בריבית חשכ"ל או לקחת <span style="text-decoration: none; color: inherit; cursor: auto;">הלוואה חוץ בנקאית</span> בה הריבית נקבעת לפי נתוני האשראי ומדיניות הגוף הפיננסי.</p>
                     <div class="govloan-interest__benefits edit-hoverable">
                         <h4 class="edit-hoverable">יתרונות הריבית:</h4>
                         <ul class="govloan-feature-list edit-hoverable">
@@ -535,17 +534,17 @@
         </div>
     </div>
 
-    <!-- WhatsApp CTA 2 -->
+    <!-- CTA 2 - Form -->
     <div class="govloan-whatsapp-section edit-hoverable">
         <div class="govloan-whatsapp-cta edit-hoverable">
             <div class="govloan-whatsapp-cta__content edit-hoverable">
                 <h3 class="govloan-whatsapp-cta__title edit-hoverable">מעוניין לקבל הצעה מיידית?</h3>
                 <p class="govloan-whatsapp-cta__text edit-hoverable">בדוק זכאותך להלוואה מיידית עד 40,000 ₪ עם תנאים מועדפים</p>
             </div>
-            <a href="https://api.whatsapp.com/send/?phone=%2B972534288957&amp;text=%D7%90%D7%A0%D7%99+%D7%9E%D7%A2%D7%95%D7%A0%D7%99%D7%99%D7%9F+%D7%9C%D7%94%D7%AA%D7%97%D7%99%D7%9C+%D7%91%D7%93%D7%99%D7%A7%D7%AA+%D7%96%D7%9B%D7%90%D7%95%D7%AA+%D7%9C%D7%94%D7%9C%D7%95%D7%95%D7%90%D7%94&amp;type=phone_number&amp;app_absent=0" class="govloan-whatsapp-cta__btn edit-hoverable" target="_blank" rel="noopener">
+            <a href="#govloan-form" class="govloan-whatsapp-cta__btn edit-hoverable">
                 <span class="govloan-whatsapp-cta__icon edit-hoverable">
                     <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.893 3.688"></path>
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"></path>
                     </svg>
                 </span>
                 <span class="govloan-whatsapp-cta__btn-text edit-hoverable">בדיקת זכאות מיידית</span>
@@ -554,7 +553,7 @@
     </div>
 
     <!-- Additional Benefits Section -->
-    <div class="govloan-section govloan-benefits edit-hoverable" style="opacity: 1; transform: translateY(0px); transition: 0.8s ease-out;">
+    <div class="govloan-section govloan-benefits edit-hoverable" style="opacity: 0; transform: translateY(30px); transition: 0.8s ease-out;">
         <div class="govloan-container edit-hoverable">
             <h2 class="govloan-section__title edit-hoverable">הטבות נוספות לעובדי מדינה</h2>
             <div class="govloan-benefits__grid edit-hoverable">
@@ -632,7 +631,7 @@
     </div>
 
     <!-- FAQ Section -->
-    <div class="govloan-section govloan-faq edit-hoverable" style="background: white; padding: 60px 0px; opacity: 1; transform: translateY(0px); transition: 0.8s ease-out;">
+    <div class="govloan-section govloan-faq edit-hoverable" style="background: white; padding: 60px 0px; opacity: 0; transform: translateY(30px); transition: 0.8s ease-out;">
         <div class="govloan-container edit-hoverable">
             <h2 class="govloan-section__title edit-hoverable diff-element-new">שאלות נפוצות</h2>
 
@@ -680,7 +679,7 @@
 
                 <!-- שאלה 4 -->
                 <div class="govloan-faq-item edit-hoverable" style="background: #f8f8f8; padding: 30px; margin-bottom: 20px; border-radius: 12px; border-right: 4px solid #1e5490;">
-                    <h3 style="color: #1e5490; margin: 0 0 15px 0; font-size: 1.2em;" class="edit-hoverable diff-element-new">מהן הלוואות חשכ"ל עובדי מדינה 2026<span style="font-size: 1.2em;">?</span></h3>
+                    <h3 style="color: #1e5490; margin: 0 0 15px 0; font-size: 1.2em;" class="edit-hoverable diff-element-new">מהן הלוואות חשכ"ל עובדי מדינה 2026<span style="font-size: 1.2em;" class="edit-hoverable">?</span></h3>
                     <div style="line-height: 1.7;" class="edit-hoverable">
                         <p class="edit-hoverable diff-element-new">חשכ"ל זה קיצור של "החשב הכללי" - זו הרשות שקובעת את כללי ההלוואות לעובדי המדינה. הלוואות חשכ"ל אלו הן הלוואות מסובסדות בריבית נמוכה במיוחד.</p>
 
@@ -708,7 +707,7 @@
                 <div class="govloan-faq-item edit-hoverable" style="background: #f8f8f8; padding: 30px; margin-bottom: 20px; border-radius: 12px; border-right: 4px solid #1e5490;">
                     <h3 style="color: #1e5490; margin: 0 0 15px 0; font-size: 1.2em;" class="edit-hoverable diff-element-new">איך מתקשרים לבנק יהב?</h3>
                     <div style="line-height: 1.7;" class="edit-hoverable">
-                        <p class="edit-hoverable"><strong class="edit-hoverable diff-element-new">טלפון בנק יהב המרכזיה:</strong>&nbsp;<span style="color: rgb(71, 71, 71); font-family: Arial, sans-serif; font-size: 14px; background-color: rgb(255, 255, 255);">&nbsp;2616*</span>&nbsp;(שעות הפעילות: א'-ה' 08:30-16:30)</p>
+                        <p class="edit-hoverable"><strong class="edit-hoverable diff-element-new">טלפון בנק יהב המרכזיה:</strong>&nbsp;<span style="color: rgb(71, 71, 71); font-family: Arial, sans-serif; font-size: 14px; background-color: rgb(255, 255, 255);" class="edit-hoverable">&nbsp;2616*</span>&nbsp;(שעות הפעילות: א'-ה' 08:30-16:30)</p>
 
                         <p class="edit-hoverable"><strong class="edit-hoverable diff-element-new">מחלקת הלוואות לעובדי מדינה:</strong> אפשר לבקש חיבור ישיר למחלקה דרך המרכזיה, או להגיע לסניף הקרוב.</p>
 
@@ -772,8 +771,6 @@
     </div>
 
 </div>
-<!-- /wp:html -->
-
 <style>
 /* === CSS Variables === */
 #govloan-wrapper {
@@ -1227,7 +1224,7 @@
 }
 
 #govloan-wrapper .govloan-hero__title {
-    font-size: 3.5em;
+    font-size: 2.5em;
     font-weight: 400;
     margin: 0 0 20px 0;
     text-shadow: 0 2px 10px rgba(0,0,0,0.3);
@@ -1911,7 +1908,7 @@
 /* === Responsive Design === */
 @media (max-width: 768px) {
     #govloan-wrapper .govloan-hero__title {
-        font-size: 2.5em;
+        font-size: 1.8em;
     }
     
     #govloan-wrapper .govloan-hero__stats {
@@ -2436,4 +2433,3 @@ html {
     
 })();
 </script>
-<!-- /wp:html -->

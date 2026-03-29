@@ -1,7 +1,7 @@
 # משימה: תיקונים בקובץ הלוואה דיגיטלית.html
 
 ## קובץ לעריכה
-@דפים לשינוי\main\הלוואה דיגיטלית\הלוואה דיגיטלית.html
+@דפים לשינוי/main/הלוואה דיגיטלית/הלוואה דיגיטלית.html
 
 ## הוראות כלליות
 - השתמש בכלי Edit (לא Write!) לעריכת הקובץ
@@ -19,17 +19,16 @@
 
 ## הערות לתיקון (1)
 
-### 1. <div>
+### 1. <span>
 
 **תוכן נוכחי:**
 ```html
-<div class="wpc-digital-loans-d7k9-faq-cta edit-hoverable edit-selected">
-<p class="edit-hoverable">יש שאלות נוספות? הצוות שלנו זמין לעזור!</p>
-<a class="wpc-digital-loans-d7k9-btn wpc-digital-loans-d7k9-btn-primary edit-hoverable" href="#wpc-dl-awg">שאלו אותנו עכשיו</a></div>
+<span class="edit-hoverable edit-selected" style="text-decoration: none; color: inherit; cursor: auto;">בנק לאומי</span>
 ```
 
-**📝 פעולת תוכן:** הסר מהעמוד את האלמנו
-**💬 הוראות נוספות:** הסר אלמנט מהעמוד
+**📝 פעולת תוכן:** שכתב את התוכן מחדש
+
+**💬 הוראות נוספות:** הסר בקוביות מובייל את הקישורים של בנק לאומי ואת התמונות לוגו של הבנקים
 
 ---
 

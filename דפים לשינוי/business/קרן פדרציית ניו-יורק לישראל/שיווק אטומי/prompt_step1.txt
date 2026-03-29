@@ -1,0 +1,267 @@
+=== פרומפט שנשלח לקלוד - step1 ===
+זמן: 2026-03-22 10:31:42
+============================================================
+
+קרא את קובץ ההוראות C:\loan-dashboard\פרומטים\אטומי\שלב 1.md ובצע את ההוראות על הקובץ C:\loan-dashboard\דפים לשינוי\business\קרן פדרציית ניו-יורק לישראל\קרן פדרציית ניו-יורק לישראל.html.
+מילת מפתח ראשית: קרן פדרציית ניו-יורק לישראל
+
+רשימת מילים לשילוב (LSI & Related)
+
+להלן רשימת הביטויים שעלו במחקר (AI + Google Suggest). עליך לנתח אותם ולשלבם בתוכן:
+הרשימה: 
+## מילות מפתח נלוות לשילוב
+
+**רשימה:** קרן פדרציית ניו יורק לישראל, הפדרציה היהודית של ניו יורק בישראל, UJA, UJA-Federation, UJA Israel
+
+### רשימת שימור:
+המילים הבאות חייבות להופיע בתוכן הסופי: קרן פדרציית ניו יורק לישראל, הפדרציה היהודית של ניו יורק בישראל, UJA, UJA-Federation, UJA Israel
+
+
+המטרה: שילוב מבוסס קטגוריות (Dynamic Clustering)
+
+במקום לעבוד עם הוראות קשיחות או דחיסת מילים, עליך למיין אוטומטית את המילים ברשימה הנ"ל ל-3 קבוצות לוגיות ולפעול לפי ההנחיות לכל קבוצה.
+כל עמוד הוא ייחודי! התאם את היישום להקשר הספציפי של הדף.
+
+1. קבוצת "הכאב והקהל" (Pain Points & Audience)
+
+הגדרה: זהה ברשימה מילים המעידות על קושי, סטטוס בעייתי, או קהל יעד ספציפי (לדוגמה: למסורבים, ללא הון עצמי, פושטי רגל, סטודנטים, BDI שלילי).
+
+ההנחיה: חפש או צור פסקה העוסקת ב"למי זה מתאים?". הסבר כיצד השירות נותן מענה לאוכלוסייה זו.
+
+בדיקת היתכנות: האם המילה כבר קיימת? אם כן, האם ניתן להוסיף זווית חדשה?
+
+דגש YMYL: אם מדובר באוכלוסייה בסיכון, הוסף סייגים ("בכפוף לבדיקה", "הפתרון מותאם אישית").
+
+2. קבוצת "מאפייני מוצר ופתרון" (Features & Benefits)
+
+הגדרה: זהה ברשימה מילים המתארות את אופן קבלת השירות או היתרונות שלו (לדוגמה: מיידי, דיגיטלי, אונליין, עד הבית, ללא ערבים, הוראת קבע).
+
+ההנחיה: שלב מילים אלו בתיאור התהליך הטכני או ברשימת היתרונות (Bullets).
+
+מיקום אופטימלי: תת-כותרת "איך זה עובד", "למה לבחור בנו" או רשימת יתרונות.
+
+3. קבוצת "שוק ומתחרים" (Market Entities)
+
+הגדרה: זהה ברשימה שמות של מותגים, בנקים, או גופים מתחרים (לדוגמה: פועלים, ישראכרט, מקס, כאל).
+
+ההנחיה: השתמש בשמות אלו לצורך השוואה או מתן דוגמאות ("בניגוד ל...", "בדומה ל...", "שירותים משלימים ל..."). אל תציג אותנו כגוף זה אם איננו הוא.
+
+מנגנון "שסתום ביטחון" (FAQ)
+
+כל ביטוי מהרשימה הנ"ל (
+## מילות מפתח נלוות לשילוב
+
+**רשימה:** קרן פדרציית ניו יורק לישראל, הפדרציה היהודית של ניו יורק בישראל, UJA, UJA-Federation, UJA Israel
+
+### רשימת שימור:
+המילים הבאות חייבות להופיע בתוכן הסופי: קרן פדרציית ניו יורק לישראל, הפדרציה היהודית של ניו יורק בישראל, UJA, UJA-Federation, UJA Israel
+) שלא הצלחת לשלב בצורה "חלקה" בטקסט הראשי לפי הקבוצות הנ"ל, חובה להוסיף אותו כשאלה ותשובה (FAQ) בתחתית העמוד.
+
+דוגמה: שאלה המכילה את מילת המפתח -> תשובה קצרה ועניינית.
+
+זהו הפתרון האידיאלי לביטויים מורכבים ("זנב ארוך") שקשה לשלב בטקסט שיווקי.
+
+הגבלות ודגשים:
+
+מקסימום 3 תוספות משמעותיות (פסקה חדשה/FAQ) לעמוד כדי לא להעמיס. אין הגבלה על שיפוץ משפטים קיימים.
+
+ייחודיות: אל תשתמש בניסוחים זהים ("שטאנץ") בעמודים שונים.
+
+עדיפות: העשרת תוכן קיים > יצירת תוכן חדש.
+
+רשימת שימור (Checklist)
+
+וודא שכל המילים ברשימה הבאה מופיעות בפלט הסופי (בטקסט, בכותרות או ב-FAQ):
+
+
+הקשר תחרותי (Data Injection)
+
+השתמש במידע הבא כדי להעשיר את התוכן ולמלא פערים מול המתחרים:
+
+תובנות ממתחרים מדורגים (SERP Organic)
+
+להלן תיאורים מאתרים המדורגים גבוה עבור מילת המפתח:
+
+## מידע ממתחרים מדורגים
+
+להלן תיאורים מאתרים המדורגים גבוה עבור מילת המפתח:
+
+- **קרן פדרציית ניו יורק לישראל (ארצית) UJA-Federation of New York** (https://shatil.org.il/funds/%D7%A7%D7%A8%D7%9F-%D7%A4%D7%93%D7%A8%D7%A6%D7%99%D7%99%D7%AA-%D7%A0%D7%99%D7%95-%D7%99%D7%95%D7%A8%D7%A7-%D7%9C%D7%99%D7%A9%D7%A8%D7%90%D7%9C-%D7%90%D7%A8%D7%A6%D7%99%D7%AA-uja-federation-of-new-y/): כדי לטפל בכל נושא, הקרן מסייעת ומעניקה כספים למאות מלכ"רים בניו יורק, בישראל ובעולם. נוסף על כך, הקרן ממשיכה לאסוף מידע על צרכים חדשים או לא מסופקים בקהילות ...
+- **Home » UJA-Federation of New York** (https://www.ujafedny.org/): UJA-Federation of New York strengthens Jewish communities locally and globally, supports those in need, combats antisemitism, and responds to global crises.
+- **Our Work In Israel » UJA-Federation of New York** (https://www.ujafedny.org/our-work/israel): Learn how UJA-Federation of NY supports Israel in times of crisis and advances inclusion, equity, and opportunity for Israelis of all backgrounds.
+- **קרן פדרציית ניו-יורק לישראל - משפחה עסקית** (https://family-biz.co.il/new-york-federation-fund/): תנאי הסיוע וההלוואה מקרן פדרציית ניו-יורק לישראל · סכום ההלוואה עד 300,000 ₪ · תקופת פירעון עד 6 שנים · אפשרות לגרייס לשנה · ריבית פריים + 1.5% · 50% הנחה על עמלת ...
+- **The Jewish Agency for Israel - U.S.** (https://www.jewishagency.org/): We are here to strengthen the Jewish people, in Israel and around the world—by promoting Aliyah, deepening connections in our global Jewish family, supporting ...
+- **מניו יורק באהבה: הארגון הפילנתרופי שהזרים מאות מיליונים לתמיכה ...** (https://forbes.co.il/from-new-york-with-love/): 18 באפר׳ 2024 — פדרציית ניו יורק (UJA) היא למעשה הארגון הקהילתי הפילנתרופי הגדול בעולם אשר נוסד לפני יותר מ-100 שנה ותומך בישראל מאז הקמתה. מי שעומד בראש ...
+- **הפדרציות היהודיות של צפון אמריקה** (https://hebrew.jewishfederations.org/): ארגון הפדרציות היהודיות של צפון אמריקה (JFNA) מייצג 146 פדרציות יהודיות ולמעלה מ-300 קהילות יהודיות עצמאיות והינו הארגון היהודי הגדול ביותר בארצות הברית וקנדה.
+- **קרן פדרציית ניו יורק לישראל - הלוואות בריבית נמוכה ואישור מהיר** (https://bankcarmel.co.il/%D7%94%D7%9C%D7%95%D7%95%D7%90%D7%95%D7%AA-%D7%9C%D7%A2%D7%A1%D7%A7%D7%99%D7%9D/%D7%A7%D7%A8%D7%A0%D7%95%D7%AA-%D7%A4%D7%99%D7%9C%D7%A0%D7%AA%D7%A8%D7%95%D7%A4%D7%99%D7%95%D7%AA/%D7%A7%D7%A8%D7%9F-%D7%A4%D7%93%D7%A8%D7%A6%D7%99%D7%99%D7%AA-%D7%A0%D7%99%D7%95-%D7%99%D7%95%D7%A8%D7%A7-%D7%9C%D7%99%D7%A9%D7%A8%D7%90%D7%9C): הקרן פונה בעיקר ליזמים המעוניינים להקים עסק חדש, אך גם לבעלי עסק קיים הזקוק למתיחת פנים או להרחבה. כל מה שחשוב לדעת על הלוואות לעסקים מטעם קרנות. הסיוע שמעניקה ...
+- **הקרן החדשה לישראל** (https://he.wikipedia.org/wiki/%D7%94%D7%A7%D7%A8%D7%9F_%D7%94%D7%97%D7%93%D7%A9%D7%94_%D7%9C%D7%99%D7%A9%D7%A8%D7%90%D7%9C): הקרן החדשה לישראל (באנגלית: New Israel Fund ובראשי תיבות: NIF) היא מלכ"ר אמריקאי ששם למטרה את קידום השוויון והדמוקרטיה בישראל. הקרן מעניקה תמיכה ומימון ...
+
+
+הנחיה: אם יש מידע בעל ערך למשתמש שלא קיים בתוכן שלנו - שלב אותו (בניסוח מחדש בלבד).
+
+תובנות מתוצאות AI (Google AI Overview)
+
+הנה מה שגוגל AI מציג לגולשים:
+
+## תוצאות AI Overview של גוגל
+
+הנה מה שגוגל AI מציג לגולשים שמחפשים את מילת המפתח:
+
+**סיכום AI:** קרן פדרציית ניו יורק (UJA-Federation of New York) היא הארגון הפילנתרופי המרכזי של הקהילה היהודית בניו יורק, והיא פעילה מאוד גם בישראל. פעילות הקרן בישראל הקרן פועלת בישראל באמצעות שותפים מקומיים כמו הסוכנות היהודית לישראל והג'וינט (JDC), ומתמקדת בקידום ניידות חברתית וכלכלית, חיזוק החוסן החברתי, ושילוב אוכלוסיות מגוונות בחברה הישראלית. תחומי הפעילות העיקריים כוללים: תמיכה באוכלוסיות בסיכון: סיוע לילדים בסיכון, קשישים, וניצולי שואה.שירותי תעסוקה והכשרה מקצועית: מתן שירותי תעסוקה וסיוע במציאת עבודה.שירותי טראומה: אספקת שירותי סיוע וטיפול בטראומה.תגובה למצבי חירום: תמיכה בקהילות שנפגעו מאירועים ביטחוניים, כולל סיוע בשיקום ומתן מענה לצרכים מיידיים לאחר אירועי 7 באוקטובר.קידום הכללה חברתית: מימון תוכניות שמטרתן לקדם הבנה ושילוב בין ישראלים מכל הרקעים האתניים והדתיים. בנוסף, הקרן מציעה הלוואות לאוכלוסיות מיועדות ומפעילה תוכניות כגון "קו.לאב - החממה לחדשנות חברתית" ותוכניות "תגלית" (Birthright Israel) לצעירים. פרטי קשר (המשרד הראשי בניו יורק) המשרד הראשי של הפדרציה נמצא בניו יורק. ניתן ליצור קשר בפרטים הבאים: כתובת: 130 East 59th Street, New York, NY 10022, United Statesטלפון: (+1) 212-980-1000אתר אינטרנט: www.ujafedny.org למידע נוסף על פעילות הקרן בישראל או הזדמנויות למענקים, ניתן לפנות דרך האתר הרשמי או שותפיה בישראל. אילו ארגונים בישראל מקבלים מימון מקרן פדרציית ניו יורק?האם יש בישראל מיזם ספציפי של הקרן בתחום התעסוקה?מהו המבנה הארגוני של הפדרציה?
+- Our Work In Israel - UJA-Federation of New York (https://www.ujafedny.org/our-work/israel#:~:text=We've%20been%20standing%20with,all%20ethnic%20and%20religious%20backgrounds.): We've been standing with Israel since its earliest days. Today, we're working with Israelis to advance social and economic mobilit...
+- Our Work In Israel - UJA-Federation of New York (https://www.ujafedny.org/our-work/israel): Our Impact * 41,700 at-risk Israeli children benefit from services. * 51,700 Israeli seniors benefit from life-enhancing. services...
+- UJA Federation NY - בית עמותות (https://www.beit-amutot.org.il/uja-federation-ny/): UJA Federation NY. הפדרציה היהודית של ניו יורק (UJA) היא הארגון הפילנתרופי המרכזי של הקהילה היהודית בניו יורק. בישראל מתמקדת הפדרצ...
+- קרן פדרציית ניו יורק לישראל (ארצית) UJA-Federation of New York (https://shatil.org.il/funds/%D7%A7%D7%A8%D7%9F-%D7%A4%D7%93%D7%A8%D7%A6%D7%99%D7%99%D7%AA-%D7%A0%D7%99%D7%95-%D7%99%D7%95%D7%A8%D7%A7-%D7%9C%D7%99%D7%A9%D7%A8%D7%90%D7%9C-%D7%90%D7%A8%D7%A6%D7%99%D7%AA-uja-federation-of-new-y/#:~:text=%D7%A7%D7%A8%D7%9F%20%D7%A4%D7%93%D7%A8%D7%A6%D7%99%D7%99%D7%AA%20%D7%A0%D7%99%D7%95%20%D7%99%D7%95%D7%A8%D7%A7%20%D7%9C%D7%99%D7%A9%D7%A8%D7%90%D7%9C,York%20%2D%20%D7%A9%D7%AA%D7%99%D7%9C%20%2D%20%D7%94%D7%A7%D7%A8%D7%9F%20%D7%94%D7%97%D7%93%D7%A9%D7%94%20%D7%9C%D7%99%D7%A9%D7%A8%D7%90%D7%9C): קרן פדרציית ניו יורק לישראל (ארצית) UJA-Federation of New York - שתיל - הקרן החדשה לישראל
+- Israel Now - UJA-Federation of New York (https://www.ujafedny.org/israel-at-war/israel-now#:~:text=Located%20at%20the%20couple's%20moshav,to%20be%20there%20for%20them.%E2%80%9D): Oct 6, 2023 — Located at the couple's moshav just south of Tel Aviv, it's one of the newest initiatives UJA is funding. Some 50 volun...
+- UJA-Federation of New York Announces $7.8 Million in Latest ... (https://www.ujafedny.org/news/ujafederation-of-new-york-announces-78-million-in-latest-round-of-grants-for-israel): Sep 14, 2025 — The latest round of funding includes support for 55 new grants, with a strategic focus on three primary areas: * Recov...
+- UJA Federation- New York - World Jewish Travel (https://www.worldjewishtravel.org/listing/uja-federation-new-york/#:~:text=Address,1)%20212%2D980%2D1000): Address. 130 East 59th Street New York, NY. Phone. (+1) 212-980-1000.
+- Travel - UJA-Federation of New York (https://www.ujafedny.org/get-involved/travel#:~:text=Zankel%20Birthright%20Israel,night%20air%20of%20South%20Africa.): Zankel Birthright Israel. Taglit-Birthright Israel, funded in part by UJA, creates peer-group educational trips to Israel for youn...
+- UJA-Federation of New York - ZoomInfo (https://www.zoominfo.com/c/uja-federation/116179564#:~:text=Non%2DProfit%20&%20Charitable%20Organizations%20%C2%B7,3): Non-Profit & Charitable Organizations · New York, United States · 201-500 Employees. UJA-Federation of New York Overview Metrics. ...
+- קרן פדרציית ניו-יורק לישראל - משפחה עסקית (https://family-biz.co.il/new-york-federation-fund/#:~:text=%D7%A7%D7%A8%D7%9F%20%D7%A4%D7%93%D7%A8%D7%A6%D7%99%D7%99%D7%AA%20%D7%A0%D7%99%D7%95%20%D7%99%D7%95%D7%A8%D7%A7%20%D7%9C%D7%99%D7%A9%D7%A8%D7%90%D7%9C%20%D7%9E%D7%A0%D7%95%D7%94%D7%9C%D7%AA%20%D7%A2%D7%9C,%D7%9E%D7%A9%D7%A4%D7%97%D7%94%20%D7%A2%D7%A1%D7%A7%D7%99%D7%AA%20%D7%9C%D7%9E%D7%99%D7%93%D7%A2%20%D7%A0%D7%95%D7%A1%D7%A3%20%D7%A2%D7%9C%20%D7%AA%D7%A0%D7%90%D7%99%20%D7%94%D7%A1%D7%99%D7%95%D7%A2.): Aug 30, 2019 — קרן פדרציית ניו יורק לישראל מנוהלת על ידי הסוכנות היהודית ומציעה הלוואות עד 300000 ₪ לאוכלוסיות מיועדות. היכנס לפורטל ...
+
+**סטטוס:** לא מופיעים ב-AI Overview
+
+
+סטטוס: אנחנו מופיעים במיקום **דירוג אורגני:** מיקום 8
+
+
+הנחיה: זהה פערים - אם ה-AI מדגיש מידע שחסר אצלנו, שקול להוסיף.
+
+הנחיות רגולציה ו-YMYL (קבוע לכל האתר)
+
+מידע פיננסי (מספרים, ריביות, חוקים) מותר לקחת רק מדומייני סמכות!
+
+# 🏛️ דומיינים מאושרים למידע פיננסי
+
+> **מידע פיננסי חדש (ריביות, תנאים, אחוזים, מסלולים) מותר לקחת רק מדומייני סמכות!**
+
+---
+
+## 🏛️ רגולטורים וממשל (Highest Authority)
+
+| גוף | קישור מאומת | שימוש מומלץ |
+|-----|-------------|-------------|
+| בנק ישראל | `https://www.boi.org.il` | ריבית, מדיניות מוניטרית |
+| רשות שוק ההון | `https://www.gov.il/he/departments/capital_market_authority` | רגולציה, הלוואות, ביטוח |
+| משרד האוצר | `https://www.gov.il/he/departments/ministry_of_finance` | מדיניות כלכלית |
+| רשות המיסים | `https://www.gov.il/he/departments/israel_tax_authority` | מיסוי, הטבות |
+| הביטוח הלאומי | `https://www.btl.gov.il` | קצבאות, זכויות |
+| הרשות לניירות ערך | `https://www.isa.gov.il` | השקעות, ניירות ערך |
+| הממונה על חדלות פירעון | `https://www.gov.il/he/departments/the_official_receiver` | פשיטת רגל, חדלות פירעון |
+| רשם החברות | `https://www.gov.il/he/departments/corporations_authority` | רישום חברות |
+
+---
+
+## 📊 מאגרי מידע ממשלתיים
+
+| שירות | קישור מאומת | שימוש |
+|-------|-------------|-------|
+| מערכת נתוני אשראי | `https://www.creditdata.org.il` | דירוג אשראי, BDI |
+| הר הכסף | `https://itur.mof.gov.il` | איתור כספים אבודים |
+| מחשבון ביטוח חובה | `https://car.cma.gov.il` | השוואת מחירי ביטוח רכב |
+
+---
+
+## 🏦 בנקים בישראל
+
+| בנק | קישור מאומת |
+|-----|-------------|
+| בנק הפועלים | `https://www.bankhapoalim.co.il` |
+| בנק לאומי | `https://www.leumi.co.il` |
+| בנק מזרחי טפחות | `https://www.mizrahi-tefahot.co.il` |
+| בנק דיסקונט | `https://www.discountbank.co.il` |
+| הבנק הבינלאומי (FIBI) | `https://www.fibi.co.il` |
+| בנק יהב | `https://www.bank-yahav.co.il` |
+| וואן זירו (One Zero) | `https://www.onezerobank.com` |
+
+---
+
+## ☂️ חברות ביטוח ופיננסים
+
+| חברה | קישור מאומת |
+|------|-------------|
+| הראל | `https://www.harel-group.co.il` |
+| מגדל | `https://www.migdal.co.il` |
+| כלל ביטוח | `https://www.clalbit.co.il` |
+| מנורה מבטחים | `https://www.menoramivt.co.il` |
+| הפניקס | `https://www.fnx.co.il` |
+| ביטוח ישיר | `https://www.555.co.il` |
+
+---
+
+## 💳 חברות כרטיסי אשראי
+
+| חברה | קישור מאומת |
+|------|-------------|
+| מקס (Max) | `https://www.max.co.il` |
+| כאל (Cal) | `https://www.cal-online.co.il` |
+| ישראכרט | `https://www.isracard.co.il` |
+
+---
+
+## 🤝 עמותות וארגונים
+
+| ארגון | קישור מאומת | תחום |
+|-------|-------------|------|
+| פעמונים | `https://www.paamonim.org` | חינוך פיננסי, ייעוץ חובות |
+| המועצה לצרכנות | `https://www.consumers.org.il` | זכויות צרכן |
+
+---
+
+## 📰 עיתונות כלכלית
+
+| אתר | קישור מאומת |
+|-----|-------------|
+| גלובס | `https://www.globes.co.il` |
+| כלכליסט | `https://www.calcalist.co.il` |
+| TheMarker | `https://www.themarker.com` |
+| Bizportal | `https://www.bizportal.co.il` |
+
+---
+
+## 📈 שוק ההון
+
+| גוף | קישור מאומת |
+|-----|-------------|
+| הבורסה לניירות ערך | `https://www.tase.co.il` |
+
+---
+
+## ⛔ קישורים אסורים - לא לכלול!
+
+```
+❌ nevo.co.il - עמודים משתנים תדיר
+❌ psakdin.co.il - לינקים לא יציבים
+❌ עמודים פנימיים של אתרים (/page/, /law/, /article/ וכו')
+❌ קישורים לוויקיפדיה (אינם סמכותיים ל-YMYL)
+❌ קישורים שלא ברשימה למעלה
+```
+
+---
+
+## 📋 כללי שימוש
+
+✅ לקחת אך ורק מהדומיינים המאושרים הנ"ל
+❌ אסור לקחת מידע פיננסי מאתרי תוכן, בלוגים, או פורומים
+⚠️ אם מצאת מידע מעניין באתר לא מאושר - ציין זאת בדוח אך אל תכניס לתוכן!
+🚫 אסור להמציא נתונים מספריים
+📋 בכל מקום בו יש הבטחה (כמו "הלוואה בטוחה"), הוסף סייג משפטי מתאים
+🔗 Target="_blank" לכל קישור חיצוני
+
+
+כללים:
+
+לקחת אך ורק מהדומיינים המאושרים הנ"ל.
+
+❌ אסור לקחת מידע פיננסי מאתרי תוכן, בלוגים, או פורומים.
+
+⚠️ אם מצאת מידע מעניין באתר לא מאושר - ציין זאת בדוח אך אל תכניס לתוכן!
+
+אסור להמציא נתונים מספריים.
+
+בכל מקום בו יש הבטחה (כמו "הלוואה בטוחה"), הוסף סייג משפטי מתאים.
+⚠️ **חשוב:** בעת שילוב מילות המפתח, הקפד על עקרונות השיווק האטומי מקובץ ההוראות - 
+השילוב חייב להיות טבעי, לא "מאולץ", ולדבר לשריטה של הלקוח.
+
+
+בסוף חובה לשמור את הדוח בנתיב המדויק: C:\loan-dashboard\דפים לשינוי\business\קרן פדרציית ניו-יורק לישראל\שיווק אטומי\דוח שלב 1.md זה שם הקובץ שאתה שומר את הדוח - 

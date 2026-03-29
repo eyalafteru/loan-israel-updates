@@ -1,4 +1,4 @@
-<!-- wp:html -->
+﻿<!-- wp:html -->
 <script>
     // בדיקה והוספת viewport meta tag אם חסר
     if (!document.querySelector('meta[name="viewport"]')) {
@@ -450,7 +450,7 @@
 <div id="awg-section" style="text-align: center; margin: 40px auto; max-width: 1200px; padding: 40px 20px; background: #ffffff; border-top: 1px solid #e0e0e0; border-bottom: 1px solid #e0e0e0;" class="edit-hoverable">
       [awg postid="32400"]
     </div>
-<div class="disclaimer-box edit-hoverable" style="background: #ffffff; padding: 18px 24px; margin: 24px 0; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.06); border: 1px solid #e8e8e8;">
+<div class="disclaimer-box edit-hoverable" style="background: #ffffff; padding: 18px 24px; margin: 24px auto; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.06); border: 1px solid #e8e8e8; max-width: 1200px; direction: rtl;">
 <p style="margin: 0; color: #555; font-size: 14px; line-height: 1.7;" class="edit-hoverable">
 <strong style="color: #333;" class="edit-hoverable">חשוב לדעת:</strong> "רק תבקש" היא פלטפורמת השוואה המחברת אותך למגוון גופים מלווים (בנקים, חברות מימון, קרנות פנסיה). אנחנו לא מעניקים הלוואות בעצמנו. התנאים, הריביות והאישורים נקבעים ע"י הגופים המלווים עצמם לפי הפרופיל האישי שלך. הלוואות בלון כוללות סיכון של תשלום גדול בסוף התקופה - חשוב לתכנן מראש כיצד תממן את התשלום הסופי.
   </p>
@@ -461,11 +461,11 @@
 <section class="wpc-balloon-loans-x7k9-opening edit-hoverable">
 <div class="wpc-balloon-loans-x7k9-container edit-hoverable">
 <div class="wpc-section-demo-title wpc-balloon-loans-x7k9-section-title edit-hoverable">
-<h2 class="edit-hoverable">&nbsp;מתיי זה שווה לך?</h2>
+<h2 class="diff-element-changed edit-hoverable">&nbsp;מתי זה שווה לך?</h2>
 </div>
 <div class="wpc-balloon-loans-x7k9-opening-content edit-hoverable">
-<p class="edit-hoverable">בואו נדבר תכל'ס: הלוואות בלון לא מתאימות לכולם - אבל למי שצריך תזרים נמוך עכשיו ויודע שיהיה לו פתרון בעתיד (מכירת דירה, ירושה, קרן השתלמות), זה יכול להיות המהלך שעוזר לך לנשום.</p>
-<p class="edit-hoverable">לדוגמה: משפר דיור שקונה דירה חדשה לפני שמכר את הישנה - הוא יכול לקחת הלוואת בלון ל-2-3 שנים, לשלם רק ריבית, ואז למכור את הדירה הישנה ולסגור את החוב. במקום תשלום של 5,000 ₪ לחודש, הוא משלם 1,500 ₪.</p>
+<p class="edit-hoverable">בואו נדבר תכל'ס: הלוואות בלון לא מתאימות לכולם - אבל למי שצריך דחיית תשלומים, תזרים נמוך עכשיו ויודע שיהיה לו פתרון בעתיד (מכירת דירה, ירושה, קרן השתלמות), זה יכול להיות המהלך שעוזר לך לנשום.</p>
+<p class="diff-element-changed edit-hoverable">לדוגמה: משפר דיור שקונה דירה חדשה לפני שמכר את הישנה - הוא יכול לקחת בלון (בולט) ל-2-3 שנים, לשלם רק ריבית, ואז למכור את הדירה הישנה ולסגור את החוב (החזר הקרן במועד הפירעון). במקום תשלום של 5,000 ₪ לחודש, הוא משלם 1,500 ₪.</p>
 </div>
 </div>
 </section>
@@ -702,7 +702,7 @@
 <section class="wpc-balloon-loans-x7k9-calculator edit-hoverable" id="calculator-section">
 <div class="wpc-calc-tabs-demo-container wpc-balloon-loans-x7k9-calc-container edit-hoverable">
 <div class="wpc-section-demo-title wpc-balloon-loans-x7k9-calc-title edit-hoverable">
-<h2 class="edit-hoverable">מחשבון סימולציית התנפחות הבלון</h2>
+<h2 class="diff-element-changed edit-hoverable">מחשבון סימולציית התנפחות העסקה</h2>
 </div>
 <div class="wpc-calc-tabs-demo-wrapper wpc-balloon-loans-x7k9-calc-wrapper edit-hoverable">
 <!-- Navigation Tabs -->
@@ -2010,9 +2010,8 @@
 <h2 class="edit-hoverable">&nbsp;ההסבר שהבנק לא נותן לך</h2>
 </div>
 <div class="wpc-balloon-loans-x7k9-explanation-content edit-hoverable">
-<p class="wpc-balloon-loans-x7k9-lead-text edit-hoverable">
-            הבנק יגיד לך: "זו הלוואה עם תשלום גדול בסוף". אבל מה שהם לא יגידו: הלוואות בלון זה כלי לניהול תזרים חכם. אתה בעצם "שוכר" את הכסף לתקופה, משלם רק על השימוש (ריבית), והקרן עצמה חוזרת כשאתה מוכן.
-          </p>
+<p class="wpc-balloon-loans-x7k9-lead-text diff-element-changed edit-hoverable">
+            הבנק יגיד לך: "זו הלוואה עם תשלום גדול בסוף", אבל מה שהם לא יגידו: שמדובר בכלי לניהול תזרים חכם. אתה בעצם "שוכר" את הכסף לתקופה, משלם רק על השימוש (ריבית), וה<span style="color: rgb(51, 51, 51); font-size: 16.78px;" class="edit-hoverable">חזר הקרן מתבצע במועד הפרעון&nbsp;</span><span style="color: rgb(51, 51, 51); font-size: 16.78px;" class="edit-hoverable">- כשאתה מוכן.</span></p>
 <p class="wpc-balloon-loans-x7k9-lead-text edit-hoverable">
 <strong class="edit-hoverable">למה זה משתלם?</strong> כי לפעמים אתה צריך כסף היום, אבל אתה יודע שבעוד שנתיים-שלוש יהיה לך - אז למה לשלם תשלומים גבוהים עכשיו?
           </p>
@@ -2461,71 +2460,7 @@
 </div>
 </div>
 </section>
-<!-- אזור 7.5: יתרונות וחסרונות - סקשן חדש -->
-<section class="wpc-balloon-loans-x7k9-pros-cons edit-hoverable" style="padding: 60px 20px; background: #ffffff; font-family: 'Assistant', sans-serif; direction: rtl;">
-<div class="wpc-balloon-loans-x7k9-container edit-hoverable" style="max-width: 1200px; margin: 0 auto;">
-<div class="wpc-section-demo-title edit-hoverable" style="margin: 0 auto 40px; width: fit-content; padding-right: 25px; position: relative;">
-<h3 style="font-size: 2.2em; font-weight: 700; color: #1e5490; margin: 0;" class="edit-hoverable">יתרונות וחסרונות - מה חשוב לדעת</h3>
-</div>
-<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; max-width: 900px; margin: 0 auto;" class="edit-hoverable">
-<div style="background: #e8f5e9; padding: 30px; border-radius: 15px; border: 2px solid #4caf50;" class="edit-hoverable">
-<h4 style="color: #2e7d32; font-size: 1.4em; margin-bottom: 20px; text-align: center;" class="edit-hoverable">✅ יתרונות</h4>
-<ul style="list-style: none; padding: 0;" class="edit-hoverable">
-<li style="margin-bottom: 12px; padding-right: 20px; position: relative;" class="edit-hoverable">
-<span style="position: absolute; right: 0; color: #4caf50; font-weight: bold;" class="edit-hoverable">✓</span>
-<strong class="edit-hoverable">תזרים חודשי נמוך</strong> - משלמים 50-70% פחות מהלוואה רגילה
-              </li>
-<li style="margin-bottom: 12px; padding-right: 20px; position: relative;" class="edit-hoverable">
-<span style="position: absolute; right: 0; color: #4caf50; font-weight: bold;" class="edit-hoverable">✓</span>
-<strong class="edit-hoverable">גמישות בתכנון</strong> - מתאים למי שמצפה להכנסה עתידית
-              </li>
-<li style="margin-bottom: 12px; padding-right: 20px; position: relative;" class="edit-hoverable">
-<span style="position: absolute; right: 0; color: #4caf50; font-weight: bold;" class="edit-hoverable">✓</span>
-<strong class="edit-hoverable">מתאים למשפרי דיור</strong> - גשר פיננסי עד מכירת הדירה הישנה
-              </li>
-<li style="margin-bottom: 12px; padding-right: 20px; position: relative;" class="edit-hoverable">
-<span style="position: absolute; right: 0; color: #4caf50; font-weight: bold;" class="edit-hoverable">✓</span>
-<strong class="edit-hoverable">אופציה לפירעון מוקדם</strong> - ניתן לסגור מתי שרוצים (בכפוף לתנאים)
-              </li>
-</ul>
-</div>
-<div style="background: #ffebee; padding: 30px; border-radius: 15px; border: 2px solid #f44336;" class="edit-hoverable">
-<h4 style="color: #c62828; font-size: 1.4em; margin-bottom: 20px; text-align: center;" class="edit-hoverable">⚠️ חסרונות וסיכונים</h4>
-<ul style="list-style: none; padding: 0;" class="edit-hoverable">
-<li style="margin-bottom: 12px; padding-right: 20px; position: relative;" class="edit-hoverable">
-<span style="position: absolute; right: 0; color: #f44336; font-weight: bold;" class="edit-hoverable">✗</span>
-<strong class="edit-hoverable">תשלום גדול בסוף</strong> - צריך תוכנית ברורה להחזר
-              </li>
-<li style="margin-bottom: 12px; padding-right: 20px; position: relative;" class="edit-hoverable">
-<span style="position: absolute; right: 0; color: #f44336; font-weight: bold;" class="edit-hoverable">✗</span>
-<strong class="edit-hoverable">סיכון הצמדה</strong> - הבלון יכול "להתנפח" בגלל הצמדה למדד
-              </li>
-<li style="margin-bottom: 12px; padding-right: 20px; position: relative;" class="edit-hoverable">
-<span style="position: absolute; right: 0; color: #f44336; font-weight: bold;" class="edit-hoverable">✗</span>
-<strong class="edit-hoverable">תלות בשוק</strong> - אם השוק צונח, קשה למכור נכס לפירעון
-              </li>
-<li style="margin-bottom: 12px; padding-right: 20px; position: relative;" class="edit-hoverable">
-<span style="position: absolute; right: 0; color: #f44336; font-weight: bold;" class="edit-hoverable">✗</span>
-<strong class="edit-hoverable">לא לכולם</strong> - דורש משמעת פיננסית ותכנון
-              </li>
-</ul>
-</div>
-</div>
-<div style="background: #fff3cd; padding: 25px; border-radius: 15px; border-right: 4px solid #ffc107; margin-top: 30px; max-width: 900px; margin-left: auto; margin-right: auto;" class="edit-hoverable">
-<p style="margin: 0; font-size: 1.1em; line-height: 1.7; color: #333;" class="edit-hoverable">
-<strong style="color: #ff6f00;" class="edit-hoverable">💡 המלצה שלנו:</strong> <strong class="edit-hoverable">הלוואת בלון</strong> מתאימה רק אם יש לך תוכנית <strong class="edit-hoverable">קונקרטית</strong> לתשלום הסופי. אם אתה מסתמך על "זה יסתדר" - זה לא בשבילך. אבל אם אתה יודע שבעוד שנתיים תמכור דירה, תקבל ירושה, או תמשוך מקרן השתלמות - זה יכול לחסוך לך אלפי שקלים בתשלומים חודשיים.
-          </p>
-</div>
-</div>
-</section>
-<style>
-    @media (max-width: 768px) {
-      .wpc-balloon-loans-x7k9-pros-cons > div > div[style*="grid"] {
-        grid-template-columns: 1fr !important;
-        gap: 20px !important;
-      }
-    }
-    </style>
+<!-- אזור 7.5 הוסר לפי בקשה -->
 <style>
     /* Cards Section - מבוסס על wpc-rate-demo + אפקטי flip מתקדמים */
     .wpc-balloon-loans-x7k9-cards {
@@ -2880,13 +2815,13 @@
 <div class="wpc-balloon-loans-x7k9-explanation-box edit-hoverable">
 <h3 class="wpc-balloon-loans-x7k9-explanation-title edit-hoverable">🎈 למה קוראים לזה "בלון"?</h3>
 <p class="wpc-balloon-loans-x7k9-explanation-text edit-hoverable">
-              "הלוואת גישור" ו"הלוואת בלון" הן בעצם אותו המונח. השם "בלון" נובע מכך שהקרן "מתנפחת" לאורך זמן (בשל הפרשי הצמדה), בדיוק כמו בלון.
+              "הלוואת גישור" ו"הלוואת בלון" הן בעצם אותו המונח רק שאומרים גישור מתכוונים בדרך כלל להלוואות לדירה. השם "בלון" נובע מכך שהקרן "מתנפחת" לאורך זמן (בשל הפרשי הצמדה), בדיוק כמו בלון.
             </p>
 </div>
 <div class="wpc-balloon-loans-x7k9-comparison-boxes edit-hoverable">
 <div class="wpc-balloon-loans-x7k9-comparison-box grace edit-hoverable">
 <div class="wpc-balloon-loans-x7k9-comparison-icon edit-hoverable">⏰</div>
-<h4 class="edit-hoverable">הלוואת גרייס</h4>
+<h4 class="edit-hoverable">&nbsp;גרייס</h4>
 <p class="edit-hoverable">מתייחסת בעיקר למצב בו <strong class="edit-hoverable">אין תשלומים כלל</strong> לאורך תקופת החסד.</p>
 <div class="wpc-balloon-loans-x7k9-comparison-features edit-hoverable">
 <span class="feature edit-hoverable">✓ אפס תשלומים</span>
@@ -2895,7 +2830,7 @@
 </div>
 <div class="wpc-balloon-loans-x7k9-comparison-box balloon edit-hoverable">
 <div class="wpc-balloon-loans-x7k9-comparison-icon edit-hoverable">🎈</div>
-<h4 class="edit-hoverable">הלוואת בלון</h4>
+<h4 class="edit-hoverable">בלון</h4>
 <p class="edit-hoverable">כוללת גם מצבים בהם יש <strong class="edit-hoverable">תשלומים חלקיים</strong> (ריבית בלבד או ריבית + הצמדה).</p>
 <div class="wpc-balloon-loans-x7k9-comparison-features edit-hoverable">
 <span class="feature edit-hoverable">✓ תשלומים חלקיים</span>
@@ -2907,7 +2842,7 @@
 <div class="wpc-balloon-loans-x7k9-summary-icon edit-hoverable">💡</div>
 <div class="wpc-balloon-loans-x7k9-summary-content edit-hoverable">
 <h4 style="color: #ffffff !important;" class="edit-hoverable">לסיכום</h4>
-<p style="color: #ffffff !important;" class="edit-hoverable">שני המונחים מתארים בעיקרון אותו דבר - הלוואה עם תשלום גדול בסוף. ההבדל הוא בעיקר בפרטים הטכניים של התשלומים במהלך התקופה.</p>
+<p style="color: #ffffff !important;" class="edit-hoverable">שני המונחים מתארים בעיקרון אותו דבר - הלוואה עם תשלום גדול בסוף. ההבדל הוא בעיקר בפרטים הטכניים של התשלומים במהלך התקופה וביעוד.</p>
 </div>
 </div>
 </div>
@@ -3161,7 +3096,7 @@
 <h2 class="edit-hoverable">איזה גופים מציעים הלוואות בלון?</h2>
 </div>
 <p class="wpc-balloon-loans-x7k9-lenders-intro edit-hoverable">
-          הלוואות בלון זמינות ממגוון גופים פיננסיים. בחרו קטגוריה לצפייה בפרטים מלאים:
+          ניתן לקבל אותה ממבחר גופים. בחרו קטגוריה לצפייה בפרטים מלאים:
         </p>
 <div class="wpc-calc-tabs-demo-container wpc-balloon-loans-x7k9-tabs-container edit-hoverable">
 <div class="wpc-calc-tabs-demo-wrapper wpc-balloon-loans-x7k9-tabs-wrapper edit-hoverable">
@@ -3262,7 +3197,7 @@
 </div>
 </div>
 <!-- Insurance Panel -->
-<div class="wpc-calc-panel-demo wpc-balloon-loans-x7k9-panel edit-hoverable active" id="panel-insurance" style="opacity: 1;">
+<div class="wpc-calc-panel-demo wpc-balloon-loans-x7k9-panel active edit-hoverable" id="panel-insurance" style="opacity: 1;">
 <h4 class="edit-hoverable">חברות ביטוח וקופות גמל</h4>
 <div class="wpc-rate-demo-container wpc-balloon-loans-x7k9-cards-grid edit-hoverable">
 <div class="wpc-rate-demo-card wpc-balloon-loans-x7k9-lender-card edit-hoverable">
@@ -3847,7 +3782,7 @@
 <section class="wpc-balloon-loans-x7k9-savings-calc edit-hoverable">
 <div class="wpc-balloon-loans-x7k9-container edit-hoverable">
 <div class="wpc-section-demo-title wpc-balloon-loans-x7k9-savings-title edit-hoverable">
-<h2 class="edit-hoverable">מחשבון צבירת כסף לבלון - תכננו מראש!</h2>
+<h2 class="diff-element-changed edit-hoverable">מחשבון הלוואת בלון/ גרייס - תכננו מראש!</h2>
 </div>
 <div class="wpc-balloon-loans-x7k9-savings-intro edit-hoverable">
 <p class="edit-hoverable"><strong class="edit-hoverable">🎯 אל תיקח הלוואת בלון בלי תוכנית!</strong></p>
@@ -3865,7 +3800,7 @@
 <div class="wpc-balloon-loans-x7k9-input-grid edit-hoverable">
 <!-- Balloon Amount Slider -->
 <div class="wpc-balloon-loans-x7k9-input-group edit-hoverable">
-<label for="balloon-amount-slider">סכום הבלון הצפוי</label>
+<label for="balloon-amount-slider">הסכום הצפוי</label>
 <div class="wpc-balloon-loans-x7k9-slider-container edit-hoverable">
 <input class="wpc-balloon-loans-x7k9-slider" id="balloon-amount-slider" max="5000000" min="50000" step="50000" type="range" value="500000">
 <div class="wpc-balloon-loans-x7k9-amount-display edit-hoverable">
@@ -3977,8 +3912,7 @@
 <div class="wpc-balloon-loans-x7k9-result-content edit-hoverable">
 <h4 class="edit-hoverable">סה"כ לחסוך</h4>
 <div class="wpc-balloon-loans-x7k9-result-value edit-hoverable" id="total-to-save">‏443,430&nbsp;‏₪</div>
-<small>עד לפרעון הבלון</small>
-</div>
+<small>עד לפרעון המלא</small></div>
 </div>
 </div>
 <!-- Progress Bar -->
@@ -4760,7 +4694,7 @@
 <h2 class="edit-hoverable">&nbsp;בנק דיסקונט</h2>
 </div>
 <div class="wpc-balloon-loans-x7k9-bank-content edit-hoverable">
-<p class="edit-hoverable">בנק דיסקונט מציע הלוואות בלון ללקוחות כל הבנקים, כולל הלוואה למשכנתא ולסטודנטים. עבור הדירה הנוכחית ניתן לקבל עד 70% מערך הדירה במסלולי משכנתא שונים, ועבור דירה חדשה ניתן למקסם את המימון בהתאם למגבלות בנק ישראל.</p>
+<p class="diff-element-changed edit-hoverable">בנק דיסקונט מציע הלוואות כאלו ללקוחות כל הבנקים, כולל הלוואה למשכנתא ולסטודנטים. עבור הדירה הנוכחית ניתן לקבל עד 70% מערך הדירה במסלולי משכנתא שונים, ועבור דירה חדשה ניתן למקסם את המימון בהתאם למגבלות בנק ישראל.</p>
 <div class="wpc-balloon-loans-x7k9-bank-highlights edit-hoverable">
 <div class="wpc-balloon-loans-x7k9-highlight-item edit-hoverable">
 <span class="wpc-balloon-loans-x7k9-highlight-icon edit-hoverable">🏦</span>
@@ -4786,10 +4720,10 @@
 <section class="wpc-balloon-loans-x7k9-bank-specific edit-hoverable">
 <div class="wpc-balloon-loans-x7k9-container edit-hoverable">
 <div class="wpc-section-demo-title wpc-balloon-loans-x7k9-bank-title edit-hoverable">
-<h2 class="edit-hoverable">הלוואת בלון דרך קרן פנסיה</h2>
+<h2 class="diff-element-changed edit-hoverable">הלוואת בולט דרך קרן פנסיה</h2>
 </div>
 <div class="wpc-balloon-loans-x7k9-bank-content edit-hoverable">
-<p class="edit-hoverable">אם יש לכם קרן פנסיה, כדאי לבדוק אפשרות להלוואת בלון. חברות הביטוח מאפשרות לעמיתים לקחת החל מ-10,000 ₪ ועד 28% מסך התגמולים, בריבית קבועה של 2.5% או בריבית משתנה צמודה לפריים + 0.5%.</p>
+<p class="diff-element-changed edit-hoverable">אם יש לכם קרן פנסיה, כדאי לבדוק אפשרות להלוואה בה התשלום הוא בסוף התקופה. חברות הביטוח מאפשרות לעמיתים לקחת החל מ-10,000 ₪ ועד 28% מסך התגמולים, בריבית קבועה של 2.5% או בריבית משתנה צמודה לפריים + 0.5%.</p>
 <div class="wpc-balloon-loans-x7k9-bank-highlights edit-hoverable">
 <div class="wpc-balloon-loans-x7k9-highlight-item edit-hoverable">
 <span class="wpc-balloon-loans-x7k9-highlight-icon edit-hoverable">💰</span>
@@ -4819,7 +4753,7 @@
 <h2 class="edit-hoverable">הלוואת בלון על חשבון קרן השתלמות</h2>
 </div>
 <div class="wpc-balloon-loans-x7k9-bank-content edit-hoverable">
-<p class="edit-hoverable">ניתן לקבל הלוואת בלון כנגד קרן השתלמות החל מ-20,000 ₪, עד 7 שנים, בריבית פריים מינוס 0.3%. סכום ההלוואה משתנה בהתאם למסלול ונזילות הכסף בקרן.</p>
+<p class="diff-element-changed edit-hoverable">ניתן לקבל אותה כנגד קרן השתלמות החל מ-20,000 ₪, עד 7 שנים, בריבית פריים מינוס 0.3%. סכום ההלוואה משתנה בהתאם למסלול ונזילות הכסף בקרן.</p>
 <div class="wpc-balloon-loans-x7k9-bank-highlights edit-hoverable">
 <div class="wpc-balloon-loans-x7k9-highlight-item edit-hoverable">
 <span class="wpc-balloon-loans-x7k9-highlight-icon edit-hoverable">🎯</span>
@@ -4849,7 +4783,7 @@
 <h2 class="edit-hoverable">מימון ישיר</h2>
 </div>
 <div class="wpc-balloon-loans-x7k9-bank-content edit-hoverable">
-<p class="edit-hoverable">מימון ישיר מציעה הלוואת בלון לרכישת רכב או לכל מטרה, עם אפשרות לבחור בין הלוואת בלון מלא או חלקי בהתאם לצרכים שלכם.</p>
+<p class="diff-element-new edit-hoverable">מימון ישיר מציעה בולט לרכישת רכב או לכל מטרה, עם אפשרות לבחור בין אם הוא יהיה&nbsp; מלא או חלקי בהתאם לצרכים שלכם.</p>
 <div class="wpc-balloon-loans-x7k9-bank-highlights edit-hoverable">
 <div class="wpc-balloon-loans-x7k9-highlight-item edit-hoverable">
 <span class="wpc-balloon-loans-x7k9-highlight-icon edit-hoverable">🚗</span>
@@ -4879,7 +4813,7 @@
 <h2 class="edit-hoverable">בנק הפועלים</h2>
 </div>
 <div class="wpc-balloon-loans-x7k9-bank-content edit-hoverable">
-<p class="edit-hoverable">בנק הפועלים מציע הלוואות בלון ללקוחות הבנק וללקוחות בנקים אחרים. הבנק מציע גם הלוואת בלון לסטודנטים למימון שכר לימוד עד 75,000 ₪ בריבית משתנה פריים + 3%.</p>
+<p class="diff-element-changed edit-hoverable">בנק הפועלים מציע הלוואות אלו ללקוחות הבנק וללקוחות בנקים אחרים. הבנק מציע גם&nbsp; לסטודנטים למימון שכר לימוד עד 75,000 ₪ בריבית משתנה פריים + 3%.</p>
 <div class="wpc-balloon-loans-x7k9-bank-highlights edit-hoverable">
 <div class="wpc-balloon-loans-x7k9-highlight-item edit-hoverable">
 <span class="wpc-balloon-loans-x7k9-highlight-icon edit-hoverable">🏛️</span>
@@ -5766,7 +5700,7 @@
 <h2 class="edit-hoverable">בנקים וריביות עדכניות</h2>
 </div>
 <div class="wpc-balloon-loans-x7k9-rates-intro edit-hoverable">
-<p class="edit-hoverable"><strong class="edit-hoverable">📊 טבלת ריביות עדכנית לחודש דצמבר 2024</strong></p>
+<p class="edit-hoverable"><strong class="edit-hoverable">📊 טבלת ריביות עדכנית לחודש פברואר 2025</strong></p>
 <p class="edit-hoverable">השוו בין כל הגופים המממנים ומצאו את התנאים הטובים ביותר עבורכם</p>
 </div>
 <div class="wpc-table-demo-container wpc-balloon-loans-x7k9-table-container edit-hoverable">
@@ -5818,11 +5752,11 @@
 </td>
 <td class="edit-hoverable"><span class="type-badge bank edit-hoverable">בנק</span></td>
 <td class="rate-cell edit-hoverable">
-<span class="rate-value best-rate edit-hoverable">5.9%</span>
-<small>פריים + 0.4%</small>
+<span class="rate-value best-rate edit-hoverable">6.2%</span>
+<small class="diff-element-changed">פריים + 0.7%</small>
 </td>
-<td class="amount-cell edit-hoverable">2,500,000 ₪</td>
-<td class="period-cell edit-hoverable">10 שנים</td>
+<td class="amount-cell diff-element-changed edit-hoverable">עד 70% משווי הנכס</td>
+<td class="period-cell diff-element-changed edit-hoverable">3 שנים</td>
 <td class="rating-cell edit-hoverable">
 <span class="stars edit-hoverable">★★★★★</span>
 <small>4.5/5</small>
@@ -5836,11 +5770,11 @@
 </td>
 <td class="edit-hoverable"><span class="type-badge bank edit-hoverable">בנק</span></td>
 <td class="rate-cell edit-hoverable">
-<span class="rate-value edit-hoverable">6%</span>
-<small>פריים + 0.5%</small>
+<span class="rate-value edit-hoverable">6.4%</span>
+<small>פריים + 0.9%</small>
 </td>
 <td class="amount-cell edit-hoverable">2,000,000 ₪</td>
-<td class="period-cell edit-hoverable">10 שנים</td>
+<td class="period-cell edit-hoverable">2-3 שנים</td>
 <td class="rating-cell edit-hoverable">
 <span class="stars edit-hoverable">★★★★☆</span>
 <small>4.5/5</small>
@@ -5854,11 +5788,11 @@
 </td>
 <td class="edit-hoverable"><span class="type-badge bank edit-hoverable">בנק</span></td>
 <td class="rate-cell edit-hoverable">
-<span class="rate-value edit-hoverable">6.1%</span>
-<small>פריים + 0.6%</small>
+<span class="rate-value edit-hoverable">6.3%</span>
+<small>פריים + 0.8%</small>
 </td>
 <td class="amount-cell edit-hoverable">1,800,000 ₪</td>
-<td class="period-cell edit-hoverable">8 שנים</td>
+<td class="period-cell diff-element-changed edit-hoverable">3 שנים</td>
 <td class="rating-cell edit-hoverable">
 <span class="stars edit-hoverable">★★★★☆</span>
 <small>4.4/5</small>
@@ -5871,33 +5805,15 @@
 <strong class="edit-hoverable">בנק הפועלים</strong>
 </td>
 <td class="edit-hoverable"><span class="type-badge bank edit-hoverable">בנק</span></td>
-<td class="rate-cell edit-hoverable">
-<span class="rate-value edit-hoverable">6.3%</span>
-<small>פריים + 0.8%</small>
+<td class="rate-cell diff-element-new edit-hoverable">
+<span class="rate-value edit-hoverable">6.5%</span>
+<small>פריים + 1%</small>
 </td>
 <td class="amount-cell edit-hoverable">1,500,000 ₪</td>
-<td class="period-cell edit-hoverable">7 שנים</td>
+<td class="period-cell diff-element-changed edit-hoverable">2 שנים</td>
 <td class="rating-cell edit-hoverable">
 <span class="stars edit-hoverable">★★★★☆</span>
 <small>4.3/5</small>
-</td>
-</tr>
-<!-- Pension Fund -->
-<tr data-amount="500000" data-rate="2.5" data-rating="4.7" data-type="insurance">
-<td class="bank-name edit-hoverable">
-<div class="bank-logo edit-hoverable">🛡️</div>
-<strong class="edit-hoverable">קרן פנסיה כללית</strong>
-</td>
-<td class="edit-hoverable"><span class="type-badge insurance edit-hoverable">ביטוח</span></td>
-<td class="rate-cell edit-hoverable">
-<span class="rate-value edit-hoverable">2.5%</span>
-<small>קבועה</small>
-</td>
-<td class="amount-cell edit-hoverable">500,000 ₪</td>
-<td class="period-cell edit-hoverable">5 שנים</td>
-<td class="rating-cell edit-hoverable">
-<span class="stars edit-hoverable">★★★★★</span>
-<small>4.7/5</small>
 </td>
 </tr>
 <!-- Study Fund -->
@@ -5908,10 +5824,10 @@
 </td>
 <td class="edit-hoverable"><span class="type-badge fund edit-hoverable">קרן</span></td>
 <td class="rate-cell edit-hoverable">
-<span class="rate-value edit-hoverable">5.2%</span>
-<small>פריים - 0.3%</small>
+<span class="rate-value edit-hoverable">5%</span>
+<small class="diff-element-changed">פריים - 0.5%</small>
 </td>
-<td class="amount-cell edit-hoverable">300,000 ₪</td>
+<td class="amount-cell diff-element-new edit-hoverable">עד 80% מהקופה</td>
 <td class="period-cell edit-hoverable">7 שנים</td>
 <td class="rating-cell edit-hoverable">
 <span class="stars edit-hoverable">★★★★★</span>
@@ -5925,12 +5841,12 @@
 <strong class="edit-hoverable">מימון ישיר</strong>
 </td>
 <td class="edit-hoverable"><span class="type-badge finance edit-hoverable">מימון</span></td>
-<td class="rate-cell edit-hoverable">
-<span class="rate-value edit-hoverable">4.2%</span>
-<small>פריים + 1.2%</small>
+<td class="rate-cell diff-element-new edit-hoverable">
+<span class="rate-value edit-hoverable">9.5%</span>
+<small>פריים + 4%</small>
 </td>
-<td class="amount-cell edit-hoverable">800,000 ₪</td>
-<td class="period-cell edit-hoverable">5 שנים</td>
+<td class="amount-cell diff-element-changed edit-hoverable">150,000 ₪</td>
+<td class="period-cell edit-hoverable">3-5 שנים</td>
 <td class="rating-cell edit-hoverable">
 <span class="stars edit-hoverable">★★★★☆</span>
 <small>4.1/5</small>
@@ -5944,11 +5860,11 @@
 </td>
 <td class="edit-hoverable"><span class="type-badge finance edit-hoverable">מימון</span></td>
 <td class="rate-cell edit-hoverable">
-<span class="rate-value edit-hoverable">4.5%</span>
+<span class="rate-value edit-hoverable">7%</span>
 <small>פריים + 1.5%</small>
 </td>
-<td class="amount-cell edit-hoverable">600,000 ₪</td>
-<td class="period-cell edit-hoverable">4 שנים</td>
+<td class="amount-cell edit-hoverable">100,000 ₪</td>
+<td class="period-cell diff-element-changed edit-hoverable">2 שנים</td>
 <td class="rating-cell edit-hoverable">
 <span class="stars edit-hoverable">★★★★☆</span>
 <small>4.0/5</small>
@@ -5961,15 +5877,15 @@
 <div class="wpc-balloon-loans-x7k9-table-summary edit-hoverable">
 <div class="wpc-balloon-loans-x7k9-summary-stats edit-hoverable">
 <div class="stat-item edit-hoverable">
-<span class="stat-number edit-hoverable" id="total-lenders">8</span>
+<span class="stat-number edit-hoverable" id="total-lenders">7</span>
 <span class="stat-label edit-hoverable">גופים מלווים</span>
 </div>
 <div class="stat-item edit-hoverable">
-<span class="stat-number edit-hoverable">2.5%</span>
+<span class="stat-number edit-hoverable">6.5%</span>
 <span class="stat-label edit-hoverable">ריבית הכי נמוכה</span>
 </div>
 <div class="stat-item edit-hoverable">
-<span class="stat-number edit-hoverable">2.5M ₪</span>
+<span class="stat-number edit-hoverable">2M ₪</span>
 <span class="stat-label edit-hoverable">סכום מקסימלי</span>
 </div>
 </div>
@@ -6913,11 +6829,11 @@
 <section class="wpc-balloon-loans-x7k9-content-section edit-hoverable">
 <div class="wpc-balloon-loans-x7k9-container edit-hoverable">
 <div class="wpc-section-demo-title wpc-balloon-loans-x7k9-content-title edit-hoverable">
-<h2 class="edit-hoverable">הלוואת בלון משכנתא - הפתרון החכם למשפרי דיור</h2>
+<h2 class="diff-element-changed edit-hoverable">הלוואת בלון למשכנתא - הפתרון החכם למשפרי דיור</h2>
 </div>
 <div class="wpc-balloon-loans-x7k9-content-text edit-hoverable">
-<p class="edit-hoverable">הלוואת בלון למשכנתא היא פתרון מושלם למשפרי דיור. במקום להמתין למכירת הדירה הנוכחית, תוכלו לרכוש דירה חדשה ולהחזיר את ההלוואה ממכירת הדירה הישנה.</p>
-<p class="edit-hoverable">הריבית במסלול הלוואת בלון משכנתא אטרקטיבית מאוד בהשוואה למסלולי משכנתא אחרים. כדאי להשוות הצעות מכמה גופים ולהשתמש במחשבון הלוואת בלון לתכנון נכון.</p>
+<p class="diff-element-changed edit-hoverable">הלוואת כזו למשכנתא היא פתרון מושלם למשפרי דיור. במקום להמתין למכירת הדירה הנוכחית, תוכלו לרכוש דירה חדשה ולהחזיר את ההלוואה ממכירת הדירה הישנה.</p>
+<p class="diff-element-new edit-hoverable">הריבית במסלול של משכנתא אטרקטיבית מאוד בהשוואה למסלולי משכנתא אחרים. כדאי להשוות הצעות מכמה גופים ולהשתמש במחשבון שלנו לתכנון נכון.</p>
 <div class="wpc-balloon-loans-x7k9-cta-box edit-hoverable">
 <h4 class="edit-hoverable">🏠 מחליפים דירה?</h4>
 <p class="edit-hoverable">הלוואת בלון תאפשר לכם לרכוש דירה חדשה עוד לפני מכירת הישנה!</p>
@@ -6935,7 +6851,7 @@
 <h2 class="edit-hoverable">בדיקת זכאות להלוואת בלון לדירה</h2>
 </div>
 <div class="wpc-balloon-loans-x7k9-content-text edit-hoverable">
-<p class="edit-hoverable">לבדיקת זכאות לקבלת הלוואת בלון לדירה, מלאו את הטופס למעלה ונחזור אליכם בהקדם עם מספר הצעות אטרקטיביות. קיימים שני מסלולים עיקריים:</p>
+<p class="diff-element-changed edit-hoverable">לבדיקת זכאות לקבלת מימון בלון לדירה, מלאו את הטופס למעלה ונחזור אליכם בהקדם עם מספר הצעות אטרקטיביות. קיימים שני מסלולים עיקריים:</p>
 <div class="wpc-balloon-loans-x7k9-two-options edit-hoverable">
 <div class="wpc-balloon-loans-x7k9-option-card edit-hoverable">
 <div class="wpc-balloon-loans-x7k9-option-icon edit-hoverable">🔵</div>
@@ -6958,7 +6874,7 @@
 <h2 class="edit-hoverable">הלוואת בלון לרכב - תנאים וזכאות</h2>
 </div>
 <div class="wpc-balloon-loans-x7k9-content-text edit-hoverable">
-<p class="edit-hoverable">לרכישת רכב החלומות תוכלו לקחת הלוואת בלון לרכב עד 200,000 ₪ באישור מהיר. הרכב משועבד כנגד ההלוואה, התקופה 3-5 שנים, והריבית החל מפריים + 0.9%.</p>
+<p class="edit-hoverable">לרכישת רכב החלומות תוכלו לקחת הלוואה לרכב עד 200,000 ₪ באישור מהיר. הרכב משועבד כנגד ההלוואה, התקופה 3-5 שנים, והריבית החל מפריים + 0.9%.</p>
 <div class="wpc-balloon-loans-x7k9-features-grid edit-hoverable">
 <div class="wpc-balloon-loans-x7k9-feature-item edit-hoverable">
 <span class="wpc-balloon-loans-x7k9-feature-icon edit-hoverable">💰</span>
@@ -6993,7 +6909,7 @@
 <div class="wpc-balloon-loans-x7k9-pros-cons edit-hoverable">
 <!-- יתרונות -->
 <div class="wpc-balloon-loans-x7k9-pros-section edit-hoverable">
-<h3 class="wpc-balloon-loans-x7k9-pros-title edit-hoverable">✅ יתרונות הלוואות בלון:</h3>
+<h3 class="wpc-balloon-loans-x7k9-pros-title edit-hoverable">✅ יתרונות:</h3>
 <div class="wpc-balloon-loans-x7k9-pros-list edit-hoverable">
 <div class="wpc-balloon-loans-x7k9-pro-item edit-hoverable">
 <div class="wpc-balloon-loans-x7k9-pro-number edit-hoverable">1</div>
@@ -7020,7 +6936,7 @@
 </div>
 <!-- חסרונות -->
 <div class="wpc-balloon-loans-x7k9-cons-section edit-hoverable">
-<h3 class="wpc-balloon-loans-x7k9-cons-title edit-hoverable">⚠️ חסרונות הלוואות בלון:</h3>
+<h3 class="wpc-balloon-loans-x7k9-cons-title edit-hoverable">⚠️ חסרונות:</h3>
 <div class="wpc-balloon-loans-x7k9-cons-list edit-hoverable">
 <div class="wpc-balloon-loans-x7k9-con-item edit-hoverable">
 <div class="wpc-balloon-loans-x7k9-con-number edit-hoverable">1</div>
@@ -7045,6 +6961,17 @@
 </div>
 </div>
 </div>
+</div>
+</div>
+</section>
+<!-- אזור 22.5: מתי הלוואת בלון היא טעות כלכלית -->
+<section class="wpc-balloon-loans-x7k9-content-section edit-hoverable">
+<div class="wpc-balloon-loans-x7k9-container edit-hoverable">
+<div class="wpc-section-demo-title wpc-balloon-loans-x7k9-content-title edit-hoverable">
+<h2 class="edit-hoverable">מתי הלוואת בלון היא טעות כלכלית?</h2>
+</div>
+<div class="wpc-balloon-loans-x7k9-content-text edit-hoverable">
+<p class="edit-hoverable">הסיכון הגדול ביותר במסלול הבלון הוא 'אפקט ההפתעה' בסוף התקופה. אם אין לכם מקור פירעון ודאי (כמו חיסכון שנפתח או דירה שנמכרת), אתם עלולים למצוא את עצמכם עם חוב שתפח משמעותית בשל הצטברות ריבית דריבית. פתיחת 2026, עם ריבית פריים של 5.5%, הופכת את דחיית תשלומי הקרן ליקרה במיוחד.</p>
 </div>
 </div>
 </section>
@@ -7095,7 +7022,7 @@
 <h2 class="edit-hoverable">סכומים וטווחי זמן - מה חשוב לדעת?</h2>
 </div>
 <div class="wpc-balloon-loans-x7k9-amounts-guide edit-hoverable">
-<p class="wpc-balloon-loans-x7k9-amounts-intro edit-hoverable">מדריך מפורט לסכומים ותקופות מומלצות להלוואות בלון:</p>
+<p class="wpc-balloon-loans-x7k9-amounts-intro edit-hoverable">מדריך מפורט לסכומים ותקופות מומלצות למימון גרייס (בלון):</p>
 <div class="wpc-balloon-loans-x7k9-amounts-grid edit-hoverable">
 <div class="wpc-balloon-loans-x7k9-amount-item edit-hoverable">
 <div class="wpc-balloon-loans-x7k9-amount-sum edit-hoverable">50,000 ₪</div>
@@ -7638,7 +7565,7 @@
               ❓ מה זה בדיוק הלוואת בלון ואיך היא שונה מהלוואה רגילה?
             </div>
 <div class="wpc-accordion-demo-content wpc-balloon-loans-x7k9-faq-content edit-hoverable">
-<p class="edit-hoverable"><strong class="edit-hoverable">הלוואת בלון</strong> היא הלוואה שבה רוב הקרן (בדרך כלל 70-90%) משולמת בתשלום אחד גדול בסוף התקופה, בעוד שבתקופת ההלוואה משלמים רק ריבית או תשלומים קטנים יחסית.</p>
+<p class="edit-hoverable"><b>זאת</b> הלוואה שבה רוב הקרן (בדרך כלל 70-90%) משולמת בתשלום אחד גדול בסוף התקופה, בעוד שבתקופת ההלוואה משלמים רק ריבית או תשלומים קטנים יחסית.</p>
 <p class="edit-hoverable"><strong class="edit-hoverable">ההבדל העיקרי:</strong> בהלוואה רגילה משלמים כל חודש קרן + ריבית, בהלוואת בלון רוב הקרן נדחית לסוף.</p>
 <p class="edit-hoverable"><strong class="edit-hoverable">למשל:</strong> הלוואה של 500,000 ₪ - בהלוואה רגילה תשלמו כ-4,500 ₪ לחודש, בהלוואת בלון רק 1,500-2,000 ₪ לחודש ו-400,000 ₪ בסוף.</p>
 </div>
@@ -7657,7 +7584,7 @@
 <li class="edit-hoverable"><strong class="edit-hoverable">הלוואה גישור נוספת</strong> - אם אתה בטוח שבעוד 6-12 חודשים יהיה לך הכסף, יש גופים שנותנים "גשר על גשר" (יקר יותר, אבל עובד).</li>
 </ul>
 <p class="edit-hoverable">אם אתה מרגיש שהתשלום מתקרב ואין לך פתרון - <strong class="edit-hoverable">אל תחכה ל-3 חודשים לפני</strong>. דבר עם הבנק מוקדם, תראה אחריות - זה עוזר במו"מ.</p>
-<p class="edit-hoverable"><strong class="edit-hoverable">למה זה קורה?</strong> כי הרבה אנשים לוקחים הלוואת בלון בהנחה ש"זה יסתדר" או "השוק יעלה". השוק לא תמיד עובד ככה. <strong class="edit-hoverable">אבל זה לא אומר שאתה "נכשלת"</strong> - זה אומר שהתוכנית השתנתה, ועכשיו צריך תוכנית B.</p>
+<p class="edit-hoverable"><strong class="edit-hoverable">למה זה קורה?</strong> כי הרבה אנשים לוקחים בלון בהנחה ש"זה יסתדר" או "השוק יעלה". השוק לא תמיד עובד ככה. <strong class="edit-hoverable">אבל זה לא אומר שאתה "נכשלת"</strong> - זה אומר שהתוכנית השתנתה, ועכשיו צריך תוכנית B.</p>
 </div>
 </div>
 <div class="wpc-accordion-demo-item wpc-balloon-loans-x7k9-faq-item edit-hoverable">
@@ -7678,7 +7605,7 @@
 </div>
 <div class="wpc-accordion-demo-item wpc-balloon-loans-x7k9-faq-item edit-hoverable">
 <div class="wpc-accordion-demo-header wpc-balloon-loans-x7k9-faq-header edit-hoverable" onclick="toggleAccordion(this)">
-              📋 מה הדרישות לקבלת הלוואת בלון ואיך מתבצעת הבדיקה?
+              📋 מה הדרישות לקבלת מימון בלון ואיך מתבצעת הבדיקה?
             </div>
 <div class="wpc-accordion-demo-content wpc-balloon-loans-x7k9-faq-content edit-hoverable">
 <p class="edit-hoverable"><strong class="edit-hoverable">דרישות בסיסיות:</strong></p>
@@ -7721,11 +7648,11 @@
 </div>
 </div>
 <div class="wpc-accordion-demo-item wpc-balloon-loans-x7k9-faq-item edit-hoverable">
-<div class="wpc-accordion-demo-header wpc-balloon-loans-x7k9-faq-header edit-hoverable" onclick="toggleAccordion(this)">
+<div class="wpc-accordion-demo-header wpc-balloon-loans-x7k9-faq-header active edit-hoverable" onclick="toggleAccordion(this)">
               🎯 איך מחשבים בדיוק את התשלומים והריבית בהלוואת בלון?
             </div>
-<div class="wpc-accordion-demo-content wpc-balloon-loans-x7k9-faq-content edit-hoverable">
-<p class="edit-hoverable"><strong class="edit-hoverable">3 סוגי מימון בלון:</strong></p>
+<div class="wpc-accordion-demo-content wpc-balloon-loans-x7k9-faq-content active edit-hoverable">
+<p class="edit-hoverable"><strong class="edit-hoverable">3 סוגי מימון גרייס:</strong></p>
 <div class="faq-calculation-example edit-hoverable">
 <h4 class="edit-hoverable">דוגמה: הלוואה של 500,000 ₪ ל-5 שנים בריבית 4%</h4>
 <div class="calc-type edit-hoverable">
