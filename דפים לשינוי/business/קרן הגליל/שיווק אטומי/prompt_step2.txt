@@ -1,21 +1,21 @@
 === פרומפט שנשלח לקלוד - step2 ===
-זמן: 2026-01-13 18:14:14
+זמן: 2026-04-12 14:13:50
 ============================================================
 
 === סוכן יישום והטמעה טכנית (Implementation Specialist) ===
 זמן: 2026-01-05
 
-קרא את קובץ ההוראות C:\Users\eyal\loan-israel-updaets\loan-israel-updates\פרומטים\אטומי\שלב 2.md
+קרא את קובץ ההוראות C:\loan-dashboard\פרומטים\אטומי\שלב 2.md
 
 ---
 
 ## נתוני קלט לביצוע
 
 **דוח מאושר משלב 1 (Final Content Spec):**
-C:\Users\eyal\loan-israel-updaets\loan-israel-updates\דפים לשינוי\business\קרן הגליל\שיווק אטומי\דוח שלב 1.md
+C:\loan-dashboard\דפים לשינוי\business\קרן הגליל\שיווק אטומי\דוח שלב 1.md
 
 **קובץ העמוד לתיקון (Source HTML):**
-C:\Users\eyal\loan-israel-updaets\loan-israel-updates\דפים לשינוי\business\קרן הגליל\קרן הגליל.html
+C:\loan-dashboard\דפים לשינוי\business\קרן הגליל\קרן הגליל.html
 
 ---
 
@@ -76,4 +76,4 @@ C:\Users\eyal\loan-israel-updaets\loan-israel-updates\דפים לשינוי\busi
 **מה כן לייצר:**
 - **לוג שינויים קצר** - רשימה של הפעולות הטכניות שבוצעו (למשל: "עודכנה פסקת הפתיחה", "נוספו 2 שאלות ל-FAQ").
 
-**שמור את דוח הסיכום בנתיב המדויק:** C:\Users\eyal\loan-israel-updaets\loan-israel-updates\דפים לשינוי\business\קרן הגליל\שיווק אטומי\דוח שלב 2.md
+**שמור את דוח הסיכום בנתיב המדויק:** C:\loan-dashboard\דפים לשינוי\business\קרן הגליל\שיווק אטומי\דוח שלב 2.md
