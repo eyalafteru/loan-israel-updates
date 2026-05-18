@@ -1,0 +1,40 @@
+---
+description: Memory Bank - project memory for agent continuity
+globs:
+alwaysApply: true
+---
+
+## Memory Bank Protocol
+
+This project uses a Memory Bank system for continuity between agent sessions. All memory files live in `docs/memory-bank/`.
+
+### At the START of every session:
+1. Read `docs/memory-bank/activeContext.md` — this is the project hub with current state and recent session links
+2. Read the 2-3 most recent session files linked from `activeContext.md`
+3. Read `docs/memory-bank/progress.md` for feature status overview
+4. Read `docs/memory-bank/techContext.md` for tech stack and deployment info
+5. Read `docs/architecture.md` for technical patterns and coding conventions
+6. Read other memory-bank files (productContext, systemPatterns, projectbrief) only if relevant to your task
+
+### At the END of every session (MANDATORY):
+1. Create a session file: `docs/memory-bank/sessions/YYYY-MM-DD-{name}.md`
+   - `{name}` = developer name or `agent` for AI sessions
+   - If a file with that name already exists today, add suffix: `-2.md`
+   - Contains: what was done, decisions made, issues found, files changed, next steps
+   - **Every file you edited MUST appear in the session log.** If you removed functionality, document what was removed and why. A diff review that finds undocumented file changes is a failure
+2. Update `docs/memory-bank/activeContext.md`:
+   - Add link to the new session file under "Recent Sessions"
+   - Update "Current State" and "Next Steps" sections
+   - Keep only the 5 most recent session links (remove older ones)
+   - Keep the file under 50 lines total
+3. Update `docs/memory-bank/progress.md` if a feature status changed
+4. Update other memory-bank files ONLY if structurally relevant:
+   - New technology added -> techContext.md
+   - New system pattern -> systemPatterns.md
+   - Product decision -> productContext.md
+
+### IMPORTANT:
+- NEVER copy passwords, API keys, or connection strings into memory-bank files
+- Memory-bank files should be UPDATED (replaced), not appended to — keep them concise
+- Session files are **action logs only** — NOT a replacement for core docs. If an architectural decision is made, update the relevant core file in addition to the session log
+- Session files older than 30 days can be deleted (important data survives in progress.md)

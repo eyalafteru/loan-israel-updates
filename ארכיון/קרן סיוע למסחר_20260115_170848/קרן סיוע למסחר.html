@@ -9,7 +9,9 @@
 
 <p>הנה האמת: <strong>77% מהבקשות לקרן בערבות מדינה מאושרות</strong>. התהליך לוקח 2-4 שבועות, לא חודשים. ויש מסלולים שדורשים רק 5% ביטחונות במקום 100%. זה יותר פשוט ממה שחשבת - אם יודעים לאן לפנות.</p>
 
+<div id="loan-form-section" class="form-wrapper-section">
 [awg postid="3470"]
+</div>
 
 <div class="disclaimer-box" style="background: #ffffff; padding: 18px 24px; margin: 24px 0; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.06); border: 1px solid #e8e8e8;">
   <p style="margin: 0; color: #555; font-size: 14px; line-height: 1.7;">
@@ -45,7 +47,7 @@
 
 <!-- CTA Button 1 -->
 <div class="wpc-loans-s4m7-cta-container">
-  <a href="#awg-form" class="wpc-loans-s4m7-cta-btn wpc-loans-s4m7-cta-btn-red">
+  <a href="#loan-form-section" class="wpc-loans-s4m7-cta-btn scroll-to-form wpc-loans-s4m7-cta-btn-red">
     בדוק זכאות עכשיו 🚀
   </a>
 </div>
@@ -127,7 +129,7 @@
 
 <!-- CTA Button 2 -->
 <div class="wpc-loans-s4m7-cta-container">
-  <a href="#awg-form" class="wpc-loans-s4m7-cta-btn wpc-loans-s4m7-cta-btn-blue">
+  <a href="#loan-form-section" class="wpc-loans-s4m7-cta-btn scroll-to-form wpc-loans-s4m7-cta-btn-blue">
     בדוק איזה מסלול מתאים לך 🎯
   </a>
 </div>
@@ -432,7 +434,7 @@
 
 <!-- CTA Button 3 -->
 <div class="wpc-loans-s4m7-cta-container">
-  <a href="#awg-form" class="wpc-loans-s4m7-cta-btn wpc-loans-s4m7-cta-btn-red">
+  <a href="#loan-form-section" class="wpc-loans-s4m7-cta-btn scroll-to-form wpc-loans-s4m7-cta-btn-red">
     קבל ליווי מקצועי בחינם 💼
   </a>
 </div>
@@ -695,6 +697,56 @@
     // Toggle current item
     if (!isActive) {
       faqItem.classList.add('active');
+    }
+  });
+})();
+</script>
+
+<style>
+/* Form Section Wrapper */
+.form-wrapper-section {
+  scroll-margin-top: 100px !important;
+  margin: 30px 0 !important;
+}
+
+/* H2/H3 Titles - Full Width Container */
+h2, h3 {
+  max-width: 1200px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  text-align: right !important;
+}
+</style>
+
+<script>
+// Smooth scroll to form for CTA buttons
+(function() {
+  'use strict';
+  var ns = 'WPC_Loans_ScrollToForm';
+  if (window[ns]) return;
+  window[ns] = true;
+
+  document.addEventListener('click', function(e) {
+    var link = e.target.closest('.scroll-to-form');
+    if (!link) return;
+
+    var href = link.getAttribute('href');
+    if (!href || !href.startsWith('#')) return;
+
+    e.preventDefault();
+    
+    var targetId = href.substring(1);
+    var targetElement = document.getElementById(targetId);
+
+    if (targetElement) {
+      var offset = 100;
+      var elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+      var offsetPosition = elementPosition - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
     }
   });
 })();

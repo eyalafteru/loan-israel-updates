@@ -9,7 +9,9 @@
 
 <p class="edit-hoverable">הנה החדשות הטובות: המדינה דווקא רוצה לעודד יזמות בתיירות. יש <strong class="edit-hoverable">מענקים ישירים של עד 28% מההשקעה</strong> שלא צריך להחזיר, <span style="text-decoration: none; color: inherit; cursor: auto;" class="edit-hoverable">קרנות בערבות מדינה</span> עם ביטחונות מינימליים, וקרנות פילנתרופיות שמעניקות הלוואות בריבית אפסית. המדריך הזה יחסוך לכם חודשים של בלבול.</p>
 
+<div id="loan-form-section" class="form-wrapper-section edit-hoverable">
 [awg postid="3470"]
+</div>
 
 <div class="disclaimer-box edit-hoverable" style="background: #ffffff; padding: 18px 24px; margin: 24px 0; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.06); border: 1px solid #e8e8e8;">
   <p style="margin: 0; color: #555; font-size: 14px; line-height: 1.7;" class="edit-hoverable">
@@ -942,6 +944,56 @@
     // Open clicked item if it wasn't active
     if (!isActive) {
       item.classList.add('active');
+    }
+  });
+})();
+</script>
+
+<style>
+/* Form Section Wrapper */
+.form-wrapper-section {
+  scroll-margin-top: 100px !important;
+  margin: 30px 0 !important;
+}
+
+/* H2/H3 Titles - Full Width Container */
+h2, h3 {
+  max-width: 1200px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  text-align: right !important;
+}
+</style>
+
+<script>
+// Smooth scroll to form for CTA buttons
+(function() {
+  'use strict';
+  var ns = 'WPC_Loans_ScrollToForm';
+  if (window[ns]) return;
+  window[ns] = true;
+
+  document.addEventListener('click', function(e) {
+    var link = e.target.closest('.scroll-to-form');
+    if (!link) return;
+
+    var href = link.getAttribute('href');
+    if (!href || !href.startsWith('#')) return;
+
+    e.preventDefault();
+    
+    var targetId = href.substring(1);
+    var targetElement = document.getElementById(targetId);
+
+    if (targetElement) {
+      var offset = 100;
+      var elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+      var offsetPosition = elementPosition - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
     }
   });
 })();

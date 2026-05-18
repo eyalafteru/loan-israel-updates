@@ -9,7 +9,9 @@
 
 <p class="edit-hoverable">המדינה מכירה בכך שחקלאות זה לא עסק רגיל. יש עונתיות, יש סיכוני מזג אוויר, ויש עלויות תשתית שגבוהות משמעותית מעסקים אחרים. לכן נוצר מסלול ייעודי עם תנאים שלא תמצא בשום מקום אחר.</p>
 
+<div id="loan-form-section" class="form-wrapper-section diff-element-new edit-hoverable">
 [awg postid="3470"]
+</div>
 
 <div class="disclaimer-box edit-hoverable" style="background: #ffffff; padding: 18px 24px; margin: 24px 0; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.06); border: 1px solid #e8e8e8;">
   <p style="margin: 0; color: #555; font-size: 14px; line-height: 1.7;" class="edit-hoverable">
@@ -325,6 +327,56 @@
 }
 </script>
 
+<style>
+/* Form Section Wrapper */
+.form-wrapper-section {
+  scroll-margin-top: 100px !important;
+  margin: 30px 0 !important;
+}
+
+/* H2/H3 Titles - Full Width Container */
+h2, h3 {
+  max-width: 1200px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  text-align: right !important;
+}
+</style>
+
+<script>
+// Smooth scroll to form for CTA buttons
+(function() {
+  'use strict';
+  var ns = 'WPC_Loans_ScrollToForm';
+  if (window[ns]) return;
+  window[ns] = true;
+
+  document.addEventListener('click', function(e) {
+    var link = e.target.closest('.scroll-to-form');
+    if (!link) return;
+
+    var href = link.getAttribute('href');
+    if (!href || !href.startsWith('#')) return;
+
+    e.preventDefault();
+    
+    var targetId = href.substring(1);
+    var targetElement = document.getElementById(targetId);
+
+    if (targetElement) {
+      var offset = 100;
+      var elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+      var offsetPosition = elementPosition - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  });
+})();
+</script>
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -379,7 +431,7 @@
 /* Stats Cards - קרן סיוע לחקלאים */
 /* ================================================ */
 .wpc-loans-f3c7-stats-section {
-  background: #2c5530 !important;
+  background: #1e5490 !important;
   padding: 60px 20px !important;
   contain: layout style paint !important;
   margin: 40px 0 !important;
@@ -449,7 +501,7 @@
 .wpc-loans-f3c7-timeline-title {
   text-align: center !important;
   font-size: 1.8em !important;
-  color: #2c5530 !important;
+  color: #1e5490 !important;
   margin-bottom: 40px !important;
 }
 
@@ -469,7 +521,7 @@
   top: 70px !important;
   bottom: 70px !important;
   width: 4px !important;
-  background: linear-gradient(to bottom, #2c5530 0%, #3d7544 50%, #e0e0e0 100%) !important;
+  background: linear-gradient(to bottom, #1e5490 0%, #3a7bc8 50%, #e0e0e0 100%) !important;
   border-radius: 2px !important;
 }
 
@@ -503,13 +555,13 @@
   font-size: 1.4em !important;
   z-index: 2 !important;
   box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important;
-  color: #2c5530 !important;
+  color: #1e5490 !important;
   flex-shrink: 0 !important;
 }
 
 .wpc-loans-f3c7-timeline-circle.active {
-  background: #2c5530 !important;
-  border-color: #2c5530 !important;
+  background: #1e5490 !important;
+  border-color: #1e5490 !important;
   color: white !important;
   transform: scale(1.1) !important;
 }
@@ -524,7 +576,7 @@
   margin: 0 0 5px 0 !important;
   font-size: 1.3em !important;
   font-weight: 700 !important;
-  color: #2c5530 !important;
+  color: #1e5490 !important;
 }
 
 .wpc-loans-f3c7-timeline-desc {
@@ -587,7 +639,7 @@
 }
 
 .wpc-loans-f3c7-pros .wpc-loans-f3c7-proscons-title {
-  color: #25D366 !important;
+  color: #ff3b3b !important;
 }
 
 .wpc-loans-f3c7-cons .wpc-loans-f3c7-proscons-title {
@@ -657,7 +709,7 @@
 }
 
 .wpc-loans-f3c7-cta-btn-blue {
-  background: #2c5530 !important;
+  background: #1e5490 !important;
   border: 2px solid #2c5530 !important;
 }
 

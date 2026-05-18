@@ -6509,6 +6509,7 @@
                     <option value="all">🌟 הכל</option>
                     <option value="special">⭐ מיוחדים</option>
                     <option value="regular">📄 רגילים</option>
+                    <option value="has_data_sources">🔍 יש מקורות לאימות</option>
                 </select>
                 <select id="uploadDateFilter" onchange="renderPageList()">
                     <option value="all">📅 כל התאריכים</option>
@@ -6645,6 +6646,208 @@
                 </div>
             </div>
         </section>
+        
+        <!-- Data Sources Management Panel - Central Registry -->
+        <div class="data-sources-panel" id="dataSourcesPanel" style="
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            padding: 0.5rem;
+            position: fixed;
+            left: 0;
+            top: 60px;
+            width: 40px;
+            height: calc(100vh - 70px);
+            overflow: hidden;
+            transition: width 0.3s ease;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+        ">
+            <!-- Collapsed state: vertical bar -->
+            <div id="sourcesPanelCollapsed" style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem; cursor: pointer;" onclick="toggleSourcesPanel()">
+                <span style="writing-mode: vertical-rl; text-orientation: mixed; font-weight: 500; font-size: 0.85rem;">📚 מקורות</span>
+                <span id="sourcesCountBadge" style="background: var(--accent); color: white; padding: 0.2rem 0.4rem; border-radius: 10px; font-size: 0.7rem;">0</span>
+                <span style="font-size: 1.2rem;">◀</span>
+            </div>
+            
+            <!-- Expanded state -->
+            <div id="sourcesPanelExpanded" style="display: none; width: 100%; height: 100%; flex-direction: column;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                    <span style="font-weight: 500; font-size: 0.9rem;">📚 מאגר מקורות</span>
+                    <div style="display: flex; gap: 0.25rem;">
+                        <button class="btn btn-small btn-primary" onclick="openBulkSourcesModal()" title="הוסף מקורות" style="font-size: 0.7rem; padding: 0.15rem 0.35rem;">📋</button>
+                        <button class="btn btn-small btn-secondary" onclick="scanAllSources()" id="scanAllBtn" title="סרוק הכל" style="font-size: 0.7rem; padding: 0.15rem 0.35rem;">🔄</button>
+                        <button class="btn btn-small btn-secondary" onclick="resetSourceErrors()" title="אפס שגיאות" style="font-size: 0.7rem; padding: 0.15rem 0.35rem;">🧹</button>
+                        <button class="btn btn-small btn-secondary" onclick="autoAssignSources()" id="autoAssignBtn" title="שיוך AI" style="font-size: 0.7rem; padding: 0.15rem 0.35rem;">🤖</button>
+                        <button class="btn btn-small btn-secondary" onclick="toggleSourcesPanel()" style="font-size: 0.7rem; padding: 0.15rem 0.35rem;">▶</button>
+                    </div>
+                </div>
+                
+                <div style="display: flex; gap: 0.5rem; margin-bottom: 0.5rem;">
+                    <input type="text" id="registrySearchInput" placeholder="חיפוש..." 
+                        style="flex: 1; padding: 0.3rem; border-radius: 4px; border: 1px solid var(--border); background: var(--bg-tertiary); color: var(--text-primary); font-size: 0.8rem;"
+                        oninput="filterRegistrySources()">
+                    <select id="registryFilterStatus" onchange="filterRegistrySources()" 
+                        style="padding: 0.3rem; border-radius: 4px; border: 1px solid var(--border); background: var(--bg-tertiary); color: var(--text-primary); font-size: 0.8rem;">
+                        <option value="">הכל</option>
+                        <option value="pending">ממתינים</option>
+                        <option value="scraped">נסרקו</option>
+                        <option value="linked">משויכים</option>
+                        <option value="unlinked">לא משויכים</option>
+                    </select>
+                </div>
+                
+                <!-- Scanning Status -->
+                <div id="scanningStatusArea" style="display: none; margin-bottom: 0.5rem; padding: 0.5rem; background: #1e1b4b; border-radius: 6px; border: 1px solid #8b5cf6;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.25rem;">
+                        <span style="font-size: 0.75rem; color: #a5b4fc;">🔄 סריקה פעילה</span>
+                        <span id="scanningCount" style="font-size: 0.7rem; color: #818cf8;">0/0</span>
+                    </div>
+                    <div id="scanningList" style="max-height: 80px; overflow-y: auto; font-size: 0.7rem;">
+                    </div>
+                </div>
+                
+                <!-- Sources List -->
+                <div id="registrySourcesList" style="flex: 1; overflow-y: auto; font-size: 0.8rem; min-height: 100px;">
+                    <p style="color: var(--text-muted); text-align: center;">טוען...</p>
+                </div>
+                
+                <!-- אזור חיפוש RAG inline -->
+                <div id="ragSearchArea" style="margin-top: 0.5rem; padding: 0.5rem; background: var(--bg-tertiary); border-radius: 6px;">
+                    <div style="display: flex; gap: 0.25rem; margin-bottom: 0.25rem;">
+                        <input type="text" id="ragSearchInput" placeholder="חיפוש במקורות..." 
+                               style="flex: 1; padding: 0.3rem; border-radius: 4px; border: 1px solid var(--border); background: var(--bg-secondary); color: var(--text-primary); font-size: 0.8rem;"
+                               onkeypress="if(event.key === 'Enter') executeRAGSearch()">
+                        <button class="btn btn-small btn-primary" onclick="executeRAGSearch()" style="padding: 0.2rem 0.4rem;">🔍</button>
+                    </div>
+                    
+                    <!-- וריאציות מילת מפתח -->
+                    <div id="keywordVariations" style="display: flex; flex-wrap: wrap; gap: 0.15rem; margin-bottom: 0.25rem; font-size: 0.75rem;">
+                    </div>
+                    
+                    <!-- חיפושים אחרונים -->
+                    <div id="recentSearches" style="font-size: 0.75rem; color: var(--text-muted);">
+                    </div>
+                    
+                    <!-- תוצאות -->
+                    <div id="ragSearchResults" style="margin-top: 0.25rem; max-height: 150px; overflow-y: auto; font-size: 0.8rem;">
+                    </div>
+                </div>
+                
+                <!-- Weekly Reports Section -->
+                <div id="weeklyReportsSection" style="margin-top: 0.5rem; padding: 0.5rem; background: var(--bg-tertiary); border-radius: 6px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.25rem;">
+                        <span style="font-weight: 500; font-size: 0.8rem;">📊 דוחות</span>
+                        <div style="display: flex; gap: 0.25rem;">
+                            <button class="btn btn-small btn-secondary" onclick="checkAIStatus()" title="בדוק סטטוס AI" style="padding: 0.1rem 0.25rem; font-size: 0.7rem;">🤖</button>
+                            <button class="btn btn-small btn-primary" onclick="runManualScan()" style="padding: 0.1rem 0.25rem; font-size: 0.7rem;">🔄</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Scanner Status -->
+                    <div id="scannerStatus" style="display: none; padding: 0.25rem; background: var(--bg-secondary); border-radius: 4px; margin-bottom: 0.25rem; font-size: 0.75rem;">
+                        <span id="scannerStatusText">בודק...</span>
+                    </div>
+                    
+                    <!-- Reports List -->
+                    <div id="weeklyReportsList" style="max-height: 120px; overflow-y: auto; font-size: 0.75rem;">
+                        <p style="color: var(--text-muted); text-align: center;">טוען דוחות...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- AI Auto-Assign Modal -->
+        <div id="autoAssignModal" class="system-modal" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); z-index: 10000; justify-content: center; align-items: center;">
+            <div class="modal-content" style="background: var(--bg-primary); padding: 1.5rem; border-radius: 12px; max-width: 900px; width: 90%; max-height: 85vh; overflow-y: auto;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                    <h3 style="margin: 0;">🤖 שיוך אוטומטי עם AI</h3>
+                    <button class="btn btn-secondary" onclick="closeAutoAssignModal()" style="font-size: 1.2rem;">✕</button>
+                </div>
+                
+                <div id="autoAssignProgress" style="display: none; padding: 1rem; background: var(--bg-tertiary); border-radius: 6px; margin-bottom: 1rem;">
+                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                        <div class="spinner" style="width: 20px; height: 20px; border: 2px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 1s linear infinite;"></div>
+                        <span id="autoAssignProgressText">מנתח מקורות...</span>
+                    </div>
+                </div>
+                
+                <div id="autoAssignResults" style="max-height: 500px; overflow-y: auto;">
+                    <!-- Suggestions will be shown here -->
+                </div>
+                
+                <div id="autoAssignActions" style="display: none; margin-top: 1rem; display: flex; gap: 0.5rem; justify-content: flex-end;">
+                    <button class="btn btn-secondary" onclick="closeAutoAssignModal()">ביטול</button>
+                    <button class="btn btn-primary" onclick="applySelectedAssignments()">שמור נבחרים</button>
+                    <button class="btn btn-success" onclick="applyAllAssignments()">אשר הכל</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Weekly Report Detail Modal -->
+        <div id="reportDetailModal" class="system-modal" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); z-index: 10000; justify-content: center; align-items: center;">
+            <div class="modal-content" style="background: var(--bg-primary); padding: 1.5rem; border-radius: 12px; max-width: 900px; width: 90%; max-height: 85vh; overflow-y: auto;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                    <h3 id="reportDetailTitle" style="margin: 0;">📊 דוח שינויים</h3>
+                    <button class="btn btn-secondary" onclick="closeReportDetailModal()" style="font-size: 1.2rem;">✕</button>
+                </div>
+                
+                <!-- Report Stats -->
+                <div id="reportStats" style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem;">
+                    <!-- Stats cards will be inserted here -->
+                </div>
+                
+                <!-- Changes List -->
+                <div id="reportChanges">
+                    <!-- Changes will be inserted here -->
+                </div>
+            </div>
+        </div>
+        
+        <!-- Bulk Import Sources Modal -->
+        <div id="bulkSourcesModal" class="system-modal" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); z-index: 10000; justify-content: center; align-items: center;">
+            <div class="modal-content" style="background: var(--bg-primary); padding: 1.5rem; border-radius: 12px; max-width: 800px; width: 90%; max-height: 80vh; overflow-y: auto;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                    <h3 style="margin: 0;">📋 הזנה מרובה של מקורות מידע</h3>
+                    <button class="btn btn-secondary" onclick="closeBulkSourcesModal()" style="font-size: 1.2rem;">✕</button>
+                </div>
+                
+                <!-- שלב 1: הזנת URLs -->
+                <div id="bulkStep1">
+                    <h4>שלב 1: הזן מקורות (תומך בשני פורמטים)</h4>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">
+                        פורמט 1: <code>שם המקור[TAB]URL</code><br>
+                        פורמט 2: <code>URL</code> בלבד (השם יופק אוטומטית מהדומיין)
+                    </p>
+                    <textarea id="bulkUrlsInput" rows="12" style="width: 100%; font-family: monospace; padding: 0.75rem; border-radius: 6px; border: 1px solid var(--border); background: var(--bg-secondary); color: var(--text-primary); direction: ltr; text-align: left;" 
+                        placeholder="יהב עובדי מדינה	https://www.bank-yahav.co.il/loans/gov-employees/
+מזרחי כל מטרה	https://www.mizrahi-tefahot.co.il/loans/
+https://www.example.com/loans"></textarea>
+                    <button class="btn btn-primary" onclick="processBulkUrls()" style="margin-top: 1rem;">המשך לשיוך עמודים →</button>
+                </div>
+                
+                <!-- שלב 2: בדיקת שמות -->
+                <div id="bulkStep2" style="display: none;">
+                    <h4>שלב 2: בדוק ועדכן שמות</h4>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.75rem;">
+                        המקורות יישמרו במאגר המרכזי. שיוך לעמודים יתבצע אחר כך (ידנית או אוטומטית עם AI).
+                    </p>
+                    <div id="bulkSourcesList" style="max-height: 400px; overflow-y: auto;">
+                        <!-- יתמלא דינמית -->
+                    </div>
+                    <div style="margin-top: 1rem; display: flex; gap: 0.5rem;">
+                        <button class="btn btn-secondary" onclick="showBulkStep(1)">← חזור</button>
+                        <button class="btn btn-primary" onclick="saveBulkSources()">שמור למאגר</button>
+                    </div>
+                </div>
+                
+                <!-- שלב 3: התקדמות -->
+                <div id="bulkStep3" style="display: none; text-align: center; padding: 2rem;">
+                    <h4>שומר ומאנדקס...</h4>
+                    <div id="bulkProgress" style="margin-top: 1rem; font-size: 1.1rem;"></div>
+                </div>
+            </div>
+        </div>
     </main>
 
     <!-- Agent Builder Section -->
@@ -9242,6 +9445,29 @@ console.log('🚀 KeywordDensityAnalyzer, SpamAnalyzer, HeaderQualityScorer & In
     </script>
 
     <script>
+        // ============ Early Functions (needed before DOM) ============
+        let sourcesPanelExpanded = false;
+        
+        function toggleSourcesPanel() {
+            const panel = document.getElementById('dataSourcesPanel');
+            const collapsed = document.getElementById('sourcesPanelCollapsed');
+            const expanded = document.getElementById('sourcesPanelExpanded');
+            
+            if (!panel) return;
+            
+            sourcesPanelExpanded = !sourcesPanelExpanded;
+            
+            if (sourcesPanelExpanded) {
+                panel.style.width = '320px';
+                if (collapsed) collapsed.style.display = 'none';
+                if (expanded) expanded.style.display = 'flex';
+            } else {
+                panel.style.width = '40px';
+                if (collapsed) collapsed.style.display = 'flex';
+                if (expanded) expanded.style.display = 'none';
+            }
+        }
+        
         // ============ State ============
         let pages = [];
         let agents = {};
@@ -11264,8 +11490,12 @@ console.log('🚀 KeywordDensityAnalyzer, SpamAnalyzer, HeaderQualityScorer & In
                 // Apply special page filter
                 if (specialFilter !== 'all') {
                     const isSpecial = page.is_special || pageInfoCache[page.path]?.is_special;
+                    const pageInfo = pageInfoCache[page.path] || {};
+                    const hasDataSources = pageInfo.data_sources && pageInfo.data_sources.length > 0;
+                    
                     if (specialFilter === 'special' && !isSpecial) return false;
                     if (specialFilter === 'regular' && isSpecial) return false;
+                    if (specialFilter === 'has_data_sources' && !hasDataSources) return false;
                 }
                 
                 // Apply agent completion filter (dynamic parsing)
@@ -11535,6 +11765,7 @@ console.log('🚀 KeywordDensityAnalyzer, SpamAnalyzer, HeaderQualityScorer & In
                         <button class="btn-mini btn-special ${isSpecial ? 'is-active' : ''}" onclick="event.stopPropagation(); toggleSpecialPage('${page.path.replace(/\\/g, '/').replace(/'/g, "\\'")}')" title="${isSpecial ? 'הסר סימון מיוחד' : 'סמן כעמוד מיוחד'}">${isSpecial ? '⭐' : '☆'}</button>
                         <button class="btn-mini ${keywordsBtnClass}" onclick="event.stopPropagation(); togglePageKeywords('${page.path.replace(/'/g, "\\'").replace(/\\/g, "\\\\")}')" title="${keywordsBtnTitle}">${keywordsBtnIcon}</button>
                         <button class="btn-mini btn-add-kw-main" onclick="event.stopPropagation(); showAddKeywordsModal('${page.path.replace(/'/g, "\\'").replace(/\\/g, "\\\\")}')" title="הוסף מילות מפתח ידנית">➕</button>
+                        <button class="btn-mini btn-sources" onclick="event.stopPropagation(); openDataSourcesPanel(${originalIndex});" title="ניהול מקורות מידע לאימות">🔗</button>
                         <button class="btn-mini btn-seo" onclick="event.stopPropagation(); openSeoReportDirect(${originalIndex})" title="דוח SEO (מושך גיבוי אוטומטי)">📊</button>
                         <button class="btn-mini btn-reset" data-reset-path="${page.path.replace(/"/g, '&quot;')}" onclick="event.stopPropagation(); resetPage(this.dataset.resetPath)" title="איפוס עמוד - מחיקת דוחות סוכנים ושחזור מגיבוי">🔄</button>
                         <button class="btn-mini btn-delete" onclick="event.stopPropagation(); confirmDeletePage('${page.path.replace(/\\/g, '/').replace(/'/g, "\\'")}')" title="מחיקת עמוד מהמערכת ומ-WordPress">🗑️</button>
@@ -11652,6 +11883,11 @@ console.log('🚀 KeywordDensityAnalyzer, SpamAnalyzer, HeaderQualityScorer & In
             }
             
             loadReports(); // Load report and update workflow buttons
+            
+            // Load data sources for verification panel - NEW!
+            await loadDataSources();
+            loadRAGSearchArea();
+            initWeeklyReports();
             
             // Check if this page is running - now using COMPOSITE KEY (page_path:agent_id)
             const normalizedPath = selectedPage.path.replace(/\\/g, '/');
@@ -23454,11 +23690,24 @@ ${suffixSection}
         
         // ============ Init ============
         document.addEventListener('DOMContentLoaded', async () => {
+            console.time('Page Load Total');
+            
             // Load configs first (for dynamic dropdowns and UI settings)
+            console.time('loadUIConfig');
             await loadUIConfig();
+            console.timeEnd('loadUIConfig');
+            
+            console.time('loadSiteConfig');
             await loadSiteConfig();
+            console.timeEnd('loadSiteConfig');
+            
+            console.time('populateSiteFilter');
             await populateSiteFilter();
+            console.timeEnd('populateSiteFilter');
+            
+            console.time('populateWpSiteSelect');
             await populateWpSiteSelect();
+            console.timeEnd('populateWpSiteSelect');
             
             // Setup upload date filter toggle
             const uploadDateFilter = document.getElementById('uploadDateFilter');
@@ -23473,12 +23722,32 @@ ${suffixSection}
                 });
             }
             
-            // Load pages and agents
-            loadPages();
-            loadAgents();
+            // Load pages first (most important)
+            console.time('loadPages');
+            await loadPages();
+            console.timeEnd('loadPages');
+            
+            initPanelResize();  // Initialize panel resize functionality
+            
+            // Load agents after pages
+            console.time('loadAgents');
+            loadAgents().then(() => console.timeEnd('loadAgents'));
+            
             loadGlobalValues();  // Load global values like BOI interest rate
             startGlobalStatusRefresh();  // Start global status monitoring
-            initPanelResize();  // Initialize panel resize functionality
+            
+            // Load sources in background with delay - don't block initial render
+            setTimeout(() => {
+                console.time('loadDataSources');
+                loadDataSources().then(() => console.timeEnd('loadDataSources'));
+            }, 500);
+            
+            // Load AI models in background
+            setTimeout(() => {
+                loadAIModels();
+            }, 600);
+            
+            console.timeEnd('Page Load Total');
             
             // Git status - check on load and every 30 seconds
             checkGitStatus();
@@ -27794,6 +28063,2513 @@ ${s.text}
                 }
             } catch (error) {
                 showToast('❌ שגיאה בשחזור: ' + error.message, 'error');
+            }
+        }
+    </script>
+    
+    <script>
+        // ========== Data Sources Management ==========
+
+        async function openDataSourcesPanel(index) {
+            // Select the page first
+            await selectPage(index);
+            
+            // Wait a bit for the panel to be created/updated
+            setTimeout(() => {
+                const panel = document.getElementById('dataSourcesPanel');
+                if (panel) {
+                    panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    
+                    // Highlight the panel briefly
+                    panel.style.boxShadow = '0 0 20px rgba(59, 130, 246, 0.5)';
+                    setTimeout(() => {
+                        panel.style.boxShadow = '';
+                    }, 1500);
+                }
+            }, 500);
+        }
+
+        async function loadDataSources() {
+            // Always show panel and load from central registry
+            const panel = document.getElementById('dataSourcesPanel');
+            if (panel) panel.style.display = 'block';
+            
+            await loadRegistrySources();
+        }
+
+        function renderDataSourcesList(sources) {
+            const container = document.getElementById('dataSourcesList');
+            if (!container) return;
+            
+            if (sources.length === 0) {
+                container.innerHTML = '<p style="color: var(--text-muted); text-align: center;">אין מקורות מידע מוגדרים</p>';
+                return;
+            }
+            
+            container.innerHTML = sources.map(source => `
+                <div class="data-source-item" style="
+                    background: var(--bg-tertiary);
+                    padding: 0.75rem;
+                    border-radius: 6px;
+                    margin-bottom: 0.5rem;
+                    border: 1px solid var(--border);
+                ">
+                    <div style="display: flex; justify-content: space-between; align-items: start;">
+                        <div style="flex: 1;">
+                            <div style="font-weight: 500; margin-bottom: 0.25rem;">
+                                ${source.description || 'מקור ללא תיאור'}
+                            </div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted); word-break: break-all;">
+                                🔗 ${source.url}
+                            </div>
+                            <div style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 0.25rem;">
+                                ${source.last_scraped ? `נסרק לאחרונה: ${new Date(source.last_scraped).toLocaleString('he-IL')}` : 'טרם נסרק'}
+                                ${source.scraping_status ? ` • ${source.scraping_status === 'success' ? '✓' : '✗'}` : ''}
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 0.25rem;">
+                            <button class="btn btn-small btn-secondary" onclick="showSourceSummary('${source.url}')" title="סיכום נתונים">📋</button>
+                            <button class="btn btn-small btn-secondary" onclick="refreshSingleSource('${source.url}')" title="רענן מקור">🔄</button>
+                            <button class="btn btn-small btn-secondary" onclick="removeDataSource('${source.id}')" title="מחק">🗑️</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        async function refreshSingleSource(url) {
+            if (!selectedPage) return;
+            
+            showToast('סורק מחדש מקור...', 'info');
+            
+            try {
+                const result = await apiCall('/api/scraping/refresh-source', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        url: url,
+                        page_path: selectedPage.path
+                    })
+                });
+                
+                if (result.success) {
+                    showToast('✅ מקור עודכן והוסף ל-RAG', 'success');
+                    await loadDataSources();
+                } else {
+                    showToast('שגיאה: ' + result.error, 'error');
+                }
+            } catch (e) {
+                showToast('שגיאה: ' + e.message, 'error');
+            }
+        }
+        
+        async function refreshAllSources() {
+            if (!selectedPage) return;
+            
+            const pageInfo = pageInfoCache[selectedPage.path] || {};
+            const sourcesCount = pageInfo.data_sources?.length || 0;
+            
+            if (sourcesCount === 0) {
+                showToast('אין מקורות לרענן', 'warning');
+                return;
+            }
+            
+            if (!confirm(`לרענן את כל ${sourcesCount} המקורות? זה עלול לקחת זמן.`)) {
+                return;
+            }
+            
+            showToast(`סורק מחדש ${sourcesCount} מקורות...`, 'info');
+            
+            try {
+                const result = await apiCall('/api/scraping/refresh-all', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        page_path: selectedPage.path
+                    })
+                });
+                
+                if (result.success) {
+                    const successCount = result.results?.filter(r => r.success).length || 0;
+                    showToast(`✅ ${successCount}/${sourcesCount} מקורות עודכנו והוספו ל-RAG`, 'success');
+                    await loadDataSources();
+                } else {
+                    showToast('שגיאה: ' + result.error, 'error');
+                }
+            } catch (e) {
+                showToast('שגיאה: ' + e.message, 'error');
+            }
+        }
+        
+        async function searchRAG() {
+            const query = prompt('הזן שאילתה לחיפוש semantic:');
+            if (!query) return;
+            
+            showToast('מחפש...', 'info');
+            
+            try {
+                // קודם בדוק את סטטיסטיקות ה-RAG
+                const statsResult = await apiCall('/api/rag/stats');
+                
+                if (!statsResult.success || statsResult.stats?.total_chunks === 0) {
+                    alert('אין נתונים במאגר RAG.\n\nכדי להוסיף נתונים:\n1. הוסף מקור מידע לעמוד (כפתור 🔗)\n2. לחץ "רענן" על המקור\n3. הנתונים יתווספו אוטומטית ל-RAG');
+                    return;
+                }
+                
+                const result = await apiCall('/api/rag/search', {
+                    method: 'POST',
+                    body: JSON.stringify({ query: query, top_k: 5 })
+                });
+                
+                if (result.success && result.results?.length > 0) {
+                    let msg = `נמצאו ${result.results.length} תוצאות:\n\n`;
+                    result.results.forEach((r, i) => {
+                        msg += `${i+1}. ${r.title} (${Math.round(r.score * 100)}%)\n`;
+                    });
+                    alert(msg);
+                } else {
+                    showToast('לא נמצאו תוצאות עבור: ' + query, 'warning');
+                }
+            } catch (e) {
+                showToast('שגיאה: ' + e.message, 'error');
+            }
+        }
+        
+        async function reindexAllSources() {
+            if (!confirm('לסרוק מחדש את כל המקורות ולהוסיף ל-RAG?\nזה עלול לקחת זמן.')) {
+                return;
+            }
+            
+            showToast('מאנדקס מחדש...', 'info');
+            
+            try {
+                const result = await apiCall('/api/rag/reindex', { method: 'POST' });
+                
+                if (result.success) {
+                    showToast(`נוספו ${result.stats?.total_chunks || 0} קטעים ל-RAG`, 'success');
+                } else {
+                    showToast('שגיאה: ' + result.error, 'error');
+                }
+            } catch (e) {
+                showToast('שגיאה: ' + e.message, 'error');
+            }
+        }
+        
+        // ========== RAG Search Functions ==========
+        
+        function generateKeywordVariations(keyword) {
+            if (!keyword) return [];
+            
+            const variations = [keyword];
+            
+            // הוספת "הלוואה" / "הלוואות"
+            if (keyword.includes('הלוואה')) {
+                variations.push(keyword.replace('הלוואה', 'הלוואות'));
+            }
+            if (keyword.includes('הלוואות')) {
+                variations.push(keyword.replace('הלוואות', 'הלוואה'));
+            }
+            
+            // פיצול לביטויים
+            const words = keyword.split(' ').filter(w => w.length > 2);
+            if (words.length > 2) {
+                variations.push(words.slice(0, 2).join(' '));
+                variations.push(words.slice(-2).join(' '));
+            }
+            
+            // הוספת מילים בודדות חשובות
+            words.forEach(w => {
+                if (w.length > 3 && !['של', 'עם', 'על', 'לפי', 'עד', 'מ-', 'ב-'].includes(w)) {
+                    variations.push(w);
+                }
+            });
+            
+            return [...new Set(variations)].slice(0, 6);
+        }
+        
+        function loadRAGSearchArea() {
+            const searchArea = document.getElementById('ragSearchArea');
+            if (!searchArea) return;
+            
+            const pageInfo = selectedPage ? (pageInfoCache[selectedPage.path] || {}) : {};
+            const keyword = pageInfo.keyword || '';
+            
+            // מילוי שדה החיפוש
+            const searchInput = document.getElementById('ragSearchInput');
+            if (searchInput && keyword) {
+                searchInput.value = keyword;
+            }
+            
+            // וריאציות מילת מפתח
+            const variations = generateKeywordVariations(keyword);
+            const variationsDiv = document.getElementById('keywordVariations');
+            if (variationsDiv) {
+                if (variations.length > 0) {
+                    variationsDiv.innerHTML = '<span style="margin-left: 0.5rem;">מילות מפתח:</span>' + 
+                        variations.map(v => 
+                            `<button class="btn btn-small btn-secondary" onclick="searchRAGWithQuery('${v.replace(/'/g, "\\'")}')" style="font-size: 0.75rem; padding: 0.2rem 0.5rem;">${v}</button>`
+                        ).join('');
+                } else {
+                    variationsDiv.innerHTML = '';
+                }
+            }
+            
+            // חיפושים אחרונים
+            const recentSearches = JSON.parse(localStorage.getItem('ragSearchHistory') || '[]');
+            const recentDiv = document.getElementById('recentSearches');
+            if (recentDiv) {
+                if (recentSearches.length > 0) {
+                    const recentHtml = recentSearches.slice(0, 5).map(s => 
+                        `<span style="cursor: pointer; text-decoration: underline;" onclick="searchRAGWithQuery('${s.replace(/'/g, "\\'")}')">${s}</span>`
+                    ).join(' | ');
+                    recentDiv.innerHTML = '🕐 חיפושים אחרונים: ' + recentHtml;
+                } else {
+                    recentDiv.innerHTML = '';
+                }
+            }
+            
+            // ניקוי תוצאות קודמות
+            const resultsDiv = document.getElementById('ragSearchResults');
+            if (resultsDiv) {
+                resultsDiv.innerHTML = '<p style="color: var(--text-muted); text-align: center;">הזן שאילתה וחפש</p>';
+            }
+        }
+        
+        function searchRAGWithQuery(query) {
+            const searchInput = document.getElementById('ragSearchInput');
+            if (searchInput) {
+                searchInput.value = query;
+            }
+            executeRAGSearch();
+        }
+        
+        async function executeRAGSearch() {
+            const searchInput = document.getElementById('ragSearchInput');
+            const query = searchInput?.value?.trim();
+            if (!query) {
+                showToast('הזן שאילתה לחיפוש', 'warning');
+                return;
+            }
+            
+            // שמירה בהיסטוריה
+            let history = JSON.parse(localStorage.getItem('ragSearchHistory') || '[]');
+            history = [query, ...history.filter(h => h !== query)].slice(0, 20);
+            localStorage.setItem('ragSearchHistory', JSON.stringify(history));
+            
+            const resultsDiv = document.getElementById('ragSearchResults');
+            if (resultsDiv) {
+                resultsDiv.innerHTML = '<p style="color: var(--text-muted); text-align: center;">מחפש...</p>';
+            }
+            
+            try {
+                // בדיקת סטטיסטיקות RAG
+                const statsResult = await apiCall('/api/rag/stats');
+                
+                if (!statsResult.success || statsResult.stats?.total_chunks === 0) {
+                    if (resultsDiv) {
+                        resultsDiv.innerHTML = `
+                            <div style="text-align: center; padding: 1rem;">
+                                <p style="color: var(--warning);">אין נתונים במאגר RAG</p>
+                                <p style="font-size: 0.85rem; color: var(--text-muted);">
+                                    הוסף מקורות מידע ולחץ "רענן" כדי להוסיף נתונים למאגר
+                                </p>
+                            </div>
+                        `;
+                    }
+                    return;
+                }
+                
+                const result = await apiCall('/api/rag/search', {
+                    method: 'POST',
+                    body: JSON.stringify({ query: query, top_k: 5 })
+                });
+                
+                if (result.success) {
+                    renderRAGResults(result.results);
+                    // עדכון היסטוריה
+                    loadRAGSearchArea();
+                } else {
+                    showToast('שגיאה: ' + result.error, 'error');
+                }
+            } catch (e) {
+                showToast('שגיאה: ' + e.message, 'error');
+            }
+        }
+        
+        function renderRAGResults(results) {
+            const container = document.getElementById('ragSearchResults');
+            if (!container) return;
+            
+            if (!results || results.length === 0) {
+                container.innerHTML = '<p style="color: var(--text-muted); text-align: center;">לא נמצאו תוצאות</p>';
+                return;
+            }
+            
+            container.innerHTML = results.map((r, i) => {
+                const scoreColor = r.score > 0.7 ? 'var(--success)' : r.score > 0.4 ? 'var(--warning)' : 'var(--text-muted)';
+                const scorePercent = Math.round(r.score * 100);
+                const textPreview = r.text ? r.text.substring(0, 200) + (r.text.length > 200 ? '...' : '') : '';
+                
+                return `
+                    <div style="padding: 0.5rem; margin-bottom: 0.5rem; background: var(--bg-secondary); border-radius: 4px; border-right: 3px solid ${scoreColor};">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div style="font-weight: 500; font-size: 0.9rem;">${r.title || 'ללא כותרת'}</div>
+                            <span style="font-size: 0.75rem; padding: 0.1rem 0.4rem; background: ${scoreColor}; color: white; border-radius: 3px;">${scorePercent}%</span>
+                        </div>
+                        <div style="font-size: 0.85rem; margin-top: 0.25rem; color: var(--text-secondary); max-height: 60px; overflow: hidden;">
+                            ${textPreview}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        // ========== Weekly Reports Functions ==========
+        
+        async function loadWeeklyReports() {
+            const container = document.getElementById('weeklyReportsList');
+            if (!container) return;
+            
+            try {
+                const result = await apiCall('/api/reports/list');
+                
+                if (result.success && result.reports?.length > 0) {
+                    container.innerHTML = result.reports.slice(0, 10).map(report => {
+                        const changesBadge = report.changes_detected > 0 
+                            ? `<span style="background: var(--warning); color: white; padding: 0.1rem 0.4rem; border-radius: 3px; font-size: 0.75rem;">${report.changes_detected} שינויים</span>`
+                            : `<span style="color: var(--success); font-size: 0.85rem;">✓ ללא שינויים</span>`;
+                        
+                        return `
+                            <div style="padding: 0.5rem; margin-bottom: 0.25rem; background: var(--bg-secondary); border-radius: 4px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;"
+                                 onclick="showReportDetail('${report.date}')">
+                                <div>
+                                    <span style="font-weight: 500;">${report.date}</span>
+                                    <span style="color: var(--text-muted); font-size: 0.85rem; margin-right: 0.5rem;">(${report.sources_scanned} מקורות)</span>
+                                </div>
+                                ${changesBadge}
+                            </div>
+                        `;
+                    }).join('');
+                } else {
+                    container.innerHTML = '<p style="color: var(--text-muted); text-align: center; font-size: 0.85rem;">אין דוחות עדיין. לחץ "סרוק עכשיו" ליצירת דוח ראשון.</p>';
+                }
+            } catch (e) {
+                container.innerHTML = '<p style="color: var(--text-muted); text-align: center; font-size: 0.85rem;">שגיאה בטעינת דוחות</p>';
+            }
+        }
+        
+        async function showReportDetail(reportDate) {
+            showToast('טוען דוח...', 'info');
+            
+            try {
+                const result = await apiCall(`/api/reports/${reportDate}`);
+                
+                if (result.success && result.report) {
+                    const report = result.report;
+                    
+                    // Update title
+                    document.getElementById('reportDetailTitle').textContent = `📊 דוח שינויים - ${report.report_date}`;
+                    
+                    // Stats cards
+                    const statsHtml = `
+                        <div style="background: var(--bg-secondary); padding: 0.75rem; border-radius: 6px; text-align: center; min-width: 100px;">
+                            <div style="font-size: 1.5rem; font-weight: bold;">${report.stats.sources_scanned}</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">מקורות נסרקו</div>
+                        </div>
+                        <div style="background: ${report.stats.changes_detected > 0 ? 'var(--warning)' : 'var(--success)'}; color: white; padding: 0.75rem; border-radius: 6px; text-align: center; min-width: 100px;">
+                            <div style="font-size: 1.5rem; font-weight: bold;">${report.stats.changes_detected}</div>
+                            <div style="font-size: 0.85rem;">שינויים זוהו</div>
+                        </div>
+                        <div style="background: var(--bg-secondary); padding: 0.75rem; border-radius: 6px; text-align: center; min-width: 100px;">
+                            <div style="font-size: 1.5rem; font-weight: bold; color: var(--danger);">${report.stats.high_importance || 0}</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">חשיבות גבוהה</div>
+                        </div>
+                        <div style="background: var(--bg-secondary); padding: 0.75rem; border-radius: 6px; text-align: center; min-width: 100px;">
+                            <div style="font-size: 1.5rem; font-weight: bold; color: var(--text-muted);">${report.stats.errors || 0}</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">שגיאות</div>
+                        </div>
+                    `;
+                    document.getElementById('reportStats').innerHTML = statsHtml;
+                    
+                    // Changes list
+                    if (report.changes && report.changes.length > 0) {
+                        const changesHtml = report.changes.map(change => {
+                            const importanceColor = change.importance === 'high' ? 'var(--danger)' : 
+                                                   change.importance === 'medium' ? 'var(--warning)' : 'var(--text-muted)';
+                            
+                            const changesDetails = change.changes?.map(c => 
+                                `<li>${c.description || c.type}</li>`
+                            ).join('') || '<li>פרטים לא זמינים</li>';
+                            
+                            return `
+                                <div style="background: var(--bg-secondary); padding: 1rem; border-radius: 6px; margin-bottom: 0.75rem; border-right: 4px solid ${importanceColor};">
+                                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 0.5rem;">
+                                        <div>
+                                            <div style="font-weight: 600;">${change.title}</div>
+                                            <div style="font-size: 0.85rem; color: var(--text-muted);">${change.url}</div>
+                                        </div>
+                                        <span style="background: ${importanceColor}; color: white; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem;">
+                                            ${change.importance === 'high' ? 'חשיבות גבוהה' : change.importance === 'medium' ? 'חשיבות בינונית' : 'חשיבות נמוכה'}
+                                        </span>
+                                    </div>
+                                    <div style="background: var(--bg-tertiary); padding: 0.5rem; border-radius: 4px; margin-bottom: 0.5rem;">
+                                        <strong>סיכום:</strong> ${change.changes_summary || 'התוכן השתנה'}
+                                    </div>
+                                    <div style="font-size: 0.9rem;">
+                                        <strong>עמודים מושפעים:</strong> ${change.affected_pages?.join(', ') || 'לא ידוע'}
+                                    </div>
+                                    <div style="margin-top: 0.5rem;">
+                                        <button class="btn btn-small btn-primary" onclick="suggestUpdatesForChange('${change.source_id}', ${JSON.stringify(change.changes || []).replace(/"/g, '&quot;')}, ${JSON.stringify(change.affected_page_paths || []).replace(/"/g, '&quot;')})">
+                                            💡 הצע עדכונים
+                                        </button>
+                                    </div>
+                                </div>
+                            `;
+                        }).join('');
+                        
+                        document.getElementById('reportChanges').innerHTML = `
+                            <h4>שינויים שזוהו:</h4>
+                            ${changesHtml}
+                        `;
+                    } else {
+                        document.getElementById('reportChanges').innerHTML = '<p style="color: var(--success); text-align: center;">✓ לא זוהו שינויים בסריקה זו</p>';
+                    }
+                    
+                    // Show modal
+                    document.getElementById('reportDetailModal').style.display = 'flex';
+                } else {
+                    showToast('דוח לא נמצא', 'error');
+                }
+            } catch (e) {
+                showToast('שגיאה: ' + e.message, 'error');
+            }
+        }
+        
+        function closeReportDetailModal() {
+            document.getElementById('reportDetailModal').style.display = 'none';
+        }
+        
+        async function runManualScan() {
+            if (!confirm('להפעיל סריקה של כל מקורות המידע?\nזה עלול לקחת מספר דקות.')) {
+                return;
+            }
+            
+            const statusDiv = document.getElementById('scannerStatus');
+            const statusText = document.getElementById('scannerStatusText');
+            statusDiv.style.display = 'block';
+            statusText.textContent = 'מתחיל סריקה...';
+            
+            try {
+                const result = await apiCall('/api/scanner/run', {
+                    method: 'POST',
+                    body: JSON.stringify({ use_ai: true })
+                });
+                
+                if (result.success) {
+                    statusText.textContent = 'סריקה רצה ברקע...';
+                    
+                    // Poll for status
+                    const checkStatus = setInterval(async () => {
+                        try {
+                            const statusResult = await apiCall('/api/scanner/status');
+                            const scanner = statusResult.scanner;
+                            
+                            if (scanner.running) {
+                                statusText.textContent = scanner.message || 'סורק...';
+                            } else {
+                                clearInterval(checkStatus);
+                                statusText.textContent = scanner.message || 'הסריקה הסתיימה';
+                                showToast('הסריקה הסתיימה!', 'success');
+                                loadWeeklyReports();
+                                
+                                // Hide status after 3 seconds
+                                setTimeout(() => {
+                                    statusDiv.style.display = 'none';
+                                }, 3000);
+                            }
+                        } catch (e) {
+                            clearInterval(checkStatus);
+                        }
+                    }, 2000);
+                } else {
+                    statusText.textContent = 'שגיאה: ' + result.error;
+                }
+            } catch (e) {
+                statusText.textContent = 'שגיאה: ' + e.message;
+            }
+        }
+        
+        async function checkAIStatus() {
+            showToast('בודק סטטוס AI...', 'info');
+            
+            try {
+                const result = await apiCall('/api/ai/status');
+                
+                if (result.ollama_available) {
+                    showToast(`✓ AI זמין (${result.model})`, 'success');
+                } else {
+                    alert('AI לא זמין.\n\nכדי להפעיל:\n1. התקן Ollama\n2. הרץ: ollama pull gemma2:9b\n3. הרץ: ollama serve');
+                }
+            } catch (e) {
+                showToast('שגיאה בבדיקת AI', 'error');
+            }
+        }
+        
+        async function suggestUpdatesForChange(sourceId, changes, affectedPagePaths) {
+            if (!affectedPagePaths || affectedPagePaths.length === 0) {
+                showToast('אין עמודים מושפעים', 'warning');
+                return;
+            }
+            
+            const pagePath = affectedPagePaths[0]; // Take first affected page
+            showToast('מייצר הצעות עדכון...', 'info');
+            
+            try {
+                const result = await apiCall('/api/suggest-update', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        page_path: pagePath,
+                        changes: changes
+                    })
+                });
+                
+                if (result.success && result.suggestions?.length > 0) {
+                    let suggestionsHtml = `<h3>הצעות עדכון לעמוד: ${result.page_title}</h3><ul>`;
+                    result.suggestions.forEach(s => {
+                        suggestionsHtml += `<li><strong>[${s.priority}]</strong> ${s.action}: ${s.description}<br><em>${s.reason}</em></li>`;
+                    });
+                    suggestionsHtml += '</ul>';
+                    
+                    // Show in modal or alert
+                    alert(`הצעות עדכון:\n\n${result.suggestions.map(s => `[${s.priority}] ${s.description}`).join('\n')}`);
+                } else if (!result.success) {
+                    showToast(result.error || 'שגיאה ביצירת הצעות', 'error');
+                } else {
+                    showToast('אין הצעות עדכון', 'info');
+                }
+            } catch (e) {
+                showToast('שגיאה: ' + e.message, 'error');
+            }
+        }
+        
+        // Load reports when data sources panel loads
+        function initWeeklyReports() {
+            loadWeeklyReports();
+        }
+        
+        async function showSourceSummary(url) {
+            showToast('טוען סיכום...', 'info');
+            
+            try {
+                const result = await apiCall('/api/sources/summary-by-url', {
+                    method: 'POST',
+                    body: JSON.stringify({ url: url })
+                });
+                
+                if (result.success) {
+                    const summary = result.summary;
+                    
+                    let summaryHtml = `
+                        <h3>${result.title || 'סיכום מקור'}</h3>
+                        <p><strong>מילים:</strong> ${result.word_count} | <strong>נסרק:</strong> ${result.scraped_at ? new Date(result.scraped_at).toLocaleDateString('he-IL') : 'לא ידוע'}</p>
+                    `;
+                    
+                    if (summary.percentages?.length > 0) {
+                        summaryHtml += '<h4>📊 אחוזים/ריביות:</h4><ul>';
+                        summary.percentages.slice(0, 5).forEach(p => {
+                            summaryHtml += `<li><strong>${p.value}</strong> - ${p.context}</li>`;
+                        });
+                        summaryHtml += '</ul>';
+                    }
+                    
+                    if (summary.money?.length > 0) {
+                        summaryHtml += '<h4>💰 סכומים:</h4><ul>';
+                        summary.money.slice(0, 5).forEach(m => {
+                            summaryHtml += `<li><strong>${m.value}</strong> - ${m.context}</li>`;
+                        });
+                        summaryHtml += '</ul>';
+                    }
+                    
+                    if (summary.numbers?.length > 0) {
+                        summaryHtml += '<h4>🔢 מספרים חשובים:</h4><ul>';
+                        summary.numbers.slice(0, 5).forEach(n => {
+                            summaryHtml += `<li>${n.value}</li>`;
+                        });
+                        summaryHtml += '</ul>';
+                    }
+                    
+                    if (summary.key_terms?.length > 0) {
+                        summaryHtml += '<h4>📝 מונחים חשובים:</h4><ul>';
+                        summary.key_terms.slice(0, 5).forEach(t => {
+                            summaryHtml += `<li>${t}</li>`;
+                        });
+                        summaryHtml += '</ul>';
+                    }
+                    
+                    if (summary.preview) {
+                        summaryHtml += `<h4>תצוגה מקדימה:</h4><p style="font-size: 0.9rem; color: var(--text-secondary);">${summary.preview}</p>`;
+                    }
+                    
+                    // הצגה בחלון
+                    const modal = document.createElement('div');
+                    modal.id = 'sourceSummaryModal';
+                    modal.style.cssText = 'position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); z-index: 10000; display: flex; justify-content: center; align-items: center;';
+                    modal.innerHTML = `
+                        <div style="background: var(--bg-primary); padding: 1.5rem; border-radius: 12px; max-width: 700px; width: 90%; max-height: 80vh; overflow-y: auto;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                <h3 style="margin: 0;">📋 סיכום מקור</h3>
+                                <button class="btn btn-secondary" onclick="document.getElementById('sourceSummaryModal').remove()">✕</button>
+                            </div>
+                            <div style="direction: rtl; text-align: right;">
+                                ${summaryHtml}
+                            </div>
+                        </div>
+                    `;
+                    document.body.appendChild(modal);
+                    modal.onclick = (e) => { if (e.target === modal) modal.remove(); };
+                    
+                } else {
+                    showToast('המקור טרם נסרק. לחץ רענן תחילה.', 'warning');
+                }
+            } catch (e) {
+                showToast('שגיאה: ' + e.message, 'error');
+            }
+        }
+
+        async function addDataSource() {
+            const url = prompt('הזן כתובת URL של מקור המידע:');
+            if (!url) return;
+            
+            const description = prompt('הזן שם המקור:') || 'מקור ללא שם';
+            
+            try {
+                const result = await apiCall('/api/page/data-sources', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        page_path: selectedPage.path,
+                        action: 'add',
+                        url,
+                        description,
+                        type: 'general'
+                    })
+                });
+                
+                if (result.success) {
+                    showToast('✓ המקור נוסף בהצלחה', 'success');
+                    await loadDataSources();
+                    document.getElementById('dataSourcesPanel').style.display = 'block';
+                } else {
+                    showToast('שגיאה: ' + result.error, 'error');
+                }
+            } catch (e) {
+                showToast('שגיאה: ' + e.message, 'error');
+            }
+        }
+        
+        // ========== Bulk Import Sources ==========
+        let bulkSourcesData = [];
+        
+        function openBulkSourcesModal() {
+            document.getElementById('bulkSourcesModal').style.display = 'flex';
+            document.getElementById('bulkUrlsInput').value = '';
+            showBulkStep(1);
+        }
+        
+        function closeBulkSourcesModal() {
+            document.getElementById('bulkSourcesModal').style.display = 'none';
+        }
+        
+        function showBulkStep(step) {
+            document.getElementById('bulkStep1').style.display = step === 1 ? 'block' : 'none';
+            document.getElementById('bulkStep2').style.display = step === 2 ? 'block' : 'none';
+            document.getElementById('bulkStep3').style.display = step === 3 ? 'block' : 'none';
+        }
+        
+        function processBulkUrls() {
+            const input = document.getElementById('bulkUrlsInput').value;
+            const lines = input.split('\n')
+                .map(line => line.trim())
+                .filter(line => line.length > 0);
+            
+            if (lines.length === 0) {
+                showToast('לא נמצאו שורות', 'error');
+                return;
+            }
+            
+            // יצירת רשימת מקורות - תומך בשני פורמטים:
+            // 1. שם<tab>URL
+            // 2. URL בלבד
+            bulkSourcesData = [];
+            
+            for (const line of lines) {
+                let name = '';
+                let url = '';
+                
+                // בדיקה אם יש טאב (פורמט: שם<tab>URL)
+                if (line.includes('\t')) {
+                    const parts = line.split('\t').map(p => p.trim());
+                    if (parts.length >= 2) {
+                        name = parts[0];
+                        url = parts[1];
+                    }
+                } else if (line.startsWith('http')) {
+                    // פורמט URL בלבד
+                    url = line;
+                    name = extractDomainName(line);
+                }
+                
+                // וידוא שה-URL תקין
+                if (url && url.startsWith('http')) {
+                    bulkSourcesData.push({
+                        url: url,
+                        name: name || extractDomainName(url),
+                        page_path: '' // ברירת מחדל: כללי (ללא שיוך לעמוד)
+                    });
+                }
+            }
+            
+            if (bulkSourcesData.length === 0) {
+                showToast('לא נמצאו URLs תקינים', 'error');
+                return;
+            }
+            
+            showToast(`נמצאו ${bulkSourcesData.length} מקורות`, 'success');
+            renderBulkSourcesList();
+            showBulkStep(2);
+        }
+        
+        function extractDomainName(url) {
+            try {
+                const domain = new URL(url).hostname.replace('www.', '');
+                return domain;
+            } catch {
+                return 'מקור חדש';
+            }
+        }
+        
+        // ============ Central Sources Registry Functions ============
+        
+        let allRegistrySources = [];
+        let registryEditingSourceId = null;
+        let activeScanningJobs = new Map(); // Track active scans
+        
+        // AI Model selection
+        let availableAIModels = [];
+        let selectedAIModel = localStorage.getItem('selectedAIModel') || null;
+        
+        async function loadAIModels() {
+            try {
+                const result = await apiCall('/api/ai/models');
+                if (result.success) {
+                    availableAIModels = result.models || [];
+                    // Set default if no selection
+                    if (!selectedAIModel && result.default_model) {
+                        selectedAIModel = result.default_model;
+                    }
+                    console.log('AI Models loaded:', availableAIModels);
+                }
+            } catch (e) {
+                console.error('Error loading AI models:', e);
+            }
+        }
+        
+        function setSelectedAIModel(modelId) {
+            selectedAIModel = modelId;
+            localStorage.setItem('selectedAIModel', modelId);
+            console.log('Selected AI model:', modelId);
+        }
+        
+        function getModelDisplayName(modelId) {
+            const model = availableAIModels.find(m => m.id === modelId);
+            return model ? model.name : modelId;
+        }
+        
+        function showScanningStatus() {
+            const area = document.getElementById('scanningStatusArea');
+            if (area) area.style.display = 'block';
+        }
+        
+        function hideScanningStatus() {
+            const area = document.getElementById('scanningStatusArea');
+            if (area) area.style.display = 'none';
+        }
+        
+        function updateScanningStatus(sourceId, status, sourceName, method = null) {
+            const list = document.getElementById('scanningList');
+            const countEl = document.getElementById('scanningCount');
+            if (!list) return;
+            
+            if (status === 'start') {
+                activeScanningJobs.set(sourceId, { name: sourceName, status: 'scanning', method: 'chrome' });
+                showScanningStatus();
+            } else if (status === 'success') {
+                activeScanningJobs.set(sourceId, { name: sourceName, status: 'success', method: method });
+            } else if (status === 'error') {
+                activeScanningJobs.set(sourceId, { name: sourceName, status: 'error', method: method });
+            } else if (status === 'done') {
+                activeScanningJobs.delete(sourceId);
+            }
+            
+            // Update count
+            const scanning = Array.from(activeScanningJobs.values()).filter(j => j.status === 'scanning').length;
+            const total = activeScanningJobs.size;
+            if (countEl) countEl.textContent = `${total - scanning}/${total}`;
+            
+            // Update list with method info
+            list.innerHTML = Array.from(activeScanningJobs.entries()).map(([id, job]) => {
+                let icon, color, methodText;
+                if (job.status === 'scanning') {
+                    icon = '🖥️'; // Chrome icon for local scanning
+                    color = '#fbbf24';
+                    methodText = 'סורק עם Chrome...';
+                } else if (job.status === 'success') {
+                    icon = '✅';
+                    color = '#4ade80';
+                    methodText = job.method === 'local_chrome' ? '🖥️' : job.method === 'apify' ? '☁️' : '';
+                } else {
+                    icon = '❌';
+                    color = '#f87171';
+                    methodText = '';
+                }
+                return `<div style="color: ${color}; padding: 0.1rem 0;">${icon} ${job.name} ${methodText}</div>`;
+            }).join('');
+            
+            // Hide when all done
+            if (activeScanningJobs.size === 0) {
+                setTimeout(hideScanningStatus, 2000);
+            }
+        }
+        
+        async function loadRegistrySources() {
+            try {
+                const result = await apiCall('/api/sources/registry');
+                if (result.success) {
+                    allRegistrySources = result.sources || [];
+                    updateRegistryStats(result.stats);
+                    renderRegistrySources(allRegistrySources);
+                }
+            } catch (e) {
+                console.error('Error loading registry sources:', e);
+                showToast('שגיאה בטעינת מקורות', 'error');
+            }
+        }
+        
+        function updateRegistryStats(stats) {
+            // Update badge
+            const badge = document.getElementById('sourcesCountBadge');
+            if (badge) {
+                badge.textContent = stats?.total || 0;
+            }
+            
+            // Update button states (keep them small)
+            const scanBtn = document.getElementById('scanAllBtn');
+            const assignBtn = document.getElementById('autoAssignBtn');
+            
+            if (scanBtn) {
+                const pending = stats?.pending || 0;
+                scanBtn.disabled = pending === 0;
+                scanBtn.title = `סרוק ${pending} ממתינים`;
+            }
+            
+            if (assignBtn) {
+                const unlinkedScraped = allRegistrySources.filter(s => 
+                    s.scraping_status === 'scraped' && (!s.linked_pages || s.linked_pages.length === 0)
+                ).length;
+                assignBtn.disabled = unlinkedScraped === 0;
+                assignBtn.title = `שייך ${unlinkedScraped} מקורות`;
+            }
+        }
+        
+        function filterRegistrySources() {
+            const searchText = document.getElementById('registrySearchInput').value.toLowerCase();
+            const statusFilter = document.getElementById('registryFilterStatus').value;
+            
+            let filtered = allRegistrySources;
+            
+            if (searchText) {
+                filtered = filtered.filter(s => 
+                    s.url.toLowerCase().includes(searchText) || 
+                    (s.description && s.description.toLowerCase().includes(searchText))
+                );
+            }
+            
+            if (statusFilter) {
+                switch (statusFilter) {
+                    case 'pending':
+                        filtered = filtered.filter(s => s.scraping_status === 'pending');
+                        break;
+                    case 'scraped':
+                        filtered = filtered.filter(s => s.scraping_status === 'scraped');
+                        break;
+                    case 'error':
+                        filtered = filtered.filter(s => s.scraping_status === 'error');
+                        break;
+                    case 'linked':
+                        filtered = filtered.filter(s => s.linked_pages && s.linked_pages.length > 0);
+                        break;
+                    case 'unlinked':
+                        filtered = filtered.filter(s => !s.linked_pages || s.linked_pages.length === 0);
+                        break;
+                }
+            }
+            
+            renderRegistrySources(filtered);
+        }
+        
+        function renderRegistrySources(sources) {
+            const container = document.getElementById('registrySourcesList');
+            if (!container) return;
+            
+            if (sources.length === 0) {
+                container.innerHTML = '<p style="color: var(--text-muted); text-align: center; font-size: 0.8rem;">אין מקורות</p>';
+                return;
+            }
+            
+            container.innerHTML = sources.map(source => {
+                const statusIcon = source.scraping_status === 'scraped' ? '✅' : 
+                                   source.scraping_status === 'error' ? '❌' : '⏳';
+                const linkedPages = source.linked_pages || [];
+                const isScraped = source.scraping_status === 'scraped';
+                const hasError = source.scraping_status === 'error';
+                const errorText = source.last_error || '';
+                
+                const isEditing = registryEditingSourceId === source.id;
+                
+                if (isEditing) {
+                    return renderSourceEditForm(source);
+                }
+                
+                // Build linked pages display
+                let linkedPagesHtml = '';
+                if (linkedPages.length > 0) {
+                    const pageNames = linkedPages.map(path => {
+                        const page = pages?.find(p => p.path === path);
+                        if (page) {
+                            return `<span style="background: #3b82f6; color: white; padding: 0.1rem 0.3rem; border-radius: 4px; font-size: 0.6rem; white-space: nowrap;">${page.keyword || page.title?.substring(0, 15) || 'עמוד'}</span>`;
+                        }
+                        return '';
+                    }).filter(Boolean).join('');
+                    linkedPagesHtml = `<div style="display: flex; flex-wrap: wrap; gap: 0.15rem; margin-top: 0.2rem;">${pageNames}</div>`;
+                } else {
+                    linkedPagesHtml = `<div style="font-size: 0.65rem; color: var(--text-muted); margin-top: 0.2rem;">לא משויך</div>`;
+                }
+                
+                // Add source URL link
+                const sourceUrlHtml = `<a href="${source.url}" target="_blank" rel="noopener" style="display: block; font-size: 0.6rem; color: #60a5fa; margin-top: 0.15rem; max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-decoration: none;" title="פתח מקור: ${source.url}" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">🔗 ${extractDomainName(source.url)}</a>`;
+                
+                // Show error message if exists (only if status is actually error, not scraped)
+                let errorHtml = '';
+                if (hasError && errorText && !isScraped) {
+                    errorHtml = `<div style="font-size: 0.6rem; color: #f87171; margin-top: 0.15rem; max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="${errorText}">❗ ${errorText}</div>`;
+                }
+                
+                // Show last scraped time if scraped
+                let scrapedTimeHtml = '';
+                if (isScraped && source.last_scraped) {
+                    const scrapedDate = new Date(source.last_scraped);
+                    scrapedTimeHtml = `<div style="font-size: 0.6rem; color: #4ade80; margin-top: 0.15rem;">✓ ${scrapedDate.toLocaleDateString('he-IL')}</div>`;
+                }
+                
+                return `
+                    <div class="registry-source-item" style="
+                        background: var(--bg-tertiary);
+                        padding: 0.4rem 0.5rem;
+                        border-radius: 4px;
+                        margin-bottom: 0.3rem;
+                        border: 1px solid var(--border);
+                        font-size: 0.8rem;
+                    ">
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 0.25rem;">
+                            <div style="flex: 1; min-width: 0;">
+                                <div style="display: flex; align-items: center; gap: 0.25rem;">
+                                    <span>${statusIcon}</span>
+                                    <span style="font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="${source.url}">${source.description || extractDomainName(source.url)}</span>
+                                </div>
+                                ${sourceUrlHtml}
+                                ${linkedPagesHtml}
+                                ${errorHtml}
+                                ${scrapedTimeHtml}
+                            </div>
+                            <div style="display: flex; gap: 0.15rem; flex-shrink: 0; flex-wrap: wrap; justify-content: flex-end; max-width: 120px;">
+                                <button class="btn btn-small ${isScraped ? 'btn-success' : 'btn-secondary'}" onclick="showSourceAISummary('${source.id}')" title="${isScraped ? 'צפה בסיכום' : 'סרוק קודם'}" style="padding: 0.15rem 0.25rem; font-size: 0.65rem; ${!isScraped ? 'opacity: 0.5;' : ''}">${source.ai_summary ? '📄✨' : '📄'}</button>
+                                ${source.ai_summary ? `<button class="btn btn-small btn-warning" onclick="regenerateAISummary('${source.id}')" title="חדש סיכום AI מחדש" style="padding: 0.15rem 0.25rem; font-size: 0.65rem; background: #f59e0b;">🔃</button>` : ''}
+                                <button class="btn btn-small ${isScraped ? 'btn-primary' : 'btn-secondary'}" onclick="autoAssignSingleSource('${source.id}')" title="${isScraped ? 'שיוך AI' : 'סרוק קודם לשיוך'}" style="padding: 0.15rem 0.25rem; font-size: 0.65rem; ${!isScraped ? 'opacity: 0.5;' : ''}">🤖</button>
+                                <button class="btn btn-small btn-secondary" onclick="scanSingleRegistrySource('${source.id}')" title="סרוק מקור" style="padding: 0.15rem 0.25rem; font-size: 0.65rem;">🔄</button>
+                                <button class="btn btn-small btn-secondary" onclick="editRegistrySource('${source.id}')" title="ערוך" style="padding: 0.15rem 0.25rem; font-size: 0.65rem;">✏️</button>
+                                <button class="btn btn-small btn-danger" onclick="deleteRegistrySource('${source.id}')" title="מחק" style="padding: 0.15rem 0.25rem; font-size: 0.65rem;">🗑</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        function renderSourceEditForm(source) {
+            // Build page options for multi-select
+            const allPages = pages || [];
+            const linkedPages = source.linked_pages || [];
+            
+            return `
+                <div class="registry-source-edit" style="
+                    background: var(--bg-primary);
+                    padding: 1rem;
+                    border-radius: 8px;
+                    margin-bottom: 0.5rem;
+                    border: 2px solid var(--accent);
+                ">
+                    <div style="margin-bottom: 0.75rem;">
+                        <label style="font-size: 0.85rem; color: var(--text-muted);">URL (לא ניתן לעריכה)</label>
+                        <div style="font-size: 0.85rem; color: var(--text-secondary); direction: ltr; text-align: left; word-break: break-all;">
+                            ${source.url}
+                        </div>
+                    </div>
+                    
+                    <div style="margin-bottom: 0.75rem;">
+                        <label style="font-size: 0.85rem; color: var(--text-muted);">שם/תיאור</label>
+                        <input type="text" id="editSourceDescription" value="${source.description || ''}" 
+                            style="width: 100%; padding: 0.5rem; border-radius: 4px; border: 1px solid var(--border); background: var(--bg-secondary); color: var(--text-primary);">
+                    </div>
+                    
+                    <div style="margin-bottom: 0.75rem;">
+                        <label style="font-size: 0.85rem; color: var(--text-muted);">שיוך לעמודים (בחר מרובה)</label>
+                        <div style="margin-bottom: 0.5rem;">
+                            <input type="text" id="editSourcePageSearch" placeholder="חיפוש עמוד..." 
+                                oninput="filterEditPagesList()"
+                                style="width: 100%; padding: 0.4rem; border-radius: 4px; border: 1px solid var(--border); background: var(--bg-tertiary); color: var(--text-primary);">
+                        </div>
+                        <div id="editSourcePagesList" style="max-height: 150px; overflow-y: auto; border: 1px solid var(--border); border-radius: 4px; background: var(--bg-tertiary);">
+                            ${allPages.map(p => `
+                                <label style="display: flex; align-items: center; gap: 0.5rem; padding: 0.4rem 0.5rem; cursor: pointer; border-bottom: 1px solid var(--border);">
+                                    <input type="checkbox" class="editPageCheckbox" value="${p.path}" ${linkedPages.includes(p.path) ? 'checked' : ''}>
+                                    <span style="font-size: 0.85rem;">${p.name}</span>
+                                </label>
+                            `).join('')}
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; gap: 0.5rem; justify-content: flex-end;">
+                        <button class="btn btn-secondary" onclick="cancelEditSource()">ביטול</button>
+                        <button class="btn btn-primary" onclick="saveEditSource('${source.id}')">שמור</button>
+                    </div>
+                </div>
+            `;
+        }
+        
+        function filterEditPagesList() {
+            const search = document.getElementById('editSourcePageSearch').value.toLowerCase();
+            const items = document.querySelectorAll('#editSourcePagesList label');
+            
+            items.forEach(item => {
+                const text = item.textContent.toLowerCase();
+                item.style.display = text.includes(search) ? 'flex' : 'none';
+            });
+        }
+        
+        function editRegistrySource(sourceId) {
+            registryEditingSourceId = sourceId;
+            renderRegistrySources(allRegistrySources);
+        }
+        
+        function cancelEditSource() {
+            registryEditingSourceId = null;
+            renderRegistrySources(allRegistrySources);
+        }
+        
+        async function saveEditSource(sourceId) {
+            const description = document.getElementById('editSourceDescription').value;
+            const checkedPages = Array.from(document.querySelectorAll('.editPageCheckbox:checked')).map(cb => cb.value);
+            
+            try {
+                // Update description
+                await apiCall('/api/sources/registry', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        action: 'update',
+                        source_id: sourceId,
+                        updates: { description }
+                    })
+                });
+                
+                // Set linked pages
+                await apiCall('/api/sources/link', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        source_id: sourceId,
+                        action: 'set',
+                        page_paths: checkedPages
+                    })
+                });
+                
+                registryEditingSourceId = null;
+                showToast('מקור עודכן בהצלחה', 'success');
+                await loadRegistrySources();
+                
+            } catch (e) {
+                console.error('Error saving source:', e);
+                showToast('שגיאה בשמירת מקור', 'error');
+            }
+        }
+        
+        async function scanSingleRegistrySource(sourceId) {
+            const source = allRegistrySources.find(s => s.id === sourceId);
+            const sourceName = source?.description || 'מקור';
+            
+            // Update sidebar status
+            updateScanningStatus(sourceId, 'start', sourceName);
+            
+            try {
+                const result = await apiCall('/api/sources/registry/scan', {
+                    method: 'POST',
+                    body: JSON.stringify({ source_id: sourceId })
+                }, 600000); // 10 minute timeout for scraping
+                
+                console.log('Scan result:', result);
+                
+                if (result.success) {
+                    // Check if the individual source scan was successful
+                    if (result.results && result.results.length > 0) {
+                        const scanResult = result.results[0];
+                        if (scanResult.success) {
+                            updateScanningStatus(sourceId, 'success', sourceName);
+                            // Show which method was used
+                            const method = scanResult.method || 'unknown';
+                            const methodIcon = method === 'local_chrome' ? '🖥️' : method === 'apify' ? '☁️' : '📦';
+                            const methodName = method === 'local_chrome' ? 'Chrome מקומי' : method === 'apify' ? 'Apify' : method === 'cached' ? 'מטמון' : method;
+                            showToast(`✅ ${sourceName} נסרק בהצלחה! (${methodIcon} ${methodName})`, 'success');
+                        } else {
+                            updateScanningStatus(sourceId, 'error', sourceName);
+                            showToast(`❌ ${sourceName}: ${scanResult.error || 'שגיאה'}`, 'error');
+                        }
+                    } else {
+                        updateScanningStatus(sourceId, 'success', sourceName);
+                        showToast(`✅ ${sourceName} נסרק`, 'success');
+                    }
+                    await loadRegistrySources();
+                } else {
+                    updateScanningStatus(sourceId, 'error', sourceName);
+                    showToast('שגיאה: ' + (result.error || 'Unknown error'), 'error');
+                    await loadRegistrySources();
+                }
+            } catch (e) {
+                console.error('Error scanning source:', e);
+                updateScanningStatus(sourceId, 'error', sourceName);
+                showToast(`שגיאה בסריקת ${sourceName}: ${e.message}`, 'error');
+                await loadRegistrySources();
+            }
+            
+            // Remove from active jobs after a delay
+            setTimeout(() => updateScanningStatus(sourceId, 'done', sourceName), 3000);
+        }
+        
+        async function resetSourceErrors() {
+            try {
+                const result = await apiCall('/api/sources/registry/reset-errors', {
+                    method: 'POST'
+                });
+                
+                if (result.success) {
+                    showToast(`🧹 אופסו ${result.reset_count} מקורות`, 'success');
+                    await loadRegistrySources();
+                } else {
+                    showToast('שגיאה: ' + result.error, 'error');
+                }
+            } catch (e) {
+                console.error('Error resetting errors:', e);
+                showToast('שגיאה באיפוס', 'error');
+            }
+        }
+        
+        async function scanAllSources() {
+            const pending = allRegistrySources.filter(s => s.scraping_status === 'pending' || s.scraping_status === 'error');
+            if (pending.length === 0) {
+                showToast('אין מקורות לסריקה', 'info');
+                return;
+            }
+            
+            showToast(`מתחיל סריקה של ${pending.length} מקורות...`, 'info');
+            
+            // Initialize all as starting
+            pending.forEach(s => {
+                updateScanningStatus(s.id, 'start', s.description || 'מקור');
+            });
+            
+            let successCount = 0;
+            let errorCount = 0;
+            
+            // Scan in batches of 3 for speed but not overwhelming
+            const batchSize = 3;
+            for (let i = 0; i < pending.length; i += batchSize) {
+                const batch = pending.slice(i, i + batchSize);
+                
+                await Promise.all(batch.map(async (source) => {
+                    try {
+                        const result = await apiCall('/api/sources/registry/scan', {
+                            method: 'POST',
+                            body: JSON.stringify({ source_id: source.id })
+                        }, 120000);
+                        
+                        if (result.success && result.results?.[0]?.success) {
+                            updateScanningStatus(source.id, 'success', source.description || 'מקור');
+                            successCount++;
+                        } else {
+                            updateScanningStatus(source.id, 'error', source.description || 'מקור');
+                            errorCount++;
+                        }
+                    } catch (e) {
+                        updateScanningStatus(source.id, 'error', source.description || 'מקור');
+                        errorCount++;
+                    }
+                }));
+            }
+            
+            showToast(`✅ סריקה הושלמה: ${successCount} הצליחו, ${errorCount} נכשלו`, successCount > 0 ? 'success' : 'error');
+            await loadRegistrySources();
+            
+            // Clear all after delay
+            setTimeout(() => {
+                pending.forEach(s => updateScanningStatus(s.id, 'done', ''));
+            }, 5000);
+        }
+        
+        async function deleteRegistrySource(sourceId) {
+            if (!confirm('למחוק את המקור הזה?')) return;
+            
+            try {
+                const result = await apiCall('/api/sources/registry', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        action: 'remove',
+                        source_id: sourceId
+                    })
+                });
+                
+                if (result.success) {
+                    showToast('מקור נמחק', 'success');
+                    await loadRegistrySources();
+                } else {
+                    showToast('שגיאה: ' + result.error, 'error');
+                }
+            } catch (e) {
+                console.error('Error deleting source:', e);
+                showToast('שגיאה במחיקה', 'error');
+            }
+        }
+        
+        async function migrateToRegistry() {
+            if (!confirm('לבצע מיגרציה של כל המקורות מהעמודים למאגר המרכזי?')) return;
+            
+            showToast('מבצע מיגרציה...', 'info');
+            
+            try {
+                const result = await apiCall('/api/sources/registry/migrate', {
+                    method: 'POST'
+                });
+                
+                if (result.success) {
+                    showToast(`✅ מיגרציה הושלמה: ${result.migrated} מקורות`, 'success');
+                    await loadRegistrySources();
+                } else {
+                    showToast('שגיאה: ' + result.error, 'error');
+                }
+            } catch (e) {
+                console.error('Error migrating:', e);
+                showToast('שגיאה במיגרציה', 'error');
+            }
+        }
+        
+        async function showSourceAISummary(sourceId, useAI = false) {
+            const source = allRegistrySources.find(s => s.id === sourceId);
+            if (!source) return;
+            
+            // Check if scanned
+            if (source.scraping_status !== 'scraped') {
+                if (confirm('המקור לא נסרק עדיין. לסרוק עכשיו?')) {
+                    await scanSingleRegistrySource(sourceId);
+                }
+                return;
+            }
+            
+            // If there's a saved AI summary and not forcing new one, load quickly without AI call
+            const hasSavedSummary = source.ai_summary;
+            const requestAI = useAI && !hasSavedSummary;
+            
+            let modelToUse = selectedAIModel;
+            
+            // If using AI (and no saved summary), show model selector then progress modal
+            if (requestAI) {
+                modelToUse = await showModelSelectorDialog(source);
+                if (!modelToUse) return; // User cancelled
+                
+                showAIProgressModal(source, modelToUse);
+                
+                // Small delay to show the modal before the request
+                await new Promise(r => setTimeout(r, 100));
+            } else {
+                showToast(hasSavedSummary ? 'טוען סיכום שמור...' : 'טוען סיכום...', 'info');
+            }
+            
+            try {
+                // Get summary - only request AI generation if explicitly asked AND no saved summary
+                let url = `/api/sources/summary/${sourceId}`;
+                if (requestAI) {
+                    url += `?use_ai=true&model=${encodeURIComponent(modelToUse)}`;
+                    addAIProgressLog(`שולח בקשה לשרת (${getModelDisplayName(modelToUse)})...`, 'info');
+                }
+                
+                const result = await apiCall(url, {}, requestAI ? 180000 : 10000); // 3 min for AI, 10s for cached
+                
+                console.log('Summary result:', result);
+                
+                if (requestAI) {
+                    if (result.success) {
+                        addAIProgressLog('התקבלה תשובה מהשרת', 'success');
+                        if (result.ai_summary) {
+                            addAIProgressLog('סיכום AI הושלם בהצלחה!', 'success');
+                        } else {
+                            addAIProgressLog('סיכום AI לא זמין - ודא ש-Ollama רץ', 'warning');
+                        }
+                    } else {
+                        addAIProgressLog('שגיאה: ' + (result.error || 'Unknown'), 'error');
+                    }
+                    
+                    // Wait a moment to show the final log
+                    await new Promise(r => setTimeout(r, 500));
+                }
+                
+                if (result.success) {
+                    const summary = result.summary || {};
+                    const aiSummary = result.ai_summary;
+                    
+                    // Build summary HTML
+                    let html = `
+                        <div style="max-width: 700px;">
+                            <h4 style="margin-bottom: 0.5rem;">${source.description || 'מקור'}</h4>
+                            <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.5rem; direction: ltr; word-break: break-all;">
+                                <a href="${source.url}" target="_blank">${source.url}</a>
+                            </div>
+                            <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 1rem;">
+                                נסרק: ${result.scraped_at || 'לא ידוע'} | ${result.word_count || 0} מילים
+                            </div>
+                    `;
+                    
+                    // Extractive summary section
+                    html += `<div style="margin-bottom: 1rem;"><h5 style="margin-bottom: 0.5rem;">📊 נתונים שנמצאו</h5>`;
+                    
+                    // Helper function to format values
+                    const formatValue = (val) => {
+                        if (typeof val === 'object' && val !== null) {
+                            return val.value || val.text || JSON.stringify(val);
+                        }
+                        return String(val);
+                    };
+                    
+                    const formatArray = (arr) => {
+                        if (!arr || !Array.isArray(arr)) return '';
+                        return arr.map(formatValue).join(', ');
+                    };
+                    
+                    if (summary.percentages?.length > 0) {
+                        html += `<div style="margin-bottom: 0.5rem;"><strong>📈 אחוזים:</strong> ${formatArray(summary.percentages)}</div>`;
+                    }
+                    if (summary.money?.length > 0) {
+                        html += `<div style="margin-bottom: 0.5rem;"><strong>💰 סכומים:</strong> ${formatArray(summary.money)}</div>`;
+                    }
+                    if (summary.numbers?.length > 0) {
+                        html += `<div style="margin-bottom: 0.5rem;"><strong>🔢 מספרים:</strong> ${formatArray(summary.numbers.slice(0, 10))}</div>`;
+                    }
+                    if (summary.dates?.length > 0) {
+                        html += `<div style="margin-bottom: 0.5rem;"><strong>📅 תאריכים:</strong> ${formatArray(summary.dates)}</div>`;
+                    }
+                    if (summary.key_terms?.length > 0) {
+                        const terms = summary.key_terms.slice(0, 15).map(t => typeof t === 'string' ? t : (t.term || t.text || String(t)));
+                        html += `<div style="margin-bottom: 0.5rem;"><strong>🔑 מונחים:</strong> ${terms.join(', ')}</div>`;
+                    }
+                    
+                    if (!summary.percentages?.length && !summary.money?.length && !summary.numbers?.length) {
+                        html += `<div style="color: var(--text-muted);">לא נמצאו נתונים מספריים</div>`;
+                    }
+                    html += `</div>`;
+                    
+                    // AI Summary section - Brief excerpt with expand button
+                    if (aiSummary) {
+                        // Create brief summary with key info
+                        let briefParts = [];
+                        
+                        // Lender info
+                        if (aiSummary.lender?.name && aiSummary.lender.name !== 'לא צוין') {
+                            briefParts.push(`<strong>🏦 ${aiSummary.lender.name}</strong>`);
+                        }
+                        
+                        // Product type
+                        if (aiSummary.product?.type && aiSummary.product.type !== 'לא צוין') {
+                            briefParts.push(`📋 ${aiSummary.product.type}`);
+                        }
+                        
+                        // Interest rate
+                        if (aiSummary.rates?.interest_rate && aiSummary.rates.interest_rate !== 'לא צוין') {
+                            briefParts.push(`📈 ריבית: ${aiSummary.rates.interest_rate}`);
+                        } else if (aiSummary.rates?.prime_plus && aiSummary.rates.prime_plus !== 'לא צוין') {
+                            briefParts.push(`📈 ${aiSummary.rates.prime_plus}`);
+                        }
+                        
+                        // Amount range
+                        if (aiSummary.amounts?.max_amount && aiSummary.amounts.max_amount !== 'לא צוין') {
+                            briefParts.push(`💰 עד ${aiSummary.amounts.max_amount}`);
+                        }
+                        
+                        // Monthly payment example
+                        if (aiSummary.monthly_payments?.example_payment && aiSummary.monthly_payments.example_payment !== 'לא צוין') {
+                            briefParts.push(`📅 החזר: ${aiSummary.monthly_payments.example_payment}`);
+                        }
+                        
+                        // First key point if we have room
+                        if (briefParts.length < 3 && aiSummary.key_points?.length > 0) {
+                            briefParts.push(`💡 ${aiSummary.key_points[0]}`);
+                        }
+                        
+                        const briefText = briefParts.join(' | ');
+                        
+                        const summaryDateStr = result.ai_summary_date ? new Date(result.ai_summary_date).toLocaleDateString('he-IL') : '';
+                        const isSaved = !useAI && result.ai_summary_date; // It was loaded from saved
+                        const modelName = result.ai_model ? getModelDisplayName(result.ai_model) : 'AI';
+                        
+                        html += `<div style="margin-bottom: 1rem; padding: 1rem; background: var(--bg-tertiary); border-radius: 8px; border-right: 3px solid #8b5cf6;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                                <div>
+                                    <h5 style="margin: 0; display: inline;">🤖 סיכום AI (${modelName})</h5>
+                                    ${summaryDateStr ? `<span style="font-size: 0.7rem; color: var(--text-muted); margin-right: 0.5rem;">נוצר: ${summaryDateStr}</span>` : ''}
+                                </div>
+                                <div style="display: flex; gap: 0.25rem;">
+                                    <button class="btn btn-small btn-primary" onclick="showFullAISummary()" style="font-size: 0.75rem;">📖 סיכום מלא</button>
+                                    <button class="btn btn-small btn-secondary" onclick="showSourceAISummary('${sourceId}', true)" title="צור סיכום חדש" style="font-size: 0.75rem;">🔄</button>
+                                </div>
+                            </div>
+                            <div style="font-size: 0.9rem; color: var(--text-secondary);">
+                                ${briefText || 'לחץ על "סיכום מלא" לפרטים'}
+                            </div>
+                        </div>`;
+                        
+                        // Store full summary in a hidden div for the popup
+                        let fullSummaryHtml = '';
+                        
+                        // Helper to check if value is valid
+                        const isValid = (val) => val && val !== 'לא צוין' && val !== '';
+                        
+                        // Lender Information
+                        if (aiSummary.lender && (isValid(aiSummary.lender.name) || isValid(aiSummary.lender.type))) {
+                            fullSummaryHtml += `<div style="margin-bottom: 1rem; padding: 0.75rem; background: #1e3a5f; border-radius: 6px;"><strong>🏦 הגוף המלווה:</strong><ul style="margin: 0.5rem 0; padding-right: 1.5rem;">`;
+                            if (isValid(aiSummary.lender.name)) fullSummaryHtml += `<li><strong>שם:</strong> ${aiSummary.lender.name}</li>`;
+                            if (isValid(aiSummary.lender.type)) fullSummaryHtml += `<li><strong>סוג:</strong> ${aiSummary.lender.type}</li>`;
+                            if (isValid(aiSummary.lender.license)) fullSummaryHtml += `<li><strong>רגולציה:</strong> ${aiSummary.lender.license}</li>`;
+                            fullSummaryHtml += `</ul></div>`;
+                        }
+                        
+                        // Product Information
+                        if (aiSummary.product && (isValid(aiSummary.product.name) || isValid(aiSummary.product.type))) {
+                            fullSummaryHtml += `<div style="margin-bottom: 1rem;"><strong>📋 פרטי המוצר:</strong><ul style="margin: 0.5rem 0; padding-right: 1.5rem;">`;
+                            if (isValid(aiSummary.product.name)) fullSummaryHtml += `<li><strong>שם:</strong> ${aiSummary.product.name}</li>`;
+                            if (isValid(aiSummary.product.type)) fullSummaryHtml += `<li><strong>סוג:</strong> ${aiSummary.product.type}</li>`;
+                            if (isValid(aiSummary.product.purpose)) fullSummaryHtml += `<li><strong>מטרה:</strong> ${aiSummary.product.purpose}</li>`;
+                            if (isValid(aiSummary.product.description)) fullSummaryHtml += `<li><strong>תיאור:</strong> ${aiSummary.product.description}</li>`;
+                            fullSummaryHtml += `</ul></div>`;
+                        }
+                        
+                        // Interest Rates
+                        if (aiSummary.rates) {
+                            const rates = aiSummary.rates;
+                            const hasRates = isValid(rates.interest_rate) || isValid(rates.prime_plus) || isValid(rates.effective_rate) || isValid(rates.range);
+                            if (hasRates) {
+                                fullSummaryHtml += `<div style="margin-bottom: 1rem; padding: 0.75rem; background: #1a4d1a; border-radius: 6px;"><strong>📈 ריביות:</strong><ul style="margin: 0.5rem 0; padding-right: 1.5rem;">`;
+                                if (isValid(rates.interest_rate)) fullSummaryHtml += `<li><strong>ריבית:</strong> ${rates.interest_rate}</li>`;
+                                if (isValid(rates.interest_type)) fullSummaryHtml += `<li><strong>סוג ריבית:</strong> ${rates.interest_type}</li>`;
+                                if (isValid(rates.prime_plus)) fullSummaryHtml += `<li><strong>פריים:</strong> ${rates.prime_plus}</li>`;
+                                if (isValid(rates.effective_rate)) fullSummaryHtml += `<li><strong>ריבית אפקטיבית:</strong> ${rates.effective_rate}</li>`;
+                                if (isValid(rates.range)) fullSummaryHtml += `<li><strong>טווח:</strong> ${rates.range}</li>`;
+                                fullSummaryHtml += `</ul></div>`;
+                            }
+                        }
+                        
+                        // Amounts
+                        if (aiSummary.amounts) {
+                            const amounts = aiSummary.amounts;
+                            const hasAmounts = isValid(amounts.min_amount) || isValid(amounts.max_amount) || isValid(amounts.typical_amount);
+                            if (hasAmounts) {
+                                fullSummaryHtml += `<div style="margin-bottom: 1rem;"><strong>💰 סכומים:</strong><ul style="margin: 0.5rem 0; padding-right: 1.5rem;">`;
+                                if (isValid(amounts.min_amount)) fullSummaryHtml += `<li><strong>מינימום:</strong> ${amounts.min_amount}</li>`;
+                                if (isValid(amounts.max_amount)) fullSummaryHtml += `<li><strong>מקסימום:</strong> ${amounts.max_amount}</li>`;
+                                if (isValid(amounts.typical_amount)) fullSummaryHtml += `<li><strong>סכום טיפוסי:</strong> ${amounts.typical_amount}</li>`;
+                                fullSummaryHtml += `</ul></div>`;
+                            }
+                        }
+                        
+                        // Periods
+                        if (aiSummary.periods) {
+                            const periods = aiSummary.periods;
+                            const hasPeriods = isValid(periods.min_period) || isValid(periods.max_period) || isValid(periods.grace_period);
+                            if (hasPeriods) {
+                                fullSummaryHtml += `<div style="margin-bottom: 1rem;"><strong>📅 תקופות:</strong><ul style="margin: 0.5rem 0; padding-right: 1.5rem;">`;
+                                if (isValid(periods.min_period)) fullSummaryHtml += `<li><strong>מינימום:</strong> ${periods.min_period}</li>`;
+                                if (isValid(periods.max_period)) fullSummaryHtml += `<li><strong>מקסימום:</strong> ${periods.max_period}</li>`;
+                                if (isValid(periods.grace_period)) fullSummaryHtml += `<li><strong>תקופת גרייס:</strong> ${periods.grace_period}</li>`;
+                                fullSummaryHtml += `</ul></div>`;
+                            }
+                        }
+                        
+                        // Monthly Payments
+                        if (aiSummary.monthly_payments) {
+                            const mp = aiSummary.monthly_payments;
+                            const hasMP = isValid(mp.example_payment) || isValid(mp.calculation_example) || isValid(mp.payment_method);
+                            if (hasMP) {
+                                fullSummaryHtml += `<div style="margin-bottom: 1rem; padding: 0.75rem; background: #4a1d6a; border-radius: 6px;"><strong>💳 החזר חודשי:</strong><ul style="margin: 0.5rem 0; padding-right: 1.5rem;">`;
+                                if (isValid(mp.example_payment)) fullSummaryHtml += `<li><strong>דוגמה:</strong> ${mp.example_payment}</li>`;
+                                if (isValid(mp.calculation_example)) fullSummaryHtml += `<li><strong>חישוב:</strong> ${mp.calculation_example}</li>`;
+                                if (isValid(mp.payment_method)) fullSummaryHtml += `<li><strong>שיטת החזר:</strong> ${mp.payment_method}</li>`;
+                                fullSummaryHtml += `</ul></div>`;
+                            }
+                        }
+                        
+                        // Eligibility
+                        if (aiSummary.eligibility?.length > 0) {
+                            const validElig = aiSummary.eligibility.filter(e => isValid(e));
+                            if (validElig.length > 0) {
+                                fullSummaryHtml += `<div style="margin-bottom: 1rem;"><strong>✅ תנאי זכאות:</strong><ul style="margin: 0.5rem 0; padding-right: 1.5rem;">`;
+                                validElig.forEach(e => { fullSummaryHtml += `<li>${e}</li>`; });
+                                fullSummaryHtml += `</ul></div>`;
+                            }
+                        }
+                        
+                        // Requirements
+                        if (aiSummary.requirements?.length > 0) {
+                            const validReq = aiSummary.requirements.filter(r => isValid(r));
+                            if (validReq.length > 0) {
+                                fullSummaryHtml += `<div style="margin-bottom: 1rem;"><strong>📝 מסמכים ודרישות:</strong><ul style="margin: 0.5rem 0; padding-right: 1.5rem;">`;
+                                validReq.forEach(r => { fullSummaryHtml += `<li>${r}</li>`; });
+                                fullSummaryHtml += `</ul></div>`;
+                            }
+                        }
+                        
+                        // Collateral
+                        if (aiSummary.collateral && (isValid(aiSummary.collateral.type) || isValid(aiSummary.collateral.details))) {
+                            fullSummaryHtml += `<div style="margin-bottom: 1rem;"><strong>🔒 בטוחות:</strong><ul style="margin: 0.5rem 0; padding-right: 1.5rem;">`;
+                            if (isValid(aiSummary.collateral.type)) fullSummaryHtml += `<li><strong>סוג:</strong> ${aiSummary.collateral.type}</li>`;
+                            if (isValid(aiSummary.collateral.details)) fullSummaryHtml += `<li><strong>פירוט:</strong> ${aiSummary.collateral.details}</li>`;
+                            fullSummaryHtml += `</ul></div>`;
+                        }
+                        
+                        // Benefits
+                        if (aiSummary.benefits?.length > 0) {
+                            const validBen = aiSummary.benefits.filter(b => isValid(b));
+                            if (validBen.length > 0) {
+                                fullSummaryHtml += `<div style="margin-bottom: 1rem; padding: 0.75rem; background: #0d4d4d; border-radius: 6px;"><strong>⭐ יתרונות:</strong><ul style="margin: 0.5rem 0; padding-right: 1.5rem;">`;
+                                validBen.forEach(b => { fullSummaryHtml += `<li>${b}</li>`; });
+                                fullSummaryHtml += `</ul></div>`;
+                            }
+                        }
+                        
+                        // Fees
+                        if (aiSummary.fees?.length > 0) {
+                            const validFees = aiSummary.fees.filter(f => f && (isValid(f.name) || isValid(f.amount)));
+                            if (validFees.length > 0) {
+                                fullSummaryHtml += `<div style="margin-bottom: 1rem;"><strong>💸 עמלות:</strong><ul style="margin: 0.5rem 0; padding-right: 1.5rem;">`;
+                                validFees.forEach(f => {
+                                    let feeText = isValid(f.name) ? f.name : 'עמלה';
+                                    if (isValid(f.amount)) feeText += `: ${f.amount}`;
+                                    if (isValid(f.notes)) feeText += ` (${f.notes})`;
+                                    fullSummaryHtml += `<li>${feeText}</li>`;
+                                });
+                                fullSummaryHtml += `</ul></div>`;
+                            }
+                        }
+                        
+                        // Process
+                        if (aiSummary.process?.length > 0) {
+                            const validProc = aiSummary.process.filter(p => isValid(p));
+                            if (validProc.length > 0) {
+                                fullSummaryHtml += `<div style="margin-bottom: 1rem;"><strong>📌 תהליך:</strong><ol style="margin: 0.5rem 0; padding-right: 1.5rem;">`;
+                                validProc.forEach(p => { fullSummaryHtml += `<li>${p}</li>`; });
+                                fullSummaryHtml += `</ol></div>`;
+                            }
+                        }
+                        
+                        // Timing
+                        if (aiSummary.timing && (isValid(aiSummary.timing.approval_time) || isValid(aiSummary.timing.funding_time))) {
+                            fullSummaryHtml += `<div style="margin-bottom: 1rem;"><strong>⏱️ זמנים:</strong><ul style="margin: 0.5rem 0; padding-right: 1.5rem;">`;
+                            if (isValid(aiSummary.timing.approval_time)) fullSummaryHtml += `<li><strong>זמן אישור:</strong> ${aiSummary.timing.approval_time}</li>`;
+                            if (isValid(aiSummary.timing.funding_time)) fullSummaryHtml += `<li><strong>זמן העברת כסף:</strong> ${aiSummary.timing.funding_time}</li>`;
+                            fullSummaryHtml += `</ul></div>`;
+                        }
+                        
+                        // Special Offers
+                        if (aiSummary.special_offers?.length > 0) {
+                            const validOffers = aiSummary.special_offers.filter(o => isValid(o));
+                            if (validOffers.length > 0) {
+                                fullSummaryHtml += `<div style="margin-bottom: 1rem; padding: 0.75rem; background: #6b4423; border-radius: 6px;"><strong>🎁 מבצעים והטבות:</strong><ul style="margin: 0.5rem 0; padding-right: 1.5rem;">`;
+                                validOffers.forEach(o => { fullSummaryHtml += `<li>${o}</li>`; });
+                                fullSummaryHtml += `</ul></div>`;
+                            }
+                        }
+                        
+                        // Contact
+                        if (aiSummary.contact && (isValid(aiSummary.contact.phone) || isValid(aiSummary.contact.website))) {
+                            fullSummaryHtml += `<div style="margin-bottom: 1rem;"><strong>📞 יצירת קשר:</strong><ul style="margin: 0.5rem 0; padding-right: 1.5rem;">`;
+                            if (isValid(aiSummary.contact.phone)) fullSummaryHtml += `<li><strong>טלפון:</strong> ${aiSummary.contact.phone}</li>`;
+                            if (isValid(aiSummary.contact.website)) fullSummaryHtml += `<li><strong>אתר:</strong> ${aiSummary.contact.website}</li>`;
+                            if (isValid(aiSummary.contact.branches)) fullSummaryHtml += `<li><strong>סניפים:</strong> ${aiSummary.contact.branches}</li>`;
+                            fullSummaryHtml += `</ul></div>`;
+                        }
+                        
+                        // Key Points
+                        if (aiSummary.key_points?.length > 0) {
+                            const validKP = aiSummary.key_points.filter(k => isValid(k));
+                            if (validKP.length > 0) {
+                                fullSummaryHtml += `<div style="margin-bottom: 1rem; padding: 0.75rem; background: #3d3d00; border-radius: 6px;"><strong>💡 נקודות עיקריות:</strong><ul style="margin: 0.5rem 0; padding-right: 1.5rem;">`;
+                                validKP.forEach(p => { fullSummaryHtml += `<li>${p}</li>`; });
+                                fullSummaryHtml += `</ul></div>`;
+                            }
+                        }
+                        
+                        // Warnings
+                        if (aiSummary.warnings?.length > 0) {
+                            const validWarn = aiSummary.warnings.filter(w => isValid(w));
+                            if (validWarn.length > 0) {
+                                fullSummaryHtml += `<div style="margin-bottom: 1rem; padding: 0.75rem; background: #5c3d23; border: 1px solid #f59e0b; border-radius: 6px;"><strong>⚠️ אזהרות והערות:</strong><ul style="margin: 0.5rem 0; padding-right: 1.5rem; color: #fbbf24;">`;
+                                validWarn.forEach(w => { fullSummaryHtml += `<li>${w}</li>`; });
+                                fullSummaryHtml += `</ul></div>`;
+                            }
+                        }
+                        
+                        // Last Updated
+                        if (isValid(aiSummary.last_updated)) {
+                            fullSummaryHtml += `<div style="font-size: 0.8rem; color: var(--text-muted); text-align: left;">עדכון אחרון במקור: ${aiSummary.last_updated}</div>`;
+                        }
+                        
+                        // Hidden data for popup
+                        html += `<div id="fullAISummaryData" style="display:none;" data-title="${source.description || 'מקור'}" data-content="${encodeURIComponent(fullSummaryHtml)}"></div>`;
+                        
+                    } else if (useAI) {
+                        html += `<div style="padding: 0.75rem; background: #fef3c7; border-radius: 6px; color: #92400e;">
+                            ⚠️ סיכום AI לא זמין. ודא ש-Ollama רץ: <code>ollama serve</code>
+                        </div>`;
+                    }
+                    
+                    // Preview section - show full scraped content
+                    if (summary.preview || result.word_count > 0) {
+                        const previewContent = summary.preview || 'אין תצוגה מקדימה זמינה';
+                        // Clean and format preview for display
+                        const cleanPreview = previewContent
+                            .replace(/</g, '&lt;')
+                            .replace(/>/g, '&gt;')
+                            .replace(/\n/g, '<br>');
+                        
+                        html += `<details style="margin-top: 1rem;" open>
+                            <summary style="cursor: pointer; color: var(--accent); font-weight: 600;">📝 תצוגה מקדימה של התוכן (${result.word_count || 0} מילים)</summary>
+                            <div style="margin-top: 0.5rem; padding: 1rem; background: #1a1a2e; border-radius: 8px; font-size: 0.85rem; max-height: 300px; overflow-y: auto; line-height: 1.6; color: #e2e8f0; border: 1px solid #374151;">
+                                ${cleanPreview}
+                            </div>
+                            <div style="margin-top: 0.5rem; display: flex; gap: 0.5rem;">
+                                <button class="btn btn-small btn-secondary" onclick="viewFullSourceContent('${sourceId}')" style="font-size: 0.75rem;">📖 צפה בתוכן המלא</button>
+                                <a href="${source.url}" target="_blank" class="btn btn-small btn-primary" style="font-size: 0.75rem; text-decoration: none;">🔗 פתח במקור</a>
+                            </div>
+                        </details>`;
+                    }
+                    
+                    // Action buttons
+                    html += `<div style="margin-top: 1rem; display: flex; gap: 0.5rem; justify-content: flex-end;">
+                        ${!useAI ? `<button class="btn btn-primary" onclick="showSourceAISummary('${sourceId}', true)">🤖 סיכום AI</button>` : ''}
+                        <button class="btn btn-secondary" onclick="document.getElementById('simpleSystemModal').style.display='none'">סגור</button>
+                    </div>`;
+                    
+                    html += '</div>';
+                    
+                    // Show in modal
+                    showSystemModal('📄 סיכום מקור', html);
+                } else {
+                    showToast('שגיאה: ' + (result.error || 'אין סיכום זמין'), 'error');
+                }
+            } catch (e) {
+                console.error('Error loading summary:', e);
+                showToast('שגיאה בטעינת סיכום: ' + e.message, 'error');
+            }
+        }
+        
+        async function viewFullSourceContent(sourceId) {
+            const source = allRegistrySources.find(s => s.id === sourceId);
+            if (!source) return;
+            
+            showToast('טוען תוכן מלא...', 'info');
+            
+            try {
+                const result = await apiCall(`/api/sources/content/${sourceId}`);
+                
+                if (result.success && result.content) {
+                    // Create modal with full content
+                    const content = result.content
+                        .replace(/</g, '&lt;')
+                        .replace(/>/g, '&gt;')
+                        .replace(/\n/g, '<br>');
+                    
+                    const html = `
+                        <div style="max-width: 900px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border);">
+                                <h4 style="margin: 0;">${source.description || 'מקור'}</h4>
+                                <a href="${source.url}" target="_blank" class="btn btn-small btn-primary" style="text-decoration: none;">🔗 פתח באתר</a>
+                            </div>
+                            <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 1rem;">
+                                ${result.word_count || 0} מילים | נסרק: ${result.scraped_at || 'לא ידוע'}
+                            </div>
+                            <div style="
+                                background: #0f0f1a;
+                                padding: 1.5rem;
+                                border-radius: 8px;
+                                font-size: 0.9rem;
+                                max-height: 70vh;
+                                overflow-y: auto;
+                                line-height: 1.8;
+                                color: #e2e8f0;
+                                border: 1px solid #374151;
+                                direction: rtl;
+                                text-align: right;
+                            ">
+                                ${content}
+                            </div>
+                        </div>
+                    `;
+                    
+                    showSystemModal('📄 תוכן מלא - ' + (source.description || 'מקור'), html);
+                } else {
+                    showToast('שגיאה: ' + (result.error || 'אין תוכן זמין'), 'error');
+                }
+            } catch (e) {
+                console.error('Error loading full content:', e);
+                showToast('שגיאה בטעינת תוכן: ' + e.message, 'error');
+            }
+        }
+        
+        async function regenerateAISummary(sourceId) {
+            const source = allRegistrySources.find(s => s.id === sourceId);
+            if (!source) return;
+            
+            if (source.scraping_status !== 'scraped') {
+                if (confirm('המקור לא נסרק עדיין. לסרוק עכשיו?')) {
+                    await scanSingleRegistrySource(sourceId);
+                }
+                return;
+            }
+            
+            // Show model selector dialog
+            const modelToUse = await showModelSelectorDialog(source);
+            if (!modelToUse) return; // User cancelled
+            
+            // Show progress modal
+            showAIProgressModal(source, modelToUse);
+            await new Promise(r => setTimeout(r, 100));
+            
+            addAIProgressLog('מוחק סיכום קודם...', 'info');
+            
+            try {
+                // Force new AI summary by calling with use_ai=true, force=true, and selected model
+                addAIProgressLog(`שולח בקשה ל-Ollama (${getModelDisplayName(modelToUse)})...`, 'info');
+                
+                const result = await apiCall(`/api/sources/summary/${sourceId}?use_ai=true&force_new=true&model=${encodeURIComponent(modelToUse)}`, {}, 180000);
+                
+                if (result.success) {
+                    addAIProgressLog('התקבלה תשובה מהשרת', 'success');
+                    if (result.ai_summary) {
+                        addAIProgressLog('סיכום AI חדש נוצר בהצלחה!', 'success');
+                        
+                        // Update local cache
+                        const idx = allRegistrySources.findIndex(s => s.id === sourceId);
+                        if (idx >= 0) {
+                            allRegistrySources[idx].ai_summary = result.ai_summary;
+                        }
+                        
+                        // Reload the list
+                        await loadRegistrySources();
+                    } else {
+                        addAIProgressLog('סיכום AI לא זמין - ודא ש-Ollama רץ', 'warning');
+                    }
+                    
+                    await new Promise(r => setTimeout(r, 1000));
+                    
+                    // Close progress modal and show summary
+                    const progressModal = document.getElementById('aiProgressModal');
+                    if (progressModal) progressModal.remove();
+                    
+                    showSourceAISummary(sourceId, false);
+                } else {
+                    addAIProgressLog('שגיאה: ' + (result.error || 'Unknown'), 'error');
+                }
+            } catch (e) {
+                console.error('Error regenerating AI summary:', e);
+                addAIProgressLog('שגיאה: ' + e.message, 'error');
+            }
+        }
+        
+        function showFullAISummary() {
+            const dataEl = document.getElementById('fullAISummaryData');
+            if (!dataEl) return;
+            
+            const title = dataEl.dataset.title;
+            const content = decodeURIComponent(dataEl.dataset.content);
+            
+            // Remove existing popup and backdrop to ensure they're on top
+            const existingPopup = document.getElementById('fullAISummaryPopup');
+            const existingBackdrop = document.getElementById('fullAISummaryBackdrop');
+            if (existingPopup) existingPopup.remove();
+            if (existingBackdrop) existingBackdrop.remove();
+            
+            // Create backdrop first
+            const backdrop = document.createElement('div');
+            backdrop.id = 'fullAISummaryBackdrop';
+            backdrop.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0,0,0,0.85);
+                z-index: 9999998;
+            `;
+            document.body.appendChild(backdrop);
+            
+            // Create popup on top
+            const popup = document.createElement('div');
+            popup.id = 'fullAISummaryPopup';
+            popup.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: #1a1a2e;
+                border: 3px solid #8b5cf6;
+                border-radius: 12px;
+                padding: 1.5rem;
+                max-width: 750px;
+                width: 90%;
+                max-height: 85vh;
+                overflow-y: auto;
+                z-index: 9999999;
+                box-shadow: 0 25px 80px rgba(139, 92, 246, 0.4);
+            `;
+            document.body.appendChild(popup);
+            
+            popup.innerHTML = `
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; border-bottom: 2px solid #8b5cf6; padding-bottom: 0.75rem;">
+                    <h3 style="margin: 0; color: #8b5cf6; font-size: 1.3rem;">🤖 סיכום AI מלא</h3>
+                    <button onclick="closeFullAISummary()" style="background: #ef4444; border: none; font-size: 1.2rem; cursor: pointer; color: white; padding: 0.25rem 0.5rem; border-radius: 4px;">✕</button>
+                </div>
+                <h4 style="margin-bottom: 1rem; color: #a78bfa; font-size: 1.1rem;">${title}</h4>
+                <div style="font-size: 0.95rem; line-height: 1.7; color: #e2e8f0;">
+                    ${content}
+                </div>
+                <div style="margin-top: 1.5rem; text-align: center;">
+                    <button class="btn btn-primary" onclick="closeFullAISummary()" style="padding: 0.75rem 2rem;">סגור</button>
+                </div>
+            `;
+            
+            // Close on backdrop click
+            backdrop.onclick = () => closeFullAISummary();
+        }
+        
+        function closeFullAISummary() {
+            const popup = document.getElementById('fullAISummaryPopup');
+            const backdrop = document.getElementById('fullAISummaryBackdrop');
+            if (popup) popup.remove();
+            if (backdrop) backdrop.remove();
+        }
+        
+        function showModelSelectorDialog(source) {
+            return new Promise((resolve) => {
+                // Build model options - show ALL models, mark which are installed
+                const defaultModel = selectedAIModel || 'gemma2:9b';
+                
+                let modelOptions = '';
+                if (availableAIModels.length > 0) {
+                    modelOptions = availableAIModels.map(m => {
+                        const installed = m.installed ? '✓' : '⚠️ לא מותקן';
+                        const disabled = m.installed ? '' : 'disabled';
+                        return `<option value="${m.id}" ${m.id === defaultModel ? 'selected' : ''} ${disabled}>${m.name} - ${m.description} ${!m.installed ? '(לא מותקן)' : ''}</option>`;
+                    }).join('');
+                } else {
+                    // Fallback if no models loaded from API
+                    modelOptions = `
+                        <option value="gemma2:9b" selected>Gemma 2 9B - מהיר ויעיל</option>
+                        <option value="qwen2.5:14b">Qwen 2.5 14B - איכותי יותר</option>
+                        <option value="qwen3:8b">Qwen 3 8B - הדור החדש</option>
+                        <option value="llama3.1:8b">Llama 3.1 8B - Meta AI</option>
+                    `;
+                }
+                
+                const html = `
+                    <div style="max-width: 450px;">
+                        <h4 style="margin-bottom: 1rem;">🤖 בחר מודל AI לסיכום</h4>
+                        <div style="margin-bottom: 1rem;">
+                            <strong>מקור:</strong> ${source.description || 'מקור'}
+                        </div>
+                        <div style="margin-bottom: 1.5rem;">
+                            <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">מודל AI:</label>
+                            <select id="aiModelSelect" style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid var(--border-color); background: #ffffff; color: #1a1a2e; font-size: 1rem; font-weight: 500;">
+                                ${modelOptions}
+                            </select>
+                            <div style="margin-top: 0.5rem; font-size: 0.8rem; color: var(--text-secondary);">
+                                💡 מודלים גדולים יותר נותנים תוצאות איכותיות יותר אך לוקחים יותר זמן
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 0.5rem; justify-content: flex-end;">
+                            <button class="btn btn-secondary" onclick="window._modelDialogResolve(null); document.getElementById('simpleSystemModal').style.display='none';">ביטול</button>
+                            <button class="btn btn-primary" onclick="
+                                const model = document.getElementById('aiModelSelect').value;
+                                setSelectedAIModel(model);
+                                window._modelDialogResolve(model);
+                                document.getElementById('simpleSystemModal').style.display='none';
+                            ">🚀 התחל סיכום</button>
+                        </div>
+                    </div>
+                `;
+                
+                window._modelDialogResolve = resolve;
+                showSystemModal('בחירת מודל AI', html);
+            });
+        }
+        
+        function showAIProgressModal(source, modelId = null) {
+            const modelName = modelId ? getModelDisplayName(modelId) : 'gemma2:9b';
+            const html = `
+                <div style="max-width: 600px;">
+                    <h4 style="margin-bottom: 1rem;">🤖 מבצע סיכום AI</h4>
+                    <div style="margin-bottom: 1rem;">
+                        <strong>מקור:</strong> ${source.description || 'מקור'}
+                    </div>
+                    <div id="aiProgressLog" style="
+                        background: #1a1a2e;
+                        color: #00ff00;
+                        font-family: 'Consolas', 'Monaco', monospace;
+                        padding: 1rem;
+                        border-radius: 8px;
+                        height: 200px;
+                        overflow-y: auto;
+                        font-size: 0.85rem;
+                        direction: ltr;
+                        text-align: left;
+                    ">
+                        <div>[${new Date().toLocaleTimeString()}] 🚀 מתחיל סיכום AI...</div>
+                        <div>[${new Date().toLocaleTimeString()}] 📡 מתחבר ל-Ollama (localhost:11434)...</div>
+                        <div>[${new Date().toLocaleTimeString()}] 🧠 משתמש במודל: ${modelName}</div>
+                        <div>[${new Date().toLocaleTimeString()}] ⏳ שולח תוכן לניתוח...</div>
+                        <div id="aiProgressSpinner">
+                            <span class="loading-dots">מעבד</span>
+                        </div>
+                    </div>
+                    <div style="margin-top: 1rem; text-align: center;">
+                        <button class="btn btn-secondary" onclick="document.getElementById('simpleSystemModal').style.display='none'">ביטול</button>
+                    </div>
+                </div>
+                <style>
+                    .loading-dots::after {
+                        content: '';
+                        animation: dots 1.5s infinite;
+                    }
+                    @keyframes dots {
+                        0%, 20% { content: '.'; }
+                        40% { content: '..'; }
+                        60%, 100% { content: '...'; }
+                    }
+                </style>
+            `;
+            showSystemModal('🤖 סיכום AI', html);
+        }
+        
+        function addAIProgressLog(message, type = 'info') {
+            const log = document.getElementById('aiProgressLog');
+            if (!log) return;
+            
+            const spinner = document.getElementById('aiProgressSpinner');
+            if (spinner) spinner.remove();
+            
+            const icon = type === 'success' ? '✅' : type === 'error' ? '❌' : type === 'warning' ? '⚠️' : '📋';
+            const color = type === 'success' ? '#00ff00' : type === 'error' ? '#ff6b6b' : type === 'warning' ? '#ffd93d' : '#00ff00';
+            
+            const div = document.createElement('div');
+            div.style.color = color;
+            div.textContent = `[${new Date().toLocaleTimeString()}] ${icon} ${message}`;
+            log.appendChild(div);
+            log.scrollTop = log.scrollHeight;
+        }
+        
+        function showSystemModal(title, content) {
+            // Create or reuse a simple modal
+            let modal = document.getElementById('simpleSystemModal');
+            if (!modal) {
+                modal = document.createElement('div');
+                modal.id = 'simpleSystemModal';
+                modal.className = 'system-modal';
+                modal.style.cssText = 'display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); z-index: 50000; justify-content: center; align-items: center;';
+                modal.innerHTML = `
+                    <div class="modal-content" style="background: var(--bg-primary); padding: 1.5rem; border-radius: 12px; max-width: 700px; width: 90%; max-height: 80vh; overflow-y: auto;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <h3 id="simpleModalTitle" style="margin: 0;"></h3>
+                            <button class="btn btn-secondary" onclick="document.getElementById('simpleSystemModal').style.display='none'" style="font-size: 1.2rem;">✕</button>
+                        </div>
+                        <div id="simpleModalContent"></div>
+                    </div>
+                `;
+                document.body.appendChild(modal);
+                
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) modal.style.display = 'none';
+                });
+            }
+            
+            document.getElementById('simpleModalTitle').textContent = title;
+            document.getElementById('simpleModalContent').innerHTML = content;
+            modal.style.display = 'flex';
+        }
+        
+        // ============ AI Auto-Assignment Functions ============
+        
+        let autoAssignSuggestions = [];
+        
+        async function autoAssignSources() {
+            const modal = document.getElementById('autoAssignModal');
+            modal.style.display = 'flex';
+            
+            const progress = document.getElementById('autoAssignProgress');
+            const results = document.getElementById('autoAssignResults');
+            const actions = document.getElementById('autoAssignActions');
+            
+            progress.style.display = 'block';
+            results.innerHTML = '';
+            actions.style.display = 'none';
+            
+            // Get unlinked scraped sources
+            const sources = allRegistrySources.filter(s => 
+                s.scraping_status === 'scraped' && (!s.linked_pages || s.linked_pages.length === 0)
+            );
+            
+            if (sources.length === 0) {
+                results.innerHTML = '<p style="text-align: center; color: var(--text-muted);">אין מקורות לשיוך אוטומטי</p>';
+                progress.style.display = 'none';
+                return;
+            }
+            
+            try {
+                const result = await apiCall('/api/sources/auto-assign', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        source_ids: sources.map(s => s.id)
+                    })
+                });
+                
+                if (result.success) {
+                    autoAssignSuggestions = result.suggestions || [];
+                    renderAutoAssignSuggestions(autoAssignSuggestions);
+                    actions.style.display = 'flex';
+                } else {
+                    results.innerHTML = `<p style="color: #f87171;">שגיאה: ${result.error}</p>`;
+                }
+            } catch (e) {
+                console.error('Error auto-assigning:', e);
+                results.innerHTML = '<p style="color: #f87171;">שגיאה בשיוך אוטומטי. ודא ש-Ollama רץ.</p>';
+            }
+            
+            progress.style.display = 'none';
+        }
+        
+        function renderAutoAssignSuggestions(suggestions) {
+            const container = document.getElementById('autoAssignResults');
+            
+            if (suggestions.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: var(--text-muted);">לא נמצאו הצעות</p>';
+                return;
+            }
+            
+            container.innerHTML = suggestions.map((suggestion, idx) => {
+                const source = allRegistrySources.find(s => s.id === suggestion.source_id);
+                const pages = suggestion.suggested_pages || [];
+                
+                return `
+                    <div style="background: var(--bg-tertiary); padding: 0.75rem; border-radius: 6px; margin-bottom: 0.5rem;">
+                        <div style="font-weight: 500; margin-bottom: 0.5rem;">
+                            ${source?.description || extractDomainName(source?.url || '')}
+                        </div>
+                        <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.5rem; direction: ltr; text-align: left;">
+                            ${source?.url || ''}
+                        </div>
+                        <div style="margin-top: 0.5rem;">
+                            <strong style="font-size: 0.85rem;">הצעות שיוך:</strong>
+                            ${pages.map((page, pIdx) => {
+                                const confidence = page.relevance || 'medium';
+                                const color = confidence === 'high' ? '#4ade80' : confidence === 'medium' ? '#fbbf24' : '#f87171';
+                                return `
+                                    <label style="display: flex; align-items: center; gap: 0.5rem; padding: 0.25rem 0; cursor: pointer;">
+                                        <input type="checkbox" class="assignSuggestion" 
+                                            data-source-id="${suggestion.source_id}" 
+                                            data-page-path="${page.page_path || page.page_name}"
+                                            ${confidence === 'high' ? 'checked' : ''}>
+                                        <span style="flex: 1;">${page.page_name}</span>
+                                        <span style="background: ${color}; color: black; padding: 0.1rem 0.3rem; border-radius: 4px; font-size: 0.7rem;">
+                                            ${confidence === 'high' ? 'גבוה' : confidence === 'medium' ? 'בינוני' : 'נמוך'}
+                                        </span>
+                                    </label>
+                                `;
+                            }).join('')}
+                            ${pages.length === 0 ? '<p style="color: var(--text-muted); font-size: 0.85rem;">לא נמצאו עמודים מתאימים</p>' : ''}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        async function autoAssignSingleSource(sourceId) {
+            const source = allRegistrySources.find(s => s.id === sourceId);
+            if (!source) return;
+            
+            // Check if scanned
+            if (source.scraping_status !== 'scraped') {
+                if (confirm('המקור לא נסרק עדיין. לסרוק עכשיו ואז לשייך?')) {
+                    await scanSingleRegistrySource(sourceId);
+                    // Re-fetch source after scan
+                    await loadRegistrySources();
+                    const updatedSource = allRegistrySources.find(s => s.id === sourceId);
+                    if (updatedSource?.scraping_status !== 'scraped') {
+                        showToast('הסריקה נכשלה', 'error');
+                        return;
+                    }
+                } else {
+                    return;
+                }
+            }
+            
+            showToast('🤖 מבצע שיוך אוטומטי...', 'info');
+            
+            try {
+                const result = await apiCall('/api/sources/auto-assign', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        source_ids: [sourceId]
+                    })
+                });
+                
+                if (result.success && result.suggestions?.length > 0) {
+                    const suggestion = result.suggestions[0];
+                    
+                    if (suggestion.pages?.length > 0) {
+                        // Build a simple dialog to confirm assignments
+                        const pagesList = suggestion.pages.map(p => {
+                            const page = pages?.find(pg => pg.path === p.path);
+                            const pageName = page?.keyword || page?.title || p.path;
+                            const confidence = Math.round((p.confidence || 0.5) * 100);
+                            return `<div style="padding: 0.3rem; background: var(--bg-tertiary); border-radius: 4px; margin-bottom: 0.25rem;">
+                                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                                    <input type="checkbox" class="singleAssignCheck" data-path="${p.path}" checked>
+                                    <span>${pageName}</span>
+                                    <span style="font-size: 0.75rem; color: var(--text-muted);">(${confidence}%)</span>
+                                </label>
+                            </div>`;
+                        }).join('');
+                        
+                        const html = `
+                            <div>
+                                <p style="margin-bottom: 0.75rem;">AI מצא התאמות לעמודים הבאים:</p>
+                                <div style="max-height: 300px; overflow-y: auto; margin-bottom: 1rem;">
+                                    ${pagesList}
+                                </div>
+                                <div style="display: flex; gap: 0.5rem; justify-content: flex-end;">
+                                    <button class="btn btn-secondary" onclick="document.getElementById('simpleSystemModal').style.display='none'">ביטול</button>
+                                    <button class="btn btn-primary" onclick="applySingleSourceAssignments('${sourceId}')">שייך נבחרים</button>
+                                </div>
+                            </div>
+                        `;
+                        
+                        showSystemModal('🤖 שיוך AI: ' + (source.description || 'מקור'), html);
+                    } else {
+                        showToast('לא נמצאו התאמות לעמודים', 'warning');
+                    }
+                } else {
+                    showToast(result.error || 'שגיאה בשיוך', 'error');
+                }
+            } catch (e) {
+                console.error('Error in auto-assign:', e);
+                showToast('שגיאה בשיוך אוטומטי', 'error');
+            }
+        }
+        
+        async function applySingleSourceAssignments(sourceId) {
+            const checkboxes = document.querySelectorAll('.singleAssignCheck:checked');
+            const pagePaths = Array.from(checkboxes).map(cb => cb.dataset.path);
+            
+            if (pagePaths.length === 0) {
+                showToast('לא נבחרו עמודים', 'warning');
+                return;
+            }
+            
+            try {
+                const result = await apiCall('/api/sources/link', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        source_id: sourceId,
+                        action: 'link',
+                        page_paths: pagePaths
+                    })
+                });
+                
+                if (result.success) {
+                    showToast(`✅ שויך ל-${pagePaths.length} עמודים`, 'success');
+                    document.getElementById('simpleSystemModal').style.display = 'none';
+                    await loadRegistrySources();
+                } else {
+                    showToast('שגיאה: ' + result.error, 'error');
+                }
+            } catch (e) {
+                console.error('Error applying assignments:', e);
+                showToast('שגיאה בשמירה', 'error');
+            }
+        }
+        
+        function closeAutoAssignModal() {
+            document.getElementById('autoAssignModal').style.display = 'none';
+        }
+        
+        async function applySelectedAssignments() {
+            const checkboxes = document.querySelectorAll('.assignSuggestion:checked');
+            const assignments = {};
+            
+            checkboxes.forEach(cb => {
+                const sourceId = cb.dataset.sourceId;
+                const pagePath = cb.dataset.pagePath;
+                
+                if (!assignments[sourceId]) assignments[sourceId] = [];
+                assignments[sourceId].push(pagePath);
+            });
+            
+            await applyAssignments(assignments);
+        }
+        
+        async function applyAllAssignments() {
+            const checkboxes = document.querySelectorAll('.assignSuggestion');
+            const assignments = {};
+            
+            checkboxes.forEach(cb => {
+                const sourceId = cb.dataset.sourceId;
+                const pagePath = cb.dataset.pagePath;
+                
+                if (!assignments[sourceId]) assignments[sourceId] = [];
+                assignments[sourceId].push(pagePath);
+            });
+            
+            await applyAssignments(assignments);
+        }
+        
+        async function applyAssignments(assignments) {
+            let count = 0;
+            
+            for (const [sourceId, pagePaths] of Object.entries(assignments)) {
+                try {
+                    await apiCall('/api/sources/link', {
+                        method: 'POST',
+                        body: JSON.stringify({
+                            source_id: sourceId,
+                            action: 'link',
+                            page_paths: pagePaths
+                        })
+                    });
+                    count++;
+                } catch (e) {
+                    console.error(`Error linking source ${sourceId}:`, e);
+                }
+            }
+            
+            showToast(`✅ שויכו ${count} מקורות`, 'success');
+            closeAutoAssignModal();
+            await loadRegistrySources();
+        }
+        
+        // ============ End Central Sources Registry Functions ============
+        
+        // משתנה לסינון עמודים
+        let bulkPageFilter = '';
+        
+        function renderBulkSourcesList() {
+            const container = document.getElementById('bulkSourcesList');
+            
+            // רשימת המקורות - עכשיו רק שמות, בלי שיוך לעמודים
+            container.innerHTML = bulkSourcesData.map((source, idx) => {
+                return `
+                <div style="padding: 0.75rem; margin-bottom: 0.5rem; background: var(--bg-tertiary); border-radius: 6px;">
+                    <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem; word-break: break-all; direction: ltr; text-align: left;">
+                        🔗 ${source.url}
+                    </div>
+                    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                        <input type="text" value="${source.name}" 
+                            onchange="bulkSourcesData[${idx}].name = this.value"
+                            placeholder="שם המקור" 
+                            style="flex: 1; min-width: 200px; padding: 0.5rem; border-radius: 4px; border: 1px solid var(--border); background: var(--bg-secondary); color: var(--text-primary);">
+                        <button class="btn btn-small btn-secondary" onclick="removeBulkSource(${idx})" title="הסר">🗑️</button>
+                    </div>
+                </div>
+            `}).join('');
+        }
+        
+        function removeBulkSource(idx) {
+            bulkSourcesData.splice(idx, 1);
+            renderBulkSourcesList();
+        }
+        
+        async function saveBulkSources() {
+            if (bulkSourcesData.length === 0) {
+                showToast('אין מקורות לשמירה', 'error');
+                return;
+            }
+            
+            showBulkStep(3);
+            
+            const progressDiv = document.getElementById('bulkProgress');
+            progressDiv.innerHTML = `שומר ${bulkSourcesData.length} מקורות למאגר המרכזי...`;
+            
+            try {
+                // Save all to central registry using bulk endpoint
+                const sourcesToSave = bulkSourcesData.map(s => ({
+                    url: s.url,
+                    description: s.name || extractDomainName(s.url)
+                }));
+                
+                const result = await apiCall('/api/sources/registry/bulk', {
+                    method: 'POST',
+                    body: JSON.stringify({ sources: sourcesToSave })
+                });
+                
+                if (result.success) {
+                    const addedCount = result.added || 0;
+                    progressDiv.innerHTML = `
+                        <div style="text-align: center;">
+                            <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">✅</div>
+                            <div>נשמרו ${addedCount} מקורות למאגר המרכזי</div>
+                            <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem;">
+                                לחץ "סרוק הכל" לסרוק את התוכן<br>
+                                ואז "שיוך אוטומטי" לשייך לעמודים
+                            </div>
+                        </div>
+                    `;
+                    
+                    showToast(`נשמרו ${addedCount} מקורות`, 'success');
+                    
+                    // Refresh registry if panel is visible
+                    if (document.getElementById('centralSourcesPanel').style.display !== 'none') {
+                        await loadRegistrySources();
+                    }
+                } else {
+                    progressDiv.innerHTML = `❌ שגיאה: ${result.error}`;
+                    showToast('שגיאה בשמירה', 'error');
+                }
+            } catch (e) {
+                console.error('Error saving bulk sources:', e);
+                progressDiv.innerHTML = `❌ שגיאה: ${e.message}`;
+                showToast('שגיאה בשמירה', 'error');
+            }
+            
+            // סגירה אחרי 3 שניות
+            setTimeout(() => {
+                closeBulkSourcesModal();
+            }, 3000);
+        }
+
+        async function removeDataSource(sourceId) {
+            if (!confirm('האם למחוק מקור מידע זה?')) return;
+            
+            try {
+                const result = await apiCall('/api/page/data-sources', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        page_path: selectedPage.path,
+                        action: 'remove',
+                        source_id: sourceId
+                    })
+                });
+                
+                if (result.success) {
+                    showToast('✓ המקור נמחק', 'success');
+                    await loadDataSources();
+                } else {
+                    showToast('שגיאה: ' + result.error, 'error');
+                }
+            } catch (e) {
+                showToast('שגיאה: ' + e.message, 'error');
+            }
+        }
+
+        async function testDataSources() {
+            if (!selectedPage) return;
+            
+            showToast('בודק נגישות מקורות...', 'info');
+            
+            try {
+                const result = await apiCall('/api/scraping/batch', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        page_path: selectedPage.path
+                    })
+                });
+                
+                if (result.success) {
+                    const successCount = result.results.filter(r => r.success).length;
+                    showToast(`✓ ${successCount}/${result.results.length} מקורות נגישים`, 'success');
+                    await loadDataSources();
+                } else {
+                    showToast('שגיאה: ' + result.error, 'error');
+                }
+            } catch (e) {
+                showToast('שגיאה: ' + e.message, 'error');
+            }
+        }
+
+        async function runDataVerificationAgent() {
+            if (!selectedPage) {
+                showToast('בחר עמוד תחילה', 'error');
+                return;
+            }
+            
+            // Find the data verification agent
+            const agentId = 'data_verification';
+            const agent = agents[agentId];
+            
+            if (!agent) {
+                showToast('סוכן אימות נתונים לא נמצא. אנא רענן את הדף.', 'error');
+                return;
+            }
+            
+            // Check if page has data sources
+            const pageInfo = pageInfoCache[selectedPage.path] || {};
+            if (!pageInfo.data_sources || pageInfo.data_sources.length === 0) {
+                showToast('לא הוגדרו מקורות מידע לעמוד זה. הוסף מקורות תחילה.', 'warning');
+                return;
+            }
+            
+            // Switch to the data verification agent
+            selectedAgent = agent;
+            renderWorkflowButtons();
+            
+            // Run full auto
+            showToast(`🚀 מריץ אימות נתונים על ${pageInfo.data_sources.length} מקורות...`, 'info');
+            
+            try {
+                const stepCount = agent.steps ? agent.steps.length : 2;
+                const result = await apiCall('/api/workflow/step/1', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        page_path: selectedPage.path,
+                        agent_id: agentId,
+                        full_auto: true,
+                        total_steps: stepCount
+                    })
+                });
+                
+                if (result.success) {
+                    console.log(`✅ Started Data Verification for ${selectedPage.path}`);
+                    // The status polling will automatically update the UI
+                } else {
+                    showToast('שגיאה: ' + (result.error || 'Failed to start'), 'error');
+                }
+            } catch (e) {
+                console.error(`❌ Error in runDataVerificationAgent: ${e}`);
+                showToast('שגיאה: ' + e.message, 'error');
             }
         }
     </script>

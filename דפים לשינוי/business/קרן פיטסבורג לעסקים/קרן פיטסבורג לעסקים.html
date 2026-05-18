@@ -9,7 +9,9 @@
 
 <p class="edit-hoverable">אבל יש משהו שרוב בעלי העסקים באזור לא יודעים: קיימת קרן ייעודית שנבנתה בדיוק בשביל העסק שלך. לא מדובר בצדקה או במענק - אלא ב<a href="https://loan-israel.co.il/Business/loans-for-new-business/" target="_self" class="edit-hoverable">הלוואה עסקית</a> לכל דבר, עם תנאים שאף בנק רגיל לא יציע לך.</p>
 
+<div id="loan-form-section" class="form-wrapper-section">
 [awg postid="3470"]
+</div>
 
 <div class="disclaimer-box edit-hoverable" style="background: #ffffff; padding: 18px 24px; margin: 24px 0; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.06); border: 1px solid #e8e8e8;">
   <p style="margin: 0; color: #555; font-size: 14px; line-height: 1.7;" class="edit-hoverable">
@@ -716,6 +718,56 @@
 })();
 </script>
 
+<style>
+/* Form Section Wrapper */
+.form-wrapper-section {
+  scroll-margin-top: 100px !important;
+  margin: 30px 0 !important;
+}
+
+/* H2/H3 Titles - Full Width Container */
+h2, h3 {
+  max-width: 1200px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  text-align: right !important;
+}
+</style>
+
+<script>
+// Smooth scroll to form for CTA buttons
+(function() {
+  'use strict';
+  var ns = 'WPC_Loans_ScrollToForm';
+  if (window[ns]) return;
+  window[ns] = true;
+
+  document.addEventListener('click', function(e) {
+    var link = e.target.closest('.scroll-to-form');
+    if (!link) return;
+
+    var href = link.getAttribute('href');
+    if (!href || !href.startsWith('#')) return;
+
+    e.preventDefault();
+    
+    var targetId = href.substring(1);
+    var targetElement = document.getElementById(targetId);
+
+    if (targetElement) {
+      var offset = 100;
+      var elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+      var offsetPosition = elementPosition - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  });
+})();
+</script>
+
 <!-- Schema Markup -->
 <script type="application/ld+json">
 {
@@ -784,7 +836,7 @@
           "name": "האם קרן פיטסבורג מתאימה לעסק בהקמה?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "כן, הקרן תומכת גם ביזמים שרק מקימים את העסק שלהם. למעשה, עסקים חדשים באזור הם בדיוק קהל היעד שהקרן רוצה לסייע לו. תצטרך להציג תוכנית עסקית ברורה ולהראות ניסיון רלוונטי בתחום."
+            "text": "קרן פיטסבורג מיועדת בעיקר לעסקים קיימים באזור כרמיאל ומועצה אזורית משגב. אם אתה מקים עסק חדש, שקול לבדוק קרנות אחרות במערך מרום של הסוכנות היהודית או את הקרן לסיוע לעסקים בערבות המדינה המתאימה גם לעסקים בהקמה."
           }
         },
         {
@@ -800,7 +852,7 @@
           "name": "האם צריך ביטחונות לקבלת הלוואה מקרן פיטסבורג?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "דרישת הביטחונות מופחתת משמעותית בהשוואה להלוואה בנקאית רגילה. בדרך כלל נדרשת ערבות אישית של בעל העסק, אך לא שעבוד נכסים כמו בית או רכב."
+            "text": "דרישת הביטחונות מופחתת משמעותית בהשוואה להלוואה בנקאית רגילה. הקרן מעניקה ערבות של עד 70% מסכום ההלוואה, והיתרה נקבעת בסיכום פרטני עם בנק אוצר החייל. זה אומר שאתה צריך ביטחונות רק על 30% או פחות מסכום ההלוואה - בהשוואה לדרישת 100% ויותר בהלוואה בנקאית רגילה."
           }
         },
         {
